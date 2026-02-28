@@ -1,7 +1,12 @@
-"""3-D viewport widget — renders the scene using Qt OpenGL.
+"""3D viewport widget — vykresluje scénu pomocí Qt OpenGL.
 
-For the MVP this uses a simple wireframe / flat-shaded renderer built on
-QOpenGLWidget.  A more advanced renderer (e.g., PBR) can replace this later.
+Pro MVP používá jednoduchý drátový / plošně stínovaný renderer
+na QOpenGLWidget. Pokročilejší renderer (např. PBR) může nahradit později.
+
+Funkce:
+- Orbita / posuv / zoom
+- Předvolby pohledu (shora, zepředu, z boku, perspektiva)
+- Přepínání drátového modelu / mřížky
 """
 
 from __future__ import annotations
@@ -24,20 +29,24 @@ except ImportError:
 
 
 class Viewport3D(QOpenGLWidget):
-    """Interactive 3-D viewport with orbit / pan / zoom."""
+    """Interaktivní 3D viewport s orbitou / posuvem / zoomem."""
 
     def __init__(self, scene: Scene | None = None, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self._scene = scene or Scene()
 
-        # Camera state (orbit camera)
+        # Stav kamery (orbitální kamera)
         self._orbit_yaw = 30.0
         self._orbit_pitch = 25.0
         self._orbit_distance = 50.0
         self._target = np.array([0.0, 0.0, 0.0])
         self._pan_offset = np.array([0.0, 0.0])
 
-        # Mouse tracking
+        # Přepínače zobrazení
+        self._show_wireframe = True
+        self._show_grid = True
+
+        # Sledování myši
         self._last_mouse: QPoint = QPoint()
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
@@ -83,10 +92,11 @@ class Viewport3D(QOpenGLWidget):
         GL.glRotatef(self._orbit_yaw, 0, 1, 0)
         GL.glTranslatef(-self._target[0], -self._target[1], -self._target[2])
 
-        # Draw grid
-        self._draw_grid()
+        # Kresli mřížku
+        if self._show_grid:
+            self._draw_grid()
 
-        # Draw meshes
+        # Kresli meshe
         self._draw_meshes()
 
     def _draw_grid(self, size: int = 20, step: float = 1.0) -> None:
@@ -114,21 +124,26 @@ class Viewport3D(QOpenGLWidget):
             if mesh is None:
                 continue
 
+            # Přeskočit neviditelné uzly
+            if hasattr(node, "visible") and not node.visible:
+                continue
+
             mat = node.transform.to_matrix()
             GL.glPushMatrix()
             GL.glMultMatrixf(mat.T.astype(np.float32).flatten())
 
-            # Wireframe
-            GL.glColor3f(0.8, 0.85, 0.9)
-            GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE)
-            GL.glBegin(GL.GL_TRIANGLES)
-            for face in mesh.faces:
-                for vi in face:
-                    v = mesh.vertices[vi]
-                    GL.glVertex3f(float(v[0]), float(v[1]), float(v[2]))
-            GL.glEnd()
+            if self._show_wireframe:
+                # Drátový model
+                GL.glColor3f(0.8, 0.85, 0.9)
+                GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE)
+                GL.glBegin(GL.GL_TRIANGLES)
+                for face in mesh.faces:
+                    for vi in face:
+                        v = mesh.vertices[vi]
+                        GL.glVertex3f(float(v[0]), float(v[1]), float(v[2]))
+                GL.glEnd()
 
-            # Solid (semi-transparent)
+            # Plošné stínování (poloprůhledné)
             GL.glEnable(GL.GL_BLEND)
             GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
             GL.glColor4f(0.4, 0.55, 0.7, 0.3)
@@ -143,7 +158,36 @@ class Viewport3D(QOpenGLWidget):
 
             GL.glPopMatrix()
 
-    # ── mouse interaction ──────────────────────────────────────────────
+    # ── předvolby pohledu ──────────────────────────────────────────────
+
+    def set_view_preset(self, preset: str) -> None:
+        """Nastaví předdefinovaný pohled kamery."""
+        self._pan_offset = np.array([0.0, 0.0])
+        if preset == "TOP":
+            self._orbit_yaw = 0.0
+            self._orbit_pitch = 89.9
+        elif preset == "FRONT":
+            self._orbit_yaw = 0.0
+            self._orbit_pitch = 0.0
+        elif preset == "SIDE":
+            self._orbit_yaw = 90.0
+            self._orbit_pitch = 0.0
+        elif preset == "PERSPECTIVE":
+            self._orbit_yaw = 30.0
+            self._orbit_pitch = 25.0
+        self.update()
+
+    def toggle_wireframe(self) -> None:
+        """Přepne drátový režim."""
+        self._show_wireframe = not self._show_wireframe
+        self.update()
+
+    def toggle_grid(self) -> None:
+        """Přepne zobrazení mřížky."""
+        self._show_grid = not self._show_grid
+        self.update()
+
+    # ── interakce myší ─────────────────────────────────────────────────
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         self._last_mouse = event.position().toPoint()

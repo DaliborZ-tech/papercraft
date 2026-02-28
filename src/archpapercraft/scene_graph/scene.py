@@ -1,4 +1,4 @@
-"""Scene manager — owns the root node and coordinates mesh generation."""
+"""Správce scény — vlastní kořenový uzel a koordinuje generování meshí."""
 
 from __future__ import annotations
 
@@ -7,12 +7,14 @@ from archpapercraft.core_geometry.primitives import (
     make_box_mesh,
     make_cone_mesh,
     make_cylinder_mesh,
+    make_sphere_mesh,
+    make_torus_mesh,
 )
 from archpapercraft.scene_graph.node import NodeType, SceneNode
 
 
 class Scene:
-    """Top-level scene container."""
+    """Kontejner scény nejvyšší úrovně."""
 
     def __init__(self) -> None:
         self.root = SceneNode(name="Scene", node_type=NodeType.GROUP)
@@ -64,12 +66,30 @@ class Scene:
                 p.get("segments", 32),
             )
 
+        elif node.node_type == NodeType.PRIMITIVE_SPHERE:
+            node.mesh = make_sphere_mesh(
+                p.get("radius", 0.5),
+                p.get("segments", 32),
+                p.get("rings", 16),
+            )
+
+        elif node.node_type == NodeType.PRIMITIVE_TORUS:
+            node.mesh = make_torus_mesh(
+                p.get("major_radius", 1.0),
+                p.get("minor_radius", 0.3),
+                p.get("major_segments", 32),
+                p.get("minor_segments", 16),
+            )
+
         elif node.node_type in (
             NodeType.WALL,
             NodeType.OPENING,
             NodeType.ROOF,
             NodeType.GOTHIC_WINDOW,
             NodeType.ONION_DOME,
+            NodeType.FLOOR_SLAB,
+            NodeType.TOWER,
+            NodeType.BUTTRESS,
         ):
             # Delegated to arch_presets module (lazy import to avoid circular)
             from archpapercraft.arch_presets import generate_preset_mesh

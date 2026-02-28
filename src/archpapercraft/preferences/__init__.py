@@ -1,0 +1,1 @@
+"""Nastavení (Preferences) aplikace."""

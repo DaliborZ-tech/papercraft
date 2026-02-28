@@ -1,4 +1,4 @@
-"""Scene-graph node hierarchy."""
+"""Hierarchie uzlů grafu scény."""
 
 from __future__ import annotations
 
@@ -12,26 +12,31 @@ from archpapercraft.scene_graph.transform import Transform
 
 
 class NodeType(Enum):
-    """Supported node / object types."""
+    """Podporované typy uzlů / objektů."""
 
     GROUP = auto()
     PRIMITIVE_BOX = auto()
     PRIMITIVE_CYLINDER = auto()
     PRIMITIVE_CONE = auto()
+    PRIMITIVE_SPHERE = auto()
+    PRIMITIVE_TORUS = auto()
     WALL = auto()
     OPENING = auto()
     ROOF = auto()
     GOTHIC_WINDOW = auto()
     ONION_DOME = auto()
+    FLOOR_SLAB = auto()
+    TOWER = auto()
+    BUTTRESS = auto()
     CUSTOM_MESH = auto()
 
 
 @dataclass
 class SceneNode:
-    """A single node in the scene hierarchy.
+    """Jeden uzel v hierarchii scény.
 
-    Each node owns a *transform*, a dict of *parameters* (type-specific),
-    and an optional cached *mesh*.
+    Každý uzel vlastní *transform*, slovník *parameters* (typově specifický),
+    a volitelně cachovanou *mesh*.
     """
 
     name: str
@@ -40,18 +45,24 @@ class SceneNode:
     transform: Transform = field(default_factory=Transform)
     parameters: dict[str, Any] = field(default_factory=dict)
 
-    # Cached mesh (generated from parameters on demand)
+    # Cachovaná mesh (generovaná z parametrů na vyžádání)
     _mesh: MeshData | None = field(default=None, repr=False)
 
-    # OCC shape (when OCC back-end active)
+    # OCC tvar (když je aktivní OCC back-end)
     _occ_shape: Any = field(default=None, repr=False)
 
-    # hierarchy
+    # Hierarchie
     parent: SceneNode | None = field(default=None, repr=False)
     children: list[SceneNode] = field(default_factory=list, repr=False)
 
-    # dirty flag → regenerate mesh
+    # Dirty příznak → regenerovat mesh
     _dirty: bool = True
+
+    # Viditelnost, zamčení, izolace, vrstva
+    visible: bool = True
+    locked: bool = False
+    isolated: bool = False
+    layer: str = "default"
 
     # ── tree operations ────────────────────────────────────────────────
 
@@ -107,6 +118,46 @@ class SceneNode:
 
     def get_param(self, key: str, default: Any = None) -> Any:
         return self.parameters.get(key, default)
+
+    # ── viditelnost / zamčení ───────────────────────────────────────────
+
+    def set_visible(self, visible: bool, recursive: bool = False) -> None:
+        """Nastav viditelnost. Pokud recursive, aplikuj na potomky."""
+        self.visible = visible
+        if recursive:
+            for c in self.children:
+                c.set_visible(visible, recursive=True)
+
+    def set_locked(self, locked: bool, recursive: bool = False) -> None:
+        """Zamkni/odemkni uzel."""
+        self.locked = locked
+        if recursive:
+            for c in self.children:
+                c.set_locked(locked, recursive=True)
+
+    def isolate(self) -> None:
+        """Izoluj tento uzel — skryj všechny sourozence."""
+        self.isolated = True
+        if self.parent:
+            for sibling in self.parent.children:
+                if sibling is not self:
+                    sibling.set_visible(False, recursive=True)
+
+    def unisolate(self) -> None:
+        """Zruš izolaci — zobraz všechny sourozence."""
+        self.isolated = False
+        if self.parent:
+            for sibling in self.parent.children:
+                sibling.set_visible(True, recursive=True)
+
+    def visible_nodes(self) -> list[SceneNode]:
+        """Vrátí všechny viditelné uzly v podstromu."""
+        result: list[SceneNode] = []
+        if self.visible:
+            result.append(self)
+        for c in self.children:
+            result.extend(c.visible_nodes())
+        return result
 
     # ── repr ───────────────────────────────────────────────────────────
 

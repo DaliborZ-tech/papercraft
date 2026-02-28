@@ -1,9 +1,8 @@
-"""Primitive solid creation (box, cylinder, cone).
+"""Vytváření primitivních těles (kvádr, válec, kužel, koule, torus) a 2D profilů.
 
-When pythonocc-core (OpenCascade) is available the functions return real
-TopoDS_Shape solids.  When it is **not** installed the module falls back to a
-lightweight numpy-mesh representation so the rest of the pipeline can still
-run (with reduced accuracy).
+Když je dostupný pythonocc-core (OpenCascade), funkce vrací reálná
+TopoDS_Shape tělesa. Jinak se použije odlehčená numpy-mesh reprezentace,
+aby zbytek pipeline mohl fungovat (s nižší přesností).
 """
 
 from __future__ import annotations
@@ -24,11 +23,11 @@ if TYPE_CHECKING:
 
 @dataclass
 class MeshData:
-    """Simple indexed-triangle mesh used as fallback and as internal exchange format."""
+    """Jednoduchý indexovaný trojúhelníkový mesh — interní výměnný formát."""
 
     vertices: NDArray[np.float64]  # (N, 3)
-    faces: NDArray[np.int32]  # (M, 3) — triangle indices
-    normals: NDArray[np.float64] | None = None  # per-face or per-vertex
+    faces: NDArray[np.int32]  # (M, 3) — indexy trojúhelníků
+    normals: NDArray[np.float64] | None = None  # per-face nebo per-vertex
 
     @property
     def num_vertices(self) -> int:
@@ -195,3 +194,160 @@ def make_cone_mesh(
         vertices=verts,
         faces=np.array(faces_list, dtype=np.int32),
     )
+
+
+# ---------------------------------------------------------------------------
+# Koule (Sphere)
+# ---------------------------------------------------------------------------
+
+
+def make_sphere_mesh(
+    radius: float, segments: int = 32, rings: int = 16
+) -> MeshData:
+    """Vytvoří mesh koule se středem v počátku.
+
+    Parametry
+    ---------
+    radius : float
+        Poloměr koule.
+    segments : int
+        Počet segmentů (podélné dělení).
+    rings : int
+        Počet prstenců (příčné dělení).
+    """
+    verts_list: list[list[float]] = []
+    faces_list: list[list[int]] = []
+
+    # Severní pól
+    verts_list.append([0.0, 0.0, radius])
+
+    for i in range(1, rings):
+        phi = math.pi * i / rings
+        z = radius * math.cos(phi)
+        r = radius * math.sin(phi)
+        for j in range(segments):
+            theta = 2 * math.pi * j / segments
+            verts_list.append([r * math.cos(theta), r * math.sin(theta), z])
+
+    # Jižní pól
+    verts_list.append([0.0, 0.0, -radius])
+
+    verts = np.array(verts_list, dtype=np.float64)
+
+    # Trojúhelníky k severnímu pólu
+    for j in range(segments):
+        nj = (j + 1) % segments
+        faces_list.append([0, 1 + j, 1 + nj])
+
+    # Střední pásy
+    for i in range(rings - 2):
+        for j in range(segments):
+            nj = (j + 1) % segments
+            r1 = 1 + i * segments
+            r2 = 1 + (i + 1) * segments
+            faces_list.append([r1 + j, r2 + j, r2 + nj])
+            faces_list.append([r1 + j, r2 + nj, r1 + nj])
+
+    # Trojúhelníky k jižnímu pólu
+    south = len(verts) - 1
+    last_ring = 1 + (rings - 2) * segments
+    for j in range(segments):
+        nj = (j + 1) % segments
+        faces_list.append([south, last_ring + nj, last_ring + j])
+
+    return MeshData(
+        vertices=verts,
+        faces=np.array(faces_list, dtype=np.int32),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Torus
+# ---------------------------------------------------------------------------
+
+
+def make_torus_mesh(
+    major_radius: float,
+    minor_radius: float,
+    major_segments: int = 32,
+    minor_segments: int = 16,
+) -> MeshData:
+    """Vytvoří mesh torusu (prstence) se středem v počátku, v rovině XY.
+
+    Parametry
+    ---------
+    major_radius : float
+        Hlavní poloměr (vzdálenost středu trubice od středu torusu).
+    minor_radius : float
+        Vedlejší poloměr (poloměr trubice).
+    major_segments : int
+        Počet dělení hlavního kruhu.
+    minor_segments : int
+        Počet dělení trubice.
+    """
+    verts_list: list[list[float]] = []
+    for i in range(major_segments):
+        theta = 2 * math.pi * i / major_segments
+        ct, st = math.cos(theta), math.sin(theta)
+        for j in range(minor_segments):
+            phi = 2 * math.pi * j / minor_segments
+            cp, sp = math.cos(phi), math.sin(phi)
+            r = major_radius + minor_radius * cp
+            verts_list.append([r * ct, r * st, minor_radius * sp])
+
+    verts = np.array(verts_list, dtype=np.float64)
+    faces_list: list[list[int]] = []
+    for i in range(major_segments):
+        ni = (i + 1) % major_segments
+        for j in range(minor_segments):
+            nj = (j + 1) % minor_segments
+            v0 = i * minor_segments + j
+            v1 = i * minor_segments + nj
+            v2 = ni * minor_segments + nj
+            v3 = ni * minor_segments + j
+            faces_list.append([v0, v1, v2])
+            faces_list.append([v0, v2, v3])
+
+    return MeshData(
+        vertices=verts,
+        faces=np.array(faces_list, dtype=np.int32),
+    )
+
+
+# ---------------------------------------------------------------------------
+# 2D profily (pro extrude / revolve / půdorysy)
+# ---------------------------------------------------------------------------
+
+
+def make_rectangle_profile(width: float, height: float) -> NDArray[np.float64]:
+    """Vrátí uzavřený obdélníkový profil (4 body, Nx2) se středem v počátku."""
+    hw, hh = width / 2, height / 2
+    return np.array([
+        [-hw, -hh],
+        [+hw, -hh],
+        [+hw, +hh],
+        [-hw, +hh],
+    ], dtype=np.float64)
+
+
+def make_circle_profile(radius: float, segments: int = 32) -> NDArray[np.float64]:
+    """Vrátí uzavřený kruhový profil (Nx2) se středem v počátku."""
+    angles = np.linspace(0, 2 * math.pi, segments, endpoint=False)
+    return np.column_stack([radius * np.cos(angles), radius * np.sin(angles)])
+
+
+def make_polyline_profile(points: list[tuple[float, float]]) -> NDArray[np.float64]:
+    """Vrátí profil z libovolné lomené čáry (Nx2).
+
+    Parametry
+    ---------
+    points : list[tuple[float, float]]
+        Seznam bodů [(x, y), ...] — uzavření se provede automaticky.
+    """
+    return np.array(points, dtype=np.float64)
+
+
+def make_ngon_profile(radius: float, sides: int) -> NDArray[np.float64]:
+    """Vrátí pravidelný N-úhelník (Nx2) — pro věže s polygonálním půdorysem."""
+    angles = np.linspace(0, 2 * math.pi, sides, endpoint=False)
+    return np.column_stack([radius * np.cos(angles), radius * np.sin(angles)])

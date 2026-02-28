@@ -1,71 +1,93 @@
 # ArchPapercraft Studio
 
-**Architecture-first 3D modeler with papercraft / paper model export.**
+**Architektura-first 3D modelář s exportem vystřihovánek (PDF/SVG/DXF)**
 
-Create architectural models (walls, roofs, gothic windows, onion domes) and export
-print-ready cutting templates (PDF / SVG / DXF) with tabs, fold lines, and assembly
-numbering — all in one offline desktop application.
+> *Jedna aplikace, ve které postavím 3D model historické/moderní architektury
+> a jedním klikem dostanu profesionální vystřihovánku v měřítku, se značením,
+> chlopněmi a návodem.*
 
 ---
 
-## Features (MVP)
+## Hlavní funkce
 
-| Module | Capability |
+| Oblast | Popis |
 |---|---|
-| **Modeler** | Primitives (box, cylinder, cone), extrude, revolve, booleans |
-| **Arch presets** | Wall, Opening, Gabled roof, Gothic window, Onion dome |
-| **Paper analyzer** | Flat / developable / non-developable surface classification |
-| **Seam editor** | Auto seams (sharp edges + A4 limit) + manual seam painting |
-| **Unfolder** | Exact unfold (planes, cylinders) + approx strategies (gores, rings, facets) |
-| **Tabs & markings** | Auto tabs, mountain/valley fold lines, part & edge numbering |
-| **Layout** | Auto-packing onto A4/A3/Letter pages |
-| **Export** | PDF (print), SVG (Inkscape), DXF (plotter/laser — cut/score layers) |
+| **3D Modelář** | Parametrické architektonické objekty (zdi, okna, střechy, cibulky, věže) |
+| **Analýza povrchů** | Klasifikace ploch (rovinné / vyvinutelné / nevyvinutelné) |
+| **Automatické švy** | Inteligentní dělení modelu na díly podle ostrých hran a velikosti |
+| **Rozklad (Unfold)** | Přesný rozvin pro roviny, góry/prstence pro cibulky |
+| **Chlopně & značení** | Oušky, horní/dolní přehyby, číslování dílů, párování hran |
+| **Rozmístění** | Automatické balení dílů na listy papíru (shelf-packing) |
+| **Export** | PDF (přesné měřítko), SVG (vrstvy), DXF (pro plotr/laser), PNG (náhled) |
+| **Stavební návod** | Legenda, seznam dílů, tabulka párování hran, doporučené pořadí |
 
-## Quick start
+## Instalace
 
 ```bash
-# 1. Create a virtual environment
+# Vytvoření virtuálního prostředí
 python -m venv .venv
-.venv\Scripts\activate        # Windows
-# source .venv/bin/activate   # Linux
+.venv\Scripts\activate   # Windows
+# source .venv/bin/activate  # Linux
 
-# 2. Install in development mode
+# Instalace projektu (vývojový režim)
 pip install -e ".[dev]"
 
-# 3. (Optional) Install OpenCascade back-end
-#    Requires conda – see docs/install_occ.md
+# (Volitelně) OpenCascade back-end pro přesná B-Rep tělesa
 pip install pythonocc-core
+```
 
-# 4. Run
-archpapercraft
-# — or —
+## Spuštění
+
+```bash
+archpapercraft          # přes entry-point
+# nebo
 python -m archpapercraft
 ```
 
-## Project structure
+## Spuštění testů
+
+```bash
+pytest tests/ -v
+```
+
+## Architektura projektu
 
 ```
 src/archpapercraft/
-├── core_geometry/    # OpenCascade wrapper, solids, booleans, triangulation
-├── scene_graph/      # Object tree, transforms, parameters
-├── arch_presets/     # Parametric architectural objects
-├── paper_analyzer/   # Surface classification
-├── seam_editor/      # Auto + manual seams
-├── unfolder/         # Exact & approximate unfolding
-├── tabs_generator/   # Tabs, fold lines, numbering
-├── layout_packer/    # Page layout / bin-packing
-├── exporter/         # PDF / SVG / DXF export
-├── project_io/       # Project save / load / autosave
-└── ui/               # PySide6 GUI (viewport, panels, wizard)
+├── app.py                   # Vstupní bod aplikace
+├── core_geometry/           # Primitiva, mesh operace, validace
+├── scene_graph/             # Transformace, hierarchie uzlů, scéna
+├── arch_presets/            # Parametrické arch. prvky (zeď, střecha, okno…)
+├── paper_analyzer/          # Klasifikace povrchů, kontrola vyrobitelnosti
+├── seam_editor/             # Graf švů, automatické švy, zamykání
+├── unfolder/                # Přesný rozvin, góry, prstence, fazetový rozklad
+├── tabs_generator/          # Generátor chlopní a značení, stavební návod
+├── layout_packer/           # Balení dílů na stránky, dlaždicový tisk
+├── exporter/                # PDF, SVG, DXF, PNG export
+├── project_io/              # Projektový formát (.apcraft), autosave, snapshoty
+├── commands/                # Undo/Redo systém (Command pattern)
+├── preferences/             # Nastavení aplikace (zkratky, snap, UI)
+└── ui/                      # PySide6 GUI (viewport, panely, průvodce…)
+tests/                       # Testovací sada (pytest)
+samples/                     # Ukázkové projekty
+docs/                        # Dokumentace
 ```
 
-## Tech stack
+## Technický stack
 
 * **GUI** — PySide6 (Qt 6)
-* **CAD kernel** — OpenCascade (via pythonocc-core) for B-Rep solids, booleans, revolve
-* **Triangulation** — OpenCascade mesh + numpy fallback
-* **Export** — reportlab (PDF), svgwrite (SVG), ezdxf (DXF)
+* **CAD jádro** — OpenCascade (pythonocc-core) pro B-Rep tělesa, booleany, revolve
+* **Triangulace** — OpenCascade mesh + numpy fallback
+* **Export** — reportlab (PDF), svgwrite (SVG), ezdxf (DXF), Pillow (PNG)
 
-## License
+## Cílové skupiny
+
+- **Papíroví modeláři** — detail, přesnost, chlopně, značení, textury
+- **Studenti architektury / designu** — rychlé hmotové modely v měřítku
+- **Školy a kroužky** — jednoduché ovládání, výukové šablony
+- **Makers (plotr/laser)** — DXF vrstvy cut/score, přesné čáry a tolerance
+- **Muzea / turistické atrakce** — generování modelů památek (suvenýry)
+
+## Licence
 
 MIT

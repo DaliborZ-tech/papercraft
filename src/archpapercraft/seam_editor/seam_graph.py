@@ -1,12 +1,14 @@
-"""Seam graph data-structure.
+"""Datová struktura grafu švů.
 
-A *SeamGraph* lives on top of a triangle mesh and marks certain edges as "seams"
-(where the paper will be cut).  Edges that are NOT seams become fold-lines.
+*SeamGraph* žije nad trojúhelníkovou meshí a označuje určité hrany jako "švy"
+(kde se papír rozřízne). Hrany, které NEJSOU švy, se stanou přehybovými čárami.
 
-The graph also tracks:
-- which connected components (unfold "islands" / parts) exist,
-- part IDs for numbering,
-- edge-match IDs so the user knows which edge sticks to which.
+Graf také sleduje:
+- propojené komponenty (rozkladové "ostrovy" / díly),
+- ID dílů pro číslování,
+- ID párování hran pro sestavovací návod,
+- zamknuté švy (uživatel nemůže změnit),
+- režim malby (paint mode).
 """
 
 from __future__ import annotations
@@ -24,12 +26,13 @@ Edge = tuple[int, int]  # always sorted (lo, hi)
 
 @dataclass
 class SeamGraph:
-    """Holds the set of seam-edges for a given mesh."""
+    """Drží množinu švových hran pro danou mesh."""
 
     mesh: MeshData
     seam_edges: set[Edge] = field(default_factory=set)
+    locked_edges: set[Edge] = field(default_factory=set)
 
-    # lazy caches
+    # Lazy cache
     _edge_faces: dict[Edge, list[int]] | None = field(default=None, repr=False)
     _face_neighbors: list[set[int]] | None = field(default=None, repr=False)
     _parts: list[list[int]] | None = field(default=None, repr=False)
@@ -65,16 +68,24 @@ class SeamGraph:
     # ── seam manipulation ──────────────────────────────────────────────
 
     def add_seam(self, v0: int, v1: int) -> None:
-        self.seam_edges.add(tuple(sorted((v0, v1))))  # type: ignore[arg-type]
+        e: Edge = tuple(sorted((v0, v1)))  # type: ignore[assignment]
+        if e in self.locked_edges:
+            return  # Zamknuté hrany nelze měnit
+        self.seam_edges.add(e)
         self.invalidate_caches()
 
     def remove_seam(self, v0: int, v1: int) -> None:
-        self.seam_edges.discard(tuple(sorted((v0, v1))))  # type: ignore[arg-type]
+        e: Edge = tuple(sorted((v0, v1)))  # type: ignore[assignment]
+        if e in self.locked_edges:
+            return  # Zamknuté hrany nelze měnit
+        self.seam_edges.discard(e)
         self.invalidate_caches()
 
     def toggle_seam(self, v0: int, v1: int) -> bool:
-        """Toggle seam state; return True if the edge is now a seam."""
+        """Přepne stav švu; vrátí True pokud je hrana nyní šev."""
         e: Edge = tuple(sorted((v0, v1)))  # type: ignore[assignment]
+        if e in self.locked_edges:
+            return e in self.seam_edges
         if e in self.seam_edges:
             self.seam_edges.discard(e)
             self.invalidate_caches()
@@ -85,6 +96,35 @@ class SeamGraph:
 
     def is_seam(self, v0: int, v1: int) -> bool:
         return tuple(sorted((v0, v1))) in self.seam_edges
+
+    # ── zamykání švů ───────────────────────────────────────────────
+
+    def lock_seam(self, v0: int, v1: int) -> None:
+        """Zamkne hranu — nelze ji přepnout."""
+        self.locked_edges.add(tuple(sorted((v0, v1))))  # type: ignore[arg-type]
+
+    def unlock_seam(self, v0: int, v1: int) -> None:
+        """Odemkne hranu."""
+        self.locked_edges.discard(tuple(sorted((v0, v1))))  # type: ignore[arg-type]
+
+    def is_locked(self, v0: int, v1: int) -> bool:
+        return tuple(sorted((v0, v1))) in self.locked_edges
+
+    def lock_all_seams(self) -> None:
+        """Zamkne všechny aktuální švy."""
+        self.locked_edges = self.seam_edges.copy()
+
+    def unlock_all(self) -> None:
+        self.locked_edges.clear()
+
+    # ── paint mode (malba švů po hranách) ─────────────────────────
+
+    def paint_seam(self, v0: int, v1: int, add: bool = True) -> None:
+        """Paint mode — namaluje (add=True) nebo smaže (add=False) šev."""
+        if add:
+            self.add_seam(v0, v1)
+        else:
+            self.remove_seam(v0, v1)
 
     # ── connected components (parts) ───────────────────────────────────
 

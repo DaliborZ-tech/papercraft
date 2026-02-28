@@ -1,13 +1,19 @@
-"""Surface classifier — label triangle groups as flat / developable / non-developable.
+"""Klasifikátor povrchů — označení skupin trojúhelníků jako flat / developable / non-developable.
 
-Algorithm (mesh-based, no OCC dependency):
-1. Compute per-face normals.
-2. Build face-adjacency graph (shared edges).
-3. Flood-fill connected faces whose dihedral angle is below a threshold → "patch".
-4. For each patch decide:
-   - All normals identical (within tolerance) → FLAT
-   - Gaussian curvature ≈ 0 → DEVELOPABLE  (cylinder / cone segment)
-   - Otherwise → NON_DEVELOPABLE
+Navíc poskytuje:
+- Detekce non-manifold hran
+- Detekce příliš krátkých hran
+- Kontroly měřítka (scale sanity checks)
+- Výpočet metriky „papercraft readiness"
+
+Algoritmus (mesh-based, bez závislosti na OCC):
+1. Vypočítá per-face normály.
+2. Sestaví graf sousednosti ploch (sdílené hrany).
+3. Flood-fill propojených ploch s dihedrálním úhlem pod prahem → „záplata".
+4. Pro každou záplatu rozhodne:
+   - Všechny normály identické → FLAT
+   - Gaussova křivost ≈ 0 → DEVELOPABLE (segment válce/kužele)
+   - Jinak → NON_DEVELOPABLE
 """
 
 from __future__ import annotations
@@ -155,3 +161,178 @@ def classify_surfaces(
         pid += 1
 
     return AnalysisResult(patches=patches)
+
+
+# ── Non-manifold a validační kontroly ──────────────────────────────────
+
+
+@dataclass
+class ManifoldReport:
+    """Výsledek kontroly manifoldnosti."""
+
+    non_manifold_edges: list[tuple[int, int]] = field(default_factory=list)
+    boundary_edges: list[tuple[int, int]] = field(default_factory=list)
+    short_edges: list[tuple[int, int]] = field(default_factory=list)
+    is_manifold: bool = True
+    is_watertight: bool = True
+
+
+def check_manifold(
+    mesh: MeshData,
+    min_edge_length: float = 0.5,
+) -> ManifoldReport:
+    """Zkontroluje non-manifold hrany, okrajové hrany a příliš krátké hrany.
+
+    Parametry
+    ---------
+    mesh : MeshData
+        Vstupní mesh.
+    min_edge_length : float
+        Minimální délka hrany v jednotkách modelu (kratší = varování).
+    """
+    edge_faces, _ = _build_adjacency(mesh)
+    report = ManifoldReport()
+
+    for edge, faces in edge_faces.items():
+        if len(faces) > 2:
+            report.non_manifold_edges.append(edge)
+        elif len(faces) == 1:
+            report.boundary_edges.append(edge)
+
+        # Kontrola délky hrany
+        v0 = mesh.vertices[edge[0]]
+        v1 = mesh.vertices[edge[1]]
+        length = float(np.linalg.norm(v1 - v0))
+        if length < min_edge_length:
+            report.short_edges.append(edge)
+
+    report.is_manifold = len(report.non_manifold_edges) == 0
+    report.is_watertight = len(report.boundary_edges) == 0
+    return report
+
+
+# ── Kontroly měřítka (Scale Sanity Checks) ────────────────────────────
+
+
+@dataclass
+class ScaleWarning:
+    """Jedno varování o měřítku."""
+
+    message: str
+    severity: str = "warning"  # "warning" | "error"
+    face_indices: list[int] = field(default_factory=list)
+
+
+@dataclass
+class ScaleReport:
+    """Výsledek kontrol měřítka."""
+
+    warnings: list[ScaleWarning] = field(default_factory=list)
+    min_detail_mm: float = 0.0
+    max_part_extent_mm: float = 0.0
+    is_ok: bool = True
+
+
+def check_scale_readiness(
+    mesh: MeshData,
+    scale_factor: float = 0.01,
+    min_detail_mm: float = 3.0,
+    max_part_extent_mm: float = 250.0,
+    min_tab_width_mm: float = 3.0,
+) -> ScaleReport:
+    """Zkontroluje, zda je model v daném měřítku vyrobitelný z papíru.
+
+    Parametry
+    ---------
+    mesh : MeshData
+        Vstupní mesh.
+    scale_factor : float
+        Faktor měřítka (např. 0.01 pro 1:100).
+    min_detail_mm : float
+        Minimální rozměr detailu po zmenšení (mm).
+    max_part_extent_mm : float
+        Maximální rozměr dílu (mm) — přesáhne-li, varování.
+    min_tab_width_mm : float
+        Minimální šířka pro chlopni (mm).
+    """
+    report = ScaleReport()
+
+    # Celkový rozsah modelu po aplikaci měřítka
+    if mesh.num_vertices == 0:
+        return report
+    bbox_min = mesh.vertices.min(axis=0)
+    bbox_max = mesh.vertices.max(axis=0)
+    extent = (bbox_max - bbox_min) * scale_factor * 1000  # převod na mm
+    report.max_part_extent_mm = float(extent.max())
+
+    if report.max_part_extent_mm > max_part_extent_mm:
+        report.warnings.append(ScaleWarning(
+            message=f"Model přesahuje {max_part_extent_mm} mm "
+                    f"(aktuální: {report.max_part_extent_mm:.1f} mm). "
+                    f"Bude nutné rozdělit na více dílů.",
+            severity="error",
+        ))
+
+    # Kontrola krátkých hran v měřítku
+    short_count = 0
+    for fi in range(mesh.num_faces):
+        tri = mesh.faces[fi]
+        for j in range(3):
+            v0 = mesh.vertices[tri[j]]
+            v1 = mesh.vertices[tri[(j + 1) % 3]]
+            length_mm = float(np.linalg.norm(v1 - v0)) * scale_factor * 1000
+            if length_mm < min_detail_mm:
+                short_count += 1
+                if length_mm < report.min_detail_mm or report.min_detail_mm == 0:
+                    report.min_detail_mm = length_mm
+
+    if short_count > 0:
+        report.warnings.append(ScaleWarning(
+            message=f"{short_count} hran je kratších než {min_detail_mm} mm "
+                    f"v daném měřítku. Zvažte zjednodušení geometrie.",
+            severity="warning",
+        ))
+
+    if report.min_detail_mm < min_tab_width_mm and report.min_detail_mm > 0:
+        report.warnings.append(ScaleWarning(
+            message=f"Nejkratší hrana ({report.min_detail_mm:.1f} mm) je kratší "
+                    f"než minimální šířka chlopně ({min_tab_width_mm} mm).",
+            severity="error",
+        ))
+
+    report.is_ok = all(w.severity != "error" for w in report.warnings)
+    return report
+
+
+# ── Papercraft Readiness Indikátor ─────────────────────────────────────
+
+
+def papercraft_readiness_score(
+    mesh: MeshData,
+    scale_factor: float = 0.01,
+) -> float:
+    """Vrátí skóre 0.0–1.0 udávající připravenost modelu pro papercraft.
+
+    1.0 = plně připraveno (pouze rovinné plochy, žádné problémy)
+    0.0 = nepřipraveno (non-manifold, vše nevyvinutelné)
+    """
+    if mesh.num_faces == 0:
+        return 0.0
+
+    # Analýza povrchů
+    result = classify_surfaces(mesh)
+    n_total = sum(len(p.face_indices) for p in result.patches)
+    n_flat = sum(len(p.face_indices) for p in result.flat_patches)
+    n_dev = sum(len(p.face_indices) for p in result.developable_patches)
+
+    surface_score = (n_flat + 0.7 * n_dev) / max(n_total, 1)
+
+    # Manifoldnost
+    mf = check_manifold(mesh)
+    manifold_score = 1.0 if mf.is_manifold else 0.3
+
+    # Měřítko
+    sr = check_scale_readiness(mesh, scale_factor)
+    scale_score = 1.0 if sr.is_ok else 0.5
+
+    return min(1.0, surface_score * 0.5 + manifold_score * 0.3 + scale_score * 0.2)

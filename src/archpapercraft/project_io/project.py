@@ -1,23 +1,29 @@
-"""Project file handling — JSON-based project format.
+"""Projektový soubor — formát JSON s příponou ``.apcraft``
 
-File extension: ``.apcraft``
-
-Structure
+Struktura
 ---------
 ```json
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "settings": { "units": "mm", "scale": "1:100", "paper": "A4", ... },
-  "scene": [ { "name": "Wall-1", "type": "WALL", "params": {...}, "transform": {...}, "children": [...] } ],
+  "scene": [ { "name": "Zeď-1", "type": "WALL", "params": {...}, "transform": {...}, "children": [...] } ],
 }
 ```
+
+Pokročilé funkce:
+- Snapshoty (versioning) — uložit stav projektu s časovým razítkem
+- Crash report + log
+- Export balíčku (zip se všemi soubory)
 """
 
 from __future__ import annotations
 
 import json
+import logging
 import shutil
 import time
+import traceback
+import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -31,11 +37,21 @@ from archpapercraft.scene_graph.transform import Transform
 
 FILE_EXTENSION = ".apcraft"
 AUTOSAVE_SUFFIX = ".autosave"
+SNAPSHOT_DIR = ".snapshots"
+
+# Logging pro crash report
+_LOG_DIR = Path.home() / ".archpapercraft" / "logs"
+_log = logging.getLogger("archpapercraft.project")
+
+
+def _ensure_log_dir() -> Path:
+    _LOG_DIR.mkdir(parents=True, exist_ok=True)
+    return _LOG_DIR
 
 
 @dataclass
 class ProjectSettings:
-    """Global project settings."""
+    """Globální nastavení projektu."""
 
     units: str = "mm"  # mm | cm | m
     scale: str = "1:100"
@@ -43,7 +59,7 @@ class ProjectSettings:
     paper_margin_mm: float = 10.0
     paper_bleed_mm: float = 0.0
     paper_grammage: int = 160
-    name: str = "Untitled"
+    name: str = "Bez názvu"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -71,18 +87,18 @@ class ProjectSettings:
 
 @dataclass
 class Project:
-    """Combines settings + scene for serialisation."""
+    """Kombinuje nastavení + scénu pro serializaci."""
 
     settings: ProjectSettings = field(default_factory=ProjectSettings)
     scene: Scene = field(default_factory=Scene)
     file_path: Path | None = None
     _last_save_time: float = 0.0
 
-    # ── serialise ──────────────────────────────────────────────────────
+    # ── serializace ────────────────────────────────────────────────────
 
     def to_dict(self) -> dict[str, Any]:
         return {
-            "version": "0.1.0",
+            "version": "0.2.0",
             "settings": self.settings.to_dict(),
             "scene": [_node_to_dict(c) for c in self.scene.root.children],
         }
@@ -127,12 +143,114 @@ class Project:
 
     @classmethod
     def recover(cls, path: str | Path) -> Project | None:
-        """Try to load from autosave next to *path*."""
+        """Pokus o načtení z autosave vedle *path*."""
         p = Path(path)
         auto = p.with_suffix(FILE_EXTENSION + AUTOSAVE_SUFFIX)
         if auto.exists():
             return cls.load(auto)
         return None
+
+    # ── snapshoty (verzování) ──────────────────────────────────────────
+
+    def create_snapshot(self, label: str = "") -> Path | None:
+        """Uloží snapshot (kopii) aktuálního stavu projektu.
+
+        Snímky se ukládají do složky ``.snapshots/`` vedle projektového souboru.
+        Název obsahuje časové razítko a volitelný popisek.
+        """
+        if self.file_path is None:
+            return None
+
+        snap_dir = self.file_path.parent / SNAPSHOT_DIR
+        snap_dir.mkdir(exist_ok=True)
+
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        suffix = f"_{label}" if label else ""
+        snap_name = f"{self.file_path.stem}_{timestamp}{suffix}{FILE_EXTENSION}"
+        snap_path = snap_dir / snap_name
+
+        snap_path.write_text(
+            json.dumps(self.to_dict(), indent=2, default=_json_default),
+            encoding="utf-8",
+        )
+        _log.info("Snapshot vytvořen: %s", snap_path)
+        return snap_path
+
+    def list_snapshots(self) -> list[Path]:
+        """Vrátí seznam všech snapshotů (seřazený od nejnovějšího)."""
+        if self.file_path is None:
+            return []
+        snap_dir = self.file_path.parent / SNAPSHOT_DIR
+        if not snap_dir.exists():
+            return []
+        snaps = sorted(snap_dir.glob(f"*{FILE_EXTENSION}"), reverse=True)
+        return snaps
+
+    @classmethod
+    def load_snapshot(cls, snapshot_path: str | Path) -> "Project":
+        """Načte projekt ze snapshotu."""
+        return cls.load(snapshot_path)
+
+    # ── export balíčku (zip) ───────────────────────────────────────────
+
+    def export_bundle(self, output_path: str | Path | None = None) -> Path:
+        """Zabalí projekt + snapshoty do ZIP archívu.
+
+        Pokud *output_path* není zadán, uloží vedle projektového souboru.
+        """
+        if self.file_path is None:
+            raise ValueError("Projekt musí být nejprve uložen.")
+
+        if output_path is None:
+            output_path = self.file_path.with_suffix(".zip")
+        else:
+            output_path = Path(output_path)
+
+        with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zf:
+            # Hlavní projektový soubor
+            zf.writestr(
+                self.file_path.name,
+                json.dumps(self.to_dict(), indent=2, default=_json_default),
+            )
+            # Snapshoty
+            snap_dir = self.file_path.parent / SNAPSHOT_DIR
+            if snap_dir.exists():
+                for snap in snap_dir.glob(f"*{FILE_EXTENSION}"):
+                    zf.write(snap, f"{SNAPSHOT_DIR}/{snap.name}")
+
+        _log.info("Bundle exportován: %s", output_path)
+        return output_path
+
+    # ── crash report ───────────────────────────────────────────────────
+
+    @staticmethod
+    def write_crash_report(exc: BaseException) -> Path:
+        """Zapíše crash report do logovacího adresáře.
+
+        Vrací cestu k souboru s reportem.
+        """
+        log_dir = _ensure_log_dir()
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        report_path = log_dir / f"crash_{timestamp}.log"
+
+        lines = [
+            f"ArchPapercraft Studio — Crash Report",
+            f"Čas: {time.strftime('%Y-%m-%d %H:%M:%S')}",
+            f"",
+            f"Výjimka: {type(exc).__name__}: {exc}",
+            f"",
+            "Traceback:",
+            traceback.format_exc(),
+        ]
+        report_path.write_text("\n".join(lines), encoding="utf-8")
+        _log.error("Crash report zapsán: %s", report_path)
+        return report_path
+
+    @staticmethod
+    def list_crash_reports() -> list[Path]:
+        """Vrátí seznam crash reportů."""
+        log_dir = _ensure_log_dir()
+        return sorted(log_dir.glob("crash_*.log"), reverse=True)
 
 
 # ── internal conversion helpers ────────────────────────────────────────

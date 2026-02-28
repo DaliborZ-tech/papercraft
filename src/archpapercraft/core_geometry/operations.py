@@ -55,7 +55,12 @@ def boolean_union_mesh(a: MeshData, b: MeshData) -> MeshData:
 
 
 def boolean_difference_mesh(a: MeshData, b: MeshData) -> MeshData:
-    """Placeholder — returns *a* unchanged.  Real CSG TBD."""
+    """Placeholder — vrací *a* beze změny. Skutečné CSG TBD."""
+    return a
+
+
+def boolean_intersect_mesh(a: MeshData, b: MeshData) -> MeshData:
+    """Placeholder průnik — vrací *a* beze změny. Skutečné CSG TBD."""
     return a
 
 
