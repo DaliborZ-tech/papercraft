@@ -1,0 +1,179 @@
+"""3-D viewport widget — renders the scene using Qt OpenGL.
+
+For the MVP this uses a simple wireframe / flat-shaded renderer built on
+QOpenGLWidget.  A more advanced renderer (e.g., PBR) can replace this later.
+"""
+
+from __future__ import annotations
+
+import math
+
+import numpy as np
+from PySide6.QtCore import QPoint, Qt
+from PySide6.QtGui import QMouseEvent, QWheelEvent
+from PySide6.QtOpenGLWidgets import QOpenGLWidget
+from PySide6.QtWidgets import QWidget
+
+from archpapercraft.scene_graph.scene import Scene
+
+try:
+    from OpenGL import GL
+    _GL_AVAILABLE = True
+except ImportError:
+    _GL_AVAILABLE = False
+
+
+class Viewport3D(QOpenGLWidget):
+    """Interactive 3-D viewport with orbit / pan / zoom."""
+
+    def __init__(self, scene: Scene | None = None, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        self._scene = scene or Scene()
+
+        # Camera state (orbit camera)
+        self._orbit_yaw = 30.0
+        self._orbit_pitch = 25.0
+        self._orbit_distance = 50.0
+        self._target = np.array([0.0, 0.0, 0.0])
+        self._pan_offset = np.array([0.0, 0.0])
+
+        # Mouse tracking
+        self._last_mouse: QPoint = QPoint()
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+
+    def set_scene(self, scene: Scene) -> None:
+        self._scene = scene
+        self.update()
+
+    # ── OpenGL callbacks ───────────────────────────────────────────────
+
+    def initializeGL(self) -> None:
+        if not _GL_AVAILABLE:
+            return
+        GL.glClearColor(0.18, 0.20, 0.22, 1.0)
+        GL.glEnable(GL.GL_DEPTH_TEST)
+        GL.glEnable(GL.GL_LINE_SMOOTH)
+        GL.glLineWidth(1.0)
+
+    def resizeGL(self, w: int, h: int) -> None:
+        if not _GL_AVAILABLE:
+            return
+        GL.glViewport(0, 0, w, h)
+        GL.glMatrixMode(GL.GL_PROJECTION)
+        GL.glLoadIdentity()
+
+        aspect = w / max(h, 1)
+        fov = 45.0
+        near, far = 0.1, 5000.0
+        top = near * math.tan(math.radians(fov / 2))
+        right = top * aspect
+        GL.glFrustum(-right, right, -top, top, near, far)
+
+        GL.glMatrixMode(GL.GL_MODELVIEW)
+
+    def paintGL(self) -> None:
+        if not _GL_AVAILABLE:
+            return
+        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        GL.glLoadIdentity()
+
+        # Camera transform
+        GL.glTranslatef(self._pan_offset[0], self._pan_offset[1], -self._orbit_distance)
+        GL.glRotatef(self._orbit_pitch, 1, 0, 0)
+        GL.glRotatef(self._orbit_yaw, 0, 1, 0)
+        GL.glTranslatef(-self._target[0], -self._target[1], -self._target[2])
+
+        # Draw grid
+        self._draw_grid()
+
+        # Draw meshes
+        self._draw_meshes()
+
+    def _draw_grid(self, size: int = 20, step: float = 1.0) -> None:
+        GL.glColor3f(0.35, 0.35, 0.35)
+        GL.glBegin(GL.GL_LINES)
+        for i in range(-size, size + 1):
+            GL.glVertex3f(i * step, 0, -size * step)
+            GL.glVertex3f(i * step, 0, size * step)
+            GL.glVertex3f(-size * step, 0, i * step)
+            GL.glVertex3f(size * step, 0, i * step)
+        GL.glEnd()
+
+        # Axes
+        GL.glLineWidth(2.0)
+        GL.glBegin(GL.GL_LINES)
+        GL.glColor3f(1, 0, 0); GL.glVertex3f(0, 0, 0); GL.glVertex3f(3, 0, 0)
+        GL.glColor3f(0, 1, 0); GL.glVertex3f(0, 0, 0); GL.glVertex3f(0, 3, 0)
+        GL.glColor3f(0, 0, 1); GL.glVertex3f(0, 0, 0); GL.glVertex3f(0, 0, 3)
+        GL.glEnd()
+        GL.glLineWidth(1.0)
+
+    def _draw_meshes(self) -> None:
+        for node in self._scene.all_mesh_nodes():
+            mesh = node.mesh
+            if mesh is None:
+                continue
+
+            mat = node.transform.to_matrix()
+            GL.glPushMatrix()
+            GL.glMultMatrixf(mat.T.astype(np.float32).flatten())
+
+            # Wireframe
+            GL.glColor3f(0.8, 0.85, 0.9)
+            GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE)
+            GL.glBegin(GL.GL_TRIANGLES)
+            for face in mesh.faces:
+                for vi in face:
+                    v = mesh.vertices[vi]
+                    GL.glVertex3f(float(v[0]), float(v[1]), float(v[2]))
+            GL.glEnd()
+
+            # Solid (semi-transparent)
+            GL.glEnable(GL.GL_BLEND)
+            GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
+            GL.glColor4f(0.4, 0.55, 0.7, 0.3)
+            GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL)
+            GL.glBegin(GL.GL_TRIANGLES)
+            for face in mesh.faces:
+                for vi in face:
+                    v = mesh.vertices[vi]
+                    GL.glVertex3f(float(v[0]), float(v[1]), float(v[2]))
+            GL.glEnd()
+            GL.glDisable(GL.GL_BLEND)
+
+            GL.glPopMatrix()
+
+    # ── mouse interaction ──────────────────────────────────────────────
+
+    def mousePressEvent(self, event: QMouseEvent) -> None:
+        self._last_mouse = event.position().toPoint()
+
+    def mouseMoveEvent(self, event: QMouseEvent) -> None:
+        pos = event.position().toPoint()
+        dx = pos.x() - self._last_mouse.x()
+        dy = pos.y() - self._last_mouse.y()
+
+        if event.buttons() & Qt.MouseButton.MiddleButton:
+            if event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
+                # Pan
+                self._pan_offset[0] += dx * 0.05
+                self._pan_offset[1] -= dy * 0.05
+            else:
+                # Orbit
+                self._orbit_yaw += dx * 0.5
+                self._orbit_pitch += dy * 0.5
+                self._orbit_pitch = max(-90, min(90, self._orbit_pitch))
+        elif event.buttons() & Qt.MouseButton.RightButton:
+            # Pan (alternative)
+            self._pan_offset[0] += dx * 0.05
+            self._pan_offset[1] -= dy * 0.05
+
+        self._last_mouse = pos
+        self.update()
+
+    def wheelEvent(self, event: QWheelEvent) -> None:
+        delta = event.angleDelta().y()
+        factor = 0.9 if delta > 0 else 1.1
+        self._orbit_distance *= factor
+        self._orbit_distance = max(1.0, min(2000.0, self._orbit_distance))
+        self.update()

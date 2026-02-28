@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "archpapercraft-studio"
+version = "0.1.0"
+description = "Architecture-first 3D modeler with papercraft export (PDF/SVG/DXF)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "ArchPapercraft Team"},
+]
+keywords = ["papercraft", "architecture", "3D", "unfold", "CAD"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Multimedia :: Graphics :: 3D Modeling",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "PySide6>=6.6",
+    "numpy>=1.24",
+    "ezdxf>=0.18",
+    "reportlab>=4.0",
+    "svgwrite>=1.4",
+    "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+occ = [
+    "pythonocc-core>=7.7",
+]
+dev = [
+    "pytest>=7.4",
+    "pytest-qt>=4.2",
+    "ruff>=0.1",
+    "mypy>=1.6",
+]
+
+[project.scripts]
+archpapercraft = "archpapercraft.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
