@@ -1,13 +1,13 @@
-"""Exact unfolding for planar and developable (cylindrical / conical) patches.
+"""Přesné rozložení pro rovinné a rozvinutelné (válcové / kuželové) plochy.
 
-Core algorithm (BFS edge-unfolding):
-  1. Pick a seed triangle, lay it flat on the 2-D plane.
-  2. BFS over the face-adjacency graph (within the same part).
-  3. For each new triangle sharing an edge with an already-placed triangle,
-     compute the 2-D position by reflecting across the shared edge.
+Základní algoritmus (BFS hranové rozložení):
+  1. Zvol počáteční trojúhelník, polož ho na 2D rovinu.
+  2. BFS přes graf sousednosti ploch (v rámci stejného dílu).
+  3. Pro každý nový trojúhelník sdílející hranu s již položeným
+     vypočtí 2D pozici odrazem přes sdílenou hranu.
 
-This works without distortion for all planar patches and gives an acceptable
-result for low-curvature developable patches.
+Funguje bez zkreslení pro všechny rovinné plochy a dává přijatelný
+výsledek pro rozvinutelné plochy s nízkou křivostí.
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ from archpapercraft.core_geometry.primitives import MeshData
 
 @dataclass
 class UnfoldedPart:
-    """Result of unfolding one connected part."""
+    """Výsledek rozložení jednoho spojeného dílu."""
 
     part_id: int
     # 2-D vertex positions  (K, 2)
@@ -40,7 +40,7 @@ class UnfoldedPart:
 def _lay_first_triangle(
     mesh: MeshData, face_idx: int
 ) -> tuple[NDArray[np.float64], dict[int, int]]:
-    """Place the first triangle at the origin.  Returns (verts_2d, 3d→2d map)."""
+    """Položí první trojúhelník do počátku. Vrací (verts_2d, 3d→2d mapa)."""
     tri = mesh.faces[face_idx]
     p0 = mesh.vertices[tri[0]]
     p1 = mesh.vertices[tri[1]]
@@ -73,7 +73,7 @@ def _place_triangle(
     verts_2d: NDArray[np.float64],
     idx_map: dict[int, int],
 ) -> tuple[NDArray[np.float64], dict[int, int]]:
-    """Place a new triangle adjacent to one whose shared edge is already laid out."""
+    """Položí nový trojúhelník sousedicí s již položeným přes sdílenou hranu."""
     tri = mesh.faces[face_idx]
     tri_list = [int(tri[0]), int(tri[1]), int(tri[2])]
 

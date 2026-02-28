@@ -1,1 +1,1 @@
-"""tabs_generator — tab generation and fold-line / numbering markings."""
+"""tabs_generator — generování chlopní a značení hran / číslování."""

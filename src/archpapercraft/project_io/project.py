@@ -52,8 +52,31 @@ _log = logging.getLogger("archpapercraft.project")
 
 
 def _ensure_log_dir() -> Path:
-    _LOG_DIR.mkdir(parents=True, exist_ok=True)
-    return _LOG_DIR
+    """Vrátí existující adresář pro logy.
+
+    Zkouší v pořadí:
+    1. ~/.archpapercraft/logs
+    2. %TEMP%/archpapercraft_logs  (fallback)
+    Nikdy nevyhodí výjimku.
+    """
+    import tempfile
+
+    candidates = [
+        _LOG_DIR,
+        Path(tempfile.gettempdir()) / "archpapercraft_logs",
+    ]
+    for d in candidates:
+        try:
+            d.mkdir(parents=True, exist_ok=True)
+            # Ověř že je zapisovatelný
+            test_file = d / ".write_test"
+            test_file.write_text("ok", encoding="utf-8")
+            test_file.unlink(missing_ok=True)
+            return d
+        except OSError:
+            continue
+    # Krajní fallback — systémový temp
+    return Path(tempfile.gettempdir())
 
 
 @dataclass
@@ -65,7 +88,7 @@ class ProjectSettings:
     Při načtení projektu se hodnoty přepočítají do mm (viz ``_ensure_mm``).
     """
 
-    units: str = "mm"  # mm | cm | m | in | ft — jen UI prezentace
+    units: str = "m"  # mm | cm | m | in | ft — jen UI prezentace
     scale: str = "1:100"
     paper: str = "A4"
     paper_margin_mm: float = 10.0
@@ -190,7 +213,7 @@ class Project:
     def save(self, path: str | Path | None = None) -> Path:
         p = Path(path) if path else self.file_path
         if p is None:
-            raise ValueError("No file path specified for save.")
+            raise ValueError("Cesta k souboru nebyla zadána pro uložení.")
         p = p.with_suffix(FILE_EXTENSION)
         p.write_text(json.dumps(self.to_dict(), indent=2, default=_json_default), encoding="utf-8")
         self.file_path = p
@@ -297,33 +320,41 @@ class Project:
     # ── crash report ───────────────────────────────────────────────────
 
     @staticmethod
-    def write_crash_report(exc: BaseException) -> Path:
+    def write_crash_report(exc: BaseException) -> Path | None:
         """Zapíše crash report do logovacího adresáře.
 
-        Vrací cestu k souboru s reportem.
+        Vrací cestu k souboru s reportem, nebo None pokud se zápis nezdaří.
+        Nikdy nevyhodí výjimku.
         """
-        log_dir = _ensure_log_dir()
-        timestamp = time.strftime("%Y%m%d_%H%M%S")
-        report_path = log_dir / f"crash_{timestamp}.log"
+        try:
+            log_dir = _ensure_log_dir()
+            timestamp = time.strftime("%Y%m%d_%H%M%S")
+            report_path = log_dir / f"crash_{timestamp}.log"
 
-        lines = [
-            f"ArchPapercraft Studio — Crash Report",
-            f"Čas: {time.strftime('%Y-%m-%d %H:%M:%S')}",
-            f"",
-            f"Výjimka: {type(exc).__name__}: {exc}",
-            f"",
-            "Traceback:",
-            traceback.format_exc(),
-        ]
-        report_path.write_text("\n".join(lines), encoding="utf-8")
-        _log.error("Crash report zapsán: %s", report_path)
-        return report_path
+            lines = [
+                "ArchPapercraft Studio — Crash Report",
+                f"Čas: {time.strftime('%Y-%m-%d %H:%M:%S')}",
+                "",
+                f"Výjimka: {type(exc).__name__}: {exc}",
+                "",
+                "Traceback:",
+                traceback.format_exc(),
+            ]
+            report_path.write_text("\n".join(lines), encoding="utf-8")
+            _log.error("Crash report zapsán: %s", report_path)
+            return report_path
+        except Exception:
+            # Krajní bezpečností — nikdy nespadnout kvůli logování
+            return None
 
     @staticmethod
     def list_crash_reports() -> list[Path]:
         """Vrátí seznam crash reportů."""
-        log_dir = _ensure_log_dir()
-        return sorted(log_dir.glob("crash_*.log"), reverse=True)
+        try:
+            log_dir = _ensure_log_dir()
+            return sorted(log_dir.glob("crash_*.log"), reverse=True)
+        except Exception:
+            return []
 
 
 # ── internal conversion helpers ────────────────────────────────────────
@@ -336,7 +367,7 @@ def _json_default(obj: Any) -> Any:
         return int(obj)
     if isinstance(obj, np.floating):
         return float(obj)
-    raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+    raise TypeError(f"Objekt typu {type(obj)} nelze serializovat do JSON")
 
 
 def _node_to_dict(node: SceneNode) -> dict[str, Any]:

@@ -1,1 +1,1 @@
-"""ui — PySide6 GUI: main window, 3-D viewport, panels, wizard."""
+"""ui — PySide6 GUI: hlavní okno, 3D viewport, panely, průvodce."""

@@ -36,9 +36,9 @@ def export_dxf(
     markings: list[PartMarkings] | None = None,
     scale: float = 1.0,
 ) -> None:
-    """Write all pages into a single DXF file (one block per page).
+    """Zapíše všechny stránky do jednoho DXF souboru (jeden blok na stránku).
 
-    Raises ``RuntimeError`` when *ezdxf* is not installed.
+    Vyhodí ``RuntimeError`` pokud *ezdxf* není nainstalován.
     """
     if not EZDXF_AVAILABLE:
         raise RuntimeError(

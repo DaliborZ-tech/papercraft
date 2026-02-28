@@ -1,1 +1,1 @@
-"""paper_analyzer — surface classification (flat / developable / non-developable)."""
+"""paper_analyzer — klasifikace povrchů (rovinný / rozvinutelný / nerozvinutelný)."""

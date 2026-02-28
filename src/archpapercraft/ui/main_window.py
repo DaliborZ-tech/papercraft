@@ -14,7 +14,14 @@ from PySide6.QtWidgets import (
     QToolBar,
 )
 
-from archpapercraft.commands.command_stack import CommandStack
+from archpapercraft.commands.command_stack import (
+    AddNodeCommand,
+    CommandStack,
+    RemoveNodeCommand,
+    SetParameterCommand,
+    SetTransformCommand,
+)
+from archpapercraft.preferences.settings import Preferences
 from archpapercraft.project_io.project import Project
 from archpapercraft.scene_graph.scene import Scene
 from archpapercraft.ui.object_tree import ObjectTreeWidget
@@ -34,6 +41,8 @@ class MainWindow(QMainWindow):
         # ── data ───────────────────────────────────────────────────────
         self.project = Project()
         self.command_stack = CommandStack(on_change=self._on_undo_redo_change)
+        self._prefs = Preferences.load()
+        self._selected_node = None
 
         # ── centrální viewport ─────────────────────────────────────────
         self.viewport = Viewport3D(scene=self.project.scene)
@@ -66,6 +75,10 @@ class MainWindow(QMainWindow):
         # ── stavový řádek ──────────────────────────────────────────────
         self.setStatusBar(QStatusBar(self))
         self.statusBar().showMessage("Připraven")
+
+        # ── propojení signálů ──────────────────────────────────────────
+        self.object_tree.node_selected.connect(self._on_node_selected)
+        self.properties.param_changed.connect(self._on_param_changed)
 
         # ── automatické ukládání (každé 2 minuty) ─────────────────────
         self._autosave_timer = QTimer(self)
@@ -122,6 +135,18 @@ class MainWindow(QMainWindow):
         self._redo_act.setEnabled(False)
         self._redo_act.triggered.connect(self._redo)
         edit_menu.addAction(self._redo_act)
+
+        edit_menu.addSeparator()
+
+        delete_act = QAction("&Smazat", self)
+        delete_act.setShortcut(QKeySequence("Delete"))
+        delete_act.triggered.connect(self._delete_selected)
+        edit_menu.addAction(delete_act)
+
+        dup_act = QAction("D&uplikovat", self)
+        dup_act.setShortcut(QKeySequence("Ctrl+D"))
+        dup_act.triggered.connect(self._duplicate_selected)
+        edit_menu.addAction(dup_act)
 
         edit_menu.addSeparator()
 
@@ -223,10 +248,17 @@ class MainWindow(QMainWindow):
     # ── sloty ──────────────────────────────────────────────────────────
 
     def _new_project(self) -> None:
-        self.project = Project()
-        self.command_stack.clear()
-        self._refresh_all()
-        self.statusBar().showMessage("Nový projekt vytvořen")
+        from archpapercraft.ui.wizard import ProjectWizard
+
+        wizard = ProjectWizard(self)
+        if wizard.exec():
+            settings = wizard.get_settings()
+            self.project = Project()
+            self.project.settings = settings
+            self.command_stack.clear()
+            self._selected_node = None
+            self._refresh_all()
+            self.statusBar().showMessage(f"Nový projekt: {settings.name}")
 
     def _open_project(self) -> None:
         path, _ = QFileDialog.getOpenFileName(
@@ -265,20 +297,20 @@ class MainWindow(QMainWindow):
 
         ntype = NodeType[ntype_name]
         name = ntype_name.replace("PRIMITIVE_", "").replace("_", " ").title()
-        self.project.scene.add_node(name, ntype)
-        self.project.scene.rebuild_meshes()
+        cmd = AddNodeCommand(self.project.scene, name, ntype)
+        self.command_stack.execute(cmd)
         self._refresh_all()
         self.statusBar().showMessage(f"Přidáno: {name}")
 
     def _undo(self) -> None:
-        desc = self.command_stack.undo()
-        if desc:
+        desc = self.command_stack.undo_description
+        if self.command_stack.undo():
             self._refresh_all()
             self.statusBar().showMessage(f"Zpět: {desc}")
 
     def _redo(self) -> None:
-        desc = self.command_stack.redo()
-        if desc:
+        desc = self.command_stack.redo_description
+        if self.command_stack.redo():
             self._refresh_all()
             self.statusBar().showMessage(f"Znovu: {desc}")
 
@@ -301,13 +333,65 @@ class MainWindow(QMainWindow):
     def _toggle_grid(self) -> None:
         self.viewport.toggle_grid()
 
+    # ── výběr a editace uzlů ──────────────────────────────────────────
+
+    def _on_node_selected(self, node_id: str) -> None:
+        """Strom objektů emitoval node_selected — zobraz ve vlastnostech a zvýrazni."""
+        node = self.project.scene.find_node(node_id)
+        self._selected_node = node
+        self.properties.set_node(node)
+        self.viewport.set_selected_node(node)
+        if node:
+            self.statusBar().showMessage(f"Vybráno: {node.name}")
+
+    def _on_param_changed(self) -> None:
+        """Properties panel reportuje změnu parametru — rebuild + refresh."""
+        self.project.scene.rebuild_meshes()
+        self.viewport.update()
+
+    def _delete_selected(self) -> None:
+        """Smaž vybraný uzel ze scény (s Undo podporou)."""
+        if self._selected_node is None:
+            return
+        name = self._selected_node.name
+        cmd = RemoveNodeCommand(self.project.scene, self._selected_node)
+        self.command_stack.execute(cmd)
+        self._selected_node = None
+        self.properties.set_node(None)
+        self.viewport.set_selected_node(None)
+        self._refresh_all()
+        self.statusBar().showMessage(f"Smazáno: {name}")
+
+    def _duplicate_selected(self) -> None:
+        """Duplikuj vybraný uzel (vytvoří kopii se stejnými parametry, s Undo)."""
+        if self._selected_node is None:
+            return
+        src = self._selected_node
+        from archpapercraft.scene_graph.node import NodeType
+
+        cmd = AddNodeCommand(
+            self.project.scene,
+            f"{src.name} (kopie)",
+            src.node_type,
+            **dict(src.parameters),
+        )
+        self.command_stack.execute(cmd)
+        # Kopíruj transformaci s mírným offsetem
+        if cmd._node is not None:
+            cmd._node.transform.position[:] = src.transform.position
+            cmd._node.transform.rotation[:] = src.transform.rotation
+            cmd._node.transform.position[0] += 0.5
+        self.project.scene.rebuild_meshes()
+        self._refresh_all()
+        self.statusBar().showMessage(f"Duplikováno: {src.name} (kopie)")
+
     def _show_preferences(self) -> None:
         """Otevře dialog předvoleb."""
-        QMessageBox.information(
-            self, "Předvolby",
-            "Dialog předvoleb bude implementován v další verzi.\n"
-            "Nastavení se ukládá do ~/.archpapercraft/settings.json",
-        )
+        from archpapercraft.ui.preferences_dialog import PreferencesDialog
+
+        dlg = PreferencesDialog(self._prefs, parent=self)
+        if dlg.exec():
+            self.statusBar().showMessage("Předvolby uloženy")
 
     def _show_about(self) -> None:
         QMessageBox.about(

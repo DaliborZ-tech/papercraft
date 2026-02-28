@@ -1,3 +1,3 @@
-"""ArchPapercraft Studio — architecture-first 3D modeler with papercraft export."""
+"""ArchPapercraft Studio — architektonický 3D modelář s exportem papírových vystřihovánek."""
 
 __version__ = "0.1.0"

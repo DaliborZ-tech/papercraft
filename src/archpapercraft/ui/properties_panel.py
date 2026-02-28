@@ -1,4 +1,4 @@
-"""Properties panel — shows and edits parameters of the selected SceneNode."""
+"""Panel vlastností — zobrazuje a edituje parametry vybraného uzlu scény."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from archpapercraft.scene_graph.node import SceneNode
 
 
 class PropertiesPanel(QWidget):
-    """Editable property sheet for the currently selected node."""
+    """Editovatelný formulář vlastností aktuálně vybraného uzlu."""
 
     param_changed = Signal()
 
@@ -25,23 +25,23 @@ class PropertiesPanel(QWidget):
         self._node: SceneNode | None = None
 
         self._layout = QVBoxLayout(self)
-        self._info_label = QLabel("No selection")
+        self._info_label = QLabel("Žádný výběr")
         self._layout.addWidget(self._info_label)
 
         # Transform group
-        self._tf_group = QGroupBox("Transform")
+        self._tf_group = QGroupBox("Transformace")
         self._tf_form = QFormLayout()
         self._tf_group.setLayout(self._tf_form)
-        self._pos_x = self._spin("Position X")
-        self._pos_y = self._spin("Position Y")
-        self._pos_z = self._spin("Position Z")
-        self._rot_x = self._spin("Rotation X", -360, 360)
-        self._rot_y = self._spin("Rotation Y", -360, 360)
-        self._rot_z = self._spin("Rotation Z", -360, 360)
+        self._pos_x = self._spin("Pozice X")
+        self._pos_y = self._spin("Pozice Y")
+        self._pos_z = self._spin("Pozice Z")
+        self._rot_x = self._spin("Rotace X", -360, 360)
+        self._rot_y = self._spin("Rotace Y", -360, 360)
+        self._rot_z = self._spin("Rotace Z", -360, 360)
         self._layout.addWidget(self._tf_group)
 
         # Parameters group (dynamic)
-        self._param_group = QGroupBox("Parameters")
+        self._param_group = QGroupBox("Parametry")
         self._param_form = QFormLayout()
         self._param_group.setLayout(self._param_form)
         self._layout.addWidget(self._param_group)
@@ -61,7 +61,7 @@ class PropertiesPanel(QWidget):
     def set_node(self, node: SceneNode | None) -> None:
         self._node = node
         if node is None:
-            self._info_label.setText("No selection")
+            self._info_label.setText("Žádný výběr")
             return
 
         self._info_label.setText(f"{node.name}  ({node.node_type.name})")

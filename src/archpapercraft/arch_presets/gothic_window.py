@@ -4,6 +4,7 @@ Generates a 3-D mesh of a Gothic window frame suitable for papercraft:
 - Proper pointed (ogival) arch top — two circular arcs meeting at apex
 - Configurable splay angle for the jambs (ostění)
 - Optional central mullion (sloupek) dividing the window into two lights
+- Optional simple tracery (kružba) in the arch head
 - Flat panels ideal for exact unfolding
 """
 
@@ -30,6 +31,8 @@ def generate_gothic_window(params: dict[str, Any]) -> MeshData:
     frame_width : float   Width of the stone frame (default 0.10).
     mullion : bool        Add a central mullion (default True).
     mullion_width : float Width of the mullion bar (default 0.06).
+    tracery : bool        Add simple trefoil tracery in arch head (default False).
+    spring_ratio : float  Spring line position as ratio of height (default 0.55).
     """
     W = float(params.get("width", 1.2))
     H = float(params.get("height", 2.8))
@@ -39,14 +42,17 @@ def generate_gothic_window(params: dict[str, Any]) -> MeshData:
     FW = float(params.get("frame_width", 0.10))
     add_mullion = bool(params.get("mullion", True))
     MW = float(params.get("mullion_width", 0.06))
+    add_tracery = bool(params.get("tracery", False))
+    spring_ratio = float(params.get("spring_ratio", 0.55))
 
     all_verts: list[np.ndarray] = []
     all_faces: list[np.ndarray] = []
     offset = 0
 
     # ── Main frame (outer arch - inner arch) ──────────────────────────
-    outer = _pointed_arch_profile(W / 2, H, segs)
-    inner = _pointed_arch_profile(W / 2 - FW, H - FW * 1.5, segs, base_z=FW * 0.5)
+    outer = _pointed_arch_profile(W / 2, H, segs, spring_ratio=spring_ratio)
+    inner = _pointed_arch_profile(W / 2 - FW, H - FW * 1.5, segs,
+                                  base_z=FW * 0.5, spring_ratio=spring_ratio)
 
     v, f = _build_frame_ring(outer, inner, D, splay, W)
     all_verts.append(v)
@@ -55,11 +61,18 @@ def generate_gothic_window(params: dict[str, Any]) -> MeshData:
 
     # ── Optional mullion (central vertical bar) ───────────────────────
     if add_mullion:
-        spring_h = H * 0.55
+        spring_h = H * spring_ratio
         mv, mf = _build_mullion(MW, spring_h, D, base_z=FW * 0.5)
         all_verts.append(mv)
         all_faces.append(mf + offset)
         offset += len(mv)
+
+    # ── Optional tracery (simple trefoil-like bars in arch head) ──────
+    if add_tracery and add_mullion:
+        tv, tf = _build_tracery(W, H, D, FW, MW, segs, spring_ratio)
+        all_verts.append(tv)
+        all_faces.append(tf + offset)
+        offset += len(tv)
 
     vertices = np.vstack(all_verts)
     faces = np.vstack(all_faces)
@@ -74,7 +87,8 @@ def generate_gothic_window(params: dict[str, Any]) -> MeshData:
 
 
 def _pointed_arch_profile(
-    half_w: float, height: float, segs: int, base_z: float = 0.0
+    half_w: float, height: float, segs: int, base_z: float = 0.0,
+    spring_ratio: float = 0.55,
 ) -> np.ndarray:
     """Generate a closed pointed-arch profile as (N, 2) array in XZ plane.
 
@@ -84,7 +98,7 @@ def _pointed_arch_profile(
     The arch uses two circular arcs whose centers sit on the spring line.
     The apex is computed so it exactly reaches *height*.
     """
-    spring_h = height * 0.55  # spring line at 55 % of total height
+    spring_h = height * spring_ratio  # spring line
     arch_rise = height - spring_h  # vertical rise from spring to apex
 
     # Compute center offset *c* so apex is exactly at *height*.
@@ -165,11 +179,15 @@ def _build_frame_ring(
     front_inner = _embed_xz(inner, y=0.0)
     back_outer = _embed_xz(outer, y=depth)
 
-    # Back inner is splayed outward (wider opening on the interior side)
+    # Back inner is splayed outward (wider opening on the interior side).
+    # Apply per-vertex angular splay: each point moves outward proportional
+    # to its distance from the profile centroid, giving proper conical splay.
     back_inner_2d = inner.copy()
     half_w = opening_width / 2 + 1e-9
-    # Scale X outward by splay
-    back_inner_2d[:, 0] *= (1.0 + splay_offset / half_w)
+    for i in range(len(back_inner_2d)):
+        x = back_inner_2d[i, 0]
+        # Splay proportional to signed distance from center
+        back_inner_2d[i, 0] = x + math.copysign(splay_offset, x) if abs(x) > 1e-9 else x
     back_inner = _embed_xz(back_inner_2d, y=depth)
 
     # Since outer and inner may have different point counts,
@@ -179,7 +197,9 @@ def _build_frame_ring(
         inner_resampled = _resample_profile(inner, n_out)
         front_inner = _embed_xz(inner_resampled, y=0.0)
         back_inner_2d_r = inner_resampled.copy()
-        back_inner_2d_r[:, 0] *= (1.0 + splay_offset / half_w)
+        for i in range(len(back_inner_2d_r)):
+            x = back_inner_2d_r[i, 0]
+            back_inner_2d_r[i, 0] = x + math.copysign(splay_offset, x) if abs(x) > 1e-9 else x
         back_inner = _embed_xz(back_inner_2d_r, y=depth)
 
     n = n_out
@@ -265,3 +285,51 @@ def _resample_profile(profile: np.ndarray, target_n: int) -> np.ndarray:
     new_x = np.interp(new_t, old_t, profile[:, 0])
     new_z = np.interp(new_t, old_t, profile[:, 1])
     return np.column_stack([new_x, new_z])
+
+
+# ── Tracery (simple arch-head bars) ───────────────────────────────────
+
+
+def _build_tracery(
+    W: float, H: float, D: float, FW: float, MW: float,
+    segs: int, spring_ratio: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Build simple tracery bars forming a Y-shape in the arch head.
+
+    Creates a horizontal bar connecting the two sub-arches at the
+    spring point of the main arch, giving a simple bifurcated tracery
+    effect typical of Early Gothic / Decorated windows.
+    """
+    spring_h = H * spring_ratio
+    bar_h = FW * 0.6  # bar thickness
+    bar_z_bottom = spring_h - bar_h / 2
+    bar_z_top = spring_h + bar_h / 2
+
+    # Horizontal bar from inner left to inner right at spring height
+    inner_hw = W / 2 - FW
+    x_left = -inner_hw
+    x_right = inner_hw
+
+    verts = np.array([
+        # Front face
+        [x_left,  0, bar_z_bottom],
+        [x_right, 0, bar_z_bottom],
+        [x_right, 0, bar_z_top],
+        [x_left,  0, bar_z_top],
+        # Back face
+        [x_left,  D, bar_z_bottom],
+        [x_right, D, bar_z_bottom],
+        [x_right, D, bar_z_top],
+        [x_left,  D, bar_z_top],
+    ], dtype=np.float64)
+
+    faces = np.array([
+        [0, 1, 2], [0, 2, 3],  # front
+        [5, 4, 7], [5, 7, 6],  # back
+        [4, 0, 3], [4, 3, 7],  # left
+        [1, 5, 6], [1, 6, 2],  # right
+        [3, 2, 6], [3, 6, 7],  # top
+        [4, 5, 1], [4, 1, 0],  # bottom
+    ], dtype=np.int32)
+
+    return verts, faces

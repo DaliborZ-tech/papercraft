@@ -1,1 +1,1 @@
-"""project_io — save / load / autosave of ArchPapercraft projects."""
+"""project_io — ukládání / načítání / autouložení projektů ArchPapercraft."""

@@ -34,6 +34,7 @@ class Viewport3D(QOpenGLWidget):
     def __init__(self, scene: Scene | None = None, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self._scene = scene or Scene()
+        self._selected_node = None
 
         # Stav kamery (orbitální kamera)
         self._orbit_yaw = 30.0
@@ -54,6 +55,11 @@ class Viewport3D(QOpenGLWidget):
         self._scene = scene
         self.update()
 
+    def set_selected_node(self, node) -> None:
+        """Nastav vybraný uzel pro zvýraznění."""
+        self._selected_node = node
+        self.update()
+
     # ── OpenGL callbacks ───────────────────────────────────────────────
 
     def initializeGL(self) -> None:
@@ -63,6 +69,15 @@ class Viewport3D(QOpenGLWidget):
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glEnable(GL.GL_LINE_SMOOTH)
         GL.glLineWidth(1.0)
+
+        # Face-normal lighting
+        GL.glEnable(GL.GL_LIGHTING)
+        GL.glEnable(GL.GL_LIGHT0)
+        GL.glEnable(GL.GL_COLOR_MATERIAL)
+        GL.glColorMaterial(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT_AND_DIFFUSE)
+        GL.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, [0.3, 1.0, 0.5, 0.0])
+        GL.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, [0.9, 0.9, 0.9, 1.0])
+        GL.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, [0.25, 0.25, 0.28, 1.0])
 
     def resizeGL(self, w: int, h: int) -> None:
         if not _GL_AVAILABLE:
@@ -100,6 +115,7 @@ class Viewport3D(QOpenGLWidget):
         self._draw_meshes()
 
     def _draw_grid(self, size: int = 20, step: float = 1.0) -> None:
+        GL.glDisable(GL.GL_LIGHTING)
         GL.glColor3f(0.35, 0.35, 0.35)
         GL.glBegin(GL.GL_LINES)
         for i in range(-size, size + 1):
@@ -117,6 +133,7 @@ class Viewport3D(QOpenGLWidget):
         GL.glColor3f(0, 0, 1); GL.glVertex3f(0, 0, 0); GL.glVertex3f(0, 0, 3)
         GL.glEnd()
         GL.glLineWidth(1.0)
+        GL.glEnable(GL.GL_LIGHTING)
 
     def _draw_meshes(self) -> None:
         for node in self._scene.all_mesh_nodes():
@@ -128,13 +145,22 @@ class Viewport3D(QOpenGLWidget):
             if hasattr(node, "visible") and not node.visible:
                 continue
 
+            is_selected = (self._selected_node is not None
+                           and node.node_id == self._selected_node.node_id)
+
             mat = node.transform.to_matrix()
             GL.glPushMatrix()
             GL.glMultMatrixf(mat.T.astype(np.float32).flatten())
 
             if self._show_wireframe:
-                # Drátový model
-                GL.glColor3f(0.8, 0.85, 0.9)
+                # Drátový model — bez osvětlení
+                GL.glDisable(GL.GL_LIGHTING)
+                if is_selected:
+                    GL.glColor3f(1.0, 0.65, 0.0)   # oranžová (výběr)
+                    GL.glLineWidth(2.0)
+                else:
+                    GL.glColor3f(0.8, 0.85, 0.9)
+                    GL.glLineWidth(1.0)
                 GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE)
                 GL.glBegin(GL.GL_TRIANGLES)
                 for face in mesh.faces:
@@ -142,14 +168,30 @@ class Viewport3D(QOpenGLWidget):
                         v = mesh.vertices[vi]
                         GL.glVertex3f(float(v[0]), float(v[1]), float(v[2]))
                 GL.glEnd()
+                GL.glLineWidth(1.0)
+                GL.glEnable(GL.GL_LIGHTING)
 
-            # Plošné stínování (poloprůhledné)
+            # Plošné stínování s normálami
             GL.glEnable(GL.GL_BLEND)
             GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
-            GL.glColor4f(0.4, 0.55, 0.7, 0.3)
+            if is_selected:
+                GL.glColor4f(1.0, 0.65, 0.0, 0.35)  # oranžový nádech
+            else:
+                GL.glColor4f(0.4, 0.55, 0.7, 0.45)
             GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL)
             GL.glBegin(GL.GL_TRIANGLES)
             for face in mesh.faces:
+                # Compute face normal for lighting
+                v0 = mesh.vertices[face[0]]
+                v1 = mesh.vertices[face[1]]
+                v2 = mesh.vertices[face[2]]
+                edge1 = v1 - v0
+                edge2 = v2 - v0
+                normal = np.cross(edge1, edge2)
+                length = np.linalg.norm(normal)
+                if length > 1e-12:
+                    normal /= length
+                GL.glNormal3f(float(normal[0]), float(normal[1]), float(normal[2]))
                 for vi in face:
                     v = mesh.vertices[vi]
                     GL.glVertex3f(float(v[0]), float(v[1]), float(v[2]))

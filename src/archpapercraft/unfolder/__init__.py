@@ -1,1 +1,1 @@
-"""unfolder — exact and approximate unfolding of 3-D mesh parts onto 2-D."""
+"""unfolder — přesné a přibližné rozložení 3D dílů sítě na 2D."""

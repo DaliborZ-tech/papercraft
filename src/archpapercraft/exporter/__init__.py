@@ -1,1 +1,1 @@
-"""exporter — PDF / SVG / DXF export of laid-out papercraft pages."""
+"""exporter — PDF / SVG / DXF export rozložených papírových stránek."""

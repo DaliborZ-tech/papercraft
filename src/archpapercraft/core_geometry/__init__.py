@@ -1,1 +1,1 @@
-"""core_geometry — OpenCascade wrapper for solid modelling, booleans, and triangulation."""
+"""core_geometry — OpenCascade obal pro tvorbu solidů, booleovské operace a triangulaci."""

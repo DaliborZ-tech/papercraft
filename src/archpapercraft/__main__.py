@@ -1,4 +1,4 @@
-"""Allow running as ``python -m archpapercraft``."""
+"""Umožňuje spuštění jako ``python -m archpapercraft``."""
 
 from archpapercraft.app import main
 

@@ -1,4 +1,4 @@
-"""Papercraft panel — workflow steps: Analyze → Seams → Unfold → Layout → Export."""
+"""Panel papercraftu — kroky workflow: Analýza → Švy → Rozložení → Uspořádání → Export."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ _log = logging.getLogger(__name__)
 
 
 class PapercraftPanel(QWidget):
-    """Right-side panel guiding the user through the papercraft workflow."""
+    """Pravý panel provádějící uživatele workflow papercraftu."""
 
     def __init__(self, project: Project | None = None, parent: QWidget | None = None) -> None:
         super().__init__(parent)
@@ -32,43 +32,43 @@ class PapercraftPanel(QWidget):
 
         layout = QVBoxLayout(self)
 
-        # ── 1. Analyze ─────────────────────────────────────────────────
-        grp_analyze = QGroupBox("1. Analyze surfaces")
+        # ── 1. Analýza ─────────────────────────────────────────────────
+        grp_analyze = QGroupBox("1. Analýza ploch")
         al = QVBoxLayout()
-        self._btn_analyze = QPushButton("Analyze")
+        self._btn_analyze = QPushButton("Analyzovat")
         self._btn_analyze.clicked.connect(self._on_analyze)
-        self._lbl_analyze = QLabel("Click Analyze to classify surfaces.")
+        self._lbl_analyze = QLabel("Klikněte na Analyzovat pro klasifikaci ploch.")
         al.addWidget(self._btn_analyze)
         al.addWidget(self._lbl_analyze)
         grp_analyze.setLayout(al)
         layout.addWidget(grp_analyze)
 
-        # ── 2. Seams ──────────────────────────────────────────────────
-        grp_seams = QGroupBox("2. Seams")
+        # ── 2. Švy ────────────────────────────────────────────────────
+        grp_seams = QGroupBox("2. Švy")
         sl = QVBoxLayout()
-        self._btn_auto_seams = QPushButton("Auto Seams")
+        self._btn_auto_seams = QPushButton("Automatické švy")
         self._btn_auto_seams.clicked.connect(self._on_auto_seams)
-        self._lbl_seams = QLabel("Generate automatic seam placement.")
+        self._lbl_seams = QLabel("Nastavit automatické umístění švů.")
         sl.addWidget(self._btn_auto_seams)
         sl.addWidget(self._lbl_seams)
         grp_seams.setLayout(sl)
         layout.addWidget(grp_seams)
 
-        # ── 3. Unfold ─────────────────────────────────────────────────
-        grp_unfold = QGroupBox("3. Unfold")
+        # ── 3. Rozložení ──────────────────────────────────────────────
+        grp_unfold = QGroupBox("3. Rozložení")
         ul = QVBoxLayout()
         uh = QHBoxLayout()
-        uh.addWidget(QLabel("Strategy:"))
+        uh.addWidget(QLabel("Strategie:"))
         self._combo_strategy = QComboBox()
         self._combo_strategy.addItems(["Exact", "Gores", "Rings", "Facets"])
         uh.addWidget(self._combo_strategy)
-        uh.addWidget(QLabel("Segments:"))
+        uh.addWidget(QLabel("Segmenty:"))
         self._spin_segments = QSpinBox()
         self._spin_segments.setRange(4, 64)
         self._spin_segments.setValue(16)
         uh.addWidget(self._spin_segments)
         ul.addLayout(uh)
-        self._btn_unfold = QPushButton("Unfold")
+        self._btn_unfold = QPushButton("Rozložit")
         self._btn_unfold.clicked.connect(self._on_unfold)
         ul.addWidget(self._btn_unfold)
         self._lbl_unfold = QLabel("")
@@ -77,19 +77,29 @@ class PapercraftPanel(QWidget):
         layout.addWidget(grp_unfold)
 
         # ── 4. Export ──────────────────────────────────────────────────
-        grp_export = QGroupBox("4. Layout & Export")
+        grp_export = QGroupBox("4. Rozvržení a export")
         el = QVBoxLayout()
         eh = QHBoxLayout()
-        self._btn_pdf = QPushButton("Export PDF")
+        self._btn_pdf = QPushButton("Exportovat PDF")
         self._btn_pdf.clicked.connect(lambda: self._on_export("pdf"))
-        self._btn_svg = QPushButton("Export SVG")
+        self._btn_svg = QPushButton("Exportovat SVG")
         self._btn_svg.clicked.connect(lambda: self._on_export("svg"))
-        self._btn_dxf = QPushButton("Export DXF")
+        self._btn_dxf = QPushButton("Exportovat DXF")
         self._btn_dxf.clicked.connect(lambda: self._on_export("dxf"))
         eh.addWidget(self._btn_pdf)
         eh.addWidget(self._btn_svg)
         eh.addWidget(self._btn_dxf)
         el.addLayout(eh)
+
+        eh2 = QHBoxLayout()
+        self._btn_png = QPushButton("Exportovat PNG")
+        self._btn_png.clicked.connect(lambda: self._on_export("png"))
+        self._btn_guide = QPushButton("Sestavovací návod")
+        self._btn_guide.clicked.connect(self._on_build_guide)
+        eh2.addWidget(self._btn_png)
+        eh2.addWidget(self._btn_guide)
+        el.addLayout(eh2)
+
         grp_export.setLayout(el)
         layout.addWidget(grp_export)
 
@@ -105,14 +115,14 @@ class PapercraftPanel(QWidget):
         self._analysis = None
         self._seam_graph = None
         self._unfolded_parts = None
-        self._lbl_analyze.setText("Click Analyze to classify surfaces.")
-        self._lbl_seams.setText("Generate automatic seam placement.")
+        self._lbl_analyze.setText("Klikněte na Analyzovat pro klasifikaci ploch.")
+        self._lbl_seams.setText("Nastavit automatické umístění švů.")
         self._lbl_unfold.setText("")
 
     # ── helpers ─────────────────────────────────────────────────────────
 
     def _get_combined_mesh(self):
-        """Rebuild scene meshes and return a single merged mesh (all visible objects)."""
+        """Přestaví meshe scény a vrátí jeden sloučený mesh (všechny viditelné objekty)."""
         from archpapercraft.core_geometry.operations import merge_meshes
 
         self._project.scene.rebuild_meshes()
@@ -122,7 +132,7 @@ class PapercraftPanel(QWidget):
         return merge_meshes(meshes)
 
     def _check_csg_requirements(self) -> None:
-        """Warn if scene contains OPENING nodes but OCC is unavailable."""
+        """Varuje pokud scéna obsahuje uzly OPENING ale OCC není dostupné."""
         from archpapercraft.core_geometry.backend import get_backend
         from archpapercraft.scene_graph.node import NodeType
 
@@ -137,16 +147,16 @@ class PapercraftPanel(QWidget):
         if has_openings:
             QMessageBox.warning(
                 self,
-                "CSG not available",
-                "The scene contains Opening nodes, but pythonocc-core "
-                "is not installed.\n\n"
-                "Boolean operations (subtracting openings from walls) "
-                "will NOT work correctly.\n\n"
-                "Install:  pip install pythonocc-core",
+                "CSG není dostupné",
+                "Scéna obsahuje uzly Otvor, ale pythonocc-core "
+                "není nainstalován.\n\n"
+                "Booleovské operace (odečítání otvorů ze zdí) "
+                "nebudou fungovat správně.\n\n"
+                "Instalace:  pip install pythonocc-core",
             )
 
     def _build_page_settings(self):
-        """Create :class:`PageSettings` from the current :class:`ProjectSettings`."""
+        """Vytvoří :class:`PageSettings` z aktuálních :class:`ProjectSettings`."""
         from archpapercraft.layout_packer.packer import (
             PageSettings,
             PaperSize,
@@ -195,7 +205,7 @@ class PapercraftPanel(QWidget):
 
         mesh = self._get_combined_mesh()
         if mesh is None:
-            self._lbl_analyze.setText("No meshes in scene.")
+            self._lbl_analyze.setText("Ve scéně nejsou žádné meshe.")
             return
 
         self._analysis = classify_surfaces(mesh)
@@ -203,29 +213,32 @@ class PapercraftPanel(QWidget):
         n_dev = len(self._analysis.developable_patches)
         n_nd = len(self._analysis.non_developable_patches)
         self._lbl_analyze.setText(
-            f"Patches: {n_flat} flat, {n_dev} developable, {n_nd} non-developable"
+            f"Díly: {n_flat} plochých, {n_dev} rozvinutelných, {n_nd} nerozvinutelných"
         )
 
     def _on_auto_seams(self) -> None:
         from archpapercraft.seam_editor.auto_seams import auto_seams
+        from archpapercraft.core_geometry.units import to_mm
 
         mesh = self._get_combined_mesh()
         if mesh is None:
-            self._lbl_seams.setText("No meshes.")
+            self._lbl_seams.setText("Žádné meshe.")
             return
 
-        scale_factor = self._project.settings.scale_factor
-        self._seam_graph = auto_seams(mesh, scale=scale_factor)
+        # Convert model-unit coords to paper mm:  unit→mm × scale_factor
+        unit_to_mm = to_mm(1.0, self._project.settings.units)
+        paper_scale = unit_to_mm * self._project.settings.scale_factor
+        self._seam_graph = auto_seams(mesh, scale=paper_scale)
         parts = self._seam_graph.compute_parts()
         self._lbl_seams.setText(
-            f"Seams: {len(self._seam_graph.seam_edges)} edges → {len(parts)} parts"
+            f"Švy: {len(self._seam_graph.seam_edges)} hran → {len(parts)} dílů"
         )
 
     def _on_unfold(self) -> None:
         from archpapercraft.unfolder.approx_unfold import unfold_with_strategy
 
         if self._seam_graph is None:
-            QMessageBox.warning(self, "Unfold", "Run Auto Seams first.")
+            QMessageBox.warning(self, "Rozložení", "Nejprve spusťte Automatické švy.")
             return
 
         mesh = self._get_combined_mesh()
@@ -239,27 +252,35 @@ class PapercraftPanel(QWidget):
             mesh, self._seam_graph, strategy=strategy, segments=segments,
         )
         self._lbl_unfold.setText(
-            f"Unfolded {len(self._unfolded_parts)} parts (strategy: {strategy})"
+            f"Rozloženo {len(self._unfolded_parts)} dílů (strategie: {strategy})"
         )
 
     def _on_export(self, fmt: str) -> None:
         if self._unfolded_parts is None:
-            QMessageBox.warning(self, "Export", "Run Unfold first.")
+            QMessageBox.warning(self, "Export", "Nejprve rozložte model.")
             return
 
+        from archpapercraft.core_geometry.units import to_mm
         from archpapercraft.layout_packer.packer import pack_parts
         from archpapercraft.tabs_generator.markings import classify_folds
         from archpapercraft.tabs_generator.tabs import TabSettings, generate_tabs_for_part
 
         # ── PageSettings from project (not defaults) ──────────────
         ps = self._build_page_settings()
-        scale = self._project.settings.scale_factor
+
+        # paper_scale = model-unit → mm on paper.
+        # Example: units="m", scale="1:100" → 1000 × 0.01 = 10
+        #   → 1.2 m window → 12 mm on paper.
+        unit_to_mm = to_mm(1.0, self._project.settings.units)
+        scale = unit_to_mm * self._project.settings.scale_factor
 
         outlines = [p.vertices_2d for p in self._unfolded_parts]
         layout = pack_parts(outlines, ps, scale=scale)
 
-        # generate tabs & markings
+        # generate tabs & markings — tab width must be in model units
         tab_settings = TabSettings(grammage=self._project.settings.paper_grammage)
+        if scale > 0:
+            tab_settings.width_mm = tab_settings.width_mm / scale  # mm → model
         tabs = []
         markings_list = []
         for part in self._unfolded_parts:
@@ -273,6 +294,7 @@ class PapercraftPanel(QWidget):
             "pdf": "PDF (*.pdf)",
             "svg": "SVG (*.svg)",
             "dxf": "DXF (*.dxf)",
+            "png": "PNG (*.png)",
         }
         path, _ = QFileDialog.getSaveFileName(self, f"Export {fmt.upper()}", "", filters[fmt])
         if not path:
@@ -293,6 +315,43 @@ class PapercraftPanel(QWidget):
             elif fmt == "dxf":
                 from archpapercraft.exporter.dxf_export import export_dxf
                 export_dxf(path, self._unfolded_parts, layout, ps, tabs, markings_list, scale)
-            QMessageBox.information(self, "Export", f"Exported to {path}")
+            elif fmt == "png":
+                from archpapercraft.exporter.png_export import export_png
+                export_png(path, self._unfolded_parts, layout, ps, tabs, markings_list, scale)
+            QMessageBox.information(self, "Export", f"Exportováno do {path}")
         except Exception as exc:
-            QMessageBox.critical(self, "Export error", str(exc))
+            QMessageBox.critical(self, "Chyba exportu", str(exc))
+
+    def _on_build_guide(self) -> None:
+        """Generuj sestavovací návod jako textový soubor."""
+        if self._unfolded_parts is None:
+            QMessageBox.warning(self, "Návod", "Nejprve rozložte model.")
+            return
+
+        from archpapercraft.tabs_generator.build_guide import generate_build_guide
+        from archpapercraft.tabs_generator.markings import classify_folds
+
+        markings_list = []
+        for part in self._unfolded_parts:
+            m = classify_folds(part.vertices_2d, part.fold_edges, part.part_id)
+            markings_list.append(m)
+
+        guide = generate_build_guide(
+            markings_list,
+            project_name=self._project.settings.name,
+            scale=self._project.settings.scale,
+            paper_grammage=self._project.settings.paper_grammage,
+        )
+
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Uložit sestavovací návod", "", "Text (*.txt)",
+        )
+        if not path:
+            return
+
+        try:
+            from pathlib import Path
+            Path(path).write_text(guide.to_text(), encoding="utf-8")
+            QMessageBox.information(self, "Návod", f"Návod uložen do {path}")
+        except Exception as exc:
+            QMessageBox.critical(self, "Chyba", str(exc))

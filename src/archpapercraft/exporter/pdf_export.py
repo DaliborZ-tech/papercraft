@@ -114,6 +114,15 @@ def export_pdf(
         if scale_label:
             _draw_scale_bar(c, pagesize, margin, scale_label)
 
+        # ── page numbering ─────────────────────────────────────────
+        c.setFont("Helvetica", 7)
+        c.setFillColorRGB(0.3, 0.3, 0.3)
+        c.drawCentredString(
+            pagesize[0] / 2,
+            margin * 0.4,
+            f"Strana {page_idx + 1} / {layout.pages}",
+        )
+
     c.save()
 
 

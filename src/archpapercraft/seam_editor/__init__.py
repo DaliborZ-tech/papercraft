@@ -1,1 +1,1 @@
-"""seam_editor — automatic and manual seam placement on a mesh."""
+"""seam_editor — automatické a manuální umísťování švů na mesh."""

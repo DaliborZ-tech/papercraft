@@ -1,5 +1,5 @@
-"""Approximate unfolding via per-face unrolling (facet strategy) and
-integration with gore/ring strategies for bodies of revolution.
+"""Přibližné rozložení pomocí facetové strategie a integrace
+s gore/ring strategiemi pro rotační tělesa.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ def unfold_all_parts(
     mesh: MeshData,
     seam_graph: SeamGraph,
 ) -> list[UnfoldedPart]:
-    """Unfold every connected part of *seam_graph* and return 2-D results."""
+    """Rozloží každý spojený díl *seam_graph* a vrátí 2D výsledky."""
     parts_faces = seam_graph.compute_parts()
     results: list[UnfoldedPart] = []
 

@@ -61,21 +61,21 @@ except ImportError:
 
 
 def make_box_occ(dx: float, dy: float, dz: float):
-    """Return a TopoDS_Shape box *dx × dy × dz*."""
+    """Vrátí TopoDS_Shape kvádr *dx × dy × dz*."""
     if not OCC_AVAILABLE:
-        raise RuntimeError("pythonocc-core is not installed")
+        raise RuntimeError("pythonocc-core není nainstalován")
     return BRepPrimAPI_MakeBox(dx, dy, dz).Shape()
 
 
 def make_cylinder_occ(radius: float, height: float):
     if not OCC_AVAILABLE:
-        raise RuntimeError("pythonocc-core is not installed")
+        raise RuntimeError("pythonocc-core není nainstalován")
     return BRepPrimAPI_MakeCylinder(radius, height).Shape()
 
 
 def make_cone_occ(radius1: float, radius2: float, height: float):
     if not OCC_AVAILABLE:
-        raise RuntimeError("pythonocc-core is not installed")
+        raise RuntimeError("pythonocc-core není nainstalován")
     return BRepPrimAPI_MakeCone(radius1, radius2, height).Shape()
 
 
@@ -85,7 +85,7 @@ def make_cone_occ(radius1: float, radius2: float, height: float):
 
 
 def make_box_mesh(dx: float, dy: float, dz: float) -> MeshData:
-    """Create an axis-aligned box mesh centered at the origin."""
+    """Vytvoří mesh kvádru zarovnaného s osami se středem v počátku."""
     hx, hy, hz = dx / 2, dy / 2, dz / 2
     verts = np.array(
         [

@@ -16,7 +16,7 @@ class ObjectTreeWidget(QTreeWidget):
 
     def __init__(self, scene: Scene | None = None, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.setHeaderLabels(["Name", "Type"])
+        self.setHeaderLabels(["Název", "Typ"])
         self.setColumnCount(2)
         self._scene = scene or Scene()
         self._rebuild()

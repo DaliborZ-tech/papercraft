@@ -1,1 +1,1 @@
-"""scene_graph — hierarchical object tree with transforms and parameters."""
+"""scene_graph — hierarchický strom objektů s transformacemi a parametry."""

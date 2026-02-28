@@ -1,4 +1,4 @@
-"""Triangulation / meshing of OCC solids and mesh utilities."""
+"""Triangulace a síťování OCC solidů a pomocné nástroje pro mesh."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ def triangulate_occ_shape(shape, linear_deflection: float = 0.1) -> MeshData:
         Mesh density control — smaller = finer mesh.
     """
     if not OCC_AVAILABLE:
-        raise RuntimeError("pythonocc-core is not installed")
+        raise RuntimeError("pythonocc-core není nainstalován")
 
     BRepMesh_IncrementalMesh(shape, linear_deflection)
 
