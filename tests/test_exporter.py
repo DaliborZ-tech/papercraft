@@ -61,7 +61,10 @@ class TestSVGExport:
 
 class TestDXFExport:
     def test_export_creates_file(self):
-        from archpapercraft.exporter.dxf_export import export_dxf
+        from archpapercraft.exporter.dxf_export import export_dxf, EZDXF_AVAILABLE
+
+        if not EZDXF_AVAILABLE:
+            pytest.skip("ezdxf not installed — DXF export is optional")
 
         parts, layout, ps, tabs, marks = _prepare()
         with tempfile.TemporaryDirectory() as d:

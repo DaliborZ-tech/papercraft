@@ -14,7 +14,12 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
-import ezdxf
+
+try:
+    import ezdxf
+    EZDXF_AVAILABLE = True
+except ImportError:
+    EZDXF_AVAILABLE = False
 
 from archpapercraft.layout_packer.packer import LayoutResult, PageSettings
 from archpapercraft.tabs_generator.markings import FoldType, PartMarkings
@@ -31,7 +36,15 @@ def export_dxf(
     markings: list[PartMarkings] | None = None,
     scale: float = 1.0,
 ) -> None:
-    """Write all pages into a single DXF file (one block per page)."""
+    """Write all pages into a single DXF file (one block per page).
+
+    Raises ``RuntimeError`` when *ezdxf* is not installed.
+    """
+    if not EZDXF_AVAILABLE:
+        raise RuntimeError(
+            "DXF export vyžaduje knihovnu ezdxf.  Nainstalujte ji: "
+            "pip install archpapercraft-studio[dxf]"
+        )
     doc = ezdxf.new(dxfversion="R2010")
     msp = doc.modelspace()
 

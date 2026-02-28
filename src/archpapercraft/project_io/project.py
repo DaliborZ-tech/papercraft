@@ -33,6 +33,13 @@ import numpy as np
 from archpapercraft.scene_graph.node import NodeType, SceneNode
 from archpapercraft.scene_graph.scene import Scene
 from archpapercraft.scene_graph.transform import Transform
+from archpapercraft.core_geometry.units import (
+    to_mm,
+    from_mm,
+    scale_factor_for_display,
+    INTERNAL_UNIT,
+    SUPPORTED_UNITS,
+)
 
 
 FILE_EXTENSION = ".apcraft"
@@ -51,15 +58,22 @@ def _ensure_log_dir() -> Path:
 
 @dataclass
 class ProjectSettings:
-    """Globální nastavení projektu."""
+    """Globální nastavení projektu.
 
-    units: str = "mm"  # mm | cm | m
+    DŮLEŽITÉ: Veškerá geometrie se interně ukládá v milimetrech (mm).
+    Pole ``units`` určuje jednotky *zobrazení* v UI a vstup z uživatele.
+    Při načtení projektu se hodnoty přepočítají do mm (viz ``_ensure_mm``).
+    """
+
+    units: str = "mm"  # mm | cm | m | in | ft — jen UI prezentace
     scale: str = "1:100"
     paper: str = "A4"
     paper_margin_mm: float = 10.0
     paper_bleed_mm: float = 0.0
     paper_grammage: int = 160
     name: str = "Bez názvu"
+    # Interní příznak, zda hodnoty scény jsou již v mm
+    _internal_unit: str = "mm"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -70,38 +84,56 @@ class ProjectSettings:
             "paper_bleed_mm": self.paper_bleed_mm,
             "paper_grammage": self.paper_grammage,
             "name": self.name,
+            "_internal_unit": INTERNAL_UNIT,
         }
 
     @classmethod
     def from_dict(cls, d: dict) -> ProjectSettings:
-        return cls(**{k: v for k, v in d.items() if k in cls.__dataclass_fields__})
+        known = {k: v for k, v in d.items() if k in cls.__dataclass_fields__}
+        return cls(**known)
 
     @property
     def scale_factor(self) -> float:
-        """Return numeric scale (e.g. '1:100' → 0.01)."""
-        parts = self.scale.split(":")
-        if len(parts) == 2:
-            return float(parts[0]) / float(parts[1])
-        return 1.0
+        """Číselný faktor měřítka (např. '1:100' → 0.01)."""
+        return scale_factor_for_display(self.scale)
+
+    def to_mm(self, value: float) -> float:
+        """Převede hodnotu z ``self.units`` do interních mm."""
+        return to_mm(value, self.units)
+
+    def from_mm(self, value_mm: float) -> float:
+        """Převede interní mm do ``self.units`` pro zobrazení v UI."""
+        return from_mm(value_mm, self.units)
 
 
 @dataclass
 class Project:
-    """Kombinuje nastavení + scénu pro serializaci."""
+    """Kombinuje nastavení + scénu pro serializaci.
+
+    Volitelně ukládá i papercraft stav (seams, layout nastavení)
+    pro round-trip editaci — uživatel otevře projekt a pokračuje
+    tam, kde skončil.
+    """
 
     settings: ProjectSettings = field(default_factory=ProjectSettings)
     scene: Scene = field(default_factory=Scene)
     file_path: Path | None = None
     _last_save_time: float = 0.0
 
+    # ── papercraft stav (round-trip) ────────────────────────────────
+    papercraft_state: dict[str, Any] = field(default_factory=dict)
+
     # ── serializace ────────────────────────────────────────────────────
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        d: dict[str, Any] = {
             "version": "0.2.0",
             "settings": self.settings.to_dict(),
             "scene": [_node_to_dict(c) for c in self.scene.root.children],
         }
+        if self.papercraft_state:
+            d["papercraft"] = self.papercraft_state
+        return d
 
     @classmethod
     def from_dict(cls, data: dict, file_path: Path | None = None) -> Project:
@@ -110,7 +142,48 @@ class Project:
         for node_data in data.get("scene", []):
             node = _node_from_dict(node_data)
             proj.scene.root.add_child(node)
+        # Načti papercraft stav (round-trip)
+        proj.papercraft_state = data.get("papercraft", {})
         return proj
+
+    # ── papercraft state helpers ───────────────────────────────────
+
+    def save_seam_state(
+        self,
+        seam_edges: list[tuple[int, int]],
+        locked_edges: list[tuple[int, int]] | None = None,
+    ) -> None:
+        """Uloží stav švů do papercraft_state pro round-trip."""
+        self.papercraft_state["seams"] = {
+            "seam_edges": [[int(e[0]), int(e[1])] for e in seam_edges],
+            "locked_edges": [[int(e[0]), int(e[1])] for e in (locked_edges or [])],
+        }
+
+    def load_seam_state(self) -> tuple[set[tuple[int, int]], set[tuple[int, int]]] | None:
+        """Načte stav švů z papercraft_state. Vrátí None pokud nebyl uložen."""
+        seams_data = self.papercraft_state.get("seams")
+        if seams_data is None:
+            return None
+        seam_edges = {tuple(e) for e in seams_data.get("seam_edges", [])}
+        locked_edges = {tuple(e) for e in seams_data.get("locked_edges", [])}
+        return seam_edges, locked_edges  # type: ignore[return-value]
+
+    def save_layout_settings(
+        self,
+        paper: str = "A4",
+        orientation: str = "portrait",
+        margin_mm: float = 10.0,
+    ) -> None:
+        """Uloží nastavení rozkladu."""
+        self.papercraft_state["layout"] = {
+            "paper": paper,
+            "orientation": orientation,
+            "margin_mm": margin_mm,
+        }
+
+    def load_layout_settings(self) -> dict[str, Any] | None:
+        """Vrátí uložené nastavení rozkladu nebo None."""
+        return self.papercraft_state.get("layout")
 
     # ── save / load ────────────────────────────────────────────────────
 

@@ -55,7 +55,8 @@ def export_svg(
         if pid >= len(parts):
             continue
         part = parts[pid]
-        ox, oy = float(pl.offset[0] * scale + margin), float(pl.offset[1] * scale + margin)
+        # offset is already in paper mm (packer applied scale)
+        ox, oy = float(pl.offset[0] + margin), float(pl.offset[1] + margin)
 
         # cut lines
         drawn: set[tuple[int, int]] = set()

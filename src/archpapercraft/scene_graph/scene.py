@@ -108,3 +108,7 @@ class Scene:
     def collect_meshes(self) -> list[MeshData]:
         """Return a flat list of all meshes (for export / analysis)."""
         return [n.mesh for n in self.all_mesh_nodes()]
+
+    def collect_visible_meshes(self) -> list[MeshData]:
+        """Return meshes only from visible nodes."""
+        return [n.mesh for n in self.all_mesh_nodes() if n.visible]

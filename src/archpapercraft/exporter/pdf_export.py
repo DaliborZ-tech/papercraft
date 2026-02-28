@@ -44,6 +44,7 @@ def export_pdf(
     tabs: list[list[Tab]] | None = None,
     markings: list[PartMarkings] | None = None,
     scale: float = 1.0,
+    scale_label: str = "",
 ) -> None:
     """Write a multi-page PDF to *path*.
 
@@ -63,6 +64,8 @@ def export_pdf(
         Per-part fold-line and numbering markings.
     scale
         mm-per-model-unit scale factor.
+    scale_label
+        Scale label (e.g. ``"1:100"``).  If set, a scale bar is drawn.
     """
     pagesize = _RL_SIZES.get(page_settings.paper, A4)
     if page_settings.orientation == Orientation.LANDSCAPE:
@@ -85,7 +88,8 @@ def export_pdf(
             if pid >= len(parts):
                 continue
             part = parts[pid]
-            ox, oy = pl.offset * mm * scale
+            # offset is already in paper mm (packer applied scale)
+            ox, oy = float(pl.offset[0]) * mm, float(pl.offset[1]) * mm
 
             # ── cut lines (edges of triangles on the boundary) ─────────
             c.setStrokeColorRGB(0, 0, 0)
@@ -105,6 +109,10 @@ def export_pdf(
             cy = margin + oy + float(part.vertices_2d[:, 1].mean()) * mm * scale
             c.setFillColorRGB(0, 0, 0)
             c.drawCentredString(cx, cy, f"P{pid + 1}")
+
+        # ── scale bar (měřítkové pravítko) ─────────────────────────
+        if scale_label:
+            _draw_scale_bar(c, pagesize, margin, scale_label)
 
     c.save()
 
@@ -182,3 +190,49 @@ def _draw_tabs(
             c.setFillColorRGB(0.3, 0.3, 0.3)
             c.setFont("Helvetica", 4)
             c.drawCentredString(mx, my, str(tab.match_id))
+
+
+def _draw_scale_bar(
+    c: Canvas,
+    pagesize: tuple[float, float],
+    margin: float,
+    scale_label: str,
+) -> None:
+    """Nakreslí měřítkové pravítko v pravém dolním rohu stránky.
+
+    Pravítko má vždy délku 50 mm na papíře.
+    """
+    bar_length_paper = 50 * mm  # 50 mm na papíře
+    bar_height = 3 * mm
+    x_right = pagesize[0] - margin
+    y_bottom = margin
+
+    x_start = x_right - bar_length_paper
+    y_bar = y_bottom
+
+    # Alternující černobílé segmenty (5 segmentů po 10 mm)
+    seg_count = 5
+    seg_width = bar_length_paper / seg_count
+
+    c.setLineWidth(0.3)
+    for i in range(seg_count):
+        sx = x_start + i * seg_width
+        if i % 2 == 0:
+            c.setFillColorRGB(0, 0, 0)
+        else:
+            c.setFillColorRGB(1, 1, 1)
+        c.rect(sx, y_bar, seg_width, bar_height, fill=1, stroke=1)
+
+    # Rámeček kolem celého pravítka
+    c.setStrokeColorRGB(0, 0, 0)
+    c.setLineWidth(0.5)
+    c.rect(x_start, y_bar, bar_length_paper, bar_height, fill=0, stroke=1)
+
+    # Popisek měřítka
+    c.setFillColorRGB(0, 0, 0)
+    c.setFont("Helvetica", 6)
+    c.drawCentredString(
+        x_start + bar_length_paper / 2,
+        y_bar + bar_height + 1.5 * mm,
+        f"Měřítko {scale_label}  |  50 mm na papíře",
+    )

@@ -1,6 +1,8 @@
 """Modelling operations: extrude, revolve, boolean, transform.
 
 OCC-backed when pythonocc-core is available; lightweight mesh fallback otherwise.
+
+Pro výběr backendu viz ``archpapercraft.core_geometry.backend``.
 """
 
 from __future__ import annotations
@@ -11,6 +13,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 
 from archpapercraft.core_geometry.primitives import MeshData, OCC_AVAILABLE
+from archpapercraft.core_geometry.backend import get_backend, GeometryBackend
 
 if TYPE_CHECKING:
     from numpy.typing import NDArray
@@ -25,43 +28,41 @@ if OCC_AVAILABLE:
     from OCP.TopoDS import TopoDS_Shape
 
 # ======================================================================
-# Boolean operations
+# Boolean operations — delegují na aktivní backend
 # ======================================================================
 
 
 def boolean_union_occ(shape_a, shape_b):
-    """OCC boolean union."""
+    """OCC boolean union (low-level — pro přímé volání s OCC shapes)."""
     return BRepAlgoAPI_Fuse(shape_a, shape_b).Shape()
 
 
 def boolean_difference_occ(shape_a, shape_b):
-    """OCC boolean difference (A − B)."""
+    """OCC boolean difference (low-level — A − B)."""
     return BRepAlgoAPI_Cut(shape_a, shape_b).Shape()
 
 
-# ── Mesh booleans (stub — full CSG on meshes is complex; placeholder) ──
-
-
 def boolean_union_mesh(a: MeshData, b: MeshData) -> MeshData:
-    """Naive mesh 'union' — simply concatenates (no CSG).
-
-    A proper implementation would use a BSP-tree or similar.  For MVP
-    this placeholder keeps the pipeline running.
-    """
-    offset = a.num_vertices
-    verts = np.vstack([a.vertices, b.vertices])
-    faces = np.vstack([a.faces, b.faces + offset])
-    return MeshData(vertices=verts, faces=faces)
+    """Boolean union přes aktivní backend."""
+    return get_backend().boolean_union(a, b)
 
 
 def boolean_difference_mesh(a: MeshData, b: MeshData) -> MeshData:
-    """Placeholder — vrací *a* beze změny. Skutečné CSG TBD."""
-    return a
+    """Boolean difference přes aktivní backend.
+
+    S MeshBackend: vrací *a* beze změny (placeholder).
+    S OCCBackend:  plné CSG odečtení.
+    """
+    return get_backend().boolean_difference(a, b)
 
 
 def boolean_intersect_mesh(a: MeshData, b: MeshData) -> MeshData:
-    """Placeholder průnik — vrací *a* beze změny. Skutečné CSG TBD."""
-    return a
+    """Boolean intersection přes aktivní backend.
+
+    S MeshBackend: vrací *a* beze změny (placeholder).
+    S OCCBackend:  plný CSG průnik.
+    """
+    return get_backend().boolean_intersect(a, b)
 
 
 # ======================================================================
@@ -155,6 +156,39 @@ def revolve_profile_mesh(
     return MeshData(
         vertices=verts,
         faces=np.array(faces_list, dtype=np.int32),
+    )
+
+
+# ======================================================================
+# Merge helpers
+# ======================================================================
+
+
+def merge_meshes(meshes: list[MeshData]) -> MeshData:
+    """Merge multiple meshes into one by concatenating vertices/faces.
+
+    Face indices are offset so that they reference the correct vertices
+    in the combined array.  Returns an empty mesh if *meshes* is empty.
+    """
+    if not meshes:
+        return MeshData(
+            vertices=np.empty((0, 3), dtype=np.float64),
+            faces=np.empty((0, 3), dtype=np.int32),
+        )
+    if len(meshes) == 1:
+        return meshes[0]
+
+    all_verts: list[NDArray] = []
+    all_faces: list[NDArray] = []
+    offset = 0
+    for m in meshes:
+        all_verts.append(m.vertices)
+        all_faces.append(m.faces + offset)
+        offset += len(m.vertices)
+
+    return MeshData(
+        vertices=np.vstack(all_verts),
+        faces=np.vstack(all_faces).astype(np.int32),
     )
 
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from PySide6.QtWidgets import (
@@ -18,6 +19,8 @@ from PySide6.QtWidgets import (
 )
 
 from archpapercraft.project_io.project import Project
+
+_log = logging.getLogger(__name__)
 
 
 class PapercraftPanel(QWidget):
@@ -106,20 +109,95 @@ class PapercraftPanel(QWidget):
         self._lbl_seams.setText("Generate automatic seam placement.")
         self._lbl_unfold.setText("")
 
+    # ── helpers ─────────────────────────────────────────────────────────
+
+    def _get_combined_mesh(self):
+        """Rebuild scene meshes and return a single merged mesh (all visible objects)."""
+        from archpapercraft.core_geometry.operations import merge_meshes
+
+        self._project.scene.rebuild_meshes()
+        meshes = self._project.scene.collect_visible_meshes()
+        if not meshes:
+            return None
+        return merge_meshes(meshes)
+
+    def _check_csg_requirements(self) -> None:
+        """Warn if scene contains OPENING nodes but OCC is unavailable."""
+        from archpapercraft.core_geometry.backend import get_backend
+        from archpapercraft.scene_graph.node import NodeType
+
+        be = get_backend()
+        if be.supports_csg:
+            return
+
+        has_openings = any(
+            n.node_type == NodeType.OPENING
+            for n in self._project.scene.root.all_nodes()
+        )
+        if has_openings:
+            QMessageBox.warning(
+                self,
+                "CSG not available",
+                "The scene contains Opening nodes, but pythonocc-core "
+                "is not installed.\n\n"
+                "Boolean operations (subtracting openings from walls) "
+                "will NOT work correctly.\n\n"
+                "Install:  pip install pythonocc-core",
+            )
+
+    def _build_page_settings(self):
+        """Create :class:`PageSettings` from the current :class:`ProjectSettings`."""
+        from archpapercraft.layout_packer.packer import (
+            PageSettings,
+            PaperSize,
+            Orientation,
+        )
+
+        _PAPER_MAP = {
+            "A4": PaperSize.A4,
+            "A3": PaperSize.A3,
+            "Letter": PaperSize.LETTER,
+            "A2": PaperSize.A2,
+            "A1": PaperSize.A1,
+        }
+
+        settings = self._project.settings
+        paper = _PAPER_MAP.get(settings.paper, PaperSize.A4)
+
+        # Prefer saved layout preferences if available
+        layout_prefs = self._project.load_layout_settings()
+        if layout_prefs:
+            orientation_str = layout_prefs.get("orientation", "portrait")
+            margin = layout_prefs.get("margin_mm", settings.paper_margin_mm)
+        else:
+            orientation_str = "portrait"
+            margin = settings.paper_margin_mm
+
+        orientation = (
+            Orientation.LANDSCAPE
+            if orientation_str == "landscape"
+            else Orientation.PORTRAIT
+        )
+
+        return PageSettings(
+            paper=paper,
+            orientation=orientation,
+            margin_mm=margin,
+            bleed_mm=settings.paper_bleed_mm,
+        )
+
     # ── workflow slots ─────────────────────────────────────────────────
 
     def _on_analyze(self) -> None:
-        from archpapercraft.core_geometry.primitives import MeshData
         from archpapercraft.paper_analyzer.classifier import classify_surfaces
 
-        self._project.scene.rebuild_meshes()
-        meshes = self._project.scene.collect_meshes()
-        if not meshes:
+        self._check_csg_requirements()
+
+        mesh = self._get_combined_mesh()
+        if mesh is None:
             self._lbl_analyze.setText("No meshes in scene.")
             return
 
-        # analyze the first mesh (simple MVP — later merge)
-        mesh = meshes[0]
         self._analysis = classify_surfaces(mesh)
         n_flat = len(self._analysis.flat_patches)
         n_dev = len(self._analysis.developable_patches)
@@ -131,12 +209,11 @@ class PapercraftPanel(QWidget):
     def _on_auto_seams(self) -> None:
         from archpapercraft.seam_editor.auto_seams import auto_seams
 
-        self._project.scene.rebuild_meshes()
-        meshes = self._project.scene.collect_meshes()
-        if not meshes:
+        mesh = self._get_combined_mesh()
+        if mesh is None:
             self._lbl_seams.setText("No meshes.")
             return
-        mesh = meshes[0]
+
         scale_factor = self._project.settings.scale_factor
         self._seam_graph = auto_seams(mesh, scale=scale_factor)
         parts = self._seam_graph.compute_parts()
@@ -145,29 +222,37 @@ class PapercraftPanel(QWidget):
         )
 
     def _on_unfold(self) -> None:
-        from archpapercraft.unfolder.approx_unfold import unfold_all_parts
+        from archpapercraft.unfolder.approx_unfold import unfold_with_strategy
 
         if self._seam_graph is None:
             QMessageBox.warning(self, "Unfold", "Run Auto Seams first.")
             return
 
-        meshes = self._project.scene.collect_meshes()
-        if not meshes:
+        mesh = self._get_combined_mesh()
+        if mesh is None:
             return
-        mesh = meshes[0]
-        self._unfolded_parts = unfold_all_parts(mesh, self._seam_graph)
-        self._lbl_unfold.setText(f"Unfolded {len(self._unfolded_parts)} parts")
+
+        strategy = self._combo_strategy.currentText()
+        segments = self._spin_segments.value()
+
+        self._unfolded_parts = unfold_with_strategy(
+            mesh, self._seam_graph, strategy=strategy, segments=segments,
+        )
+        self._lbl_unfold.setText(
+            f"Unfolded {len(self._unfolded_parts)} parts (strategy: {strategy})"
+        )
 
     def _on_export(self, fmt: str) -> None:
         if self._unfolded_parts is None:
             QMessageBox.warning(self, "Export", "Run Unfold first.")
             return
 
-        from archpapercraft.layout_packer.packer import PageSettings, pack_parts
+        from archpapercraft.layout_packer.packer import pack_parts
         from archpapercraft.tabs_generator.markings import classify_folds
         from archpapercraft.tabs_generator.tabs import TabSettings, generate_tabs_for_part
 
-        ps = PageSettings()
+        # ── PageSettings from project (not defaults) ──────────────
+        ps = self._build_page_settings()
         scale = self._project.settings.scale_factor
 
         outlines = [p.vertices_2d for p in self._unfolded_parts]
@@ -193,10 +278,15 @@ class PapercraftPanel(QWidget):
         if not path:
             return
 
+        scale_label = self._project.settings.scale
+
         try:
             if fmt == "pdf":
                 from archpapercraft.exporter.pdf_export import export_pdf
-                export_pdf(path, self._unfolded_parts, layout, ps, tabs, markings_list, scale)
+                export_pdf(
+                    path, self._unfolded_parts, layout, ps,
+                    tabs, markings_list, scale, scale_label=scale_label,
+                )
             elif fmt == "svg":
                 from archpapercraft.exporter.svg_export import export_svg
                 export_svg(path, self._unfolded_parts, layout, ps, tabs, markings_list, scale)

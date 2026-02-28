@@ -1,13 +1,14 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "settings": {
     "name": "House with Onion Dome",
-    "units": "mm",
+    "units": "m",
     "scale": "1:100",
     "paper": "A4",
     "paper_margin_mm": 10.0,
     "paper_bleed_mm": 0.0,
-    "paper_grammage": 200
+    "paper_grammage": 200,
+    "_internal_unit": "mm"
   },
   "scene": [
     {
@@ -15,15 +16,15 @@
       "type": "WALL",
       "id": "wall_front_01",
       "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
-      "parameters": { "length": 10.0, "height": 4.0, "thickness": 0.3 },
+      "parameters": { "length": 10000.0, "height": 4000.0, "thickness": 300.0 },
       "children": []
     },
     {
       "name": "Back Wall",
       "type": "WALL",
       "id": "wall_back_01",
-      "transform": { "position": [0, 8, 0], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
-      "parameters": { "length": 10.0, "height": 4.0, "thickness": 0.3 },
+      "transform": { "position": [0, 8000, 0], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
+      "parameters": { "length": 10000.0, "height": 4000.0, "thickness": 300.0 },
       "children": []
     },
     {
@@ -31,42 +32,42 @@
       "type": "WALL",
       "id": "wall_left_01",
       "transform": { "position": [0, 0, 0], "rotation": [0, 0, 90], "scale": [1, 1, 1] },
-      "parameters": { "length": 8.0, "height": 4.0, "thickness": 0.3 },
+      "parameters": { "length": 8000.0, "height": 4000.0, "thickness": 300.0 },
       "children": []
     },
     {
       "name": "Right Wall",
       "type": "WALL",
       "id": "wall_right_01",
-      "transform": { "position": [10, 0, 0], "rotation": [0, 0, 90], "scale": [1, 1, 1] },
-      "parameters": { "length": 8.0, "height": 4.0, "thickness": 0.3 },
+      "transform": { "position": [10000, 0, 0], "rotation": [0, 0, 90], "scale": [1, 1, 1] },
+      "parameters": { "length": 8000.0, "height": 4000.0, "thickness": 300.0 },
       "children": []
     },
     {
       "name": "Roof",
       "type": "ROOF",
       "id": "roof_main_01",
-      "transform": { "position": [5, 0, 4], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
-      "parameters": { "width": 10.0, "depth": 8.0, "height": 3.0, "overhang": 0.5 },
+      "transform": { "position": [5000, 0, 4000], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
+      "parameters": { "width": 10000.0, "depth": 8000.0, "height": 3000.0, "overhang": 500.0 },
       "children": []
     },
     {
       "name": "Gothic Window",
       "type": "GOTHIC_WINDOW",
       "id": "goth_win_01",
-      "transform": { "position": [4, -0.01, 1.0], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
-      "parameters": { "width": 1.2, "height": 2.8, "depth": 0.32, "splay_angle": 15.0 },
+      "transform": { "position": [4000, -10, 1000], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
+      "parameters": { "width": 1200.0, "height": 2800.0, "depth": 320.0, "splay_angle": 15.0 },
       "children": []
     },
     {
       "name": "Tower Dome",
       "type": "ONION_DOME",
       "id": "dome_tower_01",
-      "transform": { "position": [8, 6, 7], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
+      "transform": { "position": [8000, 6000, 7000], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
       "parameters": {
-        "height": 3.0,
-        "max_radius": 1.2,
-        "neck_radius": 0.5,
+        "height": 3000.0,
+        "max_radius": 1200.0,
+        "neck_radius": 500.0,
         "neck_frac": 0.15,
         "bulge_frac": 0.55,
         "segments": 24,

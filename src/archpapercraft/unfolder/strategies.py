@@ -18,9 +18,62 @@ from archpapercraft.core_geometry.primitives import MeshData
 
 
 class UnfoldStrategy(Enum):
+    EXACT = auto()
     GORES = auto()
     RINGS = auto()
     FACETS = auto()
+
+
+def extract_revolution_profile(
+    mesh: MeshData,
+    n_bins: int = 32,
+) -> NDArray[np.float64] | None:
+    """Try to extract a 2-D revolution profile ``(radius, z)`` from *mesh*.
+
+    Works for cylinders, cones, spheres, domes, towers, etc.
+    Returns *None* if the mesh does not appear rotationally symmetric.
+    """
+    verts = mesh.vertices
+    if len(verts) < 3:
+        return None
+
+    radii = np.sqrt(verts[:, 0] ** 2 + verts[:, 1] ** 2)
+    z = verts[:, 2]
+
+    z_min, z_max = float(z.min()), float(z.max())
+    if z_max - z_min < 1e-6:
+        return None  # flat — not a revolution body
+
+    # Angular distribution check: revolution bodies have many unique angles.
+    # A box has only 4; a cylinder with 32 segments has 32.
+    angles = np.arctan2(verts[:, 1], verts[:, 0])
+    unique_angles = len(np.unique(np.round(angles, decimals=2)))
+    if unique_angles < 8:
+        return None  # too few angular positions → likely a prism, not revolution
+
+    n_bins = min(n_bins, max(4, len(verts) // 4))
+    z_edges = np.linspace(z_min, z_max, n_bins + 1)
+
+    profile_r: list[float] = []
+    profile_z: list[float] = []
+
+    for i in range(n_bins):
+        mask = (z >= z_edges[i]) & (z < z_edges[i + 1] + 1e-9)
+        if not mask.any():
+            continue
+        bin_radii = radii[mask]
+        mean_r = float(bin_radii.mean())
+        std_r = float(bin_radii.std())
+        # Coefficient of variation > 25 % ⇒ not rotationally symmetric
+        if mean_r > 1e-6 and std_r / mean_r > 0.25:
+            return None
+        profile_r.append(mean_r)
+        profile_z.append(float((z_edges[i] + z_edges[i + 1]) / 2))
+
+    if len(profile_r) < 2:
+        return None
+
+    return np.column_stack([profile_r, profile_z]).astype(np.float64)
 
 
 def generate_gores(
