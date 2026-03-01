@@ -1,6 +1,15 @@
 """Automatické generování švů podle dihedrálních úhlů, velikostních limitů
 a architektonických pravidel.
 
+Algoritmus:
+  1. Ohodnotí každou vnitřní hranu váhou (ostrý úhel → vysoká váha, "architektonická"
+     hrana → střední váha, hladká hrana → nízká váha).
+  2. Najde **minimální kostru** (Prim) grafu sousednosti ploch — hrany v kostře
+     zůstanou přehyby (folds), ostatní se stanou švy (seams).
+     Minimum‐cost preferuje hladké hrany jako přehyby a ostré hrany jako švy.
+  3. Okrajové hrany (jen 1 sousedící plocha) jsou vždy švy.
+  4. Po-kostrovém kroku se ještě iterativně dělí příliš velké díly.
+
 Pravidla pro architekturu:
 - Střecha se dělí po hřebeni a úžlabí
 - Zdi se dělí v rozích
@@ -9,6 +18,7 @@ Pravidla pro architekturu:
 
 from __future__ import annotations
 
+import heapq
 import math
 
 import numpy as np
@@ -16,6 +26,12 @@ import numpy as np
 from archpapercraft.core_geometry.mesh import compute_face_normals
 from archpapercraft.core_geometry.primitives import MeshData
 from archpapercraft.seam_editor.seam_graph import Edge, SeamGraph
+
+
+# Váhy pro priority hran ve spanning tree
+_WEIGHT_SMOOTH = 0     # hladká hrana → preferujeme jako přehyb
+_WEIGHT_ARCH = 50      # architektonická hrana → preferujeme jako šev
+_WEIGHT_SHARP = 100    # ostrá hrana → silně preferujeme jako šev
 
 
 def auto_seams(
@@ -29,12 +45,12 @@ def auto_seams(
 ) -> SeamGraph:
     """Automatické generování švů.
 
-    Strategie:
-    1. Označí každou hranu, jejíž dihedrální úhel přesáhne *sharp_angle_deg*.
-    2. Pokud je *architecture_rules* True, aplikuje architektonické švy
-       (hřebeny, okapnice, svislé hrany zdí).
-    3. Pokud jakýkoli díl přesáhne *max_part_extent_mm* (po aplikaci *scale*),
-       iterativně dělí podél nejdelší hrany.
+    Strategie (spanning-tree):
+    1. Ohodnotí hrany (ostrá → vysoká váha, hladká → nízká váha).
+    2. Najde minimální kostru grafu ploch — hrany kostry = přehyby,
+       zbylé = švy.  To garantuje, že každý díl je *spojitý*.
+    3. Pokud jakýkoli díl přesáhne *max_part_extent_mm* (po *scale*),
+       iterativně dělí podél nejdelší fold-hrany.
 
     Vrací naplněný :class:`SeamGraph`.
     """
@@ -54,79 +70,125 @@ def auto_seams(
     if locked_edges:
         sg.locked_edges = set(locked_edges)
 
-    # ── krok 1: ostré hrany → švy ─────────────────────────────────────
+    # ── krok 1: ohodnotit hrany ──────────────────────────────────────
+    edge_weight: dict[Edge, int] = {}
+    boundary_edges: set[Edge] = set()
+
     for edge, faces in edge_faces.items():
         if len(faces) != 2:
-            # okrajová hrana → vždy šev
-            sg.add_seam(*edge)
+            # Okrajová hrana → vždy šev (nemůže být v kostře)
+            boundary_edges.add(edge)
             continue
+
+        # Dihedrální úhel
         n0, n1 = normals[faces[0]], normals[faces[1]]
         dot = float(np.clip(np.dot(n0, n1), -1.0, 1.0))
         angle = math.degrees(math.acos(dot))
+
         if angle >= sharp_angle_deg:
+            edge_weight[edge] = _WEIGHT_SHARP
+        else:
+            edge_weight[edge] = _WEIGHT_SMOOTH
+
+    # ── krok 2: architektonické váhy ──────────────────────────────────
+    if architecture_rules:
+        _apply_architecture_weights(edge_weight, edge_faces, normals)
+
+    # ── krok 3: minimální kostra (Prim) → fold hrany ─────────────────
+    # Stavíme graf sousednosti ploch. Hrana mezi plochami má váhu z edge_weight.
+    # Kostra určí, které hrany zůstanou přehyby (fold).
+    # Hrany MIMO kostru = švy (seams).
+
+    face_adj: dict[int, list[tuple[int, Edge]]] = {}
+    for edge, faces in edge_faces.items():
+        if len(faces) == 2 and edge not in boundary_edges:
+            f0, f1 = faces
+            face_adj.setdefault(f0, []).append((f1, edge))
+            face_adj.setdefault(f1, []).append((f0, edge))
+
+    num_faces = mesh.num_faces
+    in_tree = [False] * num_faces
+    tree_edges: set[Edge] = set()
+
+    # Spustíme Prim z každé dosud nenavštívené plochy
+    # (mesh může mít více komponent)
+    for start in range(num_faces):
+        if in_tree[start]:
+            continue
+        in_tree[start] = True
+        heap: list[tuple[int, int, int, Edge]] = []  # (weight, tiebreak, face, edge)
+        for neighbor, edge in face_adj.get(start, []):
+            w = edge_weight.get(edge, _WEIGHT_SMOOTH)
+            heapq.heappush(heap, (w, id(edge), neighbor, edge))
+
+        while heap:
+            w, _, face, edge = heapq.heappop(heap)
+            if in_tree[face]:
+                continue
+            in_tree[face] = True
+            tree_edges.add(edge)
+            for neighbor, e in face_adj.get(face, []):
+                if not in_tree[neighbor]:
+                    we = edge_weight.get(e, _WEIGHT_SMOOTH)
+                    heapq.heappush(heap, (we, id(e), neighbor, e))
+
+    # Hrany mimo kostru + okrajové → švy
+    for edge in boundary_edges:
+        sg.add_seam(*edge)
+    for edge in edge_faces:
+        if edge not in tree_edges and edge not in boundary_edges:
             sg.add_seam(*edge)
 
-    # ── krok 2: architektonické švy ───────────────────────────────────
-    if architecture_rules:
-        _apply_architecture_rules(sg, edge_faces, normals)
-
-    # ── krok 3: dělení příliš velkých dílů ────────────────────────────
+    # ── krok 4: dělení příliš velkých dílů ────────────────────────────
     _split_oversize_parts(sg, max_part_extent_mm, scale, edge_faces, normals)
 
     return sg
 
 
-def _apply_architecture_rules(
-    sg: SeamGraph,
+def _apply_architecture_weights(
+    edge_weight: dict[Edge, int],
     edge_faces: dict[Edge, list[int]],
     normals: np.ndarray,
 ) -> None:
-    """Aplikuje architektonická pravidla pro umísťování švů.
+    """Zvýší váhu architektonicky významných hran (hřebeny, okapnice, rohy zdí).
 
-    Pravidla:
-    - Hřebenové hrany (ridge): normály stoupají ze dvou stran → šev
-    - Okapnice (eave): normála jedné strany je ~horizontální, druhá ~vertikální
-    - Svislé rohy zdí: obě normály horizontální, úhel > 45°
+    Hrany s vyšší váhou budou preferovány jako švy ve spanning-tree algoritmu.
     """
     UP = np.array([0.0, 0.0, 1.0])
-    RIDGE_DOT_THRESHOLD = 0.3     # normály musí mít Z-komponentu
-    EAVE_VERTICAL_THRESHOLD = 0.7  # |dot(n, UP)| pro detekci svislé plochy
+    RIDGE_DOT_THRESHOLD = 0.3
+    EAVE_VERTICAL_THRESHOLD = 0.7
     WALL_CORNER_DEG = 45.0
 
     for edge, faces in edge_faces.items():
         if len(faces) != 2:
-            continue
-        if sg.is_seam(edge[0], edge[1]):
             continue
 
         n0, n1 = normals[faces[0]], normals[faces[1]]
         dz0 = abs(float(np.dot(n0, UP)))
         dz1 = abs(float(np.dot(n1, UP)))
 
-        # Hřebenová hrana: obě normály mají nenulovou Z-komponentu
-        # a směřují různým směrem (jedna nahoru-vlevo, druhá nahoru-vpravo)
+        # Hřebenová hrana
         if dz0 > RIDGE_DOT_THRESHOLD and dz1 > RIDGE_DOT_THRESHOLD:
             cross = np.cross(n0, n1)
             if abs(float(cross[2])) > 0.5:
-                # normály se kříží v Z → hřebenová hrana
-                sg.add_seam(*edge)
+                edge_weight[edge] = max(edge_weight.get(edge, 0), _WEIGHT_ARCH)
                 continue
 
-        # Okapnice: jedna plocha je střecha (šikmá), druhá stěna (svislá)
+        # Okapnice
         is_wall_0 = dz0 < 0.3
         is_wall_1 = dz1 < 0.3
         is_roof_0 = 0.3 < dz0 < EAVE_VERTICAL_THRESHOLD
         is_roof_1 = 0.3 < dz1 < EAVE_VERTICAL_THRESHOLD
         if (is_wall_0 and is_roof_1) or (is_wall_1 and is_roof_0):
-            sg.add_seam(*edge)
+            edge_weight[edge] = max(edge_weight.get(edge, 0), _WEIGHT_ARCH)
             continue
 
-        # Svislé rohy zdí: obě normals ~horizontální, úhel > 45°
+        # Svislé rohy zdí
         if is_wall_0 and is_wall_1:
             dot = float(np.clip(np.dot(n0, n1), -1.0, 1.0))
             angle = math.degrees(math.acos(dot))
             if angle >= WALL_CORNER_DEG:
-                sg.add_seam(*edge)
+                edge_weight[edge] = max(edge_weight.get(edge, 0), _WEIGHT_ARCH)
 
 
 def _split_oversize_parts(

@@ -44,11 +44,11 @@ class TestAutoSeams:
     def test_box_auto_seams(self):
         mesh = make_box_mesh(2, 2, 2)
         sg = auto_seams(mesh, sharp_angle_deg=60.0)
-        # A box has 90° edges → all should be seams
+        # Spanning-tree algorithm keeps connectivity: seams exist but mesh
+        # unfolds into a single connected part (cross pattern).
         assert len(sg.seam_edges) > 0
         parts = sg.compute_parts()
-        # Each face of the box should be its own part (6 face-pairs = 6 parts)
-        assert len(parts) >= 6
+        assert len(parts) == 1
 
     def test_all_edges_present(self):
         mesh = make_box_mesh(1, 1, 1)
