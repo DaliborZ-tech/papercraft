@@ -60,8 +60,16 @@ def _draw_line(
     x0: int, y0: int, x1: int, y1: int,
     color: tuple[int, ...],
     width: int = 1,
+    dash: tuple[int, ...] | None = None,
 ) -> None:
-    """Bresenhamův algoritmus pro kreslení čáry do numpy pole."""
+    """Bresenhamův algoritmus pro kreslení čáry do numpy pole.
+
+    Parameters
+    ----------
+    dash : tuple[int, ...] | None
+        Vzor čárkování v pixelech, např. (6, 3) = 6 px čára, 3 px mezera.
+        Opakuje se cyklicky. None = plná čára.
+    """
     h, w_img = pixels.shape[:2]
     dx = abs(x1 - x0)
     dy = abs(y1 - y0)
@@ -72,13 +80,27 @@ def _draw_line(
     half_w = max(0, width // 2)
     nc = len(color)
 
+    # Dash state
+    dash_idx = 0
+    dash_counter = 0
+    drawing = True  # lichý index = kresli, sudý = mezera
+    total_dash_len = sum(dash) if dash else 0
+
     while True:
-        # Kresli s danou šířkou
-        for wy in range(-half_w, half_w + 1):
-            for wx in range(-half_w, half_w + 1):
-                py, px = y0 + wy, x0 + wx
-                if 0 <= py < h and 0 <= px < w_img:
-                    pixels[py, px, :nc] = color[:nc]
+        # Rozhodnutí zda kreslit (podle dash vzoru)
+        if dash:
+            if dash_counter >= dash[dash_idx]:
+                dash_counter = 0
+                dash_idx = (dash_idx + 1) % len(dash)
+                drawing = (dash_idx % 2 == 0)  # 0,2,4.. = draw, 1,3,5.. = gap
+            dash_counter += 1
+
+        if drawing:
+            for wy in range(-half_w, half_w + 1):
+                for wx in range(-half_w, half_w + 1):
+                    py, px = y0 + wy, x0 + wx
+                    if 0 <= py < h and 0 <= px < w_img:
+                        pixels[py, px, :nc] = color[:nc]
 
         if x0 == x1 and y0 == y1:
             break
@@ -149,19 +171,18 @@ def export_png(
         ox = float(pl.offset[0]) + margin
         oy = float(pl.offset[1]) + margin
 
-        # Kresli řezné čáry (obrysy)
+        # Kresli řezné čáry (pouze cut edges, ne vnitřní fold hrany)
         verts = part.vertices_2d * scale
-        for fi in range(len(part.faces)):
-            tri = part.faces[fi]
-            for j in range(3):
-                v0 = verts[tri[j]]
-                v1 = verts[tri[(j + 1) % 3]]
-                px0, py0 = _point_to_px(v0[0] + ox, v0[1] + oy, dpi, ph)
-                px1, py1 = _point_to_px(v1[0] + ox, v1[1] + oy, dpi, ph)
-                _draw_line(pixels, px0, py0, px1, py1,
-                           png_settings.cut_color, png_settings.line_width_px)
+        cut_set = set(tuple(sorted(e)) for e in part.cut_edges)
+        for e in cut_set:
+            v0 = verts[e[0]]
+            v1 = verts[e[1]]
+            px0, py0 = _point_to_px(v0[0] + ox, v0[1] + oy, dpi, ph)
+            px1, py1 = _point_to_px(v1[0] + ox, v1[1] + oy, dpi, ph)
+            _draw_line(pixels, px0, py0, px1, py1,
+                       png_settings.cut_color, png_settings.line_width_px)
 
-        # Kresli přehybové čáry
+        # Kresli přehybové čáry (čárkovaně)
         if markings and pid < len(markings):
             for fl in markings[pid].fold_lines:
                 p0 = fl.p0 * scale
@@ -169,9 +190,11 @@ def export_png(
                 color = (png_settings.mountain_color
                          if fl.fold_type == FoldType.MOUNTAIN
                          else png_settings.valley_color)
+                # Mountain: čárky 6-3, Valley: čárka-tečka 6-2-2-2
+                dash = (6, 3) if fl.fold_type == FoldType.MOUNTAIN else (6, 2, 2, 2)
                 px0, py0 = _point_to_px(p0[0] + ox, p0[1] + oy, dpi, ph)
                 px1, py1 = _point_to_px(p1[0] + ox, p1[1] + oy, dpi, ph)
-                _draw_line(pixels, px0, py0, px1, py1, color, 1)
+                _draw_line(pixels, px0, py0, px1, py1, color, 1, dash=dash)
 
     # Rotace
     if png_settings.rotation_deg == 90:

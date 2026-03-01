@@ -72,3 +72,29 @@ class TestDXFExport:
             export_dxf(path, parts, layout, ps, tabs, marks, scale=1.0)
             assert path.exists()
             assert path.stat().st_size > 0
+
+
+class TestPNGExport:
+    def test_export_creates_file(self):
+        from archpapercraft.exporter.png_export import export_png
+
+        parts, layout, ps, tabs, marks = _prepare()
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "test.png"
+            export_png(path, parts, layout, ps, tabs=tabs, markings=marks, scale=1.0)
+            assert path.exists()
+            assert path.stat().st_size > 0
+
+    def test_export_with_dashed_folds(self):
+        """Verify PNG export does not crash when fold markings use dashed lines."""
+        from archpapercraft.exporter.png_export import export_png, PngSettings
+
+        parts, layout, ps, tabs, marks = _prepare()
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "test_dash.png"
+            export_png(
+                path, parts, layout, ps, tabs=tabs, markings=marks,
+                scale=1.0, png_settings=PngSettings(dpi=72),
+            )
+            assert path.exists()
+            assert path.stat().st_size > 0

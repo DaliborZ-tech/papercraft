@@ -58,19 +58,14 @@ def export_svg(
         # offset is already in paper mm (packer applied scale)
         ox, oy = float(pl.offset[0] + margin), float(pl.offset[1] + margin)
 
-        # cut lines
-        drawn: set[tuple[int, int]] = set()
-        for face in part.faces:
-            for j in range(3):
-                e = tuple(sorted((int(face[j]), int(face[(j + 1) % 3]))))
-                if e in drawn:
-                    continue
-                drawn.add(e)
-                x0 = ox + float(part.vertices_2d[e[0], 0]) * scale
-                y0 = oy + float(part.vertices_2d[e[0], 1]) * scale
-                x1 = ox + float(part.vertices_2d[e[1], 0]) * scale
-                y1 = oy + float(part.vertices_2d[e[1], 1]) * scale
-                g_cut.add(dwg.line(start=(x0, y0), end=(x1, y1)))
+        # cut lines — only boundary/cut edges (not interior fold edges)
+        cut_set = set(tuple(sorted(e)) for e in part.cut_edges)
+        for e in cut_set:
+            x0 = ox + float(part.vertices_2d[e[0], 0]) * scale
+            y0 = oy + float(part.vertices_2d[e[0], 1]) * scale
+            x1 = ox + float(part.vertices_2d[e[1], 0]) * scale
+            y1 = oy + float(part.vertices_2d[e[1], 1]) * scale
+            g_cut.add(dwg.line(start=(x0, y0), end=(x1, y1)))
 
         # fold lines
         if markings and pid < len(markings):

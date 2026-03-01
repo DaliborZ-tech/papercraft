@@ -109,12 +109,14 @@ class PapercraftPanel(QWidget):
         self._analysis = None
         self._seam_graph = None
         self._unfolded_parts = None
+        self._cached_mesh = None
 
     def set_project(self, project: Project) -> None:
         self._project = project
         self._analysis = None
         self._seam_graph = None
         self._unfolded_parts = None
+        self._cached_mesh = None
         self._lbl_analyze.setText("Klikněte na Analyzovat pro klasifikaci ploch.")
         self._lbl_seams.setText("Nastavit automatické umístění švů.")
         self._lbl_unfold.setText("")
@@ -122,11 +124,14 @@ class PapercraftPanel(QWidget):
     # ── helpers ─────────────────────────────────────────────────────────
 
     def _get_combined_mesh(self):
-        """Přestaví meshe scény a vrátí jeden sloučený mesh (všechny viditelné objekty)."""
+        """Přestaví meshe scény a vrátí jeden sloučený mesh (všechny viditelné objekty).
+
+        Transformace uzlů se aplikují, takže mesh je ve world-space.
+        """
         from archpapercraft.core_geometry.operations import merge_meshes
 
         self._project.scene.rebuild_meshes()
-        meshes = self._project.scene.collect_visible_meshes()
+        meshes = self._project.scene.collect_visible_meshes(world_space=True)
         if not meshes:
             return None
         return merge_meshes(meshes)
@@ -225,6 +230,8 @@ class PapercraftPanel(QWidget):
             self._lbl_seams.setText("Žádné meshe.")
             return
 
+        self._cached_mesh = mesh  # uložit pro unfold krok
+
         # Convert model-unit coords to paper mm:  unit→mm × scale_factor
         unit_to_mm = to_mm(1.0, self._project.settings.units)
         paper_scale = unit_to_mm * self._project.settings.scale_factor
@@ -241,7 +248,10 @@ class PapercraftPanel(QWidget):
             QMessageBox.warning(self, "Rozložení", "Nejprve spusťte Automatické švy.")
             return
 
-        mesh = self._get_combined_mesh()
+        # Použit cached mesh ze seam kroku (garantuje konzistentní indexy)
+        mesh = self._cached_mesh
+        if mesh is None:
+            mesh = self._get_combined_mesh()
         if mesh is None:
             return
 

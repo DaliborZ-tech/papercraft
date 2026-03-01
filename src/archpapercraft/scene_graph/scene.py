@@ -49,36 +49,40 @@ class Scene:
         p = node.parameters
 
         if node.node_type == NodeType.PRIMITIVE_BOX:
-            node.mesh = make_box_mesh(
-                p.get("dx", 1.0), p.get("dy", 1.0), p.get("dz", 1.0)
-            )
+            p.setdefault("dx", 1.0)
+            p.setdefault("dy", 1.0)
+            p.setdefault("dz", 1.0)
+            node.mesh = make_box_mesh(p["dx"], p["dy"], p["dz"])
 
         elif node.node_type == NodeType.PRIMITIVE_CYLINDER:
-            node.mesh = make_cylinder_mesh(
-                p.get("radius", 0.5), p.get("height", 1.0), p.get("segments", 32)
-            )
+            p.setdefault("radius", 0.5)
+            p.setdefault("height", 1.0)
+            p.setdefault("segments", 32)
+            node.mesh = make_cylinder_mesh(p["radius"], p["height"], p["segments"])
 
         elif node.node_type == NodeType.PRIMITIVE_CONE:
+            p.setdefault("radius_bottom", 0.5)
+            p.setdefault("radius_top", 0.0)
+            p.setdefault("height", 1.0)
+            p.setdefault("segments", 32)
             node.mesh = make_cone_mesh(
-                p.get("radius_bottom", 0.5),
-                p.get("radius_top", 0.0),
-                p.get("height", 1.0),
-                p.get("segments", 32),
+                p["radius_bottom"], p["radius_top"], p["height"], p["segments"],
             )
 
         elif node.node_type == NodeType.PRIMITIVE_SPHERE:
-            node.mesh = make_sphere_mesh(
-                p.get("radius", 0.5),
-                p.get("segments", 32),
-                p.get("rings", 16),
-            )
+            p.setdefault("radius", 0.5)
+            p.setdefault("segments", 32)
+            p.setdefault("rings", 16)
+            node.mesh = make_sphere_mesh(p["radius"], p["segments"], p["rings"])
 
         elif node.node_type == NodeType.PRIMITIVE_TORUS:
+            p.setdefault("major_radius", 1.0)
+            p.setdefault("minor_radius", 0.3)
+            p.setdefault("major_segments", 32)
+            p.setdefault("minor_segments", 16)
             node.mesh = make_torus_mesh(
-                p.get("major_radius", 1.0),
-                p.get("minor_radius", 0.3),
-                p.get("major_segments", 32),
-                p.get("minor_segments", 16),
+                p["major_radius"], p["minor_radius"],
+                p["major_segments"], p["minor_segments"],
             )
 
         elif node.node_type in (
@@ -109,6 +113,23 @@ class Scene:
         """Return a flat list of all meshes (for export / analysis)."""
         return [n.mesh for n in self.all_mesh_nodes()]
 
-    def collect_visible_meshes(self) -> list[MeshData]:
-        """Return meshes only from visible nodes."""
-        return [n.mesh for n in self.all_mesh_nodes() if n.visible]
+    def collect_visible_meshes(self, world_space: bool = False) -> list[MeshData]:
+        """Return meshes only from visible nodes.
+
+        Parameters
+        ----------
+        world_space : bool
+            If True, apply node transforms to vertices so meshes are
+            in world coordinates (needed for export pipeline).
+        """
+        result: list[MeshData] = []
+        for n in self.all_mesh_nodes():
+            if not n.visible:
+                continue
+            if world_space:
+                mat = n.transform.to_matrix()
+                verts = n.mesh.vertices @ mat[:3, :3].T + mat[:3, 3]
+                result.append(MeshData(vertices=verts, faces=n.mesh.faces.copy()))
+            else:
+                result.append(n.mesh)
+        return result
