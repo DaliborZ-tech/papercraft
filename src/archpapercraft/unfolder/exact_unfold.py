@@ -41,6 +41,8 @@ class UnfoldedPart:
     # edges classified as fold (mountain/valley) or cut
     fold_edges: list[tuple[int, int]] = field(default_factory=list)
     cut_edges: list[tuple[int, int]] = field(default_factory=list)
+    # mapping: 2D cut edge (i,j) → 3D edge (a,b) for tab match IDs
+    cut_edge_3d_map: dict[tuple[int, int], tuple[int, int]] = field(default_factory=dict)
 
 
 def unfold_part(
@@ -86,6 +88,7 @@ def unfold_part(
     vert_map_3d_list: list[int] = []
     fold_edges: list[tuple[int, int]] = []
     cut_edges: list[tuple[int, int]] = []
+    cut_edge_3d_map: dict[tuple[int, int], tuple[int, int]] = {}
 
     # face_2d_map[fi] = {3d_vidx: 2d_vidx}  — pro každý face
     face_2d_map: dict[int, dict[int, int]] = {}
@@ -129,7 +132,9 @@ def unfold_part(
                 # šev → cut edge
                 local = face_2d_map[fi]
                 if e[0] in local and e[1] in local:
-                    cut_edges.append((local[e[0]], local[e[1]]))
+                    ce = (local[e[0]], local[e[1]])
+                    cut_edges.append(ce)
+                    cut_edge_3d_map[ce] = e
                 continue
             for nb in edge_faces.get(e, []):
                 if nb in visited or nb not in face_set:
@@ -219,4 +224,5 @@ def unfold_part(
         vert_map_3d=vert_map,
         fold_edges=fold_edges,
         cut_edges=cut_edges,
+        cut_edge_3d_map=cut_edge_3d_map,
     )

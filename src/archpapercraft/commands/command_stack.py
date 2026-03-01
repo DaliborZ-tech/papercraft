@@ -75,6 +75,18 @@ class CommandStack:
             self._undo_stack = self._undo_stack[-self._max_depth :]
         self._notify()
 
+    def push_executed(self, command: Command) -> None:
+        """Přidá již provedený příkaz na undo zásobník (bez volání execute).
+
+        Užitečné pro změny aplikované přímo UI widgetem (spinbox),
+        kde jen potřebujeme zaznamenat stav pro undo.
+        """
+        self._undo_stack.append(command)
+        self._redo_stack.clear()
+        if len(self._undo_stack) > self._max_depth:
+            self._undo_stack = self._undo_stack[-self._max_depth :]
+        self._notify()
+
     def undo(self) -> bool:
         """Vrátí poslední příkaz. Vrací True pokud se podařilo."""
         if not self._undo_stack:

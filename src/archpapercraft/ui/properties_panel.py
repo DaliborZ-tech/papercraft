@@ -19,6 +19,10 @@ class PropertiesPanel(QWidget):
     """Editovatelný formulář vlastností aktuálně vybraného uzlu."""
 
     param_changed = Signal()
+    # Signal(str, float) — (param_key, new_value) for undo
+    param_value_changed = Signal(str, float)
+    # Signal() — transform changed, for undo snapshot
+    transform_changed = Signal()
 
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
@@ -48,6 +52,7 @@ class PropertiesPanel(QWidget):
 
         self._layout.addStretch()
         self._param_spins: dict[str, QDoubleSpinBox] = {}
+        self._last_transform_snapshot: tuple[tuple[float, ...], tuple[float, ...]] | None = None
 
     def _spin(self, label: str, lo: float = -10000, hi: float = 10000) -> QDoubleSpinBox:
         sb = QDoubleSpinBox()
@@ -88,6 +93,12 @@ class PropertiesPanel(QWidget):
         self._rot_y.blockSignals(False)
         self._rot_z.blockSignals(False)
 
+        # Snapshot transformace pro undo
+        self._last_transform_snapshot = (
+            tuple(node.transform.position.tolist()),
+            tuple(node.transform.rotation.tolist()),
+        )
+
         # rebuild parameter form
         self._rebuild_params(node)
 
@@ -118,11 +129,18 @@ class PropertiesPanel(QWidget):
         self._node.transform.rotation[1] = self._rot_y.value()
         self._node.transform.rotation[2] = self._rot_z.value()
         self._node.mark_dirty()
+        self.transform_changed.emit()
         self.param_changed.emit()
 
     def _on_param_changed(self) -> None:
         if self._node is None:
             return
-        for key, sb in self._param_spins.items():
-            self._node.set_param(key, sb.value())
+        sender = self.sender()
+        key = sender.objectName() if sender else None
+        # Uložit starou hodnotu PŘED aplikací změny (pro undo)
+        old_value = self._node.parameters.get(key) if key else None
+        for k, sb in self._param_spins.items():
+            self._node.set_param(k, sb.value())
+        if key and old_value is not None:
+            self.param_value_changed.emit(key, old_value)
         self.param_changed.emit()

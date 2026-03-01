@@ -79,6 +79,8 @@ class MainWindow(QMainWindow):
         # ── propojení signálů ──────────────────────────────────────────
         self.object_tree.node_selected.connect(self._on_node_selected)
         self.properties.param_changed.connect(self._on_param_changed)
+        self.properties.param_value_changed.connect(self._on_param_value_changed)
+        self.properties.transform_changed.connect(self._on_transform_changed)
 
         # ── automatické ukládání (každé 2 minuty) ─────────────────────
         self._autosave_timer = QTimer(self)
@@ -207,6 +209,7 @@ class MainWindow(QMainWindow):
 
         wireframe_act = QAction("Drátový model", self)
         wireframe_act.setCheckable(True)
+        wireframe_act.setChecked(True)
         wireframe_act.triggered.connect(self._toggle_wireframe)
         view_menu.addAction(wireframe_act)
 
@@ -348,6 +351,37 @@ class MainWindow(QMainWindow):
         """Properties panel reportuje změnu parametru — rebuild + refresh."""
         self.project.scene.rebuild_meshes()
         self.viewport.update()
+
+    def _on_param_value_changed(self, key: str, old_value: float) -> None:
+        """Parametr změněn v properties panelu — uloží do undo stacku.
+
+        ``old_value`` je hodnota PŘED změnou (z properties panelu).
+        """
+        if self._selected_node is None:
+            return
+        new_value = self._selected_node.parameters.get(key)
+        cmd = SetParameterCommand(self._selected_node, key, new_value)
+        cmd._old_value = old_value  # přepsat — uzel už má novou hodnotu
+        self.command_stack.push_executed(cmd)
+
+    def _on_transform_changed(self) -> None:
+        """Transformace změněna v properties panelu — ulož snapshot pro undo."""
+        if self._selected_node is None:
+            return
+        # Příkaz se vytvoří s aktuální (novou) transformací;
+        # _old se nastaví ručně ze snapshot uloženého před změnou.
+        cmd = SetTransformCommand(self._selected_node, self._selected_node.transform)
+        snap = self.properties._last_transform_snapshot
+        if snap:
+            pos, rot = snap
+            cmd._old.position[:] = pos
+            cmd._old.rotation[:] = rot
+        self.command_stack.push_executed(cmd)
+        # Aktualizovat snapshot pro příští změnu
+        self.properties._last_transform_snapshot = (
+            tuple(self._selected_node.transform.position.tolist()),
+            tuple(self._selected_node.transform.rotation.tolist()),
+        )
 
     def _delete_selected(self) -> None:
         """Smaž vybraný uzel ze scény (s Undo podporou)."""

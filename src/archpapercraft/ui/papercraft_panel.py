@@ -284,8 +284,14 @@ class PapercraftPanel(QWidget):
         tabs = []
         markings_list = []
         for part in self._unfolded_parts:
-            edge_ids = self._seam_graph.compute_edge_match_ids() if self._seam_graph else {}
-            t = generate_tabs_for_part(part.vertices_2d, part.cut_edges, edge_ids, tab_settings)
+            # Převod edge_match_ids z 3D klíčů na 2D klíče přes cut_edge_3d_map
+            edge_ids_3d = self._seam_graph.compute_edge_match_ids() if self._seam_graph else {}
+            edge_ids_2d: dict[tuple[int, int], int] = {}
+            for ce_2d, ce_3d in part.cut_edge_3d_map.items():
+                mid = edge_ids_3d.get(ce_3d, 0)
+                if mid:
+                    edge_ids_2d[tuple(sorted(ce_2d))] = mid
+            t = generate_tabs_for_part(part.vertices_2d, part.cut_edges, edge_ids_2d, tab_settings)
             tabs.append(t)
             m = classify_folds(part.vertices_2d, part.fold_edges, part.part_id)
             markings_list.append(m)

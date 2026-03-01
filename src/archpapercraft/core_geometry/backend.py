@@ -229,6 +229,9 @@ def get_backend(name: BackendName = "auto") -> GeometryBackend:
     """
     global _active_backend
 
+    if _active_backend is not None and name == "auto":
+        return _active_backend
+
     if name == "occ":
         _active_backend = OCCBackend()
     elif name == "mesh":
