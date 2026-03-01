@@ -63,8 +63,9 @@ def export_dxf(
         part = parts[pid]
         # page offset (stack pages horizontally)
         page_off_x = pl.page_index * 400.0  # 400 mm between pages
-        ox = page_off_x + float(pl.offset[0]) * scale + margin
-        oy = float(pl.offset[1]) * scale + margin
+        # offset je z packeru již v paper mm → nepřenásobovat scale
+        ox = page_off_x + float(pl.offset[0]) + margin
+        oy = float(pl.offset[1]) + margin
 
         # ── cut lines ─────────────────────────────────────────────────
         drawn: set[tuple[int, int]] = set()

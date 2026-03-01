@@ -246,6 +246,3 @@ def _place_tiled(
             page += 1
 
     result.pages = page
-
-    result.pages = current_page + 1
-    return result

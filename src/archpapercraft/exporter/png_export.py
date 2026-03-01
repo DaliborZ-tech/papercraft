@@ -145,13 +145,14 @@ def export_png(
         if pid >= len(parts):
             continue
         part = parts[pid]
-        ox = float(pl.offset[0]) * scale + margin
-        oy = float(pl.offset[1]) * scale + margin
+        # offset je z packeru již v paper mm → nepřenásobovat scale
+        ox = float(pl.offset[0]) + margin
+        oy = float(pl.offset[1]) + margin
 
         # Kresli řezné čáry (obrysy)
         verts = part.vertices_2d * scale
-        for fi in range(len(part.faces_2d)):
-            tri = part.faces_2d[fi]
+        for fi in range(len(part.faces)):
+            tri = part.faces[fi]
             for j in range(3):
                 v0 = verts[tri[j]]
                 v1 = verts[tri[(j + 1) % 3]]
