@@ -22,7 +22,7 @@ except ImportError:
     EZDXF_AVAILABLE = False
 
 from archpapercraft.layout_packer.packer import LayoutResult, PageSettings
-from archpapercraft.tabs_generator.markings import FoldType, PartMarkings
+from archpapercraft.tabs_generator.markings import FoldType, MarkerType, PartMarkings
 from archpapercraft.tabs_generator.tabs import Tab
 from archpapercraft.unfolder.exact_unfold import UnfoldedPart
 
@@ -102,5 +102,31 @@ def export_dxf(
             f"P{pid + 1}",
             dxfattribs={"layer": "TEXT", "height": 3.0},
         ).set_placement((cx, cy))
+
+        # ── orientation markers ───────────────────────────────────────
+        if markings and pid < len(markings):
+            for mk in markings[pid].markers:
+                mx = ox + float(mk.position[0]) * scale
+                my = oy + float(mk.position[1]) * scale
+                if mk.marker_type == MarkerType.UP_ARROW:
+                    # Small triangle
+                    sz = 2.0
+                    pts = [
+                        (mx, my + sz),
+                        (mx - sz * 0.5, my - sz * 0.3),
+                        (mx + sz * 0.5, my - sz * 0.3),
+                        (mx, my + sz),  # close
+                    ]
+                    msp.add_lwpolyline(pts, dxfattribs={"layer": "TEXT"})
+                elif mk.marker_type == MarkerType.REGISTRATION:
+                    csz = 1.5
+                    msp.add_line(
+                        (mx - csz, my), (mx + csz, my),
+                        dxfattribs={"layer": "TEXT"},
+                    )
+                    msp.add_line(
+                        (mx, my - csz), (mx, my + csz),
+                        dxfattribs={"layer": "TEXT"},
+                    )
 
     doc.saveas(str(path))

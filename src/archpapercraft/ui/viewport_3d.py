@@ -82,6 +82,26 @@ class Viewport3D(QOpenGLWidget):
         self._selected_node = node
         self.update()
 
+    def focus_on_node(self, node) -> None:
+        """Frame the camera on the given node's bounding box."""
+        mesh = getattr(node, "mesh", None)
+        if mesh is None or mesh.num_vertices == 0:
+            return
+        # Compute AABB of the node's mesh (in local coords)
+        verts = mesh.vertices
+        mat = node.transform.to_matrix()
+        # Transform verts to world space
+        ones = np.ones((verts.shape[0], 1))
+        hom = np.hstack([verts, ones])  # (N, 4)
+        world = (mat @ hom.T).T[:, :3]
+        center = world.mean(axis=0)
+        extent = float(np.linalg.norm(world.max(axis=0) - world.min(axis=0)))
+
+        self._target = center
+        self._orbit_distance = max(extent * 1.5, 2.0)
+        self._pan_offset = np.array([0.0, 0.0])
+        self.update()
+
     # ── OpenGL callbacks ───────────────────────────────────────────────
 
     def initializeGL(self) -> None:

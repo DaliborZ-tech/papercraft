@@ -47,3 +47,7 @@ class ObjectTreeWidget(QTreeWidget):
         node_id = item.data(0, Qt.ItemDataRole.UserRole)
         if node_id:
             self.node_selected.emit(node_id)
+
+    def select_all(self) -> None:
+        """Select all top-level items in the tree."""
+        self.selectAll()

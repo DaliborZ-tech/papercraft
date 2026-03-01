@@ -27,6 +27,45 @@ from numpy.typing import NDArray
 from archpapercraft.core_geometry.primitives import MeshData
 
 
+def _face_normal(mesh: MeshData, fi: int) -> NDArray[np.float64]:
+    """Compute face normal for triangle *fi*."""
+    tri = mesh.faces[fi]
+    v0, v1, v2 = mesh.vertices[tri[0]], mesh.vertices[tri[1]], mesh.vertices[tri[2]]
+    n = np.cross(v1 - v0, v2 - v0)
+    length = float(np.linalg.norm(n))
+    return n / length if length > 1e-15 else np.array([0.0, 0.0, 1.0])
+
+
+def _compute_dihedral(
+    mesh: MeshData,
+    fi_a: int,
+    fi_b: int,
+    shared_edge: tuple[int, int],
+) -> float:
+    """Compute signed dihedral angle in degrees between two adjacent faces.
+
+    Positive → mountain (convex), negative → valley (concave).
+    """
+    n_a = _face_normal(mesh, fi_a)
+    n_b = _face_normal(mesh, fi_b)
+
+    # Edge direction vector
+    e0, e1 = shared_edge
+    edge_dir = mesh.vertices[e1] - mesh.vertices[e0]
+    edge_len = float(np.linalg.norm(edge_dir))
+    if edge_len < 1e-15:
+        return 0.0
+    edge_dir = edge_dir / edge_len
+
+    # Signed angle: use cross product projected onto edge direction
+    cross = np.cross(n_a, n_b)
+    sin_val = float(np.dot(cross, edge_dir))
+    cos_val = float(np.dot(n_a, n_b))
+
+    angle_rad = float(np.arctan2(sin_val, cos_val))
+    return float(np.degrees(angle_rad))
+
+
 @dataclass
 class UnfoldedPart:
     """Výsledek rozložení jednoho spojeného dílu."""
@@ -43,6 +82,8 @@ class UnfoldedPart:
     cut_edges: list[tuple[int, int]] = field(default_factory=list)
     # mapping: 2D cut edge (i,j) → 3D edge (a,b) for tab match IDs
     cut_edge_3d_map: dict[tuple[int, int], tuple[int, int]] = field(default_factory=dict)
+    # dihedral angle (radians→degrees) for each fold edge (sorted 2D key)
+    fold_dihedral_angles: dict[tuple[int, int], float] = field(default_factory=dict)
 
 
 def unfold_part(
@@ -89,6 +130,7 @@ def unfold_part(
     fold_edges: list[tuple[int, int]] = []
     cut_edges: list[tuple[int, int]] = []
     cut_edge_3d_map: dict[tuple[int, int], tuple[int, int]] = {}
+    fold_dihedral_angles: dict[tuple[int, int], float] = {}
 
     # face_2d_map[fi] = {3d_vidx: 2d_vidx}  — pro každý face
     face_2d_map: dict[int, dict[int, int]] = {}
@@ -202,6 +244,10 @@ def unfold_part(
         # Fold edge = sdílená hrana (přehyb)
         fold_edges.append((a_2d_idx, b_2d_idx))
 
+        # Compute dihedral angle between parent face and this face
+        _dihedral = _compute_dihedral(mesh, parent_fi, fi, shared_3d)
+        fold_dihedral_angles[tuple(sorted((a_2d_idx, b_2d_idx)))] = _dihedral
+
         # Pokračuj BFS
         _enqueue_neighbors(fi)
 
@@ -225,4 +271,5 @@ def unfold_part(
         fold_edges=fold_edges,
         cut_edges=cut_edges,
         cut_edge_3d_map=cut_edge_3d_map,
+        fold_dihedral_angles=fold_dihedral_angles,
     )

@@ -5,7 +5,10 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QCursor
 from PySide6.QtWidgets import (
+    QApplication,
     QComboBox,
     QFileDialog,
     QGroupBox,
@@ -121,6 +124,21 @@ class PapercraftPanel(QWidget):
         self._lbl_seams.setText("Nastavit automatické umístění švů.")
         self._lbl_unfold.setText("")
 
+        # Restore seam state from saved project (round-trip)
+        saved = project.load_seam_state()
+        if saved is not None:
+            seam_edges, _locked = saved
+            from archpapercraft.seam_editor.seam_graph import SeamGraph
+            mesh = self._get_combined_mesh()
+            if mesh is not None:
+                self._cached_mesh = mesh
+                self._seam_graph = SeamGraph(mesh)
+                self._seam_graph.seam_edges = seam_edges
+                parts = self._seam_graph.compute_parts()
+                self._lbl_seams.setText(
+                    f"Švy (načteno): {len(seam_edges)} hran → {len(parts)} dílů"
+                )
+
     # ── helpers ─────────────────────────────────────────────────────────
 
     def _get_combined_mesh(self):
@@ -204,42 +222,72 @@ class PapercraftPanel(QWidget):
     # ── workflow slots ─────────────────────────────────────────────────
 
     def _on_analyze(self) -> None:
-        from archpapercraft.paper_analyzer.classifier import classify_surfaces
+        from archpapercraft.paper_analyzer.classifier import (
+            classify_surfaces, check_manifold, papercraft_readiness_score,
+        )
 
         self._check_csg_requirements()
 
-        mesh = self._get_combined_mesh()
-        if mesh is None:
-            self._lbl_analyze.setText("Ve scéně nejsou žádné meshe.")
-            return
+        QApplication.setOverrideCursor(QCursor(Qt.CursorShape.WaitCursor))
+        try:
+            mesh = self._get_combined_mesh()
+            if mesh is None:
+                self._lbl_analyze.setText("Ve scéně nejsou žádné meshe.")
+                return
 
-        self._analysis = classify_surfaces(mesh)
-        n_flat = len(self._analysis.flat_patches)
-        n_dev = len(self._analysis.developable_patches)
-        n_nd = len(self._analysis.non_developable_patches)
-        self._lbl_analyze.setText(
-            f"Díly: {n_flat} plochých, {n_dev} rozvinutelných, {n_nd} nerozvinutelných"
-        )
+            self._analysis = classify_surfaces(mesh)
+            n_flat = len(self._analysis.flat_patches)
+            n_dev = len(self._analysis.developable_patches)
+            n_nd = len(self._analysis.non_developable_patches)
+
+            # Validation — manifold check + readiness score
+            mf = check_manifold(mesh)
+            score = papercraft_readiness_score(mesh, self._project.settings.scale_factor)
+            score_pct = int(score * 100)
+
+            warnings: list[str] = []
+            if not mf.is_manifold:
+                warnings.append(f"{len(mf.non_manifold_edges)} non-manifold hran")
+            if not mf.is_watertight:
+                warnings.append(f"{len(mf.boundary_edges)} okrajových hran")
+            if mf.short_edges:
+                warnings.append(f"{len(mf.short_edges)} krátkých hran")
+
+            warn_text = f"  ⚠ {', '.join(warnings)}" if warnings else ""
+            self._lbl_analyze.setText(
+                f"Díly: {n_flat} plochých, {n_dev} rozvinutelných, "
+                f"{n_nd} nerozvinutelných\n"
+                f"Připravenost: {score_pct}%{warn_text}"
+            )
+        finally:
+            QApplication.restoreOverrideCursor()
 
     def _on_auto_seams(self) -> None:
         from archpapercraft.seam_editor.auto_seams import auto_seams
         from archpapercraft.core_geometry.units import to_mm
 
-        mesh = self._get_combined_mesh()
-        if mesh is None:
-            self._lbl_seams.setText("Žádné meshe.")
-            return
+        QApplication.setOverrideCursor(QCursor(Qt.CursorShape.WaitCursor))
+        try:
+            mesh = self._get_combined_mesh()
+            if mesh is None:
+                self._lbl_seams.setText("Žádné meshe.")
+                return
 
-        self._cached_mesh = mesh  # uložit pro unfold krok
+            self._cached_mesh = mesh  # uložit pro unfold krok
 
-        # Convert model-unit coords to paper mm:  unit→mm × scale_factor
-        unit_to_mm = to_mm(1.0, self._project.settings.units)
-        paper_scale = unit_to_mm * self._project.settings.scale_factor
-        self._seam_graph = auto_seams(mesh, scale=paper_scale)
-        parts = self._seam_graph.compute_parts()
-        self._lbl_seams.setText(
-            f"Švy: {len(self._seam_graph.seam_edges)} hran → {len(parts)} dílů"
-        )
+            # Convert model-unit coords to paper mm:  unit→mm × scale_factor
+            unit_to_mm = to_mm(1.0, self._project.settings.units)
+            paper_scale = unit_to_mm * self._project.settings.scale_factor
+            self._seam_graph = auto_seams(mesh, scale=paper_scale)
+            parts = self._seam_graph.compute_parts()
+            self._lbl_seams.setText(
+                f"Švy: {len(self._seam_graph.seam_edges)} hran → {len(parts)} dílů"
+            )
+
+            # Persist seam state for round-trip
+            self._project.save_seam_state(list(self._seam_graph.seam_edges))
+        finally:
+            QApplication.restoreOverrideCursor()
 
     def _on_unfold(self) -> None:
         from archpapercraft.unfolder.approx_unfold import unfold_with_strategy
@@ -248,22 +296,26 @@ class PapercraftPanel(QWidget):
             QMessageBox.warning(self, "Rozložení", "Nejprve spusťte Automatické švy.")
             return
 
-        # Použit cached mesh ze seam kroku (garantuje konzistentní indexy)
-        mesh = self._cached_mesh
-        if mesh is None:
-            mesh = self._get_combined_mesh()
-        if mesh is None:
-            return
+        QApplication.setOverrideCursor(QCursor(Qt.CursorShape.WaitCursor))
+        try:
+            # Použit cached mesh ze seam kroku (garantuje konzistentní indexy)
+            mesh = self._cached_mesh
+            if mesh is None:
+                mesh = self._get_combined_mesh()
+            if mesh is None:
+                return
 
-        strategy = self._combo_strategy.currentText()
-        segments = self._spin_segments.value()
+            strategy = self._combo_strategy.currentText()
+            segments = self._spin_segments.value()
 
-        self._unfolded_parts = unfold_with_strategy(
-            mesh, self._seam_graph, strategy=strategy, segments=segments,
-        )
-        self._lbl_unfold.setText(
-            f"Rozloženo {len(self._unfolded_parts)} dílů (strategie: {strategy})"
-        )
+            self._unfolded_parts = unfold_with_strategy(
+                mesh, self._seam_graph, strategy=strategy, segments=segments,
+            )
+            self._lbl_unfold.setText(
+                f"Rozloženo {len(self._unfolded_parts)} dílů (strategie: {strategy})"
+            )
+        finally:
+            QApplication.restoreOverrideCursor()
 
     def _on_export(self, fmt: str) -> None:
         if self._unfolded_parts is None:
@@ -272,7 +324,9 @@ class PapercraftPanel(QWidget):
 
         from archpapercraft.core_geometry.units import to_mm
         from archpapercraft.layout_packer.packer import pack_parts
-        from archpapercraft.tabs_generator.markings import classify_folds
+        from archpapercraft.tabs_generator.markings import (
+            classify_folds, add_up_arrows, add_registration_marks,
+        )
         from archpapercraft.tabs_generator.tabs import TabSettings, generate_tabs_for_part
 
         # ── PageSettings from project (not defaults) ──────────────
@@ -303,7 +357,12 @@ class PapercraftPanel(QWidget):
                     edge_ids_2d[tuple(sorted(ce_2d))] = mid
             t = generate_tabs_for_part(part.vertices_2d, part.cut_edges, edge_ids_2d, tab_settings)
             tabs.append(t)
-            m = classify_folds(part.vertices_2d, part.fold_edges, part.part_id)
+            m = classify_folds(
+                part.vertices_2d, part.fold_edges, part.part_id,
+                dihedral_angles=part.fold_dihedral_angles,
+            )
+            add_up_arrows(m, part.vertices_2d)
+            add_registration_marks(m, part.vertices_2d)
             markings_list.append(m)
 
         filters = {
@@ -318,6 +377,7 @@ class PapercraftPanel(QWidget):
 
         scale_label = self._project.settings.scale
 
+        QApplication.setOverrideCursor(QCursor(Qt.CursorShape.WaitCursor))
         try:
             if fmt == "pdf":
                 from archpapercraft.exporter.pdf_export import export_pdf
@@ -334,9 +394,12 @@ class PapercraftPanel(QWidget):
             elif fmt == "png":
                 from archpapercraft.exporter.png_export import export_png
                 export_png(path, self._unfolded_parts, layout, ps, tabs, markings_list, scale)
-            QMessageBox.information(self, "Export", f"Exportováno do {path}")
         except Exception as exc:
+            QApplication.restoreOverrideCursor()
             QMessageBox.critical(self, "Chyba exportu", str(exc))
+            return
+        QApplication.restoreOverrideCursor()
+        QMessageBox.information(self, "Export", f"Exportováno do {path}")
 
     def _on_build_guide(self) -> None:
         """Generuj sestavovací návod jako textový soubor."""
@@ -345,11 +408,17 @@ class PapercraftPanel(QWidget):
             return
 
         from archpapercraft.tabs_generator.build_guide import generate_build_guide
-        from archpapercraft.tabs_generator.markings import classify_folds
+        from archpapercraft.tabs_generator.markings import (
+            classify_folds, add_up_arrows, add_registration_marks,
+        )
 
         markings_list = []
         for part in self._unfolded_parts:
-            m = classify_folds(part.vertices_2d, part.fold_edges, part.part_id)
+            m = classify_folds(
+                part.vertices_2d, part.fold_edges, part.part_id,
+                dihedral_angles=part.fold_dihedral_angles,
+            )
+            add_up_arrows(m, part.vertices_2d)
             markings_list.append(m)
 
         guide = generate_build_guide(

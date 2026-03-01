@@ -25,7 +25,7 @@ from archpapercraft.layout_packer.packer import (
 )
 from archpapercraft.unfolder.exact_unfold import UnfoldedPart
 from archpapercraft.tabs_generator.tabs import Tab
-from archpapercraft.tabs_generator.markings import FoldType, PartMarkings
+from archpapercraft.tabs_generator.markings import FoldType, MarkerType, PartMarkings
 
 
 @dataclass
@@ -195,6 +195,26 @@ def export_png(
                 px0, py0 = _point_to_px(p0[0] + ox, p0[1] + oy, dpi, ph)
                 px1, py1 = _point_to_px(p1[0] + ox, p1[1] + oy, dpi, ph)
                 _draw_line(pixels, px0, py0, px1, py1, color, 1, dash=dash)
+
+            # Orientation markers
+            for mk in markings[pid].markers:
+                mp = mk.position * scale
+                mpx, mpy = _point_to_px(mp[0] + ox, mp[1] + oy, dpi, ph)
+                if mk.marker_type == MarkerType.UP_ARROW:
+                    # Draw small upward triangle (3 lines)
+                    sz = _mm_to_px(2.0, dpi)
+                    _draw_line(pixels, mpx, mpy - sz, mpx - sz // 2, mpy + sz // 3,
+                               (128, 128, 128), 1)
+                    _draw_line(pixels, mpx - sz // 2, mpy + sz // 3, mpx + sz // 2, mpy + sz // 3,
+                               (128, 128, 128), 1)
+                    _draw_line(pixels, mpx + sz // 2, mpy + sz // 3, mpx, mpy - sz,
+                               (128, 128, 128), 1)
+                elif mk.marker_type == MarkerType.REGISTRATION:
+                    csz = _mm_to_px(1.5, dpi)
+                    _draw_line(pixels, mpx - csz, mpy, mpx + csz, mpy,
+                               (170, 170, 170), 1)
+                    _draw_line(pixels, mpx, mpy - csz, mpx, mpy + csz,
+                               (170, 170, 170), 1)
 
     # Rotace
     if png_settings.rotation_deg == 90:

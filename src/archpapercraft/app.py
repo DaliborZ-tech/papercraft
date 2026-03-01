@@ -85,6 +85,7 @@ def main() -> None:
     app.setApplicationName("ArchPapercraft Studio")
     app.setOrganizationName("ArchPapercraft")
     app.setApplicationVersion("0.2.0")
+    app.setStyle("Fusion")  # consistent cross-platform base for theming
 
     window = MainWindow()
     window.show()

@@ -24,7 +24,7 @@ from archpapercraft.layout_packer.packer import (
     Orientation,
     PAPER_DIMS,
 )
-from archpapercraft.tabs_generator.markings import FoldLine, FoldType, PartMarkings
+from archpapercraft.tabs_generator.markings import FoldLine, FoldType, MarkerType, PartMarkings
 from archpapercraft.tabs_generator.tabs import Tab
 from archpapercraft.unfolder.exact_unfold import UnfoldedPart
 
@@ -110,6 +110,10 @@ def export_pdf(
             c.setFillColorRGB(0, 0, 0)
             c.drawCentredString(cx, cy, f"P{pid + 1}")
 
+            # ── orientation markers ────────────────────────────────────
+            if markings and pid < len(markings):
+                _draw_markers(c, markings[pid], margin + ox, margin + oy, scale)
+
         # ── scale bar (měřítkové pravítko) ─────────────────────────
         if scale_label:
             _draw_scale_bar(c, pagesize, margin, scale_label)
@@ -194,6 +198,40 @@ def _draw_tabs(
             c.setFillColorRGB(0.3, 0.3, 0.3)
             c.setFont("Helvetica", 4)
             c.drawCentredString(mx, my, str(tab.match_id))
+
+
+def _draw_markers(
+    c: Canvas,
+    mark: PartMarkings,
+    ox: float,
+    oy: float,
+    scale: float,
+) -> None:
+    """Draw orientation markers (up arrows, registration crosshairs)."""
+    for mk in mark.markers:
+        mx = ox + float(mk.position[0]) * mm * scale
+        my = oy + float(mk.position[1]) * mm * scale
+
+        if mk.marker_type == MarkerType.UP_ARROW:
+            # Small filled triangle pointing up
+            sz = 2.0 * mm
+            path = c.beginPath()
+            path.moveTo(mx, my + sz)
+            path.lineTo(mx - sz * 0.5, my - sz * 0.3)
+            path.lineTo(mx + sz * 0.5, my - sz * 0.3)
+            path.close()
+            c.setFillColorRGB(0.5, 0.5, 0.5)
+            c.setStrokeColorRGB(0.5, 0.5, 0.5)
+            c.setLineWidth(0.2)
+            c.drawPath(path, fill=1)
+
+        elif mk.marker_type == MarkerType.REGISTRATION:
+            # Crosshair
+            csz = 1.5 * mm
+            c.setStrokeColorRGB(0.6, 0.6, 0.6)
+            c.setLineWidth(0.15)
+            c.line(mx - csz, my, mx + csz, my)
+            c.line(mx, my - csz, mx, my + csz)
 
 
 def _draw_scale_bar(

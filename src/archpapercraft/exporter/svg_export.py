@@ -15,7 +15,7 @@ import numpy as np
 import svgwrite
 
 from archpapercraft.layout_packer.packer import LayoutResult, PageSettings, PAPER_DIMS
-from archpapercraft.tabs_generator.markings import FoldType, PartMarkings
+from archpapercraft.tabs_generator.markings import FoldType, MarkerType, PartMarkings
 from archpapercraft.tabs_generator.tabs import Tab
 from archpapercraft.unfolder.exact_unfold import UnfoldedPart
 
@@ -89,6 +89,32 @@ def export_svg(
         cx = ox + float(part.vertices_2d[:, 0].mean()) * scale
         cy = oy + float(part.vertices_2d[:, 1].mean()) * scale
         g_text.add(dwg.text(f"P{pid + 1}", insert=(cx, cy), text_anchor="middle"))
+
+        # orientation markers
+        if markings and pid < len(markings):
+            for mk in markings[pid].markers:
+                mx = ox + float(mk.position[0]) * scale
+                my = oy + float(mk.position[1]) * scale
+                if mk.marker_type == MarkerType.UP_ARROW:
+                    # Small triangle arrow pointing up
+                    sz = 2.0  # mm
+                    pts = [
+                        (mx, my - sz),
+                        (mx - sz * 0.5, my + sz * 0.3),
+                        (mx + sz * 0.5, my + sz * 0.3),
+                    ]
+                    g_text.add(dwg.polygon(pts, fill="#888", stroke="none"))
+                elif mk.marker_type == MarkerType.REGISTRATION:
+                    # Crosshair
+                    csz = 1.5
+                    g_cut.add(dwg.line(
+                        start=(mx - csz, my), end=(mx + csz, my),
+                        stroke="#aaa", stroke_width="0.15",
+                    ))
+                    g_cut.add(dwg.line(
+                        start=(mx, my - csz), end=(mx, my + csz),
+                        stroke="#aaa", stroke_width="0.15",
+                    ))
 
     dwg.add(g_cut)
     dwg.add(g_score)

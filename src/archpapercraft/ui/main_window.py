@@ -175,6 +175,29 @@ class MainWindow(QMainWindow):
 
         edit_menu.addSeparator()
 
+        select_all_act = QAction("Vybrat vš&e", self)
+        select_all_act.setShortcut(QKeySequence("Ctrl+A"))
+        select_all_act.triggered.connect(self._select_all)
+        edit_menu.addAction(select_all_act)
+        self._shortcut_actions["select_all"] = select_all_act
+
+        focus_act = QAction("Zaměřit &výběr", self)
+        focus_act.setShortcut(QKeySequence("Numpad ."))
+        focus_act.triggered.connect(self._focus_selection)
+        edit_menu.addAction(focus_act)
+        self._shortcut_actions["focus_selection"] = focus_act
+
+        snap_act = QAction("Přichytávání", self)
+        snap_act.setCheckable(True)
+        snap_act.setChecked(self._prefs.snap.enabled)
+        snap_act.setShortcut(QKeySequence("S"))
+        snap_act.triggered.connect(self._toggle_snap)
+        edit_menu.addAction(snap_act)
+        self._shortcut_actions["toggle_snap"] = snap_act
+        self._snap_act = snap_act
+
+        edit_menu.addSeparator()
+
         prefs_act = QAction("&Předvolby…", self)
         prefs_act.setShortcut(QKeySequence("Ctrl+,"))
         prefs_act.triggered.connect(self._show_preferences)
@@ -454,6 +477,31 @@ class MainWindow(QMainWindow):
         self._refresh_all()
         self.statusBar().showMessage(f"Duplikováno: {src.name} (kopie)")
 
+    def _select_all(self) -> None:
+        """Select all nodes in the scene tree."""
+        nodes = list(self.project.scene.root.children)
+        if nodes:
+            # Select the first node and show status with count
+            self._on_node_selected(nodes[0].node_id)
+            self.object_tree.select_all()
+            self.statusBar().showMessage(f"Vybráno {len(nodes)} objektů")
+
+    def _focus_selection(self) -> None:
+        """Frame the selected node in the viewport camera."""
+        if self._selected_node is None:
+            self.statusBar().showMessage("Žádný výběr pro zaměření")
+            return
+        self.viewport.focus_on_node(self._selected_node)
+        self.statusBar().showMessage(f"Zaměřeno na: {self._selected_node.name}")
+
+    def _toggle_snap(self) -> None:
+        """Toggle snapping on/off."""
+        self._prefs.snap.enabled = not self._prefs.snap.enabled
+        if hasattr(self, "_snap_act"):
+            self._snap_act.setChecked(self._prefs.snap.enabled)
+        state = "zapnuto" if self._prefs.snap.enabled else "vypnuto"
+        self.statusBar().showMessage(f"Přichytávání: {state}")
+
     def _show_preferences(self) -> None:
         """Otevře dialog předvoleb."""
         from archpapercraft.ui.preferences_dialog import PreferencesDialog
@@ -474,11 +522,57 @@ class MainWindow(QMainWindow):
         # Undo depth
         self.command_stack._max_depth = prefs.general.max_undo_depth
 
+        # Theme (dark / light / system)
+        self._apply_theme(prefs.general.theme)
+
         # Viewport nastavení
         self.viewport.apply_preferences(prefs.viewport)
 
         # Klávesové zkratky
         self._apply_shortcuts()
+
+    def _apply_theme(self, theme: str) -> None:
+        """Apply dark/light/system theme via QPalette on the Fusion style."""
+        from PySide6.QtGui import QColor, QPalette
+        from PySide6.QtWidgets import QApplication
+
+        app = QApplication.instance()
+        if app is None:
+            return
+
+        if theme == "dark":
+            p = QPalette()
+            p.setColor(QPalette.ColorRole.Window, QColor(53, 53, 53))
+            p.setColor(QPalette.ColorRole.WindowText, QColor(220, 220, 220))
+            p.setColor(QPalette.ColorRole.Base, QColor(35, 35, 35))
+            p.setColor(QPalette.ColorRole.AlternateBase, QColor(53, 53, 53))
+            p.setColor(QPalette.ColorRole.ToolTipBase, QColor(25, 25, 25))
+            p.setColor(QPalette.ColorRole.ToolTipText, QColor(220, 220, 220))
+            p.setColor(QPalette.ColorRole.Text, QColor(220, 220, 220))
+            p.setColor(QPalette.ColorRole.Button, QColor(53, 53, 53))
+            p.setColor(QPalette.ColorRole.ButtonText, QColor(220, 220, 220))
+            p.setColor(QPalette.ColorRole.BrightText, QColor(255, 0, 0))
+            p.setColor(QPalette.ColorRole.Link, QColor(42, 130, 218))
+            p.setColor(QPalette.ColorRole.Highlight, QColor(42, 130, 218))
+            p.setColor(QPalette.ColorRole.HighlightedText, QColor(240, 240, 240))
+            p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text, QColor(127, 127, 127))
+            p.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, QColor(127, 127, 127))
+            app.setPalette(p)
+        elif theme == "light":
+            p = QPalette()
+            p.setColor(QPalette.ColorRole.Window, QColor(240, 240, 240))
+            p.setColor(QPalette.ColorRole.WindowText, QColor(30, 30, 30))
+            p.setColor(QPalette.ColorRole.Base, QColor(255, 255, 255))
+            p.setColor(QPalette.ColorRole.AlternateBase, QColor(245, 245, 245))
+            p.setColor(QPalette.ColorRole.Text, QColor(30, 30, 30))
+            p.setColor(QPalette.ColorRole.Button, QColor(230, 230, 230))
+            p.setColor(QPalette.ColorRole.ButtonText, QColor(30, 30, 30))
+            p.setColor(QPalette.ColorRole.Highlight, QColor(51, 153, 255))
+            p.setColor(QPalette.ColorRole.HighlightedText, QColor(255, 255, 255))
+            app.setPalette(p)
+        else:
+            # system — reset to default palette
+            app.setPalette(app.style().standardPalette())
 
     def _apply_shortcuts(self) -> None:
         """Aplikuje klávesové zkratky z nastavení na akce v menu."""
@@ -492,6 +586,9 @@ class MainWindow(QMainWindow):
             "redo": sc.redo,
             "delete": sc.delete,
             "duplicate": sc.duplicate,
+            "select_all": sc.select_all,
+            "focus_selection": sc.focus_selection,
+            "toggle_snap": sc.toggle_snap,
             "toggle_grid": sc.toggle_grid,
             "view_top": sc.view_top,
             "view_front": sc.view_front,
