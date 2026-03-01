@@ -283,9 +283,9 @@ class PapercraftPanel(QWidget):
             tab_settings.width_mm = tab_settings.width_mm / scale  # mm → model
         tabs = []
         markings_list = []
+        edge_ids_3d = self._seam_graph.compute_edge_match_ids() if self._seam_graph else {}
         for part in self._unfolded_parts:
             # Převod edge_match_ids z 3D klíčů na 2D klíče přes cut_edge_3d_map
-            edge_ids_3d = self._seam_graph.compute_edge_match_ids() if self._seam_graph else {}
             edge_ids_2d: dict[tuple[int, int], int] = {}
             for ce_2d, ce_3d in part.cut_edge_3d_map.items():
                 mid = edge_ids_3d.get(ce_3d, 0)

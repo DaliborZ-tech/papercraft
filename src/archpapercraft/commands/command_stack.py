@@ -62,6 +62,7 @@ class CommandStack:
         self._redo_stack: list[Command] = []
         self._max_depth = max_depth
         self._on_change = on_change
+        self._save_point: int = 0
 
     # ── veřejné API ───────────────────────────────────────────────────
 
@@ -111,7 +112,17 @@ class CommandStack:
         """Vymaže oba zásobníky."""
         self._undo_stack.clear()
         self._redo_stack.clear()
+        self._save_point: int = 0
         self._notify()
+
+    def mark_saved(self) -> None:
+        """Označ aktuální stav jako uložený (pro detekci neuložených změn)."""
+        self._save_point = len(self._undo_stack)
+
+    @property
+    def is_modified(self) -> bool:
+        """True pokud existují neuložené změny od posledního save."""
+        return len(self._undo_stack) != getattr(self, "_save_point", 0)
 
     @property
     def can_undo(self) -> bool:

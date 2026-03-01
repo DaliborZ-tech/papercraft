@@ -40,8 +40,11 @@ class MainWindow(QMainWindow):
 
         # ── data ───────────────────────────────────────────────────────
         self.project = Project()
-        self.command_stack = CommandStack(on_change=self._on_undo_redo_change)
         self._prefs = Preferences.load()
+        self.command_stack = CommandStack(
+            max_depth=self._prefs.general.max_undo_depth,
+            on_change=self._on_undo_redo_change,
+        )
         self._selected_node = None
 
         # ── centrální viewport ─────────────────────────────────────────
@@ -82,9 +85,12 @@ class MainWindow(QMainWindow):
         self.properties.param_value_changed.connect(self._on_param_value_changed)
         self.properties.transform_changed.connect(self._on_transform_changed)
 
-        # ── automatické ukládání (každé 2 minuty) ─────────────────────
+        # ── aplikace nastavení ─────────────────────────────────────────
+        self._apply_preferences()
+
+        # ── automatické ukládání ───────────────────────────────────────
         self._autosave_timer = QTimer(self)
-        self._autosave_timer.setInterval(120_000)
+        self._autosave_timer.setInterval(self._prefs.general.autosave_interval_sec * 1000)
         self._autosave_timer.timeout.connect(self._autosave)
         self._autosave_timer.start()
 
@@ -92,6 +98,7 @@ class MainWindow(QMainWindow):
 
     def _build_menus(self) -> None:
         mb = self.menuBar()
+        self._shortcut_actions: dict[str, QAction] = {}
 
         # ── Soubor ────────────────────────────────────────────────────
         file_menu = mb.addMenu("&Soubor")
@@ -100,21 +107,33 @@ class MainWindow(QMainWindow):
         new_act.setShortcut(QKeySequence.StandardKey.New)
         new_act.triggered.connect(self._new_project)
         file_menu.addAction(new_act)
+        self._shortcut_actions["new_project"] = new_act
 
         open_act = QAction("&Otevřít…", self)
         open_act.setShortcut(QKeySequence.StandardKey.Open)
         open_act.triggered.connect(self._open_project)
         file_menu.addAction(open_act)
+        self._shortcut_actions["open_project"] = open_act
 
         save_act = QAction("&Uložit", self)
         save_act.setShortcut(QKeySequence.StandardKey.Save)
         save_act.triggered.connect(self._save_project)
         file_menu.addAction(save_act)
+        self._shortcut_actions["save_project"] = save_act
 
         save_as_act = QAction("Uložit &jako…", self)
         save_as_act.setShortcut(QKeySequence("Ctrl+Shift+S"))
         save_as_act.triggered.connect(self._save_project_as)
         file_menu.addAction(save_as_act)
+        self._shortcut_actions["save_as"] = save_as_act
+
+        file_menu.addSeparator()
+
+        export_act = QAction("&Export…", self)
+        export_act.setShortcut(QKeySequence("Ctrl+E"))
+        export_act.triggered.connect(self._export_default)
+        file_menu.addAction(export_act)
+        self._shortcut_actions["export"] = export_act
 
         file_menu.addSeparator()
 
@@ -131,12 +150,14 @@ class MainWindow(QMainWindow):
         self._undo_act.setEnabled(False)
         self._undo_act.triggered.connect(self._undo)
         edit_menu.addAction(self._undo_act)
+        self._shortcut_actions["undo"] = self._undo_act
 
         self._redo_act = QAction("Z&novu", self)
         self._redo_act.setShortcut(QKeySequence.StandardKey.Redo)
         self._redo_act.setEnabled(False)
         self._redo_act.triggered.connect(self._redo)
         edit_menu.addAction(self._redo_act)
+        self._shortcut_actions["redo"] = self._redo_act
 
         edit_menu.addSeparator()
 
@@ -144,11 +165,13 @@ class MainWindow(QMainWindow):
         delete_act.setShortcut(QKeySequence("Delete"))
         delete_act.triggered.connect(self._delete_selected)
         edit_menu.addAction(delete_act)
+        self._shortcut_actions["delete"] = delete_act
 
         dup_act = QAction("D&uplikovat", self)
         dup_act.setShortcut(QKeySequence("Ctrl+D"))
         dup_act.triggered.connect(self._duplicate_selected)
         edit_menu.addAction(dup_act)
+        self._shortcut_actions["duplicate"] = dup_act
 
         edit_menu.addSeparator()
 
@@ -194,6 +217,12 @@ class MainWindow(QMainWindow):
         # ── Zobrazení ────────────────────────────────────────────────
         view_menu = mb.addMenu("&Zobrazení")
 
+        _view_shortcut_keys = {
+            "TOP": "view_top",
+            "FRONT": "view_front",
+            "SIDE": "view_side",
+            "PERSPECTIVE": "view_perspective",
+        }
         for label, preset in [
             ("Shora (Numpad 7)", "TOP"),
             ("Zepředu (Numpad 1)", "FRONT"),
@@ -204,6 +233,9 @@ class MainWindow(QMainWindow):
             act.setData(preset)
             act.triggered.connect(self._set_view_preset)
             view_menu.addAction(act)
+            skey = _view_shortcut_keys.get(preset)
+            if skey:
+                self._shortcut_actions[skey] = act
 
         view_menu.addSeparator()
 
@@ -218,6 +250,7 @@ class MainWindow(QMainWindow):
         grid_act.setChecked(True)
         grid_act.triggered.connect(self._toggle_grid)
         view_menu.addAction(grid_act)
+        self._shortcut_actions["toggle_grid"] = grid_act
 
         # ── Nápověda ─────────────────────────────────────────────────
         help_menu = mb.addMenu("&Nápověda")
@@ -281,6 +314,7 @@ class MainWindow(QMainWindow):
             self._save_project_as()
         else:
             self.project.save()
+            self.command_stack.mark_saved()
             self.statusBar().showMessage(f"Uloženo: {self.project.file_path}")
 
     def _save_project_as(self) -> None:
@@ -289,6 +323,7 @@ class MainWindow(QMainWindow):
         )
         if path:
             self.project.save(path)
+            self.command_stack.mark_saved()
             self.statusBar().showMessage(f"Uloženo: {path}")
 
     def _add_object(self) -> None:
@@ -425,7 +460,78 @@ class MainWindow(QMainWindow):
 
         dlg = PreferencesDialog(self._prefs, parent=self)
         if dlg.exec():
-            self.statusBar().showMessage("Předvolby uloženy")
+            self._apply_preferences()
+            self.statusBar().showMessage("Předvolby uloženy a aplikovány")
+
+    def _apply_preferences(self) -> None:
+        """Aplikuje aktuální nastavení na běžící komponenty."""
+        prefs = self._prefs
+
+        # Autosave interval
+        if hasattr(self, "_autosave_timer"):
+            self._autosave_timer.setInterval(prefs.general.autosave_interval_sec * 1000)
+
+        # Undo depth
+        self.command_stack._max_depth = prefs.general.max_undo_depth
+
+        # Viewport nastavení
+        self.viewport.apply_preferences(prefs.viewport)
+
+        # Klávesové zkratky
+        self._apply_shortcuts()
+
+    def _apply_shortcuts(self) -> None:
+        """Aplikuje klávesové zkratky z nastavení na akce v menu."""
+        sc = self._prefs.shortcuts
+        mapping = {
+            "new_project": sc.new_project,
+            "open_project": sc.open_project,
+            "save_project": sc.save_project,
+            "save_as": sc.save_as,
+            "undo": sc.undo,
+            "redo": sc.redo,
+            "delete": sc.delete,
+            "duplicate": sc.duplicate,
+            "toggle_grid": sc.toggle_grid,
+            "view_top": sc.view_top,
+            "view_front": sc.view_front,
+            "view_side": sc.view_side,
+            "view_perspective": sc.view_perspective,
+            "export": sc.export,
+        }
+        for key, shortcut in mapping.items():
+            act = self._shortcut_actions.get(key)
+            if act and shortcut:
+                act.setShortcut(QKeySequence(shortcut))
+
+    def _export_default(self) -> None:
+        """Export v preferovaném formátu z panelu papercraftu."""
+        fmt = self._prefs.export.default_format
+        self.papercraft._on_export(fmt)
+
+    # ── closeEvent ─────────────────────────────────────────────────────
+
+    def closeEvent(self, event) -> None:
+        """Kontrola neuložených změn při zavírání okna."""
+        if self.command_stack.is_modified:
+            reply = QMessageBox.question(
+                self,
+                "Neuložené změny",
+                "Projekt obsahuje neuložené změny.\nChcete je uložit před zavřením?",
+                QMessageBox.StandardButton.Save
+                | QMessageBox.StandardButton.Discard
+                | QMessageBox.StandardButton.Cancel,
+                QMessageBox.StandardButton.Save,
+            )
+            if reply == QMessageBox.StandardButton.Save:
+                self._save_project()
+                event.accept()
+            elif reply == QMessageBox.StandardButton.Discard:
+                event.accept()
+            else:
+                event.ignore()
+        else:
+            event.accept()
 
     def _show_about(self) -> None:
         QMessageBox.about(

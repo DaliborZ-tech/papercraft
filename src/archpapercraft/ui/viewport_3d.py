@@ -47,9 +47,31 @@ class Viewport3D(QOpenGLWidget):
         self._show_wireframe = True
         self._show_grid = True
 
+        # Nastavení z preferences (výchozí hodnoty)
+        self._bg_color = (0.18, 0.20, 0.22)
+        self._grid_step = 1.0
+        self._orbit_sensitivity = 0.5
+        self._pan_sensitivity = 0.05
+        self._zoom_factor_in = 0.9
+        self._zoom_factor_out = 1.1
+
         # Sledování myši
         self._last_mouse: QPoint = QPoint()
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+
+    def apply_preferences(self, vp_settings) -> None:
+        """Aplikuje ViewportSettings z nastavení."""
+        r, g, b = vp_settings.background_color
+        self._bg_color = (r / 255.0, g / 255.0, b / 255.0)
+        self._grid_step = max(0.1, vp_settings.grid_size)
+        self._orbit_sensitivity = max(0.01, vp_settings.orbit_sensitivity * 0.5)
+        self._pan_sensitivity = max(0.001, vp_settings.pan_sensitivity * 0.05)
+        # Aktualizovat GL stav pokud je inicializováno
+        if _GL_AVAILABLE and self.isValid():
+            self.makeCurrent()
+            GL.glClearColor(self._bg_color[0], self._bg_color[1], self._bg_color[2], 1.0)
+            self.doneCurrent()
+        self.update()
 
     def set_scene(self, scene: Scene) -> None:
         self._scene = scene
@@ -65,7 +87,7 @@ class Viewport3D(QOpenGLWidget):
     def initializeGL(self) -> None:
         if not _GL_AVAILABLE:
             return
-        GL.glClearColor(0.18, 0.20, 0.22, 1.0)
+        GL.glClearColor(self._bg_color[0], self._bg_color[1], self._bg_color[2], 1.0)
         GL.glEnable(GL.GL_DEPTH_TEST)
         GL.glEnable(GL.GL_LINE_SMOOTH)
         GL.glLineWidth(1.0)
@@ -114,7 +136,9 @@ class Viewport3D(QOpenGLWidget):
         # Kresli meshe
         self._draw_meshes()
 
-    def _draw_grid(self, size: int = 20, step: float = 1.0) -> None:
+    def _draw_grid(self, size: int = 20, step: float | None = None) -> None:
+        if step is None:
+            step = self._grid_step
         GL.glDisable(GL.GL_LIGHTING)
         GL.glColor3f(0.35, 0.35, 0.35)
         GL.glBegin(GL.GL_LINES)
@@ -242,17 +266,17 @@ class Viewport3D(QOpenGLWidget):
         if event.buttons() & Qt.MouseButton.MiddleButton:
             if event.modifiers() & Qt.KeyboardModifier.ShiftModifier:
                 # Pan
-                self._pan_offset[0] += dx * 0.05
-                self._pan_offset[1] -= dy * 0.05
+                self._pan_offset[0] += dx * self._pan_sensitivity
+                self._pan_offset[1] -= dy * self._pan_sensitivity
             else:
                 # Orbit
-                self._orbit_yaw += dx * 0.5
-                self._orbit_pitch += dy * 0.5
+                self._orbit_yaw += dx * self._orbit_sensitivity
+                self._orbit_pitch += dy * self._orbit_sensitivity
                 self._orbit_pitch = max(-90, min(90, self._orbit_pitch))
         elif event.buttons() & Qt.MouseButton.RightButton:
             # Pan (alternative)
-            self._pan_offset[0] += dx * 0.05
-            self._pan_offset[1] -= dy * 0.05
+            self._pan_offset[0] += dx * self._pan_sensitivity
+            self._pan_offset[1] -= dy * self._pan_sensitivity
 
         self._last_mouse = pos
         self.update()
