@@ -4,10 +4,16 @@ Základní algoritmus (BFS hranové rozložení):
   1. Zvol počáteční trojúhelník, polož ho na 2D rovinu.
   2. BFS přes graf sousednosti ploch (v rámci stejného dílu).
   3. Pro každý nový trojúhelník sdílející hranu s již položeným
-     vypočtí 2D pozici odrazem přes sdílenou hranu.
+     zrcadlí nový vrchol přes sdílenou hranu na opačnou stranu
+     od rodičovského trojúhelníku.
 
-Funguje bez zkreslení pro všechny rovinné plochy a dává přijatelný
-výsledek pro rozvinutelné plochy s nízkou křivostí.
+Klíčové invarianty:
+  - Každý 3D vertex může mít v rozložení VÍCE 2D kopií (duplikace
+    na hranicích švů i při rozbalování kolem vrcholů).
+  - Pozice sdílené hrany se bere z rodičovského trojúhelníku
+    (face_2d_map), ne z globální mapy.
+  - Nový vertex se vždy klade na OPAČNOU stranu sdílené hrany
+    od třetího vrcholu rodiče (správné zrcadlení).
 """
 
 from __future__ import annotations
@@ -37,155 +43,174 @@ class UnfoldedPart:
     cut_edges: list[tuple[int, int]] = field(default_factory=list)
 
 
-def _lay_first_triangle(
-    mesh: MeshData, face_idx: int
-) -> tuple[NDArray[np.float64], dict[int, int]]:
-    """Položí první trojúhelník do počátku. Vrací (verts_2d, 3d→2d mapa)."""
-    tri = mesh.faces[face_idx]
-    p0 = mesh.vertices[tri[0]]
-    p1 = mesh.vertices[tri[1]]
-    p2 = mesh.vertices[tri[2]]
-
-    # edge lengths
-    d01 = float(np.linalg.norm(p1 - p0))
-    d02 = float(np.linalg.norm(p2 - p0))
-    d12 = float(np.linalg.norm(p2 - p1))
-
-    # place v0 at origin, v1 on +X
-    v0 = np.array([0.0, 0.0])
-    v1 = np.array([d01, 0.0])
-
-    # v2 by cosine rule
-    cos_a = (d01**2 + d02**2 - d12**2) / (2 * d01 * d02 + 1e-15)
-    cos_a = float(np.clip(cos_a, -1.0, 1.0))
-    sin_a = float(np.sqrt(max(0.0, 1.0 - cos_a**2)))
-    v2 = np.array([d02 * cos_a, d02 * sin_a])
-
-    verts_2d = np.array([v0, v1, v2], dtype=np.float64)
-    idx_map = {int(tri[0]): 0, int(tri[1]): 1, int(tri[2]): 2}
-    return verts_2d, idx_map
-
-
-def _place_triangle(
-    mesh: MeshData,
-    face_idx: int,
-    shared_3d: tuple[int, int],
-    verts_2d: NDArray[np.float64],
-    idx_map: dict[int, int],
-) -> tuple[NDArray[np.float64], dict[int, int]]:
-    """Položí nový trojúhelník sousedicí s již položeným přes sdílenou hranu."""
-    tri = mesh.faces[face_idx]
-    tri_list = [int(tri[0]), int(tri[1]), int(tri[2])]
-
-    # identify the "new" vertex (not on the shared edge)
-    new_3d = [v for v in tri_list if v not in shared_3d][0]
-
-    a_3d, b_3d = shared_3d
-    a_2d = verts_2d[idx_map[a_3d]]
-    b_2d = verts_2d[idx_map[b_3d]]
-
-    p_new = mesh.vertices[new_3d]
-    p_a = mesh.vertices[a_3d]
-    p_b = mesh.vertices[b_3d]
-
-    da = float(np.linalg.norm(p_new - p_a))
-    db = float(np.linalg.norm(p_new - p_b))
-    d_ab = float(np.linalg.norm(b_2d - a_2d))
-
-    # angle at A between edge AB and edge A→new
-    cos_a = (d_ab**2 + da**2 - db**2) / (2 * d_ab * da + 1e-15)
-    cos_a = float(np.clip(cos_a, -1.0, 1.0))
-    sin_a = float(np.sqrt(max(0.0, 1.0 - cos_a**2)))
-
-    # direction A→B in 2-D
-    ab = b_2d - a_2d
-    ab_norm = ab / (np.linalg.norm(ab) + 1e-15)
-    perp = np.array([-ab_norm[1], ab_norm[0]])
-
-    # place on the side opposite to any already-placed vertex (prefer left)
-    new_2d = a_2d + da * (cos_a * ab_norm + sin_a * perp)
-
-    new_idx = len(verts_2d)
-    verts_2d = np.vstack([verts_2d, new_2d.reshape(1, 2)])
-    idx_map[new_3d] = new_idx
-
-    return verts_2d, idx_map
-
-
 def unfold_part(
     mesh: MeshData,
     face_indices: list[int],
     seam_edges: set[tuple[int, int]] | None = None,
     part_id: int = 0,
 ) -> UnfoldedPart:
-    """Unfold a connected set of faces onto a 2-D plane (BFS edge-unfolding).
+    """Rozloží spojený díl do 2D roviny BFS hranovým rozložením.
+
+    Každý trojúhelník se zrcadlí přes sdílenou hranu na opačnou
+    stranu od rodičovského trojúhelníku.  Každý face si pamatuje
+    vlastní mapování 3D→2D vertexů (``face_2d_map``), čímž se
+    správně řeší duplikace vrcholů.
 
     Parameters
     ----------
     mesh
-        The full mesh (vertices shared across parts).
+        Celý mesh (vertexy sdíleny přes díly).
     face_indices
-        Indices of faces belonging to this part (connected component).
+        Indexy faces patřící tomuto dílu (spojená komponenta).
     seam_edges
-        Set of seam edges (sorted tuples); edges NOT in this set are fold-lines.
+        Set švových hran (setříděné tuple); hrany MIMO tuto množinu
+        jsou přehybové čáry.
     part_id
-        Identifier for this part.
+        Identifikátor dílu.
     """
     if seam_edges is None:
         seam_edges = set()
 
     face_set = set(face_indices)
 
-    # build local adjacency (within this part, non-seam edges)
-    edge_local: dict[tuple[int, int], list[int]] = {}
+    # ── lokální sousednost (v rámci dílu) ─────────────────────────
+    edge_faces: dict[tuple[int, int], list[int]] = {}
     for fi in face_indices:
         tri = mesh.faces[fi]
         for j in range(3):
             e = tuple(sorted((int(tri[j]), int(tri[(j + 1) % 3]))))
-            edge_local.setdefault(e, []).append(fi)
+            edge_faces.setdefault(e, []).append(fi)
 
-    # start with first face
-    start = face_indices[0]
-    verts_2d, idx_map = _lay_first_triangle(mesh, start)
-
-    visited = {start}
-    queue: deque[int] = deque([start])
-
+    # ── výstupní seznamy ──────────────────────────────────────────
+    verts_2d_list: list[NDArray[np.float64]] = []   # (2,) pole
+    vert_map_3d_list: list[int] = []
     fold_edges: list[tuple[int, int]] = []
     cut_edges: list[tuple[int, int]] = []
 
-    while queue:
-        fi = queue.popleft()
+    # face_2d_map[fi] = {3d_vidx: 2d_vidx}  — pro každý face
+    face_2d_map: dict[int, dict[int, int]] = {}
+
+    def _alloc_vertex(pos_2d: NDArray[np.float64], v3d: int) -> int:
+        idx = len(verts_2d_list)
+        verts_2d_list.append(pos_2d)
+        vert_map_3d_list.append(v3d)
+        return idx
+
+    # ── položení prvního trojúhelníku ─────────────────────────────
+    start = face_indices[0]
+    tri0 = mesh.faces[start]
+    v3 = [int(tri0[0]), int(tri0[1]), int(tri0[2])]
+    p0, p1, p2 = mesh.vertices[v3[0]], mesh.vertices[v3[1]], mesh.vertices[v3[2]]
+
+    d01 = float(np.linalg.norm(p1 - p0))
+    d02 = float(np.linalg.norm(p2 - p0))
+    d12 = float(np.linalg.norm(p2 - p1))
+
+    pos_a = np.array([0.0, 0.0])
+    pos_b = np.array([d01, 0.0])
+    cos_a = np.clip((d01**2 + d02**2 - d12**2) / (2.0 * d01 * d02 + 1e-15), -1.0, 1.0)
+    sin_a = float(np.sqrt(max(0.0, 1.0 - float(cos_a) ** 2)))
+    pos_c = np.array([d02 * float(cos_a), d02 * sin_a])
+
+    i_a = _alloc_vertex(pos_a, v3[0])
+    i_b = _alloc_vertex(pos_b, v3[1])
+    i_c = _alloc_vertex(pos_c, v3[2])
+    face_2d_map[start] = {v3[0]: i_a, v3[1]: i_b, v3[2]: i_c}
+
+    # ── BFS fronta: (face_to_visit, parent_face, shared_edge_3d) ──
+    visited: set[int] = {start}
+    queue: deque[tuple[int, int, tuple[int, int]]] = deque()
+
+    def _enqueue_neighbors(fi: int) -> None:
         tri = mesh.faces[fi]
         for j in range(3):
             e = tuple(sorted((int(tri[j]), int(tri[(j + 1) % 3]))))
             if e in seam_edges:
-                # this is a cut edge
-                if e[0] in idx_map and e[1] in idx_map:
-                    cut_edges.append((idx_map[e[0]], idx_map[e[1]]))
+                # šev → cut edge
+                local = face_2d_map[fi]
+                if e[0] in local and e[1] in local:
+                    cut_edges.append((local[e[0]], local[e[1]]))
                 continue
-            for neighbor in edge_local.get(e, []):
-                if neighbor in visited or neighbor not in face_set:
+            for nb in edge_faces.get(e, []):
+                if nb in visited or nb not in face_set:
                     continue
-                visited.add(neighbor)
-                # place the neighbor
-                verts_2d, idx_map = _place_triangle(
-                    mesh, neighbor, (e[0], e[1]), verts_2d, idx_map
-                )
-                fold_edges.append((idx_map[e[0]], idx_map[e[1]]))
-                queue.append(neighbor)
+                visited.add(nb)
+                queue.append((nb, fi, e))
 
-    # build face array in 2-D indices
+    _enqueue_neighbors(start)
+
+    # ── BFS ───────────────────────────────────────────────────────
+    while queue:
+        fi, parent_fi, shared_3d = queue.popleft()
+        tri = mesh.faces[fi]
+        tri_list = [int(tri[0]), int(tri[1]), int(tri[2])]
+
+        a_3d, b_3d = shared_3d
+        new_3d = [v for v in tri_list if v not in shared_3d][0]
+
+        # 2D pozice sdílené hrany Z RODIČE
+        parent_map = face_2d_map[parent_fi]
+        a_2d_idx = parent_map[a_3d]
+        b_2d_idx = parent_map[b_3d]
+        a_2d = verts_2d_list[a_2d_idx]
+        b_2d = verts_2d_list[b_2d_idx]
+
+        # 3D vzdálenosti
+        p_new = mesh.vertices[new_3d]
+        p_a = mesh.vertices[a_3d]
+        p_b = mesh.vertices[b_3d]
+        da = float(np.linalg.norm(p_new - p_a))
+        db = float(np.linalg.norm(p_new - p_b))
+        d_ab = float(np.linalg.norm(b_2d - a_2d))
+
+        # úhel u A mezi AB a A→new  (kosinová věta)
+        cos_ang = np.clip(
+            (d_ab**2 + da**2 - db**2) / (2.0 * d_ab * da + 1e-15),
+            -1.0, 1.0,
+        )
+        sin_ang = float(np.sqrt(max(0.0, 1.0 - float(cos_ang) ** 2)))
+
+        # jednotkový vektor A→B a kolmice
+        ab = b_2d - a_2d
+        ab_norm = ab / (np.linalg.norm(ab) + 1e-15)
+        perp = np.array([-ab_norm[1], ab_norm[0]])
+
+        # Třetí vertex RODIČE — ten leží na jedné straně sdílené hrany.
+        # Nový vertex musí být na OPAČNÉ straně.
+        parent_third_3d = [
+            v for v in [int(mesh.faces[parent_fi][k]) for k in range(3)]
+            if v not in shared_3d
+        ][0]
+        parent_third_2d = verts_2d_list[parent_map[parent_third_3d]]
+        side_parent = float(np.dot(parent_third_2d - a_2d, perp))
+
+        if side_parent >= 0:
+            new_2d = a_2d + da * (float(cos_ang) * ab_norm - sin_ang * perp)
+        else:
+            new_2d = a_2d + da * (float(cos_ang) * ab_norm + sin_ang * perp)
+
+        new_2d_idx = _alloc_vertex(new_2d, new_3d)
+
+        # Mapování pro tento face
+        face_2d_map[fi] = {a_3d: a_2d_idx, b_3d: b_2d_idx, new_3d: new_2d_idx}
+
+        # Fold edge = sdílená hrana (přehyb)
+        fold_edges.append((a_2d_idx, b_2d_idx))
+
+        # Pokračuj BFS
+        _enqueue_neighbors(fi)
+
+    # ── Sestavení výstupních polí ─────────────────────────────────
     faces_2d: list[list[int]] = []
     for fi in face_indices:
+        if fi not in face_2d_map:
+            continue
         tri = mesh.faces[fi]
-        if all(int(v) in idx_map for v in tri):
-            faces_2d.append([idx_map[int(tri[0])], idx_map[int(tri[1])], idx_map[int(tri[2])]])
+        local = face_2d_map[fi]
+        faces_2d.append([local[int(tri[0])], local[int(tri[1])], local[int(tri[2])]])
 
-    vert_map = np.full(len(verts_2d), -1, dtype=np.int32)
-    for v3, v2 in idx_map.items():
-        if v2 < len(vert_map):
-            vert_map[v2] = v3
+    verts_2d = np.array(verts_2d_list, dtype=np.float64) if verts_2d_list else np.empty((0, 2), dtype=np.float64)
+    vert_map = np.array(vert_map_3d_list, dtype=np.int32) if vert_map_3d_list else np.empty(0, dtype=np.int32)
 
     return UnfoldedPart(
         part_id=part_id,
