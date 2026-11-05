@@ -14,7 +14,7 @@ Deleguj cílenou analýzu geometrie a nezávislé review samostatným agentům, 
 
 Pracuj autonomně v rozsahu P0 + P1. Ptej se pouze na skutečný produktový tradeoff nebo chybějící přístup; běžné technické volby a diagnostické iterace rozhoduje tým. Dokončená diagnostická drobnost není celé předání: pokračuj všemi proveditelnými položkami prvního balíku.
 
-Chraň existující práci, staré projekty a historii. Žádný reset, clean, force-push, přepis hlavní větve ani nevratná migrace. Změny připrav v izolované větvi. V tomto prvním mandátu jsou povolené lokální commity; push, PR a merge proveď jen podle výslovné aktuální autorizace vlastníka, nikoli podle oprávnění převzatého z jiného projektu.
+Chraň existující práci, staré projekty a historii. Žádný reset, clean, force-push, přepis hlavní větve ani nevratná migrace. Změny připrav v izolované větvi. Podle výslovné opravy mandátu vlastníkem z 5. listopadu 2026 dokončený ucelený balík v autorizovaném rozsahu po ověření a nezávislé revizi integruj a pushni na `master` bez další rutinní žádosti. Nejprve načti aktuální `origin/master`, použij fast-forward, je-li možný, jinak standardní merge; zachovej vzdálené změny, konflikty a věcné změny výsledku znovu ověř a nezávisle zkontroluj. Po pushi ověř shodu lokálního a vzdáleného SHA. Integrace P0 + P1 nepřijímá kontrakt P2, variantu B ani kompatibilitu; tato produktová brána zůstává samostatná.
 
 Před zahájením produkční implementace P2 mi předlož konkrétní kontrakt, srovnání variant, ověřenou baseline, nálezy a návrh UX. Tohle je jediná plánovaná produktová brána prvního balíku. Než o přijetí požádáš, dokonči všechny nezávislé části P0 + P1 a jejich review. Nezakládej další schvalování stejných rozhodnutí.
 

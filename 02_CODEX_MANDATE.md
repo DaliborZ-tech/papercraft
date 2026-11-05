@@ -174,7 +174,11 @@ Autorizace P0 zahrnuje tento clone/bootstrap. Přístupový problém diagnostiku
 
 Před zápisem ověř pracovní strom. Cizí dirty změny nemaž a nezařazuj do vlastního commitu. Použij izolovanou pracovní větev od aktuálního stavu, např. `revival/p0-p1-contract`, pokud nekoliduje s existující prací. Výchozí větev tohoto projektu je `master`; nekopíruj develop→master pravidla z TestFlow nebo TestMap.
 
-První mandát dovoluje lokální analytické podklady, diagnostické testy/fixtures a oddělené technické spiky. Neautorizuje merge do master, produkční release, přepis historie, placené služby ani produkční implementaci pozdějších etap. Push/PR vychází z konkrétní aktuální autorizace při realizaci. Pokud chybí, předej lokální větev a commity bez zbytečného zastavení ostatní práce.
+První mandát dovoluje analytické podklady, diagnostické testy/fixtures a oddělené technické spiky. **Oprava vlastníkem z 5. listopadu 2026:** dokončený ucelený balík v již autorizovaném produktovém rozsahu musí být po ověření a nezávislé revizi integrován a pushnut na `master`, bez další rutinní žádosti. Tato aktuální autorizace zahrnuje P0 + P1 a budoucí ověřené a nezávisle schválené balíky v jejich autorizovaném rozsahu; nejde o oprávnění převzaté z jiného projektu.
+
+Před integrací ověř čistý stav nebo bezpečně odděl cizí práci, remote a aktuální `origin/master` po fetch. Použij fast-forward, pokud je možný, jinak standardní merge. Zachovej vzdálené změny. Konflikty a věcnou změnu integrovaného výsledku znovu ověř a nech nezávisle zkontrolovat v potřebném rozsahu. Push prováděj bez force a ověř shodu lokálního a vzdáleného SHA. Předání obsahuje vzdálený commit a GitHub odkazy na výstupy. Přepis historie, produkční release, placené služby ani produkční implementace dosud neautorizovaných etap tím povoleny nejsou.
+
+Integrace a push P0 + P1 nejsou přijetím kontraktu P2, varianty B ani navržené kompatibility. `GATE-P2` nadále vyžaduje skutečné samostatné přijetí vlastníkem. Přijetí produktu, technická revize a integrace do `master` se evidují odděleně. Aktivní pracovní instrukce pro další session jsou také v `AGENTS.md`.
 
 V P2 po přijetí kontraktu jsou běžné implementace, opravy, cílené testy, refactoring v daném řezu a review autonomní. PO rozhoduje o významné změně produktu, ztrátě kompatibility, placeném nákladu nebo přijetí reálného omezení. Nemá rozhodovat o metodě triangulace či opakovaně schvalovat bezpečný diagnostický experiment.
 

@@ -63,4 +63,4 @@ Dodatečné explicitní demo požadavky nad číslovanými AC: upozornění na d
 5. Jiný reviewer na konkrétním CODE SHA, uzavřené major/blocker nálezy, relevantní re-review.
 6. Předání projektu, snapshotu/exportu, verzí a tiskových instrukcí. Fyzický výtisk a sestavení v P3 zůstává PO_PENDING, dokud jej člověk skutečně neprovede.
 
-Schválení tohoto konkrétního kontraktu je jediná produktová brána k produkční P2. Push/PR/merge z něj autorizovány nejsou; nadále vyžadují výslovnou aktuální autorizaci. Nejsou třeba další souhlasy s běžnými implementačními metodami v tomto scope.
+Schválení tohoto konkrétního kontraktu je jediná produktová brána k produkční P2 a dosud neproběhlo. Podle výslovné opravy realizačního mandátu z 5. listopadu 2026 se dokončené ucelené balíky v již autorizovaném rozsahu po ověření a nezávislé revizi integrují a pushují na `master` bez další rutinní žádosti; postup je v `AGENTS.md` a §6 mandátu. Integrace P0 + P1 není produktovým přijetím tohoto kontraktu, varianty B ani kompatibility. Nejsou třeba další souhlasy s běžnými implementačními metodami v přijatém scope; produkční release zůstává samostatný.

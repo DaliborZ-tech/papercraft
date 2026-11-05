@@ -526,5 +526,25 @@
   "working_branch": "revival/p0-p1-contract",
   "release_readiness": "NOT_READY: product defects open; P2 and physical acceptance pending",
   "evidence_index": "docs/revival/BASELINE_REPORT.md",
-  "p0_p1_technical_completion": "AGENT_VERIFIED"
+  "p0_p1_technical_completion": "AGENT_VERIFIED",
+  "integration_policy": {
+    "authorized_by": "explicit_owner_instruction_2026-11-05",
+    "target_branch": "master",
+    "push_authorized": true,
+    "scope": "completed_coherent_packages_within_already_authorized_product_scope",
+    "requires": [
+      "appropriate_verification",
+      "independent_review_of_pinned_commit",
+      "closed_material_review_findings",
+      "fetch_and_preserve_origin_master",
+      "reverify_and_independently_review_material_merge_changes",
+      "verify_local_remote_sha_equality_after_push"
+    ],
+    "strategy": "fast_forward_if_possible_otherwise_standard_merge",
+    "force_push_allowed": false,
+    "routine_additional_permission_required": false,
+    "product_acceptance_implied": false,
+    "release_authorized": false,
+    "instructions": "AGENTS.md"
+  }
 }

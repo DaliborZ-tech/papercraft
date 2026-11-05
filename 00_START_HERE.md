@@ -2,6 +2,8 @@
 
 Verze 1.0 · 5. listopadu 2026 · vlastník produktu: Dalibor Zálešák.
 
+Aktuální oprava realizačního mandátu: po ověření a nezávislé revizi dokončený ucelený balík v autorizovaném rozsahu integruj a pushni na `master` bez další rutinní žádosti. Podrobný bezpečný postup je v [AGENTS.md](AGENTS.md) a §6 mandátu. Integrace P0 + P1 není přijetím kontraktu P2; varianta B a kompatibilita zůstávají otevřené.
+
 ## Jak balík použít
 
 Otevři VS Code v adresáři, který má být přímo kořenem projektu, a v něm novou Codex session. **Repozitář si naklonuje agent přímo do tohoto otevřeného adresáře, bez další podsložky `papercraft`.** Přilož celý tento balík nebo jej předem umísti do `docs/revival/brief-v1/`; agent musí zvládnout i takto neprázdný adresář bez ztráty souborů. Vlož prompt z `01_START_PROMPT.md`. Agent musí číst také hlavní mandát, epiky a akceptační matici; krátký prompt je pouze vstupní bod.

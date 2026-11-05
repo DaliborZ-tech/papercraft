@@ -19,6 +19,6 @@ Konkrétní tradeoff: první nový model je dům z rovinných panelů bez děr, 
 
 Plánovací rozsah 24–40 soustředěných člověkodnů včetně review/oprav, s přiznanou nejistotou. Rozpad a podklady v kontraktu; nejde o slíbené datum. Původní213PASS nevylučuje závažné vady: cílených6testsFAIL, 10geometrických reprodukcí, mimo jiné měřítko sample ×1000 a stale rozvin. [Baseline a jak ověřit](BASELINE_REPORT.md), [nálezy](FINDINGS.md), [Windows repro](WINDOWS_REPRO.md).
 
-Jediné požadované produktové rozhodnutí po uzavření revize: **Přijímáte tento P2 kontrakt v1.0 včetně vymezené kompatibility a doporučené varianty B?** Přijetí autorizuje lokální produkční P2 v tomto rozsahu. Neautorizuje push, PR, merge ani release. Fyzickou sestavitelnost přijme člověk až po měřeném výtisku a stavbě v P3; žádný agent ji nyní neprohlašuje za hotovou.
+Jediné požadované produktové rozhodnutí po uzavření revize: **Přijímáte tento P2 kontrakt v1.0 včetně vymezené kompatibility a doporučené varianty B?** Přijetí autorizuje produkční P2 v tomto rozsahu a dosud neproběhlo. Samostatná oprava realizačního mandátu z 5. listopadu 2026 již autorizuje integraci a push dokončených, ověřených a nezávisle schválených balíků v autorizovaném rozsahu na `master` bez další rutinní žádosti. Integrace P0 + P1 tuto produktovou otázku neuzavírá. Produkční release zůstává samostatný. Fyzickou sestavitelnost přijme člověk až po měřeném výtisku a stavbě v P3; žádný agent ji nyní neprohlašuje za hotovou.
 
 Záznam: `PO verdict = PENDING`, `GATE-P2 = NOT_ACCEPTED`, `release = NOT_READY`.
