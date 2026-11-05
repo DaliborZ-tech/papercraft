@@ -1,0 +1,30 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.15, pytest-9.2.0, pluggy-1.7.0
+PySide6 6.12.0 -- Qt runtime 6.12.0 -- Qt compiled 6.12.0
+rootdir: C:\Users\dalib\projects\papercraft
+configfile: pyproject.toml
+plugins: qt-4.5.0
+collected 213 items
+
+tests\test_backend.py .......                                            [  3%]
+tests\test_classifier_enhanced.py .......                                [  6%]
+tests\test_commands.py .........                                         [ 10%]
+tests\test_core_geometry.py .................                            [ 18%]
+tests\test_exporter.py .....                                             [ 21%]
+tests\test_mvp_pipeline.py ......................................        [ 38%]
+tests\test_new_primitives.py ...............                             [ 46%]
+tests\test_node_enhanced.py ...............                              [ 53%]
+tests\test_preferences.py ........                                       [ 56%]
+tests\test_project_enhanced.py ........                                  [ 60%]
+tests\test_project_io.py .....                                           [ 62%]
+tests\test_seam_enhanced.py ...........                                  [ 68%]
+tests\test_seam_graph.py ......                                          [ 70%]
+tests\test_snap.py .............                                         [ 76%]
+tests\test_stable_ids.py ............                                    [ 82%]
+tests\test_tabs.py ......                                                [ 85%]
+tests\test_tabs_enhanced.py ..........                                   [ 90%]
+tests\test_unfolder.py .....                                             [ 92%]
+tests\test_units.py ................                                     [100%]
+
+- generated xml file: C:\Users\dalib\projects\papercraft\docs\revival\evidence\pytest-baseline.xml -
+============================ 213 passed in 40.44s =============================

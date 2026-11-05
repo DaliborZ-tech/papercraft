@@ -1,0 +1,103 @@
+﻿{
+    "workspace":  "C:\\Users\\dalib\\projects\\papercraft",
+    "original_files":  [
+                           {
+                               "sha256":  "2B527B87A8C2C9AB0CA3B4F8ED1B8CF39D90B3C9E2BFF8220F2241366BE71494",
+                               "path":  "00_START_HERE.md"
+                           },
+                           {
+                               "sha256":  "21FCA8F0C078945755B6AD4B3146D64FABE8846D760096C8ECCB28FBCA06AE09",
+                               "path":  "01_START_PROMPT.md"
+                           },
+                           {
+                               "sha256":  "4FB2DAE58BE4B730810D88849B467AFF9A0741C1AE9E2ACBBF5D76F3224D53D2",
+                               "path":  "02_CODEX_MANDATE.md"
+                           },
+                           {
+                               "sha256":  "C077334AF8570D3CBDD82A76AB4928FDC5A4043CF3C99037A4948D3444E878FF",
+                               "path":  "03_EPICS_AND_ROADMAP.md"
+                           },
+                           {
+                               "sha256":  "9D25A1CE9A8EC341D66C463F8A1931A44B709BBD8184C3E0B2AE8750FE73108A",
+                               "path":  "04_ACCEPTANCE_AND_VERIFICATION.md"
+                           },
+                           {
+                               "sha256":  "24A3746B1900A01161754AFCC41D007D0BD8201FBA530B1DF15DC819854DA11F",
+                               "path":  "05_WORK_QUEUE.json"
+                           },
+                           {
+                               "sha256":  "0667E1B103F0702A92571FF4614F9AF79165E4EE419C6AE14E8D674021ADE635",
+                               "path":  "06_SOURCE_MANIFEST.json"
+                           },
+                           {
+                               "sha256":  "F55C61EC9928DF3F0E01EFFA98A759EC4B2D4E44FA3604DD800AD02BE105C71F",
+                               "path":  "07_REVIEW_AND_LIMITS.md"
+                           },
+                           {
+                               "sha256":  "6C9428E8B44804223DFE47CD8B624EC81402EC5097E529CA0570D5F187E5A783",
+                               "path":  "PACKAGE_MANIFEST.json"
+                           }
+                       ],
+    "stage":  "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-bootstrap-55505d1ed9fe4362a2e40b6ade82f3be",
+    "preflight_entries":  150,
+    "collisions":  [
+
+                   ],
+    "base_sha":  "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
+    "after_bootstrap_checks":  [
+                                   {
+                                       "after_sha256":  "2B527B87A8C2C9AB0CA3B4F8ED1B8CF39D90B3C9E2BFF8220F2241366BE71494",
+                                       "path":  "00_START_HERE.md",
+                                       "equal":  true,
+                                       "before_sha256":  "2B527B87A8C2C9AB0CA3B4F8ED1B8CF39D90B3C9E2BFF8220F2241366BE71494"
+                                   },
+                                   {
+                                       "after_sha256":  "21FCA8F0C078945755B6AD4B3146D64FABE8846D760096C8ECCB28FBCA06AE09",
+                                       "path":  "01_START_PROMPT.md",
+                                       "equal":  true,
+                                       "before_sha256":  "21FCA8F0C078945755B6AD4B3146D64FABE8846D760096C8ECCB28FBCA06AE09"
+                                   },
+                                   {
+                                       "after_sha256":  "4FB2DAE58BE4B730810D88849B467AFF9A0741C1AE9E2ACBBF5D76F3224D53D2",
+                                       "path":  "02_CODEX_MANDATE.md",
+                                       "equal":  true,
+                                       "before_sha256":  "4FB2DAE58BE4B730810D88849B467AFF9A0741C1AE9E2ACBBF5D76F3224D53D2"
+                                   },
+                                   {
+                                       "after_sha256":  "C077334AF8570D3CBDD82A76AB4928FDC5A4043CF3C99037A4948D3444E878FF",
+                                       "path":  "03_EPICS_AND_ROADMAP.md",
+                                       "equal":  true,
+                                       "before_sha256":  "C077334AF8570D3CBDD82A76AB4928FDC5A4043CF3C99037A4948D3444E878FF"
+                                   },
+                                   {
+                                       "after_sha256":  "9D25A1CE9A8EC341D66C463F8A1931A44B709BBD8184C3E0B2AE8750FE73108A",
+                                       "path":  "04_ACCEPTANCE_AND_VERIFICATION.md",
+                                       "equal":  true,
+                                       "before_sha256":  "9D25A1CE9A8EC341D66C463F8A1931A44B709BBD8184C3E0B2AE8750FE73108A"
+                                   },
+                                   {
+                                       "after_sha256":  "24A3746B1900A01161754AFCC41D007D0BD8201FBA530B1DF15DC819854DA11F",
+                                       "path":  "05_WORK_QUEUE.json",
+                                       "equal":  true,
+                                       "before_sha256":  "24A3746B1900A01161754AFCC41D007D0BD8201FBA530B1DF15DC819854DA11F"
+                                   },
+                                   {
+                                       "after_sha256":  "0667E1B103F0702A92571FF4614F9AF79165E4EE419C6AE14E8D674021ADE635",
+                                       "path":  "06_SOURCE_MANIFEST.json",
+                                       "equal":  true,
+                                       "before_sha256":  "0667E1B103F0702A92571FF4614F9AF79165E4EE419C6AE14E8D674021ADE635"
+                                   },
+                                   {
+                                       "after_sha256":  "F55C61EC9928DF3F0E01EFFA98A759EC4B2D4E44FA3604DD800AD02BE105C71F",
+                                       "path":  "07_REVIEW_AND_LIMITS.md",
+                                       "equal":  true,
+                                       "before_sha256":  "F55C61EC9928DF3F0E01EFFA98A759EC4B2D4E44FA3604DD800AD02BE105C71F"
+                                   },
+                                   {
+                                       "after_sha256":  "6C9428E8B44804223DFE47CD8B624EC81402EC5097E529CA0570D5F187E5A783",
+                                       "path":  "PACKAGE_MANIFEST.json",
+                                       "equal":  true,
+                                       "before_sha256":  "6C9428E8B44804223DFE47CD8B624EC81402EC5097E529CA0570D5F187E5A783"
+                                   }
+                               ]
+}

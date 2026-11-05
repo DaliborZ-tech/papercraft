@@ -1,0 +1,85 @@
+{
+  "proof_kind": "Windows desktop, QTest actions and native dialog automation",
+  "steps": [
+    {
+      "action": "new_project_wizard",
+      "name": "P0 desktop diagnostic",
+      "units": "mm"
+    },
+    {
+      "action": "add_select_edit",
+      "parameters": {
+        "dx": 100.0,
+        "dy": 60.0,
+        "dz": 40.0
+      },
+      "selected": true
+    },
+    {
+      "action": "native_save",
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\revival\\evidence\\desktop-followup\\desktop-project.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "native_class": "#32770",
+      "title": "Uložit jako"
+    },
+    {
+      "action": "native_open",
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\revival\\evidence\\desktop-followup\\desktop-project.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "native_class": "#32770",
+      "title": "Otevřít projekt"
+    },
+    {
+      "action": "native_export_svg",
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\revival\\evidence\\desktop-followup\\desktop-export.svg",
+      "native_seen": true,
+      "accepted": true,
+      "native_class": "#32770",
+      "title": "Export SVG"
+    },
+    {
+      "action": "message",
+      "title": "Export",
+      "text": "Exportováno do C:/Users/dalib/projects/papercraft/docs/revival/evidence/desktop-followup/desktop-export.svg"
+    },
+    {
+      "action": "native_export_pdf",
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\revival\\evidence\\desktop-followup\\desktop-export.pdf",
+      "native_seen": true,
+      "accepted": true,
+      "native_class": "#32770",
+      "title": "Export PDF"
+    },
+    {
+      "action": "message",
+      "title": "Export",
+      "text": "Exportováno do C:/Users/dalib/projects/papercraft/docs/revival/evidence/desktop-followup/desktop-export.pdf"
+    }
+  ],
+  "exceptions": [],
+  "platform": "windows",
+  "viewport_valid": true,
+  "opengl": {
+    "version": "b'4.6.0 NVIDIA 610.71'",
+    "renderer": "b'NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2'",
+    "vendor": "b'NVIDIA Corporation'"
+  },
+  "saved": true,
+  "reopened": true,
+  "workflow": {
+    "analysis": "Díly: 6 plochých, 0 rozvinutelných, 0 nerozvinutelných\nPřipravenost: 90%",
+    "seams": "Švy: 7 hran → 1 dílů",
+    "unfold": "Rozloženo 1 dílů (strategie: Exact)",
+    "parts": 1
+  },
+  "viewport_click_selection": false,
+  "stale_after_edit": {
+    "cached_parts_same": true,
+    "cached_mesh_same": true,
+    "current_model_dx": 120.0,
+    "mesh_current_x_extent": 120.0,
+    "unfold_label": "Rozloženo 1 dílů (strategie: Exact)"
+  }
+}

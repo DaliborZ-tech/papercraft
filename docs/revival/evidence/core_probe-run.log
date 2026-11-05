@@ -1,0 +1,117 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.15, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Users\dalib\projects\papercraft
+configfile: pyproject.toml
+collected 44 items
+
+tests\test_core_geometry.py .................                            [ 38%]
+tests\test_unfolder.py .....                                             [ 50%]
+tests\test_seam_graph.py ......                                          [ 63%]
+tests\test_units.py ................                                     [100%]
+
+- generated xml file: C:\Users\dalib\projects\papercraft\docs\revival\evidence\core-only.xml -
+============================= 44 passed in 0.28s ==============================
+============================= test session starts =============================
+platform win32 -- Python 3.12.15, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Users\dalib\projects\papercraft
+configfile: pyproject.toml
+collected 6 items
+
+tools\revival\test_diagnostic_contracts.py FFFFFF                        [100%]
+
+================================== FAILURES ===================================
+______________ test_parent_transform_applies_to_export_geometry _______________
+
+    def test_parent_transform_applies_to_export_geometry():
+        scene = Project().scene
+        parent = scene.add_node('parent', NodeType.GROUP)
+        parent.transform.position[:] = [100, 0, 0]
+        scene.add_node('child', NodeType.PRIMITIVE_BOX, parent=parent, dx=10, dy=10, dz=10)
+        scene.rebuild_meshes()
+>       assert np.mean(scene.collect_visible_meshes(True)[0].vertices[:,0]) == 100
+E       assert np.float64(0.0) == 100
+E        +  where np.float64(0.0) = <function mean at 0x000001BAFE0F61B0>(array([-5.,  5.,  5., -5., -5.,  5.,  5., -5.]))
+E        +    where <function mean at 0x000001BAFE0F61B0> = np.mean
+
+tools\revival\test_diagnostic_contracts.py:25: AssertionError
+_________________ test_future_schema_is_rejected_or_preserved _________________
+
+    def test_future_schema_is_rejected_or_preserved():
+        # Either explicit refusal or full retention is acceptable; current writer silently downgrades.
+        data = {'version': '999.0', 'future_payload': {'must_preserve': True}}
+        try:
+            project = Project.from_dict(data)
+        except ValueError:
+            return
+>       assert project.to_dict()['version'] == '999.0'
+E       AssertionError: assert '0.2.0' == '999.0'
+E         
+E         - 999.0
+E         + 0.2.0
+
+tools\revival\test_diagnostic_contracts.py:35: AssertionError
+___________________ test_open_panel_has_four_boundary_cuts ____________________
+
+    def test_open_panel_has_four_boundary_cuts():
+        mesh = MeshData(np.array([[0.,0,0],[20,0,0],[20,10,0],[0,10,0]]), np.array([[0,1,2],[0,2,3]]))
+        result = unfold_part(mesh,[0,1])
+>       assert len(result.cut_edges) == 4
+E       assert 0 == 4
+E        +  where 0 = len([])
+E        +    where [] = UnfoldedPart(part_id=0, vertices_2d=array([[ 0.00000000e+00,  0.00000000e+00],\n       [ 2.00000000e+01,  0.00000000e+0...([0, 1, 2, 3], dtype=int32), fold_edges=[(0, 2)], cut_edges=[], cut_edge_3d_map={}, fold_dihedral_angles={(0, 2): 0.0}).cut_edges
+
+tools\revival\test_diagnostic_contracts.py:42: AssertionError
+_________________ test_cone_band_joining_side_is_slant_height _________________
+
+    def test_cone_band_joining_side_is_slant_height():
+        polygon = generate_rings(np.array([[10.,0.],[20.,math.sqrt(800.)]]),num_rings=1)[0]
+>       assert abs(np.linalg.norm(polygon[2]-polygon[1])-30.) <= 0.01
+E       AssertionError: assert np.float64(13.439157912060594) <= 0.01
+E        +  where np.float64(13.439157912060594) = abs((np.float64(43.439157912060594) - 30.0))
+E        +    where np.float64(43.439157912060594) = <function norm at 0x000001BAFE1C3470>((array([94.24777961, 30.        ]) - array([125.66370614,   0.        ])))
+E        +      where <function norm at 0x000001BAFE1C3470> = <module 'numpy.linalg' from 'C:\\Users\\dalib\\projects\\papercraft\\.venv\\Lib\\site-packages\\numpy\\linalg\\__init__.py'>.norm
+E        +        where <module 'numpy.linalg' from 'C:\\Users\\dalib\\projects\\papercraft\\.venv\\Lib\\site-packages\\numpy\\linalg\\__init__.py'> = np.linalg
+
+tools\revival\test_diagnostic_contracts.py:47: AssertionError
+_______________ test_two_separate_parts_have_one_tab_per_joint ________________
+
+    def test_two_separate_parts_have_one_tab_per_joint():
+        vertices = np.array([[0.,0.],[20.,0.],[20.,10.],[0.,10.]])
+        first = generate_tabs_for_part(vertices,[(0,1)],{(0,1):7},TabSettings())
+        second = generate_tabs_for_part(vertices,[(0,1)],{(0,1):7},TabSettings())
+>       assert len(first)+len(second) == 1
+E       assert (1 + 1) == 1
+E        +  where 1 = len([Tab(edge_2d=(array([0., 0.]), array([20.,  0.])), polygon=array([[ 0.,  0.],\n       [20.,  0.],\n       [16.,  5.],\n       [ 4.,  5.]]), match_id=7, side=<TabSide.OUTER: 1>)])
+E        +  and   1 = len([Tab(edge_2d=(array([0., 0.]), array([20.,  0.])), polygon=array([[ 0.,  0.],\n       [20.,  0.],\n       [16.,  5.],\n       [ 4.,  5.]]), match_id=7, side=<TabSide.OUTER: 1>)])
+
+tools\revival\test_diagnostic_contracts.py:54: AssertionError
+___________________ test_svg_honors_rotation_and_landscape ____________________
+
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-991/test_svg_honors_rotation_and_l0')
+
+    def test_svg_honors_rotation_and_landscape(tmp_path):
+        from archpapercraft.exporter.svg_export import export_svg
+        from archpapercraft.layout_packer.packer import LayoutResult, Orientation, PageSettings, PartRotation, PlacedPart
+        from archpapercraft.unfolder.exact_unfold import UnfoldedPart
+        vertices = np.array([[0.,0.],[100.,0.],[100.,40.],[0.,40.]])
+        part = UnfoldedPart(0,vertices,np.array([[0,1,2],[0,2,3]]),np.arange(4),cut_edges=[(0,1),(1,2),(2,3),(3,0)])
+        layout = LayoutResult(1,[PlacedPart(0,0,np.zeros(2),rotation=PartRotation.DEG_90)])
+        target = tmp_path/'page.svg'
+        export_svg(target,[part],layout,PageSettings(orientation=Orientation.LANDSCAPE))
+        root = ET.parse(target).getroot()
+>       assert root.attrib['width'] == '297.0mm'
+E       AssertionError: assert '210.0mm' == '297.0mm'
+E         
+E         - 297.0mm
+E         + 210.0mm
+
+tools\revival\test_diagnostic_contracts.py:67: AssertionError
+- generated xml file: C:\Users\dalib\projects\papercraft\docs\revival\evidence\diagnostic-contracts.xml -
+=========================== short test summary info ===========================
+FAILED tools/revival/test_diagnostic_contracts.py::test_parent_transform_applies_to_export_geometry
+FAILED tools/revival/test_diagnostic_contracts.py::test_future_schema_is_rejected_or_preserved
+FAILED tools/revival/test_diagnostic_contracts.py::test_open_panel_has_four_boundary_cuts
+FAILED tools/revival/test_diagnostic_contracts.py::test_cone_band_joining_side_is_slant_height
+FAILED tools/revival/test_diagnostic_contracts.py::test_two_separate_parts_have_one_tab_per_joint
+FAILED tools/revival/test_diagnostic_contracts.py::test_svg_honors_rotation_and_landscape
+============================== 6 failed in 0.16s ==============================

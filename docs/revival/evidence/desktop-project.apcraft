@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "settings": {
+    "units": "mm",
+    "scale": "1:100",
+    "paper": "A4",
+    "paper_margin_mm": 10.0,
+    "paper_bleed_mm": 0.0,
+    "paper_grammage": 160,
+    "name": "P0 desktop diagnostic",
+    "_internal_unit": "mm"
+  },
+  "scene": [
+    {
+      "name": "Box",
+      "type": "PRIMITIVE_BOX",
+      "id": "da6938ce396e",
+      "transform": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "parameters": {
+        "dx": 100.0,
+        "dy": 60.0,
+        "dz": 40.0
+      },
+      "children": []
+    }
+  ]
+}

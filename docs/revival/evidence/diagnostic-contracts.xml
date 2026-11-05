@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="6" time="0.157" timestamp="2026-11-05T20:10:57.251093+01:00" hostname="Dalibor"><testcase classname="tools.revival.test_diagnostic_contracts" name="test_parent_transform_applies_to_export_geometry" time="0.001"><failure message="assert np.float64(0.0) == 100&#10; +  where np.float64(0.0) = &lt;function mean at 0x000001BAFE0F61B0&gt;(array([-5.,  5.,  5., -5., -5.,  5.,  5., -5.]))&#10; +    where &lt;function mean at 0x000001BAFE0F61B0&gt; = np.mean">def test_parent_transform_applies_to_export_geometry():
+        scene = Project().scene
+        parent = scene.add_node('parent', NodeType.GROUP)
+        parent.transform.position[:] = [100, 0, 0]
+        scene.add_node('child', NodeType.PRIMITIVE_BOX, parent=parent, dx=10, dy=10, dz=10)
+        scene.rebuild_meshes()
+&gt;       assert np.mean(scene.collect_visible_meshes(True)[0].vertices[:,0]) == 100
+E       assert np.float64(0.0) == 100
+E        +  where np.float64(0.0) = &lt;function mean at 0x000001BAFE0F61B0&gt;(array([-5.,  5.,  5., -5., -5.,  5.,  5., -5.]))
+E        +    where &lt;function mean at 0x000001BAFE0F61B0&gt; = np.mean
+
+tools\revival\test_diagnostic_contracts.py:25: AssertionError</failure></testcase><testcase classname="tools.revival.test_diagnostic_contracts" name="test_future_schema_is_rejected_or_preserved" time="0.001"><failure message="AssertionError: assert '0.2.0' == '999.0'&#10;  &#10;  - 999.0&#10;  + 0.2.0">def test_future_schema_is_rejected_or_preserved():
+        # Either explicit refusal or full retention is acceptable; current writer silently downgrades.
+        data = {'version': '999.0', 'future_payload': {'must_preserve': True}}
+        try:
+            project = Project.from_dict(data)
+        except ValueError:
+            return
+&gt;       assert project.to_dict()['version'] == '999.0'
+E       AssertionError: assert '0.2.0' == '999.0'
+E         
+E         - 999.0
+E         + 0.2.0
+
+tools\revival\test_diagnostic_contracts.py:35: AssertionError</failure></testcase><testcase classname="tools.revival.test_diagnostic_contracts" name="test_open_panel_has_four_boundary_cuts" time="0.001"><failure message="assert 0 == 4&#10; +  where 0 = len([])&#10; +    where [] = UnfoldedPart(part_id=0, vertices_2d=array([[ 0.00000000e+00,  0.00000000e+00],\n       [ 2.00000000e+01,  0.00000000e+0...([0, 1, 2, 3], dtype=int32), fold_edges=[(0, 2)], cut_edges=[], cut_edge_3d_map={}, fold_dihedral_angles={(0, 2): 0.0}).cut_edges">def test_open_panel_has_four_boundary_cuts():
+        mesh = MeshData(np.array([[0.,0,0],[20,0,0],[20,10,0],[0,10,0]]), np.array([[0,1,2],[0,2,3]]))
+        result = unfold_part(mesh,[0,1])
+&gt;       assert len(result.cut_edges) == 4
+E       assert 0 == 4
+E        +  where 0 = len([])
+E        +    where [] = UnfoldedPart(part_id=0, vertices_2d=array([[ 0.00000000e+00,  0.00000000e+00],\n       [ 2.00000000e+01,  0.00000000e+0...([0, 1, 2, 3], dtype=int32), fold_edges=[(0, 2)], cut_edges=[], cut_edge_3d_map={}, fold_dihedral_angles={(0, 2): 0.0}).cut_edges
+
+tools\revival\test_diagnostic_contracts.py:42: AssertionError</failure></testcase><testcase classname="tools.revival.test_diagnostic_contracts" name="test_cone_band_joining_side_is_slant_height" time="0.001"><failure message="AssertionError: assert np.float64(13.439157912060594) &lt;= 0.01&#10; +  where np.float64(13.439157912060594) = abs((np.float64(43.439157912060594) - 30.0))&#10; +    where np.float64(43.439157912060594) = &lt;function norm at 0x000001BAFE1C3470&gt;((array([94.24777961, 30.        ]) - array([125.66370614,   0.        ])))&#10; +      where &lt;function norm at 0x000001BAFE1C3470&gt; = &lt;module 'numpy.linalg' from 'C:\\Users\\dalib\\projects\\papercraft\\.venv\\Lib\\site-packages\\numpy\\linalg\\__init__.py'&gt;.norm&#10;[+1 more line; full report in element text]">def test_cone_band_joining_side_is_slant_height():
+        polygon = generate_rings(np.array([[10.,0.],[20.,math.sqrt(800.)]]),num_rings=1)[0]
+&gt;       assert abs(np.linalg.norm(polygon[2]-polygon[1])-30.) &lt;= 0.01
+E       AssertionError: assert np.float64(13.439157912060594) &lt;= 0.01
+E        +  where np.float64(13.439157912060594) = abs((np.float64(43.439157912060594) - 30.0))
+E        +    where np.float64(43.439157912060594) = &lt;function norm at 0x000001BAFE1C3470&gt;((array([94.24777961, 30.        ]) - array([125.66370614,   0.        ])))
+E        +      where &lt;function norm at 0x000001BAFE1C3470&gt; = &lt;module 'numpy.linalg' from 'C:\\Users\\dalib\\projects\\papercraft\\.venv\\Lib\\site-packages\\numpy\\linalg\\__init__.py'&gt;.norm
+E        +        where &lt;module 'numpy.linalg' from 'C:\\Users\\dalib\\projects\\papercraft\\.venv\\Lib\\site-packages\\numpy\\linalg\\__init__.py'&gt; = np.linalg
+
+tools\revival\test_diagnostic_contracts.py:47: AssertionError</failure></testcase><testcase classname="tools.revival.test_diagnostic_contracts" name="test_two_separate_parts_have_one_tab_per_joint" time="0.001"><failure message="assert (1 + 1) == 1&#10; +  where 1 = len([Tab(edge_2d=(array([0., 0.]), array([20.,  0.])), polygon=array([[ 0.,  0.],\n       [20.,  0.],\n       [16.,  5.],\n       [ 4.,  5.]]), match_id=7, side=&lt;TabSide.OUTER: 1&gt;)])&#10; +  and   1 = len([Tab(edge_2d=(array([0., 0.]), array([20.,  0.])), polygon=array([[ 0.,  0.],\n       [20.,  0.],\n       [16.,  5.],\n       [ 4.,  5.]]), match_id=7, side=&lt;TabSide.OUTER: 1&gt;)])">def test_two_separate_parts_have_one_tab_per_joint():
+        vertices = np.array([[0.,0.],[20.,0.],[20.,10.],[0.,10.]])
+        first = generate_tabs_for_part(vertices,[(0,1)],{(0,1):7},TabSettings())
+        second = generate_tabs_for_part(vertices,[(0,1)],{(0,1):7},TabSettings())
+&gt;       assert len(first)+len(second) == 1
+E       assert (1 + 1) == 1
+E        +  where 1 = len([Tab(edge_2d=(array([0., 0.]), array([20.,  0.])), polygon=array([[ 0.,  0.],\n       [20.,  0.],\n       [16.,  5.],\n       [ 4.,  5.]]), match_id=7, side=&lt;TabSide.OUTER: 1&gt;)])
+E        +  and   1 = len([Tab(edge_2d=(array([0., 0.]), array([20.,  0.])), polygon=array([[ 0.,  0.],\n       [20.,  0.],\n       [16.,  5.],\n       [ 4.,  5.]]), match_id=7, side=&lt;TabSide.OUTER: 1&gt;)])
+
+tools\revival\test_diagnostic_contracts.py:54: AssertionError</failure></testcase><testcase classname="tools.revival.test_diagnostic_contracts" name="test_svg_honors_rotation_and_landscape" time="0.045"><failure message="AssertionError: assert '210.0mm' == '297.0mm'&#10;  &#10;  - 297.0mm&#10;  + 210.0mm">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-991/test_svg_honors_rotation_and_l0')
+
+    def test_svg_honors_rotation_and_landscape(tmp_path):
+        from archpapercraft.exporter.svg_export import export_svg
+        from archpapercraft.layout_packer.packer import LayoutResult, Orientation, PageSettings, PartRotation, PlacedPart
+        from archpapercraft.unfolder.exact_unfold import UnfoldedPart
+        vertices = np.array([[0.,0.],[100.,0.],[100.,40.],[0.,40.]])
+        part = UnfoldedPart(0,vertices,np.array([[0,1,2],[0,2,3]]),np.arange(4),cut_edges=[(0,1),(1,2),(2,3),(3,0)])
+        layout = LayoutResult(1,[PlacedPart(0,0,np.zeros(2),rotation=PartRotation.DEG_90)])
+        target = tmp_path/'page.svg'
+        export_svg(target,[part],layout,PageSettings(orientation=Orientation.LANDSCAPE))
+        root = ET.parse(target).getroot()
+&gt;       assert root.attrib['width'] == '297.0mm'
+E       AssertionError: assert '210.0mm' == '297.0mm'
+E         
+E         - 297.0mm
+E         + 210.0mm
+
+tools\revival\test_diagnostic_contracts.py:67: AssertionError</failure></testcase></testsuite></testsuites>

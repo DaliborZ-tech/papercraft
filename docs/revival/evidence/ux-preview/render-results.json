@@ -1,0 +1,26 @@
+[
+  {
+    "state": "empty",
+    "screenshot_saved": true
+  },
+  {
+    "state": "house",
+    "screenshot_saved": true
+  },
+  {
+    "state": "joint",
+    "screenshot_saved": true
+  },
+  {
+    "state": "stale",
+    "screenshot_saved": true
+  },
+  {
+    "state": "collision",
+    "screenshot_saved": true
+  },
+  {
+    "state": "export",
+    "screenshot_saved": true
+  }
+]
