@@ -23,7 +23,9 @@
       "report": "docs/revival/REVIEW_REPORT.md",
       "open_blocker_major": 0
     },
-    "accepted_by_owner": false
+    "accepted_by_owner": false,
+    "contract_version": "1.1",
+    "contract_addendum": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md"
   },
   "rules": [
     "Počáteční queue není důkaz implementace.",
@@ -323,7 +325,8 @@
       },
       "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "paper_frame_schema_contract": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md"
     },
     {
       "id": "PC-007",
@@ -371,7 +374,8 @@
       },
       "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "join_preserves_receiving_part_anchor": true
     },
     {
       "id": "PC-008",
@@ -423,7 +427,41 @@
       },
       "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "mixed_part_layout_contract": {
+        "document": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+        "anchor": "persisted_root_surface_semantic_vertex_and_oriented_axis_edge",
+        "placement_reference": "anchor_not_bounding_box",
+        "required_fixture": "joined_wall_roof_part_wall_root_rotation_30deg_page_2",
+        "roof_change_model_mm": [
+          3000,
+          3500
+        ],
+        "must_preserve": [
+          "all_page_coordinates_of_unchanged_root_wall",
+          "part_id_with_unambiguous_continuity",
+          "page_id",
+          "anchor_frame",
+          "placement",
+          "position_lock",
+          "rotation_lock"
+        ],
+        "invalidate": "entire_mixed_part_until_validated_recompute",
+        "unresolved_anchor": "block_complete_export_no_centroid_or_index_fallback",
+        "required_cases": [
+          "separate_parts",
+          "mixed_part",
+          "triangle_reindexing",
+          "changed_tab_envelope",
+          "new_collision_without_repacking",
+          "save_reopen",
+          "undo_redo",
+          "split_join_lineage",
+          "missing_anchor",
+          "dependency_affected_panel"
+        ],
+        "verification_status": "NOT_RUN"
+      }
     },
     {
       "id": "PC-009",
@@ -468,7 +506,12 @@
       },
       "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "mixed_part_export_check": {
+        "requires": "PC-008 mixed fixture",
+        "verify": "same anchored wall coordinates and updated roof geometry in SVG/PDF",
+        "status": "NOT_RUN"
+      }
     },
     {
       "id": "PC-010",
@@ -546,5 +589,15 @@
     "product_acceptance_implied": false,
     "release_authorized": false,
     "instructions": "AGENTS.md"
+  },
+  "estimate_policy": {
+    "unit": "person_days",
+    "working_range": [
+      24,
+      40
+    ],
+    "agent_runtime_estimate": false,
+    "must_reestimate_after": "PC-006",
+    "basis": "actual_implementation_and_verification_results"
   }
 }

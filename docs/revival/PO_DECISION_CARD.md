@@ -4,7 +4,7 @@ P0/P1 přináší skutečně spuštěnou a proměřenou baseline, diagnostické 
 
 Nezávislé review: **APPROVED_IN_SCOPE**, CODE `5b01bb26e6b4c3da8d75afdca19cad5d6b43d576`. Dva drobné nálezy opraveny a uzavřeny, žádný zásadní otevřený nález v P0/P1. Všechny dostupné nezávislé části prvního balíku jsou technicky dokončené.
 
-**Doporučení:** přijmout variantu B a [P2_IMPLEMENTATION_CONTRACT v1.0](P2_IMPLEMENTATION_CONTRACT.md): zachovat Python/PySide6 a nahradit geometricko-papírovou pipeline parametrickými panely a explicitními spoji. [Srovnání A/B/C](ARCHITECTURE_DECISION.md), [UX návrh](UX_CONTRACT.md) a [šest klikacích stavů](ux-prototype.html).
+**Doporučení:** přijmout variantu B a [P2_IMPLEMENTATION_CONTRACT v1.1](P2_IMPLEMENTATION_CONTRACT.md): zachovat Python/PySide6 a nahradit geometricko-papírovou pipeline parametrickými panely a explicitními spoji. Verze 1.1 na žádost vlastníka stanovuje [kotvu společného dílu stěna–střecha](MIXED_PART_LAYOUT_CONTRACT.md): zachovat body ukotvené stěny, invalidovat celý změněný díl a nevydávat pohyb závislých ploch za zachovaný stav. [Srovnání A/B/C](ARCHITECTURE_DECISION.md), [UX návrh](UX_CONTRACT.md) a [šest klikacích stavů](ux-prototype.html).
 
 Co P2 dodá:
 
@@ -17,8 +17,8 @@ Co P2 dodá:
 
 Konkrétní tradeoff: první nový model je dům z rovinných panelů bez děr, ne obecný CAD. Starý sample s bání/gotikou se zachová v odděleném read-only legacy pohledu; úplná migrace těchto typů není slíbena v P2. Nejasná data se nesmějí tiše přepsat. Válce/kužely/báně, okna/ostění, materiálové kompenzace, grafika a návod zůstávají v roadmapě všech16epic. Automatický packing a dlaždice nejsou nutné pro první ruční editor.
 
-Plánovací rozsah 24–40 soustředěných člověkodnů včetně review/oprav, s přiznanou nejistotou. Rozpad a podklady v kontraktu; nejde o slíbené datum. Původní213PASS nevylučuje závažné vady: cílených6testsFAIL, 10geometrických reprodukcí, mimo jiné měřítko sample ×1000 a stale rozvin. [Baseline a jak ověřit](BASELINE_REPORT.md), [nálezy](FINDINGS.md), [Windows repro](WINDOWS_REPRO.md).
+Plánovací rozsah 24–40 soustředěných člověkodnů včetně review/oprav, s přiznanou nejistotou. Je to pracovní odhad lidské pracnosti, nikoli doba běhu agentů; po PC-006 se přepočítá podle skutečných výsledků. Rozpad a podklady v kontraktu; nejde o slíbené datum. Původní213PASS nevylučuje závažné vady: cílených6testsFAIL, 10geometrických reprodukcí, mimo jiné měřítko sample ×1000 a stale rozvin. [Baseline a jak ověřit](BASELINE_REPORT.md), [nálezy](FINDINGS.md), [Windows repro](WINDOWS_REPRO.md).
 
-Jediné požadované produktové rozhodnutí po uzavření revize: **Přijímáte tento P2 kontrakt v1.0 včetně vymezené kompatibility a doporučené varianty B?** Přijetí autorizuje produkční P2 v tomto rozsahu a dosud neproběhlo. Samostatná oprava realizačního mandátu z 5. listopadu 2026 již autorizuje integraci a push dokončených, ověřených a nezávisle schválených balíků v autorizovaném rozsahu na `master` bez další rutinní žádosti. Integrace P0 + P1 tuto produktovou otázku neuzavírá. Produkční release zůstává samostatný. Fyzickou sestavitelnost přijme člověk až po měřeném výtisku a stavbě v P3; žádný agent ji nyní neprohlašuje za hotovou.
+Jediné požadované produktové rozhodnutí po uzavření revize: **Přijímáte tento P2 kontrakt v1.1 včetně vymezené kompatibility a doporučené varianty B?** Přijetí autorizuje produkční P2 v tomto rozsahu a dosud neproběhlo. Samostatná oprava realizačního mandátu z 5. listopadu 2026 již autorizuje integraci a push dokončených, ověřených a nezávisle schválených balíků v autorizovaném rozsahu na `master` bez další rutinní žádosti. Integrace P0 + P1 tuto produktovou otázku neuzavírá. Produkční release zůstává samostatný. Fyzickou sestavitelnost přijme člověk až po měřeném výtisku a stavbě v P3; žádný agent ji nyní neprohlašuje za hotovou.
 
 Záznam: `PO verdict = PENDING`, `GATE-P2 = NOT_ACCEPTED`, `release = NOT_READY`.

@@ -17,7 +17,7 @@ Toto je pohled nad jedinou frontou `05_WORK_QUEUE.json`, nikoli druhý tracker. 
 | E09 | Vektorový export | P2 SVG/PDF; P4 varianty; později DXF/PNG | E07/E08/E12 | PC-009 | AC-X01–X10 | XML/PDF reader, Inkscape, font, calibration |
 | E10 | Architektonické detaily/knihovna | P5 otvory/ostění/výztuhy/presety | E02–E06/E12 + fyzický proof | budoucí | AC-G06; epic otvor/instance AC | holes/winding/triangulation + editor + stavba |
 | E11 | Rotační tvary | P5 válec→kužel→báně; import později zvlášť | E02/E04–E06 + fyzický proof | budoucí | AC-R01–R05 | analytic profiles/arcs, near-cylinder, curvature |
-| E12 | Identita a autorská práce | P2 revision/lineage minimum; P4 varianty/diff | E02, průřez | PC-006/008 | AC-I01–I04/I08 | střecha zachová stěny; split bez index reassignment |
+| E12 | Identita a autorská práce | P2 revision/lineage minimum; P4 varianty/diff | E02, průřez | PC-006/008 | AC-I01–I04/I08 | stabilní kotva společného dílu, invariantní body kořenové stěny; závislé plochy v dopadu; split bez index reassignment |
 | E13 | Persistence/undo/recovery | P2 safe save; P4 recovery/snapshot/bundle | E01/E02/E12 | PC-006/008 | AC-I05–I07; epic dirty/close AC | fault injection, schema, cancel close, keyboard/DPI |
 | E14 | Kvalita a stavba | P0 geometrie; P2 digitální; P3 fyzický | ověřovaný řez, nikoli hotový celý E14 | PC-002/005/010/011 | vše relevantní + P3 protokol | independent review, measured calibration/build |
 | E15 | Grafika | P2 SVG roles; P6 editor/textury; round-trip později | E09/E12/E13 | PC-009 + budoucí | AC-X10/A01–A03/L07 | part grouping nyní, přenosné assets a round-trip conflicts později |
@@ -61,7 +61,7 @@ Toto je pohled nad jedinou frontou `05_WORK_QUEUE.json`, nikoli druhý tracker. 
 | AC-L08 | Potvrzené konkrétní varování → export → přijetí platí jen pro dotčené revize; změna znovu vyžádá kontrolu | P2 / PC-008 | Integrace; P2 | NOT_RUN |
 | AC-L09 | Neumístěný díl → kompletní export → odmítnutí s nabídkou umístění; explicitní částečný export musí být jasně označen | P2 / PC-008 | Negativní GUI; P2 | NOT_RUN |
 | AC-L10 | Přijatý přesah mimo fyzickou stránku či rozbitá reference → kompletní tiskový export → příznak přijetí nezruší chybu integrity ani neoznačí ořezaný PDF za úplný; SVG zachová původní geometrii mimo viewBox a nese upozornění | P2 / PC-008 | Negativní integrace; P2 | NOT_RUN |
-| AC-I01 | Ručně rozmístěné stěny → změna střechy → neovlivněná ID/pozice/rotace/zámky zachované | P2 / PC-008 | Integrace; P2 | NOT_RUN |
+| AC-I01 | Změna střechy zachová nedotčené stěny/placements; u společného dílu persistovaná kotva v nezměněné stěně a všechny její body na stránce beze změny; celý part stale do přepočtu, závislé plochy explicitně dotčené | P2 / PC-008 | Povinně oddělený i smíšený fixture, rotace30°, save/reopen/undo, neplatná kotva bez fallbacku; MIXED_PART_LAYOUT_CONTRACT.md; exportní shoda v PC-009 | NOT_RUN |
 | AC-I02 | Změněný díl → kontrola → označen revision/stale, starý rozvin nelze vydávat za aktuální | P2 / PC-008 | Core + GUI; P2 | NOT_RUN |
 | AC-I03 | Split/merge nebo pořadí položek → reference → žádné přiřazení grafiky/placement k jinému dílu podle indexu | P2 / PC-008 | Adversarial; P2 dle scope | NOT_RUN |
 | AC-I04 | Měřítko 1:100 → 1:200 → konstrukce poloviční, výchozí chlopeň zůstává 5 mm podle uložené politiky, nové kolize hlášeny | P2 / PC-008 | Numerika; P2 | NOT_RUN |

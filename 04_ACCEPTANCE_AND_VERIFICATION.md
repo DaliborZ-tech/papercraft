@@ -78,7 +78,7 @@ Fyzická stavba může použít dokumentovaný přesah střechy a podporu, ale p
 
 | ID | Given / When / Then | Proof / etapa |
 |---|---|---|
-| AC-I01 | Ručně rozmístěné stěny → změna střechy → neovlivněná ID/pozice/rotace/zámky zachované | Integrace; P2 |
+| AC-I01 | Ručně rozmístěné stěny → změna střechy → neovlivněná ID/pozice/rotace/zámky zachované; povinně také společný díl stěna–střecha s persistovanou kotvou v nezměněné stěně: po přepočtu zůstávají všechny její body na stránce stejné, celý díl je před přepočtem stale. Plochy připojené přes změněnou geometrii patří do dopadu. Neověřovat pouze oddělené díly | Integrace; P2; fixture a pravidla v docs/revival/MIXED_PART_LAYOUT_CONTRACT.md |
 | AC-I02 | Změněný díl → kontrola → označen revision/stale, starý rozvin nelze vydávat za aktuální | Core + GUI; P2 |
 | AC-I03 | Split/merge nebo pořadí položek → reference → žádné přiřazení grafiky/placement k jinému dílu podle indexu | Adversarial; P2 dle scope |
 | AC-I04 | Měřítko 1:100 → 1:200 → konstrukce poloviční, výchozí chlopeň zůstává 5 mm podle uložené politiky, nové kolize hlášeny | Numerika; P2 |

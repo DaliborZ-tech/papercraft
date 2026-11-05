@@ -21,7 +21,7 @@ Režim Stránky: přehled A4, odkládací plocha, drag s náhledem, rotace myš�
 | Prázdný projekt | žádné díly, vytvořit dům, výchozí měřítko, export vysvětleně nedostupný | nový projekt bez falešného „hotovo“ |
 | Domeček | rozměry, společný 3D/2D výběr, stránky a odkládací plocha | AC-G02/C01 |
 | Vybraný spoj | obě hrany, čísla i stránky, chlopeň A/B a undo | AC-C02/C05/C06 |
-| Změněná střecha | text „Díly střechy vyžadují přepočet“, starý obrys přerušovaně, polohy stěn zachované | AC-I01/I02 |
+| Změněná střecha | text „Dotčené díly vyžadují přepočet“, u společného partu stěna–střecha stale celý díl, starý obrys přerušovaně a stabilní kotva ve stěně viditelná; body kořenové stěny zachované, další závislé plochy uvedené v dopadu | AC-I01/I02 včetně smíšeného fixture |
 | Kolize chlopně | obrys průniku, konkrétní spoj a stránky, přesunout díl / změnit chlopeň | AC-L04, žádné schování chlopně při validaci |
 | Exportní souhrn | počet dílů a stránek, neumístěné, stale, varování, font, měřítko a 100% tisk | AC-L08–L10/X01–X07 |
 
@@ -30,6 +30,8 @@ Režim Stránky: přehled A4, odkládací plocha, drag s náhledem, rotace myš�
 Chyby integrity (stale, missing part/reference, NaN, neúplné pokrytí) blokují kompletní export. Překryv či přesah doporučeného tiskového okraje lze označit „Přijímám pro tuto verzi“ s důvodem, nikoli globálně vypnout kontrolu. Změna dotčené geometrie potvrzení zneplatní. Přesah fyzické stránky vyžaduje umístění/jiný formát, nebo zřetelně částečnou kopii; P2 nemá automatické dlaždice. Exportní dialog oddělí neuložený projekt od aktuálního snapshotu a neoznačí projekt jako uložený.
 
 Změna rozměru střechy zobrazí dopad před přepočtem, dovolí undo a ponechá původní placements při jednoznačné kontinuitě. Zaniklý/split díl má seznam předchůdců a upozornění; kresba či placement se nikdy nepřidělí podle čísla v seznamu. P2 nemá interní kreslicí editor, ale struktura SVG umožní přesun celého dílu i samostatnou editaci role/textu. Externě upravená kopie se neimportuje zpět.
+
+Společný díl ukazuje kotvu a referenční hranu; X/Y ve vlastnostech jsou jejich poloha na stránce. Join zobrazí přijímající díl, jehož kotva se zachová. Změna střechy může zvětšit obálku, ale nepřecentruje díl ani neposune ukotvenou stěnu. Pokud kotva zanikne nebo nemá jednoznačného nástupce, UI vypíše „Kotvu dílu je nutné znovu určit“, nabídne volbu s náhledem a undo, kompletní export zablokuje. Plochy připojené přes změněnou geometrii zobrazí jako dotčené, nikoli bezpodmínečně nepohnuté. Přesný příklad a pravidla jsou v [kontraktu smíšeného dílu](MIXED_PART_LAYOUT_CONTRACT.md).
 
 Uložit/Zavřít: dirty značka a volby Uložit / Zahodit / Zrušit; neúspěšný save ponechá projekt otevřený. Chybné vstupy zobrazí konkrétní pole a zachovají předchozí hodnotu. Klíčové akce mají klávesové ovládání, fokus a tooltip; kontrast a text se zkontrolují při 100/150/200% škálování Windows. Dlouhá operace ukáže stav a při pozdějším workeru ignoruje starší výsledek. Otevření novějšího schématu nesmí tiše přepnout do editace.
 
