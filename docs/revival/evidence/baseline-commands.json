@@ -1,0 +1,57 @@
+{
+  "os": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "commands": [
+    {
+      "name": "environment",
+      "command": [
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+        "-c",
+        "import platform,sys; print(platform.platform()); print(sys.version); import archpapercraft,PySide6,numpy,scipy,reportlab,svgwrite,OpenGL; print('imports OK')"
+      ],
+      "started_utc": "2026-11-05T19:08:45.758043+00:00",
+      "seconds": 19.146,
+      "exit_code": 0
+    },
+    {
+      "name": "dependencies",
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe"
+      ],
+      "started_utc": "2026-11-05T19:09:04.904835+00:00",
+      "seconds": 0.095,
+      "exit_code": 0
+    },
+    {
+      "name": "packages",
+      "command": [
+        "uv",
+        "pip",
+        "freeze",
+        "--python",
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe"
+      ],
+      "started_utc": "2026-11-05T19:09:05.000430+00:00",
+      "seconds": 0.074,
+      "exit_code": 0
+    },
+    {
+      "name": "pytest-baseline",
+      "command": [
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-ra",
+        "--junitxml=docs/revival/evidence/pytest-baseline.xml"
+      ],
+      "started_utc": "2026-11-05T19:09:05.073011+00:00",
+      "seconds": 41.915,
+      "exit_code": 0
+    }
+  ]
+}

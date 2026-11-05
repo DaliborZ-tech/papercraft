@@ -1,0 +1,122 @@
+{
+  "parent_transform": {
+    "max_vertex_error_mm": 385.22720568516445,
+    "actual_first": [
+      0.0,
+      -10.0,
+      -15.0
+    ],
+    "expected_first": [
+      110.0,
+      200.0,
+      285.0
+    ]
+  },
+  "hidden_parent": {
+    "visible_meshes": 1,
+    "expected": 0
+  },
+  "sample_roundtrip": {
+    "nodes": 7,
+    "semantic_equal": true,
+    "original_preserved": true
+  },
+  "sample_units": {
+    "internal_unit": "mm",
+    "model_length": 10000.0,
+    "expected_paper_mm": 100.0,
+    "pipeline_paper_mm": 100000.0
+  },
+  "future_schema": {
+    "accepted": true,
+    "saved_version": "0.2.0",
+    "unknown_preserved": false
+  },
+  "save_fault": {
+    "error": "Injected interrupted save after partial write",
+    "previous_bytes": 272,
+    "remaining_bytes": 12,
+    "original_preserved": false
+  },
+  "tab_envelope": {
+    "expected_margin_mm": 10,
+    "actual_min_mm": [
+      5.0,
+      10.0
+    ],
+    "packed_min_mm": [
+      10.0,
+      10.0
+    ]
+  },
+  "dirty_branch_same_depth": {
+    "expected_modified": true,
+    "actual_modified": false
+  },
+  "svg_export": {
+    "width": "210.0mm",
+    "height": "297.0mm",
+    "expected_landscape": [
+      297,
+      210
+    ],
+    "groups": [
+      "cut",
+      "score",
+      "tabs",
+      "text"
+    ],
+    "cut_lengths_mm": [
+      100.0,
+      40.0,
+      100.0,
+      40.0
+    ],
+    "actual_bounds_mm": [
+      [
+        25.0,
+        35.0
+      ],
+      [
+        125.0,
+        75.0
+      ]
+    ],
+    "expected_rotated_size_mm": [
+      40,
+      100
+    ],
+    "actual_size_mm": [
+      100.0,
+      40.0
+    ]
+  },
+  "pdf_export": {
+    "page_count": 1,
+    "page_mm": [
+      297.0000023735894,
+      209.9999940660265
+    ],
+    "text": "P1\r\nM■■ítko 1:100 | 50 mm na papí■e\r\nStrana 1 / 1"
+  },
+  "pdf_structure": {
+    "vector_line_operators": 4,
+    "image_xobjects": "{}",
+    "content": "1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET\nBT /F1 6 Tf 7.2 TL ET\n0 0 0 RG\n.5 w\nn 70.86614 99.2126 m 354.3307 99.2126 l S\nn 354.3307 99.2126 m 354.3307 212.5984 l S\nn 354.3307 212.5984 m 70.86614 212.5984 l S\nn 70.86614 99.2126 m 70.86614 212.5984 l S\n0 0 0 rg\nBT 1 0 0 1 208.9294 155.9055 Tm (P1) Tj T* ET\n.3 w\n0 0 0 rg\nn 671.811 28.34646 28.34646 8.503937 re B*\n1 1 1 rg\nn 700.1575 28.34646 28.34646 8.503937 re B*\n0 0 0 rg\nn 728.5039 28.34646 28.34646 8.503937 re B*\n1 1 1 rg\nn 756.8504 28.34646 28.34646 8.503937 re B*\n0 0 0 rg\nn 785.1969 28.34646 28.34646 8.503937 re B*\n0 0 0 RG\n.5 w\nn 671.811 28.34646 141.7323 8.503937 re S\n0 0 0 rg\nBT /F1 6 Tf 7.2 TL ET\nBT 1 0 0 1 694.3592 41.10236 Tm (M) Tj /F2 6 Tf 7.2 TL (nn) Tj /F1 6 Tf 7.2 TL (\\355tko 1:100  |  50 mm na pap\\355) Tj /F2 6 Tf 7.2 TL (n) Tj /F1 6 Tf 7.2 TL (e) Tj T* ET\nBT /F1 7 Tf 8.4 TL ET\n.3 .3 .3 rg\nBT 1 0 0 1 402.8499 11.33858 Tm (Strana 1 / 1) Tj T* ET\n \n"
+  },
+  "svg_pdf_layout_comparison": {
+    "svg_top_left_mm": [
+      25.0,
+      35.0
+    ],
+    "pdf_top_left_mm": [
+      24.999999388888888,
+      135.00001222222224
+    ],
+    "pdf_bottom_right_mm": [
+      124.99999694444442,
+      175.0000027777778
+    ],
+    "same_top_left": false
+  }
+}

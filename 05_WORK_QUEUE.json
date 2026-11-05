@@ -1,0 +1,483 @@
+{
+  "schema_version": 1,
+  "project": "ArchPapercraft Studio",
+  "repository": "https://github.com/DaliborZ-tech/papercraft",
+  "reference_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
+  "prepared_on": "2026-11-05",
+  "initial_authorized_stages": [
+    "P0",
+    "P1"
+  ],
+  "product_gate": {
+    "id": "GATE-P2",
+    "requires": [
+      "PC-005 review a vyřešené nálezy",
+      "Skutečné přijetí konkrétního P2 kontraktu vlastníkem"
+    ],
+    "auto_approve": false,
+    "status": "PO_PENDING_AFTER_INDEPENDENT_REVIEW",
+    "contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md"
+  },
+  "rules": [
+    "Počáteční queue není důkaz implementace.",
+    "P2 položky jsou návrh k dopracování v P1; nezačínat před GATE-P2.",
+    "P4–P6 se rozepíšou do ticketů podle epic při přípravě příslušné etapy.",
+    "Stavy akceptace a release readiness jsou oddělené.",
+    "Vytvoření této fronty neautorizuje push nebo merge."
+  ],
+  "tickets": [
+    {
+      "id": "PC-000",
+      "stage": "P0",
+      "title": "Clone přímo do otevřeného VS Code workspace",
+      "depends_on": [],
+      "epics": [
+        "E01"
+      ],
+      "mode": "bootstrap",
+      "outputs": [
+        "Ověřený workspace root, remote, SHA a zachování původních souborů"
+      ],
+      "acceptance": [
+        "AC-B01",
+        "AC-B02",
+        "AC-B03"
+      ],
+      "status": "IN_REVIEW",
+      "execution_authorized_on_realization": true,
+      "evidence": [
+        "docs/revival/evidence/bootstrap.json",
+        "docs/revival/BASELINE_REPORT.md"
+      ],
+      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "product_acceptance": "PO_PENDING",
+      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+    },
+    {
+      "id": "PC-001",
+      "stage": "P0",
+      "title": "Reprodukovatelná baseline a průchod aplikací",
+      "depends_on": [
+        "PC-000"
+      ],
+      "epics": [
+        "E01",
+        "E13"
+      ],
+      "mode": "diagnosis",
+      "outputs": [
+        "BASELINE_REPORT.md",
+        "CURRENT_PROJECT_STATE.md"
+      ],
+      "acceptance": [
+        "AC-B04",
+        "AC-B05"
+      ],
+      "status": "IN_REVIEW",
+      "execution_authorized_on_realization": true,
+      "evidence": [
+        "docs/revival/BASELINE_REPORT.md",
+        "docs/revival/CURRENT_PROJECT_STATE.md",
+        "docs/revival/WINDOWS_REPRO.md"
+      ],
+      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "product_acceptance": "PO_PENDING",
+      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+    },
+    {
+      "id": "PC-002",
+      "stage": "P0",
+      "title": "Kauzální diagnostika geometrie, rozvinu a exportu",
+      "depends_on": [
+        "PC-001"
+      ],
+      "epics": [
+        "E02",
+        "E04",
+        "E05",
+        "E08",
+        "E09",
+        "E11"
+      ],
+      "mode": "diagnosis",
+      "outputs": [
+        "FINDINGS.md",
+        "GEOMETRY_SPIKE.md",
+        "Diagnostické fixtures a analytická orákula"
+      ],
+      "acceptance": [
+        "PC-F01 až PC-F08: reprodukce nebo přesně odůvodněné NOT_VERIFIED"
+      ],
+      "status": "IN_REVIEW",
+      "execution_authorized_on_realization": true,
+      "evidence": [
+        "docs/revival/FINDINGS.md",
+        "docs/revival/GEOMETRY_SPIKE.md",
+        "tools/revival/geometry_probe.py",
+        "tools/revival/integration_probe.py",
+        "tools/revival/test_diagnostic_contracts.py"
+      ],
+      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "product_acceptance": "PO_PENDING",
+      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+    },
+    {
+      "id": "PC-003",
+      "stage": "P1",
+      "title": "Rozhodnutí keep/fix/replace a konkrétní architektura",
+      "depends_on": [
+        "PC-002"
+      ],
+      "epics": [
+        "E02",
+        "E12",
+        "E13"
+      ],
+      "mode": "architecture",
+      "outputs": [
+        "ARCHITECTURE_DECISION.md",
+        "Mapa modulů a kompatibilita projektů"
+      ],
+      "acceptance": [
+        "Porovnané varianty",
+        "Datové identity, jednotky, invalidace a exportní snapshot",
+        "Žádný nepodložený slib obecného rozvinu"
+      ],
+      "status": "IN_REVIEW",
+      "execution_authorized_on_realization": true,
+      "evidence": [
+        "docs/revival/ARCHITECTURE_DECISION.md"
+      ],
+      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "product_acceptance": "PO_PENDING",
+      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+    },
+    {
+      "id": "PC-004",
+      "stage": "P1",
+      "title": "UX, roadmapa a přesný P2 kontrakt",
+      "depends_on": [
+        "PC-001",
+        "PC-003"
+      ],
+      "epics": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "mode": "analysis_and_ux",
+      "outputs": [
+        "UX_CONTRACT.md",
+        "P2_IMPLEMENTATION_CONTRACT.md",
+        "AC traceability",
+        "Jediná aktuální queue"
+      ],
+      "acceptance": [
+        "Všechny dohodnuté epiky zařazeny",
+        "P2 má manuální layout, SVG/PDF a 3D↔2D",
+        "Konkrétní demo i negativní stavy"
+      ],
+      "status": "IN_REVIEW",
+      "execution_authorized_on_realization": true,
+      "evidence": [
+        "docs/revival/UX_CONTRACT.md",
+        "docs/revival/ux-prototype.html",
+        "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/revival/TRACEABILITY.md",
+        "05_WORK_QUEUE.json"
+      ],
+      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "product_acceptance": "PO_PENDING",
+      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+    },
+    {
+      "id": "PC-005",
+      "stage": "P1",
+      "title": "Nezávislá revize a rozhodnutelné předání P0/P1",
+      "depends_on": [
+        "PC-003",
+        "PC-004"
+      ],
+      "epics": [
+        "E01",
+        "E14"
+      ],
+      "mode": "independent_review",
+      "outputs": [
+        "REVIEW_REPORT.md",
+        "Opravy nálezů",
+        "PO_DECISION_CARD.md"
+      ],
+      "acceptance": [
+        "Jiný reviewer",
+        "Ověřené důkazy a jasné limity",
+        "P2 kontrakt předložen k přijetí"
+      ],
+      "status": "IN_PROGRESS",
+      "execution_authorized_on_realization": true,
+      "evidence": [
+        "docs/revival/REVIEW_REPORT.md",
+        "docs/revival/PO_DECISION_CARD.md"
+      ],
+      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "product_acceptance": "PO_PENDING",
+      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+    },
+    {
+      "id": "PC-006",
+      "stage": "P2",
+      "title": "Referenční dům: stabilní konstrukční model a persistence",
+      "depends_on": [
+        "PC-005"
+      ],
+      "epics": [
+        "E02",
+        "E12",
+        "E13"
+      ],
+      "mode": "implementation",
+      "outputs": [
+        "Použitelný referenční dům, save/open a numerické testy"
+      ],
+      "acceptance": [
+        "AC-G01",
+        "AC-G02",
+        "AC-G03",
+        "AC-G04",
+        "AC-G05",
+        "AC-I05",
+        "AC-I06",
+        "AC-I07"
+      ],
+      "status": "PLANNED",
+      "execution_authorized_on_realization": false,
+      "gate": "GATE-P2",
+      "acceptance_state": {
+        "AC-G01": "NOT_RUN",
+        "AC-G02": "NOT_RUN",
+        "AC-G03": "NOT_RUN",
+        "AC-G04": "NOT_RUN",
+        "AC-G05": "NOT_RUN",
+        "AC-I05": "NOT_RUN",
+        "AC-I06": "NOT_RUN",
+        "AC-I07": "NOT_RUN"
+      },
+      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "Independent reviewer required after implementation, not implementer self-approval",
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-007",
+      "stage": "P2",
+      "title": "Propojený výběr a ruční švy/chlopně",
+      "depends_on": [
+        "PC-006"
+      ],
+      "epics": [
+        "E03",
+        "E04",
+        "E05"
+      ],
+      "mode": "implementation",
+      "outputs": [
+        "Funkční autorská editace řezů, spojů a chlopní"
+      ],
+      "acceptance": [
+        "AC-C01",
+        "AC-C02",
+        "AC-C03",
+        "AC-C04",
+        "AC-C05",
+        "AC-C06",
+        "AC-G07",
+        "AC-C09",
+        "AC-C10"
+      ],
+      "status": "PLANNED",
+      "execution_authorized_on_realization": false,
+      "gate": "GATE-P2",
+      "verification_deferred": {
+        "AC-C02": "Finální GUI proof přes dvě stránky až PC-009 po PC-008; předtím NOT_RUN/PENDING, nikoli PASS."
+      },
+      "acceptance_state": {
+        "AC-C01": "NOT_RUN",
+        "AC-C02": "NOT_RUN",
+        "AC-C03": "NOT_RUN",
+        "AC-C04": "NOT_RUN",
+        "AC-C05": "NOT_RUN",
+        "AC-C06": "NOT_RUN",
+        "AC-G07": "NOT_RUN",
+        "AC-C09": "NOT_RUN",
+        "AC-C10": "NOT_RUN"
+      },
+      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "Independent reviewer required after implementation, not implementer self-approval",
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-008",
+      "stage": "P2",
+      "title": "Ruční stránky, invalidace a kontroly",
+      "depends_on": [
+        "PC-007"
+      ],
+      "epics": [
+        "E06",
+        "E07",
+        "E08",
+        "E12"
+      ],
+      "mode": "implementation",
+      "outputs": [
+        "Ruční A4 layout, odkládací plocha a zachování autorské práce"
+      ],
+      "acceptance": [
+        "AC-L01",
+        "AC-L02",
+        "AC-L03",
+        "AC-L04",
+        "AC-L06",
+        "AC-L08",
+        "AC-L09",
+        "AC-I01",
+        "AC-I02",
+        "AC-I03",
+        "AC-I04",
+        "AC-L10"
+      ],
+      "status": "PLANNED",
+      "execution_authorized_on_realization": false,
+      "gate": "GATE-P2",
+      "acceptance_state": {
+        "AC-L01": "NOT_RUN",
+        "AC-L02": "NOT_RUN",
+        "AC-L03": "NOT_RUN",
+        "AC-L04": "NOT_RUN",
+        "AC-L06": "NOT_RUN",
+        "AC-L08": "NOT_RUN",
+        "AC-L09": "NOT_RUN",
+        "AC-I01": "NOT_RUN",
+        "AC-I02": "NOT_RUN",
+        "AC-I03": "NOT_RUN",
+        "AC-I04": "NOT_RUN",
+        "AC-L10": "NOT_RUN"
+      },
+      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "Independent reviewer required after implementation, not implementer self-approval",
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-009",
+      "stage": "P2",
+      "title": "SVG/PDF a skutečný autorský průchod",
+      "depends_on": [
+        "PC-008"
+      ],
+      "epics": [
+        "E09",
+        "E14"
+      ],
+      "mode": "implementation_and_verification",
+      "outputs": [
+        "Vektorové exporty, Windows demo, editor interoperability proof"
+      ],
+      "acceptance": [
+        "AC-X01",
+        "AC-X02",
+        "AC-X03",
+        "AC-X04",
+        "AC-X05",
+        "AC-X06",
+        "AC-X07",
+        "Úplné P2 demo",
+        "AC-X10",
+        "AC-C02"
+      ],
+      "status": "PLANNED",
+      "execution_authorized_on_realization": false,
+      "gate": "GATE-P2",
+      "acceptance_state": {
+        "AC-X01": "NOT_RUN",
+        "AC-X02": "NOT_RUN",
+        "AC-X03": "NOT_RUN",
+        "AC-X04": "NOT_RUN",
+        "AC-X05": "NOT_RUN",
+        "AC-X06": "NOT_RUN",
+        "AC-X07": "NOT_RUN",
+        "AC-X10": "NOT_RUN",
+        "AC-C02": "NOT_RUN"
+      },
+      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "Independent reviewer required after implementation, not implementer self-approval",
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-010",
+      "stage": "P2",
+      "title": "Nezávislé review první použitelné verze",
+      "depends_on": [
+        "PC-009"
+      ],
+      "epics": [
+        "E14"
+      ],
+      "mode": "independent_review",
+      "outputs": [
+        "Review konkrétního CODE SHA, uzavřené nálezy, tiskový balík"
+      ],
+      "acceptance": [
+        "P2 digitální kontrakt splněn",
+        "Fyzický proof poctivě pending"
+      ],
+      "status": "PLANNED",
+      "execution_authorized_on_realization": false,
+      "gate": "GATE-P2",
+      "acceptance_state": {},
+      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "Independent reviewer required after implementation, not implementer self-approval",
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-011",
+      "stage": "P3",
+      "title": "Výtisk, fyzická stavba a produktová akceptace",
+      "depends_on": [
+        "PC-010"
+      ],
+      "epics": [
+        "E14"
+      ],
+      "mode": "physical_acceptance",
+      "outputs": [
+        "Naměřená kalibrace, protokol sestavení a případné opravy"
+      ],
+      "acceptance": [
+        "P3 kontrakt a skutečné PO přijetí"
+      ],
+      "status": "PLANNED",
+      "execution_authorized_on_realization": false,
+      "acceptance_state": {},
+      "implementation_contract": "04_ACCEPTANCE_AND_VERIFICATION.md#5-fyzická-akceptace-p3",
+      "review": "Independent reviewer required after implementation, not implementer self-approval",
+      "product_acceptance": "NOT_RUN"
+    }
+  ],
+  "updated_on": "2026-11-05",
+  "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
+  "working_branch": "revival/p0-p1-contract",
+  "release_readiness": "NOT_READY: product defects open; P2 and physical acceptance pending",
+  "evidence_index": "docs/revival/BASELINE_REPORT.md"
+}

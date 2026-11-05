@@ -1,0 +1,648 @@
+{
+  "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "numpy": "2.5.4",
+  "command": "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe tools/revival/geometry_probe.py",
+  "elapsed_seconds": 0.5857397000072524,
+  "oracle_self_checks": "PASS (4 analytic intersection cases)",
+  "runtime_errors": 0,
+  "results": {
+    "panel": {
+      "expected": {
+        "area_mm2": 200,
+        "boundary_edges": 4,
+        "internal_cut_diagonals": 0
+      },
+      "observed": {
+        "direct_api": {
+          "faces": 2,
+          "triangle_area_sum": 200.00000000000006,
+          "max_edge_length_error": 3.552713678800501e-15,
+          "fold_edges": 1,
+          "cut_edges": 0,
+          "noncoincident_shared_source_edges": [],
+          "unmarked_crack_count": 0,
+          "overlapping_triangle_pairs": []
+        },
+        "automatic_path": {
+          "faces": 2,
+          "triangle_area_sum": 200.00000000000006,
+          "max_edge_length_error": 3.552713678800501e-15,
+          "fold_edges": 1,
+          "cut_edges": 4,
+          "noncoincident_shared_source_edges": [],
+          "unmarked_crack_count": 0,
+          "overlapping_triangle_pairs": []
+        },
+        "automatic_boundary_pair_ids": {
+          "(0, 1)": 1,
+          "(0, 3)": 2,
+          "(1, 2)": 3,
+          "(2, 3)": 4
+        },
+        "boundary_edges_explicitly_supplied": 4
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Exact direct API omits physical boundary cuts; auto_seams supplies them. Coplanar triangulation diagonal is still a fold entry."
+    },
+    "box": {
+      "expected": {
+        "area_mm2": 2200,
+        "faces_covered": 12,
+        "uncut_closed_surface": "reject or introduce explicit seams; non-tree closure cannot be ignored"
+      },
+      "observed": {
+        "uncut": {
+          "faces": 12,
+          "triangle_area_sum": 2200.0,
+          "max_edge_length_error": 1.4210854715202004e-14,
+          "fold_edges": 11,
+          "cut_edges": 0,
+          "noncoincident_shared_source_edges": [
+            {
+              "edge": [
+                4,
+                5
+              ],
+              "endpoint_gap": 58.309518948453004,
+              "explicit_seam": false
+            },
+            {
+              "edge": [
+                4,
+                6
+              ],
+              "endpoint_gap": 31.622776601683803,
+              "explicit_seam": false
+            },
+            {
+              "edge": [
+                4,
+                7
+              ],
+              "endpoint_gap": 94.86832980505137,
+              "explicit_seam": false
+            },
+            {
+              "edge": [
+                1,
+                5
+              ],
+              "endpoint_gap": 42.426406871192846,
+              "explicit_seam": false
+            },
+            {
+              "edge": [
+                0,
+                4
+              ],
+              "endpoint_gap": 42.42640687119284,
+              "explicit_seam": false
+            },
+            {
+              "edge": [
+                3,
+                7
+              ],
+              "endpoint_gap": 42.42640687119285,
+              "explicit_seam": false
+            },
+            {
+              "edge": [
+                2,
+                7
+              ],
+              "endpoint_gap": 44.72135954999579,
+              "explicit_seam": false
+            }
+          ],
+          "unmarked_crack_count": 7,
+          "overlapping_triangle_pairs": []
+        },
+        "automatic": [
+          {
+            "faces": 12,
+            "triangle_area_sum": 2200.0,
+            "max_edge_length_error": 1.0658141036401503e-14,
+            "fold_edges": 11,
+            "cut_edges": 14,
+            "noncoincident_shared_source_edges": [
+              {
+                "edge": [
+                  0,
+                  1
+                ],
+                "endpoint_gap": 14.142135623730947,
+                "explicit_seam": true
+              },
+              {
+                "edge": [
+                  0,
+                  3
+                ],
+                "endpoint_gap": 28.284271247461902,
+                "explicit_seam": true
+              },
+              {
+                "edge": [
+                  2,
+                  6
+                ],
+                "endpoint_gap": 42.426406871192846,
+                "explicit_seam": true
+              },
+              {
+                "edge": [
+                  5,
+                  6
+                ],
+                "endpoint_gap": 28.284271247461888,
+                "explicit_seam": true
+              },
+              {
+                "edge": [
+                  6,
+                  7
+                ],
+                "endpoint_gap": 84.85281374238569,
+                "explicit_seam": true
+              },
+              {
+                "edge": [
+                  0,
+                  4
+                ],
+                "endpoint_gap": 84.85281374238569,
+                "explicit_seam": true
+              },
+              {
+                "edge": [
+                  4,
+                  7
+                ],
+                "endpoint_gap": 84.85281374238569,
+                "explicit_seam": true
+              }
+            ],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": []
+          }
+        ],
+        "automatic_seam_count": 7
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Triangle lengths and summed area can be exact while a closed surface has unreported cracks or overlaps."
+    },
+    "house": {
+      "expected": {
+        "body_perimeter_mm": 320,
+        "roof_slope_mm": 42.42640687119285,
+        "ridge_height_mm": 70,
+        "total_area_mm2_without_floor_tabs": 23085.28137423857,
+        "faces": 14,
+        "semantic_surfaces": 8
+      },
+      "observed": {
+        "panels": {
+          "side_left": {
+            "faces": 2,
+            "triangle_area_sum": 4000.0000000000005,
+            "max_edge_length_error": 7.105427357601002e-15,
+            "fold_edges": 1,
+            "cut_edges": 4,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 4.547473508864641e-13,
+            "expected_area_mm2": 4000.0
+          },
+          "side_right": {
+            "faces": 2,
+            "triangle_area_sum": 4000.0,
+            "max_edge_length_error": 7.105427357601002e-15,
+            "fold_edges": 1,
+            "cut_edges": 4,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 0.0,
+            "expected_area_mm2": 4000.0
+          },
+          "front_wall": {
+            "faces": 2,
+            "triangle_area_sum": 2399.9999999999995,
+            "max_edge_length_error": 1.4210854715202004e-14,
+            "fold_edges": 1,
+            "cut_edges": 4,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 4.547473508864641e-13,
+            "expected_area_mm2": 2400.0
+          },
+          "back_wall": {
+            "faces": 2,
+            "triangle_area_sum": 2399.9999999999995,
+            "max_edge_length_error": 1.4210854715202004e-14,
+            "fold_edges": 1,
+            "cut_edges": 4,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 4.547473508864641e-13,
+            "expected_area_mm2": 2400.0
+          },
+          "front_gable": {
+            "faces": 1,
+            "triangle_area_sum": 900.0000000000001,
+            "max_edge_length_error": 0.0,
+            "fold_edges": 0,
+            "cut_edges": 3,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 1.1368683772161603e-13,
+            "expected_area_mm2": 900.0
+          },
+          "back_gable": {
+            "faces": 1,
+            "triangle_area_sum": 900.0000000000001,
+            "max_edge_length_error": 0.0,
+            "fold_edges": 0,
+            "cut_edges": 3,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 1.1368683772161603e-13,
+            "expected_area_mm2": 900.0
+          },
+          "roof_left": {
+            "faces": 2,
+            "triangle_area_sum": 4242.640687119285,
+            "max_edge_length_error": 1.4210854715202004e-14,
+            "fold_edges": 1,
+            "cut_edges": 4,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 0.0,
+            "expected_area_mm2": 4242.640687119285
+          },
+          "roof_right": {
+            "faces": 2,
+            "triangle_area_sum": 4242.640687119285,
+            "max_edge_length_error": 1.4210854715202004e-14,
+            "fold_edges": 1,
+            "cut_edges": 4,
+            "noncoincident_shared_source_edges": [],
+            "unmarked_crack_count": 0,
+            "overlapping_triangle_pairs": [],
+            "area_error_mm2": 0.0,
+            "expected_area_mm2": 4242.640687119285
+          }
+        },
+        "total_faces": 14,
+        "total_area_mm2": 23085.28137423857,
+        "max_edge_error_mm": 1.4210854715202004e-14
+      },
+      "status": "PASS",
+      "meaning": "Independent semantic-panel fixture establishes attainable planar tolerances; not a GUI/identity/layout or physical house acceptance."
+    },
+    "csg": {
+      "expected": {
+        "difference_A_A": "empty or explicit unsupported",
+        "union_A_A_faces": 12
+      },
+      "observed": {
+        "supports_csg": false,
+        "difference_same_object": true,
+        "difference_faces": 12,
+        "intersection_same_object": true,
+        "union_faces": 24
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Mesh API returns ordinary geometry despite unsupported CSG; callers must not report success."
+    },
+    "cylinder": {
+      "expected": {
+        "width_mm": 62.83185307179586,
+        "height_mm": 30,
+        "area_mm2": 1884.9555921538758
+      },
+      "observed": {
+        "direct_analytic_profile_outline": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            62.83185307179586,
+            0.0
+          ],
+          [
+            62.83185307179586,
+            30.0
+          ],
+          [
+            0.0,
+            30.0
+          ]
+        ],
+        "area_mm2": 1884.9555921538758,
+        "capped_mesh_extracted_profile": [
+          [
+            9.846153846153847,
+            0.46875
+          ],
+          [
+            9.846153846153847,
+            29.53125
+          ]
+        ]
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Constant-radius ring formula is exact given a correct profile; mesh extraction bins shrink z extent and mix cap-centre radii."
+    },
+    "cone_band": {
+      "expected": {
+        "inner_radius_mm": 30,
+        "outer_radius_mm": 60,
+        "angle_rad": 2.0943951023931953,
+        "joining_sides_mm": [
+          30.0,
+          30.0
+        ],
+        "arcs_mm": [
+          62.83185307179586,
+          125.66370614359172
+        ],
+        "area_mm2": 2827.4333882308138
+      },
+      "observed": {
+        "trapezoid": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            125.66370614359172,
+            0.0
+          ],
+          [
+            94.24777960769379,
+            30.000000000000004
+          ],
+          [
+            31.41592653589793,
+            30.000000000000004
+          ]
+        ],
+        "joining_sides_mm": [
+          43.439157912060594,
+          43.43915791206059
+        ],
+        "area_mm2": 2827.4333882308138,
+        "analytic_sector_spike_samples": 2050,
+        "analytic_sector_polygon_area_mm2": 2827.431416905244
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Area-only test misses the defect. Sector polyline is a throwaway illustration, not a production arc representation or exact kernel."
+    },
+    "sphere": {
+      "expected": {
+        "smooth_gaussian_curvature_per_mm2": 0.01,
+        "closed_polyhedron_total_angle_defect_rad": 12.566370614359172,
+        "continuous_exact_unstrained_development": "impossible; must reject or explicitly approximate/cut into facets"
+      },
+      "observed": {
+        "faces": 3968,
+        "patches": 1,
+        "classified_face_counts": {
+          "FLAT": 0,
+          "DEVELOPABLE": 3968,
+          "NON_DEVELOPABLE": 0
+        },
+        "total_angle_defect_rad": 12.566370614358682,
+        "min_vertex_angle_defect_rad": 0.000945083386560519,
+        "max_patch_local_dihedral_deg": 5.631642449292022
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Small adjacent-normal angles on a fine triangulated sphere do not establish developability."
+    },
+    "rigid_revolution": {
+      "expected": {
+        "local_profile_radius_mm": 10,
+        "local_profile_height_mm": 30,
+        "rigid_invariant": true
+      },
+      "observed": {
+        "local": {
+          "profile": [
+            [
+              9.846153846153847,
+              0.46875
+            ],
+            [
+              9.846153846153847,
+              29.53125
+            ]
+          ],
+          "exact_triangle_pair_max_delta_mm": 0.0
+        },
+        "translated": {
+          "profile": [
+            [
+              223.71689486386745,
+              300.46875
+            ],
+            [
+              223.71689486386745,
+              329.53125
+            ]
+          ],
+          "exact_triangle_pair_max_delta_mm": 6.2450045135165055e-15
+        },
+        "rotated_x_90": {
+          "profile": null,
+          "exact_triangle_pair_max_delta_mm": 0.0
+        },
+        "rotated_and_translated": {
+          "profile": [
+            [
+              210.4257348378901,
+              290.3125
+            ],
+            [
+              210.45265960686672,
+              290.9375
+            ],
+            [
+              210.475488778388,
+              291.5625
+            ],
+            [
+              210.4927121837676,
+              292.1875
+            ],
+            [
+              210.51062424663718,
+              292.8125
+            ],
+            [
+              210.5285366342353,
+              293.4375
+            ],
+            [
+              210.54576096436398,
+              294.6875
+            ],
+            [
+              210.56163526258234,
+              295.3125
+            ],
+            [
+              210.57554940968336,
+              295.9375
+            ],
+            [
+              210.58696860024673,
+              297.1875
+            ],
+            [
+              210.59545390893652,
+              297.8125
+            ],
+            [
+              210.60067917207863,
+              299.0625
+            ],
+            [
+              210.5412335196497,
+              299.6875
+            ],
+            [
+              210.5412335196497,
+              300.3125
+            ],
+            [
+              210.6006791720786,
+              300.9375
+            ],
+            [
+              210.59545390893652,
+              302.1875
+            ],
+            [
+              210.58696860024673,
+              302.8125
+            ],
+            [
+              210.5755494096834,
+              304.0625
+            ],
+            [
+              210.5616352625823,
+              304.6875
+            ],
+            [
+              210.54576096436395,
+              305.3125
+            ],
+            [
+              210.5285366342353,
+              306.5625
+            ],
+            [
+              210.51062424663718,
+              307.1875
+            ],
+            [
+              210.4927121837676,
+              307.8125
+            ],
+            [
+              210.47548877838804,
+              308.4375
+            ],
+            [
+              210.45265960686672,
+              309.0625
+            ],
+            [
+              210.4257348378901,
+              309.6875
+            ]
+          ],
+          "exact_triangle_pair_max_delta_mm": 2.260691633892975e-13
+        }
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Exact triangle distances are rigid invariant; profile extractor assumes global Z axis through origin. Local frame is required."
+    },
+    "topology_adversaries": {
+      "expected": {
+        "disconnected_direct_api": "explicit rejection or complete coverage",
+        "all_parts_faces": 2,
+        "nonmanifold_edge_three_faces": "reject or explicit unsupported"
+      },
+      "observed": {
+        "disconnected_direct_faces": 1,
+        "all_parts_faces": 2,
+        "nonmanifold": {
+          "faces": 3,
+          "triangle_area_sum": 150.0,
+          "max_edge_length_error": 1.7763568394002505e-15,
+          "fold_edges": 2,
+          "cut_edges": 0,
+          "noncoincident_shared_source_edges": [],
+          "unmarked_crack_count": 0,
+          "overlapping_triangle_pairs": [
+            {
+              "faces": [
+                1,
+                2
+              ],
+              "intersection_area": 49.99999999999999
+            }
+          ]
+        }
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Direct unfold silently drops disconnected faces; wrapper splits them correctly. Non-manifold branching is accepted without validation."
+    },
+    "tabs_and_polarity": {
+      "expected": {
+        "tab_material_overlap_area_mm2": 0,
+        "tab_count_on_matched_joint": 1,
+        "ridge_front_outward": "mountain",
+        "interior_corner_front_outward": "valley",
+        "reindexing_changes_polarity": false
+      },
+      "observed": {
+        "forward_tab_overlap_mm2": 80.0,
+        "reverse_tab_overlap_mm2": 0.0,
+        "two_separate_parts_tab_count_same_match": 2,
+        "ridge_angle_deg": 90.0,
+        "ridge_reindexed_angle_deg": -90.0,
+        "concave_angle_deg": -90.0
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Left-of-directed-edge is not necessarily outside material. Local seen_match does not coordinate ownership across parts. Sorted-index direction flips fold polarity."
+    },
+    "identity_hash_collision": {
+      "expected": {
+        "different_semantic_parts_share_entity_identity": false,
+        "square_area_mm2": 100,
+        "rectangle_area_mm2": 100
+      },
+      "observed": {
+        "square_hash": "4d4596b4d2d0",
+        "rectangle_hash": "4d4596b4d2d0",
+        "equal_hashes": true
+      },
+      "status": "DEFECT_REPRODUCED",
+      "meaning": "Centroid+area+triangle count cannot identify an entity or its shape. Entity ID must be persisted independently of geometry."
+    }
+  }
+}

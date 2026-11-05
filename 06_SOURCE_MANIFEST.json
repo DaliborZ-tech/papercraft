@@ -1,0 +1,84 @@
+{
+  "project": "ArchPapercraft Studio",
+  "prepared_on": "2026-11-05",
+  "repository": "https://github.com/DaliborZ-tech/papercraft",
+  "branch": "master",
+  "reference_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
+  "method": "GitHub connector: načtené UTF-8 zdroje na konkrétním SHA; statická analýza vybraných modulů, nikoli audit celého repozitáře.",
+  "runtime_tests_executed": false,
+  "desktop_executed": false,
+  "repository_modified": false,
+  "limitations": [
+    "Není ověřen běh desktopu ani pytest.",
+    "Neproběhlo fyzické sestavení modelu.",
+    "Referenční pin nenahrazuje ověření aktuálního checkoutu při realizaci.",
+    "Readme/commit message nejsou runtime důkaz."
+  ],
+  "adlc_method_reference": {
+    "filename": "TestFlow_ADLC_Codex_Mandat.md",
+    "library_file_id": "libfile_95b6bf1ddf748191b02fc52b316776e4",
+    "usage": "Převzaty principy lifecycle, autonomie a nezávislé akceptace; nikoli projektové stopy, čísla testů, incidenty a oprávnění TestFlow."
+  },
+  "sources": [
+    {
+      "path": "README.md",
+      "git_blob_sha": "8ec2bf3da794f2ffbfede24ff34e706182435207",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/README.md",
+      "sha256_utf8": "f72ffe56c7f9668f17292f7021e0adca88b2d849ac894ce0bad1abd1f4becfde"
+    },
+    {
+      "path": "docs/specifikace.md",
+      "git_blob_sha": "133f671a9fdb2983f10ff68110482bc0ffb51100",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/docs/specifikace.md",
+      "sha256_utf8": "b95e5fd3e6ef8e2a5021295cda6223014ce256223956b5d77f82803330de05fc"
+    },
+    {
+      "path": "pyproject.toml",
+      "git_blob_sha": "4f4b0b6416f87f7a431398aa1f1a1c3c6c4a5aa4",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/pyproject.toml",
+      "sha256_utf8": "1d1d9dac9965ca711f5cc7a89633cc56fde70f3241565603063c99c0011bab93"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/backend.py",
+      "git_blob_sha": "67aa9237ca729d74f3299cd8ebdd0706b9aa8dc3",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/src/archpapercraft/core_geometry/backend.py",
+      "sha256_utf8": "352de09c13946eb95c9e229746cf99fe2c8b7a4fd2b151e379815729f0cf3330"
+    },
+    {
+      "path": "src/archpapercraft/unfolder/strategies.py",
+      "git_blob_sha": "c1748a53d32ee2494eca1bbfffcfabf9d4637986",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/src/archpapercraft/unfolder/strategies.py",
+      "sha256_utf8": "013e753953f230cf30e51714aeaa0cf5d7925cee5426abd377b9bfaa0d3427af"
+    },
+    {
+      "path": "src/archpapercraft/unfolder/exact_unfold.py",
+      "git_blob_sha": "b9cc9b5fa11476fb1a823cb7bc735da71bbd3856",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/src/archpapercraft/unfolder/exact_unfold.py",
+      "sha256_utf8": "05b91dd7d2ad0b0a49d01b82776a46f61c6368e8ca269d56476e25faf1b9e838"
+    },
+    {
+      "path": "src/archpapercraft/ui/papercraft_panel.py",
+      "git_blob_sha": "26b1919f1cdf8e2868d469ccbe638b4c5d542e8e",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/src/archpapercraft/ui/papercraft_panel.py",
+      "sha256_utf8": "bca26f039a5f487605065944307444c901f4ef0dd4d18bb1bcb26ccadff63d15"
+    },
+    {
+      "path": "src/archpapercraft/layout_packer/packer.py",
+      "git_blob_sha": "25dc200911fe0a62045fc972a174882ee7442265",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/src/archpapercraft/layout_packer/packer.py",
+      "sha256_utf8": "34002ebfe6961f7e609e16fcfc49fca033b92c7562f5e9353665672cf01206d9"
+    },
+    {
+      "path": "tests/test_unfolder.py",
+      "git_blob_sha": "91adac6dd08ba2e9adf013494c6bb0e997a9dedf",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/tests/test_unfolder.py",
+      "sha256_utf8": "f6ce2327be73a1ded6f1a49a63e7e2ae245f8f67c6efbf2daf5babafa5dbcc43"
+    },
+    {
+      "path": "src/archpapercraft/ui/viewport_3d.py",
+      "git_blob_sha": "4c7df86452e0fc55a58a384f924e493ad162ac4c",
+      "pinned_url": "https://github.com/DaliborZ-tech/papercraft/blob/d689af67e059512fdc99e85e9eb0b8d432f4c5d4/src/archpapercraft/ui/viewport_3d.py",
+      "sha256_utf8": "7ecdd3a6b165b5fc6a00a531cb39e391cca5902f6bbf51697d5a04b0dc06b807"
+    }
+  ]
+}

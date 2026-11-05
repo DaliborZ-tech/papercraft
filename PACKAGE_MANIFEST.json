@@ -1,0 +1,47 @@
+{
+  "package": "Papercraft_ADLC_v1",
+  "version": "1.0",
+  "prepared_on": "2026-11-05",
+  "files": [
+    {
+      "name": "00_START_HERE.md",
+      "size_bytes": 2564,
+      "sha256": "2b527b87a8c2c9ab0ca3b4f8ed1b8cf39d90b3c9e2bff8220f2241366be71494"
+    },
+    {
+      "name": "01_START_PROMPT.md",
+      "size_bytes": 4019,
+      "sha256": "21fca8f0c078945755b6ad4b3146d64fabe8846d760096c8eccb28fbca06ae09"
+    },
+    {
+      "name": "02_CODEX_MANDATE.md",
+      "size_bytes": 24864,
+      "sha256": "4fb2dae58be4b730810d88849b467aff9a0741c1ae9e2acbbf5d76f3224d53d2"
+    },
+    {
+      "name": "03_EPICS_AND_ROADMAP.md",
+      "size_bytes": 16422,
+      "sha256": "c077334af8570d3cbdd82a76ab4928fdc5a4043cf3c99037a4948d3444e878ff"
+    },
+    {
+      "name": "04_ACCEPTANCE_AND_VERIFICATION.md",
+      "size_bytes": 16166,
+      "sha256": "9d25a1ce9a8ec341d66c463f8a1931a44b709bbd8184c3e0b2ae8750fe73108a"
+    },
+    {
+      "name": "05_WORK_QUEUE.json",
+      "size_bytes": 8633,
+      "sha256": "24a3746b1900a01161754afcc41d007d0bd8201fba530b1df15dc819854da11f"
+    },
+    {
+      "name": "06_SOURCE_MANIFEST.json",
+      "size_bytes": 4659,
+      "sha256": "0667e1b103f0702a92571ff4614f9af79165e4ee419c6ae14e8d674021ade635"
+    },
+    {
+      "name": "07_REVIEW_AND_LIMITS.md",
+      "size_bytes": 2289,
+      "sha256": "f55c61ec9928df3f0e01effa98a759ec4b2d4e44fa3604dd800ad02be105c71f"
+    }
+  ]
+}

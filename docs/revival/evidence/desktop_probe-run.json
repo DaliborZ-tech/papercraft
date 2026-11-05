@@ -1,0 +1,10 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\dalib\\projects\\papercraft\\tools\\revival\\desktop_probe.py",
+    "docs/revival/evidence/desktop-followup"
+  ],
+  "started_utc": "2026-11-05T19:15:34.149142+00:00",
+  "seconds": 14.793,
+  "exit_code": 0
+}
