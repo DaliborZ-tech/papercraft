@@ -1,0 +1,101 @@
+{
+  "base_sha": "42b3d80158fda64af39a99416f2b5e52be2bc72a",
+  "code_sha": "95be72c6de6665b98efd10c58dae941f3b91fe83",
+  "seconds": 3.333,
+  "review_worktree": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-mixed-review-ec720d727f434a64958bff127cebd5b6",
+  "proof_kind": "independent arithmetic and static contract checks only",
+  "p2_implementation_verification": "NOT_RUN",
+  "slopes_mm": [
+    42.42640687119285,
+    46.09772228646444
+  ],
+  "wall_corners_page_mm": [
+    [
+      60.0,
+      60.0
+    ],
+    [
+      146.60254037844385,
+      110.0
+    ],
+    [
+      126.60254037844385,
+      144.64101615137753
+    ],
+    [
+      40.0,
+      94.64101615137754
+    ]
+  ],
+  "old_bounds_without_tabs_mm": [
+    [
+      18.786796564403573,
+      60.0
+    ],
+    [
+      146.60254037844385,
+      181.38336229312523
+    ]
+  ],
+  "new_bounds_without_tabs_mm": [
+    [
+      16.951138856767784,
+      60.0
+    ],
+    [
+      146.60254037844385,
+      184.5628147080558
+    ]
+  ],
+  "positive_fixture_inside_A4": true,
+  "old_anchor_30_bounds_mm": [
+    [
+      -11.213203435596427,
+      60.0
+    ],
+    [
+      116.60254037844386,
+      181.38336229312523
+    ]
+  ],
+  "new_anchor_30_bounds_mm": [
+    [
+      -13.048861143232216,
+      60.0
+    ],
+    [
+      116.60254037844386,
+      184.5628147080558
+    ]
+  ],
+  "negative_fixture_overflows_both_times": true,
+  "collision_area_without_top_tabs_mm2": [
+    0.0,
+    10
+  ],
+  "bbox_min_delta_mm": [
+    -1.8356577076357894,
+    0.0
+  ],
+  "dependency_wall_reference_before_mm": [
+    -2.426406871192853,
+    168.12570843487288
+  ],
+  "dependency_wall_reference_after_mm": [
+    -6.097722286464432,
+    174.4846132647341
+  ],
+  "dependency_wall_reference_movement_mm": 7.342630830543167,
+  "lost_anchor_contract_static_check": {
+    "unresolved_state_explicit": true,
+    "complete_export_blocked": true,
+    "fallback_forbidden": true,
+    "explicit_author_action_and_lineage_required": true,
+    "implementation_proof": "NOT_RUN"
+  },
+  "p2_gate_accepted": false,
+  "p2_execution_authorized": false,
+  "estimate_refresh_before_PC007": true,
+  "validate_delivery_exit": 0,
+  "validate_delivery_output": "PASS: 12-ticket DAG, 61 AC, 16 epics, P0/P1 authorization, 6 UX states/JS syntax, evidence counts, unchanged production\n"
+}

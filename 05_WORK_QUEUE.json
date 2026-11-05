@@ -25,7 +25,14 @@
     },
     "accepted_by_owner": false,
     "contract_version": "1.1",
-    "contract_addendum": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md"
+    "contract_addendum": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+    "contract_addendum_review": {
+      "verdict": "APPROVED_IN_SCOPE",
+      "code_sha": "95be72c6de6665b98efd10c58dae941f3b91fe83",
+      "report": "docs/revival/MIXED_PART_REVIEW.md",
+      "open_blocker_major": 0,
+      "scope": "P2_v1.1_design_addendum_only_not_implementation_or_PO_acceptance"
+    }
   },
   "rules": [
     "Počáteční queue není důkaz implementace.",
@@ -474,6 +481,13 @@
           30,
           60
         ]
+      },
+      "design_addendum_review": {
+        "verdict": "APPROVED_IN_SCOPE",
+        "code_sha": "95be72c6de6665b98efd10c58dae941f3b91fe83",
+        "report": "docs/revival/MIXED_PART_REVIEW.md",
+        "open_blocker_major": 0,
+        "scope": "P2_v1.1_design_addendum_only_not_implementation_or_PO_acceptance"
       }
     },
     {
