@@ -1,0 +1,27 @@
+{
+  "review_base": "983fef516269eac36f28a4fa81763a7a3e184f4c",
+  "reviewed_instruction_code": "2c572d81190995040e1b8c75cbab265dca3d0003",
+  "reviewed_merge_code": "89c0bf7b3cf17cfa0732a9e0f7a044b521e25d59",
+  "final_review_code": "8f959ea415ff2b7a144adb1e1ef307f773c33106",
+  "seconds": 6.044,
+  "remote_master_at_review": "f789b74946b0455341b53b5adf3b97dfc05b7543",
+  "preserved_remote_merge": "f789b74946b0455341b53b5adf3b97dfc05b7543",
+  "merge_parents_verified": true,
+  "merge_tree_identical_to_instruction_code": true,
+  "remote_merge_is_ancestor_of_final_code": true,
+  "local_instruction_code_is_ancestor_of_final_code": true,
+  "subsequent_content_delta": [
+    "docs/revival/INTEGRATION_REPORT.md"
+  ],
+  "queue_changes_only_integration_policy_and_last_rule": true,
+  "p2_gate_accepted": false,
+  "p2_gate_status": "PO_PENDING",
+  "p2_execution_flags_remain_false": true,
+  "p2_contract_scope_unchanged": true,
+  "production_ac_roadmap_unchanged": true,
+  "diff_check_exit": 0,
+  "validate_delivery_exit": 0,
+  "validate_delivery_stdout": "PASS: 12-ticket DAG, 61 AC, 16 epics, P0/P1 authorization, 6 UX states/JS syntax, evidence counts, unchanged production\n",
+  "verdict": "APPROVED_IN_SCOPE",
+  "push_and_remote_sha_verification": "integrator_followup_not_yet_proven_by_this_review"
+}
