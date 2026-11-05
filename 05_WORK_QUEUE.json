@@ -30,7 +30,7 @@
     "P2 položky jsou návrh k dopracování v P1; nezačínat před GATE-P2.",
     "P4–P6 se rozepíšou do ticketů podle epic při přípravě příslušné etapy.",
     "Stavy akceptace a release readiness jsou oddělené.",
-    "Vytvoření této fronty neautorizuje push nebo merge."
+    "Oprava vlastníka 2026-11-05 autorizuje integraci a push dokončených ucelených balíků v autorizovaném rozsahu po ověření a nezávislé revizi na master bez další rutinní žádosti; produktová brána P2 zůstává samostatná."
   ],
   "tickets": [
     {
