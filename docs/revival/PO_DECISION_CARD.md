@@ -2,6 +2,8 @@
 
 P0/P1 přináší skutečně spuštěnou a proměřenou baseline, diagnostické reprodukce a návrh obnovy. Nevznikla ještě nová použitelná vystřihovánka. Technický verdikt a přesný review pin jsou v [REVIEW_REPORT.md](REVIEW_REPORT.md); PO akceptace a release jsou samostatné a zůstávají čekající.
 
+Nezávislé review: **APPROVED_IN_SCOPE**, CODE `5b01bb26e6b4c3da8d75afdca19cad5d6b43d576`. Dva drobné nálezy opraveny a uzavřeny, žádný zásadní otevřený nález v P0/P1. Všechny dostupné nezávislé části prvního balíku jsou technicky dokončené.
+
 **Doporučení:** přijmout variantu B a [P2_IMPLEMENTATION_CONTRACT v1.0](P2_IMPLEMENTATION_CONTRACT.md): zachovat Python/PySide6 a nahradit geometricko-papírovou pipeline parametrickými panely a explicitními spoji. [Srovnání A/B/C](ARCHITECTURE_DECISION.md), [UX návrh](UX_CONTRACT.md) a [šest klikacích stavů](ux-prototype.html).
 
 Co P2 dodá:

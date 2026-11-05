@@ -1,0 +1,79 @@
+{
+  "base_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
+  "code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+  "command": "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe docs\\revival\\evidence\\reviewer-checks.py",
+  "exit_code": 0,
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "seconds": 0.4506750999717042,
+  "results": {
+    "positive_rigid_triangle": {
+      "lengths": [
+        3.0,
+        4.0,
+        5.0
+      ],
+      "area": 6.0,
+      "pass_numerics": true,
+      "boundary_cuts": 0
+    },
+    "negative_closed_tetrahedron": {
+      "faces": 4,
+      "cuts": 0,
+      "max_unreported_gap": 7.999999999999998,
+      "defect_reproduced": true
+    },
+    "negative_cone_lengths_vs_area": {
+      "expected_radial_seam": 13,
+      "actual_radial_seam": 20.38970598187316,
+      "expected_area": 449.2477494633404,
+      "actual_area": 449.2477494633404,
+      "defect_reproduced": true
+    },
+    "boundary_near_cylinder": {
+      "finite": true,
+      "joining_side": 30.0,
+      "pass_this_fixture_only": true
+    },
+    "negative_index_permutation": {
+      "angle": 73.73979529168804,
+      "reindexed": -73.73979529168804,
+      "expected_same_semantic_polarity": true,
+      "defect_reproduced": true
+    },
+    "negative_tab_in_material": {
+      "entire_tab_inside_rect": true,
+      "overlap_mm2": 48.0,
+      "defect_reproduced": true
+    },
+    "negative_disjoint_intersection": {
+      "expected": "empty or explicit unsupported",
+      "actual_faces": 12,
+      "defect_reproduced": true
+    },
+    "negative_nonmanifold": {
+      "accepted_faces": 3,
+      "two_children_coincident": true,
+      "overlap_mm2": 24,
+      "defect_reproduced": true
+    },
+    "export_landscape_mismatch": {
+      "pdf_width_mm": 297.0000127777778,
+      "svg_width": "210.0mm",
+      "defect_reproduced": true
+    },
+    "bootstrap_and_binary_proof": {
+      "original_files_still_byte_equal": [
+        "00_START_HERE.md",
+        "01_START_PROMPT.md",
+        "02_CODEX_MANDATE.md",
+        "03_EPICS_AND_ROADMAP.md",
+        "04_ACCEPTANCE_AND_VERIFICATION.md",
+        "06_SOURCE_MANIFEST.json",
+        "07_REVIEW_AND_LIMITS.md",
+        "PACKAGE_MANIFEST.json"
+      ],
+      "pdf_blobs_byte_equal": true
+    },
+    "production_unchanged": true
+  }
+}

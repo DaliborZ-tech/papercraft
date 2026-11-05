@@ -15,8 +15,15 @@
       "Skutečné přijetí konkrétního P2 kontraktu vlastníkem"
     ],
     "auto_approve": false,
-    "status": "PO_PENDING_AFTER_INDEPENDENT_REVIEW",
-    "contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md"
+    "status": "PO_PENDING",
+    "contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+    "independent_review": {
+      "verdict": "APPROVED_IN_SCOPE",
+      "code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "report": "docs/revival/REVIEW_REPORT.md",
+      "open_blocker_major": 0
+    },
+    "accepted_by_owner": false
   },
   "rules": [
     "Počáteční queue není důkaz implementace.",
@@ -43,15 +50,22 @@
         "AC-B02",
         "AC-B03"
       ],
-      "status": "IN_REVIEW",
+      "status": "AGENT_VERIFIED",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/evidence/bootstrap.json",
         "docs/revival/BASELINE_REPORT.md"
       ],
-      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
-      "product_acceptance": "PO_PENDING",
-      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+      "technical_verdict": "APPROVED_IN_SCOPE",
+      "product_acceptance": "NOT_REQUIRED_FOR_DIAGNOSIS",
+      "review": "docs/revival/REVIEW_REPORT.md",
+      "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
+      "acceptance_state": {
+        "AC-B01": "NOT_APPLICABLE: root was nonempty; B02 bootstrap used",
+        "AC-B02": "PASS: all nine hashes equal immediately before/after bootstrap",
+        "AC-B03": "NOT_APPLICABLE: no differing collision or other Git; preflight completed before copy"
+      }
     },
     {
       "id": "PC-001",
@@ -73,16 +87,22 @@
         "AC-B04",
         "AC-B05"
       ],
-      "status": "IN_REVIEW",
+      "status": "AGENT_VERIFIED",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/BASELINE_REPORT.md",
         "docs/revival/CURRENT_PROJECT_STATE.md",
         "docs/revival/WINDOWS_REPRO.md"
       ],
-      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
-      "product_acceptance": "PO_PENDING",
-      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+      "technical_verdict": "APPROVED_IN_SCOPE",
+      "product_acceptance": "NOT_REQUIRED_FOR_DIAGNOSIS",
+      "review": "docs/revival/REVIEW_REPORT.md",
+      "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
+      "acceptance_state": {
+        "AC-B04": "PASS: exact commands, versions, counts and exits recorded",
+        "AC-B05": "NOT_APPLICABLE: Windows/OpenGL available; core and desktop results separately recorded"
+      }
     },
     {
       "id": "PC-002",
@@ -108,7 +128,7 @@
       "acceptance": [
         "PC-F01 až PC-F08: reprodukce nebo přesně odůvodněné NOT_VERIFIED"
       ],
-      "status": "IN_REVIEW",
+      "status": "AGENT_VERIFIED",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/FINDINGS.md",
@@ -117,9 +137,14 @@
         "tools/revival/integration_probe.py",
         "tools/revival/test_diagnostic_contracts.py"
       ],
-      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
-      "product_acceptance": "PO_PENDING",
-      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+      "technical_verdict": "APPROVED_IN_SCOPE",
+      "product_acceptance": "NOT_REQUIRED_FOR_DIAGNOSIS",
+      "review": "docs/revival/REVIEW_REPORT.md",
+      "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
+      "acceptance_state": {
+        "PC-F01 až PC-F08: reprodukce nebo přesně odůvodněné NOT_VERIFIED": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
+      }
     },
     {
       "id": "PC-003",
@@ -143,14 +168,21 @@
         "Datové identity, jednotky, invalidace a exportní snapshot",
         "Žádný nepodložený slib obecného rozvinu"
       ],
-      "status": "IN_REVIEW",
+      "status": "PO_PENDING",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/ARCHITECTURE_DECISION.md"
       ],
-      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "technical_verdict": "APPROVED_IN_SCOPE",
       "product_acceptance": "PO_PENDING",
-      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+      "review": "docs/revival/REVIEW_REPORT.md",
+      "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
+      "acceptance_state": {
+        "Porovnané varianty": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
+        "Datové identity, jednotky, invalidace a exportní snapshot": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
+        "Žádný nepodložený slib obecného rozvinu": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
+      }
     },
     {
       "id": "PC-004",
@@ -190,7 +222,7 @@
         "P2 má manuální layout, SVG/PDF a 3D↔2D",
         "Konkrétní demo i negativní stavy"
       ],
-      "status": "IN_REVIEW",
+      "status": "PO_PENDING",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/UX_CONTRACT.md",
@@ -199,9 +231,16 @@
         "docs/revival/TRACEABILITY.md",
         "05_WORK_QUEUE.json"
       ],
-      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "technical_verdict": "APPROVED_IN_SCOPE",
       "product_acceptance": "PO_PENDING",
-      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+      "review": "docs/revival/REVIEW_REPORT.md",
+      "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
+      "acceptance_state": {
+        "Všechny dohodnuté epiky zařazeny": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
+        "P2 má manuální layout, SVG/PDF a 3D↔2D": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
+        "Konkrétní demo i negativní stavy": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
+      }
     },
     {
       "id": "PC-005",
@@ -226,15 +265,22 @@
         "Ověřené důkazy a jasné limity",
         "P2 kontrakt předložen k přijetí"
       ],
-      "status": "IN_PROGRESS",
+      "status": "PO_PENDING",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/REVIEW_REPORT.md",
         "docs/revival/PO_DECISION_CARD.md"
       ],
-      "technical_verdict": "PENDING_INDEPENDENT_REVIEW",
+      "technical_verdict": "APPROVED_IN_SCOPE",
       "product_acceptance": "PO_PENDING",
-      "review": "PC-005; distinct reviewer; exact CODE SHA and evidence in REVIEW_REPORT.md"
+      "review": "docs/revival/REVIEW_REPORT.md",
+      "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+      "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
+      "acceptance_state": {
+        "Jiný reviewer": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
+        "Ověřené důkazy a jasné limity": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
+        "P2 kontrakt předložen k přijetí": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
+      }
     },
     {
       "id": "PC-006",
@@ -479,5 +525,6 @@
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
   "working_branch": "revival/p0-p1-contract",
   "release_readiness": "NOT_READY: product defects open; P2 and physical acceptance pending",
-  "evidence_index": "docs/revival/BASELINE_REPORT.md"
+  "evidence_index": "docs/revival/BASELINE_REPORT.md",
+  "p0_p1_technical_completion": "AGENT_VERIFIED"
 }
