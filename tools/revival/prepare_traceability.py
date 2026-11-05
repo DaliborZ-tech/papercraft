@@ -6,6 +6,8 @@ import re
 ROOT = Path(__file__).resolve().parents[2]
 queue_path = ROOT/'05_WORK_QUEUE.json'
 queue = json.loads(queue_path.read_text(encoding='utf-8-sig'))
+if any(t['stage'] in ['P0','P1'] and t['status'] not in ['PLANNED','IN_REVIEW','IN_PROGRESS'] for t in queue['tickets']):
+    raise SystemExit('Refusing to regress reviewed or accepted queue state; this is a one-time P1 preparation helper')
 queue['updated_on'] = '2026-11-05'
 queue['baseline_sha'] = 'd689af67e059512fdc99e85e9eb0b8d432f4c5d4'
 queue['working_branch'] = 'revival/p0-p1-contract'

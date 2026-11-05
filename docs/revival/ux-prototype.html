@@ -32,7 +32,25 @@ joint:{mode:'Díly a spoje · vybrán hřeben J01',selection:'J01 · P5 ↔ P6',
 stale:{mode:'Konstrukce · změněna výška střechy',selection:'P5/P6 · vyžadují kontrolu',properties:[['Převýšení střechy','3 → 3,5 m'],['Stěny P1–P4','Beze změny'],['Polohy stěn','Zachovány'],['Střecha','Přepočítat a zkontrolovat'],['Úplný export','Blokován']],caption:'Starý obrys zůstává viditelný jako neaktuální. Nedotčené díly si ponechají identity, polohy, rotace a zámky.',issue:'Neaktuální geometrie střechy. Přepočítejte; při jednoznačné kontinuitě se původní poloha zachová. Zastaralý snapshot nelze přijmout jako aktuální.'},
 collision:{mode:'Stránky · kolize chlopně J12',selection:'J12 · kolize na stránce 2',properties:[['Problém','Chlopeň zasahuje P3'],['Oprava A','Posunout díl'],['Oprava B','Upravit chlopeň'],['Zámek polohy','Samostatný'],['Zámek rotace','Samostatný'],['Přesný vstup','X / Y / úhel']],caption:'Kontrola používá celý materiálový obrys včetně chlopní. Vybere konkrétní dvojici a nabídne opravu. Dotyk hrany se odlišuje od plošného průniku.',issue:'Kolize chlopně J12 se stěnou P3. Záměrný překryv lze potvrdit pro konkrétní revizi; přesah fyzického papíru ani rozbité reference tím nelze prominout.'},
 export:{mode:'Exportní souhrn · stejný snapshot pro SVG a PDF',selection:'Revize projektu 12 · návrh',properties:[['SVG','Soubor na každou stránku'],['PDF','2 vektorové stránky'],['Neumístěné díly','0'],['Kalibrace','100 mm'],['Tisk','100 % / skutečná velikost']],caption:'Souhrn odliší integritu, potvrditelná varování a částečný výstup. Úspěch hlásí až po zápisu všech souborů. Toto je ilustrační stav návrhu.',issue:'Ukázkové varování okraje. Skutečná přejímka P2 vyžaduje Windows průchod, otevření/editaci SVG v Inkscape a kontrolu vektorového PDF.'}}
-function showState(name){const s=states[name];for(const id of ['mode','selection','caption','issue'])document.getElementById(id).textContent=s[id];document.getElementById('properties').replaceChildren(...s.properties.flatMap(([a,b])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=a;dd.textContent=b;return [dt,dd]}));document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.state===name)));for(const id of ['modelView','paperView'])document.getElementById(id).style.display=['empty','export'].includes(name)?'none':'block';document.getElementById('empty').style.display=name==='empty'?'block':'none';document.getElementById('export').style.display=name==='export'?'block':'none';document.getElementById('staleOverlay').style.display=name==='stale'?'block':'none';document.getElementById('collision').style.display=name==='collision'?'block':'none';document.getElementById('joint2d').style.display=name==='joint'?'block':'none';document.getElementById('joint3d').style.display=name==='joint'?'block':'none';document.getElementById('status').textContent=name==='empty'?'Nový projekt':'Projekt: Referenční dům · 1:100';history.replaceState(null,'','#'+name)}
+const constructionTree = document.querySelector('.content.tree');
+const populatedTreeMarkup = constructionTree.innerHTML;
+function showState(name){
+ const s=states[name];
+ for(const id of ['mode','selection','caption','issue'])document.getElementById(id).textContent=s[id];
+ constructionTree.innerHTML=name==='empty'?'<p>Žádné objekty ani díly.</p><p>Stránky: 0</p><p>Vložte domeček pro zahájení práce.</p>':populatedTreeMarkup;
+ document.querySelectorAll('aside button').forEach(button=>{button.hidden=name==='empty';button.disabled=name==='empty'});
+ document.getElementById('properties').replaceChildren(...s.properties.flatMap(([a,b])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=a;dd.textContent=b;return [dt,dd]}));
+ document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.state===name)));
+ for(const id of ['modelView','paperView'])document.getElementById(id).style.display=['empty','export'].includes(name)?'none':'block';
+ document.getElementById('empty').style.display=name==='empty'?'block':'none';
+ document.getElementById('export').style.display=name==='export'?'block':'none';
+ document.getElementById('staleOverlay').style.display=name==='stale'?'block':'none';
+ document.getElementById('collision').style.display=name==='collision'?'block':'none';
+ document.getElementById('joint2d').style.display=name==='joint'?'block':'none';
+ document.getElementById('joint3d').style.display=name==='joint'?'block':'none';
+ document.getElementById('status').textContent=name==='empty'?'Nový projekt':'Projekt: Referenční dům · 1:100';
+ history.replaceState(null,'','#'+name);
+}
 document.querySelectorAll('[data-state]').forEach(b=>b.addEventListener('click',()=>showState(b.dataset.state)));showState(states[location.hash.slice(1)]?location.hash.slice(1):'house');
 </script>
 </html>
