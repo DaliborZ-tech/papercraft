@@ -326,7 +326,12 @@
       "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
       "product_acceptance": "NOT_RUN",
-      "paper_frame_schema_contract": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md"
+      "paper_frame_schema_contract": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+      "estimate_refresh_required": {
+        "when": "after_PC-006_before_PC-007",
+        "unit": "person_days",
+        "basis": "actual_results_not_agent_elapsed_time"
+      }
     },
     {
       "id": "PC-007",
@@ -460,7 +465,15 @@
           "missing_anchor",
           "dependency_affected_panel"
         ],
-        "verification_status": "NOT_RUN"
+        "verification_status": "NOT_RUN",
+        "anchor_page_mm": [
+          60,
+          60
+        ],
+        "negative_overflow_anchor_page_mm": [
+          30,
+          60
+        ]
       }
     },
     {

@@ -26,16 +26,16 @@ Split: potomek s původní kotvou zachová frame. Jiný potomek dostane vlastní
 
 ## Povinný fixture a ověřovací kontrakt PC-008
 
-Referenční dům 1:100, stěna 100 × 40 paper mm, střecha bez přesahu. Eave spoj stěna–střecha je **fold**, obě plochy tvoří jeden part se stěnovým rootem. Spodní levý roh stěny je lokální `[0,0]`, spodní hrana kladná X; stěna zabírá `[0,100] × [0,40]`, střecha pokračuje od y=40. Placement kotvy `[30,60]` paper mm na druhé A4 stránce, rotation=30°, oba zámky zapnuté. Triangulační pořadí není součást expected.
+Referenční dům 1:100, stěna 100 × 40 paper mm, střecha bez přesahu. Eave spoj stěna–střecha je **fold**, obě plochy tvoří jeden part se stěnovým rootem. Spodní levý roh stěny je lokální `[0,0]`, spodní hrana kladná X; stěna zabírá `[0,100] × [0,40]`, střecha pokračuje od y=40. Placement kotvy `[60,60]` paper mm na druhé A4 stránce, rotation=30°, oba zámky zapnuté. Tento hlavní fixture se vejde na fyzickou A4 i po změně střechy; úplná obálka s případnými chlopněmi se navíc validuje samostatně. Triangulační pořadí není součást expected.
 
 Změna převýšení střechy 3000→3500 model mm při neměnné šířce domu 6000 mm změní lokální sklonovou délku `sqrt(30²+30²)=42.426406871...` na `sqrt(30²+35²)=46.097722286...` paper mm. Maximum lokálního y dílu se změní z 82.426406871... na 86.097722286... bez chlopní. Čtyři rohy stěny po placementu zůstávají:
 
 | Lokální roh stěny | Bod na stránce v mm |
 |---|---|
-| [0,0] | [30,60] |
-| [100,0] | [116.602540378...,110] |
-| [100,40] | [96.602540378...,144.641016151...] |
-| [0,40] | [10,94.641016151...] |
+| [0,0] | [60,60] |
+| [100,0] | [146.602540378...,110] |
+| [100,40] | [126.602540378...,144.641016151...] |
+| [0,40] | [40,94.641016151...] |
 
 Expected vychází z analytické rotace/posunu, nikoli z helperu testovaného unfold/layout algoritmu. Použij stávající délkovou toleranci `max(0.01 paper mm, 1e-6 L)`; neměň ji kvůli stabilizaci identity.
 
@@ -43,10 +43,11 @@ Expected vychází z analytické rotace/posunu, nikoli z helperu testovaného un
 |---|---|---|
 | Změna střechy ve společném partu | Celý part stale a complete export blokován; po přepočtu stejné ID/frame/page/x/y/rotation/locks, všechny uvedené rohy stěny stejné, střecha má novou délku | AC-I01/I02; PC-008 |
 | Rotace, jiné pořadí triangles a větší tab envelope | Žádná změna kotvy ani bodů kořenové stěny; nová kolize/přesah se hlásí bez automatického posunu | AC-I01/C10/L04; PC-008 |
-| Nová kolize | Malý sousední materiál v původním lokálním pásu y=84..85 leží mimo starou střechu a uvnitř nové; po transformaci se odhalí kolize, placement zůstane | AC-L04/I02; PC-008 |
+| Nová kolize | Malý sousední materiál při x=10..20, y=84..85 v původním lokálním rámci leží mimo starou střechu a uvnitř nové; pro tuto izolovanou kontrolu jsou chlopně na horním okraji střechy vypnuté. Po transformaci se odhalí nová kolize, placement zůstane. Chlopně mají vlastní doplňující obálkový případ | AC-L04/I02; PC-008 |
 | Save/reopen, undo/redo | Persistovaný frame a page souřadnice, undo obnoví starou source revision i geometrii; redo vrátí nový tvar bez driftu | AC-I05/I01; PC-008 |
 | Kotva smazaná/neplatná, nejednoznačný split | Explicitní ANCHOR_UNRESOLVED/kontrola, žádná náhradní kotva bez příkazu, žádný kompletní export | AC-I03/I02; PC-008 |
 | Stěna připojená přes změněný střešní panel | Zahrnuta do dopadu a ke kontrole; žádný falešný příslib její původní 2D polohy | AC-I01/I02; PC-008 |
 | Tentýž smíšený part v SVG/PDF | Zachované kotvy i rohy stěny a změněný rozměr střechy ze stejného snapshotu; kontrola nezávislými čtečkami | AC-X04; PC-009 po PC-008 |
+| Negativní overflow varianta s kotvou [30,60] | Při stejné rotaci má bod [0,ymax] x=-11.213203436... před změnou a -13.048861143... mm po změně: oba stavy přesahují fyzickou stránku, complete PDF je blokován. Přijetí varování nesmí tuto chybu obejít; hlavní pozitivní exportní fixture používá [60,60] | AC-L10; PC-008/009 |
 
 PC-008 se nesmí uzavřít testem pouze oddělených stěn a střech. PC-006 zavede reference rámce/persistence; PC-007 nesmí joinem tyto reference zahodit; PC-008 ověří celý přepočet/layout a PC-009 exportní soulad. Původní AC se neruší: tento fixture doplňuje běžný případ oddělených dílů.
