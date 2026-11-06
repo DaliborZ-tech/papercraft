@@ -372,6 +372,55 @@ def main():
                 if attached:
                     user32.AttachThreadInput(current_thread, foreign_thread, False)
             focus_record["input_queue_temporarily_attached"] = attached
+        if user32.GetForegroundWindow() != own_hwnd:
+            # Windows can reject programmatic focus even when the requested
+            # document is visible. Activate it as a user would: a real click
+            # on its own title bar, after verifying the desktop hit target.
+            user32.SetWindowPos.argtypes = [
+                wintypes.HWND,
+                wintypes.HWND,
+                ctypes.c_int,
+                ctypes.c_int,
+                ctypes.c_int,
+                ctypes.c_int,
+                wintypes.UINT,
+            ]
+            user32.WindowFromPoint.argtypes = [wintypes.POINT]
+            user32.WindowFromPoint.restype = wintypes.HWND
+            user32.GetAncestor.argtypes = [wintypes.HWND, wintypes.UINT]
+            user32.GetAncestor.restype = wintypes.HWND
+            user32.SetCursorPos.argtypes = [ctypes.c_int, ctypes.c_int]
+            user32.GetCursorPos.argtypes = [ctypes.POINTER(wintypes.POINT)]
+            cursor, rect = wintypes.POINT(), wintypes.RECT()
+            user32.GetCursorPos(ctypes.byref(cursor))
+            raised = bool(user32.SetWindowPos(own_hwnd, wintypes.HWND(-1), 0, 0, 0, 0, 0x43))
+            try:
+                QTest.qWait(120)
+                assert user32.GetWindowRect(own_hwnd, ctypes.byref(rect))
+                point = wintypes.POINT((rect.left + rect.right) // 2, rect.top + 16)
+                target = user32.WindowFromPoint(point)
+                pid = wintypes.DWORD()
+                user32.GetWindowThreadProcessId(target, ctypes.byref(pid))
+                assert pid.value == process.pid and user32.GetAncestor(target, 2) == own_hwnd, (
+                    "Title-bar activation target is not this proof's editor; refusing mouse input"
+                )
+                assert user32.SetCursorPos(point.x, point.y)
+                assert user32.WindowFromPoint(point) == target, (
+                    "Activation target moved before click"
+                )
+                user32.mouse_event(0x0002, 0, 0, 0, 0)
+                user32.mouse_event(0x0004, 0, 0, 0, 0)
+                QTest.qWait(200)
+                focus_record["verified_titlebar_click"] = {
+                    "target_hwnd": int(target),
+                    "target_pid": pid.value,
+                    "x": point.x,
+                    "y": point.y,
+                }
+            finally:
+                if raised:
+                    user32.SetWindowPos(own_hwnd, wintypes.HWND(-2), 0, 0, 0, 0, 0x43)
+                user32.SetCursorPos(cursor.x, cursor.y)
         focus_record["after_hwnd"] = int(user32.GetForegroundWindow() or 0)
         report["initial_focus"] = focus_record
         save_report()
