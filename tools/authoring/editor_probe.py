@@ -286,6 +286,14 @@ def main():
         user32 = ctypes.WinDLL("user32", use_last_error=True)
         user32.GetForegroundWindow.restype = wintypes.HWND
         user32.GetWindowThreadProcessId.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.DWORD)]
+        user32.GetWindowThreadProcessId.restype = wintypes.DWORD
+        user32.IsWindowVisible.argtypes = [wintypes.HWND]
+        user32.GetWindowTextW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+        user32.GetClassNameW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
+        user32.GetWindowRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
+        user32.ShowWindow.argtypes = [wintypes.HWND, ctypes.c_int]
+        user32.BringWindowToTop.argtypes = [wintypes.HWND]
+        user32.AttachThreadInput.argtypes = [wintypes.DWORD, wintypes.DWORD, wintypes.BOOL]
         user32.SetForegroundWindow.argtypes = [wintypes.HWND]
         user32.PostMessageW.argtypes = [
             wintypes.HWND,
@@ -296,18 +304,41 @@ def main():
         callback_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
         user32.EnumWindows.argtypes = [callback_type, wintypes.LPARAM]
         found = []
+        observed = {}
 
         def visit(hwnd, _):
             pid = wintypes.DWORD()
             user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
             if pid.value == process.pid and user32.IsWindowVisible(hwnd):
-                found.append(hwnd)
+                title, cls, rect = (
+                    ctypes.create_unicode_buffer(2048),
+                    ctypes.create_unicode_buffer(256),
+                    wintypes.RECT(),
+                )
+                user32.GetWindowTextW(hwnd, title, len(title))
+                user32.GetClassNameW(hwnd, cls, len(cls))
+                user32.GetWindowRect(hwnd, ctypes.byref(rect))
+                width, height = rect.right - rect.left, rect.bottom - rect.top
+                observed[int(hwnd)] = {
+                    "hwnd": int(hwnd),
+                    "title": title.value,
+                    "class": cls.value,
+                    "width": width,
+                    "height": height,
+                }
+                # GTK can expose transient/helper windows before the document.
+                # Only the actual large window for this disposable SVG is a
+                # valid keyboard target, not the first visible HWND of its PID.
+                if edited.name in title.value and width >= 600 and height >= 400:
+                    found.append(hwnd)
             return True
 
         deadline = time.monotonic() + 20
         while time.monotonic() < deadline and not found:
             user32.EnumWindows(callback_type(visit), 0)
             time.sleep(0.2)
+        report["own_visible_windows"] = list(observed.values())
+        save_report()
         if not found:
             raise AssertionError(
                 "No real editor GUI window belonging to this proof PID was observed"
@@ -318,8 +349,36 @@ def main():
 
         app = QApplication.instance() or QApplication([])
         QTest.qWait(2200)
-        user32.SetForegroundWindow(own_hwnd)
+        before_foreground = user32.GetForegroundWindow()
+        user32.ShowWindow(own_hwnd, 9)  # SW_RESTORE, only our verified document HWND.
+        direct = bool(user32.SetForegroundWindow(own_hwnd))
         QTest.qWait(250)
+        focus_record = {
+            "own_hwnd": int(own_hwnd),
+            "before_hwnd": int(before_foreground or 0),
+            "direct_activation_returned": direct,
+        }
+        if user32.GetForegroundWindow() != own_hwnd:
+            kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+            kernel32.GetCurrentThreadId.restype = wintypes.DWORD
+            current_thread = kernel32.GetCurrentThreadId()
+            foreign_thread = user32.GetWindowThreadProcessId(user32.GetForegroundWindow(), None)
+            attached = False
+            try:
+                if foreign_thread and foreign_thread != current_thread:
+                    attached = bool(user32.AttachThreadInput(current_thread, foreign_thread, True))
+                user32.BringWindowToTop(own_hwnd)
+                focus_record["attached_activation_returned"] = bool(
+                    user32.SetForegroundWindow(own_hwnd)
+                )
+                QTest.qWait(150)
+            finally:
+                if attached:
+                    user32.AttachThreadInput(current_thread, foreign_thread, False)
+            focus_record["input_queue_temporarily_attached"] = attached
+        focus_record["after_hwnd"] = int(user32.GetForegroundWindow() or 0)
+        report["initial_focus"] = focus_record
+        save_report()
 
         def foreground():
             if user32.GetForegroundWindow() != own_hwnd:
@@ -475,6 +534,9 @@ def main():
             except subprocess.TimeoutExpired:
                 process.terminate()  # Only the proof's own process and disposable edited copy.
                 process.wait(timeout=5)
+        report["origin_bundle_preserved_after_run"] = {
+            p.name: _sha(p) for p in source_path.parent.iterdir() if p.is_file()
+        } == bundle
         save_report()
     print(json.dumps({k: report[k] for k in ("status", "source_sha", "elapsed_seconds")}, indent=2))
     return 0 if report["status"] == "PASS" else 1
