@@ -505,9 +505,15 @@ def main():
         assert tuple(p.attrib["data-role"] for p in final_part.findall("s:g", NS)) == ROLES
         final_paths = {p.attrib["id"]: p.attrib["d"] for p in final.findall(".//s:path[@id]", NS)}
         assert len(final.findall(".//s:path[@id]", NS)) == len(final_paths), "Duplicate path IDs"
-        assert paths.keys() == final_paths.keys(), (
-            "Stable path IDs lost or duplicate geometry created"
+        assert paths.keys() <= final_paths.keys(), "An existing stable path ID was lost"
+        assert len(original.findall(".//s:path", NS)) == len(final.findall(".//s:path", NS)), (
+            "A path was lost or extra geometry was created"
         )
+        unidentified = [p for p in original.findall(".//s:path", NS) if "id" not in p.attrib]
+        assert all(p.attrib.get("data-calibration-mm") == "100" for p in unidentified), (
+            "The probe cannot identify an original unlabelled non-calibration path"
+        )
+        added_ids = final_paths.keys() - paths.keys()
         displacements = {}
         for identity, geometry in paths.items():
             _same_path(geometry, final_paths[identity])
@@ -534,6 +540,9 @@ def main():
         after_calibration = final.find(".//s:path[@data-calibration-mm='100']", NS)
         assert calibration is not None and after_calibration is not None
         _same_path(calibration.attrib["d"], after_calibration.attrib["d"])
+        assert added_ids <= {after_calibration.attrib.get("id")}, (
+            "An added ID belongs to something other than the original calibration path"
+        )
         # This page-GUIDES path has no ID in the export, so query its parent.
         assert all(
             math.isclose(a, b, abs_tol=0.002)
@@ -551,6 +560,8 @@ def main():
         assert _git("rev-parse", "HEAD") == sha and _sha(Path(__file__)) == script_hash
         report["roundtrip_assertions"] = {
             "path_count": len(paths),
+            "total_path_count_including_calibration": len(final.findall(".//s:path", NS)),
+            "editor_added_id_to_existing_calibration": sorted(added_ids),
             "part_role_groups": list(ROLES),
             "native_path_commands_preserved": True,
             "all_local_coordinates_unchanged_mm_tolerance": 0.00002,
