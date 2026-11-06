@@ -28,12 +28,18 @@
       "skill_change": "Initial narrow project procedure with specification links and a concrete example",
       "usage_example": "A wall attached inside a roof keeps its overhang; evaluate material contact instead of trimming roof to wall edge.",
       "verification": {
-        "status": "PENDING",
-        "kind": "skill format/reference validation and independent decision review; no new physical proof"
+        "status": "FORMAT_AND_CONTENT_DECISION_REVIEW_PASS",
+        "kind": "skill format/reference validation and independent decision review; no new physical proof",
+        "evidence": [
+          "docs/p2/v1.2/evidence/usability-skills-review-results.json",
+          "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        ]
       },
       "independent_review": {
-        "status": "PENDING",
-        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+        "scope": "definition_and_current_documentation_application_only"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
@@ -71,12 +77,18 @@
       "skill_change": "Initial project UI procedure plus explicit recognition of required interaction/workspace restructuring, ordinary in-scope autonomy and concrete owner-facing alternatives.",
       "usage_example": "When a person cannot find an interior roof attachment, investigate controls and visible feedback before prescribing another hint.",
       "verification": {
-        "status": "PENDING",
-        "kind": "independent procedure/decision review; actual novice study NOT_RUN"
+        "status": "FORMAT_AND_CONTENT_DECISION_REVIEW_PASS",
+        "kind": "independent procedure/decision review; actual novice study NOT_RUN",
+        "evidence": [
+          "docs/p2/v1.2/evidence/usability-skills-review-results.json",
+          "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        ]
       },
       "independent_review": {
-        "status": "PENDING",
-        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+        "scope": "definition_and_current_documentation_application_only"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
@@ -110,12 +122,18 @@
       "skill_change": "Initial narrow project procedure with specification links and a concrete example",
       "usage_example": "Require a valid-domain regularity argument for a positive loft certificate; distinguish sampled and certified error bounds.",
       "verification": {
-        "status": "PENDING",
-        "kind": "historical fix is verified; independent application of this newly written skill still to check"
+        "status": "FORMAT_AND_CONTENT_DECISION_REVIEW_PASS",
+        "kind": "historical fix is verified; independent application of this newly written skill still to check",
+        "evidence": [
+          "docs/p2/v1.2/evidence/usability-skills-review-results.json",
+          "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        ]
       },
       "independent_review": {
-        "status": "PENDING",
-        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+        "scope": "definition_and_current_documentation_application_only"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
@@ -150,12 +168,18 @@
       "skill_change": "Initial delivery procedure plus ordinary UI rework autonomy and evidence-based escalation of fundamental workflow alternatives only.",
       "usage_example": "Before handing off a revised part/export pipeline, identify the tested commit and scope later fixes separately.",
       "verification": {
-        "status": "PENDING",
-        "kind": "independent review of current pinned addendum and source/evidence discipline"
+        "status": "FORMAT_AND_CONTENT_DECISION_REVIEW_PASS",
+        "kind": "independent review of current pinned addendum and source/evidence discipline",
+        "evidence": [
+          "docs/p2/v1.2/evidence/usability-skills-review-results.json",
+          "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        ]
       },
       "independent_review": {
-        "status": "PENDING",
-        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+        "scope": "definition_and_current_documentation_application_only"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {

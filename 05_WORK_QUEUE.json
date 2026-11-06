@@ -2187,7 +2187,12 @@
             "docs/p2/v1.2/ACCEPTANCE.md",
             "docs/p2/SKILL_IMPROVEMENTS.json"
           ],
-          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+          "review": {
+            "verdict": "APPROVED_IN_SCOPE",
+            "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+            "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+            "scope": "actual_documentation_application_only"
+          }
         },
         {
           "skill": "papercraft-authoring-ui",
@@ -2198,7 +2203,12 @@
             "docs/p2/v1.2/ACCEPTANCE.md",
             "docs/p2/SKILL_IMPROVEMENTS.json"
           ],
-          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+          "review": {
+            "verdict": "APPROVED_IN_SCOPE",
+            "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+            "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+            "scope": "actual_documentation_application_only"
+          }
         },
         {
           "skill": "papercraft-verification",
@@ -2209,7 +2219,12 @@
             "docs/p2/v1.2/ACCEPTANCE.md",
             "docs/p2/SKILL_IMPROVEMENTS.json"
           ],
-          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+          "review": {
+            "verdict": "APPROVED_IN_SCOPE",
+            "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+            "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+            "scope": "actual_documentation_application_only"
+          }
         },
         {
           "skill": "papercraft-delivery",
@@ -2220,7 +2235,12 @@
             "docs/p2/v1.2/ACCEPTANCE.md",
             "docs/p2/SKILL_IMPROVEMENTS.json"
           ],
-          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+          "review": {
+            "verdict": "APPROVED_IN_SCOPE",
+            "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+            "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+            "scope": "actual_documentation_application_only"
+          }
         }
       ]
     }
@@ -2368,13 +2388,20 @@
   },
   "usability_skills_addendum": {
     "requested_on": "2026-11-06",
-    "status": "IN_REVIEW",
+    "status": "AGENT_VERIFIED",
     "scope": "instructions_skills_usability_contract_and_prepared_test_only",
     "product_implementation": "NOT_RUN",
     "skills_effectiveness": "PENDING_NEXT_USE",
     "new_phase_created": false,
     "review_report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
-    "includes_explicit_ui_rework_authority": true
+    "includes_explicit_ui_rework_authority": true,
+    "independent_review": {
+      "verdict": "APPROVED_IN_SCOPE",
+      "source_sha": "9a7dc15c87dac4fe19745154f18bc77e04ee0abf",
+      "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+      "open_material_findings": 0,
+      "scope": "working_contract_and_skills_only_not_product_or_new_user_or_next_use_effectiveness"
+    }
   },
   "ui_ux_authority": {
     "source": "explicit_owner_UI_UX_mandate_2026-11-06",
