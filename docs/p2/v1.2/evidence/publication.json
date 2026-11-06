@@ -1,0 +1,17 @@
+{
+  "verified_at_utc": "2026-11-06T07:43:55.184216+00:00",
+  "scope": "published reviewed design package; following metadata-only commit records this actual observation",
+  "published_design_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
+  "reviewed_source_sha": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+  "administrative_commit_independently_approved": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
+  "local_master_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
+  "origin_master_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
+  "server_master_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
+  "remote": "https://github.com/DaliborZ-tech/papercraft.git",
+  "integration": "fast_forward",
+  "push_exit_code": 0,
+  "sha_equal": true,
+  "product_acceptance_implied": false,
+  "new_product_AC": "NOT_RUN",
+  "production_pipeline_changed": false
+}
