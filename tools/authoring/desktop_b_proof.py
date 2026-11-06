@@ -380,6 +380,11 @@ def run_windows(output, expected_sha):
                 except Exception:
                     errors.append(traceback.format_exc())
                     if dialog:
+                        details = {"kind": "failed_authoring_dialog", "title": dialog.windowTitle()}
+                        if hasattr(dialog, "specification"):
+                            details["actual_specification"] = dialog.specification()
+                        report["dialogs"].append(details)
+                        self.capture("FAIL-authoring-dialog", dialog)
                         dialog.reject()
 
             QTimer.singleShot(220, drive)
@@ -540,6 +545,7 @@ def run_windows(output, expected_sha):
                 if region:
                     self.click(dialog.draw_region)
                     self.sketch_points(dialog.sketch, region)
+                log("actual_attachment_specification", specification=dialog.specification())
                 check(
                     dialog.buttons.button(QDialogButtonBox.StandardButton.Ok).isEnabled(),
                     "Actual contact dialog rejected existing physical contact: "
@@ -894,7 +900,10 @@ def run_windows(output, expected_sha):
                     0,
                     base,
                     interval=[0.05, 0.95],
-                    region=[[1500, 2000], [11500, 2000], [11500, 8000], [1500, 8000]],
+                    # A real drawn region includes a deliberate1mm paper margin
+                    # around the wall footprint; pixel clicks cannot promise exact
+                    # coincidence with a trace on its boundary. The base stays130×100.
+                    region=[[1400, 1900], [11600, 1900], [11600, 8100], [1400, 8100]],
                 )
                 if wall == south:
                     self.tab(wall, aid, width=2)
