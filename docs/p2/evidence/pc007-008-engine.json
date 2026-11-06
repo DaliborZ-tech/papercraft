@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests/panel/test_domain.py",
+    "tests/panel/test_project_io.py",
+    "tests/panel/test_paper.py",
+    "-q",
+    "--junitxml=docs/p2/evidence/pc007-008-engine.xml"
+  ],
+  "started_utc": "2026-11-06T06:48:11.152819+00:00",
+  "seconds": 6.258267899975181,
+  "exit_code": 0
+}

@@ -1,0 +1,45 @@
+{
+  "stage": "P2 digital desktop",
+  "steps": [
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\p2-desktop-attempt1\\reference-house.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit projekt"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\p2-desktop-attempt1\\reference-house.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít projekt"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\p2-desktop-attempt1\\export",
+      "native_seen": false,
+      "accepted": false
+    },
+    {
+      "message": "Exportní souhrn",
+      "text": "2 stránek, 8 dílů.\n\nMěřítko modelu 1:100. Tisk 100 % / skutečná velikost.\n\nSVG: editovatelné díly a role. PDF: vektorové cesty, vložený font, kalibrace 100 mm.\n\nExterně upravenou SVG kopii tato verze neimportuje zpět."
+    }
+  ],
+  "errors": [
+    "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft\\tools\\panel\\p2_demo.py\", line 315, in run\n    assert (export_dir / \"model.pdf\").exists() and len(list(export_dir.glob(\"*.svg\"))) == 2\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  ],
+  "opengl": {
+    "valid": true,
+    "version": "b'4.6.0 NVIDIA 610.71'",
+    "renderer": "b'NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2'"
+  },
+  "linked_mouse_selection": true,
+  "mouse_drag_undo": true,
+  "seam_split_join_undo_redo": true,
+  "tab_owner_width_undo_redo": true,
+  "cross_page_pair": "J4: P9 · Levá střecha / stránka 2 ↔ P7 · Levá stěna / stránka 1",
+  "collision_overflow_gates": true,
+  "mixed_wall_page_max_delta_mm": 0.0,
+  "delete_page_undo": true,
+  "final_issues": [],
+  "save_reopen_all_author_state": true,
+  "seconds": 7.600533899967559
+}

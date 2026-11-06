@@ -1,5 +1,7 @@
 # Prompt pro novou Codex session
 
+> Aktualizace 6. 11. 2026: tento prompt pro p?vodn? P0/P1 je historick?. V existuj?c?m spr?vn?m checkoutu neklonuj znovu. Pokra?uj podle AGENTS, 05_WORK_QUEUE.json a docs/p2/v1.2/README.md: vlastn? profily, otev?en? konstrukce, vnit?n? p?ipojen? a zak?iven? pl??t?; dome?ek je pouze numerick? fixture.
+
 Převezmi roli delivery leada obnovy mého projektu ArchPapercraft Studio v repozitáři https://github.com/DaliborZ-tech/papercraft.
 
 **Nejdříve si repozitář naklonuj přímo do adresáře, ve kterém už je otevřený tento VS Code workspace. Tento adresář bude kořenem repozitáře. Nevytvářej v něm další podsložku `papercraft` a neklonuj jinam jako konečné umístění.** Nejprve vypiš a ověř skutečný workspace root, obsah a případný existující `.git`. V prázdném adresáři použij `git clone https://github.com/DaliborZ-tech/papercraft.git .`. U neprázdného adresáře dodrž bezpečný bootstrap z §6 mandátu: zachovej všechny existující soubory, včetně tohoto zadání, a nepřepisuj kolize. Existující správný checkout znovu neklonuj. Jiný Git projekt nebo kolize je konkrétní problém k vyřešení, nikoli důvod mazat obsah či zvolit jiný cílový adresář.

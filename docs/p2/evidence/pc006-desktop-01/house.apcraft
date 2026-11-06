@@ -1,0 +1,246 @@
+{
+  "application": "ArchPapercraft.PanelProject",
+  "schema_version": 1,
+  "project_id": "eb98534c-e29d-458c-877d-0a0b16b04bda",
+  "element_id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972",
+  "name": "Reference house P2",
+  "units": "mm",
+  "params": {
+    "length_mm": 10000.0,
+    "width_mm": 6000.0,
+    "wall_height_mm": 4000.0,
+    "roof_rise_mm": 3000.0
+  },
+  "scale": 0.01,
+  "revision": 1,
+  "element_revision": 1,
+  "surface_revisions": {
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left": 1,
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right": 1
+  },
+  "local_transform": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "parent_transforms": [],
+  "joints": {
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-bottom--back-left-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-bottom--back-left-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back:edge-left",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left:edge-back",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 1
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-top--back-ridge": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-top--back-ridge",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back:edge-left",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left:edge-back",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 2
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-top--back-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-top--back-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back:edge-bottom",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back:edge-top",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 3
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-top--front-left-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-left-top--front-left-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left:edge-eave",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left:edge-top",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 4
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-ridge--back-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-ridge--back-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back:edge-right",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right:edge-back",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 5
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-ridge--front-ridge": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-ridge--front-ridge",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left:edge-ridge",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right:edge-ridge",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 6
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-right-bottom--back-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-right-bottom--back-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back:edge-right",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right:edge-back",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 7
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-right-top--front-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-back-right-top--front-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right:edge-eave",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right:edge-top",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 8
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-left-bottom--front-left-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-left-bottom--front-left-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front:edge-left",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-left:edge-front",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 9
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-left-top--front-ridge": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-left-top--front-ridge",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front:edge-left",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-left:edge-front",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 10
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-left-top--front-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-left-top--front-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front:edge-bottom",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front:edge-top",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 11
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-ridge--front-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-ridge--front-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front:edge-right",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right:edge-front",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:gable-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 12
+    },
+    "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-right-bottom--front-right-top": {
+      "id": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:joint-front-right-bottom--front-right-top",
+      "surface_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front",
+      "edge_a": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front:edge-right",
+      "surface_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right",
+      "edge_b": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-right:edge-front",
+      "mode": "cut",
+      "tab_owner": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:wall-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 13
+    }
+  },
+  "pages": [
+    {
+      "id": "ea8cdb73-7609-406e-907c-c84c339d824b",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "margin_mm": 10.0
+    },
+    {
+      "id": "0ac3c9ab-1b43-407c-b325-ca77ef00fe89",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "margin_mm": 10.0
+    }
+  ],
+  "paper_state": {
+    "frames": {},
+    "placements": {},
+    "parts": {},
+    "acknowledgements": {},
+    "revision": 1
+  }
+}

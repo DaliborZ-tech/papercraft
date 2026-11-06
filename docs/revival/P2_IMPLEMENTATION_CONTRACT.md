@@ -1,5 +1,7 @@
 # P2 — implementační kontrakt k přijetí vlastníkem
 
+> Aktualizace 6. 11. 2026: tento dokument zachov?v? stav p?vodn?ho P0/P1 a v1.1. V1.1 byla skute?n? p?ijata vlastn?kem, potom byl c?l roz???en. Aktivn? n?vrh [P2 v1.2](../p2/v1.2/README.md) a jedin? queue ur?uj? nyn?j?? rozsah/stav; review a baseline piny z?st?vaj? historick?. Povinn? mixed-part testy se neru??. Push n?vrhu nen? jeho produktov? p?ijet?.
+
 Verze 1.1 · 5. 11. 2026 · stav PO_PENDING. Oproti v1.0 doplněna stabilní kotva společného dílu stěna–střecha a povinné smíšené fixtures PC-008 na žádost vlastníka. Produkční implementace P2 zatím není autorizována. Normativní zadání: [mandát](../../02_CODEX_MANDATE.md), [akceptace](../../04_ACCEPTANCE_AND_VERIFICATION.md), [16 epic](../../03_EPICS_AND_ROADMAP.md). Traceability a aktuální fronta jsou odkázané níže.
 
 ## Co vlastník dostane

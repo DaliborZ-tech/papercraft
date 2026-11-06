@@ -1,0 +1,90 @@
+{
+  "code_sha": "3fcf8773ae24e67341ee2f4975588916e58f04cd",
+  "seconds": 2.21,
+  "scope": "paper engine only; no UI/export renderer approval",
+  "results": {
+    "nondefault_panel_coverage": {
+      "surfaces": 8,
+      "area_paper_mm2": 34400.0,
+      "cut_paths_without_tabs": 30,
+      "internal_triangulation_cuts": 0
+    },
+    "tabs": {
+      "one_owner_per_joint": true,
+      "outward_signed_halfplane": true,
+      "default_width_mm": 5,
+      "no_base_cut": true,
+      "owner_change_removes_old": true
+    },
+    "mixed_anchor": {
+      "wall_corners_paper_mm": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137753
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ],
+      "stale_cache_saved": true,
+      "wall_max_drift_mm": 0.0,
+      "new_roof_slope_mm": 46.09772228646444,
+      "locks_and_frame_preserved": true
+    },
+    "split": {
+      "new_ids": true,
+      "lineage_preserved": true,
+      "page_geometry_preserved": true
+    },
+    "fold_polarity": {
+      "concave": "valley",
+      "convex": "mountain",
+      "side_swap_consistent": true,
+      "printed_side_flips": true
+    },
+    "dependency_wall": {
+      "reference_point_before_local_mm": [
+        0.0,
+        124.8528137423857
+      ],
+      "reference_point_after_local_mm": [
+        0.0,
+        132.19544457292886
+      ],
+      "movement_mm": 7.342630830543158,
+      "expected_movement_mm": 7.342630830543172
+    },
+    "warnings_and_integrity": {
+      "margin_ack_allowed": true,
+      "placement_change_invalidates_ack": true,
+      "physical_overflow_not_acknowledgeable": true,
+      "forged_ack_cannot_bypass_hard_error": true,
+      "footer_overlap_detected": true
+    },
+    "missing_runtime_cache_part": {
+      "blocked": false,
+      "authoritative_part_records": 8,
+      "runtime_parts": 7,
+      "exported_parts": 7,
+      "issues": []
+    },
+    "tampered_serialized_geometry": "blocked",
+    "strict_counter_rejected": [
+      "True",
+      "0",
+      "-1",
+      "'9'",
+      "1.5",
+      "1"
+    ]
+  }
+}

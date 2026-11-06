@@ -1,0 +1,1686 @@
+{
+  "application": "ArchPapercraft.PanelProject",
+  "schema_version": 1,
+  "project_id": "1289b122-4713-42eb-8e75-9dd6909f2361",
+  "element_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb",
+  "name": "Reference house P2",
+  "units": "mm",
+  "params": {
+    "length_mm": 10000.0,
+    "width_mm": 6000.0,
+    "wall_height_mm": 4000.0,
+    "roof_rise_mm": 3000.0
+  },
+  "scale": 0.01,
+  "revision": 1,
+  "element_revision": 1,
+  "surface_revisions": {
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left": 1,
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right": 1
+  },
+  "local_transform": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "parent_transforms": [],
+  "joints": {
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-bottom--back-left-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-bottom--back-left-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back:edge-left",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left:edge-back",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 1
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--back-ridge": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--back-ridge",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back:edge-left",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left:edge-back",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 2
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--back-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--back-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back:edge-bottom",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back:edge-top",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 3
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--front-left-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--front-left-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left:edge-eave",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left:edge-top",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 4
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-ridge--back-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-ridge--back-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back:edge-right",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right:edge-back",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 5
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-ridge--front-ridge": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-ridge--front-ridge",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left:edge-ridge",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right:edge-ridge",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 6
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-right-bottom--back-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-right-bottom--back-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back:edge-right",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right:edge-back",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 7
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-right-top--front-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-right-top--front-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right:edge-eave",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right:edge-top",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 8
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-bottom--front-left-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-bottom--front-left-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front:edge-left",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left:edge-front",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 9
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-top--front-ridge": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-top--front-ridge",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front:edge-left",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left:edge-front",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 10
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-top--front-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-top--front-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front:edge-bottom",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front:edge-top",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 11
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-ridge--front-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-ridge--front-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front:edge-right",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right:edge-front",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 12
+    },
+    "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-right-bottom--front-right-top": {
+      "id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-right-bottom--front-right-top",
+      "surface_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front",
+      "edge_a": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front:edge-right",
+      "surface_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right",
+      "edge_b": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right:edge-front",
+      "mode": "cut",
+      "tab_owner": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front",
+      "width_mm": 5.0,
+      "taper": 0.6,
+      "revision": 1,
+      "number": 13
+    }
+  },
+  "pages": [
+    {
+      "id": "c364dfd1-d08e-49e2-8798-b0c74ad64b63",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "margin_mm": 10.0
+    },
+    {
+      "id": "d9a81876-9670-42f6-ad4a-0b1ae20ce970",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "margin_mm": 10.0
+    }
+  ],
+  "paper_state": {
+    "frames": {
+      "56c3d66a-b51d-5940-afd4-99d8059ebec1": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:back-left-top",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back:edge-bottom",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "94a681be-3284-5a49-9937-82e623cf454a": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:front-left-bottom",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left:edge-bottom",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "a99090ff-1799-5efa-8f77-7459faaf8800": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:front-right-bottom",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front:edge-bottom",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "c480a0fa-7830-524d-bef5-a370104ee158": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:back-right-bottom",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right:edge-bottom",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "c82f13fa-7492-55a2-9832-877dac589ec1": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:front-left-top",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left:edge-eave",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "e6bcd137-b045-521a-8404-cf06e1035ded": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:back-left-bottom",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back:edge-bottom",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "e73b757a-e001-5e1f-8887-168103434c78": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:front-right-top",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front:edge-bottom",
+        "orientation": 1,
+        "front_side": "outside"
+      },
+      "f4c3efa4-b90d-5745-869e-1ca5b2cf289b": {
+        "root_surface_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right",
+        "anchor_vertex_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:back-right-top",
+        "axis_edge_id": "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right:edge-eave",
+        "orientation": 1,
+        "front_side": "outside"
+      }
+    },
+    "placements": {
+      "56c3d66a-b51d-5940-afd4-99d8059ebec1": {
+        "part_id": "56c3d66a-b51d-5940-afd4-99d8059ebec1",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "94a681be-3284-5a49-9937-82e623cf454a": {
+        "part_id": "94a681be-3284-5a49-9937-82e623cf454a",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "a99090ff-1799-5efa-8f77-7459faaf8800": {
+        "part_id": "a99090ff-1799-5efa-8f77-7459faaf8800",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "c480a0fa-7830-524d-bef5-a370104ee158": {
+        "part_id": "c480a0fa-7830-524d-bef5-a370104ee158",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "c82f13fa-7492-55a2-9832-877dac589ec1": {
+        "part_id": "c82f13fa-7492-55a2-9832-877dac589ec1",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "e6bcd137-b045-521a-8404-cf06e1035ded": {
+        "part_id": "e6bcd137-b045-521a-8404-cf06e1035ded",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "e73b757a-e001-5e1f-8887-168103434c78": {
+        "part_id": "e73b757a-e001-5e1f-8887-168103434c78",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      },
+      "f4c3efa4-b90d-5745-869e-1ca5b2cf289b": {
+        "part_id": "f4c3efa4-b90d-5745-869e-1ca5b2cf289b",
+        "page_id": null,
+        "x_mm": 0.0,
+        "y_mm": 0.0,
+        "rotation_deg": 0.0,
+        "lock_position": false,
+        "lock_rotation": false,
+        "source_revision": 1,
+        "review_state": "current"
+      }
+    },
+    "parts": {
+      "56c3d66a-b51d-5940-afd4-99d8059ebec1": {
+        "id": "56c3d66a-b51d-5940-afd4-99d8059ebec1",
+        "name": "gable-back",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-back": [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                30.0,
+                30.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                57.53553390593274,
+                9.535533905932738
+              ],
+              [
+                39.53553390593274,
+                27.535533905932738
+              ],
+              [
+                30.0,
+                30.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                30.0
+              ],
+              [
+                20.464466094067262,
+                27.535533905932738
+              ],
+              [
+                2.4644660940672627,
+                9.535533905932738
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                12.0,
+                -5.0
+              ],
+              [
+                48.0,
+                -5.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                30.0,
+                30.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                30.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "valley_paths": [],
+          "tab_polygons": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                57.53553390593274,
+                9.535533905932738
+              ],
+              [
+                39.53553390593274,
+                27.535533905932738
+              ],
+              [
+                30.0,
+                30.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                30.0
+              ],
+              [
+                20.464466094067262,
+                27.535533905932738
+              ],
+              [
+                2.4644660940672627,
+                9.535533905932738
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                12.0,
+                -5.0
+              ],
+              [
+                48.0,
+                -5.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ]
+          ],
+          "guide_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ]
+          ],
+          "labels": [
+            {
+              "text": "5",
+              "x": 43.58578643762691,
+              "y": 13.585786437626904,
+              "size_mm": 2.5
+            },
+            {
+              "text": "2",
+              "x": 16.414213562373096,
+              "y": 13.585786437626904,
+              "size_mm": 2.5
+            },
+            {
+              "text": "3",
+              "x": 30.0,
+              "y": 2.0,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-ridge--back-right-top",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--back-ridge",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--back-right-top"
+          ],
+          "input_digest": "b07185b685e14fe830ef69f3fe4303cd7d625bec5305af9ab1dd08fef8a3b9b8"
+        }
+      },
+      "e73b757a-e001-5e1f-8887-168103434c78": {
+        "id": "e73b757a-e001-5e1f-8887-168103434c78",
+        "name": "gable-front",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:gable-front": [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                30.0,
+                30.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                57.53553390593274,
+                9.535533905932738
+              ],
+              [
+                39.53553390593274,
+                27.535533905932738
+              ],
+              [
+                30.0,
+                30.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                30.0
+              ],
+              [
+                20.464466094067262,
+                27.535533905932738
+              ],
+              [
+                2.4644660940672627,
+                9.535533905932738
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                12.0,
+                -5.0
+              ],
+              [
+                48.0,
+                -5.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                30.0,
+                30.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                30.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "valley_paths": [],
+          "tab_polygons": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                57.53553390593274,
+                9.535533905932738
+              ],
+              [
+                39.53553390593274,
+                27.535533905932738
+              ],
+              [
+                30.0,
+                30.0
+              ]
+            ],
+            [
+              [
+                30.0,
+                30.0
+              ],
+              [
+                20.464466094067262,
+                27.535533905932738
+              ],
+              [
+                2.4644660940672627,
+                9.535533905932738
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                12.0,
+                -5.0
+              ],
+              [
+                48.0,
+                -5.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ]
+          ],
+          "guide_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ]
+          ],
+          "labels": [
+            {
+              "text": "10",
+              "x": 43.58578643762691,
+              "y": 13.585786437626904,
+              "size_mm": 2.5
+            },
+            {
+              "text": "12",
+              "x": 16.414213562373096,
+              "y": 13.585786437626904,
+              "size_mm": 2.5
+            },
+            {
+              "text": "11",
+              "x": 30.0,
+              "y": 2.0,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-top--front-ridge",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-ridge--front-right-top",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-top--front-right-top"
+          ],
+          "input_digest": "39f2f37893ea588d31a774dd651ed81fa36419bb79447178ede70d48b036c3c4"
+        }
+      },
+      "c82f13fa-7492-55a2-9832-877dac589ec1": {
+        "id": "c82f13fa-7492-55a2-9832-877dac589ec1",
+        "name": "roof-left",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-left": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                42.42640687119286
+              ],
+              [
+                0.0,
+                42.42640687119286
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                20.0,
+                -5.0
+              ],
+              [
+                80.0,
+                -5.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                42.42640687119286
+              ]
+            ],
+            [
+              [
+                100.0,
+                42.42640687119286
+              ],
+              [
+                80.0,
+                47.42640687119286
+              ],
+              [
+                20.0,
+                47.42640687119286
+              ],
+              [
+                0.0,
+                42.42640687119286
+              ]
+            ],
+            [
+              [
+                0.0,
+                42.42640687119286
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                42.42640687119286
+              ],
+              [
+                0.0,
+                42.42640687119286
+              ]
+            ]
+          ],
+          "valley_paths": [],
+          "tab_polygons": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                20.0,
+                -5.0
+              ],
+              [
+                80.0,
+                -5.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                42.42640687119286
+              ],
+              [
+                80.0,
+                47.42640687119286
+              ],
+              [
+                20.0,
+                47.42640687119286
+              ],
+              [
+                0.0,
+                42.42640687119286
+              ]
+            ]
+          ],
+          "guide_paths": [],
+          "labels": [
+            {
+              "text": "4",
+              "x": 50.0,
+              "y": 2.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "2",
+              "x": 98.0,
+              "y": 21.21320343559643,
+              "size_mm": 2.5
+            },
+            {
+              "text": "6",
+              "x": 50.0,
+              "y": 40.42640687119286,
+              "size_mm": 2.5
+            },
+            {
+              "text": "10",
+              "x": 2.0,
+              "y": 21.21320343559643,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-top--front-left-top",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-ridge--front-ridge"
+          ],
+          "input_digest": "9d9c6074c97815ad21b5e78398519ecef8c71a774d1fd96ed29c05f2c598b672"
+        }
+      },
+      "f4c3efa4-b90d-5745-869e-1ca5b2cf289b": {
+        "id": "f4c3efa4-b90d-5745-869e-1ca5b2cf289b",
+        "name": "roof-right",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:roof-right": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                42.42640687119286
+              ],
+              [
+                0.0,
+                42.42640687119286
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                20.0,
+                -5.0
+              ],
+              [
+                80.0,
+                -5.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                42.42640687119286
+              ]
+            ],
+            [
+              [
+                100.0,
+                42.42640687119286
+              ],
+              [
+                0.0,
+                42.42640687119286
+              ]
+            ],
+            [
+              [
+                0.0,
+                42.42640687119286
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ]
+          ],
+          "valley_paths": [],
+          "tab_polygons": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                20.0,
+                -5.0
+              ],
+              [
+                80.0,
+                -5.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ]
+          ],
+          "guide_paths": [],
+          "labels": [
+            {
+              "text": "8",
+              "x": 50.0,
+              "y": 2.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "12",
+              "x": 98.0,
+              "y": 21.21320343559643,
+              "size_mm": 2.5
+            },
+            {
+              "text": "6",
+              "x": 50.0,
+              "y": 40.42640687119286,
+              "size_mm": 2.5
+            },
+            {
+              "text": "5",
+              "x": 2.0,
+              "y": 21.21320343559643,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-right-top--front-right-top"
+          ],
+          "input_digest": "8633de9d692cb6576f8116ea4b8782d0b9a07939d5e703b92f4c2b0d9762a439"
+        }
+      },
+      "e6bcd137-b045-521a-8404-cf06e1035ded": {
+        "id": "e6bcd137-b045-521a-8404-cf06e1035ded",
+        "name": "wall-back",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-back": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                65.0,
+                8.0
+              ],
+              [
+                65.0,
+                32.0
+              ],
+              [
+                60.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                60.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                -5.0,
+                32.0
+              ],
+              [
+                -5.0,
+                8.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "valley_paths": [],
+          "tab_polygons": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                65.0,
+                8.0
+              ],
+              [
+                65.0,
+                32.0
+              ],
+              [
+                60.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                -5.0,
+                32.0
+              ],
+              [
+                -5.0,
+                8.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "guide_paths": [],
+          "labels": [
+            {
+              "text": "7",
+              "x": 58.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "3",
+              "x": 30.0,
+              "y": 38.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "1",
+              "x": 2.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-right-bottom--back-right-top",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-back-left-bottom--back-left-top"
+          ],
+          "input_digest": "6ad43a6f09d35ac07d9a9bcda66d4b55590aebd8bdf591ad52a7a6287cfbc7c8"
+        }
+      },
+      "a99090ff-1799-5efa-8f77-7459faaf8800": {
+        "id": "a99090ff-1799-5efa-8f77-7459faaf8800",
+        "name": "wall-front",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-front": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                65.0,
+                8.0
+              ],
+              [
+                65.0,
+                32.0
+              ],
+              [
+                60.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                60.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                -5.0,
+                32.0
+              ],
+              [
+                -5.0,
+                8.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "valley_paths": [],
+          "tab_polygons": [
+            [
+              [
+                60.0,
+                0.0
+              ],
+              [
+                65.0,
+                8.0
+              ],
+              [
+                65.0,
+                32.0
+              ],
+              [
+                60.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                -5.0,
+                32.0
+              ],
+              [
+                -5.0,
+                8.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "guide_paths": [],
+          "labels": [
+            {
+              "text": "9",
+              "x": 58.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "11",
+              "x": 30.0,
+              "y": 38.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "13",
+              "x": 2.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-left-bottom--front-left-top",
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:joint-front-right-bottom--front-right-top"
+          ],
+          "input_digest": "7e40d7775d69d4e4629c2a80d80890b577790d9a4f2991eb6c5e052545b50d22"
+        }
+      },
+      "94a681be-3284-5a49-9937-82e623cf454a": {
+        "id": "94a681be-3284-5a49-9937-82e623cf454a",
+        "name": "wall-left",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-left": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [],
+          "valley_paths": [],
+          "tab_polygons": [],
+          "guide_paths": [],
+          "labels": [
+            {
+              "text": "1",
+              "x": 98.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "4",
+              "x": 50.0,
+              "y": 38.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "9",
+              "x": 2.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [],
+          "input_digest": "a9190e1b2e7be838b1cbfac587ed833f932401366cd071d5b1e1daa9efd91691"
+        }
+      },
+      "c480a0fa-7830-524d-bef5-a370104ee158": {
+        "id": "c480a0fa-7830-524d-bef5-a370104ee158",
+        "name": "wall-right",
+        "surface_ids": [
+          "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right"
+        ],
+        "source_revision": 1,
+        "stale": false,
+        "lineage": [],
+        "review_state": "current",
+        "geometry": {
+          "polygons": {
+            "1a8c3aec-35c6-48fb-b9b5-ff890edb5ceb:wall-right": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ]
+          },
+          "cut_paths": [
+            [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            [
+              [
+                0.0,
+                40.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ]
+          ],
+          "mountain_paths": [],
+          "valley_paths": [],
+          "tab_polygons": [],
+          "guide_paths": [],
+          "labels": [
+            {
+              "text": "13",
+              "x": 98.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "8",
+              "x": 50.0,
+              "y": 38.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "7",
+              "x": 2.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            }
+          ],
+          "tab_joints": [],
+          "input_digest": "7fdae292e008c4186d14e3ed37b4e7674266a11af6323c5eb149935cbcafc6f2"
+        }
+      }
+    },
+    "acknowledgements": {},
+    "revision": 2
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "checked_on": "2026-11-06",
+  "distribution": "Inkscape official Windows x64 compressed archive, local temporary extraction only",
+  "release_page": "https://inkscape.org/release/inkscape-1.4.4/windows/64-bit/compressed-7z/dl/",
+  "download_url": "https://inkscape.org/gallery/item/59503/inkscape-1.4.4_2026-05-05_dcaf3e7-x64_mHK170m.7z",
+  "official_checksum_url": "https://media.inkscape.org/media/resources/sigs/inkscape-1.4.4_2026-05-05_dcaf3e7-x64.7z_BKqiyKW.sha256",
+  "official_sha256": "c4dbd64a92628abe7d7316c43f9325396e4d48417866027ee3d993d4f5b54c6a",
+  "actual_archive_sha256": "c4dbd64a92628abe7d7316c43f9325396e4d48417866027ee3d993d4f5b54c6a",
+  "archive_size_bytes": 110359970,
+  "download_command": "Invoke-WebRequest -UseBasicParsing -Uri <download_url> -OutFile <task-temp>/inkscape-1.4.4.7z",
+  "checksum_command": "Get-FileHash -Algorithm SHA256 <archive>; compare with official.sha256",
+  "extraction_command": "tar -xf <task-temp>/inkscape-1.4.4.7z -C <task-temp>",
+  "executable": "%TEMP%/papercraft-p2-editor-tools/inkscape/bin/inkscape.com",
+  "actual_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "official_cli_documentation": "https://wiki.inkscape.org/wiki/Using_the_Command_Line",
+  "actual_supported_actions_verified_with": "inkscape.com --action-list",
+  "global_installation": false,
+  "archive_or_executable_added_to_repository": false,
+  "browser_fetch_limit": "web tool returned 403 for main release page; ordinary HTTPS Invoke-WebRequest to the same official site succeeded",
+  "font": {
+    "source": "Windows-installed C:/Windows/Fonts/arial.ttf",
+    "check": "OS/2 fsType permissions checked before ReportLab subset embedding; required Unicode glyph coverage checked",
+    "raw_font_redistributed": false
+  }
+}

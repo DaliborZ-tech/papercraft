@@ -1,0 +1,65 @@
+{
+  "code_sha": "135a3a1d4fb7da1c74adf33574bde58e5fd9f0e7",
+  "seconds": 0.154,
+  "proof_kind": "independent core review; defect probes are observations, not product PASS",
+  "results": {
+    "nondefault_house": {
+      "surface_count": 8,
+      "area_paper_mm2": 34400.0,
+      "roof_panel_area_paper_mm2": 6000
+    },
+    "units": "PASS: 12m/1200cm/12000mm -> 120 paper mm",
+    "two_parent_transform": {
+      "max_coordinate_error_mm": 4.547473508864641e-13,
+      "area_preserved": true
+    },
+    "transactional_invalid_dimensions": [
+      "nan",
+      "inf",
+      "-1",
+      "0",
+      "1e-08",
+      "True",
+      "'200'"
+    ],
+    "save_fault_and_legacy": {
+      "preserved_failures": [
+        "fsync",
+        "replace"
+      ],
+      "raw_legacy_preserved": true
+    },
+    "strict_schema": {
+      "future_schema": "rejected",
+      "unknown_field": "rejected",
+      "duplicate_page_id": "rejected",
+      "nan_parameter": "rejected"
+    },
+    "nonrigid_transform_policy": {
+      "local_edge_mm": 10000.0,
+      "world_edge_mm": 20000.0
+    },
+    "finite_transform_overflow": {
+      "rejected": false,
+      "all_areas_finite": false,
+      "world_areas_repr": [
+        "inf",
+        "inf",
+        "inf",
+        "inf",
+        "inf",
+        "inf",
+        "inf",
+        "inf"
+      ]
+    },
+    "frame_outside_part": {
+      "rejected": false,
+      "part_surface": [
+        "19c02c8a-cbe2-440d-ac5f-8c1fdfbacc81:wall-left"
+      ],
+      "frame_root": "19c02c8a-cbe2-440d-ac5f-8c1fdfbacc81:wall-right",
+      "review_state": "current"
+    }
+  }
+}

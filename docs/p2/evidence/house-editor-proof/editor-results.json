@@ -1,0 +1,177 @@
+{
+  "version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "source_sha256": "77d4a93a68abf93fadd7c602ec9dc8780e0f71c3635ac9a92b04b28cd56933cb",
+  "source": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-original.svg",
+  "edited": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-edited.svg",
+  "part_id": "part-2729cec2-23b8-531c-81ae-e0888226526c",
+  "label_id": "label-2729cec2-23b8-531c-81ae-e0888226526c-0",
+  "original_transform": "translate(30 100) rotate(0)",
+  "edited_transform": "translate(32.645833,103.96875)",
+  "part_bounds_before": "94.0157\n377.48\n265.512\n152.126",
+  "part_bounds_after": "104.016\n392.48\n265.512\n152.126",
+  "text_before": "P5",
+  "text_after": "P5",
+  "color_after": "fill:#b43d28",
+  "path_count": 8,
+  "role_groups": [
+    "CUT",
+    "FOLD_MOUNTAIN",
+    "FOLD_VALLEY",
+    "TABS",
+    "LABELS",
+    "ARTWORK",
+    "GUIDES"
+  ],
+  "source_preserved": true,
+  "all_path_descendants_translated_px": {
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-CUT-0": [
+      10.0,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-CUT-1": [
+      10.0,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-CUT-2": [
+      10.0,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-CUT-3": [
+      10.00030000000001,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN-0": [
+      10.0,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN-1": [
+      10.0,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-TABS-0": [
+      10.0,
+      15.0
+    ],
+    "path-2729cec2-23b8-531c-81ae-e0888226526c-TABS-1": [
+      9.999799999999993,
+      15.0
+    ]
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.5202793000498787,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-original.svg",
+        "--query-id=part-2729cec2-23b8-531c-81ae-e0888226526c",
+        "--query-x",
+        "--query-y",
+        "--query-width",
+        "--query-height"
+      ],
+      "seconds": 2.313508699997328,
+      "exit_code": 0,
+      "stdout": "94.0157\n377.48\n265.512\n152.126\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 1.867144100018777,
+      "exit_code": 0,
+      "stdout": "svg5,37.7953,131.811,624.079,971.926\npart-2729cec2-23b8-531c-81ae-e0888226526c,94.0157,377.48,265.512,152.126\nrole-2729cec2-23b8-531c-81ae-e0888226526c-CUT,94.0157,377.48,265.512,152.126\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-0,113.386,377.48,226.772,0.944882\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-1,339.757,377.702,19.7707,151.682\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-2,113.386,528.661,226.772,0.944882\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-3,94.0157,377.702,19.7707,151.682\nrole-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN,112.913,377.953,227.717,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN-0,339.685,377.953,0.944882,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN-1,112.913,377.953,0.944882,151.181\n\nrole-2729cec2-23b8-531c-81ae-e0888226526c-TABS,94.4882,377.953,264.567,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-TABS-0,340.157,377.953,18.8976,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-TABS-1,94.4882,377.953,18.8976,151.181\nrole-2729cec2-23b8-531c-81ae-e0888226526c-LABELS,121.974,444.886,215.451,76.8089\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-0,227.705,444.886,13.376,8.80512\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-1,333.046,446.867,4.37838,6.676\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-2,227.168,514.783,4.42913,6.91129\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-3,121.974,446.752,2.49139,6.79134\n\n\npart-5d89a5fd-8e95-5fd2-9d47-1427995b04ab,94.0157,131.811,265.512,152.126\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT,94.0157,131.811,265.512,152.126\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-0,113.386,131.811,226.772,0.944882\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-1,339.757,132.033,19.7707,151.682\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-2,113.386,282.992,226.772,0.944882\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-3,94.0157,132.033,19.7707,151.682\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-FOLD_MOUNTAIN,112.913,132.283,227.717,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-FOLD_MOUNTAIN-0,339.685,132.283,0.944882,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-FOLD_MOUNTAIN-1,112.913,132.283,0.944882,151.181\n\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-TABS,94.4882,132.283,264.567,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-TABS-0,340.157,132.283,18.8976,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-TABS-1,94.4882,132.283,18.8976,151.181\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-LABELS,121.974,199.181,215.464,76.7244\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-0,227.705,199.181,13.3051,8.84055\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-1,332.991,201.083,4.44759,6.90668\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-2,227.801,269.114,7.04509,6.79134\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-3,121.974,201.083,9.05204,6.91129\n\n\npart-e9419402-a6c7-52da-9907-114a073b1bf6,434.188,642.047,227.686,133.213\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-CUT,434.188,642.047,227.686,133.213\npath-e9419402-a6c7-52da-9907-114a073b1bf6-CUT-0,547.913,661.299,113.961,113.961\npath-e9419402-a6c7-52da-9907-114a073b1bf6-CUT-1,434.188,661.299,113.961,113.961\npath-e9419402-a6c7-52da-9907-114a073b1bf6-CUT-2,434.464,642.047,227.135,19.8062\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-FOLD_MOUNTAIN,434.312,661.083,227.44,114.054\npath-e9419402-a6c7-52da-9907-114a073b1bf6-FOLD_MOUNTAIN-0,547.697,661.083,114.054,114.054\npath-e9419402-a6c7-52da-9907-114a073b1bf6-FOLD_MOUNTAIN-1,434.312,661.083,114.054,114.054\n\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-TABS,434.646,642.52,226.772,132.283\npath-e9419402-a6c7-52da-9907-114a073b1bf6-TABS-0,548.031,661.417,113.386,113.386\npath-e9419402-a6c7-52da-9907-114a073b1bf6-TABS-1,434.646,661.417,113.386,113.386\npath-e9419402-a6c7-52da-9907-114a073b1bf6-TABS-2,434.646,642.52,226.772,18.8976\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-LABELS,496.96,662.185,107.296,50.6955\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-0,548.965,690.52,11.6398,8.69291\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-1,599.772,706.094,4.4845,6.78672\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-2,496.96,705.974,4.47988,6.79134\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-3,548.428,662.185,4.42913,6.91129\n\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-GUIDES,434.646,661.134,226.772,0.566929\npath-e9419402-a6c7-52da-9907-114a073b1bf6-GUIDES-0,434.646,661.134,226.772,0.566929\npart-fdec3e7d-37f5-58d5-a078-34cc99a778ba,112.928,642.047,227.686,133.213\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT,112.928,642.047,227.686,133.213\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT-0,226.653,661.299,113.961,113.961\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT-1,112.928,661.299,113.961,113.961\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT-2,113.204,642.047,227.135,19.8062\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-FOLD_MOUNTAIN,113.052,661.083,227.44,114.054\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-FOLD_MOUNTAIN-0,226.438,661.083,114.054,114.054\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-FOLD_MOUNTAIN-1,113.052,661.083,114.054,114.054\n\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS,113.386,642.52,226.772,132.283\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS-0,226.772,661.417,113.386,113.386\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS-1,113.386,661.417,113.386,113.386\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS-2,113.386,642.52,226.772,18.8976\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-LABELS,176.453,662.185,111.725,50.6955\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-0,227.705,690.52,13.2224,8.69291\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-1,279.148,705.974,9.02897,6.90668\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-2,176.453,705.974,8.98284,6.79134\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-3,227.801,662.185,7.04509,6.79134\n\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-GUIDES,113.386,661.134,226.772,0.566929\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-GUIDES-0,113.386,661.134,226.772,0.566929\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath5,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-original.svg",
+        "--actions=select-by-id:part-2729cec2-23b8-531c-81ae-e0888226526c;transform-translate:10,15;select-clear;select-by-id:label-2729cec2-23b8-531c-81ae-e0888226526c-0;org.inkscape.text.uppercase.noprefs;select-clear;select-by-id:label-2729cec2-23b8-531c-81ae-e0888226526c-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-edited.svg;export-do"
+      ],
+      "seconds": 2.488136400002986,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n(org.inkscape.Inkscape:24904): GLib-WARNING **: 07:58:22.427: passing a child setup function to the g_spawn functions is pointless on Windows and it is ignored\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-edited.svg",
+        "--query-id=part-2729cec2-23b8-531c-81ae-e0888226526c",
+        "--query-x",
+        "--query-y",
+        "--query-width",
+        "--query-height"
+      ],
+      "seconds": 2.1186226999852806,
+      "exit_code": 0,
+      "stdout": "104.016\n392.48\n265.512\n152.126\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 1.9647454000078142,
+      "exit_code": 0,
+      "stdout": "svg5,37.7953,131.811,624.079,971.926\npart-2729cec2-23b8-531c-81ae-e0888226526c,104.016,392.48,265.512,152.126\nrole-2729cec2-23b8-531c-81ae-e0888226526c-CUT,104.016,392.48,265.512,152.126\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-0,123.386,392.48,226.772,0.944882\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-1,349.757,392.702,19.7707,151.682\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-2,123.386,543.661,226.772,0.944882\npath-2729cec2-23b8-531c-81ae-e0888226526c-CUT-3,104.016,392.702,19.7707,151.682\nrole-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN,122.913,392.953,227.717,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN-0,349.685,392.953,0.944882,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-FOLD_MOUNTAIN-1,122.913,392.953,0.944882,151.181\n\nrole-2729cec2-23b8-531c-81ae-e0888226526c-TABS,104.488,392.953,264.567,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-TABS-0,350.157,392.953,18.8976,151.181\npath-2729cec2-23b8-531c-81ae-e0888226526c-TABS-1,104.488,392.953,18.8976,151.181\nrole-2729cec2-23b8-531c-81ae-e0888226526c-LABELS,131.974,459.886,215.451,76.8089\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-0,237.705,459.886,13.376,8.80512\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-1,343.046,461.867,4.37838,6.676\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-2,237.168,529.783,4.42913,6.91129\nlabel-2729cec2-23b8-531c-81ae-e0888226526c-3,131.974,461.752,2.49139,6.79134\n\n\npart-5d89a5fd-8e95-5fd2-9d47-1427995b04ab,94.0157,131.811,265.512,152.126\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT,94.0157,131.811,265.512,152.126\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-0,113.386,131.811,226.772,0.944882\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-1,339.757,132.033,19.7707,151.682\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-2,113.386,282.992,226.772,0.944882\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-CUT-3,94.0157,132.033,19.7707,151.682\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-FOLD_MOUNTAIN,112.913,132.283,227.717,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-FOLD_MOUNTAIN-0,339.685,132.283,0.944882,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-FOLD_MOUNTAIN-1,112.913,132.283,0.944882,151.181\n\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-TABS,94.4882,132.283,264.567,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-TABS-0,340.157,132.283,18.8976,151.181\npath-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-TABS-1,94.4882,132.283,18.8976,151.181\nrole-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-LABELS,121.974,199.181,215.464,76.7244\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-0,227.705,199.181,13.3051,8.84055\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-1,332.991,201.083,4.44759,6.90668\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-2,227.801,269.114,7.04509,6.79134\nlabel-5d89a5fd-8e95-5fd2-9d47-1427995b04ab-3,121.974,201.083,9.05204,6.91129\n\n\npart-e9419402-a6c7-52da-9907-114a073b1bf6,434.188,642.047,227.686,133.213\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-CUT,434.188,642.047,227.686,133.213\npath-e9419402-a6c7-52da-9907-114a073b1bf6-CUT-0,547.913,661.299,113.961,113.961\npath-e9419402-a6c7-52da-9907-114a073b1bf6-CUT-1,434.188,661.299,113.961,113.961\npath-e9419402-a6c7-52da-9907-114a073b1bf6-CUT-2,434.464,642.047,227.135,19.8062\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-FOLD_MOUNTAIN,434.312,661.083,227.44,114.054\npath-e9419402-a6c7-52da-9907-114a073b1bf6-FOLD_MOUNTAIN-0,547.697,661.083,114.054,114.054\npath-e9419402-a6c7-52da-9907-114a073b1bf6-FOLD_MOUNTAIN-1,434.312,661.083,114.054,114.054\n\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-TABS,434.646,642.52,226.772,132.283\npath-e9419402-a6c7-52da-9907-114a073b1bf6-TABS-0,548.031,661.417,113.386,113.386\npath-e9419402-a6c7-52da-9907-114a073b1bf6-TABS-1,434.646,661.417,113.386,113.386\npath-e9419402-a6c7-52da-9907-114a073b1bf6-TABS-2,434.646,642.52,226.772,18.8976\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-LABELS,496.96,662.185,107.296,50.6955\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-0,548.965,690.52,11.6398,8.69291\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-1,599.772,706.094,4.4845,6.78672\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-2,496.96,705.974,4.47988,6.79134\nlabel-e9419402-a6c7-52da-9907-114a073b1bf6-3,548.428,662.185,4.42913,6.91129\n\nrole-e9419402-a6c7-52da-9907-114a073b1bf6-GUIDES,434.646,661.134,226.772,0.566929\npath-e9419402-a6c7-52da-9907-114a073b1bf6-GUIDES-0,434.646,661.134,226.772,0.566929\npart-fdec3e7d-37f5-58d5-a078-34cc99a778ba,112.928,642.047,227.686,133.213\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT,112.928,642.047,227.686,133.213\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT-0,226.653,661.299,113.961,113.961\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT-1,112.928,661.299,113.961,113.961\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-CUT-2,113.204,642.047,227.135,19.8062\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-FOLD_MOUNTAIN,113.052,661.083,227.44,114.054\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-FOLD_MOUNTAIN-0,226.438,661.083,114.054,114.054\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-FOLD_MOUNTAIN-1,113.052,661.083,114.054,114.054\n\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS,113.386,642.52,226.772,132.283\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS-0,226.772,661.417,113.386,113.386\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS-1,113.386,661.417,113.386,113.386\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-TABS-2,113.386,642.52,226.772,18.8976\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-LABELS,176.453,662.185,111.725,50.6955\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-0,227.705,690.52,13.2224,8.69291\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-1,279.148,705.974,9.02897,6.90668\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-2,176.453,705.974,8.98284,6.79134\nlabel-fdec3e7d-37f5-58d5-a078-34cc99a778ba-3,227.801,662.185,7.04509,6.79134\n\nrole-fdec3e7d-37f5-58d5-a078-34cc99a778ba-GUIDES,113.386,661.134,226.772,0.566929\npath-fdec3e7d-37f5-58d5-a078-34cc99a778ba-GUIDES-0,113.386,661.134,226.772,0.566929\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath5,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1076.25,305.975,8.71986\npage-label-1,38.4966,1095.15,178.379,8.58606\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 2.1767388998996466,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-final-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 2.1359403000678867,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "gui_individual_text_edit": {
+    "text": "Žluťoučký",
+    "other_text_unchanged": true,
+    "method": "Select stable text ID, F8, Ctrl+A, native Unicode input, Ctrl+S"
+  },
+  "final_text": "Žluťoučký",
+  "gui": {
+    "native_window_observed": true,
+    "pid": 37836,
+    "screenshot": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\house-editor-proof\\editor-gui.png",
+    "width": 1500,
+    "height": 1062
+  },
+  "input_source_original": {
+    "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\p2-desktop-attempt3\\export\\page-188643d5-2f4e-4dae-bf89-14326038a0e1.svg",
+    "sha256_after_edit": "77d4a93a68abf93fadd7c602ec9dc8780e0f71c3635ac9a92b04b28cd56933cb",
+    "matches_original_copy_before_edit": true
+  }
+}

@@ -1,5 +1,7 @@
 # PC-008 — kotva společného dílu stěna–střecha
 
+> Aktualizace 6. 11. 2026: tento dokument zachov?v? stav p?vodn?ho P0/P1 a v1.1. V1.1 byla skute?n? p?ijata vlastn?kem, potom byl c?l roz???en. Aktivn? n?vrh [P2 v1.2](../p2/v1.2/README.md) a jedin? queue ur?uj? nyn?j?? rozsah/stav; review a baseline piny z?st?vaj? historick?. Povinn? mixed-part testy se neru??. Push n?vrhu nen? jeho produktov? p?ijet?.
+
 Normativní doplněk kontraktu P2 v1.1 na žádost vlastníka z 5. listopadu 2026. Rozšiřuje provedení AC-I01/I02/I03/I05 a AC-X04 o společný díl; není to implementace ani PASS budoucího produktu. Všechny zde popsané implementační kontroly jsou **NOT_RUN**. Produktová brána zůstává PO_PENDING.
 
 ## Identita a souřadnicový rámec

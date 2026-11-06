@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests",
+    "-q",
+    "--junitxml=docs/p2/evidence/p2-prototype-preservation.xml"
+  ],
+  "started_utc": "2026-11-06T07:07:00.386287+00:00",
+  "seconds": 24.285680099972524,
+  "exit_code": 0
+}

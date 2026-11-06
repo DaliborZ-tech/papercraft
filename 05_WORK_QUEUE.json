@@ -10,33 +10,26 @@
   ],
   "product_gate": {
     "id": "GATE-P2",
+    "contract_version": "1.2",
+    "contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+    "status": "PO_PENDING",
+    "accepted_by_owner": false,
     "requires": [
-      "PC-005 review a vyřešené nálezy",
-      "Skutečné přijetí konkrétního P2 kontraktu vlastníkem"
+      "Reviewed v1.2 design package PC-012 with geometric spike evidence",
+      "Actual owner acceptance of new v1.2 contract; technical review or push does not imply acceptance"
     ],
     "auto_approve": false,
-    "status": "PO_PENDING",
-    "contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+    "previous_acceptance": "product_gate_history[0]: P2 v1.1 accepted 2026-11-06; preserved, scope superseded by owner clarification",
+    "owner_clarification": "docs/p2/v1.2/OWNER_CLARIFICATION.txt",
     "independent_review": {
-      "verdict": "APPROVED_IN_SCOPE",
-      "code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
-      "report": "docs/revival/REVIEW_REPORT.md",
-      "open_blocker_major": 0
-    },
-    "accepted_by_owner": false,
-    "contract_version": "1.1",
-    "contract_addendum": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
-    "contract_addendum_review": {
-      "verdict": "APPROVED_IN_SCOPE",
-      "code_sha": "95be72c6de6665b98efd10c58dae941f3b91fe83",
-      "report": "docs/revival/MIXED_PART_REVIEW.md",
-      "open_blocker_major": 0,
-      "scope": "P2_v1.1_design_addendum_only_not_implementation_or_PO_acceptance"
+      "verdict": "PENDING",
+      "report": "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
+      "scope": "design_and_spikes_only_not_implementation_or_PO_acceptance"
     }
   },
   "rules": [
     "Počáteční queue není důkaz implementace.",
-    "P2 položky jsou návrh k dopracování v P1; nezačínat před GATE-P2.",
+    "P2 v1.2 design/spikes/review/integration are authorized as PC-012; production v1.2 acceptance is separate from historical v1.1 acceptance.",
     "P4–P6 se rozepíšou do ticketů podle epic při přípravě příslušné etapy.",
     "Stavy akceptace a release readiness jsou oddělené.",
     "Oprava vlastníka 2026-11-05 autorizuje integraci a push dokončených ucelených balíků v autorizovaném rozsahu po ověření a nezávislé revizi na master bez další rutinní žádosti; produktová brána P2 zůstává samostatná."
@@ -177,13 +170,13 @@
         "Datové identity, jednotky, invalidace a exportní snapshot",
         "Žádný nepodložený slib obecného rozvinu"
       ],
-      "status": "PO_PENDING",
+      "status": "PO_ACCEPTED",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/ARCHITECTURE_DECISION.md"
       ],
       "technical_verdict": "APPROVED_IN_SCOPE",
-      "product_acceptance": "PO_PENDING",
+      "product_acceptance": "PO_ACCEPTED: P2_v1.1_proposal_not_implemented_product",
       "review": "docs/revival/REVIEW_REPORT.md",
       "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
       "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
@@ -231,7 +224,7 @@
         "P2 má manuální layout, SVG/PDF a 3D↔2D",
         "Konkrétní demo i negativní stavy"
       ],
-      "status": "PO_PENDING",
+      "status": "PO_ACCEPTED",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/UX_CONTRACT.md",
@@ -241,7 +234,7 @@
         "05_WORK_QUEUE.json"
       ],
       "technical_verdict": "APPROVED_IN_SCOPE",
-      "product_acceptance": "PO_PENDING",
+      "product_acceptance": "PO_ACCEPTED: P2_v1.1_proposal_not_implemented_product",
       "review": "docs/revival/REVIEW_REPORT.md",
       "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
       "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
@@ -274,14 +267,14 @@
         "Ověřené důkazy a jasné limity",
         "P2 kontrakt předložen k přijetí"
       ],
-      "status": "PO_PENDING",
+      "status": "PO_ACCEPTED",
       "execution_authorized_on_realization": true,
       "evidence": [
         "docs/revival/REVIEW_REPORT.md",
         "docs/revival/PO_DECISION_CARD.md"
       ],
       "technical_verdict": "APPROVED_IN_SCOPE",
-      "product_acceptance": "PO_PENDING",
+      "product_acceptance": "PO_ACCEPTED: P2_v1.1_proposal_not_implemented_product",
       "review": "docs/revival/REVIEW_REPORT.md",
       "reviewed_code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
       "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
@@ -294,9 +287,9 @@
     {
       "id": "PC-006",
       "stage": "P2",
-      "title": "Referenční dům: stabilní konstrukční model a persistence",
+      "title": "Vlastn? konstruk?n? dom?na a prvn? pou?iteln? autorsk? verze A",
       "depends_on": [
-        "PC-005"
+        "PC-012"
       ],
       "epics": [
         "E02",
@@ -305,7 +298,9 @@
       ],
       "mode": "implementation",
       "outputs": [
-        "Použitelný referenční dům, save/open a numerické testy"
+        "Vlastn? konstruk?n? dom?na a prvn? pou?iteln? autorsk? verze A",
+        "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/p2/v1.2/ACCEPTANCE.md"
       ],
       "acceptance": [
         "AC-G01",
@@ -315,35 +310,114 @@
         "AC-G05",
         "AC-I05",
         "AC-I06",
-        "AC-I07"
+        "AC-I07",
+        "AC-AU01",
+        "AC-AU02",
+        "AC-AU03",
+        "AC-AU04",
+        "AC-AU05",
+        "AC-AU06",
+        "AC-AU07",
+        "AC-AU13",
+        "AC-AU15",
+        "AC-AU16"
       ],
-      "status": "PLANNED",
+      "status": "REPLANNED",
       "execution_authorized_on_realization": false,
       "gate": "GATE-P2",
       "acceptance_state": {
-        "AC-G01": "NOT_RUN",
-        "AC-G02": "NOT_RUN",
-        "AC-G03": "NOT_RUN",
-        "AC-G04": "NOT_RUN",
-        "AC-G05": "NOT_RUN",
-        "AC-I05": "NOT_RUN",
-        "AC-I06": "NOT_RUN",
-        "AC-I07": "NOT_RUN"
+        "AC-G01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-G02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-G03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-G04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-G05": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I05": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I06": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I07": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU05": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU06": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU07": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
       },
-      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
       "product_acceptance": "NOT_RUN",
       "paper_frame_schema_contract": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
       "estimate_refresh_required": {
-        "when": "after_PC-006_before_PC-007",
+        "when": [
+          "after_PC-006A",
+          "after_PC-006B"
+        ],
         "unit": "person_days",
         "basis": "actual_results_not_agent_elapsed_time"
-      }
+      },
+      "implementation_authorized_on": "2026-11-06",
+      "historical_definition_v1_1": {
+        "id": "PC-006",
+        "stage": "P2",
+        "title": "Referenční dům: stabilní konstrukční model a persistence",
+        "depends_on": [
+          "PC-005"
+        ],
+        "epics": [
+          "E02",
+          "E12",
+          "E13"
+        ],
+        "mode": "implementation",
+        "outputs": [
+          "Použitelný referenční dům, save/open a numerické testy"
+        ],
+        "acceptance": [
+          "AC-G01",
+          "AC-G02",
+          "AC-G03",
+          "AC-G04",
+          "AC-G05",
+          "AC-I05",
+          "AC-I06",
+          "AC-I07"
+        ],
+        "status": "IN_PROGRESS",
+        "execution_authorized_on_realization": true,
+        "gate": "GATE-P2",
+        "acceptance_state": {
+          "AC-G01": "NOT_RUN",
+          "AC-G02": "NOT_RUN",
+          "AC-G03": "NOT_RUN",
+          "AC-G04": "NOT_RUN",
+          "AC-G05": "NOT_RUN",
+          "AC-I05": "NOT_RUN",
+          "AC-I06": "NOT_RUN",
+          "AC-I07": "NOT_RUN"
+        },
+        "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "review": "Independent reviewer required after implementation, not implementer self-approval",
+        "product_acceptance": "NOT_RUN",
+        "paper_frame_schema_contract": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+        "estimate_refresh_required": {
+          "when": "after_PC-006_before_PC-007",
+          "unit": "person_days",
+          "basis": "actual_results_not_agent_elapsed_time"
+        },
+        "implementation_authorized_on": "2026-11-06"
+      },
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "completed_by": [
+        "PC-006A",
+        "PC-006B"
+      ]
     },
     {
       "id": "PC-007",
       "stage": "P2",
-      "title": "Propojený výběr a ruční švy/chlopně",
+      "title": "Profily, ost?n? B a sto?en? pl??t? C",
       "depends_on": [
         "PC-006"
       ],
@@ -354,7 +428,9 @@
       ],
       "mode": "implementation",
       "outputs": [
-        "Funkční autorská editace řezů, spojů a chlopní"
+        "Profily, ost?n? B a sto?en? pl??t? C",
+        "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/p2/v1.2/ACCEPTANCE.md"
       ],
       "acceptance": [
         "AC-C01",
@@ -365,34 +441,102 @@
         "AC-C06",
         "AC-G07",
         "AC-C09",
-        "AC-C10"
+        "AC-C10",
+        "AC-AU08",
+        "AC-AU09",
+        "AC-AU10",
+        "AC-AU11",
+        "AC-AU13",
+        "AC-AU15"
       ],
-      "status": "PLANNED",
+      "status": "REPLANNED",
       "execution_authorized_on_realization": false,
       "gate": "GATE-P2",
       "verification_deferred": {
         "AC-C02": "Finální GUI proof přes dvě stránky až PC-009 po PC-008; předtím NOT_RUN/PENDING, nikoli PASS."
       },
       "acceptance_state": {
-        "AC-C01": "NOT_RUN",
-        "AC-C02": "NOT_RUN",
-        "AC-C03": "NOT_RUN",
-        "AC-C04": "NOT_RUN",
-        "AC-C05": "NOT_RUN",
-        "AC-C06": "NOT_RUN",
-        "AC-G07": "NOT_RUN",
-        "AC-C09": "NOT_RUN",
-        "AC-C10": "NOT_RUN"
+        "AC-C01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C05": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C06": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-G07": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C09": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU08": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU09": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU11": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
       },
-      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
       "product_acceptance": "NOT_RUN",
-      "join_preserves_receiving_part_anchor": true
+      "join_preserves_receiving_part_anchor": true,
+      "implementation_authorized_on": "2026-11-06",
+      "historical_definition_v1_1": {
+        "id": "PC-007",
+        "stage": "P2",
+        "title": "Propojený výběr a ruční švy/chlopně",
+        "depends_on": [
+          "PC-006"
+        ],
+        "epics": [
+          "E03",
+          "E04",
+          "E05"
+        ],
+        "mode": "implementation",
+        "outputs": [
+          "Funkční autorská editace řezů, spojů a chlopní"
+        ],
+        "acceptance": [
+          "AC-C01",
+          "AC-C02",
+          "AC-C03",
+          "AC-C04",
+          "AC-C05",
+          "AC-C06",
+          "AC-G07",
+          "AC-C09",
+          "AC-C10"
+        ],
+        "status": "PLANNED",
+        "execution_authorized_on_realization": true,
+        "gate": "GATE-P2",
+        "verification_deferred": {
+          "AC-C02": "Finální GUI proof přes dvě stránky až PC-009 po PC-008; předtím NOT_RUN/PENDING, nikoli PASS."
+        },
+        "acceptance_state": {
+          "AC-C01": "NOT_RUN",
+          "AC-C02": "NOT_RUN",
+          "AC-C03": "NOT_RUN",
+          "AC-C04": "NOT_RUN",
+          "AC-C05": "NOT_RUN",
+          "AC-C06": "NOT_RUN",
+          "AC-G07": "NOT_RUN",
+          "AC-C09": "NOT_RUN",
+          "AC-C10": "NOT_RUN"
+        },
+        "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "review": "Independent reviewer required after implementation, not implementer self-approval",
+        "product_acceptance": "NOT_RUN",
+        "join_preserves_receiving_part_anchor": true,
+        "implementation_authorized_on": "2026-11-06"
+      },
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "completed_by": [
+        "PC-007A",
+        "PC-007B"
+      ]
     },
     {
       "id": "PC-008",
       "stage": "P2",
-      "title": "Ruční stránky, invalidace a kontroly",
+      "title": "??zen? aproximace D, zm?ny a zachov?n? autorsk? pr?ce",
       "depends_on": [
         "PC-007"
       ],
@@ -404,7 +548,9 @@
       ],
       "mode": "implementation",
       "outputs": [
-        "Ruční A4 layout, odkládací plocha a zachování autorské práce"
+        "??zen? aproximace D, zm?ny a zachov?n? autorsk? pr?ce",
+        "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/p2/v1.2/ACCEPTANCE.md"
       ],
       "acceptance": [
         "AC-L01",
@@ -418,26 +564,36 @@
         "AC-I02",
         "AC-I03",
         "AC-I04",
-        "AC-L10"
+        "AC-L10",
+        "AC-AU12",
+        "AC-AU13",
+        "AC-AU14",
+        "AC-AU15",
+        "AC-AU16"
       ],
-      "status": "PLANNED",
+      "status": "REPLANNED",
       "execution_authorized_on_realization": false,
       "gate": "GATE-P2",
       "acceptance_state": {
-        "AC-L01": "NOT_RUN",
-        "AC-L02": "NOT_RUN",
-        "AC-L03": "NOT_RUN",
-        "AC-L04": "NOT_RUN",
-        "AC-L06": "NOT_RUN",
-        "AC-L08": "NOT_RUN",
-        "AC-L09": "NOT_RUN",
-        "AC-I01": "NOT_RUN",
-        "AC-I02": "NOT_RUN",
-        "AC-I03": "NOT_RUN",
-        "AC-I04": "NOT_RUN",
-        "AC-L10": "NOT_RUN"
+        "AC-L01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L06": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L08": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L09": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-I04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-L10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU12": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU14": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
       },
-      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
       "product_acceptance": "NOT_RUN",
       "mixed_part_layout_contract": {
@@ -488,12 +644,116 @@
         "report": "docs/revival/MIXED_PART_REVIEW.md",
         "open_blocker_major": 0,
         "scope": "P2_v1.1_design_addendum_only_not_implementation_or_PO_acceptance"
-      }
+      },
+      "implementation_authorized_on": "2026-11-06",
+      "historical_definition_v1_1": {
+        "id": "PC-008",
+        "stage": "P2",
+        "title": "Ruční stránky, invalidace a kontroly",
+        "depends_on": [
+          "PC-007"
+        ],
+        "epics": [
+          "E06",
+          "E07",
+          "E08",
+          "E12"
+        ],
+        "mode": "implementation",
+        "outputs": [
+          "Ruční A4 layout, odkládací plocha a zachování autorské práce"
+        ],
+        "acceptance": [
+          "AC-L01",
+          "AC-L02",
+          "AC-L03",
+          "AC-L04",
+          "AC-L06",
+          "AC-L08",
+          "AC-L09",
+          "AC-I01",
+          "AC-I02",
+          "AC-I03",
+          "AC-I04",
+          "AC-L10"
+        ],
+        "status": "PLANNED",
+        "execution_authorized_on_realization": true,
+        "gate": "GATE-P2",
+        "acceptance_state": {
+          "AC-L01": "NOT_RUN",
+          "AC-L02": "NOT_RUN",
+          "AC-L03": "NOT_RUN",
+          "AC-L04": "NOT_RUN",
+          "AC-L06": "NOT_RUN",
+          "AC-L08": "NOT_RUN",
+          "AC-L09": "NOT_RUN",
+          "AC-I01": "NOT_RUN",
+          "AC-I02": "NOT_RUN",
+          "AC-I03": "NOT_RUN",
+          "AC-I04": "NOT_RUN",
+          "AC-L10": "NOT_RUN"
+        },
+        "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "review": "Independent reviewer required after implementation, not implementer self-approval",
+        "product_acceptance": "NOT_RUN",
+        "mixed_part_layout_contract": {
+          "document": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+          "anchor": "persisted_root_surface_semantic_vertex_and_oriented_axis_edge",
+          "placement_reference": "anchor_not_bounding_box",
+          "required_fixture": "joined_wall_roof_part_wall_root_rotation_30deg_page_2",
+          "roof_change_model_mm": [
+            3000,
+            3500
+          ],
+          "must_preserve": [
+            "all_page_coordinates_of_unchanged_root_wall",
+            "part_id_with_unambiguous_continuity",
+            "page_id",
+            "anchor_frame",
+            "placement",
+            "position_lock",
+            "rotation_lock"
+          ],
+          "invalidate": "entire_mixed_part_until_validated_recompute",
+          "unresolved_anchor": "block_complete_export_no_centroid_or_index_fallback",
+          "required_cases": [
+            "separate_parts",
+            "mixed_part",
+            "triangle_reindexing",
+            "changed_tab_envelope",
+            "new_collision_without_repacking",
+            "save_reopen",
+            "undo_redo",
+            "split_join_lineage",
+            "missing_anchor",
+            "dependency_affected_panel"
+          ],
+          "verification_status": "NOT_RUN",
+          "anchor_page_mm": [
+            60,
+            60
+          ],
+          "negative_overflow_anchor_page_mm": [
+            30,
+            60
+          ]
+        },
+        "design_addendum_review": {
+          "verdict": "APPROVED_IN_SCOPE",
+          "code_sha": "95be72c6de6665b98efd10c58dae941f3b91fe83",
+          "report": "docs/revival/MIXED_PART_REVIEW.md",
+          "open_blocker_major": 0,
+          "scope": "P2_v1.1_design_addendum_only_not_implementation_or_PO_acceptance"
+        },
+        "implementation_authorized_on": "2026-11-06"
+      },
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope."
     },
     {
       "id": "PC-009",
       "stage": "P2",
-      "title": "SVG/PDF a skutečný autorský průchod",
+      "title": "Konsolidace v?ech pr?chod? a vektorov?ch v?stup? A/B/C/D",
       "depends_on": [
         "PC-008"
       ],
@@ -503,7 +763,9 @@
       ],
       "mode": "implementation_and_verification",
       "outputs": [
-        "Vektorové exporty, Windows demo, editor interoperability proof"
+        "Konsolidace v?ech pr?chod? a vektorov?ch v?stup? A/B/C/D",
+        "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/p2/v1.2/ACCEPTANCE.md"
       ],
       "acceptance": [
         "AC-X01",
@@ -515,35 +777,93 @@
         "AC-X07",
         "Úplné P2 demo",
         "AC-X10",
-        "AC-C02"
+        "AC-C02",
+        "AC-AU15",
+        "AC-AU17"
       ],
-      "status": "PLANNED",
+      "status": "REPLANNED",
       "execution_authorized_on_realization": false,
       "gate": "GATE-P2",
       "acceptance_state": {
-        "AC-X01": "NOT_RUN",
-        "AC-X02": "NOT_RUN",
-        "AC-X03": "NOT_RUN",
-        "AC-X04": "NOT_RUN",
-        "AC-X05": "NOT_RUN",
-        "AC-X06": "NOT_RUN",
-        "AC-X07": "NOT_RUN",
-        "AC-X10": "NOT_RUN",
-        "AC-C02": "NOT_RUN"
+        "AC-X01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X05": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X06": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X07": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "Úplné P2 demo": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-X10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-C02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU17": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
       },
-      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
       "product_acceptance": "NOT_RUN",
       "mixed_part_export_check": {
         "requires": "PC-008 mixed fixture",
         "verify": "same anchored wall coordinates and updated roof geometry in SVG/PDF",
         "status": "NOT_RUN"
-      }
+      },
+      "implementation_authorized_on": "2026-11-06",
+      "historical_definition_v1_1": {
+        "id": "PC-009",
+        "stage": "P2",
+        "title": "SVG/PDF a skutečný autorský průchod",
+        "depends_on": [
+          "PC-008"
+        ],
+        "epics": [
+          "E09",
+          "E14"
+        ],
+        "mode": "implementation_and_verification",
+        "outputs": [
+          "Vektorové exporty, Windows demo, editor interoperability proof"
+        ],
+        "acceptance": [
+          "AC-X01",
+          "AC-X02",
+          "AC-X03",
+          "AC-X04",
+          "AC-X05",
+          "AC-X06",
+          "AC-X07",
+          "Úplné P2 demo",
+          "AC-X10",
+          "AC-C02"
+        ],
+        "status": "PLANNED",
+        "execution_authorized_on_realization": true,
+        "gate": "GATE-P2",
+        "acceptance_state": {
+          "AC-X01": "NOT_RUN",
+          "AC-X02": "NOT_RUN",
+          "AC-X03": "NOT_RUN",
+          "AC-X04": "NOT_RUN",
+          "AC-X05": "NOT_RUN",
+          "AC-X06": "NOT_RUN",
+          "AC-X07": "NOT_RUN",
+          "AC-X10": "NOT_RUN",
+          "AC-C02": "NOT_RUN"
+        },
+        "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "review": "Independent reviewer required after implementation, not implementer self-approval",
+        "product_acceptance": "NOT_RUN",
+        "mixed_part_export_check": {
+          "requires": "PC-008 mixed fixture",
+          "verify": "same anchored wall coordinates and updated roof geometry in SVG/PDF",
+          "status": "NOT_RUN"
+        },
+        "implementation_authorized_on": "2026-11-06"
+      },
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope."
     },
     {
       "id": "PC-010",
       "stage": "P2",
-      "title": "Nezávislé review první použitelné verze",
+      "title": "Nez?visl? review a ?pln? digit?ln? p?ed?n? P2 v1.2",
       "depends_on": [
         "PC-009"
       ],
@@ -552,24 +872,62 @@
       ],
       "mode": "independent_review",
       "outputs": [
-        "Review konkrétního CODE SHA, uzavřené nálezy, tiskový balík"
+        "Nez?visl? review a ?pln? digit?ln? p?ed?n? P2 v1.2",
+        "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/p2/v1.2/ACCEPTANCE.md"
       ],
       "acceptance": [
         "P2 digitální kontrakt splněn",
-        "Fyzický proof poctivě pending"
+        "Fyzický proof poctivě pending",
+        "P2_v1.2_all_digital_AC_independently_verified",
+        "P3_physical_pending"
       ],
-      "status": "PLANNED",
+      "status": "REPLANNED",
       "execution_authorized_on_realization": false,
       "gate": "GATE-P2",
-      "acceptance_state": {},
-      "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "acceptance_state": {
+        "P2 digitální kontrakt splněn": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "Fyzický proof poctivě pending": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "P2_v1.2_all_digital_AC_independently_verified": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "P3_physical_pending": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
+      },
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "implementation_authorized_on": "2026-11-06",
+      "historical_definition_v1_1": {
+        "id": "PC-010",
+        "stage": "P2",
+        "title": "Nezávislé review první použitelné verze",
+        "depends_on": [
+          "PC-009"
+        ],
+        "epics": [
+          "E14"
+        ],
+        "mode": "independent_review",
+        "outputs": [
+          "Review konkrétního CODE SHA, uzavřené nálezy, tiskový balík"
+        ],
+        "acceptance": [
+          "P2 digitální kontrakt splněn",
+          "Fyzický proof poctivě pending"
+        ],
+        "status": "PLANNED",
+        "execution_authorized_on_realization": true,
+        "gate": "GATE-P2",
+        "acceptance_state": {},
+        "implementation_contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "review": "Independent reviewer required after implementation, not implementer self-approval",
+        "product_acceptance": "NOT_RUN",
+        "implementation_authorized_on": "2026-11-06"
+      },
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope."
     },
     {
       "id": "PC-011",
       "stage": "P3",
-      "title": "Výtisk, fyzická stavba a produktová akceptace",
+      "title": "V?tisk a fyzick? stavba p?ej?mac?ch model? A/B/C a varianty D",
       "depends_on": [
         "PC-010"
       ],
@@ -581,21 +939,282 @@
         "Naměřená kalibrace, protokol sestavení a případné opravy"
       ],
       "acceptance": [
-        "P3 kontrakt a skutečné PO přijetí"
+        "P3 kontrakt a skutečné PO přijetí",
+        "AC-AU18"
       ],
       "status": "PLANNED",
       "execution_authorized_on_realization": false,
-      "acceptance_state": {},
+      "acceptance_state": {
+        "AC-AU18": "NOT_RUN: actual print and assembly required"
+      },
       "implementation_contract": "04_ACCEPTANCE_AND_VERIFICATION.md#5-fyzická-akceptace-p3",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
       "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-006A",
+      "stage": "P2",
+      "parent": "PC-006",
+      "title": "Pr?zdn? projekt, vlastn? ?se?kov? plochy s otvory a cel? v?robn? pr?chod",
+      "depends_on": [
+        "PC-012"
+      ],
+      "epics": [
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "mode": "vertical_slice_implementation",
+      "outputs": [
+        "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
+        "Pr?zdn? projekt, vlastn? ?se?kov? plochy s otvory a cel? v?robn? pr?chod"
+      ],
+      "acceptance": [
+        "AC-AU01",
+        "AC-AU02",
+        "AC-AU03",
+        "AC-AU13",
+        "AC-AU15",
+        "AC-AU16"
+      ],
+      "acceptance_state": {
+        "AC-AU01": "NOT_RUN",
+        "AC-AU02": "NOT_RUN",
+        "AC-AU03": "NOT_RUN",
+        "AC-AU13": "NOT_RUN",
+        "AC-AU15": "NOT_RUN",
+        "AC-AU16": "NOT_RUN"
+      },
+      "status": "PLANNED",
+      "gate": "GATE-P2",
+      "execution_authorized_on_realization": false,
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "independent reviewer of pinned commit required",
+      "estimate_person_days": [
+        9,
+        15
+      ],
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-006B",
+      "stage": "P2",
+      "parent": "PC-006",
+      "title": "Prvn? autorsk? verze: ru?n? budova A, p?esahy, z?kladna a p??jemci chlopn?",
+      "depends_on": [
+        "PC-006A"
+      ],
+      "epics": [
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "mode": "vertical_slice_implementation",
+      "outputs": [
+        "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
+        "Prvn? autorsk? verze: ru?n? budova A, p?esahy, z?kladna a p??jemci chlopn?"
+      ],
+      "acceptance": [
+        "AC-AU03",
+        "AC-AU04",
+        "AC-AU05",
+        "AC-AU06",
+        "AC-AU07",
+        "AC-AU13",
+        "AC-AU15"
+      ],
+      "acceptance_state": {
+        "AC-AU03": "NOT_RUN",
+        "AC-AU04": "NOT_RUN",
+        "AC-AU05": "NOT_RUN",
+        "AC-AU06": "NOT_RUN",
+        "AC-AU07": "NOT_RUN",
+        "AC-AU13": "NOT_RUN",
+        "AC-AU15": "NOT_RUN"
+      },
+      "status": "PLANNED",
+      "gate": "GATE-P2",
+      "execution_authorized_on_realization": false,
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "independent reviewer of pinned commit required",
+      "estimate_person_days": [
+        10,
+        17
+      ],
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-007A",
+      "stage": "P2",
+      "parent": "PC-007",
+      "title": "Oblouky/B?zierovy profily, korespondence a ost?n? B",
+      "depends_on": [
+        "PC-006"
+      ],
+      "epics": [
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "mode": "vertical_slice_implementation",
+      "outputs": [
+        "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
+        "Oblouky/B?zierovy profily, korespondence a ost?n? B"
+      ],
+      "acceptance": [
+        "AC-AU08",
+        "AC-AU09",
+        "AC-AU13",
+        "AC-AU15"
+      ],
+      "acceptance_state": {
+        "AC-AU08": "NOT_RUN",
+        "AC-AU09": "NOT_RUN",
+        "AC-AU13": "NOT_RUN",
+        "AC-AU15": "NOT_RUN"
+      },
+      "status": "PLANNED",
+      "gate": "GATE-P2",
+      "execution_authorized_on_realization": false,
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "independent reviewer of pinned commit required",
+      "estimate_person_days": [
+        12,
+        20
+      ],
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-007B",
+      "stage": "P2",
+      "parent": "PC-007",
+      "title": "Sto?en? v?lec/ku?el C a d?len? troj?heln?kov? chlopn?",
+      "depends_on": [
+        "PC-007A"
+      ],
+      "epics": [
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14"
+      ],
+      "mode": "vertical_slice_implementation",
+      "outputs": [
+        "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
+        "Sto?en? v?lec/ku?el C a d?len? troj?heln?kov? chlopn?"
+      ],
+      "acceptance": [
+        "AC-AU07",
+        "AC-AU10",
+        "AC-AU11",
+        "AC-AU13",
+        "AC-AU15"
+      ],
+      "acceptance_state": {
+        "AC-AU07": "NOT_RUN",
+        "AC-AU10": "NOT_RUN",
+        "AC-AU11": "NOT_RUN",
+        "AC-AU13": "NOT_RUN",
+        "AC-AU15": "NOT_RUN"
+      },
+      "status": "PLANNED",
+      "gate": "GATE-P2",
+      "execution_authorized_on_realization": false,
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+      "review": "independent reviewer of pinned commit required",
+      "estimate_person_days": [
+        10,
+        17
+      ],
+      "product_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "PC-012",
+      "stage": "P2-DESIGN",
+      "title": "Revize P2 v1.2: autorsk? konstrukce, ?asn? spiky a nez?visle revidovan? n?vrh",
+      "depends_on": [
+        "PC-005"
+      ],
+      "epics": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "mode": "design_and_geometric_experiments",
+      "outputs": [
+        "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/p2/v1.2/GEOMETRY_SPIKES.md",
+        "docs/p2/v1.2/ARCHITECTURE.md",
+        "docs/p2/v1.2/AUTHORING_UX.md",
+        "docs/p2/v1.2/CODE_DISPOSITION.md",
+        "docs/p2/v1.2/ACCEPTANCE.md",
+        "docs/p2/v1.2/ESTIMATE_AND_RISKS.md",
+        "docs/p2/v1.2/INDEPENDENT_REVIEW.md"
+      ],
+      "acceptance": [
+        "Owner clarification A/B/C/D fully traced",
+        "Reproducible curved/interior-join/tab spikes affect domain before freeze",
+        "Existing work and evidence preserved",
+        "Independent pinned design review with material findings closed",
+        "Master push and SHA equality"
+      ],
+      "acceptance_state": {},
+      "status": "IN_REVIEW",
+      "execution_authorized_on_realization": true,
+      "authorization_source": "explicit_owner_P2_v1.2_clarification_2026-11-06",
+      "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+      "product_acceptance": "NOT_RUN: design review and integration do not imply PO acceptance"
     }
   ],
-  "updated_on": "2026-11-05",
+  "updated_on": "2026-11-06",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p0-p1-contract",
-  "release_readiness": "NOT_READY: product defects open; P2 and physical acceptance pending",
-  "evidence_index": "docs/revival/BASELINE_REPORT.md",
+  "working_branch": "revival/p2-v1.2-design",
+  "release_readiness": "NOT_READY: v1.2 design and spikes; A/B/C/D implementation NOT_RUN; P3 physical proof pending",
+  "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
     "authorized_by": "explicit_owner_instruction_2026-11-05",
@@ -620,11 +1239,70 @@
   "estimate_policy": {
     "unit": "person_days",
     "working_range": [
-      24,
-      40
+      59,
+      100
     ],
     "agent_runtime_estimate": false,
-    "must_reestimate_after": "PC-006",
-    "basis": "actual_implementation_and_verification_results"
-  }
+    "must_reestimate_after": [
+      "PC-006A",
+      "PC-006B",
+      "PC-007A"
+    ],
+    "basis": "PC-006 prototype findings plus new authoring scope; not agent elapsed time",
+    "risk_adjusted_range": [
+      68,
+      125
+    ],
+    "scope": "remaining_P2_v1.2_implementation_excluding_design_and_P3",
+    "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md"
+  },
+  "authorized_stages": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "p2_digital_delivery": "NOT_RUN: v1.2 A/B/C/D not implemented; prototype evidence does not satisfy them",
+  "product_gate_history": [
+    {
+      "id": "GATE-P2",
+      "requires": [
+        "PC-005 review a vyřešené nálezy",
+        "Skutečné přijetí konkrétního P2 kontraktu vlastníkem"
+      ],
+      "auto_approve": false,
+      "status": "PO_ACCEPTED",
+      "contract": "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+      "independent_review": {
+        "verdict": "APPROVED_IN_SCOPE",
+        "code_sha": "5b01bb26e6b4c3da8d75afdca19cad5d6b43d576",
+        "report": "docs/revival/REVIEW_REPORT.md",
+        "open_blocker_major": 0
+      },
+      "accepted_by_owner": true,
+      "contract_version": "1.1",
+      "contract_addendum": "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+      "contract_addendum_review": {
+        "verdict": "APPROVED_IN_SCOPE",
+        "code_sha": "95be72c6de6665b98efd10c58dae941f3b91fe83",
+        "report": "docs/revival/MIXED_PART_REVIEW.md",
+        "open_blocker_major": 0,
+        "scope": "P2_v1.1_design_addendum_only_not_implementation_or_PO_acceptance"
+      },
+      "accepted_on": "2026-11-06",
+      "acceptance_source": "explicit_owner_message_2026-11-06",
+      "acceptance_record": "docs/p2/ACCEPTANCE_RECORD.md",
+      "accepted_contract_source_sha": "6eb8977011854b242ab1dac8ea929e262e3b9563",
+      "accepted_variant": "B",
+      "accepted_legacy_compatibility": "read_only_legacy_no_full_dome_gothic_migration_in_P2"
+    }
+  ],
+  "preserved_prototype": {
+    "branch": "revival/p2",
+    "sha": "f9507e325c479c8b703e7f52c410de6847958720",
+    "bundle": "docs/p2/archive/p2-v11-prototype.bundle",
+    "status": "WIP_NOT_GLOBALLY_APPROVED",
+    "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
+    "report": "docs/p2/v1.2/PRESERVATION.md"
+  },
+  "current_authorized_package": "PC-012"
 }

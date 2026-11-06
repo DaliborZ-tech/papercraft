@@ -1,0 +1,24 @@
+{
+  "verification": "implementation evidence, independent review required",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "pytest_command": ".venv\\Scripts\\python.exe -m pytest tests/panel/test_panel_export.py -ra --junitxml=docs/p2/evidence/editor-export-tests.xml",
+  "pytest_result": {
+    "pass": 22,
+    "fail": 0,
+    "skip": 0,
+    "error": 0,
+    "seconds": 0.77,
+    "exit_code": 0
+  },
+  "lint_command": ".venv\\Scripts\\ruff.exe check --no-cache src/archpapercraft/exporter/panel_export.py tests/panel/test_panel_export.py tools/panel/editor_probe.py",
+  "lint_exit_code": 0,
+  "files_sha256": {
+    "src/archpapercraft/exporter/panel_export.py": "578e87a33ad8f37d472cec06ae2780b0d4f16660f0c82bc258640a808affc2cb",
+    "tests/panel/test_panel_export.py": "10eb646836d6852c86b27f2ebe656a60df050fd3cf88afe8b5ba3253cd7ac90a",
+    "tools/panel/editor_probe.py": "1fd3ce981e23b18ff0dc617e4319ea2817801406016faa0fcab93e4b8e8460a4"
+  },
+  "editor_proof": "editor-proof-final/editor-results.json",
+  "independent_approval": false,
+  "footer_fix": "Shared SVG/PDF footer uses Strana index / total; UUID remains only in stable IDs and metadata"
+}

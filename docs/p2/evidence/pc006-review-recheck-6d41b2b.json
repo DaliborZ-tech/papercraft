@@ -1,0 +1,27 @@
+{
+  "nonrigid_policy": {
+    "nonuniform_scale": "typed rejection; unchanged project",
+    "uniform_scale": "typed rejection; unchanged project",
+    "huge_scale": "typed rejection; unchanged project",
+    "shear": "typed rejection; unchanged project"
+  },
+  "frame_integrity": {
+    "foreign_root": "current rejected; explicit unresolved/stale draft preserved exactly",
+    "foreign_vertex": "current rejected; explicit unresolved/stale draft preserved exactly",
+    "foreign_axis": "current rejected; explicit unresolved/stale draft preserved exactly",
+    "missing_axis": "current rejected; explicit unresolved/stale draft preserved exactly",
+    "wrong_axis_orientation": "current rejected; explicit unresolved/stale draft preserved exactly"
+  },
+  "unresolved_save_reopen": "PASS",
+  "large_rigid_translation": {
+    "rejected": false,
+    "original_preserved": false,
+    "expected_edge_mm": 10000.0,
+    "actual_edge_mm": 16384.0,
+    "expected_area_mm2": 40000000.0,
+    "actual_area_mm2": 65536000.0
+  },
+  "code_sha": "6d41b2beac72d7f229dee22df78962abc5965626",
+  "seconds": 0.08,
+  "scope": "PC006 core only; no GUI/export approval"
+}

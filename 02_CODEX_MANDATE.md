@@ -1,5 +1,7 @@
 # ArchPapercraft Studio — produktový a realizační mandát ADLC
 
+> Aktivn? dopln?n? 6. 11. 2026: [opravn? pokyn vlastn?ka](docs/p2/v1.2/OWNER_CLARIFICATION.txt) a [kontrakt v1.2](docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md) roz?i?uj? c?l na vlastn? kreslen? a konstrukci z profil?, otev?en? plochy, p?esahy, vnit?n? spoje, autorsk? chlopn? a sto?en? pl??t?. PC-012 zahrnuje skute?n? spiky p?ed stabilizac? dom?ny, nez?visl? review a integraci/push n?vrhu. D??v?j?? p?ijet? v1.1 je zachov?no historicky; nevyd?vej je za p?ijet? v1.2. Autorizace integrace a ochrana dat dle AGENTS trvaj?. N?sleduj?c? P0/P1 vymezuje p?vodn? etapu, nikoli dne?n? omezen? produktu.
+
 Verze 1.0 · 2026-11-05 · návrh k realizaci v nové Codex session.
 
 ## 1. Produktový cíl a rozhodnutí vlastníka

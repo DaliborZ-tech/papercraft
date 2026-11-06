@@ -1,0 +1,10 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "tools/panel/desktop_verify.py",
+    "docs/p2/evidence/pc006-desktop-final"
+  ],
+  "started_utc": "2026-11-06T06:39:55.608900+00:00",
+  "seconds": 8.40360189997591,
+  "exit_code": 0
+}

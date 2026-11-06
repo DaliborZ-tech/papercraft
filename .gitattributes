@@ -1,4 +1,9 @@
 # Preserve generated proof bytes, including PDF xref offsets, on Windows checkout.
 *.pdf binary
 *.png binary
+*.bundle binary
 docs/revival/evidence/** -text -whitespace
+docs/p2/evidence/** -text -whitespace
+docs/p2/v1.2/evidence/** -text -whitespace
+tools/spikes/** text eol=lf
+tests/spikes/** text eol=lf

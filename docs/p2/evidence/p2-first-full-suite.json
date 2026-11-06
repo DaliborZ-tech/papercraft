@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests",
+    "-q",
+    "--junitxml=docs/p2/evidence/p2-first-full-suite.xml"
+  ],
+  "started_utc": "2026-11-06T06:40:42.890793+00:00",
+  "seconds": 8.452663599979132,
+  "exit_code": 0
+}

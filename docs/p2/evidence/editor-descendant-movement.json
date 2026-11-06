@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "method": "actual Inkscape --query-all on source and GUI-edited copy",
+  "all_physical_paths": {
+    "path-panel-proof-CUT-0": {
+      "delta_px": [
+        10.0,
+        15.0
+      ],
+      "width_unchanged": true,
+      "height_unchanged": true
+    },
+    "path-panel-proof-FOLD_MOUNTAIN-0": {
+      "delta_px": [
+        10.0,
+        15.0
+      ],
+      "width_unchanged": true,
+      "height_unchanged": true
+    },
+    "path-panel-proof-FOLD_VALLEY-0": {
+      "delta_px": [
+        10.0,
+        15.0
+      ],
+      "width_unchanged": true,
+      "height_unchanged": true
+    },
+    "path-panel-proof-TABS-0": {
+      "delta_px": [
+        10.0,
+        15.0
+      ],
+      "width_unchanged": true,
+      "height_unchanged": true
+    }
+  }
+}

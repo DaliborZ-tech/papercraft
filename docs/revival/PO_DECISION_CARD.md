@@ -1,5 +1,7 @@
 # Rozhodnutí vlastníka: konkrétní P2
 
+> Aktualizace 6. 11. 2026: tento dokument zachov?v? stav p?vodn?ho P0/P1 a v1.1. V1.1 byla skute?n? p?ijata vlastn?kem, potom byl c?l roz???en. Aktivn? n?vrh [P2 v1.2](../p2/v1.2/README.md) a jedin? queue ur?uj? nyn?j?? rozsah/stav; review a baseline piny z?st?vaj? historick?. Povinn? mixed-part testy se neru??. Push n?vrhu nen? jeho produktov? p?ijet?.
+
 P0/P1 přináší skutečně spuštěnou a proměřenou baseline, diagnostické reprodukce a návrh obnovy. Nevznikla ještě nová použitelná vystřihovánka. Technický verdikt a přesný review pin jsou v [REVIEW_REPORT.md](REVIEW_REPORT.md); PO akceptace a release jsou samostatné a zůstávají čekající.
 
 Nezávislé review: **APPROVED_IN_SCOPE**, CODE `5b01bb26e6b4c3da8d75afdca19cad5d6b43d576`. Dva drobné nálezy opraveny a uzavřeny, žádný zásadní otevřený nález v P0/P1. Všechny dostupné nezávislé části prvního balíku jsou technicky dokončené.

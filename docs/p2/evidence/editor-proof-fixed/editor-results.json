@@ -1,0 +1,98 @@
+{
+  "version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "source_sha256": "18098bbcdb057c76f0decdf036f3ee33378697f757ee4632d392e8e53e32e15d",
+  "source": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-source\\page-one.svg",
+  "edited": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-edited.svg",
+  "part_id": "part-panel-proof",
+  "label_id": "label-panel-proof-0",
+  "original_transform": "translate(35 45) rotate(30)",
+  "edited_transform": "rotate(30,-72.554015,94.732456)",
+  "part_bounds_before": "56.0475\n163.162\n338.735\n289.67",
+  "part_bounds_after": "66.0475\n178.162\n338.735\n289.67",
+  "text_before": "Příliš žluťoučký kůň — střecha",
+  "text_after": "PŘÍLIŠ ŽLUŤOUČKÝ KŮŇ — STŘECHA",
+  "color_after": "fill:#b43d28",
+  "path_count": 4,
+  "role_groups": [
+    "CUT",
+    "FOLD_MOUNTAIN",
+    "FOLD_VALLEY",
+    "TABS",
+    "LABELS",
+    "ARTWORK",
+    "GUIDES"
+  ],
+  "source_preserved": true,
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 1.1959963999688625,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-source\\page-one.svg",
+        "--query-id=part-panel-proof",
+        "--query-x",
+        "--query-y",
+        "--query-width",
+        "--query-height"
+      ],
+      "seconds": 4.046645499998704,
+      "exit_code": 0,
+      "stdout": "56.0475\n163.162\n338.735\n289.67\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-source\\page-one.svg",
+        "--actions=select-by-id:part-panel-proof;transform-translate:10,15;select-clear;select-by-id:label-panel-proof-0;org.inkscape.text.uppercase.noprefs;select-clear;select-by-id:label-panel-proof-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-edited.svg;export-do"
+      ],
+      "seconds": 3.013340799952857,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n(org.inkscape.Inkscape:25308): GLib-WARNING **: 07:23:04.565: passing a child setup function to the g_spawn functions is pointless on Windows and it is ignored\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-edited.svg",
+        "--query-id=part-panel-proof",
+        "--query-x",
+        "--query-y",
+        "--query-width",
+        "--query-height"
+      ],
+      "seconds": 3.2649667999939993,
+      "exit_code": 0,
+      "stdout": "66.0475\n178.162\n338.735\n289.67\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 2.4065298999194056,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "gui": {
+    "native_window_observed": true,
+    "pid": 45624,
+    "screenshot": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\editor-proof-fixed\\editor-gui.png",
+    "width": 1500,
+    "height": 1062
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests/panel/test_controller.py",
+    "tests/panel/test_workspace.py",
+    "-q",
+    "--junitxml=docs/p2/evidence/pc006-ui-final.xml"
+  ],
+  "started_utc": "2026-11-06T06:38:42.419551+00:00",
+  "seconds": 3.51469909993466,
+  "exit_code": 0
+}

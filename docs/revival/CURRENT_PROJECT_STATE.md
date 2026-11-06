@@ -1,5 +1,7 @@
 # Aktuální stav projektu
 
+> Aktualizace 6. 11. 2026: tento dokument zachov?v? stav p?vodn?ho P0/P1 a v1.1. V1.1 byla skute?n? p?ijata vlastn?kem, potom byl c?l roz???en. Aktivn? n?vrh [P2 v1.2](../p2/v1.2/README.md) a jedin? queue ur?uj? nyn?j?? rozsah/stav; review a baseline piny z?st?vaj? historick?. Povinn? mixed-part testy se neru??. Push n?vrhu nen? jeho produktov? p?ijet?.
+
 Datum: 5. 11. 2026. Integrace: hlavní agent; geometrická analýza: samostatný `geometry_analysis`; finální revize: další nezávislý reviewer podle REVIEW_REPORT.
 
 Repo přímo v `C:\Users\dalib\projects\papercraft`, origin správný, baseline `d689af67e059512fdc99e85e9eb0b8d432f4c5d4`, zdrojová větev P0/P1 `revival/p0-p1-contract`, integrační cíl `master`. Původní práce zachována, žádné změny produkčního kódu, historie se nepřepisuje. Dokumentace/fixtures jsou záměrné nové přírůstky. Root `05_WORK_QUEUE.json` je jediná aktuální fronta; reference na PLANNED ve zdrojových dokumentech popisují stav při přípravě.

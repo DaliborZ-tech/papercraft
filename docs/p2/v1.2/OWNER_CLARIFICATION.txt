@@ -1,0 +1,91 @@
+a tohle je zásadní oprava mého dosavadního pojetí. Příliš jsem zaměnil jednoduchý testovací domeček za základ celého editoru. Ty chceš autorský nástroj na konstrukci papírových modelů, ve kterém si vlastní tvary vytvoříš, sestavíš a připravíš k výrobě.
+
+Aktuální P2 v1.1 opravdu omezuje tvorbu na rovinné panely a další důležité schopnosti odsouvá. V této podobě už neodpovídá upřesněnému cíli. Moje předchozí doporučení přijmout ho musíme upravit.
+
+Nejdůležitější je změnit následující předpoklady:
+Oblast	Co musí editor umožnit
+Základ modelu	Otevřené konstrukce, jednotlivé plochy a skořepiny. Spodní stěna je volitelná; aplikace nesmí automaticky uzavírat každou budovu.
+Vlastní tvorba	Kreslit obrysy a profily z úseček, oblouků a křivek, upravovat jejich rozměry a vytvářet z nich konstrukční díly. Hotové objekty jsou pomůcka.
+Stěny a pláště	Rovné, lomené, ohýbané a zakřivené plochy; rozlišit ostrý přehyb, plynulé stočení a aproximaci segmenty.
+Plocha mezi profily	Vybrat dvě křivky, určit jejich vzájemné umístění a odpovídající body a vytvořit mezi nimi plochu.
+Otvory a ostění	Skutečné výřezy, různé přední a zadní obrysy, hloubka a šikmé ostění — včetně obloukových a gotických tvarů.
+Střechy	Přesahy u okapu i štítu, rozdílné přesahy jednotlivých hran, podhledy, případně spodní potisk nebo samostatné spodní díly.
+Terén a základna	Samostatná součást modelu: půdorys osazení budovy, otvory, lepicí oblasti, výškové úrovně a později tvarovaný terén.
+Chlopně	Souvislé i dělené, lichoběžníkové, trojúhelníkové a další autorské tvary; počet, rozestupy, výřezy a orientace podle konkrétní hrany.
+
+
+Přesah střechy odhaluje důležitou chybu i v navržené architektuře spojů. Horní hrana stěny se často připojuje dovnitř střešní plochy, protože střecha pokračuje za ni. Nestačí tedy modelovat každý spoj jako dvě shodné vnější hrany. Potřebujeme také připojovací čáru nebo lepicí oblast uvnitř plochy. Stejný princip se využije při usazení budovy do terénu.
+
+U tvého příkladu se dvěma oblouky musí editor rozlišovat dva případy:
+- Oblouky v jedné rovině: vznikne rovinný pás nebo obrys ostění.
+- Oblouky v různých rovinách: vznikne prostorová plocha mezi profily.
+U prostorové plochy se musí ověřit, zda ji lze přesně rozvinout. Pokud ne, autor potřebuje nabídnout dělení, segmentaci nebo řízenou aproximaci s uvedenou odchylkou. Pouhé propojení křivek trojúhelníkovou sítí by původní problém zopakovalo.
+
+Agentům bych nyní poslal tento opravný pokyn:
+Zásadní upřesnění produktového cíle a revize kontraktu P2
+
+Dosavadní P2 v1.1 nepovažujte za konečné vymezení produktu.
+Referenční domeček je numerický testovací vzor. Editor nesmí
+být architektonicky ani uživatelsky omezený na jeho preset.
+
+Cílem je autorská tvorba skutečných papírových modelů:
+z jednotlivých ploch, vlastních obrysů, profilů, ohybů
+a zakřivených plášťů, s možností využívat hotové prvky.
+
+Před stabilizací nové domény a persistence připravte P2 v1.2:
+
+1. Doplňte produktovou analýzu papírového modelářství:
+   otevřené budovy bez dna, základny a terén, výztuhy,
+   přesahy střech, ostění, stočené plochy a dělené chlopně.
+   Nepředpokládejte uzavřený objem jako podmínku validity.
+
+2. Navrhněte vlastní kreslení úseček, oblouků a křivek,
+   editaci obrysů/profilů a konstrukci ploch mezi dvěma profily.
+   Rozlište rovinný pás, prostorovou plochu a její rozvinutelnost.
+   Presety musí používat stejnou konstrukční doménu jako
+   ručně vytvořené prvky; nesmějí být jedinou cestou tvorby.
+
+3. Rozšiřte konstrukční spoje:
+   hrana–hrana, hrana–čára uvnitř plochy a lepicí oblast.
+   Střešní přesah ani osazení na terén neřešte falešným
+   ztotožněním vnějších hran nebo odstraněním přesahu.
+
+4. Chlopně modelujte jako autorsky upravitelné spojovací prvky.
+   Podporujte návrh souvislých i jednotlivých chlopní,
+   trojúhelníkové/zúžené tvary a dělení kolem zakřivené hrany.
+   Kontrolujte kolize, místo pro ohyb a skutečnou lepicí plochu.
+
+5. Doplňte rozhraní pro tvorbu od prázdného projektu:
+   nakreslit profil → vytvořit plochu → umístit/připojit →
+   určit ohyb/spoj → vytvořit chlopně → rozvinout →
+   ručně rozmístit → exportovat SVG/PDF.
+
+6. Proveďte časné geometrické spiky pro zakřivené plochy
+   a spoj uvnitř plochy. Jejich výsledky musí ovlivnit návrh
+   domény ještě před jejím uzavřením. Nestačí napsat,
+   že „se to později přidá“.
+
+7. Aktualizujte architekturu, UX, roadmapu, queue, akceptaci
+   a odhad. Rozdělte realizaci na zvládnutelné vertikální řezy,
+   ale základní vlastní tvorbu neodkládejte celou za presetový
+   domeček. Výslovně ukažte, které konstrukční schopnosti
+   bude mít první skutečně použitelná autorská verze.
+
+Povinné přejímací modely:
+A. Ručně vytvořená budova bez dna, s přesahy střechy
+   a připojením k základně; bez použití hotového domu.
+B. Ostění mezi dvěma různými obloukovými/gotickými profily.
+C. Stočený plášť s dělenými trojúhelníkovými chlopněmi.
+D. Zakřivená plocha, kterou nelze přesně rozvinout:
+   pravdivé odmítnutí přesného režimu a návrh dalšího postupu.
+
+Každý podporovaný řez musí projít přes skutečné UI,
+uložení/otevření, rozvin, ruční layout a vektorový export.
+Fyzická sestavitelnost vyžaduje následný skutečný výtisk.
+
+Zachovejte dosavadní práci a důkazy. Již rozpracovaný kód
+posuďte proti novému cíli; nic automaticky nezahazujte.
+Dodatek nechte nezávisle zrevidovat a schválený návrhový
+balík integrujte a pushněte na master podle platného mandátu.
+
+Tohle musí ovlivnit základní datový model už teď. Postupné dodávání funkcí je správné, ale základ nesmí předpokládat pouze rovné panely a spoje po jejich okrajích, pokud na něm později mají stát právě takové konstrukce, které popisuješ.

@@ -1,0 +1,26 @@
+{
+  "scope": "Actual Inkscape interoperability automation; distinct from product exporter tests",
+  "attempts": [
+    {
+      "directory": "editor-proof",
+      "status": "HARNESS_ASSERTION_FAILED",
+      "observation": "Actual extension changed Czech text to uppercase, but extension invocation cleared selection and the following fill action did not affect the label",
+      "correction": "Explicitly reselect the stable label ID after the extension before the fill action"
+    },
+    {
+      "directory": "editor-proof-fixed",
+      "status": "PASS_FOR_CLI_GROUP_TRANSLATION_TEXT_CASE_COLOR_AND_REAL_GUI_OPEN",
+      "limitation": "In headless extension mode uppercase applies to all text in the edited copy; this is not claimed as an isolated label-content edit",
+      "follow_up": "Add a native GUI edit to the selected text object, save and compare all other text objects"
+    },
+    {
+      "directory": "editor-proof-individual",
+      "status": "HARNESS_ASSERTION_FAILED",
+      "observation": "Native GUI changed the intended label and preserved Czech characters, but Unicode packet input did not retain spaces; exact-content assertion correctly failed",
+      "correction": "Use a native space key for spaces; final isolated-label proof uses the unambiguous Czech word Žluťoučký"
+    }
+  ],
+  "final_evidence": "editor-proof-final/editor-results.json",
+  "source_projects_modified": false,
+  "production_exporter_test_failures": 0
+}

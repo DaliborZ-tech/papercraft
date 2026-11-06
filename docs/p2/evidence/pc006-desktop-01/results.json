@@ -1,0 +1,44 @@
+{
+  "stage": "PC-006",
+  "steps": [
+    {
+      "native_path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\pc006-desktop-01\\house.apcraft",
+      "seen": true,
+      "accepted": true,
+      "title": "Uložit projekt"
+    },
+    {
+      "native_path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\evidence\\pc006-desktop-01\\house.apcraft",
+      "seen": true,
+      "accepted": true,
+      "title": "Otevřít projekt"
+    },
+    {
+      "native_path": "C:\\Users\\dalib\\projects\\papercraft\\samples\\house_with_dome.apcraft",
+      "seen": true,
+      "accepted": true,
+      "title": "Otevřít projekt"
+    }
+  ],
+  "errors": [],
+  "new_house": {
+    "surfaces": 8,
+    "params": {
+      "length_mm": 10000.0,
+      "width_mm": 6000.0,
+      "wall_height_mm": 4000.0,
+      "roof_rise_mm": 3000.0
+    },
+    "dirty": true
+  },
+  "opengl": {
+    "valid": true,
+    "version": "b'4.6.0 NVIDIA 610.71'",
+    "renderer": "b'NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2'"
+  },
+  "viewport_pick": "f1ac025a-2bfe-4d7e-8d58-2f264379c972:roof-right",
+  "save_reopen_identity": true,
+  "legacy_read_only_dialog": true,
+  "legacy_original_preserved": true,
+  "seconds": 4.262128900038078
+}

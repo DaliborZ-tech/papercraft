@@ -1,5 +1,7 @@
 # Akceptační a ověřovací kontrakt
 
+> Aktivn? roz???en? 6. 11. 2026: [P2 v1.2 akceptace](docs/p2/v1.2/ACCEPTANCE.md) je normativn? dodatek. D?m n??e je numerick? regrese. Povinn? jsou t?? vlastn? modely A/B/C/D; otvory (AC-G06), p?sky (AC-C08) a digit?ln? ??sti v?lce/ku?ele/odm?tnut? dvojit? k?ivosti (AC-R01?R05) jsou ji? P2. Ka?d? podporovan? ?ez proch?z? skute?n?m UI, IO, rozvinem, ru?n?m layoutem a SVG/PDF. P?vodn? mixed-part kotvy, p?esnost a ochrana pr?ce z?st?vaj?. Nov? produktov? AC jsou NOT_RUN; spike nen? UI proof, fyzick? v?tisk z?st?v? P3.
+
 Verze 1.0 · Normativní součást zadání. Číselné tolerance jsou návrh požadované digitální přesnosti; P1 musí experimentálně doložit jejich dosažitelnost nebo předložit zdůvodněnou změnu. Nejsou tvrzením o přesnosti domácí tiskárny.
 
 ## 1. Referenční model P2

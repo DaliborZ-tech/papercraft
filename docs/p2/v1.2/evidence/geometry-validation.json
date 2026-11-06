@@ -1,0 +1,38 @@
+﻿{
+    "exit_code":  0,
+    "errors":  0,
+    "preformat_archive":  [
+                              "geometry-preformat-results.json",
+                              "geometry-preformat-tests.xml",
+                              "geometry-preformat-validation.json",
+                              "geometry-preformat-tab-footprints.svg"
+                          ],
+    "formatting_only":  true,
+    "scientific_sources":  [
+                               {
+                                   "url":  "https://encov.ip.uca.fr/publications/pubfiles/2013_Perriollat_etal_CAVW_developable.pdf",
+                                   "title":  "A Computational Model of Bounded Developable Surfaces"
+                               },
+                               {
+                                   "url":  "https://www.cis.upenn.edu/~cis6100/gma-v2-chap20.pdf",
+                                   "title":  "Basics of the Differential Geometry of Surfaces, Chapter 20"
+                               }
+                           ],
+    "numerical_results_identical_to_preformat":  true,
+    "skipped":  0,
+    "source_files":  [
+                         {
+                             "sha256":  "a64c80d6715300251156df385d09bee3022d48713264c445b3b20010fb524df1",
+                             "path":  "C:\\Users\\dalib\\projects\\papercraft\\tools\\spikes\\p2_v12_geometry.py"
+                         },
+                         {
+                             "sha256":  "577083c5a04497eef073732d8a3459cb3a460fea11794828eabc6c88d72ad6cf",
+                             "path":  "C:\\Users\\dalib\\projects\\papercraft\\tests\\spikes\\test_p2_v12_geometry.py"
+                         }
+                     ],
+    "tests":  40,
+    "command":  ".venv\\Scripts\\python.exe -m pytest tests/spikes/test_p2_v12_geometry.py -q --junitxml=docs/p2/v1.2/evidence/geometry-tests.xml",
+    "failures":  0,
+    "date":  "2026-11-06",
+    "ruff_check":  "PASS"
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "tools/panel/p2_demo.py",
+    "docs/p2/evidence/p2-desktop-attempt3"
+  ],
+  "started_utc": "2026-11-06T06:54:43.939058+00:00",
+  "seconds": 14.7483082000399,
+  "exit_code": 0
+}
