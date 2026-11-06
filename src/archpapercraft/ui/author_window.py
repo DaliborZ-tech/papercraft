@@ -9,6 +9,8 @@ from pathlib import Path
 from PySide6.QtCore import QSettings, Qt, QTimer
 from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (
+    QAbstractSpinBox,
+    QApplication,
     QCheckBox,
     QComboBox,
     QDialog,
@@ -60,6 +62,8 @@ class AuthorMainWindow(QMainWindow):
         self._raw = {}
         self.sections = {}
         self._frame_next = True
+        self._command_errors = 0
+        self._committing_input = False
         self.controller = AuthorController(self.refresh)
         self.actions = {}
         self._build_workspace()
@@ -397,6 +401,7 @@ class AuthorMainWindow(QMainWindow):
         try:
             return operation()
         except Exception as exc:
+            self._command_errors += 1
             self.statusBar().showMessage(str(exc), 12000)
             QMessageBox.warning(self, "Změnu nelze dokončit", str(exc))
             return None
@@ -1356,6 +1361,8 @@ class AuthorMainWindow(QMainWindow):
         self.paper.fitInView(self.paper.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
 
     def _confirm_replace(self):
+        if not self._commit_pending_input():
+            return False
         if self.sketch.drawing and self.sketch.points:
             answer = QMessageBox.question(
                 self,
@@ -1447,6 +1454,8 @@ class AuthorMainWindow(QMainWindow):
         dialog.exec()
 
     def save_project(self, *, save_as=False):
+        if not self._commit_pending_input():
+            return False
         if self.sketch.drawing and self.sketch.points:
             QMessageBox.information(
                 self,
@@ -1469,6 +1478,8 @@ class AuthorMainWindow(QMainWindow):
         return self.run(lambda: self.controller.save(path)) is not None
 
     def export_project(self):
+        if not self._commit_pending_input():
+            return
         if self.sketch.drawing and self.sketch.points:
             QMessageBox.information(
                 self, "Dokončete obrys",
@@ -1507,6 +1518,33 @@ class AuthorMainWindow(QMainWindow):
                 + "\n".join(Path(p).name for p in result)
                 + "\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm.",
             )
+
+    def _commit_pending_input(self):
+        """Finish the visible numeric edit before save, snapshot, or replacement."""
+        if self._committing_input:
+            return True
+        field = QApplication.focusWidget()
+        while field is not None and field is not self and not isinstance(field, QAbstractSpinBox):
+            field = field.parentWidget()
+        if not isinstance(field, QAbstractSpinBox) or not self.isAncestorOf(field):
+            return True
+        if not field.hasAcceptableInput():
+            QMessageBox.warning(
+                self, "Zkontrolujte zadané číslo",
+                "Zadaná hodnota není úplné platné číslo. Opravte ji před pokračováním.",
+            )
+            field.setFocus()
+            return False
+        errors_before = self._command_errors
+        self._committing_input = True
+        try:
+            field.interpretText()
+            field.editingFinished.emit()
+            # Native dialogs must not commit another edit after a snapshot was taken.
+            field.clearFocus()
+        finally:
+            self._committing_input = False
+        return self._command_errors == errors_before
 
     def closeEvent(self, event):
         if self._confirm_replace():

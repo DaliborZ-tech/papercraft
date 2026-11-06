@@ -81,6 +81,54 @@ def test_keyboard_issue_activation_focuses_actual_part(window, qtbot):
     assert window.paper.selected_part == pid
 
 
+@pytest.mark.parametrize("action", ["save", "export", "new"])
+def test_pending_numeric_edit_is_committed_before_shortcuts(window, qtbot, tmp_path, action):
+    from archpapercraft.authoring import load_project
+
+    sid = arrange_rectangle(window)
+    window.select_vertex(profile_of(window, sid).id, profile_of(window, sid).vertices[1].id)
+    target = tmp_path / "pending-input.apcraft"
+    window.controller.save(target)
+    identity = profile_of(window, sid).vertices[1].id
+    window.vertex_x.setFocus()
+    qtbot.keyClick(window.vertex_x, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+    qtbot.keyClicks(window.vertex_x, "11")
+    assert profile_of(window, sid).vertex(identity).point[0] == 10000.0
+    project_id = window.project.project_id
+    key = {"save": Qt.Key.Key_S, "export": Qt.Key.Key_E, "new": Qt.Key.Key_N}[action]
+    qtbot.keyClick(window, key, Qt.KeyboardModifier.ControlModifier)
+    qtbot.wait(10)
+    assert profile_of(window, sid).vertex(identity).point[0] == 11000.0
+    if action == "save":
+        loaded = load_project(target)
+        assert loaded.profiles[profile_of(window, sid).id].vertex(identity).point[0] == 11000.0
+        assert not window.controller.dirty
+    elif action == "export":
+        assert window.project.parts[window.selected_part].stale
+        assert window._test_warnings  # Stale geometry must stop snapshot/export.
+        assert window.controller.dirty
+    else:
+        assert window.project.project_id == project_id  # Dirty prompt answered Cancel.
+        assert window.controller.dirty
+
+
+def test_failed_pending_numeric_commit_cannot_save_or_replace(window, qtbot, tmp_path):
+    sid = arrange_rectangle(window)
+    profile = profile_of(window, sid)
+    window.select_vertex(profile.id, profile.vertices[1].id)
+    path = tmp_path / "unchanged.apcraft"
+    window.controller.save(path)
+    original = path.read_bytes()
+    before = deepcopy(window.project.to_dict())
+    window.vertex_x.setFocus()
+    qtbot.keyClick(window.vertex_x, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+    qtbot.keyClicks(window.vertex_x, "0")  # Coincides with the first vertex: invalid.
+    qtbot.keyClick(window, Qt.Key.Key_S, Qt.KeyboardModifier.ControlModifier)
+    assert window._test_warnings
+    assert window.project.to_dict() == before and path.read_bytes() == original
+    assert not window.controller.dirty
+
+
 @pytest.fixture
 def window(qtbot, tmp_path, monkeypatch):
     settings = QSettings(str(tmp_path / "authoring-settings.ini"), QSettings.Format.IniFormat)

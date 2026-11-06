@@ -85,6 +85,7 @@ def main():
     from PySide6.QtTest import QSignalSpy, QTest
     from PySide6.QtWidgets import (
         QApplication,
+        QCheckBox,
         QDialog,
         QDialogButtonBox,
         QDoubleSpinBox,
@@ -145,7 +146,24 @@ def main():
         return widget
 
     def click(widget):
-        QTest.mouseClick(visible(widget), Qt.MouseButton.LeftButton)
+        visible(widget)
+        if isinstance(widget, QCheckBox):
+            # In a narrow, horizontally scrollable dock, the row's centre can
+            # be clipped. Scroll the exact indicator point into view and check
+            # that this real click toggled before attributing a lock failure.
+            point = QPoint(8, widget.height() // 2)
+            scroll = widget.parentWidget()
+            while scroll and not isinstance(scroll, QScrollArea):
+                scroll = scroll.parentWidget()
+            if scroll:
+                target = widget.mapTo(scroll.widget(), point)
+                scroll.ensureVisible(target.x(), target.y(), 12, 12)
+                QTest.qWait(45)
+            before = widget.isChecked()
+            QTest.mouseClick(widget, Qt.MouseButton.LeftButton, pos=point)
+            check(widget.isChecked() != before, "Checkbox indicator click did not toggle")
+        else:
+            QTest.mouseClick(widget, Qt.MouseButton.LeftButton)
         QTest.qWait(60)
 
     def number(widget, value):
@@ -394,6 +412,11 @@ def main():
             number(window.paper_angle, 30)
             click(window.position_lock)
             click(window.rotation_lock)
+            check(
+                window.project.placements[pid_a].position_locked
+                and window.project.placements[pid_a].rotation_locked,
+                "Checkbox controls did not persist both locks on the selected A part",
+            )
             add_page = next(b for b in window.findChildren(QPushButton) if b.text() == "Přidat A4")
             click(add_page)
             select(window, sid_b)
