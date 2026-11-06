@@ -133,10 +133,6 @@ def _send_keys(user32, text, foreground_guard):
 
     for char in text:
         foreground_guard()
-        if char == " ":
-            user32.keybd_event(0x20, 0, 0, 0)
-            user32.keybd_event(0x20, 0, 2, 0)
-            continue
         down = Input(type=1, ki=KeyInput(wVk=0, wScan=ord(char), dwFlags=4, time=0, dwExtraInfo=0))
         up = Input(type=1, ki=KeyInput(wVk=0, wScan=ord(char), dwFlags=6, time=0, dwExtraInfo=0))
         inputs = (Input * 2)(down, up)
@@ -251,7 +247,6 @@ def main():
         edited = out / "editor-edited.svg"
         actions = (
             f"select-by-id:{part_id};transform-translate:10,15;select-clear;"
-            f"select-by-id:{label_id};org.inkscape.text.uppercase.noprefs;"
             f"select-clear;select-by-id:{label_id};object-set-property:fill,#b43d28;"
             f"export-filename:{edited};export-do"
         )
@@ -259,19 +254,20 @@ def main():
         changed = ET.parse(edited).getroot()
         edited_label = changed.find(f".//s:text[@id='{label_id}']", NS)
         assert edited_label is not None
-        assert "".join(edited_label.itertext()) == "".join(label.itertext()).upper()
+        assert "".join(edited_label.itertext()) == "".join(label.itertext())
         assert (
             "#b43d28" in edited_label.attrib.get("style", "")
             or edited_label.attrib.get("fill") == "#b43d28"
         )
-        # The real editor's actions have changed text/color/placement. A native
-        # GUI edit below additionally proves individual text is still editable.
+        # Native editor actions change color/placement. Text content is changed
+        # only by the individual GUI edit below. The historical uppercase
+        # extension also affected unselected footer texts, so is not used.
         report["actual_inkscape_action_edits"] = {
             "part_id": part_id,
             "label_id": label_id,
             "translation_px": [10, 15],
             "fill": "#b43d28",
-            "text": "uppercase",
+            "text": "unchanged_by_actions; individual_native_GUI_edit_below",
             "method": "Inkscape executable native actions, not XML writes",
         }
         process = subprocess.Popen(
