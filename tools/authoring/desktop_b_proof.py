@@ -163,7 +163,7 @@ def git(*args):
     return subprocess.check_output(["git", *args], cwd=ROOT, text=True).strip()
 
 
-def run_windows(output, expected_sha):
+def run_windows(output, expected_sha, fixture="all"):
     # Imported only after explicit CLI entry and fresh-directory/source guards.
     import native_dialogs
     from pypdf import PdfReader
@@ -196,6 +196,8 @@ def run_windows(output, expected_sha):
     report = {
         "status": "RUNNING",
         "source_sha": sha,
+        "requested_fixture": fixture,
+        "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "platform": platform.platform(),
@@ -1161,18 +1163,25 @@ def run_windows(output, expected_sha):
             }
             window.viewport.doneCurrent()
             driver.capture("empty-real-app")
-            driver.building()
-            driver.mixed()
+            if fixture in ("all", "model-A"):
+                driver.building()
+                report["fixture_status"]["model-A"] = "PASS_TECHNICAL_UI"
+            if fixture in ("all", "mixed-part"):
+                driver.mixed()
+                report["fixture_status"]["mixed-part"] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
-                len(native) == 6 and all(r["native_seen"] and r["accepted"] for r in native),
-                "Both complete fixtures require native save/open/export",
+                len(native) == (6 if fixture == "all" else 3)
+                and all(r["native_seen"] and r["accepted"] for r in native),
+                "Each requested complete fixture requires native save/open/export",
             )
             check(
                 git("rev-parse", "HEAD") == sha and source_files() == hashes,
                 "Sources changed during proof; cannot attribute one CODE SHA",
             )
-            report.update(status="PASS", failures=failures)
+            report.update(
+                status="PASS" if fixture == "all" else "PASS_REQUESTED_FIXTURE", failures=failures
+            )
             exit_code[0] = 0
         except Exception:
             report.update(status="FAIL", error=traceback.format_exc(), failures=failures)
@@ -1227,6 +1236,12 @@ def main():
     parser.add_argument("--output", type=Path)
     parser.add_argument("--expected-sha")
     parser.add_argument("--oracle-only", action="store_true")
+    parser.add_argument(
+        "--fixture",
+        choices=["all", "model-A", "mixed-part"],
+        default="all",
+        help="A partial checkpoint never replaces the full A+mixed proof",
+    )
     args = parser.parse_args()
     if args.oracle_only:
         value = oracle()
@@ -1241,7 +1256,7 @@ def main():
         parser.error("Native proof requires --output and --expected-sha")
     if args.output.resolve().exists():
         parser.error("Evidence output must be a fresh nonexistent directory")
-    return run_windows(args.output.resolve(), args.expected_sha)
+    return run_windows(args.output.resolve(), args.expected_sha, args.fixture)
 
 
 if __name__ == "__main__":
