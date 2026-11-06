@@ -4,6 +4,20 @@
 
 **Integrační CODE `b66b325eabc1e5cf744a73ac58ff6cda635d3603`, schválený produkční základ `4b172e65af3cde19c865cf7594c63fa004aa1ba2`. Verdikt: APPROVED_IN_SCOPE, 0 BLOCKER / 0 MAJOR.** Níže je jedna drobná nejednoznačnost záznamu `current_delivery` k rutinnímu sjednocení. Technické schválení PC-006A a produktové meze zůstávají zachované; nejde o schválení celého P2 nebo budoucího editorového pokusu.
 
+## Následná úzká integrační kontrola po C-06
+
+**Pin `1d8ed8b9db95a7e225ad77fbaffe7b943ddec828`: APPROVED_IN_SCOPE, 0 BLOCKER / 0 MAJOR; I-01 CLOSED.** Tato následná kontrola ponechává původní b66 revizi níže jako historii a doplňuje nový produkční source `7da240386550039761de6861d3149ce9ee1be466`/helper `5741cf144116123b4a0cb3f1c84987443517662a`. Produkce mezi `5741` a `1d8` je beze změny. C-06 byl nezávisle uzavřen [samostatnou CODE revizí](PC006A_REVIEW.md); skutečné run04/run06 důkazy nejsou předem schválené na základě starého run03.
+
+[Vlastní kontrola konkrétního integračního archivu](evidence/pc006a-review-integration-1d8ed8b.json) potvrzuje:
+
+- Produktová brána, její historie a historické definice ticketů jsou datově shodné s posouzeným b66. Nové úzké editorové PASS nemění přijetí celého P2, A/B/C/D, novice, fyzické P3 nebo závěrečný vlastní model AC-AU19.
+- I-01 je opraven: `current_delivery.ticket=PC-006B`, předchozí ověřený A je oddělený v `previous_verified`; nejde o zpětné dokončení B. Jeho uvedené `4b` SHA je původní úsečkové schválení; nový C-06 source a meze určuje přidaný CODE review a delivery dodatek.
+- Všech **30 relativních Markdown odkazů** v novém delta směřuje na existující cíl tohoto commitu a všech **89 uložených proof hashů** ve výsledkových manifestech přesně souhlasí s Git archive bytes. Staré neúspěšné běhy zůstávají FAIL; přidané PNG/PDF jsou vlastní UI/editor výstupy, nikoli zdrojové vystřihovánky. Veřejná dostupnost přes master vyžaduje následný push a ověření vzdáleného SHA integračním ownerem.
+- SK-005 správně odkazuje na skutečné b66 nezávislé schválení rady. Její další použití a účinnost zůstávají pending.
+- **Nová rada SK-006: APPROVED_IN_SCOPE** na tomto přesném pinu. Příčina a produktová oprava jsou podložené vlastním nezávislým A/B a nyní uzavřenou produkční regresí. Krátký verification odstavec ukládá skutečné postupné psaní víceslovného Unicode textu a uložený readback, zachování ostatních objektů a rozlišení bezpečně odmítnutého harnessu. Neoslabuje AC ani nezaměňuje Inkscape za všechny editory nebo novice. `PENDING_NEXT_USE` a PC-009 `NOT_RUN` správně nechávají účinnost nově napsané rady neověřenou. Aktuálně pending pole jejího nezávislého review a produktu lze teď navázat na tuto revizi a CODE uzavření; nedává to PASS budoucímu použití.
+
+Tato kontrola nezahrnuje izolované rozpracované produkční změny PC-006B. Jeho digitální AU07 nálezy zůstávají oddělené a otevřené podle B review. Nepřidává rutinní produktovou bránu.
+
 ## Zdroj a přiměřené ověření
 
 Porovnání `git diff 4b172e6 b66b325 -- src tests pyproject.toml` je prázdné. Nezměnil se schválený běžící produkt ani jeho testy/dependencies. Proto není důvod opakovat celou sadu 443 PASS nebo znovu řídit desktop; jejich konkrétní source vazba a předešlá omezení platí dál. Nové jsou dokumenty, reference, queue, úzký skill odstavec, skutečné historické důkazy a opt-in `tools/authoring/editor_probe.py`.

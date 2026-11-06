@@ -1,0 +1,82 @@
+{
+  "integration_sha": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828",
+  "production_delta_from_5741": "",
+  "product_gate_unchanged": true,
+  "gate_history_unchanged": true,
+  "historical_definitions_unchanged": true,
+  "current_delivery": {
+    "ticket": "PC-006B",
+    "then": "PC-007A",
+    "followed_by": [
+      "PC-007B",
+      "PC-008",
+      "PC-009",
+      "PC-010"
+    ],
+    "status": "IN_PROGRESS",
+    "new_routine_permission_required": false,
+    "final_historic_model_ticket": "PC-010 / AC-AU19",
+    "previous_verified": {
+      "ticket": "PC-006A",
+      "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+      "report": "docs/p2/implementation/PC006A_REVIEW.md"
+    }
+  },
+  "relative_link_count": 30,
+  "missing_links": [],
+  "manifest_hash_count": 89,
+  "manifest_hash_failures": [],
+  "skills": [
+    {
+      "id": "SK-005",
+      "independent_review": {
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "b66b325eabc1e5cf744a73ac58ff6cda635d3603",
+        "report": "docs/p2/implementation/PC006A_INTEGRATION_REVIEW.md",
+        "scope": "new advice and documented product correction; next use still pending"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-006B",
+        "evidence": null
+      }
+    },
+    {
+      "id": "SK-006",
+      "independent_review": {
+        "status": "PENDING_FOR_NEW_SKILL_ADVICE",
+        "source_sha": null,
+        "report": "docs/p2/implementation/PC006A_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-009",
+        "evidence": null
+      }
+    }
+  ],
+  "new_binary_files": [
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/01-own-concave-hole-stale-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/01-own-concave-hole-stale-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/02-edited-stale-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/02-edited-stale-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/03-assembly-dialog-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/03-assembly-dialog-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/03-real-assembly-preview-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/03-real-assembly-preview-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/04-fold-shared-part-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/04-fold-shared-part-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/05-manual-two-pages-tab-and-locks-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/05-manual-two-pages-tab-and-locks-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/05b-specific-digital-warning-acknowledged-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/05b-specific-digital-warning-acknowledged-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/06-native-reopened-desktop.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/06-native-reopened-opengl.png",
+    "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/export/model.pdf",
+    "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-final-render.png",
+    "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-gui.png",
+    "docs/p2/implementation/evidence/pc006a-inkscape-ed3b50b-run05/editor-gui.png"
+  ]
+}

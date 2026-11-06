@@ -1644,7 +1644,7 @@
         "AC-AU13": "Stable vertex/profile identity and explicit unresolved references verified; general curve split/provenance remains later slices",
         "AC-AU15": "PC-006A native UI/save/reopen/manual layout/SVG/PDF PASS; other A/B/C/D flows pending",
         "AC-AU16": "Legacy read-only/source preservation verified; explicit PanelProject conversion remains PC-008",
-        "AC-G06": "Real hole in UI/3D/paper/SVG/PDF PASS; actual external-editor check is recorded separately when run; P3 physical pending",
+        "AC-G06": "Real hole in UI/3D/paper/SVG/PDF and actual Inkscape 1.4.4 multiword Unicode edit/save run06 PASS; broader curves/DPI PC-009 and P3 pending",
         "AC-US01": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
         "AC-US02": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
         "AC-US03": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
@@ -1657,7 +1657,7 @@
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-      "review": "Independent pinned CODE review approved PC-006A; C-01 through C-05 closed; full P2 and novice/P3 remain pending",
+      "review": "Independent pinned CODE review approved PC-006A; C-01 through C-06 closed; full P2 and novice/P3 remain pending",
       "estimate_person_days": [
         9,
         15
@@ -1695,11 +1695,13 @@
         {
           "skill": "papercraft-verification",
           "status": "APPLIED_AND_INDEPENDENTLY_REVIEWED_IN_SLICE",
-          "decision": "Independent analytic area/rigid transforms/holes and actual Windows flow; no novice or physical claim.",
+          "decision": "Independent analytic area/rigid transforms/holes and actual Windows flow; no novice or physical claim. C-06 independently isolated with native A/B typing, fixed in writer and verified on a fresh application export in actual Inkscape.",
           "evidence": [
             "docs/p2/implementation/PC006A_DELIVERY.md",
             "docs/p2/implementation/PC006A_REVIEW.md",
-            "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+            "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json",
+            "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/results.json",
+            "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-results.json"
           ],
           "review": "APPROVED_IN_PC006A_TECHNICAL_SCOPE; no novice or physical claim"
         },
@@ -1730,7 +1732,9 @@
           "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json",
           "tests/authoring/test_workspace.py",
           "tests/authoring/test_profile_workspace.py",
-          "docs/p2/implementation/PC006A_REVIEW.md"
+          "docs/p2/implementation/PC006A_REVIEW.md",
+          "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/results.json",
+          "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-results.json"
         ],
         "status": "TECHNICALLY_VERIFIED_IN_SLICE; HUMAN_LEARNABILITY_NOT_RUN",
         "implementation_in_this_slice": true,
@@ -1749,15 +1753,19 @@
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "implementation_authorized_on": "2026-11-06",
-      "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+      "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
       "delivery_report": "docs/p2/implementation/PC006A_DELIVERY.md",
       "independent_review": {
         "verdict": "APPROVED_IN_SCOPE",
-        "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+        "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
         "report": "docs/p2/implementation/PC006A_REVIEW.md",
         "open_blocker_major": 0,
-        "author_is_reviewer": false
-      }
+        "author_is_reviewer": false,
+        "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a",
+        "evidence_commit_sha": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828"
+      },
+      "historical_code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a"
     },
     {
       "id": "PC-006B",
@@ -2540,8 +2548,9 @@
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
       "ticket": "PC-006A",
-      "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
-      "report": "docs/p2/implementation/PC006A_REVIEW.md"
+      "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
+      "report": "docs/p2/implementation/PC006A_REVIEW.md",
+      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a"
     }
   }
 }

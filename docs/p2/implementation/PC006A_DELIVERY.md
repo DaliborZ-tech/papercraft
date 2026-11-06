@@ -1,6 +1,6 @@
 # PC-006A — vlastní úsečkové díly až do vektorového výstupu
 
-6.11.2026. **Technicky dodáno a nezávisle schváleno v rozsahu PC-006A**, CODE SHA `4b172e65af3cde19c865cf7594c63fa004aa1ba2`. [Nezávislá revize](PC006A_REVIEW.md). Produktové přijetí implementace je samostatné; celé P2 a první kompletní autorská verze A zde ještě dokončené nejsou.
+6.11.2026. **Technicky dodáno a nezávisle schváleno v rozsahu PC-006A**, produkční CODE SHA `7da240386550039761de6861d3149ce9ee1be466`, celý ověřovací source `5741cf144116123b4a0cb3f1c84987443517662a`. [Nezávislá revize](PC006A_REVIEW.md) uzavírá i později objevený C-06; původní `4b172e6` a jeho běhy zůstávají historicky zachované. Produktové přijetí implementace je samostatné; celé P2 a první kompletní autorská verze A zde ještě dokončené nejsou.
 
 ## Co lze skutečně udělat
 
@@ -31,6 +31,8 @@ První dva native pokusy zůstávají jako **FAIL**: run01 měl chybný středov
 Před publikací byl doplněn skutečný externí editorový průchod. Odhalil C-06: při postupném psaní víceslovného popisku v Inkscape mizely mezery, přestože XML/render kontroly procházely. Writer na `7da240386550039761de6861d3149ce9ee1be466` doplnil `xml:space="preserve"` pro všechny editovatelné texty. Nový [celý native průchod run04](evidence/pc006a-desktop-7da2403-run04/results.json) skutečně aplikací vytvořil nový export. [Inkscape run06](evidence/pc006a-inkscape-5741cf1-run06/editor-results.json) na helper pinu `5741cf144116123b4a0cb3f1c84987443517662a` prošel přesným uložením `Žluťoučký – vlastní díl`, změnou barvy a přesunem celé skupiny; zachoval otvor, ostatní texty, role, jednotky a 100mm kalibraci. [Diagnostika](evidence/pc006a-C06-svg-text-whitespace.md) zachovává i všechny předchozí FAIL a důvody opravy testovacího nástroje. Nezávislé uzavření nového produkčního pinu určuje výhradně [CODE review](PC006A_REVIEW.md); dřívější schválení `4b172e6` níže se na opravu nepřepisuje zpětně.
 
 Nezávisle **443 testů PASS,0skip**: původní baseline/spiky a170 nových autorských kontrol. Reviewer navíc provedl vlastní numerické a IO proti-příklady,6 pozitivních/negativních shortcut kontrol,4 legacy kontroly a22bodové čtení výstupů. Ruff dotčených souborů PASS; detaily a přesné raw výsledky jsou v review.
+
+Úzká C-06 revize nové produkce samostatně doložila **55 exportních testů PASS**, **132 nezávislých source/hash/XML/transform kontrol PASS** a **22 kontrol nových native výstupů PASS**. PDF ze stejného snapshotu je byte-identické, změna SVG je omezena na zachování mezer. Tyto počty nejsou přičítány jako nové unikátní testy k původním 443. C-01 až C-06 jsou uzavřené; širší editorové/křivkové/DPI přejímky PC-009 zůstávají v navazujícím rozsahu.
 
 Uzavřeno C-01 zachování vlastníka chlopně, C-02 poctivá mez interpolace a skutečné serializace PDF, C-03 kontrola drobných otvorů, C-04 světová plošná přesnost a C-05 právě rozepsaná čísla před uložením/exportem/nahrazením projektu. Tato poslední chyba by při Ctrl+S/E/N bez Enter ignorovala viditelný vstup nebo exportovala dřívější snapshot; oprava především mění transakci ovládání, nepřidává další nápovědu.
 
