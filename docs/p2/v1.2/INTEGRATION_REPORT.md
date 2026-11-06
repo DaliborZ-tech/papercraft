@@ -23,3 +23,5 @@ Po `git fetch origin` byly lokální master, `origin/master` a přímé `git ls-
 PC-012 je nyní AGENT_VERIFIED jako návrhový balík. Tento protokol a stav fronty se zaznamenají samostatným metadata commitem; výše uvedený SHA označuje skutečně publikovaný návrh, ne tvrzení o SHA budoucího zápisu protokolu. I konečný metadata commit projde omezenou nezávislou kontrolou a běžným pushem. Rozpracovaný prototyp je zachován i vzdáleně v bundle, root zůstává `C:\Users\dalib\projects\papercraft` na master.
 
 Produktová brána nového kontraktu zůstává PO_PENDING a A–D nejsou implementované. Příští implementační krok po skutečném přijetí v1.2 je PC-006A z prázdného projektu; není jím stabilizace starého house-only schématu. Fyzický výtisk a sestavení zůstávají P3.
+
+Samostatná [nezávislá kontrola publikačních metadat](PUBLICATION_REVIEW.md) dokládá revizi integračních commitů odděleně od geometrického návrhového review.
