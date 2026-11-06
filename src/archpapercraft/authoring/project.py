@@ -15,6 +15,7 @@ from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation
 
+from .bend import DEFAULT_MATERIAL_PROFILE, BendCommands
 from .errors import ProjectFormatError, UnsupportedOperationError, ValidationError
 from .geometry import (
     material_polygon,
@@ -51,8 +52,8 @@ from .paper import (
 )
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 2
-WRITER_VERSION = "0.3.0-pc006b-experimental"
+SCHEMA_VERSION = 3
+WRITER_VERSION = "0.3.0-pc006b-clearance-experimental"
 _UNSET = object()
 
 
@@ -87,7 +88,7 @@ def _record(cls, data):
     return cls(**copy.deepcopy(data))
 
 
-class AuthorProject(InteriorCommands):
+class AuthorProject(InteriorCommands, BendCommands):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
         self.name, self.scale, self.revision = name, number(scale, "Měřítko", positive=True), 1
@@ -97,6 +98,7 @@ class AuthorProject(InteriorCommands):
         self.placements, self.acknowledgements = {}, {}
         self.attachments, self.next_attachment_number = {}, 1
         self.loaded_from_schema, self.requires_save_as, self.loaded_source_path = None, False, None
+        self.material_profile = copy.deepcopy(DEFAULT_MATERIAL_PROFILE)
 
     @classmethod
     def new(cls, name="Nový model", scale=0.01):
@@ -795,6 +797,7 @@ class AuthorProject(InteriorCommands):
 
     def validate(self):
         uuid(self.project_id)
+        self._validate_material_profile()
         if not isinstance(self.name, str):
             raise ValidationError("Název projektu musí být text.")
         number(self.scale, "Měřítko", positive=True)
@@ -1100,6 +1103,7 @@ class AuthorProject(InteriorCommands):
             "project_id": self.project_id,
             "name": self.name,
             "scale": self.scale,
+            "material_profile": copy.deepcopy(self.material_profile),
             "revision": self.revision,
             "next_part_number": self.next_part_number,
             "next_joint_number": self.next_joint_number,
@@ -1131,11 +1135,37 @@ class AuthorProject(InteriorCommands):
             and data["schema_version"] == 1
             and data.get("writer_version") == "0.3.0-experimental"
         )
+        upgrading_b = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 2
+            and data.get("writer_version") == "0.3.0-pc006b-experimental"
+        )
         if upgrading:
-            if "attachments" in data or "next_attachment_number" in data:
+            if any(key in data for key in (
+                "attachments", "next_attachment_number", "material_profile"
+            )):
                 raise ProjectFormatError("Projekt006A obsahuje neočekávaná pole novějšího formátu.")
-            data.update(attachments={}, next_attachment_number=1)
+            data.update(attachments={}, next_attachment_number=1,
+                        material_profile=copy.deepcopy(DEFAULT_MATERIAL_PROFILE))
             data["schema_version"] = SCHEMA_VERSION
+        if upgrading_b:
+            if "material_profile" in data:
+                raise ProjectFormatError(
+                    "Starý B dokument obsahuje pole novější materiálové verze."
+                )
+            data.update(material_profile=copy.deepcopy(DEFAULT_MATERIAL_PROFILE),
+                        schema_version=SCHEMA_VERSION)
+            if isinstance(data.get("connectors"), dict):
+                known_fields = set(asdict(Connector("", "", "")))
+                for record in data["connectors"].values():
+                    if not isinstance(record, dict) or set(record) not in (
+                        known_fields, known_fields - {"receiver_side"}
+                    ):
+                        raise ProjectFormatError("Neznámá struktura původní B chlopně.")
+                    record.setdefault("receiver_side", "unknown")
+                    if record["tab_ids"] == [] and record["count"] == 1:
+                        record["tab_ids"] = [identity()]
         if upgrading and isinstance(data.get("connectors"), dict):
             old_connector_fields = {
                 "id",
@@ -1154,7 +1184,7 @@ class AuthorProject(InteriorCommands):
                 #006A had one implicit tab, not an independently addressable entity.
                 # Allocate its explicit identity once when creating the editable copy.
                 record["tab_ids"] = [identity()]
-        if upgrading and isinstance(data.get("parts"), dict):
+        if (upgrading or upgrading_b) and isinstance(data.get("parts"), dict):
             for part in data["parts"].values():
                 if isinstance(part, dict):
                     part["stale"] = True
@@ -1166,6 +1196,7 @@ class AuthorProject(InteriorCommands):
             "project_id",
             "name",
             "scale",
+            "material_profile",
             "revision",
             "next_part_number",
             "next_joint_number",
@@ -1199,6 +1230,7 @@ class AuthorProject(InteriorCommands):
                 "next_joint_number",
                 "next_attachment_number",
                 "acknowledgements",
+                "material_profile",
             ):
                 setattr(project, key, copy.deepcopy(data[key]))
             for key, cls_type in (
@@ -1314,6 +1346,6 @@ def load_project(path):
         return LegacyProject(raw, source)
     project = AuthorProject.from_dict(data)
     project.loaded_from_schema = data.get("schema_version")
-    project.requires_save_as = project.loaded_from_schema == 1
+    project.requires_save_as = project.loaded_from_schema in (1, 2)
     project.loaded_source_path = str(source.resolve())
     return project

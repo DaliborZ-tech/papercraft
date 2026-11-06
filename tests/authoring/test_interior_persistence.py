@@ -47,7 +47,7 @@ def legacy_a_document():
     )
     data = p.to_dict()
     data.update(schema_version=1, writer_version="0.3.0-experimental")
-    del data["attachments"], data["next_attachment_number"]
+    del data["attachments"], data["next_attachment_number"], data["material_profile"]
     return data, sid
 
 
@@ -70,9 +70,9 @@ def test_known_a_file_import_preserves_source_ids_layout_and_origin_requires_cop
     p.save(target)
     assert not p.requires_save_as
     assert hashlib.sha256(path.read_bytes()).hexdigest() == original_hash
-    assert json.loads(target.read_text(encoding="utf8"))["schema_version"] == 2
+    assert json.loads(target.read_text(encoding="utf8"))["schema_version"] == 3
     restored = AuthorProject.load(target)
-    assert restored.loaded_from_schema == 2 and not restored.requires_save_as
+    assert restored.loaded_from_schema == 3 and not restored.requires_save_as
     undo = AuthorProject.from_dict(p.to_dict())
     assert undo.loaded_from_schema is None and not undo.requires_save_as
 
