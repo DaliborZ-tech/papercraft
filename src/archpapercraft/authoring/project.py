@@ -704,6 +704,8 @@ class AuthorProject(InteriorCommands):
                 joint.connector_id = connector.id
                 self.connectors[connector.id] = connector
             connector = self.connectors[joint.connector_id]
+            if not connector.tab_ids:
+                connector.tab_ids = [identity()]
             if connector.owner_surface_id != chosen:
                 connector.receiver_side = "unknown"
             connector.owner_surface_id = chosen
@@ -1039,8 +1041,7 @@ class AuthorProject(InteriorCommands):
                 or not isinstance(connector.enabled, bool)
                 or not isinstance(connector.tab_ids, list)
                 or len(set(connector.tab_ids)) != len(connector.tab_ids)
-                or (connector.tab_ids and len(connector.tab_ids) != connector.count)
-                or (not connector.tab_ids and connector.count != 1)
+                or len(connector.tab_ids) != connector.count
                 or not isinstance(connector.tab_overrides, dict)
                 or set(connector.tab_overrides) - set(connector.tab_ids)
                 or any(not isinstance(v, dict) for v in connector.tab_overrides.values())
@@ -1150,6 +1151,9 @@ class AuthorProject(InteriorCommands):
                     raise ProjectFormatError("Neplatná původní chlopeň projektu006A.")
                 defaults = asdict(Connector("", "", ""))
                 record.update({k: v for k, v in defaults.items() if k not in record})
+                #006A had one implicit tab, not an independently addressable entity.
+                # Allocate its explicit identity once when creating the editable copy.
+                record["tab_ids"] = [identity()]
         if upgrading and isinstance(data.get("parts"), dict):
             for part in data["parts"].values():
                 if isinstance(part, dict):

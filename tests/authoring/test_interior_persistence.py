@@ -1,11 +1,35 @@
 import copy
 import hashlib
 import json
+from pathlib import Path
 
 import pytest
 from test_interior import wall_roof
 
 from archpapercraft.authoring import AuthorProject, ProjectFormatError, UnsupportedOperationError
+
+
+def test_actual_schema_one_implicit_tab_can_be_edited_individually_in_its_copy(tmp_path):
+    source = (
+        Path(__file__).resolve().parents[2] / "docs/p2/implementation/evidence/"
+        "pc006a-desktop-7da2403-run04/own-model.apcraft"
+    )
+    original = source.read_bytes()
+    legacy = json.loads(original)
+    project = AuthorProject.load(source)
+    cid = next(iter(project.connectors))
+    connector = project.connectors[cid]
+    assert connector.id == legacy["connectors"][cid]["id"]
+    assert connector.owner_surface_id == legacy["connectors"][cid]["owner_surface_id"]
+    assert len(connector.tab_ids) == 1 and connector.tab_ids[0] != cid
+    tid = connector.tab_ids[0]
+    project.set_connector_tab(cid, tid, enabled=False)
+    copy_path = tmp_path / "own-editable-copy.apcraft"
+    project.save(copy_path)
+    restored = AuthorProject.load(copy_path)
+    assert restored.connectors[cid].tab_ids == [tid]
+    assert restored.connectors[cid].tab_overrides[tid]["enabled"] is False
+    assert source.read_bytes() == original
 
 
 def legacy_a_document():
