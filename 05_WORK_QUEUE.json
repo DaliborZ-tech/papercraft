@@ -320,7 +320,9 @@
         "AC-AU07",
         "AC-AU13",
         "AC-AU15",
-        "AC-AU16"
+        "AC-AU16",
+        "AC-G06",
+        "AC-C08"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -343,7 +345,9 @@
         "AC-AU07": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
+        "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-G06": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -447,7 +451,11 @@
         "AC-AU10",
         "AC-AU11",
         "AC-AU13",
-        "AC-AU15"
+        "AC-AU15",
+        "AC-R01",
+        "AC-R02",
+        "AC-R03",
+        "AC-R05"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -470,7 +478,11 @@
         "AC-AU10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU11": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
+        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-R01": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-R02": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-R03": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -569,7 +581,8 @@
         "AC-AU13",
         "AC-AU14",
         "AC-AU15",
-        "AC-AU16"
+        "AC-AU16",
+        "AC-R04"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -591,7 +604,8 @@
         "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU14": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
+        "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-R04": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -940,12 +954,16 @@
       ],
       "acceptance": [
         "P3 kontrakt a skutečné PO přijetí",
-        "AC-AU18"
+        "AC-AU18",
+        "AC-R01",
+        "AC-R02"
       ],
       "status": "PLANNED",
       "execution_authorized_on_realization": false,
       "acceptance_state": {
-        "AC-AU18": "NOT_RUN: actual print and assembly required"
+        "AC-AU18": "NOT_RUN: actual print and assembly required",
+        "AC-R01": "NOT_RUN: actual print and assembly required",
+        "AC-R02": "NOT_RUN: actual print and assembly required"
       },
       "implementation_contract": "04_ACCEPTANCE_AND_VERIFICATION.md#5-fyzická-akceptace-p3",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -983,7 +1001,8 @@
         "AC-AU03",
         "AC-AU13",
         "AC-AU15",
-        "AC-AU16"
+        "AC-AU16",
+        "AC-G06"
       ],
       "acceptance_state": {
         "AC-AU01": "NOT_RUN",
@@ -991,7 +1010,8 @@
         "AC-AU03": "NOT_RUN",
         "AC-AU13": "NOT_RUN",
         "AC-AU15": "NOT_RUN",
-        "AC-AU16": "NOT_RUN"
+        "AC-AU16": "NOT_RUN",
+        "AC-G06": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1037,7 +1057,8 @@
         "AC-AU06",
         "AC-AU07",
         "AC-AU13",
-        "AC-AU15"
+        "AC-AU15",
+        "AC-C08"
       ],
       "acceptance_state": {
         "AC-AU03": "NOT_RUN",
@@ -1046,7 +1067,8 @@
         "AC-AU06": "NOT_RUN",
         "AC-AU07": "NOT_RUN",
         "AC-AU13": "NOT_RUN",
-        "AC-AU15": "NOT_RUN"
+        "AC-AU15": "NOT_RUN",
+        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1089,13 +1111,15 @@
         "AC-AU08",
         "AC-AU09",
         "AC-AU13",
-        "AC-AU15"
+        "AC-AU15",
+        "AC-R05"
       ],
       "acceptance_state": {
         "AC-AU08": "NOT_RUN",
         "AC-AU09": "NOT_RUN",
         "AC-AU13": "NOT_RUN",
-        "AC-AU15": "NOT_RUN"
+        "AC-AU15": "NOT_RUN",
+        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1139,14 +1163,22 @@
         "AC-AU10",
         "AC-AU11",
         "AC-AU13",
-        "AC-AU15"
+        "AC-AU15",
+        "AC-R01",
+        "AC-R02",
+        "AC-R03",
+        "AC-R05"
       ],
       "acceptance_state": {
         "AC-AU07": "NOT_RUN",
         "AC-AU10": "NOT_RUN",
         "AC-AU11": "NOT_RUN",
         "AC-AU13": "NOT_RUN",
-        "AC-AU15": "NOT_RUN"
+        "AC-AU15": "NOT_RUN",
+        "AC-R01": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-R02": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-R03": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",

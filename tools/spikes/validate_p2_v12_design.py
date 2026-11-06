@@ -51,6 +51,16 @@ def validate(root: Path) -> dict:
     acs = {f"AC-AU{n:02}" for n in range(1, 19)}
     traced = {ac for item in tickets for ac in item["acceptance"]}
     checks["all_new_AC_have_tickets"] = acs <= traced
+    active_p2_acs = {ac for item in tickets if item["stage"] == "P2" for ac in item["acceptance"]}
+    checks["promoted_original_AC_explicitly_traced"] = {
+        "AC-G06",
+        "AC-C08",
+        "AC-R01",
+        "AC-R02",
+        "AC-R03",
+        "AC-R04",
+        "AC-R05",
+    } <= active_p2_acs
     checks["no_new_product_AC_claimed_PASS"] = all(
         state.startswith("NOT_RUN")
         for item in tickets
