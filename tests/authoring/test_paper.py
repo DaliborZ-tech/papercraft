@@ -270,3 +270,39 @@ def test_reversing_joint_storage_does_not_change_fold_type():
     joint.edge_a, joint.edge_b = joint.edge_b, joint.edge_a
     p.recompute()
     assert len(p.parts[pid].paths["FOLD_MOUNTAIN"]) == 1
+
+
+@pytest.mark.parametrize(
+    "width,height,expected", [(0.1, 0.2, True), (0.49, 1, True), (0.5, 1, False), (1, 2, False)]
+)
+def test_hole_boundary_small_detail_warning_uses_same_threshold_as_outer(width, height, expected):
+    p = AuthorProject.new(scale=1)
+    outer = p.add_profile([[0, 0], [100, 0], [100, 100], [0, 100]])
+    hole = p.add_profile([[30, 30], [30 + width, 30], [30 + width, 30 + height], [30, 30 + height]])
+    sid = p.add_surface(outer, [hole])
+    p.set_placement(p.part_for_surface(sid), p.pages[0].id, 20, 20)
+    warnings = [i for i in p.validate_layout() if i.code == "SMALL_DETAIL"]
+    assert bool(warnings) == expected
+    if expected:
+        assert warnings[0].severity == "warning"
+        with pytest.raises(ValidationError):
+            p.snapshot()
+        p.acknowledge(warnings[0].id)
+    assert p.snapshot()["coverage"]["expected_surface_ids"] == [sid]
+    assert len(p.parts[p.part_for_surface(sid)].polygons[sid]) == 2
+
+
+def test_small_hole_acknowledgement_expires_after_affected_profile_revision():
+    p = AuthorProject.new(scale=1)
+    outer = p.add_profile([[0, 0], [100, 0], [100, 100], [0, 100]])
+    hole = p.add_profile([[30, 30], [30.1, 30], [30.1, 30.2], [30, 30.2]])
+    sid = p.add_surface(outer, [hole])
+    p.set_placement(p.part_for_surface(sid), p.pages[0].id, 20, 20)
+    warning = next(i for i in p.validate_layout() if i.code == "SMALL_DETAIL")
+    p.acknowledge(warning.id)
+    assert next(i for i in p.validate_layout() if i.id == warning.id).acknowledged
+    p.move_vertex(hole, p.profiles[hole].vertices[1].id, [30.15, 30])
+    p.recompute()
+    changed = next(i for i in p.validate_layout() if i.id == warning.id)
+    assert not changed.acknowledged and changed.digest != warning.digest
+    assert len(p.parts[p.part_for_surface(sid)].polygons[sid]) == 2

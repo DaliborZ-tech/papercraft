@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import math
 import os
 import tempfile
 import warnings
@@ -212,6 +213,36 @@ class AuthorProject:
         self._touch(self._profile_surfaces(profile_id))
 
     @atomic
+    def append_vertex(self, profile_id, point):
+        """Extend an open source profile without replacing existing topology."""
+        profile = self.profiles[profile_id]
+        if profile.closed:
+            raise ValidationError("Obrys je již uzavřený. Upravte jeho vrcholy místo pokračování.")
+        vertex = Vertex(identity(), vector(point, 2))
+        segment = CurveSegment(identity(), "line", profile.vertices[-1].id, vertex.id)
+        profile.vertices.append(vertex)
+        profile.segments.append(segment)
+        profile.revision += 1
+        self._touch(self._profile_surfaces(profile_id))
+        return vertex.id
+
+    @atomic
+    def close_profile(self, profile_id):
+        """Explicit closure preserves every vertex and existing segment ID."""
+        profile = self.profiles[profile_id]
+        if profile.closed:
+            return profile.id
+        if len(profile.vertices) < 3:
+            raise ValidationError("Pro uzavřený obrys přidejte alespoň třetí vrchol.")
+        profile.segments.append(
+            CurveSegment(identity(), "line", profile.vertices[-1].id, profile.vertices[0].id)
+        )
+        profile.closed = True
+        profile.revision += 1
+        self._touch(self._profile_surfaces(profile_id))
+        return profile.id
+
+    @atomic
     def add_surface(self, profile_id, holes=(), *, name="Plocha"):
         profile = self.profiles[profile_id]
         hole_ids = list(holes)
@@ -285,8 +316,8 @@ class AuthorProject:
             source, np.roll(source, -1, axis=0), world, np.roll(world, -1, axis=0)
         ):
             reference, actual = (
-                np.linalg.norm(b - a) * self.scale,
-                np.linalg.norm(wb - wa) * self.scale,
+                math.dist(a, b) * self.scale,
+                math.dist(wa, wb) * self.scale,
             )
             if reference > 0 and (
                 actual <= 0 or abs(reference - actual) > max(0.01, 1e-6 * reference)
@@ -304,6 +335,27 @@ class AuthorProject:
         normal = self._surface_matrix(surface_id)[:3, :3] @ normal
         if signed_area(profile.points) < 0:
             normal = -normal
+        triangle_areas = []
+        for face in triangles:
+            a, b, c = vertices[face]
+            cross = np.cross(b - a, c - a)
+            area = math.hypot(*cross) / 2
+            if not math.isfinite(area) or area <= 0 or np.dot(cross, normal) <= 0:
+                raise ValidationError("Umístění ztrácí nenulovou orientovanou plochu materiálu.")
+            triangle_areas.append(area)
+        actual_area = math.fsum(triangle_areas) * self.scale * self.scale
+        reference_area = (
+            self._source_polygon(surface.profile_id, surface.hole_profile_ids).area
+            * self.scale
+            * self.scale
+        )
+        if (
+            not math.isfinite(actual_area)
+            or not math.isfinite(reference_area)
+            or reference_area <= 0
+            or abs(actual_area - reference_area) > max(0.01, 1e-6 * reference_area)
+        ):
+            raise ValidationError("Umístění ztrácí požadovanou plošnou přesnost materiálu.")
         boundary = []
         for p in [profile, *[self.profiles[h] for h in surface.hole_profile_ids]]:
             for edge in p.segments:
@@ -768,8 +820,9 @@ class AuthorProject:
             vector(surface.rotation_deg, 3)
             _revision(surface.revision)
             self._surface_matrix(sid)
-            source_points = self.profiles[surface.profile_id].points
-            self._surface_world_points(sid, source_points)
+            # Validate the rendered material, including hole boundaries and every
+            # constrained triangle, before accepting an authoring command.
+            self.world_geometry(sid)
             area = (
                 self._source_polygon(surface.profile_id, surface.hole_profile_ids).area
                 * self.scale

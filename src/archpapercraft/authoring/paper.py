@@ -443,9 +443,9 @@ def validate_layout(project):
                     "warning",
                 )
             if any(
-                np.linalg.norm(np.roll(np.array(loops[0]), -1, axis=0) - loops[0], axis=1).min()
-                < 0.5
+                np.linalg.norm(np.roll(np.array(loop), -1, axis=0) - loop, axis=1).min() < 0.5
                 for loops in part.polygons.values()
+                for loop in loops
             ):
                 issue(
                     "SMALL_DETAIL", "Díl má detail menší než 0,5 mm na papíře.", (pid,), "warning"

@@ -387,11 +387,14 @@ def test_native_circle_svg_and_pdf_cubics_respect_declared_global_error_bound(sn
     native = svg.find(".//s:g[@data-role='CUT']/s:path", NS).attrib["d"]
     assert native.count(" A ") == 2 and " C " not in native and " L " not in native
     manifest = json.loads((files[0].parent / ".author-export.json").read_text(encoding="utf-8"))
-    bound = manifest["pdf_arc_approximation"]["max_position_error_mm"]
+    bound = manifest["pdf_arc_approximation"]["max_interpolation_error_mm"]
+    combined = manifest["pdf_geometry_precision"]["combined_position_error_bound_mm"]
     assert 0 < bound <= 0.001
-    assert float(svg.attrib["data-pdf-arc-position-error-bound-mm"]) == pytest.approx(bound)
+    assert float(svg.attrib["data-pdf-arc-interpolation-error-bound-mm"]) == pytest.approx(bound)
+    assert float(svg.attrib["data-pdf-combined-position-error-bound-mm"]) == pytest.approx(combined)
     pdf = PdfReader(files[-1])
-    assert "arc_position_error_bound_mm=" in pdf.metadata.subject
+    assert "arc_interpolation_error_bound_mm=" in pdf.metadata.subject
+    assert "numeric_serialization_error_bound_mm=" in pdf.metadata.subject
     curves = pdf_curves(pdf.pages[0])
     assert len(curves) >= 8
     maximum = 0.0
@@ -405,7 +408,75 @@ def test_native_circle_svg_and_pdf_cubics_respect_declared_global_error_bound(sn
             maximum = max(maximum, float(np.linalg.norm(actual - expected)))
     # Sampling is only this independent regression check. The declared global
     # bound derives from the fourth derivative Hermite remainder, not samples.
-    assert maximum <= bound + 1e-5
+    assert maximum <= combined + 1e-10
+
+
+@pytest.mark.parametrize("radius", [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0])
+def test_serialized_rotated_circle_has_separate_interpolation_and_numeric_bounds(
+    snapshot, tmp_path, radius
+):
+    part = single_part(snapshot)
+    part["placement"].update(x_mm=53.123456789, y_mm=71.987654321, rotation_deg=37.0)
+    part["paths"]["CUT"] = [
+        {
+            "commands": [
+                ["M", radius, 0.0],
+                ["A", radius, radius, 0.0, 0, 1, -radius, 0.0],
+                ["A", radius, radius, 0.0, 0, 1, radius, 0.0],
+                ["Z"],
+            ],
+            "closed": True,
+        }
+    ]
+    files = exporter.export_all(snapshot, tmp_path / "curves")
+    manifest = json.loads((files[0].parent / ".author-export.json").read_text(encoding="utf-8"))
+    interpolation = manifest["pdf_arc_approximation"]["max_interpolation_error_mm"]
+    precision = manifest["pdf_geometry_precision"]
+    numeric = precision["numeric_serialization_bound_mm"]
+    combined = precision["combined_position_error_bound_mm"]
+    assert combined == interpolation + numeric
+    assert 0 < numeric < combined <= precision["required_digital_budget_mm"] == 0.01
+    curves = pdf_curves(PdfReader(files[-1]).pages[0])
+    maximum = 0.0
+    for index, curve in enumerate(curves):
+        for t in np.linspace(0, 1, 101):
+            actual = sum(
+                (1 - t) ** (3 - i) * t**i * (1, 3, 3, 1)[i] * p for i, p in enumerate(curve)
+            )
+            angle = 2 * math.pi * (index + t) / len(curves) + math.radians(37)
+            expected = np.array(
+                [
+                    53.123456789 + radius * math.cos(angle),
+                    71.987654321 + radius * math.sin(angle),
+                ]
+            )
+            maximum = max(maximum, float(np.linalg.norm(actual - expected)))
+    assert maximum <= combined + 1e-10
+    if radius == 0.0001:
+        # Independent C02 reproduction: an interpolation-only promise did not
+        # cover ReportLab's rounded transformation and coordinate tokens.
+        assert maximum > interpolation
+
+
+def test_extreme_compensated_coordinates_refuse_inaccurate_pdf_and_preserve_bundle(
+    snapshot, tmp_path
+):
+    files = exporter.export_all(snapshot, tmp_path / "bundle")
+    before = file_bytes(files[0].parent)
+    part = single_part(snapshot)
+    part["placement"].update(x_mm=-1e9 + 40.0, y_mm=55.0, rotation_deg=0.0)
+    # The ideal points fit the page, but fp_str cannot retain these fractions
+    # in billion-millimetre local coordinates or their compensating CTM.
+    part["paths"]["CUT"] = [
+        {
+            "points": [[1e9 + 0.125, 0.0], [1e9 + 30.125, 0.0]],
+            "closed": False,
+        }
+    ]
+    with pytest.raises(exporter.SnapshotError, match="numeric serialization"):
+        exporter.export_all(snapshot, files[0].parent)
+    assert file_bytes(files[0].parent) == before
+    assert not list(tmp_path.glob(".author-export-*"))
 
 
 def test_rotated_ellipse_arc_extrema_are_checked_beyond_endpoints(snapshot, tmp_path):

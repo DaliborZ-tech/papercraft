@@ -28,10 +28,11 @@ import shutil
 import tempfile
 import threading
 import xml.etree.ElementTree as ET
+from decimal import Decimal, localcontext
 from pathlib import Path
 from typing import Any
 
-from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase import pdfdoc, pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFError, TTFont
 from reportlab.pdfgen.canvas import Canvas
 
@@ -43,6 +44,7 @@ _LOCK = threading.RLock()
 _MANIFEST = ".author-export.json"
 _INSTRUCTION = "Tisk 100 % / skutečná velikost. Kalibrace 100 mm na papíře."
 PDF_ARC_TOLERANCE_MM = 0.001
+PDF_DIGITAL_BUDGET_MM = 0.01
 
 
 class SnapshotError(ValueError):
@@ -587,6 +589,70 @@ def _curve_bound(data: dict) -> float:
     return bound
 
 
+def _serialized_matrix(canvas) -> list[Decimal]:
+    """Read the actual CTM token just emitted by this installed ReportLab.
+
+    ReportLab rounds numbers and may combine consecutive transformations. Its
+    unrounded _currentMatrix is therefore not an oracle for the written file.
+    Fail explicitly if a future backend changes the emitted representation.
+    """
+    tokens = canvas._code[-1].split()
+    if len(tokens) != 7 or tokens[-1] != "cm":
+        raise SnapshotError("Cannot verify the PDF backend's serialized transformation")
+    return [Decimal(value) for value in tokens[:-1]]
+
+
+def _serialized_controls(code: str) -> list[tuple[Decimal, Decimal]]:
+    points, values = [], []
+    for token in code.split():
+        if token in ("m", "l", "c"):
+            expected = 6 if token == "c" else 2
+            if len(values) != expected:
+                raise SnapshotError("Cannot verify the PDF backend's path coordinates")
+            points.extend((values[index], values[index + 1]) for index in range(0, expected, 2))
+            values = []
+        elif token in ("n", "h", "S"):
+            if values:
+                raise SnapshotError("Unexpected PDF path coordinate representation")
+        else:
+            values.append(Decimal(token))
+    if values:
+        raise SnapshotError("Incomplete PDF path coordinate representation")
+    return points
+
+
+def _numeric_error(serialized, reference, matrices, media_height, placement=None) -> float:
+    """Conservative serialized position difference at vertices/control points.
+
+    A line/cubic's difference is a Bernstein polynomial of the differences at
+    its controls. Its norm cannot exceed their maximum: this checks the whole
+    segment, not samples. Arcs have a separate analytic interpolation bound.
+    Decimal arithmetic avoids cancelling the very rounding error under test.
+    """
+    if len(serialized) != len(reference):
+        raise SnapshotError("PDF serialized controls do not cover the requested geometry")
+    with localcontext() as context:
+        context.prec = 768  # Enough for cancellation across the finite-double input range.
+        ratio = Decimal(127) / Decimal(360)  # Exact definition: paper mm per PDF point.
+        if placement is not None:
+            angle = math.radians(_rotation(placement))
+            cosine, sine = Decimal.from_float(math.cos(angle)), Decimal.from_float(math.sin(angle))
+            tx = Decimal.from_float(float(placement["x_mm"]))
+            ty = Decimal.from_float(float(placement["y_mm"]))
+        maximum = Decimal(0)
+        for actual, ideal in zip(serialized, reference):
+            x, y = actual
+            for a, b, c, d, e, f in reversed(matrices):
+                x, y = a * x + c * y + e, b * x + d * y + f
+            x, y = x * ratio, (media_height - y) * ratio
+            px, py = (Decimal.from_float(float(value)) for value in ideal)
+            if placement is not None:
+                px, py = tx + cosine * px - sine * py, ty + sine * px + cosine * py
+            error = ((x - px) ** 2 + (y - py) ** 2).sqrt()
+            maximum = max(maximum, error)
+        return math.nextafter(float(maximum), math.inf) if maximum else 0.0
+
+
 def _page_footer(data: dict, page_index: int) -> str:
     return f"Měřítko modelu {data['scale_label']} · Strana {page_index + 1} / {len(data['pages'])}"
 
@@ -599,6 +665,7 @@ def _svg(
     target: Path,
     page_index: int,
     curve_bound: float = 0.0,
+    numeric_bound: float = 0.0,
 ) -> None:
     width, height = page["width_mm"], page["height_mm"]
     root = ET.Element(
@@ -610,7 +677,9 @@ def _svg(
             "data-project-id": data["project_id"],
             "data-snapshot-digest": digest,
             "data-page-id": page["id"],
-            "data-pdf-arc-position-error-bound-mm": _fmt(curve_bound),
+            "data-pdf-arc-interpolation-error-bound-mm": _fmt(curve_bound),
+            "data-pdf-numeric-serialization-error-bound-mm": _fmt(numeric_bound),
+            "data-pdf-combined-position-error-bound-mm": _fmt(curve_bound + numeric_bound),
         },
     )
     ET.SubElement(root, "title").text = str(data.get("name", data["project_id"]))
@@ -707,18 +776,33 @@ def _svg(
     ET.ElementTree(root).write(target, encoding="utf-8", xml_declaration=True)
 
 
-def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: float = 0.0) -> None:
+def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: float = 0.0) -> float:
     mm = 72 / 25.4
     canvas = Canvas(str(target), invariant=1, pageCompression=1)
     canvas.setTitle(str(data.get("name", data["project_id"])))
-    canvas.setSubject(
-        "Author export snapshot " + digest + "; arc_position_error_bound_mm=" + _fmt(curve_bound)
-    )
+    numeric_bound = 0.0
+    page_matrix, part_matrix, media_height = None, None, None
 
     def text(value, x, y, size):
+        nonlocal numeric_bound
         canvas.saveState()
         canvas.translate(x, y)
         canvas.scale(1, -1)
+        matrices = [
+            page_matrix,
+            *([part_matrix] if part_matrix is not None else []),
+            _serialized_matrix(canvas),
+        ]
+        numeric_bound = max(
+            numeric_bound,
+            _numeric_error(
+                [(Decimal(0), Decimal(0))],
+                [(x, y)],
+                matrices,
+                media_height,
+                place if part_matrix is not None else None,
+            ),
+        )
         canvas.setFont(font_name, size)
         canvas.drawString(0, 0, value)
         canvas.restoreState()
@@ -728,11 +812,14 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
         canvas.saveState()
         canvas.translate(0, page["height_mm"] * mm)
         canvas.scale(mm, -mm)
+        page_matrix = _serialized_matrix(canvas)
+        media_height = Decimal(pdfdoc.format(page["height_mm"] * mm, canvas._doc).decode("ascii"))
         for part in page["parts"]:
             place = part["placement"]
             canvas.saveState()
             canvas.translate(place["x_mm"], place["y_mm"])
             canvas.rotate(_rotation(place))
+            part_matrix = _serialized_matrix(canvas)
             # Fill tabs before manufacturing lines; no duplicate tab strokes.
             for role in (
                 "TABS",
@@ -757,26 +844,41 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
                 )
                 for item in part["paths"].get(role, []):
                     path = canvas.beginPath()
+                    controls = []
                     current, start = None, None
                     for command in _commands(item):
                         op = command[0]
                         if op == "M":
                             current = start = command[1:3]
                             path.moveTo(*current)
+                            controls.append(current)
                         elif op == "L":
                             current = command[1:3]
                             path.lineTo(*current)
+                            controls.append(current)
                         elif op == "C":
                             path.curveTo(*command[1:])
+                            controls.extend(command[index : index + 2] for index in (1, 3, 5))
                             current = command[-2:]
                         elif op == "A":
                             curves, _ = _arc_cubics(_arc(current, command))
                             for curve in curves:
                                 path.curveTo(*curve)
+                                controls.extend(curve[index : index + 2] for index in (0, 2, 4))
                             current = command[-2:]
                         else:
                             path.close()
                             current = start
+                    numeric_bound = max(
+                        numeric_bound,
+                        _numeric_error(
+                            _serialized_controls(path.getCode()),
+                            controls,
+                            [page_matrix, part_matrix],
+                            media_height,
+                            place,
+                        ),
+                    )
                     canvas.drawPath(
                         path,
                         stroke=int(role != "TABS"),
@@ -787,11 +889,21 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
             for label in part.get("labels", []):
                 text(label["text"], label["x"], label["y"], label.get("size_mm", 2.5))
             canvas.restoreState()
+            part_matrix = None
         canvas.setDash([])
         canvas.setStrokeColorRGB(0.125, 0.17, 0.17)
         canvas.setFillColorRGB(0.125, 0.17, 0.17)
         canvas.setLineWidth(0.25)
         canvas.line(10, page["height_mm"] - 15, 110, page["height_mm"] - 15)
+        numeric_bound = max(
+            numeric_bound,
+            _numeric_error(
+                _serialized_controls(canvas._code[-1]),
+                [(10, page["height_mm"] - 15), (110, page["height_mm"] - 15)],
+                [page_matrix],
+                media_height,
+            ),
+        )
         prefix = "ČÁSTEČNÝ VÝSTUP — " if data.get("partial") else ""
         text(prefix + _INSTRUCTION, 10, page["height_mm"] - 10, 2.5)
         text(
@@ -802,7 +914,24 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
         )
         canvas.restoreState()
         canvas.showPage()
+    if curve_bound + numeric_bound > PDF_DIGITAL_BUDGET_MM:
+        raise SnapshotError(
+            "PDF numeric serialization cannot preserve the required 0.01 mm precision; "
+            "choose a paper frame near the material instead of compensating extreme coordinates. "
+            f"Interpolation bound={curve_bound:.8g} mm, serialization bound={numeric_bound:.8g} mm."
+        )
+    canvas.setSubject(
+        "Author export snapshot "
+        + digest
+        + "; arc_interpolation_error_bound_mm="
+        + _fmt(curve_bound)
+        + "; numeric_serialization_error_bound_mm="
+        + _fmt(numeric_bound)
+        + "; combined_position_error_bound_mm="
+        + _fmt(curve_bound + numeric_bound)
+    )
     canvas.save()
+    return numeric_bound
 
 
 def _remove_stage(stage: Path, parent: Path) -> None:
@@ -874,9 +1003,18 @@ def export_all(
             stage = Path(tempfile.mkdtemp(prefix=".author-export-", dir=directory.parent))
             (stage / "new").mkdir()
             (stage / "old").mkdir()
+            numeric_bound = _pdf(data, font_name, digest, stage / "new/model.pdf", curve_bound)
             for page_index, (page, name) in enumerate(zip(data["pages"], names)):
-                _svg(page, data, family, digest, stage / "new" / name, page_index, curve_bound)
-            _pdf(data, font_name, digest, stage / "new/model.pdf", curve_bound)
+                _svg(
+                    page,
+                    data,
+                    family,
+                    digest,
+                    stage / "new" / name,
+                    page_index,
+                    curve_bound,
+                    numeric_bound,
+                )
             (stage / "new" / _MANIFEST).write_text(
                 json.dumps(
                     dict(
@@ -886,8 +1024,19 @@ def export_all(
                         font_sha256=font_digest,
                         pdf_arc_approximation={
                             "method": "cubic_hermite",
-                            "max_position_error_mm": curve_bound,
-                            "requested_bound_mm": PDF_ARC_TOLERANCE_MM,
+                            "max_interpolation_error_mm": curve_bound,
+                            "requested_interpolation_bound_mm": PDF_ARC_TOLERANCE_MM,
+                            "bound_scope": "arc_to_cubic_before_numeric_serialization",
+                        },
+                        pdf_geometry_precision={
+                            "numeric_serialization_bound_mm": numeric_bound,
+                            "combined_position_error_bound_mm": curve_bound + numeric_bound,
+                            "required_digital_budget_mm": PDF_DIGITAL_BUDGET_MM,
+                            "method": "serialized_CTM_and_Bernstein_control_difference",
+                            "scope": (
+                                "finite_input_paths_calibration_text_anchors; "
+                                "font_outlines_excluded"
+                            ),
                         },
                         files=names,
                     ),

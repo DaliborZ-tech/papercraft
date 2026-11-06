@@ -121,3 +121,74 @@ def test_typed_unknown_source_reference_does_not_partially_create_a_surface():
     with pytest.raises(ValidationError):
         p.add_surface("missing")
     assert p.to_dict() == before
+
+
+def test_continue_then_close_open_source_preserves_all_existing_topology_ids():
+    p = AuthorProject.new(scale=1)
+    profile_id = p.add_profile([[0, 0], [100, 0]], closed=False)
+    original_vertices = [v.id for v in p.profiles[profile_id].vertices]
+    original_segments = [s.id for s in p.profiles[profile_id].segments]
+    new_vertex = p.append_vertex(profile_id, [100, 80])
+    assert [v.id for v in p.profiles[profile_id].vertices] == [*original_vertices, new_vertex]
+    continued_segments = [s.id for s in p.profiles[profile_id].segments]
+    assert continued_segments[:1] == original_segments
+    revision = p.profiles[profile_id].revision
+    p.close_profile(profile_id)
+    profile = p.profiles[profile_id]
+    assert profile.closed and profile.revision == revision + 1
+    assert [v.id for v in profile.vertices] == [*original_vertices, new_vertex]
+    assert [s.id for s in profile.segments][:-1] == continued_segments
+    assert profile.segments[-1].start_vertex_id == new_vertex
+    assert profile.segments[-1].end_vertex_id == original_vertices[0]
+    no_op = p.to_dict()
+    p.close_profile(profile_id)
+    assert p.to_dict() == no_op
+    with pytest.raises(ValidationError, match="již uzavřený"):
+        p.append_vertex(profile_id, [0, 80])
+    assert p.to_dict() == no_op
+
+
+def test_open_profile_invalid_continuation_or_closure_is_transactional():
+    p = AuthorProject.new()
+    profile_id = p.add_profile([[0, 0], [100, 100]], closed=False)
+    before = p.to_dict()
+    with pytest.raises(ValidationError, match="třetí"):
+        p.close_profile(profile_id)
+    assert p.to_dict() == before
+    with pytest.raises(ValidationError):
+        p.append_vertex(profile_id, [100, 100])
+    assert p.to_dict() == before
+    with pytest.raises(ValidationError):
+        p.append_vertex(profile_id, [float("nan"), 100])
+    assert p.to_dict() == before
+    p.append_vertex(profile_id, [0, 100])
+    p.append_vertex(profile_id, [100, 0])
+    crossing = p.to_dict()
+    with pytest.raises(ValidationError):
+        p.close_profile(profile_id)
+    assert p.to_dict() == crossing
+    assert not p.profiles[profile_id].closed
+
+
+def test_saved_open_profile_reopens_continues_closes_and_becomes_own_surface(tmp_path):
+    p = AuthorProject.new(scale=0.01)
+    profile_id = p.add_profile([[0, 0], [10000, 0]], closed=False, name="Moje rozpracovaná stěna")
+    vertex_ids = [v.id for v in p.profiles[profile_id].vertices]
+    edge_id = p.profiles[profile_id].segments[0].id
+    path = tmp_path / "open-profile.apcraft"
+    p.save(path)
+    reopened = AuthorProject.load(path)
+    assert reopened.to_dict() == p.to_dict()
+    reopened.append_vertex(profile_id, [10000, 4000])
+    reopened.append_vertex(profile_id, [0, 4000])
+    reopened.close_profile(profile_id)
+    sid = reopened.add_surface(profile_id)
+    assert [v.id for v in reopened.profiles[profile_id].vertices][:2] == vertex_ids
+    assert reopened.profiles[profile_id].segments[0].id == edge_id
+    assert len(reopened.surfaces) == len(reopened.parts) == 1
+    assert reopened.parts[reopened.part_for_surface(sid)].polygons[sid][0] == [
+        [0, 0],
+        [100, 0],
+        [100, 40],
+        [0, 40],
+    ]

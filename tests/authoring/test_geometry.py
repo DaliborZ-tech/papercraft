@@ -128,3 +128,65 @@ def test_ill_conditioned_sketch_plane_origin_rejects_lost_source_metric():
     with pytest.raises(ValidationError, match="přesnost"):
         p.add_surface(profile)
     assert p.to_dict() == before
+
+
+@pytest.mark.parametrize("pose", ["local", "parent", "plane"])
+def test_world_area_guard_rejects_pose_with_small_edge_error_but_large_area_loss(pose):
+    p = AuthorProject.new(scale=0.01)
+    profile = p.add_profile([[0, 0], [10000.5, 0], [10000.5, 4000], [0, 4000]])
+    if pose == "plane":
+        p.profiles[profile].plane.origin = [1e16, 1e16, 0]
+        before = p.to_dict()
+        with pytest.raises(ValidationError, match="plošnou přesnost"):
+            p.add_surface(profile)
+    else:
+        sid = p.add_surface(profile)
+        before = p.to_dict()
+        kwargs = (
+            {"position_mm": [1e16, 1e16, 0]}
+            if pose == "local"
+            else {
+                "parent_transforms": [
+                    [[1, 0, 0, 1e16], [0, 1, 0, 1e16], [0, 0, 1, 0], [0, 0, 0, 1]]
+                ]
+            }
+        )
+        with pytest.raises(ValidationError, match="plošnou přesnost"):
+            p.set_transform(sid, **kwargs)
+    assert p.to_dict() == before
+    # Independent rectangle oracle: 10000.5*4000*0.01² = 4000.2 paper mm².
+    assert 10000.5 * 4000 * 0.01 * 0.01 == pytest.approx(4000.2)
+
+
+def test_well_represented_large_world_translation_preserves_area_including_holes():
+    p = AuthorProject.new(scale=0.01)
+    outer = p.add_profile([[0, 0], [10000.5, 0], [10000.5, 4000], [0, 4000]])
+    hole = p.add_profile([[1000, 1000], [1200, 1000], [1200, 1400], [1000, 1400]])
+    sid = p.add_surface(outer, [hole])
+    p.set_transform(sid, [1e12, 1e12, 1e12])
+    geometry = p.world_geometry(sid)
+    vertices = np.asarray(geometry["vertices"])
+    measured = (
+        sum(
+            np.linalg.norm(
+                np.cross(vertices[f[1]] - vertices[f[0]], vertices[f[2]] - vertices[f[0]])
+            )
+            / 2
+            for f in geometry["triangles"]
+        )
+        * 0.01
+        * 0.01
+    )
+    assert measured == pytest.approx(3992.2, abs=0.01)
+
+
+def test_commit_validation_rejects_a_collapsed_hole_before_later_render_call():
+    p = AuthorProject.new(scale=1)
+    outer = p.add_profile([[0, 0], [100, 0], [100, 100], [0, 100]])
+    hole = p.add_profile([[30, 30], [30.1, 30], [30.1, 30.2], [30, 30.2]])
+    sid = p.add_surface(outer, [hole])
+    before = p.to_dict()
+    with pytest.raises(ValidationError):
+        p.set_transform(sid, [1e16, 1e16, 0])
+    assert p.to_dict() == before
+    assert len(p.world_geometry(sid)["triangles"]) == 8
