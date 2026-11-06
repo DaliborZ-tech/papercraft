@@ -2527,7 +2527,7 @@
     "whole_v12_contract_acceptance_implied": false
   },
   "current_delivery": {
-    "ticket": "PC-006A",
+    "ticket": "PC-006B",
     "then": "PC-007A",
     "followed_by": [
       "PC-007B",
@@ -2538,6 +2538,10 @@
     "status": "IN_PROGRESS",
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
-    "next": "PC-006B"
+    "previous_verified": {
+      "ticket": "PC-006A",
+      "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+      "report": "docs/p2/implementation/PC006A_REVIEW.md"
+    }
   }
 }

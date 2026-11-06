@@ -1,0 +1,214 @@
+{
+  "status": "PASS",
+  "source_sha": "7da240386550039761de6861d3149ce9ee1be466",
+  "source_status_at_start": "M 05_WORK_QUEUE.json\n M docs/p2/SKILL_IMPROVEMENTS.json\n?? docs/p2/implementation/PC006A_INTEGRATION_REVIEW.md\n?? docs/p2/implementation/evidence/pc006a-C06-svg-text-whitespace.md\n?? docs/p2/implementation/evidence/pc006a-inkscape-18754c1-run02/\n?? docs/p2/implementation/evidence/pc006a-inkscape-a8ff4b3-run03/\n?? docs/p2/implementation/evidence/pc006a-review-integration-b66b325.json\n?? docs/p2/implementation/evidence/pc006a-review-space-minimal-ab-run02.json\n?? docs/p2/implementation/evidence/pc006a-review-space-minimal-ab-run03.json\n?? docs/p2/implementation/evidence/pc006a-review-space-minimal-ab.json\n?? docs/p2/implementation/evidence/pc006a-review-space-minimal-run03/\n?? docs/p2/implementation/evidence/pc006a-review-space-minimal.py",
+  "source_files_sha256": {
+    "pyproject.toml": "7fc368b74cf04b0461920bac0d175f003a4493ac3dde798abdb850ee3727b5d2",
+    "src/archpapercraft/__init__.py": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+    "src/archpapercraft/__main__.py": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+    "src/archpapercraft/app.py": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+    "src/archpapercraft/application/__init__.py": "b40a4d55ee06f7c3d6dc573acbfd15720631297c33613cbc8016e2c7615968f1",
+    "src/archpapercraft/application/author_controller.py": "da230d91bbcab8eec4a8df71018372953c08a411f2049a0a747943040fd62c98",
+    "src/archpapercraft/arch_presets/__init__.py": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+    "src/archpapercraft/arch_presets/buttress.py": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+    "src/archpapercraft/arch_presets/floor_slab.py": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+    "src/archpapercraft/arch_presets/gothic_window.py": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+    "src/archpapercraft/arch_presets/onion_dome.py": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+    "src/archpapercraft/arch_presets/opening.py": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+    "src/archpapercraft/arch_presets/roof.py": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+    "src/archpapercraft/arch_presets/tower.py": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+    "src/archpapercraft/arch_presets/wall.py": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+    "src/archpapercraft/authoring/__init__.py": "20f09fec7229337a717bc37ec81591588f41694bd1037769d3688178cc53bf5b",
+    "src/archpapercraft/authoring/errors.py": "0bda672632b8cb2429c1573b5cdaad973d6216b02ca30c7ec36a6ea0aa00eca0",
+    "src/archpapercraft/authoring/geometry.py": "98504f07eda9c1e47110775c85ba755165595f9e6646a4b2019cd561c80cc111",
+    "src/archpapercraft/authoring/model.py": "4d8f0f2e300a5f62dcd3bbfdf3613f6d8484ffd171d7172d8e5f88430f4e11d2",
+    "src/archpapercraft/authoring/paper.py": "e0abc1be4800b0af51bb02b9afffb4c20828d2005a473abf099c20cdc7a9a5a3",
+    "src/archpapercraft/authoring/project.py": "8d530c32e312888991b33514145d75b5e812be9bc21f7fe66c4bad435df316ff",
+    "src/archpapercraft/commands/__init__.py": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+    "src/archpapercraft/commands/command_stack.py": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+    "src/archpapercraft/core_geometry/__init__.py": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+    "src/archpapercraft/core_geometry/backend.py": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+    "src/archpapercraft/core_geometry/mesh.py": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+    "src/archpapercraft/core_geometry/operations.py": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+    "src/archpapercraft/core_geometry/primitives.py": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+    "src/archpapercraft/core_geometry/stable_ids.py": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+    "src/archpapercraft/core_geometry/units.py": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+    "src/archpapercraft/core_geometry/validation.py": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+    "src/archpapercraft/exporter/__init__.py": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+    "src/archpapercraft/exporter/author_export.py": "ec1d2839cf48d11cd0381c3c1b60d96ad4ed4de7e8d75008eecf065d3e09a90c",
+    "src/archpapercraft/exporter/dxf_export.py": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+    "src/archpapercraft/exporter/pdf_export.py": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+    "src/archpapercraft/exporter/png_export.py": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+    "src/archpapercraft/exporter/svg_export.py": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+    "src/archpapercraft/layout_packer/__init__.py": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+    "src/archpapercraft/layout_packer/packer.py": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+    "src/archpapercraft/paper_analyzer/__init__.py": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+    "src/archpapercraft/paper_analyzer/classifier.py": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+    "src/archpapercraft/preferences/__init__.py": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+    "src/archpapercraft/preferences/settings.py": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+    "src/archpapercraft/project_io/__init__.py": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+    "src/archpapercraft/project_io/project.py": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+    "src/archpapercraft/scene_graph/__init__.py": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+    "src/archpapercraft/scene_graph/node.py": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+    "src/archpapercraft/scene_graph/scene.py": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+    "src/archpapercraft/scene_graph/snap.py": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+    "src/archpapercraft/scene_graph/transform.py": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+    "src/archpapercraft/seam_editor/__init__.py": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+    "src/archpapercraft/seam_editor/auto_seams.py": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+    "src/archpapercraft/seam_editor/seam_graph.py": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+    "src/archpapercraft/tabs_generator/__init__.py": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+    "src/archpapercraft/tabs_generator/build_guide.py": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+    "src/archpapercraft/tabs_generator/markings.py": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+    "src/archpapercraft/tabs_generator/tabs.py": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+    "src/archpapercraft/ui/__init__.py": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+    "src/archpapercraft/ui/author_paper.py": "1feab611f22e4be3e454bfc39dcb6e5f22b2294e9d9f3407d28a1d110748b3f6",
+    "src/archpapercraft/ui/author_sketch.py": "c57eeba4ebf014a021f993f6ebbd3f783212592b7905c819fa742683ce43b779",
+    "src/archpapercraft/ui/author_viewport.py": "46d708b5df86cbbd10668c7e89126f9c01e9ad083eea1f71f5ddc05ededa715d",
+    "src/archpapercraft/ui/author_window.py": "fab56c2b746956b4a5844b41fe074ba63c4ac0390459a3cf09651805642dec0e",
+    "src/archpapercraft/ui/main_window.py": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+    "src/archpapercraft/ui/object_tree.py": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+    "src/archpapercraft/ui/papercraft_panel.py": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+    "src/archpapercraft/ui/preferences_dialog.py": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+    "src/archpapercraft/ui/properties_panel.py": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+    "src/archpapercraft/ui/viewport_3d.py": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+    "src/archpapercraft/ui/wizard.py": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+    "src/archpapercraft/unfolder/__init__.py": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+    "src/archpapercraft/unfolder/approx_unfold.py": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+    "src/archpapercraft/unfolder/exact_unfold.py": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+    "src/archpapercraft/unfolder/strategies.py": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+    "tools/authoring/desktop_proof.py": "3e2acf3cc537428cdad0904c0c31d7ef6c36926996461bb774990256a3fe5f25",
+    "tools/authoring/native_dialogs.py": "837706a734dbd7a3f1ccbfd79be6b1ce7ea5d894bc517c44bf0d62d088ccc579"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "pid": 46292,
+  "steps": [
+    {
+      "name": "actual_app_main_empty_workspace",
+      "status": "PASS"
+    },
+    {
+      "name": "own_concave_polygon_and_true_hole",
+      "status": "PASS",
+      "outer_mm2": 3300.0,
+      "holes_mm2": 225.0,
+      "net_mm2": 3075.0
+    },
+    {
+      "name": "numeric_vertex_edit_explicit_recompute",
+      "status": "PASS",
+      "outer_mm2": 3600.0,
+      "holes_mm2": 225.0,
+      "net_mm2": 3375.0
+    },
+    {
+      "name": "actual_3D_material_and_empty_hole_picking",
+      "status": "PASS"
+    },
+    {
+      "name": "own_second_surface_real_assembly_preview",
+      "status": "PASS",
+      "title": "Umístit a připojit protikus",
+      "angle_deg": 90.0
+    },
+    {
+      "name": "fold_cut_and_seven_mm_tab_on_B",
+      "status": "PASS"
+    },
+    {
+      "name": "manual_two_A4_pages_and_independent_locks",
+      "status": "PASS"
+    },
+    {
+      "name": "native_save_new_and_reopen_preserve_author_state",
+      "status": "PASS"
+    },
+    {
+      "name": "native_export_SVG_PDF_independent_readers",
+      "status": "PASS",
+      "parts": [
+        "e40af19a-71bd-4850-b890-a9cfc842d939",
+        "e80edef3-7f3f-4973-b876-bcc3c88b8d00"
+      ],
+      "pages": 2
+    }
+  ],
+  "dialogs": [
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-desktop-7da2403-run04\\own-model.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-desktop-7da2403-run04\\own-model.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-desktop-7da2403-run04\\export",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Vyberte složku pro SVG a PDF",
+      "directory_confirmation": true
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Vektorový export",
+      "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?",
+      "clicked": "Ok"
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Export dokončen",
+      "text": "Uloženo:\npage-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg\npage-dea8fffd-0ea8-438d-96b6-588902d12846.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm.",
+      "clicked": "Ok"
+    }
+  ],
+  "evidence_kind": "actual_app_main_QTest_widgets_and_own_PID_native_file_dialogs",
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN",
+  "started_local": "2026-11-06T12:50:38+0100",
+  "pyside6": "6.12.0",
+  "opengl": {
+    "version": "4.6.0 NVIDIA 610.71",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+  },
+  "elapsed_seconds": 14.219,
+  "files_sha256": {
+    "01-own-concave-hole-stale-desktop.png": "f141a55b075a90e570e00d5b15dcc8670d09a34d69f23930c4900faf1887811e",
+    "01-own-concave-hole-stale-opengl.png": "f324757d1e11fecd75e85027140757f205439529625a628ba277ddc57a461a4d",
+    "02-edited-stale-desktop.png": "539e08137fa4ee65fc56de06b815c5d4e0486bbad471dd4459e6d189501583b7",
+    "02-edited-stale-opengl.png": "d6caa07e87c3e14a576a2263ddba9098d1f21d2070a1a3abb2b4e21720ed3164",
+    "03-assembly-dialog-desktop.png": "a3082eb49839977d7a02fb8236e8baadc1299f43dcd01353dfeef1a2102869c2",
+    "03-assembly-dialog-opengl.png": "f7436a41974a7d0d0af7306184667e5b09b5e8acdba79ef6b4cb277589c554e1",
+    "03-real-assembly-preview-desktop.png": "999f491d2ca1b9bb74be4f3c9233054c9a9859bcefd8417a1ce197b2924d60df",
+    "03-real-assembly-preview-opengl.png": "66a37c0385491349f678363d14f3b63db2d0870ea12335b93c50840aec0c31bb",
+    "04-fold-shared-part-desktop.png": "be45f341965829a63f5d078a6049aae3e0a682f87688e79fcc760a2941d0e724",
+    "04-fold-shared-part-opengl.png": "aa9ef9870eb445363cb43d52782aae9d7fdd76efb90c0370af828f6b14dbee2f",
+    "05-manual-two-pages-tab-and-locks-desktop.png": "f94a5573024eaabe888d9ea3782ff169c0a2a74d942d59f64623235d22516813",
+    "05-manual-two-pages-tab-and-locks-opengl.png": "4827bcc8d607908389bd57b8fbabac1279b4737ba15a01d38aec3d050c2f1111",
+    "05b-specific-digital-warning-acknowledged-desktop.png": "46b2f706a43967a9fb6608e7ee58b9b2c0f959b949179e6db4ec656f1f8c9d62",
+    "05b-specific-digital-warning-acknowledged-opengl.png": "bcd2de9bacd49958262481fedc6b6ed22e576156a6d90bf8017c13965673faec",
+    "06-native-reopened-desktop.png": "9712c9def887519d3539839098552c7ad100387a1db5493df17fe5a095798bda",
+    "06-native-reopened-opengl.png": "7aa0e170a360fa63a832a59dcb8fa4b6a27c69ce585054f8d4e2f8d5629b6e76",
+    "export/.author-export.json": "d4cebaf3135d24f6782379f55e0e5ba6a679eb069b35ae43b32a42b6287ea4e1",
+    "export/model.pdf": "5fbfefcc020dd63808d1f904d857253e2d9643198aa29f17985f55d8a25e06d1",
+    "export/page-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg": "93cc197f9d35b6f78ecbdc60cbfd6fdf2686f43c0b3c22b1b1a8f4d619b445d6",
+    "export/page-dea8fffd-0ea8-438d-96b6-588902d12846.svg": "5d64b038e9aed3f341a2c831ba712d346148d0777acfb7acba016752de657fac",
+    "own-model.apcraft": "c649da8478d5b36bf6ffeb764ff58c2e308ddb9c4a7d38191a2effcbb46b205d",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953",
+    "snapshot.json": "7053d475d398e5d389cc6ca2aef5f66a3850e97b285913f8e9cedd2de947e562"
+  },
+  "digital_only_acknowledgements": [
+    {
+      "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+      "id": "6926a953f55cccb99b983a0e",
+      "message": "Digitální spoj nezaručuje ohyb a pevnost konkrétního papíru; ověřte výtiskem.",
+      "digest": "9abbec1509bac50165cd892efd2a902d0bca79bdf384dc1c198f881937826bd9",
+      "meaning": "digital_only; physical_build_NOT_RUN"
+    }
+  ]
+}

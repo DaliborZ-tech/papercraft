@@ -14,3 +14,5 @@ Příklad: konečné nulové vzorky neprokazují regularitu celého loftu. [DR-0
 Připni zdroj ověřovaného výsledku a uveď důkaz: numerika, UI automatizace, skutečný editor, nový uživatel nebo fyzická stavba. Jeden druh nenahrazuje druhý. Chybějící důkaz zůstává NOT_RUN/BLOCKED s důvodem. Selhání neskrývej odstraněním testu či změkčením AC.
 
 Reviewer ověří také, zda důkaz pokrývá právě vydávaný commit a skutečně požadovaný výsledek. Zjištění přenes do produktu a cíleného postupu přes [smyčku poučení](../../../AGENTS.md#projektové-skills-a-poučení).
+
+Editovatelnost ověř také skutečným psaním a uložením v cílovém editoru. [C-06](../../../docs/p2/implementation/evidence/pc006a-C06-svg-text-whitespace.md) prošel původním XML/render auditem, ale při postupném psaní víceslovného popisku v Inkscape mizely mezery. Příklad: uprav jeden label na víceslovný Unicode text, ulož a nezávisle přečti přesný obsah i nezměněné ostatní objekty. Odliš bezpečné odmítnutí vstupu testovacím nástrojem od produktové vady; uchovej oba výsledky. Úspěch jednoho editoru necertifikuje jiné editory, jiné konstrukční řezy ani nového uživatele.

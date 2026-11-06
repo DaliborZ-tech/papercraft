@@ -233,6 +233,52 @@
         ]
       },
       "independent_review": {
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "b66b325eabc1e5cf744a73ac58ff6cda635d3603",
+        "report": "docs/p2/implementation/PC006A_INTEGRATION_REVIEW.md",
+        "scope": "new advice and documented product correction; next use still pending"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-006B",
+        "evidence": null
+      }
+    },
+    {
+      "id": "SK-006",
+      "changed_on": "2026-11-06",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/evidence/pc006a-C06-svg-text-whitespace.md",
+        "problem": "C-06: exported SVG rendered correctly but incremental multiword text editing in native Inkscape lost spaces"
+      },
+      "cause": {
+        "status": "INDEPENDENTLY_REPRODUCED",
+        "mechanism": "Text nodes lacked xml:space=preserve; identical native keystrokes in a minimal independent A/B retained spaces only with the attribute",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006a-review-space-minimal-ab-run03.json",
+          "docs/p2/implementation/evidence/pc006a-inkscape-a8ff4b3-run03/editor-results.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_NATIVE_EDITOR_VERIFIED; INDEPENDENT_CLOSURE_PENDING",
+        "source_sha": "7da240386550039761de6861d3149ce9ee1be466",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/results.json",
+          "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-results.json"
+        ]
+      },
+      "skill_change": "Check actual incremental text editing and saved content in the native target editor; distinguish guarded harness refusal from product failure",
+      "usage_example": "Edit one label to a multiword Unicode caption, save and independently verify exact spaces plus unchanged other objects, geometry, calibration and source bundle",
+      "verification": {
+        "status": "NATIVE_EDITOR_PRODUCT_REGRESSION_PASS",
+        "kind": "real Inkscape 1.4.4 GUI input and readback on a fresh actual application export; not novice evidence",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-results.json"
+        ]
+      },
+      "independent_review": {
         "status": "PENDING_FOR_NEW_SKILL_ADVICE",
         "source_sha": null,
         "report": "docs/p2/implementation/PC006A_REVIEW.md"
@@ -240,7 +286,7 @@
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
         "status": "NOT_RUN",
-        "ticket": "PC-006B",
+        "ticket": "PC-009",
         "evidence": null
       }
     }
