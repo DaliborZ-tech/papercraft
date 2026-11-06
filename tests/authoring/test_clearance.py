@@ -427,3 +427,173 @@ def test_zero_degree_join_without_known_material_does_not_claim_clearance():
         check(sweep, replace(material, thickness_mm=None), obstacles, allowances).status
         == "UNVERIFIED"
     )
+
+
+def reviewer_mixed_scene(tab_thickness, blocker_thickness, blocker_y):
+    """Independent K01 dimensions; no exporter/checker helper derives expected."""
+    sweep = FoldSweep(
+        [[[0, 0, 0], [10, 0, 0], [10, 0, -5], [0, 0, -5]]],
+        [0, 0, 0],
+        [10, 0, 0],
+        0,
+        "source",
+        "receiver",
+        [0, 1, 0],
+        [0, 1, 0],
+    )
+    obstacles = [
+        MaterialObstacle("source", quad([0, 0, 0], [10, 0, 0], [10, 0, 10], [0, 0, 10]), 0.2),
+        MaterialObstacle(
+            "receiver", quad([-10, 0, -20], [20, 0, -20], [20, 0, 0], [-10, 0, 0]), 0.2
+        ),
+        MaterialObstacle(
+            "blocker",
+            quad([2, blocker_y, -4], [8, blocker_y, -4], [8, blocker_y, -1], [2, blocker_y, -1]),
+            blocker_thickness,
+        ),
+        MaterialObstacle(
+            "far-unknown", quad([20, 40, -4], [25, 40, -4], [25, 40, -1], [20, 40, -1]), None
+        ),
+    ]
+    allowances = [
+        ContactAllowance(
+            "source",
+            "hinge",
+            box([-0.5, 10.5], [-0.5, 0.5], [-0.5, 0.5]),
+            (0, 0),
+            "Explicit finite source crease",
+        ),
+        ContactAllowance(
+            "receiver",
+            "final_contact",
+            box([-0.5, 10.5], [-0.25, 0.25], [-5.5, 0.5]),
+            (0, 0),
+            "Actual receiving footprint",
+        ),
+    ]
+    return sweep, MaterialProfile(tab_thickness), obstacles, allowances
+
+
+@pytest.mark.parametrize(
+    "tab_t,obstacle_t,y,expected_message",
+    [
+        (0.2, 0.2, 0.15, "Known material solids"),
+        (None, 1.0, 0.15, "Original tab midplane"),
+        (0.2, None, 0.05, "Original obstacle midplane"),
+    ],
+)
+def test_k01_known_thickness_is_preserved_when_other_material_is_unknown(
+    tab_t, obstacle_t, y, expected_message
+):
+    # Independent interval oracle: known pair overlaps y in [.05,.1]; an
+    # unknown tab's y0 is inside the known slab [-.35,.65]; unknown obstacle
+    # midplane y.05 is inside a known tab [-.1,.1]. All are strict overlaps.
+    result = check(*reviewer_mixed_scene(tab_t, obstacle_t, y))
+    assert result.status == "COLLISION", result
+    assert result.obstacle_id == "blocker"
+    assert result.witness_angle_deg == 0
+    assert expected_message in result.message
+    if tab_t is None or obstacle_t is None:
+        x, actual_y, z = result.witness_point_mm
+        assert 2 < x < 8 and -4 < z < -1
+        assert actual_y == pytest.approx(0 if tab_t is None else y)
+
+
+def tangent_scene_with_needle(angle_deg):
+    sweep, material, obstacles, allowances = scene()
+    material = replace(material, thickness_mm=None)
+    obstacles = [replace(o, thickness_mm=None) for o in obstacles]
+    # This independent plane meets the rotating tab only along the hinge; it
+    # is deliberately NOT granted a contact permission or ignored by identity.
+    tangent = MaterialObstacle(
+        "third-hinge-tangency",
+        quad([20, 5, 0], [60, 5, 0], [60, 5, 10], [20, 5, 10]),
+        None,
+    )
+    theta = math.radians(angle_deg)
+    y, z = 5 + 3 * math.sin(theta), -3 * math.cos(theta)
+    needle = MaterialObstacle(
+        "later-obstacle",
+        quad([30, y, z - 0.005], [40, y, z - 0.005], [40, y, z + 0.005], [30, y, z + 0.005]),
+        None,
+    )
+    return sweep, material, [*obstacles, tangent, needle], allowances
+
+
+def test_unknown_coarse_pass_visits_all_original_intervals_and_later_obstacles():
+    result = check(*tangent_scene_with_needle(-67.5), max_intervals=2, max_depth=0)
+    assert result.status == "COLLISION", result
+    assert result.obstacle_id == "later-obstacle"
+    assert result.witness_angle_deg == pytest.approx(-67.5)
+    assert result.search_interval_limit == 2
+    assert result.certified_intervals == 0
+
+
+def test_unknown_refinement_is_breadth_first_after_complete_coarse_pass():
+    fixture = tangent_scene_with_needle(-78.75)
+    coarse = check(*fixture, max_intervals=2, max_depth=8)
+    assert coarse.status == "UNVERIFIED", coarse
+    assert coarse.coarse_intervals_examined == coarse.examined_intervals == 2
+    assert coarse.search_budget_exhausted
+    # The first refinement cell of the earlier phase contains -78.75. DFS of
+    # the last tangent phase would exhaust this tiny budget without visiting it.
+    result = check(*fixture, max_intervals=3, max_depth=8)
+    assert result.status == "COLLISION", result
+    assert result.obstacle_id == "later-obstacle"
+    assert result.witness_angle_deg == pytest.approx(-78.75)
+    assert result.examined_intervals == 3
+    assert result.coarse_intervals_examined == 2
+
+
+def test_bounded_unknown_tangency_never_claims_absence_or_clearance():
+    sweep, material, obstacles, allowances = tangent_scene_with_needle(-78.75)
+    obstacles.pop()  # Keep the real third-plane tangency, remove the needle.
+    result = check(sweep, material, obstacles, allowances, max_intervals=7, max_depth=8)
+    assert result.status == "UNVERIFIED", result
+    assert result.examined_intervals == 7
+    assert result.search_interval_limit == 7 and result.search_depth_limit == 8
+    assert result.search_budget_exhausted
+    assert result.coarse_intervals_examined == 2
+    assert result.witness_angles_examined >= 5
+    assert result.certified_intervals == 0
+    assert "absence of collision has NOT been proved" in result.message
+    assert result.proof_method.startswith("bounded_breadth_first")
+
+
+def test_unknown_depth_limit_and_static_search_are_reported_separately():
+    sweep, material, obstacles, allowances = scene()
+    result = check(sweep, replace(material, thickness_mm=None), obstacles, allowances, max_depth=0)
+    assert result.status == "UNVERIFIED"
+    assert result.search_depth_limit_reached and not result.search_budget_exhausted
+    assert result.examined_intervals == result.coarse_intervals_examined == 2
+    sweep, material, obstacles, allowances = flat_scene()
+    static = check(sweep, replace(material, thickness_mm=None), obstacles, allowances)
+    assert static.status == "UNVERIFIED"
+    assert static.witness_angles_examined == 1
+    assert not static.search_depth_limit_reached and not static.search_budget_exhausted
+
+
+def test_unknown_too_small_budget_does_not_silently_skip_a_coarse_phase():
+    sweep, material, obstacles, allowances = scene()
+    result = check(
+        sweep, replace(material, thickness_mm=None), obstacles, allowances, max_intervals=1
+    )
+    assert result.status == "UNRESOLVED"
+    assert result.search_budget_exhausted and result.coarse_intervals_examined == 0
+    assert "mandatory complete coarse" in result.message
+
+
+@pytest.mark.parametrize(
+    "limits", [{"max_intervals": 0}, {"max_depth": -1}, {"max_intervals": True}]
+)
+def test_invalid_search_limits_are_truthfully_rejected(limits):
+    assert check(*scene(), **limits).status == "UNRESOLVED"
+
+
+def test_subprecision_known_thickness_never_turns_an_artificial_proxy_into_collision():
+    # The true known slab is y[.4995e-9,.5005e-9], separated from the unknown
+    # tab midplane y0. A numerical 4*guard proxy would be thicker and overlap.
+    fixture = reviewer_mixed_scene(None, 1e-12, 0.5e-9)
+    result = check(*fixture)
+    assert result.status == "UNRESOLVED", result
+    assert "numeric uncertainty" in result.message

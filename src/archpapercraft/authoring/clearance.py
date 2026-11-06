@@ -10,6 +10,7 @@ exclusion is returned in the result. Unknown material never produces CLEAR.
 from __future__ import annotations
 
 import math
+from collections import deque
 from dataclasses import dataclass, field
 from typing import Literal
 
@@ -91,6 +92,12 @@ class ClearanceResult:
     bend_radius_mm: float = 0.0
     allowances: tuple[dict, ...] = ()
     checked_obstacle_ids: tuple[str, ...] = ()
+    search_interval_limit: int | None = None
+    search_depth_limit: int | None = None
+    search_budget_exhausted: bool = False
+    search_depth_limit_reached: bool = False
+    coarse_intervals_examined: int = 0
+    witness_angles_examined: int = 0
     proof_method: str = "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT"
     assumptions: tuple[str, ...] = field(
         default_factory=lambda: (
@@ -451,6 +458,267 @@ def _zero_collision(patch, triangle, normal, permissions, guard):
     return None
 
 
+def _face_solid_collision(face, normal, solid, permissions, guard):
+    """A strict lower-bound witness: an original midplane inside known solid.
+
+    Unknown thickness still contains its own zero-thickness midplane. Preserve
+    the other material's known thickness rather than globally discarding it.
+    The solid is shrunk and permissions expanded before choosing a witness.
+    """
+    clipped = _clip_face(face, solid[1].equations, -2 * guard)
+    if len(clipped) < 3:
+        return None
+    origin = face[0]
+    u = _normal(face[1] - origin)
+    v = np.cross(normal, u)
+
+    def uv(points):
+        return np.column_stack([(points - origin) @ u, (points - origin) @ v])
+
+    original = Polygon(uv(face))
+    overlap = Polygon(uv(np.asarray(clipped)))
+    for equations in permissions:
+        allowed = _clip_face(np.asarray(clipped), equations, 2 * guard)
+        if len(allowed) >= 3:
+            overlap = overlap.difference(Polygon(uv(np.asarray(allowed))))
+    if overlap.is_empty or overlap.area <= 16 * guard**2:
+        return None
+    point = overlap.representative_point()
+    witness = origin + point.x * u + point.y * v
+    if (
+        original.boundary.distance(point) <= 4 * guard
+        or np.max(solid[1].equations[:, :3] @ witness + solid[1].equations[:, 3]) >= -guard
+        or not _outside_permissions(witness, permissions, 2 * guard)
+    ):
+        return None
+    return witness
+
+
+def _bounds_disjoint(first, second, guard):
+    """Only prune demonstrably separated static bounds; never certify a sweep."""
+    return bool(
+        np.any(first.max(axis=0) < second.min(axis=0) - guard)
+        or np.any(second.max(axis=0) < first.min(axis=0) - guard)
+    )
+
+
+def _unknown_witness_search(
+    patches,
+    axis,
+    normal,
+    thickness,
+    items,
+    triangles,
+    solids,
+    planes,
+    intervals,
+    origin,
+    guard,
+    base,
+    max_depth,
+    max_intervals,
+):
+    """Bounded search only; no amount of empty samples certifies absence."""
+    base = dict(
+        base,
+        proof_method="bounded_breadth_first_material_lower_bound_collision_witness_search",
+        search_interval_limit=max_intervals,
+        search_depth_limit=max_depth,
+    )
+    examined = coarse = 0
+    depth_reached = False
+    ambiguous = False
+    sampled = set()
+    real_solids = {o.id: [] for o in items}
+    known_thickness = {o.id: o.thickness_mm for o in items}
+    for identity, solid in solids:
+        actual = known_thickness[identity]
+        if actual is not None:
+            if actual >= 4 * guard:
+                real_solids[identity].append(solid)
+            else:
+                # An artificial pruning proxy must NEVER become a negative
+                # collision witness for sub-precision known thickness either.
+                ambiguous = True
+    clipped_cache = {}
+
+    def finish(status, message, **witness):
+        return ClearanceResult(
+            status,
+            message,
+            examined_intervals=examined,
+            coarse_intervals_examined=coarse,
+            witness_angles_examined=len(sampled),
+            search_depth_limit_reached=depth_reached,
+            **base,
+            **witness,
+        )
+
+    def probe(sample):
+        nonlocal ambiguous
+        if sample in sampled:
+            return None
+        sampled.add(sample)
+        active = tuple(i for i, (_, a, b, _) in enumerate(planes) if a <= sample <= b)
+        for patch in patches:
+            rotated = _rotate(patch, axis, sample)
+            rotated_normal = _rotate(np.array([normal]), axis, sample)[0]
+            moving = None
+            if thickness >= 4 * guard:
+                moving = _hull(
+                    np.vstack(
+                        [
+                            rotated - rotated_normal * thickness / 2,
+                            rotated + rotated_normal * thickness / 2,
+                        ]
+                    )
+                )
+                if moving is None:
+                    ambiguous = True
+            elif thickness > 0:
+                ambiguous = True
+            for obstacle in items:
+                permissions = [planes[i][3] for i in active if planes[i][0] == obstacle.id]
+                # First keep exact original-midplane witnesses, including B02.
+                # Near-coplanarity cannot stop the pass before a later definite
+                # collision with this or any other material has been searched.
+                for triangle in triangles[obstacle.id]:
+                    if _bounds_disjoint(rotated, triangle, guard):
+                        continue
+                    witness = _zero_collision(rotated, triangle, rotated_normal, permissions, guard)
+                    if isinstance(witness, tuple):
+                        ambiguous = True
+                    elif witness is not None:
+                        return finish(
+                            "COLLISION",
+                            "Original material midplanes intersect during the fold",
+                            obstacle_id=obstacle.id,
+                            witness_angle_deg=math.degrees(sample),
+                            witness_point_mm=tuple(float(v) for v in witness + origin),
+                        )
+                if obstacle.thickness_mm is not None:
+                    if moving is not None:
+                        key = (obstacle.id, active)
+                        if key not in clipped_cache:
+                            pieces = real_solids[obstacle.id]
+                            for equations in permissions:
+                                pieces = [
+                                    piece
+                                    for current in pieces
+                                    for piece in _subtract(current, equations, -2 * guard)
+                                ]
+                            clipped_cache[key] = pieces
+                        for solid in clipped_cache[key]:
+                            if _bounds_disjoint(moving[0], solid[0], guard):
+                                continue
+                            if _static_collision(
+                                patch, solid, axis, sample, normal, thickness, guard
+                            ):
+                                return finish(
+                                    "COLLISION",
+                                    "Known material solids intersect during the fold",
+                                    obstacle_id=obstacle.id,
+                                    witness_angle_deg=math.degrees(sample),
+                                )
+                    else:
+                        for solid in real_solids[obstacle.id]:
+                            if _bounds_disjoint(rotated, solid[0], guard):
+                                continue
+                            witness = _face_solid_collision(
+                                rotated,
+                                rotated_normal,
+                                solid,
+                                permissions,
+                                guard,
+                            )
+                            if witness is not None:
+                                return finish(
+                                    "COLLISION",
+                                    "Original tab midplane penetrates known thick material",
+                                    obstacle_id=obstacle.id,
+                                    witness_angle_deg=math.degrees(sample),
+                                    witness_point_mm=tuple(float(v) for v in witness + origin),
+                                )
+                elif moving is not None:
+                    for triangle in triangles[obstacle.id]:
+                        if _bounds_disjoint(triangle, moving[0], guard):
+                            continue
+                        face_normal = _normal(
+                            np.cross(triangle[1] - triangle[0], triangle[2] - triangle[0])
+                        )
+                        witness = _face_solid_collision(
+                            triangle, face_normal, moving, permissions, guard
+                        )
+                        if witness is not None:
+                            return finish(
+                                "COLLISION",
+                                "Original obstacle midplane penetrates known thick tab",
+                                obstacle_id=obstacle.id,
+                                witness_angle_deg=math.degrees(sample),
+                                witness_point_mm=tuple(float(v) for v in witness + origin),
+                            )
+        return None
+
+    def visit(lo, hi):
+        try:
+            for sample in (lo, (lo + hi) / 2, hi):
+                result = probe(sample)
+                if result is not None:
+                    return result
+        except ValueError as exc:
+            return finish("UNRESOLVED", "Numerically unresolved witness geometry: " + str(exc))
+        return None
+
+    if len(intervals) > max_intervals:
+        return finish(
+            "UNRESOLVED",
+            "Interval budget cannot cover the mandatory complete coarse witness pass",
+            search_budget_exhausted=True,
+        )
+    # Complete every original phase interval before any refinement. A tangent
+    # branch can therefore never consume the budget ahead of a coarse witness.
+    pending = deque()
+    for lo, hi, _ in intervals:
+        examined += 1
+        coarse += 1
+        result = visit(lo, hi)
+        if result is not None:
+            return result
+        if lo < hi:
+            if max_depth:
+                mid = (lo + hi) / 2
+                pending.extend([(lo, mid, 1), (mid, hi, 1)])
+            else:
+                depth_reached = True
+    while pending and examined < max_intervals:
+        lo, hi, depth = pending.popleft()
+        examined += 1
+        result = visit(lo, hi)
+        if result is not None:
+            return result
+        if depth < max_depth:
+            mid = (lo + hi) / 2
+            pending.extend([(lo, mid, depth + 1), (mid, hi, depth + 1)])
+        else:
+            depth_reached = True
+    limited = bool(pending)
+    message = (
+        "Bounded collision-witness search found no definite intersection; "
+        "absence of collision has NOT been proved and material clearance remains unverified"
+    )
+    if limited:
+        message += "; interval budget exhausted"
+    elif depth_reached:
+        message += "; requested search depth reached"
+    return finish(
+        "UNRESOLVED" if ambiguous else "UNVERIFIED",
+        "Material overlap or thickness lies in the numeric uncertainty band; " + message
+        if ambiguous
+        else message,
+        search_budget_exhausted=limited,
+    )
+
+
 def check_fold_clearance(
     sweep: FoldSweep,
     material: MaterialProfile,
@@ -458,15 +726,18 @@ def check_fold_clearance(
     *,
     expected_obstacle_ids: object,
     allowances: object = (),
-    max_depth: int = 12,
-    max_intervals: int = 4096,
+    max_depth: int | None = None,
+    max_intervals: int | None = None,
 ) -> ClearanceResult:
     """Certify a rigid digital sweep, or truthfully return why it is not proven.
 
     CLEAR means the complete continuous inflated sweep avoids every supplied
     material solid OUTSIDE the recorded permitted volumes. COLLISION has an
-    actual angle witness with intersecting finite-thickness solids, or a strict
-    original-midplane intersection when any thickness is unknown.
+    actual angle witness with intersecting known-thickness solids, original
+    midplanes, or an original midplane strictly inside known-thickness material.
+    Unknown material uses bounded witness search, never an absence certificate.
+    Default depth/interval budgets are 8/128 for any unknown material and remain
+    12/4096 for the continuous all-known certification branch.
     A hull overlap or exhausted subdivision is UNRESOLVED, not collision/PASS.
     Radius is conservatively added to the whole sweep's displacement envelope;
     no inference of strain, material bendability, or automatic compensation is made.
@@ -485,6 +756,17 @@ def check_fold_clearance(
         if not {sweep.source_id, sweep.receiver_id} <= set(identifiers):
             raise ValueError("Source and receiver material must both be in the obstacle registry")
         unknown = unknown or any(o.thickness_mm is None for o in items)
+        max_depth = (8 if unknown else 12) if max_depth is None else max_depth
+        max_intervals = (128 if unknown else 4096) if max_intervals is None else max_intervals
+        if (
+            type(max_depth) is not int
+            or max_depth < 0
+            or type(max_intervals) is not int
+            or max_intervals < 1
+        ):
+            raise ValueError(
+                "Search depth must be a nonnegative integer and interval budget a positive integer"
+            )
         origin, end = _vector(sweep.hinge_start_mm), _vector(sweep.hinge_end_mm)
         hinge_length = float(np.linalg.norm(end - origin))
         axis, normal = _normal(end - origin), _normal(sweep.initial_normal)
@@ -614,9 +896,27 @@ def check_fold_clearance(
         clearance_mm=clearance,
         bend_radius_mm=radius,
     )
+    cuts = sorted(cuts)
+    intervals = [(a, b, 0) for a, b in zip(cuts, cuts[1:])] if len(cuts) > 1 else [(low, high, 0)]
+    if unknown:
+        return _unknown_witness_search(
+            patches,
+            axis,
+            normal,
+            thickness,
+            items,
+            original_triangles,
+            solids,
+            planes,
+            intervals,
+            origin,
+            guard,
+            base,
+            max_depth,
+            max_intervals,
+        )
     examined, certified, uncertain = 0, 0, False
     cache = {}
-    witness_cache = {}
 
     def chunks_for(active):
         if active not in cache:
@@ -635,8 +935,7 @@ def check_fold_clearance(
             cache[active] = chunks
         return cache[active]
 
-    cuts = sorted(cuts)
-    stack = [(a, b, 0) for a, b in zip(cuts, cuts[1:])] if len(cuts) > 1 else [(low, high, 0)]
+    stack = intervals[:]
     while stack:
         lo, hi, depth = stack.pop()
         examined += 1
@@ -668,43 +967,6 @@ def check_fold_clearance(
                     point_active = tuple(
                         i for i, (_, a, b, _) in enumerate(planes) if a <= sample <= b
                     )
-                    if unknown:
-                        key = (id(patch), obstacle_id, sample)
-                        if key not in witness_cache:
-                            rotated = _rotate(patch, axis, sample)
-                            rotated_normal = _rotate(np.array([normal]), axis, sample)[0]
-                            permissions = [
-                                planes[i][3] for i in point_active if planes[i][0] == obstacle_id
-                            ]
-                            witness = None
-                            for triangle in original_triangles[obstacle_id]:
-                                witness = _zero_collision(
-                                    rotated, triangle, rotated_normal, permissions, guard
-                                )
-                                if witness is not None:
-                                    break
-                            witness_cache[key] = witness
-                        witness = witness_cache[key]
-                        if witness is not None:
-                            if isinstance(witness, tuple):
-                                return ClearanceResult(
-                                    "UNRESOLVED",
-                                    "Near-coplanar overlap lies in the numeric uncertainty band",
-                                    obstacle_id=obstacle_id,
-                                    examined_intervals=examined,
-                                    **base,
-                                )
-                            return ClearanceResult(
-                                "COLLISION",
-                                "Original material midplanes intersect during the fold",
-                                obstacle_id=obstacle_id,
-                                witness_angle_deg=math.degrees(sample),
-                                witness_point_mm=tuple(float(v) for v in witness + origin),
-                                certified_intervals=certified,
-                                examined_intervals=examined,
-                                **base,
-                            )
-                        continue
                     for point_id, point_solid in chunks_for(point_active):
                         if point_id == obstacle_id and _static_collision(
                             patch, point_solid, axis, sample, normal, thickness, guard
@@ -724,27 +986,16 @@ def check_fold_clearance(
             mid = (lo + hi) / 2
             stack.extend([(lo, mid, depth + 1), (mid, hi, depth + 1)])
         else:
-            if not unknown:
-                # A single unproven leaf already prevents a continuous CLEAR.
-                # Do not spend thousands of further cells re-proving that the
-                # same unresolved tangency is unresolved in the UI thread.
-                return ClearanceResult(
-                    "UNRESOLVED",
-                    "Continuous clearance has an unresolved interval",
-                    certified_intervals=certified,
-                    examined_intervals=examined,
-                    **base,
-                )
-            uncertain = True
-    if unknown:
-        return ClearanceResult(
-            "UNVERIFIED",
-            "No zero-thickness intersection witness found; "
-            "material thickness and clearance remain unverified",
-            certified_intervals=0,
-            examined_intervals=examined,
-            **base,
-        )
+            # A single unproven leaf already prevents a continuous CLEAR.
+            # Do not spend thousands of further cells re-proving that the
+            # same unresolved tangency is unresolved in the UI thread.
+            return ClearanceResult(
+                "UNRESOLVED",
+                "Continuous clearance has an unresolved interval",
+                certified_intervals=certified,
+                examined_intervals=examined,
+                **base,
+            )
     if uncertain:
         return ClearanceResult(
             "UNRESOLVED",
