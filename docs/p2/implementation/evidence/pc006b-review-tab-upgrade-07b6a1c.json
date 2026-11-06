@@ -1,0 +1,57 @@
+{
+  "source_sha": "07b6a1cc9ce3835427f621c6337f65e39464ec65",
+  "actual_old_model_sha256": "c649da8478d5b36bf6ffeb764ff58c2e308ddb9c4a7d38191a2effcbb46b205d",
+  "kind": "independent-actual-A-schema1-copy-ID-layout-source-preservation-no-GUI",
+  "results": [
+    {
+      "name": "source-IDs-preserved",
+      "passed": true
+    },
+    {
+      "name": "new-tab-semantic-not-connector",
+      "passed": true
+    },
+    {
+      "name": "copypolicy-known-source",
+      "passed": true
+    },
+    {
+      "name": "layout-position-and-locks",
+      "passed": true
+    },
+    {
+      "name": "off-exact-tab",
+      "passed": true
+    },
+    {
+      "name": "undo-preserves-new-tab-identity",
+      "passed": true
+    },
+    {
+      "name": "redo-preserves-new-tab-identity",
+      "passed": true
+    },
+    {
+      "name": "original-write-blocked-after-undo-redo",
+      "passed": true
+    },
+    {
+      "name": "reopen-same-semantic-ID-and-off",
+      "passed": true
+    },
+    {
+      "name": "origin-bytes-unchanged",
+      "passed": true
+    },
+    {
+      "name": "strict-schema2-rejects-empty-ids",
+      "passed": true
+    },
+    {
+      "name": "fresh-edgepair-tab-editable",
+      "passed": true
+    }
+  ],
+  "passed": 12,
+  "failed": 0
+}

@@ -1,0 +1,102 @@
+{
+  "source_sha": "4bb5c436f5055cf278d756a637d1c5017ed8964b",
+  "kind": "independent_numeric_exact_200mm2_negative_and_opposite_side_positive",
+  "results": [
+    {
+      "name": "analytic-200mm2:unknown",
+      "passed": true,
+      "detail": 200.0
+    },
+    {
+      "name": "side-diagnostic:unknown",
+      "passed": true,
+      "detail": [
+        "FOLDED_SIDE_UNRESOLVED"
+      ]
+    },
+    {
+      "name": "snapshot-block-or-allow:unknown",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "error-cannot-acknowledge:unknown",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "roundtrip-side-and-tabIDs:unknown",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "analytic-200mm2:outside",
+      "passed": true,
+      "detail": 200.0
+    },
+    {
+      "name": "side-diagnostic:outside",
+      "passed": true,
+      "detail": [
+        "FOLDED_CONNECTOR_COLLISION"
+      ]
+    },
+    {
+      "name": "snapshot-block-or-allow:outside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "error-cannot-acknowledge:outside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "roundtrip-side-and-tabIDs:outside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "analytic-200mm2:inside",
+      "passed": true,
+      "detail": 200.0
+    },
+    {
+      "name": "side-diagnostic:inside",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "snapshot-block-or-allow:inside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "roundtrip-side-and-tabIDs:inside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "off-removes-only-conflict",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "reenable-same-UUID-restores-error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "invalid-side-atomic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "owner-change-drops-face-intent",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 18,
+  "failed": 0
+}

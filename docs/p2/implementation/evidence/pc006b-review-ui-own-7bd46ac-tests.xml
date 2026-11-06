@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="18" time="3.155" timestamp="2026-11-06T13:47:50.334235+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_each_coordinate_is_used_before_result_spec[0-108]" time="0.145" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_each_coordinate_is_used_before_result_spec[1-124]" time="0.141" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_each_coordinate_is_used_before_result_spec[2-36]" time="0.109" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_each_coordinate_is_used_before_result_spec[3-28]" time="0.110" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_interval_and_angle[start_fraction-25-interval0]" time="0.141" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_interval_and_angle[end_fraction-75-interval1]" time="0.112" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_pending_interval_and_angle[angle-37.5-interval2]" time="0.069"><failure message="AssertionError: Opravte neúplné číslo před potvrzením.&#10;assert 0 == &lt;DialogCode.Accepted: 1&gt;&#10; +  where 0 = &lt;built-in method result of AttachmentDialog object at 0x0000016B6129ABC0&gt;()&#10; +    where &lt;built-in method result of AttachmentDialog object at 0x0000016B6129ABC0&gt; = &lt;archpapercraft.ui.author_attachment.AttachmentDialog(0x16b5feaf620) at 0x0000016B6129ABC0&gt;.result&#10; +  and   &lt;DialogCode.Accepted: 1&gt; = &lt;enum 'DialogCode'&gt;.Accepted&#10; +    where &lt;enum 'DialogCode'&gt; = QDialog.DialogCode">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x0000016B63700410&gt;, name = 'angle'
+value = '37.5', interval = [0, 1]
+
+    @pytest.mark.parametrize('name,value,interval',[
+        ('start_fraction','25',[.25,1]),('end_fraction','75',[0,.75]),('angle','37.5',[0,1])])
+    def test_pending_interval_and_angle(qtbot,name,value,interval):
+        p,s,t,e,d=attachment(qtbot);field=getattr(d,name)
+        pending(qtbot,field,value);d.confirm()
+&gt;       assert d.result()==QDialog.DialogCode.Accepted,d.feedback.text()
+E       AssertionError: Opravte neúplné číslo před potvrzením.
+E       assert 0 == &lt;DialogCode.Accepted: 1&gt;
+E        +  where 0 = &lt;built-in method result of AttachmentDialog object at 0x0000016B6129ABC0&gt;()
+E        +    where &lt;built-in method result of AttachmentDialog object at 0x0000016B6129ABC0&gt; = &lt;archpapercraft.ui.author_attachment.AttachmentDialog(0x16b5feaf620) at 0x0000016B6129ABC0&gt;.result
+E        +  and   &lt;DialogCode.Accepted: 1&gt; = &lt;enum 'DialogCode'&gt;.Accepted
+E        +    where &lt;enum 'DialogCode'&gt; = QDialog.DialogCode
+
+docs\p2\implementation\evidence\pc006b-review-ui-cases.py:65: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_invalid_pending_attachment_cannot_accept_or_mutate[angle--]" time="0.070" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_invalid_pending_attachment_cannot_accept_or_mutate[start_fraction-100]" time="0.065" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_invalid_pending_attachment_cannot_accept_or_mutate[end_fraction-0]" time="0.067" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_connector_pending_inputs_apply_once_then_undo[width-7-7]" time="0.319" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_connector_pending_inputs_apply_once_then_undo[taper-.75-0.75]" time="0.128"><failure message="AssertionError: Opravte rozepsané číslo před potvrzením.&#10;assert 0 == &lt;DialogCode.Accepted: 1&gt;&#10; +  where 0 = &lt;built-in method result of ConnectorEditDialog object at 0x0000016B638066C0&gt;()&#10; +    where &lt;built-in method result of ConnectorEditDialog object at 0x0000016B638066C0&gt; = &lt;archpapercraft.ui.author_connectors.ConnectorEditDialog(0x16b5feb02d0) at 0x0000016B638066C0&gt;.result&#10; +  and   &lt;DialogCode.Accepted: 1&gt; = &lt;enum 'DialogCode'&gt;.Accepted&#10; +    where &lt;enum 'DialogCode'&gt; = QDialog.DialogCode">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x0000016B63707E30&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1096/test_connector_pending_inputs_1')
+name = 'taper', text = '.75', expected = 0.75
+
+    @pytest.mark.parametrize('name,text,expected',[('width','7',7),('taper','.75',.75),('count','3',3),('gap','1.5',1.5)])
+    def test_connector_pending_inputs_apply_once_then_undo(qtbot,tmp_path,name,text,expected):
+        w,aid,cid,s,t=host(qtbot,tmp_path);before=copy.deepcopy(w.project.to_dict())
+        d=ConnectorEditDialog(w,('attachment',aid),connector_id=cid);qtbot.addWidget(d);d.show();qtbot.wait(5)
+        d.advanced_body.setVisible(True)
+        pending(qtbot,getattr(d,name),text);d.accept()
+&gt;       assert d.result()==QDialog.DialogCode.Accepted,d.status.text()
+E       AssertionError: Opravte rozepsané číslo před potvrzením.
+E       assert 0 == &lt;DialogCode.Accepted: 1&gt;
+E        +  where 0 = &lt;built-in method result of ConnectorEditDialog object at 0x0000016B638066C0&gt;()
+E        +    where &lt;built-in method result of ConnectorEditDialog object at 0x0000016B638066C0&gt; = &lt;archpapercraft.ui.author_connectors.ConnectorEditDialog(0x16b5feb02d0) at 0x0000016B638066C0&gt;.result
+E        +  and   &lt;DialogCode.Accepted: 1&gt; = &lt;enum 'DialogCode'&gt;.Accepted
+E        +    where &lt;enum 'DialogCode'&gt; = QDialog.DialogCode
+
+docs\p2\implementation\evidence\pc006b-review-ui-cases.py:93: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_connector_pending_inputs_apply_once_then_undo[count-3-3]" time="0.311" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_connector_pending_inputs_apply_once_then_undo[gap-1.5-1.5]" time="0.127"><failure message="AssertionError: Opravte rozepsané číslo před potvrzením.&#10;assert 0 == &lt;DialogCode.Accepted: 1&gt;&#10; +  where 0 = &lt;built-in method result of ConnectorEditDialog object at 0x0000016B6381E1C0&gt;()&#10; +    where &lt;built-in method result of ConnectorEditDialog object at 0x0000016B6381E1C0&gt; = &lt;archpapercraft.ui.author_connectors.ConnectorEditDialog(0x16b60512570) at 0x0000016B6381E1C0&gt;.result&#10; +  and   &lt;DialogCode.Accepted: 1&gt; = &lt;enum 'DialogCode'&gt;.Accepted&#10; +    where &lt;enum 'DialogCode'&gt; = QDialog.DialogCode">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x0000016B637B49E0&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1096/test_connector_pending_inputs_3')
+name = 'gap', text = '1.5', expected = 1.5
+
+    @pytest.mark.parametrize('name,text,expected',[('width','7',7),('taper','.75',.75),('count','3',3),('gap','1.5',1.5)])
+    def test_connector_pending_inputs_apply_once_then_undo(qtbot,tmp_path,name,text,expected):
+        w,aid,cid,s,t=host(qtbot,tmp_path);before=copy.deepcopy(w.project.to_dict())
+        d=ConnectorEditDialog(w,('attachment',aid),connector_id=cid);qtbot.addWidget(d);d.show();qtbot.wait(5)
+        d.advanced_body.setVisible(True)
+        pending(qtbot,getattr(d,name),text);d.accept()
+&gt;       assert d.result()==QDialog.DialogCode.Accepted,d.status.text()
+E       AssertionError: Opravte rozepsané číslo před potvrzením.
+E       assert 0 == &lt;DialogCode.Accepted: 1&gt;
+E        +  where 0 = &lt;built-in method result of ConnectorEditDialog object at 0x0000016B6381E1C0&gt;()
+E        +    where &lt;built-in method result of ConnectorEditDialog object at 0x0000016B6381E1C0&gt; = &lt;archpapercraft.ui.author_connectors.ConnectorEditDialog(0x16b60512570) at 0x0000016B6381E1C0&gt;.result
+E        +  and   &lt;DialogCode.Accepted: 1&gt; = &lt;enum 'DialogCode'&gt;.Accepted
+E        +    where &lt;enum 'DialogCode'&gt; = QDialog.DialogCode
+
+docs\p2\implementation\evidence\pc006b-review-ui-cases.py:93: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_invalid_tab_number_blocks_acceptance_and_cancel_is_pure" time="0.128" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_receiving_hole_and_region_draft_are_not_silently_committed" time="0.084" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_schema1_source_survives_failed_operation_undo_and_saveas" time="0.065" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_glue_patch_cancel_is_pure_and_unfinished_region_blocks" time="0.034" /></testsuite></testsuites>

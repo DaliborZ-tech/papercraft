@@ -4,6 +4,8 @@ Povinný v PC-006A/B, součást dodávání první autorské verze. **Stav: NOT_
 
 ## Účastník a příprava
 
+**Skutečný stav dostupnosti 6. 11. 2026:** vlastník na konkrétní dotaz k zajištění nového člověka pro 20–30minutové sezení odpověděl „Teď takový člověk není k dispozici“. Účastník tedy není zajištěný; AC-US08 zůstává **NOT_RUN / účastník nedostupný**, počet skutečných účastníků 0. Nejde o zamítnutí produktu ani zrušení autorizace. Implementace a nezávislé technické části pokračují. Žádný dosavadní průchod autora, agenta nebo GUI automatu tuto chybějící lidskou přejímku nenahrazuje.
+
 Alespoň jeden skutečný začínající modelář, který aplikaci dosud nepoužíval a není jejím autorem, členem implementačního/review týmu ani předem školeným testerem. Zapiš dosavadní zkušenost s modelářstvím/CAD a jazykem UI, bez zbytečných osobních údajů. Jedno sezení je kvalitativní zkouška, nikoli důkaz použitelnosti pro celou populaci.
 
 Na Windows připrav čistý prázdný projekt, funkční vstupní zařízení a přístupný adresář pro soubory. Zaznamenej CODE SHA/build, OS, DPI, jazyk a výchozí stav vestavěných tipů. Ověř technickou funkčnost před příchodem účastníka; nedělej mu demonstrační průchod a nenabízej hotový projekt. Příprava zařízení nesmí zahrnovat vysvětlení, která tlačítka mačkat. Sezení plánuj přibližně na20–30 minut, nikoli jako test rychlosti člověka. Čas a případné prodloužení se zaznamenají.

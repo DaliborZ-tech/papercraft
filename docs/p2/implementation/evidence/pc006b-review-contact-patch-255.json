@@ -1,0 +1,118 @@
+{
+  "source_sha": "255088984fc189eec62109dc1890905e53e00b73",
+  "contact_source": "5b1161c3df9fc3dc90e04818e9526c0c4f1fdf50",
+  "kind": "independent-contact-boundary-actual-raw-state-and-glued-hole-registry",
+  "results": [
+    {
+      "name": "contact-threshold:1:0.9",
+      "passed": true,
+      "detail": {
+        "gap_model_mm": 9e-07,
+        "gap_paper_mm": 9e-07
+      }
+    },
+    {
+      "name": "source-never-snapped:1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "contact-threshold:1:1.1",
+      "passed": true,
+      "detail": {
+        "gap_model_mm": 1.1e-06,
+        "gap_paper_mm": 1.1e-06
+      }
+    },
+    {
+      "name": "invalid-contact-atomic:1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "contact-threshold:1000000.0:0.9",
+      "passed": true,
+      "detail": {
+        "gap_model_mm": 9.000000000000001e-09,
+        "gap_paper_mm": 0.009000000000000001
+      }
+    },
+    {
+      "name": "source-never-snapped:1000000.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "contact-threshold:1000000.0:1.1",
+      "passed": true,
+      "detail": {
+        "gap_model_mm": 1.1000000000000001e-08,
+        "gap_paper_mm": 0.011000000000000001
+      }
+    },
+    {
+      "name": "invalid-contact-atomic:1000000.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actual-rounding-band-independent-area",
+      "passed": true,
+      "detail": 169.70562748477138
+    },
+    {
+      "name": "actual-rounding-roof-unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actual-native-registry-20mm2",
+      "passed": true,
+      "detail": [
+        20.0
+      ]
+    },
+    {
+      "name": "actual-native-registry-blocks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actual-native-snapshot-blocked-preserves-raw",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "independent-hole-area:False:inside",
+      "passed": true,
+      "detail": 0.0
+    },
+    {
+      "name": "independent-hole-registry:False:inside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "independent-hole-area:True:inside",
+      "passed": true,
+      "detail": 50.0
+    },
+    {
+      "name": "independent-hole-registry:True:inside",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "independent-hole-area:True:outside",
+      "passed": true,
+      "detail": 50.0
+    },
+    {
+      "name": "independent-hole-registry:True:outside",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 19,
+  "failed": 0
+}
