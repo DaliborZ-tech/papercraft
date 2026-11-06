@@ -25,6 +25,23 @@ flowchart LR
 
 ## Pracovní prostor
 
+### Osvojitelnost je součást každého řezu
+
+Každý hlavní průchod má v témže ticketu implementaci a ověření [AC-US01–US07](ACCEPTANCE.md). První autorská verze má navíc [krátké skutečné sezení s novým uživatelem](USABILITY_TEST.md). Nejde o práci odloženou na vizuální redesign. Základní pojmy v UI vycházejí z modelářovy činnosti; UV souřadnice, Jacobian, provenance a názvy solverů nejsou povinnou znalostí pro vytvoření dílu, chlopeň, opravu a export. Technické podrobnosti lze rozbalit dobrovolně.
+
+| Co musí jít poznat/udělat | Provedení v konkrétním průchodu |
+|---|---|
+| Kde začít a jak pokračovat | Prázdný stav nabídne vlastní kreslení. Po otevřeném obrysu nabídne pokračování/uzavření, po ploše umístění či připojení, po validním rozvinu ruční stránky. Další krok nesmí skrýt možnost vrátit se. |
+| Co platí pro aktuální výběr | Akce se vztahuje k viditelně vybranému bodu/hraně/ploše/dílu. Nezpůsobilá operace vysvětlí chybějící výběr a dostupný další krok i klávesnicí; nestačí bezejmenné šedé tlačítko. |
+| Jaký je výsledek a jeho protějšek | Náhled před potvrzením, viditelný dopad po něm, stejný výběr ve3D a rozvinu. U chlopně je vidět její díl i místo přilepení, nikoli jen interní ID. |
+| Kde je chyba a jak ji opravit | Výběr problému přejde k místu a vhodné akci: např. „Chlopeň míří mimo podložku“ → ukázat protikus / upravit chlopeň. Při neprokázaném rozvinu nabídnout modelářsky vysvětlené dělení a jeho dopad. |
+| Jak bezpečně zkusit jinou možnost | Zrušit náhled, Esc při tažení, undo/redo celé změny. Výsledek návratu je viditelný na konstrukci i stránkách; chybná operace nepoškodí rozpracovanou práci. |
+| Jak zvládnout základ bez interní geometrie | Výběr příjemce přímo na ploše a náhled připojení, srozumitelné rozměry a chyby. Pokročilé parametry se odkrývají až na vyžádání, s přímou cestou pro zkušeného autora. |
+
+Tipy a kontextové vedení jsou volitelné a neblokující. Každý použitý tip lze znovu vyvolat u nástroje, zavřít nebo vypnout; společné „Vypnout tipy“ se uchová v uživatelském nastavení a musí jít opět zapnout. Nastavení tipů nemění projekt, dirty, rozvin ani export. Povinná hlášení chyb a integrity se vypnutím tipů neschovají. Žádný průvodce není povinnou cestou k přímému příkazu, číselnému vstupu nebo zkratce. Ověřit průchod s vedením i s vedením vypnutým v aktuálním řezu.
+
+Váhání uživatele je vstup pro opravu produktu. Když nepozná připojení dovnitř střechy, posoudit sémantiku výběru, dostupnost akce a zpětnou vazbu dříve než přidat další nápovědu. Výrok, hypotéza příčiny, změna UI a výsledek dalšího ověření jsou oddělené záznamy.
+
 Hlavní režimy jsou **Konstrukce / Skica / Spoje a díly / Stránky**. Sdílejí výběr a identitu prvku; přepnutí režimu nepřesune díly a nezruší rozpracovaný kontext. Skica v modelových souřadnicích a tisková stránka v paper mm jsou odlišná plátna, vždy pojmenovaná i jednotkově. Kreslení profilu není kreslení dekorace do již hotového SVG.
 
 | Umístění | Co autor vidí a ovládá |

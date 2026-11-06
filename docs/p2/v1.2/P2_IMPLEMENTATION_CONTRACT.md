@@ -39,6 +39,10 @@ Normativní návrh entit a invariantů: [architektura](ARCHITECTURE.md). Produkt
 
 ## Vertikální řezy a výstup každého
 
+Průřezově platí **srozumitelné a postupně osvojitelné ovládání** pro začínajícího modeláře. V každém hlavním průchodu daného řezu ověřit začátek/další krok, akce podle výběru, porozumění výsledku a vazbu3D↔rozvin, nalezení/opravu chyby v UI, bezpečný návrat experimentu a práci bez znalosti interní geometrie. Volitelné vedení je opakovatelné a vypnutelné; zkušený autor má přímou rychlou cestu. Konkrétní [AC-US01–US08](ACCEPTANCE.md), [UX](AUTHORING_UX.md) a [test s novým uživatelem](USABILITY_TEST.md) patří přímo do PC-006A/B a dalších řezů, ne do nové etapy či závěrečného redesignu. Nedostupný skutečný účastník se nezamění za průchod implementátora nebo GUI automat.
+
+Každý ticket deklaruje relevantní projektové skills a dokládá konkrétní použití dle [AGENTS](../../../AGENTS.md#projektové-skills-a-poučení). Nezávislé review hodnotí jejich uplatnění na výsledku i převzaté poučení, nikoli pouze existenci souborů. Údržba skills je součást dodávání v platném rozsahu; nemění AC ani produktovou bránu.
+
 | Ticket | Co jde skutečně udělat | Povinný důkaz |
 |---|---|---|
 | PC-012 | Tento návrh + spiky, zhodnocení prototypu | Připnuté nezávislé review; žádné tvrzení hotového UI A–D |

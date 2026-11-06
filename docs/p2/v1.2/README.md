@@ -12,6 +12,7 @@ Tento balík obsahuje **analýzu, spustitelné geometrické experimenty a návrh
 | [Architektura a persistence](ARCHITECTURE.md) | Skici, křivky, trim plochy, assembly vs material, certifikáty a identity |
 | [Skutečné geometrické spiky](GEOMETRY_SPIKES.md) | Plochy mezi profily, vnitřní připojení, tabs; důkazy, negativní případy a limity |
 | [Autorské UX](AUTHORING_UX.md) | Cesta od prázdného projektu až po layout/export a řešení problémů |
+| [Test s novým uživatelem](USABILITY_TEST.md) | Připravený krátký protokol a formulář; skutečné sezení NOT_RUN |
 | [Dispozice kódu](CODE_DISPOSITION.md) | Konkrétní reuse/adapt/replace, žádné automatické vyhození dosavadní práce |
 | [Akceptace A/B/C/D](ACCEPTANCE.md) | Povinná skutečná UI, IO, rozviny, layout a oba výstupy; nové AC NOT_RUN |
 | [Roadmapa](ROADMAP.md) | Zvládnutelné vertikální řezy a zachování všech 16 epic |
@@ -20,6 +21,7 @@ Tento balík obsahuje **analýzu, spustitelné geometrické experimenty a návrh
 | [Nezávislá revize](INDEPENDENT_REVIEW.md) | Reviewer odlišný od autorů, konkrétní pin, vlastní reprodukce a opravy |
 | [Ověření balíku](VERIFICATION.md) | Přesné source piny, příkazy, výsledky, integrita fronty a obnova archivu |
 | [Integrace a publikace](INTEGRATION_REPORT.md) | Kontrola master/remote, bezpečné zachování WIP a skutečný stav push |
+| [Dodatek použitelnosti a skills](USABILITY_SKILLS_REPORT.md) | Průřezové AC, čtyři skills, uplatnění a pending účinnost |
 
 První použitelná autorská verze (PC-006A/B) musí sama vytvořit A bez domu-presetu. Celé P2 přidává B ostění mezi profily, C stočený plášť s dělenými chlopněmi a D pravdivé odmítnutí přesného režimu plus použitelnou odvozenou segmentovanou variantu. Přesné rozviny se neslibují pro libovolný loft. Změna střechy společného dílu stále musí zachovat všechny body kořenové stěny na stránce.
 

@@ -14,6 +14,8 @@ P0/P1 zůstávají dokončenou diagnostikou a návrhem původního řezu. Histor
 
 Každý implementační podřez je end-to-end, včetně ručního švu, chlopně, layoutu a obou výstupů v rozsahu svého typu geometrie. Pozdější konsolidace PC-009 není první chvíle, kdy lze z programu exportovat vlastní díl. Žádný cyklus závislostí: rodičovské PC-006 se dokončí po svých dětech, děti nezávisejí na rodiči; PC-007A závisí na dokončeném PC-006, PC-007B na PC-007A a rodič PC-007 se uzavírá po obou. `completed_by` je agregační pravidlo, nikoli dodatečná opačná závislost.
 
+Použitelnost AC-US01–US07 se implementuje a ověřuje v každém hlavním průchodu právě dodávaného řezu. PC-006A/B zahrnují přípravu a skutečný test první autorské verze s novým člověkem (AC-US08); PC-009/010 kontrolují zachování, neopravují použitelnost poprvé. Relevantní skills a jejich údržba/poučení jsou součástí týchž ticketů a nezávislé revize výsledku. Nepřibývá žádná samostatná designová nebo dokumentační etapa.
+
 ## Zachování a posuny všech 16 epic
 
 | Epic | P2 v1.2 | Další rozsah, který zůstává v produktu |

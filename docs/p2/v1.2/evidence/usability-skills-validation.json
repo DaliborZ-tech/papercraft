@@ -1,0 +1,85 @@
+{
+  "checked_at_utc": "2026-11-06T08:14:50.614501+00:00",
+  "scope": "document/skill integration validation; not a novice test or production usability result",
+  "initial_attempt": "quick_validate exited 1 for each skill because application venv lacks PyYAML; pip also absent. Used existing uv and isolated target instead; no project dependencies changed.",
+  "temporary_validation_dependencies": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-skill-validation-deps-crglazmv",
+  "install_command": [
+    "C:\\Users\\dalib\\.local\\bin\\uv.exe",
+    "pip",
+    "install",
+    "--python",
+    "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+    "--target",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-skill-validation-deps-crglazmv",
+    "PyYAML"
+  ],
+  "install_stdout": "",
+  "install_stderr": "Using CPython 3.12.15 interpreter at: .venv\\Scripts\\python.exe\nResolved 1 package in 258ms\nPrepared 1 package in 96ms\nInstalled 1 package in 9ms\n + pyyaml==6.0.3\n",
+  "validator": "C:\\Users\\dalib\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+  "skills": [
+    {
+      "skill": "papercraft-construction",
+      "command": [
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\dalib\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+        "C:\\Users\\dalib\\projects\\papercraft\\.agents\\skills\\papercraft-construction"
+      ],
+      "exit_code": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": "",
+      "sha256": "d5479176be00fe8b668bb86a558ed670bc92fa37aeb1e65e531b4608c92baaa6"
+    },
+    {
+      "skill": "papercraft-authoring-ui",
+      "command": [
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\dalib\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+        "C:\\Users\\dalib\\projects\\papercraft\\.agents\\skills\\papercraft-authoring-ui"
+      ],
+      "exit_code": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": "",
+      "sha256": "bf183826543022f52c5e9964966fb7d0234d9c53a6ee9d866fe1af46588f8f59"
+    },
+    {
+      "skill": "papercraft-verification",
+      "command": [
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\dalib\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+        "C:\\Users\\dalib\\projects\\papercraft\\.agents\\skills\\papercraft-verification"
+      ],
+      "exit_code": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": "",
+      "sha256": "d795ceb69f47c6a9d402e724628bfe22557ccee5a2d2fb9e0bc17d76bc3924ac"
+    },
+    {
+      "skill": "papercraft-delivery",
+      "command": [
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\dalib\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+        "C:\\Users\\dalib\\projects\\papercraft\\.agents\\skills\\papercraft-delivery"
+      ],
+      "exit_code": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": "",
+      "sha256": "efd6f72ad7208437e9277ec42e5f199b5ac7aaa874c5170f0eef9b45ea6255c0"
+    }
+  ],
+  "checks": {
+    "four_skills_format_valid": true,
+    "every_ticket_skills_resolve": true,
+    "every_ticket_application_records_match": true,
+    "each_p2_ticket_has_usability_criteria": true,
+    "novice_test_not_cyclic_dependency": true,
+    "novice_test_not_fabricated": true,
+    "product_gate_and_authorization_unchanged": true,
+    "no_new_ticket_or_stage": true,
+    "untried_effectiveness_pending": true,
+    "historical_skills_not_falsely_claimed": true,
+    "local_references_exist": true
+  },
+  "missing_links": [],
+  "pass": true,
+  "participants_observed": 0
+}

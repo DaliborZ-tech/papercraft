@@ -70,7 +70,20 @@
         "AC-B01": "NOT_APPLICABLE: root was nonempty; B02 bootstrap used",
         "AC-B02": "PASS: all nine hashes equal immediately before/after bootstrap",
         "AC-B03": "NOT_APPLICABLE: no differing collision or other Git; preflight completed before copy"
-      }
+      },
+      "skills": [
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-delivery",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "skill_mapping_note": "Declared for subsequent work; not a retroactive claim that these skills existed or were applied during the historical ticket."
     },
     {
       "id": "PC-001",
@@ -107,7 +120,28 @@
       "acceptance_state": {
         "AC-B04": "PASS: exact commands, versions, counts and exits recorded",
         "AC-B05": "NOT_APPLICABLE: Windows/OpenGL available; core and desktop results separately recorded"
-      }
+      },
+      "skills": [
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-verification",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "skill_mapping_note": "Declared for subsequent work; not a retroactive claim that these skills existed or were applied during the historical ticket."
     },
     {
       "id": "PC-002",
@@ -149,7 +183,36 @@
       "completion_note": "P0/P1 deliverable verified; product defects stay OPEN for P2/E11. This does not assert implemented P2 or physical acceptance.",
       "acceptance_state": {
         "PC-F01 až PC-F08: reprodukce nebo přesně odůvodněné NOT_VERIFIED": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
-      }
+      },
+      "skills": [
+        "papercraft-construction",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "skill_mapping_note": "Declared for subsequent work; not a retroactive claim that these skills existed or were applied during the historical ticket."
     },
     {
       "id": "PC-003",
@@ -187,7 +250,44 @@
         "Porovnané varianty": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
         "Datové identity, jednotky, invalidace a exportní snapshot": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
         "Žádný nepodložený slib obecného rozvinu": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
-      }
+      },
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "skill_mapping_note": "Declared for subsequent work; not a retroactive claim that these skills existed or were applied during the historical ticket."
     },
     {
       "id": "PC-004",
@@ -245,7 +345,44 @@
         "Všechny dohodnuté epiky zařazeny": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
         "P2 má manuální layout, SVG/PDF a 3D↔2D": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
         "Konkrétní demo i negativní stavy": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
-      }
+      },
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "skill_mapping_note": "Declared for subsequent work; not a retroactive claim that these skills existed or were applied during the historical ticket."
     },
     {
       "id": "PC-005",
@@ -285,7 +422,44 @@
         "Jiný reviewer": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
         "Ověřené důkazy a jasné limity": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance",
         "P2 kontrakt předložen k přijetí": "PASS: P0/P1 analysis/review criterion, not P2 product acceptance"
-      }
+      },
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "HISTORICAL_NOT_APPLIED",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "skill_mapping_note": "Declared for subsequent work; not a retroactive claim that these skills existed or were applied during the historical ticket."
     },
     {
       "id": "PC-006",
@@ -325,7 +499,15 @@
         "AC-AU15",
         "AC-AU16",
         "AC-G06",
-        "AC-C08"
+        "AC-C08",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07",
+        "AC-US08"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -350,7 +532,15 @@
         "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-G06": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
-        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -419,7 +609,60 @@
       "completed_by": [
         "PC-006A",
         "PC-006B"
-      ]
+      ],
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07",
+          "AC-US08"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-007",
@@ -458,7 +701,14 @@
         "AC-R01",
         "AC-R02",
         "AC-R03",
-        "AC-R05"
+        "AC-R05",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -485,7 +735,14 @@
         "AC-R01": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
         "AC-R02": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
         "AC-R03": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
-        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -546,7 +803,59 @@
       "completed_by": [
         "PC-007A",
         "PC-007B"
-      ]
+      ],
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-008",
@@ -585,7 +894,14 @@
         "AC-AU14",
         "AC-AU15",
         "AC-AU16",
-        "AC-R04"
+        "AC-R04",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -608,7 +924,14 @@
         "AC-AU14": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-R04": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-R04": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -765,7 +1088,59 @@
         },
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope."
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-009",
@@ -796,7 +1171,15 @@
         "AC-X10",
         "AC-C02",
         "AC-AU15",
-        "AC-AU17"
+        "AC-AU17",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07",
+        "AC-US08"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -813,7 +1196,15 @@
         "AC-X10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-C02": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-AU17": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
+        "AC-AU17": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -875,7 +1266,60 @@
         },
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope."
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07",
+          "AC-US08"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-010",
@@ -891,13 +1335,22 @@
       "outputs": [
         "Nezávislé review a úplné digitální předání P2 v1.2",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-        "docs/p2/v1.2/ACCEPTANCE.md"
+        "docs/p2/v1.2/ACCEPTANCE.md",
+        "Independent review of actual skill application and usability evidence; unresolved novice test is not replaced by author/GUI automation"
       ],
       "acceptance": [
         "P2 digitální kontrakt splněn",
         "Fyzický proof poctivě pending",
         "P2_v1.2_all_digital_AC_independently_verified",
-        "P3_physical_pending"
+        "P3_physical_pending",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07",
+        "AC-US08"
       ],
       "status": "REPLANNED",
       "execution_authorized_on_realization": false,
@@ -906,7 +1359,15 @@
         "P2 digitální kontrakt splněn": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "Fyzický proof poctivě pending": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "P2_v1.2_all_digital_AC_independently_verified": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "P3_physical_pending": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately"
+        "P3_physical_pending": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -939,7 +1400,60 @@
         "product_acceptance": "NOT_RUN",
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope."
+      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07",
+          "AC-US08"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-011",
@@ -970,7 +1484,43 @@
       },
       "implementation_contract": "04_ACCEPTANCE_AND_VERIFICATION.md#5-fyzická-akceptace-p3",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ]
     },
     {
       "id": "PC-006A",
@@ -996,7 +1546,8 @@
       "mode": "vertical_slice_implementation",
       "outputs": [
         "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
-        "Prázdný projekt, vlastní úsečkové plochy s otvory a celý výrobní průchod"
+        "Prázdný projekt, vlastní úsečkové plochy s otvory a celý výrobní průchod",
+        "Usability implemented in first own-part flow; prepared novice session and actual-build readiness, without claiming AC-US08 completion"
       ],
       "acceptance": [
         "AC-AU01",
@@ -1005,7 +1556,14 @@
         "AC-AU13",
         "AC-AU15",
         "AC-AU16",
-        "AC-G06"
+        "AC-G06",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07"
       ],
       "acceptance_state": {
         "AC-AU01": "NOT_RUN",
@@ -1014,7 +1572,14 @@
         "AC-AU13": "NOT_RUN",
         "AC-AU15": "NOT_RUN",
         "AC-AU16": "NOT_RUN",
-        "AC-G06": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-G06": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1025,7 +1590,60 @@
         9,
         15
       ],
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false,
+        "novice_study_role": "PREPARE_IN_THIS_SLICE; full first-version study in PC-006B"
+      }
     },
     {
       "id": "PC-006B",
@@ -1061,7 +1679,15 @@
         "AC-AU07",
         "AC-AU13",
         "AC-AU15",
-        "AC-C08"
+        "AC-C08",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07",
+        "AC-US08"
       ],
       "acceptance_state": {
         "AC-AU03": "NOT_RUN",
@@ -1071,7 +1697,15 @@
         "AC-AU07": "NOT_RUN",
         "AC-AU13": "NOT_RUN",
         "AC-AU15": "NOT_RUN",
-        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1082,7 +1716,67 @@
         10,
         17
       ],
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07",
+          "AC-US08"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false,
+        "novice_study": {
+          "protocol": "docs/p2/v1.2/USABILITY_TEST.md",
+          "status": "NOT_RUN",
+          "participants_observed": 0,
+          "reason": "Authoring version not implemented; no actual participant session has taken place",
+          "required_before_first_author_version_fully_verified": true
+        }
+      }
     },
     {
       "id": "PC-007A",
@@ -1115,14 +1809,28 @@
         "AC-AU09",
         "AC-AU13",
         "AC-AU15",
-        "AC-R05"
+        "AC-R05",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07"
       ],
       "acceptance_state": {
         "AC-AU08": "NOT_RUN",
         "AC-AU09": "NOT_RUN",
         "AC-AU13": "NOT_RUN",
         "AC-AU15": "NOT_RUN",
-        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1133,7 +1841,59 @@
         12,
         20
       ],
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-007B",
@@ -1170,7 +1930,14 @@
         "AC-R01",
         "AC-R02",
         "AC-R03",
-        "AC-R05"
+        "AC-R05",
+        "AC-US01",
+        "AC-US02",
+        "AC-US03",
+        "AC-US04",
+        "AC-US05",
+        "AC-US06",
+        "AC-US07"
       ],
       "acceptance_state": {
         "AC-AU07": "NOT_RUN",
@@ -1181,7 +1948,14 @@
         "AC-R01": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
         "AC-R02": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
         "AC-R03": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
-        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3"
+        "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
+        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
@@ -1192,7 +1966,59 @@
         10,
         17
       ],
-      "product_acceptance": "NOT_RUN"
+      "product_acceptance": "NOT_RUN",
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "NOT_RUN",
+          "decision": null,
+          "evidence": [],
+          "review": "NOT_RUN"
+        }
+      ],
+      "usability": {
+        "contract": "docs/p2/v1.2/ACCEPTANCE.md",
+        "criteria": [
+          "AC-US01",
+          "AC-US02",
+          "AC-US03",
+          "AC-US04",
+          "AC-US05",
+          "AC-US06",
+          "AC-US07"
+        ],
+        "main_flow_evidence": [],
+        "status": "NOT_RUN",
+        "implementation_in_this_slice": true,
+        "defer_to_visual_redesign": false
+      }
     },
     {
       "id": "PC-012",
@@ -1263,7 +2089,59 @@
         "design_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
         "report": "docs/p2/v1.2/INTEGRATION_REPORT.md",
         "evidence": "docs/p2/v1.2/evidence/publication.json"
-      }
+      },
+      "skills": [
+        "papercraft-construction",
+        "papercraft-authoring-ui",
+        "papercraft-verification",
+        "papercraft-delivery"
+      ],
+      "skill_application": [
+        {
+          "skill": "papercraft-construction",
+          "status": "APPLIED_TO_CURRENT_ADDENDUM_ONLY",
+          "decision": "Preserve valid recipient/material constraints in the novice task; do not simplify by bypassing joints.",
+          "evidence": [
+            "docs/p2/v1.2/USABILITY_TEST.md",
+            "docs/p2/v1.2/ACCEPTANCE.md",
+            "docs/p2/SKILL_IMPROVEMENTS.json"
+          ],
+          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+        },
+        {
+          "skill": "papercraft-authoring-ui",
+          "status": "APPLIED_TO_CURRENT_ADDENDUM_ONLY",
+          "decision": "Usability criteria implemented as per-slice requirements, direct expert path and actual novice protocol.",
+          "evidence": [
+            "docs/p2/v1.2/USABILITY_TEST.md",
+            "docs/p2/v1.2/ACCEPTANCE.md",
+            "docs/p2/SKILL_IMPROVEMENTS.json"
+          ],
+          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+        },
+        {
+          "skill": "papercraft-verification",
+          "status": "APPLIED_TO_CURRENT_ADDENDUM_ONLY",
+          "decision": "Keep all novice/product checks NOT_RUN; distinguish independent decision review, GUI automation, human and physical evidence.",
+          "evidence": [
+            "docs/p2/v1.2/USABILITY_TEST.md",
+            "docs/p2/v1.2/ACCEPTANCE.md",
+            "docs/p2/SKILL_IMPROVEMENTS.json"
+          ],
+          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+        },
+        {
+          "skill": "papercraft-delivery",
+          "status": "APPLIED_TO_CURRENT_ADDENDUM_ONLY",
+          "decision": "Preserve historical review pins, add traceable skills and lesson records, independently review this specific addendum before publishing.",
+          "evidence": [
+            "docs/p2/v1.2/USABILITY_TEST.md",
+            "docs/p2/v1.2/ACCEPTANCE.md",
+            "docs/p2/SKILL_IMPROVEMENTS.json"
+          ],
+          "review": "PENDING_CURRENT_ADDENDUM_REVIEW"
+        }
+      ]
     }
   ],
   "updated_on": "2026-11-06",
@@ -1377,5 +2255,43 @@
     "published_design_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
     "publication_evidence": "docs/p2/v1.2/evidence/publication.json"
   },
-  "completed_design_branch": "revival/p2-v1.2-design"
+  "completed_design_branch": "revival/p2-v1.2-design",
+  "project_skills": {
+    "registry": {
+      "papercraft-construction": ".agents/skills/papercraft-construction/SKILL.md",
+      "papercraft-authoring-ui": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "papercraft-verification": ".agents/skills/papercraft-verification/SKILL.md",
+      "papercraft-delivery": ".agents/skills/papercraft-delivery/SKILL.md"
+    },
+    "instructions": "AGENTS.md#projektové-skills-a-poučení",
+    "improvements": "docs/p2/SKILL_IMPROVEMENTS.json",
+    "review_requires_actual_application": true,
+    "past_ticket_mapping_is_not_retroactive_usage": true
+  },
+  "cross_cutting_usability": {
+    "authorized_by": "explicit_owner_instruction_2026-11-06",
+    "criteria": [
+      "AC-US01",
+      "AC-US02",
+      "AC-US03",
+      "AC-US04",
+      "AC-US05",
+      "AC-US06",
+      "AC-US07",
+      "AC-US08"
+    ],
+    "implementation_policy": "within_each_vertical_slice_no_new_phase",
+    "first_author_test": "docs/p2/v1.2/USABILITY_TEST.md",
+    "first_author_test_status": "NOT_RUN",
+    "participants_observed": 0
+  },
+  "usability_skills_addendum": {
+    "requested_on": "2026-11-06",
+    "status": "IN_REVIEW",
+    "scope": "instructions_skills_usability_contract_and_prepared_test_only",
+    "product_implementation": "NOT_RUN",
+    "skills_effectiveness": "PENDING_NEXT_USE",
+    "new_phase_created": false,
+    "review_report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+  }
 }

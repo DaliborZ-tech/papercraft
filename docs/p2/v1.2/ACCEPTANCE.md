@@ -59,6 +59,25 @@ Nabídnout změnu geometrie, přidání skutečných švů nebo vytvoření segm
 
 Tabulka se doplňuje původními AC: G01–G07 (G06 přesunuto do P2), C01–C10 dle výslovného rozsahu (C08 pásek už v P2), L01–L04/L06/L08–L10, I01–I07, X01–X07/X10 a R01–R05 digitální částí (R01/R02 fyzický proof P3). AC-I08 platí při zavedení asynchronních workerů. Automatický packing, grafika a obrazový návod se neprohlašují hotové; jejich původní AC zůstávají v pozdějších epicích.
 
-## Oddělení review od přijetí
+## Průřezová použitelnost — v každém hlavním průchodu
+
+Následující kritéria jsou součást každého implementačního vertikálního řezu PC-006A/B, PC-007A/B, PC-008 a všech hlavních průchodů konsolidovaných PC-009/010. Platí také pro rodičovské tickety. Nezakládají další návrhovou etapu. V průchodu evidovat pozorované kroky, druh důkazu a jeho meze, ne jen odškrtnutou existenci ovládacího prvku. Technický průchod a GUI regrese průběžně chrání chování; závěr o novém uživateli vyžaduje skutečného nového člověka.
+
+| ID | Ověřitelný výsledek | Stav produktu |
+|---|---|---|
+| AC-US01 | Uživatel pozná, kde začít a jak pokračovat; po změně stavu je další dosažitelný krok srozumitelný | NOT_RUN |
+| AC-US02 | Dostupné akce odpovídají viditelnému výběru; nezpůsobilá akce vysvětlí důvod a cestu k platnému výběru, také bez myši | NOT_RUN |
+| AC-US03 | Uživatel rozumí výsledku a najde jeho protějšek ve3D/rozvinu; změna je vidět a označené spoje/příjemci dávají smysl | NOT_RUN |
+| AC-US04 | Chybu najde a opraví z UI s přechodem na dotčené místo a dostupným dalším krokem, bez konzole či ruční editace JSON | NOT_RUN |
+| AC-US05 | Experiment bezpečně zruší/vrátí, vidí obnovený model i layout a může pokračovat bez ztráty práce | NOT_RUN |
+| AC-US06 | Základní úkol zvládne pomocí modelářských pojmů bez znalosti interní geometrie, ID, UV či algoritmů | NOT_RUN |
+| AC-US07 | Vedení/tipy lze přeskočit, znovu vyvolat, vypnout i zapnout; s vypnutým vedením fungují přímé příkazy, přesný vstup a zkratky. Vypnutí tipů neskryje chyby a nezmění projekt/export | NOT_RUN |
+| AC-US08 | Skutečný nový uživatel v první autorské verzi vytvoří vlastní jednoduchý díl, upraví jej, přidá chlopeň, ručně rozmístí a vydá SVG/PDF bez průběžného slovního navádění autora; zapsaná váhání, chyby a pomoc, opravy a relevantní opakování | NOT_RUN |
+
+PC-006A dodá použitelnost svého úsečkového průchodu a připraví sezení; PC-006B musí pro úplné ověření první autorské verze doložit AC-US08 podle [protokolu](USABILITY_TEST.md). PC-010 ověří pokrytí i vyřešení zásadních nálezů. Bez člověka je lidská přejímka NOT_RUN/BLOCKED s důvodem; implementátor, nezávislý agent ani GUI automat ji nenahradí. Oprava produktu probíhá v dotčeném řezu a poučení se přenáší do relevantního skillu podle AGENTS. Historické PASS neplatí automaticky pro tento nový rozsah.
+
+## Oddělení review od přijetí a kontrola skills
 
 Review návrhu kontroluje úplnost, proveditelnost a reprodukci spikeů. Review implementace ověří konkrétní CODE SHA, vlastní negativní a hraniční případy a skutečné UI důkazy. Vlastník přijímá produkt; agent si toto přijetí neuděluje. Digitální předání lze prohlásit za AGENT_VERIFIED až po úplném P2 digitálním rozsahu, nikoli po samotném A. P3 fyzická akceptace čeká na člověka a skutečný výtisk.
+
+Reviewer načte skills deklarované ticketem a porovná jejich použití s výsledným produktem a důkazy. V reportu uvede konkrétní rozhodnutí/artefakt, nedoložené tvrzení i stav následného použití poučení. Může požadovat opravu produktu, pokud pouhý přidaný tip neřeší doloženou příčinu. Kontrola formátu SKILL.md, agentní rozhodovací zkouška nebo schválení postupu samo nezavře AC-US08 ani fyzickou přejímku.

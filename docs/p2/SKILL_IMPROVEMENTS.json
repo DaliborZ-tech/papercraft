@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "scope": "project lessons maintained inside product delivery, not a new work phase",
+  "policy": "AGENTS.md#projektové-skills-a-poučení",
+  "entries": [
+    {
+      "id": "SK-001",
+      "changed_on": "2026-11-06",
+      "skill": "papercraft-construction",
+      "reason": {
+        "source": "docs/p2/v1.2/OWNER_CLARIFICATION.txt",
+        "problem": "Boundary-only joints cannot express an overhanging roof or attachment to a base."
+      },
+      "cause": {
+        "status": "DOCUMENTED",
+        "evidence": [
+          "docs/p2/v1.2/CODE_DISPOSITION.md",
+          "docs/p2/v1.2/GEOMETRY_SPIKES.md"
+        ]
+      },
+      "product_correction": {
+        "status": "DESIGN_CORRECTED_IMPLEMENTATION_PENDING",
+        "evidence": [
+          "docs/p2/v1.2/ARCHITECTURE.md"
+        ],
+        "remaining": "Actual authoring UI/domain A not implemented."
+      },
+      "skill_change": "Initial narrow project procedure with specification links and a concrete example",
+      "usage_example": "A wall attached inside a roof keeps its overhang; evaluate material contact instead of trimming roof to wall edge.",
+      "verification": {
+        "status": "PENDING",
+        "kind": "skill format/reference validation and independent decision review; no new physical proof"
+      },
+      "independent_review": {
+        "status": "PENDING",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": null,
+        "evidence": null
+      }
+    },
+    {
+      "id": "SK-002",
+      "changed_on": "2026-11-06",
+      "skill": "papercraft-authoring-ui",
+      "reason": {
+        "source": "explicit_owner_usability_instruction_2026-11-06",
+        "problem": "Novice learnability must be delivered in each slice, with no substitution of author or GUI checks for a new user."
+      },
+      "cause": {
+        "status": "REQUIREMENT_GAP_DOCUMENTED_NOT_OBSERVED_USER_BEHAVIOR",
+        "evidence": [
+          "docs/p2/v1.2/USABILITY_TEST.md"
+        ],
+        "hypothesis": "An unclear interior attachment flow could originate in selection/actions/feedback; not an observed participant incident."
+      },
+      "product_correction": {
+        "status": "REQUIREMENTS_CORRECTED_UI_FIX_PENDING",
+        "evidence": [
+          "docs/p2/v1.2/ACCEPTANCE.md",
+          "docs/p2/v1.2/AUTHORING_UX.md"
+        ],
+        "remaining": "No authoring build or participant session yet."
+      },
+      "skill_change": "Initial narrow project procedure with specification links and a concrete example",
+      "usage_example": "When a person cannot find an interior roof attachment, investigate controls and visible feedback before prescribing another hint.",
+      "verification": {
+        "status": "PENDING",
+        "kind": "independent procedure/decision review; actual novice study NOT_RUN"
+      },
+      "independent_review": {
+        "status": "PENDING",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": null,
+        "evidence": null
+      }
+    },
+    {
+      "id": "SK-003",
+      "changed_on": "2026-11-06",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
+        "problem": "DR-01 found a singular planar loft accepted as exact by finite screening."
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "evidence": [
+          "docs/p2/v1.2/evidence/review-oracles-580e7bb.json"
+        ]
+      },
+      "product_correction": {
+        "status": "EXPERIMENT_FIX_VERIFIED_NOT_A_PRODUCTION_FEATURE",
+        "source_sha": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+        "evidence": [
+          "docs/p2/v1.2/evidence/geometry-dr01-tests.xml",
+          "docs/p2/v1.2/INDEPENDENT_REVIEW.md"
+        ]
+      },
+      "skill_change": "Initial narrow project procedure with specification links and a concrete example",
+      "usage_example": "Require a valid-domain regularity argument for a positive loft certificate; distinguish sampled and certified error bounds.",
+      "verification": {
+        "status": "PENDING",
+        "kind": "historical fix is verified; independent application of this newly written skill still to check"
+      },
+      "independent_review": {
+        "status": "PENDING",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": null,
+        "evidence": null
+      }
+    },
+    {
+      "id": "SK-004",
+      "changed_on": "2026-11-06",
+      "skill": "papercraft-delivery",
+      "reason": {
+        "source": "docs/p2/PAPER_ENGINE_REVIEW.md",
+        "problem": "A green working tree result did not match the pinned source under independent review."
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "evidence": [
+          "docs/p2/evidence/paper-review-tests.xml",
+          "docs/p2/PAPER_ENGINE_REVIEW.md"
+        ]
+      },
+      "product_correction": {
+        "status": "WORKFLOW_CORRECTED_PROTOTYPE_REMAINS_ARCHIVED",
+        "evidence": [
+          "docs/p2/v1.2/VERIFICATION.md",
+          "docs/p2/v1.2/PRESERVATION.md"
+        ],
+        "remaining": "Historical CHANGES_REQUIRED verdict was not rewritten."
+      },
+      "skill_change": "Initial narrow project procedure with specification links and a concrete example",
+      "usage_example": "Before handing off a revised part/export pipeline, identify the tested commit and scope later fixes separately.",
+      "verification": {
+        "status": "PENDING",
+        "kind": "independent review of current pinned addendum and source/evidence discipline"
+      },
+      "independent_review": {
+        "status": "PENDING",
+        "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": null,
+        "evidence": null
+      }
+    }
+  ]
+}
