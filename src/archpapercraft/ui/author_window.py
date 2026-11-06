@@ -40,6 +40,7 @@ from PySide6.QtWidgets import (
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
+from archpapercraft.ui.author_attachment import AttachmentDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_sketch import AuthorSketch
 from archpapercraft.ui.author_viewport import AuthorViewport
@@ -197,6 +198,11 @@ class AuthorMainWindow(QMainWindow):
             self._action("hole", "Nakreslit otvor do vybrané plochy", self.start_hole, "Ctrl+H")
         )
         construct.addAction(
+            self._action(
+                "attach_inside", "Připojit hranu dovnitř plochy…", self.attach_inside, "Ctrl+J"
+            )
+        )
+        construct.addAction(
             self._action("cancel", "Zrušit rozpracovanou operaci", self.cancel_operation, "Esc")
         )
         construct.addAction(
@@ -324,6 +330,9 @@ class AuthorMainWindow(QMainWindow):
         self.connect_button = QPushButton("Připojit k další hraně")
         self.connect_button.clicked.connect(self.start_connection)
         form.addRow(self.connect_button)
+        self.attach_inside_button = QPushButton("Připojit dovnitř plochy…")
+        self.attach_inside_button.clicked.connect(self.attach_inside)
+        form.addRow(self.attach_inside_button)
         self.joint_choice = QComboBox()
         self.joint_choice.currentIndexChanged.connect(self.choose_joint)
         form.addRow("Existující spoj", self.joint_choice)
@@ -609,6 +618,13 @@ class AuthorMainWindow(QMainWindow):
             self.edge_choice.findData(self.selected_edge[1]) if self.selected_edge else -1
         )
         self.connect_button.setEnabled(self.selected_edge is not None)
+        can_attach = self.selected_edge is not None and len(self.project.surfaces) > 1
+        self.attach_inside_button.setEnabled(can_attach)
+        self.actions["attach_inside"].setEnabled(can_attach)
+        self.attach_inside_button.setToolTip(
+            "Vyberte okraj zdrojové plochy a nakreslete jeho místo na protikusu."
+            if can_attach else "Nejprve vytvořte dvě plochy a vyberte okraj jedné z nich."
+        )
         self.joint_choice.clear()
         for joint in self.project.joints.values():
             if self.selected_surface in (joint.surface_a, joint.surface_b):
@@ -1093,6 +1109,19 @@ class AuthorMainWindow(QMainWindow):
             self.connect_source = self.selected_edge
             self.update_guidance()
 
+    def attach_inside(self):
+        if not self._commit_pending_input() or self.selected_edge is None:
+            return
+        dialog = AttachmentDialog(
+            self.project, self.selected_edge, unit=self.units.currentText(),
+            unit_factor=self.unit_factor, parent=self,
+        )
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            spec = dialog.result_spec
+            self.run(lambda: self.controller.execute(
+                "Připojit hranu dovnitř plochy", lambda p: AttachmentDialog.apply(p, spec)
+            ))
+
     def preview_connection(self, source, target):
         dialog = QDialog(self)
         dialog.setWindowTitle("Umístit a připojit protikus")
@@ -1422,6 +1451,13 @@ class AuthorMainWindow(QMainWindow):
         self.selected_profile = None
         self._frame_next = True
         self.refresh()
+        if self.controller.copy_source_path:
+            QMessageBox.information(
+                self, "Starší autorský projekt · úprava kopie",
+                "Projekt je načtený do nové konstrukční verze. Původní soubor zůstane "
+                "beze změny; uložení nabídne nový název kopie. Papírové díly před "
+                "exportem přepočítejte a zkontrolujte.",
+            )
 
     def _show_legacy(self, loaded):
         dialog = QDialog(self)
@@ -1466,10 +1502,14 @@ class AuthorMainWindow(QMainWindow):
             return False
         path = self.controller.file_path
         if save_as or path is None:
+            source = self.controller.copy_source_path
+            default = str(path) if path else (
+                str(source.with_name(source.stem + "-copy.apcraft")) if source else "model.apcraft"
+            )
             selected, _ = QFileDialog.getSaveFileName(
                 self,
                 "Uložit model",
-                str(path) if path else "model.apcraft",
+                default,
                 "Papercraft (*.apcraft)",
             )
             if not selected:

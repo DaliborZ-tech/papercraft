@@ -14,6 +14,7 @@ class AuthorController:
     def __init__(self, on_change=None):
         self.project = None
         self.file_path = None
+        self.copy_source_path = None
         self.on_change = on_change or (lambda: None)
         self._undo, self._redo = [], []
         self._saved_digest = None
@@ -41,6 +42,7 @@ class AuthorController:
     def new(self, name="Nový model", scale=0.01):
         self.project = AuthorProject.new(name=name, scale=scale)
         self.file_path = None
+        self.copy_source_path = None
         self._undo.clear()
         self._redo.clear()
         self._saved_digest = self.digest(self.project.to_dict())
@@ -51,7 +53,8 @@ class AuthorController:
         if not isinstance(loaded, AuthorProject):
             return loaded
         self.project = loaded
-        self.file_path = Path(path)
+        self.copy_source_path = Path(path) if loaded.requires_save_as else None
+        self.file_path = None if self.copy_source_path else Path(path)
         self._undo.clear()
         self._redo.clear()
         self._saved_digest = self.digest(loaded.to_dict())
@@ -64,8 +67,11 @@ class AuthorController:
         target = Path(path) if path else self.file_path
         if target is None:
             raise ValueError("Vyberte umístění projektu.")
+        if self.copy_source_path and target.resolve() == self.copy_source_path.resolve():
+            raise ValueError("Původní projekt zůstává beze změny. Uložte kopii pod novým názvem.")
         self.project.save(target)
         self.file_path = target
+        self.copy_source_path = None
         self._saved_digest = self.digest(self.project.to_dict())
         self.on_change()
         return target
