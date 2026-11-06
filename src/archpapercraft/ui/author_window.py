@@ -538,10 +538,11 @@ class AuthorMainWindow(QMainWindow):
                     self.tree.addTopLevelItem(item)
                     if self.selected_surface is None and pid == self.selected_profile:
                         self.tree.setCurrentItem(item)
-            self.viewport.set_project(self.project, frame=self._frame_next)
+            frame_views = self._frame_next
+            self.viewport.set_project(self.project, frame=frame_views)
             self._frame_next = False
             self.sketch.set_project(self.project, self.selected_surface, self.selected_profile)
-            self.paper.set_project(self.project)
+            self.paper.set_project(self.project, frame=frame_views)
             self._populate_properties()
             self._highlight()
             self.issues.clear()

@@ -275,7 +275,11 @@ class AuthorPaperView(QGraphicsView):
         self._initialized, self._panning = False, False
         self._pan_at = QPointF()
 
-    def set_project(self, project):
+    def set_project(self, project, *, frame=False):
+        # Read-only projection previews also work without a persisted document UUID.
+        previous_id = getattr(self.project, "project_id", id(self.project))
+        if frame or previous_id != getattr(project, "project_id", id(project)):
+            self._initialized = False
         self.project = project
         self.scene().clear()
         self.part_items, self.page_origins, self.issue_overlays = {}, {}, []
