@@ -238,6 +238,7 @@ class Connector:
     enabled: bool = True
     tab_ids: list[str] = field(default_factory=list)
     tab_overrides: dict = field(default_factory=dict)
+    receiver_side: str = "unknown"
 
 
 @dataclass

@@ -704,6 +704,8 @@ class AuthorProject(InteriorCommands):
                 joint.connector_id = connector.id
                 self.connectors[connector.id] = connector
             connector = self.connectors[joint.connector_id]
+            if connector.owner_surface_id != chosen:
+                connector.receiver_side = "unknown"
             connector.owner_surface_id = chosen
             if width_mm is not None:
                 connector.width_mm = number(width_mm, "Šířka chlopně", positive=True)
@@ -1006,6 +1008,7 @@ class AuthorProject(InteriorCommands):
                     or attachment.connector_id != cid
                     or connector.joint_id
                     or connector.owner_surface_id != attachment.source_surface_id
+                    or connector.receiver_side != "unknown"
                 ):
                     raise ValidationError("Chlopeň nemá právě jednoho vlastníka a protikus.")
             else:
@@ -1021,6 +1024,8 @@ class AuthorProject(InteriorCommands):
                 ):
                     raise ValidationError("Chlopeň nemá právě jednoho vlastníka a protikus.")
             number(connector.width_mm, "Šířka chlopně", positive=True)
+            if connector.receiver_side not in ("unknown", "inside", "outside"):
+                raise ValidationError("Neplatná strana přijímající plochy chlopně.")
             if not 0 < number(connector.taper) <= 1 or connector.shape not in (
                 "triangle",
                 "trapezoid",

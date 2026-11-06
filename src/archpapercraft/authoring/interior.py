@@ -403,6 +403,7 @@ class InteriorCommands:
         outline_mm=None,
         enabled=None,
         owner=None,
+        receiver_side=None,
     ):
         connector = self.connectors[connector_id]
         if count is not None and (type(count) is not int or not 1 <= count <= 4096):
@@ -427,7 +428,13 @@ class InteriorCommands:
                 raise ValidationError(
                     "Uvnitř souvislého protikusu nelze vytvořit chlopeň bez řezu. Použijte pásek."
                 )
+            if connector.owner_surface_id != owner:
+                connector.receiver_side = "unknown"
             connector.owner_surface_id = owner
+        if receiver_side is not None:
+            if connector.attachment_id:
+                raise ValidationError("Stranu vnitřního spoje určete na jeho přijímající ploše.")
+            connector.receiver_side = receiver_side
         while len(connector.tab_ids) < connector.count:
             connector.tab_ids.append(identity())
         connector.tab_ids = connector.tab_ids[: connector.count]
@@ -561,6 +568,8 @@ class InteriorCommands:
             "standalone_part_id": None,
             "clearance_status": "MATERIAL_CLEARANCE_UNVERIFIED",
             "bend_sweep_status": "NOT_CHECKED",
+            "receiver_side": self.attachments[connector.attachment_id].target_side
+            if connector.attachment_id else connector.receiver_side,
         }
 
     @atomic

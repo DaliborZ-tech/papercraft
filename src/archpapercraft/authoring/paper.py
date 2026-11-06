@@ -186,6 +186,7 @@ def connector_contact(project, joint, connector):
                 "nominal_area_mm2": footprint.area,
                 "available_area_mm2": footprint.intersection(target).area,
                 "receiver_surface_id": sid,
+                "receiver_side": connector.receiver_side,
             }
         )
     footprint = unary_union(polygons)
@@ -541,6 +542,34 @@ def validate_layout(project):
                     (a, b),
                     "warning",
                 )
+    # All connector kinds share one assembly-space registry. Page/tray position
+    # must not hide a collision between tabs that meet on the same receiver.
+    folded_regions = []
+
+    def register_folded(target, side, contact, parts, relation_id):
+        region = Polygon(contact["footprint_uv_mm"])
+        for sid, other_side, other, other_id, other_parts in folded_regions:
+            if (
+                sid != target
+                or (side != other_side and "unknown" not in (side, other_side))
+                or region.intersection(other).area <= 1e-8
+            ):
+                continue
+            unknown = "unknown" in (side, other_side)
+            issue(
+                "FOLDED_SIDE_UNRESOLVED" if unknown else "FOLDED_CONNECTOR_COLLISION",
+                (
+                    "Nelze vyloučit překryv ohnutých chlopní: strana protikusu není určená. "
+                    "Určete ji ve vlastnostech spoje, nebo upravte chlopně."
+                    if unknown else
+                    "Ohnuté záložky zasahují do stejného místa na stejné straně protikusu. "
+                    "Upravte jejich tvar, polohu nebo dělení."
+                ) + f" ({other_id}).",
+                tuple(dict.fromkeys([*parts, *other_parts])),
+                joint_id=relation_id,
+            )
+        folded_regions.append((target, side, region, contact["tab_id"], parts))
+
     for joint in project.joints.values():
         if joint.unresolved:
             issue(
@@ -561,6 +590,12 @@ def validate_layout(project):
         pid = project.surfaces[connector.owner_surface_id].part_id
         try:
             contact = connector_contact(project, joint, connector)
+            target = contact["receiver_surface_id"]
+            for tab in contact["tabs"]:
+                register_folded(
+                    target, connector.receiver_side, tab,
+                    tuple(dict.fromkeys([pid, project.part_for_surface(target)])), joint.id,
+                )
             if contact["nominal_area_mm2"] - contact["available_area_mm2"] > max(
                 1e-8, contact["nominal_area_mm2"] * 1e-10
             ):
@@ -581,7 +616,6 @@ def validate_layout(project):
             "warning",
             joint.id,
         )
-    folded_regions = []
     for attachment in project.attachments.values():
         source, target = attachment.source_surface_id, attachment.target_surface_id
         parts = tuple(
@@ -603,23 +637,7 @@ def validate_layout(project):
                             parts,
                             joint_id=attachment.id,
                         )
-                    region = Polygon(contact["footprint_uv_mm"])
-                    for sid, side, other, other_id in folded_regions:
-                        if (
-                            sid == target
-                            and side == attachment.target_side
-                            and region.intersection(other).area > 1e-8
-                        ):
-                            issue(
-                                "FOLDED_CONNECTOR_COLLISION",
-                                "Ohnuté záložky zasahují do stejného místa protikusu "
-                                f"({other_id}).",
-                                parts,
-                                joint_id=attachment.id,
-                            )
-                    folded_regions.append(
-                        (target, attachment.target_side, region, contact["tab_id"])
-                    )
+                    register_folded(target, attachment.target_side, contact, parts, attachment.id)
         except ValidationError as exc:
             issue("ATTACHMENT_CONTACT", str(exc), parts, joint_id=attachment.id)
         issue(
