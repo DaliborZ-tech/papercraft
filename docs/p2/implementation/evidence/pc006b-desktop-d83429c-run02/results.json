@@ -1,0 +1,1571 @@
+{
+  "status": "FAIL",
+  "source_sha": "d83429c5f9374bc945202616967936746aea3fe5",
+  "source_status_at_start": "M 05_WORK_QUEUE.json\n?? docs/p2/implementation/PC006A_INTEGRATION.md\n?? docs/p2/implementation/PC006B_DOMAIN_REVIEW.md\n?? docs/p2/implementation/PC006B_UI_REVIEW.md\n?? docs/p2/implementation/evidence/pc006b-desktop-833adec-run01/\n?? docs/p2/implementation/evidence/pc006b-review-07b-affected-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-07b-scratch.json\n?? docs/p2/implementation/evidence/pc006b-review-4bb-scratch.json\n?? docs/p2/implementation/evidence/pc006b-review-component-0db8f02-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-controller-0db8f02-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02-payload-B01-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02-payload-B02-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02-payload.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-4bb5c43-B01-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-4bb5c43-B02-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-4bb5c43.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles.py\n?? docs/p2/implementation/evidence/pc006b-review-registry-4bb5c43-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-registry-4bb5c43.json\n?? docs/p2/implementation/evidence/pc006b-review-registry.py\n?? docs/p2/implementation/evidence/pc006b-review-tab-upgrade-07b6a1c.json\n?? docs/p2/implementation/evidence/pc006b-review-tab-upgrade.py\n?? docs/p2/implementation/evidence/pc006b-review-ui-7bd46ac-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-cases.py\n?? docs/p2/implementation/evidence/pc006b-review-ui-own-07b6a1c-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-own-7bd46ac-locale-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-own-7bd46ac-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-scratch.json",
+  "source_files_sha256": {
+    "pyproject.toml": "7fc368b74cf04b0461920bac0d175f003a4493ac3dde798abdb850ee3727b5d2",
+    "src/archpapercraft/__init__.py": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+    "src/archpapercraft/__main__.py": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+    "src/archpapercraft/app.py": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+    "src/archpapercraft/application/__init__.py": "68882fe29cec1ed6857a27ea2c4dd44c006d4ea9a93c4dd5497b83e575b4314c",
+    "src/archpapercraft/application/author_controller.py": "b3c2a4cfb1502e751465f1105e4ca9922d32392879c5538a1d6b1c6cf9965f84",
+    "src/archpapercraft/arch_presets/__init__.py": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+    "src/archpapercraft/arch_presets/buttress.py": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+    "src/archpapercraft/arch_presets/floor_slab.py": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+    "src/archpapercraft/arch_presets/gothic_window.py": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+    "src/archpapercraft/arch_presets/onion_dome.py": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+    "src/archpapercraft/arch_presets/opening.py": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+    "src/archpapercraft/arch_presets/roof.py": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+    "src/archpapercraft/arch_presets/tower.py": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+    "src/archpapercraft/arch_presets/wall.py": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+    "src/archpapercraft/authoring/__init__.py": "b0844fca50b090cdf265358924b44576866d929f19fc9743cf78aed47debcecf",
+    "src/archpapercraft/authoring/attachments.py": "c0181165fa6e066115544117612ad10281dff68197d05053d5f028789c79d0fd",
+    "src/archpapercraft/authoring/commands.py": "7bd87f52ab1ae38a052ca8c2572aab2452694a8114a081f98ebc1c9600dd2839",
+    "src/archpapercraft/authoring/errors.py": "c73b4d32e1f609eab78ae0f0067b5dc483d80435a92a77e89efe43ea12e9d838",
+    "src/archpapercraft/authoring/geometry.py": "a183daa0f705972ea482498bf795a0bacb19954c9b1c228735bcdda782c8e05e",
+    "src/archpapercraft/authoring/interior.py": "ce62c3272dc5fdab18f46baac4bd23446015ee50233ce119f83e82f69324a33e",
+    "src/archpapercraft/authoring/model.py": "e5fb93cca506826fcb026d380f298c51bf41accce277f62cd7c1fec9c640ba95",
+    "src/archpapercraft/authoring/paper.py": "f20a3585658a724c975036c3a92f6b435dde81ad1a6f67bb83157df77162b59f",
+    "src/archpapercraft/authoring/project.py": "6ed300e92a00fb7ea55292034ba7700c3ac4021b5699bd07645e4a78cfbc6aeb",
+    "src/archpapercraft/commands/__init__.py": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+    "src/archpapercraft/commands/command_stack.py": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+    "src/archpapercraft/core_geometry/__init__.py": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+    "src/archpapercraft/core_geometry/backend.py": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+    "src/archpapercraft/core_geometry/mesh.py": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+    "src/archpapercraft/core_geometry/operations.py": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+    "src/archpapercraft/core_geometry/primitives.py": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+    "src/archpapercraft/core_geometry/stable_ids.py": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+    "src/archpapercraft/core_geometry/units.py": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+    "src/archpapercraft/core_geometry/validation.py": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+    "src/archpapercraft/exporter/__init__.py": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+    "src/archpapercraft/exporter/author_export.py": "304c92ccecf46b2ca680446dd2ad744fc96b763e5e2484f3ffd3184bf847e9e4",
+    "src/archpapercraft/exporter/dxf_export.py": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+    "src/archpapercraft/exporter/pdf_export.py": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+    "src/archpapercraft/exporter/png_export.py": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+    "src/archpapercraft/exporter/svg_export.py": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+    "src/archpapercraft/layout_packer/__init__.py": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+    "src/archpapercraft/layout_packer/packer.py": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+    "src/archpapercraft/paper_analyzer/__init__.py": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+    "src/archpapercraft/paper_analyzer/classifier.py": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+    "src/archpapercraft/preferences/__init__.py": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+    "src/archpapercraft/preferences/settings.py": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+    "src/archpapercraft/project_io/__init__.py": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+    "src/archpapercraft/project_io/project.py": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+    "src/archpapercraft/scene_graph/__init__.py": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+    "src/archpapercraft/scene_graph/node.py": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+    "src/archpapercraft/scene_graph/scene.py": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+    "src/archpapercraft/scene_graph/snap.py": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+    "src/archpapercraft/scene_graph/transform.py": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+    "src/archpapercraft/seam_editor/__init__.py": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+    "src/archpapercraft/seam_editor/auto_seams.py": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+    "src/archpapercraft/seam_editor/seam_graph.py": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+    "src/archpapercraft/tabs_generator/__init__.py": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+    "src/archpapercraft/tabs_generator/build_guide.py": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+    "src/archpapercraft/tabs_generator/markings.py": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+    "src/archpapercraft/tabs_generator/tabs.py": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+    "src/archpapercraft/ui/__init__.py": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+    "src/archpapercraft/ui/author_attachment.py": "09800a9f8c8cad18e9331d5085e411626830a0ef4896835a0e0955eba867eebd",
+    "src/archpapercraft/ui/author_connectors.py": "51c4cb87058ea1d620afa2b470987355425ccefccf76ba2411cc71fa4f747b56",
+    "src/archpapercraft/ui/author_paper.py": "c66a6d304385c5aec592bcaa304e6348fbe1c2c90bebbef2538c2506d57b2a3d",
+    "src/archpapercraft/ui/author_sketch.py": "f0aa99d0ff19bc6374c425a4c7be508ec8650818baec6da858c0a63488ec6257",
+    "src/archpapercraft/ui/author_viewport.py": "b60d6d769e4085783219af402b2a49b4f4ded1446ecb0184eeb56225b636e38d",
+    "src/archpapercraft/ui/author_window.py": "e265eb824293784207c8240adc9835d4aa0db72f938e7cf37212d14d78fb9bfd",
+    "src/archpapercraft/ui/main_window.py": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+    "src/archpapercraft/ui/object_tree.py": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+    "src/archpapercraft/ui/papercraft_panel.py": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+    "src/archpapercraft/ui/preferences_dialog.py": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+    "src/archpapercraft/ui/properties_panel.py": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+    "src/archpapercraft/ui/viewport_3d.py": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+    "src/archpapercraft/ui/wizard.py": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+    "src/archpapercraft/unfolder/__init__.py": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+    "src/archpapercraft/unfolder/approx_unfold.py": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+    "src/archpapercraft/unfolder/exact_unfold.py": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+    "src/archpapercraft/unfolder/strategies.py": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+    "tools/authoring/desktop_b_proof.py": "5f8cc2d0fc152cf6d2adca5cc8938391a942baae1c1557524b89a642bcf8868a",
+    "tools/authoring/native_dialogs.py": "825076d2b29596980a7e3a2be4b6b846b2057cb99cc91a69cacc1082750a5167"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "application_version": "0.3.0",
+  "pid": 6980,
+  "oracle": {
+    "scale": 0.01,
+    "building_model_mm": {
+      "length": 10000,
+      "width": 6000,
+      "wall": 4000,
+      "ridge": 7000
+    },
+    "initial_roof_paper_mm": {
+      "length": 108,
+      "half_slope": 49.49747468305833
+    },
+    "roof_wall_trace_paper_mm": 7.0710678118654755,
+    "changed_south_eave_model_mm": 800,
+    "changed_south_slope_paper_mm": 53.74011537017761,
+    "changed_trace_from_eave_paper_mm": 11.313708498984761,
+    "areas_paper_mm2": {
+      "long_wall": 4000,
+      "gable_wall": 3300.0,
+      "base": 13000,
+      "brace_outer": 2700.0,
+      "brace_hole": 300,
+      "brace_net": 2400.0,
+      "soffit": 800,
+      "initial_half_roof": 5345.727265770299,
+      "changed_south_roof": 5803.932459979182
+    },
+    "mixed": {
+      "initial_rise_model_mm": 3000,
+      "changed_rise_model_mm": 3500,
+      "initial_slope_model_mm": 4242.640687119285,
+      "changed_slope_model_mm": 4609.772228646444,
+      "changed_angle_deg": 49.398705354995535,
+      "page_number": 2,
+      "anchor_paper_mm": [
+        60,
+        60
+      ],
+      "rotation_deg": 30,
+      "wall_page_points_paper_mm": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ]
+    }
+  },
+  "versions": {
+    "PySide6": "6.12.0",
+    "numpy": "2.5.4",
+    "shapely": "2.2.0",
+    "pypdf": "6.21.4",
+    "reportlab": "5.1.0",
+    "PyOpenGL": "3.1.10"
+  },
+  "evidence_kind": "actual_app_main_QTest_widgets_own_PID_native_dialogs",
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN",
+  "AU19": "NOT_RUN_PC010",
+  "started_local": "2026-11-06T14:01:56+0100",
+  "steps": [],
+  "inputs": [
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "south",
+      "surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 6000,
+      "typed_text": "6000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "north",
+      "surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "west_gable",
+      "surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "east_gable",
+      "surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10800,
+      "typed_text": "10800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4949.747468305833,
+      "typed_text": "4949,747468",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -400,
+      "typed_text": "-400",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -500,
+      "typed_text": "-500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3500,
+      "typed_text": "3500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "roof_south",
+      "surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "model_mm": [
+        10800,
+        4949.747468305833
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10800,
+      "typed_text": "10800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4949.747468305833,
+      "typed_text": "4949,747468",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -400,
+      "typed_text": "-400",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3000,
+      "typed_text": "3000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 7000,
+      "typed_text": "7000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -45,
+      "typed_text": "-45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "roof_north",
+      "surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "model_mm": [
+        10800,
+        4949.747468305833
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 90,
+      "typed_text": "90",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_edgepair_fold",
+      "joint_id": "4fad7131-e623-414a-92e9-fdbe3d81e117",
+      "angle_deg": 90
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 13000,
+      "typed_text": "13000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -1500,
+      "typed_text": "-1500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -2000,
+      "typed_text": "-2000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "base",
+      "surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "model_mm": [
+        13000,
+        10000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          3000
+        ],
+        [
+          3000,
+          6000
+        ],
+        [
+          0,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "brace",
+      "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          3000
+        ],
+        [
+          3000,
+          6000
+        ],
+        [
+          0,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          2000,
+          1000
+        ],
+        [
+          4000,
+          1000
+        ],
+        [
+          4000,
+          2500
+        ],
+        [
+          2000,
+          2500
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_hole",
+      "role": "brace_hole",
+      "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+      "requested_model_mm": [
+        [
+          2000,
+          1000
+        ],
+        [
+          4000,
+          1000
+        ],
+        [
+          4000,
+          2500
+        ],
+        [
+          2000,
+          2500
+        ]
+      ]
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5000,
+      "typed_text": "5000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 8000,
+      "typed_text": "8000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 500,
+      "typed_text": "500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4500,
+      "typed_text": "4500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "soffit",
+      "surface_id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+      "model_mm": [
+        8000,
+        1000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "82807166-c852-44d4-abf8-938d436a2f31",
+          "ef0fe9df-a6d5-45f1-b962-91c26bd493a9"
+        ],
+        "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            707.1067811865476
+          ],
+          [
+            400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "82807166-c852-44d4-abf8-938d436a2f31",
+      "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+          "7d7cef02-09b4-4343-b732-57da381928f4"
+        ],
+        "target": "13a25517-7565-497a-8b02-ab5d5b276b78",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4242.640687119286
+          ],
+          [
+            400.0,
+            4242.640687119286
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": -1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "target": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "f2279317-ad18-496d-af04-5474426037ba",
+          "55df8e75-90d4-430d-b2c8-050d09a5af14"
+        ],
+        "target": "13a25517-7565-497a-8b02-ab5d5b276b78",
+        "mode": "contact",
+        "trace": [
+          [
+            400.0,
+            4242.640687119286
+          ],
+          [
+            400.0,
+            6.431098710333652e-13
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "f2279317-ad18-496d-af04-5474426037ba",
+      "target": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "f2279317-ad18-496d-af04-5474426037ba",
+          "b4b0be4b-3ecd-4238-a627-120b5d863eb0"
+        ],
+        "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+        "mode": "contact",
+        "trace": [
+          [
+            400.0,
+            4949.747468305833
+          ],
+          [
+            400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "f2279317-ad18-496d-af04-5474426037ba",
+      "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "49d6fe93-49cb-4a3b-bd1e-52a1710270bb"
+        ],
+        "target": "13a25517-7565-497a-8b02-ab5d5b276b78",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4242.640687119286
+          ],
+          [
+            10400.0,
+            6.431098710333652e-13
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "target": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "796b3c22-4797-4868-a06a-d485b94fc1ee"
+        ],
+        "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4949.747468305833
+          ],
+          [
+            10400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "82807166-c852-44d4-abf8-938d436a2f31",
+          "c8a8bf61-7b6a-4a10-8c4b-47b71f9c22fb"
+        ],
+        "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+        "mode": "contact",
+        "trace": [
+          [
+            2000.0,
+            2000.0
+          ],
+          [
+            11000.0,
+            2000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "82807166-c852-44d4-abf8-938d436a2f31",
+      "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+          "a766a4a0-09d1-4580-8d33-b301c27422d0"
+        ],
+        "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+        "mode": "contact",
+        "trace": [
+          [
+            2000.0,
+            8000.0
+          ],
+          [
+            11000.0,
+            8000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "f2279317-ad18-496d-af04-5474426037ba",
+          "afc9c26d-c000-457c-9a1a-374072d869ed"
+        ],
+        "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+        "mode": "contact",
+        "trace": [
+          [
+            1500.0,
+            2300.0
+          ],
+          [
+            1500.0,
+            7700.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "f2279317-ad18-496d-af04-5474426037ba",
+      "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "f6b01be3-f20b-47e2-a1c6-7b30ee0ae6a9"
+        ],
+        "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+        "mode": "contact",
+        "trace": [
+          [
+            11500.0,
+            2300.0
+          ],
+          [
+            11500.0,
+            7700.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "target": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "f483aefd-d390-4da6-a4f2-47b4f4e1ac03"
+        ],
+        "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+        "mode": "contact",
+        "trace": [
+          [
+            5400.0,
+            4949.747468305833
+          ],
+          [
+            5400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+      "target": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    }
+  ],
+  "dialogs": [
+    {
+      "kind": "failed_authoring_dialog",
+      "title": "Samostatný lepicí pásek"
+    }
+  ],
+  "negative_cases": [],
+  "opengl": {
+    "version": "4.6.0 NVIDIA 610.71",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+  },
+  "error": "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 1164, in run\n    driver.building()\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 911, in building\n    band = self.tab(brace, brace_aid, width=2, band=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 579, in tab\n    self.modal(\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 392, in modal\n    check(not errors, \"Dialog proof failed: \" + \"\\n\".join(errors))\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 238, in check\n    raise AssertionError(\nAssertionError: Dialog proof failed: Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 378, in drive\n    edit(dialog)\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 577, in edit\n    self.ok(dialog)\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 397, in ok\n    self.click(buttons.button(QDialogButtonBox.StandardButton.Ok))\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 300, in click\n    self.visible(widget)\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 293, in visible\n    check(\n  File \"C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\tools\\authoring\\desktop_b_proof.py\", line 238, in check\n    raise AssertionError(\nAssertionError: Required widget hidden/disabled: QPushButton\n\n",
+  "failures": [],
+  "elapsed_seconds": 48.156,
+  "files_sha256": {
+    "empty-real-app-desktop.png": "55f2854679dbbc3810c2b73e85ff2178aa6d36e114995c5b5348a4e6b4605d34",
+    "empty-real-app-opengl.png": "16c2055a2970050ca41ff5567cff1e4ffc7018911a962e5b7ecc6687d3b28565",
+    "FAIL-authoring-dialog-desktop.png": "597f9328cf8e6deecbb40ce9a17e7a4fb5ea11c216f4c5a99d595dbca2ff7db1",
+    "FAIL-authoring-dialog-opengl.png": "c387c7bf7034f5f86a9d7132fffec501033eb42083024e518579fb9db2f81d3e",
+    "FAIL-last-state-desktop.png": "dbb8e7865a710796604e74f299bd68fdb29352b8f01c7f1a6c1b28db120a2943",
+    "FAIL-last-state-opengl.png": "c387c7bf7034f5f86a9d7132fffec501033eb42083024e518579fb9db2f81d3e",
+    "FAIL-partial-observed-state.json": "2d2c43e59a2d32e694b3f9925fd63e35062e8a5c3941aa20b5871f6ec4ef981f",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953"
+  }
+}
