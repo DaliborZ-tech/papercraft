@@ -96,6 +96,16 @@ def test_xml_roles_grouping_editable_text_and_snapshot_immutability(snapshot, tm
     assert text.text == "Příliš žluťoučký kůň — střecha"
     assert part.find("s:g[@data-role='TABS']", NS).attrib["stroke"] == "none"
     assert root.find("s:g[@id='page-GUIDES']/s:path", NS).attrib["data-calibration-mm"] == "100"
+    # This is only the serialized-text regression guard. Actual multiword
+    # editing is separately verified in Windows Inkscape, not inferred here.
+    for file in files[:-1]:
+        page = ET.parse(file).getroot()
+        texts = page.findall(".//s:text", NS)
+        assert len(texts) == 3  # One part label and both human-readable page labels.
+        assert all(
+            node.attrib.get("{http://www.w3.org/XML/1998/namespace}space") == "preserve"
+            for node in texts
+        )
 
 
 def test_pdf_rotation_page_sizes_czech_embedding_and_vector_content(snapshot, tmp_path):
