@@ -1,0 +1,2981 @@
+{
+  "application": "ArchPapercraft.AuthorProject",
+  "schema_version": 2,
+  "status": "experimental",
+  "writer_version": "0.3.0-pc006b-experimental",
+  "project_id": "7ef4db25-388f-4ede-a5c3-523405a01404",
+  "name": "Nový model",
+  "scale": 0.01,
+  "revision": 64,
+  "next_part_number": 10,
+  "next_joint_number": 2,
+  "next_attachment_number": 12,
+  "profiles": {
+    "e9efc8f3-6853-4760-9307-2a34b89ba2ac": {
+      "id": "e9efc8f3-6853-4760-9307-2a34b89ba2ac",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "5784f972-a907-457d-ba25-d28a887da1f5",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "9042492a-cccb-40ce-b2fa-f5bd82b1ee94",
+          "point": [
+            10000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "01ae55be-59e1-4607-86f3-2bbb4ecaa02c",
+          "point": [
+            10000.0,
+            4000.0
+          ]
+        },
+        {
+          "id": "fc609a3f-5b76-4b64-b8b8-9ce91011190d",
+          "point": [
+            0.0,
+            4000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "c8a8bf61-7b6a-4a10-8c4b-47b71f9c22fb",
+          "kind": "line",
+          "start_vertex_id": "5784f972-a907-457d-ba25-d28a887da1f5",
+          "end_vertex_id": "9042492a-cccb-40ce-b2fa-f5bd82b1ee94",
+          "data": {}
+        },
+        {
+          "id": "63f2fb81-96a6-4748-8ffc-9eea5d9eb7e5",
+          "kind": "line",
+          "start_vertex_id": "9042492a-cccb-40ce-b2fa-f5bd82b1ee94",
+          "end_vertex_id": "01ae55be-59e1-4607-86f3-2bbb4ecaa02c",
+          "data": {}
+        },
+        {
+          "id": "ef0fe9df-a6d5-45f1-b962-91c26bd493a9",
+          "kind": "line",
+          "start_vertex_id": "01ae55be-59e1-4607-86f3-2bbb4ecaa02c",
+          "end_vertex_id": "fc609a3f-5b76-4b64-b8b8-9ce91011190d",
+          "data": {}
+        },
+        {
+          "id": "5b3a8abc-c6e5-491e-b13e-8e98276b008c",
+          "kind": "line",
+          "start_vertex_id": "fc609a3f-5b76-4b64-b8b8-9ce91011190d",
+          "end_vertex_id": "5784f972-a907-457d-ba25-d28a887da1f5",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "revision": 1
+    },
+    "75de4f7a-0c04-4c59-abc4-40ddae37253c": {
+      "id": "75de4f7a-0c04-4c59-abc4-40ddae37253c",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "3be37611-007f-4836-9116-db3a12b6db92",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "dfa52f19-3314-4c6a-9055-7d2031a248b7",
+          "point": [
+            10000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "2a4dc81c-3a21-49ff-89fd-841eb8405903",
+          "point": [
+            10000.0,
+            4000.0
+          ]
+        },
+        {
+          "id": "388a3e77-3a24-4ef9-b387-78f0d8e633c3",
+          "point": [
+            0.0,
+            4000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "a766a4a0-09d1-4580-8d33-b301c27422d0",
+          "kind": "line",
+          "start_vertex_id": "3be37611-007f-4836-9116-db3a12b6db92",
+          "end_vertex_id": "dfa52f19-3314-4c6a-9055-7d2031a248b7",
+          "data": {}
+        },
+        {
+          "id": "61b93df7-607e-4e6c-b02c-246c405c838d",
+          "kind": "line",
+          "start_vertex_id": "dfa52f19-3314-4c6a-9055-7d2031a248b7",
+          "end_vertex_id": "2a4dc81c-3a21-49ff-89fd-841eb8405903",
+          "data": {}
+        },
+        {
+          "id": "7d7cef02-09b4-4343-b732-57da381928f4",
+          "kind": "line",
+          "start_vertex_id": "2a4dc81c-3a21-49ff-89fd-841eb8405903",
+          "end_vertex_id": "388a3e77-3a24-4ef9-b387-78f0d8e633c3",
+          "data": {}
+        },
+        {
+          "id": "327d364b-f8dd-4d28-8ead-dd729a4846e8",
+          "kind": "line",
+          "start_vertex_id": "388a3e77-3a24-4ef9-b387-78f0d8e633c3",
+          "end_vertex_id": "3be37611-007f-4836-9116-db3a12b6db92",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "revision": 1
+    },
+    "4410c1c9-71a9-409f-9289-852ecbe1b505": {
+      "id": "4410c1c9-71a9-409f-9289-852ecbe1b505",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "b90a84de-b6e7-4727-bba5-cdc08425c5c3",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "546a9e65-54ee-4fab-a647-07ebf8cfbc6c",
+          "point": [
+            6000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "ad26ef11-fb61-416e-a8e9-b7eba2dc1526",
+          "point": [
+            6000.0,
+            4000.0
+          ]
+        },
+        {
+          "id": "48af9916-ba3d-48b0-aacb-f13335983f9c",
+          "point": [
+            3000.0,
+            7000.0
+          ]
+        },
+        {
+          "id": "060b6512-bb64-48eb-a983-aa1a1a95bbf5",
+          "point": [
+            0.0,
+            4000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "afc9c26d-c000-457c-9a1a-374072d869ed",
+          "kind": "line",
+          "start_vertex_id": "b90a84de-b6e7-4727-bba5-cdc08425c5c3",
+          "end_vertex_id": "546a9e65-54ee-4fab-a647-07ebf8cfbc6c",
+          "data": {}
+        },
+        {
+          "id": "fbb2dba3-2341-409e-9ef7-048374c1a5f6",
+          "kind": "line",
+          "start_vertex_id": "546a9e65-54ee-4fab-a647-07ebf8cfbc6c",
+          "end_vertex_id": "ad26ef11-fb61-416e-a8e9-b7eba2dc1526",
+          "data": {}
+        },
+        {
+          "id": "55df8e75-90d4-430d-b2c8-050d09a5af14",
+          "kind": "line",
+          "start_vertex_id": "ad26ef11-fb61-416e-a8e9-b7eba2dc1526",
+          "end_vertex_id": "48af9916-ba3d-48b0-aacb-f13335983f9c",
+          "data": {}
+        },
+        {
+          "id": "b4b0be4b-3ecd-4238-a627-120b5d863eb0",
+          "kind": "line",
+          "start_vertex_id": "48af9916-ba3d-48b0-aacb-f13335983f9c",
+          "end_vertex_id": "060b6512-bb64-48eb-a983-aa1a1a95bbf5",
+          "data": {}
+        },
+        {
+          "id": "1e9a422c-2974-4e59-be03-d0ff4996fd7c",
+          "kind": "line",
+          "start_vertex_id": "060b6512-bb64-48eb-a983-aa1a1a95bbf5",
+          "end_vertex_id": "b90a84de-b6e7-4727-bba5-cdc08425c5c3",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "revision": 1
+    },
+    "e49978e2-ced1-4628-9ca9-824330d10300": {
+      "id": "e49978e2-ced1-4628-9ca9-824330d10300",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "9eb057af-8158-4b8c-8156-dd4a6e6c45d6",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "aae6a24f-0e67-4535-93bf-f4675f092f66",
+          "point": [
+            6000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "e0d71d03-42ec-4562-9feb-ea2d76ab905a",
+          "point": [
+            6000.0,
+            4000.0
+          ]
+        },
+        {
+          "id": "e09d9e54-774e-4fca-8646-580a15e0c823",
+          "point": [
+            3000.0,
+            7000.0
+          ]
+        },
+        {
+          "id": "e14c99b4-4b73-4ba0-8401-e1c187da63de",
+          "point": [
+            0.0,
+            4000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "f6b01be3-f20b-47e2-a1c6-7b30ee0ae6a9",
+          "kind": "line",
+          "start_vertex_id": "9eb057af-8158-4b8c-8156-dd4a6e6c45d6",
+          "end_vertex_id": "aae6a24f-0e67-4535-93bf-f4675f092f66",
+          "data": {}
+        },
+        {
+          "id": "1cc13cd8-a96d-4c19-92da-46c13cf4f64a",
+          "kind": "line",
+          "start_vertex_id": "aae6a24f-0e67-4535-93bf-f4675f092f66",
+          "end_vertex_id": "e0d71d03-42ec-4562-9feb-ea2d76ab905a",
+          "data": {}
+        },
+        {
+          "id": "49d6fe93-49cb-4a3b-bd1e-52a1710270bb",
+          "kind": "line",
+          "start_vertex_id": "e0d71d03-42ec-4562-9feb-ea2d76ab905a",
+          "end_vertex_id": "e09d9e54-774e-4fca-8646-580a15e0c823",
+          "data": {}
+        },
+        {
+          "id": "796b3c22-4797-4868-a06a-d485b94fc1ee",
+          "kind": "line",
+          "start_vertex_id": "e09d9e54-774e-4fca-8646-580a15e0c823",
+          "end_vertex_id": "e14c99b4-4b73-4ba0-8401-e1c187da63de",
+          "data": {}
+        },
+        {
+          "id": "8614eb2f-73c4-4d9b-a93d-bf22a1f76167",
+          "kind": "line",
+          "start_vertex_id": "e14c99b4-4b73-4ba0-8401-e1c187da63de",
+          "end_vertex_id": "9eb057af-8158-4b8c-8156-dd4a6e6c45d6",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "revision": 1
+    },
+    "9360cd9f-af83-44b1-876a-4258f9288d00": {
+      "id": "9360cd9f-af83-44b1-876a-4258f9288d00",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "d9488f34-8945-4df8-bc44-cf209548b5d4",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "453ee286-34ce-4857-9389-946b082d1cb9",
+          "point": [
+            10800.0,
+            0.0
+          ]
+        },
+        {
+          "id": "85ad33b2-0182-48c2-92b6-27c02459f798",
+          "point": [
+            10800.0,
+            4949.747468
+          ]
+        },
+        {
+          "id": "3cd597eb-83e0-4c6d-970e-aef8feed9639",
+          "point": [
+            0.0,
+            4949.747468
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "5ed874aa-f04e-4e70-9fbb-bf15d9ee2577",
+          "kind": "line",
+          "start_vertex_id": "d9488f34-8945-4df8-bc44-cf209548b5d4",
+          "end_vertex_id": "453ee286-34ce-4857-9389-946b082d1cb9",
+          "data": {}
+        },
+        {
+          "id": "6c777c8b-be5d-4456-93a1-0a4bea8628f3",
+          "kind": "line",
+          "start_vertex_id": "453ee286-34ce-4857-9389-946b082d1cb9",
+          "end_vertex_id": "85ad33b2-0182-48c2-92b6-27c02459f798",
+          "data": {}
+        },
+        {
+          "id": "271f7f83-9c2e-4518-a4fa-9684327cd165",
+          "kind": "line",
+          "start_vertex_id": "85ad33b2-0182-48c2-92b6-27c02459f798",
+          "end_vertex_id": "3cd597eb-83e0-4c6d-970e-aef8feed9639",
+          "data": {}
+        },
+        {
+          "id": "d2e2c090-3b79-4870-bd76-5aead7da5e83",
+          "kind": "line",
+          "start_vertex_id": "3cd597eb-83e0-4c6d-970e-aef8feed9639",
+          "end_vertex_id": "d9488f34-8945-4df8-bc44-cf209548b5d4",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "revision": 1
+    },
+    "5bddb4c7-0417-4360-a4f5-e177545aae38": {
+      "id": "5bddb4c7-0417-4360-a4f5-e177545aae38",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "6f538449-e549-46c5-897e-7bcc76d70698",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "2d381d23-8774-46fa-966b-ba500dcdb526",
+          "point": [
+            10800.0,
+            0.0
+          ]
+        },
+        {
+          "id": "5f960cb7-c3f3-4eb2-86cf-bcc4587cdcb4",
+          "point": [
+            10800.0,
+            4949.747468
+          ]
+        },
+        {
+          "id": "f19fbcf0-86b3-480d-9650-5a5c0f4b210e",
+          "point": [
+            0.0,
+            4949.747468
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "d53a1a3e-9cee-45cc-a04e-88df36c18966",
+          "kind": "line",
+          "start_vertex_id": "6f538449-e549-46c5-897e-7bcc76d70698",
+          "end_vertex_id": "2d381d23-8774-46fa-966b-ba500dcdb526",
+          "data": {}
+        },
+        {
+          "id": "865c8ebb-7c0b-4a11-bf7d-fa7d6b85e2e3",
+          "kind": "line",
+          "start_vertex_id": "2d381d23-8774-46fa-966b-ba500dcdb526",
+          "end_vertex_id": "5f960cb7-c3f3-4eb2-86cf-bcc4587cdcb4",
+          "data": {}
+        },
+        {
+          "id": "cabf4cb1-9dc1-4f0b-bc4c-bb4358bee422",
+          "kind": "line",
+          "start_vertex_id": "5f960cb7-c3f3-4eb2-86cf-bcc4587cdcb4",
+          "end_vertex_id": "f19fbcf0-86b3-480d-9650-5a5c0f4b210e",
+          "data": {}
+        },
+        {
+          "id": "ddc0733e-ea94-4707-9460-523711c47170",
+          "kind": "line",
+          "start_vertex_id": "f19fbcf0-86b3-480d-9650-5a5c0f4b210e",
+          "end_vertex_id": "6f538449-e549-46c5-897e-7bcc76d70698",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "revision": 1
+    },
+    "6dc52555-0d48-4a3e-8524-76c006629aa8": {
+      "id": "6dc52555-0d48-4a3e-8524-76c006629aa8",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "314dd121-235e-4776-b975-5db622d5e7b9",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "2dd5083d-a209-4028-bc05-f4466f6c7b04",
+          "point": [
+            13000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "aeae88d7-c623-4baf-bbd6-531a6aec97d4",
+          "point": [
+            13000.0,
+            10000.0
+          ]
+        },
+        {
+          "id": "1a96690d-9e32-47b7-a0e4-5a31161f247b",
+          "point": [
+            0.0,
+            10000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "a98d2d7f-2434-4fa9-971e-1fbc4c473414",
+          "kind": "line",
+          "start_vertex_id": "314dd121-235e-4776-b975-5db622d5e7b9",
+          "end_vertex_id": "2dd5083d-a209-4028-bc05-f4466f6c7b04",
+          "data": {}
+        },
+        {
+          "id": "30c7cca2-626a-41c3-8ce4-c366756fd628",
+          "kind": "line",
+          "start_vertex_id": "2dd5083d-a209-4028-bc05-f4466f6c7b04",
+          "end_vertex_id": "aeae88d7-c623-4baf-bbd6-531a6aec97d4",
+          "data": {}
+        },
+        {
+          "id": "3aff007c-706a-40db-9237-735b422ef7f4",
+          "kind": "line",
+          "start_vertex_id": "aeae88d7-c623-4baf-bbd6-531a6aec97d4",
+          "end_vertex_id": "1a96690d-9e32-47b7-a0e4-5a31161f247b",
+          "data": {}
+        },
+        {
+          "id": "d6a59f24-2395-4241-a6ac-ec7a7a98727e",
+          "kind": "line",
+          "start_vertex_id": "1a96690d-9e32-47b7-a0e4-5a31161f247b",
+          "end_vertex_id": "314dd121-235e-4776-b975-5db622d5e7b9",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "revision": 1
+    },
+    "ce809118-d148-4935-82f7-b7aeb844f423": {
+      "id": "ce809118-d148-4935-82f7-b7aeb844f423",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "be3afc4a-7456-4b70-9304-d31ed38dfc0a",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "223d2368-7c2c-4165-96ad-3272d620de0d",
+          "point": [
+            6000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "31037e47-d45e-43f5-8e46-914d228b2073",
+          "point": [
+            6000.0,
+            3000.0
+          ]
+        },
+        {
+          "id": "118335a7-9376-45e2-afaf-c3eba23debdc",
+          "point": [
+            3000.0,
+            6000.0
+          ]
+        },
+        {
+          "id": "c4542323-d457-40ac-9b2a-09392b2e8af2",
+          "point": [
+            0.0,
+            3000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "e08c5368-3897-4fb4-9716-0e5670386100",
+          "kind": "line",
+          "start_vertex_id": "be3afc4a-7456-4b70-9304-d31ed38dfc0a",
+          "end_vertex_id": "223d2368-7c2c-4165-96ad-3272d620de0d",
+          "data": {}
+        },
+        {
+          "id": "3cdbbcf5-77a0-4460-957d-6fe8076fb069",
+          "kind": "line",
+          "start_vertex_id": "223d2368-7c2c-4165-96ad-3272d620de0d",
+          "end_vertex_id": "31037e47-d45e-43f5-8e46-914d228b2073",
+          "data": {}
+        },
+        {
+          "id": "f8ccee3f-a8f2-4dd3-adcb-020f83727af8",
+          "kind": "line",
+          "start_vertex_id": "31037e47-d45e-43f5-8e46-914d228b2073",
+          "end_vertex_id": "118335a7-9376-45e2-afaf-c3eba23debdc",
+          "data": {}
+        },
+        {
+          "id": "f483aefd-d390-4da6-a4f2-47b4f4e1ac03",
+          "kind": "line",
+          "start_vertex_id": "118335a7-9376-45e2-afaf-c3eba23debdc",
+          "end_vertex_id": "c4542323-d457-40ac-9b2a-09392b2e8af2",
+          "data": {}
+        },
+        {
+          "id": "4db8d172-959c-4265-833b-4c2947c465ca",
+          "kind": "line",
+          "start_vertex_id": "c4542323-d457-40ac-9b2a-09392b2e8af2",
+          "end_vertex_id": "be3afc4a-7456-4b70-9304-d31ed38dfc0a",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "revision": 1
+    },
+    "4ef20a33-5912-4a77-a637-b5af3c1ca655": {
+      "id": "4ef20a33-5912-4a77-a637-b5af3c1ca655",
+      "name": "Otvor",
+      "vertices": [
+        {
+          "id": "b352952c-95a9-40f0-b19a-f4e438e8484a",
+          "point": [
+            2000.0,
+            1000.0
+          ]
+        },
+        {
+          "id": "f3218219-d502-46dd-9cab-f6139d1ccc12",
+          "point": [
+            4000.0,
+            1000.0
+          ]
+        },
+        {
+          "id": "05b62592-c1d7-444d-979e-ae3e4e4de34e",
+          "point": [
+            4000.0,
+            2500.0
+          ]
+        },
+        {
+          "id": "4b0e924a-b9fb-48a7-975c-5d617cfa3491",
+          "point": [
+            2000.0,
+            2500.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "15fafd76-5e1d-4c10-a6cc-bdddb1bbf6e0",
+          "kind": "line",
+          "start_vertex_id": "b352952c-95a9-40f0-b19a-f4e438e8484a",
+          "end_vertex_id": "f3218219-d502-46dd-9cab-f6139d1ccc12",
+          "data": {}
+        },
+        {
+          "id": "054a010e-c7a8-4413-8c50-abfe747cea66",
+          "kind": "line",
+          "start_vertex_id": "f3218219-d502-46dd-9cab-f6139d1ccc12",
+          "end_vertex_id": "05b62592-c1d7-444d-979e-ae3e4e4de34e",
+          "data": {}
+        },
+        {
+          "id": "15153e2b-49f5-4d65-81b9-eb4f3f6273f1",
+          "kind": "line",
+          "start_vertex_id": "05b62592-c1d7-444d-979e-ae3e4e4de34e",
+          "end_vertex_id": "4b0e924a-b9fb-48a7-975c-5d617cfa3491",
+          "data": {}
+        },
+        {
+          "id": "db5d14b8-616a-4ded-b66d-6d93b9ca73c1",
+          "kind": "line",
+          "start_vertex_id": "4b0e924a-b9fb-48a7-975c-5d617cfa3491",
+          "end_vertex_id": "b352952c-95a9-40f0-b19a-f4e438e8484a",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "revision": 1
+    },
+    "9274d890-8939-423d-9115-f1b6224a53f8": {
+      "id": "9274d890-8939-423d-9115-f1b6224a53f8",
+      "name": "Vlastní obrys",
+      "vertices": [
+        {
+          "id": "3bc99332-eac3-4e00-98ef-ac733744164e",
+          "point": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "50b1d50e-9aa8-418b-a462-a0ad5934c624",
+          "point": [
+            8000.0,
+            0.0
+          ]
+        },
+        {
+          "id": "b4ccd307-2e54-4993-80b9-f55eea8f0412",
+          "point": [
+            8000.0,
+            1000.0
+          ]
+        },
+        {
+          "id": "48027c9f-92ae-42c1-8023-200bb6d26861",
+          "point": [
+            0.0,
+            1000.0
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "id": "71928792-237d-4335-81db-c8e83cc42941",
+          "kind": "line",
+          "start_vertex_id": "3bc99332-eac3-4e00-98ef-ac733744164e",
+          "end_vertex_id": "50b1d50e-9aa8-418b-a462-a0ad5934c624",
+          "data": {}
+        },
+        {
+          "id": "e30a4333-07a0-4c1d-aca8-fa18d8ada96b",
+          "kind": "line",
+          "start_vertex_id": "50b1d50e-9aa8-418b-a462-a0ad5934c624",
+          "end_vertex_id": "b4ccd307-2e54-4993-80b9-f55eea8f0412",
+          "data": {}
+        },
+        {
+          "id": "07ebee36-7451-41d4-b47a-80181f0c7091",
+          "kind": "line",
+          "start_vertex_id": "b4ccd307-2e54-4993-80b9-f55eea8f0412",
+          "end_vertex_id": "48027c9f-92ae-42c1-8023-200bb6d26861",
+          "data": {}
+        },
+        {
+          "id": "be3e1447-7acc-4cbf-860b-799da484bd0e",
+          "kind": "line",
+          "start_vertex_id": "48027c9f-92ae-42c1-8023-200bb6d26861",
+          "end_vertex_id": "3bc99332-eac3-4e00-98ef-ac733744164e",
+          "data": {}
+        }
+      ],
+      "closed": true,
+      "plane": {
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "v": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "revision": 1
+    }
+  },
+  "surfaces": {
+    "82807166-c852-44d4-abf8-938d436a2f31": {
+      "id": "82807166-c852-44d4-abf8-938d436a2f31",
+      "name": "Plocha 1",
+      "profile_id": "e9efc8f3-6853-4760-9307-2a34b89ba2ac",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 9,
+      "part_id": "1ca3e2f7-2fba-406b-b3b0-623db1d649d3"
+    },
+    "a8663414-2cdb-46e0-b024-24999f3aa9ba": {
+      "id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "name": "Plocha 2",
+      "profile_id": "75de4f7a-0c04-4c59-abc4-40ddae37253c",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        0.0,
+        6000.0,
+        0.0
+      ],
+      "rotation_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 8,
+      "part_id": "31e7b34a-e2da-453f-b32c-e37f96482e66"
+    },
+    "f2279317-ad18-496d-af04-5474426037ba": {
+      "id": "f2279317-ad18-496d-af04-5474426037ba",
+      "name": "Plocha 3",
+      "profile_id": "4410c1c9-71a9-409f-9289-852ecbe1b505",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 6,
+      "part_id": "6a6bbba8-3aab-43de-b749-b6dfa16d7e92"
+    },
+    "fa09d6ba-06a5-4ca0-835f-a24e7f816a23": {
+      "id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "name": "Plocha 4",
+      "profile_id": "e49978e2-ced1-4628-9ca9-824330d10300",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        10000.0,
+        0.0,
+        0.0
+      ],
+      "rotation_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 7,
+      "part_id": "7357a8f3-29e9-4875-a8ca-e9cf58717625"
+    },
+    "dc58b2ec-7a34-4429-9817-c77ca6e0710c": {
+      "id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "name": "Plocha 5",
+      "profile_id": "9360cd9f-af83-44b1-876a-4258f9288d00",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        -400.0,
+        -500.0,
+        3500.0
+      ],
+      "rotation_deg": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 14,
+      "part_id": "66504f5b-ba9e-4b12-908c-f4b337c8a8bf"
+    },
+    "13a25517-7565-497a-8b02-ab5d5b276b78": {
+      "id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "name": "Plocha 6",
+      "profile_id": "5bddb4c7-0417-4360-a4f5-e177545aae38",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        -400.0,
+        2999.999999783743,
+        6999.999999783744
+      ],
+      "rotation_deg": [
+        -45.00000000000001,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 14,
+      "part_id": "66504f5b-ba9e-4b12-908c-f4b337c8a8bf"
+    },
+    "9af9faca-90f7-4ce5-ad58-8ee72feb350c": {
+      "id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "name": "Plocha 7",
+      "profile_id": "6dc52555-0d48-4a3e-8524-76c006629aa8",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        -1500.0,
+        -2000.0,
+        0.0
+      ],
+      "rotation_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 14,
+      "part_id": "c806a06e-f78c-4d74-b8d9-068bd5a1cf18"
+    },
+    "69bc2c4b-d346-4bd3-b365-7520d4397267": {
+      "id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+      "name": "Plocha 8",
+      "profile_id": "ce809118-d148-4935-82f7-b7aeb844f423",
+      "hole_profile_ids": [
+        "4ef20a33-5912-4a77-a637-b5af3c1ca655"
+      ],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        5000.0,
+        0.0,
+        1000.0
+      ],
+      "rotation_deg": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 6,
+      "part_id": "4a797fdf-3f93-4b2c-8b2e-5ba5fe6d543a"
+    },
+    "8699ea44-848e-4e7d-8d2e-733fd2604a13": {
+      "id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+      "name": "Plocha 9",
+      "profile_id": "9274d890-8939-423d-9115-f1b6224a53f8",
+      "hole_profile_ids": [],
+      "kind": "planar",
+      "params": {},
+      "position_mm": [
+        1000.0,
+        500.0,
+        4500.0
+      ],
+      "rotation_deg": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "parent_transforms": [],
+      "revision": 7,
+      "part_id": "9907efec-45f5-4fbb-9536-b3bf85c17775"
+    }
+  },
+  "parts": {
+    "1ca3e2f7-2fba-406b-b3b0-623db1d649d3": {
+      "id": "1ca3e2f7-2fba-406b-b3b0-623db1d649d3",
+      "name": "P1 · Plocha 1",
+      "surface_ids": [
+        "82807166-c852-44d4-abf8-938d436a2f31"
+      ],
+      "frame": {
+        "root_surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+        "anchor_vertex_id": "5784f972-a907-457d-ba25-d28a887da1f5",
+        "axis_segment_id": "c8a8bf61-7b6a-4a10-8c4b-47b71f9c22fb"
+      },
+      "stale": true,
+      "source_revision": 57,
+      "input_digest": "aaa0ae3c9ffb37dad5bdba5cd35f2b4fef72ca47e8a93f56a6af581b6c4ff3ee",
+      "polygons": {
+        "82807166-c852-44d4-abf8-938d436a2f31": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              100.0,
+              0.0
+            ],
+            [
+              100.0,
+              40.0
+            ],
+            [
+              0.0,
+              40.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                77.0,
+                -2.0
+              ],
+              [
+                23.0,
+                -2.0
+              ],
+              [
+                5.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                40.0
+              ],
+              [
+                20.0,
+                42.0
+              ],
+              [
+                80.0,
+                42.0
+              ],
+              [
+                100.0,
+                40.0
+              ],
+              [
+                100.0,
+                0.0
+              ],
+              [
+                95.0,
+                0.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [
+          {
+            "points": [
+              [
+                5.0,
+                0.0
+              ],
+              [
+                95.0,
+                0.0
+              ]
+            ],
+            "closed": false
+          }
+        ],
+        "FOLD_VALLEY": [
+          {
+            "points": [
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            "closed": false
+          }
+        ],
+        "TABS": [
+          {
+            "points": [
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ],
+              [
+                20.0,
+                42.0
+              ],
+              [
+                80.0,
+                42.0
+              ]
+            ],
+            "closed": true
+          },
+          {
+            "points": [
+              [
+                5.0,
+                0.0
+              ],
+              [
+                95.0,
+                0.0
+              ],
+              [
+                77.0,
+                -2.0
+              ],
+              [
+                23.0,
+                -2.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P1 · Plocha 1",
+          "x": 50.0,
+          "y": 20.0,
+          "size_mm": 2.5
+        },
+        {
+          "text": "A1 · rub",
+          "x": 50.0,
+          "y": 40.0,
+          "size_mm": 2.0
+        },
+        {
+          "text": "A7 · rub",
+          "x": 50.0,
+          "y": 0.0,
+          "size_mm": 2.0
+        }
+      ],
+      "lineage": [],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+          "edge_id": "c8a8bf61-7b6a-4a10-8c4b-47b71f9c22fb",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            100.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+          "edge_id": "63f2fb81-96a6-4748-8ffc-9eea5d9eb7e5",
+          "start": [
+            100.0,
+            0.0
+          ],
+          "end": [
+            100.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+          "edge_id": "ef0fe9df-a6d5-45f1-b962-91c26bd493a9",
+          "start": [
+            100.0,
+            40.0
+          ],
+          "end": [
+            0.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+          "edge_id": "5b3a8abc-c6e5-491e-b13e-8e98276b008c",
+          "start": [
+            0.0,
+            40.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 1
+    },
+    "31e7b34a-e2da-453f-b32c-e37f96482e66": {
+      "id": "31e7b34a-e2da-453f-b32c-e37f96482e66",
+      "name": "P2 · Plocha 2",
+      "surface_ids": [
+        "a8663414-2cdb-46e0-b024-24999f3aa9ba"
+      ],
+      "frame": {
+        "root_surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+        "anchor_vertex_id": "3be37611-007f-4836-9116-db3a12b6db92",
+        "axis_segment_id": "a766a4a0-09d1-4580-8d33-b301c27422d0"
+      },
+      "stale": true,
+      "source_revision": 58,
+      "input_digest": "12c9b0b3d1349574efc8f4dac35db3b144c75f383d5467ff25d5b86d0afe4f89",
+      "polygons": {
+        "a8663414-2cdb-46e0-b024-24999f3aa9ba": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              100.0,
+              0.0
+            ],
+            [
+              100.0,
+              40.0
+            ],
+            [
+              0.0,
+              40.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                40.0
+              ],
+              [
+                20.0,
+                42.0
+              ],
+              [
+                80.0,
+                42.0
+              ],
+              [
+                100.0,
+                40.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [
+          {
+            "points": [
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            "closed": false
+          }
+        ],
+        "FOLD_VALLEY": [],
+        "TABS": [
+          {
+            "points": [
+              [
+                100.0,
+                40.0
+              ],
+              [
+                0.0,
+                40.0
+              ],
+              [
+                20.0,
+                42.0
+              ],
+              [
+                80.0,
+                42.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P2 · Plocha 2",
+          "x": 50.0,
+          "y": 20.0,
+          "size_mm": 2.5
+        },
+        {
+          "text": "A2 · rub",
+          "x": 50.0,
+          "y": 40.0,
+          "size_mm": 2.0
+        },
+        {
+          "text": "A8 · rub",
+          "x": 50.0,
+          "y": 0.0,
+          "size_mm": 2.0
+        }
+      ],
+      "lineage": [],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+          "edge_id": "a766a4a0-09d1-4580-8d33-b301c27422d0",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            100.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+          "edge_id": "61b93df7-607e-4e6c-b02c-246c405c838d",
+          "start": [
+            100.0,
+            0.0
+          ],
+          "end": [
+            100.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+          "edge_id": "7d7cef02-09b4-4343-b732-57da381928f4",
+          "start": [
+            100.0,
+            40.0
+          ],
+          "end": [
+            0.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+          "edge_id": "327d364b-f8dd-4d28-8ead-dd729a4846e8",
+          "start": [
+            0.0,
+            40.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 2
+    },
+    "6a6bbba8-3aab-43de-b749-b6dfa16d7e92": {
+      "id": "6a6bbba8-3aab-43de-b749-b6dfa16d7e92",
+      "name": "P3 · Plocha 3",
+      "surface_ids": [
+        "f2279317-ad18-496d-af04-5474426037ba"
+      ],
+      "frame": {
+        "root_surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+        "anchor_vertex_id": "b90a84de-b6e7-4727-bba5-cdc08425c5c3",
+        "axis_segment_id": "afc9c26d-c000-457c-9a1a-374072d869ed"
+      },
+      "stale": true,
+      "source_revision": 60,
+      "input_digest": "d3284cea0eb0409ab2c62e2dcc7e36f74f079ecb3a1b2f4fbae8940bbc230687",
+      "polygons": {
+        "f2279317-ad18-496d-af04-5474426037ba": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              60.0,
+              0.0
+            ],
+            [
+              60.0,
+              40.0
+            ],
+            [
+              30.0,
+              70.0
+            ],
+            [
+              0.0,
+              40.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                40.0
+              ],
+              [
+                30.0,
+                70.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [],
+        "FOLD_VALLEY": [],
+        "TABS": [],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P3 · Plocha 3",
+          "x": 30.0,
+          "y": 20.0,
+          "size_mm": 2.5
+        },
+        {
+          "text": "A3 · rub",
+          "x": 45.0,
+          "y": 55.0,
+          "size_mm": 2.0
+        },
+        {
+          "text": "A4 · rub",
+          "x": 15.0,
+          "y": 55.0,
+          "size_mm": 2.0
+        },
+        {
+          "text": "A9 · rub",
+          "x": 30.0,
+          "y": 0.0,
+          "size_mm": 2.0
+        }
+      ],
+      "lineage": [],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+          "edge_id": "afc9c26d-c000-457c-9a1a-374072d869ed",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            60.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+          "edge_id": "fbb2dba3-2341-409e-9ef7-048374c1a5f6",
+          "start": [
+            60.0,
+            0.0
+          ],
+          "end": [
+            60.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+          "edge_id": "55df8e75-90d4-430d-b2c8-050d09a5af14",
+          "start": [
+            60.0,
+            40.0
+          ],
+          "end": [
+            30.0,
+            70.0
+          ]
+        },
+        {
+          "surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+          "edge_id": "b4b0be4b-3ecd-4238-a627-120b5d863eb0",
+          "start": [
+            30.0,
+            70.0
+          ],
+          "end": [
+            0.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+          "edge_id": "1e9a422c-2974-4e59-be03-d0ff4996fd7c",
+          "start": [
+            0.0,
+            40.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 3
+    },
+    "7357a8f3-29e9-4875-a8ca-e9cf58717625": {
+      "id": "7357a8f3-29e9-4875-a8ca-e9cf58717625",
+      "name": "P4 · Plocha 4",
+      "surface_ids": [
+        "fa09d6ba-06a5-4ca0-835f-a24e7f816a23"
+      ],
+      "frame": {
+        "root_surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+        "anchor_vertex_id": "9eb057af-8158-4b8c-8156-dd4a6e6c45d6",
+        "axis_segment_id": "f6b01be3-f20b-47e2-a1c6-7b30ee0ae6a9"
+      },
+      "stale": true,
+      "source_revision": 62,
+      "input_digest": "3e3e5205a5d5a69ff001ef47ca7a969682b54bf16c20e048a552766c261d6a95",
+      "polygons": {
+        "fa09d6ba-06a5-4ca0-835f-a24e7f816a23": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              60.0,
+              0.0
+            ],
+            [
+              60.0,
+              40.0
+            ],
+            [
+              30.0,
+              70.0
+            ],
+            [
+              0.0,
+              40.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                40.0
+              ],
+              [
+                30.0,
+                70.0
+              ],
+              [
+                0.0,
+                40.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [],
+        "FOLD_VALLEY": [],
+        "TABS": [],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P4 · Plocha 4",
+          "x": 30.0,
+          "y": 20.0,
+          "size_mm": 2.5
+        },
+        {
+          "text": "A5 · rub",
+          "x": 45.0,
+          "y": 55.0,
+          "size_mm": 2.0
+        },
+        {
+          "text": "A6 · rub",
+          "x": 15.0,
+          "y": 55.0,
+          "size_mm": 2.0
+        },
+        {
+          "text": "A10 · rub",
+          "x": 30.0,
+          "y": 0.0,
+          "size_mm": 2.0
+        }
+      ],
+      "lineage": [],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "edge_id": "f6b01be3-f20b-47e2-a1c6-7b30ee0ae6a9",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            60.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "edge_id": "1cc13cd8-a96d-4c19-92da-46c13cf4f64a",
+          "start": [
+            60.0,
+            0.0
+          ],
+          "end": [
+            60.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "edge_id": "49d6fe93-49cb-4a3b-bd1e-52a1710270bb",
+          "start": [
+            60.0,
+            40.0
+          ],
+          "end": [
+            30.0,
+            70.0
+          ]
+        },
+        {
+          "surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "edge_id": "796b3c22-4797-4868-a06a-d485b94fc1ee",
+          "start": [
+            30.0,
+            70.0
+          ],
+          "end": [
+            0.0,
+            40.0
+          ]
+        },
+        {
+          "surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+          "edge_id": "8614eb2f-73c4-4d9b-a93d-bf22a1f76167",
+          "start": [
+            0.0,
+            40.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 4
+    },
+    "66504f5b-ba9e-4b12-908c-f4b337c8a8bf": {
+      "id": "66504f5b-ba9e-4b12-908c-f4b337c8a8bf",
+      "name": "P5 · Plocha 5",
+      "surface_ids": [
+        "13a25517-7565-497a-8b02-ab5d5b276b78",
+        "dc58b2ec-7a34-4429-9817-c77ca6e0710c"
+      ],
+      "frame": {
+        "root_surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+        "anchor_vertex_id": "d9488f34-8945-4df8-bc44-cf209548b5d4",
+        "axis_segment_id": "5ed874aa-f04e-4e70-9fbb-bf15d9ee2577"
+      },
+      "stale": false,
+      "source_revision": 64,
+      "input_digest": "18082a14dd942403439c80dd03bd377e2d9b1859d55c47c1248040c9b83b4a6b",
+      "polygons": {
+        "13a25517-7565-497a-8b02-ab5d5b276b78": [
+          [
+            [
+              0.0,
+              49.497474679999996
+            ],
+            [
+              108.0,
+              49.497474679999996
+            ],
+            [
+              108.0,
+              98.99494935999999
+            ],
+            [
+              0.0,
+              98.99494935999999
+            ]
+          ]
+        ],
+        "dc58b2ec-7a34-4429-9817-c77ca6e0710c": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              108.0,
+              49.497474679999996
+            ],
+            [
+              0.0,
+              49.497474679999996
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                108.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                49.497474679999996
+              ],
+              [
+                0.0,
+                98.99494935999999
+              ],
+              [
+                108.0,
+                98.99494935999999
+              ],
+              [
+                108.0,
+                49.497474679999996
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [
+          {
+            "points": [
+              [
+                108.0,
+                49.497474679999996
+              ],
+              [
+                0.0,
+                49.497474679999996
+              ]
+            ],
+            "closed": false
+          }
+        ],
+        "FOLD_VALLEY": [],
+        "TABS": [],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P5 · Plocha 5",
+          "x": 54.0,
+          "y": 74.24621202,
+          "size_mm": 2.5
+        }
+      ],
+      "lineage": [
+        "6b220383-8e21-4aa5-9e97-aee07fca30f5"
+      ],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+          "edge_id": "d53a1a3e-9cee-45cc-a04e-88df36c18966",
+          "start": [
+            0.0,
+            49.497474679999996
+          ],
+          "end": [
+            108.0,
+            49.497474679999996
+          ]
+        },
+        {
+          "surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+          "edge_id": "865c8ebb-7c0b-4a11-bf7d-fa7d6b85e2e3",
+          "start": [
+            108.0,
+            49.497474679999996
+          ],
+          "end": [
+            108.0,
+            98.99494935999999
+          ]
+        },
+        {
+          "surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+          "edge_id": "cabf4cb1-9dc1-4f0b-bc4c-bb4358bee422",
+          "start": [
+            108.0,
+            98.99494935999999
+          ],
+          "end": [
+            0.0,
+            98.99494935999999
+          ]
+        },
+        {
+          "surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+          "edge_id": "ddc0733e-ea94-4707-9460-523711c47170",
+          "start": [
+            0.0,
+            98.99494935999999
+          ],
+          "end": [
+            0.0,
+            49.497474679999996
+          ]
+        },
+        {
+          "surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+          "edge_id": "5ed874aa-f04e-4e70-9fbb-bf15d9ee2577",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            108.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+          "edge_id": "6c777c8b-be5d-4456-93a1-0a4bea8628f3",
+          "start": [
+            108.0,
+            0.0
+          ],
+          "end": [
+            108.0,
+            49.497474679999996
+          ]
+        },
+        {
+          "surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+          "edge_id": "271f7f83-9c2e-4518-a4fa-9684327cd165",
+          "start": [
+            108.0,
+            49.497474679999996
+          ],
+          "end": [
+            0.0,
+            49.497474679999996
+          ]
+        },
+        {
+          "surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+          "edge_id": "d2e2c090-3b79-4870-bd76-5aead7da5e83",
+          "start": [
+            0.0,
+            49.497474679999996
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 5
+    },
+    "c806a06e-f78c-4d74-b8d9-068bd5a1cf18": {
+      "id": "c806a06e-f78c-4d74-b8d9-068bd5a1cf18",
+      "name": "P7 · Plocha 7",
+      "surface_ids": [
+        "9af9faca-90f7-4ce5-ad58-8ee72feb350c"
+      ],
+      "frame": {
+        "root_surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+        "anchor_vertex_id": "314dd121-235e-4776-b975-5db622d5e7b9",
+        "axis_segment_id": "a98d2d7f-2434-4fa9-971e-1fbc4c473414"
+      },
+      "stale": true,
+      "source_revision": 62,
+      "input_digest": "a4576f917c96a3565a0aea688ce585f60e036ce8319de6fdac70fcfba7ac20ef",
+      "polygons": {
+        "9af9faca-90f7-4ce5-ad58-8ee72feb350c": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              130.0,
+              0.0
+            ],
+            [
+              130.0,
+              100.0
+            ],
+            [
+              0.0,
+              100.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                130.0,
+                0.0
+              ],
+              [
+                130.0,
+                100.0
+              ],
+              [
+                0.0,
+                100.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [],
+        "FOLD_VALLEY": [],
+        "TABS": [],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P7 · Plocha 7",
+          "x": 65.0,
+          "y": 50.0,
+          "size_mm": 2.5
+        }
+      ],
+      "lineage": [],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+          "edge_id": "a98d2d7f-2434-4fa9-971e-1fbc4c473414",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            130.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+          "edge_id": "30c7cca2-626a-41c3-8ce4-c366756fd628",
+          "start": [
+            130.0,
+            0.0
+          ],
+          "end": [
+            130.0,
+            100.0
+          ]
+        },
+        {
+          "surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+          "edge_id": "3aff007c-706a-40db-9237-735b422ef7f4",
+          "start": [
+            130.0,
+            100.0
+          ],
+          "end": [
+            0.0,
+            100.0
+          ]
+        },
+        {
+          "surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+          "edge_id": "d6a59f24-2395-4241-a6ac-ec7a7a98727e",
+          "start": [
+            0.0,
+            100.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 7
+    },
+    "4a797fdf-3f93-4b2c-8b2e-5ba5fe6d543a": {
+      "id": "4a797fdf-3f93-4b2c-8b2e-5ba5fe6d543a",
+      "name": "P8 · Plocha 8",
+      "surface_ids": [
+        "69bc2c4b-d346-4bd3-b365-7520d4397267"
+      ],
+      "frame": {
+        "root_surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+        "anchor_vertex_id": "be3afc4a-7456-4b70-9304-d31ed38dfc0a",
+        "axis_segment_id": "e08c5368-3897-4fb4-9716-0e5670386100"
+      },
+      "stale": false,
+      "source_revision": 64,
+      "input_digest": "9934d88085b52d3b1a29f1603d187f9dad401d64db6748ddd0e6ed9fa42a9ce3",
+      "polygons": {
+        "69bc2c4b-d346-4bd3-b365-7520d4397267": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              60.0,
+              0.0
+            ],
+            [
+              60.0,
+              30.0
+            ],
+            [
+              30.0,
+              60.0
+            ],
+            [
+              0.0,
+              30.0
+            ]
+          ],
+          [
+            [
+              20.0,
+              10.0
+            ],
+            [
+              40.0,
+              10.0
+            ],
+            [
+              40.0,
+              25.0
+            ],
+            [
+              20.0,
+              25.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                60.0,
+                0.0
+              ],
+              [
+                60.0,
+                30.0
+              ],
+              [
+                30.0,
+                60.0
+              ],
+              [
+                0.0,
+                30.0
+              ]
+            ],
+            "closed": true
+          },
+          {
+            "points": [
+              [
+                20.0,
+                10.0
+              ],
+              [
+                40.0,
+                10.0
+              ],
+              [
+                40.0,
+                25.0
+              ],
+              [
+                20.0,
+                25.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [],
+        "FOLD_VALLEY": [],
+        "TABS": [],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P8 · Plocha 8",
+          "x": 30.0,
+          "y": 45.0,
+          "size_mm": 2.5
+        },
+        {
+          "text": "A11 · rub",
+          "x": 15.0,
+          "y": 45.0,
+          "size_mm": 2.0
+        }
+      ],
+      "lineage": [],
+      "front_side": "outside",
+      "edges": [
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "e08c5368-3897-4fb4-9716-0e5670386100",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            60.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "3cdbbcf5-77a0-4460-957d-6fe8076fb069",
+          "start": [
+            60.0,
+            0.0
+          ],
+          "end": [
+            60.0,
+            30.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "f8ccee3f-a8f2-4dd3-adcb-020f83727af8",
+          "start": [
+            60.0,
+            30.0
+          ],
+          "end": [
+            30.0,
+            60.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "f483aefd-d390-4da6-a4f2-47b4f4e1ac03",
+          "start": [
+            30.0,
+            60.0
+          ],
+          "end": [
+            0.0,
+            30.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "4db8d172-959c-4265-833b-4c2947c465ca",
+          "start": [
+            0.0,
+            30.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "15fafd76-5e1d-4c10-a6cc-bdddb1bbf6e0",
+          "start": [
+            20.0,
+            10.0
+          ],
+          "end": [
+            40.0,
+            10.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "054a010e-c7a8-4413-8c50-abfe747cea66",
+          "start": [
+            40.0,
+            10.0
+          ],
+          "end": [
+            40.0,
+            25.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "15153e2b-49f5-4d65-81b9-eb4f3f6273f1",
+          "start": [
+            40.0,
+            25.0
+          ],
+          "end": [
+            20.0,
+            25.0
+          ]
+        },
+        {
+          "surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+          "edge_id": "db5d14b8-616a-4ded-b66d-6d93b9ca73c1",
+          "start": [
+            20.0,
+            25.0
+          ],
+          "end": [
+            20.0,
+            10.0
+          ]
+        }
+      ],
+      "number": 8
+    },
+    "9907efec-45f5-4fbb-9536-b3bf85c17775": {
+      "id": "9907efec-45f5-4fbb-9536-b3bf85c17775",
+      "name": "P9 · Plocha 9",
+      "surface_ids": [
+        "8699ea44-848e-4e7d-8d2e-733fd2604a13"
+      ],
+      "frame": {
+        "root_surface_id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+        "anchor_vertex_id": "3bc99332-eac3-4e00-98ef-ac733744164e",
+        "axis_segment_id": "71928792-237d-4335-81db-c8e83cc42941"
+      },
+      "stale": false,
+      "source_revision": 43,
+      "input_digest": "22b189d4c4c0c7ec106f7d3f78c3e0384a91aa4cba3991fa7ceb17d04af1e30d",
+      "polygons": {
+        "8699ea44-848e-4e7d-8d2e-733fd2604a13": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              80.0,
+              0.0
+            ],
+            [
+              80.0,
+              10.0
+            ],
+            [
+              0.0,
+              10.0
+            ]
+          ]
+        ]
+      },
+      "paths": {
+        "CUT": [
+          {
+            "points": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                80.0,
+                0.0
+              ],
+              [
+                80.0,
+                10.0
+              ],
+              [
+                0.0,
+                10.0
+              ]
+            ],
+            "closed": true
+          }
+        ],
+        "FOLD_MOUNTAIN": [],
+        "FOLD_VALLEY": [],
+        "TABS": [],
+        "GUIDES": []
+      },
+      "labels": [
+        {
+          "text": "P9 · Plocha 9",
+          "x": 40.0,
+          "y": 5.0,
+          "size_mm": 2.5
+        }
+      ],
+      "lineage": [],
+      "front_side": "inside",
+      "edges": [
+        {
+          "surface_id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+          "edge_id": "71928792-237d-4335-81db-c8e83cc42941",
+          "start": [
+            0.0,
+            0.0
+          ],
+          "end": [
+            80.0,
+            0.0
+          ]
+        },
+        {
+          "surface_id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+          "edge_id": "e30a4333-07a0-4c1d-aca8-fa18d8ada96b",
+          "start": [
+            80.0,
+            0.0
+          ],
+          "end": [
+            80.0,
+            10.0
+          ]
+        },
+        {
+          "surface_id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+          "edge_id": "07ebee36-7451-41d4-b47a-80181f0c7091",
+          "start": [
+            80.0,
+            10.0
+          ],
+          "end": [
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "surface_id": "8699ea44-848e-4e7d-8d2e-733fd2604a13",
+          "edge_id": "be3e1447-7acc-4cbf-860b-799da484bd0e",
+          "start": [
+            0.0,
+            10.0
+          ],
+          "end": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "number": 9
+    }
+  },
+  "joints": {
+    "4fad7131-e623-414a-92e9-fdbe3d81e117": {
+      "id": "4fad7131-e623-414a-92e9-fdbe3d81e117",
+      "surface_a": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "edge_a": "271f7f83-9c2e-4518-a4fa-9684327cd165",
+      "surface_b": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "edge_b": "d53a1a3e-9cee-45cc-a04e-88df36c18966",
+      "mode": "fold",
+      "revision": 2,
+      "connector_id": null,
+      "number": 1,
+      "unresolved": false
+    }
+  },
+  "connectors": {
+    "5d473795-0ad8-475b-9528-5dc88ab60f09": {
+      "id": "5d473795-0ad8-475b-9528-5dc88ab60f09",
+      "joint_id": "",
+      "owner_surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+      "width_mm": 2.0,
+      "taper": 0.6,
+      "shape": "trapezoid",
+      "revision": 3,
+      "attachment_id": "66e769c7-fe3d-4979-b0d6-500a5510537a",
+      "count": 1,
+      "gap_mm": 0,
+      "outline_mm": [],
+      "enabled": true,
+      "tab_ids": [
+        "89407165-1762-451d-ab7c-f20f8aebd5f1"
+      ],
+      "tab_overrides": {},
+      "receiver_side": "unknown"
+    },
+    "93372a05-d469-4e49-91b4-5f6608490a2f": {
+      "id": "93372a05-d469-4e49-91b4-5f6608490a2f",
+      "joint_id": "",
+      "owner_surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "width_mm": 2.0,
+      "taper": 0.6,
+      "shape": "trapezoid",
+      "revision": 3,
+      "attachment_id": "6b379e83-d2f1-4912-ae3c-2c3cf94eebe5",
+      "count": 1,
+      "gap_mm": 0,
+      "outline_mm": [],
+      "enabled": true,
+      "tab_ids": [
+        "131929f7-7aaa-4ce0-9e5c-8be0c7ea7908"
+      ],
+      "tab_overrides": {},
+      "receiver_side": "unknown"
+    },
+    "c8299107-115d-4087-8554-2a99cc8277e5": {
+      "id": "c8299107-115d-4087-8554-2a99cc8277e5",
+      "joint_id": "",
+      "owner_surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+      "width_mm": 2.0,
+      "taper": 0.6,
+      "shape": "trapezoid",
+      "revision": 3,
+      "attachment_id": "410c4a9a-cc8d-42f3-9b85-2140bc929787",
+      "count": 1,
+      "gap_mm": 0,
+      "outline_mm": [],
+      "enabled": true,
+      "tab_ids": [
+        "051c8b3d-adda-43db-b418-22f3a986f18d"
+      ],
+      "tab_overrides": {},
+      "receiver_side": "unknown"
+    }
+  },
+  "placements": {
+    "1ca3e2f7-2fba-406b-b3b0-623db1d649d3": {
+      "page_id": null,
+      "x_mm": 0.0,
+      "y_mm": 0.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "31e7b34a-e2da-453f-b32c-e37f96482e66": {
+      "page_id": null,
+      "x_mm": 120.0,
+      "y_mm": 0.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "6a6bbba8-3aab-43de-b749-b6dfa16d7e92": {
+      "page_id": null,
+      "x_mm": 240.0,
+      "y_mm": 0.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "7357a8f3-29e9-4875-a8ca-e9cf58717625": {
+      "page_id": null,
+      "x_mm": 0.0,
+      "y_mm": 120.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "66504f5b-ba9e-4b12-908c-f4b337c8a8bf": {
+      "page_id": null,
+      "x_mm": 120.0,
+      "y_mm": 120.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "c806a06e-f78c-4d74-b8d9-068bd5a1cf18": {
+      "page_id": null,
+      "x_mm": 0.0,
+      "y_mm": 240.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "4a797fdf-3f93-4b2c-8b2e-5ba5fe6d543a": {
+      "page_id": null,
+      "x_mm": 120.0,
+      "y_mm": 240.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    },
+    "9907efec-45f5-4fbb-9536-b3bf85c17775": {
+      "page_id": null,
+      "x_mm": 240.0,
+      "y_mm": 240.0,
+      "rotation_deg": 0.0,
+      "position_locked": false,
+      "rotation_locked": false
+    }
+  },
+  "attachments": {
+    "66e769c7-fe3d-4979-b0d6-500a5510537a": {
+      "id": "66e769c7-fe3d-4979-b0d6-500a5510537a",
+      "kind": "surface_trace",
+      "source_surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+      "target_surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "source_edge_id": "ef0fe9df-a6d5-45f1-b962-91c26bd493a9",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": "5d473795-0ad8-475b-9528-5dc88ab60f09",
+      "revision": 1,
+      "number": 1,
+      "unresolved": false
+    },
+    "6b379e83-d2f1-4912-ae3c-2c3cf94eebe5": {
+      "id": "6b379e83-d2f1-4912-ae3c-2c3cf94eebe5",
+      "kind": "surface_trace",
+      "source_surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "target_surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "source_edge_id": "7d7cef02-09b4-4343-b732-57da381928f4",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": -1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": "93372a05-d469-4e49-91b4-5f6608490a2f",
+      "revision": 1,
+      "number": 2,
+      "unresolved": false
+    },
+    "871195e9-3fb8-4c0a-9be0-907d8380123e": {
+      "id": "871195e9-3fb8-4c0a-9be0-907d8380123e",
+      "kind": "surface_trace",
+      "source_surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+      "target_surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "source_edge_id": "55df8e75-90d4-430d-b2c8-050d09a5af14",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 1,
+      "number": 3,
+      "unresolved": false
+    },
+    "ef8b01b0-651d-46f6-ac9b-3201cbdfa537": {
+      "id": "ef8b01b0-651d-46f6-ac9b-3201cbdfa537",
+      "kind": "surface_trace",
+      "source_surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+      "target_surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "source_edge_id": "b4b0be4b-3ecd-4238-a627-120b5d863eb0",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 1,
+      "number": 4,
+      "unresolved": false
+    },
+    "8b95d16e-f4e1-4086-b0de-eef5be48133a": {
+      "id": "8b95d16e-f4e1-4086-b0de-eef5be48133a",
+      "kind": "surface_trace",
+      "source_surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "target_surface_id": "13a25517-7565-497a-8b02-ab5d5b276b78",
+      "source_edge_id": "49d6fe93-49cb-4a3b-bd1e-52a1710270bb",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 1,
+      "number": 5,
+      "unresolved": false
+    },
+    "5a37c2ad-5025-4cc0-af5e-c595d2d2b5c1": {
+      "id": "5a37c2ad-5025-4cc0-af5e-c595d2d2b5c1",
+      "kind": "surface_trace",
+      "source_surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "target_surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "source_edge_id": "796b3c22-4797-4868-a06a-d485b94fc1ee",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 1,
+      "number": 6,
+      "unresolved": false
+    },
+    "410c4a9a-cc8d-42f3-9b85-2140bc929787": {
+      "id": "410c4a9a-cc8d-42f3-9b85-2140bc929787",
+      "kind": "glue_region",
+      "source_surface_id": "82807166-c852-44d4-abf8-938d436a2f31",
+      "target_surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "source_edge_id": "c8a8bf61-7b6a-4a10-8c4b-47b71f9c22fb",
+      "source_interval": [
+        0.05,
+        0.95
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [
+        [
+          1389.0,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          8084.700000000001
+        ],
+        [
+          1389.0,
+          8084.700000000001
+        ]
+      ],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": "c8299107-115d-4087-8554-2a99cc8277e5",
+      "revision": 2,
+      "number": 7,
+      "unresolved": false
+    },
+    "724e0f77-4e7e-46eb-9abe-128b9f28b772": {
+      "id": "724e0f77-4e7e-46eb-9abe-128b9f28b772",
+      "kind": "glue_region",
+      "source_surface_id": "a8663414-2cdb-46e0-b024-24999f3aa9ba",
+      "target_surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "source_edge_id": "a766a4a0-09d1-4580-8d33-b301c27422d0",
+      "source_interval": [
+        0.05,
+        0.95
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [
+        [
+          1389.0,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          8084.700000000001
+        ],
+        [
+          1389.0,
+          8084.700000000001
+        ]
+      ],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 2,
+      "number": 8,
+      "unresolved": false
+    },
+    "8a69d7c9-c72c-41e0-bc4d-8ce98813992a": {
+      "id": "8a69d7c9-c72c-41e0-bc4d-8ce98813992a",
+      "kind": "glue_region",
+      "source_surface_id": "f2279317-ad18-496d-af04-5474426037ba",
+      "target_surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "source_edge_id": "afc9c26d-c000-457c-9a1a-374072d869ed",
+      "source_interval": [
+        0.05,
+        0.95
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [
+        [
+          1389.0,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          8084.700000000001
+        ],
+        [
+          1389.0,
+          8084.700000000001
+        ]
+      ],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 2,
+      "number": 9,
+      "unresolved": false
+    },
+    "95cbae9a-43a3-4683-87f8-9f8f5b02ab58": {
+      "id": "95cbae9a-43a3-4683-87f8-9f8f5b02ab58",
+      "kind": "glue_region",
+      "source_surface_id": "fa09d6ba-06a5-4ca0-835f-a24e7f816a23",
+      "target_surface_id": "9af9faca-90f7-4ce5-ad58-8ee72feb350c",
+      "source_edge_id": "f6b01be3-f20b-47e2-a1c6-7b30ee0ae6a9",
+      "source_interval": [
+        0.05,
+        0.95
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [
+        [
+          1389.0,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          1887.6000000000001
+        ],
+        [
+          11610.6,
+          8084.700000000001
+        ],
+        [
+          1389.0,
+          8084.700000000001
+        ]
+      ],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 2,
+      "number": 10,
+      "unresolved": false
+    },
+    "df1a85fc-08a9-4c85-b0d8-d9ab26301b28": {
+      "id": "df1a85fc-08a9-4c85-b0d8-d9ab26301b28",
+      "kind": "surface_trace",
+      "source_surface_id": "69bc2c4b-d346-4bd3-b365-7520d4397267",
+      "target_surface_id": "dc58b2ec-7a34-4429-9817-c77ca6e0710c",
+      "source_edge_id": "f483aefd-d390-4da6-a4f2-47b4f4e1ac03",
+      "source_interval": [
+        0.0,
+        1.0
+      ],
+      "target_side": "inside",
+      "glue_direction": 1,
+      "target_region_uv": [],
+      "source_region_uv": [],
+      "requested_placement": {},
+      "connector_id": null,
+      "revision": 1,
+      "number": 11,
+      "unresolved": false
+    }
+  },
+  "pages": [
+    {
+      "id": "fe69770e-2e54-4d25-bcd2-e0db26c467ce",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "margin_mm": 10.0
+    }
+  ],
+  "acknowledgements": {}
+}

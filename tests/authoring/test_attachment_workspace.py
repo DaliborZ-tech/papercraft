@@ -289,3 +289,40 @@ def test_relationship_selection_and_issue_repair_target_are_shared_between_panel
     qtbot.keyClick(window.viewport, Qt.Key.Key_Home)
     np.testing.assert_allclose(window.viewport.center, [50, 50, 10])
     assert not window.controller.dirty  # Selection and repair navigation never edit the model.
+
+
+def test_same_project_reopen_frames_paper_but_ordinary_refresh_preserves_authors_camera(
+    qtbot, tmp_path, monkeypatch
+):
+    project, *_ = construction()
+    for index, pid in enumerate(project.parts):
+        page = project.pages[0].id if index == 0 else project.add_page()
+        project.set_placement(pid, page, 40, 60)
+    source = tmp_path / "own-pages.apcraft"
+    project.save(source)
+    window = AuthorMainWindow(settings=QSettings(
+        str(tmp_path / "settings.ini"), QSettings.Format.IniFormat
+    ))
+    qtbot.addWidget(window)
+    monkeypatch.setattr(QFileDialog, "getOpenFileName", lambda *args: (str(source), ""))
+    window.open_project()
+    window.show()
+    qtbot.wait(50)
+    window.paper.resetTransform()
+    window.paper.scale(20, 20)
+    window.paper.centerOn(10000, 10000)
+    qtbot.wait(15)
+    transform = window.paper.transform()
+    center = window.paper.mapToScene(window.paper.viewport().rect().center())
+    window.refresh()
+    qtbot.wait(20)
+    assert window.paper.transform() == transform
+    preserved = window.paper.mapToScene(window.paper.viewport().rect().center())
+    assert (preserved - center).manhattanLength() < 0.1
+    # Opening the same project_id is still a file operation, not an ordinary edit refresh.
+    window.open_project()
+    qtbot.wait(30)
+    visible = window.paper.mapToScene(window.paper.viewport().rect()).boundingRect()
+    assert all(visible.contains(item.sceneBoundingRect().center())
+               for item in window.paper.part_items.values())
+    assert window.paper.transform() != transform
