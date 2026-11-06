@@ -462,6 +462,46 @@ def main():
                 "Actual paper selection did not reach 3D",
             )
             capture("05-manual-two-pages-tab-and-locks")
+            remaining = [i for i in window.project.validate_layout() if not i.acknowledged]
+            check(
+                all(
+                    i.code == "MATERIAL_CLEARANCE_UNVERIFIED" and i.severity == "warning"
+                    for i in remaining
+                ),
+                "Unexpected issue must be repaired before export",
+            )
+            acknowledgements = []
+            for issue in remaining:
+                acknowledgements.append(
+                    {
+                        "code": issue.code,
+                        "id": issue.id,
+                        "message": issue.message,
+                        "digest": issue.digest,
+                        "meaning": "digital_only; physical_build_NOT_RUN",
+                    }
+                )
+                item = next(
+                    window.issues.item(i)
+                    for i in range(window.issues.count())
+                    if window.issues.item(i).data(Qt.ItemDataRole.UserRole) == issue.id
+                )
+                window.issues.scrollToItem(item)
+                QTest.mouseClick(
+                    window.issues.viewport(),
+                    Qt.MouseButton.LeftButton,
+                    pos=window.issues.visualItemRect(item).center(),
+                )
+                QTest.qWait(60)
+                click(window.ack_button)
+                check(
+                    next(
+                        i for i in window.project.validate_layout() if i.id == issue.id
+                    ).acknowledged,
+                    "Specific warning UI acknowledgement was not persisted",
+                )
+            report["digital_only_acknowledgements"] = acknowledgements
+            capture("05b-specific-digital-warning-acknowledged")
             snapshot = window.project.snapshot()  # Read-only observation after actual UI commands.
             (output / "snapshot.json").write_text(
                 json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8"
