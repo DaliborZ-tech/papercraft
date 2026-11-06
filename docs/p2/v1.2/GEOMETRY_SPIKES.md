@@ -149,4 +149,3 @@ Spikové prahy 0.2 mm pro bend clearance a 8 mm² kontaktu ukazují tradeoff: 12
 5. Aproximační varianta uchová cíl, error budget, cuts/creases a report sampled versus prokázaných mezí. Přesný rozvin odvozených facets není přesný rozvin původní hladké plochy.
 
 Spiky neřeší obecné samo-průsečíky všech možných křivek, certifikaci libovolného Bézier loftu, úplnou intervalovou aritmetiku, net optimalizaci nebo prakticky slepitelnou segmentaci tisíců triangles. Nedodávají UI průchod A/B/C/D, nový writer, interoperability proof ani fyzickou stavbu. Tyto důkazy musejí vzniknout v přijatých vertikálních řezech. Dosavadní pracovní kód a evidence zůstaly zachované; návrh již nesmí být stabilizován jako house-only doména.
-

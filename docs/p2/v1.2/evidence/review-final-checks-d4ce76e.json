@@ -1,0 +1,1259 @@
+{
+  "code_pin": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+  "checks": [
+    {
+      "name": "collapsed_circle_0.25_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 3.527381858912375e-14,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 392.6990816987239,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_0.25_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 0.0,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 392.6990816987239,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_0.25_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 3.527381858912374e-14,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 392.69908169872383,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_1.4_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 0.0,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 603.1857894892396,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_1.4_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 6.772573169111758e-14,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 603.1857894892396,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_1.4_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 4.228425321170308e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 603.1857894892398,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_3.0_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 1.1287621948519602e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 5026.548245743667,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_3.0_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 1.1287621948519597e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 5026.548245743667,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_circle_3.0_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 7.017822805120265e-14,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 5026.548245743667,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_0.25_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 7.05476371782475e-14,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 589.0486225480859,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_0.25_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 0.0,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 589.0486225480859,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_0.25_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 7.054763717824748e-14,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 589.0486225480859,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_1.4_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 1.3545146338223523e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 904.7786842338595,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_1.4_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 0.0,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 904.7786842338593,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_1.4_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 8.035781274033401e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 904.7786842338592,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_3.0_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 2.2575243897039206e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 7539.822368615501,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_3.0_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 0.0,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 7539.822368615502,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_ellipse_3.0_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 3.3101978104719586e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 7539.8223686155,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_0.25_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 2.957332582640443e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 477.7925839088379,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_0.25_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 2.957332582640443e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 477.7925839088379,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_0.25_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.8,
+        "jacobian": 2.2067503481276225e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.8
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 477.7925839088379,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_1.4_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 1.4411178902646153e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 733.8894088839745,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_1.4_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 2.7958427781404204e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 733.8894088839745,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_1.4_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.4166666666666667,
+        "jacobian": 2.795842778140422e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.4166666666666667
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 733.8894088839745,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_3.0_-180",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 4.659737963567366e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 6115.745074033124,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_3.0_180",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 4.659737963567368e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 6115.745074033124,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "collapsed_gothic_3.0_540",
+      "passed": true,
+      "details": {
+        "v_star": 0.25,
+        "jacobian": 9.31947592713474e-13,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses at the interior ruling fraction v=1/(1+k)",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "collapsed_profile",
+              "v": 0.25
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 6115.745074033124,
+          "corner_parameters": [
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "name": "general_planar_circle_singularity_1.4_60",
+      "passed": true,
+      "details": {
+        "v_star": 0.1923076923076923,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic circular planar Jacobian vanishes at an interior ruling fraction",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "zero_jacobian",
+              "v": 0.19230769230769232
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 376.9911184307747,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "general_planar_circle_singularity_0.5_80",
+      "passed": true,
+      "details": {
+        "v_star": 0.8483990942544797,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic circular planar Jacobian vanishes at an interior ruling fraction",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "zero_jacobian",
+              "v": 0.8483990942544797
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 205.0528975054424,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "general_planar_circle_singularity_1.4_120",
+      "passed": true,
+      "details": {
+        "v_star": 0.38990825688073394,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic circular planar Jacobian vanishes at an interior ruling fraction",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "zero_jacobian",
+              "v": 0.38990825688073394
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 603.1857894892396,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "general_planar_circle_singularity_1.0_17",
+      "passed": true,
+      "details": {
+        "v_star": 0.5,
+        "evidence": {
+          "verdict": "DEGENERATE_OR_SINGULAR",
+          "proof": "analytic circular planar Jacobian vanishes at an interior ruling fraction",
+          "sample_count": 156,
+          "regularity_proof": null,
+          "analytic_singularities": [
+            {
+              "kind": "zero_jacobian",
+              "v": 0.5
+            }
+          ],
+          "trim_domain": {
+            "u": [
+              0.0,
+              1.0
+            ],
+            "v": [
+              0.0,
+              1.0
+            ]
+          },
+          "max_normalized_triple": 0,
+          "min_K_per_mm2": -0.0,
+          "minimum_sampled_jacobian": 0.0,
+          "corner_parameters": []
+        }
+      }
+    },
+    {
+      "name": "proved_semianulus_circle_0.7",
+      "passed": true,
+      "details": {
+        "verdict": "EXACT_PLANAR",
+        "proof": "positive untwisted half-ellipse homothety has a strictly positive analytic Jacobian bound and a simple semi-annular boundary",
+        "sample_count": 156,
+        "regularity_proof": {
+          "analytic_jacobian_lower_bound_mm2": 263.89378290154264,
+          "valid_domain": "u in [0,1], v in [0,1]",
+          "corner_policy": "endpoints are boundary corners; profile is smooth",
+          "boundary_simple": true,
+          "boundary_proof": "positive unequal radial factors and monotone theta in [0,pi] give an injective affine image of a semi-annulus; radial connectors at theta=0 and theta=pi are disjoint",
+          "material_area_mm2": 320.4424506661589
+        },
+        "analytic_singularities": [],
+        "trim_domain": {
+          "u": [
+            0.0,
+            1.0
+          ],
+          "v": [
+            0.0,
+            1.0
+          ]
+        },
+        "max_normalized_triple": 0,
+        "min_K_per_mm2": -0.0,
+        "minimum_sampled_jacobian": 263.8937829015426,
+        "corner_parameters": []
+      }
+    },
+    {
+      "name": "proved_semianulus_circle_1.5",
+      "passed": true,
+      "details": {
+        "verdict": "EXACT_PLANAR",
+        "proof": "positive untwisted half-ellipse homothety has a strictly positive analytic Jacobian bound and a simple semi-annular boundary",
+        "sample_count": 156,
+        "regularity_proof": {
+          "analytic_jacobian_lower_bound_mm2": 628.3185307179587,
+          "valid_domain": "u in [0,1], v in [0,1]",
+          "corner_policy": "endpoints are boundary corners; profile is smooth",
+          "boundary_simple": true,
+          "boundary_proof": "positive unequal radial factors and monotone theta in [0,pi] give an injective affine image of a semi-annulus; radial connectors at theta=0 and theta=pi are disjoint",
+          "material_area_mm2": 785.3981633974483
+        },
+        "analytic_singularities": [],
+        "trim_domain": {
+          "u": [
+            0.0,
+            1.0
+          ],
+          "v": [
+            0.0,
+            1.0
+          ]
+        },
+        "max_normalized_triple": 0,
+        "min_K_per_mm2": -0.0,
+        "minimum_sampled_jacobian": 628.3185307179584,
+        "corner_parameters": []
+      }
+    },
+    {
+      "name": "proved_semianulus_ellipse_0.7",
+      "passed": true,
+      "details": {
+        "verdict": "EXACT_PLANAR",
+        "proof": "positive untwisted half-ellipse homothety has a strictly positive analytic Jacobian bound and a simple semi-annular boundary",
+        "sample_count": 156,
+        "regularity_proof": {
+          "analytic_jacobian_lower_bound_mm2": 395.84067435231395,
+          "valid_domain": "u in [0,1], v in [0,1]",
+          "corner_policy": "endpoints are boundary corners; profile is smooth",
+          "boundary_simple": true,
+          "boundary_proof": "positive unequal radial factors and monotone theta in [0,pi] give an injective affine image of a semi-annulus; radial connectors at theta=0 and theta=pi are disjoint",
+          "material_area_mm2": 480.66367599923836
+        },
+        "analytic_singularities": [],
+        "trim_domain": {
+          "u": [
+            0.0,
+            1.0
+          ],
+          "v": [
+            0.0,
+            1.0
+          ]
+        },
+        "max_normalized_triple": 0,
+        "min_K_per_mm2": -0.0,
+        "minimum_sampled_jacobian": 395.84067435231384,
+        "corner_parameters": []
+      }
+    },
+    {
+      "name": "proved_semianulus_ellipse_1.5",
+      "passed": true,
+      "details": {
+        "verdict": "EXACT_PLANAR",
+        "proof": "positive untwisted half-ellipse homothety has a strictly positive analytic Jacobian bound and a simple semi-annular boundary",
+        "sample_count": 156,
+        "regularity_proof": {
+          "analytic_jacobian_lower_bound_mm2": 942.4777960769379,
+          "valid_domain": "u in [0,1], v in [0,1]",
+          "corner_policy": "endpoints are boundary corners; profile is smooth",
+          "boundary_simple": true,
+          "boundary_proof": "positive unequal radial factors and monotone theta in [0,pi] give an injective affine image of a semi-annulus; radial connectors at theta=0 and theta=pi are disjoint",
+          "material_area_mm2": 1178.0972450961724
+        },
+        "analytic_singularities": [],
+        "trim_domain": {
+          "u": [
+            0.0,
+            1.0
+          ],
+          "v": [
+            0.0,
+            1.0
+          ]
+        },
+        "max_normalized_triple": 0,
+        "min_K_per_mm2": -0.0,
+        "minimum_sampled_jacobian": 942.4777960769376,
+        "corner_parameters": []
+      }
+    },
+    {
+      "name": "spatial_proof_circle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "twisted_negative_circle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "negative_depth_not_false_exact_circle",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "spatial_proof_ellipse",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "twisted_negative_ellipse",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "negative_depth_not_false_exact_ellipse",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "spatial_proof_gothic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "twisted_negative_gothic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "negative_depth_not_false_exact_gothic",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "unsupported_planar_gothic_no_certificate",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "finite_zeros_do_not_prove_family",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "passed": 46,
+  "total": 46,
+  "reviewer_source_sha256": "187c7ce992ac3a3102ef9e418b907bfb9734ad28b6a71e764b71c40e4a456314"
+}

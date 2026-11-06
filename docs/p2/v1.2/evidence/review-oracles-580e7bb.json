@@ -1,0 +1,565 @@
+{
+  "code_pin": "580e7bbb6e98b3b688952ee750508f5bca0501ca",
+  "reviewer_source_sha256": "a0a3be492c372d0450ee182e4eebad234856649d85783bd2cef58831e3c5ad9d",
+  "checks": [
+    {
+      "name": "cylinder_circumference",
+      "actual": 62.83185307179586,
+      "oracle": 62.83185307179586,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cylinder_area",
+      "actual": 1884.9555921538758,
+      "oracle": 1884.9555921538758,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_angle",
+      "actual": 2.0943951023931953,
+      "oracle": 2.0943951023931953,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_area",
+      "actual": 2827.4333882308138,
+      "oracle": 2827.4333882308138,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_inner",
+      "actual": 30.0,
+      "oracle": 30.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_outer",
+      "actual": 60.0,
+      "oracle": 60.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_ruling_0",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_ruling_0.2",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_ruling_0.7",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_10_20_ruling_1",
+      "actual": 29.999999999999996,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_angle",
+      "actual": 2.0943951023931953,
+      "oracle": 2.0943951023931953,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_area",
+      "actual": 2827.4333882308138,
+      "oracle": 2827.4333882308138,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_inner",
+      "actual": 30.0,
+      "oracle": 30.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_outer",
+      "actual": 60.0,
+      "oracle": 60.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_ruling_0",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_ruling_0.2",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_ruling_0.7",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_10_ruling_1",
+      "actual": 29.999999999999996,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_angle",
+      "actual": 4.1887902047863905,
+      "oracle": 4.1887902047863905,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_area",
+      "actual": 1884.9555921538758,
+      "oracle": 1884.9555921538758,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_inner",
+      "actual": 0.0,
+      "oracle": 0.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_outer",
+      "actual": 30.0,
+      "oracle": 30.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_ruling_0",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_ruling_0.2",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_ruling_0.7",
+      "actual": 29.999999999999996,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_0_20_ruling_1",
+      "actual": 29.999999999999996,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_angle",
+      "actual": 4.1887902047863905,
+      "oracle": 4.1887902047863905,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_area",
+      "actual": 1884.9555921538758,
+      "oracle": 1884.9555921538758,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_inner",
+      "actual": 0.0,
+      "oracle": 0.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_outer",
+      "actual": 30.0,
+      "oracle": 30.0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_ruling_0",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_ruling_0.2",
+      "actual": 30.0,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_ruling_0.7",
+      "actual": 29.999999999999996,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "cone_20_0_ruling_1",
+      "actual": 29.999999999999996,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "near_cylinder_end_x",
+      "actual": 62.83185307179593,
+      "oracle": 62.83185307179586,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "near_cylinder_end_y",
+      "actual": 29.99999999999993,
+      "oracle": 30,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "triple_30_0.11",
+      "actual": -71061.15168784335,
+      "oracle": -71061.15168784336,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "triple_30_0.37",
+      "actual": -71061.15168784336,
+      "oracle": -71061.15168784336,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "triple_30_0.83",
+      "actual": -71061.15168784335,
+      "oracle": -71061.15168784336,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "nondevelopable_30",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "triple_-30_0.11",
+      "actual": 71061.15168784336,
+      "oracle": 71061.15168784336,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "triple_-30_0.37",
+      "actual": 71061.15168784336,
+      "oracle": 71061.15168784336,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "triple_-30_0.83",
+      "actual": 71061.15168784333,
+      "oracle": 71061.15168784336,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "nondevelopable_-30",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "triple_90_0.11",
+      "actual": -142122.30337568672,
+      "oracle": -142122.30337568675,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "triple_90_0.37",
+      "actual": -142122.30337568675,
+      "oracle": -142122.30337568675,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "triple_90_0.83",
+      "actual": -142122.30337568672,
+      "oracle": -142122.30337568675,
+      "tolerance": 1e-07,
+      "passed": true
+    },
+    {
+      "name": "nondevelopable_90",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "roof_uv_y_5",
+      "actual": 7.071067811865475,
+      "oracle": 7.0710678118654755,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "roof_contact_5",
+      "actual": 500.0,
+      "oracle": 500,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "roof_world_unchanged_5",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "roof_uv_y_8",
+      "actual": 11.31370849898476,
+      "oracle": 11.313708498984761,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "roof_contact_8",
+      "actual": 500.0,
+      "oracle": 500,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "roof_world_unchanged_8",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "roof_oversize_contact",
+      "actual": 4242.640687119285,
+      "oracle": 4242.640687119286,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "roof_gap_has_no_contact",
+      "actual": 0.0,
+      "oracle": 0,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "base_nominal",
+      "actual": 1600.0,
+      "oracle": 1600,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "base_hole_subtraction",
+      "actual": 1500.0,
+      "oracle": 1500,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_chord_12",
+      "actual": 9.578002174740005,
+      "oracle": 9.578002174740005,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_sagitta_12",
+      "actual": 0.581826332397557,
+      "oracle": 0.581826332397557,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_side_change_12",
+      "actual": 0.4403264608445614,
+      "oracle": 0.4403264608445614,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_contact_relief_12",
+      "actual": 16.640620482688327,
+      "oracle": 16.640620482688327,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_not_exact_12",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "tab_chord_24",
+      "actual": 4.426900500973518,
+      "oracle": 4.426900500973518,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_sagitta_24",
+      "actual": 0.12286142351922713,
+      "oracle": 0.12286142351922713,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_side_change_24",
+      "actual": 0.11395513174076388,
+      "oracle": 0.11395513174076388,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_contact_relief_24",
+      "actual": 8.695313849421325,
+      "oracle": 8.695313849421325,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_not_exact_24",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "tab_chord_48",
+      "actual": 1.8173680410998008,
+      "oracle": 1.8173680410998008,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_sagitta_48",
+      "actual": 0.02065333023130833,
+      "oracle": 0.02065333023130833,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_side_change_48",
+      "actual": 0.02037509554378847,
+      "oracle": 0.02037509554378847,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_contact_relief_48",
+      "actual": 3.6615913840183345,
+      "oracle": 3.6615913840183345,
+      "tolerance": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "tab_not_exact_48",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "wide_tabs_collide",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "constructed_internal_singularity",
+      "passed": true,
+      "details": {
+        "regular": false,
+        "jacobian": 6.772573169111758e-14,
+        "triple": 0.0,
+        "residual": null,
+        "K": null
+      }
+    },
+    {
+      "name": "production_sources_unchanged",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "v12_gate_pending",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "findings": [
+    {
+      "id": "DR-01",
+      "case": "coplanar antipodal profiles",
+      "v_star": 0.4166666666666667,
+      "analytic": "S=(1-(1+k)*v)*C0, so every u collapses at v=1/(1+k)",
+      "classifier": {
+        "verdict": "EXACT_PLANAR",
+        "proof": "both curves and every ruling lie in the same plane; separate boundary validity required",
+        "sample_count": 156,
+        "regularity_proof": null,
+        "trim_domain": {
+          "u": [
+            0.0,
+            1.0
+          ],
+          "v": [
+            0.0,
+            1.0
+          ]
+        },
+        "max_normalized_triple": 0,
+        "min_K_per_mm2": -0.0,
+        "minimum_sampled_jacobian": 603.1857894892396,
+        "corner_parameters": []
+      },
+      "differential": {
+        "regular": false,
+        "jacobian": 6.772573169111758e-14,
+        "triple": 0.0,
+        "residual": null,
+        "K": null
+      },
+      "observed_exact": true
+    }
+  ],
+  "passed": 77,
+  "total": 77
+}

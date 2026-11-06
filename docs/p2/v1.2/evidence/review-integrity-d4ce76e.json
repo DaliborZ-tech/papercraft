@@ -1,0 +1,360 @@
+{
+  "code_pin": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+  "base": "6eb8977011854b242ab1dac8ea929e262e3b9563",
+  "checks": [
+    {
+      "name": "all_ticket_ids_unique",
+      "passed": true
+    },
+    {
+      "name": "depends_and_completed_by_form_DAG",
+      "passed": true
+    },
+    {
+      "name": "all_18_new_criteria_traced",
+      "passed": true
+    },
+    {
+      "name": "all_new_product_criteria_NOT_RUN",
+      "passed": true
+    },
+    {
+      "name": "all_P2_production_unauthorized",
+      "passed": true
+    },
+    {
+      "name": "only_current_design_authorized",
+      "passed": true
+    },
+    {
+      "name": "first_author_release_A_has_both_children",
+      "passed": true
+    },
+    {
+      "name": "first_sketch_not_blocked_by_preset_parent",
+      "passed": true
+    },
+    {
+      "name": "physical_proof_is_P3",
+      "passed": true
+    },
+    {
+      "name": "old_v11_acceptance_preserved",
+      "passed": true
+    },
+    {
+      "name": "new_gate_not_PO_accepted",
+      "passed": true
+    },
+    {
+      "name": "all_sixteen_epics_visible",
+      "passed": true
+    },
+    {
+      "name": "src_and_pyproject_unchanged",
+      "passed": true
+    },
+    {
+      "name": "bundle_bytes_exact",
+      "passed": true
+    },
+    {
+      "name": "bundle_head_exact",
+      "passed": true
+    },
+    {
+      "name": "independent_fresh_repository_restore",
+      "passed": true
+    },
+    {
+      "name": "reproduced_results_equal_published",
+      "passed": true
+    },
+    {
+      "name": "actual_spike_source_hash_tools/spikes/p2_v12_geometry.py",
+      "passed": true
+    },
+    {
+      "name": "actual_spike_source_hash_tests/spikes/test_p2_v12_geometry.py",
+      "passed": true
+    },
+    {
+      "name": "own_273_tests_no_fail_error_skip",
+      "passed": true
+    }
+  ],
+  "acceptance_mapping": {
+    "AC-AU04": [
+      "PC-006",
+      "PC-006B"
+    ],
+    "AC-AU02": [
+      "PC-006",
+      "PC-006A"
+    ],
+    "AC-AU05": [
+      "PC-006",
+      "PC-006B"
+    ],
+    "AC-AU09": [
+      "PC-007",
+      "PC-007A"
+    ],
+    "AC-AU13": [
+      "PC-006",
+      "PC-007",
+      "PC-008",
+      "PC-006A",
+      "PC-006B",
+      "PC-007A",
+      "PC-007B"
+    ],
+    "AC-AU16": [
+      "PC-006",
+      "PC-008",
+      "PC-006A"
+    ],
+    "AC-AU14": [
+      "PC-008"
+    ],
+    "AC-AU17": [
+      "PC-009"
+    ],
+    "AC-AU11": [
+      "PC-007",
+      "PC-007B"
+    ],
+    "AC-AU03": [
+      "PC-006",
+      "PC-006A",
+      "PC-006B"
+    ],
+    "AC-AU08": [
+      "PC-007",
+      "PC-007A"
+    ],
+    "AC-AU07": [
+      "PC-006",
+      "PC-006B",
+      "PC-007B"
+    ],
+    "AC-AU01": [
+      "PC-006",
+      "PC-006A"
+    ],
+    "AC-AU12": [
+      "PC-008"
+    ],
+    "AC-AU15": [
+      "PC-006",
+      "PC-007",
+      "PC-008",
+      "PC-009",
+      "PC-006A",
+      "PC-006B",
+      "PC-007A",
+      "PC-007B"
+    ],
+    "AC-AU06": [
+      "PC-006",
+      "PC-006B"
+    ],
+    "AC-AU10": [
+      "PC-007",
+      "PC-007B"
+    ],
+    "AC-AU18": [
+      "PC-011"
+    ]
+  },
+  "test_counts": {
+    "tests": 273,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "commands": [
+    {
+      "args": [
+        "diff",
+        "--name-only",
+        "6eb8977011854b242ab1dac8ea929e262e3b9563",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": ".gitattributes\n00_START_HERE.md\n01_START_PROMPT.md\n02_CODEX_MANDATE.md\n03_EPICS_AND_ROADMAP.md\n04_ACCEPTANCE_AND_VERIFICATION.md\n05_WORK_QUEUE.json\nAGENTS.md\ndocs/p2/ACCEPTANCE_RECORD.md\ndocs/p2/PAPER_ENGINE_REVIEW.md\ndocs/p2/PC006_CORE_REVIEW.md\ndocs/p2/archive/p2-v11-prototype.bundle\ndocs/p2/evidence/editor-descendant-movement.json\ndocs/p2/evidence/editor-export-tests.xml\ndocs/p2/evidence/editor-export-verification.json\ndocs/p2/evidence/editor-harness-attempts.json\ndocs/p2/evidence/editor-proof-final/editor-edited.svg\ndocs/p2/evidence/editor-proof-final/editor-gui.png\ndocs/p2/evidence/editor-proof-final/editor-render.png\ndocs/p2/evidence/editor-proof-final/editor-results.json\ndocs/p2/evidence/editor-proof-final/editor-source/.panel-export.json\ndocs/p2/evidence/editor-proof-final/editor-source/model.pdf\ndocs/p2/evidence/editor-proof-final/editor-source/page-one.svg\ndocs/p2/evidence/editor-proof-fixed/editor-edited.svg\ndocs/p2/evidence/editor-proof-fixed/editor-gui.png\ndocs/p2/evidence/editor-proof-fixed/editor-render.png\ndocs/p2/evidence/editor-proof-fixed/editor-results.json\ndocs/p2/evidence/editor-proof-fixed/editor-source/.panel-export.json\ndocs/p2/evidence/editor-proof-fixed/editor-source/model.pdf\ndocs/p2/evidence/editor-proof-fixed/editor-source/page-one.svg\ndocs/p2/evidence/editor-proof-individual/editor-edited.svg\ndocs/p2/evidence/editor-proof-individual/editor-render.png\ndocs/p2/evidence/editor-proof-individual/editor-source/.panel-export.json\ndocs/p2/evidence/editor-proof-individual/editor-source/model.pdf\ndocs/p2/evidence/editor-proof-individual/editor-source/page-one.svg\ndocs/p2/evidence/editor-proof/editor-colored.svg\ndocs/p2/evidence/editor-proof/editor-edited.svg\ndocs/p2/evidence/editor-proof/editor-render.png\ndocs/p2/evidence/editor-proof/editor-source/.panel-export.json\ndocs/p2/evidence/editor-proof/editor-source/model.pdf\ndocs/p2/evidence/editor-proof/editor-source/page-one.svg\ndocs/p2/evidence/editor-sources.json\ndocs/p2/evidence/house-editor-proof/editor-edited.svg\ndocs/p2/evidence/house-editor-proof/editor-final-render.png\ndocs/p2/evidence/house-editor-proof/editor-gui.png\ndocs/p2/evidence/house-editor-proof/editor-original.svg\ndocs/p2/evidence/house-editor-proof/editor-render.png\ndocs/p2/evidence/house-editor-proof/editor-results.json\ndocs/p2/evidence/p2-desktop-attempt1.json\ndocs/p2/evidence/p2-desktop-attempt1.log\ndocs/p2/evidence/p2-desktop-attempt1/collision.png\ndocs/p2/evidence/p2-desktop-attempt1/mixed-recomputed.png\ndocs/p2/evidence/p2-desktop-attempt1/mixed-stale.png\ndocs/p2/evidence/p2-desktop-attempt1/reference-house.apcraft\ndocs/p2/evidence/p2-desktop-attempt1/results.json\ndocs/p2/evidence/p2-desktop-attempt1/snapshot.json\ndocs/p2/evidence/p2-desktop-attempt2.json\ndocs/p2/evidence/p2-desktop-attempt2.log\ndocs/p2/evidence/p2-desktop-attempt2/collision.png\ndocs/p2/evidence/p2-desktop-attempt2/mixed-recomputed.png\ndocs/p2/evidence/p2-desktop-attempt2/mixed-stale.png\ndocs/p2/evidence/p2-desktop-attempt2/reference-house.apcraft\ndocs/p2/evidence/p2-desktop-attempt2/snapshot.json\ndocs/p2/evidence/p2-desktop-attempt3.json\ndocs/p2/evidence/p2-desktop-attempt3.log\ndocs/p2/evidence/p2-desktop-attempt3/collision.png\ndocs/p2/evidence/p2-desktop-attempt3/export/.panel-export.json\ndocs/p2/evidence/p2-desktop-attempt3/export/model.pdf\ndocs/p2/evidence/p2-desktop-attempt3/export/page-188643d5-2f4e-4dae-bf89-14326038a0e1.svg\ndocs/p2/evidence/p2-desktop-attempt3/export/page-b36dd167-b7a2-45f7-bd8b-9735577588e8.svg\ndocs/p2/evidence/p2-desktop-attempt3/final-workspace.png\ndocs/p2/evidence/p2-desktop-attempt3/mixed-recomputed.png\ndocs/p2/evidence/p2-desktop-attempt3/mixed-stale.png\ndocs/p2/evidence/p2-desktop-attempt3/reference-house.apcraft\ndocs/p2/evidence/p2-desktop-attempt3/results.json\ndocs/p2/evidence/p2-desktop-attempt3/snapshot.json\ndocs/p2/evidence/p2-first-full-suite.json\ndocs/p2/evidence/p2-first-full-suite.log\ndocs/p2/evidence/p2-first-full-suite.xml\ndocs/p2/evidence/p2-prototype-preservation.json\ndocs/p2/evidence/p2-prototype-preservation.log\ndocs/p2/evidence/p2-prototype-preservation.xml\ndocs/p2/evidence/paper-review-checks.py\ndocs/p2/evidence/paper-review-results-3fcf877.json\ndocs/p2/evidence/paper-review-tests.xml\ndocs/p2/evidence/pc006-core-fixed.xml\ndocs/p2/evidence/pc006-core-precision.xml\ndocs/p2/evidence/pc006-core.xml\ndocs/p2/evidence/pc006-desktop-01/framebuffer.png\ndocs/p2/evidence/pc006-desktop-01/house.apcraft\ndocs/p2/evidence/pc006-desktop-01/legacy-read-only.png\ndocs/p2/evidence/pc006-desktop-01/results.json\ndocs/p2/evidence/pc006-desktop-01/workspace.png\ndocs/p2/evidence/pc006-desktop-final.json\ndocs/p2/evidence/pc006-desktop-final.log\ndocs/p2/evidence/pc006-desktop-final/framebuffer.png\ndocs/p2/evidence/pc006-desktop-final/house.apcraft\ndocs/p2/evidence/pc006-desktop-final/legacy-read-only.png\ndocs/p2/evidence/pc006-desktop-final/results.json\ndocs/p2/evidence/pc006-desktop-final/workspace.png\ndocs/p2/evidence/pc006-review-checks.py\ndocs/p2/evidence/pc006-review-final-tests.xml\ndocs/p2/evidence/pc006-review-fixed-tests.xml\ndocs/p2/evidence/pc006-review-recheck-2a341e1.json\ndocs/p2/evidence/pc006-review-recheck-6d41b2b.json\ndocs/p2/evidence/pc006-review-recheck.py\ndocs/p2/evidence/pc006-review-results.json\ndocs/p2/evidence/pc006-review-tests.xml\ndocs/p2/evidence/pc006-ui-final.json\ndocs/p2/evidence/pc006-ui-final.log\ndocs/p2/evidence/pc006-ui-final.xml\ndocs/p2/evidence/pc006-ui-fixed.json\ndocs/p2/evidence/pc006-ui-fixed.log\ndocs/p2/evidence/pc006-ui-fixed.xml\ndocs/p2/evidence/pc007-008-engine.json\ndocs/p2/evidence/pc007-008-engine.log\ndocs/p2/evidence/pc007-008-engine.xml\ndocs/p2/v1.2/ACCEPTANCE.md\ndocs/p2/v1.2/ARCHITECTURE.md\ndocs/p2/v1.2/AUTHORING_UX.md\ndocs/p2/v1.2/CODE_DISPOSITION.md\ndocs/p2/v1.2/ESTIMATE_AND_RISKS.md\ndocs/p2/v1.2/GEOMETRY_SPIKES.md\ndocs/p2/v1.2/OWNER_CLARIFICATION.txt\ndocs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md\ndocs/p2/v1.2/PRESERVATION.md\ndocs/p2/v1.2/PRODUCT_ANALYSIS.md\ndocs/p2/v1.2/README.md\ndocs/p2/v1.2/ROADMAP.md\ndocs/p2/v1.2/VERIFICATION.md\ndocs/p2/v1.2/evidence/design-full-tests.xml\ndocs/p2/v1.2/evidence/geometry-dr01-results.json\ndocs/p2/v1.2/evidence/geometry-dr01-tab-footprints.svg\ndocs/p2/v1.2/evidence/geometry-dr01-tests.xml\ndocs/p2/v1.2/evidence/geometry-dr01-validation.json\ndocs/p2/v1.2/evidence/geometry-pinned.json\ndocs/p2/v1.2/evidence/geometry-preformat-results.json\ndocs/p2/v1.2/evidence/geometry-preformat-tab-footprints.svg\ndocs/p2/v1.2/evidence/geometry-preformat-tests.xml\ndocs/p2/v1.2/evidence/geometry-preformat-validation.json\ndocs/p2/v1.2/evidence/geometry-results.json\ndocs/p2/v1.2/evidence/geometry-tab-footprints.svg\ndocs/p2/v1.2/evidence/geometry-tests.xml\ndocs/p2/v1.2/evidence/geometry-validation.json\ndocs/p2/v1.2/evidence/preservation-restore.json\ndocs/revival/ARCHITECTURE_DECISION.md\ndocs/revival/CURRENT_PROJECT_STATE.md\ndocs/revival/MIXED_PART_LAYOUT_CONTRACT.md\ndocs/revival/P2_IMPLEMENTATION_CONTRACT.md\ndocs/revival/PO_DECISION_CARD.md\ndocs/revival/TRACEABILITY.md\ndocs/revival/UX_CONTRACT.md\ntests/spikes/test_p2_v12_geometry.py\ntools/spikes/p2_v12_geometry.py\ntools/spikes/validate_p2_v12_design.py",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "diff",
+        "--check",
+        "6eb8977011854b242ab1dac8ea929e262e3b9563",
+        "HEAD",
+        "--",
+        ".",
+        ":(exclude)docs/p2/v1.2/GEOMETRY_SPIKES.md"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "diff",
+        "--check"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'docs/p2/v1.2/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/p2/v1.2/VERIFICATION.md', LF will be replaced by CRLF the next time Git touches it"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "6eb8977011854b242ab1dac8ea929e262e3b9563",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "bundle",
+        "verify",
+        "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\\docs\\p2\\archive\\p2-v11-prototype.bundle"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "The bundle contains this ref:\nf9507e325c479c8b703e7f52c410de6847958720 refs/heads/revival/p2\nThe bundle requires this ref:\n6eb8977011854b242ab1dac8ea929e262e3b9563 \nThe bundle uses this hash algorithm: sha1",
+      "stderr": "C:/Users/dalib/projects/papercraft-p2-v12-design/docs/p2/archive/p2-v11-prototype.bundle is okay"
+    },
+    {
+      "args": [
+        "bundle",
+        "list-heads",
+        "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\\docs\\p2\\archive\\p2-v11-prototype.bundle"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "f9507e325c479c8b703e7f52c410de6847958720 refs/heads/revival/p2",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "init",
+        "--bare",
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "Initialized empty Git repository in C:/Users/dalib/AppData/Local/Temp/papercraft-review-restore-kv4lib8d/",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "fetch",
+        "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+        "6eb8977011854b242ab1dac8ea929e262e3b9563"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "From C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\n * branch            6eb8977011854b242ab1dac8ea929e262e3b9563 -> FETCH_HEAD"
+    },
+    {
+      "args": [
+        "fetch",
+        "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\\docs\\p2\\archive\\p2-v11-prototype.bundle",
+        "refs/heads/revival/p2:refs/heads/reviewer-archive"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "From C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\\docs\\p2\\archive\\p2-v11-prototype.bundle\n * [new branch]      revival/p2 -> reviewer-archive"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "refs/heads/reviewer-archive"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "f9507e325c479c8b703e7f52c410de6847958720",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "-e",
+        "f9507e325c479c8b703e7f52c410de6847958720:src/archpapercraft/domain/project.py"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "-e",
+        "f9507e325c479c8b703e7f52c410de6847958720:src/archpapercraft/ui/panel_main_window.py"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "-e",
+        "f9507e325c479c8b703e7f52c410de6847958720:tests/panel/test_paper.py"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "-e",
+        "f9507e325c479c8b703e7f52c410de6847958720:tools/panel/p2_demo.py"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "-e",
+        "f9507e325c479c8b703e7f52c410de6847958720:docs/p2/evidence/house-editor-proof/editor-results.json"
+      ],
+      "cwd": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design",
+      "exit": 0,
+      "stdout": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+      "stderr": ""
+    }
+  ],
+  "retained_disposable_bare_repository": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-review-restore-kv4lib8d",
+  "pass_count": 20,
+  "passed": true
+}

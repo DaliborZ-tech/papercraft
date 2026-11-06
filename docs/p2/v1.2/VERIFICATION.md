@@ -22,3 +22,11 @@ git bundle verify docs/p2/archive/p2-v11-prototype.bundle
 Validator fronty kontroluje unikátní ID, zachování původních ticketů, acykličnost dependency i completion grafu, přiřazení všech18 nových AC, všech16 epic, skutečné historické přijetí v1.1 a oddělenou bránu v1.2, nepřisouzení PASS novým produktovým AC, místní odkazy a integritu bundle. První průchod před vznikem review záměrně hlásil chybějící soubor `INDEPENDENT_REVIEW.md`; finální výsledek se uloží po doplnění nezávislé evidence. Tento validator neposuzuje pravdivost algoritmu ani neuděluje produktové přijetí.
 
 Dosavadní prototyp a jeho úspěšné i neúspěšné desktopové/editorové pokusy se nevydávají za A/B/C/D. Nové skutečné UI, nové persistence, výrobní výstupy a DPI průchody jsou **NOT_RUN**. Fyzický výtisk, lepicí pevnost a sestavení jsou P3, nikoli výsledek matematických spikeů.
+
+## Opravy po nezávislých nálezech
+
+Nový source pin **`d4ce76e38b3632c72964adf3e438c5632849caa9`** opravuje falešné EXACT u singulárního rovinného loftu (DR-01) a texty poškozené přenosem Unicode přes výchozí ASCII stdin PowerShellu (DR-02). Druhá oprava byla provedena přímo z UTF-8 souboru, včetně všech nových pointerů, názvů ve frontě a doplňku přijetí; validator hlídá náhradní značky. Původní raw evidence zůstává zachovaná. Přibyly regrese nesamplovaných singularit, směrů a kruhového descriptoru; celkem je nyní60 spike testů.
+
+Root ověření na tomto source pinu: **273 PASS / 0 FAIL / 0 ERROR / 0 SKIP**, exit0, pytest5.28s; [finální JUnit](evidence/design-final-full-tests.xml). Je to213 původních +60 nových. Ruff PASS. [Všech18 kontrol integrity návrhu](evidence/design-integrity-d4ce76e.json) PASS: nyní též explicitní původní AC přesunutá do P2 a správné UTF-8 texty. Přítomnost review souboru znamená jen existující odkaz; technický verdikt se čte z review a nelze jej vyvodit z integrity validatoru.
+
+[Skutečná obnova archivního bundle](evidence/preservation-restore.json) do nové izolované bare databáze potvrdila SHA archivní větve i přítomnost zdrojového modelu/UI/testu/nástroje a editorového důkazu. Původní workspace zůstává na správném místě, archivní `revival/p2` se nemění. Nezávislý reviewer ověřuje nový pin zvlášť, včetně vlastních hraničních/negativních případů; zde uvedený root test není jeho schválení.

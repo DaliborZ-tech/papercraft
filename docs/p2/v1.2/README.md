@@ -18,6 +18,8 @@ Tento balík obsahuje **analýzu, spustitelné geometrické experimenty a návrh
 | [Odhad a rizika](ESTIMATE_AND_RISKS.md) | Přepočet po prototypu PC-006, širší rozsah, člověkodny a body dalšího přepočtu |
 | [Zachování prototypu a evidence](PRESERVATION.md) | Přesný WIP pin, archivní bundle, význam PASS/FAIL a neúplných pokusů |
 | [Nezávislá revize](INDEPENDENT_REVIEW.md) | Reviewer odlišný od autorů, konkrétní pin, vlastní reprodukce a opravy |
+| [Ověření balíku](VERIFICATION.md) | Přesné source piny, příkazy, výsledky, integrita fronty a obnova archivu |
+| [Integrace a publikace](INTEGRATION_REPORT.md) | Kontrola master/remote, bezpečné zachování WIP a skutečný stav push |
 
 První použitelná autorská verze (PC-006A/B) musí sama vytvořit A bez domu-presetu. Celé P2 přidává B ostění mezi profily, C stočený plášť s dělenými chlopněmi a D pravdivé odmítnutí přesného režimu plus použitelnou odvozenou segmentovanou variantu. Přesné rozviny se neslibují pro libovolný loft. Změna střechy společného dílu stále musí zachovat všechny body kořenové stěny na stránce.
 

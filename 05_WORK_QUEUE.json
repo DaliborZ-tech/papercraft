@@ -22,9 +22,12 @@
     "previous_acceptance": "product_gate_history[0]: P2 v1.1 accepted 2026-11-06; preserved, scope superseded by owner clarification",
     "owner_clarification": "docs/p2/v1.2/OWNER_CLARIFICATION.txt",
     "independent_review": {
-      "verdict": "PENDING",
+      "verdict": "APPROVED_IN_SCOPE",
+      "code_sha": "d4ce76e38b3632c72964adf3e438c5632849caa9",
       "report": "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
-      "scope": "design_and_spikes_only_not_implementation_or_PO_acceptance"
+      "open_blocker_major": 0,
+      "scope": "design_and_spikes_only_not_implementation_or_PO_acceptance",
+      "reviewer": "separate_agent_integration_review"
     }
   },
   "rules": [
@@ -1234,12 +1237,27 @@
         "Independent pinned design review with material findings closed",
         "Master push and SHA equality"
       ],
-      "acceptance_state": {},
-      "status": "IN_REVIEW",
+      "acceptance_state": {
+        "Owner clarification A/B/C/D fully traced": "PASS: independently verified in pinned design review",
+        "Reproducible curved/interior-join/tab spikes affect domain before freeze": "PASS: independently verified in pinned design review",
+        "Existing work and evidence preserved": "PASS: independently verified in pinned design review",
+        "Independent pinned design review with material findings closed": "PASS: independently verified in pinned design review",
+        "Master push and SHA equality": "NOT_RUN: next action is reviewed master integration and push"
+      },
+      "status": "INTEGRATION_READY",
       "execution_authorized_on_realization": true,
       "authorization_source": "explicit_owner_P2_v1.2_clarification_2026-11-06",
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-      "product_acceptance": "NOT_RUN: design review and integration do not imply PO acceptance"
+      "product_acceptance": "NOT_RUN: design review and integration do not imply PO acceptance",
+      "technical_verdict": "APPROVED_IN_SCOPE",
+      "review": "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
+      "reviewed_code_sha": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+      "evidence": [
+        "docs/p2/v1.2/VERIFICATION.md",
+        "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
+        "docs/p2/v1.2/evidence/review-final-checks-d4ce76e.json",
+        "docs/p2/v1.2/evidence/design-final-full-tests.xml"
+      ]
     }
   ],
   "updated_on": "2026-11-06",
@@ -1336,5 +1354,19 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "PC-012"
+  "current_authorized_package": "PC-012",
+  "p2_v12_design_delivery": {
+    "status": "INTEGRATION_READY",
+    "technical_review": {
+      "verdict": "APPROVED_IN_SCOPE",
+      "code_sha": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+      "report": "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
+      "open_blocker_major": 0,
+      "scope": "design_and_spikes_only_not_implementation_or_PO_acceptance",
+      "reviewer": "separate_agent_integration_review"
+    },
+    "integration_report": "docs/p2/v1.2/INTEGRATION_REPORT.md",
+    "product_acceptance": "PO_PENDING",
+    "implementation": "NOT_RUN"
+  }
 }

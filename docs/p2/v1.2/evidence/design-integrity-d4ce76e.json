@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "new_gate_not_falsely_accepted": true,
+    "actual_v11_acceptance_preserved": true,
+    "unique_ticket_ids": true,
+    "existing_ticket_ids_preserved": true,
+    "completion_and_dependency_DAG": true,
+    "all_new_AC_have_tickets": true,
+    "promoted_original_AC_explicitly_traced": true,
+    "no_new_product_AC_claimed_PASS": true,
+    "first_author_version_has_no_preset_dependency": true,
+    "physical_acceptance_separate": true,
+    "current_package_authorized": true,
+    "new_production_scope_not_falsely_authorized": true,
+    "all_16_epics_retained": true,
+    "active_text_has_no_encoding_replacement_markers": true,
+    "local_document_links_exist": true,
+    "preservation_bundle_valid": true,
+    "preservation_bundle_exact_bytes": true,
+    "no_production_pipeline_or_schema_changes": true
+  },
+  "missing_links": [],
+  "pass": true
+}
