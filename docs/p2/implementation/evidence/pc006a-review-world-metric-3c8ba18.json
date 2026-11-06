@@ -1,0 +1,66 @@
+{
+  "source_sha": "3c8ba1815e8ce864d7ee48004163aa59c16f137a",
+  "results": [
+    {
+      "kind": "local",
+      "offset_mm": 1000000000000.0,
+      "with_hole": false,
+      "command_accepted": true,
+      "post_command_world_error": null,
+      "actual_world_area_paper_mm2": 4000.2000000000003,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": null,
+      "pass": true
+    },
+    {
+      "kind": "local",
+      "offset_mm": 1e+16,
+      "with_hole": false,
+      "command_accepted": true,
+      "post_command_world_error": null,
+      "actual_world_area_paper_mm2": 4000.0,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": null,
+      "pass": false
+    },
+    {
+      "kind": "parent",
+      "offset_mm": 1e+16,
+      "with_hole": false,
+      "command_accepted": true,
+      "post_command_world_error": null,
+      "actual_world_area_paper_mm2": 4000.0,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": null,
+      "pass": false
+    },
+    {
+      "kind": "plane",
+      "offset_mm": 1e+16,
+      "with_hole": false,
+      "command_accepted": true,
+      "post_command_world_error": null,
+      "actual_world_area_paper_mm2": 4000.0,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": null,
+      "pass": false
+    },
+    {
+      "kind": "local",
+      "offset_mm": 1e+16,
+      "with_hole": true,
+      "command_accepted": true,
+      "post_command_world_error": "Um\u00edst\u011bn\u00ed ztr\u00e1c\u00ed po\u017eadovanou p\u0159esnost modelu.",
+      "actual_world_area_paper_mm2": null,
+      "analytic_source_area_paper_mm2": 3999.975,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": null,
+      "pass": false
+    }
+  ],
+  "pass": false
+}

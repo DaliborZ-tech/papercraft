@@ -1,5 +1,7 @@
 # ArchPapercraft Studio
 
+Aktuální autorský režim0.3.0 začíná prázdným projektem: vlastní úsečkové profily, konkávní plochy a skutečné otvory, propojený výběr3D/papír, základní švy/chlopně, ruční stránky, undo/save/reopen a vektorové SVG/PDF. [Co bylo skutečně dodáno a ověřeno](docs/p2/implementation/PC006A_DELIVERY.md). Vnitřní připojení s přesahy, křivkové ostění a stočené pláště se dále dodávají podle přijatéhoP2v1.2; nejsou tímto označeny hotové. Následující původní seznam popisuje širší vizi a historické funkce; není certifikátem správnosti staré geometrické pipeline.
+
 **Architektura-first 3D modelář s exportem vystřihovánek (PDF/SVG/DXF)**
 
 > *Jedna aplikace, ve které postavím 3D model historické/moderní architektury

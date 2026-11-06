@@ -1,0 +1,209 @@
+{
+  "source_sha": "b59a526d0ee43c07b26f7858757c988190fb9798",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-b59a526-hvme5sgb",
+  "module_file": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-b59a526-hvme5sgb\\src\\archpapercraft\\authoring\\__init__.py",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-oracles-wr0xs_ls",
+  "elapsed_seconds": 0.36110519990324974,
+  "classification": "independent component math/IO/export checks; no desktop or novice proof",
+  "checks": [
+    {
+      "name": "two_holes_analytic_model_area",
+      "pass": true,
+      "observed": 10793.0
+    },
+    {
+      "name": "two_holes_scaled_paper_area",
+      "pass": true,
+      "observed": 2698.25
+    },
+    {
+      "name": "touching_hole_rejected_transactionally",
+      "pass": true,
+      "observed": {
+        "blocked": true,
+        "type": "ValidationError",
+        "message": "Obrys není platná materiálová plocha: Self-intersection[0 20]"
+      }
+    },
+    {
+      "name": "different_concave_cutout_area",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "large_translated_origin_retains_winding_area",
+      "pass": true,
+      "observed": 11223.0
+    },
+    {
+      "name": "lost_world_metric_rejected_without_mutation",
+      "pass": true,
+      "observed": {
+        "blocked": true,
+        "type": "ValidationError",
+        "message": "Umístění ztrácí požadovanou přesnost modelu."
+      }
+    },
+    {
+      "name": "C01_parameter_edit_preserves_B_owner",
+      "pass": true,
+      "observed": [
+        {
+          "parameter": {
+            "width_mm": 7
+          },
+          "owner_stayed_B": true,
+          "connector_id_stable": true
+        },
+        {
+          "parameter": {
+            "taper": 0.35
+          },
+          "owner_stayed_B": true,
+          "connector_id_stable": true
+        },
+        {
+          "parameter": {
+            "shape": "triangle"
+          },
+          "owner_stayed_B": true,
+          "connector_id_stable": true
+        }
+      ]
+    },
+    {
+      "name": "nonright_convex_fold_mark",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "inside_print_side_swaps_fold_mark",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "whole_folded_part_stale_with_previous_geometry",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "stale_save_reopen_preserves_cache_frame_locks",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "stale_export_blocks",
+      "pass": true,
+      "observed": {
+        "blocked": true,
+        "type": "ValidationError",
+        "message": "Export vyžaduje opravu nebo potvrzení: Díl je po změně konstrukce neaktuální. Přepočítejte jeho rozvin."
+      }
+    },
+    {
+      "name": "all_unchanged_root_points_keep_rotated_page_position",
+      "pass": true,
+      "observed": 0.0
+    },
+    {
+      "name": "cut_split_keeps_both_world_page_regions_and_locks",
+      "pass": true,
+      "observed": [
+        0.0,
+        2.842170943040401e-14
+      ]
+    },
+    {
+      "name": "hole_material_is_void_for_layout_collision",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "missing_runtime_projection_cannot_hide_authoritative_surface",
+      "pass": true,
+      "observed": {
+        "blocked": true,
+        "type": "ValidationError",
+        "message": "Export vyžaduje opravu nebo potvrzení: Projekt obsahuje neplatnou vazbu nebo geometrii: Každý díl musí mít právě jeden záznam umístění."
+      }
+    },
+    {
+      "name": "tampered_cut_path_blocks_snapshot",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "atomic_save_failure_preserves_original_bytes",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "strict_json_reject_18",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "strict_json_reject_19",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "export_does_not_mutate_snapshot",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "svg_part_group_and_all_roles",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "svg_true_hole_has_own_cut_loop",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "pdf_a4_vector_unicode",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "pdf_cut_hole_positions_match_independent_rotation",
+      "pass": true,
+      "observed": [
+        1.5064758159155645e-05,
+        5.1945923971175034e-06
+      ]
+    },
+    {
+      "name": "pdf_100mm_calibration",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "font_failure_preserves_prior_bundle",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "export_writer_rejects_missing_covered_part",
+      "pass": true,
+      "observed": null
+    },
+    {
+      "name": "repeat_snapshot_stable_digest",
+      "pass": true,
+      "observed": null
+    }
+  ],
+  "pass_count": 29,
+  "fail_count": 0,
+  "source_files_sha256": {
+    "src\\archpapercraft\\authoring\\errors.py": "c73b4d32e1f609eab78ae0f0067b5dc483d80435a92a77e89efe43ea12e9d838",
+    "src\\archpapercraft\\authoring\\geometry.py": "a183daa0f705972ea482498bf795a0bacb19954c9b1c228735bcdda782c8e05e",
+    "src\\archpapercraft\\authoring\\model.py": "f7d6c7552e0b0dd5c4e1afbaa37944a93955def834fdb0c31dbef06de9d4d2b0",
+    "src\\archpapercraft\\authoring\\paper.py": "74aa1e3f20696b18bce905ff04381a6fbac64852e119d1482e3394f80b955c59",
+    "src\\archpapercraft\\authoring\\project.py": "8ca1e5c0f2c6f327a05ecc4fa4d698f86b437365e3e39b5a7e72ff3cee32589c",
+    "src\\archpapercraft\\authoring\\__init__.py": "fcabf71f8c446722e9d1e8c860a5141c3a3d94fa42fb377c2894b97621251a16"
+  }
+}

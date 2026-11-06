@@ -1,0 +1,174 @@
+{
+  "source_sha": "7da240386550039761de6861d3149ce9ee1be466",
+  "run": "docs\\p2\\implementation\\evidence\\pc006a-desktop-7da2403-run04",
+  "kind": "independent_XML_actual_PDF_and_saved_project_read_no_writer_helpers",
+  "results": [
+    {
+      "name": "native-source-and-pass",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "independent-snapshot-digest",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "complete-coverage-matches-source",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-page-units-page-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-snapshot-digest-page-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-100mm-calibration-page-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-editable-native-roles-e40af19a-71bd-4850-b890-a9cfc842d939",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-page-units-page-dea8fffd-0ea8-438d-96b6-588902d12846.svg",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-snapshot-digest-page-dea8fffd-0ea8-438d-96b6-588902d12846.svg",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-100mm-calibration-page-dea8fffd-0ea8-438d-96b6-588902d12846.svg",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-editable-native-roles-e80edef3-7f3f-4973-b876-bcc3c88b8d00",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "tab-base-hinge-not-double-cut",
+      "pass": true,
+      "detail": {
+        "CUT": 0,
+        "FOLD_MOUNTAIN": 1,
+        "FOLD_VALLEY": 0
+      }
+    },
+    {
+      "name": "all-svg-part-coverage",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "svg-own-numeric-areas-and-hole",
+      "pass": true,
+      "detail": {
+        "closed_cut_areas_mm2": [
+          [
+            225.0,
+            3600.0
+          ],
+          [
+            468.0
+          ]
+        ],
+        "tab_areas_mm2": [
+          168.0
+        ],
+        "oracle": "A=3300+0.5*10*60, hole=15*15; B=10*30+7*(30+18)/2"
+      }
+    },
+    {
+      "name": "pdf-shared-snapshot-and-pages",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "pdf-physical-page-and-no-images-1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "pdf-physical-page-and-no-images-2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "pdf-independent-world-areas",
+      "pass": true,
+      "detail": [
+        [
+          224.99989514059052,
+          3599.99832224946
+        ],
+        [
+          468.0001092000059
+        ]
+      ]
+    },
+    {
+      "name": "pdf-calibration-and-unicode-font",
+      "pass": true,
+      "detail": {
+        "calibrations_mm": [
+          [
+            100.00001166666667
+          ],
+          [
+            100.00001166666667
+          ]
+        ],
+        "fonts": [
+          {
+            "used": [
+              "/F1",
+              "/F2+0"
+            ],
+            "embedded": [
+              "/F2+0"
+            ]
+          },
+          {
+            "used": [
+              "/F1",
+              "/F2+0"
+            ],
+            "embedded": [
+              "/F2+0"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "saved-manual-layout-and-independent-locks",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "only-explicit-digital-caveat-acknowledged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "three-real-native-path-observations",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "pass": 22,
+  "fail": 0
+}

@@ -1,0 +1,453 @@
+{
+  "source_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-final-4b172e6-gh63_03l",
+  "source_results": [
+    {
+      "path": "pyproject.toml",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/__main__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/app.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/application/__init__.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/application/author_controller.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/buttress.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/floor_slab.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/gothic_window.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/onion_dome.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/opening.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/roof.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/tower.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/wall.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/authoring/__init__.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/authoring/errors.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/authoring/geometry.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/authoring/model.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/authoring/paper.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/authoring/project.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/commands/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/commands/command_stack.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/backend.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/mesh.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/operations.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/primitives.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/stable_ids.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/units.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/validation.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/exporter/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/exporter/author_export.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/exporter/dxf_export.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/exporter/pdf_export.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/exporter/png_export.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/exporter/svg_export.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/layout_packer/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/layout_packer/packer.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/paper_analyzer/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/paper_analyzer/classifier.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/preferences/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/preferences/settings.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/project_io/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/project_io/project.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/node.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/scene.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/snap.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/transform.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/seam_editor/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/seam_editor/auto_seams.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/seam_editor/seam_graph.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/build_guide.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/markings.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/tabs.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/author_paper.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/ui/author_sketch.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/ui/author_viewport.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/ui/author_window.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "src/archpapercraft/ui/main_window.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/object_tree.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/papercraft_panel.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/preferences_dialog.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/properties_panel.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/viewport_3d.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/ui/wizard.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/unfolder/__init__.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/unfolder/approx_unfold.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/unfolder/exact_unfold.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "src/archpapercraft/unfolder/strategies.py",
+      "match": "EXACT_BYTES"
+    },
+    {
+      "path": "tools/authoring/desktop_proof.py",
+      "match": "FAIL"
+    },
+    {
+      "path": "tools/authoring/native_dialogs.py",
+      "match": "FAIL"
+    }
+  ],
+  "source_count": 75,
+  "exact_source_count": 60,
+  "newline_only_count": 0,
+  "source_mismatch_count": 15,
+  "output_results": [
+    {
+      "path": "01-own-concave-hole-stale-desktop.png",
+      "expected": "f141a55b075a90e570e00d5b15dcc8670d09a34d69f23930c4900faf1887811e",
+      "actual": "f141a55b075a90e570e00d5b15dcc8670d09a34d69f23930c4900faf1887811e",
+      "pass": true
+    },
+    {
+      "path": "01-own-concave-hole-stale-opengl.png",
+      "expected": "f324757d1e11fecd75e85027140757f205439529625a628ba277ddc57a461a4d",
+      "actual": "f324757d1e11fecd75e85027140757f205439529625a628ba277ddc57a461a4d",
+      "pass": true
+    },
+    {
+      "path": "02-edited-stale-desktop.png",
+      "expected": "539e08137fa4ee65fc56de06b815c5d4e0486bbad471dd4459e6d189501583b7",
+      "actual": "539e08137fa4ee65fc56de06b815c5d4e0486bbad471dd4459e6d189501583b7",
+      "pass": true
+    },
+    {
+      "path": "02-edited-stale-opengl.png",
+      "expected": "d6caa07e87c3e14a576a2263ddba9098d1f21d2070a1a3abb2b4e21720ed3164",
+      "actual": "d6caa07e87c3e14a576a2263ddba9098d1f21d2070a1a3abb2b4e21720ed3164",
+      "pass": true
+    },
+    {
+      "path": "03-assembly-dialog-desktop.png",
+      "expected": "a3082eb49839977d7a02fb8236e8baadc1299f43dcd01353dfeef1a2102869c2",
+      "actual": "a3082eb49839977d7a02fb8236e8baadc1299f43dcd01353dfeef1a2102869c2",
+      "pass": true
+    },
+    {
+      "path": "03-assembly-dialog-opengl.png",
+      "expected": "f7436a41974a7d0d0af7306184667e5b09b5e8acdba79ef6b4cb277589c554e1",
+      "actual": "f7436a41974a7d0d0af7306184667e5b09b5e8acdba79ef6b4cb277589c554e1",
+      "pass": true
+    },
+    {
+      "path": "03-real-assembly-preview-desktop.png",
+      "expected": "999f491d2ca1b9bb74be4f3c9233054c9a9859bcefd8417a1ce197b2924d60df",
+      "actual": "999f491d2ca1b9bb74be4f3c9233054c9a9859bcefd8417a1ce197b2924d60df",
+      "pass": true
+    },
+    {
+      "path": "03-real-assembly-preview-opengl.png",
+      "expected": "66a37c0385491349f678363d14f3b63db2d0870ea12335b93c50840aec0c31bb",
+      "actual": "66a37c0385491349f678363d14f3b63db2d0870ea12335b93c50840aec0c31bb",
+      "pass": true
+    },
+    {
+      "path": "04-fold-shared-part-desktop.png",
+      "expected": "b0f3be943cc695f5f2014b2814d71d75c3fb522ba12d13b0f5ef9432ddb60a0c",
+      "actual": "b0f3be943cc695f5f2014b2814d71d75c3fb522ba12d13b0f5ef9432ddb60a0c",
+      "pass": true
+    },
+    {
+      "path": "04-fold-shared-part-opengl.png",
+      "expected": "aa9ef9870eb445363cb43d52782aae9d7fdd76efb90c0370af828f6b14dbee2f",
+      "actual": "aa9ef9870eb445363cb43d52782aae9d7fdd76efb90c0370af828f6b14dbee2f",
+      "pass": true
+    },
+    {
+      "path": "05-manual-two-pages-tab-and-locks-desktop.png",
+      "expected": "f94a5573024eaabe888d9ea3782ff169c0a2a74d942d59f64623235d22516813",
+      "actual": "f94a5573024eaabe888d9ea3782ff169c0a2a74d942d59f64623235d22516813",
+      "pass": true
+    },
+    {
+      "path": "05-manual-two-pages-tab-and-locks-opengl.png",
+      "expected": "4827bcc8d607908389bd57b8fbabac1279b4737ba15a01d38aec3d050c2f1111",
+      "actual": "4827bcc8d607908389bd57b8fbabac1279b4737ba15a01d38aec3d050c2f1111",
+      "pass": true
+    },
+    {
+      "path": "05b-specific-digital-warning-acknowledged-desktop.png",
+      "expected": "46b2f706a43967a9fb6608e7ee58b9b2c0f959b949179e6db4ec656f1f8c9d62",
+      "actual": "46b2f706a43967a9fb6608e7ee58b9b2c0f959b949179e6db4ec656f1f8c9d62",
+      "pass": true
+    },
+    {
+      "path": "05b-specific-digital-warning-acknowledged-opengl.png",
+      "expected": "bcd2de9bacd49958262481fedc6b6ed22e576156a6d90bf8017c13965673faec",
+      "actual": "bcd2de9bacd49958262481fedc6b6ed22e576156a6d90bf8017c13965673faec",
+      "pass": true
+    },
+    {
+      "path": "06-native-reopened-desktop.png",
+      "expected": "9712c9def887519d3539839098552c7ad100387a1db5493df17fe5a095798bda",
+      "actual": "9712c9def887519d3539839098552c7ad100387a1db5493df17fe5a095798bda",
+      "pass": true
+    },
+    {
+      "path": "06-native-reopened-opengl.png",
+      "expected": "7aa0e170a360fa63a832a59dcb8fa4b6a27c69ce585054f8d4e2f8d5629b6e76",
+      "actual": "7aa0e170a360fa63a832a59dcb8fa4b6a27c69ce585054f8d4e2f8d5629b6e76",
+      "pass": true
+    },
+    {
+      "path": "export/.author-export.json",
+      "expected": "9a983e76ea5e389c21cf2c4b016baaa32c7b2de8a5a2af811822bb4bc7f49a34",
+      "actual": "9a983e76ea5e389c21cf2c4b016baaa32c7b2de8a5a2af811822bb4bc7f49a34",
+      "pass": true
+    },
+    {
+      "path": "export/model.pdf",
+      "expected": "be91eaa9a4453bf687a1c421020c03718cf1fcf90456b3e727bb8816dcf86c66",
+      "actual": "be91eaa9a4453bf687a1c421020c03718cf1fcf90456b3e727bb8816dcf86c66",
+      "pass": true
+    },
+    {
+      "path": "export/page-9891d8b0-bd54-4b13-8058-342bd40fdaf0.svg",
+      "expected": "03501f7ef4ae47ecc69a7a65135cdd78758862d9da8f7457a35d5587f445d16f",
+      "actual": "03501f7ef4ae47ecc69a7a65135cdd78758862d9da8f7457a35d5587f445d16f",
+      "pass": true
+    },
+    {
+      "path": "export/page-d538304d-2553-4083-b12a-ad297176c249.svg",
+      "expected": "2469d41bba7c8a7f07bafe1e606dd56e95d76bef5cfefdc78cc8ea7cf9123ed9",
+      "actual": "2469d41bba7c8a7f07bafe1e606dd56e95d76bef5cfefdc78cc8ea7cf9123ed9",
+      "pass": true
+    },
+    {
+      "path": "own-model.apcraft",
+      "expected": "72b8d975fb2767569cc671dee51ed85ca1d0c15d2bf885ba83c07bfe594d420c",
+      "actual": "72b8d975fb2767569cc671dee51ed85ca1d0c15d2bf885ba83c07bfe594d420c",
+      "pass": true
+    },
+    {
+      "path": "settings.ini",
+      "expected": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953",
+      "actual": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953",
+      "pass": true
+    },
+    {
+      "path": "snapshot.json",
+      "expected": "4aae9f6dd212220f394125dba766dee81e194b46ba9e4b61221b3de02dc40a72",
+      "actual": "4aae9f6dd212220f394125dba766dee81e194b46ba9e4b61221b3de02dc40a72",
+      "pass": true
+    }
+  ],
+  "output_count": 23,
+  "production_test_dependency_diff_from_independently_tested_bbd1578": "",
+  "pass": false
+}

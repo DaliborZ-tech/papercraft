@@ -737,6 +737,9 @@ def _svg(
                             "y": _fmt(label["y"]),
                             "font-size": _fmt(label.get("size_mm", 2.5)),
                             "font-family": family,
+                            # Native editor typing must preserve a trailing space
+                            # while the author is entering the next word (C06).
+                            "{http://www.w3.org/XML/1998/namespace}space": "preserve",
                             "fill": "#202b2b",
                             "stroke": "none",
                         },
@@ -768,6 +771,7 @@ def _svg(
                 "x": "10",
                 "y": _fmt(y),
                 "font-family": family,
+                "{http://www.w3.org/XML/1998/namespace}space": "preserve",
                 "font-size": "2.5",
                 "fill": "#202b2b",
             },

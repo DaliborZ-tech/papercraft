@@ -1,0 +1,35 @@
+{
+  "source_sha": "3c8ba1815e8ce864d7ee48004163aa59c16f137a",
+  "scope": "supported line-profile hole boundary; not advanced thin-web or material simulation",
+  "results": [
+    {
+      "hole_width_mm": 0.1,
+      "hole_height_mm": 0.2,
+      "issue_codes": [],
+      "expected_small_detail": true,
+      "pass": false
+    },
+    {
+      "hole_width_mm": 0.49,
+      "hole_height_mm": 3.0,
+      "issue_codes": [],
+      "expected_small_detail": true,
+      "pass": false
+    },
+    {
+      "hole_width_mm": 0.5,
+      "hole_height_mm": 3.0,
+      "issue_codes": [],
+      "expected_small_detail": false,
+      "pass": true
+    },
+    {
+      "hole_width_mm": 0.6,
+      "hole_height_mm": 3.0,
+      "issue_codes": [],
+      "expected_small_detail": false,
+      "pass": true
+    }
+  ],
+  "pass": false
+}

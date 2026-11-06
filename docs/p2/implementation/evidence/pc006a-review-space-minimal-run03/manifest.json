@@ -1,0 +1,31 @@
+{
+  "kind": "independent_minimal_AB_fixture_inputs_and_actual_saved_outputs",
+  "raw_result": "docs\\p2\\implementation\\evidence\\pc006a-review-space-minimal-ab-run03.json",
+  "script_sha256": "95b5c6477d5c48c57df3b08f0d4d4fa93863a353d34624aa51795d61c5ee73ab",
+  "inkscape_executable_sha256": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a",
+  "files": [
+    {
+      "path": "docs\\p2\\implementation\\evidence\\pc006a-review-space-minimal-run03\\default-input.svg",
+      "sha256": "9d3931359b0788aed2304e21540eed7476097363b9aa98187442e3b55897ab9c",
+      "original_temporary_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-2tb68af5\\default\\input-original.svg"
+    },
+    {
+      "path": "docs\\p2\\implementation\\evidence\\pc006a-review-space-minimal-run03\\default-edited.svg",
+      "sha256": "d63f098d3902efa9ba93abc277a8a1abd39ad82382e862e55787e7cdde12d002",
+      "original_temporary_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-2tb68af5\\default\\minimal.svg"
+    },
+    {
+      "path": "docs\\p2\\implementation\\evidence\\pc006a-review-space-minimal-run03\\preserve-input.svg",
+      "sha256": "a2a93f2c178b9b11bc074c913958c0397b1e63624d4abf963afa563c873dd91f",
+      "original_temporary_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-2tb68af5\\preserve\\input-original.svg"
+    },
+    {
+      "path": "docs\\p2\\implementation\\evidence\\pc006a-review-space-minimal-run03\\preserve-edited.svg",
+      "sha256": "6b01cc6ffd5aaaecd6191157b172513a6fec67bc54866e69d54170698656745c",
+      "original_temporary_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-2tb68af5\\preserve\\minimal.svg"
+    }
+  ],
+  "production_export_fix_review": "NOT_GRANTED_BY_MINIMAL_EXPERIMENT",
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN"
+}

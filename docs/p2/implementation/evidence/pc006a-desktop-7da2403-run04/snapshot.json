@@ -1,0 +1,224 @@
+{
+  "project_id": "afd0d849-f62b-42aa-8865-d36b86bb0b71",
+  "revision": 24,
+  "scale_label": "1:100",
+  "coverage": {
+    "expected_part_ids": [
+      "e40af19a-71bd-4850-b890-a9cfc842d939",
+      "e80edef3-7f3f-4973-b876-bcc3c88b8d00"
+    ],
+    "expected_surface_ids": [
+      "87b9c3e3-3005-434c-b598-c9d4e356ee41",
+      "06018f3e-b0ae-4de1-8322-62b23cca2fa5"
+    ],
+    "source_revisions": {
+      "e40af19a-71bd-4850-b890-a9cfc842d939": 24,
+      "e80edef3-7f3f-4973-b876-bcc3c88b8d00": 24
+    }
+  },
+  "pages": [
+    {
+      "id": "4e4eefb9-aada-4c67-b70e-a2045ffb9b27",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "e40af19a-71bd-4850-b890-a9cfc842d939",
+          "name": "P3 · Plocha 1",
+          "surface_ids": [
+            "87b9c3e3-3005-434c-b598-c9d4e356ee41"
+          ],
+          "source_revision": 24,
+          "placement": {
+            "x_mm": 60.0,
+            "y_mm": 50.0,
+            "rotation_deg": 30.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    80.0,
+                    0.0
+                  ],
+                  [
+                    90.0,
+                    60.0
+                  ],
+                  [
+                    50.0,
+                    60.0
+                  ],
+                  [
+                    50.0,
+                    30.0
+                  ],
+                  [
+                    0.0,
+                    30.0
+                  ]
+                ],
+                "closed": true
+              },
+              {
+                "points": [
+                  [
+                    55.0,
+                    5.0
+                  ],
+                  [
+                    70.0,
+                    5.0
+                  ],
+                  [
+                    70.0,
+                    20.0
+                  ],
+                  [
+                    55.0,
+                    20.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P3 · Plocha 1",
+              "x": 68.75,
+              "y": 45.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "J1",
+              "x": 0.0,
+              "y": 15.0,
+              "size_mm": 2.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dea8fffd-0ea8-438d-96b6-588902d12846",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "e80edef3-7f3f-4973-b876-bcc3c88b8d00",
+          "name": "P2 · Plocha 2",
+          "surface_ids": [
+            "06018f3e-b0ae-4de1-8322-62b23cca2fa5"
+          ],
+          "source_revision": 24,
+          "placement": {
+            "x_mm": 50.0,
+            "y_mm": 60.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    30.0
+                  ],
+                  [
+                    10.0,
+                    30.0
+                  ],
+                  [
+                    17.0,
+                    24.0
+                  ],
+                  [
+                    17.0,
+                    6.0
+                  ],
+                  [
+                    10.0,
+                    0.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [
+              {
+                "points": [
+                  [
+                    10.0,
+                    0.0
+                  ],
+                  [
+                    10.0,
+                    30.0
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "FOLD_VALLEY": [],
+            "TABS": [
+              {
+                "points": [
+                  [
+                    10.0,
+                    0.0
+                  ],
+                  [
+                    10.0,
+                    30.0
+                  ],
+                  [
+                    17.0,
+                    24.0
+                  ],
+                  [
+                    17.0,
+                    6.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P2 · Plocha 2",
+              "x": 5.0,
+              "y": 15.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "J1",
+              "x": 10.0,
+              "y": 15.0,
+              "size_mm": 2.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

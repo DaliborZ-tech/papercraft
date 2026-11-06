@@ -1,0 +1,73 @@
+{
+  "source_sha": "bbd157895e48a24195ec17fc2ed6325435d6d8f2",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-ui-bbd1578-3nv1fw8p",
+  "evidence_kind": "offscreen_Qt_modal_open_route_and_file_preservation; not_native_GL_or_migration",
+  "results": [
+    {
+      "name": "native-0.2",
+      "source_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-ui-bbd1578-3nv1fw8p\\samples\\house_with_dome.apcraft",
+      "source_sha256": "3b0dcd0d2e4fe08f1a9c8345d7a8b15a203a342269ea86a06eb2674a608dbc65",
+      "records": [
+        {
+          "kind": "legacy-view",
+          "title": "Starší projekt · pouze prohlížení",
+          "plain_text_view": false,
+          "text_is_read_only": true,
+          "buttons": 2097152
+        }
+      ],
+      "original_unchanged": true,
+      "active_author_project_and_path_unchanged": true,
+      "pass": true
+    },
+    {
+      "name": "prototype-PanelProject",
+      "source_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-ui-bbd1578-3nv1fw8p\\docs\\p2\\evidence\\pc006-desktop-final\\house.apcraft",
+      "source_sha256": "f8f5447b901212d2a025fc4d1d6aa154acf83f42226a37fa7fe2f372e6397831",
+      "records": [
+        {
+          "kind": "legacy-view",
+          "title": "Starší projekt · pouze prohlížení",
+          "plain_text_view": true,
+          "text_is_read_only": true,
+          "buttons": 2097152
+        }
+      ],
+      "original_unchanged": true,
+      "active_author_project_and_path_unchanged": true,
+      "pass": true
+    },
+    {
+      "name": "corrupt-legacy-settings",
+      "source_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-legacy-ui-61_grdxd\\broken-old.apcraft",
+      "source_sha256": "0a7c5656a8702f61f177582bef4cc0f61868ec583a8a097df9ec5ab746f9861b",
+      "records": [
+        {
+          "kind": "error",
+          "title": "Změnu nelze dokončit",
+          "text": "Neznámá verze nebo struktura autorského projektu."
+        }
+      ],
+      "original_unchanged": true,
+      "active_author_project_and_path_unchanged": true,
+      "pass": true
+    },
+    {
+      "name": "recognized-legacy-corrupt-scene-viewer-guard",
+      "source_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-legacy-ui-61_grdxd\\broken-scene.apcraft",
+      "source_sha256": "2bf9378eda12708f95cbf1499c6047069e276f5d58fca85f7a432e240dbe3f64",
+      "records": [
+        {
+          "kind": "error",
+          "title": "Změnu nelze dokončit",
+          "text": "'NoneType' object has no attribute 'get'"
+        }
+      ],
+      "original_unchanged": true,
+      "active_author_project_and_path_unchanged": true,
+      "pass": true
+    }
+  ],
+  "pass": 4,
+  "fail": 0
+}

@@ -1,0 +1,672 @@
+{
+  "metadata_pin": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828",
+  "production_pin": "7da240386550039761de6861d3149ce9ee1be466",
+  "helper_pin": "5741cf144116123b4a0cb3f1c84987443517662a",
+  "results": [
+    {
+      "name": "git-bytes:results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "git-bytes:editor-results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "source-pins-and-status",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/01-own-concave-hole-stale-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/01-own-concave-hole-stale-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/02-edited-stale-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/02-edited-stale-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/03-assembly-dialog-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/03-assembly-dialog-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/03-real-assembly-preview-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/03-real-assembly-preview-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/04-fold-shared-part-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/04-fold-shared-part-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/05-manual-two-pages-tab-and-locks-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/05-manual-two-pages-tab-and-locks-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/05b-specific-digital-warning-acknowledged-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/05b-specific-digital-warning-acknowledged-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/06-native-reopened-desktop.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/06-native-reopened-opengl.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/export/.author-export.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/export/model.pdf",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/export/page-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/export/page-dea8fffd-0ea8-438d-96b6-588902d12846.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/own-model.apcraft",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/settings.ini",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-desktop-7da2403-run04/snapshot.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-inkscape-5741cf1-run06/editor-edited.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-inkscape-5741cf1-run06/editor-final-render.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-inkscape-5741cf1-run06/editor-gui.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "output-bytes:pc006a-inkscape-5741cf1-run06/editor-original.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:pyproject.toml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/__main__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/app.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/application/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/application/author_controller.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/buttress.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/floor_slab.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/gothic_window.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/onion_dome.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/opening.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/roof.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/tower.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/arch_presets/wall.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/authoring/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/authoring/errors.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/authoring/geometry.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/authoring/model.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/authoring/paper.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/authoring/project.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/commands/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/commands/command_stack.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/backend.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/mesh.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/operations.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/primitives.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/stable_ids.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/units.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/core_geometry/validation.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/exporter/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/exporter/author_export.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/exporter/dxf_export.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/exporter/pdf_export.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/exporter/png_export.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/exporter/svg_export.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/layout_packer/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/layout_packer/packer.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/paper_analyzer/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/paper_analyzer/classifier.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/preferences/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/preferences/settings.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/project_io/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/project_io/project.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/scene_graph/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/scene_graph/node.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/scene_graph/scene.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/scene_graph/snap.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/scene_graph/transform.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/seam_editor/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/seam_editor/auto_seams.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/seam_editor/seam_graph.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/tabs_generator/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/tabs_generator/build_guide.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/tabs_generator/markings.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/tabs_generator/tabs.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/author_paper.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/author_sketch.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/author_viewport.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/author_window.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/main_window.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/object_tree.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/papercraft_panel.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/preferences_dialog.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/properties_panel.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/viewport_3d.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/ui/wizard.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/unfolder/__init__.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/unfolder/approx_unfold.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/unfolder/exact_unfold.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:src/archpapercraft/unfolder/strategies.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:tools/authoring/desktop_proof.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-source:tools/authoring/native_dialogs.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "editor-helper-source",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "helper-production-identical",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original-bundle:.author-export.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original-bundle:model.pdf",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original-bundle:page-4e4eefb9-aada-4c67-b70e-a2045ffb9b27.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original-bundle:page-dea8fffd-0ea8-438d-96b6-588902d12846.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "raw-input-is-fresh-native-export",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all-original-ids-preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page-metadata-unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "seven-original-role-groups",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "exact-native-multiword-unicode",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "other-texts-unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-edit-color",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "preserve-all-exported-text",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "exact-own-foreground",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all-path-counts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local-geometry:path-e40af19a-71bd-4850-b890-a9cfc842d939-CUT-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-group-translation:path-e40af19a-71bd-4850-b890-a9cfc842d939-CUT-0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local-geometry:path-e40af19a-71bd-4850-b890-a9cfc842d939-CUT-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native-group-translation:path-e40af19a-71bd-4850-b890-a9cfc842d939-CUT-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "independent-cut-areas",
+      "passed": true,
+      "detail": [
+        3600.0,
+        225.0
+      ]
+    },
+    {
+      "name": "only-calibration-id-added",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "100mm-calibration",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "writer-module-source",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same-snapshot-SVG-only-preserve:page-9891d8b0-bd54-4b13-8058-342bd40fdaf0.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same-snapshot-SVG-only-preserve:page-d538304d-2553-4083-b12a-ad297176c249.svg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "same-snapshot-PDF-byte-identical",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 132,
+  "failed": 0
+}

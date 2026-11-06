@@ -1,5 +1,7 @@
 # ArchPapercraft Studio — zadání obnovy projektu
 
+> **Aktuální dodání 6. 11. 2026:** [PC-006A](docs/p2/implementation/PC006A_DELIVERY.md) má běžící autorský editor a nezávisle schválenou produkci `7da2403` včetně opravy C-06. Původních 443 testů doplňuje 55 exportních regresí a nový skutečný Windows → SVG/PDF → Inkscape průchod. Pokračuje PC-006B a celý sjednaný A/B/C/D. Vlastníkův závěrečný historický model je zapsán jako PC-010 / AC-AU19, zatím NOT_RUN. Čti [AGENTS](AGENTS.md) a jedinou queue; další odstavce zachovávají historii zadání, nikoli pokyn začít obnovu znovu.
+
 > Vlastník 6.11.2026 výslovně přijal P2 v1.2 včetně UI/UX, skills a použitelnosti a autorizoval celé A/B/C/D. Aktuálně realizuj PC-006A, následně PC-006B a další řezy podle AGENTS a jediné queue. [Záznam přijetí](docs/p2/v1.2/ACCEPTANCE_RECORD.md). Předchozí pending odkazy níže zachycují historickou přípravu.
 
 > Aktuální stav 6. 11. 2026: P0/P1 jsou na master. Vlastník přijal P2 v1.1 a následně zásadně upřesnil cíl. Aktivní návrh je [P2 v1.2 — vlastní autorská tvorba](docs/p2/v1.2/README.md), aktuální návrhový balík PC-012; jeho review/push není PO přijetí nové v1.2. Starší přípravné instrukce níže jsou historický vstup, nikoli pokyn znovu klonovat nebo omezit produkt na dům. Čti nejprve AGENTS a jedinou queue.

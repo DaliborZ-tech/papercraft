@@ -1,0 +1,55 @@
+{
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-fixed-bcl9mfiu",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-curves-6sre6bus",
+  "meaning": "Sampling can falsify an asserted bound, not certify it. Includes serialized PDF transform/coordinate rounding.",
+  "results": [
+    {
+      "radius_mm": 0.0001,
+      "pdf_cubic_count": 4,
+      "sampled_actual_serialized_position_error_mm": 1.1749228804869742e-05,
+      "declared_arc_bound_mm": 2.242142865213569e-06,
+      "sample_above_declared_bound": true,
+      "within_required_digital_0_01mm": true
+    },
+    {
+      "radius_mm": 0.001,
+      "pdf_cubic_count": 4,
+      "sampled_actual_serialized_position_error_mm": 2.4346878268607485e-05,
+      "declared_arc_bound_mm": 2.2421428652135686e-05,
+      "sample_above_declared_bound": true,
+      "within_required_digital_0_01mm": true
+    },
+    {
+      "radius_mm": 0.01,
+      "pdf_cubic_count": 4,
+      "sampled_actual_serialized_position_error_mm": 0.00016095801087408822,
+      "declared_arc_bound_mm": 0.00022421428652135688,
+      "sample_above_declared_bound": false,
+      "within_required_digital_0_01mm": true
+    },
+    {
+      "radius_mm": 0.1,
+      "pdf_cubic_count": 6,
+      "sampled_actual_serialized_position_error_mm": 0.000317227524105761,
+      "declared_arc_bound_mm": 0.0004428924178199641,
+      "sample_above_declared_bound": false,
+      "within_required_digital_0_01mm": true
+    },
+    {
+      "radius_mm": 1,
+      "pdf_cubic_count": 10,
+      "sampled_actual_serialized_position_error_mm": 0.0004130671718395026,
+      "declared_arc_bound_mm": 0.0005739885734946737,
+      "sample_above_declared_bound": false,
+      "within_required_digital_0_01mm": true
+    },
+    {
+      "radius_mm": 10,
+      "pdf_cubic_count": 16,
+      "sampled_actual_serialized_position_error_mm": 0.0006229782511722736,
+      "declared_arc_bound_mm": 0.0008758370567240503,
+      "sample_above_declared_bound": false,
+      "within_required_digital_0_01mm": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "source_sha": "012e541655a6152edb285854439a22f87979a3ab",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-ui-012e541-6v4lni5o",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-pending-input-gcmqm8n1",
+  "evidence_kind": "offscreen_real_Qt_widgets_shortcuts_modal; controller_setup; not_native_or_human",
+  "results": [
+    {
+      "name": "pending_vertex_CtrlS_existing_path",
+      "typed_text": "11",
+      "saved_x_model_mm": 10000.0,
+      "current_source_x_model_mm": 10000.0,
+      "dirty_after_shortcut": false,
+      "pass": false
+    },
+    {
+      "name": "pending_vertex_CtrlE_snapshot_before_modal_commit",
+      "original_revision": 4,
+      "current_revision": 5,
+      "current_source_x_model_mm": 11000.0,
+      "part_stale_after_modal": true,
+      "export_created": true,
+      "export_manifest_revision": null,
+      "dialogs": [
+        {
+          "title": "Vektorový export",
+          "text": "Exportovat 1 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?",
+          "revision_at_dialog": 5,
+          "source_x_at_dialog": 11000.0
+        },
+        {
+          "title": "Export dokončen",
+          "text": "Uloženo:\npage-700baf1b-af41-40cd-b0c6-66083515cc86.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm.",
+          "revision_at_dialog": 5,
+          "source_x_at_dialog": 11000.0
+        }
+      ],
+      "pass": false
+    },
+    {
+      "name": "pending_vertex_CtrlN_must_not_discard_without_dirty_prompt",
+      "original_project_id": "ee934f1e-3768-4320-bd35-6724e4c6c000",
+      "current_project_id": "4028aef6-a558-4334-a36b-ea3a3d06d8bb",
+      "source_retained": false,
+      "dialogs": [],
+      "pass": false
+    }
+  ],
+  "pass": 0,
+  "fail": 3
+}

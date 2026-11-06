@@ -1,6 +1,6 @@
 # P2 v1.2 — autorský papírový model, návrhový kontrakt
 
-**Přijato vlastníkem 6.11.2026 včetně UI/UX, skills a použitelnosti; autorizováno celé A/B/C/D.** [Záznam přijetí](ACCEPTANCE_RECORD.md). Implementace PC-006A je IN_PROGRESS, produktové důkazy zůstávají NOT_RUN. Následující návrhová formulace zachovává původní znění podkladu.
+**Přijato vlastníkem 6.11.2026 včetně UI/UX, skills a použitelnosti; autorizováno celé A/B/C/D.** [Záznam přijetí](ACCEPTANCE_RECORD.md). PC-006A je technicky AGENT_VERIFIED na CODE4b172e6, pokračuje PC-006B; [dodání a přesné meze](../implementation/PC006A_DELIVERY.md). Celé P2, skutečný novice test a fyzické důkazy zůstávají nedokončené. Následující návrhová formulace zachovává původní znění podkladu.
 
 6. 11. 2026. Tento návrh vzniká na výslovný [opravný pokyn vlastníka](OWNER_CLARIFICATION.txt). Nahrazuje omezení v1.1 na preset domu. Dřívější přijetí v1.1 zůstává historickou skutečností; není přijetím tohoto nového návrhu ani hotového editoru. Stav implementace v1.2: **NOT_RUN**. Technické review a integrace návrhu nejsou produktová akceptace. Aktuální stav určuje `05_WORK_QUEUE.json`.
 
@@ -56,7 +56,7 @@ UI/UX patří do implementačního mandátu P2 a staré obrazovky/panely/menu/in
 | PC-007B | Válec/kužel → explicitní šev → souvislé či dělené trojúhelníkové chlopně C | C přes UI a oba exporty; poloměry/obloukové délky a vlastní počty/mezerování; prostorová lepicí plocha |
 | PC-008 | D + robustní změny konstrukce napříč A–C | Reálné odmítnutí EXACT, náhled segmentace s chybou/rozpočtem, explicitně potvrzená odvozená varianta až do exportu; všechny povinné mixed-part testy |
 | PC-009 | Výrobní konsolidace a skutečná interoperabilita | A/B/C a segmentovaná varianta D, stejný snapshot SVG/PDF, nezávislé čtení, skutečný externí editor, 100/150/200% DPI a klávesnice |
-| PC-010 | Nezávislá revize celého digitálního P2, opravy, předání | Konkrétní CODE SHA, každý AC a jeho důkaz, projekty/exporty/hash/verze, tisk 100%; P3 fyzicky pending |
+| PC-010 | Závěrečný vlastní model historické architektury v aplikaci; nezávislá revize celého digitálního P2, opravy, předání | AC-AU19: celý autorský UI průchod historického modelu; konkrétní CODE SHA, každý AC a jeho důkaz, projekty/exporty/hash/verze, tisk 100%; P3 fyzicky pending |
 
 PC-006 až PC-010 zůstávají původními rodičovskými ID. Jejich staré definice a důkazy jsou zachovány, nové podřezy jsou v jediné queue. Každý implementační řez zahrnuje relevantní ověření, nezávislou revizi, opravy a bezpečnou integraci, nemusí čekat na PC-010, aby měl skutečné UI a výstupy. Review autorovi provádí jiný agent. Po PC-006A a PC-006B se přepočítá [odhad](ESTIMATE_AND_RISKS.md); ztracená přesnost nebo nejasná geometrie není důvod zúžit A/B/C/D na preset.
 

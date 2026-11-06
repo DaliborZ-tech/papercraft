@@ -152,4 +152,6 @@ AC: krok odkazuje na existující díly a revision; změna dílu označí dotče
 
 ## Úplnost původní vize
 
+Výslovný realizační doplněk vlastníka6.11.2026: po dodáníA/B/C/D a konsolidaciPC-009 provést jako závěrečný autorský úkol vPC-010 vlastní model historické architektury přes skutečnéUI,save/reopen,ručnílayout aSVG/PDF. [AC-AU19](docs/p2/v1.2/ACCEPTANCE.md#závěrečný-autorský-model-historické-architektury) stanovuje konstrukční obsah, editovatelný projekt a nezávislé ověření. Jde o funkční důkaz dodávané aplikace; nenahrazuje původní přejímky, novice test ani fyzickéP3. Stav jeNOT_RUN.
+
 Sekční pohled a pokročilé měření patří do E03; knihovna, styly a opakování do E10; obecný mesh import až po E11 jako samostatný budoucí ticket; DXF a PNG do E09; dlaždice do E08; autosave, snapshoty a balík projektu do E13; materiály a směr vláken do E06; varianty a exportní diff do E12; grafický editor do E15; animace do E16. Agent nesmí nepodporované funkce prezentovat aktivním tlačítkem s prázdným handlerem nebo tichým fallbackem.

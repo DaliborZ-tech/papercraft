@@ -1,0 +1,73 @@
+{
+  "status": "FAIL",
+  "source_sha": "c390a10d78e9cb8c77f4aa8683b007055202df4d",
+  "source_status_at_start": "M .agents/skills/papercraft-authoring-ui/SKILL.md\n M 00_START_HERE.md\n M 03_EPICS_AND_ROADMAP.md\n M 05_WORK_QUEUE.json\n M AGENTS.md\n M README.md\n M docs/p2/SKILL_IMPROVEMENTS.json\n M docs/p2/v1.2/ACCEPTANCE.md\n M docs/p2/v1.2/ESTIMATE_AND_RISKS.md\n M docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md\n M docs/p2/v1.2/README.md\n M docs/p2/v1.2/USABILITY_TEST.md\n?? docs/p2/implementation/",
+  "script_sha256": "f9a1b20954bca36b97e5ac1ca0236bfcdf36936111b6da4595ed765c86a3748b",
+  "origin_source": "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-desktop-4b172e6-run03\\export\\page-9891d8b0-bd54-4b13-8058-342bd40fdaf0.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "9a983e76ea5e389c21cf2c4b016baaa32c7b2de8a5a2af811822bb4bc7f49a34",
+    "model.pdf": "be91eaa9a4453bf687a1c421020c03718cf1fcf90456b3e727bb8816dcf86c66",
+    "page-9891d8b0-bd54-4b13-8058-342bd40fdaf0.svg": "03501f7ef4ae47ecc69a7a65135cdd78758862d9da8f7457a35d5587f445d16f",
+    "page-d538304d-2553-4083-b12a-ad297176c249.svg": "2469d41bba7c8a7f07bafe1e606dd56e95d76bef5cfefdc78cc8ea7cf9123ed9"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 1.359,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-inkscape-c390a10-run01\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 3.735,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,188.331,451.413,915.406\npart-126b2663-0ba6-405a-9c29-d161b7162b70,169.433,188.331,319.774,367.802\nrole-126b2663-0ba6-405a-9c29-d161b7162b70-CUT,169.433,188.331,319.774,367.802\npath-126b2663-0ba6-405a-9c29-d161b7162b70-CUT-0,169.433,188.331,319.774,367.802\npath-126b2663-0ba6-405a-9c29-d161b7162b70-CUT-1,368.355,308.634,78.7347,78.7347\n\n\n\nrole-126b2663-0ba6-405a-9c29-d161b7162b70-LABELS,198.555,233.489,219.226,260.196\nlabel-126b2663-0ba6-405a-9c29-d161b7162b70-0,367.394,460.697,50.3875,32.9883\nlabel-126b2663-0ba6-405a-9c29-d161b7162b70-1,198.555,233.489,8.29893,7.88236\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-inkscape-c390a10-run01\\editor-original.svg",
+        "--actions=select-by-id:part-126b2663-0ba6-405a-9c29-d161b7162b70;transform-translate:10,15;select-clear;select-by-id:label-126b2663-0ba6-405a-9c29-d161b7162b70-0;org.inkscape.text.uppercase.noprefs;select-clear;select-by-id:label-126b2663-0ba6-405a-9c29-d161b7162b70-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft\\docs\\p2\\implementation\\evidence\\pc006a-inkscape-c390a10-run01\\editor-edited.svg;export-do"
+      ],
+      "seconds": 3.484,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n(org.inkscape.Inkscape:31840): GLib-WARNING **: 12:08:58.054: passing a child setup function to the g_spawn functions is pointless on Windows and it is ignored\n"
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-j53hdhep",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "elapsed_seconds": 18.422,
+  "files_sha256": {
+    "editor-edited.svg": "de7a95f2182f27d9a48b31a511a995c2542c8387ab1ef29deccfb166050388fc",
+    "editor-original.svg": "03501f7ef4ae47ecc69a7a65135cdd78758862d9da8f7457a35d5587f445d16f"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-126b2663-0ba6-405a-9c29-d161b7162b70",
+    "label_id": "label-126b2663-0ba6-405a-9c29-d161b7162b70-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "uppercase",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "error": "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft\\tools\\authoring\\editor_probe.py\", line 341, in main\n    chord(0x77)  # F8 selects the text tool for the selected stable text ID.\n    ^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft\\tools\\authoring\\editor_probe.py\", line 331, in chord\n    foreground()\n  File \"C:\\Users\\dalib\\projects\\papercraft\\tools\\authoring\\editor_probe.py\", line 326, in foreground\n    raise AssertionError(\nAssertionError: Own editor window lost foreground; refusing global keyboard input\n"
+}

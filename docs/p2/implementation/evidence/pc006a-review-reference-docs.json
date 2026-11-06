@@ -1,0 +1,27 @@
+{
+  "scope": "Current documentation text; concrete reference claims checked on explicitly named visual subsets only; independent original PDF hashes verified. Not author self-approval of own Damnikov design. Commit mapping to be completed by integration owner without changing these reviewed texts.",
+  "documents": [
+    {
+      "path": "docs/p2/implementation/REFERENCE_TVRZE.md",
+      "raw_sha256": "be124c6609445df99d713d26f5ba2cedfb5364ee470715cf7959f2ff11d5671f",
+      "normalized_LF_sha256": "e3457bcb069749cd9dd6337f9dda72607aa24be9e13b65a277188d51dd438c72"
+    },
+    {
+      "path": "docs/p2/implementation/REFERENCE_OBSERVATIONS.md",
+      "raw_sha256": "b3857dcbe023ec1de0dcd049043dc1c3225d4920218e13a48bbdbb516bd00073",
+      "normalized_LF_sha256": "b3857dcbe023ec1de0dcd049043dc1c3225d4920218e13a48bbdbb516bd00073"
+    },
+    {
+      "path": "docs/p2/implementation/REFERENCE_SECANDA_PARTS.md",
+      "raw_sha256": "605f772a77facfc4630f95bd04bf082c2051593f7e9d7edfc74a96137a7e8ca5",
+      "normalized_LF_sha256": "605f772a77facfc4630f95bd04bf082c2051593f7e9d7edfc74a96137a7e8ca5"
+    },
+    {
+      "path": "docs/p2/implementation/REFERENCE_ROZSOCHY_KERDEVOT.md",
+      "raw_sha256": "231adf808bb12d4dfcc42fba4ef6eb587fc76b87eea1e5259acf44ac4a65b260",
+      "normalized_LF_sha256": "231adf808bb12d4dfcc42fba4ef6eb587fc76b87eea1e5259acf44ac4a65b260"
+    }
+  ],
+  "reference_evidence": "pc006a-review-reference-pdf-subset-validated.json",
+  "production_code_review": "4b172e65af3cde19c865cf7594c63fa004aa1ba2 APPROVED_IN_SCOPE"
+}

@@ -1,5 +1,7 @@
 # P2 v1.2 — návrhový balík pro skutečnou autorskou tvorbu
 
+**Dodání PC-006A6.11.2026:** [běžící úsečkový editor a nezávislé ověření](../implementation/PC006A_DELIVERY.md); pokračuje PC-006B. Dokumenty níže zachovávají návrhový základ, celá implementace A/B/C/D ani novice a fyzické přejímky zatím dokončené nejsou. Závěrečný historický model je nově zapsán v PC-010 / AC-AU19.
+
 **Aktuálně přijato vlastníkem 6.11.2026.** [Přijetí a autorizace celého A/B/C/D](ACCEPTANCE_RECORD.md). Implementace začíná PC-006A a navazuje PC-006B; níže je podklad návrhového balíku, nikoli tvrzení dokončeného editoru.
 
 Aktuální produktový cíl: od prázdného projektu kreslit vlastní profily/obrysy, konstruovat otevřené i zakřivené plochy, spojovat je včetně vnitřních stop a lepicích oblastí, vytvářet vlastní chlopně a připravit ručně rozmístěnou vystřihovánku SVG/PDF. Referenční domeček je numerický test, ne základní omezení editoru.

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   data-project-id="fef3169a-c10f-402c-a52b-4e50000f9f75"
+   data-snapshot-digest="3c83d128e23d595957e3271fca2fd6e855ddea68030fd8731f39d7d5d77a27ad"
+   data-page-id="9891d8b0-bd54-4b13-8058-342bd40fdaf0"
+   data-pdf-arc-interpolation-error-bound-mm="0"
+   data-pdf-numeric-serialization-error-bound-mm="3.53143659782311e-05"
+   data-pdf-combined-position-error-bound-mm="3.53143659782311e-05"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="editor-original.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs2" />
+  <title
+     id="title1">FEF3169A-C10F-402C-A52B-4E50000F9F75</title>
+  <g
+     id="part-126b2663-0ba6-405a-9c29-d161b7162b70"
+     data-part-id="126b2663-0ba6-405a-9c29-d161b7162b70"
+     transform="rotate(30,-69.384142,143.88309)">
+    <title
+       id="title2">P3 · PLOCHA 1</title>
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-CUT"
+       data-role="CUT"
+       class="CUT"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <path
+         id="path-126b2663-0ba6-405a-9c29-d161b7162b70-CUT-0"
+         d="M 0,0 H 80 L 90,60 H 50 V 30 H 0 Z"
+         fill-rule="evenodd" />
+      <path
+         id="path-126b2663-0ba6-405a-9c29-d161b7162b70-CUT-1"
+         d="M 55,5 H 70 V 20 H 55 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-FOLD_MOUNTAIN"
+       data-role="FOLD_MOUNTAIN"
+       class="FOLD_MOUNTAIN"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 1" />
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-FOLD_VALLEY"
+       data-role="FOLD_VALLEY"
+       class="FOLD_VALLEY"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 0.5, 0.5, 0.5" />
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-TABS"
+       data-role="TABS"
+       class="TABS"
+       fill="#eee6d5"
+       stroke="none"
+       stroke-width="0.25" />
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-LABELS"
+       data-role="LABELS"
+       class="LABELS"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <text
+         id="label-126b2663-0ba6-405a-9c29-d161b7162b70-0"
+         x="68.75"
+         y="45"
+         font-size="2.5px"
+         font-family="Arial"
+         fill="#202b2b"
+         stroke="none"
+         style="fill:#b43d28">P3 · PLOCHA 1</text>
+      <text
+         id="label-126b2663-0ba6-405a-9c29-d161b7162b70-1"
+         x="0"
+         y="15"
+         font-size="2px"
+         font-family="Arial"
+         fill="#202b2b"
+         stroke="none">J1</text>
+    </g>
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-ARTWORK"
+       data-role="ARTWORK"
+       class="ARTWORK"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25" />
+    <g
+       id="role-126b2663-0ba6-405a-9c29-d161b7162b70-GUIDES"
+       data-role="GUIDES"
+       class="GUIDES"
+       fill="none"
+       stroke="#8c9894"
+       stroke-width="0.15" />
+  </g>
+  <g
+     id="page-GUIDES"
+     data-role="GUIDES">
+    <path
+       d="M 10 282 L 110 282"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       fill="none"
+       data-calibration-mm="100"
+       id="path2" />
+    <text
+       id="page-label-0"
+       x="10"
+       y="287"
+       font-family="Arial"
+       font-size="2.5"
+       fill="#202b2b">TISK 100 % / SKUTEČNÁ VELIKOST. KALIBRACE 100 MM NA PAPÍŘE.</text>
+    <text
+       id="page-label-1"
+       x="10"
+       y="292"
+       font-family="Arial"
+       font-size="2.5"
+       fill="#202b2b">MĚŘÍTKO MODELU 1:100 · STRANA 1 / 2</text>
+  </g>
+</svg>

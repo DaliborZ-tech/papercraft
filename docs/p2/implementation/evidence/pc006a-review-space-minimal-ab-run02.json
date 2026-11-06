@@ -1,0 +1,33 @@
+{
+  "kind": "independent_minimal_fixture_native_AB_not_production_export_approval",
+  "script_sha256": "22d1f2f9149d1887a346015add446dcfcd00e3f8652a5d7486e8a8ae7594ae22",
+  "inkscape_executable": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe",
+  "inkscape_executable_sha256": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-vk4ka_ey",
+  "results": [
+    {
+      "xml_space_preserve": false,
+      "file": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-vk4ka_ey\\default\\minimal.svg",
+      "input_original": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-vk4ka_ey\\default\\input-original.svg",
+      "initial_sha256": "9d3931359b0788aed2304e21540eed7476097363b9aa98187442e3b55897ab9c",
+      "requested_text": "Wall 1 left",
+      "input_method": "own-window F8/CtrlA; identical Unicode SendInput pairs for all characters including U+0020; CtrlS",
+      "own_pid": 40380,
+      "own_hwnd": 8782384,
+      "error": "AssertionError('Own document foreground lost; no global input sent')"
+    },
+    {
+      "xml_space_preserve": true,
+      "file": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-vk4ka_ey\\preserve\\minimal.svg",
+      "input_original": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-space-minimal-vk4ka_ey\\preserve\\input-original.svg",
+      "initial_sha256": "a2a93f2c178b9b11bc074c913958c0397b1e63624d4abf963afa563c873dd91f",
+      "requested_text": "Wall 1 left",
+      "input_method": "own-window F8/CtrlA; identical Unicode SendInput pairs for all characters including U+0020; CtrlS",
+      "own_pid": 51104,
+      "own_hwnd": 12719730,
+      "error": "AssertionError('Own document foreground lost; no global input sent')"
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN"
+}
