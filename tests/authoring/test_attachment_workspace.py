@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QDialog, QDialogButtonBox
 
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject, load_project
-from archpapercraft.ui.author_attachment import AttachmentDialog
+from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 
 pytestmark = pytest.mark.ui
 
@@ -135,3 +135,58 @@ def test_schema_one_copy_policy_survives_command_undo_and_failed_save(tmp_path):
     controller.save(target)
     assert origin.read_bytes() == original and controller.file_path == target
     assert controller.copy_source_path is None and load_project(target).name == "Own copy"
+
+
+def test_drawn_glue_region_is_contact_area_not_a_cutout_and_rejects_hole(qtbot):
+    project = AuthorProject.new(scale=1)
+    source = project.add_surface(
+        project.add_profile([[20, 20], [40, 20], [40, 40], [20, 40]])
+    )
+    target = project.add_surface(
+        project.add_profile([[0, 0], [100, 0], [100, 100], [0, 100]])
+    )
+    before = copy.deepcopy(project.to_dict())
+    dialog = GlueRegionDialog(project, source, unit="mm", unit_factor=1)
+    qtbot.addWidget(dialog)
+    dialog.receiver.setCurrentIndex(dialog.receiver.findData(target))
+    dialog.show()
+    qtbot.wait(50)
+    dialog.target_sketch.grid_mm = 1
+    qtbot.mouseClick(dialog.draw_target, Qt.MouseButton.LeftButton)
+    for x, y in [(10, 10), (50, 10), (50, 50), (10, 50)]:
+        qtbot.mouseClick(
+            dialog.target_sketch.viewport(), Qt.MouseButton.LeftButton,
+            pos=dialog.target_sketch.mapFromScene(QPointF(x, -y)),
+        )
+    qtbot.keyClick(dialog.target_sketch, Qt.Key.Key_Return)
+    assert dialog.buttons.button(QDialogButtonBox.StandardButton.Ok).isEnabled(), (
+        dialog.feedback.text(), dialog.target_sketch.region
+    )
+    assert project.to_dict() == before
+    dialog.confirm()
+    aid = GlueRegionDialog.apply(project, dialog.result_spec)
+    geometry = project.attachment_geometry(aid)
+    assert geometry["available_area_mm2"] == pytest.approx(400)
+    assert not project.surfaces[target].hole_profile_ids
+    assert len(project.parts[project.part_for_surface(target)].polygons[target]) == 1
+    # A new opening removes actual adhesive material despite unchanged plan outline.
+    project.add_hole(target, project.add_profile([[25, 25], [30, 25], [30, 30], [25, 30]]))
+    assert not project.attachment_geometry(aid)["valid"]
+    assert any(i.code == "ATTACHMENT_CONTACT" for i in project.validate_layout())
+
+
+def test_partial_edge_interval_stays_explicit_in_the_authoring_command(qtbot):
+    project, source, target, edge = construction()
+    dialog = dialog_for(qtbot, project, source, target, edge)
+    for field, value in zip(dialog.fields, [20, 30, 60, 30]):
+        field.setValue(value)
+    dialog.numeric_trace()
+    dialog.start_fraction.setValue(25)
+    dialog.end_fraction.setValue(75)
+    dialog.interval_changed()
+    dialog.confirm()
+    assert dialog.result_spec["interval"] == [0.25, 0.75]
+    aid = AttachmentDialog.apply(project, dialog.result_spec)
+    geometry = project.attachment_geometry(aid)
+    assert geometry["material_length_mm"] == pytest.approx(20)
+    np.testing.assert_allclose(geometry["source_world"], [[20, 30, 0], [40, 30, 0]])

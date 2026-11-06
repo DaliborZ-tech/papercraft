@@ -40,7 +40,7 @@ from PySide6.QtWidgets import (
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
-from archpapercraft.ui.author_attachment import AttachmentDialog
+from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_sketch import AuthorSketch
 from archpapercraft.ui.author_viewport import AuthorViewport
@@ -203,6 +203,11 @@ class AuthorMainWindow(QMainWindow):
             )
         )
         construct.addAction(
+            self._action(
+                "glue_region", "Přilepit plochu oblastí…", self.glue_region, "Ctrl+Shift+J"
+            )
+        )
+        construct.addAction(
             self._action("cancel", "Zrušit rozpracovanou operaci", self.cancel_operation, "Esc")
         )
         construct.addAction(
@@ -333,6 +338,9 @@ class AuthorMainWindow(QMainWindow):
         self.attach_inside_button = QPushButton("Připojit dovnitř plochy…")
         self.attach_inside_button.clicked.connect(self.attach_inside)
         form.addRow(self.attach_inside_button)
+        self.glue_region_button = QPushButton("Přilepit plochu oblastí…")
+        self.glue_region_button.clicked.connect(self.glue_region)
+        form.addRow(self.glue_region_button)
         self.joint_choice = QComboBox()
         self.joint_choice.currentIndexChanged.connect(self.choose_joint)
         form.addRow("Existující spoj", self.joint_choice)
@@ -621,6 +629,9 @@ class AuthorMainWindow(QMainWindow):
         can_attach = self.selected_edge is not None and len(self.project.surfaces) > 1
         self.attach_inside_button.setEnabled(can_attach)
         self.actions["attach_inside"].setEnabled(can_attach)
+        can_glue = self.selected_surface is not None and len(self.project.surfaces) > 1
+        self.glue_region_button.setEnabled(can_glue)
+        self.actions["glue_region"].setEnabled(can_glue)
         self.attach_inside_button.setToolTip(
             "Vyberte okraj zdrojové plochy a nakreslete jeho místo na protikusu."
             if can_attach else "Nejprve vytvořte dvě plochy a vyberte okraj jedné z nich."
@@ -1120,6 +1131,19 @@ class AuthorMainWindow(QMainWindow):
             spec = dialog.result_spec
             self.run(lambda: self.controller.execute(
                 "Připojit hranu dovnitř plochy", lambda p: AttachmentDialog.apply(p, spec)
+            ))
+
+    def glue_region(self):
+        if not self._commit_pending_input() or self.selected_surface is None:
+            return
+        dialog = GlueRegionDialog(
+            self.project, self.selected_surface, unit=self.units.currentText(),
+            unit_factor=self.unit_factor, parent=self,
+        )
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            spec = dialog.result_spec
+            self.run(lambda: self.controller.execute(
+                "Přilepit plochu oblastí", lambda p: GlueRegionDialog.apply(p, spec)
             ))
 
     def preview_connection(self, source, target):
