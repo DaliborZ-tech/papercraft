@@ -5,12 +5,14 @@ import json
 
 import numpy as np
 import pytest
-from PySide6.QtCore import QPointF, Qt
-from PySide6.QtWidgets import QDialog, QDialogButtonBox
+from PySide6.QtCore import QPointF, QSettings, Qt
+from PySide6.QtWidgets import QDialog, QDialogButtonBox, QFileDialog, QMessageBox
 
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject, load_project
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
+from archpapercraft.ui.author_viewport import AuthorViewport
+from archpapercraft.ui.author_window import AuthorMainWindow
 
 pytestmark = pytest.mark.ui
 
@@ -190,3 +192,54 @@ def test_partial_edge_interval_stays_explicit_in_the_authoring_command(qtbot):
     geometry = project.attachment_geometry(aid)
     assert geometry["material_length_mm"] == pytest.approx(20)
     np.testing.assert_allclose(geometry["source_world"], [[20, 30, 0], [40, 30, 0]])
+
+
+def test_linked_receiver_overlay_shows_actual_folded_material_and_hides_invalid_contact(qtbot):
+    project, source, target, edge = construction()
+    aid = project.place_and_attach_edge(source, edge, target, [20, 30], [60, 30])
+    project.set_attachment_tab(aid, width_mm=4, taper=1)
+    viewport = AuthorViewport()
+    qtbot.addWidget(viewport)
+    viewport.set_project(project)
+    viewport.select_relation(("attachment", aid))
+    assert len(viewport.relation_paths) == 2  # Hinge and actual folded outline.
+    np.testing.assert_allclose(viewport.relation_paths[0][0], [[20, 30, 0], [60, 30, 0]])
+    np.testing.assert_allclose(
+        viewport.relation_paths[1][0],
+        [[20, 30, 0], [60, 30, 0], [60, 34, 0], [20, 34, 0]], atol=1e-10,
+    )
+    project.set_transform(source, [0, 0, 1])
+    viewport.set_project(project)
+    assert viewport.relation_paths == [] and "opravu" in viewport.relation_status
+    viewport.select_relation(None)
+    assert viewport.relation_paths == [] and viewport.relation_status == ""
+
+
+def test_upgrade_workspace_explains_copy_and_offers_a_new_filename(qtbot, tmp_path, monkeypatch):
+    project, *_ = construction()
+    data = project.to_dict()
+    data.update(schema_version=1, writer_version="0.3.0-experimental")
+    del data["attachments"], data["next_attachment_number"]
+    origin = tmp_path / "original-author.apcraft"
+    origin.write_text(json.dumps(data), encoding="utf8")
+    original = origin.read_bytes()
+    settings = QSettings(str(tmp_path / "settings.ini"), QSettings.Format.IniFormat)
+    window = AuthorMainWindow(settings=settings)
+    qtbot.addWidget(window)
+    messages, offered = [], []
+    monkeypatch.setattr(QFileDialog, "getOpenFileName", lambda *a, **kw: (str(origin), ""))
+    monkeypatch.setattr(QMessageBox, "information", lambda *a, **kw: messages.append(a[2]))
+    window.open_project()
+    assert window.controller.file_path is None and window.controller.copy_source_path == origin
+    assert any("Původní soubor" in text for text in messages)
+    target = tmp_path / "original-author-copy.apcraft"
+
+    def save_dialog(*args, **kwargs):
+        offered.append(args[2])
+        return str(target), ""
+
+    monkeypatch.setattr(QFileDialog, "getSaveFileName", save_dialog)
+    assert window.save_project()
+    assert offered == [str(target)]
+    assert origin.read_bytes() == original and target.is_file()
+    assert load_project(target).name == project.name

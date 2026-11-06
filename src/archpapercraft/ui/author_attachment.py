@@ -76,6 +76,16 @@ class ReceivingSketch(AuthorSketch):
         else:
             super().finish_outline()
 
+    def finish_open_profile(self):
+        if self.purpose == "region":
+            self.finish_outline()
+        elif len(self.points) != 2:
+            self.status.emit(
+                "Připojovací čáru určete právě dvěma body; ostatní lze vrátit Backspace."
+            )
+        else:
+            super().finish_open_profile()
+
     def _trace_ready(self, points):
         if self.purpose == "trace" and len(points) == 2:
             self.trace = points
@@ -167,7 +177,7 @@ class AttachmentDialog(QDialog):
         splitter.addWidget(self.sketch)
         splitter.addWidget(self.viewport)
         layout.addWidget(splitter, 1)
-        precise = QGroupBox(f"Přesná poloha dvou bodů v obrysu příjemce ({unit})")
+        precise = QGroupBox(f"Přesný rozsah hrany a poloha čáry na protikusu ({unit})")
         precise.setCheckable(True)
         precise.setChecked(False)
         box_layout = QVBoxLayout(precise)
@@ -290,7 +300,8 @@ class AttachmentDialog(QDialog):
         placing = self.mode.currentData() == "place"
         self.draw_line.setEnabled(placing)
         self.angle.setEnabled(placing)
-        self.coordinates.setEnabled(placing)
+        for field in self.fields:
+            field.setEnabled(placing)
         try:
             if not self.receiver.currentData():
                 raise ValueError("Nejprve vytvořte další vlastní plochu jako příjemce.")
@@ -310,6 +321,7 @@ class AttachmentDialog(QDialog):
                 self.sketch.redraw()
             self.viewport.set_project(clone, frame=True)
             self.viewport.select([*self.source[:1], self.receiver.currentData()])
+            self.viewport.select_relation(("attachment", aid))
             self.feedback.setText(
                 "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu "
                 "v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
@@ -450,6 +462,7 @@ class GlueRegionDialog(QDialog):
             geometry = clone.attachment_geometry(aid)
             self.viewport.set_project(clone, frame=True)
             self.viewport.select([self.source, self.receiver.currentData()])
+            self.viewport.select_relation(("attachment", aid))
             self.feedback.setText(
                 f"Plochy přiléhají. Skutečný lepený otisk má "
                 f"{geometry['available_area_mm2']:g} mm² na papíře. "

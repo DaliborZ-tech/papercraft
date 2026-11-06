@@ -11,6 +11,8 @@ from PySide6.QtCore import QPointF, Qt, Signal
 from PySide6.QtGui import QColor, QPainter, QSurfaceFormat
 from PySide6.QtOpenGLWidgets import QOpenGLWidget
 
+from archpapercraft.authoring import ValidationError
+
 
 class AuthorViewport(QOpenGLWidget):
     surface_selected = Signal(str)
@@ -27,6 +29,9 @@ class AuthorViewport(QOpenGLWidget):
         self.meshes = {}
         self.selected_surfaces = set()
         self.selected_edge = None
+        self.relation = None
+        self.relation_paths = []
+        self.relation_status = ""
         self.yaw, self.pitch, self.span = 30.0, 55.0, 6000.0
         self.center, self.pan = np.zeros(3), np.zeros(2)
         self._last = QPointF()
@@ -40,11 +45,60 @@ class AuthorViewport(QOpenGLWidget):
         )
         if frame:
             self.focus_selection(all_surfaces=True)
+        self.select_relation(self.relation)
         self.update()
 
     def select(self, surfaces=(), edge=None):
         self.selected_surfaces = set(surfaces)
         self.selected_edge = edge
+        self.update()
+
+    def select_relation(self, relation):
+        self.relation = relation
+        self.relation_paths, self.relation_status = [], ""
+        if not self.project or not relation:
+            self.update()
+            return
+        kind, identity = relation
+        project = self.project
+        try:
+            if kind == "attachment":
+                record = project.attachments[identity]
+                geometry = project.attachment_geometry(identity)
+                if not geometry["valid"]:
+                    self.relation_status = "Připojení potřebuje opravu; vyberte problém dole."
+                    self.update()
+                    return
+                source = geometry["source_world"]
+                self.relation_paths.append((source, record.source_edge_id is None, "#bd5d00"))
+                if record.target_region_uv:
+                    world = project._surface_world_points(
+                        record.target_surface_id, record.target_region_uv
+                    ).tolist()
+                    self.relation_paths.append((world, True, "#975ca8"))
+                connector_id = record.connector_id
+            elif kind == "joint":
+                record = project.joints[identity]
+                connector_id = record.connector_id
+            else:
+                self.relation = None
+                self.update()
+                return
+            if connector_id:
+                connector = project.connector_geometry(connector_id)
+                for tab in connector["tabs"]:
+                    world = tab.get("folded_world")
+                    if world is None:
+                        world = project._surface_world_points(
+                            tab["receiver_surface_id"],
+                            np.asarray(tab["footprint_uv_mm"]) / project.scale,
+                        ).tolist()
+                    self.relation_paths.append((world, True, "#a75800"))
+            if self.relation_paths:
+                self.relation_status = "Připojovací čára / lepicí oblast a ohnuté chlopně"
+        except (ValidationError, KeyError):
+            self.relation_paths = []
+            self.relation_status = "Připojení potřebuje opravu; vyberte problém dole."
         self.update()
 
     def camera(self):
@@ -134,11 +188,23 @@ class AuthorViewport(QOpenGLWidget):
                 GL.glVertex3dv(edge["start"])
                 GL.glVertex3dv(edge["end"])
                 GL.glEnd()
+        if self.relation_paths:
+            GL.glDisable(GL.GL_DEPTH_TEST)
+            GL.glLineWidth(3)
+            for points, closed, color in self.relation_paths:
+                shade = QColor(color)
+                GL.glColor3f(shade.redF(), shade.greenF(), shade.blueF())
+                GL.glBegin(GL.GL_LINE_LOOP if closed else GL.GL_LINE_STRIP)
+                for point in points:
+                    GL.glVertex3dv(point)
+                GL.glEnd()
         painter = QPainter(self)
         painter.setPen(QColor("#254e45"))
         painter.drawText(12, 22, "Prostor · vybraný díl se zvýrazní také na papíře")
         if not self.meshes:
             painter.drawText(12, 52, "Začněte kreslením vlastního obrysu vlevo.")
+        elif self.relation_status:
+            painter.drawText(12, 42, self.relation_status)
         painter.drawText(
             12, self.height() - 14, "Prostřední: oběh · Shift: posun · kolečko: zoom · F: zaměřit"
         )
