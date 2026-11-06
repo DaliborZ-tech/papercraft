@@ -68,6 +68,13 @@ def surface_material(project, surface_id, *, paper=False):
     )
 
 
+def contact_tolerance(project, *regions, span=0):
+    """Model-space contact tolerance, bounded by the 0.01 paper-mm budget."""
+    extents = [math.hypot(r.bounds[2] - r.bounds[0], r.bounds[3] - r.bounds[1])
+               for r in regions]
+    return min(0.01 / project.scale, max(1e-6, 1e-9 * max([span, *extents])))
+
+
 def attachment_geometry(project, attachment):
     """Read-only diagnostics; a projection never substitutes for physical contact."""
     if attachment.unresolved:
@@ -82,7 +89,7 @@ def attachment_geometry(project, attachment):
         uv, distances = world_to_uv(project, target, world)
         trace = LineString(uv)
         gap = float(np.max(np.abs(distances)))
-        tolerance = max(1e-6, 1e-9 * math.dist(*world))
+        tolerance = contact_tolerance(project, material, span=math.dist(*world))
         if gap > tolerance:
             raise ValidationError(
                 f"ATTACHMENT_GAP: hrana je {gap:g} mm od materiálu protikusu. "
@@ -102,11 +109,12 @@ def attachment_geometry(project, attachment):
             "material_length_mm": trace.length - missing,
             "receiver_surface_id": target,
             "target_side": attachment.target_side,
+            "contact_tolerance_model_mm": tolerance,
         }
         if attachment.kind == "glue_region":
             region = material_polygon(attachment.target_region_uv)
             if (
-                region.difference(material).area > 1e-8
+                not material.buffer(tolerance).covers(region)
                 or trace.difference(region).length > tolerance
             ):
                 raise ValidationError(
@@ -123,10 +131,11 @@ def attachment_geometry(project, attachment):
         if attachment.source_region_uv
         else source_material
     )
-    if source_polygon.difference(source_material).area > 1e-8:
+    tolerance = contact_tolerance(project, material, source_material, source_polygon)
+    if not source_material.buffer(tolerance).covers(source_polygon):
         raise ValidationError("SOURCE_GLUE_OUTSIDE: zdrojová lepicí oblast není celá na materiálu.")
     target_region = material_polygon(attachment.target_region_uv)
-    if target_region.difference(material).area > 1e-8:
+    if not material.buffer(tolerance).covers(target_region):
         raise ValidationError(
             "TARGET_GLUE_OUTSIDE: cílová lepicí oblast zasahuje mimo materiál nebo do otvoru."
         )
@@ -141,13 +150,19 @@ def attachment_geometry(project, attachment):
         uv_loops.append(uv)
         distances.extend(distance)
     gap = float(max(abs(v) for v in distances))
-    if gap > 1e-6:
+    if gap > tolerance:
         raise ValidationError(f"ATTACHMENT_GAP: lepené plochy odděluje mezera {gap:g} mm.")
     footprint = material_polygon(uv_loops[0], uv_loops[1:])
     available = footprint.intersection(target_region).intersection(material).area
     if footprint.area - available > max(1e-8, footprint.area * 1e-10):
         raise ValidationError(
             "GLUE_REGION_PARTIAL: otisk není celý v zadané lepicí oblasti protikusu."
+        )
+    if not material.buffer(tolerance).covers(footprint) or not target_region.buffer(
+        tolerance
+    ).covers(footprint):
+        raise ValidationError(
+            "GLUE_REGION_PARTIAL: otisk přesahuje příjemce nad toleranci kontaktu."
         )
     return {
         "kind": attachment.kind,
@@ -160,6 +175,10 @@ def attachment_geometry(project, attachment):
         "available_area_mm2": available * project.scale * project.scale,
         "receiver_surface_id": target,
         "target_side": attachment.target_side,
+        "contact_tolerance_model_mm": tolerance,
+        "target_region_outside_area_mm2": (
+            target_region.difference(material).area * project.scale**2
+        ),
     }
 
 
