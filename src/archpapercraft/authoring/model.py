@@ -231,6 +231,34 @@ class Connector:
     taper: float = 0.6
     shape: str = "trapezoid"
     revision: int = 1
+    attachment_id: str | None = None
+    count: int = 1
+    gap_mm: float = 0.0
+    outline_mm: list = field(default_factory=list)
+    enabled: bool = True
+    tab_ids: list[str] = field(default_factory=list)
+    tab_overrides: dict = field(default_factory=dict)
+
+
+@dataclass
+class Attachment:
+    """Assembly relation; source intervals remain authority over derived target UV."""
+
+    id: str
+    kind: str
+    source_surface_id: str
+    target_surface_id: str
+    source_edge_id: str | None = None
+    source_interval: list[float] = field(default_factory=lambda: [0.0, 1.0])
+    target_side: str = "inside"
+    glue_direction: int = 1
+    target_region_uv: list = field(default_factory=list)
+    source_region_uv: list = field(default_factory=list)
+    requested_placement: dict = field(default_factory=dict)
+    connector_id: str | None = None
+    revision: int = 1
+    number: int = 1
+    unresolved: bool = False
 
 
 @dataclass(frozen=True)

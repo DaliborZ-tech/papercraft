@@ -12,6 +12,13 @@ import numpy as np
 from shapely import Polygon, box
 from shapely.ops import unary_union
 
+from .attachments import (
+    attachment_geometry,
+    connector_shapes,
+    edge_source,
+    source_outward,
+    trace_connector_contact,
+)
 from .errors import ValidationError
 from .geometry import material_polygon, page_points, path, signed_area
 from .model import Issue
@@ -32,6 +39,13 @@ def part_input(project, part):
     joints = [j for j in project.joints.values() if {j.surface_a, j.surface_b} & touched]
     for joint in joints:
         touched.update((joint.surface_a, joint.surface_b))
+    attachments = [
+        a
+        for a in project.attachments.values()
+        if {a.source_surface_id, a.target_surface_id} & touched
+    ]
+    for attachment in attachments:
+        touched.update((attachment.source_surface_id, attachment.target_surface_id))
     surfaces = {sid: asdict(project.surfaces[sid]) for sid in sorted(touched)}
     profile_ids = {
         pid
@@ -44,9 +58,10 @@ def part_input(project, part):
             "surfaces": surfaces,
             "profiles": {pid: asdict(project.profiles[pid]) for pid in sorted(profile_ids)},
             "joints": [asdict(j) for j in sorted(joints, key=lambda j: j.id)],
+            "attachments": [asdict(a) for a in sorted(attachments, key=lambda a: a.id)],
             "connectors": {
                 j.connector_id: asdict(project.connectors[j.connector_id])
-                for j in joints
+                for j in [*joints, *attachments]
                 if j.connector_id
             },
             "frame": asdict(part.frame),
@@ -86,14 +101,7 @@ def _map_points(points, mapping):
 
 
 def _edge_points(project, surface_id, edge_id):
-    surface = project.surfaces[surface_id]
-    profile = project.profiles[surface.profile_id]
-    edge = profile.segment(edge_id)
-    if edge is None:
-        raise ValidationError("REFERENCE_UNRESOLVED: hrana spoje chybí.")
-    return np.array(
-        [profile.vertex(edge.start_vertex_id).point, profile.vertex(edge.end_vertex_id).point]
-    )
+    return edge_source(project, surface_id, edge_id)[2]
 
 
 def edge_world(project, surface_id, edge_id):
@@ -153,26 +161,40 @@ def connector_contact(project, joint, connector):
     inward = np.array([-tangent[1], tangent[0]])
     if signed_area(profile.points) < 0:
         inward = -inward
-    if connector.shape == "triangle":
-        points = [edge[0], edge[1], edge.mean(axis=0) + inward * connector.width_mm]
-    else:
-        inset = (1 - connector.taper) * np.linalg.norm(edge[1] - edge[0]) / 2
-        points = [
-            edge[0],
-            edge[1],
-            edge[1] - tangent * inset + inward * connector.width_mm,
-            edge[0] + tangent * inset + inward * connector.width_mm,
-        ]
     target = material_polygon(
         np.array(profile.points) * project.scale,
         [np.array(project.profiles[h].points) * project.scale for h in surface.hole_profile_ids],
     )
-    footprint = Polygon(points)
+    owner = connector.owner_surface_id
+    owner_edge = joint.edge_a if owner == joint.surface_a else joint.edge_b
+    owner_world = edge_world(project, owner, owner_edge)
+    target_world = edge_world(project, sid, edge_id)
+    reverse = math.dist(owner_world[0], target_world[1]) < math.dist(
+        owner_world[0], target_world[0]
+    )
+    start = edge[1] if reverse else edge[0]
+    axis = -tangent if reverse else tangent
+    polygons, tabs = [], []
+    for tab in connector_shapes(connector, math.dist(*edge)):
+        points = start + tab["points"][:, :1] * axis + tab["points"][:, 1:] * inward
+        footprint = Polygon(points)
+        polygons.append(footprint)
+        tabs.append(
+            {
+                "tab_id": tab["id"],
+                "footprint_uv_mm": points.tolist(),
+                "nominal_area_mm2": footprint.area,
+                "available_area_mm2": footprint.intersection(target).area,
+                "receiver_surface_id": sid,
+            }
+        )
+    footprint = unary_union(polygons)
     return {
         "nominal_area_mm2": footprint.area,
         "available_area_mm2": footprint.intersection(target).area,
         "receiver_surface_id": sid,
-        "footprint": points,
+        "footprint": tabs[0]["footprint_uv_mm"] if tabs else [],
+        "tabs": tabs,
     }
 
 
@@ -246,17 +268,17 @@ def build_part(project, old_part):
             )
         material.append(polygon)
         part.polygons[sid] = loops
-        profile = profiles[0]
-        for edge in profile.segments:
-            points = _map_points(_edge_points(project, sid, edge.id), maps[sid])
-            part.edges.append(
-                {
-                    "surface_id": sid,
-                    "edge_id": edge.id,
-                    "start": points[0].tolist(),
-                    "end": points[1].tolist(),
-                }
-            )
+        for profile in profiles:
+            for edge in profile.segments:
+                points = _map_points(_edge_points(project, sid, edge.id), maps[sid])
+                part.edges.append(
+                    {
+                        "surface_id": sid,
+                        "edge_id": edge.id,
+                        "start": points[0].tolist(),
+                        "end": points[1].tolist(),
+                    }
+                )
     tabs = []
     for joint in project.joints.values():
         if joint.surface_a not in part.surface_ids and joint.surface_b not in part.surface_ids:
@@ -297,25 +319,79 @@ def build_part(project, old_part):
         outer = part.polygons[sid][0]
         if signed_area(outer) < 0:
             outward = -outward
-        inset = (1 - connector.taper) * np.linalg.norm(points[1] - points[0]) / 2
-        if connector.shape == "triangle":
-            tab = [points[0], points[1], points.mean(axis=0) + outward * connector.width_mm]
-        else:
-            tab = [
-                points[0],
-                points[1],
-                points[1] - tangent * inset + outward * connector.width_mm,
-                points[0] + tangent * inset + outward * connector.width_mm,
-            ]
-        tab_polygon = Polygon(tab)
-        if any(tab_polygon.intersection(p).area > 1e-8 for p in material):
-            raise ValidationError(
-                "Chlopeň zasahuje do vlastního materiálu. Změňte šířku nebo tvar."
-            )
-        tabs.append(tab_polygon)
-        part.paths["TABS"].append(path(tab, True))
         receiver = joint.surface_b if sid == joint.surface_a else joint.surface_a
-        part.paths[fold_role(project, sid, receiver, edge_id, part.front_side)].append(path(points))
+        role = fold_role(project, sid, receiver, edge_id, part.front_side)
+        for shape in connector_shapes(connector, math.dist(*points)):
+            tab = points[0] + shape["points"][:, :1] * tangent + shape["points"][:, 1:] * outward
+            tab_polygon = Polygon(tab)
+            if any(tab_polygon.intersection(p).area > 1e-8 for p in [*material, *tabs]):
+                raise ValidationError(
+                    "FLAT_CONNECTOR_COLLISION: chlopeň překrývá vlastní materiál "
+                    "nebo sousední záložku."
+                )
+            tabs.append(tab_polygon)
+            part.paths["TABS"].append(path(tab, True))
+            hinge = points[0] + shape["hinge"][:, :1] * tangent
+            part.paths[role].append(path(hinge))
+    for attachment in project.attachments.values():
+        source, target = attachment.source_surface_id, attachment.target_surface_id
+        if not {source, target} & set(part.surface_ids):
+            continue
+        contact = attachment_geometry(project, attachment)
+        # Glue marks are guides, never cuts. A mark on the reverse is not silently
+        # mirrored onto the currently printed face.
+        if target in maps and attachment.target_side == part.front_side:
+            region = contact.get("target_region_uv", contact["target_uv"])
+            points = _map_points(region, maps[target])
+            part.paths["GUIDES"].append(path(points, attachment.kind == "glue_region"))
+            center = points.mean(axis=0)
+            part.labels.append(
+                {
+                    "text": f"A{attachment.number}",
+                    "x": float(center[0]),
+                    "y": float(center[1]),
+                    "size_mm": 2.0,
+                }
+            )
+        if source not in maps:
+            continue
+        source_points = _map_points(contact["source_uv"], maps[source])
+        center = source_points.mean(axis=0)
+        part.labels.append(
+            {
+                "text": f"A{attachment.number} · "
+                + ("rub" if attachment.target_side == "inside" else "líc"),
+                "x": float(center[0]),
+                "y": float(center[1]),
+                "size_mm": 2.0,
+            }
+        )
+        if attachment.connector_id is None:
+            continue
+        connector = project.connectors[attachment.connector_id]
+        tangent = (source_points[1] - source_points[0]) / math.dist(*source_points)
+        _, source_normal = source_outward(project, source, attachment.source_edge_id)
+        flat_normal = maps[source][0] @ source_normal / project.scale
+        folded = trace_connector_contact(project, attachment, connector)
+        angle = math.radians(folded[0]["fold_angle_deg"]) if folded else 0
+        if part.front_side == "inside":
+            angle = -angle
+        role = "GUIDES" if abs(angle) < 1e-10 else ("FOLD_MOUNTAIN" if angle > 0 else "FOLD_VALLEY")
+        for shape in connector_shapes(connector, math.dist(*source_points)):
+            points = (
+                source_points[0]
+                + shape["points"][:, :1] * tangent
+                + shape["points"][:, 1:] * flat_normal
+            )
+            polygon = Polygon(points)
+            if any(polygon.intersection(p).area > 1e-8 for p in [*material, *tabs]):
+                raise ValidationError(
+                    "FLAT_CONNECTOR_COLLISION: chlopeň překrývá vlastní materiál "
+                    "nebo sousední záložku."
+                )
+            tabs.append(polygon)
+            part.paths["TABS"].append(path(points, True))
+            part.paths[role].append(path(source_points[0] + shape["hinge"][:, :1] * tangent))
     union = unary_union([*material, *tabs])
     part.paths["CUT"] = _polygon_loops(union)
     label_at = material[0].representative_point()
@@ -504,5 +580,54 @@ def validate_layout(project):
             (pid,),
             "warning",
             joint.id,
+        )
+    folded_regions = []
+    for attachment in project.attachments.values():
+        source, target = attachment.source_surface_id, attachment.target_surface_id
+        parts = tuple(
+            dict.fromkeys([project.part_for_surface(source), project.part_for_surface(target)])
+        )
+        try:
+            attachment_geometry(project, attachment)
+            if attachment.connector_id:
+                contacts = trace_connector_contact(
+                    project, attachment, project.connectors[attachment.connector_id]
+                )
+                for contact in contacts:
+                    if contact["nominal_area_mm2"] - contact["available_area_mm2"] > max(
+                        1e-8, contact["nominal_area_mm2"] * 1e-10
+                    ):
+                        issue(
+                            "FOLDED_GLUE_AREA_PARTIAL",
+                            "Ohnutá záložka není celá na lepicím materiálu protikusu.",
+                            parts,
+                            joint_id=attachment.id,
+                        )
+                    region = Polygon(contact["footprint_uv_mm"])
+                    for sid, side, other, other_id in folded_regions:
+                        if (
+                            sid == target
+                            and side == attachment.target_side
+                            and region.intersection(other).area > 1e-8
+                        ):
+                            issue(
+                                "FOLDED_CONNECTOR_COLLISION",
+                                "Ohnuté záložky zasahují do stejného místa protikusu "
+                                f"({other_id}).",
+                                parts,
+                                joint_id=attachment.id,
+                            )
+                    folded_regions.append(
+                        (target, attachment.target_side, region, contact["tab_id"])
+                    )
+        except ValidationError as exc:
+            issue("ATTACHMENT_CONTACT", str(exc), parts, joint_id=attachment.id)
+        issue(
+            "MATERIAL_CLEARANCE_UNVERIFIED",
+            "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; "
+            "ověřte výtiskem.",
+            parts,
+            "warning",
+            attachment.id,
         )
     return issues

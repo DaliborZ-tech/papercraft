@@ -2,6 +2,7 @@
 
 from .errors import ProjectFormatError, UnsupportedOperationError, ValidationError
 from .model import (
+    Attachment,
     Connector,
     CurveSegment,
     Issue,
@@ -18,6 +19,7 @@ from .model import (
 from .project import AuthorProject, LegacyProject, load_project
 
 __all__ = [
+    "Attachment",
     "AuthorProject",
     "Connector",
     "CurveSegment",

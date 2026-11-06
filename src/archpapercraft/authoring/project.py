@@ -25,7 +25,9 @@ from .geometry import (
     validate_rigid,
     vector,
 )
+from .interior import InteriorCommands
 from .model import (
+    Attachment,
     Connector,
     CurveSegment,
     Joint,
@@ -49,8 +51,8 @@ from .paper import (
 )
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 1
-WRITER_VERSION = "0.3.0-experimental"
+SCHEMA_VERSION = 2
+WRITER_VERSION = "0.3.0-pc006b-experimental"
 _UNSET = object()
 
 
@@ -85,7 +87,7 @@ def _record(cls, data):
     return cls(**copy.deepcopy(data))
 
 
-class AuthorProject:
+class AuthorProject(InteriorCommands):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
         self.name, self.scale, self.revision = name, number(scale, "Měřítko", positive=True), 1
@@ -93,6 +95,8 @@ class AuthorProject:
         self.profiles, self.surfaces, self.parts, self.joints, self.connectors = {}, {}, {}, {}, {}
         self.pages = [Page()]
         self.placements, self.acknowledgements = {}, {}
+        self.attachments, self.next_attachment_number = {}, 1
+        self.loaded_from_schema, self.requires_save_as, self.loaded_source_path = None, False, None
 
     @classmethod
     def new(cls, name="Nový model", scale=0.01):
@@ -103,9 +107,14 @@ class AuthorProject:
     def _touch(self, surface_ids=()):
         self.revision += 1
         affected = set(surface_ids)
-        for joint in self.joints.values():
-            if {joint.surface_a, joint.surface_b} & affected:
-                affected.update((joint.surface_a, joint.surface_b))
+        pairs = [{j.surface_a, j.surface_b} for j in self.joints.values()]
+        pairs.extend({a.source_surface_id, a.target_surface_id} for a in self.attachments.values())
+        previous = None
+        while previous != affected:
+            previous = set(affected)
+            for pair in pairs:
+                if pair & affected:
+                    affected.update(pair)
         for sid in surface_ids:
             self.surfaces[sid].revision += 1
         for part in self.parts.values():
@@ -197,6 +206,9 @@ class AuthorProject:
                 for sid in (joint.surface_a, joint.surface_b)
             ):
                 joint.unresolved = True
+        for attachment in self.attachments.values():
+            if attachment.source_edge_id in {edge.id for edge in old.segments}:
+                attachment.unresolved = True
         self._touch(self._profile_surfaces(profile_id))
 
     @atomic
@@ -979,26 +991,83 @@ class AuthorProject:
                 if joint.connector_id not in self.connectors:
                     raise ValidationError("Chybějící chlopeň spoje.")
                 connector_ids.append(joint.connector_id)
+        all_ids.extend(self._validate_interior(connector_ids))
         if sorted(connector_ids) != sorted(self.connectors):
             raise ValidationError("Neplatné pokrytí spojovacích prvků.")
         for cid, connector in self.connectors.items():
             uuid(cid)
             all_ids.append(cid)
-            if connector.id != cid or connector.joint_id not in self.joints:
+            if connector.id != cid:
                 raise ValidationError("Neplatná chlopeň.")
-            joint = self.joints[connector.joint_id]
-            if joint.connector_id != cid or connector.owner_surface_id not in (
-                joint.surface_a,
-                joint.surface_b,
-            ):
-                raise ValidationError("Chlopeň nemá právě jednoho vlastníka a protikus.")
+            if connector.attachment_id:
+                attachment = self.attachments.get(connector.attachment_id)
+                if (
+                    attachment is None
+                    or attachment.connector_id != cid
+                    or connector.joint_id
+                    or connector.owner_surface_id != attachment.source_surface_id
+                ):
+                    raise ValidationError("Chlopeň nemá právě jednoho vlastníka a protikus.")
+            else:
+                joint = self.joints.get(connector.joint_id)
+                if (
+                    joint is None
+                    or joint.connector_id != cid
+                    or connector.owner_surface_id
+                    not in (
+                        joint.surface_a,
+                        joint.surface_b,
+                    )
+                ):
+                    raise ValidationError("Chlopeň nemá právě jednoho vlastníka a protikus.")
             number(connector.width_mm, "Šířka chlopně", positive=True)
             if not 0 < number(connector.taper) <= 1 or connector.shape not in (
                 "triangle",
                 "trapezoid",
+                "custom",
             ):
                 raise ValidationError("Neplatný tvar chlopně.")
             _revision(connector.revision)
+            if (
+                type(connector.count) is not int
+                or not 1 <= connector.count <= 4096
+                or not isinstance(connector.enabled, bool)
+                or not isinstance(connector.tab_ids, list)
+                or len(set(connector.tab_ids)) != len(connector.tab_ids)
+                or (connector.tab_ids and len(connector.tab_ids) != connector.count)
+                or (not connector.tab_ids and connector.count != 1)
+                or not isinstance(connector.tab_overrides, dict)
+                or set(connector.tab_overrides) - set(connector.tab_ids)
+                or any(not isinstance(v, dict) for v in connector.tab_overrides.values())
+            ):
+                raise ValidationError("Neplatné identity nebo parametry dělených záložek.")
+            number(connector.gap_mm, "Mezera záložek", nonnegative=True)
+            for tab_id in connector.tab_ids:
+                uuid(tab_id)
+                all_ids.append(tab_id)
+            for outline in [
+                connector.outline_mm,
+                *[change.get("outline_mm", []) for change in connector.tab_overrides.values()],
+            ]:
+                if outline:
+                    material_polygon(outline)
+            for change in connector.tab_overrides.values():
+                if not isinstance(change, dict) or set(change) - {
+                    "enabled",
+                    "width_mm",
+                    "taper",
+                    "shape",
+                    "outline_mm",
+                }:
+                    raise ValidationError("Neplatná individuální úprava záložky.")
+                if "enabled" in change and not isinstance(change["enabled"], bool):
+                    raise ValidationError("Vypnutí záložky je explicitní volba.")
+                if "width_mm" in change:
+                    number(change["width_mm"], positive=True)
+                if "taper" in change and not 0 < number(change["taper"]) <= 1:
+                    raise ValidationError("Neplatné zkosení záložky.")
+                if "shape" in change and change["shape"] not in ("triangle", "trapezoid", "custom"):
+                    raise ValidationError("Neplatný individuální tvar záložky.")
         if len(set(all_ids)) != len(all_ids):
             raise ValidationError("Entity sdílejí stejnou identitu.")
         components = {frozenset(c) for c in self._components()}
@@ -1028,9 +1097,18 @@ class AuthorProject:
             "revision": self.revision,
             "next_part_number": self.next_part_number,
             "next_joint_number": self.next_joint_number,
+            "next_attachment_number": self.next_attachment_number,
             **{
                 key: {k: asdict(v) for k, v in getattr(self, key).items()}
-                for key in ("profiles", "surfaces", "parts", "joints", "connectors", "placements")
+                for key in (
+                    "profiles",
+                    "surfaces",
+                    "parts",
+                    "joints",
+                    "connectors",
+                    "placements",
+                    "attachments",
+                )
             },
             "pages": [asdict(p) for p in self.pages],
             "acknowledgements": copy.deepcopy(self.acknowledgements),
@@ -1038,6 +1116,39 @@ class AuthorProject:
 
     @classmethod
     def from_dict(cls, data):
+        data = copy.deepcopy(data)
+        # An explicitly identified006A document has its own complete envelope.
+        # Missing B registries in schema2 are corruption, never a legacy fallback.
+        upgrading = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 1
+            and data.get("writer_version") == "0.3.0-experimental"
+        )
+        if upgrading:
+            if "attachments" in data or "next_attachment_number" in data:
+                raise ProjectFormatError("Projekt006A obsahuje neočekávaná pole novějšího formátu.")
+            data.update(attachments={}, next_attachment_number=1)
+            data["schema_version"] = SCHEMA_VERSION
+        if upgrading and isinstance(data.get("connectors"), dict):
+            old_connector_fields = {
+                "id",
+                "joint_id",
+                "owner_surface_id",
+                "width_mm",
+                "taper",
+                "shape",
+                "revision",
+            }
+            for record in data["connectors"].values():
+                if not isinstance(record, dict) or set(record) != old_connector_fields:
+                    raise ProjectFormatError("Neplatná původní chlopeň projektu006A.")
+                defaults = asdict(Connector("", "", ""))
+                record.update({k: v for k, v in defaults.items() if k not in record})
+        if upgrading and isinstance(data.get("parts"), dict):
+            for part in data["parts"].values():
+                if isinstance(part, dict):
+                    part["stale"] = True
         expected = {
             "application",
             "schema_version",
@@ -1049,11 +1160,13 @@ class AuthorProject:
             "revision",
             "next_part_number",
             "next_joint_number",
+            "next_attachment_number",
             "profiles",
             "surfaces",
             "parts",
             "joints",
             "connectors",
+            "attachments",
             "placements",
             "pages",
             "acknowledgements",
@@ -1075,6 +1188,7 @@ class AuthorProject:
                 "revision",
                 "next_part_number",
                 "next_joint_number",
+                "next_attachment_number",
                 "acknowledgements",
             ):
                 setattr(project, key, copy.deepcopy(data[key]))
@@ -1082,6 +1196,7 @@ class AuthorProject:
                 ("surfaces", SurfaceFeature),
                 ("joints", Joint),
                 ("connectors", Connector),
+                ("attachments", Attachment),
                 ("placements", Placement),
             ):
                 if not isinstance(data[key], dict):
@@ -1118,7 +1233,7 @@ class AuthorProject:
         data = self.to_dict()
         if destination.exists():
             existing = load_project(destination)
-            if isinstance(existing, LegacyProject):
+            if isinstance(existing, LegacyProject) or existing.requires_save_as:
                 raise UnsupportedOperationError(
                     "Starý projekt je pouze ke čtení. Uložte kopii pod novým názvem."
                 )
@@ -1134,6 +1249,7 @@ class AuthorProject:
                 os.fsync(handle.fileno())
             os.replace(temporary, destination)
             temporary = None
+            self.requires_save_as = False
         finally:
             if temporary is not None:
                 Path(temporary).unlink(missing_ok=True)
@@ -1187,4 +1303,8 @@ def load_project(path):
         and isinstance(data.get("scene"), list)
     ):
         return LegacyProject(raw, source)
-    return AuthorProject.from_dict(data)
+    project = AuthorProject.from_dict(data)
+    project.loaded_from_schema = data.get("schema_version")
+    project.requires_save_as = project.loaded_from_schema == 1
+    project.loaded_source_path = str(source.resolve())
+    return project
