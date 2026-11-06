@@ -547,7 +547,8 @@ def validate_layout(project):
     folded_regions = []
 
     def register_folded(target, side, contact, parts, relation_id):
-        region = Polygon(contact["footprint_uv_mm"])
+        loops = contact.get("footprint_loops_uv_mm", [contact.get("footprint_uv_mm")])
+        region = Polygon(loops[0], loops[1:])
         for sid, other_side, other, other_id, other_parts in folded_regions:
             if (
                 sid != target
@@ -562,8 +563,8 @@ def validate_layout(project):
                     "Nelze vyloučit překryv ohnutých chlopní: strana protikusu není určená. "
                     "Určete ji ve vlastnostech spoje, nebo upravte chlopně."
                     if unknown else
-                    "Ohnuté záložky zasahují do stejného místa na stejné straně protikusu. "
-                    "Upravte jejich tvar, polohu nebo dělení."
+                    "Lepené části nebo ohnuté záložky zasahují do stejného místa "
+                    "na stejné straně protikusu. Upravte jejich tvar, polohu nebo dělení."
                 ) + f" ({other_id}).",
                 tuple(dict.fromkeys([*parts, *other_parts])),
                 joint_id=relation_id,
@@ -622,7 +623,15 @@ def validate_layout(project):
             dict.fromkeys([project.part_for_surface(source), project.part_for_surface(target)])
         )
         try:
-            attachment_geometry(project, attachment)
+            geometry = attachment_geometry(project, attachment)
+            if attachment.source_edge_id is None:
+                register_folded(target, attachment.target_side, {
+                    "tab_id": attachment.id,
+                    "footprint_loops_uv_mm": [
+                        (np.asarray(loop) * project.scale).tolist()
+                        for loop in geometry["target_loops_uv"]
+                    ],
+                }, parts, attachment.id)
             if attachment.connector_id:
                 contacts = trace_connector_contact(
                     project, attachment, project.connectors[attachment.connector_id]

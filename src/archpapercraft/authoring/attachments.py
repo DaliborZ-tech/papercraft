@@ -169,6 +169,7 @@ def attachment_geometry(project, attachment):
         "source_world": world_loops[0].tolist(),
         "source_uv": np.asarray(loops[0]).tolist(),
         "target_uv": uv_loops[0].tolist(),
+        "target_loops_uv": [loop.tolist() for loop in uv_loops],
         "target_region_uv": attachment.target_region_uv,
         "contact_gap_mm": gap,
         "nominal_area_mm2": footprint.area * project.scale * project.scale,
