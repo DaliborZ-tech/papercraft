@@ -625,7 +625,14 @@ class AuthorProject:
                 self.connectors.pop(joint.connector_id)
                 joint.connector_id = None
         else:
-            chosen = joint.surface_a if owner is _UNSET else owner
+            if owner is _UNSET:
+                chosen = (
+                    self.connectors[joint.connector_id].owner_surface_id
+                    if joint.connector_id
+                    else joint.surface_a
+                )
+            else:
+                chosen = owner
             if chosen not in (joint.surface_a, joint.surface_b):
                 raise ValidationError("Chlopeň musí patřit jednomu z protikusů.")
             if not joint.connector_id:

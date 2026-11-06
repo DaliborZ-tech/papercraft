@@ -76,6 +76,28 @@ def test_one_author_tab_moves_owner_has_only_one_hinge_and_snapshot_material():
     assert not p.connectors and not p.parts[bid].paths["TABS"]
 
 
+@pytest.mark.parametrize("change", [{"width_mm": 7}, {"taper": 0.4}, {"shape": "triangle"}])
+def test_tab_parameter_only_edit_preserves_existing_owner_and_connector_identity(change):
+    p, a, b, ea, eb = two_panels()
+    j = p.connect_edges(a, ea, b, eb)
+    p.set_tab(j, owner=b)
+    connector_id = p.joints[j].connector_id
+    p.set_tab(j, **change)
+    assert p.joints[j].connector_id == connector_id
+    assert p.connectors[connector_id].owner_surface_id == b
+    assert not p.parts[p.part_for_surface(a)].paths["TABS"]
+    assert len(p.parts[p.part_for_surface(b)].paths["TABS"]) == 1
+    for name, value in change.items():
+        assert getattr(p.connectors[connector_id], name) == value
+
+
+def test_new_tab_without_explicit_owner_uses_declared_default_side_a():
+    p, a, b, ea, eb = two_panels()
+    j = p.connect_edges(a, ea, b, eb)
+    p.set_tab(j, width_mm=7)
+    assert p.connectors[p.joints[j].connector_id].owner_surface_id == a
+
+
 def test_wrong_joint_and_bad_tab_settings_are_transactional():
     p, a, b, ea, eb = two_panels()
     before = p.to_dict()
