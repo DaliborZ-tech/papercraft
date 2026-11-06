@@ -1,0 +1,835 @@
+{
+  "project_id": "e53a6361-ad2c-48be-bcf2-e305acd1853e",
+  "revision": 114,
+  "scale_label": "1:100",
+  "coverage": {
+    "expected_part_ids": [
+      "e48dd6e0-6f19-4e2d-89f1-af8ca6858998",
+      "c0f7c323-8fd5-41fb-a362-c89ba3d2adac",
+      "4ee417c5-8587-48bb-a308-8ce94ea4a969",
+      "a9f3b406-71e6-49e6-af27-45047908e39d",
+      "e062be97-b6fc-4015-9ae3-b316ccbce691",
+      "bda29347-c322-4bb2-bce6-9ef40e90a865",
+      "b89d200a-683b-4c5b-94b7-7ad06eb41719",
+      "c78b22d7-e93b-42e6-a927-d249bedc38ab",
+      "027e1875-645e-4a7e-9558-6c3c44329bd2"
+    ],
+    "expected_surface_ids": [
+      "8d763352-fe8c-4ece-9f46-b5e350071b51",
+      "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+      "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+      "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+      "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+      "72481922-32ce-4698-9b37-648f9787ef67",
+      "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+      "6b281b75-e6ae-4e82-95ff-61742b00d160",
+      "df8f38c6-9eb8-4e53-a844-9baec51a5851",
+      "e20274e1-3c52-4a77-a7d5-6e21e4f7f99d",
+      "8a4e794e-7cd8-4570-83ad-51e508d0622e"
+    ],
+    "source_revisions": {
+      "e48dd6e0-6f19-4e2d-89f1-af8ca6858998": 114,
+      "c0f7c323-8fd5-41fb-a362-c89ba3d2adac": 114,
+      "4ee417c5-8587-48bb-a308-8ce94ea4a969": 114,
+      "a9f3b406-71e6-49e6-af27-45047908e39d": 114,
+      "e062be97-b6fc-4015-9ae3-b316ccbce691": 114,
+      "bda29347-c322-4bb2-bce6-9ef40e90a865": 114,
+      "b89d200a-683b-4c5b-94b7-7ad06eb41719": 114,
+      "c78b22d7-e93b-42e6-a927-d249bedc38ab": 114,
+      "027e1875-645e-4a7e-9558-6c3c44329bd2": 114
+    }
+  },
+  "pages": [
+    {
+      "id": "1bae96ce-860e-45f1-867e-de26d5f5390b",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "e48dd6e0-6f19-4e2d-89f1-af8ca6858998",
+          "name": "P1 · Plocha 1",
+          "surface_ids": [
+            "8d763352-fe8c-4ece-9f46-b5e350071b51"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 30.0,
+            "rotation_deg": 5.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    77.0,
+                    -2.0
+                  ],
+                  [
+                    23.0,
+                    -2.0
+                  ],
+                  [
+                    5.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ],
+                  [
+                    20.0,
+                    42.0
+                  ],
+                  [
+                    80.0,
+                    42.0
+                  ],
+                  [
+                    100.0,
+                    40.0
+                  ],
+                  [
+                    100.0,
+                    0.0
+                  ],
+                  [
+                    95.0,
+                    0.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [
+              {
+                "points": [
+                  [
+                    5.0,
+                    0.0
+                  ],
+                  [
+                    95.0,
+                    0.0
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "FOLD_VALLEY": [
+              {
+                "points": [
+                  [
+                    100.0,
+                    40.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "TABS": [
+              {
+                "points": [
+                  [
+                    100.0,
+                    40.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ],
+                  [
+                    20.0,
+                    42.0
+                  ],
+                  [
+                    80.0,
+                    42.0
+                  ]
+                ],
+                "closed": true
+              },
+              {
+                "points": [
+                  [
+                    5.0,
+                    0.0
+                  ],
+                  [
+                    95.0,
+                    0.0
+                  ],
+                  [
+                    77.0,
+                    -2.0
+                  ],
+                  [
+                    23.0,
+                    -2.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P1 · Plocha 1",
+              "x": 50.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A1 · rub",
+              "x": 50.0,
+              "y": 40.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A7 · rub",
+              "x": 50.0,
+              "y": 0.0,
+              "size_mm": 2.0
+            }
+          ]
+        },
+        {
+          "id": "c0f7c323-8fd5-41fb-a362-c89ba3d2adac",
+          "name": "P2 · Plocha 2",
+          "surface_ids": [
+            "ca714881-efcf-4bdc-b1b5-58ca5add8de8"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 110.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    100.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ],
+                  [
+                    20.0,
+                    42.0
+                  ],
+                  [
+                    80.0,
+                    42.0
+                  ],
+                  [
+                    100.0,
+                    40.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [
+              {
+                "points": [
+                  [
+                    100.0,
+                    40.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "FOLD_VALLEY": [],
+            "TABS": [
+              {
+                "points": [
+                  [
+                    100.0,
+                    40.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ],
+                  [
+                    20.0,
+                    42.0
+                  ],
+                  [
+                    80.0,
+                    42.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P2 · Plocha 2",
+              "x": 50.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A2 · rub",
+              "x": 50.0,
+              "y": 40.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A8 · rub",
+              "x": 50.0,
+              "y": 0.0,
+              "size_mm": 2.0
+            }
+          ]
+        },
+        {
+          "id": "4ee417c5-8587-48bb-a308-8ce94ea4a969",
+          "name": "P3 · Plocha 3",
+          "surface_ids": [
+            "8f67f48f-4bbc-4057-bff5-e357ff302e46"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 140.0,
+            "y_mm": 30.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    60.0,
+                    0.0
+                  ],
+                  [
+                    60.0,
+                    40.0
+                  ],
+                  [
+                    30.0,
+                    70.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P3 · Plocha 3",
+              "x": 30.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A3 · rub",
+              "x": 45.0,
+              "y": 55.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A4 · rub",
+              "x": 15.0,
+              "y": 55.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A9 · rub",
+              "x": 30.0,
+              "y": 0.0,
+              "size_mm": 2.0
+            }
+          ]
+        },
+        {
+          "id": "a9f3b406-71e6-49e6-af27-45047908e39d",
+          "name": "P4 · Plocha 4",
+          "surface_ids": [
+            "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 140.0,
+            "y_mm": 130.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    60.0,
+                    0.0
+                  ],
+                  [
+                    60.0,
+                    40.0
+                  ],
+                  [
+                    30.0,
+                    70.0
+                  ],
+                  [
+                    0.0,
+                    40.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P4 · Plocha 4",
+              "x": 30.0,
+              "y": 20.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A5 · rub",
+              "x": 45.0,
+              "y": 55.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A6 · rub",
+              "x": 15.0,
+              "y": 55.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A10 · rub",
+              "x": 30.0,
+              "y": 0.0,
+              "size_mm": 2.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "48e415f8-c427-46b5-b0cf-a2186f380b80",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "e062be97-b6fc-4015-9ae3-b316ccbce691",
+          "name": "P5 · Plocha 5",
+          "surface_ids": [
+            "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+            "72481922-32ce-4698-9b37-648f9787ef67"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 30.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    108.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    53.74011537
+                  ],
+                  [
+                    0.0,
+                    103.23759005
+                  ],
+                  [
+                    108.0,
+                    103.23759005
+                  ],
+                  [
+                    108.0,
+                    53.74011537
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [
+              {
+                "points": [
+                  [
+                    108.0,
+                    53.74011537
+                  ],
+                  [
+                    0.0,
+                    53.74011537
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P5 · Plocha 5",
+              "x": 54.0,
+              "y": 26.870057685,
+              "size_mm": 2.5
+            }
+          ]
+        },
+        {
+          "id": "bda29347-c322-4bb2-bce6-9ef40e90a865",
+          "name": "P7 · Plocha 7",
+          "surface_ids": [
+            "409797c6-ec7d-47f9-b2c5-a68312d236d2"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 160.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    130.0,
+                    0.0
+                  ],
+                  [
+                    130.0,
+                    100.0
+                  ],
+                  [
+                    0.0,
+                    100.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P7 · Plocha 7",
+              "x": 65.0,
+              "y": 50.0,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "df0f89c3-c066-4b65-9778-1a92717e3555",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "b89d200a-683b-4c5b-94b7-7ad06eb41719",
+          "name": "P8 · Plocha 8",
+          "surface_ids": [
+            "6b281b75-e6ae-4e82-95ff-61742b00d160"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 30.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    60.0,
+                    0.0
+                  ],
+                  [
+                    60.0,
+                    30.0
+                  ],
+                  [
+                    30.0,
+                    60.0
+                  ],
+                  [
+                    0.0,
+                    30.0
+                  ]
+                ],
+                "closed": true
+              },
+              {
+                "points": [
+                  [
+                    20.0,
+                    10.0
+                  ],
+                  [
+                    40.0,
+                    10.0
+                  ],
+                  [
+                    40.0,
+                    25.0
+                  ],
+                  [
+                    20.0,
+                    25.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P8 · Plocha 8",
+              "x": 30.0,
+              "y": 45.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A11 · rub",
+              "x": 15.0,
+              "y": 45.0,
+              "size_mm": 2.0
+            }
+          ]
+        },
+        {
+          "id": "c78b22d7-e93b-42e6-a927-d249bedc38ab",
+          "name": "P9 · Plocha 9",
+          "surface_ids": [
+            "df8f38c6-9eb8-4e53-a844-9baec51a5851"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 100.0,
+            "y_mm": 120.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    80.0,
+                    0.0
+                  ],
+                  [
+                    80.0,
+                    10.0
+                  ],
+                  [
+                    0.0,
+                    10.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P9 · Plocha 9",
+              "x": 40.0,
+              "y": 5.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A14 · rub",
+              "x": 40.0,
+              "y": 5.0,
+              "size_mm": 2.0
+            }
+          ]
+        },
+        {
+          "id": "027e1875-645e-4a7e-9558-6c3c44329bd2",
+          "name": "P10 · Lepicí pásek",
+          "surface_ids": [
+            "8a4e794e-7cd8-4570-83ad-51e508d0622e",
+            "e20274e1-3c52-4a77-a7d5-6e21e4f7f99d"
+          ],
+          "source_revision": 114,
+          "placement": {
+            "x_mm": 40.0,
+            "y_mm": 200.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    42.426406871192846,
+                    -2.0
+                  ],
+                  [
+                    0.0,
+                    -2.0
+                  ],
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    2.0
+                  ],
+                  [
+                    42.426406871192846,
+                    2.0
+                  ],
+                  [
+                    42.426406871192846,
+                    0.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    42.426406871192846,
+                    0.0
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P10 · Lepicí pásek",
+              "x": 21.213203435596423,
+              "y": -1.0,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A12 · rub",
+              "x": 21.213203435596423,
+              "y": 1.0,
+              "size_mm": 2.0
+            },
+            {
+              "text": "A13 · rub",
+              "x": 21.213203435596423,
+              "y": -1.0,
+              "size_mm": 2.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

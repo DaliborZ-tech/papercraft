@@ -1,0 +1,2558 @@
+{
+  "status": "PASS",
+  "source_sha": "5b1161c3df9fc3dc90e04818e9526c0c4f1fdf50",
+  "requested_fixture": "all",
+  "fixture_status": {
+    "model-A": "PASS_TECHNICAL_UI",
+    "mixed-part": "PASS_TECHNICAL_UI"
+  },
+  "source_status_at_start": "M 05_WORK_QUEUE.json\n?? docs/p2/implementation/PC006A_INTEGRATION.md\n?? docs/p2/implementation/PC006B_DOMAIN_REVIEW.md\n?? docs/p2/implementation/PC006B_UI_REVIEW.md\n?? docs/p2/implementation/evidence/pc006b-review-07b-affected-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-07b-scratch.json\n?? docs/p2/implementation/evidence/pc006b-review-4bb-scratch.json\n?? docs/p2/implementation/evidence/pc006b-review-component-0db8f02-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-controller-0db8f02-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02-payload-B01-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02-payload-B02-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02-payload.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-0db8f02.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-4bb5c43-B01-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-4bb5c43-B02-project.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles-4bb5c43.json\n?? docs/p2/implementation/evidence/pc006b-review-oracles.py\n?? docs/p2/implementation/evidence/pc006b-review-registry-4bb5c43-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-registry-4bb5c43.json\n?? docs/p2/implementation/evidence/pc006b-review-registry.py\n?? docs/p2/implementation/evidence/pc006b-review-tab-upgrade-07b6a1c.json\n?? docs/p2/implementation/evidence/pc006b-review-tab-upgrade.py\n?? docs/p2/implementation/evidence/pc006b-review-ui-7bd46ac-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-cases.py\n?? docs/p2/implementation/evidence/pc006b-review-ui-own-07b6a1c-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-own-7bd46ac-locale-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-own-7bd46ac-tests.xml\n?? docs/p2/implementation/evidence/pc006b-review-ui-scratch.json",
+  "source_files_sha256": {
+    "pyproject.toml": "7fc368b74cf04b0461920bac0d175f003a4493ac3dde798abdb850ee3727b5d2",
+    "src/archpapercraft/__init__.py": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+    "src/archpapercraft/__main__.py": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+    "src/archpapercraft/app.py": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+    "src/archpapercraft/application/__init__.py": "68882fe29cec1ed6857a27ea2c4dd44c006d4ea9a93c4dd5497b83e575b4314c",
+    "src/archpapercraft/application/author_controller.py": "b3c2a4cfb1502e751465f1105e4ca9922d32392879c5538a1d6b1c6cf9965f84",
+    "src/archpapercraft/arch_presets/__init__.py": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+    "src/archpapercraft/arch_presets/buttress.py": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+    "src/archpapercraft/arch_presets/floor_slab.py": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+    "src/archpapercraft/arch_presets/gothic_window.py": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+    "src/archpapercraft/arch_presets/onion_dome.py": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+    "src/archpapercraft/arch_presets/opening.py": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+    "src/archpapercraft/arch_presets/roof.py": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+    "src/archpapercraft/arch_presets/tower.py": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+    "src/archpapercraft/arch_presets/wall.py": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+    "src/archpapercraft/authoring/__init__.py": "b0844fca50b090cdf265358924b44576866d929f19fc9743cf78aed47debcecf",
+    "src/archpapercraft/authoring/attachments.py": "2f21408aab1d4dc3425de2a0770958d02f57b4675f1161b1bffc1dd38f88dcd0",
+    "src/archpapercraft/authoring/commands.py": "7bd87f52ab1ae38a052ca8c2572aab2452694a8114a081f98ebc1c9600dd2839",
+    "src/archpapercraft/authoring/errors.py": "c73b4d32e1f609eab78ae0f0067b5dc483d80435a92a77e89efe43ea12e9d838",
+    "src/archpapercraft/authoring/geometry.py": "a183daa0f705972ea482498bf795a0bacb19954c9b1c228735bcdda782c8e05e",
+    "src/archpapercraft/authoring/interior.py": "ce62c3272dc5fdab18f46baac4bd23446015ee50233ce119f83e82f69324a33e",
+    "src/archpapercraft/authoring/model.py": "e5fb93cca506826fcb026d380f298c51bf41accce277f62cd7c1fec9c640ba95",
+    "src/archpapercraft/authoring/paper.py": "f20a3585658a724c975036c3a92f6b435dde81ad1a6f67bb83157df77162b59f",
+    "src/archpapercraft/authoring/project.py": "6ed300e92a00fb7ea55292034ba7700c3ac4021b5699bd07645e4a78cfbc6aeb",
+    "src/archpapercraft/commands/__init__.py": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+    "src/archpapercraft/commands/command_stack.py": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+    "src/archpapercraft/core_geometry/__init__.py": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+    "src/archpapercraft/core_geometry/backend.py": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+    "src/archpapercraft/core_geometry/mesh.py": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+    "src/archpapercraft/core_geometry/operations.py": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+    "src/archpapercraft/core_geometry/primitives.py": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+    "src/archpapercraft/core_geometry/stable_ids.py": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+    "src/archpapercraft/core_geometry/units.py": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+    "src/archpapercraft/core_geometry/validation.py": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+    "src/archpapercraft/exporter/__init__.py": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+    "src/archpapercraft/exporter/author_export.py": "304c92ccecf46b2ca680446dd2ad744fc96b763e5e2484f3ffd3184bf847e9e4",
+    "src/archpapercraft/exporter/dxf_export.py": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+    "src/archpapercraft/exporter/pdf_export.py": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+    "src/archpapercraft/exporter/png_export.py": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+    "src/archpapercraft/exporter/svg_export.py": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+    "src/archpapercraft/layout_packer/__init__.py": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+    "src/archpapercraft/layout_packer/packer.py": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+    "src/archpapercraft/paper_analyzer/__init__.py": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+    "src/archpapercraft/paper_analyzer/classifier.py": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+    "src/archpapercraft/preferences/__init__.py": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+    "src/archpapercraft/preferences/settings.py": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+    "src/archpapercraft/project_io/__init__.py": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+    "src/archpapercraft/project_io/project.py": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+    "src/archpapercraft/scene_graph/__init__.py": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+    "src/archpapercraft/scene_graph/node.py": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+    "src/archpapercraft/scene_graph/scene.py": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+    "src/archpapercraft/scene_graph/snap.py": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+    "src/archpapercraft/scene_graph/transform.py": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+    "src/archpapercraft/seam_editor/__init__.py": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+    "src/archpapercraft/seam_editor/auto_seams.py": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+    "src/archpapercraft/seam_editor/seam_graph.py": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+    "src/archpapercraft/tabs_generator/__init__.py": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+    "src/archpapercraft/tabs_generator/build_guide.py": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+    "src/archpapercraft/tabs_generator/markings.py": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+    "src/archpapercraft/tabs_generator/tabs.py": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+    "src/archpapercraft/ui/__init__.py": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+    "src/archpapercraft/ui/author_attachment.py": "09800a9f8c8cad18e9331d5085e411626830a0ef4896835a0e0955eba867eebd",
+    "src/archpapercraft/ui/author_connectors.py": "51c4cb87058ea1d620afa2b470987355425ccefccf76ba2411cc71fa4f747b56",
+    "src/archpapercraft/ui/author_paper.py": "c66a6d304385c5aec592bcaa304e6348fbe1c2c90bebbef2538c2506d57b2a3d",
+    "src/archpapercraft/ui/author_sketch.py": "f0aa99d0ff19bc6374c425a4c7be508ec8650818baec6da858c0a63488ec6257",
+    "src/archpapercraft/ui/author_viewport.py": "b60d6d769e4085783219af402b2a49b4f4ded1446ecb0184eeb56225b636e38d",
+    "src/archpapercraft/ui/author_window.py": "e265eb824293784207c8240adc9835d4aa0db72f938e7cf37212d14d78fb9bfd",
+    "src/archpapercraft/ui/main_window.py": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+    "src/archpapercraft/ui/object_tree.py": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+    "src/archpapercraft/ui/papercraft_panel.py": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+    "src/archpapercraft/ui/preferences_dialog.py": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+    "src/archpapercraft/ui/properties_panel.py": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+    "src/archpapercraft/ui/viewport_3d.py": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+    "src/archpapercraft/ui/wizard.py": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+    "src/archpapercraft/unfolder/__init__.py": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+    "src/archpapercraft/unfolder/approx_unfold.py": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+    "src/archpapercraft/unfolder/exact_unfold.py": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+    "src/archpapercraft/unfolder/strategies.py": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+    "tools/authoring/desktop_b_proof.py": "d980adb95a6050b6f21e0339df2f8f788f4bd65be1ea9304d72614a3901b5ae9",
+    "tools/authoring/native_dialogs.py": "825076d2b29596980a7e3a2be4b6b846b2057cb99cc91a69cacc1082750a5167"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "application_version": "0.3.0",
+  "pid": 21192,
+  "oracle": {
+    "scale": 0.01,
+    "building_model_mm": {
+      "length": 10000,
+      "width": 6000,
+      "wall": 4000,
+      "ridge": 7000
+    },
+    "initial_roof_paper_mm": {
+      "length": 108,
+      "half_slope": 49.49747468305833
+    },
+    "roof_wall_trace_paper_mm": 7.0710678118654755,
+    "changed_south_eave_model_mm": 800,
+    "changed_south_slope_paper_mm": 53.74011537017761,
+    "changed_trace_from_eave_paper_mm": 11.313708498984761,
+    "areas_paper_mm2": {
+      "long_wall": 4000,
+      "gable_wall": 3300.0,
+      "base": 13000,
+      "brace_outer": 2700.0,
+      "brace_hole": 300,
+      "brace_net": 2400.0,
+      "soffit": 800,
+      "initial_half_roof": 5345.727265770299,
+      "changed_south_roof": 5803.932459979182
+    },
+    "mixed": {
+      "initial_rise_model_mm": 3000,
+      "changed_rise_model_mm": 3500,
+      "initial_slope_model_mm": 4242.640687119285,
+      "changed_slope_model_mm": 4609.772228646444,
+      "changed_angle_deg": 49.398705354995535,
+      "page_number": 2,
+      "anchor_paper_mm": [
+        60,
+        60
+      ],
+      "rotation_deg": 30,
+      "wall_page_points_paper_mm": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ]
+    }
+  },
+  "versions": {
+    "PySide6": "6.12.0",
+    "numpy": "2.5.4",
+    "shapely": "2.2.0",
+    "pypdf": "6.21.4",
+    "reportlab": "5.1.0",
+    "PyOpenGL": "3.1.10"
+  },
+  "evidence_kind": "actual_app_main_QTest_widgets_own_PID_native_dialogs",
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN",
+  "AU19": "NOT_RUN_PC010",
+  "started_local": "2026-11-06T14:10:21+0100",
+  "steps": [
+    {
+      "name": "A_full_open_building_base_brace_hole_band_soffit",
+      "status": "PASS",
+      "checks": [
+        {
+          "label": "south net area",
+          "actual": 4000.0,
+          "expected": 4000,
+          "tolerance": 0.01
+        },
+        {
+          "label": "north net area",
+          "actual": 4000.0,
+          "expected": 4000,
+          "tolerance": 0.01
+        },
+        {
+          "label": "west_gable net area",
+          "actual": 3300.0,
+          "expected": 3300.0,
+          "tolerance": 0.01
+        },
+        {
+          "label": "east_gable net area",
+          "actual": 3300.0,
+          "expected": 3300.0,
+          "tolerance": 0.01
+        },
+        {
+          "label": "base net area",
+          "actual": 13000.0,
+          "expected": 13000,
+          "tolerance": 0.01
+        },
+        {
+          "label": "brace net area",
+          "actual": 2400.0,
+          "expected": 2400.0,
+          "tolerance": 0.01
+        },
+        {
+          "label": "soffit net area",
+          "actual": 800.0,
+          "expected": 800,
+          "tolerance": 0.01
+        },
+        {
+          "label": "roof_south net area",
+          "actual": 5345.727265439999,
+          "expected": 5345.727265770299,
+          "tolerance": 0.01
+        },
+        {
+          "label": "roof_north net area",
+          "actual": 5345.727265439999,
+          "expected": 5345.727265770299,
+          "tolerance": 0.01
+        },
+        {
+          "label": "wall trace along initial roof",
+          "actual": 7.0710678118654755,
+          "expected": 7.0710678118654755,
+          "tolerance": 0.01
+        }
+      ],
+      "roles": {
+        "south": "8d763352-fe8c-4ece-9f46-b5e350071b51",
+        "north": "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+        "west_gable": "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+        "east_gable": "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+        "roof_south": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+        "roof_north": "72481922-32ce-4698-9b37-648f9787ef67",
+        "base": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+        "brace": "6b281b75-e6ae-4e82-95ff-61742b00d160",
+        "soffit": "df8f38c6-9eb8-4e53-a844-9baec51a5851",
+        "band_root": "e20274e1-3c52-4a77-a7d5-6e21e4f7f99d"
+      }
+    },
+    {
+      "name": "A_asymmetric_500_to_800_model_mm_eave_preserves_live_trace",
+      "status": "PASS",
+      "trace_before": [
+        [
+          10400.0,
+          707.1067811865476
+        ],
+        [
+          400.0,
+          707.1067811865476
+        ]
+      ],
+      "trace_after": [
+        [
+          10400.0,
+          707.1067811865476
+        ],
+        [
+          400.0,
+          707.1067811865476
+        ]
+      ]
+    },
+    {
+      "name": "A_manual_piece_transfer_between_existing_pages",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_assembled_3D_pick_links_paper",
+      "status": "PASS",
+      "surface_id": "8d763352-fe8c-4ece-9f46-b5e350071b51",
+      "world_probe_mm": [
+        6666.666666666667,
+        0.0,
+        1333.3333333333333
+      ],
+      "pixel": [
+        370,
+        192
+      ]
+    },
+    {
+      "name": "actual_unlocked_manual_paper_drag",
+      "status": "PASS",
+      "part_id": "e48dd6e0-6f19-4e2d-89f1-af8ca6858998",
+      "anchor_before": [
+        30.0,
+        30.0
+      ],
+      "anchor_after": [
+        33.0,
+        32.0
+      ]
+    },
+    {
+      "name": "A_true_hole_preserved_in_both_vector_outputs",
+      "status": "PASS",
+      "pdf_page_hole": [
+        [
+          50.00000583333333,
+          40.00000466666671
+        ],
+        [
+          70.00000816666667,
+          40.00000466666671
+        ],
+        [
+          70.00000816666667,
+          55.00000641666668
+        ],
+        [
+          50.00000583333333,
+          55.00000641666668
+        ]
+      ]
+    },
+    {
+      "name": "model-A_native_save_new_reopen_export",
+      "status": "PASS",
+      "pages": 3,
+      "parts": [
+        "027e1875-645e-4a7e-9558-6c3c44329bd2",
+        "4ee417c5-8587-48bb-a308-8ce94ea4a969",
+        "a9f3b406-71e6-49e6-af27-45047908e39d",
+        "b89d200a-683b-4c5b-94b7-7ad06eb41719",
+        "bda29347-c322-4bb2-bce6-9ef40e90a865",
+        "c0f7c323-8fd5-41fb-a362-c89ba3d2adac",
+        "c78b22d7-e93b-42e6-a927-d249bedc38ab",
+        "e062be97-b6fc-4015-9ae3-b316ccbce691",
+        "e48dd6e0-6f19-4e2d-89f1-af8ca6858998"
+      ],
+      "unfold_mode": "EXACT",
+      "exact_scope": "piecewise planar material; no curved-surface or physical claim",
+      "digital_only_acknowledgements": [
+        {
+          "id": "0a52104185a7583bd73d74ea",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "39652be7bb1af36b956aadc2",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "eeaf217bbfe8aef620fc2554",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "a559e7cc0ee8dcb951910b50",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "934b8953dd49fd7759682bb0",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "7afa38a23dca1f11128db19a",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "9c3bd1d0019f1e17c9820225",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "e45523850f4dac665d6d2f2e",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "a7b0fae8f42f007de95c934d",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "70ff0a435cd5ed485aea25e9",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "fa6dc3f507ace7cc20030119",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "9f35b67fff9001a2c53b6bcd",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "8a2cf2cafc00dad0bc2e9f2d",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "f49d02b423b0ec36e3f0a97e",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        }
+      ]
+    },
+    {
+      "name": "actual_locked_paper_drag",
+      "status": "PASS",
+      "part_id": "caf7fbfc-000f-41b2-83c1-ef7887b3bf34",
+      "anchor_before": [
+        60.0,
+        60.0
+      ],
+      "anchor_after": [
+        60.0,
+        60.0
+      ]
+    },
+    {
+      "name": "mixed_source_profile_rise_change_and_interior_base_wall_points_invariant",
+      "status": "PASS",
+      "wall_page_points_before": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ],
+      "wall_page_points_after": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ],
+      "page2_anchor": [
+        60,
+        60
+      ],
+      "rotation_deg": 30,
+      "position_locked": true,
+      "rotation_locked": true
+    },
+    {
+      "name": "mixed-part_native_save_new_reopen_export",
+      "status": "PASS",
+      "pages": 2,
+      "parts": [
+        "184537de-41ee-45bf-b206-72169bf25830",
+        "caf7fbfc-000f-41b2-83c1-ef7887b3bf34"
+      ],
+      "unfold_mode": "EXACT",
+      "exact_scope": "piecewise planar material; no curved-surface or physical claim",
+      "digital_only_acknowledgements": [
+        {
+          "id": "7694e72a0034be9bab0b6394",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "south",
+      "surface_id": "8d763352-fe8c-4ece-9f46-b5e350071b51",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 6000,
+      "typed_text": "6000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "north",
+      "surface_id": "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "west_gable",
+      "surface_id": "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "east_gable",
+      "surface_id": "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10800,
+      "typed_text": "10800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4949.747468305833,
+      "typed_text": "4949,747468",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -400,
+      "typed_text": "-400",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -500,
+      "typed_text": "-500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3500,
+      "typed_text": "3500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "roof_south",
+      "surface_id": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+      "model_mm": [
+        10800,
+        4949.747468305833
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10800,
+      "typed_text": "10800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4949.747468305833,
+      "typed_text": "4949,747468",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -400,
+      "typed_text": "-400",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3000,
+      "typed_text": "3000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 7000,
+      "typed_text": "7000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -45,
+      "typed_text": "-45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "roof_north",
+      "surface_id": "72481922-32ce-4698-9b37-648f9787ef67",
+      "model_mm": [
+        10800,
+        4949.747468305833
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 90,
+      "typed_text": "90",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_edgepair_fold",
+      "joint_id": "6db81cb0-b979-4a39-b127-b4f482e871f9",
+      "angle_deg": 90
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 13000,
+      "typed_text": "13000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -1500,
+      "typed_text": "-1500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -2000,
+      "typed_text": "-2000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "base",
+      "surface_id": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+      "model_mm": [
+        13000,
+        10000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          3000
+        ],
+        [
+          3000,
+          6000
+        ],
+        [
+          0,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "brace",
+      "surface_id": "6b281b75-e6ae-4e82-95ff-61742b00d160",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          3000
+        ],
+        [
+          3000,
+          6000
+        ],
+        [
+          0,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          2000,
+          1000
+        ],
+        [
+          4000,
+          1000
+        ],
+        [
+          4000,
+          2500
+        ],
+        [
+          2000,
+          2500
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_hole",
+      "role": "brace_hole",
+      "surface_id": "6b281b75-e6ae-4e82-95ff-61742b00d160",
+      "requested_model_mm": [
+        [
+          2000,
+          1000
+        ],
+        [
+          4000,
+          1000
+        ],
+        [
+          4000,
+          2500
+        ],
+        [
+          2000,
+          2500
+        ]
+      ]
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5000,
+      "typed_text": "5000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 8000,
+      "typed_text": "8000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 500,
+      "typed_text": "500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4500,
+      "typed_text": "4500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "soffit",
+      "surface_id": "df8f38c6-9eb8-4e53-a844-9baec51a5851",
+      "model_mm": [
+        8000,
+        1000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "8d763352-fe8c-4ece-9f46-b5e350071b51",
+          "a18daf56-9232-4d66-8cbf-5dc63e237c57"
+        ],
+        "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            707.1067811865476
+          ],
+          [
+            400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "8d763352-fe8c-4ece-9f46-b5e350071b51",
+      "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+          "1302edb5-086c-4423-8245-88dfa37504b8"
+        ],
+        "target": "72481922-32ce-4698-9b37-648f9787ef67",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4242.640687119286
+          ],
+          [
+            400.0,
+            4242.640687119286
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": -1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+      "target": "72481922-32ce-4698-9b37-648f9787ef67",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+          "618f45cf-d25f-4adb-ad5e-1d3c983d188d"
+        ],
+        "target": "72481922-32ce-4698-9b37-648f9787ef67",
+        "mode": "contact",
+        "trace": [
+          [
+            400.0,
+            4242.640687119286
+          ],
+          [
+            400.0,
+            6.431098710333652e-13
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+      "target": "72481922-32ce-4698-9b37-648f9787ef67",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+          "7021c516-e633-4041-ae28-aaea4f0d7288"
+        ],
+        "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+        "mode": "contact",
+        "trace": [
+          [
+            400.0,
+            4949.747468305833
+          ],
+          [
+            400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+      "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+          "ddc6cdf0-958f-4fc9-8075-50cf2549fc51"
+        ],
+        "target": "72481922-32ce-4698-9b37-648f9787ef67",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4242.640687119286
+          ],
+          [
+            10400.0,
+            6.431098710333652e-13
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+      "target": "72481922-32ce-4698-9b37-648f9787ef67",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+          "b1e5a1d2-879f-428d-82ca-88f6f8a707f6"
+        ],
+        "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4949.747468305833
+          ],
+          [
+            10400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+      "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "8d763352-fe8c-4ece-9f46-b5e350071b51",
+          "5dc09c35-ac94-453f-9cc4-bb41c64be556"
+        ],
+        "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+        "mode": "contact",
+        "trace": [
+          [
+            2000.0,
+            2000.0
+          ],
+          [
+            11000.0,
+            2000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "8d763352-fe8c-4ece-9f46-b5e350071b51",
+      "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+          "40e6fbeb-079f-4d2d-92f0-b4305cada733"
+        ],
+        "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+        "mode": "contact",
+        "trace": [
+          [
+            2000.0,
+            8000.0
+          ],
+          [
+            11000.0,
+            8000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "ca714881-efcf-4bdc-b1b5-58ca5add8de8",
+      "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+          "2ed3dc64-7800-4ed1-b32c-3ba0766fd0a4"
+        ],
+        "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+        "mode": "contact",
+        "trace": [
+          [
+            1500.0,
+            2300.0
+          ],
+          [
+            1500.0,
+            7700.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "8f67f48f-4bbc-4057-bff5-e357ff302e46",
+      "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+          "4b098b6e-c568-47bb-ac9e-5c414a0f6454"
+        ],
+        "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+        "mode": "contact",
+        "trace": [
+          [
+            11500.0,
+            2300.0
+          ],
+          [
+            11500.0,
+            7700.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "3ab6cab2-4944-4d05-bf2b-b88eaf4b4303",
+      "target": "409797c6-ec7d-47f9-b2c5-a68312d236d2",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "6b281b75-e6ae-4e82-95ff-61742b00d160",
+          "e259599c-0e4b-424c-8cfa-eac332a09c6e"
+        ],
+        "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+        "mode": "contact",
+        "trace": [
+          [
+            5400.0,
+            4949.747468305833
+          ],
+          [
+            5400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "6b281b75-e6ae-4e82-95ff-61742b00d160",
+      "target": "1bc460be-042f-442d-a3f2-275dc7bfc3c3",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1000,
+          1000
+        ],
+        [
+          10000,
+          1000
+        ],
+        [
+          10000,
+          3000
+        ],
+        [
+          1000,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 20,
+      "typed_text": "20",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -424.26406871192853,
+      "typed_text": "-424,264069",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -424.26406871192853,
+      "typed_text": "-424,264069",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5,
+      "typed_text": "5",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 110,
+      "typed_text": "110",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 140,
+      "typed_text": "140",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 140,
+      "typed_text": "140",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 130,
+      "typed_text": "130",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 160,
+      "typed_text": "160",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 120,
+      "typed_text": "120",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 40,
+      "typed_text": "40",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 200,
+      "typed_text": "200",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 140,
+      "typed_text": "140",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 210,
+      "typed_text": "210",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5,
+      "typed_text": "5",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "mixed_wall",
+      "surface_id": "5bfec88f-a014-47e9-94b2-fb4c37529ffd",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4242.640687119285,
+      "typed_text": "4242,640687",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "mixed_roof",
+      "surface_id": "190709b4-d3ba-432b-bc29-1eed9ee8ff65",
+      "model_mm": [
+        10000,
+        4242.640687119285
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_edgepair_fold",
+      "joint_id": "90b2b55e-2a04-4b61-a4fe-96033dee43b6",
+      "angle_deg": 45
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 13000,
+      "typed_text": "13000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -1500,
+      "typed_text": "-1500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -2000,
+      "typed_text": "-2000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "mixed_base",
+      "surface_id": "4a382fe1-395e-4888-ab07-69f7624fe977",
+      "model_mm": [
+        13000,
+        10000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "5bfec88f-a014-47e9-94b2-fb4c37529ffd",
+          "f0aab092-302d-494c-8137-4cbf0ba02211"
+        ],
+        "target": "4a382fe1-395e-4888-ab07-69f7624fe977",
+        "mode": "contact",
+        "trace": [
+          [
+            1500.0,
+            2000.0
+          ],
+          [
+            11500.0,
+            2000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "5bfec88f-a014-47e9-94b2-fb4c37529ffd",
+      "target": "4a382fe1-395e-4888-ab07-69f7624fe977",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 60,
+      "typed_text": "60",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 60,
+      "typed_text": "60",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4609.772228646444,
+      "typed_text": "4609,772229",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4609.772228646444,
+      "typed_text": "4609,772229",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 49.398705354995535,
+      "typed_text": "49,398705",
+      "locale": "cs_CZ"
+    }
+  ],
+  "dialogs": [
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\docs\\p2\\implementation\\evidence\\pc006b-desktop-5b1161c-run03\\model-A\\model-A.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\docs\\p2\\implementation\\evidence\\pc006b-desktop-5b1161c-run03\\model-A\\model-A.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\docs\\p2\\implementation\\evidence\\pc006b-desktop-5b1161c-run03\\model-A\\export",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Vyberte složku pro SVG a PDF",
+      "directory_confirmation": true
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Vektorový export",
+      "text": "Exportovat 3 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Export dokončen",
+      "text": "Uloženo:\npage-1bae96ce-860e-45f1-867e-de26d5f5390b.svg\npage-48e415f8-c427-46b5-b0cf-a2186f380b80.svg\npage-df0f89c3-c066-4b65-9778-1a92717e3555.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\docs\\p2\\implementation\\evidence\\pc006b-desktop-5b1161c-run03\\mixed-part\\mixed-part.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\docs\\p2\\implementation\\evidence\\pc006b-desktop-5b1161c-run03\\mixed-part\\mixed-part.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-pc006b-domain\\docs\\p2\\implementation\\evidence\\pc006b-desktop-5b1161c-run03\\mixed-part\\export",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Vyberte složku pro SVG a PDF",
+      "directory_confirmation": true
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Vektorový export",
+      "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Export dokončen",
+      "text": "Uloženo:\npage-66381e5d-cc38-4775-82dd-484c565508ae.svg\npage-b84e6e08-6956-4862-98f8-0cefaf1d0995.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+    }
+  ],
+  "negative_cases": [
+    {
+      "status": "EXPECTED_REJECTION",
+      "kind": "outside_roof",
+      "feedback": "Upravte návrh: FOLDED_GLUE_AREA_PARTIAL: záložka není celá na materiálu protikusu."
+    }
+  ],
+  "opengl": {
+    "version": "4.6.0 NVIDIA 610.71",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+  },
+  "elapsed_seconds": 95.032,
+  "files_sha256": {
+    "A-complete-before-asymmetric-edit-desktop.png": "3e7f380ffbe9fd83285d5d4206ca5a59bd644d5fa42f56a1ec585e548886c3b2",
+    "A-complete-before-asymmetric-edit-opengl.png": "c387c7bf7034f5f86a9d7132fffec501033eb42083024e518579fb9db2f81d3e",
+    "A-manual-three-page-layout-desktop.png": "638fabf38b22c0d7f6ce863bbbceb8b3d7f64f50ac7f9e583c72f7de854541ee",
+    "A-manual-three-page-layout-opengl.png": "11a62f8f5b24dd0854b395aa2a45fea75b158356e3b06e0141755780bea3980e",
+    "A-negative-outside-roof-desktop.png": "139c2e185e868450f76ab2b7801f68421bb3ce68c3edd86053da2336578646c3",
+    "A-negative-outside-roof-opengl.png": "a530c9679aa833fa5e916820a62c0b9793151aeca45216f6ff5d4c67a07d5fba",
+    "empty-real-app-desktop.png": "55f2854679dbbc3810c2b73e85ff2178aa6d36e114995c5b5348a4e6b4605d34",
+    "empty-real-app-opengl.png": "16c2055a2970050ca41ff5567cff1e4ffc7018911a962e5b7ecc6687d3b28565",
+    "mixed-part/export/.author-export.json": "9e53961c704f8e454a2c3fbd2c1e16010ae7ab3c77312f5391c80205e44c85e7",
+    "mixed-part/export/model.pdf": "48db977290f0ac0c82e9be574792c12288968e0c05b95034ffd22a10fe7871b8",
+    "mixed-part/export/page-66381e5d-cc38-4775-82dd-484c565508ae.svg": "e2f48f694fd3cdec31c1db552dd776c0e25883a726fc1f8ec18570921a857884",
+    "mixed-part/export/page-b84e6e08-6956-4862-98f8-0cefaf1d0995.svg": "21b3e4a64e87ad0bf45590114950f582bfa678532aef41bd802d8fe6059aabe3",
+    "mixed-part/mixed-part.apcraft": "76527425ba29d6bd2962271497c346282f9a05d1873c9893c9b544c29a4204dd",
+    "mixed-part/snapshot.json": "0d9cf4763988158098a51887b1d9d4e49f03f9456687882a67d4f48c12cc6213",
+    "mixed-part-reopened-desktop.png": "c23b1fc9623b795042092929a9b683e1510ac4c06a31eb6999bfd34bc717edaa",
+    "mixed-part-reopened-opengl.png": "287258cda06d154d0f8bf3c6eb0d23e687666bc6151dfb2fb0219a4a85a37405",
+    "mixed-profile-edit-stale-desktop.png": "7ba76c2b7e1a6af5549b55383442923780e9a4c4cdaf829a1569234ee3c8063d",
+    "mixed-profile-edit-stale-opengl.png": "d4c09b0b35901efef376b8c1b296f14487d5e83af5c4e0169bba9f0f86d3d3d6",
+    "mixed-rise3500-recomputed-locked-desktop.png": "c4c6f844a29b2a3edf91e2cc14043cbbb3eaa25b7fda94790f1669125bb33b85",
+    "mixed-rise3500-recomputed-locked-opengl.png": "d4c09b0b35901efef376b8c1b296f14487d5e83af5c4e0169bba9f0f86d3d3d6",
+    "model-A/export/.author-export.json": "9503899dad58581a8296812ae7947cb2ceb688f8818c49bc2023c3ece583e949",
+    "model-A/export/model.pdf": "48fea42177e0e6fe22cad723b74ef7819e5482620b6e4b55966128764106c621",
+    "model-A/export/page-1bae96ce-860e-45f1-867e-de26d5f5390b.svg": "9ab8bb56a962d45e6be5b3e54bca2ed7c35893584dc8d6124a20ceb3a65826f6",
+    "model-A/export/page-48e415f8-c427-46b5-b0cf-a2186f380b80.svg": "adfd04fcad30edc29c67c0e85b1e64523bdfd382164ebd3a673ae859ea078599",
+    "model-A/export/page-df0f89c3-c066-4b65-9778-1a92717e3555.svg": "a35f4ab3dccaf5603f9854297abbd0dc4cf16bb295ee8c1e851dccad4754529e",
+    "model-A/model-A.apcraft": "42d76e5e8ca0585f9dba25b4a135e2e28ad3fc7748e09418a6c29b7274b10963",
+    "model-A/snapshot.json": "74fea5425f76a20862a98a5f83151e50a30d5e115f2d22fc9d4305287cb09b05",
+    "model-A-reopened-desktop.png": "62d0acfb26fd0785bd7a3fa632276d486f1b49701be906b48655824d25552649",
+    "model-A-reopened-opengl.png": "7fa88a31e7947146e69a502708a4c91599f657bd3a0b50fd11e0b1bd44b7f014",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953"
+  },
+  "failures": []
+}
