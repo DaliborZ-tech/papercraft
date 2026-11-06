@@ -4,6 +4,12 @@
 
 **Integrační CODE `b66b325eabc1e5cf744a73ac58ff6cda635d3603`, schválený produkční základ `4b172e65af3cde19c865cf7594c63fa004aa1ba2`. Verdikt: APPROVED_IN_SCOPE, 0 BLOCKER / 0 MAJOR.** Níže je jedna drobná nejednoznačnost záznamu `current_delivery` k rutinnímu sjednocení. Technické schválení PC-006A a produktové meze zůstávají zachované; nejde o schválení celého P2 nebo budoucího editorového pokusu.
 
+## Finální integrační pin e02eae1
+
+**`e02eae17021abb170f7a39171889d57a27172b67`: APPROVED_IN_SCOPE, 0 BLOCKER / 0 MAJOR.** [Připnuté kontrolní výsledky](evidence/pc006a-review-integration-e02eae1.json) potvrzují prázdný delta `src/tests/pyproject.toml/tools` proti již schválenému `1d8`. Není potřeba opakovat produktové nebo desktop testy. Všech 79 relativních Markdown cílů přidaného delta existuje, 89 historických proof hashů nadále souhlasí a přidané vlastní raw review důkazy jsou totožné s reviewerem vytvořenými soubory.
+
+Queue správně spojuje A s produkcí `7da`, ověřovacím source `5741`, důkazy `1d8` a historickým `4b`; všechny C-01–C-06 jsou doloženě uzavřené. SK-006 navazuje skutečnou nezávislou revizi `1d8` a nechává účinnost `PENDING_NEXT_USE`. Produktová brána, její historie a historické ticket definitions se nezměnily. Start/delivery/diagnostika rozlišují původní baseline, úzkou opakovanou sadu 55 exportních testů a nové vlastní kontroly; 55 není nových unikátních testů přičtených k 443. Novice, P3, celé A/B/C/D/P2 a samostatný B-02 zůstávají mimo toto schválení. Ucelený úsečkový A balík lze integrovat a pushnout podle platného mandátu bez nové rutinní brány.
+
 ## Následná úzká integrační kontrola po C-06
 
 **Pin `1d8ed8b9db95a7e225ad77fbaffe7b943ddec828`: APPROVED_IN_SCOPE, 0 BLOCKER / 0 MAJOR; I-01 CLOSED.** Tato následná kontrola ponechává původní b66 revizi níže jako historii a doplňuje nový produkční source `7da240386550039761de6861d3149ce9ee1be466`/helper `5741cf144116123b4a0cb3f1c84987443517662a`. Produkce mezi `5741` a `1d8` je beze změny. C-06 byl nezávisle uzavřen [samostatnou CODE revizí](PC006A_REVIEW.md); skutečné run04/run06 důkazy nejsou předem schválené na základě starého run03.

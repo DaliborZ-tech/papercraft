@@ -1,0 +1,93 @@
+{
+  "integration_sha": "e02eae17021abb170f7a39171889d57a27172b67",
+  "delta_from": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828",
+  "production_tests_dependencies_tools_delta": "",
+  "gate_unchanged": true,
+  "gate_history_unchanged": true,
+  "historical_ticket_definitions_unchanged": true,
+  "current_delivery": {
+    "ticket": "PC-006B",
+    "then": "PC-007A",
+    "followed_by": [
+      "PC-007B",
+      "PC-008",
+      "PC-009",
+      "PC-010"
+    ],
+    "status": "IN_PROGRESS",
+    "new_routine_permission_required": false,
+    "final_historic_model_ticket": "PC-010 / AC-AU19",
+    "previous_verified": {
+      "ticket": "PC-006A",
+      "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
+      "report": "docs/p2/implementation/PC006A_REVIEW.md",
+      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a"
+    }
+  },
+  "PC006A_source": {
+    "status": "AGENT_VERIFIED",
+    "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
+    "historical_code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+    "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a",
+    "independent_review": {
+      "verdict": "APPROVED_IN_SCOPE",
+      "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
+      "report": "docs/p2/implementation/PC006A_REVIEW.md",
+      "open_blocker_major": 0,
+      "author_is_reviewer": false,
+      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a",
+      "evidence_commit_sha": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828"
+    }
+  },
+  "SK006": {
+    "id": "SK-006",
+    "changed_on": "2026-11-06",
+    "skill": "papercraft-verification",
+    "reason": {
+      "source": "docs/p2/implementation/evidence/pc006a-C06-svg-text-whitespace.md",
+      "problem": "C-06: exported SVG rendered correctly but incremental multiword text editing in native Inkscape lost spaces"
+    },
+    "cause": {
+      "status": "INDEPENDENTLY_REPRODUCED",
+      "mechanism": "Text nodes lacked xml:space=preserve; identical native keystrokes in a minimal independent A/B retained spaces only with the attribute",
+      "evidence": [
+        "docs/p2/implementation/evidence/pc006a-review-space-minimal-ab-run03.json",
+        "docs/p2/implementation/evidence/pc006a-inkscape-a8ff4b3-run03/editor-results.json"
+      ]
+    },
+    "product_correction": {
+      "status": "IMPLEMENTED_AND_INDEPENDENTLY_CLOSED",
+      "source_sha": "7da240386550039761de6861d3149ce9ee1be466",
+      "evidence": [
+        "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/results.json",
+        "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-results.json"
+      ]
+    },
+    "skill_change": "Check actual incremental text editing and saved content in the native target editor; distinguish guarded harness refusal from product failure",
+    "usage_example": "Edit one label to a multiword Unicode caption, save and independently verify exact spaces plus unchanged other objects, geometry, calibration and source bundle",
+    "verification": {
+      "status": "NATIVE_EDITOR_PRODUCT_REGRESSION_PASS",
+      "kind": "real Inkscape 1.4.4 GUI input and readback on a fresh actual application export; not novice evidence",
+      "evidence": [
+        "docs/p2/implementation/evidence/pc006a-inkscape-5741cf1-run06/editor-results.json"
+      ]
+    },
+    "independent_review": {
+      "status": "APPROVED_IN_SCOPE",
+      "source_sha": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828",
+      "report": "docs/p2/implementation/PC006A_INTEGRATION_REVIEW.md",
+      "scope": "new advice and concrete C06 correction; effectiveness still PENDING_NEXT_USE"
+    },
+    "effectiveness": "PENDING_NEXT_USE",
+    "next_use": {
+      "status": "NOT_RUN",
+      "ticket": "PC-009",
+      "evidence": null
+    }
+  },
+  "relative_link_count": 79,
+  "missing_links": [],
+  "raw_proof_hash_count": 89,
+  "raw_proof_hash_failures": [],
+  "owned_raw_reviewer_files_identical_to_working_copy": true
+}
