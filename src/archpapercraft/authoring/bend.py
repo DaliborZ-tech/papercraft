@@ -41,6 +41,7 @@ class BendCommands:
         self, *, thickness_mm=_MISSING, clearance_mm=None,
         bend_radius_mm=None, crease_zone_mm=None,
     ):
+        before = copy.deepcopy(self.material_profile)
         if thickness_mm is not _MISSING:
             self.material_profile["thickness_mm"] = thickness_mm
         for key, value in (
@@ -50,14 +51,20 @@ class BendCommands:
             if value is not None:
                 self.material_profile[key] = value
         self._validate_material_profile()
+        if self.material_profile == before:
+            self.material_profile = before
+            return
         self._touch(list(self.surfaces))
 
     def _assembly_clearance_key(self):
+        used = {pid for surface in self.surfaces.values()
+                for pid in [surface.profile_id, *surface.hole_profile_ids]}
         state = {
             "scale": self.scale,
             "material_profile": self.material_profile,
+            "profiles": {pid: asdict(self.profiles[pid]) for pid in sorted(used)},
             **{name: {key: asdict(value) for key, value in getattr(self, name).items()}
-               for name in ("profiles", "surfaces", "joints", "attachments", "connectors")},
+               for name in ("surfaces", "joints", "attachments", "connectors")},
         }
         return hashlib.sha256(json.dumps(
             state, sort_keys=True, ensure_ascii=False, allow_nan=False
@@ -125,6 +132,13 @@ class BendCommands:
             lo, hi = tab["source_interval"]
             hinge_start, hinge_end = a + lo * (b - a), a + hi * (b - a)
             outline = np.asarray(tab["outline_mm"])
+            crease = profile["crease_zone_mm"]
+            if 2 * crease > min(tab["base_length_mm"], float(np.max(outline[:, 1]))):
+                raise ValidationError(
+                    "Místní pás ohybu je příliš široký vůči záložce. "
+                    "Zmenšete jej nejvýše na polovinu délky základny i výšky chlopně; "
+                    "nesmí zakrýt celou kontrolovanou záložku."
+                )
             initial = (hinge_start + outline[:, :1] * axis
                        + outline[:, 1:] * flat_outward)
             final = contact.get("folded_world")
@@ -149,7 +163,7 @@ class BendCommands:
                 source_id=source, receiver_id=receiver, initial_normal=initial_normal,
                 final_normal=rotation.apply(initial_normal), tab_id=tab["id"],
             )
-            radius = profile["crease_zone_mm"]
+            radius = crease
             padding = (thickness or 0) / 2 + profile["clearance_mm"] + profile["bend_radius_mm"]
             numerical_contact_band = 0.001  # Finite model-contact tolerance, paper mm.
             band = padding + (thickness or 0) / 2 + numerical_contact_band
@@ -198,8 +212,18 @@ class BendCommands:
             result = check_fold_clearance(
                 sweep, material, obstacles_for_tab,
                 expected_obstacle_ids=list(self.surfaces), allowances=allowances,
+                **({"max_depth": 8, "max_intervals": 128} if thickness is None else {}),
             )
-            reports.append(asdict(result))
+            detail = asdict(result)
+            detail["search_scope"] = (
+                "BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN"
+                if thickness is None else "CONTINUOUS_DECLARED_MATERIAL_ENVELOPE"
+            )
+            detail["search_limits"] = (
+                {"max_depth": 8, "max_intervals": 128} if thickness is None
+                else {"max_depth": 12, "max_intervals": 4096}
+            )
+            reports.append(detail)
         precedence = {"CLEAR": 0, "UNVERIFIED": 1, "UNRESOLVED": 2, "COLLISION": 3}
         status = max((r["status"] for r in reports), key=precedence.__getitem__)
         return {

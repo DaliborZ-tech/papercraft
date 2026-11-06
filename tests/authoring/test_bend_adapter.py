@@ -80,3 +80,12 @@ def test_existing_coplanar_edge_join_uses_the_static_clearance_path():
     project.set_material_profile(thickness_mm=0.2, clearance_mm=0.02, bend_radius_mm=0.05)
     result = project.connector_bend_clearance(project.joints[joint].connector_id)
     assert result["status"] == "CLEAR", result
+
+
+def test_large_crease_reservation_cannot_make_the_check_vacuously_clear():
+    project, cid, *_ = own_wall_base()
+    project.set_material_profile(thickness_mm=0.2, crease_zone_mm=100)
+    result = project.connector_bend_clearance(cid)
+    assert result["status"] == "UNRESOLVED"
+    assert "příliš široký" in result["message"]
+    assert any(i.code == "BEND_UNRESOLVED" for i in project.validate_layout())

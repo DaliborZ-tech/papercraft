@@ -42,6 +42,7 @@ from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
+from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_sketch import AuthorSketch
 from archpapercraft.ui.author_viewport import AuthorViewport
@@ -162,6 +163,9 @@ class AuthorMainWindow(QMainWindow):
             ("export", "Exportovat SVG a PDF…", self.export_project, "Ctrl+E"),
         ]:
             project_menu.addAction(self._action(key, text, slot, shortcut))
+        project_menu.addAction(
+            self._action("material", "Papír a místo pro ohyb…", self.edit_material)
+        )
         edit = self.menuBar().addMenu("Úpravy")
         edit.addAction(self._action("undo", "Vrátit změnu", self.undo_command, "Ctrl+Z"))
         edit.addAction(self._action("redo", "Zopakovat změnu", self.redo_command, "Ctrl+Y"))
@@ -311,6 +315,9 @@ class AuthorMainWindow(QMainWindow):
             lambda value: setattr(self.sketch, "grid_mm", value * self.unit_factor)
         )
         form.addRow("Síť obrysu (Alt obejde)", self.grid)
+        self.material_button = QPushButton("Papír a místo pro ohyb…")
+        self.material_button.clicked.connect(self.edit_material)
+        form.addRow(self.material_button)
         form = self._section(layout, "Bod obrysu")
         self.vertex_choice = QComboBox()
         self.vertex_choice.currentIndexChanged.connect(self.choose_vertex)
@@ -1148,6 +1155,16 @@ class AuthorMainWindow(QMainWindow):
                     "Změnit měřítko", lambda p: p.set_scale(1 / self.scale_field.value())
                 )
             )
+
+    def edit_material(self):
+        if not self._commit_pending_input():
+            return
+        dialog = MaterialDialog(self.project, self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.run(lambda: self.controller.execute(
+                "Změnit papír a místo pro ohyb",
+                lambda p: p.set_material_profile(**dialog.result_profile),
+            ))
 
     def unit_changed(self):
         if not self._updating and self.project:

@@ -53,6 +53,17 @@ def title(project, sid):
     return f"{surface.name} (P{part.number})"
 
 
+def bend_message(data):
+    status = data.get("bend_report", {}).get("status")
+    return {
+        "CLEAR": "Pohyb mimo zadané místní pásy ohybu a kontaktu je prověřen podle profilu papíru.",
+        "UNVERIFIED": "Tloušťka není známá. Omezené hledání střetů nedokazuje jejich nepřítomnost.",
+        "COLLISION": "Při ohýbání vzniká doložený střet. Vyberte jeho konkrétní místo dole.",
+        "UNRESOLVED": "Prostor pro ohyb není doložený; zkontrolujte papír a geometrii spoje.",
+        "NOT_APPLICABLE": "Záložky jsou vypnuté; tento pohyb se neprovádí.",
+    }.get(status, "")
+
+
 class MaterialPreview(QGraphicsView):
     """Render only the material paths supplied by the preview document."""
 
@@ -446,12 +457,13 @@ class ConnectorEditDialog(QDialog):
                     else self.source
                 )
                 self.receiver_label.setText(f"Protikus: {title(clone, recipient)}")
+                message += "\n" + bend_message(data)
             related = {clone.part_for_surface(self.source), clone.part_for_surface(self.target)}
             conflicts = [
                 issue.message
                 for issue in clone.validate_layout()
                 if issue.severity == "error"
-                and issue.code.startswith("FOLDED_")
+                and issue.code.startswith(("FOLDED_", "BEND_"))
                 and (issue.joint_id == self.relation[1] or related.intersection(issue.part_ids))
             ]
             if conflicts:
@@ -597,7 +609,7 @@ class ConnectorPanel(QWidget):
         self.edit.setEnabled(can_tab)
         self.edit.setToolTip(
             "Plošné lepení bez hrany nevytváří chlopeň."
-            if attachment
+            if attachment and not can_tab
             else "Chlopeň patří k lepenému řezu; přehyb zůstává souvislým materiálem."
         )
         self.remove.setEnabled(bool(cid))
@@ -620,6 +632,7 @@ class ConnectorPanel(QWidget):
         if cid:
             data = project.connector_geometry(cid)
             messages.extend(data.get("issues", []))
+            messages.append(bend_message(data))
             for index, tab in enumerate(data["all_tabs"], 1):
                 self.tabs.addItem(
                     f"Záložka {index}" + (" · vypnutá" if not tab["enabled"] else ""), tab["id"]
@@ -629,7 +642,7 @@ class ConnectorPanel(QWidget):
                 issue.message
                 for issue in project.validate_layout()
                 if issue.severity == "error"
-                and issue.code.startswith("FOLDED_")
+                and issue.code.startswith(("FOLDED_", "BEND_"))
                 and (issue.joint_id == record.id or related.intersection(issue.part_ids))
             )
         self.tabs.setEnabled(self.tabs.count() > 0)

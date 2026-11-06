@@ -418,7 +418,7 @@ def geometry_payload(part):
 def validate_layout(project):
     issues, materials = [], {}
 
-    def issue(code, message, parts=(), severity="error", joint_id=None):
+    def issue(code, message, parts=(), severity="error", joint_id=None, evidence=None):
         issue_id = digest([code, sorted(parts), joint_id])[:24]
         relevant = {}
         for pid in parts:
@@ -433,7 +433,7 @@ def validate_layout(project):
                     "placement": asdict(placement) if placement else None,
                     "page": asdict(page) if page else None,
                 }
-        signature = digest([issue_id, relevant])
+        signature = digest([issue_id, relevant] + ([evidence] if evidence is not None else []))
         issues.append(
             Issue(
                 issue_id,
@@ -612,10 +612,12 @@ def validate_layout(project):
             issue("SMALL_TAB", "Chlopeň je užší než 2 mm na papíře.", (pid,), "warning", joint.id)
         issue(
             "MATERIAL_CLEARANCE_UNVERIFIED",
-            "Digitální spoj nezaručuje ohyb a pevnost konkrétního papíru; ověřte výtiskem.",
+            "Digitální spoj nenahrazuje ohnutí, slepení a ověření pevnosti výtiskem. "
+            "Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost.",
             (pid,),
             "warning",
             joint.id,
+            evidence=project._assembly_clearance_key(),
         )
     for attachment in project.attachments.values():
         source, target = attachment.source_surface_id, attachment.target_surface_id
@@ -651,10 +653,39 @@ def validate_layout(project):
             issue("ATTACHMENT_CONTACT", str(exc), parts, joint_id=attachment.id)
         issue(
             "MATERIAL_CLEARANCE_UNVERIFIED",
-            "Digitální kontakt neověřuje tloušťku, prostor při ohýbání ani pevnost papíru; "
-            "ověřte výtiskem.",
+            "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního "
+            "papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich "
+            "nepřítomnost; ověřte výtiskem.",
             parts,
             "warning",
             attachment.id,
+            evidence=project._assembly_clearance_key() if attachment.connector_id else None,
         )
+    for cid, connector in project.connectors.items():
+        report = project.connector_bend_clearance(cid)
+        if report["status"] in ("CLEAR", "UNVERIFIED", "NOT_APPLICABLE"):
+            continue
+        source, receiver = project._connector_surfaces(connector)
+        parts = [project.part_for_surface(source), project.part_for_surface(receiver)]
+        relation_id = connector.attachment_id or connector.joint_id
+        failing = [tab for tab in report["tabs"] if tab["status"] in ("COLLISION", "UNRESOLVED")]
+        for detail in failing or [report]:
+            obstacle = detail.get("obstacle_id")
+            if obstacle in project.surfaces:
+                parts.append(project.part_for_surface(obstacle))
+            collision = detail["status"] == "COLLISION"
+            name = project.surfaces[obstacle].name if obstacle in project.surfaces else "modelu"
+            angle = detail.get("witness_angle_deg")
+            angle_text = f" při {angle:g}°" if angle is not None else ""
+            message = (
+                f"Při ohýbání záložka naráží do plochy {name}{angle_text}. "
+                "Upravte chlopeň, mezeru nebo polohu překážky."
+                if collision else
+                "Prostor pro ohnutí této záložky nelze v zadaném materiálovém modelu doložit. "
+                "Zkontrolujte parametry papíru, místní pás ohybu a geometrii spoje."
+            )
+            if report.get("message"):
+                message += " " + report["message"]
+            issue("BEND_COLLISION" if collision else "BEND_UNRESOLVED", message,
+                  tuple(dict.fromkeys(parts)), joint_id=relation_id, evidence=report)
     return issues

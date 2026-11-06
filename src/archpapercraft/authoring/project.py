@@ -780,6 +780,14 @@ class AuthorProject(InteriorCommands, BendCommands):
         return {
             "project_id": self.project_id,
             "revision": self.revision,
+            "construction_checks": {
+                "material_profile": copy.deepcopy(self.material_profile),
+                "assembly_digest": self._assembly_clearance_key(),
+                "connector_bends": {
+                    cid: self.connector_bend_clearance(cid) for cid in self.connectors
+                },
+                "physical_build": "NOT_VERIFIED",
+            },
             "scale_label": f"1:{1 / self.scale:g}",
             "coverage": {
                 "expected_part_ids": list(self.parts),

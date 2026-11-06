@@ -358,6 +358,21 @@ def _validate(data: dict) -> None:
     _number(data.get("revision"), "revision")
     if not isinstance(data["revision"], int) or data["revision"] < 0:
         raise SnapshotError("revision must be a non-negative integer")
+    if "construction_checks" in data:
+        checks = data["construction_checks"]
+        if not isinstance(checks, dict) or not isinstance(checks.get("connector_bends"), dict):
+            raise SnapshotError("Construction checks must contain an explicit connector registry")
+        for report in checks["connector_bends"].values():
+            if not isinstance(report, dict) or report.get("status") not in (
+                "CLEAR", "UNVERIFIED", "NOT_APPLICABLE"
+            ):
+                raise SnapshotError("Snapshot contains blocked or unresolved construction checks")
+            tabs = report.get("tabs", [])
+            if not isinstance(tabs, list) or any(
+                not isinstance(tab, dict) or tab.get("status") not in ("CLEAR", "UNVERIFIED")
+                for tab in tabs
+            ):
+                raise SnapshotError("Snapshot contains a blocked tab motion")
     if "partial" in data and not isinstance(data["partial"], bool):
         raise SnapshotError("partial must be an explicit boolean")
     if (
@@ -683,6 +698,10 @@ def _svg(
         },
     )
     ET.SubElement(root, "title").text = str(data.get("name", data["project_id"]))
+    if "construction_checks" in data:
+        full, summary = _construction_metadata(data)
+        root.set("data-construction-checks-digest", summary["construction_checks_digest"])
+        ET.SubElement(root, "metadata", {"id": "construction-checks"}).text = full
     for part in page["parts"]:
         place = part["placement"]
         group = ET.SubElement(
@@ -924,6 +943,9 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
             "choose a paper frame near the material instead of compensating extreme coordinates. "
             f"Interpolation bound={curve_bound:.8g} mm, serialization bound={numeric_bound:.8g} mm."
         )
+    if "construction_checks" in data:
+        _, summary = _construction_metadata(data)
+        canvas.setKeywords(json.dumps(summary, sort_keys=True, ensure_ascii=False, allow_nan=False))
     canvas.setSubject(
         "Author export snapshot "
         + digest
@@ -936,6 +958,22 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
     )
     canvas.save()
     return numeric_bound
+
+
+def _construction_metadata(data):
+    checks = data["construction_checks"]
+    full = json.dumps(checks, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False, allow_nan=False)
+    summary = {
+        "construction_checks_digest": hashlib.sha256(full.encode("utf8")).hexdigest(),
+        "material_profile": checks.get("material_profile"),
+        "connector_statuses": {
+            cid: report["status"] for cid, report in checks["connector_bends"].items()
+        },
+        "physical_build": "NOT_VERIFIED",
+        "unknown_search_scope": "BOUNDED_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN",
+    }
+    return full, summary
 
 
 def _remove_stage(stage: Path, parent: Path) -> None:
@@ -1043,6 +1081,9 @@ def export_all(
                             ),
                         },
                         files=names,
+                        **({"construction_checks": data["construction_checks"],
+                            "construction_summary": _construction_metadata(data)[1]}
+                           if "construction_checks" in data else {}),
                     ),
                     sort_keys=True,
                     indent=2,

@@ -478,6 +478,10 @@ class InteriorCommands:
         try:
             result = self._connector_geometry(connector_id)
             result.update(valid=True, issues=[])
+            bend = self.connector_bend_clearance(connector_id)
+            result.update(
+                bend_report=bend, clearance_status=bend["status"], bend_sweep_status=bend["status"]
+            )
             return result
         except ValidationError as exc:
             connector = self.connectors[connector_id]
