@@ -26,6 +26,8 @@ V UI vlastní profil/parametry, nikoli pouze načtený hotový export: válec r=
 
 Druhý případ: kuželový pás r1=10,r2=20,s=30mm: rozvin mezikruhová výseč R1=30,R2=60,úhel2π/3, oblouky20π a40π. Test válcového limitu r1≈r2 a změny směru. Příjemce je navržený samostatný díl s oblastí lepení. Ověřit skutečnou plochu záložky v regionu po ohnutí, kolizi sousedních záložek, mezeru pro ohyb a zásah do otvoru. Překryv záložek lze reprodukovat nevhodným počtem/šířkou; očekávání se nesmí odvozovat ze stejného generátoru.
 
+Přesný rozvin válcového pláště nedává automaticky přesný konektor: u zakřiveného hinge se samostatně ověří odchylka dělení, požadovaná deformace a kontakt po ohnutí. Pokud zadaná tolerance neprojde, autor musí upravit počet/mezeru/obrys nebo zvolit explicitně omezené aproximované připojení. C musí předat konkrétní podporovanou a zkontrolovanou volbu; samotné odmítnutí konektoru není dokončený C. Fyzická pružnost a pevnost zůstává neověřená do výtisku.
+
 ## D — prokazatelně nerozvinutelná plocha
 
 Vlastní dvojice profilů s nenulovým developability determinantem nebo kulový segment s nenulovou dvojitou křivostí. Zachovat původní cíl. UI musí odmítnout EXACT a ukázat důvod i dotčenou oblast; výsledek není schován pouze v logu. Není-li solver schopen důkaz rozhodnout, řekne UNRESOLVED, nikoli „přesně rozvinutelné“.

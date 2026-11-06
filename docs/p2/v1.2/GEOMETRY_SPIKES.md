@@ -1,4 +1,4 @@
-# Geometrické spiky před stabilizací P2 v1.2
+﻿# Geometrické spiky před stabilizací P2 v1.2
 
 6. listopadu 2026. Autor samostatné analýzy: agent `geometry_analysis`. Vstup: [přesné upřesnění vlastníka](OWNER_CLARIFICATION.txt). Tento balík je experiment, nikoli produkční geometrické API, serializační schema, hotové UI nebo fyzická akceptace.
 
@@ -7,15 +7,16 @@
 ## Spuštění a důkazy
 
 ```powershell
-.venv\Scripts\python.exe tools/spikes/p2_v12_geometry.py
-.venv\Scripts\python.exe -m pytest tests/spikes/test_p2_v12_geometry.py -q --junitxml=docs/p2/v1.2/evidence/geometry-tests.xml
+.venv\Scripts\python.exe tools/spikes/p2_v12_geometry.py --output docs/p2/v1.2/evidence/geometry-dr01-results.json
+.venv\Scripts\python.exe -m pytest tests/spikes/test_p2_v12_geometry.py -q --junitxml=docs/p2/v1.2/evidence/geometry-dr01-tests.xml
 ```
 
-Poslední ověření: **40 PASS, 0 FAIL, 0 ERROR, 0 SKIP, exit 0**. Přesné časy runneru/testů jsou v JSON/JUnit. CPython 3.12.15, NumPy 2.5.4, izolovaná existující `.venv`, Windows 11. Checkout při původním běhu měl parent HEAD `f9507e325c479c8b703e7f52c410de6847958720`; **nejde o commit obsahující tento dosud necommitnutý spike**. Přesný zdroj běhu identifikují SHA-256 skriptu a testů v `source_files_sha256` a kontrolním manifestu. Integrační owner po přenosu do návrhové větve připne vlastní CODE SHA a experimenty znovu spustí. Spike má vlastní testy, neimportuje produkční `domain` ani starý unfolder a nemění jejich výsledky.
+Původní ověření: **40 PASS, 0 FAIL, 0 ERROR, 0 SKIP, exit 0**. Po nezávislém nálezu DR01 je aktuální opravná sada **60 PASS, 0 FAIL, 0 ERROR, 0 SKIP, exit 0**, viz nové odkazy níže. Přesné časy runneru/testů jsou v JSON/JUnit. CPython 3.12.15, NumPy 2.5.4, izolovaná existující `.venv`, Windows 11. Checkout při původním běhu měl parent HEAD `f9507e325c479c8b703e7f52c410de6847958720`; **nejde o commit obsahující tehdy necommitnutý spike**. Přesný zdroj běhu identifikují SHA-256 skriptu a testů v `source_files_sha256` a kontrolním manifestu. Opravný běh DR01 vznikl v návrhovém worktree; jeho parent HEAD rovněž není opravným CODE commitem. Integrační owner připne opravený CODE SHA a zadá re-review. Spike má vlastní testy, neimportuje produkční `domain` ani starý unfolder a nemění jejich výsledky.
 
 - [Spustitelný spike](../../../tools/spikes/p2_v12_geometry.py), [analytické a negativní testy](../../../tests/spikes/test_p2_v12_geometry.py).
 - [Úplné naměřené hodnoty](evidence/geometry-results.json), [JUnit](evidence/geometry-tests.xml), [kontrolní metadata a hashe](evidence/geometry-validation.json).
 - [Schéma cílových footprintů chlopní](evidence/geometry-tab-footprints.svg). Obrázek ukazuje navržené polohy na víčku, nikoli důkaz jejich bezdeformačního sestavení.
+- Oprava DR01: [nové úplné výsledky](evidence/geometry-dr01-results.json), [60 testů JUnit](evidence/geometry-dr01-tests.xml), [zdrojové hashe a příkazy](evidence/geometry-dr01-validation.json). Původní raw evidence kandidáta zůstala beze změny.
 
 Před předáním ke kandidátnímu review byly oba zdroje pouze zformátovány přes Ruff. Následně prošlo všech 40 testů i `ruff check`; všechna data pod `results` jsou přesně shodná s předchozím během. Původní surové výsledky, JUnit, metadata a SVG jsou zachované jako `evidence/geometry-preformat-*`. Aktuální JSON a kontrolní manifest nesou nové zdrojové hashe; numerické závěry a rozsah důkazů se nezměnily.
 
@@ -24,6 +25,14 @@ Jednotky experimentů jsou mm. Střešní fixture používá rozměry papírové
 ## 1. Dva oblouky: rovinná oblast a prostorový ruled loft
 
 Rovinný příklad: dvě půlkružnice se společným středem, poloměry 20 a 30 mm, ve stejné rovině. Hranici pásu tvoří oba oblouky a koncové radiální spojnice. Plocha je `π(30²−20²)/2 = 785.398163397 mm²`. Jde o rovinný materiálový region. Samotné dvě otevřené křivky nejsou uzavřená vystřihovaná oblast a nejsou automatickým důvodem k vyplnění jejich konvexního obalu.
+
+**Oprava nezávislého nálezu DR01:** původní classifier nepřípustně povýšil samotnou koplanaritu a tři v-vzorky na `EXACT_PLANAR`. Při pootočení druhé kružnice o 180° a k=1.4 má totiž `S=(1−2.4v)C0` v=5/12 kolaps celé křivky do počátku. Původní vzorky v=0,0.5,1 ho minuly; přímo v analytickém kolapsu je numerický Jacobian přibližně 1e-13 mm². Po opravě je to analyticky `DEGENERATE_OR_SINGULAR`, včetně výslovného singulárního parametru. Totéž ověřují testy pro kružnici, elipsu i gotiku při +180°, −180° a 540°.
+
+`EXACT_PLANAR` nyní vzniká pouze pro prokázanou **nepootočenou kladnou homotetii půlelipsy nebo půlkružnice**, k>0 a k≠1. Pro `S=f(v)P(u)`, `f=1+(k−1)v`, platí `Jmin=min(1,k)|k−1|πab>0`. Při k>1 i k<1 je navíc hranice jednoduchá: kladné různé radiální faktory a monotónní θ∈[0,π] dávají injektivní afinní obraz půlmezikruží; koncové radiální spojnice jsou na opačných poloosách a neprotínají se. Certifikát nese tuto dolní mez, doménu i explicitní důkaz hranice. Obecný rovinný loft, například neověřená pootočená nebo gotická dvojice, zůstává `UNPROVEN`; zdejší oprava netvrdí, že není možné jej někdy správně rozvinout.
+
+Další analytický negativní případ: u stejných kružnic ve stejné rovině pootočených o 30° mizí Jacobian při v=0.5, ačkoli profil nekolabuje do počátku. Obecně se pro kruhovou rodinu hledá `v*=(1−k cosα)/(k²−2k cosα+1)`; je-li v trimu, přesný regulární režim se odmítne. Žádný prefix `EXACT` se již v classifieru nepřiděluje bez konečné kladné analytické meze regularity.
+
+V rovinné mezi `πab` je pro kružnici vždy b=a, tedy `πa²`; obecný společný descriptor `Profile` má pole b, které kružnice záměrně nepoužívá. Dvě regrese výslovně zkoušejí kružnici a=20 s nepoužitým b=30 při k=0.6 a k=1.4, aby se z descriptoru neodvodila falešná větší dolní mez. U elipsy se skutečně používá její samostatná poloosa b.
 
 Druhý příklad přesune větší půlkružnici do rovnoběžné roviny vzdálené 30 mm a výslovně spáruje stejné parametry. Vznikne část kuželové plochy. Její přesnost plyne z homotetie generujících profilů, ne ze stejného počtu vzorků. Vypočtený rozvin zachoval první fundamentální formu s normalizovanou numerickou odchylkou pod `2.1e-10` v příslušných fixturech.
 
@@ -37,7 +46,7 @@ Z druhé fundamentální formy ruled plochy vychází `K = −D² / ||S_u × d||
 
 | Rodina a podmínky | Důkazový status | Naměřená kontrola |
 |---|---|---|
-| Rovinný region | Přesná projekce do ortonormální báze; samostatně ověřit trim a materiál | Půlkruhový pás 785.398163397 mm² |
+| Prokázaná nepootočená kladná homotetie půlkružnice/půlelipsy, k≠1 | Přesná projekce, analytická dolní mez Jacobianu a jednoduchost semi-annular hranice | Půlkruhový pás 785.398163397 mm²; obecné rovinné lofty zůstávají UNPROVEN |
 | Normálová extruze `C1=C0+[0,0,H]`, H>0 | `d'=0`; přesný zobecněný válcový rozvin `[arclength(C0), Hv]` | Gotický profil má správnou analytickou délku dvou kruhových oblouků; žádné vyhlazení vrcholu |
 | Homotetie `C1=k·C0+[0,0,H]`, k>0, H>0 | `d'=(k−1)C0'`, tedy D identicky 0 na každém hladkém intervalu | Kruhový, eliptický a gotický profil: reziduum D do 2.56e-16; metrická kontrola do 2.10e-10 |
 | Totéž s pootočením korespondence o 25° | NONDEVELOPABLE, ne „jiný přesný kužel“ | Normalizované D přibližně 0.688; záporné K u všech tří profilových fixturech |
@@ -140,3 +149,4 @@ Spikové prahy 0.2 mm pro bend clearance a 8 mm² kontaktu ukazují tradeoff: 12
 5. Aproximační varianta uchová cíl, error budget, cuts/creases a report sampled versus prokázaných mezí. Přesný rozvin odvozených facets není přesný rozvin původní hladké plochy.
 
 Spiky neřeší obecné samo-průsečíky všech možných křivek, certifikaci libovolného Bézier loftu, úplnou intervalovou aritmetiku, net optimalizaci nebo prakticky slepitelnou segmentaci tisíců triangles. Nedodávají UI průchod A/B/C/D, nový writer, interoperability proof ani fyzickou stavbu. Tyto důkazy musejí vzniknout v přijatých vertikálních řezech. Dosavadní pracovní kód a evidence zůstaly zachované; návrh již nesmí být stabilizován jako house-only doména.
+

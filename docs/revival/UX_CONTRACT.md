@@ -1,6 +1,6 @@
 # UX kontrakt P2
 
-> Aktualizace 6. 11. 2026: tento dokument zachov?v? stav p?vodn?ho P0/P1 a v1.1. V1.1 byla skute?n? p?ijata vlastn?kem, potom byl c?l roz???en. Aktivn? n?vrh [P2 v1.2](../p2/v1.2/README.md) a jedin? queue ur?uj? nyn?j?? rozsah/stav; review a baseline piny z?st?vaj? historick?. Povinn? mixed-part testy se neru??. Push n?vrhu nen? jeho produktov? p?ijet?.
+> Aktualizace 6. 11. 2026: tento dokument zachovává stav původního P0/P1 a v1.1. V1.1 byla skutečně přijata vlastníkem, potom byl cíl rozšířen. Aktivní návrh [P2 v1.2](../p2/v1.2/README.md) a jediná queue určují nynější rozsah/stav; review a baseline piny zůstávají historické. Povinné mixed-part testy se neruší. Push návrhu není jeho produktové přijetí.
 
 Návrh k akceptaci, ne screenshot funkční nové aplikace. [Offline klikací obrazovky](ux-prototype.html) zobrazují všech šest požadovaných stavů. Prototyp nepočítá geometrii a neukládá projekt.
 

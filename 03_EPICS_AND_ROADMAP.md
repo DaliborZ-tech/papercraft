@@ -1,6 +1,6 @@
 # ArchPapercraft Studio — epiky a produktová roadmapa
 
-> Aktualizace v1.2, 6. 11. 2026: [aktivn? roadmapa a mapa v?ech 16 epic](docs/p2/v1.2/ROADMAP.md) p?esouv? z?klad vlastn? tvorby, otvory, ost?n?, v?lce/ku?ely a d?len? chlopn? do P2. Prvn? autorsk? verze je A z pr?zdn?ho projektu; cel? P2 zahrnuje A/B/C/D. Tabulka a IN/OUT v p?vodn? v1.0 n??e z?st?vaj? historickou anal?zou a p?i rozporu je nahrazuje v1.2, ne ?stn? v?klad.
+> Aktualizace v1.2, 6. 11. 2026: [aktivní roadmapa a mapa všech 16 epic](docs/p2/v1.2/ROADMAP.md) přesouvá základ vlastní tvorby, otvory, ostění, válce/kužely a dělené chlopně do P2. První autorská verze je A z prázdného projektu; celé P2 zahrnuje A/B/C/D. Tabulka a IN/OUT v původní v1.0 níže zůstávají historickou analýzou a při rozporu je nahrazuje v1.2, ne ústní výklad.
 
 Verze 1.0 · Všechny epiky patří do cílové vize. Stav při přípravě: PLANNED, nikoli implementováno nebo přijato. První mandát je P0/P1. Odhady vzniknou až z discovery.
 

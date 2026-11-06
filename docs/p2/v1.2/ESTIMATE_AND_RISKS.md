@@ -25,6 +25,10 @@ Zbývající implementace: **59–100 člověkodnů**; první autorská verze A 
 
 ## Rizika a konkrétní rozhodnutí
 
+Spiky už doložily pozitivní homotetické kruhové/eliptické/gotické rodiny a negativní nezávisle změněné profily. Snižují nejistotu základního postupu B, nikoli práci na obecné editaci a reference modelu. U D dosáhl hrubý experiment globální meze0.004113mm až za cenu8192 triangle islands; to je nepoužitelný výchozí výrobní návrh. PC-008 proto obsahuje výběr praktického dělení a náhled jeho ceny, ne pouhé převzetí tohoto mesh výstupu. U C má24 záložek malý arc/chord mismatch0.009087mm, ale změnu boční délky0.113955mm: kontakt a ohyb jsou samostatné riziko, přesný plášť je neřeší. Riziková rezerva se po těchto výsledcích nesnižuje a nelze ji převést na „garantováno testy“.
+
+Nezávislá revize navíc našla singularitu rovinného loftu mezi vzorky. I raný spike tedy potřebuje negativní důkazy a analytickou regularitu; samotný počet PASS nedává oprávnění uzavřít schema. Jeho oprava nemění plánovaný rozsah, ale potvrzuje potřebu review a rezervy.
+
 | Riziko | Co už je doloženo / co chybí | Opatření a bod přepočtu |
 |---|---|---|
 | House-only persistence by zablokovala tvorbu | Audit identifikoval pevné plochy, hrany a default wall frame | Nezmrazit prototypové schema; PC-006A/B skutečné generické entity a připravené B/C/D fixtures před freeze |

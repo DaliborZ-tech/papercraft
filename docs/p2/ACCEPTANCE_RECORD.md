@@ -8,6 +8,6 @@ Vlastník výslovně uvedl: „Přijímám kontrakt P2 v1.1, doporučenou varian
 
 Přijetí kontraktu není tvrzení, že P2 už funguje. Implementační AC mají do ověření NOT_RUN; digitální předání a jeho PO přijetí se evidují zvlášť. Fyzický výtisk, sestavení a jejich přijetí zůstávají P3. Historické baseline/review piny se zpětně nemění.
 
-## N?sledn? up?esn?n? t?ho? dne
+## Následné upřesnění téhož dne
 
-Vlastn?k n?sledn? po??dal o n?vrh P2 v1.2 pro skute?nou autorskou tvorbu p?ed stabilizac? dom?ny/persistence. P?edchoz? p?ijet? v1.1 se nema?e, ale nen? p?ijet?m roz???en? v1.2. Aktu?ln? n?vrhov? bal?k PC-012 a stav nov? br?ny jsou v jedin? queue; [p?esn? up?esn?n?](v1.2/OWNER_CLARIFICATION.txt).
+Vlastník následně požádal o návrh P2 v1.2 pro skutečnou autorskou tvorbu před stabilizací domény/persistence. Předchozí přijetí v1.1 se nemaže, ale není přijetím rozšířené v1.2. Aktuální návrhový balík PC-012 a stav nové brány jsou v jediné queue; [přesné upřesnění](v1.2/OWNER_CLARIFICATION.txt).

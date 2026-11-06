@@ -1,6 +1,6 @@
 # Prompt pro novou Codex session
 
-> Aktualizace 6. 11. 2026: tento prompt pro p?vodn? P0/P1 je historick?. V existuj?c?m spr?vn?m checkoutu neklonuj znovu. Pokra?uj podle AGENTS, 05_WORK_QUEUE.json a docs/p2/v1.2/README.md: vlastn? profily, otev?en? konstrukce, vnit?n? p?ipojen? a zak?iven? pl??t?; dome?ek je pouze numerick? fixture.
+> Aktualizace 6. 11. 2026: tento prompt pro původní P0/P1 je historický. V existujícím správném checkoutu neklonuj znovu. Pokračuj podle AGENTS, 05_WORK_QUEUE.json a docs/p2/v1.2/README.md: vlastní profily, otevřené konstrukce, vnitřní připojení a zakřivené pláště; domeček je pouze numerický fixture.
 
 Převezmi roli delivery leada obnovy mého projektu ArchPapercraft Studio v repozitáři https://github.com/DaliborZ-tech/papercraft.
 

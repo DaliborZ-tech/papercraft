@@ -287,7 +287,7 @@
     {
       "id": "PC-006",
       "stage": "P2",
-      "title": "Vlastn? konstruk?n? dom?na a prvn? pou?iteln? autorsk? verze A",
+      "title": "Vlastní konstrukční doména a první použitelná autorská verze A",
       "depends_on": [
         "PC-012"
       ],
@@ -298,7 +298,7 @@
       ],
       "mode": "implementation",
       "outputs": [
-        "Vlastn? konstruk?n? dom?na a prvn? pou?iteln? autorsk? verze A",
+        "Vlastní konstrukční doména a první použitelná autorská verze A",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
         "docs/p2/v1.2/ACCEPTANCE.md"
       ],
@@ -421,7 +421,7 @@
     {
       "id": "PC-007",
       "stage": "P2",
-      "title": "Profily, ost?n? B a sto?en? pl??t? C",
+      "title": "Profily, ostění B a stočené pláště C",
       "depends_on": [
         "PC-006"
       ],
@@ -432,7 +432,7 @@
       ],
       "mode": "implementation",
       "outputs": [
-        "Profily, ost?n? B a sto?en? pl??t? C",
+        "Profily, ostění B a stočené pláště C",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
         "docs/p2/v1.2/ACCEPTANCE.md"
       ],
@@ -548,7 +548,7 @@
     {
       "id": "PC-008",
       "stage": "P2",
-      "title": "??zen? aproximace D, zm?ny a zachov?n? autorsk? pr?ce",
+      "title": "Řízená aproximace D, změny a zachování autorské práce",
       "depends_on": [
         "PC-007"
       ],
@@ -560,7 +560,7 @@
       ],
       "mode": "implementation",
       "outputs": [
-        "??zen? aproximace D, zm?ny a zachov?n? autorsk? pr?ce",
+        "Řízená aproximace D, změny a zachování autorské práce",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
         "docs/p2/v1.2/ACCEPTANCE.md"
       ],
@@ -767,7 +767,7 @@
     {
       "id": "PC-009",
       "stage": "P2",
-      "title": "Konsolidace v?ech pr?chod? a vektorov?ch v?stup? A/B/C/D",
+      "title": "Konsolidace všech průchodů a vektorových výstupů A/B/C/D",
       "depends_on": [
         "PC-008"
       ],
@@ -777,7 +777,7 @@
       ],
       "mode": "implementation_and_verification",
       "outputs": [
-        "Konsolidace v?ech pr?chod? a vektorov?ch v?stup? A/B/C/D",
+        "Konsolidace všech průchodů a vektorových výstupů A/B/C/D",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
         "docs/p2/v1.2/ACCEPTANCE.md"
       ],
@@ -877,7 +877,7 @@
     {
       "id": "PC-010",
       "stage": "P2",
-      "title": "Nez?visl? review a ?pln? digit?ln? p?ed?n? P2 v1.2",
+      "title": "Nezávislé review a úplné digitální předání P2 v1.2",
       "depends_on": [
         "PC-009"
       ],
@@ -886,7 +886,7 @@
       ],
       "mode": "independent_review",
       "outputs": [
-        "Nez?visl? review a ?pln? digit?ln? p?ed?n? P2 v1.2",
+        "Nezávislé review a úplné digitální předání P2 v1.2",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
         "docs/p2/v1.2/ACCEPTANCE.md"
       ],
@@ -941,7 +941,7 @@
     {
       "id": "PC-011",
       "stage": "P3",
-      "title": "V?tisk a fyzick? stavba p?ej?mac?ch model? A/B/C a varianty D",
+      "title": "Výtisk a fyzická stavba přejímacích modelů A/B/C a varianty D",
       "depends_on": [
         "PC-010"
       ],
@@ -973,7 +973,7 @@
       "id": "PC-006A",
       "stage": "P2",
       "parent": "PC-006",
-      "title": "Pr?zdn? projekt, vlastn? ?se?kov? plochy s otvory a cel? v?robn? pr?chod",
+      "title": "Prázdný projekt, vlastní úsečkové plochy s otvory a celý výrobní průchod",
       "depends_on": [
         "PC-012"
       ],
@@ -993,7 +993,7 @@
       "mode": "vertical_slice_implementation",
       "outputs": [
         "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
-        "Pr?zdn? projekt, vlastn? ?se?kov? plochy s otvory a cel? v?robn? pr?chod"
+        "Prázdný projekt, vlastní úsečkové plochy s otvory a celý výrobní průchod"
       ],
       "acceptance": [
         "AC-AU01",
@@ -1028,7 +1028,7 @@
       "id": "PC-006B",
       "stage": "P2",
       "parent": "PC-006",
-      "title": "Prvn? autorsk? verze: ru?n? budova A, p?esahy, z?kladna a p??jemci chlopn?",
+      "title": "První autorská verze: ruční budova A, přesahy, základna a příjemci chlopní",
       "depends_on": [
         "PC-006A"
       ],
@@ -1048,7 +1048,7 @@
       "mode": "vertical_slice_implementation",
       "outputs": [
         "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
-        "Prvn? autorsk? verze: ru?n? budova A, p?esahy, z?kladna a p??jemci chlopn?"
+        "První autorská verze: ruční budova A, přesahy, základna a příjemci chlopní"
       ],
       "acceptance": [
         "AC-AU03",
@@ -1085,7 +1085,7 @@
       "id": "PC-007A",
       "stage": "P2",
       "parent": "PC-007",
-      "title": "Oblouky/B?zierovy profily, korespondence a ost?n? B",
+      "title": "Oblouky/Bézierovy profily, korespondence a ostění B",
       "depends_on": [
         "PC-006"
       ],
@@ -1105,7 +1105,7 @@
       "mode": "vertical_slice_implementation",
       "outputs": [
         "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
-        "Oblouky/B?zierovy profily, korespondence a ost?n? B"
+        "Oblouky/Bézierovy profily, korespondence a ostění B"
       ],
       "acceptance": [
         "AC-AU08",
@@ -1136,7 +1136,7 @@
       "id": "PC-007B",
       "stage": "P2",
       "parent": "PC-007",
-      "title": "Sto?en? v?lec/ku?el C a d?len? troj?heln?kov? chlopn?",
+      "title": "Stočený válec/kužel C a dělené trojúhelníkové chlopně",
       "depends_on": [
         "PC-007A"
       ],
@@ -1156,7 +1156,7 @@
       "mode": "vertical_slice_implementation",
       "outputs": [
         "Real UI -> save/reopen -> unfold -> manual layout -> SVG/PDF",
-        "Sto?en? v?lec/ku?el C a d?len? troj?heln?kov? chlopn?"
+        "Stočený válec/kužel C a dělené trojúhelníkové chlopně"
       ],
       "acceptance": [
         "AC-AU07",
@@ -1194,7 +1194,7 @@
     {
       "id": "PC-012",
       "stage": "P2-DESIGN",
-      "title": "Revize P2 v1.2: autorsk? konstrukce, ?asn? spiky a nez?visle revidovan? n?vrh",
+      "title": "Revize P2 v1.2: autorská konstrukce, časné spiky a nezávisle revidovaný návrh",
       "depends_on": [
         "PC-005"
       ],

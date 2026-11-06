@@ -1,0 +1,26 @@
+﻿{
+    "ruff_check":  "PASS",
+    "tests":  60,
+    "skipped":  0,
+    "commands":  [
+                     "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe -m pytest tests/spikes/test_p2_v12_geometry.py -q --junitxml=docs/p2/v1.2/evidence/geometry-dr01-tests.xml",
+                     "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe tools/spikes/p2_v12_geometry.py --output docs/p2/v1.2/evidence/geometry-dr01-results.json"
+                 ],
+    "failures":  0,
+    "errors":  0,
+    "runner_exit":  0,
+    "date":  "2026-11-06",
+    "source_semantics":  "Parent commit predates this correction; exact working files identified by SHA256 until integrator pins corrected CODE",
+    "parent_head":  "580e7bbb6e98b3b688952ee750508f5bca0501ca",
+    "review_finding":  "DR01",
+    "source_files":  [
+                         {
+                             "sha256":  "c96b3cabe3139042c78f1d9f5800eea611b2541a43f0031f43292a83a30c5754",
+                             "path":  "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\\tools\\spikes\\p2_v12_geometry.py"
+                         },
+                         {
+                             "sha256":  "3c776aecd6b4d1e3796b3c09fbd75633de72d237376e8162424006d35b48b8e6",
+                             "path":  "C:\\Users\\dalib\\projects\\papercraft-p2-v12-design\\tests\\spikes\\test_p2_v12_geometry.py"
+                         }
+                     ]
+}

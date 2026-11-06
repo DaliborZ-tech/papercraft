@@ -164,15 +164,72 @@ def developability_evidence(loft):
     regular = all(s["regular"] for s in samples)
     nonzero = max((s["residual"] or 0) for s in samples) > 1e-10
     identical_profiles = loft.profile0 == loft.profile1
-    if not regular:
+    regularity = None
+    singularities = []
+    planar_circle_singularity = None
+    if loft.depth == 0 and identical_profiles and loft.profile0.kind == "circle":
+        cosine = math.cos(math.radians(loft.twist_deg))
+        denominator = loft.scale1**2 - 2 * loft.scale1 * cosine + 1
+        if denominator > 0:
+            fraction = (1 - loft.scale1 * cosine) / denominator
+            if 0 <= fraction <= 1:
+                planar_circle_singularity = fraction
+    if loft.depth == 0 and identical_profiles and loft.twist_deg % 360 == 180:
+        verdict, proof = (
+            "DEGENERATE_OR_SINGULAR",
+            "analytic half-turn gives S=(1-(1+k)v)C0; its entire profile collapses "
+            "at the interior ruling fraction v=1/(1+k)",
+        )
+        singularities = [{"kind": "collapsed_profile", "v": 1 / (1 + loft.scale1)}]
+    elif loft.depth == 0 and identical_profiles and loft.twist_deg == 0 and loft.scale1 == 1:
+        verdict, proof = (
+            "DEGENERATE_OR_SINGULAR",
+            "coincident profiles give a zero ruling on the entire parameter domain",
+        )
+        singularities = [{"kind": "zero_ruling", "v_interval": [0.0, 1.0]}]
+    elif planar_circle_singularity is not None:
+        verdict, proof = (
+            "DEGENERATE_OR_SINGULAR",
+            "analytic circular planar Jacobian vanishes at an interior ruling fraction",
+        )
+        singularities = [{"kind": "zero_jacobian", "v": planar_circle_singularity}]
+    elif not regular:
         verdict, proof = "DEGENERATE_OR_SINGULAR", "sampled degeneracy; exact flattening forbidden"
-    elif loft.depth == 0:
+    elif (
+        loft.depth == 0
+        and identical_profiles
+        and loft.twist_deg == 0
+        and loft.scale1 != 1
+        and loft.profile0.kind in ("circle", "ellipse")
+    ):
         verdict, proof = (
             "EXACT_PLANAR",
-            "both curves and every ruling lie in the same plane; "
-            "separate boundary validity required",
+            "positive untwisted half-ellipse homothety has a strictly positive analytic "
+            "Jacobian bound and a simple semi-annular boundary",
         )
-    elif identical_profiles and loft.twist_deg == 0:
+        profile = loft.profile0
+        a, b = profile.a, profile.a if profile.kind == "circle" else profile.b
+        regularity = {
+            "analytic_jacobian_lower_bound_mm2": (
+                min(1.0, loft.scale1) * abs(loft.scale1 - 1) * math.pi * a * b
+            ),
+            "valid_domain": "u in [0,1], v in [0,1]",
+            "corner_policy": "endpoints are boundary corners; profile is smooth",
+            "boundary_simple": True,
+            "boundary_proof": (
+                "positive unequal radial factors and monotone theta in [0,pi] "
+                "give an injective affine image of a semi-annulus; radial connectors "
+                "at theta=0 and theta=pi are disjoint"
+            ),
+            "material_area_mm2": 0.5 * math.pi * a * b * abs(loft.scale1**2 - 1),
+        }
+    elif loft.depth == 0:
+        verdict, proof = (
+            "UNPROVEN",
+            "planarity only proves zero Gaussian curvature where regular; "
+            "global parameter regularity and a simple material boundary are not proved",
+        )
+    elif identical_profiles and loft.twist_deg == 0 and loft.depth > 0:
         verdict, proof = (
             "EXACT_CYLINDRICAL" if loft.scale1 == 1 else "EXACT_CONICAL",
             "analytic extrusion/homothety identity makes the scalar triple product "
@@ -185,7 +242,6 @@ def developability_evidence(loft):
         )
     else:
         verdict, proof = "UNPROVEN", "finite zero samples are not an analytic certificate"
-    regularity = None
     if identical_profiles and loft.twist_deg == 0 and loft.depth > 0:
         p = loft.profile0
         min_speed = (
@@ -202,11 +258,20 @@ def developability_evidence(loft):
             if p.breaks
             else "smooth profile",
         }
+    if verdict.startswith("EXACT") and (
+        regularity is None
+        or not math.isfinite(regularity["analytic_jacobian_lower_bound_mm2"])
+        or regularity["analytic_jacobian_lower_bound_mm2"] <= 0
+    ):
+        verdict = "UNPROVEN"
+        proof = "no finite positive analytic regularity bound is available"
+        regularity = None
     return {
         "verdict": verdict,
         "proof": proof,
         "sample_count": len(samples),
         "regularity_proof": regularity,
+        "analytic_singularities": singularities,
         "trim_domain": {"u": [0.0, 1.0], "v": [0.0, 1.0]},
         "max_normalized_triple": max((s["residual"] or 0) for s in samples),
         "min_K_per_mm2": min((s["K"] for s in samples if s["K"] is not None), default=None),
@@ -652,6 +717,17 @@ def experiments():
             "wide_collision": segmented_tabs(width=25),
             "wrong_bend": segmented_tabs(bend_deg=80),
         },
+        "dr01_planar_counterexamples": {
+            "half_turn_collapse": developability_evidence(Loft(circle, circle, 1.4, 0, 180)),
+            "half_turn_jacobian_at_v_5_12": Loft(circle, circle, 1.4, 0, 180).differential(
+                0.37, 5 / 12
+            )["jacobian"],
+            "equal_circle_rotated_30": developability_evidence(Loft(circle, circle, 1, 0, 30)),
+            "unproved_planar_twist_25": developability_evidence(Loft(circle, circle, 1.4, 0, 25)),
+            "unproved_planar_gothic": developability_evidence(
+                Loft(Profile("gothic", 20, 30), Profile("gothic", 20, 30), 1.4, 0)
+            ),
+        },
     }
 
 
@@ -718,7 +794,10 @@ def main():
     args.output.write_text(
         json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8"
     )
-    write_tabs_svg(results, args.output.with_name("geometry-tab-footprints.svg"))
+    write_tabs_svg(
+        results,
+        args.output.with_name(args.output.stem.replace("results", "tab-footprints") + ".svg"),
+    )
     print(f"Geometry spike evidence: {args.output}; {report['elapsed_seconds']:.3f}s")
     return 0
 

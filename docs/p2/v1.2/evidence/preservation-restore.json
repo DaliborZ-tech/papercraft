@@ -1,0 +1,15 @@
+{
+  "purpose": "actual independent bare repository restoration from baseline prerequisite and archived bundle; not a final project checkout",
+  "archive_sha": "f9507e325c479c8b703e7f52c410de6847958720",
+  "bundle_sha256": "9430a97e1668e3ba862ec720c8558a034034144af5d0b47c911956a1f2b5f769",
+  "source_files_verified_present": [
+    "src/archpapercraft/domain/project.py",
+    "src/archpapercraft/ui/panel_main_window.py",
+    "tests/panel/test_paper.py",
+    "tools/panel/p2_demo.py",
+    "docs/p2/evidence/house-editor-proof/editor-results.json"
+  ],
+  "pass": true,
+  "commands": "git init --bare; fetch baseline SHA from local master; fetch bundle ref; rev-parse; cat-file -e",
+  "temporary_bare_repository": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-v12-archive-restore-adszx0_x"
+}

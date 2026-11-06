@@ -1,10 +1,10 @@
 # ArchPapercraft Studio — zadání obnovy projektu
 
-> Aktu?ln? stav 6. 11. 2026: P0/P1 jsou na master. Vlastn?k p?ijal P2 v1.1 a n?sledn? z?sadn? up?esnil c?l. Aktivn? n?vrh je [P2 v1.2 ? vlastn? autorsk? tvorba](docs/p2/v1.2/README.md), aktu?ln? n?vrhov? bal?k PC-012; jeho review/push nen? PO p?ijet? nov? v1.2. Star?? p??pravn? instrukce n??e jsou historick? vstup, nikoli pokyn znovu klonovat nebo omezit produkt na d?m. ?ti nejprve AGENTS a jedinou queue.
+> Aktuální stav 6. 11. 2026: P0/P1 jsou na master. Vlastník přijal P2 v1.1 a následně zásadně upřesnil cíl. Aktivní návrh je [P2 v1.2 — vlastní autorská tvorba](docs/p2/v1.2/README.md), aktuální návrhový balík PC-012; jeho review/push není PO přijetí nové v1.2. Starší přípravné instrukce níže jsou historický vstup, nikoli pokyn znovu klonovat nebo omezit produkt na dům. Čti nejprve AGENTS a jedinou queue.
 
 Verze 1.0 · 5. listopadu 2026 · vlastník produktu: Dalibor Zálešák.
 
-Aktuální oprava realizačního mandátu: po ověření a nezávislé revizi dokončený ucelený balík v autorizovaném rozsahu integruj a pushni na `master` bez další rutinní žádosti. Podrobný bezpečný postup je v [AGENTS.md](AGENTS.md) a §6 mandátu. Integrace P0 + P1 není přijetím kontraktu P2; varianta B a kompatibilita zůstávají otevřené.
+Aktuální oprava realizačního mandátu: po ověření a nezávislé revizi dokončený ucelený balík v autorizovaném rozsahu integruj a pushni na `master` bez další rutinní žádosti. Podrobný bezpečný postup je v [AGENTS.md](AGENTS.md) a §6 mandátu. Integrace sama není přijetím kontraktu. V1.1/B/kompatibilita byly následně přijaty; nové rozšíření v1.2 se eviduje odděleně.
 
 ## Jak balík použít
 

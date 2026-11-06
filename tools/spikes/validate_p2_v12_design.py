@@ -88,6 +88,27 @@ def validate(root: Path) -> dict:
     )
     roadmap = (root / "docs/p2/v1.2/ROADMAP.md").read_text(encoding="utf-8")
     checks["all_16_epics_retained"] = all(f"| E{n:02} " in roadmap for n in range(1, 17))
+    pointer_files = [
+        "00_START_HERE.md",
+        "01_START_PROMPT.md",
+        "02_CODEX_MANDATE.md",
+        "03_EPICS_AND_ROADMAP.md",
+        "04_ACCEPTANCE_AND_VERIFICATION.md",
+        "docs/revival/ARCHITECTURE_DECISION.md",
+        "docs/revival/CURRENT_PROJECT_STATE.md",
+        "docs/revival/MIXED_PART_LAYOUT_CONTRACT.md",
+        "docs/revival/P2_IMPLEMENTATION_CONTRACT.md",
+        "docs/revival/PO_DECISION_CARD.md",
+        "docs/revival/TRACEABILITY.md",
+        "docs/revival/UX_CONTRACT.md",
+    ]
+    current_text = [
+        (root / path).read_text(encoding="utf-8").splitlines()[2] for path in pointer_files
+    ] + [item["title"] for item in tickets]
+    current_text.append((root / "docs/p2/ACCEPTANCE_RECORD.md").read_text(encoding="utf-8"))
+    checks["active_text_has_no_encoding_replacement_markers"] = all(
+        "\ufffd" not in value and not re.search(r"\?{2,}|\w\?\w", value) for value in current_text
+    )
     missing_links = []
     for document in (root / "docs/p2/v1.2").glob("*.md"):
         body = document.read_text(encoding="utf-8")

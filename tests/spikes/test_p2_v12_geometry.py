@@ -275,3 +275,68 @@ def test_trim_domains_and_unproved_exact_requests_are_rejected():
         exact_homothetic_flat(Loft(p, p, 1, 30, 25), 0.5, 0.5)
     with pytest.raises(ValueError):
         stable_sector_flat(10, 20, 30, 1.1, 0.5)
+
+
+@pytest.mark.parametrize("kind,a,b", [("circle", 20, 20), ("circle", 20, 30), ("ellipse", 20, 30)])
+@pytest.mark.parametrize("ratio", [0.6, 1.4])
+def test_exact_planar_half_ellipse_has_global_jacobian_and_simple_boundary_proofs(
+    kind, a, b, ratio
+):
+    profile = Profile(kind, a, b)
+    loft = Loft(profile, profile, ratio, 0)
+    evidence = developability_evidence(loft)
+    assert evidence["verdict"] == "EXACT_PLANAR"
+    regularity = evidence["regularity_proof"]
+    effective_b = a if kind == "circle" else b  # Circle's b descriptor is unused.
+    oracle = min(1, ratio) * abs(ratio - 1) * math.pi * a * effective_b
+    assert regularity["analytic_jacobian_lower_bound_mm2"] == pytest.approx(oracle)
+    assert regularity["boundary_simple"] is True
+    assert "injective" in regularity["boundary_proof"]
+    assert regularity["material_area_mm2"] == pytest.approx(
+        math.pi * a * effective_b * abs(ratio**2 - 1) / 2
+    )
+    for u in (0, 0.23, 0.7, 1):
+        for v in (0, 0.1, 0.63, 1):
+            assert loft.differential(u, v)["jacobian"] >= oracle - 1e-9
+
+
+@pytest.mark.parametrize("kind", ["circle", "ellipse", "gothic"])
+@pytest.mark.parametrize("angle", [180, -180, 540])
+def test_half_turn_planar_loft_collapse_between_samples_is_analytically_rejected(kind, angle):
+    profile = Profile(kind, 20, 30)
+    loft = Loft(profile, profile, 1.4, 0, angle)
+    evidence = developability_evidence(loft)
+    fraction = 5 / 12  # Independent identity 1 / (1 + 1.4).
+    assert evidence["minimum_sampled_jacobian"] > 1  # Original samples miss the collapse.
+    assert evidence["verdict"] == "DEGENERATE_OR_SINGULAR"
+    assert evidence["regularity_proof"] is None
+    assert evidence["analytic_singularities"][0]["v"] == pytest.approx(fraction)
+    assert loft.differential(0.37, fraction)["jacobian"] < 1e-9
+    np.testing.assert_allclose(loft.point(0.37, fraction), [0, 0, 0], atol=1e-12)
+
+
+def test_coplanar_equal_circles_rotated_30_have_an_interior_noncollapsed_singularity():
+    profile = Profile("circle", 20, 20)
+    loft = Loft(profile, profile, 1, 0, 30)
+    evidence = developability_evidence(loft)
+    assert evidence["verdict"] == "DEGENERATE_OR_SINGULAR"
+    assert evidence["analytic_singularities"][0]["v"] == pytest.approx(0.5)
+    assert np.linalg.norm(loft.point(0.37, 0.5)) > 19  # Not the origin-collapse case.
+    assert loft.differential(0.37, 0.5)["jacobian"] < 1e-9
+
+
+@pytest.mark.parametrize(
+    "case", ["planar-twist", "planar-gothic", "different-profiles", "negative-depth"]
+)
+def test_zero_triples_and_coplanarity_never_replace_missing_regularity_or_boundary_proofs(case):
+    circle = Profile("circle", 20, 20)
+    loft = {
+        "planar-twist": Loft(circle, circle, 1.4, 0, 25),
+        "planar-gothic": Loft(Profile("gothic", 20, 30), Profile("gothic", 20, 30), 1.4, 0),
+        "different-profiles": Loft(circle, Profile("ellipse", 22, 30), 1, 0),
+        "negative-depth": Loft(circle, circle, 1.4, -15),
+    }[case]
+    evidence = developability_evidence(loft)
+    assert evidence["minimum_sampled_jacobian"] > 0
+    assert evidence["verdict"] == "UNPROVEN"
+    assert evidence["regularity_proof"] is None
