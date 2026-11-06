@@ -1,5 +1,7 @@
 # P2 v1.2 — autorský papírový model, návrhový kontrakt
 
+**Přijato vlastníkem 6.11.2026 včetně UI/UX, skills a použitelnosti; autorizováno celé A/B/C/D.** [Záznam přijetí](ACCEPTANCE_RECORD.md). Implementace PC-006A je IN_PROGRESS, produktové důkazy zůstávají NOT_RUN. Následující návrhová formulace zachovává původní znění podkladu.
+
 6. 11. 2026. Tento návrh vzniká na výslovný [opravný pokyn vlastníka](OWNER_CLARIFICATION.txt). Nahrazuje omezení v1.1 na preset domu. Dřívější přijetí v1.1 zůstává historickou skutečností; není přijetím tohoto nového návrhu ani hotového editoru. Stav implementace v1.2: **NOT_RUN**. Technické review a integrace návrhu nejsou produktová akceptace. Aktuální stav určuje `05_WORK_QUEUE.json`.
 
 ## Výsledek pro autora
@@ -60,4 +62,4 @@ PC-006 až PC-010 zůstávají původními rodičovskými ID. Jejich staré defi
 
 ## Stav a autorizace
 
-Aktuální úkol vlastníka autorizuje návrh, experimenty, nezávislé review a integraci tohoto návrhového balíku. Nezakládáme další rutinní souhlasy mezi technickými řezy. Rozsah v1.2 je zásadně širší než dříve přijatá v1.1: jeho produktové přijetí evidujeme odděleně a bez výslovného přijetí nevydáváme technické schválení/push za `PO_ACCEPTED`. Stabilizace nové domény a persistence čeká na vyřešení návrhových nálezů; implementace užšího domu se nezamění za celé P2. Fyzická akceptace A/B/C a každého nového konstrukčního principu vyžaduje skutečný výtisk v P3.
+Vlastník 6.11.2026 skutečně přijal tento P2 v1.2 včetně UI/UX, skills a přejímek použitelnosti a autorizoval implementaci celého A/B/C/D. Aktuální brána je PO_ACCEPTED; [záznam](ACCEPTANCE_RECORD.md). PC-006A → PC-006B → navazující řezy se provádějí autonomně podle ADLC. Technická rozhodnutí a běžné změny UI uvnitř sjednaného cíle nepotřebují další rutinní souhlas. Nezávisle schválené balíky se ověří, integrují a pushují podle AGENTS. Přijetí kontraktu není přijetí budoucí implementace; každé AC se musí teprve prokázat. Fyzický P3 zůstává skutečný výtisk a sestavení člověkem.

@@ -1,5 +1,7 @@
 # P2 v1.2 — návrhový balík pro skutečnou autorskou tvorbu
 
+**Aktuálně přijato vlastníkem 6.11.2026.** [Přijetí a autorizace celého A/B/C/D](ACCEPTANCE_RECORD.md). Implementace začíná PC-006A a navazuje PC-006B; níže je podklad návrhového balíku, nikoli tvrzení dokončeného editoru.
+
 Aktuální produktový cíl: od prázdného projektu kreslit vlastní profily/obrysy, konstruovat otevřené i zakřivené plochy, spojovat je včetně vnitřních stop a lepicích oblastí, vytvářet vlastní chlopně a připravit ručně rozmístěnou vystřihovánku SVG/PDF. Referenční domeček je numerický test, ne základní omezení editoru.
 
 Tento balík obsahuje **analýzu, spustitelné geometrické experimenty a návrh implementace**, nikoli hotovou novou autorskou aplikaci. V1.1 byla vlastníkem skutečně přijata, následný opravný pokyn rozšířil cíl. Nový návrh v1.2, technická revize, implementační ověření, produktová akceptace a fyzická P3 jsou oddělené stavy. Aktuální normativní stav je v [jediné queue](../../../05_WORK_QUEUE.json).

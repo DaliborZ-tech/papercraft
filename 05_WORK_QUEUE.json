@@ -12,8 +12,8 @@
     "id": "GATE-P2",
     "contract_version": "1.2",
     "contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-    "status": "PO_PENDING",
-    "accepted_by_owner": false,
+    "status": "PO_ACCEPTED",
+    "accepted_by_owner": true,
     "requires": [
       "Reviewed v1.2 design package PC-012 with geometric spike evidence",
       "Actual owner acceptance of new v1.2 contract; technical review or push does not imply acceptance"
@@ -28,7 +28,11 @@
       "open_blocker_major": 0,
       "scope": "design_and_spikes_only_not_implementation_or_PO_acceptance",
       "reviewer": "separate_agent_integration_review"
-    }
+    },
+    "accepted_on": "2026-11-06",
+    "acceptance_source": "explicit_owner_message_accepting_v1.2_UI_UX_skills_usability_A_B_C_D",
+    "accepted_contract_source_sha": "d00d95e01aa6866470ddbe36d8d3cfd5bebdc8de",
+    "acceptance_record": "docs/p2/v1.2/ACCEPTANCE_RECORD.md"
   },
   "rules": [
     "Počáteční queue není důkaz implementace.",
@@ -509,8 +513,8 @@
         "AC-US07",
         "AC-US08"
       ],
-      "status": "REPLANNED",
-      "execution_authorized_on_realization": false,
+      "status": "IN_PROGRESS",
+      "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "acceptance_state": {
         "AC-G01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
@@ -605,7 +609,7 @@
         },
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "completed_by": [
         "PC-006A",
         "PC-006B"
@@ -719,8 +723,8 @@
         "AC-US06",
         "AC-US07"
       ],
-      "status": "REPLANNED",
-      "execution_authorized_on_realization": false,
+      "status": "PLANNED",
+      "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "verification_deferred": {
         "AC-C02": "Finální GUI proof přes dvě stránky až PC-009 po PC-008; předtím NOT_RUN/PENDING, nikoli PASS."
@@ -808,7 +812,7 @@
         "join_preserves_receiving_part_anchor": true,
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "completed_by": [
         "PC-007A",
         "PC-007B"
@@ -921,8 +925,8 @@
         "AC-US06",
         "AC-US07"
       ],
-      "status": "REPLANNED",
-      "execution_authorized_on_realization": false,
+      "status": "PLANNED",
+      "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "acceptance_state": {
         "AC-L01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
@@ -1106,7 +1110,7 @@
         },
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "skills": [
         "papercraft-construction",
         "papercraft-authoring-ui",
@@ -1208,8 +1212,8 @@
         "AC-US07",
         "AC-US08"
       ],
-      "status": "REPLANNED",
-      "execution_authorized_on_realization": false,
+      "status": "PLANNED",
+      "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "acceptance_state": {
         "AC-X01": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
@@ -1293,7 +1297,7 @@
         },
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "skills": [
         "papercraft-construction",
         "papercraft-authoring-ui",
@@ -1388,8 +1392,8 @@
         "AC-US07",
         "AC-US08"
       ],
-      "status": "REPLANNED",
-      "execution_authorized_on_realization": false,
+      "status": "PLANNED",
+      "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "acceptance_state": {
         "P2 digitální kontrakt splněn": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
@@ -1436,7 +1440,7 @@
         "product_acceptance": "NOT_RUN",
         "implementation_authorized_on": "2026-11-06"
       },
-      "authorization_note": "Historical v1.1 implementation authorized; v1.2 design package now active. Await actual v1.2 product gate for new production scope.",
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "skills": [
         "papercraft-construction",
         "papercraft-authoring-ui",
@@ -1626,9 +1630,9 @@
         "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
         "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "gate": "GATE-P2",
-      "execution_authorized_on_realization": false,
+      "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "independent reviewer of pinned commit required",
       "estimate_person_days": [
@@ -1645,29 +1649,29 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "NOT_RUN",
-          "decision": null,
+          "status": "IN_USE",
+          "decision": "Generic drawn profiles and real holes; retain receiver requirements and open structures instead of house preset authority.",
           "evidence": [],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "NOT_RUN",
-          "decision": null,
+          "status": "IN_USE",
+          "decision": "Blank project sketch-first workflow with context selection, repair and undo delivered in this slice.",
           "evidence": [],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-verification",
-          "status": "NOT_RUN",
-          "decision": null,
+          "status": "IN_USE",
+          "decision": "Independent analytic area/rigid transforms/holes and actual Windows flow; no novice or physical claim.",
           "evidence": [],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "NOT_RUN",
-          "decision": null,
+          "status": "IN_USE",
+          "decision": "Implement coherent PC-006A then B, pinned independent review, integrate approved batches and continue A/B/C/D.",
           "evidence": [],
           "review": "NOT_RUN"
         }
@@ -1697,7 +1701,9 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
-      }
+      },
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
+      "implementation_authorized_on": "2026-11-06"
     },
     {
       "id": "PC-006B",
@@ -1763,7 +1769,7 @@
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
-      "execution_authorized_on_realization": false,
+      "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "independent reviewer of pinned commit required",
       "estimate_person_days": [
@@ -1839,7 +1845,9 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
-      }
+      },
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
+      "implementation_authorized_on": "2026-11-06"
     },
     {
       "id": "PC-007A",
@@ -1897,7 +1905,7 @@
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
-      "execution_authorized_on_realization": false,
+      "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "independent reviewer of pinned commit required",
       "estimate_person_days": [
@@ -1965,7 +1973,9 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
-      }
+      },
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
+      "implementation_authorized_on": "2026-11-06"
     },
     {
       "id": "PC-007B",
@@ -2031,7 +2041,7 @@
       },
       "status": "PLANNED",
       "gate": "GATE-P2",
-      "execution_authorized_on_realization": false,
+      "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "independent reviewer of pinned commit required",
       "estimate_person_days": [
@@ -2099,7 +2109,9 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
-      }
+      },
+      "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
+      "implementation_authorized_on": "2026-11-06"
     },
     {
       "id": "PC-012",
@@ -2247,8 +2259,8 @@
   ],
   "updated_on": "2026-11-06",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "master",
-  "release_readiness": "NOT_READY: v1.2 design and spikes; A/B/C/D implementation NOT_RUN; P3 physical proof pending",
+  "working_branch": "revival/p2-authoring",
+  "release_readiness": "NOT_READY: owner accepted full P2 v1.2; implementation PC-006A in progress; new-user and physical evidence not run",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2296,7 +2308,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "NOT_RUN: v1.2 A/B/C/D not implemented; prototype evidence does not satisfy them",
+  "p2_digital_delivery": "NOT_RUN: accepted v1.2 A/B/C/D implementation in progress, not an implemented product acceptance",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2329,6 +2341,29 @@
       "accepted_contract_source_sha": "6eb8977011854b242ab1dac8ea929e262e3b9563",
       "accepted_variant": "B",
       "accepted_legacy_compatibility": "read_only_legacy_no_full_dome_gothic_migration_in_P2"
+    },
+    {
+      "id": "GATE-P2",
+      "contract_version": "1.2",
+      "contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+      "status": "PO_PENDING",
+      "accepted_by_owner": false,
+      "requires": [
+        "Reviewed v1.2 design package PC-012 with geometric spike evidence",
+        "Actual owner acceptance of new v1.2 contract; technical review or push does not imply acceptance"
+      ],
+      "auto_approve": false,
+      "previous_acceptance": "product_gate_history[0]: P2 v1.1 accepted 2026-11-06; preserved, scope superseded by owner clarification",
+      "owner_clarification": "docs/p2/v1.2/OWNER_CLARIFICATION.txt",
+      "independent_review": {
+        "verdict": "APPROVED_IN_SCOPE",
+        "code_sha": "d4ce76e38b3632c72964adf3e438c5632849caa9",
+        "report": "docs/p2/v1.2/INDEPENDENT_REVIEW.md",
+        "open_blocker_major": 0,
+        "scope": "design_and_spikes_only_not_implementation_or_PO_acceptance",
+        "reviewer": "separate_agent_integration_review"
+      },
+      "historical_note": "Draft v1.2 before explicit owner acceptance 2026-11-06"
     }
   ],
   "preserved_prototype": {
@@ -2339,7 +2374,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "PC-012",
+  "current_authorized_package": "PC-006A",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2351,7 +2386,7 @@
       "reviewer": "separate_agent_integration_review"
     },
     "integration_report": "docs/p2/v1.2/INTEGRATION_REPORT.md",
-    "product_acceptance": "PO_PENDING",
+    "product_acceptance": "PO_ACCEPTED_CONTRACT_ONLY_2026-11-06",
     "implementation": "NOT_RUN",
     "published_design_sha": "ef5d0a11f98b3df8b4176e2d5195322cb1762c55",
     "publication_evidence": "docs/p2/v1.2/evidence/publication.json"
@@ -2420,5 +2455,18 @@
     "first_slice": "PC-006A",
     "new_design_stage": false,
     "whole_v12_contract_acceptance_implied": false
+  },
+  "current_delivery": {
+    "ticket": "PC-006A",
+    "then": "PC-006B",
+    "followed_by": [
+      "PC-007A",
+      "PC-007B",
+      "PC-008",
+      "PC-009",
+      "PC-010"
+    ],
+    "status": "IN_PROGRESS",
+    "new_routine_permission_required": false
   }
 }

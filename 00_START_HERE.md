@@ -1,5 +1,7 @@
 # ArchPapercraft Studio — zadání obnovy projektu
 
+> Vlastník 6.11.2026 výslovně přijal P2 v1.2 včetně UI/UX, skills a použitelnosti a autorizoval celé A/B/C/D. Aktuálně realizuj PC-006A, následně PC-006B a další řezy podle AGENTS a jediné queue. [Záznam přijetí](docs/p2/v1.2/ACCEPTANCE_RECORD.md). Předchozí pending odkazy níže zachycují historickou přípravu.
+
 > Aktuální stav 6. 11. 2026: P0/P1 jsou na master. Vlastník přijal P2 v1.1 a následně zásadně upřesnil cíl. Aktivní návrh je [P2 v1.2 — vlastní autorská tvorba](docs/p2/v1.2/README.md), aktuální návrhový balík PC-012; jeho review/push není PO přijetí nové v1.2. Starší přípravné instrukce níže jsou historický vstup, nikoli pokyn znovu klonovat nebo omezit produkt na dům. Čti nejprve AGENTS a jedinou queue.
 
 Verze 1.0 · 5. listopadu 2026 · vlastník produktu: Dalibor Zálešák.
