@@ -1,0 +1,57 @@
+{
+  "kind": "independent_reference_subset_review",
+  "claims_confirmed": [
+    "SECANDA31: cut rectangles explicitly marked with scissors versus printed oval windows; SECANDA33: internal numbered mounting regions",
+    "Rozsochy4 and12: four separate roof ribs visible in underside photo and matching four triangular rib parts",
+    "Kerdevot11 and32: 13a four middle roof holders, explicit print-four-times; Kerdevot27: sixteen separate8k dome segments for two towers"
+  ],
+  "sources": [
+    {
+      "path": "C:\\Users\\dalib\\OneDrive\\Plocha\\secanda_24_2_v_2_a_parlement_bzh.pdf",
+      "sha256": "a1229fe942c4ab05924fde6b9ccfc3504931a168427d5425a6027c379a5f85eb",
+      "page_count": 52,
+      "visually_opened_pdf_pages": [
+        31,
+        33
+      ],
+      "scope": "Key-claim subset of existing renders; independent original hash/page/text read; not all author-declared pages, model measurement, production proof, or physical test",
+      "selected_text_char_counts": {
+        "31": 0,
+        "33": 0
+      }
+    },
+    {
+      "path": "C:\\Users\\dalib\\Downloads\\Rozsochy.pdf",
+      "sha256": "191ac3d37a5813fa94c78058e096de0a22fab0576e27c5b618c18367c00d263a",
+      "page_count": 15,
+      "visually_opened_pdf_pages": [
+        4,
+        12
+      ],
+      "scope": "Key-claim subset of existing renders; independent original hash/page/text read; not all author-declared pages, model measurement, production proof, or physical test",
+      "selected_text_char_counts": {
+        "4": 0,
+        "12": 0
+      }
+    },
+    {
+      "path": "C:\\Users\\dalib\\Downloads\\secanda_22_3_v_1_a_kerdevot.pdf",
+      "sha256": "4cf40573d4f08075cdc141c320f2946ba0b98f843750a6c822677299a08a89f6",
+      "page_count": 37,
+      "visually_opened_pdf_pages": [
+        11,
+        27,
+        32
+      ],
+      "scope": "Key-claim subset of existing renders; independent original hash/page/text read; not all author-declared pages, model measurement, production proof, or physical test",
+      "selected_text_char_counts": {
+        "11": 1073,
+        "27": 0,
+        "32": 0
+      }
+    }
+  ],
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN",
+  "self_authored_Damnikov_design_independent_review": "NOT_GRANTED_BY_ITS_AUTHOR"
+}

@@ -1,0 +1,753 @@
+{
+  "source_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-final-4b172e6-gh63_03l",
+  "source_results": [
+    {
+      "path": "pyproject.toml",
+      "expected_run_sha256": "7fc368b74cf04b0461920bac0d175f003a4493ac3dde798abdb850ee3727b5d2",
+      "git_blob_sha256": "bce3a636be4fd9e1489776e8e91faabe6bdff959c6c6e3c692f7454b5d5a06a1",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/__init__.py",
+      "expected_run_sha256": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+      "git_blob_sha256": "27c4b8ecc5f2cec50aa1f4e5685678db8c48a2ac816fccf7b3064b153e0781f4",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/__main__.py",
+      "expected_run_sha256": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+      "git_blob_sha256": "c55bb338a4104f7321358dbc81576848ef45de5ca39b3c0c49e46b649923f638",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/app.py",
+      "expected_run_sha256": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+      "git_blob_sha256": "b40da3800758e1d35ab99002f8ec09407fd1c9aac938b389b2e03479ddcddbf0",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/application/__init__.py",
+      "expected_run_sha256": "b40a4d55ee06f7c3d6dc573acbfd15720631297c33613cbc8016e2c7615968f1",
+      "git_blob_sha256": "b40a4d55ee06f7c3d6dc573acbfd15720631297c33613cbc8016e2c7615968f1",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/application/author_controller.py",
+      "expected_run_sha256": "da230d91bbcab8eec4a8df71018372953c08a411f2049a0a747943040fd62c98",
+      "git_blob_sha256": "da230d91bbcab8eec4a8df71018372953c08a411f2049a0a747943040fd62c98",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/__init__.py",
+      "expected_run_sha256": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+      "git_blob_sha256": "613f05cec23739bd135276144f6877d295a13b8d038fb7c9d9b8e3996a13fdad",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/buttress.py",
+      "expected_run_sha256": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+      "git_blob_sha256": "d4fd937061217389f25eabbf3f2c55e0cbcdadfa9840563d79c1369603e536cd",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/floor_slab.py",
+      "expected_run_sha256": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+      "git_blob_sha256": "38783ea9422b3a7c182925043204c64ec8aded796864813cdc4290d83ec3da4a",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/gothic_window.py",
+      "expected_run_sha256": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+      "git_blob_sha256": "64d3a4075d3bae7a736e0ed81c271eb64213a2e5f6b47225c77c7d2ca7525820",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/onion_dome.py",
+      "expected_run_sha256": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+      "git_blob_sha256": "39e1690c80014800633981a2bba50e6bf24174fb1349e4f3990c4fc91feeda0d",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/opening.py",
+      "expected_run_sha256": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+      "git_blob_sha256": "0c91ac4d1a28102bc823a57f308cc887445cdb1e5edbbd82f887d4e79badbdec",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/roof.py",
+      "expected_run_sha256": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+      "git_blob_sha256": "35d9d36319b466717b2818f3e162ee475558446a33578a29040876e0b91f27df",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/tower.py",
+      "expected_run_sha256": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+      "git_blob_sha256": "c9e63f3abfd47761954f310df199841e93e82388cbb09fe781cb517541ef6b35",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/arch_presets/wall.py",
+      "expected_run_sha256": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+      "git_blob_sha256": "0f066987732cb1f060ac04f2a250294ad6d302f9d8ff026af3cbf63074a9f378",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/authoring/__init__.py",
+      "expected_run_sha256": "20f09fec7229337a717bc37ec81591588f41694bd1037769d3688178cc53bf5b",
+      "git_blob_sha256": "20f09fec7229337a717bc37ec81591588f41694bd1037769d3688178cc53bf5b",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/authoring/errors.py",
+      "expected_run_sha256": "0bda672632b8cb2429c1573b5cdaad973d6216b02ca30c7ec36a6ea0aa00eca0",
+      "git_blob_sha256": "0bda672632b8cb2429c1573b5cdaad973d6216b02ca30c7ec36a6ea0aa00eca0",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/authoring/geometry.py",
+      "expected_run_sha256": "98504f07eda9c1e47110775c85ba755165595f9e6646a4b2019cd561c80cc111",
+      "git_blob_sha256": "98504f07eda9c1e47110775c85ba755165595f9e6646a4b2019cd561c80cc111",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/authoring/model.py",
+      "expected_run_sha256": "4d8f0f2e300a5f62dcd3bbfdf3613f6d8484ffd171d7172d8e5f88430f4e11d2",
+      "git_blob_sha256": "4d8f0f2e300a5f62dcd3bbfdf3613f6d8484ffd171d7172d8e5f88430f4e11d2",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/authoring/paper.py",
+      "expected_run_sha256": "e0abc1be4800b0af51bb02b9afffb4c20828d2005a473abf099c20cdc7a9a5a3",
+      "git_blob_sha256": "e0abc1be4800b0af51bb02b9afffb4c20828d2005a473abf099c20cdc7a9a5a3",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/authoring/project.py",
+      "expected_run_sha256": "8d530c32e312888991b33514145d75b5e812be9bc21f7fe66c4bad435df316ff",
+      "git_blob_sha256": "8d530c32e312888991b33514145d75b5e812be9bc21f7fe66c4bad435df316ff",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/commands/__init__.py",
+      "expected_run_sha256": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+      "git_blob_sha256": "4792b4c7eecc6c7dc72a8837868c7e261cf71764b8accb29b457396e6162592e",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/commands/command_stack.py",
+      "expected_run_sha256": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+      "git_blob_sha256": "406322a8f8327b99550af5323cb936374ae9fd079b55ec0d9ac97bc71c3401ea",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/__init__.py",
+      "expected_run_sha256": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+      "git_blob_sha256": "18960f6833001c4cb030962b45528d8916c387b5040000dbecbfdfd5a637ab37",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/backend.py",
+      "expected_run_sha256": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+      "git_blob_sha256": "352de09c13946eb95c9e229746cf99fe2c8b7a4fd2b151e379815729f0cf3330",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/mesh.py",
+      "expected_run_sha256": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+      "git_blob_sha256": "f1944644301675113e467569a64dfec330a410a8663ee8f61b33ca85135c69fb",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/operations.py",
+      "expected_run_sha256": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+      "git_blob_sha256": "789655a0b9838a04457a5d262736dd2fe5d2525e23dbc432a6f141d2d50762d4",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/primitives.py",
+      "expected_run_sha256": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+      "git_blob_sha256": "57b22505476b135667286e13c2f52963a7141300d8b56c929f7c45de9d5e863a",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/stable_ids.py",
+      "expected_run_sha256": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+      "git_blob_sha256": "45f105c79866cab5829b7eb2e033d4e3451950f003f23dd8714003a7c3c3f77f",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/units.py",
+      "expected_run_sha256": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+      "git_blob_sha256": "331da06177882465288d12e201f72be79b934937b6702c9e079395aa79df88cf",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/core_geometry/validation.py",
+      "expected_run_sha256": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+      "git_blob_sha256": "d0900bb5ce7c7e573d52c81896592c41dae42f9c823193ab0c83d9ea47193b56",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/exporter/__init__.py",
+      "expected_run_sha256": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+      "git_blob_sha256": "136a3760ce55a14b19e503125544a2a07752b3f4bf4ab19b863bce24deb56169",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/exporter/author_export.py",
+      "expected_run_sha256": "a3609489739757c9c4a596ae244e279326737144664d9a3ed7c2625276a4a2e7",
+      "git_blob_sha256": "a3609489739757c9c4a596ae244e279326737144664d9a3ed7c2625276a4a2e7",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/exporter/dxf_export.py",
+      "expected_run_sha256": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+      "git_blob_sha256": "448ded24f00982f014b1391ca6bf79073d6d0128cdf305fbf012fe93c0202d9c",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/exporter/pdf_export.py",
+      "expected_run_sha256": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+      "git_blob_sha256": "0886eeaa2df54bf60b0f73d399e1720a889adb050c17f717803a7f9411d22c16",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/exporter/png_export.py",
+      "expected_run_sha256": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+      "git_blob_sha256": "376e33903bf435e992ac62f8954dd40f6cbb5650ef7bb62c73f4e933c2cbce2a",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/exporter/svg_export.py",
+      "expected_run_sha256": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+      "git_blob_sha256": "d6a037f4ba17d894d1ed5ab90b4b9d607012c34c14f81ad42121272159eda5c2",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/layout_packer/__init__.py",
+      "expected_run_sha256": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+      "git_blob_sha256": "e2a2ea95bc8e92ab6d24dac7e8d43cd2b87f4670b62c869600fdf9e025d79f98",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/layout_packer/packer.py",
+      "expected_run_sha256": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+      "git_blob_sha256": "34002ebfe6961f7e609e16fcfc49fca033b92c7562f5e9353665672cf01206d9",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/paper_analyzer/__init__.py",
+      "expected_run_sha256": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+      "git_blob_sha256": "5074824ab07ae8fe66f012f2d15464d86cd825a0b447f66a427bf9220a075dc9",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/paper_analyzer/classifier.py",
+      "expected_run_sha256": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+      "git_blob_sha256": "963be9242c76903873f630fe4a4e968f137384728a56e2096a4b691c1bbf4732",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/preferences/__init__.py",
+      "expected_run_sha256": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+      "git_blob_sha256": "fb2520b89037842429327204f6cca56f1ac08e79c8521cbcbdfb8c73529cedaf",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/preferences/settings.py",
+      "expected_run_sha256": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+      "git_blob_sha256": "70657869cbc185c6cfdd16ddfae81c9bb733c561c3e412f2f1f7d004728cd07c",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/project_io/__init__.py",
+      "expected_run_sha256": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+      "git_blob_sha256": "b87d6c426593700478100c1b2649e9c050f2e3b11d8e942a8867d16e38d7a849",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/project_io/project.py",
+      "expected_run_sha256": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+      "git_blob_sha256": "e026e1dd49cef7121104c9f122ffeb4c68e5d74e7eff7395dedd6c0643c52530",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/__init__.py",
+      "expected_run_sha256": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+      "git_blob_sha256": "b17b1f71ac656a8d34efe64c747ea9b6186b8e6bef143d18415c4f97aca4a3c4",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/node.py",
+      "expected_run_sha256": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+      "git_blob_sha256": "3c0266c5722802c6759b656ee4dc7a735f0b25a4a15870a0c32bdc54c0a77786",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/scene.py",
+      "expected_run_sha256": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+      "git_blob_sha256": "5102b26aa9d627d8dbdbd5e6644d3e2796dd37c48697fe4404ed3f8735fa303e",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/snap.py",
+      "expected_run_sha256": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+      "git_blob_sha256": "f04104852a10be0c6dd60a25f01eba05d887be7a5d05d2b12abc4594351afc94",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/scene_graph/transform.py",
+      "expected_run_sha256": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+      "git_blob_sha256": "e008d230b3ba6a3dead8d42675bac9008a16ed2cde3a221551cb56e27816beb7",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/seam_editor/__init__.py",
+      "expected_run_sha256": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+      "git_blob_sha256": "e3f2133a4e1ca7f04ca2af12df376db8c00645def3a00d8f70135f80d99680df",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/seam_editor/auto_seams.py",
+      "expected_run_sha256": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+      "git_blob_sha256": "4b246686335b24883fbc7c15df7b119cdf06a1342112d16b626f93fb98221ea1",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/seam_editor/seam_graph.py",
+      "expected_run_sha256": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+      "git_blob_sha256": "bf99eb3db9a8244d395bf8823b6a63921768f72b7fe5bc1aad249d5b5793bd4f",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/__init__.py",
+      "expected_run_sha256": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+      "git_blob_sha256": "b4443948a5cba127f6da61a54cbebde275b7adad2c132e2d67614b00e4cfe94c",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/build_guide.py",
+      "expected_run_sha256": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+      "git_blob_sha256": "ae44e316d79cc5354601a3cb3a8902d24d374b817c00b97d62af2917b29e47d9",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/markings.py",
+      "expected_run_sha256": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+      "git_blob_sha256": "81b0b2f70adf18969e39e24a8c8bbce627a1cbd1d06a5e9a9bb0e047f30dd725",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/tabs_generator/tabs.py",
+      "expected_run_sha256": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+      "git_blob_sha256": "0203aac5a69c5dd2f4e6f21e67e38f50998925c3e43523758beffee642f9ced7",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/__init__.py",
+      "expected_run_sha256": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+      "git_blob_sha256": "36d514c2eb6873f18dab08242678d85dcea02b728469639c10a9d18e9cea2150",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/author_paper.py",
+      "expected_run_sha256": "1feab611f22e4be3e454bfc39dcb6e5f22b2294e9d9f3407d28a1d110748b3f6",
+      "git_blob_sha256": "1feab611f22e4be3e454bfc39dcb6e5f22b2294e9d9f3407d28a1d110748b3f6",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/author_sketch.py",
+      "expected_run_sha256": "c57eeba4ebf014a021f993f6ebbd3f783212592b7905c819fa742683ce43b779",
+      "git_blob_sha256": "c57eeba4ebf014a021f993f6ebbd3f783212592b7905c819fa742683ce43b779",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/author_viewport.py",
+      "expected_run_sha256": "46d708b5df86cbbd10668c7e89126f9c01e9ad083eea1f71f5ddc05ededa715d",
+      "git_blob_sha256": "46d708b5df86cbbd10668c7e89126f9c01e9ad083eea1f71f5ddc05ededa715d",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/author_window.py",
+      "expected_run_sha256": "fab56c2b746956b4a5844b41fe074ba63c4ac0390459a3cf09651805642dec0e",
+      "git_blob_sha256": "fab56c2b746956b4a5844b41fe074ba63c4ac0390459a3cf09651805642dec0e",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/main_window.py",
+      "expected_run_sha256": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+      "git_blob_sha256": "18a863a44d3c9fa742760f8a984518ae6227fdc2e298af06fa31c6d1ad4ef53e",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/object_tree.py",
+      "expected_run_sha256": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+      "git_blob_sha256": "85a49691f70d3e50701a574202ddee2af9495ed9cc09629265c11085d4bb8532",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/papercraft_panel.py",
+      "expected_run_sha256": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+      "git_blob_sha256": "bca26f039a5f487605065944307444c901f4ef0dd4d18bb1bcb26ccadff63d15",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/preferences_dialog.py",
+      "expected_run_sha256": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+      "git_blob_sha256": "7c86626ccbc635c039a43b1c37d2906992c86c4f8e1c7ae864c33ac22c49581d",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/properties_panel.py",
+      "expected_run_sha256": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+      "git_blob_sha256": "d89328b270c0014287815c99b43e2d46dc1666e2eba5028e3529cf173746e011",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/viewport_3d.py",
+      "expected_run_sha256": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+      "git_blob_sha256": "7ecdd3a6b165b5fc6a00a531cb39e391cca5902f6bbf51697d5a04b0dc06b807",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/ui/wizard.py",
+      "expected_run_sha256": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+      "git_blob_sha256": "c383615a20cfbe82ff2f3618dfd267c756181d53d04083dbf8f5fd3aa5b9598d",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/unfolder/__init__.py",
+      "expected_run_sha256": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+      "git_blob_sha256": "6bd944af36d4c6761374fb48911ee1066f522c44e2cbf485f5b913a572d186ce",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/unfolder/approx_unfold.py",
+      "expected_run_sha256": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+      "git_blob_sha256": "3170a6bc5d5b0029e625fec142c6a3888b126a4ffd6a98879eeebdd000a849d3",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/unfolder/exact_unfold.py",
+      "expected_run_sha256": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+      "git_blob_sha256": "05b91dd7d2ad0b0a49d01b82776a46f61c6368e8ca269d56476e25faf1b9e838",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "src/archpapercraft/unfolder/strategies.py",
+      "expected_run_sha256": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+      "git_blob_sha256": "013e753953f230cf30e51714aeaa0cf5d7925cee5426abd377b9bfaa0d3427af",
+      "match": false,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "tools/authoring/desktop_proof.py",
+      "expected_run_sha256": "3e2acf3cc537428cdad0904c0c31d7ef6c36926996461bb774990256a3fe5f25",
+      "git_blob_sha256": "3e2acf3cc537428cdad0904c0c31d7ef6c36926996461bb774990256a3fe5f25",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    },
+    {
+      "path": "tools/authoring/native_dialogs.py",
+      "expected_run_sha256": "837706a734dbd7a3f1ccbfd79be6b1ce7ea5d894bc517c44bf0d62d088ccc579",
+      "git_blob_sha256": "837706a734dbd7a3f1ccbfd79be6b1ce7ea5d894bc517c44bf0d62d088ccc579",
+      "match": true,
+      "archive_exact": false,
+      "archive_python_text_equal": true
+    }
+  ],
+  "source_count": 75,
+  "raw_git_blob_exact_matches": 15,
+  "archive_raw_matches": 0,
+  "archive_newline_only_differences": 75,
+  "output_results": [
+    {
+      "path": "01-own-concave-hole-stale-desktop.png",
+      "expected": "f141a55b075a90e570e00d5b15dcc8670d09a34d69f23930c4900faf1887811e",
+      "actual": "f141a55b075a90e570e00d5b15dcc8670d09a34d69f23930c4900faf1887811e",
+      "pass": true
+    },
+    {
+      "path": "01-own-concave-hole-stale-opengl.png",
+      "expected": "f324757d1e11fecd75e85027140757f205439529625a628ba277ddc57a461a4d",
+      "actual": "f324757d1e11fecd75e85027140757f205439529625a628ba277ddc57a461a4d",
+      "pass": true
+    },
+    {
+      "path": "02-edited-stale-desktop.png",
+      "expected": "539e08137fa4ee65fc56de06b815c5d4e0486bbad471dd4459e6d189501583b7",
+      "actual": "539e08137fa4ee65fc56de06b815c5d4e0486bbad471dd4459e6d189501583b7",
+      "pass": true
+    },
+    {
+      "path": "02-edited-stale-opengl.png",
+      "expected": "d6caa07e87c3e14a576a2263ddba9098d1f21d2070a1a3abb2b4e21720ed3164",
+      "actual": "d6caa07e87c3e14a576a2263ddba9098d1f21d2070a1a3abb2b4e21720ed3164",
+      "pass": true
+    },
+    {
+      "path": "03-assembly-dialog-desktop.png",
+      "expected": "a3082eb49839977d7a02fb8236e8baadc1299f43dcd01353dfeef1a2102869c2",
+      "actual": "a3082eb49839977d7a02fb8236e8baadc1299f43dcd01353dfeef1a2102869c2",
+      "pass": true
+    },
+    {
+      "path": "03-assembly-dialog-opengl.png",
+      "expected": "f7436a41974a7d0d0af7306184667e5b09b5e8acdba79ef6b4cb277589c554e1",
+      "actual": "f7436a41974a7d0d0af7306184667e5b09b5e8acdba79ef6b4cb277589c554e1",
+      "pass": true
+    },
+    {
+      "path": "03-real-assembly-preview-desktop.png",
+      "expected": "999f491d2ca1b9bb74be4f3c9233054c9a9859bcefd8417a1ce197b2924d60df",
+      "actual": "999f491d2ca1b9bb74be4f3c9233054c9a9859bcefd8417a1ce197b2924d60df",
+      "pass": true
+    },
+    {
+      "path": "03-real-assembly-preview-opengl.png",
+      "expected": "66a37c0385491349f678363d14f3b63db2d0870ea12335b93c50840aec0c31bb",
+      "actual": "66a37c0385491349f678363d14f3b63db2d0870ea12335b93c50840aec0c31bb",
+      "pass": true
+    },
+    {
+      "path": "04-fold-shared-part-desktop.png",
+      "expected": "b0f3be943cc695f5f2014b2814d71d75c3fb522ba12d13b0f5ef9432ddb60a0c",
+      "actual": "b0f3be943cc695f5f2014b2814d71d75c3fb522ba12d13b0f5ef9432ddb60a0c",
+      "pass": true
+    },
+    {
+      "path": "04-fold-shared-part-opengl.png",
+      "expected": "aa9ef9870eb445363cb43d52782aae9d7fdd76efb90c0370af828f6b14dbee2f",
+      "actual": "aa9ef9870eb445363cb43d52782aae9d7fdd76efb90c0370af828f6b14dbee2f",
+      "pass": true
+    },
+    {
+      "path": "05-manual-two-pages-tab-and-locks-desktop.png",
+      "expected": "f94a5573024eaabe888d9ea3782ff169c0a2a74d942d59f64623235d22516813",
+      "actual": "f94a5573024eaabe888d9ea3782ff169c0a2a74d942d59f64623235d22516813",
+      "pass": true
+    },
+    {
+      "path": "05-manual-two-pages-tab-and-locks-opengl.png",
+      "expected": "4827bcc8d607908389bd57b8fbabac1279b4737ba15a01d38aec3d050c2f1111",
+      "actual": "4827bcc8d607908389bd57b8fbabac1279b4737ba15a01d38aec3d050c2f1111",
+      "pass": true
+    },
+    {
+      "path": "05b-specific-digital-warning-acknowledged-desktop.png",
+      "expected": "46b2f706a43967a9fb6608e7ee58b9b2c0f959b949179e6db4ec656f1f8c9d62",
+      "actual": "46b2f706a43967a9fb6608e7ee58b9b2c0f959b949179e6db4ec656f1f8c9d62",
+      "pass": true
+    },
+    {
+      "path": "05b-specific-digital-warning-acknowledged-opengl.png",
+      "expected": "bcd2de9bacd49958262481fedc6b6ed22e576156a6d90bf8017c13965673faec",
+      "actual": "bcd2de9bacd49958262481fedc6b6ed22e576156a6d90bf8017c13965673faec",
+      "pass": true
+    },
+    {
+      "path": "06-native-reopened-desktop.png",
+      "expected": "9712c9def887519d3539839098552c7ad100387a1db5493df17fe5a095798bda",
+      "actual": "9712c9def887519d3539839098552c7ad100387a1db5493df17fe5a095798bda",
+      "pass": true
+    },
+    {
+      "path": "06-native-reopened-opengl.png",
+      "expected": "7aa0e170a360fa63a832a59dcb8fa4b6a27c69ce585054f8d4e2f8d5629b6e76",
+      "actual": "7aa0e170a360fa63a832a59dcb8fa4b6a27c69ce585054f8d4e2f8d5629b6e76",
+      "pass": true
+    },
+    {
+      "path": "export/.author-export.json",
+      "expected": "9a983e76ea5e389c21cf2c4b016baaa32c7b2de8a5a2af811822bb4bc7f49a34",
+      "actual": "9a983e76ea5e389c21cf2c4b016baaa32c7b2de8a5a2af811822bb4bc7f49a34",
+      "pass": true
+    },
+    {
+      "path": "export/model.pdf",
+      "expected": "be91eaa9a4453bf687a1c421020c03718cf1fcf90456b3e727bb8816dcf86c66",
+      "actual": "be91eaa9a4453bf687a1c421020c03718cf1fcf90456b3e727bb8816dcf86c66",
+      "pass": true
+    },
+    {
+      "path": "export/page-9891d8b0-bd54-4b13-8058-342bd40fdaf0.svg",
+      "expected": "03501f7ef4ae47ecc69a7a65135cdd78758862d9da8f7457a35d5587f445d16f",
+      "actual": "03501f7ef4ae47ecc69a7a65135cdd78758862d9da8f7457a35d5587f445d16f",
+      "pass": true
+    },
+    {
+      "path": "export/page-d538304d-2553-4083-b12a-ad297176c249.svg",
+      "expected": "2469d41bba7c8a7f07bafe1e606dd56e95d76bef5cfefdc78cc8ea7cf9123ed9",
+      "actual": "2469d41bba7c8a7f07bafe1e606dd56e95d76bef5cfefdc78cc8ea7cf9123ed9",
+      "pass": true
+    },
+    {
+      "path": "own-model.apcraft",
+      "expected": "72b8d975fb2767569cc671dee51ed85ca1d0c15d2bf885ba83c07bfe594d420c",
+      "actual": "72b8d975fb2767569cc671dee51ed85ca1d0c15d2bf885ba83c07bfe594d420c",
+      "pass": true
+    },
+    {
+      "path": "settings.ini",
+      "expected": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953",
+      "actual": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953",
+      "pass": true
+    },
+    {
+      "path": "snapshot.json",
+      "expected": "4aae9f6dd212220f394125dba766dee81e194b46ba9e4b61221b3de02dc40a72",
+      "actual": "4aae9f6dd212220f394125dba766dee81e194b46ba9e4b61221b3de02dc40a72",
+      "pass": true
+    }
+  ],
+  "output_count": 23,
+  "production_test_dependency_diff_from_independently_tested_bbd1578": "",
+  "pass": false
+}

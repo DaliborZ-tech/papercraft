@@ -1371,12 +1371,13 @@
       "epics": [
         "E14"
       ],
-      "mode": "independent_review",
+      "mode": "final_authoring_proof_and_independent_review",
       "outputs": [
         "Nezávislé review a úplné digitální předání P2 v1.2",
         "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
         "docs/p2/v1.2/ACCEPTANCE.md",
-        "Independent review of actual skill application and usability evidence; unresolved novice test is not replaced by author/GUI automation"
+        "Independent review of actual skill application and usability evidence; unresolved novice test is not replaced by author/GUI automation",
+        "Závěrečný vlastní model historické architektury přes UI, save/reopen, ruční layout a SVG/PDF; nezávislý proof funkčnosti"
       ],
       "acceptance": [
         "P2 digitální kontrakt splněn",
@@ -1390,7 +1391,8 @@
         "AC-US05",
         "AC-US06",
         "AC-US07",
-        "AC-US08"
+        "AC-US08",
+        "AC-AU19"
       ],
       "status": "PLANNED",
       "execution_authorized_on_realization": true,
@@ -1407,7 +1409,8 @@
         "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
         "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
         "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
+        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
+        "AC-AU19": "NOT_RUN: owner requested final original historic model in actual application"
       },
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
       "review": "Independent reviewer required after implementation, not implementer self-approval",
@@ -1502,6 +1505,26 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
+      },
+      "final_historic_model": {
+        "requested_by_owner_on": "2026-11-06",
+        "status": "NOT_RUN",
+        "execution_order": "final authoring task after A/B/C/D and PC-009, before final independent verification and digital handover",
+        "workflow": "empty project -> actual UI construction -> joints/tabs -> unfold -> manual multi-page layout -> save/close/reopen -> edit/undo -> SVG/PDF",
+        "construction": [
+          "curtain wall",
+          "tower",
+          "articulated overhanging roof",
+          "pointed Gothic opening and splayed reveal",
+          "base",
+          "authored connectors"
+        ],
+        "specification": "docs/p2/v1.2/ACCEPTANCE.md#závěrečný-autorský-model-historické-architektury",
+        "evidence": [],
+        "independent_review": "NOT_RUN",
+        "replaces_A_B_C_D_or_novice_test": false,
+        "physical_build": "P3; not claimed by digital proof",
+        "source_artwork": "original construction; reference artwork is not copied"
       }
     },
     {
@@ -1615,26 +1638,26 @@
         "AC-US07"
       ],
       "acceptance_state": {
-        "AC-AU01": "NOT_RUN",
-        "AC-AU02": "NOT_RUN",
-        "AC-AU03": "NOT_RUN",
-        "AC-AU13": "NOT_RUN",
-        "AC-AU15": "NOT_RUN",
-        "AC-AU16": "NOT_RUN",
-        "AC-G06": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
-        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
+        "AC-AU01": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-AU02": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-AU03": "Open planar material valid in PC-006A; whole open building A remains PC-006B",
+        "AC-AU13": "Stable vertex/profile identity and explicit unresolved references verified; general curve split/provenance remains later slices",
+        "AC-AU15": "PC-006A native UI/save/reopen/manual layout/SVG/PDF PASS; other A/B/C/D flows pending",
+        "AC-AU16": "Legacy read-only/source preservation verified; explicit PanelProject conversion remains PC-008",
+        "AC-G06": "Real hole in UI/3D/paper/SVG/PDF PASS; actual external-editor check is recorded separately when run; P3 physical pending",
+        "AC-US01": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-US02": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-US03": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-US04": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-US05": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-US06": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding",
+        "AC-US07": "VERIFIED_IN_PC006A_TECHNICAL_SCOPE; see delivery/review; no claim for later slices or human understanding"
       },
-      "status": "IN_PROGRESS",
+      "status": "AGENT_VERIFIED",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-      "review": "independent reviewer of pinned commit required",
+      "review": "Independent pinned CODE review approved PC-006A; C-01 through C-05 closed; full P2 and novice/P3 remain pending",
       "estimate_person_days": [
         9,
         15
@@ -1649,31 +1672,47 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "IN_USE",
+          "status": "APPLIED_AND_INDEPENDENTLY_REVIEWED_IN_SLICE",
           "decision": "Generic drawn profiles and real holes; retain receiver requirements and open structures instead of house preset authority.",
-          "evidence": [],
-          "review": "NOT_RUN"
+          "evidence": [
+            "docs/p2/implementation/PC006A_DELIVERY.md",
+            "docs/p2/implementation/PC006A_REVIEW.md",
+            "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+          ],
+          "review": "APPROVED_IN_PC006A_TECHNICAL_SCOPE; no novice or physical claim"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "IN_USE",
+          "status": "APPLIED_AND_INDEPENDENTLY_REVIEWED_IN_SLICE",
           "decision": "Blank project sketch-first workflow with context selection, repair and undo delivered in this slice.",
-          "evidence": [],
-          "review": "NOT_RUN"
+          "evidence": [
+            "docs/p2/implementation/PC006A_DELIVERY.md",
+            "docs/p2/implementation/PC006A_REVIEW.md",
+            "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+          ],
+          "review": "APPROVED_IN_PC006A_TECHNICAL_SCOPE; no novice or physical claim"
         },
         {
           "skill": "papercraft-verification",
-          "status": "IN_USE",
+          "status": "APPLIED_AND_INDEPENDENTLY_REVIEWED_IN_SLICE",
           "decision": "Independent analytic area/rigid transforms/holes and actual Windows flow; no novice or physical claim.",
-          "evidence": [],
-          "review": "NOT_RUN"
+          "evidence": [
+            "docs/p2/implementation/PC006A_DELIVERY.md",
+            "docs/p2/implementation/PC006A_REVIEW.md",
+            "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+          ],
+          "review": "APPROVED_IN_PC006A_TECHNICAL_SCOPE; no novice or physical claim"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "IN_USE",
+          "status": "APPLIED_AND_INDEPENDENTLY_REVIEWED_IN_SLICE",
           "decision": "Implement coherent PC-006A then B, pinned independent review, integrate approved batches and continue A/B/C/D.",
-          "evidence": [],
-          "review": "NOT_RUN"
+          "evidence": [
+            "docs/p2/implementation/PC006A_DELIVERY.md",
+            "docs/p2/implementation/PC006A_REVIEW.md",
+            "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+          ],
+          "review": "APPROVED_IN_PC006A_TECHNICAL_SCOPE; no novice or physical claim"
         }
       ],
       "usability": {
@@ -1687,23 +1726,38 @@
           "AC-US06",
           "AC-US07"
         ],
-        "main_flow_evidence": [],
-        "status": "NOT_RUN",
+        "main_flow_evidence": [
+          "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json",
+          "tests/authoring/test_workspace.py",
+          "tests/authoring/test_profile_workspace.py",
+          "docs/p2/implementation/PC006A_REVIEW.md"
+        ],
+        "status": "TECHNICALLY_VERIFIED_IN_SLICE; HUMAN_LEARNABILITY_NOT_RUN",
         "implementation_in_this_slice": true,
         "defer_to_visual_redesign": false,
-        "novice_study_role": "PREPARE_IN_THIS_SLICE; full first-version study in PC-006B",
+        "novice_study_role": "BUILD_AND_PROTOCOL_PREPARED; full first-version novice study remains PC-006B",
         "ui_rework_evidence": {
-          "status": "NOT_RUN",
-          "problem": null,
-          "reason": null,
-          "preserved_parts": null,
-          "before_after_flow": null,
-          "consistency_impact": null,
-          "workflow_alternative_decision": null
-        }
+          "status": "TECHNICAL_BEFORE_AFTER_VERIFIED; NOVICE_NOT_RUN",
+          "problem": "Preset/mesh authority did not support blank author sketch and actual holes; C-05 lost visible numeric edits on shortcuts",
+          "reason": "Use one generic construction and coherent sketch/3D/paper selection; commit pending numeric edits before persistence/snapshot decisions",
+          "preserved_parts": "Qt/OpenGL, native dialogs, vector roles, atomic IO and older read-only source preservation",
+          "before_after_flow": "House/preset entry -> blank project -> own polygon/open profile/hole -> edit -> seam/tab -> pages -> native save/open/export",
+          "consistency_impact": "Context selection, error activation, undo and optional/repeatable tips work in the same author workspace",
+          "workflow_alternative_decision": "Within accepted P2 authoring mandate; no new product alternative or approval gate"
+        },
+        "participant_count": 0
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
-      "implementation_authorized_on": "2026-11-06"
+      "implementation_authorized_on": "2026-11-06",
+      "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+      "delivery_report": "docs/p2/implementation/PC006A_DELIVERY.md",
+      "independent_review": {
+        "verdict": "APPROVED_IN_SCOPE",
+        "code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+        "report": "docs/p2/implementation/PC006A_REVIEW.md",
+        "open_blocker_major": 0,
+        "author_is_reviewer": false
+      }
     },
     {
       "id": "PC-006B",
@@ -1767,7 +1821,7 @@
         "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
         "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
@@ -1786,28 +1840,28 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "NOT_RUN",
+          "status": "IN_USE",
           "decision": null,
           "evidence": [],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "NOT_RUN",
+          "status": "IN_USE",
           "decision": null,
           "evidence": [],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-verification",
-          "status": "NOT_RUN",
+          "status": "IN_USE",
           "decision": null,
           "evidence": [],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "NOT_RUN",
+          "status": "IN_USE",
           "decision": null,
           "evidence": [],
           "review": "NOT_RUN"
@@ -1847,7 +1901,9 @@
         }
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
-      "implementation_authorized_on": "2026-11-06"
+      "implementation_authorized_on": "2026-11-06",
+      "working_branch": "revival/p2-interior-domain",
+      "implementation_start_basis": "PC-006A CODE independently approved on 4b172e65af3cde19c865cf7594c63fa004aa1ba2"
     },
     {
       "id": "PC-007A",
@@ -2301,14 +2357,28 @@
       125
     ],
     "scope": "remaining_P2_v1.2_implementation_excluding_design_and_P3",
-    "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md"
+    "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md",
+    "after_PC006A": {
+      "unit": "person_days",
+      "remaining_base": [
+        52,
+        89
+      ],
+      "remaining_risk_adjusted": [
+        60,
+        112
+      ],
+      "includes_owner_final_historic_model": true,
+      "not_measured_agent_runtime": true,
+      "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md"
+    }
   },
   "authorized_stages": [
     "P0",
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "NOT_RUN: accepted v1.2 A/B/C/D implementation in progress, not an implemented product acceptance",
+  "p2_digital_delivery": "IN_PROGRESS: PC-006A technically verified, PC-006B underway; full A/B/C/D, AC-US08, AC-AU19 and final P2 review not yet complete",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2458,15 +2528,16 @@
   },
   "current_delivery": {
     "ticket": "PC-006A",
-    "then": "PC-006B",
+    "then": "PC-007A",
     "followed_by": [
-      "PC-007A",
       "PC-007B",
       "PC-008",
       "PC-009",
       "PC-010"
     ],
     "status": "IN_PROGRESS",
-    "new_routine_permission_required": false
+    "new_routine_permission_required": false,
+    "final_historic_model_ticket": "PC-010 / AC-AU19",
+    "next": "PC-006B"
   }
 }

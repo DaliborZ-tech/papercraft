@@ -1,0 +1,66 @@
+{
+  "source_sha": "b59a526d0ee43c07b26f7858757c988190fb9798",
+  "results": [
+    {
+      "kind": "local",
+      "offset_mm": 1000000000000.0,
+      "with_hole": false,
+      "command_accepted": true,
+      "post_command_world_error": null,
+      "actual_world_area_paper_mm2": 4000.2000000000003,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": null,
+      "pass": true
+    },
+    {
+      "kind": "local",
+      "offset_mm": 1e+16,
+      "with_hole": false,
+      "command_accepted": false,
+      "post_command_world_error": "Um\u00edst\u011bn\u00ed ztr\u00e1c\u00ed po\u017eadovanou plo\u0161nou p\u0159esnost materi\u00e1lu.",
+      "actual_world_area_paper_mm2": null,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": true,
+      "pass": true
+    },
+    {
+      "kind": "parent",
+      "offset_mm": 1e+16,
+      "with_hole": false,
+      "command_accepted": false,
+      "post_command_world_error": "Um\u00edst\u011bn\u00ed ztr\u00e1c\u00ed po\u017eadovanou plo\u0161nou p\u0159esnost materi\u00e1lu.",
+      "actual_world_area_paper_mm2": null,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": true,
+      "pass": true
+    },
+    {
+      "kind": "plane",
+      "offset_mm": 1e+16,
+      "with_hole": false,
+      "command_accepted": false,
+      "post_command_world_error": "Um\u00edst\u011bn\u00ed ztr\u00e1c\u00ed po\u017eadovanou plo\u0161nou p\u0159esnost materi\u00e1lu.",
+      "actual_world_area_paper_mm2": null,
+      "analytic_source_area_paper_mm2": 4000.2000000000003,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": true,
+      "pass": true
+    },
+    {
+      "kind": "local",
+      "offset_mm": 1e+16,
+      "with_hole": true,
+      "command_accepted": false,
+      "post_command_world_error": "Um\u00edst\u011bn\u00ed ztr\u00e1c\u00ed po\u017eadovanou p\u0159esnost modelu.",
+      "actual_world_area_paper_mm2": null,
+      "analytic_source_area_paper_mm2": 3999.975,
+      "area_tolerance_mm2": 0.01,
+      "rolled_back_if_rejected": true,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

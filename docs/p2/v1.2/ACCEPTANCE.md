@@ -36,6 +36,14 @@ Nabídnout změnu geometrie, přidání skutečných švů nebo vytvoření segm
 
 ## Nové normativní AC
 
+### Závěrečný autorský model historické architektury
+
+**Výslovný doplněk vlastníka 6.11.2026:** jako závěrečný realizační úkol P2 vytvořit v aplikaci vlastní model historické architektury, který prokáže funkčnost sjednaných nástrojů. Navazuje na A/B/C/D a konsolidaci PC-009; patří do PC-010 před závěrečné nezávislé ověření a digitální předání. Nenahrazuje žádnou z původních přejímek ani test s novým uživatelem.
+
+Vlastní menší historický areál / brána s věží spojí hradbu, věž, členitou střechu s přesahem, gotické okno s lomeným obloukem a prostorovým lomeným ostěním, základnu a autorské spojovací prvky. Inspirací jsou dodané referenční modely, nikoli import hotové vystřihovánky. Konkrétní rozměry, rozdělení materiálu a numerická očekávání se zadají nezávisle; grafika předloh se nekopíruje. Zakřivené/segmentované části musí mít pravdivý režim rozvinu a doloženou chybu.
+
+Celý model se vytvoří od prázdného projektu přes skutečné UI bez injekce připravené geometrie do controlleru/JSON. Doložit konstrukci a propojený výběr3D↔2D, švy/chlopně a příjemce, explicitní rozvin, ruční vícestránkový layout, save→zavřít→open, následnou autorskou změnu s bezpečným návratem a oba vektorové výstupy. Předat editovatelný projekt, snapshot, SVG/PDF, zdrojový CODE SHA, průchod a screenshoty, hashe a nezávislou revizi výsledku. Obrázek výsledku ani backendový generátor samotný nejsou průkaz. Fyzické vytištění, sestavení a jeho přijetí zůstávají P3; digitální stav tohoto doplňku je **NOT_RUN**.
+
 | ID | Kritérium a negativní/hraniční doplněk | Řez | Stav produktu |
 |---|---|---|---|
 | AC-AU01 | Prázdný projekt, vlastní úsečky, rozměry, editace; presety rozbalené do stejné domény; nulová délka odmítnuta | 006A | NOT_RUN |
@@ -56,6 +64,7 @@ Nabídnout změnu geometrie, přidání skutečných švů nebo vytvoření segm
 | AC-AU16 | Read-only staré soubory, prototypový PanelProject jen rozpoznaný copy/SaveAs adapter, nevratný přepis zakázán | 006A/008 | NOT_RUN |
 | AC-AU17 | SVG native curves/compound paths a otvory; PDF vector approximation má doloženou mez; oba ze stejného snapshotu, reálný editor | 009 | NOT_RUN |
 | AC-AU18 | Fyzický výtisk A/B/C + varianty D, skutečná kalibrace a sestavení; geometrická změna invaliduje dotčený proof | P3 | NOT_RUN |
+| AC-AU19 | Závěrečný vlastní model historické architektury přes skutečné UI, editovatelný projekt po reopen, ruční layout, SVG/PDF a nezávislé ověření dle odstavce výše | 010 | NOT_RUN |
 
 Tabulka se doplňuje původními AC: G01–G07 (G06 přesunuto do P2), C01–C10 dle výslovného rozsahu (C08 pásek už v P2), L01–L04/L06/L08–L10, I01–I07, X01–X07/X10 a R01–R05 digitální částí (R01/R02 fyzický proof P3). AC-I08 platí při zavedení asynchronních workerů. Automatický packing, grafika a obrazový návod se neprohlašují hotové; jejich původní AC zůstávají v pozdějších epicích.
 

@@ -1,5 +1,13 @@
 # Přepočet odhadu po prototypu PC-006 a změně cíle
 
+## Aktualizace po skutečném PC-006A,6.11.2026
+
+PC-006A má běžící generický editor, uložené vlastní profily/otvory, skutečný Windows průchod až SVG/PDF a [nezávislé schválení](../implementation/PC006A_REVIEW.md) na4b172e6. Celá sada443PASS nenahradila cílenou revizi: ta našla a nechala opravit5 konkrétních chyb včetně neuložených čísel, světové plošné metriky a deklarace PDF chyby. Základní Qt/IO/vector směr a konkávní materiál jsou nyní podložené implementací. Interiérové kontakty, obecné křivky/lofty a fyzický materiál zůstávají hlavními riziky; experimentální schema se neuzavírá.
+
+Pro **zbývající PC-006B až010** ponecháváme odborné odhady10–17 +12–20 +10–17 +8–14 +6–10 +4–7 = **50–85 člověkodnů**, s dosavadní rezervou15–25% přibližně **58–107**. Původních9–15 za006A je odebráno ze zbývající práce, nikoli vykázáno jako skutečně odpracovaný čas. Závěrečný vlastní historický model AU19, výslovně doplněný vlastníkem, přidává vPC-010 **2–4 člověkodny** na vlastní konstrukci, celý průchod, numerická očekávání a review. Aktuální zbytek je proto **52–89**, s rezervou zaokrouhleně **60–112 člověkodnů**. Nejde o naměřenou rychlost týmu, délku agentních běhů ani kalendářní termín. Dostupnost skutečného novice účastníka se sleduje samostatně; počet účastníků je zatím0. Další povinný přepočet nastane po006B podle reálných kontaktů a autorských konektorů, poté po007A.
+
+Zbývající rizika doplněná zkušeností006A: změna vstupu během modální operace (C-05; nyní regresně chráněno), oddělení analytické a serializační chyby vektorů (C-02), materiálová geometrie ve vzdálených souřadnicích (C-04) a průkaznost capture/souborových dialogů. Doplněné historické předlohy potvrzují význam výztuh, samostatných pásků, skutečných výřezů a vnitřních přijímačů, ne matematickou správnost našich budoucíchB/C/D. Původní návrhový rozpad níže je zachován jako historie a plánovací základ.
+
 6. 11. 2026. Jednotka je soustředěný **člověkoden**, nikoli doba běhu agenta, údaj o dosud odpracovaných dnech nebo slib kalendářního termínu. Nová v1.2 je rozsahově větší než v1.1. Starých 24–40 člověkodnů nelze přenést na vlastní kreslení, díry, profily, vnitřní připojení a stočené pláště.
 
 ## Co skutečně víme z PC-006 prototypu

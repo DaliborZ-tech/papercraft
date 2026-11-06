@@ -1,0 +1,24 @@
+{
+  "files": [
+    "page-9891d8b0-bd54-4b13-8058-342bd40fdaf0.svg",
+    "page-d538304d-2553-4083-b12a-ad297176c249.svg",
+    "model.pdf"
+  ],
+  "font_sha256": "edfbd22a3d088fc2f5d7c79b8c9c732df6dc878a60f0a80be0f92a3c7a634404",
+  "pdf_arc_approximation": {
+    "bound_scope": "arc_to_cubic_before_numeric_serialization",
+    "max_interpolation_error_mm": 0.0,
+    "method": "cubic_hermite",
+    "requested_interpolation_bound_mm": 0.001
+  },
+  "pdf_geometry_precision": {
+    "combined_position_error_bound_mm": 3.531436597823108e-05,
+    "method": "serialized_CTM_and_Bernstein_control_difference",
+    "numeric_serialization_bound_mm": 3.531436597823108e-05,
+    "required_digital_budget_mm": 0.01,
+    "scope": "finite_input_paths_calibration_text_anchors; font_outlines_excluded"
+  },
+  "project_id": "fef3169a-c10f-402c-a52b-4e50000f9f75",
+  "schema_version": 1,
+  "snapshot_digest": "3c83d128e23d595957e3271fca2fd6e855ddea68030fd8731f39d7d5d77a27ad"
+}

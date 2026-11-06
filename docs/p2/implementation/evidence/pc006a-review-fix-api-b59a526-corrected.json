@@ -1,0 +1,86 @@
+{
+  "source_sha": "b59a526d0ee43c07b26f7858757c988190fb9798",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-b59a526-hvme5sgb",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-fix-api-7sbhgdd0",
+  "results": [
+    {
+      "name": "two-point-close-typed-atomic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "open-profile-reopen-retains-source-topology",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate-append-typed-atomic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "infinite-append-typed-atomic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "append-close-retains-every-old-vertex-and-segment",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "already-closed-is-idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "closed-append-typed-atomic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "continued-concave-surface-area-independent-1908",
+      "pass": true,
+      "detail": {
+        "actual_mm2": 1908.0,
+        "analytic_mm2": 1908
+      }
+    },
+    {
+      "name": "crossing-closure-typed-atomic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "small-hole-warning-can-be-acknowledged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "small-hole-source-edit-invalidates-old-ack",
+      "pass": true,
+      "detail": {
+        "old_issue_id": "76396c16cac3be403f1bb217",
+        "new_issue_id": "76396c16cac3be403f1bb217",
+        "old_digest": "5a6988057254b3db5fc7eb6455d1b1881f2d336708e303d3c0c4d749cbd77781",
+        "new_digest": "beed567a3d042bd4986fdb419dba7376bd132dc2dc64e999dd65acdfbb0abc75",
+        "note": "Stable issue identity is valid; acknowledgement is bound to the changed source-state digest."
+      }
+    },
+    {
+      "name": "well-conditioned-world-hole-translation-remains-valid",
+      "pass": true,
+      "detail": {
+        "actual_paper_mm2": 3850.2000000000003,
+        "analytic_paper_mm2": 3850.2000000000003
+      }
+    },
+    {
+      "name": "inaccurate-serialized-pdf-rejected-prior-bundle-identical",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "pass": 13,
+  "fail": 0
+}

@@ -1,6 +1,6 @@
 # Krátký test první autorské verze s novým uživatelem
 
-Povinný v PC-006A/B, součást dodávání první autorské verze. **Stav: NOT_RUN.** Nová autorská aplikace není implementovaná a nebyl zapojen žádný účastník. Tento soubor je připravený protokol a formulář, nikoli výsledek uživatelského testu. Nezakládá novou návrhovou etapu. Normativní kritéria: [AC-US01–US08](ACCEPTANCE.md); návrh ovládání: [UX](AUTHORING_UX.md).
+Povinný v PC-006A/B, součást dodávání první autorské verze. **Stav: NOT_RUN,0 skutečných účastníků.** [PC-006A](../implementation/PC006A_DELIVERY.md) nyní poskytuje běžící build a technicky ověřený průchod vlastním dílem; celéA a první autorskou verzi s vnitřními přijímači dokončí PC-006B. Tento soubor je připravený protokol a formulář, nikoli výsledek uživatelského testu. Před sezením připnout skutečný použitý build a uvést, které dílčí schopnosti již obsahuje. Nezakládá novou návrhovou etapu. Normativní kritéria: [AC-US01–US08](ACCEPTANCE.md); návrh ovládání: [UX](AUTHORING_UX.md).
 
 ## Účastník a příprava
 

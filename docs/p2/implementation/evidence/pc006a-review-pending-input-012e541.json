@@ -1,0 +1,45 @@
+{
+  "source_sha": "012e541655a6152edb285854439a22f87979a3ab",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-ui-012e541-6v4lni5o",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-pending-input-m_ycc0uu",
+  "evidence_kind": "offscreen_real_Qt_widgets_shortcuts_modal; controller_setup; not_native_or_human",
+  "results": [
+    {
+      "name": "pending_vertex_CtrlS_existing_path",
+      "typed_text": "11",
+      "saved_x_model_mm": 10000.0,
+      "current_source_x_model_mm": 10000.0,
+      "dirty_after_shortcut": false,
+      "pass": false
+    },
+    {
+      "name": "pending_vertex_CtrlE_snapshot_before_modal_commit",
+      "original_revision": 4,
+      "current_revision": 4,
+      "current_source_x_model_mm": 10000.0,
+      "part_stale_after_modal": false,
+      "export_created": true,
+      "export_manifest_revision": null,
+      "dialogs": [
+        {
+          "title": "Vektorový export",
+          "revision_at_dialog": 4,
+          "source_x_at_dialog": 10000.0
+        },
+        {
+          "title": "Změnu nelze dokončit",
+          "revision_at_dialog": 4,
+          "source_x_at_dialog": 10000.0
+        },
+        {
+          "title": "Export dokončen",
+          "revision_at_dialog": 4,
+          "source_x_at_dialog": 10000.0
+        }
+      ],
+      "pass": false
+    }
+  ],
+  "pass": 0,
+  "fail": 2
+}

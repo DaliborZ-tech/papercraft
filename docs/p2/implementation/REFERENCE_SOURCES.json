@@ -1,0 +1,324 @@
+{
+    "source_root":  "C:\\zaloha_telefon_fotky\\zaloha_telefon_fotky\\modely",
+    "scope":  "53 inspected image files; duplicate scans are not distinct constructions; inventory is not content review",
+    "records":  [
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_18_1.jpg",
+                        "sha256":  "ccf9cb8452a818631e01b0595d96a6186ad56a185732058ca1454d63d3652da7",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_18_2.jpg",
+                        "sha256":  "8d1a975bf509b72a155387f5e58cef3cceace495dff41f7156fbe8073af5e606",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_18_6.jpg",
+                        "sha256":  "7cf57efbc3706037886bc7e48128f80fd9605c3b3bf147faddd8db37476fb840",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_19_1.jpg",
+                        "sha256":  "6eef61054d5115942e6315f6db54f31b1e75af77905a428009c22da1b6bc5022",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_19_4.jpg",
+                        "sha256":  "70aa99a642d1732d68678db42b1bceb5314eebbd11418cf98cfe0086533b5760",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_20_2.jpg",
+                        "sha256":  "17deb78b8d864748dbd6d58049d653ead7084d7e9903f3d9f86c2907e2de0f98",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_20_3.jpg",
+                        "sha256":  "4740a38b647e9b84eae90c6a8e322105a36fbe53a6dc9ffa476379fa10c13987",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\abc_20_5.jpg",
+                        "sha256":  "476a657a74ac216e8e9e3026a90780d5f482372b132367980f28748d4bda1363",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\Untitled77.jpg",
+                        "sha256":  "f2cdd9d303cce9c47c5af2ca7e5ed01ed9bcd10efa0110db802d12744a66ab18",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\Untitled81.jpg",
+                        "sha256":  "0f3fe95802e58fe55541161bc29bbef41fa6ec6c73dd941249a32f76549e51e5",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\Untitled82.jpg",
+                        "sha256":  "28c12c6ffb576bec23bc946358dabeee5fa8c2fe6d0a833732599bd96bdc38e1",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\Untitled92.jpg",
+                        "sha256":  "273b81fa0537ad592fb5fb0b91555e35b73c61e55ca12710a312b003f615dcb5",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\Untitled93.jpg",
+                        "sha256":  "fc7c120c71d173c53cfd303e12d31c173282bddc463e43356bedf9064cfc1561",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel v Damnikově\\Untitled95.jpg",
+                        "sha256":  "bcd59537f9ee4d58bb98bd82176c74a8398e47c4f850fe5c604b3c2b48d5a2a1",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "19-Hospices de Beaune\\01.jpg",
+                        "sha256":  "713194b903ae13562846903fdf705c9663fc0d298ac0ea1436aae5c6127f1024",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "19-Hospices de Beaune\\03.jpg",
+                        "sha256":  "07a2537fc81154ef775c734ae7b596c44b00fe52db59b13c15ad2c017bd48564",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "19-Hospices de Beaune\\06.jpg",
+                        "sha256":  "a4ae230d1c4533447d32cbc1c03b9297d1280a7a202a526b2de681495a359fd7",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "19-Hospices de Beaune\\08.jpg",
+                        "sha256":  "80433f486ca639c62844905f6d8d322ff8a619cf3ae50baf00eb8de70fd265b6",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "20-Pont-Neuf\\01.jpg",
+                        "sha256":  "843da8d66d2e54ba59a02ea9d485e1722b36d37005b993e4890be66b0c0a609f",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "20-Pont-Neuf\\05.jpg",
+                        "sha256":  "d1f6f34171f726e137b8b0d1e64e471a84aafa34cc4db43441f9e28d5ef1de6d",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "20-Pont-Neuf\\13.jpg",
+                        "sha256":  "99bd8e889189ec80f08194b8807a2220f78389cf4e1313aceae42fc48ffe716b",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "20-Pont-Neuf\\22.jpg",
+                        "sha256":  "c15054b169c1baf2d24763e49ceef01c97741ea9805bf43ac50b4aa415fbad05",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Katedrála sv. Víta\\katedrala-page1.jpg",
+                        "sha256":  "4d6877743ba77e351a8ce864c12397ad1b85d20b0462195ad4304ec70c814ffa",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Katedrála sv. Víta\\katedrala-page3.jpg",
+                        "sha256":  "eebc87e5b02cc3f4a29ef8b049a328534c13657050559f1df211511800e14310",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Katedrála sv. Víta\\katedrala-thems2.jpg",
+                        "sha256":  "c5060604ce4785ce6285bb0521fa1f1e232e61838cf7443b189edd37276566b3",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Větrný mlýn (v Kuželově na Moravě)\\sejmout.jpg",
+                        "sha256":  "42126be186e4a87cd43aec5f0e958678264ad02d26a5d9959ecfaaff81cf6c4a",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Větrný mlýn (v Kuželově na Moravě)\\sejmout0001.jpg",
+                        "sha256":  "6497ab2bd93ece9fa216a6277a65f64dd6257ff863f69aa58b8f23d16c0ff300",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Lidové roubené stavby (albatros)\\01.jpg",
+                        "sha256":  "61c744c8a24cb15beba1e50197760898c6f40d8dc79d3137663718a2fcbc8fd5",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Lidové roubené stavby (albatros)\\04.jpg",
+                        "sha256":  "04de3195e3b4421b76ea07a81e2169a3bc382e25d0a2e2611a2b6d39399306d6",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Lidové roubené stavby (albatros)\\07.jpg",
+                        "sha256":  "7d750c4a93398368be851cb025bb1230ac4dab101de10d41cbb9272933f59e65",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Lidové roubené stavby (albatros)\\10.jpg",
+                        "sha256":  "c6f3938005b729bb0fcb797e373f11de4e4bb8a2e54a31fa1f8997dcb5c4f280",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Zámek Lednice (betexa)\\Cover.jpg",
+                        "sha256":  "3bf4ab15d1f8812aa6b7a5f51008a00e69f0bfdb2036ca6dc900c136b4257374",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Zámek Lednice (betexa)\\Lednice card page 03.jpg",
+                        "sha256":  "8ac0881596de43da1a07a1a1b47dd34eb27aacdedb6a21686ff4611564f9393f",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Zámek Lednice (betexa)\\Lednice card page 08.jpg",
+                        "sha256":  "741a57f46693e58aa90b4cff3c8d2e41fdac66a515a6fb5b2c543277161d7bec",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Zámek Lednice (betexa)\\Lednice card page 13.jpg",
+                        "sha256":  "08e3315b1df43b8bdef6312065f909c69997bb48e9fd01d03d1e137d648d03af",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Hrad Pernštejn (ERKO)\\DSC_0722.jpg",
+                        "sha256":  "b53771536901e857f1e03cb10c45a82ffa85dcb32062face83440a60253922d5",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Hrad Pernštejn (ERKO)\\IMG_0001.jpg",
+                        "sha256":  "920a5feedce980c9ac1b2deb74e71c659ea32720a6a51ad4259e228c7d8da457",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Hrad Pernštejn (ERKO)\\IMG_0006.jpg",
+                        "sha256":  "a49a07680d811ab58071e83af8a97a00e6593773df11ddbccb1c17937d65932b",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Hrad Pernštejn (ERKO)\\IMG_0013.jpg",
+                        "sha256":  "d3fffef65f77924513a0d0683b35a3124ff116d3b4ef7bc81523cd2c458f5966",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Hrad Pernštejn (ERKO)\\IMG_0021.jpg",
+                        "sha256":  "3e60f04a2639f9a5ca35125a1ee185c8dc4834f6a118d250fb08cb0f5f23352a",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "kostel Ostrava Hrabová\\ABC 2004_25-26 0024.jpg",
+                        "sha256":  "d3ddfe9a6e41bb3aca2dd031613466da043eacc2b9a3b01b3c3a37dd31f42aaa",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "kostel Ostrava Hrabová\\ABC 2004_25-26 0028.jpg",
+                        "sha256":  "60c3f47747eae498dfc0dcdd9ea69a304f402684781ab9701825e96dd14ae455",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "kostel Ostrava Hrabová\\ABC 2004_25-26 0032.jpg",
+                        "sha256":  "b7ad8a3f8f0231f5e7afb1253a482667c27d28b32a8d215f844c69901cef1d09",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\obr1.jpg",
+                        "sha256":  "cd1084b5dba862516ccc8e5083496fec2fc8f9b1e4a31848120e65f9947fa814",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\obr2.jpg",
+                        "sha256":  "07106d9f29dd3e0e1e5b4df5dbff0b72c10cae4b2ba47672e46375796e1bf104",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\obr3.jpg",
+                        "sha256":  "1bcfafd2051e51036cdfc1268bc6833a5eb62af9908a7074a1278f6e9bf380b8",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\obr4.jpg",
+                        "sha256":  "c2f6811c29f5ca3b32f418dda67436ba294bc04d3ac9b3c270f705c871bc61f5",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\skenovat0001.jpg",
+                        "sha256":  "13bd86a9f0067937fc22db63ce594c9b85510a2dc33d3d49368c37b477e2404e",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\skenovat0002.jpg",
+                        "sha256":  "d08f280e144821a8346d7fea7f40e570393aaffe1186099d620a0dc02c900578",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\skenovat0006.jpg",
+                        "sha256":  "21f06d6a5897ba3970304a1a5142c50e1021157e9e1c44c98699c0d81800be55",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\skenovat0007.jpg",
+                        "sha256":  "78c75759984c1dbfa48181ec0577f87c04db900970b066c48c3d282e8dce183a",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\skenovat0008.jpg",
+                        "sha256":  "31a0b0f1eb84192854e9cc5fd5084209e5685968c80fdef4d886ee703b30f241",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    },
+                    {
+                        "relative_path":  "Kostel sv.Bartoloměje\\skenovat0009.jpg",
+                        "sha256":  "695709854d62ee7dee1a0bd503ebaf9050148614071fc0670235663d1be1c3d0",
+                        "read_by":  "root",
+                        "method":  "view_image"
+                    }
+                ]
+}

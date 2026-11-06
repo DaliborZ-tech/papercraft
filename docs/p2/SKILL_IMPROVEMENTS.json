@@ -65,14 +65,16 @@
         "hypothesis": "An unclear interior attachment flow could originate in selection/actions/feedback; not an observed participant incident."
       },
       "product_correction": {
-        "status": "REQUIREMENTS_CORRECTED_UI_FIX_PENDING",
+        "status": "PC006A_TECHNICAL_UI_DELIVERED; NOVICE_STUDY_PENDING_PC006B",
         "evidence": [
           "docs/p2/v1.2/ACCEPTANCE.md",
           "docs/p2/v1.2/AUTHORING_UX.md",
           "AGENTS.md",
-          "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md"
+          "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
+          "docs/p2/implementation/PC006A_DELIVERY.md",
+          "docs/p2/implementation/PC006A_REVIEW.md"
         ],
-        "remaining": "No authoring build or participant session yet."
+        "remaining": "Actual new-user session and first complete authoring version A in PC-006B; 0 participants"
       },
       "skill_change": "Initial project UI procedure plus explicit recognition of required interaction/workspace restructuring, ordinary in-scope autonomy and concrete owner-facing alternatives.",
       "usage_example": "When a person cannot find an interior roof attachment, investigate controls and visible feedback before prescribing another hint.",
@@ -135,11 +137,16 @@
         "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
         "scope": "definition_and_current_documentation_application_only"
       },
-      "effectiveness": "PENDING_NEXT_USE",
+      "effectiveness": "OBSERVED_NARROW_TRANSFER_IN_PC006A; no general or human validation claim",
       "next_use": {
-        "status": "NOT_RUN",
-        "ticket": null,
-        "evidence": null
+        "status": "VERIFIED_IN_NARROW_PC006A_SCOPE",
+        "ticket": "PC-006A",
+        "evidence": [
+          "docs/p2/implementation/PC006A_REVIEW.md",
+          "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+        ],
+        "source_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+        "kind": "independent numeric/PDF review and pinned source/repair verification; not novice or physical evidence"
       }
     },
     {
@@ -181,10 +188,59 @@
         "report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
         "scope": "definition_and_current_documentation_application_only"
       },
+      "effectiveness": "OBSERVED_NARROW_TRANSFER_IN_PC006A; no general or human validation claim",
+      "next_use": {
+        "status": "VERIFIED_IN_NARROW_PC006A_SCOPE",
+        "ticket": "PC-006A",
+        "evidence": [
+          "docs/p2/implementation/PC006A_REVIEW.md",
+          "docs/p2/implementation/evidence/pc006a-desktop-4b172e6-run03/results.json"
+        ],
+        "source_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+        "kind": "independent numeric/PDF review and pinned source/repair verification; not novice or physical evidence"
+      }
+    },
+    {
+      "id": "SK-005",
+      "changed_on": "2026-11-06",
+      "skill": "papercraft-authoring-ui",
+      "reason": {
+        "source": "docs/p2/implementation/PC006A_REVIEW.md",
+        "problem": "C-05: visible numeric input without Enter was ignored by Ctrl+S/N or committed after Ctrl+E snapshot"
+      },
+      "cause": {
+        "status": "INDEPENDENTLY_REPRODUCED",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006a-review-pending-input-012e541-all-shortcuts.json"
+        ],
+        "mechanism": "keyboardTracking=False and editingFinished/focusOut occurred after shortcut preflight or after snapshot"
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_CLOSED",
+        "source_sha": "bbd157895e48a24195ec17fc2ed6325435d6d8f2",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006a-review-pending-input-bbd1578.json",
+          "docs/p2/implementation/PC006A_REVIEW.md"
+        ]
+      },
+      "skill_change": "Commit and validate visible numeric edits before save, dirty replacement decision or snapshot; stop on failed commit",
+      "usage_example": "Type a new dimension and use Ctrl+S/E/N directly without Enter; also try a geometrically invalid dimension and verify source/disk/export preservation",
+      "verification": {
+        "status": "PRODUCT_REGRESSION_PASS",
+        "kind": "6 independent Qt shortcut checks plus native flow; not novice observation",
+        "evidence": [
+          "docs/p2/implementation/PC006A_REVIEW.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_FOR_NEW_SKILL_ADVICE",
+        "source_sha": null,
+        "report": "docs/p2/implementation/PC006A_REVIEW.md"
+      },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
         "status": "NOT_RUN",
-        "ticket": null,
+        "ticket": "PC-006B",
         "evidence": null
       }
     }

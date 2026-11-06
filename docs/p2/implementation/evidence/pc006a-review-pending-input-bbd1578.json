@@ -1,0 +1,88 @@
+{
+  "source_sha": "bbd157895e48a24195ec17fc2ed6325435d6d8f2",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-ui-bbd1578-3nv1fw8p",
+  "scratch": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006a-review-pending-input-ipauhqpg",
+  "evidence_kind": "offscreen_real_Qt_widgets_shortcuts_modal; controller_setup; not_native_or_human",
+  "results": [
+    {
+      "name": "pending_vertex_CtrlS_existing_path",
+      "typed_text": "11",
+      "saved_x_model_mm": 11000.0,
+      "current_source_x_model_mm": 11000.0,
+      "dirty_after_shortcut": false,
+      "pass": true
+    },
+    {
+      "name": "pending_vertex_CtrlE_snapshot_before_modal_commit",
+      "original_revision": 4,
+      "current_revision": 5,
+      "current_source_x_model_mm": 11000.0,
+      "part_stale_after_modal": true,
+      "export_created": false,
+      "export_manifest_revision": null,
+      "dialogs": [
+        {
+          "title": "Změnu nelze dokončit",
+          "text": "Export vyžaduje opravu nebo potvrzení: Díl je po změně konstrukce neaktuální. Přepočítejte jeho rozvin.",
+          "revision_at_dialog": 5,
+          "source_x_at_dialog": 11000.0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "pending_vertex_CtrlN_must_not_discard_without_dirty_prompt",
+      "original_project_id": "b4887efd-878d-42cf-95e2-7e84c19e84e2",
+      "current_project_id": "b4887efd-878d-42cf-95e2-7e84c19e84e2",
+      "source_retained": true,
+      "dialogs": [
+        {
+          "title": "Neuložený model",
+          "text": "Uložit změny před zavřením modelu?"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "invalid_pending_vertex_CtrlS",
+      "source_unchanged": true,
+      "saved_bytes_and_mtime_unchanged": true,
+      "no_export": true,
+      "dialogs": [
+        {
+          "title": "Změnu nelze dokončit",
+          "text": "Obrys není platná materiálová plocha: Self-intersection[0 454.545454545455]"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "invalid_pending_vertex_CtrlE",
+      "source_unchanged": true,
+      "saved_bytes_and_mtime_unchanged": true,
+      "no_export": true,
+      "dialogs": [
+        {
+          "title": "Změnu nelze dokončit",
+          "text": "Obrys není platná materiálová plocha: Self-intersection[0 454.545454545455]"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "invalid_pending_vertex_CtrlN",
+      "source_unchanged": true,
+      "saved_bytes_and_mtime_unchanged": true,
+      "no_export": true,
+      "dialogs": [
+        {
+          "title": "Změnu nelze dokončit",
+          "text": "Obrys není platná materiálová plocha: Self-intersection[0 454.545454545455]"
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": 6,
+  "fail": 0
+}

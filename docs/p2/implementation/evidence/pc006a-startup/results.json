@@ -1,0 +1,13 @@
+{
+  "blank_surfaces": 0,
+  "tips_visible": true,
+  "minimum_width": 671,
+  "size": [
+    1660,
+    960
+  ],
+  "opengl_valid": true,
+  "dirty": false,
+  "opengl_version": "4.6.0 NVIDIA 610.71",
+  "pass": true
+}
