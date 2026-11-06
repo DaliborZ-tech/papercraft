@@ -41,6 +41,7 @@ from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
+from archpapercraft.ui.author_connectors import ConnectorPanel
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_sketch import AuthorSketch
 from archpapercraft.ui.author_viewport import AuthorViewport
@@ -223,6 +224,11 @@ class AuthorMainWindow(QMainWindow):
         view_menu.addAction(
             self._action("focus_all", "Zaměřit celý model a stránky", self.focus_all, "Home")
         )
+        # Canvas navigation must not steal Home/F from a focused property/list.
+        for key in ("focus", "focus_all"):
+            self.actions[key].setShortcutContext(Qt.ShortcutContext.WidgetShortcut)
+            for canvas in (self, self.sketch, self.viewport, self.paper):
+                canvas.addAction(self.actions[key])
         self.tips_action = QAction("Zobrazovat tipy", self, checkable=True)
         self.tips_action.setChecked(self.settings.value("tips_enabled", True, type=bool))
         self.tips_action.toggled.connect(self.set_tips)
@@ -329,6 +335,7 @@ class AuthorMainWindow(QMainWindow):
             self.transform_fields.append(spin)
             form.addRow(label, spin)
         form = self._section(layout, "Hrany, spoj a chlopeň")
+        self.edge_form = form
         self.edge_choice = QComboBox()
         self.edge_choice.currentIndexChanged.connect(self.choose_edge)
         form.addRow("Okraj vybrané plochy", self.edge_choice)
@@ -369,6 +376,10 @@ class AuthorMainWindow(QMainWindow):
         self.partner_button = QPushButton("Ukázat protikus")
         self.partner_button.clicked.connect(self.show_partner)
         form.addRow(self.partner_button)
+        form = self._section(layout, "Autorské spoje a záložky")
+        self.connectors_panel = ConnectorPanel(self)
+        self.connectors_panel.relation_changed.connect(self.show_connector_relation)
+        form.addRow(self.connectors_panel)
         form = self._section(layout, "Díl na papíře")
         self.page_choice = QComboBox()
         self.page_choice.currentIndexChanged.connect(self.edit_placement)
@@ -570,6 +581,7 @@ class AuthorMainWindow(QMainWindow):
             "Bod obrysu",
             "Umístění v prostoru",
             "Hrany, spoj a chlopeň",
+            "Autorské spoje a záložky",
             "Díl na papíře",
         ):
             header, box = self.sections[title]
@@ -677,6 +689,7 @@ class AuthorMainWindow(QMainWindow):
         ]
         self._raw["placement"] = raw
         self._raw["page"] = placement.page_id if placement else None
+        self.connectors_panel.refresh()
 
     def _populate_vertex(self):
         vertex = None
@@ -843,6 +856,33 @@ class AuthorMainWindow(QMainWindow):
             self._updating = True
             self._populate_joint()
             self._updating = False
+            self.select_connector_relation(("joint", self.current_joint))
+
+    def select_connector_relation(self, relation):
+        choice = self.connectors_panel.relationship
+        for index in range(choice.count()):
+            if choice.itemData(index) == relation:
+                choice.setCurrentIndex(index)
+                self.show_connector_relation(relation)
+                break
+
+    def show_connector_relation(self, relation):
+        updating = self._updating
+        self._updating = True
+        try:
+            self.current_joint = relation[1] if relation and relation[0] == "joint" else None
+            self.joint_choice.setCurrentIndex(self.joint_choice.findData(self.current_joint))
+            self._populate_joint()
+            # The two entry points edit the same selected relationship. An interior
+            # receiver must never leave another EdgePair active in the basic form.
+            for field in (
+                self.joint_choice, self.joint_mode, self.tab_owner, self.tab_width,
+                self.tab_taper, self.tab_shape, self.partner_label, self.partner_button,
+            ):
+                self.edge_form.setRowVisible(field, self.current_joint is not None)
+            self.viewport.select_relation(relation)
+        finally:
+            self._updating = updating
 
     def tree_selection(self):
         if not self._updating and self.tree.selectedItems():
@@ -1372,6 +1412,9 @@ class AuthorMainWindow(QMainWindow):
         )
         if selected and selected.part_ids:
             self.select_part(selected.part_ids[0])
+            if selected.joint_id:
+                kind = "attachment" if selected.joint_id in self.project.attachments else "joint"
+                self.select_connector_relation((kind, selected.joint_id))
             self.paper.focus_part(selected.part_ids[0])
             self.paper.show_issue(selected)
 

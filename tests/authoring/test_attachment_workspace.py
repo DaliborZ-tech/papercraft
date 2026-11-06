@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 from PySide6.QtCore import QPointF, QSettings, Qt
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QFileDialog, QMessageBox
+from test_folded_registry import mixed_connectors
 
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject, load_project
@@ -243,3 +244,47 @@ def test_upgrade_workspace_explains_copy_and_offers_a_new_filename(qtbot, tmp_pa
     assert offered == [str(target)]
     assert origin.read_bytes() == original and target.is_file()
     assert load_project(target).name == project.name
+
+
+def test_relationship_selection_and_issue_repair_target_are_shared_between_panels(qtbot, tmp_path):
+    project, _, other_cid, joint, receiver = mixed_connectors()
+    aid = project.connectors[other_cid].attachment_id
+    settings = QSettings(str(tmp_path / "settings.ini"), QSettings.Format.IniFormat)
+    window = AuthorMainWindow(settings=settings)
+    qtbot.addWidget(window)
+    window.controller.project = project
+    window.controller._saved_digest = window.controller.digest(project.to_dict())
+    window.refresh()
+    window.select_surface(receiver)
+    window.show()
+    qtbot.wait(40)
+    choice = window.connectors_panel.relationship
+    choice.setFocus()
+    qtbot.keyClick(choice, Qt.Key.Key_End)
+    assert choice.currentData() == ("attachment", aid) and window.current_joint is None
+    assert window.joint_choice.currentIndex() == -1
+    assert not window.edge_form.isRowVisible(window.tab_owner)
+    assert window.viewport.relation == ("attachment", aid)
+    assert window.viewport.related_surfaces == {
+        project.attachments[aid].source_surface_id, receiver
+    }
+    qtbot.keyClick(choice, Qt.Key.Key_Home)
+    assert choice.currentData() == ("joint", joint) and window.current_joint == joint
+    assert window.joint_choice.currentData() == joint
+    assert window.edge_form.isRowVisible(window.tab_owner)
+    issue = next(i for i in project.validate_layout() if i.code == "FOLDED_SIDE_UNRESOLVED")
+    item = next(
+        window.issues.item(index) for index in range(window.issues.count())
+        if window.issues.item(index).data(Qt.ItemDataRole.UserRole) == issue.id
+    )
+    window.select_issue(item)
+    assert window.connectors_panel.current_relation == ("attachment", aid)
+    assert window.viewport.relation == ("attachment", aid) and window.current_joint is None
+    window.clear_selection()
+    assert window.connectors_panel.current_relation is None
+    assert window.viewport.related_surfaces == set() and window.viewport.relation is None
+    window.viewport.center = np.array([700.0, 800.0, 900.0])
+    window.viewport.setFocus()
+    qtbot.keyClick(window.viewport, Qt.Key.Key_Home)
+    np.testing.assert_allclose(window.viewport.center, [50, 50, 10])
+    assert not window.controller.dirty  # Selection and repair navigation never edit the model.

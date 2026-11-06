@@ -32,6 +32,7 @@ class AuthorViewport(QOpenGLWidget):
         self.relation = None
         self.relation_paths = []
         self.relation_status = ""
+        self.related_surfaces = set()
         self.yaw, self.pitch, self.span = 30.0, 55.0, 6000.0
         self.center, self.pan = np.zeros(3), np.zeros(2)
         self._last = QPointF()
@@ -56,6 +57,7 @@ class AuthorViewport(QOpenGLWidget):
     def select_relation(self, relation):
         self.relation = relation
         self.relation_paths, self.relation_status = [], ""
+        self.related_surfaces = set()
         if not self.project or not relation:
             self.update()
             return
@@ -64,6 +66,7 @@ class AuthorViewport(QOpenGLWidget):
         try:
             if kind == "attachment":
                 record = project.attachments[identity]
+                self.related_surfaces = {record.source_surface_id, record.target_surface_id}
                 geometry = project.attachment_geometry(identity)
                 if not geometry["valid"]:
                     self.relation_status = "Připojení potřebuje opravu; vyberte problém dole."
@@ -79,6 +82,7 @@ class AuthorViewport(QOpenGLWidget):
                 connector_id = record.connector_id
             elif kind == "joint":
                 record = project.joints[identity]
+                self.related_surfaces = {record.surface_a, record.surface_b}
                 connector_id = record.connector_id
             else:
                 self.relation = None
@@ -158,7 +162,8 @@ class AuthorViewport(QOpenGLWidget):
         GL.glPolygonOffset(1, 1)
         for sid, mesh in self.meshes.items():
             GL.glColor3f(
-                *(0.97, 0.72, 0.30) if sid in self.selected_surfaces else (0.69, 0.83, 0.77)
+                *((0.97, 0.72, 0.30) if sid in self.selected_surfaces else
+                  (0.52, 0.72, 0.83) if sid in self.related_surfaces else (0.69, 0.83, 0.77))
             )
             points = np.asarray(mesh["vertices"])
             GL.glBegin(GL.GL_TRIANGLES)
