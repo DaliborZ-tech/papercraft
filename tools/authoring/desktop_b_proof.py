@@ -52,6 +52,29 @@ def oracle():
             "initial_half_roof": 108 * slope * SCALE,
             "changed_south_roof": 108 * math.hypot(3800, 3800) * SCALE,
         },
+        "authored_top_tabs": {
+            "hinge_length_mm": 100,
+            "count": 4,
+            "gap_mm": 1,
+            "base_length_mm": 100 / 4 - 1,
+            "triangle_width_mm": 5,
+            "triangle_area_mm2": 24 * 5 / 2,
+            "custom_outline_mm": [
+                [0, 0],
+                [24, 0],
+                [24, 2],
+                [14, 2],
+                [14, 4],
+                [10, 4],
+                [10, 2],
+                [0, 2],
+            ],
+            "custom_area_mm2": 24 * 2 + (14 - 10) * 2,
+            "active_count": 3,
+            "active_area_mm2": 2 * (24 * 5 / 2) + 24 * 2 + (14 - 10) * 2,
+            "existing_bottom_area_mm2": 90 * 2 * (1 + 0.6) / 2,
+            "wall_cut_area_mm2": 100 * 40 + 176 + 144,
+        },
         "mixed": {
             "initial_rise_model_mm": 3000,
             "changed_rise_model_mm": 3500,
@@ -211,6 +234,7 @@ def run_windows(output, expected_sha, fixture="all"):
         },
         "evidence_kind": "actual_app_main_QTest_widgets_own_PID_native_dialogs",
         "new_user": "NOT_RUN",
+        "new_user_reason": "Owner confirmed no actual new participant is currently available",
         "physical_build": "NOT_RUN",
         "AU19": "NOT_RUN_PC010",
         "started_local": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
@@ -275,6 +299,7 @@ def run_windows(output, expected_sha, fixture="all"):
         def __init__(self, window):
             self.w = window
             self.roles = {}
+            self.authored_top = None
 
         def visible(self, widget):
             for header, box in self.w.sections.values():
@@ -590,6 +615,131 @@ def run_windows(output, expected_sha, fixture="all"):
                 return next(iter(new))
             return self.w.project.attachments[aid].connector_id
 
+        def author_top_tabs(self, south, aid):
+            expected = report["oracle"]["authored_top_tabs"]
+            self.relation(south, "attachment", aid)
+
+            def split(dialog):
+                self.number(dialog.width, 5)
+                self.data(dialog.shape, "triangle")
+                self.number(dialog.count, 4)
+                self.number(dialog.gap, 1)
+                self.ok(dialog)
+
+            self.modal(lambda: self.click(self.w.connectors_panel.edit), split)
+            cid = self.w.project.attachments[aid].connector_id
+            geometry = self.w.project.connector_geometry(cid)
+            ids = list(self.w.project.connectors[cid].tab_ids)
+            check(
+                len(ids) == 4 and len(set(ids)) == 4, "Split tabs need four semantic stable UUIDs"
+            )
+            self.near(
+                geometry["hinge_length_mm"],
+                expected["hinge_length_mm"],
+                "full selected source hinge",
+            )
+            for tab in geometry["all_tabs"]:
+                self.near(tab["base_length_mm"], expected["base_length_mm"], "split base length")
+            for tab in geometry["tabs"]:
+                self.near(tab["nominal_area_mm2"], 60, "initial triangle area", tolerance=AREA_TOL)
+            self.data(self.w.connectors_panel.tabs, ids[1])
+
+            def disable(dialog):
+                check(dialog.enabled.isChecked(), "Newly split tab unexpectedly off")
+                self.click(dialog.enabled)
+                self.ok(dialog)
+
+            self.modal(lambda: self.click(self.w.connectors_panel.edit_tab), disable)
+            self.data(self.w.connectors_panel.tabs, ids[2])
+
+            def custom(dialog):
+                self.data(dialog.shape, "custom")
+                self.click(dialog.draw)
+                check(dialog.canvas.points == [[0, 0], [24, 0]], "Drawing lost fixed 24mm hinge")
+                for x, y in expected["custom_outline_mm"][2:]:
+                    point = dialog.canvas.mapFromScene(QPointF(x, -y))
+                    check(
+                        dialog.canvas.viewport().rect().contains(point), "Tab sketch point clipped"
+                    )
+                    QTest.mouseClick(dialog.canvas.viewport(), Qt.MouseButton.LeftButton, pos=point)
+                    QTest.qWait(35)
+                QTest.keyClick(dialog.canvas, Qt.Key.Key_Return)
+                check(
+                    len(dialog.canvas.points) == 8,
+                    "Mouse drawing did not create eight tab vertices",
+                )
+                log(
+                    "actual_drawn_tab_before_numeric_refinement",
+                    tab_id=ids[2],
+                    paper_mm=copy.deepcopy(dialog.canvas.points),
+                )
+                # The sketch is real mouse input, followed by the author's exact
+                # numeric refinement. Pixel approximation is not the expected oracle.
+                for index, (x, y) in enumerate(expected["custom_outline_mm"][2:], 2):
+                    self.data(dialog.vertex, index)
+                    self.number(dialog.vertex_x, x)
+                    self.number(dialog.vertex_y, y)
+                check(
+                    dialog.outline == expected["custom_outline_mm"], "Precise stepped outline lost"
+                )
+                self.capture("A-positive-stepped-tab-drawn-and-refined", dialog)
+                self.ok(dialog)
+
+            self.modal(lambda: self.click(self.w.connectors_panel.edit_tab), custom)
+            self.authored_top = {"connector_id": cid, "ids": ids, "attachment_id": aid}
+            self.audit_authored_tabs()
+            step(
+                "A_positive_split_triangles_individual_off_and_drawn_custom_tab",
+                connector_id=cid,
+                tab_ids=ids,
+                disabled_id=ids[1],
+                custom_id=ids[2],
+                active_area_mm2=176,
+                existing_bottom_area_mm2=144,
+                wall_material_mm2=4000,
+                wall_cut_mm2=4320,
+            )
+
+        def audit_authored_tabs(self):
+            expected, record = report["oracle"]["authored_top_tabs"], self.authored_top
+            cid, ids = record["connector_id"], record["ids"]
+            connector = self.w.project.connectors[cid]
+            check(connector.tab_ids == ids, "Authored tab IDs changed across command/save/reopen")
+            check(connector.tab_overrides[ids[1]]["enabled"] is False, "Individual off state lost")
+            custom = connector.tab_overrides[ids[2]]
+            check(
+                custom["shape"] == "custom"
+                and custom["outline_mm"] == expected["custom_outline_mm"],
+                "Drawn custom tab did not remain editable after persistence",
+            )
+            geometry = self.w.project.connector_geometry(cid)
+            check(
+                [t["tab_id"] for t in geometry["tabs"]] == [ids[0], ids[2], ids[3]],
+                "Active split tab coverage differs from stable author selection",
+            )
+            for tab, nominal in zip(geometry["tabs"], [60, 56, 60]):
+                self.near(tab["nominal_area_mm2"], nominal, "individual authored area", AREA_TOL)
+                self.near(
+                    tab["available_area_mm2"], nominal, "actual receiver contact area", AREA_TOL
+                )
+            self.near(
+                sum(tab["nominal_area_mm2"] for tab in geometry["tabs"]),
+                176,
+                "all active upper tabs",
+                AREA_TOL,
+            )
+            self.near(
+                self.net_area(self.roles["south"]), 4000, "unchanged wall material area", AREA_TOL
+            )
+            part_id = self.w.project.surfaces[self.roles["south"]].part_id
+            cut = self.w.project.part_geometry(part_id)["paths"]["CUT"]
+            self.near(
+                sum(area(path["points"]) for path in cut if path["closed"]),
+                4320,
+                "wall CUT including unchanged144mm2 bottom connector",
+                AREA_TOL,
+            )
+
         def place(self, sid, page_index, x, y, angle=0):
             self.select(sid)
             self.combo(self.w.page_choice, page_index + 1)
@@ -723,14 +873,13 @@ def run_windows(output, expected_sha, fixture="all"):
                 anchor_after=[after.x_mm, after.y_mm],
             )
 
-        def finish(self, name):
-            # Hard errors are never acknowledged; any new warning class needs explicit review.
+        def acknowledge_physical_warnings(self):
+            # No guessed code is silently added. New adapter warnings require its
+            # explicit reviewed API; digital errors never reach the acknowledgement.
+            allowed = {"MATERIAL_CLEARANCE_UNVERIFIED"}
             issues = [issue for issue in self.w.project.validate_layout() if not issue.acknowledged]
             check(
-                all(
-                    i.severity == "warning" and i.code == "MATERIAL_CLEARANCE_UNVERIFIED"
-                    for i in issues
-                ),
+                all(i.severity == "warning" and i.code in allowed for i in issues),
                 "Unexpected issue blocks complete digital fixture: "
                 + repr([(i.code, i.message) for i in issues]),
             )
@@ -749,6 +898,12 @@ def run_windows(output, expected_sha, fixture="all"):
                 )
                 QTest.qWait(45)
                 self.click(self.w.ack_button)
+                check(
+                    next(
+                        i for i in self.w.project.validate_layout() if i.id == issue.id
+                    ).acknowledged,
+                    "Explicit physical warning acknowledgement was not persisted",
+                )
                 accepted.append(
                     {
                         "id": issue.id,
@@ -757,6 +912,89 @@ def run_windows(output, expected_sha, fixture="all"):
                         "meaning": "digital_only_physical_NOT_RUN",
                     }
                 )
+            check(
+                not any(i.severity == "error" for i in self.w.project.validate_layout()),
+                "A digital error cannot be acknowledged as a physical limitation",
+            )
+            return accepted
+
+        def camera_after_reopen(self, name):
+            QTest.qWait(160)  # Allow the real deferred project-frame command to finish.
+            view = self.w.paper
+            viewport = view.viewport().rect()
+            centers = []
+            for pid, place in self.w.project.placements.items():
+                if place.page_id is None:
+                    continue
+                item = view.part_items[pid]
+                pixel_bounds = view.mapFromScene(item.sceneBoundingRect()).boundingRect()
+                center = view.mapFromScene(item.mapToScene(item.boundingRect().center()))
+                check(
+                    viewport.contains(center) and viewport.contains(pixel_bounds),
+                    "Native reopen failed to show all placed material without Home: " + pid,
+                )
+                centers.append(
+                    {
+                        "part_id": pid,
+                        "center_pixel": [center.x(), center.y()],
+                        "bounds_pixel": [
+                            pixel_bounds.x(),
+                            pixel_bounds.y(),
+                            pixel_bounds.width(),
+                            pixel_bounds.height(),
+                        ],
+                    }
+                )
+            check(len(centers) == len(self.w.project.parts), "Camera proof omitted a material part")
+            self.capture(f"{name}-reopened-auto-frame-all-material")
+
+            def camera():
+                matrix = view.transform()
+                center = view.mapToScene(view.viewport().rect().center())
+                return (
+                    [
+                        matrix.m11(),
+                        matrix.m12(),
+                        matrix.m21(),
+                        matrix.m22(),
+                        matrix.dx(),
+                        matrix.dy(),
+                    ],
+                    [center.x(), center.y()],
+                )
+
+            initial = camera()
+            point = view.viewport().rect().center()
+            window_point = view.viewport().mapTo(self.w, point)
+            QTest.wheelEvent(
+                self.w.windowHandle(),
+                QPointF(window_point),
+                QPoint(0, 120),
+                stateKey=Qt.KeyboardModifier.ControlModifier,
+            )
+            QTest.qWait(60)
+            QTest.mousePress(view.viewport(), Qt.MouseButton.MiddleButton, pos=point)
+            QTest.mouseMove(view.viewport(), point + QPoint(17, 11), delay=70)
+            QTest.mouseRelease(
+                view.viewport(), Qt.MouseButton.MiddleButton, pos=point + QPoint(17, 11)
+            )
+            authored = camera()
+            check(authored != initial, "Actual wheel/pan did not change the view camera")
+            state = copy.deepcopy(self.w.project.to_dict())
+            self.shortcut(Qt.Key.Key_R)  # Real ordinary UI refresh, already current material.
+            check(camera() == authored, "Ordinary refresh reset the author's zoom/pan")
+            check(
+                self.w.project.to_dict() == state and not self.w.controller.dirty,
+                "Camera-only proof or redundant recompute changed the reopened document",
+            )
+            step(
+                f"{name}_reopen_auto_frame_and_refresh_preserves_authored_camera",
+                all_centers_visible_without_Home=centers,
+                authored_camera=authored,
+            )
+
+        def finish(self, name):
+            accepted = self.acknowledge_physical_warnings()
             directory = output / name
             directory.mkdir()
             (directory / "export").mkdir()
@@ -770,6 +1008,9 @@ def run_windows(output, expected_sha, fixture="all"):
             native_dialogs.schedule_path(path, report["dialogs"])
             self.shortcut(Qt.Key.Key_O)
             check(self.w.project.to_dict() == state, "Native reopen changed authorial state")
+            self.camera_after_reopen(name)
+            if name == "model-A":
+                self.audit_authored_tabs()
             snapshot = self.w.project.snapshot()  # Observation only; actual export remains UI.
             (directory / "snapshot.json").write_text(
                 json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf8"
@@ -799,6 +1040,55 @@ def run_windows(output, expected_sha, fixture="all"):
                 )
                 self.near(float(page.mediabox.width) * 25.4 / 72, 210, "PDF A4 width")
             if name == "model-A":
+                expected_tabs = report["oracle"]["authored_top_tabs"]
+                south_part = self.w.project.surfaces[self.roles["south"]].part_id
+                south_group = next(
+                    g
+                    for svg in svgs
+                    for g in ET.parse(svg).getroot().iter()
+                    if g.attrib.get("data-part-id") == south_part
+                )
+                south_cuts = next(g for g in south_group if g.attrib.get("data-role") == "CUT")
+                south_cut_loops = [
+                    loop for path in south_cuts for loop in svg_line_loops(path.attrib["d"])
+                ]
+                self.near(
+                    sum(area(loop) for loop in south_cut_loops),
+                    expected_tabs["wall_cut_area_mm2"],
+                    "SVG south cut material+all tabs",
+                    AREA_TOL,
+                )
+                tabs_group = next(g for g in south_group if g.attrib.get("data-role") == "TABS")
+                exported_tabs = [
+                    loop for path in tabs_group for loop in svg_line_loops(path.attrib["d"])
+                ]
+                actual_areas = sorted(area(loop) for loop in exported_tabs)
+                check(len(actual_areas) == 4, "SVG omitted active top or existing bottom tab")
+                for actual, expected in zip(actual_areas, [56, 60, 60, 144]):
+                    self.near(actual, expected, "actual SVG authored tab area", AREA_TOL)
+                check(
+                    any(
+                        len(loop) == 8 and abs(area(loop) - 56) <= AREA_TOL
+                        for loop in exported_tabs
+                    ),
+                    "Actual SVG lost the eight-vertex stepped outline",
+                )
+                pdf_south = [
+                    loop
+                    for page_index, loop in pdf_stroked_loops(pdf)
+                    if page_index == 0 and abs(area(loop) - 4320) <= AREA_TOL
+                ]
+                check(
+                    len(pdf_south) == 1,
+                    "PDF omitted/duplicated the south wall cut with4320mm2 material",
+                )
+                step(
+                    "A_authored_split_off_custom_tabs_persist_in_SVG_and_PDF",
+                    connector_id=self.authored_top["connector_id"],
+                    tab_ids=self.authored_top["ids"],
+                    svg_active_tab_areas_mm2=actual_areas,
+                    pdf_cut_area_mm2=area(pdf_south[0]),
+                )
                 brace_part = self.w.project.surfaces[self.roles["brace"]].part_id
                 group = next(
                     g
@@ -881,7 +1171,7 @@ def run_windows(output, expected_sha, fixture="all"):
             )
             self.transform(brace, [5000, 0, 1000], [0, 0, 0])
             soffit = self.rectangle(
-                "soffit", 8000, 1000, position=[1000, 500, 4500], rotation=[45, 0, 0]
+                "soffit", 8000, 1000, position=[1000, 4500, 5500], rotation=[-45, 0, 0]
             )
             self.data(self.w.front_side, "inside")
             check(
@@ -915,10 +1205,10 @@ def run_windows(output, expected_sha, fixture="all"):
             self.select(soffit)
 
             def glue(dialog):
-                self.data(dialog.receiver, roof_south)
+                self.data(dialog.receiver, roof_north)
                 self.click(dialog.draw_target)
                 self.sketch_points(
-                    dialog.target_sketch, [[1000, 1000], [10000, 1000], [10000, 3000], [1000, 3000]]
+                    dialog.target_sketch, [[1000, 1800], [10000, 1800], [10000, 3500], [1000, 3500]]
                 )
                 check(
                     dialog.buttons.button(QDialogButtonBox.StandardButton.Ok).isEnabled(),
@@ -988,6 +1278,8 @@ def run_windows(output, expected_sha, fixture="all"):
 
             self.modal(lambda: self.click(self.w.connectors_panel.edit), invalid)
             check(self.w.project.to_dict() == before, "Cancelled invalid flap mutated project")
+            self.author_top_tabs(south, south_roof_aid)
+            before = copy.deepcopy(self.w.project.to_dict())
             changed_y = -math.hypot(300, 300)
             self.vertex(roof_south, 0, y=changed_y)
             self.vertex(roof_south, 1, y=changed_y)
@@ -1164,9 +1456,11 @@ def run_windows(output, expected_sha, fixture="all"):
             window.viewport.doneCurrent()
             driver.capture("empty-real-app")
             if fixture in ("all", "model-A"):
+                report["fixture_status"]["model-A"] = "RUNNING"
                 driver.building()
                 report["fixture_status"]["model-A"] = "PASS_TECHNICAL_UI"
             if fixture in ("all", "mixed-part"):
+                report["fixture_status"]["mixed-part"] = "RUNNING"
                 driver.mixed()
                 report["fixture_status"]["mixed-part"] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
@@ -1184,6 +1478,9 @@ def run_windows(output, expected_sha, fixture="all"):
             )
             exit_code[0] = 0
         except Exception:
+            for name, status in report["fixture_status"].items():
+                if status == "RUNNING":
+                    report["fixture_status"][name] = "FAIL"
             report.update(status="FAIL", error=traceback.format_exc(), failures=failures)
             try:
                 driver.capture("FAIL-last-state")
