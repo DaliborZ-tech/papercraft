@@ -5,6 +5,7 @@
 docs/revival/evidence/** -text -whitespace
 docs/p2/evidence/** -text -whitespace
 docs/p2/v1.2/evidence/** -text -whitespace
+docs/p2/implementation/evidence/** -text -whitespace
 tools/spikes/** text eol=lf
 tests/spikes/** text eol=lf
 .agents/skills/** text eol=lf

@@ -79,15 +79,15 @@ def main() -> None:
 
     from PySide6.QtWidgets import QApplication
 
-    from archpapercraft.ui.main_window import MainWindow
+    from archpapercraft.ui.author_window import AuthorMainWindow
 
     app = QApplication(sys.argv)
     app.setApplicationName("ArchPapercraft Studio")
     app.setOrganizationName("ArchPapercraft")
-    app.setApplicationVersion("0.2.0")
+    app.setApplicationVersion("0.3.0")
     app.setStyle("Fusion")  # consistent cross-platform base for theming
 
-    window = MainWindow()
+    window = AuthorMainWindow()
     window.show()
 
     sys.exit(app.exec())
