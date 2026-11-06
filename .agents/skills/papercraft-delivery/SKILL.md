@@ -9,6 +9,8 @@ Před prací ověř aktuální rozsah, bránu a stav v [AGENTS](../../../AGENTS.
 
 Dovážej ucelený přírůstek přes skutečný výsledek, vhodné ověření, review jiným agentem a opravy. Neuzavírej ticket proto, že skončila diagnostická drobnost. Relevantní skills a jejich konkrétní použití eviduj v ticketu; reviewer kontroluje výsledek, ne jen seznam souborů.
 
+UI změny v sjednaném workflow řeš v témže řezu autonomně; větší přestavbu odůvodni pracovním problémem a skutečným průchodem. K produktovému rozhodnutí předkládej zásadní alternativu způsobu práce s konkrétní ukázkou a doporučením, nikoli běžnou technickou volbu. Nápověda, nový panel ani hezčí vzhled samy neuzavírají nález nesrozumitelného ovládání.
+
 Příklad: [paper review](../../../docs/p2/PAPER_ENGINE_REVIEW.md) odhalilo rozdíl mezi zeleným pracovním stromem a chybujícím připnutým commitem. Před předáním spoj důkaz s konkrétním zdrojem; následné změny ověř v přiměřeném rozsahu. Historické důkazy neopravuj zpětně.
 
 Pro poučení zaznamenej doloženou příčinu, opravu produktu, úzkou změnu skillu s příkladem, nezávislou kontrolu a další použití podle [pravidel](../../../AGENTS.md#projektové-skills-a-poučení). Efektivitu dosud nepoužité rady neprohlašuj za ověřenou. U dokumentačního přírůstku může být výsledkem lepší pracovní kontrakt; nepředstírej opravu neexistujícího UI.

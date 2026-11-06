@@ -661,7 +661,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -854,7 +863,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -1139,7 +1157,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -1318,7 +1345,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -1452,7 +1488,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -1642,7 +1687,16 @@
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
         "defer_to_visual_redesign": false,
-        "novice_study_role": "PREPARE_IN_THIS_SLICE; full first-version study in PC-006B"
+        "novice_study_role": "PREPARE_IN_THIS_SLICE; full first-version study in PC-006B",
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -1775,6 +1829,15 @@
           "participants_observed": 0,
           "reason": "Authoring version not implemented; no actual participant session has taken place",
           "required_before_first_author_version_fully_verified": true
+        },
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
         }
       }
     },
@@ -1892,7 +1955,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -2017,7 +2089,16 @@
         "main_flow_evidence": [],
         "status": "NOT_RUN",
         "implementation_in_this_slice": true,
-        "defer_to_visual_redesign": false
+        "defer_to_visual_redesign": false,
+        "ui_rework_evidence": {
+          "status": "NOT_RUN",
+          "problem": null,
+          "reason": null,
+          "preserved_parts": null,
+          "before_after_flow": null,
+          "consistency_impact": null,
+          "workflow_alternative_decision": null
+        }
       }
     },
     {
@@ -2292,6 +2373,25 @@
     "product_implementation": "NOT_RUN",
     "skills_effectiveness": "PENDING_NEXT_USE",
     "new_phase_created": false,
-    "review_report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md"
+    "review_report": "docs/p2/v1.2/USABILITY_SKILLS_REVIEW.md",
+    "includes_explicit_ui_rework_authority": true
+  },
+  "ui_ux_authority": {
+    "source": "explicit_owner_UI_UX_mandate_2026-11-06",
+    "part_of_P2_implementation": true,
+    "existing_screens_panels_menus_interactions_binding": false,
+    "ordinary_in_scope_changes": "AUTONOMOUS",
+    "major_change_requires": [
+      "concrete_work_problem_and_evidence",
+      "reason_for_choice",
+      "preserved_useful_parts",
+      "actual_flow_verification",
+      "consistency_across_slices"
+    ],
+    "fundamental_workflow_alternative": "CONCRETE_PROPOSAL_WITH_DEMO_IMPACTS_AND_RECOMMENDATION_FOR_OWNER_DECISION",
+    "guidance_cannot_replace_interaction_fix": true,
+    "first_slice": "PC-006A",
+    "new_design_stage": false,
+    "whole_v12_contract_acceptance_implied": false
   }
 }

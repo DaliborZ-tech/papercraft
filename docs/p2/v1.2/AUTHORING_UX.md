@@ -27,6 +27,12 @@ flowchart LR
 
 ### Osvojitelnost je součást každého řezu
 
+UI/UX je součást implementačního mandátu P2. Stávající obrazovky ani uspořádání v tomto návrhu nejsou závaznou finální podobou. Tým může v rámci sjednaného autorského cíle autonomně přepracovat pracovní prostor a vazbu2D/3D, kreslení/editaci, výběr a přímou manipulaci, kontextové nástroje, vlastnosti a rozměry, pokročilé parametry, stránky/rozvin/chlopně/export, prázdné/chybové/stale stavy, nápovědu, klávesnici a škálování obrazovky. Zachová se užitečné chování a platná AC, nikoli nutně staré menu nebo panel.
+
+U větší změny ticket uvede konkrétní pracovní problém a jeho důkaz (nebo označenou hypotézu), návrh interakce/struktury s odůvodněním, zachované části a dopad na konzistenci ostatních průchodů. Porovná skutečný průchod před změnou a po ní na konkrétním buildu; pokud výchozí UI funkci vůbec nemělo, popíše tento limit místo předstíraného srovnání. Uvede druh důkazu, chybné kroky, návraty, potřebnou pomoc a otevřené závěry. Pouhá modernizace vzhledu ani autorův dojem neprokazují lepší použitelnost. Skutečný nový uživatel se řídí samostatným protokolem.
+
+Zásadní alternativa, která mění způsob práce vlastníka, vyžaduje konkrétní návrh s ukázkou (např. interaktivní náčrt nebo předvedený průchod), porovnáním dopadů a doporučením. Běžné uspořádání vlastností či sjednocení příkazu uvnitř sjednaného workflow nevyžaduje další rutinní souhlas. Postupné změny od PC-006A mají vytvářet jeden konzistentní model výběru, názvů, akcí a návratu; použitelnost se neodkládá na konec.
+
 Každý hlavní průchod má v témže ticketu implementaci a ověření [AC-US01–US07](ACCEPTANCE.md). První autorská verze má navíc [krátké skutečné sezení s novým uživatelem](USABILITY_TEST.md). Nejde o práci odloženou na vizuální redesign. Základní pojmy v UI vycházejí z modelářovy činnosti; UV souřadnice, Jacobian, provenance a názvy solverů nejsou povinnou znalostí pro vytvoření dílu, chlopeň, opravu a export. Technické podrobnosti lze rozbalit dobrovolně.
 
 | Co musí jít poznat/udělat | Provedení v konkrétním průchodu |

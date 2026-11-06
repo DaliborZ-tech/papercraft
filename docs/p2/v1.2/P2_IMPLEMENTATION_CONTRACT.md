@@ -43,6 +43,8 @@ Průřezově platí **srozumitelné a postupně osvojitelné ovládání** pro z
 
 Každý ticket deklaruje relevantní projektové skills a dokládá konkrétní použití dle [AGENTS](../../../AGENTS.md#projektové-skills-a-poučení). Nezávislé review hodnotí jejich uplatnění na výsledku i převzaté poučení, nikoli pouze existenci souborů. Údržba skills je součást dodávání v platném rozsahu; nemění AC ani produktovou bránu.
 
+UI/UX patří do implementačního mandátu P2 a staré obrazovky/panely/menu/interakce nejsou závazné. V rámci sjednaného cíle tým autonomně zachová užitečné části a případně změní samotnou interakci či strukturu UI. Větší změna vyžaduje doložený pracovní problém, odůvodnění a skutečný průchod; nápověda ani modernější vzhled ji nenahradí. Zásadní alternativa uživatelského způsobu práce se předkládá s konkrétní ukázkou, dopady a doporučením. [UX](AUTHORING_UX.md) rozepisuje rozsah a způsob ověření; každý řez od PC-006A přispívá ke konzistentnímu rozhraní.
+
 | Ticket | Co jde skutečně udělat | Povinný důkaz |
 |---|---|---|
 | PC-012 | Tento návrh + spiky, zhodnocení prototypu | Připnuté nezávislé review; žádné tvrzení hotového UI A–D |

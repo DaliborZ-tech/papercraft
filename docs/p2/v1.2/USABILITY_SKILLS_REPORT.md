@@ -10,9 +10,13 @@
 
 Autor tohoto dodatku načetl všechny čtyři nové skills. Konstrukční skill vedl k zachování skutečného příjemce chlopně v novice úkolu místo obcházení validace; UI skill k začlenění použitelnosti přímo do řezu; verification skill k odděleným stavům pro dokument, člověka a fyzický proof; delivery skill k přiřazení odpovědností a připnuté nezávislé revizi tohoto dodatku. To je uplatnění na pracovním kontraktu, nikoli implementace autorského UI.
 
+Následné výslovné UI/UX upřesnění vlastníka je zapracované do instrukcí, kontraktu, UX, akceptace, ticketů a UI/delivery skills: původní rozhraní není závazné, běžný rework uvnitř sjednaného cíle je autonomní. Větší změna má konkrétní pracovní důvod a skutečný průchod, zachovává užitečné části a sjednocuje ostatní řezy. Zásadní alternativa způsobu práce se předloží s ukázkou, dopady a doporučením. Nápověda nesmí zakrýt potřebu změnit samotnou interakci či strukturu. V tomto dokumentačním dodatku žádná obrazovka přepracována nebyla; ověření budoucího UI zůstává NOT_RUN.
+
 ## Přiměřené ověření
 
 [Raw validační záznam](evidence/usability-skills-validation.json): všechny4 skills prošly oficiálním `skill-creator/scripts/quick_validate.py`, exit0;11 kontrol návaznosti PASS. Kontroly zahrnují odkazy, skills každého ticketu, přiřazení usability AC všem P2 ticketům, zachování původních fází/závislostí a produktové autorizace i skutečnost, že nebyl vymyšlen nový uživatel. Původní integritní validator P2 v1.2 prošel18/18; `git diff --check` PASS. Zdroj skills identifikují SHA256 v raw záznamu; konkrétní commit doplní [nezávislá revize](USABILITY_SKILLS_REVIEW.md).
+
+Tento první raw záznam vznikl před následným výslovným UI/UX upřesněním a odpovídá původnímu dodatku `8826fd1`. Po změně UI/delivery skills je nutná nová formátová kontrola a nezávislá revize aktuálního pinu; starší hashe se nepřenášejí na změněné soubory. Jejich výsledek se doplní odděleně.
 
 První spuštění oficiálního validatoru nemohlo běžet kvůli chybějícímu PyYAML; aplikace má prostředí vytvořené přes uv bez pip. Pro validaci byl PyYAML přes existující uv instalován pouze do samostatného dočasného adresáře, s UTF-8 režimem Pythonu. Žádná produktová ani globální závislost se neměnila. Formátová validace neprokazuje účinnost skillu. Runtime aplikace ani algoritmy se nemění, proto se neopakuje nesouvisející full suite; dřívější273 PASS zůstává historickým důkazem svého pinu.
 

@@ -48,7 +48,8 @@
       "skill": "papercraft-authoring-ui",
       "reason": {
         "source": "explicit_owner_usability_instruction_2026-11-06",
-        "problem": "Novice learnability must be delivered in each slice, with no substitution of author or GUI checks for a new user."
+        "problem": "Novice learnability must be delivered in each slice, with no substitution of author or GUI checks for a new user.",
+        "ui_authority_source": "explicit_owner_UI_UX_mandate_2026-11-06"
       },
       "cause": {
         "status": "REQUIREMENT_GAP_DOCUMENTED_NOT_OBSERVED_USER_BEHAVIOR",
@@ -61,11 +62,13 @@
         "status": "REQUIREMENTS_CORRECTED_UI_FIX_PENDING",
         "evidence": [
           "docs/p2/v1.2/ACCEPTANCE.md",
-          "docs/p2/v1.2/AUTHORING_UX.md"
+          "docs/p2/v1.2/AUTHORING_UX.md",
+          "AGENTS.md",
+          "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md"
         ],
         "remaining": "No authoring build or participant session yet."
       },
-      "skill_change": "Initial narrow project procedure with specification links and a concrete example",
+      "skill_change": "Initial project UI procedure plus explicit recognition of required interaction/workspace restructuring, ordinary in-scope autonomy and concrete owner-facing alternatives.",
       "usage_example": "When a person cannot find an interior roof attachment, investigate controls and visible feedback before prescribing another hint.",
       "verification": {
         "status": "PENDING",
@@ -144,7 +147,7 @@
         ],
         "remaining": "Historical CHANGES_REQUIRED verdict was not rewritten."
       },
-      "skill_change": "Initial narrow project procedure with specification links and a concrete example",
+      "skill_change": "Initial delivery procedure plus ordinary UI rework autonomy and evidence-based escalation of fundamental workflow alternatives only.",
       "usage_example": "Before handing off a revised part/export pipeline, identify the tested commit and scope later fixes separately.",
       "verification": {
         "status": "PENDING",
