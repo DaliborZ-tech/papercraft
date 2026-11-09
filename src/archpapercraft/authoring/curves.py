@@ -131,12 +131,21 @@ def _exact_derivative(curve, t):
     return points[0]
 
 
-def svg_commands(curve):
+def svg_commands(curve, *, chord_tolerance=None, length_tolerance=None):
     """Local SVG coordinates: M followed by native L, A or C; no flattening.
 
     Positive source sweep uses SVG sweep=1 in the same coordinate system.
     A caller reflecting Y must also invert the SVG sweep flag or reflect a group.
+    With explicit tolerances this refuses uncertified geometry. Without them
+    this is only serialization; publication must check certify_curve first.
     """
+    if chord_tolerance is not None or length_tolerance is not None:
+        if chord_tolerance is None or length_tolerance is None:
+            raise ValueError("SVG publication needs both geometric and length tolerances")
+        result = certify_curve(curve, chord_tolerance=chord_tolerance,
+                               length_tolerance=length_tolerance)
+        if result.status != "CERTIFIED":
+            raise ValueError("SVG geometry is not certified at the requested tolerances")
     def f(x):
         return format(x, ".17g")
 
@@ -149,10 +158,13 @@ def svg_commands(curve):
         return prefix + "C " + " ".join(point(p) for p in (
             curve.data["control1"], curve.data["control2"], curve.end,
         ))
-    radius = math.dist(curve.start, curve.data["center"])
-    sweep = curve.data["sweep_deg"]
-    command = f"A {f(radius)} {f(radius)} 0 {int(abs(sweep) > 180)} {int(sweep > 0)} "
-    return prefix + command + point(curve.end)
+    arcs, deviation, length_error = _arc_svg_plan(curve)
+    if not math.isfinite(deviation + length_error):
+        raise ValueError("SVG arc endpoint geometry cannot be bounded")
+    return prefix + " ".join(
+        f"A {f(radius)} {f(radius)} 0 0 {sweep} " + point(end)
+        for radius, sweep, end in arcs
+    )
 
 
 def _sqrt_bounds(value):
@@ -173,6 +185,74 @@ def _sqrt_bounds(value):
 
 def _distance_bounds(a, b):
     return _sqrt_bounds(sum((x - y) ** 2 for x, y in zip(a, b)))
+
+
+def _evaluation_guard(curve):
+    points = [curve.start, curve.end, *curve.data.values()] if curve.kind == "cubic" else [
+        curve.start, curve.end,
+    ]
+    if curve.kind == "arc":
+        points.append(curve.data["center"])
+    magnitude = max(abs(x) for point in points for x in point)
+    guard = 128 * math.ulp(max(1.0, magnitude))
+    if curve.kind == "arc":
+        theta = math.radians(curve.data["sweep_deg"])
+        guard *= 1 + theta ** 2
+        center = curve.data["center"]
+        x, y = (a - b for a, b in zip(curve.start, center))
+        predicted = (center[0] + x * math.cos(theta) - y * math.sin(theta),
+                     center[1] + x * math.sin(theta) + y * math.cos(theta))
+        guard += math.dist(predicted, curve.end)
+    return guard
+
+
+def _arc_svg_plan(curve):
+    """Bound the actual SVG endpoint-form circles, not merely the source arc.
+
+    Endpoint form chooses a center. A nearly full arc is catastrophically
+    branch-sensitive to a tolerated endpoint perturbation, so every emitted A
+    spans at most 90 source degrees and has large-arc=0. Exact rational chord
+    arithmetic and outward sqrt bounds enclose its SVG-selected center.
+
+    If D bounds that center displacement and e bounds each endpoint error,
+    radial-vector differences are <=D+e. Their angular differences are bounded
+    by pi*(D+e)/min(radius); triangle inequalities then bound the whole arc and
+    its length, without assuming that sampled midpoints prove correctness.
+    """
+    radius = math.dist(curve.start, curve.data["center"])
+    sweep = curve.data["sweep_deg"]
+    count = math.ceil(abs(sweep) / 90)
+    points = [evaluate(curve, index / count) for index in range(count + 1)]
+    arcs = [(radius, int(sweep > 0), end) for end in points[1:]]
+    center = tuple(Fraction(x) for x in curve.data["center"])
+    initial = tuple(Fraction(x) for x in curve.start)
+    rlo, rhi = _distance_bounds(initial, center)
+    if not math.isfinite(radius + rlo + rhi) or rlo <= 0:
+        return arcs, math.inf, math.inf
+    e = Fraction(_evaluation_guard(curve))
+    r, rmin, upper = Fraction(radius), Fraction(min(radius, rlo)), Fraction(rhi)
+    radius_error = max(abs(r - Fraction(rlo)), abs(r - Fraction(rhi)))
+    deviation_bounds, length_bounds = [], []
+    for start, end in zip(points, points[1:]):
+        a, b = (tuple(Fraction(x) for x in point) for point in (start, end))
+        dx, dy = (y - x for x, y in zip(a, b))
+        squared = dx * dx + dy * dy
+        if squared == 0 or r * r <= squared / 4:
+            return arcs, math.inf, math.inf
+        low, high = _sqrt_bounds(r * r / squared - Fraction(1, 4))
+        sign = 1 if sweep > 0 else -1
+        intervals = []
+        for x, y, perpendicular in zip(a, b, (-dy * sign, dx * sign)):
+            candidates = [(x + y) / 2 + perpendicular * Fraction(k) for k in (low, high)]
+            intervals.append((min(candidates), max(candidates)))
+        distance2 = sum(max(abs(lo-c), abs(hi-c)) ** 2
+                        for (lo, hi), c in zip(intervals, center))
+        d = Fraction(_sqrt_bounds(distance2)[1])
+        angle_error = 2 * _PI_UPPER * (d + e) / rmin
+        deviation_bounds.append(2 * d + e + upper * angle_error)
+        length_bounds.append(radius_error * _PI_UPPER + upper * angle_error)
+    return (arcs, math.nextafter(float(max(deviation_bounds)), math.inf),
+            math.nextafter(float(sum(length_bounds)), math.inf))
 
 
 def _segment_distance_bound(point, a, b):
@@ -212,6 +292,8 @@ class CurveCertificate:
     length_lower: float
     length_upper: float
     numerical_guard: float
+    svg_deviation_bound: float
+    svg_length_error_bound: float
     regularity: str
     method: str
     message: str
@@ -231,27 +313,19 @@ def certify_curve(curve, *, chord_tolerance, length_tolerance, max_depth=24, max
         raise ValueError("Subdivision depth must be a nonnegative integer")
     if type(max_segments) is not int or max_segments < 1:
         raise ValueError("Subdivision segment budget must be a positive integer")
-    all_points = [curve.start, curve.end, *(
-        [curve.data["center"]] if curve.kind == "arc" else
-        [curve.data["control1"], curve.data["control2"]] if curve.kind == "cubic" else []
-    )]
-    magnitude = max(abs(x) for p in all_points for x in p)
     # A declared conservative floating evaluation reserve; exact cubic hull
     # subdivision and length bounds below do not depend on sampled values.
-    guard = 128 * math.ulp(max(1.0, magnitude))
+    guard = _evaluation_guard(curve)
+    svg_deviation = svg_length_error = 0.0
     if curve.kind == "arc":
-        guard *= 1 + math.radians(curve.data["sweep_deg"]) ** 2
         center = curve.data["center"]
-        theta = math.radians(curve.data["sweep_deg"])
-        x, y = (a - b for a, b in zip(curve.start, center))
-        predicted = (center[0] + x * math.cos(theta) - y * math.sin(theta),
-                     center[1] + x * math.sin(theta) + y * math.cos(theta))
-        guard += math.dist(predicted, curve.end)
         exact_start = tuple(Fraction(x) for x in curve.start)
         exact_center = tuple(Fraction(x) for x in center)
         radius_lower, radius_upper = _distance_bounds(exact_start, exact_center)
         sweep_fraction = abs(Fraction(curve.data["sweep_deg"])) / 180
-    unresolved = guard >= min(chord_tolerance, length_tolerance / 4)
+        _, svg_deviation, svg_length_error = _arc_svg_plan(curve)
+    unresolved = (guard >= min(chord_tolerance, length_tolerance / 4)
+                  or svg_deviation > chord_tolerance or svg_length_error > length_tolerance)
     controls = None if curve.kind == "arc" else _control(curve)
     pending = deque([(0.0, 1.0, 0, controls)])
     leaves, exhausted, count = [], False, 1
@@ -301,11 +375,11 @@ def certify_curve(curve, *, chord_tolerance, length_tolerance, max_depth=24, max
     return CurveCertificate(
         status, curve.segment_id, parameters, tuple(evaluate(curve, t) for t in parameters),
         tuple((leaf[0], leaf[1]) for leaf in leaves), deviation, length_low, length_high,
-        guard, regularity,
+        guard, svg_deviation, svg_length_error, regularity,
         "ANALYTIC_ARC_LENGTH_AND_SAGITTA_BOUND" if curve.kind == "arc" else
         "EXACT_RATIONAL_CASTELJAU_HULL_AND_CHORD_CONTROL_POLYGON_LENGTH_BOUNDS",
         "Length/chord bounds only; no loft, topology or physical-build certificate. "
-        + ("Floating precision reserve exceeds the requested tolerance." if unresolved else
+        + ("Floating or SVG endpoint-form bounds exceed the requested tolerance." if unresolved else
            "Finite subdivision budget exhausted; requested bounds not established." if exhausted
            else "Whole-curve length gap and every chord meet the requested tolerances."),
     )

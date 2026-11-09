@@ -49,9 +49,9 @@ def test_circle_analytic_length_sagitta_and_oriented_svg(sweep, end):
         theta = abs(sweep) * math.pi / 180 * (t1 - t0)
         sagitta = 10 * (1 - math.cos(theta / 2))
         assert sagitta <= result.max_chord_deviation_bound
-    assert " A 10 10 0 " + str(int(abs(sweep) > 180)) + " " + str(int(sweep > 0)) in svg_commands(
-        curve
-    )
+    native = svg_commands(curve)
+    assert native.count("A ") == math.ceil(abs(sweep) / 90)
+    assert " A 10 10 0 0 " + str(int(sweep > 0)) in native
     assert math.hypot(*derivative(curve, 0.4)) == pytest.approx(expected)
 
 
@@ -60,6 +60,75 @@ def test_arc_endpoint_rounding_is_in_precision_budget_not_silently_changed():
     result = certificate(curve, chord_tolerance=1e-10, length_tolerance=1e-10)
     assert result.status == "UNRESOLVED"
     assert evaluate(curve, 1) == (1e-8, 10)
+
+
+def decode_svg_arc_samples(text):
+    """Independent endpoint-form circle reader; no production curve helpers."""
+    words = text.split()
+    assert words[0] == "M"
+    start = np.array([float(words[1]), float(words[2])])
+    index, arcs = 3, []
+    while index < len(words):
+        assert words[index] == "A"
+        radius, ry, rotation, large, sweep, x, y = map(float, words[index+1:index+8])
+        assert radius == ry and rotation == large == 0
+        end = np.array([x, y])
+        chord = end-start
+        chord_length = np.linalg.norm(chord)
+        side = np.array([-chord[1], chord[0]]) / chord_length
+        center = (start+end)/2 + (1 if sweep else -1)*side*math.sqrt(
+            radius*radius-chord_length*chord_length/4
+        )
+        a, b = start-center, end-center
+        angle = math.atan2(a[0]*b[1]-a[1]*b[0], np.dot(a, b))
+        if sweep and angle < 0:
+            angle += 2*math.pi
+        if not sweep and angle > 0:
+            angle -= 2*math.pi
+        arcs.append((start, end, center, radius, angle))
+        start = end
+        index += 8
+    return arcs
+
+
+@pytest.mark.parametrize("direction", [-1, 1])
+def test_near_full_arc_endpoint_perturbation_cannot_switch_svg_to_opposite_circle(direction):
+    sweep = direction*(360-math.degrees(1e-8))
+    # Deliberately accepted by the pre-existing source endpoint tolerance:
+    # declared end has the opposite Y sign from the analytic circle endpoint.
+    curve = Curve((1, 0), (1, direction*1e-8), "arc",
+                  {"center": (0, 0), "sweep_deg": sweep}, "near-full")
+    result = certificate(curve)
+    assert result.status == "CERTIFIED"
+    assert result.svg_deviation_bound < 0.001
+    assert result.svg_length_error_bound < 0.001
+    commands = svg_commands(curve, chord_tolerance=0.001, length_tolerance=0.001)
+    arcs = decode_svg_arc_samples(commands)
+    assert len(arcs) == 4
+    assert tuple(arcs[-1][1]) == curve.end  # Identity is not silently snapped.
+    for index, (start, end, center, radius, angle) in enumerate(arcs):
+        assert abs(angle) <= math.pi/2 + 1e-6
+        for u in np.linspace(0, 1, 17):
+            rotation = np.array([[math.cos(u*angle), -math.sin(u*angle)],
+                                 [math.sin(u*angle), math.cos(u*angle)]])
+            actual = center + rotation @ (start-center)
+            expected = evaluate(curve, (index+u)/len(arcs))
+            assert np.linalg.norm(actual-expected) <= result.svg_deviation_bound
+    emitted_length = sum(radius*abs(angle) for _, _, _, radius, angle in arcs)
+    source_length = abs(sweep)*math.pi/180
+    assert abs(emitted_length-source_length) <= result.svg_length_error_bound
+
+
+def test_endpoint_form_ill_conditioning_is_unresolved_and_strict_svg_publication_is_blocked():
+    curve = Curve((1, 0), (1, -1e-8), "arc",
+                  {"center": (0, 0), "sweep_deg": math.degrees(1e-8)})
+    result = certificate(curve)
+    assert result.status == "UNRESOLVED"
+    assert result.svg_deviation_bound > 0.001
+    with pytest.raises(ValueError, match="not certified"):
+        svg_commands(curve, chord_tolerance=0.001, length_tolerance=0.001)
+    with pytest.raises(ValueError, match="both"):
+        svg_commands(curve, chord_tolerance=0.001)
 
 
 def test_cubic_exact_polynomial_expected_derivative_and_native_svg():
