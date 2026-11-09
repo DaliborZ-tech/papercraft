@@ -7,6 +7,7 @@ from fractions import Fraction
 import pytest
 
 from archpapercraft.authoring.curve_topology import (
+    certify_native_region_separation,
     certify_native_region_topology,
     certify_region_topology,
 )
@@ -270,3 +271,93 @@ def test_raw_native_budget_is_explicit_and_never_falls_back_to_source_geometry()
     path = native_rectangle(0, 0, 10, 10)
     result = certify_native_region_topology(path, max_nodes=0)
     assert result.status == "UNRESOLVED" and "budget" in result.reason
+
+
+def separation(first, second, first_holes=(), second_holes=(), **limits):
+    return certify_native_region_separation(first, first_holes, second, second_holes, **limits)
+
+
+def test_native_material_regions_disjoint_and_strict_containment_are_distinguished():
+    outer = native_rectangle(0, 0, 10, 10)
+    apart = native_rectangle(20, 20, 25, 25)
+    inside = native_rectangle(2, 2, 4, 4)
+    assert separation(outer, apart).status == "DISJOINT"
+    result = separation(outer, inside)
+    assert result.status == "OVERLAP"
+    assert result.witness["method"] == "STRICT_MATERIAL_CONTAINMENT_WITH_DISJOINT_BOUNDARIES"
+    assert separation(inside, outer).status == "OVERLAP"
+
+
+def test_material_inside_other_regions_hole_is_disjoint_in_both_directions():
+    outer = native_rectangle(0, 0, 10, 10)
+    hole = native_rectangle(2, 2, 8, 8)
+    floating = native_rectangle(3, 3, 7, 7)
+    assert separation(outer, floating, first_holes=(hole,)).status == "DISJOINT"
+    assert separation(floating, outer, second_holes=(hole,)).status == "DISJOINT"
+    spanning_hole = native_rectangle(1, 1, 9, 9)
+    assert separation(outer, spanning_hole, first_holes=(hole,)).status == "OVERLAP"
+
+
+def test_transverse_crossing_proves_positive_material_area_not_only_boundary_intersection():
+    horizontal = native_rectangle(-3, -1, 3, 1)
+    vertical = native_rectangle(-1, -3, 1, 3)
+    result = separation(horizontal, vertical)
+    assert result.status == "OVERLAP"
+    assert (result.witness.get("proper_interior_crossing")
+            or result.witness["method"] == "CERTIFIED_STRICT_COMMON_INTERIOR_POINT")
+
+
+@pytest.mark.parametrize("second", [native_rectangle(10, 0, 20, 10),
+                                     native_rectangle(10, 10, 20, 20)])
+def test_native_boundary_edge_or_corner_touch_is_not_called_positive_area_overlap(second):
+    result = separation(native_rectangle(0, 0, 10, 10), second)
+    assert result.status == "UNRESOLVED", result
+    assert "positive area" in result.reason
+
+
+def test_coincident_boundaries_need_an_actual_common_interior_witness_for_positive_area():
+    outer = native_rectangle(0, 0, 10, 10)
+    result = separation(outer, outer)
+    assert result.status == "OVERLAP"
+    assert result.witness["method"] == "CERTIFIED_STRICT_COMMON_INTERIOR_POINT"
+
+
+def native_circle(x=0, y=0, radius=1):
+    return (("M", x+radius, y),
+            ("A", radius, radius, 0, 0, 1, x, y+radius),
+            ("A", radius, radius, 0, 0, 1, x-radius, y),
+            ("A", radius, radius, 0, 0, 1, x, y-radius),
+            ("A", radius, radius, 0, 0, 1, x+radius, y), ("Z",))
+
+
+def test_native_circle_region_separation_uses_interval_circle_geometry_and_hole_material():
+    first, separate, crossing = native_circle(), native_circle(3, 0), native_circle(1, 0)
+    assert separation(first, separate).status == "DISJOINT"
+    assert separation(first, crossing).status == "OVERLAP"
+    outer, hole = native_circle(radius=10), native_circle(radius=5)
+    floating = native_circle(radius=1)
+    assert separation(outer, floating, first_holes=(hole,)).status == "DISJOINT"
+
+
+def test_native_separation_budget_and_invalid_input_block_without_area_claim():
+    outer = native_rectangle(0, 0, 10, 10)
+    assert separation(outer, outer, max_nodes=0).status == "UNRESOLVED"
+    invalid = (("M", 0, 0), ("L", 10, 10), ("L", 0, 10), ("L", 10, 0), ("Z",))
+    result = separation(outer, invalid)
+    assert result.status == "UNRESOLVED" and "input material region" in result.reason
+
+
+def test_exact_fraction_separation_does_not_turn_tiny_positive_gap_into_overlap():
+    delta = Fraction(1, 10**40)
+    first = native_rectangle(0, 0, 1, 1)
+    apart = native_rectangle(1+delta, 0, 2, 1)
+    result = separation(first, apart, max_nodes=2000)
+    assert result.status in ("DISJOINT", "UNRESOLVED"), result
+
+
+def test_actual_native_cubic_material_crossing_uses_area_proof_not_chord_rectangles():
+    arch = (("M", 0, 0), ("C", 0, 8, 10, 8, 10, 0),
+            ("L", 10, -5), ("L", 0, -5), ("Z",))
+    across_top = native_rectangle(4, 4, 6, 8)
+    result = separation(arch, across_top)
+    assert result.status == "OVERLAP", result

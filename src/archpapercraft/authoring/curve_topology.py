@@ -287,6 +287,7 @@ def _linear_witness(line, other, allowed):
         result["point"] = None  # The certified root is bracketed, not a sampled midpoint.
         result["line_side_values"] = [float(values[0]), float(values[-1])]
         result["line_side_values_exact"] = [str(values[0]), str(values[-1])]
+        result["proper_interior_crossing"] = min(projections) > 0 and max(projections) < length2
         return result
     if len(points) == 2:
         determinant = _cross(direction, _sub(points[1], points[0]))
@@ -295,7 +296,9 @@ def _linear_witness(line, other, allowed):
             u = _cross(_sub(points[0], a), direction) / determinant
             point = tuple(x+t*v for x, v in zip(a, direction))
             if 0 <= t <= 1 and 0 <= u <= 1 and point not in allowed:
-                return _witness(line, other, point, "EXACT_RATIONAL_LINE_INTERSECTION")
+                result = _witness(line, other, point, "EXACT_RATIONAL_LINE_INTERSECTION")
+                result["proper_interior_crossing"] = 0 < t < 1 and 0 < u < 1
+                return result
     return None
 
 
@@ -319,11 +322,12 @@ def _native_arc_contains(node, point):
     return a[0] > 0 and b[0] > 0
 
 
-def _native_root_witness(a, b, point, method):
+def _native_root_witness(a, b, point, method, transverse=False):
     middle = tuple(sum(value)/2 for value in point)
     result = _witness(a, b, middle, method)
     result["point_bounds"] = [[float(lo), float(hi)] for lo, hi in point]
     result["point"] = None  # The interval, rather than its midpoint, encloses the true root.
+    result["proper_interior_crossing"] = transverse
     return result
 
 
@@ -350,7 +354,10 @@ def _analytic_arc_witness(a, b, allowed, budget):
                 continue
             point = tuple(_iadd(_iv(x), _imul(parameter, d)) for x, d in zip(start, direction))
             if _native_arc_contains(a, point):
-                return _native_root_witness(a, b, point, "NATIVE_SVG_CIRCLE_LINE_INTERVAL_ROOT")
+                return _native_root_witness(
+                    a, b, point, "NATIVE_SVG_CIRCLE_LINE_INTERVAL_ROOT",
+                    parameter[0] > 0 and parameter[1] < 1,
+                )
     elif b.native is not None:
         c1, r1 = b.native["center"], _iv(b.native["radius"])
         # Identical fixed-endpoint/radius/sweep geometry is an exact overlap,
@@ -383,7 +390,9 @@ def _analytic_arc_witness(a, b, allowed, budget):
             point = tuple(_iadd(p, _imul(_iv(sign), _imul(height, v)))
                           for p, v in zip(base, perpendicular))
             if _native_arc_contains(a, point) and _native_arc_contains(b, point):
-                return _native_root_witness(a, b, point, "NATIVE_SVG_CIRCLE_CIRCLE_INTERVAL_ROOT")
+                return _native_root_witness(
+                    a, b, point, "NATIVE_SVG_CIRCLE_CIRCLE_INTERVAL_ROOT", True,
+                )
     return None
 
 
@@ -648,3 +657,110 @@ def certify_native_region_topology(outer_commands, holes_commands=(), *,
     except (_UnresolvedError, ArithmeticError, ValueError, TypeError, IndexError) as exc:
         return TopologyCertificate("UNRESOLVED", str(exc), None, budget.used,
                                    budget.guard, proof, geometry, entry)
+
+
+@dataclass(frozen=True)
+class RegionSeparationCertificate:
+    status: str
+    reason: str
+    witness: dict | None
+    examined_nodes: int
+    numerical_guard: float
+    proof: tuple[str, ...]
+    geometry_scope: str = "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY"
+    entry_scope: str = "TWO_SUPPLIED_NATIVE_MATERIAL_REGIONS_WITH_HOLES"
+
+
+def _material_contains(region, point, budget):
+    return _winding(region[0], point, budget) != 0 and all(
+        _winding(hole, point, budget) == 0 for hole in region[1:]
+    )
+
+
+def _strict_common_interior(first, second, budget):
+    """A verified interior point proves positive area, never global absence."""
+    boxes = [tuple((min(p[i] for n in region[0] for p in _hull(n)),
+                    max(p[i] for n in region[0] for p in _hull(n))) for i in (0, 1))
+             for region in (first, second)]
+    overlap = [(max(a[0], b[0]), min(a[1], b[1])) for a, b in zip(*boxes)]
+    if any(lo >= hi for lo, hi in overlap):
+        return None
+    for x in (Fraction(1, 2), Fraction(1, 4), Fraction(3, 4)):
+        for y in (Fraction(1, 2), Fraction(1, 4), Fraction(3, 4)):
+            point = tuple(lo+t*(hi-lo) for (lo, hi), t in zip(overlap, (x, y)))
+            try:
+                if all(_material_contains(region, point, budget) for region in (first, second)):
+                    return {"method": "CERTIFIED_STRICT_COMMON_INTERIOR_POINT",
+                            "point_exact": [str(value) for value in point]}
+            except _UnresolvedError:
+                if budget.used > budget.limit:
+                    raise
+                # A candidate on a boundary is not an area witness. Other
+                # candidates may still prove an open common interior.
+    return None
+
+
+def certify_native_region_separation(first_outer, first_holes, second_outer, second_holes, *,
+                                     max_depth=24, max_nodes=20000):
+    """Prove DISJOINT material or positive-area OVERLAP for exact supplied paths.
+
+    Both input regions must first pass their own topology proof. A boundary
+    touch/overlap alone never proves positive material area. Holes are voids;
+    containment is tested in both directions with certified material winding.
+    All unresolved contact, unsupported geometry and exhausted budgets block.
+    """
+    proof = (*_topology_proof(),
+             "POSITIVE_AREA_REQUIRES_STRICT_COMMON_INTERIOR_OR_PROVED_INTERIOR_BOUNDARY_CROSSING",
+             "DISJOINT_REQUIRES_BOUNDARY_SEPARATION_AND_SYMMETRIC_MATERIAL_WINDING")
+    budget = _Budget(max_nodes, max_depth, 0.0)
+
+    def result(status, reason, witness=None):
+        return RegionSeparationCertificate(status, reason, witness, budget.used,
+                                           budget.guard, proof)
+
+    try:
+        commands = [[tuple(first_outer), *(tuple(hole) for hole in first_holes)],
+                    [tuple(second_outer), *(tuple(hole) for hole in second_holes)]]
+        budget = _native_budget([loop for region in commands for loop in region],
+                                max_depth, max_nodes)
+        regions = []
+        for ri, command_loops in enumerate(commands):
+            parsed = [_parse_native_loop(loop, f"region-{ri}-loop-{li}", budget)
+                      for li, loop in enumerate(command_loops)]
+            nodes, points = [a for a, _ in parsed], [b for _, b in parsed]
+            _check_region_nodes(nodes, points, budget)
+            regions.append(nodes)
+        boundary_failure = None
+        try:
+            for a_loop in regions[0]:
+                for b_loop in regions[1]:
+                    for a in a_loop:
+                        for b in b_loop:
+                            _pair(a, b, set(), budget)
+        except _InvalidError as exc:
+            if exc.witness and exc.witness.get("proper_interior_crossing"):
+                return result("OVERLAP", "Proved interior material-boundary crossing",
+                              exc.witness)
+            boundary_failure = exc.reason
+        except _UnresolvedError as exc:
+            boundary_failure = str(exc)
+        if boundary_failure is None:
+            for own, other in ((regions[0], regions[1]), (regions[1], regions[0])):
+                point = own[0][0].ends()[0]
+                if _material_contains(other, point, budget):
+                    return result("OVERLAP", "Outer boundary lies strictly inside other material",
+                                  {"method": "STRICT_MATERIAL_CONTAINMENT_WITH_DISJOINT_BOUNDARIES",
+                                   "point_exact": [str(x) for x in point]})
+            return result("DISJOINT",
+                          "All boundaries separated and neither material contains the other")
+        if budget.used <= budget.limit:
+            witness = _strict_common_interior(*regions, budget)
+            if witness:
+                return result("OVERLAP", "Proved positive-area common material interior", witness)
+        return result("UNRESOLVED",
+                      "Boundary contact does not establish positive area: "+boundary_failure)
+    except _InvalidError as exc:
+        return result("UNRESOLVED", "An input material region is not valid: "+exc.reason,
+                      exc.witness)
+    except (_UnresolvedError, ArithmeticError, ValueError, TypeError, IndexError) as exc:
+        return result("UNRESOLVED", str(exc))
