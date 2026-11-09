@@ -29,6 +29,7 @@ import tempfile
 import threading
 import xml.etree.ElementTree as ET
 from decimal import Decimal, localcontext
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -36,7 +37,12 @@ from reportlab.pdfbase import pdfdoc, pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFError, TTFont
 from reportlab.pdfgen.canvas import Canvas
 
-from archpapercraft.precision import PDF_ARC_TOLERANCE_MM, PDF_DIGITAL_BUDGET_MM
+from archpapercraft.precision import (
+    AREA_ABSOLUTE_BUDGET_MM2,
+    AREA_RELATIVE_BUDGET,
+    PDF_ARC_TOLERANCE_MM,
+    PDF_DIGITAL_BUDGET_MM,
+)
 
 from .curve_output_validation import CurveOutputError
 
@@ -246,7 +252,7 @@ def _arc_tangent(arc: tuple, theta: float) -> tuple[float, float]:
     ) * s + ry * math.cos(theta) * c
 
 
-def _arc_cubics(arc: tuple) -> tuple[list[tuple], float]:
+def _arc_cubics(arc: tuple, *, tolerance_mm=None) -> tuple[list[tuple], float]:
     """Cubic Hermite interpolation with a global, nonsampled position bound.
 
     Each coordinate's Hermite remainder is M4*h**4/384. The norm of the two
@@ -255,7 +261,9 @@ def _arc_cubics(arc: tuple) -> tuple[list[tuple], float]:
     """
     _, _, rx, ry, _, theta, delta = arc
     radius = math.hypot(rx, ry)
-    max_step = min(math.pi / 2, (384 * PDF_ARC_TOLERANCE_MM / radius) ** 0.25)
+    tolerance_mm = PDF_ARC_TOLERANCE_MM if tolerance_mm is None else tolerance_mm
+    tolerance_mm = _number(tolerance_mm, "Arc representation budget", positive=True)
+    max_step = min(math.pi / 2, (384 * tolerance_mm / radius) ** 0.25)
     count = max(1, math.ceil(abs(delta) / max_step))
     if count > 100000:
         raise SnapshotError("Arc needs more cubic segments than the supported export limit")
@@ -610,7 +618,7 @@ def _svg_path(path: dict) -> str:
     )
 
 
-def _curve_bound(data: dict) -> float:
+def _curve_bound(data: dict, *, arc_tolerance_mm=None) -> float:
     bound = 0.0
     for page in data["pages"]:
         for part in page["parts"]:
@@ -625,7 +633,8 @@ def _curve_bound(data: dict) -> float:
                             current = start
                         else:
                             if op == "A":
-                                _, error = _arc_cubics(_arc(current, command))
+                                _, error = _arc_cubics(_arc(current, command),
+                                                       tolerance_mm=arc_tolerance_mm)
                                 bound = max(bound, error)
                             current = command[-2:]
     return bound
@@ -648,6 +657,41 @@ def _curve_output_expectations(data):
     }
 
 
+def _validate_vector_area_agreement(checks, expected):
+    """Apply the independent normative area tolerance, never a positional tube."""
+    sources = {pid: record for page in checks["svg"] for pid, record in page["parts"].items()}
+    comparisons = {}
+    for pid, target in checks["pdf"]["parts"].items():
+        source = sources[pid]
+        s = source["material_area_bounds_mm2"]
+        p = target["material_area_bounds_mm2"]
+        source_low, source_high = Fraction(s["lower"]), Fraction(s["upper"])
+        pdf_low, pdf_high = Fraction(p["lower"]), Fraction(p["upper"])
+        difference = max(abs(pdf_low-source_high), abs(pdf_high-source_low))
+        base_lower = Fraction(source["base_area_lower_bound_mm2"])
+        budget = max(Fraction(str(AREA_ABSOLUTE_BUDGET_MM2)),
+                     base_lower * Fraction(str(AREA_RELATIVE_BUDGET)))
+        comparisons[pid] = {
+            "svg_area_bounds_mm2": [str(source_low), str(source_high)],
+            "pdf_area_bounds_mm2": [str(pdf_low), str(pdf_high)],
+            "absolute_difference_bound_mm2": str(difference),
+            "allowed_area_error_mm2": str(budget),
+            "base_area_lower_bound_mm2": str(base_lower),
+        }
+        if difference > budget:
+            raise CurveOutputError(
+                f"Nelze doložit plošnou shodu SVG a PDF: odchylka má mez "
+                f"{float(difference):.6g} mm², povolená mez je {float(budget):.6g} mm². "
+                "Přesnost polohy nenahrazuje přesnost plochy. Předchozí výstupy zůstaly zachované.",
+                part_id=pid, part_name=expected[pid]["name"],
+                page_index=expected[pid]["page_index"],
+                report={"status": "REJECTED", "area_comparisons": comparisons},
+            )
+    return {"status": "VERIFIED", "comparisons": comparisons,
+            "acceptance": "04_AREA_max(0.01_mm2,1e-6_BASE_AREA); AC-X04",
+            "scope": "ACTUAL_NET_CUT_AREA_AGREEMENT; source flattening verified separately"}
+
+
 def _serialized_matrix(canvas) -> list[Decimal]:
     """Read the actual CTM token just emitted by this installed ReportLab.
 
@@ -659,6 +703,23 @@ def _serialized_matrix(canvas) -> list[Decimal]:
     if len(tokens) != 7 or tokens[-1] != "cm":
         raise SnapshotError("Cannot verify the PDF backend's serialized transformation")
     return [Decimal(value) for value in tokens[:-1]]
+
+
+def _precise_transform(canvas, matrix):
+    """Emit a local CTM without ReportLab's six-digit rounding/combination.
+
+    The backend still tracks the real matrix. Replacing its just-emitted token
+    is safe only immediately after our own q; a changed backend contract fails
+    explicitly. Fixed decimal notation is required by PDF (no exponent tokens).
+    The independent raw reader and numeric bound inspect these actual lexemes.
+    """
+    if not canvas._code or canvas._code[-1] != "q":
+        raise SnapshotError("A precise local PDF transform needs a fresh saved graphics state")
+    canvas.transform(*matrix)
+    _serialized_matrix(canvas)  # Verify the installed backend emitted one local cm.
+    canvas._code[-1] = " ".join(
+        format(float(value), ".17f").rstrip("0").rstrip(".") or "0" for value in matrix
+    ) + " cm"
 
 
 def _serialized_controls(code: str) -> list[tuple[Decimal, Decimal]]:
@@ -845,7 +906,8 @@ def _svg(
     ET.ElementTree(root).write(target, encoding="utf-8", xml_declaration=True)
 
 
-def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: float = 0.0) -> float:
+def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: float = 0.0,
+         *, arc_tolerance_mm=None) -> float:
     mm = 72 / 25.4
     canvas = Canvas(str(target), invariant=1, pageCompression=1)
     canvas.setTitle(str(data.get("name", data["project_id"])))
@@ -855,8 +917,7 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
     def text(value, x, y, size):
         nonlocal numeric_bound
         canvas.saveState()
-        canvas.translate(x, y)
-        canvas.scale(1, -1)
+        _precise_transform(canvas, (1, 0, 0, -1, x, y))
         matrices = [
             page_matrix,
             *([part_matrix] if part_matrix is not None else []),
@@ -879,15 +940,15 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
     for page_index, page in enumerate(data["pages"]):
         canvas.setPageSize((page["width_mm"] * mm, page["height_mm"] * mm))
         canvas.saveState()
-        canvas.translate(0, page["height_mm"] * mm)
-        canvas.scale(mm, -mm)
+        _precise_transform(canvas, (mm, 0, 0, -mm, 0, page["height_mm"] * mm))
         page_matrix = _serialized_matrix(canvas)
         media_height = Decimal(pdfdoc.format(page["height_mm"] * mm, canvas._doc).decode("ascii"))
         for part in page["parts"]:
             place = part["placement"]
             canvas.saveState()
-            canvas.translate(place["x_mm"], place["y_mm"])
-            canvas.rotate(_rotation(place))
+            theta = math.radians(_rotation(place))
+            c, s = math.cos(theta), math.sin(theta)
+            _precise_transform(canvas, (c, s, -s, c, place["x_mm"], place["y_mm"]))
             part_matrix = _serialized_matrix(canvas)
             canvas._code.append(f"/APPart_{part['id']} BMC")
             # Fill tabs before manufacturing lines; no duplicate tab strokes.
@@ -932,7 +993,8 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
                             controls.extend(command[index : index + 2] for index in (1, 3, 5))
                             current = command[-2:]
                         elif op == "A":
-                            curves, _ = _arc_cubics(_arc(current, command))
+                            curves, _ = _arc_cubics(_arc(current, command),
+                                                     tolerance_mm=arc_tolerance_mm)
                             for curve in curves:
                                 path.curveTo(*curve)
                                 controls.extend(curve[index : index + 2] for index in (0, 2, 4))
@@ -1036,6 +1098,56 @@ def _remove_stage(stage: Path, parent: Path) -> None:
     shutil.rmtree(stage)
 
 
+def _write_validated_vectors(data, stage, names, font_name, family, digest, curve_bound):
+    """Tighten arc representation inside the transaction, without relaxing AC.
+
+    A positional bound alone cannot guarantee the independent area budget. Try
+    at most four progressively finer representations. Other errors never retry;
+    no existing user file is touched until all checks have succeeded.
+    """
+    tolerance, attempts = PDF_ARC_TOLERANCE_MM, []
+    for attempt in range(4):
+        if attempt:
+            curve_bound = _curve_bound(data, arc_tolerance_mm=tolerance)
+        numeric_bound = _pdf(data, font_name, digest, stage / "new/model.pdf", curve_bound,
+                             arc_tolerance_mm=tolerance)
+        for page_index, (page, name) in enumerate(zip(data["pages"], names)):
+            _svg(page, data, family, digest, stage / "new" / name, page_index,
+                 curve_bound, numeric_bound)
+        checks = {}
+        record = {"requested_interpolation_bound_mm": tolerance,
+                  "actual_interpolation_bound_mm": curve_bound}
+        if data.get("construction_checks", {}).get("curve_profiles"):
+            from .curve_output_validation import validate_pdf_curve_geometry
+            from .svg_curve_validation import validate_svg_curve_geometry
+
+            expected = _curve_output_expectations(data)
+            allowed = data["construction_checks"].get("accepted_layout_overlaps", [])
+            checks["pdf"] = validate_pdf_curve_geometry(stage / "new/model.pdf", expected, allowed)
+            checks["svg"] = [
+                validate_svg_curve_geometry(
+                    stage / "new" / name,
+                    {pid: value for pid, value in expected.items() if value["page_index"] == index},
+                )
+                for index, name in enumerate(names[:-1])
+            ]
+            try:
+                checks["area_agreement"] = _validate_vector_area_agreement(checks, expected)
+            except CurveOutputError as exc:
+                if attempt == 3:
+                    raise
+                record.update(status="AREA_BUDGET_NOT_MET", evidence=exc.report)
+                attempts.append(record)
+                tolerance /= 10
+                continue
+            record["status"] = "ACTUAL_GEOMETRY_AND_AREA_VERIFIED"
+        else:
+            record["status"] = "POSITION_CHECKED_ONLY; NO_AUTHORED_MATERIAL_CERTIFICATE"
+        attempts.append(record)
+        return curve_bound, numeric_bound, checks, tolerance, attempts
+    raise AssertionError("Bounded vector validation loop must return or raise")
+
+
 def export_all(
     snapshot: dict, output_directory: str | Path, *, font_path: str | Path | None = None
 ) -> list[Path]:
@@ -1097,36 +1209,9 @@ def export_all(
             stage = Path(tempfile.mkdtemp(prefix=".author-export-", dir=directory.parent))
             (stage / "new").mkdir()
             (stage / "old").mkdir()
-            numeric_bound = _pdf(data, font_name, digest, stage / "new/model.pdf", curve_bound)
-            for page_index, (page, name) in enumerate(zip(data["pages"], names)):
-                _svg(
-                    page,
-                    data,
-                    family,
-                    digest,
-                    stage / "new" / name,
-                    page_index,
-                    curve_bound,
-                    numeric_bound,
-                )
-            actual_curve_checks = {}
-            if data.get("construction_checks", {}).get("curve_profiles"):
-                from .curve_output_validation import validate_pdf_curve_geometry
-                from .svg_curve_validation import validate_svg_curve_geometry
-
-                expected = _curve_output_expectations(data)
-                allowed = data["construction_checks"].get("accepted_layout_overlaps", [])
-                actual_curve_checks["pdf"] = validate_pdf_curve_geometry(
-                    stage / "new/model.pdf", expected, allowed,
-                )
-                actual_curve_checks["svg"] = [
-                    validate_svg_curve_geometry(
-                        stage / "new" / name,
-                        {pid: record for pid, record in expected.items()
-                         if record["page_index"] == index},
-                    )
-                    for index, name in enumerate(names[:-1])
-                ]
+            curve_bound, numeric_bound, actual_curve_checks, used_tolerance, attempts = (
+                _write_validated_vectors(data, stage, names, font_name, family, digest, curve_bound)
+            )
             (stage / "new" / _MANIFEST).write_text(
                 json.dumps(
                     dict(
@@ -1137,7 +1222,8 @@ def export_all(
                         pdf_arc_approximation={
                             "method": "cubic_hermite",
                             "max_interpolation_error_mm": curve_bound,
-                            "requested_interpolation_bound_mm": PDF_ARC_TOLERANCE_MM,
+                            "requested_interpolation_bound_mm": used_tolerance,
+                            "precision_attempts": attempts,
                             "bound_scope": "arc_to_cubic_before_numeric_serialization",
                         },
                         pdf_geometry_precision={

@@ -194,6 +194,7 @@ def run_windows(output, expected_sha, fixture="all"):
     from pypdf import PdfReader
     from pypdf.generic import ContentStream
     from PySide6.QtCore import QPoint, QPointF, QRectF, QSettings, Qt, QTimer
+    from PySide6.QtGui import QKeySequence
     from PySide6.QtTest import QTest
     from PySide6.QtWidgets import (
         QApplication,
@@ -316,6 +317,15 @@ def run_windows(output, expected_sha, fixture="all"):
             self.w = window
             self.roles = {}
             self.authored_top = None
+            self.action_counts = {}
+            for name, action in window.actions.items():
+                action.triggered.connect(
+                    lambda _checked=False, key=name: self.observed_action(key)
+                )
+
+        def observed_action(self, name):
+            self.action_counts[name] = self.action_counts.get(name, 0) + 1
+            log("observed_QAction_triggered", action=name, count=self.action_counts[name])
 
         def visible(self, widget):
             for header, box in self.w.sections.values():
@@ -388,12 +398,34 @@ def run_windows(output, expected_sha, fixture="all"):
             self.combo(widget, index)
 
         def shortcut(self, key, shift=False):
+            # A native Windows dialog may release activation. Sending a key to
+            # an inactive QWidget does not prove its window QAction fired.
+            self.w.raise_()
+            self.w.activateWindow()
+            QTest.qWait(80)
             self.w.setFocus()
             modifiers = Qt.KeyboardModifier.ControlModifier
             if shift:
                 modifiers |= Qt.KeyboardModifier.ShiftModifier
+            sequence = QKeySequence(modifiers.value | key.value)
+            expected = [
+                name for name, action in self.w.actions.items()
+                if action.shortcut().matches(sequence) == QKeySequence.SequenceMatch.ExactMatch
+            ]
+            before = {name: self.action_counts.get(name, 0) for name in expected}
+            active = QApplication.activeWindow()
+            focus = QApplication.focusWidget()
+            log("shortcut_context", sequence=sequence.toString(), expected_actions=expected,
+                window_active=self.w.isActiveWindow(),
+                active_window_title=active.windowTitle() if active else None,
+                focus_class=type(focus).__name__ if focus else None)
+            check(active is self.w and self.w.isActiveWindow(),
+                  "Shortcut target was not active after explicit native window activation")
             QTest.keyClick(self.w, key, modifiers)
             QTest.qWait(85)
+            observed = {name: [before[name], self.action_counts.get(name, 0)] for name in expected}
+            check(all(after == previous+1 for previous, after in observed.values()),
+                  "Actual shortcut did not trigger its expected window QAction: " + repr(observed))
 
         def action(self, name):
             action = self.w.actions[name]
@@ -1186,12 +1218,15 @@ def run_windows(output, expected_sha, fixture="all"):
             delta = manifest["pdf_geometry_precision"]["combined_position_error_bound_mm"]
             check(0 <= delta <= 0.01, "PDF output exceeds the agreed paper-mm position budget")
             for value, target in zip(values, wanted):
-                # A circle's positional bound implies an annulus area interval,
-                # not the same numerical value in mm squared. The Green integral
-                # is read independently from the actual serialized PDF cubics.
-                tolerance = (2 * math.pi * 20 * delta + math.pi * delta**2
-                             if target == 400 * math.pi else 0.01)
+                # A mathematically valid positional tube is NOT permission to
+                # relax the separate normative area acceptance (V02).
+                tolerance = max(0.01, 1e-6 * target)
                 observations.append(self.near(value, target, "actual PDF Green area", tolerance))
+            expected_net = 12000 - 400 * math.pi
+            observations.append(self.near(
+                values[-1] - values[1], expected_net, "PDF net material excluding real hole",
+                max(0.01, 1e-6 * expected_net),
+            ))
             check(manifest["actual_curve_output_checks"]["pdf"]["status"] == "VALID",
                   "Actual staged PDF manufacturing proof absent")
             step("native_curves_hole_tab_and_independent_vector_integrals",
