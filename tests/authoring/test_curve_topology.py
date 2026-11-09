@@ -132,9 +132,33 @@ def test_nonadjacent_repeated_authored_vertex_is_not_permitted_as_a_shared_endpo
 def test_coincident_reversed_lines_and_overlapping_arcs_are_not_valid_loops():
     lines = (Curve((0, 0), (1, 0)), Curve((1, 0), (0, 0)))
     assert certify_region_topology(lines).status == "INVALID"
-    arcs = circle()
-    same_upper = Curve((-1, 0), (1, 0), "arc", {"center": (0, 0), "sweep_deg": -180})
-    assert certify_region_topology((arcs[0], same_upper)).status == "INVALID"
+    quarter = Curve((1, 0), (0, 1), "arc", {"center": (0, 0), "sweep_deg": 90})
+    reverse = Curve((0, 1), (1, 0), "arc", {"center": (0, 0), "sweep_deg": -90})
+    assert certify_region_topology((quarter, reverse)).status == "INVALID"
+
+
+def test_opposite_semicircles_with_differently_rounded_native_midpoints_are_unresolved():
+    # Their raw source circles coincide, but positive/negative trig evaluation
+    # yields different fixed native midpoint X coordinates. Do not claim an
+    # exact manufactured intersection from those nominal source circles.
+    upper = circle()[0]
+    reverse = Curve((-1, 0), (1, 0), "arc", {"center": (0, 0), "sweep_deg": -180})
+    assert certify_region_topology((upper, reverse)).status == "UNRESOLVED"
+
+
+def test_t01_nominal_source_circle_cannot_invent_a_native_svg_intersection():
+    delta = 1e-14
+    arc = Curve((0, 1), (1, 0), "arc",
+                {"center": (delta, 0), "sweep_deg": -90}, "T01")
+    # SVG's fixed endpoints and radius1 choose the unit circle; its x<=1.
+    # The nominal center delta would falsely hit the next vertical line.
+    outer = (arc, Curve((1, 0), (1+delta/2, 0)),
+             Curve((1+delta/2, 0), (1+delta/2, 2)),
+             Curve((1+delta/2, 2), (0, 2)), Curve((0, 2), (0, 1)))
+    result = certify_region_topology(outer)
+    assert result.status == "UNRESOLVED", result
+    assert result.witness is None
+    assert result.geometry_scope.startswith("MANUFACTURING_NATIVE_SVG")
 
 
 def test_retracing_cubic_without_proved_self_monotonicity_never_passes_on_chords():
