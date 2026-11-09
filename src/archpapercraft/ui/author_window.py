@@ -552,7 +552,12 @@ class AuthorMainWindow(QMainWindow):
         elif self.sketch.drawing:
             text = self.sketch.instruction_text() + " Backspace vrátí vstup, Esc zruší návrh."
         elif profile is not None and self.selected_surface is None:
+            used_by_loft = any(s.kind == "ruled_loft" and profile.id in s.source_profile_ids()
+                               for s in self.project.surfaces.values())
             text = (
+                "Upravujete zdrojový profil plochy. Po změně tvaru nebo hloubky "
+                "přepočítejte její papírový díl (Ctrl+R)."
+                if used_by_loft else
                 "Vybraný profil ještě není tiskový díl. V nabídce Vytvořit přidejte body, "
                 "uzavřete jej jako plochu, nebo vytvořte plochu mezi dvěma profily."
             )
@@ -565,6 +570,14 @@ class AuthorMainWindow(QMainWindow):
             text = (
                 "Konstrukce se změnila. Papírový díl je neaktuální; "
                 "přepočítejte jej (Ctrl+R) a zkontrolujte stránky."
+            )
+        elif (self.selected_surface and
+              self.project.surfaces[self.selected_surface].kind == "ruled_loft"):
+            text = (
+                "Tvar a hloubku měňte ve zdrojových profilech. "
+                "Dvojice úseků a začátek rozvinu upravíte příkazem "
+                "Upravit dvojice profilů a šev. Připojení této prostorové plochy "
+                "zatím nemá ověřený spoj; nelze je nahradit přímou tětivou."
             )
         elif self.selected_edge:
             text = (
