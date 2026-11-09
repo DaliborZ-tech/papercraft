@@ -398,8 +398,11 @@ def build_part(project, old_part):
     label_at = material[0].representative_point()
     part.labels.insert(0, {"text": part.name, "x": label_at.x, "y": label_at.y, "size_mm": 2.5})
     part.stale = False
-    part.source_revision = project.revision
     part.input_digest = part_input(project, part)
+    # Layout edits advance the document revision without changing this source.
+    # Rebuilding an already current part must not turn a saved model dirty.
+    if old_part.stale or part.input_digest != old_part.input_digest:
+        part.source_revision = project.revision
     return part
 
 

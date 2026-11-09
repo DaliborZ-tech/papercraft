@@ -7,6 +7,42 @@ from archpapercraft.authoring import AuthorProject, ValidationError
 from archpapercraft.authoring.geometry import page_points
 
 
+def test_recompute_after_layout_save_reopen_is_noop_but_source_edit_advances_cache(tmp_path):
+    from archpapercraft.application.author_controller import AuthorController
+
+    controller = AuthorController()
+    controller.new(scale=0.01)
+
+    def create(project):
+        profile = project.add_profile([[0, 0], [4000, 0], [4000, 3000], [0, 3000]])
+        return project.add_surface(profile)
+
+    sid = controller.execute("Create material", create)
+    pid = controller.project.part_for_surface(sid)
+    controller.recompute()
+    revision = controller.project.parts[pid].source_revision
+    controller.execute("Author layout", lambda p: p.set_placement(
+        pid, p.pages[0].id, 70, 80, 30, position_locked=True, rotation_locked=True
+    ))
+    assert controller.project.revision > revision
+    target = tmp_path / "laid-out.apcraft"
+    controller.save(target)
+    controller.open(target)
+    before = copy.deepcopy(controller.project.to_dict())
+    controller.recompute()
+    assert controller.project.to_dict() == before
+    assert not controller.dirty and not controller.can_undo
+    placement = copy.deepcopy(controller.project.placements[pid])
+    profile = controller.project.profiles[controller.project.surfaces[sid].profile_id]
+    vertex = profile.vertices[1].id
+    controller.execute("Change source", lambda p: p.move_vertex(profile.id, vertex, [4500, 0]))
+    assert controller.project.parts[pid].stale
+    controller.recompute()
+    assert controller.project.parts[pid].source_revision == controller.project.revision > revision
+    assert controller.project.placements[pid] == placement
+    assert controller.dirty
+
+
 def two_panels(scale=0.01):
     p = AuthorProject.new(scale=scale)
     pa = p.add_profile([[0, 0], [10000, 0], [10000, 4000], [0, 4000]])
