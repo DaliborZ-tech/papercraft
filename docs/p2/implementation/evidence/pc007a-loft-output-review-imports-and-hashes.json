@@ -1,0 +1,41 @@
+{
+  "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+  "evidence_sha": "18fad42ea7dc61f730576d540578aa46d277197a",
+  "actual_imports": {
+    "archpapercraft.exporter.author_export": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx\\src\\archpapercraft\\exporter\\author_export.py",
+      "sha256": "95fe2e3392d704c3125955e1d5513ceb7d8f35c0c97bb6717f33a90c34c04522"
+    },
+    "archpapercraft.exporter.loft_output_validation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx\\src\\archpapercraft\\exporter\\loft_output_validation.py",
+      "sha256": "68ca06caf13c20f161bf562514009487b8f68e835bfa92de5df67c27b2b6fe1e"
+    },
+    "archpapercraft.exporter.curve_output_validation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+      "sha256": "0187d27c9927ca846b0bbfdfe35589b7d8c683a36e0bbf1d2be70e2fcee9cfbf"
+    },
+    "archpapercraft.exporter.svg_curve_validation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx\\src\\archpapercraft\\exporter\\svg_curve_validation.py",
+      "sha256": "57ba93fd22d7f5f7d27e9b881fba1615721b5bf6f295d77e2f1934a4ae7ae4a5"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx\\src\\archpapercraft\\authoring\\project.py",
+      "sha256": "490a449435f543b3eee85a971bd3cf60fdd75a9d8a0fa74f04049dc195f55d07"
+    },
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "sha256": "7cedded96eeaec1a3e1500154f4a9bd99f4cd164370cf0a5dcbd57560b03b728"
+    }
+  },
+  "verified_git_artifacts": {
+    "heavy-source-pin-junit.xml": "7d0ca23e3811cddb990225789bc052da20db39e8e2f53f2cd4ae5cc5c29f2f16",
+    "loft-output-junit.xml": "4c1db9bbf7e5130c52785cedb961bcc9485fe11293c57cb574cf2e14b9af746d",
+    "writer-regression-junit.xml": "59f691d4edfd15979d774c550241bfacc3abf31bec2a2ee91c201c155de9540f",
+    "B1/.author-export.json": "5f30192b85043f6c00f0a1abfe9d3a5a569a1b9925f249939a876a7256661184",
+    "B1/model.pdf": "0a41b8d6849645fbc562fa5a1fb598eb613b4488860ad3cd5191cb8da8b09b03",
+    "B1/page-378ad774-6fa9-4f2f-924f-bb59ad8cd616.svg": "a2e734a0cc04c472181667ea6258ddb9565efde58bc074fad9df49a71c351c5a",
+    "LD02/.author-export.json": "40e614088d416a67a26560b2eb1f78f6ca5af85148d162b4154663e90eb07ed3",
+    "LD02/model.pdf": "596f1d88fe2605e1c676d7eef087d9007baa8b4241c483c6d803b8b063be70cd",
+    "LD02/page-cdb4a492-f270-4c79-b106-6d0f60e2a67f.svg": "aafd0b630f8fcc8d3c628da18556a66119d039b89c8908604f8ac6bb42ff66e3"
+  }
+}

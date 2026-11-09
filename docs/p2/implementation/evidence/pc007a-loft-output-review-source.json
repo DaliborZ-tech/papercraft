@@ -1,0 +1,42 @@
+{
+  "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+  "archive": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-output-3f4-k21fbtxx",
+  "evidence_sha": "18fad42ea7dc61f730576d540578aa46d277197a",
+  "source_files": {
+    "src/archpapercraft/exporter/author_export.py": {
+      "actual_sha256": "95fe2e3392d704c3125955e1d5513ceb7d8f35c0c97bb6717f33a90c34c04522",
+      "git_bytes_sha256": "e77325e14aaccab4b179924000680a489ed521680552cc45f5feed44b79b84cf",
+      "eol_only": true
+    },
+    "src/archpapercraft/exporter/loft_output_validation.py": {
+      "actual_sha256": "68ca06caf13c20f161bf562514009487b8f68e835bfa92de5df67c27b2b6fe1e",
+      "git_bytes_sha256": "baeba8242393597a6c8b0b3a6758cc85f8f7627316759e29efb0162e0aec9ed0",
+      "eol_only": true
+    },
+    "src/archpapercraft/exporter/curve_output_validation.py": {
+      "actual_sha256": "0187d27c9927ca846b0bbfdfe35589b7d8c683a36e0bbf1d2be70e2fcee9cfbf",
+      "git_bytes_sha256": "0068af233691b170437bc86a56eb5c1a10d999964cf363e1b51f9b9bf68994bc",
+      "eol_only": true
+    },
+    "src/archpapercraft/exporter/svg_curve_validation.py": {
+      "actual_sha256": "57ba93fd22d7f5f7d27e9b881fba1615721b5bf6f295d77e2f1934a4ae7ae4a5",
+      "git_bytes_sha256": "4276be2a26cf97d85f11733ef6e7825c51385a70e78e03eeeb0a849f09ac5d58",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/project.py": {
+      "actual_sha256": "490a449435f543b3eee85a971bd3cf60fdd75a9d8a0fa74f04049dc195f55d07",
+      "git_bytes_sha256": "2324036ba83a42065a6f0a890e3be0b9c9b700e99bdfef01bb5e9aaa0f5dbf79",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/loft_surface.py": {
+      "actual_sha256": "7cedded96eeaec1a3e1500154f4a9bd99f4cd164370cf0a5dcbd57560b03b728",
+      "git_bytes_sha256": "03e49fb0895ea9752c032613e3ef0bcbf37a9dda8e2e217007c95d2fde4eae0a",
+      "eol_only": true
+    },
+    "tests/authoring/test_loft_export.py": {
+      "actual_sha256": "1d814e42a8510c9bb809154dbfaf4be4d450371099fb89db9e628d5e3c719803",
+      "git_bytes_sha256": "558033d3f990396e4b71322bc6c01e2d73cdc5609ef0fc2b3a0b145f043676bc",
+      "eol_only": true
+    }
+  }
+}

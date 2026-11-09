@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="1.204" timestamp="2026-11-09T12:44:31.409798+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft[frame]" time="0.028" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_whole_source_budget_no_fresh_allowance_for_each_conversion" time="0.102"><failure message="AssertionError: Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 6276&#10;assert None is not None&#10; +  where None = CurveOutputError('Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 6276').report&#10;[+1 more line; full report in element text]">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1239/test_whole_source_budget_no_fr0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x00000157FF9E6CC0&gt;
+
+    def test_whole_source_budget_no_fresh_allowance_for_each_conversion(tmp_path,monkeypatch):
+        # Independent fixture: 112 -&gt;112.008 SVG -&gt;112.016 PDF, .01 final budget.
+        p,sid,pid=project();snap=p.snapshot();directory=tmp_path/'bundle';author_export.export_all(snap,directory);(directory/'foreign.dat').write_bytes(b'owner data\x00\xff');before=hashes(directory)
+        svg0,pdf0=author_export._svg,author_export._pdf
+        def svg(*args,**kwargs):
+            svg0(*args,**kwargs);path=args[4];tree=ET.parse(path);cut=tree.find(f'.//{NS}g[@data-role="CUT"]/{NS}path');d=cut.get('d');cut.set('d',re.sub(r'(?&lt;![\d.])7(?![\d.])','7.0005',d));tree.write(path,encoding='utf8',xml_declaration=True)
+        def pdf(*args,**kwargs):
+            out=pdf0(*args,**kwargs);path=args[3];reader=PdfReader(path);writer=PdfWriter()
+            for page in reader.pages:
+                raw=page.get_contents().get_data();match=re.search(rb'/APRole_CUT BMC(.*?)EMC',raw,re.S);block=match[1];changed,n=re.subn(rb'(?&lt;![\d.])7(?![\d.])',b'7.001',block);assert n&gt;=2;raw=raw[:match.start(1)]+changed+raw[match.end(1):];stream=DecodedStreamObject();stream.set_data(raw);page[NameObject('/Contents')]=stream;writer.add_page(page)
+            with path.open('wb') as f:writer.write(f)
+            return out
+        monkeypatch.setattr(author_export,'_svg',svg);monkeypatch.setattr(author_export,'_pdf',pdf)
+        with pytest.raises(CurveOutputError) as caught:author_export.export_all(snap,directory)
+&gt;       assert caught.value.report is not None,str(caught.value)
+E       AssertionError: Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 6276
+E       assert None is not None
+E        +  where None = CurveOutputError('Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 6276').report
+E        +    where CurveOutputError('Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 6276') = &lt;ExceptionInfo CurveOutputError('Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 6276') tblen=4&gt;.value
+
+docs\p2\implementation\evidence\pc007a-loft-output-review-own.py:212: AssertionError</failure></testcase></testsuite></testsuites>

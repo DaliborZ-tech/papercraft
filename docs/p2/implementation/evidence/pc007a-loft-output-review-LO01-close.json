@@ -1,0 +1,12 @@
+{
+  "source_runtime_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+  "documentation_fix_sha": "7d0b13a8aec9759820c20b329f319816086bfcbf",
+  "changed_files": [
+    "src/archpapercraft/exporter/loft_output_validation.py"
+  ],
+  "only_docstring_changed": true,
+  "executable_ast_equal": true,
+  "before_git_sha256": "baeba8242393597a6c8b0b3a6758cc85f8f7627316759e29efb0162e0aec9ed0",
+  "after_git_sha256": "9bc4edcfaf3a4aae2711dabc1670cf46ad2e699d38c893d8239dd64fa112aba6",
+  "LO-01": "CLOSED; no geometry/runtime behavior delta; no repeated broad tests"
+}
