@@ -375,6 +375,10 @@ def segment_ruled_loft(
             if any(not isinstance(c.segment_id, str) or not c.segment_id for c in profile.curves):
                 raise ValueError("Source segments need explicit identities")
             _profile(profile)
+        if first.profile_id == second.profile_id:
+            raise ValueError(
+                "Source profile identities must be distinct; colliding references are unresolved"
+            )
         for reference in correspondences:
             if not isinstance(reference, LoftCorrespondence) or any(
                 isinstance(x, bool)

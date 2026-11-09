@@ -396,3 +396,37 @@ def test_inconsistent_source_topology_is_not_silently_closed():
         result = segment_ruled_loft(a, b, refs, scale=1)
         assert result["status"] == "UNRESOLVED"
         assert result["examined_cells"] == 0
+
+
+def test_sm01_different_sources_cannot_share_one_profile_identity():
+    first, second, references = _fixture()
+    conflicting = replace(second, profile_id=first.profile_id)
+    before = (
+        first.profile_id,
+        first.origin,
+        first.curves,
+        conflicting.profile_id,
+        conflicting.origin,
+        conflicting.curves,
+    )
+    result = segment_ruled_loft(first, conflicting, references, scale=1)
+    assert result["status"] == "UNRESOLVED"
+    assert "profile identities must be distinct" in result["message"]
+    assert result["examined_cells"] == 0
+    assert "triangles" not in result and "edges" not in result
+    assert before == (
+        first.profile_id,
+        first.origin,
+        first.curves,
+        conflicting.profile_id,
+        conflicting.origin,
+        conflicting.curves,
+    )
+    # Repairing the source reference alone restores the intended target and its
+    # independent geometric contract, without inventing an identity in the solver.
+    repaired = _certified(segment_ruled_loft(first, second, references, scale=1))
+    assert repaired["source"]["first_profile_id"] == "front-profile"
+    assert repaired["source"]["second_profile_id"] == "back-profile"
+    assert repaired["patches"][0]["developability_determinant_exact"] == "-24000"
+    assert repaired["max_surface_deviation_paper_mm"] == 0.15625
+    assert repaired["counts"]["triangles"] == 64
