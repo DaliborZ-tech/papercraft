@@ -136,7 +136,9 @@ class LoftDesktopSteps:
         self.shortcut(Qt.Key.Key_R)
         if wall:
             self.add_page()
-            self.place(wall, 0, 30, 30)
+            # Keep the circular disk's true curved material beyond the 10mm
+            # print margin, including the independently reserved output bound.
+            self.place(wall, 0, 30, 40)
             self.place(loft, 1, 40, 60, 17)
         else:
             self.place(loft, 0, 40, 60, 17)
