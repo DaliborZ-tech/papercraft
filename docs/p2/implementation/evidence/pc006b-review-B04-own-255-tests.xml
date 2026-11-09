@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="1.044" timestamp="2026-11-06T14:48:36.707766+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_B04_open_fit_preserves_normal_refresh_camera[False]" time="0.078" /><testcase classname="docs.p2.implementation.evidence.pc006b-review-ui-cases" name="test_B04_open_fit_preserves_normal_refresh_camera[True]" time="0.061"><failure message="assert False&#10; +  where False = all(&lt;generator object test_B04_open_fit_preserves_normal_refresh_camera.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001EA1FA97CA0&gt;)">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001EA1FAF93A0&gt;, new_identity = True
+
+    @pytest.mark.parametrize('new_identity',[False,True])
+    def test_B04_open_fit_preserves_normal_refresh_camera(qtbot,new_identity):
+        p,s,t,e=construction()
+        for index,pid in enumerate(p.parts):
+            page=p.pages[0].id if index==0 else p.add_page()
+            p.set_placement(pid,page_id=page,x_mm=40,y_mm=60)
+        v=AuthorPaperView();qtbot.addWidget(v);v.resize(700,450);v.show();v.set_project(p);qtbot.wait(15)
+        v.resetTransform();v.scale(13,13);v.centerOn(9000,9000);qtbot.wait(5)
+        matrix=v.transform();center=v.mapToScene(v.viewport().rect().center())
+        clone=AuthorProject.from_dict(p.to_dict());v.set_project(clone);qtbot.wait(5)
+        assert v.transform()==matrix
+        assert (v.mapToScene(v.viewport().rect().center())-center).manhattanLength()&lt;.1
+        if new_identity:
+            clone.project_id=AuthorProject.new().project_id
+            v.set_project(clone)
+        else:v.set_project(clone,frame=True)
+        qtbot.wait(15)
+        visible=v.mapToScene(v.viewport().rect()).boundingRect()
+&gt;       assert all(visible.contains(item.sceneBoundingRect().center()) for item in v.part_items.values())
+E       assert False
+E        +  where False = all(&lt;generator object test_B04_open_fit_preserves_normal_refresh_camera.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001EA1FA97CA0&gt;)
+
+docs\p2\implementation\evidence\pc006b-review-ui-cases.py:161: AssertionError</failure></testcase></testsuite></testsuites>

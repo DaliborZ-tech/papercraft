@@ -1,0 +1,316 @@
+{
+  "source_sha": "4bb5c436f5055cf278d756a637d1c5017ed8964b",
+  "source_root": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc006b-review-4bb5-tqwqud1f",
+  "kind": "independent_numeric_negative_and_positive_domain_experiments_no_GUI",
+  "results": [
+    {
+      "name": "B01_mixed_EdgePair_SurfaceTrace_collision",
+      "project_payload": "docs\\p2\\implementation\\evidence\\pc006b-review-oracles-4bb5c43-B01-project.json",
+      "analytic_overlap_mm2": 200,
+      "actual_overlap_mm2": 200.0,
+      "edge_contact": {
+        "connector_id": "1f82dfc2-0219-4a02-b435-2ff5df41a89d",
+        "tab_ids": [],
+        "enabled": true,
+        "tabs": [
+          {
+            "tab_id": "1f82dfc2-0219-4a02-b435-2ff5df41a89d",
+            "footprint_uv_mm": [
+              [
+                100.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                7.0
+              ],
+              [
+                100.0,
+                7.0
+              ]
+            ],
+            "nominal_area_mm2": 700.0,
+            "available_area_mm2": 700.0,
+            "receiver_surface_id": "9cb79a0f-45ed-49b2-a801-1a0f8f974bdb",
+            "receiver_side": "unknown"
+          }
+        ],
+        "hinge_length_mm": 100.0,
+        "tab_length_mm": 100.0,
+        "all_tabs": [
+          {
+            "id": "1f82dfc2-0219-4a02-b435-2ff5df41a89d",
+            "enabled": true,
+            "base_length_mm": 100.0,
+            "source_interval": [
+              0.0,
+              1.0
+            ],
+            "outline_mm": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                100.0,
+                0.0
+              ],
+              [
+                100.0,
+                7.0
+              ],
+              [
+                0.0,
+                7.0
+              ]
+            ],
+            "folded_contact": {
+              "tab_id": "1f82dfc2-0219-4a02-b435-2ff5df41a89d",
+              "footprint_uv_mm": [
+                [
+                  100.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  7.0
+                ],
+                [
+                  100.0,
+                  7.0
+                ]
+              ],
+              "nominal_area_mm2": 700.0,
+              "available_area_mm2": 700.0,
+              "receiver_surface_id": "9cb79a0f-45ed-49b2-a801-1a0f8f974bdb",
+              "receiver_side": "unknown"
+            }
+          }
+        ],
+        "standalone_part_id": null,
+        "clearance_status": "MATERIAL_CLEARANCE_UNVERIFIED",
+        "bend_sweep_status": "NOT_CHECKED",
+        "receiver_side": "unknown",
+        "valid": true,
+        "issues": []
+      },
+      "trace_contact": {
+        "connector_id": "acca199c-7cb5-47c8-9f90-1859643d6b98",
+        "tab_ids": [
+          "82f249e8-ffb7-4ff9-aed4-be3e9fd494d1"
+        ],
+        "enabled": true,
+        "tabs": [
+          {
+            "tab_id": "82f249e8-ffb7-4ff9-aed4-be3e9fd494d1",
+            "footprint_uv_mm": [
+              [
+                20.0,
+                5.0
+              ],
+              [
+                60.0,
+                5.0
+              ],
+              [
+                60.0,
+                -8.881784197001252e-16
+              ],
+              [
+                20.0,
+                -8.881784197001252e-16
+              ]
+            ],
+            "nominal_area_mm2": 200.00000000000003,
+            "available_area_mm2": 200.0,
+            "receiver_surface_id": "9cb79a0f-45ed-49b2-a801-1a0f8f974bdb",
+            "folded_world": [
+              [
+                20.0,
+                5.0,
+                0.0
+              ],
+              [
+                60.0,
+                5.0,
+                0.0
+              ],
+              [
+                60.0,
+                -8.881784197001252e-16,
+                2.4894981252573966e-16
+              ],
+              [
+                20.0,
+                -8.881784197001252e-16,
+                2.4894981252573966e-16
+              ]
+            ],
+            "fold_angle_deg": -89.99999999999999,
+            "contact_gap_mm": 2.4894981252573966e-16
+          }
+        ],
+        "hinge_length_mm": 40.0,
+        "tab_length_mm": 40.0,
+        "all_tabs": [
+          {
+            "id": "82f249e8-ffb7-4ff9-aed4-be3e9fd494d1",
+            "enabled": true,
+            "base_length_mm": 40.0,
+            "source_interval": [
+              0.0,
+              1.0
+            ],
+            "outline_mm": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                40.0,
+                0.0
+              ],
+              [
+                40.0,
+                5.0
+              ],
+              [
+                0.0,
+                5.0
+              ]
+            ],
+            "folded_contact": {
+              "tab_id": "82f249e8-ffb7-4ff9-aed4-be3e9fd494d1",
+              "footprint_uv_mm": [
+                [
+                  20.0,
+                  5.0
+                ],
+                [
+                  60.0,
+                  5.0
+                ],
+                [
+                  60.0,
+                  -8.881784197001252e-16
+                ],
+                [
+                  20.0,
+                  -8.881784197001252e-16
+                ]
+              ],
+              "nominal_area_mm2": 200.00000000000003,
+              "available_area_mm2": 200.0,
+              "receiver_surface_id": "9cb79a0f-45ed-49b2-a801-1a0f8f974bdb",
+              "folded_world": [
+                [
+                  20.0,
+                  5.0,
+                  0.0
+                ],
+                [
+                  60.0,
+                  5.0,
+                  0.0
+                ],
+                [
+                  60.0,
+                  -8.881784197001252e-16,
+                  2.4894981252573966e-16
+                ],
+                [
+                  20.0,
+                  -8.881784197001252e-16,
+                  2.4894981252573966e-16
+                ]
+              ],
+              "fold_angle_deg": -89.99999999999999,
+              "contact_gap_mm": 2.4894981252573966e-16
+            }
+          }
+        ],
+        "standalone_part_id": null,
+        "clearance_status": "MATERIAL_CLEARANCE_UNVERIFIED",
+        "bend_sweep_status": "NOT_CHECKED",
+        "receiver_side": "outside",
+        "valid": true,
+        "issues": []
+      },
+      "issues": [
+        {
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "severity": "warning"
+        },
+        {
+          "code": "FOLDED_SIDE_UNRESOLVED",
+          "severity": "error"
+        },
+        {
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "severity": "warning"
+        }
+      ],
+      "snapshot_allowed_after_warnings": false,
+      "expected_snapshot_blocked": true,
+      "pass": true
+    },
+    {
+      "name": "B02_intermediate_bend_obstacle_is_not_checked",
+      "project_payload": "docs\\p2\\implementation\\evidence\\pc006b-review-oracles-4bb5c43-B02-project.json",
+      "analytic_witness_world_mm": [
+        40,
+        3,
+        -2
+      ],
+      "tab_radius_at_witness_mm": 2.8284271247461903,
+      "tab_width_mm": 5,
+      "obstacle_bounds_world": {
+        "x": [
+          25,
+          55
+        ],
+        "y": [
+          3,
+          3
+        ],
+        "z": [
+          -2.5,
+          -1.5
+        ]
+      },
+      "folded_contact_valid": true,
+      "bend_sweep_status": "NOT_CHECKED",
+      "snapshot_allowed_after_warnings": true,
+      "scope": "Known digital sweep gap, not an assertion that the API falsely reports sweep PASS. Physical material is separately unknown.",
+      "pass": false
+    },
+    {
+      "name": "rotated_plane_straight_tab_has_analytic_9mm2_contact",
+      "actual_nominal_mm2": 8.999999999999998,
+      "actual_available_mm2": 8.999999999999998,
+      "analytic_mm2": 9.0,
+      "pass": true
+    },
+    {
+      "name": "authored_off_tab_identity_and_area",
+      "analytic_mm2": 2.55,
+      "actual_mm2": 2.55,
+      "ids_preserved": true,
+      "pass": true
+    },
+    {
+      "name": "invalid_gap_rejects_atomically",
+      "pass": true
+    }
+  ],
+  "pass": 4,
+  "fail": 1
+}

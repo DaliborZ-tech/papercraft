@@ -1765,7 +1765,15 @@
         "evidence_commit_sha": "1d8ed8b9db95a7e225ad77fbaffe7b943ddec828"
       },
       "historical_code_sha": "4b172e65af3cde19c865cf7594c63fa004aa1ba2",
-      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a"
+      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a",
+      "integration": {
+        "status": "PUSHED_AND_REMOTE_SHA_VERIFIED",
+        "master_sha": "00277352407cd10c17493d56d547f283e91c5524",
+        "remote_sha": "00277352407cd10c17493d56d547f283e91c5524",
+        "method": "fast-forward; ordinary push; no history rewrite",
+        "report": "docs/p2/implementation/PC006A_INTEGRATION.md",
+        "product_acceptance_implied": false
+      }
     },
     {
       "id": "PC-006B",
@@ -1906,12 +1914,34 @@
           "before_after_flow": null,
           "consistency_impact": null,
           "workflow_alternative_decision": null
+        },
+        "participant_availability": {
+          "status": "NOT_RUN_PARTICIPANT_UNAVAILABLE",
+          "confirmed_by": "owner",
+          "confirmed_on": "2026-11-06",
+          "participant_count": 0,
+          "reply": "No new user available now",
+          "independent_implementation_continues": true,
+          "automated_GUI_substitution_permitted": false,
+          "protocol": "docs/p2/v1.2/USABILITY_TEST.md"
         }
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "implementation_authorized_on": "2026-11-06",
       "working_branch": "revival/p2-interior-domain",
-      "implementation_start_basis": "PC-006A CODE independently approved on 4b172e65af3cde19c865cf7594c63fa004aa1ba2"
+      "implementation_start_basis": "PC-006A CODE independently approved on 4b172e65af3cde19c865cf7594c63fa004aa1ba2",
+      "component_checkpoint": {
+        "domain_source_sha": "0db8f0239bea59369a123f210a4b4317f95ee237",
+        "folded_registry_fix_sha": "4bb5c436f5055cf278d756a637d1c5017ed8964b",
+        "ui_source_sha": "7bd46ac9ac96d8422ed8793d94141fea83dffa37",
+        "implicit_tab_identity_fix_sha": "07b6a1cc9ce3835427f621c6337f65e39464ec65",
+        "domain_review": "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md",
+        "B-01": "INDEPENDENTLY_CLOSED_ON_4bb5c43",
+        "B-02": "OPEN_MAJOR: continuous bend clearance implementation underway in isolated branch",
+        "native_complete_A": "NOT_RUN",
+        "novice_study": "NOT_RUN: owner confirmed no eligible new participant available; 0 participants",
+        "whole_ticket_verdict": "CHANGES_REQUIRED_UNTIL_REQUIRED_EVIDENCE_AND_AU07_COMPLETE"
+      }
     },
     {
       "id": "PC-007A",
@@ -2323,7 +2353,7 @@
   ],
   "updated_on": "2026-11-06",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-authoring",
+  "working_branch": "revival/p2-interior-domain",
   "release_readiness": "NOT_READY: owner accepted full P2 v1.2; implementation PC-006A in progress; new-user and physical evidence not run",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
@@ -2497,7 +2527,17 @@
     "implementation_policy": "within_each_vertical_slice_no_new_phase",
     "first_author_test": "docs/p2/v1.2/USABILITY_TEST.md",
     "first_author_test_status": "NOT_RUN",
-    "participants_observed": 0
+    "participants_observed": 0,
+    "novice_participant_availability": {
+      "status": "NOT_RUN_PARTICIPANT_UNAVAILABLE",
+      "confirmed_by": "owner",
+      "confirmed_on": "2026-11-06",
+      "participant_count": 0,
+      "reply": "No new user available now",
+      "independent_implementation_continues": true,
+      "automated_GUI_substitution_permitted": false,
+      "protocol": "docs/p2/v1.2/USABILITY_TEST.md"
+    }
   },
   "usability_skills_addendum": {
     "requested_on": "2026-11-06",
@@ -2543,7 +2583,7 @@
       "PC-009",
       "PC-010"
     ],
-    "status": "IN_PROGRESS",
+    "status": "PAUSED_BY_OWNER",
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
@@ -2551,6 +2591,15 @@
       "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
       "report": "docs/p2/implementation/PC006A_REVIEW.md",
       "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a"
-    }
+    },
+    "status_before_pause": "IN_PROGRESS",
+    "paused_on": "2026-11-06",
+    "continuation_target_date": "2026-11-07",
+    "pause_reason": "Owner explicitly requested interruption and continuation documentation for tomorrow",
+    "implementation_authorization_unchanged": true,
+    "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-07.md",
+    "wip_source_sha": "4e9956bc8fdb8a91af5cd5a4aa62de481e3eb657",
+    "wip_branch": "revival/p2-clearance-integration",
+    "next_required_technical_work": "Complete AU07 obstacle registry with every other active connector tab, then independent adapter review and new native proof"
   }
 }

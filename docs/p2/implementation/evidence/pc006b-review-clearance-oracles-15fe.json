@@ -1,0 +1,2421 @@
+{
+  "source_sha": "15feefb9ce670d0af07dd99217e6da8869b11cb3",
+  "kind": "independent_numeric_geometry_permission_mixed_material_and_between_samples",
+  "analytic_thin_witness_mm": [
+    5,
+    -1.194171997565095,
+    -2.7520816194712308
+  ],
+  "analytic_known_overlap_mm": 0.05,
+  "results": [
+    {
+      "name": "static-positive-real-one-interval",
+      "expected": [
+        "CLEAR"
+      ],
+      "passed": true,
+      "result": {
+        "status": "CLEAR",
+        "message": "Continuous swept envelope is separated outside declared contacts",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 1,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.06628140003886074
+    },
+    {
+      "name": "K01-known-overlap-0.05mm",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": true,
+      "result": {
+        "status": "COLLISION",
+        "message": "Thick material intersects during the fold",
+        "tab_id": "tab",
+        "obstacle_id": "known-blocker",
+        "witness_angle_deg": 0.0,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "known-blocker"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.07626820006407797
+    },
+    {
+      "name": "K01-same-known-overlap-with-unrelated-unknown",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": false,
+      "result": {
+        "status": "UNVERIFIED",
+        "message": "No zero-thickness intersection witness found; material thickness and clearance remain unverified",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1.0341779909214273e-09,
+        "envelope_padding_mm": 1.0341779909214273e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "known-blocker",
+          "unrelated-unknown"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.08844890003092587
+    },
+    {
+      "name": "unknown-tab-inside-known-one-mm-slab",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": false,
+      "result": {
+        "status": "UNVERIFIED",
+        "message": "No zero-thickness intersection witness found; material thickness and clearance remain unverified",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "known-blocker"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.07684450002852827
+    },
+    {
+      "name": "known-tab-contains-unknown-midplane",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": false,
+      "result": {
+        "status": "UNVERIFIED",
+        "message": "No zero-thickness intersection witness found; material thickness and clearance remain unverified",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "known-blocker"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.07844489999115467
+    },
+    {
+      "name": "unknown-free-never-CLEAR",
+      "expected": [
+        "UNVERIFIED"
+      ],
+      "passed": true,
+      "result": {
+        "status": "UNVERIFIED",
+        "message": "No zero-thickness intersection witness found; material thickness and clearance remain unverified",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.06227670004591346
+    },
+    {
+      "name": "permission-does-not-remove-unpermitted-half",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": true,
+      "result": {
+        "status": "COLLISION",
+        "message": "Thick material intersects during the fold",
+        "tab_id": "tab",
+        "obstacle_id": "receiver",
+        "witness_angle_deg": 0.0,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                4.9,
+                -0.25,
+                -5.5
+              ],
+              [
+                4.9,
+                -0.25,
+                0.5
+              ],
+              [
+                4.9,
+                0.25,
+                -5.5
+              ],
+              [
+                4.9,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.08480740000959486
+    },
+    {
+      "name": "unknown-permission-does-not-remove-unpermitted-half",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": true,
+      "result": {
+        "status": "COLLISION",
+        "message": "Original material midplanes intersect during the fold",
+        "tab_id": "tab",
+        "obstacle_id": "receiver",
+        "witness_angle_deg": 0.0,
+        "witness_point_mm": [
+          7.4500000005,
+          0.0,
+          -2.5
+        ],
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                4.9,
+                -0.25,
+                -5.5
+              ],
+              [
+                4.9,
+                -0.25,
+                0.5
+              ],
+              [
+                4.9,
+                0.25,
+                -5.5
+              ],
+              [
+                4.9,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.06860280002001673
+    },
+    {
+      "name": "third-party-cannot-be-permitted",
+      "expected": [
+        "UNRESOLVED"
+      ],
+      "passed": true,
+      "result": {
+        "status": "UNRESOLVED",
+        "message": "No blanket permission for an independent obstacle is allowed",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 0,
+        "numerical_guard_mm": 0.0,
+        "envelope_padding_mm": 0.0,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [],
+        "checked_obstacle_ids": [],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.0019260999979451299
+    },
+    {
+      "name": "rectangle-covers-L-void",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": true,
+      "result": {
+        "status": "COLLISION",
+        "message": "Thick material intersects during the fold",
+        "tab_id": "tab",
+        "obstacle_id": "in-void",
+        "witness_angle_deg": 0.0,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "in-void"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.07573349995072931
+    },
+    {
+      "name": "exact-concave-patches-keep-void",
+      "expected": [
+        "CLEAR"
+      ],
+      "passed": true,
+      "result": {
+        "status": "CLEAR",
+        "message": "Continuous swept envelope is separated outside declared contacts",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 1,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 1e-09,
+        "envelope_padding_mm": 1e-09,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                -0.25,
+                0.5
+              ],
+              [
+                -0.5,
+                0.25,
+                -5.5
+              ],
+              [
+                -0.5,
+                0.25,
+                0.5
+              ],
+              [
+                10.5,
+                -0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                -0.25,
+                0.5
+              ],
+              [
+                10.5,
+                0.25,
+                -5.5
+              ],
+              [
+                10.5,
+                0.25,
+                0.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "in-void"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.10415110003668815
+    },
+    {
+      "name": "coordinate-conditioning:10000.0",
+      "expected": [
+        "CLEAR"
+      ],
+      "passed": true,
+      "result": {
+        "status": "CLEAR",
+        "message": "Continuous swept envelope is separated outside declared contacts",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 1,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 2.3540148342097523e-07,
+        "envelope_padding_mm": 2.3540148342097523e-07,
+        "material_thickness_mm": 0.2,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                9999.5,
+                -10000.5,
+                9999.5
+              ],
+              [
+                9999.5,
+                -10000.5,
+                10000.5
+              ],
+              [
+                9999.5,
+                -9999.5,
+                9999.5
+              ],
+              [
+                9999.5,
+                -9999.5,
+                10000.5
+              ],
+              [
+                10010.5,
+                -10000.5,
+                9999.5
+              ],
+              [
+                10010.5,
+                -10000.5,
+                10000.5
+              ],
+              [
+                10010.5,
+                -9999.5,
+                9999.5
+              ],
+              [
+                10010.5,
+                -9999.5,
+                10000.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "actual flat contact",
+            "angle_interval_deg": [
+              0.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                9999.5,
+                -10000.25,
+                9994.5
+              ],
+              [
+                9999.5,
+                -10000.25,
+                10000.5
+              ],
+              [
+                9999.5,
+                -9999.75,
+                9994.5
+              ],
+              [
+                9999.5,
+                -9999.75,
+                10000.5
+              ],
+              [
+                10010.5,
+                -10000.25,
+                9994.5
+              ],
+              [
+                10010.5,
+                -10000.25,
+                10000.5
+              ],
+              [
+                10010.5,
+                -9999.75,
+                9994.5
+              ],
+              [
+                10010.5,
+                -9999.75,
+                10000.5
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.06089219998102635
+    },
+    {
+      "name": "coordinate-conditioning:10000000.0",
+      "expected": [
+        "UNRESOLVED"
+      ],
+      "passed": true,
+      "result": {
+        "status": "UNRESOLVED",
+        "message": "Coordinate conditioning exceeds the supported digital precision",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 0,
+        "numerical_guard_mm": 0.0,
+        "envelope_padding_mm": 0.0,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [],
+        "checked_obstacle_ids": [],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.00022960000205785036
+    },
+    {
+      "name": "thin-nondyadic-between-coarse-samples",
+      "expected": [
+        "UNRESOLVED"
+      ],
+      "passed": true,
+      "result": {
+        "status": "UNRESOLVED",
+        "message": "Continuous clearance has an unresolved interval",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 1,
+        "numerical_guard_mm": 2.2115886891400097e-08,
+        "envelope_padding_mm": 2.2115886891400097e-08,
+        "material_thickness_mm": 0.001,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "hinge",
+            "reason": "finite receiver crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                -0.1,
+                0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                0.1
+              ],
+              [
+                10.1,
+                0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                0.1,
+                0.1
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "finite terminal glue patch",
+            "angle_interval_deg": [
+              -90.0,
+              -45.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                -5.1,
+                0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                0.01
+              ],
+              [
+                10.1,
+                0.1,
+                -0.01
+              ],
+              [
+                10.1,
+                0.1,
+                0.01
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "independent-thin-between"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.24823710008058697
+    },
+    {
+      "name": "thin-nondyadic-refined-witness",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": true,
+      "result": {
+        "status": "COLLISION",
+        "message": "Thick material intersects during the fold",
+        "tab_id": "tab",
+        "obstacle_id": "independent-thin-between",
+        "witness_angle_deg": -23.466796875000004,
+        "witness_point_mm": null,
+        "certified_intervals": 3,
+        "examined_intervals": 12,
+        "numerical_guard_mm": 2.2115886891400097e-08,
+        "envelope_padding_mm": 2.2115886891400097e-08,
+        "material_thickness_mm": 0.001,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "hinge",
+            "reason": "finite receiver crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                -0.1,
+                0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                0.1
+              ],
+              [
+                10.1,
+                0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                0.1,
+                0.1
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "finite terminal glue patch",
+            "angle_interval_deg": [
+              -90.0,
+              -45.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                -5.1,
+                0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                0.01
+              ],
+              [
+                10.1,
+                0.1,
+                -0.01
+              ],
+              [
+                10.1,
+                0.1,
+                0.01
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "independent-thin-between"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 1.0236370000056922
+    },
+    {
+      "name": "thin-unknown-refined-witness",
+      "expected": [
+        "COLLISION"
+      ],
+      "passed": true,
+      "result": {
+        "status": "COLLISION",
+        "message": "Original material midplanes intersect during the fold",
+        "tab_id": "tab",
+        "obstacle_id": "independent-thin-between",
+        "witness_angle_deg": -23.466796875000004,
+        "witness_point_mm": [
+          7.157945752236703,
+          -1.194171997565095,
+          -2.7507657279667574
+        ],
+        "certified_intervals": 3,
+        "examined_intervals": 12,
+        "numerical_guard_mm": 2.2115886891400097e-08,
+        "envelope_padding_mm": 2.2115886891400097e-08,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "hinge",
+            "reason": "finite receiver crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                -0.1,
+                0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                0.1
+              ],
+              [
+                10.1,
+                0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                0.1,
+                0.1
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "finite terminal glue patch",
+            "angle_interval_deg": [
+              -90.0,
+              -45.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                -5.1,
+                0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                0.01
+              ],
+              [
+                10.1,
+                0.1,
+                -0.01
+              ],
+              [
+                10.1,
+                0.1,
+                0.01
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "independent-thin-between"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.6049522999674082
+    },
+    {
+      "name": "thin-unknown-exhaustion-never-CLEAR",
+      "expected": [
+        "UNVERIFIED",
+        "UNRESOLVED"
+      ],
+      "passed": true,
+      "result": {
+        "status": "UNVERIFIED",
+        "message": "No zero-thickness intersection witness found; material thickness and clearance remain unverified",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 2,
+        "numerical_guard_mm": 2.2115886891400097e-08,
+        "envelope_padding_mm": 2.2115886891400097e-08,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [
+          {
+            "obstacle_id": "source",
+            "kind": "hinge",
+            "reason": "explicit finite source crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                -0.5
+              ],
+              [
+                -0.5,
+                0.5,
+                0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                -0.5,
+                0.5
+              ],
+              [
+                10.5,
+                0.5,
+                -0.5
+              ],
+              [
+                10.5,
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "hinge",
+            "reason": "finite receiver crease",
+            "angle_interval_deg": [
+              -90.0,
+              0.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                -0.1,
+                0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.1
+              ],
+              [
+                -0.1,
+                0.1,
+                0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                -0.1,
+                0.1
+              ],
+              [
+                10.1,
+                0.1,
+                -0.1
+              ],
+              [
+                10.1,
+                0.1,
+                0.1
+              ]
+            ]
+          },
+          {
+            "obstacle_id": "receiver",
+            "kind": "final_contact",
+            "reason": "finite terminal glue patch",
+            "angle_interval_deg": [
+              -90.0,
+              -45.0
+            ],
+            "vertices_world_mm": [
+              [
+                -0.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                -5.1,
+                0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                -0.01
+              ],
+              [
+                -0.1,
+                0.1,
+                0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                -0.01
+              ],
+              [
+                10.1,
+                -5.1,
+                0.01
+              ],
+              [
+                10.1,
+                0.1,
+                -0.01
+              ],
+              [
+                10.1,
+                0.1,
+                0.01
+              ]
+            ]
+          }
+        ],
+        "checked_obstacle_ids": [
+          "source",
+          "receiver",
+          "independent-thin-between"
+        ],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      },
+      "seconds": 0.09694409999065101
+    },
+    {
+      "name": "complete-registry-required",
+      "expected": [
+        "UNRESOLVED"
+      ],
+      "passed": true,
+      "result": {
+        "status": "UNRESOLVED",
+        "message": "Complete obstacle registry does not match expected identities",
+        "tab_id": "tab",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 0,
+        "numerical_guard_mm": 0.0,
+        "envelope_padding_mm": 0.0,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [],
+        "checked_obstacle_ids": [],
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ]
+      }
+    }
+  ],
+  "passed": 15,
+  "failed": 3
+}
