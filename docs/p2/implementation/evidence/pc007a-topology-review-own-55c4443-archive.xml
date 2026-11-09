@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="16" time="0.737" timestamp="2026-11-09T09:12:27.671874+01:00" hostname="Dalibor"><testcase classname="" name="test_own_hidden_cubic_crossing_is_invalid_even_when_chord_is_rectangle[1e-06]" time="0.002" /><testcase classname="" name="test_own_hidden_cubic_crossing_is_invalid_even_when_chord_is_rectangle[1e-09]" time="0.001" /><testcase classname="" name="test_own_hidden_cubic_crossing_is_invalid_even_when_chord_is_rectangle[1e-12]" time="0.001" /><testcase classname="" name="test_own_adjacent_cubic_second_crossing_not_waived_by_shared_endpoint" time="0.011" /><testcase classname="" name="test_own_disjoint_holes_inside_annular_like_native_boundary" time="0.006" /><testcase classname="" name="test_own_nested_and_outside_holes_have_hard_witnesses" time="0.010" /><testcase classname="" name="test_own_coincident_or_crossing_circle_holes_never_pass[0]" time="0.006" /><testcase classname="" name="test_own_coincident_or_crossing_circle_holes_never_pass[1e-12]" time="0.006" /><testcase classname="" name="test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[1e-14]" time="0.001"><failure message="AssertionError: TopologyCertificate(status='INVALID', reason='Authored curve boundaries intersect or overlap', witness={'segments': ['...D_ARC_ENDPOINT_CONSTRAINTS_WITHIN_FLOAT_EVALUATION_RESERVE', 'QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING'))&#10;assert 'INVALID' != 'INVALID'&#10;[+1 more line; full report in element text]">delta = 1e-14
+
+    @pytest.mark.parametrize('delta',[1e-14,math.ulp(1.0),math.ulp(1.0)/2])
+    def test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection(delta):
+        x=1+delta/2
+        arc=Curve((0,1),(1,0),'arc',{'center':(delta,0),'sweep_deg':-90},'native-quarter')
+        assert svg_commands(arc)=='M 0 1 A 1 1 0 0 0 1 0'
+        if x==1:
+            # The expression has rounded onto the actual native boundary. We avoid
+            # a zero-length authored line and make the contact explicit instead.
+            boundary=(arc,Curve((1,0),(1,2)),Curve((1,2),(0,2)),Curve((0,2),(0,1)))
+        else:
+            boundary=(arc,Curve((1,0),(x,0)),Curve((x,0),(x,2)),Curve((x,2),(0,2)),Curve((0,2),(0,1)))
+        result=certify_region_topology(boundary)
+        # Native unit quarter has x&lt;=1. The short outward bridge followed by
+        # vertical x&gt;=1 creates a simple closed Jordan boundary. Precision may
+        # remain unknown, but a nominal-center intersection is not a true witness.
+&gt;       assert result.status!='INVALID',result
+E       AssertionError: TopologyCertificate(status='INVALID', reason='Authored curve boundaries intersect or overlap', witness={'segments': ['...D_ARC_ENDPOINT_CONSTRAINTS_WITHIN_FLOAT_EVALUATION_RESERVE', 'QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING'))
+E       assert 'INVALID' != 'INVALID'
+E        +  where 'INVALID' = TopologyCertificate(status='INVALID', reason='Authored curve boundaries intersect or overlap', witness={'segments': ['...D_ARC_ENDPOINT_CONSTRAINTS_WITHIN_FLOAT_EVALUATION_RESERVE', 'QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING')).status
+
+..\..\..\..\projects\papercraft-curve-numerics\docs\p2\implementation\evidence\pc007a-topology-review-own.py:71: AssertionError</failure></testcase><testcase classname="" name="test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[2.220446049250313e-16]" time="0.001" /><testcase classname="" name="test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[1.1102230246251565e-16]" time="0.002" /><testcase classname="" name="test_own_both_semicircle_directions_form_simple_material_with_real_hole" time="0.004" /><testcase classname="" name="test_own_global_budget_exhaustion_never_grants_valid[0]" time="0.000" /><testcase classname="" name="test_own_global_budget_exhaustion_never_grants_valid[1]" time="0.000" /><testcase classname="" name="test_own_global_budget_exhaustion_never_grants_valid[2]" time="0.000" /><testcase classname="" name="test_own_source_tangent_hole_requires_strict_separation_not_point_sampling" time="0.016" /></testsuite></testsuites>
