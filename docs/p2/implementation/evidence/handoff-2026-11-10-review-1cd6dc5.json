@@ -1,0 +1,60 @@
+{
+  "handoff_sha": "1cd6dc5f42acde23cb72c443216fd68f6ca34448",
+  "published_master_sha_verified_remote": "a27cf5aaf76e7057a49d4b4cb7ec85a87855c17f",
+  "pending_local_sha": "f214222592550a0a057bf09e99e06b0a791f6e07",
+  "integration_head_descends_from_checkpoint": "a236f83b085bf45c0235bcbdb2a1fadda6209459",
+  "changed_paths": [
+    "00_START_HERE.md",
+    "05_WORK_QUEUE.json",
+    "docs/p2/implementation/CONTINUE_2026-11-10.md"
+  ],
+  "runtime_and_acceptance_unchanged": true,
+  "pause_explicit_owner_request": true,
+  "actual_local_evidence_records": {
+    "B1": {
+      "status": "FAIL",
+      "source_sha": "a9d155a1861edebfe9581bbd44fde11a56a5394c",
+      "elapsed_seconds": 327.515,
+      "git_blob_sha256": "97feb34a7714c836097cfa599e068e8d9821797bb6279c65dc3ad16f2cfa8a79"
+    },
+    "B2": {
+      "status": "PASS_REQUESTED_FIXTURE",
+      "source_sha": "23ce202535bbd0ce7f2d4e5e975386f363bd2653",
+      "elapsed_seconds": 42.172,
+      "git_blob_sha256": "381a756670dbd27be5ca48ae7570898d78d6d196b47ac9573c2c87556f406b7e"
+    },
+    "Bezier": {
+      "status": "PASS_REQUESTED_FIXTURE",
+      "source_sha": "23ce202535bbd0ce7f2d4e5e975386f363bd2653",
+      "elapsed_seconds": 65.672,
+      "git_blob_sha256": "a85a8719799b127ba7686a6d85ca8a4303482a3f019cb1ebb76940e88266d249"
+    },
+    "B2_editor_disk": {
+      "status": "PASS",
+      "source_sha": "23b2446d78cbc6f45f7c736520aa36a9ac1b244f",
+      "elapsed_seconds": 14.453,
+      "git_blob_sha256": "c77cb847f5f02738c20c985006b14f9557abb3d2719d147332afb02d58cb625e"
+    },
+    "B2_editor_band": {
+      "status": "PASS",
+      "source_sha": "23b2446d78cbc6f45f7c736520aa36a9ac1b244f",
+      "elapsed_seconds": 14.781,
+      "git_blob_sha256": "f8256561992480b1d6600550c8a695259c9c8d280195d9d46b817cb8f9fea1ed"
+    },
+    "Bezier_editor": {
+      "status": "FAIL",
+      "source_sha": "23b2446d78cbc6f45f7c736520aa36a9ac1b244f",
+      "elapsed_seconds": 12.75,
+      "git_blob_sha256": "a4ef125f2551293ee2279432bbcd88ac58089ee2f5232a4bb1c70d2798d403a7"
+    }
+  },
+  "performance_independent_review": "NOT_RUN",
+  "performance_runtime_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
+  "performance_handoff_sha": "d460446cd643478b8236df1e058522d63d72553c",
+  "performance_measurements": "AUTHOR_RECORDED_OFFSCREEN_ONLY; NOT_INDEPENDENT_PERFORMANCE_REVIEW",
+  "whole_P2_complete": false,
+  "novice_count": 0,
+  "physical": "NOT_RUN_P3",
+  "verdict": "APPROVED_IN_DOC_ONLY_HANDOFF_PUBLICATION_SCOPE",
+  "permitted_mechanical_followup": "Exact frozen performance checkpoint and its handoff path; retain review NOT_RUN and no source publication"
+}
