@@ -290,6 +290,80 @@
         "ticket": "PC-009",
         "evidence": null
       }
+    },
+    {
+      "id": "SK-007",
+      "changed_on": "2026-11-09",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md",
+        "problem": "K01: unrelated unknown thickness removed an independently certain collision"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "A global unknown-thickness branch replaced known per-pair thickness lower bounds",
+        "evidence": [
+          "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_COMPONENT_VERIFICATION; final integrated review pending",
+        "source_sha": "9f36e1aa52f2b3144e3f081449f3b12c220d6c6a",
+        "description": "Known collision lower bounds preserved; layer uncertainty cannot erase a third certain collision"
+      },
+      "skill_change": "Known collision lower bounds preserved; layer uncertainty cannot erase a third certain collision",
+      "usage_example": "Run the same negative pair with and without a far unknown obstacle",
+      "verification": {
+        "status": "PENDING_INTEGRATED_REVIEW_AND_NEXT_NATIVE_USE",
+        "evidence": [
+          "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-006B"
+      }
+    },
+    {
+      "id": "SK-008",
+      "changed_on": "2026-11-09",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/evidence/pc006b-desktop-95482c5-run04/results.json",
+        "problem": "Native driver bound Git metadata but imported the shared virtualenv editable installation from another checkout"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "Import search path selected root checkout instead of the driver worktree",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006b-desktop-95482c5-run04/results.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_COMPONENT_VERIFICATION; final integrated review pending",
+        "source_sha": "1108361ac625d59939a53ef7045a1743555deacf",
+        "description": "Driver prepends own src and checks and records actual module __file__ before launch"
+      },
+      "skill_change": "Driver prepends own src and checks and records actual module __file__ before launch",
+      "usage_example": "Launch with a shared virtualenv from a second worktree; inspect actual module path and reject mismatches",
+      "verification": {
+        "status": "PENDING_INTEGRATED_REVIEW_AND_NEXT_NATIVE_USE",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc006b-desktop-95482c5-run04/results.json"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-006B"
+      }
     }
   ]
 }
