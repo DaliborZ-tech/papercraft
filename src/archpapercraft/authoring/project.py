@@ -27,8 +27,13 @@ from .geometry import (
     vector,
 )
 from .interior import InteriorCommands
-from .loft_surface import LoftCommands, validate_loft_params, world_loft_geometry
-from .loft_surface import analysis as loft_analysis
+from .loft_surface import (
+    LoftCommands,
+    validate_loft_params,
+    validate_loft_world_geometry,
+    world_loft_geometry,
+)
+from .loft_surface import _analysis_readonly as loft_analysis
 from .model import (
     Attachment,
     Connector,
@@ -897,7 +902,7 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                     for report in result.get("source_topology", {}).values()
                 ):
                     raise ValidationError("Zdrojový profil loftu se kříží nebo překrývá.")
-                self.world_geometry(sid)
+                validate_loft_world_geometry(self, surface)
                 if (
                     surface.part_id not in self.parts
                     or sid not in self.parts[surface.part_id].surface_ids

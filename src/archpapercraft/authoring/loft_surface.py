@@ -9,6 +9,7 @@ import math
 from dataclasses import asdict
 from fractions import Fraction
 from functools import lru_cache
+from types import MethodType, SimpleNamespace
 
 import numpy as np
 from shapely import Polygon
@@ -233,6 +234,37 @@ def validate_loft_params(project, surface, *, require_bound=False):
 
 
 def _commands(segments):
+    compacted = []
+    for segment in segments:
+        previous = compacted[-1] if compacted else None
+        source = segment.get("source", {})
+        before = previous.get("source", {}) if previous else {}
+        same_source = (
+            source.get("profile_id") is not None
+            and source.get("segment_id") is not None
+            and (source["profile_id"], source["segment_id"])
+            == (before.get("profile_id"), before.get("segment_id"))
+        )
+        if (
+            previous
+            and previous["kind"] == segment["kind"] == "line"
+            and same_source
+            and previous["end"] == segment["start"]
+        ):
+            a, b, c = (
+                tuple(Fraction(x) for x in p)
+                for p in (previous["start"], previous["end"], segment["end"])
+            )
+            ab, ac, cb = (tuple(x - y for x, y in zip(p, q)) for p, q in ((b, a), (c, a), (b, c)))
+            # Exact rational collinearity AND betweenness preserve the entire
+            # path locus and length. No epsilon, cross-source corner removal,
+            # ruling removal or C/A flattening is permitted. The detailed
+            # source-parameter map remains in native.patches[].*.segments.
+            if ab[0] * ac[1] == ab[1] * ac[0] and sum(x * y for x, y in zip(ab, cb)) <= 0:
+                compacted[-1] = {**previous, "end": segment["end"]}
+                continue
+        compacted.append(segment)
+    segments = compacted
     commands = [["M", *segments[0]["start"]]]
     for s in segments:
         if s["kind"] == "line":
@@ -628,7 +660,7 @@ def _bound_analysis(intrinsic_key, surface_record):
     return result
 
 
-def analysis(project, surface):
+def _analysis_keys(project, surface):
     validate_loft_params(project, surface)
     key = json.dumps(
         {
@@ -640,13 +672,53 @@ def analysis(project, surface):
         allow_nan=False,
     )
     surface_record = json.dumps(asdict(surface), sort_keys=True, allow_nan=False)
-    # Callers never receive either cached mutable dictionary. Preview workers
-    # and the main document may safely consume/mutate their detached result.
-    return copy.deepcopy(_bound_analysis(key, surface_record))
+    return key, surface_record
+
+
+def _analysis_readonly(project, surface):
+    """Private, read-only certificate view; callers must never return its members."""
+    return _bound_analysis(*_analysis_keys(project, surface))
+
+
+def analysis(project, surface):
+    # Public consumers may mutate their result; no cached dictionary escapes.
+    return copy.deepcopy(_analysis_readonly(project, surface))
 
 
 def world_loft_geometry(project, surface):
-    result = analysis(project, surface)
+    # JSON is an immutable cache value and its C decoder creates detached
+    # lists/dicts. Finite Python floats round-trip without losing a bit.
+    return json.loads(_world_mesh_json(*_analysis_keys(project, surface)))
+
+
+def validate_loft_world_geometry(project, surface):
+    # The complete original world metric/area checks run on every NEW actual
+    # source+pose key. Validation needs their success, not a copy of the mesh.
+    _world_mesh_json(*_analysis_keys(project, surface))
+
+
+@lru_cache(maxsize=8)
+def _world_mesh_json(key, surface_record):
+    context, surface = _source_context(key, surface_record)
+    payload = _build_world_mesh(context, surface, _bound_analysis(key, surface_record))
+    return json.dumps(payload, allow_nan=False, separators=(",", ":"))
+
+
+def _source_context(key, surface_record):
+    from .project import AuthorProject
+
+    data = json.loads(key)
+    surface = SurfaceFeature(**json.loads(surface_record))
+    context = SimpleNamespace(
+        profiles={p["id"]: _profile_from_record(p) for p in data["profiles"]},
+        surfaces={surface.id: surface},
+        scale=data["scale"],
+    )
+    context._surface_matrix = MethodType(AuthorProject._surface_matrix, context)
+    return context, surface
+
+
+def _build_world_mesh(project, surface, result):
     if surface.params["reference_state"] != "BOUND":
         return {
             "vertices": [],
@@ -832,7 +904,7 @@ def material_envelopes(project, part, *, output_error_mm=0):
     from .curve_material import _result
 
     surface = project.surfaces[part.surface_ids[0]]
-    result = analysis(project, surface)
+    result = _analysis_readonly(project, surface)
     if part.stale or result["status"] != "EXACT":
         raise ValidationError("Rozvin loftu nemá aktuální doložený materiál.")
     loop = part.polygons[surface.id][0]
@@ -848,7 +920,7 @@ def material_envelopes(project, part, *, output_error_mm=0):
 
 
 def has_small_loft_detail(project, part):
-    result = analysis(project, project.surfaces[part.surface_ids[0]])
+    result = _analysis_readonly(project, project.surfaces[part.surface_ids[0]])
     for patch in result["solver"]["patches"]:
         for side in ("first", "second"):
             chain = patch["flat_" + side + "_paper_mm"]
@@ -969,13 +1041,12 @@ def crease_geometry(project, surface, result, front_side):
     return creases
 
 
-def build_loft_part(project, old_part):
+def _build_loft_material_geometry(project, old_part, result):
     if len(old_part.surface_ids) != 1:
         raise ValidationError(
             "Loft zatím potřebuje vlastní papírový díl; složené kontakty nejsou doložené."
         )
     surface = project.surfaces[old_part.surface_ids[0]]
-    result = analysis(project, surface)
     if result["status"] != "EXACT":
         raise ValidationError(result["code"] + ": " + result["message"])
     rotation, origin = _local_frame(project, old_part, result)
@@ -983,7 +1054,7 @@ def build_loft_part(project, old_part):
     def mapped(points):
         return ((np.asarray(points) - origin) @ rotation.T).tolist()
 
-    part = copy.deepcopy(old_part)
+    part = copy.copy(old_part)
     part.polygons = {surface.id: [mapped(result["flat_loop"])]}
     commands = []
     for command in result["native_commands"]:
@@ -1045,6 +1116,47 @@ def build_loft_part(project, old_part):
             )
     center = Polygon(part.polygons[surface.id][0]).representative_point()
     part.labels = [{"text": part.name, "x": center.x, "y": center.y, "size_mm": 2.5}]
+    return part
+
+
+@lru_cache(maxsize=8)
+def _loft_material_json(key, surface_record, material_record):
+    context, surface = _source_context(key, surface_record)
+    material = json.loads(material_record)
+    material.pop("capabilities")
+    material["frame"] = PaperFrame(**material["frame"])
+    part = MaterialPart(**material)
+    built = _build_loft_material_geometry(context, part, _bound_analysis(key, surface_record))
+    return json.dumps(
+        {k: getattr(built, k) for k in ("polygons", "paths", "labels", "edges")},
+        allow_nan=False,
+        separators=(",", ":"),
+    )
+
+
+def build_loft_part(project, old_part):
+    if len(old_part.surface_ids) != 1:
+        raise ValidationError("Loft zatím potřebuje vlastní papírový díl.")
+    surface = project.surfaces[old_part.surface_ids[0]]
+    key, surface_record = _analysis_keys(project, surface)
+    record = json.dumps(
+        {
+            "id": old_part.id,
+            "name": old_part.name,
+            "surface_ids": old_part.surface_ids,
+            "frame": asdict(old_part.frame),
+            "front_side": old_part.front_side,
+            "capabilities": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+        },
+        sort_keys=True,
+        allow_nan=False,
+    )
+    geometry = json.loads(_loft_material_json(key, surface_record, record))
+    part = copy.copy(old_part)
+    part.surface_ids, part.lineage = list(old_part.surface_ids), list(old_part.lineage)
+    part.frame = copy.deepcopy(old_part.frame)
+    for field, value in geometry.items():
+        setattr(part, field, value)
     from .paper import part_input
 
     part.input_digest = part_input(project, part)
@@ -1076,7 +1188,7 @@ class LoftCommands:
                 "message": "Rovinný materiál s původním vnějším obrysem a otvory.",
                 "source_profile_ids": surface.source_profile_ids(),
             }
-        result = analysis(self, surface)
+        result = _analysis_readonly(self, surface)
         from .paper import part_input
 
         part = self.parts[surface.part_id]
@@ -1280,7 +1392,7 @@ class LoftCommands:
         self.next_part_number += 1
         self.placements[pid] = Placement(x_mm=(index % 3) * 120.0, y_mm=(index // 3) * 120.0)
         self._touch([sid])
-        result = analysis(self, surface)
+        result = _analysis_readonly(self, surface)
         if result.get("family") == "SINGULAR_HOMOTHETY":
             raise ValidationError("Korespondence obsahuje zhroucení nebo křížení generátorů.")
         if result["status"] == "EXACT":
