@@ -627,6 +627,16 @@ def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs
         if chosen is None:
             fail("Topologii skutečných výstupních řezů a otvorů nelze doložit. "
                  "Upravte dotýkající se nebo křížící se obrysy.", pid, page_index)
+        from archpapercraft.authoring.curve_area import native_region_area_bounds
+
+        try:
+            area_lower, area_upper = native_region_area_bounds(loops)
+        except ValueError as exc:
+            fail("Plochu skutečného vektorového dílu nelze doložit: " + str(exc), pid, page_index)
+        report["parts"][pid]["material_area_bounds_mm2"] = {
+            "lower": str(area_lower), "upper": str(area_upper),
+            "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+        }
         page = pages[page_index]
         page_proof = (_inside_page(loops, page["width_mm"], page["height_mm"])
                       if check_page_bounds else

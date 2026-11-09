@@ -20,6 +20,7 @@ import time
 import traceback
 import xml.etree.ElementTree as ET
 from ctypes import wintypes
+from fractions import Fraction
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -56,7 +57,7 @@ def _path_signature(value):
     Refuse an unsupported representation rather than claiming equal geometry.
     """
     tokens = re.findall(r"[A-Za-z]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?", value)
-    result, current, start, index, op = [], [0.0, 0.0], None, 0, None
+    result, current, start, index, op = [], [Fraction(0), Fraction(0)], None, 0, None
     while index < len(tokens):
         if tokens[index].isalpha():
             op = tokens[index]
@@ -65,6 +66,11 @@ def _path_signature(value):
             raise AssertionError("Path representation lacks an initial command")
         absolute, relative = op.upper(), op.islower()
         if absolute == "Z":
+            # Z draws the identical straight closing edge. Inkscape may remove
+            # an explicit L to the exact initial point; never discard a C/A or
+            # a merely nearby endpoint (a different short edge).
+            if result and result[-1][0] == "L" and list(result[-1][1:]) == start:
+                result.pop()
             result.append(("Z",))
             current, op = list(start), None
             continue
@@ -72,7 +78,7 @@ def _path_signature(value):
         if absolute not in counts:
             raise AssertionError("Unsupported native path reserialization: " + absolute)
         count = counts[absolute]
-        values = list(map(float, tokens[index : index + count]))
+        values = list(map(Fraction, tokens[index : index + count]))
         assert len(values) == count
         index += count
         if absolute == "H":

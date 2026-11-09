@@ -1186,12 +1186,15 @@ def run_windows(output, expected_sha, fixture="all"):
             delta = manifest["pdf_geometry_precision"]["combined_position_error_bound_mm"]
             check(0 <= delta <= 0.01, "PDF output exceeds the agreed paper-mm position budget")
             for value, target in zip(values, wanted):
-                # A circle's positional bound implies an annulus area interval,
-                # not the same numerical value in mm squared. The Green integral
-                # is read independently from the actual serialized PDF cubics.
-                tolerance = (2 * math.pi * 20 * delta + math.pi * delta**2
-                             if target == 400 * math.pi else 0.01)
+                # A mathematically valid positional tube is NOT permission to
+                # relax the separate normative area acceptance (V02).
+                tolerance = max(0.01, 1e-6 * target)
                 observations.append(self.near(value, target, "actual PDF Green area", tolerance))
+            expected_net = 12000 - 400 * math.pi
+            observations.append(self.near(
+                values[-1] - values[1], expected_net, "PDF net material excluding real hole",
+                max(0.01, 1e-6 * expected_net),
+            ))
             check(manifest["actual_curve_output_checks"]["pdf"]["status"] == "VALID",
                   "Actual staged PDF manufacturing proof absent")
             step("native_curves_hole_tab_and_independent_vector_integrals",

@@ -135,10 +135,27 @@ def validate_svg_curve_geometry(path, expected_parts):
         if not expected_parts and not actual["parts"]:
             report["status"] = "NO_MATERIAL"
             return report
-        return validate_native_output_regions(
+        result = validate_native_output_regions(
             actual, expected_parts, report=report,
             check_separation=False, check_page_bounds=False,
         )
+        from archpapercraft.authoring.curve_area import native_region_area_bounds
+
+        # The area acceptance excludes tabs. Subtracting the SUM of their areas
+        # is a conservative lower bound for the base material even if their
+        # union overlaps. The validated cache supplies CUT = base union tabs.
+        for group in root:
+            pid = group.get("data-part-id")
+            if pid is None:
+                continue
+            tabs = next(node for node in group if node.get("data-role") == "TABS")
+            tab_area_upper = sum(
+                native_region_area_bounds([loop])[1]
+                for node in tabs for loop in _loops(node.attrib["d"])
+            )
+            lower = Fraction(result["parts"][pid]["material_area_bounds_mm2"]["lower"])
+            result["parts"][pid]["base_area_lower_bound_mm2"] = str(max(0, lower-tab_area_upper))
+        return result
     except CurveOutputError:
         raise
     except (OSError, ET.ParseError, ValueError, KeyError, TypeError) as exc:
