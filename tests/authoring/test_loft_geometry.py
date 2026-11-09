@@ -96,6 +96,16 @@ def test_normal_arc_extrusion_length_and_exact_rectangular_metric():
     assert result["physical_build"] == "NOT_VERIFIED"
 
 
+def test_planar_arc_polyline_boundary_length_deficit_is_in_the_reported_bound():
+    a, b = arc_profile(20), arc_profile(30, prefix="b")
+    result = flatten_loft(a, b, correspondence(a, b))
+    assert result["status"] == "EXACT"
+    patch = result["patches"][0]
+    for points, radius in ((patch["flat_first_paper_mm"], 20), (patch["flat_second_paper_mm"], 30)):
+        measured = math.fsum(math.dist(x, y) for x, y in zip(points, points[1:]))
+        assert abs(math.pi * radius - measured) <= (result["boundary_length_error_bound_paper_mm"])
+
+
 def test_cubic_extrusion_proves_regularity_and_total_arclength_enclosure():
     # C(t)=(30t,30t^2); exact length is 15sqrt(5)+7.5 asinh(2).
     curve = Curve((0, 0), (30, 30), "cubic", {"control1": (10, 0), "control2": (20, 10)}, "first")

@@ -531,7 +531,11 @@ def _planar(first, second, pairs, k, shift, scale, budget, guard, max_segments):
         ]
         patches.append(_patch(first, second, a, b, reference, ts, aa, bb))
         position = max(position, certificate.max_chord_deviation_bound * scale * max(1, float(k)))
-        metric += (certificate.length_upper - certificate.length_lower) * scale * max(1, float(k))
+        # An analytic arc-length enclosure may be extremely tight although
+        # the delivered chord boundary is shorter. Bound THAT representation
+        # deficit, not merely uncertainty in the analytic length itself.
+        chords = math.fsum(math.dist(x, y) for x, y in zip(aa, aa[1:]))
+        metric += max(0.0, certificate.length_upper * scale - chords) * max(1, float(k))
         count += len(ts) - 1
     radial = min(
         _norm_bounds(tuple(Fraction(x) - y for x, y in zip(a.start, center)))[0]
