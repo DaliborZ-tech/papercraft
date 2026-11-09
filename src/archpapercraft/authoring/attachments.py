@@ -63,8 +63,8 @@ def surface_material(project, surface_id, *, paper=False):
     surface = project.surfaces[surface_id]
     factor = project.scale if paper else 1.0
     return material_polygon(
-        np.asarray(project.profiles[surface.profile_id].points) * factor,
-        [np.asarray(project.profiles[h].points) * factor for h in surface.hole_profile_ids],
+        np.asarray(project.profile_outline(surface.profile_id)) * factor,
+        [np.asarray(project.profile_outline(h)) * factor for h in surface.hole_profile_ids],
     )
 
 

@@ -5,9 +5,13 @@ from __future__ import annotations
 
 import math
 
+import numpy as np
 from PySide6.QtCore import QPointF, QRectF, Qt, QTimer, Signal
 from PySide6.QtGui import QBrush, QColor, QPainter, QPainterPath, QPen, QPolygonF
 from PySide6.QtWidgets import QGraphicsEllipseItem, QGraphicsItem, QGraphicsScene, QGraphicsView
+
+from archpapercraft.authoring.profile_curves import profile_native_path
+from archpapercraft.ui.author_paper import _path
 
 
 def cosmetic(color, width=1.0, style=Qt.PenStyle.SolidLine):
@@ -162,6 +166,11 @@ class AuthorSketch(QGraphicsView):
             path = QPainterPath()
             path.setFillRule(Qt.FillRule.OddEvenFill)
             for profile in profiles:
+                if any(s.kind != "line" for s in profile.segments):
+                    path.addPath(_path(profile_native_path(
+                        profile, (np.diag([1.0, -1.0]), np.zeros(2)),
+                    )))
+                    continue
                 polygon = QPolygonF([QPointF(float(x), -float(y)) for x, y in profile.points])
                 if profile.closed:
                     path.addPolygon(polygon)

@@ -102,7 +102,8 @@ class Profile:
         ):
             raise ValidationError("Neplatná metadata profilu.")
         self.plane.validate()
-        if len(self.vertices) < (3 if self.closed else 2):
+        minimum = 3 if self.closed and all(s.kind == "line" for s in self.segments) else 2
+        if len(self.vertices) < minimum:
             raise ValidationError("Profil má příliš málo bodů.")
         ids = [v.id for v in self.vertices]
         if len(set(ids)) != len(ids) or len(self.segments) != len(ids) - (0 if self.closed else 1):

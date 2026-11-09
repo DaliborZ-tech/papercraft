@@ -7,6 +7,7 @@ import pytest
 from test_interior import wall_roof
 
 from archpapercraft.authoring import AuthorProject, ProjectFormatError, UnsupportedOperationError
+from archpapercraft.authoring.project import SCHEMA_VERSION
 
 
 def test_actual_schema_one_implicit_tab_can_be_edited_individually_in_its_copy(tmp_path):
@@ -70,9 +71,9 @@ def test_known_a_file_import_preserves_source_ids_layout_and_origin_requires_cop
     p.save(target)
     assert not p.requires_save_as
     assert hashlib.sha256(path.read_bytes()).hexdigest() == original_hash
-    assert json.loads(target.read_text(encoding="utf8"))["schema_version"] == 3
+    assert json.loads(target.read_text(encoding="utf8"))["schema_version"] == SCHEMA_VERSION
     restored = AuthorProject.load(target)
-    assert restored.loaded_from_schema == 3 and not restored.requires_save_as
+    assert restored.loaded_from_schema == SCHEMA_VERSION and not restored.requires_save_as
     undo = AuthorProject.from_dict(p.to_dict())
     assert undo.loaded_from_schema is None and not undo.requires_save_as
 

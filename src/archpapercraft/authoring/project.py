@@ -50,10 +50,11 @@ from .paper import (
     validate_joint_contact,
     validate_layout,
 )
+from .profile_curves import ProfileCurveCommands, move_curve_endpoint
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 3
-WRITER_VERSION = "0.3.0-pc006b-clearance-experimental"
+SCHEMA_VERSION = 4
+WRITER_VERSION = "0.3.0-pc007a-profiles-experimental"
 _UNSET = object()
 
 
@@ -88,7 +89,7 @@ def _record(cls, data):
     return cls(**copy.deepcopy(data))
 
 
-class AuthorProject(InteriorCommands, BendCommands):
+class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
         self.name, self.scale, self.revision = name, number(scale, "Měřítko", positive=True), 1
@@ -222,7 +223,7 @@ class AuthorProject(InteriorCommands, BendCommands):
         value = vector(point, 2)
         if value == vertex.point:
             return
-        vertex.point = value
+        move_curve_endpoint(profile, vertex_id, value)
         profile.revision += 1
         self._touch(self._profile_surfaces(profile_id))
 
@@ -279,15 +280,13 @@ class AuthorProject(InteriorCommands, BendCommands):
         profiles = [self.profiles[p] for p in [profile_id, *hole_ids]]
         if any(not p.closed for p in profiles):
             raise ValidationError("Plocha potřebuje uzavřený vnější obrys i otvory.")
-        if any(any(s.kind != "line" for s in p.segments) for p in profiles):
-            raise UnsupportedOperationError(
-                "Křivkový profil je uložený; vytvoření této plochy z křivek "
-                "bude podporovat profilový řez."
-            )
         first = asdict(profiles[0].plane)
         if any(asdict(p.plane) != first for p in profiles[1:]):
             raise ValidationError("Obrys a otvory musí být ve stejné pracovní rovině.")
-        return material_polygon(profiles[0].points, [p.points for p in profiles[1:]])
+        return material_polygon(
+            self.profile_outline(profiles[0].id),
+            [self.profile_outline(p.id) for p in profiles[1:]],
+        )
 
     @atomic
     def add_hole(self, surface_id, profile_id):
@@ -342,12 +341,13 @@ class AuthorProject(InteriorCommands, BendCommands):
     def world_geometry(self, surface_id):
         surface = self.surfaces[surface_id]
         profile = self.profiles[surface.profile_id]
-        holes = [self.profiles[h].points for h in surface.hole_profile_ids]
-        local, triangles = triangulate(profile.points, holes)
+        outer = self.profile_outline(profile.id)
+        holes = [self.profile_outline(h) for h in surface.hole_profile_ids]
+        local, triangles = triangulate(outer, holes)
         vertices = self._surface_world_points(surface_id, local)
         normal = np.cross(profile.plane.u, profile.plane.v)
         normal = self._surface_matrix(surface_id)[:3, :3] @ normal
-        if signed_area(profile.points) < 0:
+        if signed_area(outer) < 0:
             normal = -normal
         triangle_areas = []
         for face in triangles:
@@ -373,13 +373,15 @@ class AuthorProject(InteriorCommands, BendCommands):
         boundary = []
         for p in [profile, *[self.profiles[h] for h in surface.hole_profile_ids]]:
             for edge in p.segments:
-                points = self._surface_world_points(
-                    surface_id,
-                    [p.vertex(edge.start_vertex_id).point, p.vertex(edge.end_vertex_id).point],
-                )
-                boundary.append(
-                    {"id": edge.id, "start": points[0].tolist(), "end": points[1].tolist()}
-                )
+                samples = [p.vertex(edge.start_vertex_id).point,
+                           p.vertex(edge.end_vertex_id).point]
+                if edge.kind != "line":
+                    samples = next(c["points"] for c in self.profile_projection(p.id)["curves"]
+                                   if c["segment_id"] == edge.id)
+                points = self._surface_world_points(surface_id, samples)
+                for first, second in zip(points, points[1:]):
+                    boundary.append({"id": edge.id, "start": first.tolist(),
+                                     "end": second.tolist()})
         return {
             "vertices": vertices.tolist(),
             "triangles": triangles.tolist(),
@@ -924,6 +926,11 @@ class AuthorProject(InteriorCommands, BendCommands):
                 raise ValidationError("Uložený rozvin nemá úplné role cest.")
             for values in part.paths.values():
                 for p in values:
+                    if set(p) == {"commands", "closed"}:
+                        from .profile_curves import validate_native_path
+
+                        validate_native_path(p)
+                        continue
                     if (
                         set(p) != {"points", "closed"}
                         or not isinstance(p["closed"], bool)
@@ -1149,6 +1156,14 @@ class AuthorProject(InteriorCommands, BendCommands):
             and data["schema_version"] == 2
             and data.get("writer_version") == "0.3.0-pc006b-experimental"
         )
+        upgrading_c = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 3
+            and data.get("writer_version") == "0.3.0-pc006b-clearance-experimental"
+        )
+        if upgrading_c:
+            data["schema_version"] = SCHEMA_VERSION
         if upgrading:
             if any(key in data for key in (
                 "attachments", "next_attachment_number", "material_profile"
@@ -1192,7 +1207,7 @@ class AuthorProject(InteriorCommands, BendCommands):
                 #006A had one implicit tab, not an independently addressable entity.
                 # Allocate its explicit identity once when creating the editable copy.
                 record["tab_ids"] = [identity()]
-        if (upgrading or upgrading_b) and isinstance(data.get("parts"), dict):
+        if (upgrading or upgrading_b or upgrading_c) and isinstance(data.get("parts"), dict):
             for part in data["parts"].values():
                 if isinstance(part, dict):
                     part["stale"] = True
@@ -1354,6 +1369,6 @@ def load_project(path):
         return LegacyProject(raw, source)
     project = AuthorProject.from_dict(data)
     project.loaded_from_schema = data.get("schema_version")
-    project.requires_save_as = project.loaded_from_schema in (1, 2)
+    project.requires_save_as = project.loaded_from_schema in (1, 2, 3)
     project.loaded_source_path = str(source.resolve())
     return project

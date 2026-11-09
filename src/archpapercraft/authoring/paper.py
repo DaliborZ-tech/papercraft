@@ -22,6 +22,7 @@ from .attachments import (
 from .errors import ValidationError
 from .geometry import material_polygon, page_points, path, signed_area
 from .model import Issue
+from .profile_curves import has_small_source_detail, restore_native_cut_curves
 
 ROLES = ("CUT", "FOLD_MOUNTAIN", "FOLD_VALLEY", "TABS", "GUIDES")
 
@@ -82,7 +83,7 @@ def _frame_map(project, part):
         raise ValidationError("ANCHOR_UNRESOLVED: kořen dílu chybí.")
     profile = project.profiles[project.surfaces[frame.root_surface_id].profile_id]
     vertex, segment = profile.vertex(frame.anchor_vertex_id), profile.segment(frame.axis_segment_id)
-    if vertex is None or segment is None or segment.kind != "line":
+    if vertex is None or segment is None:
         raise ValidationError("ANCHOR_UNRESOLVED: zvolte znovu kotvu a směr dílu.")
     start, end = (
         profile.vertex(segment.start_vertex_id).point,
@@ -241,7 +242,8 @@ def build_part(project, old_part):
         profiles = [
             project.profiles[pid] for pid in [surface.profile_id, *surface.hole_profile_ids]
         ]
-        loops = [_map_points(profile.points, maps[sid]).tolist() for profile in profiles]
+        loops = [_map_points(project.profile_outline(profile.id), maps[sid]).tolist()
+                 for profile in profiles]
         polygon = material_polygon(loops[0], loops[1:])
         reference = (
             project._source_polygon(surface.profile_id, surface.hole_profile_ids).area
@@ -253,7 +255,7 @@ def build_part(project, old_part):
         ):
             raise ValidationError("Rozvin ztrácí požadovanou plošnou přesnost.")
         for profile, flattened in zip(profiles, loops):
-            original = np.asarray(profile.points)
+            original = np.asarray(project.profile_outline(profile.id))
             flat = np.asarray(flattened)
             expected_lengths = (
                 np.linalg.norm(np.roll(original, -1, axis=0) - original, axis=1) * project.scale
@@ -271,15 +273,17 @@ def build_part(project, old_part):
         part.polygons[sid] = loops
         for profile in profiles:
             for edge in profile.segments:
-                points = _map_points(_edge_points(project, sid, edge.id), maps[sid])
-                part.edges.append(
-                    {
-                        "surface_id": sid,
-                        "edge_id": edge.id,
-                        "start": points[0].tolist(),
-                        "end": points[1].tolist(),
-                    }
-                )
+                samples = [profile.vertex(edge.start_vertex_id).point,
+                           profile.vertex(edge.end_vertex_id).point]
+                if edge.kind != "line":
+                    samples = next(
+                        c["points"] for c in project.profile_projection(profile.id)["curves"]
+                        if c["segment_id"] == edge.id
+                    )
+                points = _map_points(samples, maps[sid])
+                for first, second in zip(points, points[1:]):
+                    part.edges.append({"surface_id": sid, "edge_id": edge.id,
+                                       "start": first.tolist(), "end": second.tolist()})
     tabs = []
     for joint in project.joints.values():
         if joint.surface_a not in part.surface_ids and joint.surface_b not in part.surface_ids:
@@ -395,6 +399,7 @@ def build_part(project, old_part):
             part.paths[role].append(path(source_points[0] + shape["hinge"][:, :1] * tangent))
     union = unary_union([*material, *tabs])
     part.paths["CUT"] = _polygon_loops(union)
+    restore_native_cut_curves(project, part, maps)
     label_at = material[0].representative_point()
     part.labels.insert(0, {"text": part.name, "x": label_at.x, "y": label_at.y, "size_mm": 2.5})
     part.stale = False
@@ -522,11 +527,7 @@ def validate_layout(project):
                     (pid,),
                     "warning",
                 )
-            if any(
-                np.linalg.norm(np.roll(np.array(loop), -1, axis=0) - loop, axis=1).min() < 0.5
-                for loops in part.polygons.values()
-                for loop in loops
-            ):
+            if has_small_source_detail(project, part):
                 issue(
                     "SMALL_DETAIL", "Díl má detail menší než 0,5 mm na papíře.", (pid,), "warning"
                 )

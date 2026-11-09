@@ -1977,7 +1977,15 @@
         "docs/p2/implementation/evidence/pc006b-eb08f97-all-tests.xml",
         "docs/p2/implementation/evidence/pc006b-desktop-eb08f97-run06/results.json",
         "docs/p2/implementation/evidence/pc006b-inkscape-eb08f97-run01/editor-results.json"
-      ]
+      ],
+      "integration": {
+        "status": "PUSHED_AND_REMOTE_SHA_VERIFIED",
+        "master_sha": "8e72cdade01cb9d23c98c95629ed898f8e05290b",
+        "remote_sha": "8e72cdade01cb9d23c98c95629ed898f8e05290b",
+        "report": "docs/p2/implementation/PC006B_INTEGRATION.md",
+        "mode": "FAST_FORWARD",
+        "scope": "Technical implementation only; actual novice AC-US08 remains open"
+      }
     },
     {
       "id": "PC-007A",
@@ -2033,7 +2041,7 @@
         "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
         "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
@@ -2052,31 +2060,41 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Preserve native source profiles and stable curve IDs; planar trims and separately verified ruled families, no closed-solid prerequisite",
+          "evidence": [
+            "src/archpapercraft/authoring/profile_curves.py"
+          ],
+          "review": "PENDING integrated-source review"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Actual line/arc/cubic sketch input, contextual curve editing, staged previews and reversible controller commands in this slice",
+          "evidence": [
+            "src/archpapercraft/ui/author_sketch.py"
+          ],
+          "review": "PENDING integrated-source review"
         },
         {
           "skill": "papercraft-verification",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Independent bound/regularity and native SVG review found near-full-circle wrong-branch R01; retain failure and require repair before publishing",
+          "evidence": [
+            "src/archpapercraft/authoring/curves.py",
+            "tests/authoring/test_profile_curves.py"
+          ],
+          "review": "PENDING integrated-source review"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Continue after published technical B while retaining missing novice evidence; isolate numeric/loft/UI ownership and review concrete source",
+          "evidence": [
+            "docs/p2/implementation/PC006B_INTEGRATION.md",
+            "05_WORK_QUEUE.json"
+          ],
+          "review": "PENDING integrated-source review"
         }
       ],
       "usability": {
@@ -2105,7 +2123,14 @@
         }
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
-      "implementation_authorized_on": "2026-11-06"
+      "implementation_authorized_on": "2026-11-06",
+      "working_branch": "revival/p2-profiles",
+      "implementation_started_on": "2026-11-09",
+      "dependency_evidence": {
+        "technical_prerequisite": "PC-006A/B implementation independently approved and published on 8e72cda",
+        "remaining_prerequisite_evidence": "Actual novice AC-US08 NOT_RUN; PC-006B/parent stay open, does not prevent independent authorized technical work",
+        "no_acceptance_waived": true
+      }
     },
     {
       "id": "PC-007B",
@@ -2389,7 +2414,7 @@
   ],
   "updated_on": "2026-11-06",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-clearance-integration",
+  "working_branch": "revival/p2-profiles",
   "release_readiness": "NOT_READY: owner accepted full P2 v1.2; implementation PC-006A in progress; new-user and physical evidence not run",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
@@ -2518,7 +2543,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "PC-006B",
+  "current_authorized_package": "PC-007A",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2611,10 +2636,9 @@
     "whole_v12_contract_acceptance_implied": false
   },
   "current_delivery": {
-    "ticket": "PC-006B",
-    "then": "PC-007A",
+    "ticket": "PC-007A",
+    "then": "PC-007B",
     "followed_by": [
-      "PC-007B",
       "PC-008",
       "PC-009",
       "PC-010"
@@ -2623,10 +2647,10 @@
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
-      "ticket": "PC-006A",
-      "code_sha": "7da240386550039761de6861d3149ce9ee1be466",
-      "report": "docs/p2/implementation/PC006A_REVIEW.md",
-      "verification_source_sha": "5741cf144116123b4a0cb3f1c84987443517662a"
+      "ticket": "PC-006B technical slice",
+      "code_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",
+      "published_sha": "8e72cdade01cb9d23c98c95629ed898f8e05290b",
+      "report": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md"
     },
     "status_before_pause": "IN_PROGRESS",
     "paused_on": "2026-11-06",
@@ -2635,8 +2659,8 @@
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-07.md",
     "wip_source_sha": "4e9956bc8fdb8a91af5cd5a4aa62de481e3eb657",
-    "wip_branch": "revival/p2-clearance-integration",
-    "next_required_technical_work": "Complete AU07 obstacle registry with every other active connector tab, then independent adapter review and new native proof",
+    "wip_branch": "revival/p2-profiles",
+    "next_required_technical_work": "Native curve sketch/edit/planar output and certified profile-to-profile B, independent review then real UI/save/reopen/layout/vector/editor proof",
     "resumed_on": "2026-11-09",
     "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills",
     "digital_source_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",

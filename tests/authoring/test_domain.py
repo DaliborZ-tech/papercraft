@@ -2,7 +2,7 @@ import copy
 
 import pytest
 
-from archpapercraft.authoring import AuthorProject, UnsupportedOperationError, ValidationError
+from archpapercraft.authoring import AuthorProject, ValidationError
 
 
 def rectangle(p, width=10000, height=4000):
@@ -100,7 +100,7 @@ def test_analytic_curve_sources_roundtrip_without_pretending_material_support(ki
     assert copy_p.profiles[pid].segments[0].kind == kind
 
 
-def test_curved_region_creation_is_explicitly_unsupported_in_first_cut():
+def test_curved_region_has_native_material_but_curved_rigid_hinge_is_not_a_chord():
     p = AuthorProject.new()
     pid = p.add_profile(
         segments=[
@@ -109,9 +109,14 @@ def test_curved_region_creation_is_explicitly_unsupported_in_first_cut():
             {"kind": "line", "start": [0, 0], "end": [10, 0]},
         ]
     )
+    sid = p.add_surface(pid)
+    assert any(c[0] == "A" for path in p.parts[p.part_for_surface(sid)].paths["CUT"]
+               for c in path["commands"])
+    from archpapercraft.authoring.attachments import edge_source
+
     before = p.to_dict()
-    with pytest.raises(UnsupportedOperationError):
-        p.add_surface(pid)
+    with pytest.raises(ValidationError, match="přímý ohyb"):
+        edge_source(p, sid, p.profiles[pid].segments[0].id)
     assert p.to_dict() == before
 
 

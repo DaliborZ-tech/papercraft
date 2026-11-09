@@ -7,6 +7,7 @@ import pytest
 
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject, ProjectFormatError, ValidationError
+from archpapercraft.authoring.project import SCHEMA_VERSION
 
 
 def test_material_is_explicit_persistent_undoable_and_invalidates_only_source_evidence(tmp_path):
@@ -87,4 +88,4 @@ def test_known_prior_b_draft_is_only_saved_as_copy_and_gets_no_measured_material
         controller.save(original)
     controller.save(tmp_path / "B-material-copy.apcraft")
     assert original.read_bytes() == original_bytes
-    assert controller.project.to_dict()["schema_version"] == 3
+    assert controller.project.to_dict()["schema_version"] == SCHEMA_VERSION
