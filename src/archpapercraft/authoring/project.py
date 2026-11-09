@@ -27,6 +27,8 @@ from .geometry import (
     vector,
 )
 from .interior import InteriorCommands
+from .loft_surface import LoftCommands, validate_loft_params, world_loft_geometry
+from .loft_surface import analysis as loft_analysis
 from .model import (
     Attachment,
     Connector,
@@ -89,7 +91,7 @@ def _record(cls, data):
     return cls(**copy.deepcopy(data))
 
 
-class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
+class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCommands):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
         self.name, self.scale, self.revision = name, number(scale, "Měřítko", positive=True), 1
@@ -119,17 +121,20 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                 if pair & affected:
                     affected.update(pair)
         for sid in surface_ids:
+            surface = self.surfaces[sid]
+            if surface.kind == "ruled_loft":
+                for side, pid in zip(("first", "second"), surface.source_profile_ids()):
+                    if {r[side + "_segment_id"] for r in surface.params["correspondences"]} != {
+                        segment.id for segment in self.profiles[pid].segments
+                    }:
+                        surface.params["reference_state"] = "UNRESOLVED"
             self.surfaces[sid].revision += 1
         for part in self.parts.values():
             if set(part.surface_ids) & affected:
                 part.stale = True
 
     def _profile_surfaces(self, profile_id):
-        return [
-            sid
-            for sid, s in self.surfaces.items()
-            if profile_id in [s.profile_id, *s.hole_profile_ids]
-        ]
+        return [sid for sid, s in self.surfaces.items() if profile_id in s.source_profile_ids()]
 
     @atomic
     def add_profile(self, points=None, *, segments=None, closed=True, name="Obrys", plane=None):
@@ -203,6 +208,9 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
         replacement = self.profiles.pop(new_id)
         replacement.id, replacement.revision = profile_id, old.revision + 1
         self.profiles[profile_id] = replacement
+        for surface in self.surfaces.values():
+            if surface.kind == "ruled_loft" and profile_id in surface.source_profile_ids():
+                surface.params["reference_state"] = "UNRESOLVED"
         for joint in self.joints.values():
             if any(
                 self.surfaces[sid].profile_id == profile_id
@@ -342,6 +350,8 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
 
     def world_geometry(self, surface_id):
         surface = self.surfaces[surface_id]
+        if surface.kind == "ruled_loft":
+            return world_loft_geometry(self, surface)
         profile = self.profiles[surface.profile_id]
         outer = self.profile_outline(profile.id)
         holes = [self.profile_outline(h) for h in surface.hole_profile_ids]
@@ -375,15 +385,18 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
         boundary = []
         for p in [profile, *[self.profiles[h] for h in surface.hole_profile_ids]]:
             for edge in p.segments:
-                samples = [p.vertex(edge.start_vertex_id).point,
-                           p.vertex(edge.end_vertex_id).point]
+                samples = [p.vertex(edge.start_vertex_id).point, p.vertex(edge.end_vertex_id).point]
                 if edge.kind != "line":
-                    samples = next(c["points"] for c in self.profile_projection(p.id)["curves"]
-                                   if c["segment_id"] == edge.id)
+                    samples = next(
+                        c["points"]
+                        for c in self.profile_projection(p.id)["curves"]
+                        if c["segment_id"] == edge.id
+                    )
                 points = self._surface_world_points(surface_id, samples)
                 for first, second in zip(points, points[1:]):
-                    boundary.append({"id": edge.id, "start": first.tolist(),
-                                     "end": second.tolist()})
+                    boundary.append(
+                        {"id": edge.id, "start": first.tolist(), "end": second.tolist()}
+                    )
         return {
             "vertices": vertices.tolist(),
             "triangles": triangles.tolist(),
@@ -790,10 +803,16 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                 "connector_bends": {
                     cid: self.connector_bend_clearance(cid) for cid in self.connectors
                 },
-                "curve_profiles": self.curve_projection_reports(),
-                "curve_regions": self.curve_region_reports(),
+                "curve_profiles": self._planar_curve_reports("curve_projection_reports"),
+                "curve_regions": self._planar_curve_reports("curve_region_reports"),
+                "lofts": {
+                    sid: self.loft_status(sid)
+                    for sid, surface in self.surfaces.items()
+                    if surface.kind == "ruled_loft"
+                },
                 "accepted_layout_overlaps": [
-                    list(issue.part_ids) for issue in issues
+                    list(issue.part_ids)
+                    for issue in issues
                     if issue.code == "MATERIAL_OVERLAP" and issue.acknowledged
                 ],
                 "physical_build": "NOT_VERIFIED",
@@ -806,6 +825,25 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
             },
             "pages": pages,
         }
+
+    def _planar_curve_reports(self, method):
+        view = copy.copy(self)
+        view.surfaces = {sid: s for sid, s in self.surfaces.items() if s.kind == "planar"}
+        return getattr(ProfileCurveCommands, method)(view)
+
+    def _assembly_clearance_key(self):
+        base = BendCommands._assembly_clearance_key(self)
+        profiles = {
+            pid: asdict(self.profiles[pid])
+            for surface in self.surfaces.values()
+            if surface.kind == "ruled_loft"
+            for pid in surface.source_profile_ids()
+        }
+        if not profiles:
+            return base
+        from .paper import digest
+
+        return digest({"assembly": base, "loft_source_profiles": profiles})
 
     def _state_for_digest(self):
         data = self.to_dict(validate=False)
@@ -844,6 +882,25 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                 or not isinstance(surface.name, str)
             ):
                 raise ValidationError("Neplatný registr povrchů.")
+            if surface.kind == "ruled_loft":
+                all_ids.extend(validate_loft_params(self, surface))
+                vector(surface.position_mm, 3)
+                vector(surface.rotation_deg, 3)
+                _revision(surface.revision)
+                self._surface_matrix(sid)
+                result = loft_analysis(self, surface)
+                if any(
+                    report["status"] == "INVALID"
+                    for report in result.get("source_topology", {}).values()
+                ):
+                    raise ValidationError("Zdrojový profil loftu se kříží nebo překrývá.")
+                self.world_geometry(sid)
+                if (
+                    surface.part_id not in self.parts
+                    or sid not in self.parts[surface.part_id].surface_ids
+                ):
+                    raise ValidationError("Loft nemá platný vlastní materiálový díl.")
+                continue
             if surface.kind != "planar" or surface.params != {}:
                 raise UnsupportedOperationError(
                     "Tento typ konstrukční plochy zatím není implementovaný."
@@ -924,7 +981,15 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                 raise ValidationError("Neplatný původ dílu.")
             for ancestor in part.lineage:
                 uuid(ancestor)
-            if not isinstance(part.polygons, dict) or set(part.polygons) != set(part.surface_ids):
+            unresolved_new_loft = (
+                part.stale
+                and not part.polygons
+                and len(part.surface_ids) == 1
+                and self.surfaces[part.surface_ids[0]].kind == "ruled_loft"
+            )
+            if not isinstance(part.polygons, dict) or (
+                not unresolved_new_loft and set(part.polygons) != set(part.surface_ids)
+            ):
                 raise ValidationError("Uložený rozvin nepokrývá všechny povrchy.")
             for loops in part.polygons.values():
                 if not isinstance(loops, list) or not loops:
@@ -971,11 +1036,69 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
             for edge in part.edges:
                 if (
                     not isinstance(edge, dict)
-                    or set(edge) != {"surface_id", "edge_id", "start", "end"}
+                    or set(edge)
+                    not in (
+                        {"surface_id", "edge_id", "start", "end"},
+                        {"surface_id", "edge_id", "start", "end", "source"},
+                    )
                     or edge["surface_id"] not in part.surface_ids
                 ):
                     raise ValidationError("Neplatná uložená hrana rozvinu.")
                 uuid(edge["edge_id"])
+                if "source" in edge:
+                    surface = self.surfaces[edge["surface_id"]]
+                    source = edge["source"]
+                    if (
+                        surface.kind != "ruled_loft"
+                        or not isinstance(source, dict)
+                        or set(source)
+                        != {
+                            "feature_id",
+                            "patch_id",
+                            "profile_id",
+                            "segment_id",
+                            "role",
+                            "parameter_interval",
+                        }
+                        or source["feature_id"] != surface.id
+                        or source["segment_id"] != edge["edge_id"]
+                    ):
+                        raise ValidationError("Neplatný původ rozvinuté loft hrany.")
+                    if source["role"] not in ("FIRST", "SECOND"):
+                        raise ValidationError("Neplatná strana zdrojové hranice loftu.")
+                    for key in ("patch_id", "profile_id", "segment_id"):
+                        uuid(source[key])
+                    side = source["role"].lower()
+                    interval = source["parameter_interval"]
+                    if not isinstance(interval, list) or len(interval) != 2:
+                        raise ValidationError("Zdrojová hranice loftu neodpovídá patchi.")
+                    for value in interval:
+                        number(value, "Zdrojový parametr loft hrany")
+                        if not 0 <= value <= 1:
+                            raise ValidationError("Zdrojový parametr je mimo původní úsek.")
+                    if interval[1] == interval[0]:
+                        raise ValidationError("Uložená hrana loftu změnila směr zdroje.")
+                    if not part.stale:
+                        record = next(
+                            (
+                                r
+                                for r in surface.params["correspondences"]
+                                if r["id"] == source["patch_id"]
+                            ),
+                            None,
+                        )
+                        expected_profile = surface.source_profile_ids()[0 if side == "first" else 1]
+                        if (
+                            record is None
+                            or source["profile_id"] != expected_profile
+                            or source["segment_id"] != record[side + "_segment_id"]
+                            or (interval[1] - interval[0])
+                            * (record[side + "_interval"][1] - record[side + "_interval"][0])
+                            <= 0
+                        ):
+                            raise ValidationError(
+                                "Aktuální hrana loftu nemá platnou zdrojovou vazbu."
+                            )
                 vector(edge["start"], 2)
                 vector(edge["end"], 2)
             placement = self.placements[pid]
@@ -1173,25 +1296,31 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
         if upgrading_c:
             data["schema_version"] = SCHEMA_VERSION
         if upgrading:
-            if any(key in data for key in (
-                "attachments", "next_attachment_number", "material_profile"
-            )):
+            if any(
+                key in data for key in ("attachments", "next_attachment_number", "material_profile")
+            ):
                 raise ProjectFormatError("Projekt006A obsahuje neočekávaná pole novějšího formátu.")
-            data.update(attachments={}, next_attachment_number=1,
-                        material_profile=copy.deepcopy(DEFAULT_MATERIAL_PROFILE))
+            data.update(
+                attachments={},
+                next_attachment_number=1,
+                material_profile=copy.deepcopy(DEFAULT_MATERIAL_PROFILE),
+            )
             data["schema_version"] = SCHEMA_VERSION
         if upgrading_b:
             if "material_profile" in data:
                 raise ProjectFormatError(
                     "Starý B dokument obsahuje pole novější materiálové verze."
                 )
-            data.update(material_profile=copy.deepcopy(DEFAULT_MATERIAL_PROFILE),
-                        schema_version=SCHEMA_VERSION)
+            data.update(
+                material_profile=copy.deepcopy(DEFAULT_MATERIAL_PROFILE),
+                schema_version=SCHEMA_VERSION,
+            )
             if isinstance(data.get("connectors"), dict):
                 known_fields = set(asdict(Connector("", "", "")))
                 for record in data["connectors"].values():
                     if not isinstance(record, dict) or set(record) not in (
-                        known_fields, known_fields - {"receiver_side"}
+                        known_fields,
+                        known_fields - {"receiver_side"},
                     ):
                         raise ProjectFormatError("Neznámá struktura původní B chlopně.")
                     record.setdefault("receiver_side", "unknown")
@@ -1212,7 +1341,7 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                     raise ProjectFormatError("Neplatná původní chlopeň projektu006A.")
                 defaults = asdict(Connector("", "", ""))
                 record.update({k: v for k, v in defaults.items() if k not in record})
-                #006A had one implicit tab, not an independently addressable entity.
+                # 006A had one implicit tab, not an independently addressable entity.
                 # Allocate its explicit identity once when creating the editable copy.
                 record["tab_ids"] = [identity()]
         if (upgrading or upgrading_b or upgrading_c) and isinstance(data.get("parts"), dict):

@@ -7,10 +7,10 @@ has been proved to avoid the query point. Exhaustion never produces VALID.
 
 from __future__ import annotations
 
+import heapq
 import math
 from dataclasses import dataclass
 from fractions import Fraction
-from itertools import combinations
 
 from .curves import Curve, _arc_svg_plan, _control, _split, _sqrt_bounds
 
@@ -208,6 +208,119 @@ def _bbox(node, budget):
 def _boxes_separate(a, b, budget):
     ba, bb = _bbox(a, budget), _bbox(b, budget)
     return any(x[1] < y[0] or y[1] < x[0] for x, y in zip(ba, bb))
+
+
+@dataclass
+class _SweepNode:
+    key: tuple
+    high: Fraction
+    left: object = None
+    right: object = None
+    maximum: Fraction | None = None
+    height: int = 1
+
+
+def _sweep_height(node):
+    return 0 if node is None else node.height
+
+
+def _sweep_update(node):
+    if node is not None:
+        node.maximum = max([node.high, *(child.maximum for child in (node.left, node.right)
+                                        if child is not None)])
+        node.height = 1+max(_sweep_height(node.left), _sweep_height(node.right))
+    return node
+
+
+def _sweep_rotate(root, left):
+    if left:
+        pivot = root.right
+        root.right, pivot.left = pivot.left, root
+    else:
+        pivot = root.left
+        root.left, pivot.right = pivot.right, root
+    _sweep_update(root)
+    return _sweep_update(pivot)
+
+
+def _sweep_balance(root):
+    _sweep_update(root)
+    difference = _sweep_height(root.left)-_sweep_height(root.right)
+    if difference > 1:
+        if _sweep_height(root.left.left) < _sweep_height(root.left.right):
+            root.left = _sweep_rotate(root.left, True)
+        return _sweep_rotate(root, False)
+    if difference < -1:
+        if _sweep_height(root.right.right) < _sweep_height(root.right.left):
+            root.right = _sweep_rotate(root.right, False)
+        return _sweep_rotate(root, True)
+    return root
+
+
+def _sweep_insert(root, node):
+    if root is None:
+        return _sweep_update(node)
+    if node.key < root.key:
+        root.left = _sweep_insert(root.left, node)
+    else:
+        root.right = _sweep_insert(root.right, node)
+    return _sweep_balance(root)
+
+
+def _sweep_delete(root, key):
+    if root.key == key:
+        if root.left is None:
+            return root.right
+        if root.right is None:
+            return root.left
+        successor = root.right
+        while successor.left is not None:
+            successor = successor.left
+        root.key, root.high = successor.key, successor.high
+        root.right = _sweep_delete(root.right, successor.key)
+    elif key < root.key:
+        root.left = _sweep_delete(root.left, key)
+    else:
+        root.right = _sweep_delete(root.right, key)
+    return _sweep_balance(root)
+
+
+def _sweep_query(root, low, high, budget):
+    if root is None or root.maximum < low:
+        return
+    budget.tick()  # Index traversal is finite work, including empty candidate searches.
+    yield from _sweep_query(root.left, low, high, budget)
+    if root.key[0] <= high:
+        if root.high >= low:
+            yield root.key[1]
+        yield from _sweep_query(root.right, low, high, budget)
+
+
+def _candidate_pairs(nodes, budget):
+    """Exact outward hull sweep; every omitted pair has disjoint hull boxes.
+
+    The active secondary interval tree avoids both horizontal and vertical
+    quadratic scans. Bounds never round through float/GEOS: rational Bezier
+    hulls (including interval rational native arcs) plus the existing outward
+    coordinate reserve contain each entire curve. Touching boxes stay candidates.
+    """
+    reserve = Fraction(budget.guard)
+    bounds = []
+    for node in nodes:
+        hull = _hull(node)
+        bounds.append(tuple((min(Fraction(p[i]) for p in hull)-reserve,
+                             max(Fraction(p[i]) for p in hull)+reserve) for i in (0, 1)))
+    active, expiry = None, []
+    for index in sorted(range(len(nodes)), key=lambda i: (bounds[i][0][0], i)):
+        (low, high), (bottom, top) = bounds[index]
+        while expiry and expiry[0][0] < low:
+            _, previous = heapq.heappop(expiry)
+            active = _sweep_delete(active, (bounds[previous][1][0], previous))
+        for previous in _sweep_query(active, bottom, top, budget):
+            budget.tick()  # Each exact pair candidate consumes the shared finite budget.
+            yield min(previous, index), max(previous, index)
+        active = _sweep_insert(active, _SweepNode((bottom, index), top))
+        heapq.heappush(expiry, (high, index))
 
 
 def _positive_side(node, normal, origin, allowed, budget):
@@ -436,7 +549,8 @@ def _simple_pieces(node, budget):
         if (min(values) >= 0 and max(values) > 0) or (max(values) <= 0 and min(values) < 0):
             return [node]  # Strictly monotone interior projection; exact Bernstein proof.
     pieces = [piece for child in node.split(budget) for piece in _simple_pieces(child, budget)]
-    for (ia, a), (ib, b) in combinations(enumerate(pieces), 2):
+    for ia, ib in _candidate_pairs(pieces, budget):
+        a, b = pieces[ia], pieces[ib]
         allowed = set(a.ends()) & set(b.ends()) if ib == ia+1 else set()
         _pair(a, b, allowed, budget)
     return pieces
@@ -469,7 +583,9 @@ def _winding(loop, point, budget):
 def _check_region_nodes(nodes, query_points, budget):
     """Shared native/source engine; all input construction precedes this proof."""
     indexed = [(li, ni, node) for li, loop in enumerate(nodes) for ni, node in enumerate(loop)]
-    for (ia, ja, a), (ib, jb, b) in combinations(indexed, 2):
+    for first, second in _candidate_pairs([item[2] for item in indexed], budget):
+        ia, ja, a = indexed[first]
+        ib, jb, b = indexed[second]
         adjacent = ia == ib and (jb == ja+1 or (ja == 0 and jb == len(nodes[ia])-1))
         allowed = set(a.ends()) & set(b.ends()) if adjacent else set()
         _pair(a, b, allowed, budget)
@@ -486,6 +602,7 @@ def _check_region_nodes(nodes, query_points, budget):
 
 def _topology_proof():
     return ("EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
             "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
             "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
             "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
@@ -732,11 +849,11 @@ def certify_native_region_separation(first_outer, first_holes, second_outer, sec
             regions.append(nodes)
         boundary_failure = None
         try:
-            for a_loop in regions[0]:
-                for b_loop in regions[1]:
-                    for a in a_loop:
-                        for b in b_loop:
-                            _pair(a, b, set(), budget)
+            first_nodes = [n for loop in regions[0] for n in loop]
+            combined = [*first_nodes, *(n for loop in regions[1] for n in loop)]
+            for a, b in _candidate_pairs(combined, budget):
+                if a < len(first_nodes) <= b:
+                    _pair(combined[a], combined[b], set(), budget)
         except _InvalidError as exc:
             if exc.witness and exc.witness.get("proper_interior_crossing"):
                 return result("OVERLAP", "Proved interior material-boundary crossing",

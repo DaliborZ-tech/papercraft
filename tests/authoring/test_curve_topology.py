@@ -361,3 +361,63 @@ def test_actual_native_cubic_material_crossing_uses_area_proof_not_chord_rectang
     across_top = native_rectangle(4, 4, 6, 8)
     result = separation(arch, across_top)
     assert result.status == "OVERLAP", result
+
+def test_rational_sweep_candidates_equal_exhaustive_outward_hull_pairs():
+    from archpapercraft.authoring import curve_topology as t
+
+    # A grid plus long thin curves exercises expiry, equal x, nested y,
+    # touching boxes and positive rational gaps smaller than float resolution.
+    delta = Fraction(1, 10**80)
+    curves = [
+        Curve((x, y), (x + 1, y + 1), segment_id=f"grid-{x}-{y}")
+        for x in range(8)
+        for y in range(6)
+    ]
+    curves += [Curve((0, 2), (7, 2), segment_id="wide")]
+    nodes = [t._Node(c, controls=t._control(c)) for c in curves]
+    exact = ((1+delta, Fraction(0)), (1+delta, Fraction(6)))
+    nodes.append(t._Node(t._NativeCurve(*exact, "line", "rational"), controls=exact))
+    budget = t._Budget(100000, 24, 0)
+    actual = set(t._candidate_pairs(nodes, budget))
+    boxes = [
+        tuple((min(p[i] for p in t._hull(n)), max(p[i] for p in t._hull(n))) for i in (0, 1))
+        for n in nodes
+    ]
+    expected = {
+        (a, b)
+        for a in range(len(nodes))
+        for b in range(a + 1, len(nodes))
+        if all(x[0] <= y[1] and y[0] <= x[1] for x, y in zip(boxes[a], boxes[b]))
+    }
+    assert actual == expected
+    assert (0, len(nodes)-1) not in actual  # Strict gap survives beyond float resolution.
+    with pytest.raises(t._UnresolvedError, match="budget"):
+        list(t._candidate_pairs(nodes, t._Budget(1, 24, 0)))
+
+
+@pytest.mark.parametrize("vertical", [False, True])
+def test_long_native_boundary_uses_shared_sweep_without_skipping_endpoint_proofs(vertical):
+    # 4000 collinear cubic intervals on each side: exact simple rectangle,
+    # but a naive all-pairs implementation exceeds this finite node budget.
+    count = 4000
+    commands = [("M", 0, 0)]
+    for i in range(count):
+        commands.append(("C", Fraction(3 * i + 1, 3), 0, Fraction(3 * i + 2, 3), 0, i + 1, 0))
+    commands.append(("L", count, 10))
+    for i in reversed(range(count)):
+        commands.append(("C", Fraction(3 * i + 2, 3), 10, Fraction(3 * i + 1, 3), 10, i, 10))
+    commands.append(("Z",))
+    if vertical:
+        commands = [(c[0], *(v for pair in zip(c[2::2], c[1::2]) for v in pair)) for c in commands]
+    result = certify_native_region_topology(commands, max_nodes=200000)
+    assert result.status == "VALID", result
+    assert result.examined_nodes < 150000
+    assert "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS" in result.proof
+    assert certify_native_region_topology(commands, max_nodes=200).status == "UNRESOLVED"
+
+
+def test_sweep_keeps_native_arc_bulge_outside_its_endpoint_chord_as_candidate():
+    # Endpoint chord is y=0, actual upper semicircle crosses a narrow rectangle.
+    circle_path = native_circle(radius=10)
+    rectangle = native_rectangle(-1, 9, 1, 11)
+    assert separation(circle_path, rectangle).status == "OVERLAP"

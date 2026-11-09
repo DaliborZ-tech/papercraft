@@ -49,11 +49,7 @@ def part_input(project, part):
     for attachment in attachments:
         touched.update((attachment.source_surface_id, attachment.target_surface_id))
     surfaces = {sid: asdict(project.surfaces[sid]) for sid in sorted(touched)}
-    profile_ids = {
-        pid
-        for sid in touched
-        for pid in [project.surfaces[sid].profile_id, *project.surfaces[sid].hole_profile_ids]
-    }
+    profile_ids = {pid for sid in touched for pid in project.surfaces[sid].source_profile_ids()}
     return digest(
         {
             "scale": project.scale,
@@ -202,6 +198,10 @@ def connector_contact(project, joint, connector):
 
 
 def build_part(project, old_part):
+    if any(project.surfaces[sid].kind == "ruled_loft" for sid in old_part.surface_ids):
+        from .loft_surface import build_loft_part
+
+        return build_loft_part(project, old_part)
     part = copy.deepcopy(old_part)
     part.paths = {role: [] for role in ROLES}
     part.polygons, part.edges, part.labels = {}, [], []
@@ -243,8 +243,10 @@ def build_part(project, old_part):
         profiles = [
             project.profiles[pid] for pid in [surface.profile_id, *surface.hole_profile_ids]
         ]
-        loops = [_map_points(project.profile_outline(profile.id), maps[sid]).tolist()
-                 for profile in profiles]
+        loops = [
+            _map_points(project.profile_outline(profile.id), maps[sid]).tolist()
+            for profile in profiles
+        ]
         polygon = material_polygon(loops[0], loops[1:])
         reference = (
             project._source_polygon(surface.profile_id, surface.hole_profile_ids).area
@@ -274,17 +276,26 @@ def build_part(project, old_part):
         part.polygons[sid] = loops
         for profile in profiles:
             for edge in profile.segments:
-                samples = [profile.vertex(edge.start_vertex_id).point,
-                           profile.vertex(edge.end_vertex_id).point]
+                samples = [
+                    profile.vertex(edge.start_vertex_id).point,
+                    profile.vertex(edge.end_vertex_id).point,
+                ]
                 if edge.kind != "line":
                     samples = next(
-                        c["points"] for c in project.profile_projection(profile.id)["curves"]
+                        c["points"]
+                        for c in project.profile_projection(profile.id)["curves"]
                         if c["segment_id"] == edge.id
                     )
                 points = _map_points(samples, maps[sid])
                 for first, second in zip(points, points[1:]):
-                    part.edges.append({"surface_id": sid, "edge_id": edge.id,
-                                       "start": first.tolist(), "end": second.tolist()})
+                    part.edges.append(
+                        {
+                            "surface_id": sid,
+                            "edge_id": edge.id,
+                            "start": first.tolist(),
+                            "end": second.tolist(),
+                        }
+                    )
     tabs = []
     for joint in project.joints.values():
         if joint.surface_a not in part.surface_ids and joint.surface_b not in part.surface_ids:
@@ -436,13 +447,20 @@ def _placed_curve_envelopes(project, part, placement, *, output_error_mm=0):
         for sid, loops in part.polygons.items()
     }
     projected.edges = [
-        {**edge, "start": page_points([edge["start"]], placement)[0].tolist(),
-         "end": page_points([edge["end"]], placement)[0].tolist()}
+        {
+            **edge,
+            "start": page_points([edge["start"]], placement)[0].tolist(),
+            "end": page_points([edge["end"]], placement)[0].tolist(),
+        }
         for edge in part.edges
     ]
     projected.paths = {
         "TABS": [path(page_points(p["points"], placement), True) for p in part.paths["TABS"]]
     }
+    if any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids):
+        from .loft_surface import material_envelopes
+
+        return material_envelopes(project, projected, output_error_mm=output_error_mm)
     return part_envelopes(project, projected, output_error_mm=output_error_mm)
 
 
@@ -456,8 +474,9 @@ def validate_layout(project):
     curved_material = any(
         segment.kind != "line"
         for surface in project.surfaces.values()
-        for pid in [surface.profile_id, *surface.hole_profile_ids]
-        if pid in project.profiles for segment in project.profiles[pid].segments
+        for pid in surface.source_profile_ids()
+        if pid in project.profiles
+        for segment in project.profiles[pid].segments
     )
 
     def issue(code, message, parts=(), severity="error", joint_id=None, evidence=None):
@@ -503,6 +522,14 @@ def validate_layout(project):
         issue("INVALID_PROJECT", f"Projekt obsahuje neplatnou vazbu nebo geometrii: {exc}")
         return issues
     for pid, part in project.parts.items():
+        loft = next(
+            (sid for sid in part.surface_ids if project.surfaces[sid].kind == "ruled_loft"), None
+        )
+        if loft is not None:
+            status = project.loft_status(loft)
+            if status["status"] != "EXACT":
+                issue(status["code"], status["message"], (pid,), evidence=status)
+                continue
         if part.stale or part.input_digest != part_input(project, part):
             issue(
                 "STALE", "Díl je po změně konstrukce neaktuální. Přepočítejte jeho rozvin.", (pid,)
@@ -535,7 +562,9 @@ def validate_layout(project):
             )
             material = unary_union(transformed)
             envelope = _placed_curve_envelopes(
-                project, part, placement,
+                project,
+                part,
+                placement,
                 output_error_mm=PDF_DIGITAL_BUDGET_MM if curved_material else 0,
             )
             materials[pid] = material
@@ -545,9 +574,12 @@ def validate_layout(project):
             if not sheet.covers(envelope.guaranteed):
                 issue("PHYSICAL_OVERFLOW", "Díl včetně chlopní přesahuje fyzický list.", (pid,))
             elif not sheet.covers(envelope.possible):
-                issue("CURVE_SHEET_UNRESOLVED",
-                      "U křivky nelze doložit odstup od fyzického listu. "
-                      "Posuňte díl dál od okraje; obal zahrnuje mez odchylky křivky.", (pid,))
+                issue(
+                    "CURVE_SHEET_UNRESOLVED",
+                    "U křivky nelze doložit odstup od fyzického listu. "
+                    "Posuňte díl dál od okraje; obal zahrnuje mez odchylky křivky.",
+                    (pid,),
+                )
             elif not box(
                 page.margin_mm,
                 page.margin_mm,
@@ -572,7 +604,13 @@ def validate_layout(project):
                     (pid,),
                     "warning",
                 )
-            if has_small_source_detail(project, part):
+            if loft is not None:
+                from .loft_surface import has_small_loft_detail
+
+                small_detail = has_small_loft_detail(project, part)
+            else:
+                small_detail = has_small_source_detail(project, part)
+            if small_detail:
                 issue(
                     "SMALL_DETAIL", "Díl má detail menší než 0,5 mm na papíře.", (pid,), "warning"
                 )
@@ -617,10 +655,11 @@ def validate_layout(project):
                 (
                     "Nelze vyloučit překryv ohnutých chlopní: strana protikusu není určená. "
                     "Určete ji ve vlastnostech spoje, nebo upravte chlopně."
-                    if unknown else
-                    "Lepené části nebo ohnuté záložky zasahují do stejného místa "
+                    if unknown
+                    else "Lepené části nebo ohnuté záložky zasahují do stejného místa "
                     "na stejné straně protikusu. Upravte jejich tvar, polohu nebo dělení."
-                ) + f" ({other_id}).",
+                )
+                + f" ({other_id}).",
                 tuple(dict.fromkeys([*parts, *other_parts])),
                 joint_id=relation_id,
             )
@@ -649,8 +688,11 @@ def validate_layout(project):
             target = contact["receiver_surface_id"]
             for tab in contact["tabs"]:
                 register_folded(
-                    target, connector.receiver_side, tab,
-                    tuple(dict.fromkeys([pid, project.part_for_surface(target)])), joint.id,
+                    target,
+                    connector.receiver_side,
+                    tab,
+                    tuple(dict.fromkeys([pid, project.part_for_surface(target)])),
+                    joint.id,
                 )
             if contact["nominal_area_mm2"] - contact["available_area_mm2"] > max(
                 1e-8, contact["nominal_area_mm2"] * 1e-10
@@ -682,13 +724,19 @@ def validate_layout(project):
         try:
             geometry = attachment_geometry(project, attachment)
             if attachment.source_edge_id is None:
-                register_folded(target, attachment.target_side, {
-                    "tab_id": attachment.id,
-                    "footprint_loops_uv_mm": [
-                        (np.asarray(loop) * project.scale).tolist()
-                        for loop in geometry["target_loops_uv"]
-                    ],
-                }, parts, attachment.id)
+                register_folded(
+                    target,
+                    attachment.target_side,
+                    {
+                        "tab_id": attachment.id,
+                        "footprint_loops_uv_mm": [
+                            (np.asarray(loop) * project.scale).tolist()
+                            for loop in geometry["target_loops_uv"]
+                        ],
+                    },
+                    parts,
+                    attachment.id,
+                )
             if attachment.connector_id:
                 contacts = trace_connector_contact(
                     project, attachment, project.connectors[attachment.connector_id]
@@ -755,8 +803,8 @@ def validate_layout(project):
             message = (
                 f"Při ohýbání záložka naráží do {target}{angle_text}. "
                 "Upravte chlopeň, mezeru nebo polohu překážky."
-                if collision else
-                "Prostor pro ohnutí této záložky nelze v zadaném materiálovém modelu doložit. "
+                if collision
+                else "Prostor pro ohnutí této záložky nelze v zadaném materiálovém modelu doložit. "
                 "Zkontrolujte parametry papíru, místní pás ohybu a geometrii spoje."
             )
             unresolved = detail.get("unresolved_layer_obstacle_ids", [])
@@ -768,6 +816,11 @@ def validate_layout(project):
                 )
             if report.get("message"):
                 message += " " + report["message"]
-            issue("BEND_COLLISION" if collision else "BEND_UNRESOLVED", message,
-                  tuple(dict.fromkeys(detail_parts)), joint_id=relation_id, evidence=report)
+            issue(
+                "BEND_COLLISION" if collision else "BEND_UNRESOLVED",
+                message,
+                tuple(dict.fromkeys(detail_parts)),
+                joint_id=relation_id,
+                evidence=report,
+            )
     return issues

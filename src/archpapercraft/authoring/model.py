@@ -165,6 +165,12 @@ class SurfaceFeature:
     revision: int = 1
     part_id: str = ""
 
+    def source_profile_ids(self):
+        ids = [self.profile_id, *self.hole_profile_ids]
+        if self.kind == "ruled_loft" and isinstance(self.params, dict):
+            ids.append(self.params.get("second_profile_id"))
+        return ids
+
 
 @dataclass
 class PaperFrame:
