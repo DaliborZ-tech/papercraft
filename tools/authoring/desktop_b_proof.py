@@ -1132,11 +1132,59 @@ def run_windows(output, expected_sha, fixture="all"):
                 digital_only_acknowledgements=accepted,
             )
 
+        def author_commands(self, south):
+            """Native user input, impact confirmation and reversible experimentation."""
+            def rename(dialog):
+                for field, text in (
+                    (dialog.project_name, "Own open architectural model A"),
+                    (dialog.surface_name, "South wall"),
+                    (dialog.part_name, "South wall with authored tabs"),
+                ):
+                    self.visible(field).setFocus()
+                    QTest.keyClick(field, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+                    QTest.keyClicks(field, text)
+                self.ok(dialog)
+
+            self.modal(lambda: self.action("rename"), rename)
+            check(self.w.project.surfaces[south].name == "South wall", "Typed name lost")
+            self.capture("A-native-own-names")
+            scrap = self.rectangle("temporary_scrap", 1000, 1000)
+            profile = self.w.project.surfaces[scrap].profile_id
+            state = copy.deepcopy(self.w.project.to_dict())
+
+            def cancel(dialog):
+                self.capture("A-native-delete-impact", dialog)
+                self.click(dialog.buttons.button(QDialogButtonBox.StandardButton.Cancel))
+
+            self.modal(lambda: self.action("delete_part"), cancel)
+            check(self.w.project.to_dict() == state, "Cancel removed or changed material")
+            self.modal(lambda: self.action("delete_part"), self.ok)
+            check(scrap not in self.w.project.surfaces, "Confirmed removal failed")
+            check(profile in self.w.project.profiles, "Removal destroyed reusable source sketch")
+            self.shortcut(Qt.Key.Key_Z)
+            check(self.w.project.to_dict() == state, "Removal undo failed to restore source")
+            self.shortcut(Qt.Key.Key_Y)
+            check(scrap not in self.w.project.surfaces, "Removal redo failed")
+            self.roles.pop("temporary_scrap")
+            self.select(south)
+            state = copy.deepcopy(self.w.project.to_dict())
+
+            def paper(dialog):
+                check(not dialog.known.isChecked(), "Default paper thickness falsely known")
+                self.ok(dialog)
+
+            self.modal(lambda: self.action("material"), paper)
+            check(self.w.project.to_dict() == state, "Unchanged paper settings mutated document")
+            step("native_own_names_delete_cancel_confirm_undo_redo_material_noop",
+                 preserved_source_profile=profile,
+                 physical_material="UNKNOWN; no physical clearance certificate")
+
         def building(self):
             self.data(self.w.units, 1)
             self.number(self.w.scale_field, 100)
             o = report["oracle"]
             south = self.rectangle("south", 10000, 4000, "XZ")
+            self.author_commands(south)
             check(
                 len(self.w.project.surfaces) == 1
                 and len(self.w.project.world_geometry(south)["triangles"]) == 2,
