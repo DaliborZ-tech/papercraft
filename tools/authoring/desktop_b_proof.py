@@ -236,7 +236,8 @@ def run_windows(output, expected_sha, fixture="all"):
         "source_sha": sha,
         "requested_fixture": fixture,
         "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN",
-                           "curves-planar": "NOT_RUN"},
+                           "curves-planar": "NOT_RUN", "loft-B1": "NOT_RUN",
+                           "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "actual_application_module": str(Path(author_window.__file__).resolve()),
@@ -312,9 +313,12 @@ def run_windows(output, expected_sha, fixture="all"):
             write_report()
             QApplication.instance().exit(1)
 
-    class Driver:
+    from loft_desktop_steps import LoftDesktopSteps
+
+    class Driver(LoftDesktopSteps):
         def __init__(self, window):
             self.w = window
+            self.check, self.step, self.log = check, step, log
             self.roles = {}
             self.authored_top = None
             self.action_counts = {}
@@ -1174,12 +1178,16 @@ def run_windows(output, expected_sha, fixture="all"):
                 step("A_true_hole_preserved_in_both_vector_outputs", pdf_page_hole=pdf_holes[0])
             if name == "curves-planar":
                 self.audit_curve_vectors(directory, svgs, pdf)
+            if name.startswith("loft-"):
+                self.audit_loft_vectors(name, directory, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
                 parts=sorted(actual_parts),
                 unfold_mode="EXACT",
-                exact_scope="piecewise planar material; no curved-surface or physical claim",
+                exact_scope=("certified ruled/planar family; no physical claim"
+                             if name.startswith("loft-") else
+                             "piecewise planar material; no curved-surface or physical claim"),
                 digital_only_acknowledgements=accepted,
             )
 
@@ -1684,6 +1692,10 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"]["curves-planar"] = "RUNNING"
                 driver.curves_planar()
                 report["fixture_status"]["curves-planar"] = "PASS_TECHNICAL_UI"
+            if fixture.startswith("loft-"):
+                report["fixture_status"][fixture] = "RUNNING"
+                driver.loft_case(fixture)
+                report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
                 len(native) == (6 if fixture == "all" else 3)
@@ -1756,7 +1768,8 @@ def main():
     parser.add_argument("--oracle-only", action="store_true")
     parser.add_argument(
         "--fixture",
-        choices=["all", "model-A", "mixed-part", "curves-planar"],
+        choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
+                 "loft-Bezier"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",
     )
