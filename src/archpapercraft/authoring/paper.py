@@ -661,6 +661,27 @@ def validate_layout(project):
             attachment.id,
             evidence=project._assembly_clearance_key() if attachment.connector_id else None,
         )
+    tab_owners = {
+        "tab:" + tid: (connector, index + 1)
+        for connector in project.connectors.values()
+        for index, tid in enumerate(connector.tab_ids)
+    }
+
+    def bend_obstacle_description(obstacle_id, affected_parts):
+        if obstacle_id in project.surfaces:
+            affected_parts.append(project.part_for_surface(obstacle_id))
+            return f"plochy „{project.surfaces[obstacle_id].name}“"
+        if obstacle_id in tab_owners:
+            owner, ordinal = tab_owners[obstacle_id]
+            sid = owner.owner_surface_id
+            pid = project.part_for_surface(sid)
+            affected_parts.append(pid)
+            return (
+                f"chlopně {ordinal} dílu „{project.parts[pid].name}“ "
+                f"na ploše „{project.surfaces[sid].name}“"
+            )
+        return "jiného materiálu modelu"
+
     for cid, connector in project.connectors.items():
         report = project.connector_bend_clearance(cid)
         if report["status"] in ("CLEAR", "UNVERIFIED", "NOT_APPLICABLE"):
@@ -670,22 +691,28 @@ def validate_layout(project):
         relation_id = connector.attachment_id or connector.joint_id
         failing = [tab for tab in report["tabs"] if tab["status"] in ("COLLISION", "UNRESOLVED")]
         for detail in failing or [report]:
+            detail_parts = parts.copy()
             obstacle = detail.get("obstacle_id")
-            if obstacle in project.surfaces:
-                parts.append(project.part_for_surface(obstacle))
             collision = detail["status"] == "COLLISION"
-            name = project.surfaces[obstacle].name if obstacle in project.surfaces else "modelu"
+            target = bend_obstacle_description(obstacle, detail_parts) if collision else None
             angle = detail.get("witness_angle_deg")
             angle_text = f" při {angle:g}°" if angle is not None else ""
             message = (
-                f"Při ohýbání záložka naráží do plochy {name}{angle_text}. "
+                f"Při ohýbání záložka naráží do {target}{angle_text}. "
                 "Upravte chlopeň, mezeru nebo polohu překážky."
                 if collision else
                 "Prostor pro ohnutí této záložky nelze v zadaném materiálovém modelu doložit. "
                 "Zkontrolujte parametry papíru, místní pás ohybu a geometrii spoje."
             )
+            unresolved = detail.get("unresolved_layer_obstacle_ids", [])
+            if unresolved:
+                targets = [bend_obstacle_description(oid, detail_parts) for oid in unresolved]
+                message += (
+                    " Neurčené vrstvy vůči: " + "; ".join(targets) + ". "
+                    "U připojení určete stranu a zkontrolujte skutečné uspořádání vrstev."
+                )
             if report.get("message"):
                 message += " " + report["message"]
             issue("BEND_COLLISION" if collision else "BEND_UNRESOLVED", message,
-                  tuple(dict.fromkeys(parts)), joint_id=relation_id, evidence=report)
+                  tuple(dict.fromkeys(detail_parts)), joint_id=relation_id, evidence=report)
     return issues
