@@ -412,7 +412,8 @@
         "status": "VERIFIED_IN_BOUNDED_CURVED_CONTACT_AND_BEND_SCOPE",
         "ticket": "PC-007A",
         "evidence": "docs/p2/implementation/PC007A_MATERIAL_INTEGRATION_REVIEW.md",
-        "broader_transfer": "PENDING_NEXT_USE"
+        "broader_transfer": "PENDING_NEXT_USE",
+        "source_sha": "61168e0879157baba1193785b9856f24d1d1c959"
       }
     },
     {
