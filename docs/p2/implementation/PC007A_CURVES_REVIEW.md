@@ -6,6 +6,8 @@ Zdroj: **`8074d3ef0f9168cedf686b461d5f002cff63c2e9`**, větev `revival/p2-curve-
 
 **Verdikt: CHANGES_REQUESTED — R01 MAJOR OPEN.** Délkové a tětivové důkazy pro zkoušené konzistentní vstupy mají pozitivní výsledky, ale téměř úplný oblouk může být jako nativní SVG vydán na jiné kružnici. Komponentu nelze schválit pro tvrzenou shodu zdroje a vektorového výstupu, dokud není nález uzavřen.
 
+**Aktuální následná revize:** `f53a73f72ea9bfcc30b14687959aa88d521cc740`, níže. R01 CLOSED; APPROVED_IN_NUMERIC_AND_NATIVE_SERIALIZATION_COMPONENT_SCOPE. Původní FAIL a verdikt výše zůstávají historickým důkazem.
+
 ## R01 — MAJOR: povolená endpoint odchylka mění větev SVG oblouku
 
 Vstup:
@@ -48,3 +50,18 @@ Kontrola implementace: přesné racionální de Casteljau dělení kontrolního 
 Před revizí byly skutečně načteny čtyři projektové skills a relevantní AU08/09, kontrakt a závěry geometrických spiků. Konstrukční skill zde brání záměně analytického zdroje s náhodným tessellovaným obalem; R01 ukazuje výrobně významnou změnu obrysu. UI skill vyžaduje, aby pozdější integrace nehlásila certifikát délky jako obecně regulární nebo přesně rozvinutelný profil; žádný UI průchod tato pure komponenta nedodává. Verification skill vedl k vlastnímu nepříjemnému endpoint případu a oddělení matematického důkazu od vzorků. Delivery skill vyžaduje opravu a nové review konkrétního zdroje před použitím schválení.
 
 AC-AU08/09 nejsou touto revizí celé splněné: vlastní kreslení/editace oblouku a Bézier, rohy, B1/B2/B3, extruze, IO, skutečné UI, ruční layout a oba exporty musí projít navazujícími řezy. Uživatel a P3 jsou NOT_RUN. Reviewer neuděluje vlastní produktové přijetí ani schválení celé PC-007A.
+
+## Následná revize opravy R01 — `f53a73f`
+
+Přesný zdroj **`f53a73f72ea9bfcc30b14687959aa88d521cc740`**, 9. 11. 2026, pracovní strom produkce odpovídal tomuto pinu. Přečtena změna numeriky, SVG writeru a autorových testů. **R01 CLOSED; APPROVED_IN_NUMERIC_AND_NATIVE_SERIALIZATION_COMPONENT_SCOPE.**
+
+Writer již nepoužívá jediný téměř úplný endpoint oblouk. Dělí zdrojový sweep do nativních A příkazů po nejvýše 90 zdrojových stupních s `large-arc=0`; koncový bod zůstává deklarovaný, není potichu přesunut. Pro každou skutečně emitovanou kružnici se z binárních souřadnic a výstupního poloměru přes racionální délku tětivy a vnější sqrt intervaly rekonstruuje interval jejího SVG středu. Z jeho vzdálenosti od zdrojového středu, endpoint rezervy a poloměrové rezervy vzniká samostatná globální mez polohové odchylky SVG a součet mezí chyby obloukových délek. Nejde jen o kontrolu konečného počtu středních bodů.
+
+Výsledky rozlišují `svg_deviation_bound` a `svg_length_error_bound` od původních mezí chord aproximace a zdrojové délky. Pokud nelze příslušné požadavky doložit, certifikát je UNRESOLVED. `svg_commands` s oběma explicitními tolerancemi vyžaduje certifikaci a odmítá neprokázaný výstup; s jednou tolerancí odmítne neúplný kontrakt. Varianta bez tolerancí je podle dokumentace pouze serializace. Integrační publisher proto musí použít strict variantu nebo prokazatelně kontrolovat certifikát a samostatně přenést relevantní error budgety; tento komponentový verdikt neschvaluje budoucí opomenutí této kontroly.
+
+- Původní autorovy testy včetně oprav: **37 PASS / 1,92 s**, [JUnit](evidence/pc007a-curves-review-original-f53a73f.xml).
+- Vlastní analytické/negativní případy po přiměřené úpravě čtení výstupního formátu: **22 PASS / 1,06 s**, [JUnit](evidence/pc007a-curves-review-own-f53a73f.xml).
+
+Význam původního orákula zůstal stejný — skutečný nativní SVG tvar musí odpovídat zdrojovému oblouku. Nový writer má více příkazů A, proto vlastní reader nyní nezávisle dekóduje všechny jejich endpoint středy a orientované úhly. Neoznačuje změnu formátu z jednoho A na čtyři za produktovou chybu. Obě orientace téměř úplné kružnice zachovaly výslovný koncový bod; vnitřní body SVG po částech kryla hlášená nová polohová mez a celkovou chybu délky kryl její hlášený součet. Vlastní negativní tiny-sweep případ se stejně malou endpoint odchylkou, která vybírá opačnou větev, vrací UNRESOLVED a strict SVG se nevydá.
+
+Původní `pc007a-curves-review-own-initial.xml` s rozdílem 4,0 zůstává zachovaný. Změna zdroje vlastních orákul je dohledatelná v commitech review. Žádné AC ani tolerance se neměnily. Skutečný cílový SVG editor, nativní UI, finální schema/domain integrace, lidský test a fyzická stavba tímto doplňkem provedené nebyly; jejich stavy zůstávají samostatné.
