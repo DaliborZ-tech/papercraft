@@ -631,3 +631,33 @@ def test_schema_three_copy_adapter_still_preserves_known_planar_sources_and_layo
     assert restored.profiles == p.profiles and restored.surfaces == p.surfaces
     assert restored.parts[pid].frame == p.parts[pid].frame
     assert restored.placements == p.placements and restored.parts[pid].stale
+
+
+def test_open_loft_seam_must_remain_the_actual_first_patch_atomically_and_on_read():
+    p, a, b = extrusion()
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    before = p.to_dict()
+    second = p.surfaces[s].params["correspondences"][1]["id"]
+    with pytest.raises(ValidationError, match="Šev"):
+        p.update_loft(s, seam_patch_id=second)
+    assert p.to_dict() == before
+    data = copy.deepcopy(before)
+    data["surfaces"][s]["params"]["seam_patch_id"] = second
+    with pytest.raises(ProjectFormatError, match="Šev"):
+        AuthorProject.from_dict(data)
+
+
+def test_closed_loft_seam_update_reorders_live_patches_without_replacing_identity_or_frame():
+    p = AuthorProject.new(scale=1)
+    a = p.add_profile([[0, 0], [10, 0], [10, 10], [0, 10]])
+    b = p.copy_profile(a, plane={"origin": [0, 0, 10], "u": [1, 0, 0], "v": [0, 1, 0]})
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    pid = p.part_for_surface(s)
+    original = copy.deepcopy(p.surfaces[s].params["correspondences"])
+    frame = copy.deepcopy(p.parts[pid].frame)
+    p.update_loft(s, seam_patch_id=original[1]["id"])
+    assert p.surfaces[s].params["correspondences"] == original[1:] + original[:1]
+    p.recompute()
+    assert p.parts[pid].frame == frame
+    assert p.loft_status(s)["status"] == "EXACT"
+    assert AuthorProject.from_dict(p.to_dict()).to_dict() == p.to_dict()

@@ -170,6 +170,10 @@ def validate_loft_params(project, surface, *, require_bound=False):
         raise ValidationError("Konstrukční patche a rulingy potřebují odlišné stálé identity.")
     if params["seam_patch_id"] not in [r["id"] for r in records]:
         raise ValidationError("Začátek švu neodkazuje na zvolený patch.")
+    if params["seam_patch_id"] != records[0]["id"]:
+        raise ValidationError(
+            "Šev musí být první korespondencí; otevřený profil začíná na svém konci."
+        )
     a, b = project.profiles[surface.profile_id], project.profiles[params["second_profile_id"]]
     for expected, profile in zip(surface.source_profile_ids(), (a, b)):
         uuid(profile.id)
