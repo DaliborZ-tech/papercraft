@@ -1,0 +1,144 @@
+{
+  "before": {
+    "status": "UNRESOLVED",
+    "tabs": [
+      {
+        "status": "UNRESOLVED",
+        "message": "Coordinate conditioning exceeds the supported digital precision",
+        "tab_id": "0c9fc821-d4b7-4890-b2a0-401017bdcbd2",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 0,
+        "numerical_guard_mm": 0.0,
+        "envelope_padding_mm": 0.0,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [],
+        "checked_obstacle_ids": [],
+        "search_interval_limit": null,
+        "search_depth_limit": null,
+        "search_budget_exhausted": false,
+        "search_depth_limit_reached": false,
+        "coarse_intervals_examined": 0,
+        "witness_angles_examined": 0,
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ],
+        "expected_obstacle_ids": [
+          "d2c1fd22-2368-4881-9976-4b0461617b26",
+          "0a6bcbd2-d048-4bc9-9d3d-47903f50eacb",
+          "05093c47-0e5d-4b08-acb5-2f15d3be171b"
+        ],
+        "unresolved_layer_obstacle_ids": [],
+        "not_evaluated_obstacle_ids": [
+          "d2c1fd22-2368-4881-9976-4b0461617b26",
+          "0a6bcbd2-d048-4bc9-9d3d-47903f50eacb",
+          "05093c47-0e5d-4b08-acb5-2f15d3be171b"
+        ],
+        "layer_geometry": "NO_UNRESOLVED_RECEIVER_LAYER_PAIRS",
+        "search_scope": "BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN",
+        "search_limits": {
+          "max_depth": 8,
+          "max_intervals": 128
+        }
+      }
+    ],
+    "material_profile": {
+      "thickness_mm": null,
+      "clearance_mm": 0.0,
+      "bend_radius_mm": 0.0,
+      "crease_zone_mm": 0.5
+    },
+    "assembly_digest": "cb9577c46d4a18ae803ec7407e3ea36bbd5fd6f3abcbedfd840c951dd02ab46b",
+    "motion": "shorter_signed_rigid_fold; finite_crease_and_contact_reservations",
+    "assembly_scenario": "ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED",
+    "physical_build": "NOT_VERIFIED"
+  },
+  "after": {
+    "status": "UNRESOLVED",
+    "tabs": [
+      {
+        "status": "UNRESOLVED",
+        "message": "Coordinate conditioning exceeds the supported digital precision Vz\u00e1jemnou polohu vrstev chlopn\u00ed na protilehl\u00fdch nebo neur\u010den\u00fdch stran\u00e1ch p\u0159\u00edjemce nelze ov\u011b\u0159it. Nejde o prok\u00e1zanou kolizi ani voln\u00fd prostor; ur\u010dete skute\u010dnou konstrukci vrstev.",
+        "tab_id": "0c9fc821-d4b7-4890-b2a0-401017bdcbd2",
+        "obstacle_id": null,
+        "witness_angle_deg": null,
+        "witness_point_mm": null,
+        "certified_intervals": 0,
+        "examined_intervals": 0,
+        "numerical_guard_mm": 0.0,
+        "envelope_padding_mm": 0.0,
+        "material_thickness_mm": null,
+        "clearance_mm": 0.0,
+        "bend_radius_mm": 0.0,
+        "allowances": [],
+        "checked_obstacle_ids": [],
+        "search_interval_limit": null,
+        "search_depth_limit": null,
+        "search_budget_exhausted": false,
+        "search_depth_limit_reached": false,
+        "coarse_intervals_examined": 0,
+        "witness_angles_examined": 0,
+        "proof_method": "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT",
+        "assumptions": [
+          "complete_registry_of_planar_material_triangles",
+          "straight_hinge_rigid_motion_of_declared_convex_patches",
+          "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+          "explicit_finite_hinge_and_contact_volumes_only",
+          "physical_build_and_strength_NOT_VERIFIED"
+        ],
+        "expected_obstacle_ids": [
+          "d2c1fd22-2368-4881-9976-4b0461617b26",
+          "0a6bcbd2-d048-4bc9-9d3d-47903f50eacb",
+          "05093c47-0e5d-4b08-acb5-2f15d3be171b",
+          "aa2ce039-62d8-43b2-9049-8b3e04c3bc83",
+          "tab:704cc745-9f37-4d37-ba16-7d4d989c8e19"
+        ],
+        "unresolved_layer_obstacle_ids": [
+          "tab:704cc745-9f37-4d37-ba16-7d4d989c8e19"
+        ],
+        "not_evaluated_obstacle_ids": [
+          "d2c1fd22-2368-4881-9976-4b0461617b26",
+          "0a6bcbd2-d048-4bc9-9d3d-47903f50eacb",
+          "05093c47-0e5d-4b08-acb5-2f15d3be171b",
+          "aa2ce039-62d8-43b2-9049-8b3e04c3bc83"
+        ],
+        "layer_geometry": "Opposite or unknown receiver sides require explicit physical layer offsets; these obstacles are inventoried but their clearance is not established.",
+        "search_scope": "BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN",
+        "search_limits": {
+          "max_depth": 8,
+          "max_intervals": 128
+        }
+      }
+    ],
+    "material_profile": {
+      "thickness_mm": null,
+      "clearance_mm": 0.0,
+      "bend_radius_mm": 0.0,
+      "crease_zone_mm": 0.5
+    },
+    "assembly_digest": "affc79df539fe190e1b0592e22c5f7266979c10bdd50553fde2717397daba133",
+    "motion": "shorter_signed_rigid_fold; finite_crease_and_contact_reservations",
+    "assembly_scenario": "ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED",
+    "physical_build": "NOT_VERIFIED"
+  },
+  "pass_": true,
+  "issue_codes": [
+    "STALE",
+    "UNPLACED",
+    "UNPLACED",
+    "UNPLACED",
+    "MATERIAL_CLEARANCE_UNVERIFIED",
+    "MATERIAL_CLEARANCE_UNVERIFIED",
+    "BEND_UNRESOLVED",
+    "BEND_UNRESOLVED"
+  ]
+}
