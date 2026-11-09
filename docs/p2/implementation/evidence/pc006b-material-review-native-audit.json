@@ -1,0 +1,130 @@
+{
+  "status": "PASS",
+  "source_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",
+  "cases": [
+    {
+      "name": "completed_native_flow",
+      "pass_": true,
+      "pin": "eb08f97f3ced9c547bd818f97e47d29f9b73a548"
+    },
+    {
+      "name": "both_required_fixtures",
+      "pass_": true
+    },
+    {
+      "name": "six_real_native_dialogs",
+      "pass_": true
+    },
+    {
+      "name": "artifact_hashes_independently_read",
+      "pass_": true,
+      "count": 40
+    },
+    {
+      "name": "actual_source_files_match_pinned_native_run",
+      "pass_": true,
+      "count": 85
+    },
+    {
+      "name": "actual_import_bound_to_reviewed_worktree",
+      "pass_": true
+    },
+    {
+      "name": "model-A_counts",
+      "pass_": true
+    },
+    {
+      "name": "model-A_metadata_matches_manifest",
+      "pass_": true
+    },
+    {
+      "name": "model-A_svg_report_page-4cce3c7e-bebb-41af-b566-da01369419c8",
+      "pass_": true
+    },
+    {
+      "name": "model-A_svg_report_page-5746cc51-5d19-4fe5-b9d8-11e64c0a55d9",
+      "pass_": true
+    },
+    {
+      "name": "model-A_svg_report_page-6e63dba0-92a7-4384-90ae-bf6d1787b7ad",
+      "pass_": true
+    },
+    {
+      "name": "model-A_complete_role_material_coverage",
+      "pass_": true
+    },
+    {
+      "name": "model-A_pdf_vector_paths_no_raster",
+      "pass_": true
+    },
+    {
+      "name": "A_independent_actual_CUT_area",
+      "pass_": true,
+      "actual": 4320.0,
+      "expected": "100*40 + 56 + 60 + 60 + 144"
+    },
+    {
+      "name": "A_independent_actual_tab_areas",
+      "pass_": true,
+      "actual": [
+        56.0,
+        60.0,
+        60.0,
+        144.0
+      ]
+    },
+    {
+      "name": "mixed-part_counts",
+      "pass_": true
+    },
+    {
+      "name": "mixed-part_metadata_matches_manifest",
+      "pass_": true
+    },
+    {
+      "name": "mixed-part_svg_report_page-2c4e9123-4e77-4730-8ede-d0a42a81d04c",
+      "pass_": true
+    },
+    {
+      "name": "mixed-part_svg_report_page-ab382d78-f761-447f-956c-ee2b7480c2d1",
+      "pass_": true
+    },
+    {
+      "name": "mixed-part_complete_role_material_coverage",
+      "pass_": true
+    },
+    {
+      "name": "mixed-part_pdf_vector_paths_no_raster",
+      "pass_": true
+    },
+    {
+      "name": "editor_exact_same_source",
+      "pass_": true
+    },
+    {
+      "name": "editor_origin_bundle_preserved",
+      "pass_": true
+    },
+    {
+      "name": "editor_artifacts_match_recorded_hashes",
+      "pass_": true
+    },
+    {
+      "name": "editor_actual_saved_unicode_and_spaces",
+      "pass_": true
+    },
+    {
+      "name": "editor_other_text_objects_preserved",
+      "pass_": true
+    },
+    {
+      "name": "editor_path_local_coordinates_preserved",
+      "pass_": true,
+      "count": 5
+    },
+    {
+      "name": "editor_A4_page_and_calibration_preserved",
+      "pass_": true
+    }
+  ]
+}

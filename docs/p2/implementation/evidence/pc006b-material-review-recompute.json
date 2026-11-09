@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "actual_native_A_redundant_recompute_exact_noop",
+      "pass_": true,
+      "revisions": {
+        "941cf131-b665-4d30-841d-57aeb7d65706": 82,
+        "f02dab1a-38d9-4500-826a-f24134ea4cbd": 82,
+        "33147bf8-c2a7-4b82-af34-67f802a5b3f9": 82,
+        "ccb83c83-4302-4572-9414-9350ef880539": 82,
+        "5c1c36bc-937e-407d-8f4b-ecfca5f9fa00": 82,
+        "e45ba61b-0f44-487d-8149-d145332cba78": 82,
+        "b4022408-9400-4faf-94d8-1cc20070e190": 82,
+        "70603f16-4602-4c1b-aedb-fc20baa70ff2": 82,
+        "f8d29a5e-ba6f-43da-b604-697049388a19": 82
+      }
+    },
+    {
+      "name": "actual_native_A_material_change_advances_source_evidence",
+      "pass_": true
+    },
+    {
+      "name": "recompute_after_changed_source_is_stable_again",
+      "pass_": true
+    },
+    {
+      "name": "real_contour_edit_advances_source_evidence",
+      "pass_": true
+    },
+    {
+      "name": "original_native_project_bytes_preserved",
+      "pass_": true
+    }
+  ]
+}
