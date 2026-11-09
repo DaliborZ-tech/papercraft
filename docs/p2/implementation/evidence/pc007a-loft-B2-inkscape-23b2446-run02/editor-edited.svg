@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   data-project-id="e8a4da1e-d3c0-4fe2-b71a-18562cb77e86"
+   data-snapshot-digest="8df2c9c60c4ca595d2d85e388244f5bf9c34b29e047e08714d286e0495dd6fc8"
+   data-page-id="91c174db-2c9c-49be-b8d7-0c5d3ac9480b"
+   data-pdf-arc-interpolation-error-bound-mm="8.20171144111045e-05"
+   data-pdf-numeric-serialization-error-bound-mm="1.89032999343218e-05"
+   data-pdf-combined-position-error-bound-mm="0.000100920460471341"
+   data-construction-checks-digest="06acf2c2b60374709d94aa211e9bc40e2e52a206d4c203916847f2f149e1dd90"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="editor-edited.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.57727273"
+     inkscape:cx="397.55906"
+     inkscape:cy="560.3937"
+     inkscape:window-width="1520"
+     inkscape:window-height="873"
+     inkscape:window-x="2128"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <title
+     id="title1">e8a4da1e-d3c0-4fe2-b71a-18562cb77e86</title>
+  <metadata
+     id="construction-checks">{&quot;accepted_layout_overlaps&quot;:[],&quot;assembly_digest&quot;:&quot;b8ced584876b9999f9540e84e0685942088a23b1b048f8e0f1a319b0e55aba35&quot;,&quot;connector_bends&quot;:{},&quot;curve_profiles&quot;:{&quot;41b4087a-330c-41fd-9120-34d946948181&quot;:{&quot;chord_deviation_bound_paper_mm&quot;:0.0015059821200313628,&quot;family&quot;:&quot;PLANAR_RIGID_ISOMETRY&quot;,&quot;length_lower_paper_mm&quot;:125.66370614358536,&quot;length_upper_paper_mm&quot;:125.6637061435981,&quot;representation_budget_paper_mm&quot;:0.002,&quot;scope&quot;:&quot;Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof.&quot;,&quot;source_revision&quot;:1,&quot;source_segment_ids&quot;:[&quot;d56c4ce9-e176-4f4f-b4f0-a2ffbcf6082e&quot;,&quot;c8343be8-e40b-48d8-9313-3c78b5510854&quot;],&quot;status&quot;:&quot;CERTIFIED&quot;,&quot;svg_deviation_bound_paper_mm&quot;:2.307816412766953e-11,&quot;svg_length_error_bound_paper_mm&quot;:7.965602513631625e-11},&quot;ae1aebda-7b04-4595-a5bf-38dbe572686a&quot;:{&quot;chord_deviation_bound_paper_mm&quot;:0.0018071785465684123,&quot;family&quot;:&quot;PLANAR_RIGID_ISOMETRY&quot;,&quot;length_lower_paper_mm&quot;:150.79644737229737,&quot;length_upper_paper_mm&quot;:150.7964473723228,&quot;representation_budget_paper_mm&quot;:0.002,&quot;scope&quot;:&quot;Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof.&quot;,&quot;source_revision&quot;:1,&quot;source_segment_ids&quot;:[&quot;6514619c-f75d-4c6a-81fa-309a3e3608f3&quot;,&quot;1d2ce785-1d69-4ae6-a62a-e0bd43c82ff7&quot;],&quot;status&quot;:&quot;CERTIFIED&quot;,&quot;svg_deviation_bound_paper_mm&quot;:4.612591473500752e-11,&quot;svg_length_error_bound_paper_mm&quot;:1.5921545142991013e-10}},&quot;curve_regions&quot;:{&quot;bb7b0418-8525-439d-b183-ca6cd1f11777&quot;:{&quot;entry_scope&quot;:&quot;AUTHORED_CURVE_DESCRIPTORS&quot;,&quot;examined_nodes&quot;:256,&quot;geometry_scope&quot;:&quot;MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS&quot;,&quot;numerical_guard&quot;:1.1641532182693481e-10,&quot;proof&quot;:[&quot;EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS&quot;,&quot;EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS&quot;,&quot;FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS&quot;,&quot;ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES&quot;,&quot;SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES&quot;,&quot;QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING&quot;],&quot;reason&quot;:&quot;Native manufacturing-curve topology proved&quot;,&quot;source_profile_ids&quot;:[&quot;ae1aebda-7b04-4595-a5bf-38dbe572686a&quot;,&quot;41b4087a-330c-41fd-9120-34d946948181&quot;],&quot;source_revisions&quot;:{&quot;41b4087a-330c-41fd-9120-34d946948181&quot;:1,&quot;ae1aebda-7b04-4595-a5bf-38dbe572686a&quot;:1},&quot;status&quot;:&quot;VALID&quot;,&quot;witness&quot;:null},&quot;eab12c77-8606-4975-8a7b-fe3878d7b2b4&quot;:{&quot;entry_scope&quot;:&quot;AUTHORED_CURVE_DESCRIPTORS&quot;,&quot;examined_nodes&quot;:26,&quot;geometry_scope&quot;:&quot;MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS&quot;,&quot;numerical_guard&quot;:5.820766091346741e-11,&quot;proof&quot;:[&quot;EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS&quot;,&quot;EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS&quot;,&quot;FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS&quot;,&quot;ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES&quot;,&quot;SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES&quot;,&quot;QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING&quot;],&quot;reason&quot;:&quot;Native manufacturing-curve topology proved&quot;,&quot;source_profile_ids&quot;:[&quot;41b4087a-330c-41fd-9120-34d946948181&quot;],&quot;source_revisions&quot;:{&quot;41b4087a-330c-41fd-9120-34d946948181&quot;:1},&quot;status&quot;:&quot;VALID&quot;,&quot;witness&quot;:null}},&quot;lofts&quot;:{},&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;}</metadata>
+  <g
+     id="part-964b9eff-7d6f-4002-a172-233cd028adcd"
+     data-part-id="964b9eff-7d6f-4002-a172-233cd028adcd"
+     transform="rotate(17,-192.68953,174.65934)">
+    <title
+       id="title2">P2 · Ostění</title>
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-CUT"
+       data-role="CUT"
+       class="CUT"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <path
+         id="path-964b9eff-7d6f-4002-a172-233cd028adcd-CUT-0"
+         d="M 0,0 A 24,24 0 0 1 24,-24 24,24 0 0 1 48,0 24,24 0 0 1 24,24 24,24 0 0 1 0,0 Z"
+         fill-rule="evenodd" />
+      <path
+         id="path-964b9eff-7d6f-4002-a172-233cd028adcd-CUT-1"
+         d="M 4,0 A 20,20 0 0 1 24,-20 20,20 0 0 1 44,0 20,20 0 0 1 24,20 20,20 0 0 1 4,0 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-FOLD_MOUNTAIN"
+       data-role="FOLD_MOUNTAIN"
+       class="FOLD_MOUNTAIN"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 1" />
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-FOLD_VALLEY"
+       data-role="FOLD_VALLEY"
+       class="FOLD_VALLEY"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 0.5, 0.5, 0.5" />
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-TABS"
+       data-role="TABS"
+       class="TABS"
+       fill="#eee6d5"
+       stroke="none"
+       stroke-width="0.25" />
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-LABELS"
+       data-role="LABELS"
+       class="LABELS"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <text
+         id="label-964b9eff-7d6f-4002-a172-233cd028adcd-0"
+         x="2.0030117"
+         y="0.24541229"
+         font-size="2.5px"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none"
+         style="fill:#b43d28">Žluťoučký – vlastní díl</text>
+    </g>
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-ARTWORK"
+       data-role="ARTWORK"
+       class="ARTWORK"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25" />
+    <g
+       id="role-964b9eff-7d6f-4002-a172-233cd028adcd-GUIDES"
+       data-role="GUIDES"
+       class="GUIDES"
+       fill="none"
+       stroke="#8c9894"
+       stroke-width="0.15" />
+  </g>
+  <g
+     id="page-GUIDES"
+     data-role="GUIDES">
+    <path
+       d="M 10 282 L 110 282"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       fill="none"
+       data-calibration-mm="100"
+       id="path2" />
+    <text
+       id="page-label-0"
+       x="10"
+       y="287"
+       font-family="Arial"
+       xml:space="preserve"
+       font-size="2.5"
+       fill="#202b2b">Tisk 100 % / skutečná velikost. Kalibrace 100 mm na papíře.</text>
+    <text
+       id="page-label-1"
+       x="10"
+       y="292"
+       font-family="Arial"
+       xml:space="preserve"
+       font-size="2.5"
+       fill="#202b2b">Měřítko modelu 1:100 · Strana 2 / 2</text>
+  </g>
+</svg>

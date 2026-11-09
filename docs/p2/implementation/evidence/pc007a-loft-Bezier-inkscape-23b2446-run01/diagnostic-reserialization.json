@@ -1,0 +1,10 @@
+[
+  {
+    "path_id": "path-6a1c0e38-9670-4845-8715-a5c6e270ef80-CUT-0",
+    "commands_before": 803,
+    "commands_after": 803,
+    "max_coordinate_difference_mm": 0.00012019174,
+    "area_before_mm2": 956.649284434254,
+    "area_after_mm2": 956.648113
+  }
+]
