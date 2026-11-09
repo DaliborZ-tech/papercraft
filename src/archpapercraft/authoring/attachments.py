@@ -5,8 +5,9 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from shapely import LineString, Polygon
+from shapely import LineString, Point, Polygon
 
+from .curve_material import surface_envelopes
 from .errors import ValidationError
 from .geometry import material_polygon, number, signed_area
 
@@ -60,11 +61,35 @@ def world_to_uv(project, surface_id, points):
 
 
 def surface_material(project, surface_id, *, paper=False):
-    surface = project.surfaces[surface_id]
-    factor = project.scale if paper else 1.0
-    return material_polygon(
-        np.asarray(project.profile_outline(surface.profile_id)) * factor,
-        [np.asarray(project.profile_outline(h)) * factor for h in surface.hole_profile_ids],
+    """Material that is proved present; a chord proxy is not a receiver proof."""
+    return surface_envelopes(project, surface_id, paper=paper).guaranteed
+
+
+def _prove_material_contact(bounds, geometry, tolerance, code, message, *,
+                            trace=False, defer_uncertainty=False):
+    """Keep definite absence separate from uncertainty near a curved boundary."""
+    def covered(material):
+        if trace:
+            return geometry.difference(material).length <= tolerance
+        return material.buffer(tolerance).covers(geometry)
+
+    if not covered(bounds.possible):
+        raise ValidationError(code+": "+message)
+    if bounds.is_exact or bounds.guaranteed.covers(geometry):
+        return True
+    # The existing contact tolerance may accommodate arithmetic at a straight
+    # boundary. It must not fill a curved uncertainty band back with material.
+    if covered(bounds.guaranteed) and bounds.uncertainty_band.disjoint(geometry):
+        return True
+    if defer_uncertainty:
+        return False
+    _unresolved_curve_contact()
+
+
+def _unresolved_curve_contact():
+    raise ValidationError(
+        "CURVE_CONTACT_UNRESOLVED: u křivkové hrany nebo otvoru nelze doložit celý kontakt. "
+        "Posuňte stopu nebo zmenšete lepicí oblast dále od křivky a znovu ověřte spoj."
     )
 
 
@@ -82,7 +107,8 @@ def attachment_geometry(project, attachment):
             "REFERENCE_UNRESOLVED: po nahrazení profilu vyberte znovu zdroj spoje."
         )
     source, target = attachment.source_surface_id, attachment.target_surface_id
-    material = surface_material(project, target)
+    target_bounds = surface_envelopes(project, target)
+    material = target_bounds.guaranteed
     if attachment.source_edge_id is not None:
         local = interval_points(project, attachment)
         world = project._surface_world_points(source, local)
@@ -95,11 +121,15 @@ def attachment_geometry(project, attachment):
                 f"ATTACHMENT_GAP: hrana je {gap:g} mm od materiálu protikusu. "
                 "Přisuňte ji nebo změňte spoj."
             )
-        missing = trace.difference(material).length
-        if trace.length <= 1e-9 or missing > tolerance:
+        if trace.length <= 1e-9:
             raise ValidationError(
                 "TRACE_OUTSIDE_MATERIAL: část stopy je mimo protikus nebo v jeho otvoru."
             )
+        _prove_material_contact(
+            target_bounds, trace, tolerance, "TRACE_OUTSIDE_MATERIAL",
+            "část stopy je mimo protikus nebo v jeho otvoru.", trace=True,
+        )
+        missing = trace.difference(material).length
         result = {
             "kind": attachment.kind,
             "source_world": world.tolist(),
@@ -113,10 +143,11 @@ def attachment_geometry(project, attachment):
         }
         if attachment.kind == "glue_region":
             region = material_polygon(attachment.target_region_uv)
-            if (
-                not material.buffer(tolerance).covers(region)
-                or trace.difference(region).length > tolerance
-            ):
+            _prove_material_contact(
+                target_bounds, region, tolerance, "TARGET_GLUE_OUTSIDE",
+                "lepicí oblast není na přijímajícím materiálu.",
+            )
+            if trace.difference(region).length > tolerance:
                 raise ValidationError(
                     "TARGET_GLUE_OUTSIDE: lepicí oblast nebo její stopa "
                     "není na přijímajícím materiálu."
@@ -125,20 +156,26 @@ def attachment_geometry(project, attachment):
         return result
     if attachment.kind != "glue_region":
         raise ValidationError("Neznámý typ připojení.")
-    source_material = surface_material(project, source)
+    source_bounds = surface_envelopes(project, source)
+    source_material = source_bounds.guaranteed
+    implicit_curved_source = not attachment.source_region_uv and not source_bounds.is_exact
     source_polygon = (
         material_polygon(attachment.source_region_uv)
         if attachment.source_region_uv
-        else source_material
+        else source_bounds.proxy
     )
     tolerance = contact_tolerance(project, material, source_material, source_polygon)
-    if not source_material.buffer(tolerance).covers(source_polygon):
-        raise ValidationError("SOURCE_GLUE_OUTSIDE: zdrojová lepicí oblast není celá na materiálu.")
     target_region = material_polygon(attachment.target_region_uv)
-    if not material.buffer(tolerance).covers(target_region):
-        raise ValidationError(
-            "TARGET_GLUE_OUTSIDE: cílová lepicí oblast zasahuje mimo materiál nebo do otvoru."
-        )
+    target_proved = _prove_material_contact(
+        target_bounds, target_region, tolerance, "TARGET_GLUE_OUTSIDE",
+        "cílová lepicí oblast zasahuje mimo materiál nebo do otvoru.",
+        defer_uncertainty=True,
+    )
+    source_proved = implicit_curved_source or _prove_material_contact(
+        source_bounds, source_polygon, tolerance, "SOURCE_GLUE_OUTSIDE",
+        "zdrojová lepicí oblast není celá na materiálu.",
+        defer_uncertainty=True,
+    )
     loops = [
         list(source_polygon.exterior.coords)[:-1],
         *[list(h.coords)[:-1] for h in source_polygon.interiors],
@@ -153,17 +190,33 @@ def attachment_geometry(project, attachment):
     if gap > tolerance:
         raise ValidationError(f"ATTACHMENT_GAP: lepené plochy odděluje mezera {gap:g} mm.")
     footprint = material_polygon(uv_loops[0], uv_loops[1:])
-    available = footprint.intersection(target_region).intersection(material).area
-    if footprint.area - available > max(1e-8, footprint.area * 1e-10):
+    footprint_proved = _prove_material_contact(
+        target_bounds, footprint, tolerance, "GLUE_REGION_PARTIAL",
+        "otisk není celý na lepicím materiálu protikusu.",
+        defer_uncertainty=True,
+    )
+    possible_available = (
+        footprint.intersection(target_region).intersection(target_bounds.possible).area
+    )
+    if footprint.area - possible_available > max(1e-8, footprint.area * 1e-10):
         raise ValidationError(
             "GLUE_REGION_PARTIAL: otisk není celý v zadané lepicí oblasti protikusu."
         )
-    if not material.buffer(tolerance).covers(footprint) or not target_region.buffer(
-        tolerance
-    ).covers(footprint):
+    if not target_region.buffer(tolerance).covers(footprint):
         raise ValidationError(
             "GLUE_REGION_PARTIAL: otisk přesahuje příjemce nad toleranci kontaktu."
         )
+    if implicit_curved_source:
+        # A shrunken chord guarantee must never replace the authored whole part.
+        # Definite source/receiver/gap failures above retain their own verdict.
+        raise ValidationError(
+            "CURVE_SOURCE_REGION_UNRESOLVED: určete na zdrojovém dílu vlastní lepicí oblast "
+            "uvnitř materiálu, dále od křivkové hrany nebo otvoru. "
+            "Celý zakřivený obrys nelze nahradit zmenšeným mnohoúhelníkem."
+        )
+    if not all((source_proved, target_proved, footprint_proved)):
+        _unresolved_curve_contact()
+    available = footprint.intersection(target_region).intersection(material).area
     return {
         "kind": attachment.kind,
         "source_world": world_loops[0].tolist(),
@@ -228,7 +281,8 @@ def trace_connector_contact(project, attachment, connector):
     hinge = np.asarray(geometry["target_uv"]) * project.scale
     tangent = (hinge[1] - hinge[0]) / math.dist(*hinge)
     side = np.array([-tangent[1], tangent[0]]) * attachment.glue_direction
-    receiver = surface_material(project, attachment.target_surface_id, paper=True)
+    receiver_bounds = surface_envelopes(project, attachment.target_surface_id, paper=True)
+    receiver = receiver_bounds.guaranteed
     if attachment.kind == "glue_region":
         receiver = receiver.intersection(
             material_polygon(np.asarray(attachment.target_region_uv) * project.scale)
@@ -263,6 +317,11 @@ def trace_connector_contact(project, attachment, connector):
             raise ValidationError("FOLDED_CONTACT_GAP: ohnutá chlopeň neleží na přijímající ploše.")
         footprint = footprint_uv * project.scale
         region = Polygon(footprint)
+        if not receiver_bounds.is_exact:
+            _prove_material_contact(
+                receiver_bounds, region, 0, "FOLDED_GLUE_AREA_PARTIAL",
+                "ohnutá chlopeň není celá na materiálu protikusu.",
+            )
         available = region.intersection(receiver).area
         result.append(
             {
@@ -283,6 +342,25 @@ def source_outward(project, surface_id, edge_id):
     profile, _, edge = edge_source(project, surface_id, edge_id)
     tangent = (edge[1] - edge[0]) / math.dist(*edge)
     outward = np.array([tangent[1], -tangent[0]])
+    if any(segment.kind != "line" for segment in profile.segments):
+        bounds = surface_envelopes(project, surface_id)
+        midpoint = (edge[0]+edge[1])/2
+        step = math.dist(*edge)/4
+        for _ in range(25):
+            right, left = midpoint+step*outward, midpoint-step*outward
+            right_inside = (bounds.guaranteed.contains(Point(right))
+                            and bounds.guaranteed.covers(LineString([midpoint, right])))
+            left_inside = (bounds.guaranteed.contains(Point(left))
+                           and bounds.guaranteed.covers(LineString([midpoint, left])))
+            if right_inside and not bounds.possible.covers(Point(left)):
+                return tangent, -outward
+            if left_inside and not bounds.possible.covers(Point(right)):
+                return tangent, outward
+            step /= 2
+        raise ValidationError(
+            "CURVE_EDGE_SIDE_UNRESOLVED: u vybrané hrany nelze doložit stranu materiálu. "
+            "Zvolte delší přímý úsek dále od křivkové hrany nebo otvoru."
+        )
     if signed_area(profile.points) < 0:
         outward = -outward
     if profile.id in project.surfaces[surface_id].hole_profile_ids:
