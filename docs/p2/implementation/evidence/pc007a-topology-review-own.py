@@ -87,3 +87,31 @@ def test_own_global_budget_exhaustion_never_grants_valid(limit):
 def test_own_source_tangent_hole_requires_strict_separation_not_point_sampling():
     result=certify_region_topology(circle(0,0,10),(circle(9,0,1,'t'),),max_nodes=1000)
     assert result.status!='VALID'
+
+
+def test_T01_fixed_scope_is_native_and_nominal_endpoint_jump_does_not_become_false_witness():
+    c=Curve((-1,0),(1,0),'arc',{'center':(0,0),'sweep_deg':180+1e-12},'jump')
+    result=certify_region_topology((c,Curve((1,0),(-1,0))))
+    assert result.status!='INVALID',result
+    assert result.geometry_scope=='MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS'
+    assert all('DECLARED_ARC_ENDPOINT_CONSTRAINTS' not in p for p in result.proof)
+
+
+def test_own_true_native_arc_line_crossing_retains_interval_witness_after_nominal_center_fix():
+    arc=Curve((0,1),(1,0),'arc',{'center':(1e-14,0),'sweep_deg':-90},'quarter')
+    boundary=(arc,Curve((1,0),(0.9,0)),Curve((0.9,0),(0.9,2)),Curve((0.9,2),(0,2)),Curve((0,2),(0,1)))
+    result=certify_region_topology(boundary)
+    assert result.status=='INVALID',result
+    assert result.witness['method']=='NATIVE_SVG_CIRCLE_LINE_INTERVAL_ROOT'
+    assert result.witness['point'] is None
+    expected=(0.9,math.sqrt(1-0.9**2))
+    for (lo,hi),point in zip(result.witness['point_bounds'],expected):
+        assert lo-2*math.ulp(point)<=point<=hi+2*math.ulp(point)
+
+
+def test_own_identical_fixed_endpoint_quarter_arcs_have_exact_overlap_witness():
+    a=Curve((1,0),(0,1),'arc',{'center':(0,0),'sweep_deg':90},'a')
+    b=Curve((0,1),(1,0),'arc',{'center':(0,0),'sweep_deg':-90},'b')
+    result=certify_region_topology((a,b))
+    assert result.status=='INVALID',result
+    assert result.witness['method']=='IDENTICAL_NATIVE_SVG_ARC_OVERLAP'
