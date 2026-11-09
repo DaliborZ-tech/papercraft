@@ -606,3 +606,28 @@ def test_existing_loft_preview_updates_detached_identity_without_duplicate_patch
     assert p.to_dict() == result["project_state"]
     p.recompute()
     assert not p.parts[pid].stale and p.placements[pid] == preview.placements[pid]
+
+
+@pytest.mark.parametrize("new_capability", ["loft", "orphan_curve"])
+def test_schema_three_copy_adapter_rejects_capabilities_it_never_defined(new_capability):
+    p, a, b = extrusion(cubic=new_capability == "orphan_curve")
+    if new_capability == "loft":
+        p.add_loft(a, b, correspondences=refs(p, a, b))
+    data = p.to_dict()
+    data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
+    with pytest.raises(ProjectFormatError, match="Starší formát"):
+        AuthorProject.from_dict(data)
+
+
+def test_schema_three_copy_adapter_still_preserves_known_planar_sources_and_layout():
+    p = AuthorProject.new(scale=1)
+    a = p.add_profile([[0, 0], [20, 0], [20, 10], [0, 10]])
+    s = p.add_surface(a)
+    pid = p.part_for_surface(s)
+    p.set_placement(pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True)
+    data = p.to_dict()
+    data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
+    restored = AuthorProject.from_dict(data)
+    assert restored.profiles == p.profiles and restored.surfaces == p.surfaces
+    assert restored.parts[pid].frame == p.parts[pid].frame
+    assert restored.placements == p.placements and restored.parts[pid].stale

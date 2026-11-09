@@ -1293,6 +1293,35 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             and data["schema_version"] == 3
             and data.get("writer_version") == "0.3.0-pc006b-clearance-experimental"
         )
+        if upgrading or upgrading_b or upgrading_c:
+            # These published experimental envelopes knew only straight
+            # sketches and planar features. A version-label change must not
+            # smuggle newer capabilities through a permissive copy adapter.
+            surfaces, profiles = data.get("surfaces"), data.get("profiles")
+            if (
+                not isinstance(surfaces, dict)
+                or any(
+                    not isinstance(record, dict)
+                    or record.get("kind") != "planar"
+                    or record.get("params") != {}
+                    for record in surfaces.values()
+                )
+                or not isinstance(profiles, dict)
+                or any(
+                    not isinstance(record, dict)
+                    or not isinstance(record.get("segments"), list)
+                    or any(
+                        not isinstance(segment, dict)
+                        or segment.get("kind") != "line"
+                        or segment.get("data") != {}
+                        for segment in record["segments"]
+                    )
+                    for record in profiles.values()
+                )
+            ):
+                raise ProjectFormatError(
+                    "Starší formát nezná křivkové profily ani nerovinné konstrukční plochy."
+                )
         if upgrading_c:
             data["schema_version"] = SCHEMA_VERSION
         if upgrading:
