@@ -238,11 +238,12 @@
         "report": "docs/p2/implementation/PC006A_INTEGRATION_REVIEW.md",
         "scope": "new advice and documented product correction; next use still pending"
       },
-      "effectiveness": "PENDING_NEXT_USE",
+      "effectiveness": "TECHNICAL_NEXT_USE_OBSERVED; human usability not inferred",
       "next_use": {
-        "status": "NOT_RUN",
+        "status": "TECHNICAL_TRANSFER_OBSERVED",
         "ticket": "PC-006B",
-        "evidence": null
+        "evidence": "docs/p2/implementation/PC006B_COMMANDS_REVIEW.md",
+        "scope": "Actual F2 pending-number and invalid-input Qt checks; not novice study"
       }
     },
     {
@@ -314,13 +315,16 @@
       "skill_change": "Known collision lower bounds preserved; layer uncertainty cannot erase a third certain collision",
       "usage_example": "Run the same negative pair with and without a far unknown obstacle",
       "verification": {
-        "status": "PENDING_INTEGRATED_REVIEW_AND_NEXT_NATIVE_USE",
+        "status": "PRODUCT_OR_HARNESS_REPAIR_REVIEWED; broader effectiveness PENDING_NEXT_USE",
         "evidence": [
           "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md"
         ]
       },
       "independent_review": {
-        "status": "PENDING"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "d072aa8",
+        "report": "docs/p2/implementation/PC006B_COMMANDS_REVIEW.md",
+        "additional_report": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
@@ -351,13 +355,16 @@
       "skill_change": "Driver prepends own src and checks and records actual module __file__ before launch",
       "usage_example": "Launch with a shared virtualenv from a second worktree; inspect actual module path and reject mismatches",
       "verification": {
-        "status": "PENDING_INTEGRATED_REVIEW_AND_NEXT_NATIVE_USE",
+        "status": "PRODUCT_OR_HARNESS_REPAIR_REVIEWED; broader effectiveness PENDING_NEXT_USE",
         "evidence": [
           "docs/p2/implementation/evidence/pc006b-desktop-95482c5-run04/results.json"
         ]
       },
       "independent_review": {
-        "status": "PENDING"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "d072aa8",
+        "report": "docs/p2/implementation/PC006B_COMMANDS_REVIEW.md",
+        "additional_report": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {

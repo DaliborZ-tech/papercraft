@@ -1820,28 +1820,28 @@
         "AC-US08"
       ],
       "acceptance_state": {
-        "AC-AU03": "NOT_RUN",
-        "AC-AU04": "NOT_RUN",
-        "AC-AU05": "NOT_RUN",
-        "AC-AU06": "NOT_RUN",
-        "AC-AU07": "NOT_RUN",
-        "AC-AU13": "NOT_RUN",
-        "AC-AU15": "NOT_RUN",
-        "AC-C08": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
-        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US08": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
+        "AC-AU03": "DIGITAL_PASS_IN_SLICE_SCOPE: native A/mixed eb08f97 run06 plus independent material/component review; physical P3 NOT_RUN",
+        "AC-AU04": "DIGITAL_PASS_IN_SLICE_SCOPE: native A/mixed eb08f97 run06 plus independent material/component review; physical P3 NOT_RUN",
+        "AC-AU05": "DIGITAL_PASS_IN_SLICE_SCOPE: native A/mixed eb08f97 run06 plus independent material/component review; physical P3 NOT_RUN",
+        "AC-AU06": "DIGITAL_PASS_IN_SLICE_SCOPE: native A/mixed eb08f97 run06 plus independent material/component review; physical P3 NOT_RUN",
+        "AC-AU07": "DIGITAL_PASS_IN_SLICE_SCOPE: native A/mixed eb08f97 run06 plus independent material/component review; physical P3 NOT_RUN",
+        "AC-AU13": "PASS_FOR_PLANAR_A_AND_MIXED_SLICE; curved/approximate cases remain in later authorized slices",
+        "AC-AU15": "PASS_FOR_PLANAR_A_AND_MIXED_SLICE; curved/approximate cases remain in later authorized slices",
+        "AC-C08": "DIGITAL_PASS_IN_SLICE_SCOPE: native A/mixed eb08f97 run06 plus independent material/component review; physical P3 NOT_RUN",
+        "AC-US01": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US02": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US03": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US04": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US05": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US06": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US07": "TECHNICAL_UI_VERIFIED_IN_SLICE; actual novice observation NOT_RUN, not inferred from automation",
+        "AC-US08": "NOT_RUN_PARTICIPANT_UNAVAILABLE: owner confirmed; zero participants, no substitution"
       },
       "status": "IN_PROGRESS",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-      "review": "independent reviewer of pinned commit required",
+      "review": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md",
       "estimate_person_days": [
         10,
         17
@@ -1856,44 +1856,44 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "IN_USE",
+          "status": "APPLIED_IN_DIGITAL_SLICE",
           "decision": "Keep true overhang and receiving material; include other active assembled tabs during one-tab fold; explicit layer uncertainty, no physical certification",
           "evidence": [
             "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md",
             "src/archpapercraft/authoring/bend.py"
           ],
-          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
+          "review": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md; PC006B_COMMANDS_REVIEW.md; human efficacy not claimed"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "IN_USE",
+          "status": "APPLIED_IN_DIGITAL_SLICE",
           "decision": "Contextual part deletion with concrete dependency preview and reusable sketches; named source/part selection; C05 pending numeric preflight for both actions",
           "evidence": [
             "src/archpapercraft/ui/author_window.py",
             "tests/authoring/test_workspace.py"
           ],
-          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
+          "review": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md; PC006B_COMMANDS_REVIEW.md; human efficacy not claimed"
         },
         {
           "skill": "papercraft-verification",
-          "status": "IN_USE",
+          "status": "APPLIED_IN_DIGITAL_SLICE",
           "decision": "Use independent mid-fold witnesses and exact obstacle inventory, preserve old failing desktop runs; new native proof pinned to one source, no novice substitution",
           "evidence": [
             "tests/authoring/test_bend_adapter.py",
             "tools/authoring/desktop_b_proof.py",
             "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md"
           ],
-          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
+          "review": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md; PC006B_COMMANDS_REVIEW.md; human efficacy not claimed"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "IN_USE",
+          "status": "APPLIED_IN_DIGITAL_SLICE",
           "decision": "Resume explicit owner pause without reopening accepted scope; isolate component ownership and independent reviewers; integration only after pinned verification and review",
           "evidence": [
             "docs/p2/implementation/CONTINUE_2026-11-07.md",
             "05_WORK_QUEUE.json"
           ],
-          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
+          "review": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md; PC006B_COMMANDS_REVIEW.md; human efficacy not claimed"
         }
       ],
       "usability": {
@@ -1908,8 +1908,11 @@
           "AC-US07",
           "AC-US08"
         ],
-        "main_flow_evidence": [],
-        "status": "NOT_RUN",
+        "main_flow_evidence": [
+          "docs/p2/implementation/evidence/pc006b-desktop-eb08f97-run06/results.json",
+          "docs/p2/implementation/evidence/pc006b-inkscape-eb08f97-run01/editor-results.json"
+        ],
+        "status": "TECHNICAL_UI_VERIFIED_HUMAN_STUDY_PENDING",
         "implementation_in_this_slice": true,
         "defer_to_visual_redesign": false,
         "novice_study": {
@@ -1920,13 +1923,13 @@
           "required_before_first_author_version_fully_verified": true
         },
         "ui_rework_evidence": {
-          "status": "NOT_RUN",
-          "problem": null,
-          "reason": null,
-          "preserved_parts": null,
-          "before_after_flow": null,
-          "consistency_impact": null,
-          "workflow_alternative_decision": null
+          "status": "TECHNICALLY_VERIFIED",
+          "problem": "Unnamed entities and unavailable explicit removal made real assembly editing ambiguous; redundant recompute dirtied a saved laid-out model",
+          "reason": "Expose concrete names, dependency preview, reversible deletion and source-revision stability in the current slice",
+          "preserved_parts": "Existing linked sketch/3D/paper workspace, history, numeric input and authored placement",
+          "before_after_flow": "Native run05 failure, eb08f97 fix, native run06 complete PASS and independent Qt shortcut checks",
+          "consistency_impact": "Shared selection and controller command/undo path, C05 pending input validation",
+          "workflow_alternative_decision": "Ordinary in-scope change under accepted UI mandate"
         },
         "participant_availability": {
           "status": "NOT_RUN_PARTICIPANT_UNAVAILABLE",
@@ -1950,17 +1953,31 @@
         "implicit_tab_identity_fix_sha": "07b6a1cc9ce3835427f621c6337f65e39464ec65",
         "domain_review": "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md",
         "B-01": "INDEPENDENTLY_CLOSED_ON_4bb5c43",
-        "B-02": "OPEN_MAJOR: continuous bend clearance implementation underway in isolated branch",
-        "native_complete_A": "run03 TECHNICAL_UI_PASS on 5b1161c, known camera/contact limitations preserved; new full-material registry native proof NOT_RUN",
+        "B-02": "INDEPENDENTLY_CLOSED_IN_DECLARED_STRAIGHT_HINGE_DIGITAL_SCOPE_ON_eb08f97",
+        "native_complete_A": "PASS_TECHNICAL_UI_eb08f97_run06; unknown material explicitly unverified; not novice or physical proof",
         "novice_study": "NOT_RUN: owner confirmed no eligible new participant available; 0 participants",
-        "whole_ticket_verdict": "CHANGES_REQUIRED_UNTIL_REQUIRED_EVIDENCE_AND_AU07_COMPLETE",
+        "whole_ticket_verdict": "DIGITAL_IMPLEMENTATION_APPROVED; AC-US08_NOT_RUN_PARTICIPANT_UNAVAILABLE",
         "material_adapter_wip_source_sha": "4e9956bc8fdb8a91af5cd5a4aa62de481e3eb657",
         "author_commands_integration_sha": "ccc2d7e",
         "native_driver_sha": "bae88e2",
         "B-03": "INDEPENDENTLY_CLOSED_ON_5b1161c",
         "B-04": "INDEPENDENTLY_CLOSED_ON_a69c22a",
-        "B-05": "INDEPENDENTLY_CLOSED_ON_2550889"
-      }
+        "B-05": "INDEPENDENTLY_CLOSED_ON_2550889",
+        "R01": "INDEPENDENTLY_CLOSED_ON_022e9fa",
+        "recompute_dirty_fix_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548"
+      },
+      "technical_verdict": "APPROVED_IN_DIGITAL_SLICE_SCOPE",
+      "reviewed_code_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",
+      "delivery_report": "docs/p2/implementation/PC006B_DELIVERY.md",
+      "completion_note": "Digital A and mixed-part implementation independently approved; ticket remains open for actual novice AC-US08, zero participants; full P2 and physical P3 not complete",
+      "evidence": [
+        "docs/p2/implementation/PC006B_DELIVERY.md",
+        "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md",
+        "docs/p2/implementation/PC006B_COMMANDS_REVIEW.md",
+        "docs/p2/implementation/evidence/pc006b-eb08f97-all-tests.xml",
+        "docs/p2/implementation/evidence/pc006b-desktop-eb08f97-run06/results.json",
+        "docs/p2/implementation/evidence/pc006b-inkscape-eb08f97-run01/editor-results.json"
+      ]
     },
     {
       "id": "PC-007A",
@@ -2435,7 +2452,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "IN_PROGRESS: PC-006A technically verified, PC-006B underway; full A/B/C/D, AC-US08, AC-AU19 and final P2 review not yet complete",
+  "p2_digital_delivery": "IN_PROGRESS: A and mixed-part digital implementation verified; B/C/D, novice AC-US08, final historic AC-AU19 and final P2 review still pending",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2621,6 +2638,10 @@
     "wip_branch": "revival/p2-clearance-integration",
     "next_required_technical_work": "Complete AU07 obstacle registry with every other active connector tab, then independent adapter review and new native proof",
     "resumed_on": "2026-11-09",
-    "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills"
+    "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills",
+    "digital_source_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",
+    "remaining_external_evidence": [
+      "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
+    ]
   }
 }

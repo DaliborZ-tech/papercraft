@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   data-project-id="a9718d9d-35b7-4a02-950e-8dea7ffd4e9f"
+   data-snapshot-digest="238ab592b385e33421d21ab42df1557b3728b8259935b72e49add49a450055bd"
+   data-page-id="4cce3c7e-bebb-41af-b566-da01369419c8"
+   data-pdf-arc-interpolation-error-bound-mm="0"
+   data-pdf-numeric-serialization-error-bound-mm="5.83456381889721e-05"
+   data-pdf-combined-position-error-bound-mm="5.83456381889721e-05"
+   data-construction-checks-digest="02dec67c5302bfe833e1a33eea92d2a84d85d6e6dd96907f777c28780ce8f634"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="editor-edited.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.57727273"
+     inkscape:cx="397.55906"
+     inkscape:cy="560.3937"
+     inkscape:window-width="1520"
+     inkscape:window-height="873"
+     inkscape:window-x="2050"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4" />
+  <title
+     id="title1">a9718d9d-35b7-4a02-950e-8dea7ffd4e9f</title>
+  <metadata
+     id="construction-checks">{&quot;assembly_digest&quot;:&quot;3cb1944ae094153bfd4dc68056156e0fca6f074ba1412866c753e199ae7105be&quot;,&quot;connector_bends&quot;:{&quot;49ee05be-d2a4-4dc5-8275-8062cfb786e6&quot;:{&quot;assembly_digest&quot;:&quot;3cb1944ae094153bfd4dc68056156e0fca6f074ba1412866c753e199ae7105be&quot;,&quot;assembly_scenario&quot;:&quot;ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED&quot;,&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;motion&quot;:&quot;shorter_signed_rigid_fold; finite_crease_and_contact_reservations&quot;,&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tabs&quot;:[{&quot;allowances&quot;:[{&quot;angle_interval_deg&quot;:[-135.0,0.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[100.0,0.5,39.5],[100.0,-0.5,39.5],[100.0,0.5,40.5],[100.0,-0.5,40.5],[75.0,0.5,39.5],[75.0,-0.5,39.5],[75.0,0.5,40.5],[75.0,-0.5,40.5]]},{&quot;angle_interval_deg&quot;:[-135.0,0.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[100.0,0.5,39.5],[100.0,-0.5,39.5],[100.0,0.5,40.5],[100.0,-0.5,40.5],[75.0,0.5,39.5],[75.0,-0.5,39.5],[75.0,0.5,40.5],[75.0,-0.5,40.5]]},{&quot;angle_interval_deg&quot;:[-135.0,-134.88540836457932],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[75.49510098048641,0.0014142135623729873,40.0],[75.49510098048641,-1.0809495659680479e-16,40.00141421356237],[99.50489901951357,0.0014142135623729873,40.0],[99.50489901951357,-1.0809495659680479e-16,40.00141421356237],[99.50490678724331,0.0013867504905608655,39.99997253692819],[99.50490678724331,-2.7463071812229697e-05,40.00138675049056],[87.5,-3.5355928314978384,36.46299295493979],[87.5,-3.537007045060211,36.46440716850216],[75.49509321275669,0.0013867504905608655,39.99997253692819],[75.49509321275669,-2.7463071812229697e-05,40.00138675049056]]}],&quot;assumptions&quot;:[&quot;complete_registry_of_planar_material_triangles&quot;,&quot;straight_hinge_rigid_motion_of_declared_convex_patches&quot;,&quot;bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics&quot;,&quot;explicit_finite_hinge_and_contact_volumes_only&quot;,&quot;physical_build_and_strength_NOT_VERIFIED&quot;],&quot;bend_radius_mm&quot;:0.0,&quot;certified_intervals&quot;:0,&quot;checked_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;clearance_mm&quot;:0.0,&quot;coarse_intervals_examined&quot;:2,&quot;envelope_padding_mm&quot;:1.1335665442435989e-06,&quot;examined_intervals&quot;:128,&quot;expected_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;layer_geometry&quot;:&quot;NO_UNRESOLVED_RECEIVER_LAYER_PAIRS&quot;,&quot;material_thickness_mm&quot;:null,&quot;message&quot;:&quot;Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified; interval budget exhausted&quot;,&quot;not_evaluated_obstacle_ids&quot;:[],&quot;numerical_guard_mm&quot;:1.1335665442435989e-06,&quot;obstacle_id&quot;:null,&quot;proof_method&quot;:&quot;bounded_breadth_first_material_lower_bound_collision_witness_search&quot;,&quot;search_budget_exhausted&quot;:true,&quot;search_depth_limit&quot;:8,&quot;search_depth_limit_reached&quot;:false,&quot;search_interval_limit&quot;:128,&quot;search_limits&quot;:{&quot;max_depth&quot;:8,&quot;max_intervals&quot;:128},&quot;search_scope&quot;:&quot;BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tab_id&quot;:&quot;f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;unresolved_layer_obstacle_ids&quot;:[],&quot;witness_angle_deg&quot;:null,&quot;witness_angles_examined&quot;:131,&quot;witness_point_mm&quot;:null},{&quot;allowances&quot;:[{&quot;angle_interval_deg&quot;:[-134.99999999999994,0.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[50.0,0.5,39.5],[50.0,-0.5,39.5],[50.0,0.5,40.5],[50.0,-0.5,40.5],[25.0,0.5,39.5],[25.0,-0.5,39.5],[25.0,0.5,40.5],[25.0,-0.5,40.5]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,0.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[50.0,0.5,39.5],[50.0,-0.5,39.5],[50.0,0.5,40.5],[50.0,-0.5,40.5],[25.0,0.5,39.5],[25.0,-0.5,39.5],[25.0,0.5,40.5],[25.0,-0.5,40.5]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,-134.88540836457926],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[39.49497409958807,-1.413496114989384,38.585089671448245],[39.49497409958807,-1.4149103285517572,38.586503885010615],[49.501,0.0015696383925149974,40.00015542483015],[49.501,0.0001554248301419022,40.00156963839252],[49.501,-1.414213562373095,38.58437222406454],[49.501,-1.415627775935468,38.58578643762691],[39.495074567145245,-1.414213562373095,38.58437222406454],[39.495074567145245,-1.415627775935468,38.58578643762691]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,-134.88540836457926],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[35.4957639320225,-2.8284271247461903,37.17015866169144],[35.4957639320225,-2.829841338308563,37.17157287525381],[39.501,-1.4123623327862742,38.58622345365136],[39.501,-1.4137765463486474,38.58763766721373],[39.501,-2.8284271247461903,37.17015866169144],[39.501,-2.829841338308563,37.17157287525381]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,-134.88540836457926],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[25.498999999999995,0.0015696383925167027,40.00015542483015],[25.498999999999995,0.00015542483014360754,40.00156963839252],[35.50502590041193,-1.413496114989384,38.585089671448245],[35.50502590041193,-1.4149103285517572,38.586503885010615],[35.504925432854755,-1.414213562373095,38.58437222406454],[35.504925432854755,-1.415627775935468,38.58578643762691],[25.498999999999995,-1.414213562373095,38.58437222406454],[25.498999999999995,-1.415627775935468,38.58578643762691]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,-134.88540836457926],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[39.50002814979465,-1.414223584864863,38.584362201572766],[39.50002814979465,-1.4156377984272361,38.585776415135136],[25.494966700781788,0.0005012610681775357,39.99908704750581],[25.494966700781788,-0.0009129524941955596,40.00050126106818],[25.495058457130085,0.0014142135623729873,40.0],[25.495058457130085,-1.0809495659680479e-16,40.00141421356237],[49.504925432854755,0.0014142135623729873,40.0],[49.504925432854755,-1.0809495659680479e-16,40.00141421356237],[49.50502590041193,0.0006967661786621819,39.99928255261629],[49.50502590041193,-0.0007174473837109134,40.00069676617866]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,-134.88540836457926],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[35.499,-1.412799348810721,38.58578643762691],[35.499,-1.414213562373094,38.58720065118928],[39.5042360679775,-1.412799348810721,38.58578643762691],[39.5042360679775,-1.414213562373094,38.58720065118928],[35.499,-2.828864140770639,37.16972164566699],[35.499,-2.8302783543330117,37.17113585922936]]},{&quot;angle_interval_deg&quot;:[-134.99999999999994,-134.88540836457926],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[39.50494154286991,-1.414213562373095,38.58437222406454],[39.50494154286991,-1.415627775935468,38.58578643762691],[35.49990098048641,-1.414213562373095,38.58437222406454],[35.49990098048641,-1.415627775935468,38.58578643762691],[25.494926309578467,0.0007035247066347609,39.99928931114427],[25.494926309578467,-0.0007106888557383344,40.00070352470664],[25.495217244983177,0.0019045237104928618,40.00049031014812],[25.495217244983177,0.0004903101481197665,40.00190452371049],[39.50503329921821,-1.4133006098788996,38.58528517655873],[39.50503329921821,-1.4147148234412728,38.5866993901211]]}],&quot;assumptions&quot;:[&quot;complete_registry_of_planar_material_triangles&quot;,&quot;straight_hinge_rigid_motion_of_declared_convex_patches&quot;,&quot;bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics&quot;,&quot;explicit_finite_hinge_and_contact_volumes_only&quot;,&quot;physical_build_and_strength_NOT_VERIFIED&quot;],&quot;bend_radius_mm&quot;:0.0,&quot;certified_intervals&quot;:0,&quot;checked_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;clearance_mm&quot;:0.0,&quot;coarse_intervals_examined&quot;:2,&quot;envelope_padding_mm&quot;:1.1365798921007581e-06,&quot;examined_intervals&quot;:128,&quot;expected_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;layer_geometry&quot;:&quot;NO_UNRESOLVED_RECEIVER_LAYER_PAIRS&quot;,&quot;material_thickness_mm&quot;:null,&quot;message&quot;:&quot;Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified; interval budget exhausted&quot;,&quot;not_evaluated_obstacle_ids&quot;:[],&quot;numerical_guard_mm&quot;:1.1365798921007581e-06,&quot;obstacle_id&quot;:null,&quot;proof_method&quot;:&quot;bounded_breadth_first_material_lower_bound_collision_witness_search&quot;,&quot;search_budget_exhausted&quot;:true,&quot;search_depth_limit&quot;:8,&quot;search_depth_limit_reached&quot;:false,&quot;search_interval_limit&quot;:128,&quot;search_limits&quot;:{&quot;max_depth&quot;:8,&quot;max_intervals&quot;:128},&quot;search_scope&quot;:&quot;BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tab_id&quot;:&quot;d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;unresolved_layer_obstacle_ids&quot;:[],&quot;witness_angle_deg&quot;:null,&quot;witness_angles_examined&quot;:131,&quot;witness_point_mm&quot;:null},{&quot;allowances&quot;:[{&quot;angle_interval_deg&quot;:[-135.0,0.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[25.0,0.5,39.5],[25.0,-0.5,39.5],[25.0,0.5,40.5],[25.0,-0.5,40.5],[0.0,0.5,39.5],[0.0,-0.5,39.5],[0.0,0.5,40.5],[0.0,-0.5,40.5]]},{&quot;angle_interval_deg&quot;:[-135.0,0.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[25.0,0.5,39.5],[25.0,-0.5,39.5],[25.0,0.5,40.5],[25.0,-0.5,40.5],[0.0,0.5,39.5],[0.0,-0.5,39.5],[0.0,0.5,40.5],[0.0,-0.5,40.5]]},{&quot;angle_interval_deg&quot;:[-135.0,-134.88540836457932],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[0.49510098048640716,0.0014142135623729873,40.0],[0.49510098048640716,-1.0809495659680479e-16,40.00141421356237],[24.50489901951359,0.0014142135623729873,40.0],[24.50489901951359,-1.0809495659680479e-16,40.00141421356237],[24.504906787243318,0.0013867504905631393,39.99997253692819],[24.504906787243318,-2.7463071809955908e-05,40.00138675049056],[12.5,-3.535592831497837,36.46299295493979],[12.5,-3.53700704506021,36.46440716850216],[0.4950932127566841,0.001386750490562571,39.99997253692819],[0.4950932127566841,-2.7463071810524355e-05,40.00138675049056]]}],&quot;assumptions&quot;:[&quot;complete_registry_of_planar_material_triangles&quot;,&quot;straight_hinge_rigid_motion_of_declared_convex_patches&quot;,&quot;bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics&quot;,&quot;explicit_finite_hinge_and_contact_volumes_only&quot;,&quot;physical_build_and_strength_NOT_VERIFIED&quot;],&quot;bend_radius_mm&quot;:0.0,&quot;certified_intervals&quot;:0,&quot;checked_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;clearance_mm&quot;:0.0,&quot;coarse_intervals_examined&quot;:2,&quot;envelope_padding_mm&quot;:1.1334871862998689e-06,&quot;examined_intervals&quot;:128,&quot;expected_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;layer_geometry&quot;:&quot;NO_UNRESOLVED_RECEIVER_LAYER_PAIRS&quot;,&quot;material_thickness_mm&quot;:null,&quot;message&quot;:&quot;Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified; interval budget exhausted&quot;,&quot;not_evaluated_obstacle_ids&quot;:[],&quot;numerical_guard_mm&quot;:1.1334871862998689e-06,&quot;obstacle_id&quot;:null,&quot;proof_method&quot;:&quot;bounded_breadth_first_material_lower_bound_collision_witness_search&quot;,&quot;search_budget_exhausted&quot;:true,&quot;search_depth_limit&quot;:8,&quot;search_depth_limit_reached&quot;:false,&quot;search_interval_limit&quot;:128,&quot;search_limits&quot;:{&quot;max_depth&quot;:8,&quot;max_intervals&quot;:128},&quot;search_scope&quot;:&quot;BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tab_id&quot;:&quot;0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;unresolved_layer_obstacle_ids&quot;:[],&quot;witness_angle_deg&quot;:null,&quot;witness_angles_examined&quot;:131,&quot;witness_point_mm&quot;:null}]},&quot;5a090967-633b-49a6-a585-a39ec3240d75&quot;:{&quot;assembly_digest&quot;:&quot;3cb1944ae094153bfd4dc68056156e0fca6f074ba1412866c753e199ae7105be&quot;,&quot;assembly_scenario&quot;:&quot;ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED&quot;,&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;motion&quot;:&quot;shorter_signed_rigid_fold; finite_crease_and_contact_reservations&quot;,&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tabs&quot;:[{&quot;allowances&quot;:[{&quot;angle_interval_deg&quot;:[0.0,90.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[4.5,0.5,0.5],[4.5,-0.5,0.5],[4.5,0.5,-0.5],[4.5,-0.5,-0.5],[95.5,0.5,0.5],[95.5,-0.5,0.5],[95.5,0.5,-0.5],[95.5,-0.5,-0.5]]},{&quot;angle_interval_deg&quot;:[0.0,90.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[4.5,0.5,0.5],[4.5,-0.5,0.5],[4.5,0.5,-0.5],[4.5,-0.5,-0.5],[95.5,0.5,0.5],[95.5,-0.5,0.5],[95.5,0.5,-0.5],[95.5,-0.5,-0.5]]},{&quot;angle_interval_deg&quot;:[89.88540836457935,90.0],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[77.00501244017201,1.9991388487211452,-0.001],[77.00501244017201,1.9991388487211452,0.001],[4.995066850726267,-0.0011374176523486312,-0.001],[4.995066850726267,-0.0011374176523486312,0.001],[4.994957092552709,0.00044583085453723473,-0.001],[4.994957092552709,0.00044583085453723473,0.001],[22.99994461486189,2.000999999999999,-0.001],[22.99994461486189,2.000999999999999,0.001],[77.00498659583313,2.000999999999999,-0.001],[77.00498659583313,2.000999999999999,0.001]]},{&quot;angle_interval_deg&quot;:[89.88540836457935,90.0],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[4.9949875598279805,0.000861151278854777,-0.001],[4.9949875598279805,0.000861151278854777,0.001],[77.00004153086834,2.0010015393633056,-0.001],[77.00004153086834,2.0010015393633056,0.001],[95.00503241985489,0.0004469961425820657,-0.001],[95.00503241985489,0.0004469961425820657,0.001],[95.00495227777367,-0.0010000000000013642,-0.001],[95.00495227777367,-0.0010000000000013642,0.001],[4.99501340416685,-0.0010000000000013642,-0.001],[4.99501340416685,-0.0010000000000013642,0.001]]}],&quot;assumptions&quot;:[&quot;complete_registry_of_planar_material_triangles&quot;,&quot;straight_hinge_rigid_motion_of_declared_convex_patches&quot;,&quot;bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics&quot;,&quot;explicit_finite_hinge_and_contact_volumes_only&quot;,&quot;physical_build_and_strength_NOT_VERIFIED&quot;],&quot;bend_radius_mm&quot;:0.0,&quot;certified_intervals&quot;:0,&quot;checked_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;],&quot;clearance_mm&quot;:0.0,&quot;coarse_intervals_examined&quot;:2,&quot;envelope_padding_mm&quot;:4.397335783798941e-06,&quot;examined_intervals&quot;:128,&quot;expected_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:49facc42-c2ef-4176-97e5-a6ce6e141440&quot;],&quot;layer_geometry&quot;:&quot;NO_UNRESOLVED_RECEIVER_LAYER_PAIRS&quot;,&quot;material_thickness_mm&quot;:null,&quot;message&quot;:&quot;Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified; interval budget exhausted&quot;,&quot;not_evaluated_obstacle_ids&quot;:[],&quot;numerical_guard_mm&quot;:4.397335783798941e-06,&quot;obstacle_id&quot;:null,&quot;proof_method&quot;:&quot;bounded_breadth_first_material_lower_bound_collision_witness_search&quot;,&quot;search_budget_exhausted&quot;:true,&quot;search_depth_limit&quot;:8,&quot;search_depth_limit_reached&quot;:false,&quot;search_interval_limit&quot;:128,&quot;search_limits&quot;:{&quot;max_depth&quot;:8,&quot;max_intervals&quot;:128},&quot;search_scope&quot;:&quot;BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tab_id&quot;:&quot;754a2506-1db6-4d48-9669-8666d4d00e76&quot;,&quot;unresolved_layer_obstacle_ids&quot;:[],&quot;witness_angle_deg&quot;:null,&quot;witness_angles_examined&quot;:131,&quot;witness_point_mm&quot;:null}]},&quot;e159653f-61a9-418d-9c69-865d10814bc2&quot;:{&quot;assembly_digest&quot;:&quot;3cb1944ae094153bfd4dc68056156e0fca6f074ba1412866c753e199ae7105be&quot;,&quot;assembly_scenario&quot;:&quot;ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED&quot;,&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;motion&quot;:&quot;shorter_signed_rigid_fold; finite_crease_and_contact_reservations&quot;,&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tabs&quot;:[{&quot;allowances&quot;:[{&quot;angle_interval_deg&quot;:[0.0,135.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[100.5,60.5,39.5],[100.5,59.5,39.5],[100.5,60.5,40.5],[100.5,59.5,40.5],[-0.5,60.5,39.5],[-0.5,59.5,39.5],[-0.5,60.5,40.5],[-0.5,59.5,40.5]]},{&quot;angle_interval_deg&quot;:[0.0,135.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[100.5,60.5,39.5],[100.5,59.5,39.5],[100.5,60.5,40.5],[100.5,59.5,40.5],[-0.5,60.5,39.5],[-0.5,59.5,39.5],[-0.5,60.5,40.5],[-0.5,59.5,40.5]]},{&quot;angle_interval_deg&quot;:[134.88540836457932,135.0],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[100.00501132664529,59.999911630197445,39.99867415191505],[100.00501132664529,60.001325843759815,40.00008836547742],[100.00498789244024,59.998585784275065,39.99999999783743],[100.00498789244024,59.999999997837435,40.0014142113998],[-0.004956339460111394,59.998585784275065,39.99999999783743],[-0.004956339460111394,59.999999997837435,40.0014142113998],[-0.0050312458091366355,59.999647761773474,39.99893802033901],[-0.0050312458091366355,60.001061975335844,40.00035223390138],[19.9999625991126,61.41421444230741,38.58437133980508],[19.9999625991126,61.41562865586978,38.58578555336745]]},{&quot;angle_interval_deg&quot;:[134.88540836457932,135.0],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[19.994988673354715,61.41288771428815,38.58569806782434],[19.994988673354715,61.414301927850524,38.58711228138671],[19.995012107559756,61.41421356021053,38.58437222190196],[19.995012107559756,61.4156277737729,38.58578643546433],[80.00004987562113,61.41421356021053,38.58437222190196],[80.00004987562113,61.4156277737729,38.58578643546433],[100.00504099059862,59.99964707271281,39.99893870939968],[100.00504099059862,60.00106128627518,40.00035292296205],[100.00493958947173,59.99849824290842,40.000087539204074],[100.00493958947173,59.99991245647079,40.001501752766444]]}],&quot;assumptions&quot;:[&quot;complete_registry_of_planar_material_triangles&quot;,&quot;straight_hinge_rigid_motion_of_declared_convex_patches&quot;,&quot;bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics&quot;,&quot;explicit_finite_hinge_and_contact_volumes_only&quot;,&quot;physical_build_and_strength_NOT_VERIFIED&quot;],&quot;bend_radius_mm&quot;:0.0,&quot;certified_intervals&quot;:0,&quot;checked_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;clearance_mm&quot;:0.0,&quot;coarse_intervals_examined&quot;:2,&quot;envelope_padding_mm&quot;:4.885831353229344e-06,&quot;examined_intervals&quot;:128,&quot;expected_obstacle_ids&quot;:[&quot;ebbdabb1-fca7-4026-9891-7a568fb46c3f&quot;,&quot;198b7538-2d1e-4d82-a800-8d65aad4c15e&quot;,&quot;f2c32b98-7bb3-4384-8be6-73ae18d29e23&quot;,&quot;623ea60f-ae3f-410f-8ed3-d834a2c1c5cc&quot;,&quot;629b0a6c-b13f-4a17-b6ba-51675562ff95&quot;,&quot;e100c69b-826f-4211-9c71-4fcb6ecc585f&quot;,&quot;87b57ee4-7c0a-49ca-a1ef-f8bd66a216a5&quot;,&quot;3ffafc33-6457-4a72-a8be-e5c56b25188d&quot;,&quot;ec166fee-58b6-48a6-9699-e1e520f617c4&quot;,&quot;5e24cd0b-6fc2-4029-802e-31363e6f00c8&quot;,&quot;1542cc91-a649-4361-bda5-53ee6194303e&quot;,&quot;tab:f7d7f373-ebd5-4e21-8ebd-bd1f5b13950c&quot;,&quot;tab:d4b208d6-8395-4670-a6b5-a6d10f0fae34&quot;,&quot;tab:0e9c8c07-bdb4-4abb-883b-c4c3acaf994d&quot;,&quot;tab:754a2506-1db6-4d48-9669-8666d4d00e76&quot;],&quot;layer_geometry&quot;:&quot;NO_UNRESOLVED_RECEIVER_LAYER_PAIRS&quot;,&quot;material_thickness_mm&quot;:null,&quot;message&quot;:&quot;Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified; interval budget exhausted&quot;,&quot;not_evaluated_obstacle_ids&quot;:[],&quot;numerical_guard_mm&quot;:4.885831353229344e-06,&quot;obstacle_id&quot;:null,&quot;proof_method&quot;:&quot;bounded_breadth_first_material_lower_bound_collision_witness_search&quot;,&quot;search_budget_exhausted&quot;:true,&quot;search_depth_limit&quot;:8,&quot;search_depth_limit_reached&quot;:false,&quot;search_interval_limit&quot;:128,&quot;search_limits&quot;:{&quot;max_depth&quot;:8,&quot;max_intervals&quot;:128},&quot;search_scope&quot;:&quot;BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tab_id&quot;:&quot;49facc42-c2ef-4176-97e5-a6ce6e141440&quot;,&quot;unresolved_layer_obstacle_ids&quot;:[],&quot;witness_angle_deg&quot;:null,&quot;witness_angles_examined&quot;:131,&quot;witness_point_mm&quot;:null}]}},&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;}</metadata>
+  <g
+     id="part-344829f1-11aa-492d-8ccd-5cc3c9a2d318"
+     data-part-id="344829f1-11aa-492d-8ccd-5cc3c9a2d318"
+     transform="translate(32.645833,33.96875)">
+    <title
+       id="title2">P9 · Plocha 8</title>
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-CUT"
+       data-role="CUT"
+       class="CUT"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <path
+         id="path-344829f1-11aa-492d-8ccd-5cc3c9a2d318-CUT-0"
+         d="M 0,0 H 60 V 30 L 30,60 0,30 Z"
+         fill-rule="evenodd" />
+      <path
+         id="path-344829f1-11aa-492d-8ccd-5cc3c9a2d318-CUT-1"
+         d="M 20,10 H 40 V 25 H 20 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-FOLD_MOUNTAIN"
+       data-role="FOLD_MOUNTAIN"
+       class="FOLD_MOUNTAIN"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 1" />
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-FOLD_VALLEY"
+       data-role="FOLD_VALLEY"
+       class="FOLD_VALLEY"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 0.5, 0.5, 0.5" />
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-TABS"
+       data-role="TABS"
+       class="TABS"
+       fill="#eee6d5"
+       stroke="none"
+       stroke-width="0.25" />
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-LABELS"
+       data-role="LABELS"
+       class="LABELS"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <text
+         id="label-344829f1-11aa-492d-8ccd-5cc3c9a2d318-0"
+         x="30"
+         y="45"
+         font-size="2.5px"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none"
+         style="fill:#b43d28">Žluťoučký – vlastní díl</text>
+      <text
+         id="label-344829f1-11aa-492d-8ccd-5cc3c9a2d318-1"
+         x="15"
+         y="45"
+         font-size="2px"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">A11 · rub</text>
+    </g>
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-ARTWORK"
+       data-role="ARTWORK"
+       class="ARTWORK"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25" />
+    <g
+       id="role-344829f1-11aa-492d-8ccd-5cc3c9a2d318-GUIDES"
+       data-role="GUIDES"
+       class="GUIDES"
+       fill="none"
+       stroke="#8c9894"
+       stroke-width="0.15" />
+  </g>
+  <g
+     id="part-1676603d-109f-41ca-906a-f7a02be00417"
+     data-part-id="1676603d-109f-41ca-906a-f7a02be00417"
+     transform="translate(100 120) rotate(0)">
+    <title
+       id="title3">P10 · Plocha 9</title>
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-CUT"
+       data-role="CUT"
+       class="CUT"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <path
+         id="path-1676603d-109f-41ca-906a-f7a02be00417-CUT-0"
+         d="M 0 0 L 80 0 L 80 10 L 0 10 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-FOLD_MOUNTAIN"
+       data-role="FOLD_MOUNTAIN"
+       class="FOLD_MOUNTAIN"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2,1" />
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-FOLD_VALLEY"
+       data-role="FOLD_VALLEY"
+       class="FOLD_VALLEY"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2,0.5,0.5,0.5" />
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-TABS"
+       data-role="TABS"
+       class="TABS"
+       fill="#eee6d5"
+       stroke="none"
+       stroke-width="0.25" />
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-LABELS"
+       data-role="LABELS"
+       class="LABELS"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <text
+         id="label-1676603d-109f-41ca-906a-f7a02be00417-0"
+         x="40"
+         y="5"
+         font-size="2.5"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">P10 · Plocha 9</text>
+      <text
+         id="label-1676603d-109f-41ca-906a-f7a02be00417-1"
+         x="40"
+         y="5"
+         font-size="2"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">A14 · rub</text>
+    </g>
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-ARTWORK"
+       data-role="ARTWORK"
+       class="ARTWORK"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25" />
+    <g
+       id="role-1676603d-109f-41ca-906a-f7a02be00417-GUIDES"
+       data-role="GUIDES"
+       class="GUIDES"
+       fill="none"
+       stroke="#8c9894"
+       stroke-width="0.15" />
+  </g>
+  <g
+     id="part-a9c9fd0e-d3f6-4701-8abb-2ca1db892125"
+     data-part-id="a9c9fd0e-d3f6-4701-8abb-2ca1db892125"
+     transform="translate(40 200) rotate(0)">
+    <title
+       id="title4">P11 · Lepicí pásek</title>
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-CUT"
+       data-role="CUT"
+       class="CUT"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <path
+         id="path-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-CUT-0"
+         d="M 42.4264068711928 -2 L 0 -2 L 0 0 L 0 2 L 42.4264068711928 2 L 42.4264068711928 0 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-FOLD_MOUNTAIN"
+       data-role="FOLD_MOUNTAIN"
+       class="FOLD_MOUNTAIN"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2,1" />
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-FOLD_VALLEY"
+       data-role="FOLD_VALLEY"
+       class="FOLD_VALLEY"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2,0.5,0.5,0.5">
+      <path
+         id="path-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-FOLD_VALLEY-0"
+         d="M 0 0 L 42.4264068711928 0"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-TABS"
+       data-role="TABS"
+       class="TABS"
+       fill="#eee6d5"
+       stroke="none"
+       stroke-width="0.25" />
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-LABELS"
+       data-role="LABELS"
+       class="LABELS"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <text
+         id="label-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-0"
+         x="21.2132034355964"
+         y="-1"
+         font-size="2.5"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">P11 · Lepicí pásek</text>
+      <text
+         id="label-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-1"
+         x="21.2132034355964"
+         y="1"
+         font-size="2"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">A12 · rub</text>
+      <text
+         id="label-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-2"
+         x="21.2132034355964"
+         y="-1"
+         font-size="2"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">A13 · rub</text>
+    </g>
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-ARTWORK"
+       data-role="ARTWORK"
+       class="ARTWORK"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25" />
+    <g
+       id="role-a9c9fd0e-d3f6-4701-8abb-2ca1db892125-GUIDES"
+       data-role="GUIDES"
+       class="GUIDES"
+       fill="none"
+       stroke="#8c9894"
+       stroke-width="0.15" />
+  </g>
+  <g
+     id="page-GUIDES"
+     data-role="GUIDES">
+    <path
+       d="M 10 282 L 110 282"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       fill="none"
+       data-calibration-mm="100"
+       id="path4" />
+    <text
+       id="page-label-0"
+       x="10"
+       y="287"
+       font-family="Arial"
+       xml:space="preserve"
+       font-size="2.5"
+       fill="#202b2b">Tisk 100 % / skutečná velikost. Kalibrace 100 mm na papíře.</text>
+    <text
+       id="page-label-1"
+       x="10"
+       y="292"
+       font-family="Arial"
+       xml:space="preserve"
+       font-size="2.5"
+       fill="#202b2b">Měřítko modelu 1:100 · Strana 3 / 3</text>
+  </g>
+</svg>
