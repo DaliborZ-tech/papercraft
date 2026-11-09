@@ -375,23 +375,46 @@ def flatten_loft(
                 )
                 if certificate.status != "CERTIFIED":
                     raise ValueError("Nebylo dosaženo meze obloukové délky extrudovaného profilu.")
-                parameters = certificate.parameters
-                lengths = [
-                    math.dist(x, y) * scale
-                    for x, y in zip(certificate.points, certificate.points[1:])
-                ]
+                # Geometric chord distance is NOT a source-parameter bound:
+                # a collinear cubic can move nonlinearly along its chord.
+                # For world C(u), ||C-linear(C)|| <= sup||C''||*du²/8.
+                # L(u)=integral||C'|| has |L''|<=||C''|| on a regular
+                # interval, so the same bound controls the arclength map.
+                second_derivative = _bounds(
+                    a, (Fraction(0), Fraction(0)), Fraction(1), Fraction(scale)
+                )[2]
+                steps = max(
+                    1, math.ceil(math.sqrt(_upper(second_derivative / (8 * Fraction(budget)))))
+                )
+                parameters = tuple(
+                    sorted(
+                        set(certificate.parameters) | set(np.linspace(0.0, 1.0, steps + 1).tolist())
+                    )
+                )
+                if count + len(parameters) - 1 > max_segments:
+                    raise ValueError(
+                        "Rozpočet uzlů nestačí pro doložené mapování zdrojového parametru."
+                    )
+                maximum_step = max(
+                    Fraction(y) - Fraction(x) for x, y in zip(parameters, parameters[1:])
+                )
+                parameter_error = _upper(second_derivative * maximum_step**2 / 8)
+                points = [evaluate(a, t) for t in parameters]
+                lengths = [math.dist(x, y) * scale for x, y in zip(points, points[1:])]
                 coordinates = [offset]
                 for distance in lengths:
                     coordinates.append(coordinates[-1] + distance)
                 gap = max(0, certificate.length_upper * scale - math.fsum(lengths))
                 total_gap += gap
-                world_error = max(world_error, certificate.max_chord_deviation_bound * scale)
+                world_error = max(world_error, parameter_error, certificate.numerical_guard * scale)
                 count += len(lengths)
                 flat_a = [[x, 0.0] for x in coordinates]
                 flat_b = [[x, abs(height) * scale] for x in coordinates]
                 patches.append(_patch(first, second, a, b, reference, parameters, flat_a, flat_b))
                 offset = coordinates[-1]
-            position = max(total_gap, world_error) + guard * count
+            # Prefix arclength enclosure errors accumulate across all source
+            # segments; local interpolation error is additional, not a max.
+            position = total_gap + world_error + guard * count
             report = _report(
                 "NORMAL_EXTRUSION",
                 patches,
@@ -399,8 +422,15 @@ def flatten_loft(
                 position,
                 min(speed) * abs(height) * scale**2,
                 "d'=0; [integral |C'|, H v] preserves the first fundamental form; "
-                "whole-curve rational chord/control-polygon length enclosures",
+                "whole-curve rational chord/control-polygon length enclosures; "
+                "pointwise C(u) and L(u) interpolation <=sup|C''|*du^2/8, "
+                "because |L''|<=|C''|; arclength prefix errors sum globally",
                 guard,
+            )
+            report.update(
+                arclength_prefix_error_bound_paper_mm=total_gap,
+                parameter_interpolation_error_bound_paper_mm=world_error,
+                node_rounding_reserve_paper_mm=guard * count,
             )
             return _complete(report, first, second, scale, tolerance_mm)
         if height == 0:

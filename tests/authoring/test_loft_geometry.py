@@ -268,3 +268,41 @@ def test_cone_forward_map_and_boundary_lengths_have_a_global_not_per_leaf_budget
     assert point["mode"] == "BOUNDED_PARAMETER_INTERPOLATION"
     with pytest.raises(ValueError):
         sample_loft(result, 0, 1.01, 0)
+
+
+@pytest.mark.parametrize("scale", [1.0, 0.1])
+def test_l01_collinear_cubic_mapping_preserves_nonlinear_source_parameter(scale):
+    # C(t)=(3t+3t²,0), speed=3+6t>=3. Its geometric chord error is ZERO,
+    # but interpolation over [0,1] gives x=3 rather than x=2.25 at t=.5.
+    curve = Curve((0, 0), (6, 0), "cubic", {"control1": (1, 0), "control2": (3, 0)}, "first")
+    other = Curve(curve.start, curve.end, curve.kind, dict(curve.data), "second")
+    a, b = LoftProfile((curve,)), LoftProfile((other,), origin=(0, 0, 10))
+    report = flatten_loft(a, b, correspondence(a, b), scale=scale)
+    assert report["status"] == "EXACT", report
+    assert len(report["patches"][0]["parameters"]) > 2
+    for u in (0.001, 0.031, 0.173, 0.333, 0.5, 0.731, 0.999):
+        v = 0.417
+        exact = 3 * u + 3 * u * u
+        point = sample_loft(report, 0, u, v)
+        error = report["representation_error_bound_paper_mm"]
+        assert scale * math.dist(point["world_model_mm"], [exact, 0, 10 * v]) <= error
+        assert math.dist(point["flat_paper_mm"], [exact * scale, 10 * v * scale]) <= error
+        assert point["u"] == u and point["first_segment_id"] == "first"
+    limited = flatten_loft(a, b, correspondence(a, b), scale=scale, max_segments=2)
+    assert limited["status"] == "UNRESOLVED"
+
+
+def test_l01_curved_cubic_pointwise_world_and_arclength_map_have_one_global_bound():
+    curve = Curve((0, 0), (30, 30), "cubic", {"control1": (10, 0), "control2": (20, 10)}, "first")
+    other = Curve(curve.start, curve.end, curve.kind, dict(curve.data), "second")
+    a, b = LoftProfile((curve,)), LoftProfile((other,), origin=(0, 0, 12))
+    report = flatten_loft(a, b, correspondence(a, b))
+    assert report["status"] == "EXACT", report
+    for u in (0.003, 0.137, 0.287, 0.519, 0.743, 0.997):
+        v = 0.61
+        exact_length = 15 * u * math.sqrt(1 + 4 * u * u) + 7.5 * math.asinh(2 * u)
+        point = sample_loft(report, 0, u, v)
+        error = report["representation_error_bound_paper_mm"]
+        assert math.dist(point["world_model_mm"], [30 * u, 30 * u * u, 12 * v]) <= error
+        assert math.dist(point["flat_paper_mm"], [exact_length, 12 * v]) <= error
+    assert report["representation_error_bound_paper_mm"] <= 0.005
