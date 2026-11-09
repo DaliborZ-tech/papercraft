@@ -489,8 +489,10 @@
         ]
       },
       "independent_review": {
-        "status": "PENDING_METADATA_REVIEW",
-        "product_report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "source_sha": "71f7b16e4eb220f327a5285321fee8f8b0f45d25",
+        "report": "docs/p2/implementation/PC007A_PLANAR_METADATA_REVIEW.md",
+        "scope": "Skill advice and product correction reviewed; effectiveness remains PENDING_NEXT_USE"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
