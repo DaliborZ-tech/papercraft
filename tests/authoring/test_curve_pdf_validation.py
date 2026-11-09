@@ -156,14 +156,145 @@ def test_parser_requires_closed_stroked_cut_loops(tmp_path, ending, valid):
             read_pdf_cut_regions(target)
 
 
-def test_parser_refuses_decoded_numeric_precision_loss(tmp_path):
+def test_parser_preserves_long_original_decimal_before_any_float_conversion(tmp_path):
     def before(canvas):
         canvas._code.extend(["/APPart_a BMC", "/APRole_CUT BMC",
                              "0.123456789012345678 0 m 10 0 l 10 10 l 0 10 l h S",
                              "EMC", "EMC"])
 
-    with pytest.raises(CurveOutputError, match="přesnost"):
-        read_pdf_cut_regions(pdf_file(tmp_path, before=before))
+    parsed = read_pdf_cut_regions(pdf_file(tmp_path, before=before))
+    assert parsed["parts"]["a"]["loops"][0][0][1] == (
+        Fraction("0.123456789012345678") * Fraction(127, 360))
+
+
+def exact_raw_pdf(tmp_path, *, fields="/MediaBox [0 0 360 360]", content=None,
+                  parent_fields="", extra_objects=()):
+    """Independent byte writer: numeric lexemes never pass through pypdf."""
+    if content is None:
+        content = b"/APPart_a BMC /APRole_CUT BMC 10 10 m 20 10 l 20 20 l 10 20 l h S EMC EMC"
+    objects = [b"<< /Type /Catalog /Pages 2 0 R >>",
+               ("<< /Type /Pages /Kids [3 0 R] /Count 1 " + parent_fields + " >>").encode("ascii"),
+               ("<< /Type /Page /Parent 2 0 R " + fields +
+                " /Resources << >> /Contents 4 0 R >>").encode("ascii"),
+               b"<< /Length " + str(len(content)).encode("ascii") + b" >>\nstream\n" +
+               content + b"\nendstream", *extra_objects]
+    raw, offsets = b"%PDF-1.4\n", []
+    for identity, value in enumerate(objects, 1):
+        offsets.append(len(raw))
+        raw += str(identity).encode("ascii") + b" 0 obj\n" + value + b"\nendobj\n"
+    xref = len(raw)
+    raw += (f"xref\n0 {len(objects)+1}\n0000000000 65535 f \n".encode("ascii") +
+            b"".join(f"{offset:010d} 00000 n \n".encode("ascii") for offset in offsets) +
+            (f"trailer\n<< /Root 1 0 R /Size {len(objects)+1} >>\n"
+             f"startxref\n{xref}\n%%EOF\n").encode("ascii"))
+    target = tmp_path / "raw-lexemes.pdf"
+    target.write_bytes(raw)
+    return target
+
+
+@pytest.mark.parametrize("compressed", [False, True])
+def test_original_stream_numbers_survive_compression_ctm_and_subfloat_gaps(tmp_path, compressed):
+    target = tmp_path / "lexeme-stream.pdf"
+    canvas = Canvas(str(target), pagesize=(360, 360), pageCompression=int(compressed))
+    token = "1.00000000000000001"
+    canvas._code.extend([f"q 1 0 .00000000000000001 1 {token} 0 cm",
+                         "/APPart_a BMC /APRole_CUT BMC",
+                         "0 1 m 10 1 l 10 10 l 0 10 l h S EMC EMC Q"])
+    canvas.save()
+    loop = read_pdf_cut_regions(target)["parts"]["a"]["loops"][0]
+    assert loop[0][1] == (Fraction(token) + Fraction(".00000000000000001")) * Fraction(127, 360)
+    assert loop[0][2] == 359 * Fraction(127, 360)
+
+
+def test_original_page_mediabox_and_indirect_value_retain_subfloat_precision(tmp_path):
+    target = exact_raw_pdf(tmp_path, fields="/MediaBox 5 0 R",
+                           extra_objects=(b"[0 0 360.00000000000000001 360]",))
+    parsed = read_pdf_cut_regions(target)
+    assert parsed["pages"][0]["width_mm"] == Fraction("360.00000000000000001") * Fraction(127, 360)
+
+
+@pytest.mark.parametrize("field", ["/CropBox [0 0 359.99999999999999999 360]",
+                                     "/Rotate 360.00000000000000001",
+                                     "/UserUnit 1.00000000000000001"])
+def test_original_nonstandard_page_fields_are_not_rounded_into_defaults(tmp_path, field):
+    target = exact_raw_pdf(tmp_path, fields="/MediaBox [0 0 360 360] " + field)
+    with pytest.raises(CurveOutputError):
+        read_pdf_cut_regions(target)
+
+
+def test_original_inherited_page_geometry_is_read_from_parent_bytes(tmp_path):
+    target = exact_raw_pdf(tmp_path, fields="",
+                           parent_fields="/MediaBox [0 0 360.00000000000000001 360]")
+    assert read_pdf_cut_regions(target)["pages"][0]["width_mm"] == (
+        Fraction("360.00000000000000001") * Fraction(127, 360))
+    target = exact_raw_pdf(tmp_path, fields="/MediaBox [0 0 360 360]",
+                           parent_fields="/Rotate 360.00000000000000001")
+    with pytest.raises(CurveOutputError):
+        read_pdf_cut_regions(target)
+
+
+def test_raw_lexer_does_not_read_geometry_from_comments_nested_strings_or_hex(tmp_path):
+    target = exact_raw_pdf(tmp_path, fields=(
+        "/MediaBox [0 % 999.999 is only a comment\n0 360 360] "
+        "/Unused (nested (/Rotate 1) escaped \\) /UserUnit 3) "
+        "/Other <2f526f746174652031>"), content=(
+        b"% /APPart_false BMC /APRole_CUT BMC 999 999 m\n"
+        b"BT (abc\\) (nested) /APPart_false BMC 999 999 m) Tj "
+        b"<2f4150506172745f66616c736520424d43> Tj ET\n"
+        b"/APPart_#61 BMC /APRole_C#55T BMC "
+        b"10% /UserUnit 1.00000000000000001\n10 m 20 10 l 20 20 l 10 20 l h S EMC EMC"))
+    parsed = read_pdf_cut_regions(target)
+    assert set(parsed["parts"]) == {"a"}
+    assert parsed["parts"]["a"]["loops"][0][0] == [
+        "M", 10*Fraction(127, 360), 350*Fraction(127, 360)]
+
+
+@pytest.mark.parametrize("fields", [
+    "/MediaBox [0 0 360 360] /MediaBox [0 0 361 360]",
+    "/MediaBox [0 0 360 360] /R#6ftate 360.00000000000000001",
+    "/MediaBox [0 0 360 360] /UserUnit 5 0 R",
+])
+def test_ambiguous_or_escaped_page_geometry_cannot_bypass_strict_reading(tmp_path, fields):
+    target = exact_raw_pdf(tmp_path, fields=fields,
+                           extra_objects=(b"1.00000000000000001",))
+    with pytest.raises(CurveOutputError):
+        read_pdf_cut_regions(target)
+
+
+def test_actual_compressed_page_object_is_refused_before_decoded_float_geometry(tmp_path):
+    from pypdf import PdfReader
+
+    content = b"/APPart_a BMC /APRole_CUT BMC 10 10 m 20 10 l 20 20 l 10 20 l h S EMC EMC"
+    compressed = (b"3 0 << /Type /Page /Parent 2 0 R /MediaBox [0 0 "
+                  b"360.00000000000000001 360] /Resources << >> /Contents 4 0 R >>")
+    objects = {
+        1: b"<< /Type /Catalog /Pages 2 0 R >>",
+        2: b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        4: b"<< /Length " + str(len(content)).encode("ascii") +
+           b" >>\nstream\n" + content + b"\nendstream",
+        5: b"<< /Type /ObjStm /N 1 /First 4 /Length " +
+           str(len(compressed)).encode("ascii") + b" >>\nstream\n" + compressed + b"\nendstream",
+    }
+    raw, offsets = b"%PDF-1.5\n", {}
+    for identity, value in objects.items():
+        offsets[identity] = len(raw)
+        raw += str(identity).encode("ascii") + b" 0 obj\n" + value + b"\nendobj\n"
+    offsets[6] = len(raw)
+    entries = bytearray()
+    for identity in range(7):
+        kind, field, generation = ((0, 0, 65535) if identity == 0 else
+                                   (2, 5, 0) if identity == 3 else (1, offsets[identity], 0))
+        entries.extend(bytes([kind]) + field.to_bytes(4, "big") + generation.to_bytes(2, "big"))
+    raw += (b"6 0 obj\n<< /Type /XRef /Size 7 /Root 1 0 R /W [1 4 2] /Length " +
+            str(len(entries)).encode("ascii") + b" >>\nstream\n" + entries +
+            b"\nendstream\nendobj\nstartxref\n" + str(offsets[6]).encode("ascii") + b"\n%%EOF\n")
+    target = tmp_path / "compressed-page.pdf"
+    target.write_bytes(raw)
+    # It is a real readable object-stream page, not a mocked numeric decoder.
+    reader = PdfReader(target)
+    assert len(reader.pages) == 1 and 3 in reader.xref_objStm
+    with pytest.raises(CurveOutputError, match="Komprimovaný objekt"):
+        read_pdf_cut_regions(target)
 
 
 @pytest.mark.parametrize("wanted", [expected(("missing", 0, 1)),

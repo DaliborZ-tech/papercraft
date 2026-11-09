@@ -10,8 +10,8 @@ from __future__ import annotations
 
 import copy
 import hashlib
-import math
-from dataclasses import asdict, is_dataclass
+import re
+from dataclasses import asdict, dataclass, is_dataclass
 from fractions import Fraction
 from itertools import combinations
 from pathlib import Path
@@ -36,15 +36,224 @@ class CurveOutputError(ValueError):
 
 
 def _number(value):
-    try:
-        result = Fraction(str(value))
-        if isinstance(value, float) and (
-            not math.isfinite(value) or float(str(value)) != float(value)
-        ):
-            raise ValueError("PDF number lost precision during operand decoding")
-        return result
-    except (ValueError, TypeError, OverflowError, ZeroDivisionError) as exc:
-        raise CurveOutputError("Číselnou přesnost skutečného PDF nelze bezpečně přečíst.") from exc
+    # Only the raw lexer may create numeric operands. A decoded pypdf float has
+    # already lost its original decimal token, even when it round-trips to str.
+    if type(value) not in (int, Fraction):
+        raise CurveOutputError("Číselnou přesnost skutečného PDF nelze bezpečně přečíst.")
+    return Fraction(value)
+
+
+@dataclass(frozen=True)
+class _Reference:
+    identity: int
+    generation: int
+
+
+@dataclass(frozen=True)
+class _String:
+    """Opaque literal/hex string; contents must never become PDF operators."""
+
+    value: bytes
+
+
+class _RawPdf:
+    """Small strict PDF lexer, independent of pypdf's numeric object decoder.
+
+    Whitespace/comments, escaped/nested literal strings, hex strings, names,
+    arrays and dictionaries are consumed as whole tokens. Decimal numbers are
+    converted directly from their original bytes to Fraction, never via float.
+    Object streams are outside the own-writer contract; ordinary compressed
+    *content streams* remain supported through pypdf's byte decompression.
+    """
+
+    _space = b"\x00\t\n\x0c\r "
+    _delimiters = b"\x00\t\n\x0c\r ()<>[]{}/%"
+    _decimal = re.compile(rb"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)\Z")
+
+    def __init__(self, data, *, references=False):
+        self.data, self.position, self.references = data, 0, references
+
+    def fail(self):
+        raise CurveOutputError("Původní zápis PDF obsahuje nepodporovaný nebo neúplný token.")
+
+    def whitespace(self):
+        while self.position < len(self.data):
+            if self.data[self.position] in self._space:
+                self.position += 1
+            elif self.data[self.position] == ord("%"):
+                while self.position < len(self.data) and self.data[self.position] not in b"\r\n":
+                    self.position += 1
+            else:
+                break
+
+    def value(self, depth=0):
+        self.whitespace()
+        if depth > 64 or self.position >= len(self.data):
+            self.fail()
+        start = self.position
+        char = self.data[start:start+1]
+        if char == b"(":
+            self.position += 1
+            nesting = 1
+            while self.position < len(self.data) and nesting:
+                char = self.data[self.position:self.position+1]
+                self.position += 1
+                if char == b"\\":
+                    if self.position >= len(self.data):
+                        self.fail()
+                    self.position += 1
+                elif char == b"(":
+                    nesting += 1
+                elif char == b")":
+                    nesting -= 1
+            if nesting:
+                self.fail()
+            return _String(self.data[start:self.position])
+        if self.data[start:start+2] == b"<<":
+            self.position += 2
+            result = {}
+            while True:
+                self.whitespace()
+                if self.data[self.position:self.position+2] == b">>":
+                    self.position += 2
+                    return result
+                key = self.value(depth+1)
+                if not isinstance(key, str) or not key.startswith("/") or key in result:
+                    self.fail()
+                result[key] = self.value(depth+1)
+        if char == b"<":
+            end = self.data.find(b">", start+1)
+            if end < 0:
+                self.fail()
+            value = self.data[start+1:end]
+            if any(c not in b"0123456789abcdefABCDEF" + self._space for c in value):
+                self.fail()
+            self.position = end+1
+            return _String(value)
+        if char == b"[":
+            self.position += 1
+            result = []
+            while True:
+                self.whitespace()
+                if self.data[self.position:self.position+1] == b"]":
+                    self.position += 1
+                    return result
+                result.append(self.value(depth+1))
+        if char in (b")", b">", b"]", b"{", b"}"):
+            self.fail()
+        if char == b"/":
+            self.position += 1
+            while (self.position < len(self.data) and
+                   self.data[self.position] not in self._delimiters):
+                self.position += 1
+            token = self.data[start+1:self.position]
+            # Names may escape their bytes with #XX. Reject malformed escapes.
+            if re.search(rb"#(?![0-9A-Fa-f]{2})", token):
+                self.fail()
+            token = re.sub(rb"#([0-9A-Fa-f]{2})", lambda m: bytes([int(m[1], 16)]), token)
+            return "/" + token.decode("latin1")
+        while self.position < len(self.data) and self.data[self.position] not in self._delimiters:
+            self.position += 1
+        token = self.data[start:self.position]
+        if not token:
+            self.fail()
+        if self._decimal.fullmatch(token):
+            number = Fraction(token.decode("ascii"))
+            if self.references and re.fullmatch(rb"[0-9]+", token):
+                end = self.position
+                self.whitespace()
+                match = re.match(rb"([0-9]+)[\x00\t\n\x0c\r ]+R(?=[\x00\t\n\x0c\r ()<>\[\]{}/%]|$)",
+                                 self.data[self.position:])
+                if match:
+                    self.position += len(match[0])
+                    return _Reference(int(token), int(match[1]))
+                self.position = end
+            return number
+        return token
+
+    def operations(self):
+        operands = []
+        while True:
+            self.whitespace()
+            if self.position == len(self.data):
+                if operands:
+                    self.fail()
+                return
+            value = self.value()
+            if isinstance(value, bytes):
+                if value in (b"true", b"false", b"null"):
+                    operands.append(value)
+                else:
+                    yield operands, value
+                    operands = []
+            else:
+                operands.append(value)
+
+
+def _raw_object(reader, raw_file, reference):
+    """Read an uncompressed indirect object at its actual xref byte offset."""
+    identity, generation = reference.identity, reference.generation
+    if identity in reader.xref_objStm:
+        raise CurveOutputError("Komprimovaný objekt stránky PDF nemá podporovaný přesný zápis.")
+    offset = reader.xref.get(generation, {}).get(identity)
+    if not isinstance(offset, int) or offset < 0 or offset >= len(raw_file):
+        raise CurveOutputError("Původní objekt stránky PDF nelze přesně přečíst z tabulky xref.")
+    lexer = _RawPdf(raw_file[offset:], references=True)
+    # The header is parsed separately: otherwise `id generation R` lookahead is
+    # appropriate only for values, not the indirect-object declaration.
+    header = re.match(rb"([0-9]+)\s+([0-9]+)\s+obj\b", lexer.data)
+    if not header or (int(header[1]), int(header[2])) != (identity, generation):
+        raise CurveOutputError("Odkaz xref PDF neodpovídá původnímu objektu stránky.")
+    lexer.position = len(header[0])
+    value = lexer.value()
+    lexer.whitespace()
+    if lexer.value() != b"endobj":
+        raise CurveOutputError("Původní objekt stránky PDF nemá podporovaný přímý zápis.")
+    return value
+
+
+def _raw_page_fields(reader, raw_file, page):
+    ref = page.indirect_reference
+    reference = _Reference(ref.idnum, ref.generation)
+    fields = _raw_object(reader, raw_file, reference)
+    if not isinstance(fields, dict) or fields.get("/Type") != "/Page":
+        raise CurveOutputError("Původní slovník stránky PDF není podporovaný.")
+    # Only these three geometry fields inherit through the actual page tree.
+    # In particular UserUnit is page-local, and defaults to exactly one.
+    geometry = {key: fields[key] for key in ("/MediaBox", "/CropBox", "/Rotate", "/UserUnit")
+                if key in fields}
+    visited = {reference}
+    while fields.get("/Parent") is not None:
+        parent = fields["/Parent"]
+        if not isinstance(parent, _Reference) or parent in visited:
+            raise CurveOutputError("Původní strom stránek PDF má neplatný nebo cyklický odkaz.")
+        visited.add(parent)
+        fields = _raw_object(reader, raw_file, parent)
+        if not isinstance(fields, dict) or fields.get("/Type") != "/Pages":
+            raise CurveOutputError("Původní nadřazený slovník stránek PDF není podporovaný.")
+        for key in ("/MediaBox", "/CropBox", "/Rotate"):
+            if key not in geometry and key in fields:
+                geometry[key] = fields[key]
+    for key, value in geometry.items():
+        seen = set()
+        while isinstance(value, _Reference):
+            if value in seen:
+                raise CurveOutputError("Číselný údaj stránky PDF obsahuje cyklický odkaz.")
+            seen.add(value)
+            value = _raw_object(reader, raw_file, value)
+        geometry[key] = value
+    return geometry
+
+
+def _raw_content(page):
+    """Only decompress actual stream bytes; never parse numeric PDF operands."""
+    content = page.get("/Contents")
+    if content is None:
+        return b""
+    content = content.get_object()
+    if isinstance(content, list):
+        return b"\n".join(item.get_object().get_data() for item in content)
+    return content.get_data()
 
 
 def _matrix_product(current, supplied):
@@ -59,15 +268,19 @@ def _context(marked):
     return part, role
 
 
-def _page_geometry(page, page_index):
-    if _number(page.get("/Rotate", 0)) % 360 or _number(page.get("/UserUnit", 1)) != 1:
+def _page_geometry(page, page_index, raw_geometry):
+    if (_number(raw_geometry.get("/Rotate", 0)) % 360 or
+            _number(raw_geometry.get("/UserUnit", 1)) != 1):
         raise CurveOutputError("PDF používá nepodporované otočení nebo jednotku stránky.",
                                page_index=page_index)
-    media = tuple(_number(value) for value in page.mediabox)
+    media = tuple(_number(value) for value in raw_geometry.get("/MediaBox", ()))
+    if len(media) != 4:
+        raise CurveOutputError("Původní PDF nemá úplný fyzický rozměr stránky.",
+                               page_index=page_index)
     left, bottom, right, top = media
     if right <= left or top <= bottom:
         raise CurveOutputError("PDF nemá platný fyzický rozměr stránky.", page_index=page_index)
-    if "/CropBox" in page and tuple(_number(v) for v in page["/CropBox"]) != media:
+    if "/CropBox" in raw_geometry and tuple(_number(v) for v in raw_geometry["/CropBox"]) != media:
         raise CurveOutputError("PDF obsahuje neočekávané oříznutí stránky.", page_index=page_index)
     resources = page.get("/Resources", {})
     if hasattr(resources, "get_object"):
@@ -87,10 +300,10 @@ def read_pdf_cut_regions(path):
     """
     try:
         from pypdf import PdfReader
-        from pypdf.generic import ContentStream
     except ImportError as exc:
         raise CurveOutputError("Není dostupné čtení a ověření skutečného PDF.") from exc
     try:
+        raw_file = Path(path).read_bytes()
         reader = PdfReader(path)
         if reader.is_encrypted:
             raise CurveOutputError("Zašifrované PDF nelze ověřit jako výrobní výstup.")
@@ -98,7 +311,8 @@ def read_pdf_cut_regions(path):
                   "coordinate_system": "PHYSICAL_PAGE_TOP_LEFT_MM",
                   "arithmetic": "EXACT_FRACTIONS_OF_SUPPORTED_SERIALIZED_PDF_DECIMALS"}
         for page_index, page in enumerate(reader.pages):
-            left, bottom, right, top = _page_geometry(page, page_index)
+            raw_geometry = _raw_page_fields(reader, raw_file, page)
+            left, bottom, right, top = _page_geometry(page, page_index, raw_geometry)
             result["pages"].append({"page_index": page_index,
                                     "width_mm": (right-left)*_MM_PER_PT,
                                     "height_mm": (top-bottom)*_MM_PER_PT})
@@ -117,8 +331,7 @@ def read_pdf_cut_regions(path):
                 a, b, c, d, e, f = matrix
                 return [(a*x+c*y+e-left)*_MM_PER_PT, (top-b*x-d*y-f)*_MM_PER_PT]
 
-            content = page.get_contents()
-            operations = [] if content is None else ContentStream(content, reader).operations
+            operations = _RawPdf(_raw_content(page)).operations()
             for operands, op in operations:
                 part_id, role = _context(marked)
                 cut = part_id is not None and role == "CUT"
