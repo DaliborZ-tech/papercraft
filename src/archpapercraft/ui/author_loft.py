@@ -953,9 +953,10 @@ class LoftProfilesDialog(QDialog):
             issued.append(end)
             if len(set(issued)) != len(issued):
                 raise ValueError("Preview assigned duplicate persistent identities")
-        # Validate the entire result before adopting even one new identity.
-        self.preview_result = candidate
-        self._parameters_for_apply = {
+        for key in ("second_profile_id", "tolerance_mm", "max_segments"):
+            if key in params and params[key] != requested[key]:
+                raise ValueError("Preview changed explicit source or computation parameters")
+        staged_parameters = {
             "first_profile_id": request["parameters"]["first_profile_id"],
             "second_profile_id": request["parameters"]["second_profile_id"],
             **{
@@ -964,38 +965,49 @@ class LoftProfilesDialog(QDialog):
                 if key in params or key in request["parameters"]
             },
         }
-        self._end_ruling_id = self._parameters_for_apply.get("end_ruling_id")
-        # Store IDs created by the detached preview; do not re-pair by index.
         by_id = {row["id"]: row for row in self.pair_rows}
-        for pair in self._parameters_for_apply["correspondences"]:
-            if pair["id"] in by_id and pair.get("ruling_id"):
-                by_id[pair["id"]]["ruling_id"] = pair["ruling_id"]
-        self._result_digest = request["fingerprint"]
-        status = result["status"]
+        adoptions = [
+            (by_id[pair["id"]], pair["ruling_id"])
+            for pair in staged_parameters["correspondences"]
+            if pair.get("ruling_id")
+        ]
+        status = candidate["status"]
+        family = candidate.get("family", "")
+        message = candidate.get(
+            "message", "Návrh je připravený k vytvoření." if status == "EXACT" else ""
+        )
+        if not isinstance(family, str) or not isinstance(message, str):
+            raise ValueError("Preview presentation fields must be plain text")
         if status == "EXACT":
             kind = (
                 "Rovinný pás"
-                if result.get("family") in ("PLANAR_REGION", "CONCENTRIC_PLANAR_ARC_BAND")
+                if family in ("PLANAR_REGION", "CONCENTRIC_PLANAR_ARC_BAND")
                 else "Plocha mezi profily"
             )
-            self.feedback.setText(
-                kind
-                + " · přesný režim s doloženou numerickou mezí. "
-                + result.get("message", "Návrh je připravený k vytvoření.")
-            )
+            feedback = kind + " · přesný režim s doloženou numerickou mezí. " + message
         else:
-            self.keep_target.setVisible(True)
-            self.feedback.setText(
+            feedback = (
                 (
                     "Přesný rozvin byl odmítnut. "
                     if status == "REJECTED"
                     else "Přesný rozvin není doložený. "
                 )
-                + result.get("message", "")
+                + message
                 + " Opravte profily či jejich párování, nebo výslovně uchovejte "
                 "jen konstrukční cíl bez tiskového dílu."
             )
-        self.preview_changed.emit(copy.deepcopy(result))
+        published = copy.deepcopy(candidate)
+        # Staging, text construction and copies must all succeed BEFORE any
+        # draft identity changes or a successful preview becomes observable.
+        self.preview_result = candidate
+        self._parameters_for_apply = staged_parameters
+        self._end_ruling_id = staged_parameters.get("end_ruling_id")
+        for row, ruling_id in adoptions:
+            row["ruling_id"] = ruling_id
+        self._result_digest = request["fingerprint"]
+        self.feedback.setText(feedback)
+        self.keep_target.setVisible(status != "EXACT")
+        self.preview_changed.emit(published)
 
     def _check_source_revision(self):
         if not self._closed and self.project.revision != self._source_revision:

@@ -1,0 +1,9 @@
+{
+  "core_source_pin": "a1cbf920397694f3b1d3e85a08052acdc3962a7b",
+  "core_actual_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-loft-ui-review-a1cbf92\\src\\archpapercraft\\authoring\\project.py",
+  "widget_source_pin": "133a2efb5f4a6a1ae43c42cc7b669f27b9cbd410",
+  "widget_actual_path": "C:\\Users\\dalib\\projects\\papercraft-loft-ui\\src\\archpapercraft\\ui\\author_loft.py",
+  "widget_sha256": "faeeef680b06d3540bbd1bebb32ab29b4c163ddfac73779d15c8c4af51a810f3",
+  "scope": "WIDGET_AND_PUBLIC_API_IDENTITY_ONLY_NOT_GEOMETRY_APPROVAL",
+  "qt_platform": "offscreen"
+}
