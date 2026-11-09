@@ -45,6 +45,7 @@ from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDial
 from archpapercraft.ui.author_connectors import ConnectorPanel
 from archpapercraft.ui.author_curves import CurveEditorDialog, CurveSketch
 from archpapercraft.ui.author_editing import DeletePartDialog, RenameDialog
+from archpapercraft.ui.author_loft import LoftProfilesDialog
 from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
@@ -193,6 +194,12 @@ class AuthorMainWindow(QMainWindow):
         ))
         construct.addAction(self._action(
             "profile_plane", "Hloubka a rovina vybraného profilu…", self.place_selected_profile
+        ))
+        construct.addAction(self._action(
+            "loft", "Vytvořit plochu mezi dvěma profily…", self.create_loft
+        ))
+        construct.addAction(self._action(
+            "edit_loft", "Upravit profily a šev této plochy…", self.edit_loft
         ))
         construct.addAction(
             self._action(
@@ -369,6 +376,12 @@ class AuthorMainWindow(QMainWindow):
         self.profile_plane_button = QPushButton("Hloubka a rovina profilu…")
         self.profile_plane_button.clicked.connect(self.place_selected_profile)
         form.addRow(self.profile_plane_button)
+        self.loft_button = QPushButton("Plocha mezi dvěma profily…")
+        self.loft_button.clicked.connect(self.create_loft)
+        form.addRow(self.loft_button)
+        self.loft_edit_button = QPushButton("Upravit dvojice profilů a šev…")
+        self.loft_edit_button.clicked.connect(self.edit_loft)
+        form.addRow(self.loft_edit_button)
         form = self._section(layout, "Bod obrysu")
         self.vertex_choice = QComboBox()
         self.vertex_choice.currentIndexChanged.connect(self.choose_vertex)
@@ -527,6 +540,13 @@ class AuthorMainWindow(QMainWindow):
             self.controller.can_undo or bool(self.sketch.drawing and self.sketch.points)
         )
         self.actions["redo"].setEnabled(self.controller.can_redo and not self.sketch.drawing)
+        can_loft = len(self.project.profiles) >= 2 and not self.sketch.drawing
+        self.actions["loft"].setEnabled(can_loft)
+        self.loft_button.setEnabled(can_loft)
+        self.loft_button.setToolTip(
+            "Vyberte dva vlastní profily a určete, které úseky tvoří společnou plochu."
+            if can_loft else "Nejprve nakreslete profil a vytvořte druhý profil nebo jeho kopii."
+        )
         if self.connect_source:
             text = "Spojení: vyberte druhou hranu v prostoru nebo na papíře. Esc operaci zruší."
         elif self.sketch.drawing:
@@ -534,7 +554,7 @@ class AuthorMainWindow(QMainWindow):
         elif profile is not None and self.selected_surface is None:
             text = (
                 "Vybraný profil ještě není tiskový díl. V nabídce Vytvořit přidejte body, "
-                "nebo profil uzavřete a vytvořte plochu."
+                "uzavřete jej jako plochu, nebo vytvořte plochu mezi dvěma profily."
             )
         elif not self.project or not self.project.surfaces:
             text = (
@@ -584,12 +604,20 @@ class AuthorMainWindow(QMainWindow):
                 )
                 item.setData(0, Qt.ItemDataRole.UserRole, sid)
                 self.tree.addTopLevelItem(item)
+                if surface.kind == "ruled_loft":
+                    for side, pid in zip(
+                        ("První profil", "Druhý profil"), surface.source_profile_ids()
+                    ):
+                        child = QTreeWidgetItem([f"{side} · {self.project.profiles[pid].name}"])
+                        child.setData(0, Qt.ItemDataRole.UserRole, ("profile", pid))
+                        item.addChild(child)
+                    item.setExpanded(True)
                 if sid == self.selected_surface:
                     self.tree.setCurrentItem(item)
             used_profiles = {
                 pid
                 for surface in self.project.surfaces.values()
-                for pid in [surface.profile_id, *surface.hole_profile_ids]
+                for pid in surface.source_profile_ids()
             }
             for pid, profile in self.project.profiles.items():
                 if pid not in used_profiles:
@@ -603,7 +631,7 @@ class AuthorMainWindow(QMainWindow):
             frame_views = self._frame_next
             self.viewport.set_project(self.project, frame=frame_views)
             self._frame_next = False
-            self.sketch.set_project(self.project, self.selected_surface, self.selected_profile)
+            self._show_source_sketch()
             self.paper.set_project(self.project, frame=frame_views)
             self._populate_properties()
             self._highlight()
@@ -622,7 +650,7 @@ class AuthorMainWindow(QMainWindow):
             self.update_ack_button()
             self.actions["undo"].setEnabled(self.controller.can_undo)
             self.actions["redo"].setEnabled(self.controller.can_redo)
-            self.actions["hole"].setEnabled(self.selected_surface is not None)
+            self.actions["hole"].setEnabled(self._planar_selection())
             self._update_edit_actions()
             self.actions["recompute"].setEnabled(bool(self.project.parts))
             self.actions["export"].setEnabled(bool(self.project.parts))
@@ -663,12 +691,12 @@ class AuthorMainWindow(QMainWindow):
         self._shown["scale"] = self.scale_field.value()
         self.vertex_choice.clear()
         if profile:
-            for profile_id in [profile.id, *(surface.hole_profile_ids if surface else [])]:
+            for profile_id in (surface.source_profile_ids() if surface else [profile.id]):
                 profile = self.project.profiles[profile_id]
                 for index, vertex in enumerate(profile.vertices):
                     self.vertex_choice.addItem(
                         (
-                            f"{'Otvor ' if surface and profile_id != surface.profile_id else ''}"
+                            f"{profile.name} · "
                             f"Bod {index + 1}"
                         ),
                         (profile_id, vertex.id),
@@ -696,14 +724,14 @@ class AuthorMainWindow(QMainWindow):
         self._raw["transform"] = raw_transform
         self.edge_choice.clear()
         if surface:
-            for profile_id in [surface.profile_id, *surface.hole_profile_ids]:
+            for profile_id in surface.source_profile_ids():
                 for edge in self.project.profiles[profile_id].segments:
                     label = {"line": "Úsečka", "arc": "Oblouk", "cubic": "Křivka"}[edge.kind]
                     self.edge_choice.addItem(f"{label} {self.edge_choice.count() + 1}", edge.id)
         self.edge_choice.setCurrentIndex(
             self.edge_choice.findData(self.selected_edge[1]) if self.selected_edge else -1
         )
-        straight = self.selected_edge is not None and any(
+        straight = self._planar_selection() and self.selected_edge is not None and any(
             s.id == self.selected_edge[1] and s.kind == "line"
             for profile in self.project.profiles.values() for s in profile.segments
         )
@@ -714,7 +742,7 @@ class AuthorMainWindow(QMainWindow):
         can_attach = straight and len(self.project.surfaces) > 1
         self.attach_inside_button.setEnabled(can_attach)
         self.actions["attach_inside"].setEnabled(can_attach)
-        can_glue = self.selected_surface is not None and len(self.project.surfaces) > 1
+        can_glue = self._planar_selection() and len(self.project.surfaces) > 1
         self.glue_region_button.setEnabled(can_glue)
         self.actions["glue_region"].setEnabled(can_glue)
         self.attach_inside_button.setToolTip(
@@ -769,7 +797,7 @@ class AuthorMainWindow(QMainWindow):
         previous = self.curve_choice.currentData()
         self.curve_choice.clear()
         surface = self.project.surfaces.get(self.selected_surface)
-        profile_ids = ([surface.profile_id, *surface.hole_profile_ids] if surface else
+        profile_ids = (surface.source_profile_ids() if surface else
                        [self.selected_profile] if self.selected_profile else [])
         for pid in profile_ids:
             profile = self.project.profiles[pid]
@@ -788,18 +816,25 @@ class AuthorMainWindow(QMainWindow):
         self.curve_edit_button.setEnabled(enabled)
         self.actions["edit_curve"].setEnabled(enabled)
         self.actions["copy_profile"].setEnabled(enabled)
-        self.actions["profile_plane"].setEnabled(enabled and surface is None)
+        plane_editable = enabled and (surface is None or surface.kind == "ruled_loft")
+        self.actions["profile_plane"].setEnabled(plane_editable)
         self.copy_profile_button.setEnabled(enabled)
-        self.profile_plane_button.setEnabled(enabled and surface is None)
+        self.profile_plane_button.setEnabled(plane_editable)
+        editable_loft = surface is not None and surface.kind == "ruled_loft"
+        self.actions["edit_loft"].setEnabled(editable_loft)
+        self.loft_edit_button.setVisible(editable_loft)
+        self.loft_edit_button.setEnabled(editable_loft)
         self.sections["Profil a křivky"][0].setVisible(enabled)
         self.sections["Profil a křivky"][1].setVisible(enabled)
 
     def choose_curve(self):
         if self._updating or not self.curve_choice.currentData():
             return
-        _, segment_id = self.curve_choice.currentData()
+        profile_id, segment_id = self.curve_choice.currentData()
         if self.selected_surface:
+            self.selected_profile = profile_id
             self.selected_edge = (self.selected_surface, segment_id)
+            self._show_source_sketch()
             self._sync_selection()
 
     def edit_curve(self):
@@ -828,7 +863,8 @@ class AuthorMainWindow(QMainWindow):
         if not self._commit_pending_input():
             return
         choice = self.curve_choice.currentData()
-        if not choice or (not copying and self.selected_surface):
+        surface = self.project.surfaces.get(self.selected_surface)
+        if not choice or (not copying and surface and surface.kind != "ruled_loft"):
             return
         profile_id = choice[0]
         dialog = ProfilePlacementDialog(
@@ -848,6 +884,57 @@ class AuthorMainWindow(QMainWindow):
         result = self.run(lambda: self.controller.execute("Umístit zdrojový profil", operation))
         if result:
             self.select_profile(result)
+
+    def _planar_selection(self):
+        surface = self.project.surfaces.get(self.selected_surface)
+        return surface is not None and surface.kind == "planar"
+
+    def _show_source_sketch(self):
+        surface = self.project.surfaces.get(self.selected_surface)
+        # A loft is not a filled polygon in the first profile plane. Show its
+        # selected live source sketch; the assembled surface remains in 3D.
+        sid = None if surface and surface.kind == "ruled_loft" else self.selected_surface
+        self.sketch.set_project(self.project, sid, self.selected_profile)
+
+    def create_loft(self):
+        self._loft_dialog(editing=False)
+
+    def edit_loft(self):
+        self._loft_dialog(editing=True)
+
+    def _loft_dialog(self, *, editing):
+        if not self._commit_pending_input() or not self._confirm_sketch_restart():
+            return
+        surface = self.project.surfaces.get(self.selected_surface)
+        if editing and (surface is None or surface.kind != "ruled_loft"):
+            return
+        if len(self.project.profiles) < 2:
+            return
+        dialog = LoftProfilesDialog(self.project, self.selected_profile, parent=self)
+        if editing:
+            dialog.load_parameters(
+                surface.profile_id, surface.params, existing_surface_id=surface.id
+            )
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+
+        def operation(project):
+            if not editing:
+                return dialog.apply(project)
+            dialog.check_source(project)
+            parameters = dict(dialog.result_parameters)
+            parameters.pop("first_profile_id")
+            parameters.pop("end_ruling_id", None)
+            project.update_loft(surface.id, **parameters)
+            return surface.id
+
+        result = self.run(lambda: self.controller.execute(
+            "Upravit plochu mezi profily" if editing else "Vytvořit plochu mezi profily", operation
+        ))
+        if result:
+            self.cancel_operation()
+            self.select_surface(result)
+            self.viewport.focus_selection()
             self.viewport.focus_selection(all_surfaces=True)
 
     def change_curve_mode(self):
@@ -930,11 +1017,14 @@ class AuthorMainWindow(QMainWindow):
         if self._updating or surface_id not in self.project.surfaces:
             return
         self.selected_surface = surface_id
-        self.selected_profile = self.project.surfaces[surface_id].profile_id
+        surface = self.project.surfaces[surface_id]
+        self.selected_profile = next((pid for pid in surface.source_profile_ids()
+            if self.selected_edge and any(s.id == self.selected_edge[1]
+                for s in self.project.profiles[pid].segments)), surface.profile_id)
         self.selected_vertex = None
         if self.selected_edge and self.selected_edge[0] != surface_id:
             self.selected_edge = None
-        self.sketch.select_surface(surface_id)
+        self._show_source_sketch()
         self._sync_selection()
 
     def _sync_selection(self):
@@ -948,7 +1038,7 @@ class AuthorMainWindow(QMainWindow):
                     self.tree.setCurrentItem(item)
             self._populate_properties()
             self._highlight()
-            self.actions["hole"].setEnabled(self.selected_surface is not None)
+            self.actions["hole"].setEnabled(self._planar_selection())
             self._update_edit_actions()
             self.update_guidance()
         finally:
@@ -1157,7 +1247,7 @@ class AuthorMainWindow(QMainWindow):
             self.viewport.focus_selection()
 
     def start_hole(self):
-        if self.selected_surface:
+        if self._planar_selection():
             if (
                 self.sketch.drawing and self.sketch.points and self.sketch.hole
                 and self.draft_surface == self.selected_surface

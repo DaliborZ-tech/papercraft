@@ -48,11 +48,13 @@ class AuthorViewport(QOpenGLWidget):
         self.meshes = (
             {sid: project.world_geometry(sid) for sid in project.surfaces} if project else {}
         )
-        used = ({p for s in project.surfaces.values() for p in [s.profile_id, *s.hole_profile_ids]}
+        used = ({p for s in project.surfaces.values() for p in s.source_profile_ids()}
                 if project else set())
+        loft_sources = ({p for s in project.surfaces.values() if s.kind == "ruled_loft"
+                         for p in s.source_profile_ids()} if project else set())
         self.profile_paths, self.profile_problems = {}, {}
         for pid, profile in project.profiles.items() if project else []:
-            if pid not in used:
+            if pid not in used or pid in loft_sources:
                 try:
                     points = project.profile_outline(pid)
                     self.profile_paths[pid] = profile.plane.world(points).tolist()

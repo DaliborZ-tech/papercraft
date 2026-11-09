@@ -58,7 +58,7 @@ def part_deletion_impact(project, part_id):
     used = set()
     for sid in project.parts[part_id].surface_ids:
         surface = project.surfaces[sid]
-        for pid in [surface.profile_id, *surface.hole_profile_ids]:
+        for pid in surface.source_profile_ids():
             if pid not in used:
                 used.add(pid)
                 profiles.append({"id": pid, "name": project.profiles[pid].name})
