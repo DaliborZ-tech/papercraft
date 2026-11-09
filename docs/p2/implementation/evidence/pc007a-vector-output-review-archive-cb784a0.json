@@ -1,0 +1,22 @@
+{
+  "source_sha": "cb784a04f4e9c2f59c983968da72692e41558ed4",
+  "archive_sha256": "dace265b374df590e32bcd713a24098af8ea8580b3059f9a3e621947ad58c92c",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-vector-output-review-xhxx8dvz",
+  "actual_import_probe": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-vector-output-review-xhxx8dvz\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+    "sha256": "05116df302fe0ed26f585fc41dda9dc2b174049ab4f9df87499fe06455974087",
+    "source_lf_sha256": "594fcb7f8cc0395b640f84fe07c625bb2aaed7035bbea7aa8a0b405e6b62a78c"
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "....................................................................     [100%]\n68 passed in 9.84s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "....................                                                     [100%]\n20 passed in 0.95s\n",
+      "stderr": ""
+    }
+  }
+}

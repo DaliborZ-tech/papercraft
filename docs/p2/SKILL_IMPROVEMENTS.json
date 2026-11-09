@@ -371,6 +371,83 @@
         "status": "NOT_RUN",
         "ticket": "PC-006B"
       }
+    },
+    {
+      "id": "SK-009",
+      "changed_on": "2026-11-09",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC007A_PLANAR_REVIEW.md",
+        "problem": "P01/P02: bounded display chords hid a native crossing and positive material overlap"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "Metric approximation bound was used as if it proved native topology and exact material coverage",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc007a-planar-review-P01-crossing.json",
+          "docs/p2/implementation/evidence/pc007a-planar-review-P02-native-layout-overlap.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_PLANAR_SCOPE; contact/bend integration pending",
+        "source_sha": "820ab6672d6a3f252391807b4c2c626c51a040bb",
+        "description": "Native topology plus guaranteed/possible material and reserved output bounds; ambiguous layout is a hard unacknowledgeable error"
+      },
+      "skill_change": "Check metric, topology and material independently; transfer the same witness to receivers and the entire bend instead of assuming a layout repair covers them",
+      "usage_example": "A shallow cubic crossing below its valid rectangular chord proxy; a circle bulge between sample nodes near a glue receiver or a swept tab",
+      "verification": {
+        "status": "PLANAR_NEGATIVE_REPRODUCTIONS_PASS",
+        "evidence": [
+          "docs/p2/implementation/PC007A_PLANAR_REVIEW.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_REVIEW_OF_SKILL_CHANGE",
+        "product_report": "docs/p2/implementation/PC007A_PLANAR_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "IN_PROGRESS_NOT_YET_REVIEWED",
+        "ticket": "PC-007A curved contact and bend adapter"
+      }
+    },
+    {
+      "id": "SK-010",
+      "changed_on": "2026-11-09",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md",
+        "problem": "V01: pypdf decoding lost source decimal digits before a float roundtrip guard"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "Comparing float(str(decoded_float)) with decoded_float cannot detect digits discarded by initial parsing",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc007a-vector-output-review-own-820ab66.xml"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_COMPONENT_SCOPE",
+        "source_sha": "cb784a04f4e9c2f59c983968da72692e41558ed4",
+        "description": "Exact raw stream and page dictionary lexemes become Fraction before numeric loss; unsupported compressed page objects are rejected"
+      },
+      "skill_change": "Use original numeric lexemes in actual manufacturing readers, including page geometry and transforms; refuse unsupported precision instead of making an exact claim from decoded floats",
+      "usage_example": "Manually encoded 1.00000000000000001 in CUT/CTM, MediaBox, CropBox, Rotate or UserUnit",
+      "verification": {
+        "status": "ORIGINAL_FIVE_REVIEW_REPRODUCTIONS_PASS",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc007a-vector-output-review-own-cb784a0.xml"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_REVIEW_OF_SKILL_CHANGE",
+        "product_report": "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-007A/PC-009 actual manufacturing output validation"
+      }
     }
   ]
 }

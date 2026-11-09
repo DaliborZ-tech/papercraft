@@ -160,3 +160,42 @@ def test_own_real_arc_writer_has_actual_cubic_pdf_topology_and_distinct_svg_scop
     assert checks['svg'][0]['proof_scope']['same_page_part_separation']=='NOT_CHECKED_LOCAL_COORDINATES'
     bounds=manifest['pdf_geometry_precision']
     assert bounds['combined_position_error_bound_mm']<=bounds['required_digital_budget_mm']
+
+
+def test_V01_fixed_lexer_escaped_strings_arrays_hex_comments_names_do_not_inject_geometry(tmp_path):
+    commands=(r'% /APPart_fake BMC /APRole_CUT BMC 999 999 m'+'\n'+
+              r'BT (literal \) /APPart_fake BMC (nested)) Tj '+
+              r'[(more /APRole_CUT) 1.00000000000000001 <30303020393939206d>] TJ ET '+
+              r'/APPart_#61 BMC /APRole_C#55T BMC '+
+              '1.00000000000000001% ignored numeric suffix 999\n1 m 10 1 l 10 10 l 1 10 l h S EMC EMC')
+    parsed=read_pdf_cut_regions(pdf(tmp_path,commands))
+    assert set(parsed['parts'])=={'a'}
+    assert parsed['parts']['a']['loops'][0][0][1]==Fraction('1.00000000000000001')*UNIT
+
+
+@pytest.mark.parametrize('extra',[
+    '/MediaBox [0 0 360 360]',
+    '/R#6ftate 360.00000000000000001',
+    '/UserUnit 1.00000000000000001',
+])
+def test_V01_fixed_duplicate_or_escaped_geometry_cannot_bypass_exact_read(tmp_path,extra):
+    target=exact_page_pdf(tmp_path,'/MediaBox [0 0 360 360] '+extra)
+    with pytest.raises(CurveOutputError): read_pdf_cut_regions(target)
+
+
+def test_V01_fixed_original_parent_and_indirect_page_numbers_are_exact(tmp_path):
+    # Reuse exact byte writer but move MediaBox to the Pages dictionary with
+    # updated object offsets, rather than mutating parsed float objects.
+    source=exact_page_pdf(tmp_path,'/MediaBox [0 0 360 360]')
+    raw=source.read_bytes()
+    raw=raw.replace(b'/Count 1 >>',b'/Count 1 /MediaBox [0 0 360.00000000000000001 360] >>')
+    raw=raw.replace(b'/MediaBox [0 0 360 360] /Resources',b'/Resources')
+    # Rebuild xref after this controlled byte edit; object contents stay literal.
+    import re
+    offsets=[match.start() for match in re.finditer(rb'(?m)^[1-4] 0 obj\n',raw)]
+    base=raw[:raw.index(b'xref\n')]
+    xref=len(base)
+    base+=b'xref\n0 5\n0000000000 65535 f \n'+b''.join(f'{offset:010d} 00000 n \n'.encode('ascii') for offset in offsets)
+    base+=f'trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n'.encode('ascii')
+    source.write_bytes(base)
+    assert read_pdf_cut_regions(source)['pages'][0]['width_mm']==Fraction('360.00000000000000001')*UNIT

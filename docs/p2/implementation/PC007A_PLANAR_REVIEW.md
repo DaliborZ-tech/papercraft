@@ -1,5 +1,7 @@
 # Nezávislá revize PC-007A — rovinné zdrojové křivky a UI
 
+Integrační poznámka: původní otevřené nálezy níže patří pinu `e3a545f`. Doplňující nezávislá revize `820ab66` na konci zprávy uzavřela **P01/P02 CLOSED VERIFIED**. Původní FAIL je zachovaný. Následné úpravy kontaktů, ohybu a přesného přímého obrazu kolineární kubiky vyžadují vlastní doplňující revizi; toto schválení není automaticky schválením celé PC-007A.
+
 Reviewer: samostatný agent `bend_adapter_review`, nikoli autor zde revidované implementace. Zdroj **`e3a545fffb05abcbf6ff5e8071f43b21ce5131f2`**, 9. 11. 2026. V tomto pinu není implementován nový loftový modul, jehož jsem autorem; tuto vlastní produkci zde nereviduji.
 
 **CHANGES_REQUIRED: P01 a P02 MAJOR jsou OPEN.** Rovinný přírůstek nelze schválit na základě zelených původních testů. Celá PC-007A, B1/B2/B3, novice test ani digitální P2 nejsou dokončené.

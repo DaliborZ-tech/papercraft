@@ -2072,17 +2072,20 @@
           "status": "IN_USE",
           "decision": "Actual line/arc/cubic sketch input, contextual curve editing, staged previews and reversible controller commands in this slice",
           "evidence": [
-            "src/archpapercraft/ui/author_sketch.py"
+            "src/archpapercraft/ui/author_curves.py",
+            "src/archpapercraft/ui/author_profile_placement.py",
+            "tests/authoring/test_curve_workspace.py"
           ],
           "review": "PENDING integrated-source review"
         },
         {
           "skill": "papercraft-verification",
           "status": "IN_USE",
-          "decision": "Independent bound/regularity and native SVG review found near-full-circle wrong-branch R01; retain failure and require repair before publishing",
+          "decision": "Separate source metric, native topology, actual serialized output and material uncertainty; retain original negative witnesses P01/P02/V01 and curved bend false CLEAR",
           "evidence": [
-            "src/archpapercraft/authoring/curves.py",
-            "tests/authoring/test_profile_curves.py"
+            "docs/p2/implementation/PC007A_PLANAR_REVIEW.md",
+            "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md",
+            "docs/p2/implementation/PC007A_NATIVE_OUTPUT_TOPOLOGY_REVIEW.md"
           ],
           "review": "PENDING integrated-source review"
         },
@@ -2130,6 +2133,24 @@
         "technical_prerequisite": "PC-006A/B implementation independently approved and published on 8e72cda",
         "remaining_prerequisite_evidence": "Actual novice AC-US08 NOT_RUN; PC-006B/parent stay open, does not prevent independent authorized technical work",
         "no_acceptance_waived": true
+      },
+      "implementation_progress": {
+        "planar_native_curves": "Implemented actual UI sketch/edit/copy, schema4 copy-only legacy readers, source topology and output guards; native desktop/editor and final integrated review pending",
+        "loft_numeric_component": {
+          "status": "INDEPENDENTLY_APPROVED_COMPONENT_ONLY",
+          "source_sha": "2f3ee8e283255a25729e836d81d9415a751822a6",
+          "report": "docs/p2/implementation/PC007A_LOFT_REVIEW.md",
+          "full_B_UI": "NOT_RUN"
+        },
+        "scope_preserved": [
+          "B1 Gothic homothetic unequal profiles",
+          "B2 planar band",
+          "B3 incompatible profiles with truthful exact refusal",
+          "normal Bezier extrusion",
+          "stable mixed-part anchors",
+          "actual UI/save/reopen/layout/SVG/PDF"
+        ],
+        "whole_ticket_complete": false
       }
     },
     {
@@ -2412,10 +2433,10 @@
       ]
     }
   ],
-  "updated_on": "2026-11-06",
+  "updated_on": "2026-11-09",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
   "working_branch": "revival/p2-profiles",
-  "release_readiness": "NOT_READY: owner accepted full P2 v1.2; implementation PC-006A in progress; new-user and physical evidence not run",
+  "release_readiness": "NOT_READY: PC-006A/B technical slices published; PC-007A native curves under verification; B/C/D, actual novice and final historic model pending",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2441,8 +2462,8 @@
   "estimate_policy": {
     "unit": "person_days",
     "working_range": [
-      59,
-      100
+      43,
+      74
     ],
     "agent_runtime_estimate": false,
     "must_reestimate_after": [
@@ -2452,8 +2473,8 @@
     ],
     "basis": "PC-006 prototype findings plus new authoring scope; not agent elapsed time",
     "risk_adjusted_range": [
-      68,
-      125
+      52,
+      97
     ],
     "scope": "remaining_P2_v1.2_implementation_excluding_design_and_P3",
     "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md",
@@ -2470,6 +2491,26 @@
       "includes_owner_final_historic_model": true,
       "not_measured_agent_runtime": true,
       "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md"
+    },
+    "after_PC006B": {
+      "unit": "person_days",
+      "remaining_base": [
+        43,
+        74
+      ],
+      "remaining_risk_adjusted": [
+        52,
+        97
+      ],
+      "includes_owner_final_historic_model": true,
+      "includes_missing_novice_session_and_repairs": true,
+      "novice_component_person_days": [
+        1,
+        2
+      ],
+      "not_measured_agent_runtime": true,
+      "report": "docs/p2/v1.2/ESTIMATE_AND_RISKS.md",
+      "published_source_sha": "8e72cdade01cb9d23c98c95629ed898f8e05290b"
     }
   },
   "authorized_stages": [
@@ -2666,6 +2707,23 @@
     "digital_source_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
-    ]
+    ],
+    "active_work": "PC-007A planar native curves, actual manufacturing topology and material envelopes; profile-to-profile B UI and full loft integration remain pending",
+    "active_reviews": {
+      "planar_P01_P02": {
+        "status": "CLOSED_VERIFIED_IN_SCOPE",
+        "source_sha": "820ab6672d6a3f252391807b4c2c626c51a040bb",
+        "report": "docs/p2/implementation/PC007A_PLANAR_REVIEW.md"
+      },
+      "PDF_V01": {
+        "status": "CLOSED_VERIFIED_IN_SCOPE",
+        "source_sha": "cb784a04f4e9c2f59c983968da72692e41558ed4",
+        "report": "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md"
+      },
+      "curved_contact_and_bend": {
+        "status": "IMPLEMENTATION_AND_INDEPENDENT_REVIEW_PENDING",
+        "description": "Known chord-proxy false CLEAR requires guaranteed/possible material, preserved negative precedence and full-angle pruning proof"
+      }
+    }
   }
 }
