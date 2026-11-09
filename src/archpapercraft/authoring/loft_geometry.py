@@ -406,7 +406,9 @@ def flatten_loft(
                     coordinates.append(coordinates[-1] + distance)
                 gap = max(0, certificate.length_upper * scale - math.fsum(lengths))
                 total_gap += gap
-                world_error = max(world_error, parameter_error, certificate.numerical_guard * scale)
+                world_error = max(
+                    world_error, parameter_error + certificate.numerical_guard * scale
+                )
                 count += len(lengths)
                 flat_a = [[x, 0.0] for x in coordinates]
                 flat_b = [[x, abs(height) * scale] for x in coordinates]
