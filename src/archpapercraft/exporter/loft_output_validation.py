@@ -99,7 +99,8 @@ def _bound_source_native(source_json, frame_json):
 def validate_loft_snapshot(data):
     """Validate current feature/source UUID/revision/digest and canonical CUT.
 
-    This does not re-run the source solver or mutate/refine authored profiles.
+    This reuses approved source analysis, recomputing it on a cache miss.
+    It never mutates or refines authored profiles or their requested parameters.
     A pure loft has no planar curve_profile entry; that must never skip proof.
     """
     reports = data.get("construction_checks", {}).get("lofts", {})
