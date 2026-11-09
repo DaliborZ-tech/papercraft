@@ -61,3 +61,26 @@ Vlastní test byl spuštěn s `QT_QPA_PLATFORM=offscreen`, `PYTHONPATH` explicit
 **Přesná mez pinu:** během běhů byl HEAD integračního worktree `ccc2d7e`, avšak jiný agent souběžně měnil `authoring/bend.py` a jeho testy. `git diff ccc2d7e -- author_window.py author_editing.py editing.py test_workspace.py` byl prázdný. Tato revize proto schvaluje uvedené přesné UI/editing soubory a jejich integrační delta; neuděluje schválení celému znečištěnému pracovnímu stromu ani rozpracovanému adaptéru ohybu. Finální sjednocený commit potřebuje samostatné připnuté ověření/review. Testy zde neobsahovaly nové konektorové ohyby a neposuzují jejich správnost.
 
 Nativní OS průchod s novými příkazy, finální schema-3 balík, výrobní exporty, nový člověk a fyzické sestavení nadále nebyly tímto doplňkem provedeny. Historické evidence ani jejich zdrojové piny nebyly přepsány.
+
+## Nativní driver a poučení — nezávislá úzká revize 9. 11. 2026
+
+Revidované změny driveru: `bae88e2dfdd71dbf0c10aafb6b5d06042c8de2f6` (vlastní pojmenování/mazání/materiál), `1108361ac625d59939a53ef7045a1743555deacf` (vazba importu na worktree), doplněk `d2a3b735ce2fcffcddbea6ca32d7449a1609b0c5` (odmítnutí necommitovaných zdrojů). Revidovaná změna skillu a ledgeru: `d072aa8d83af1fa19df7ed93ab733909549582e2`.
+
+**APPROVED_IN_HARNESS_AND_LESSON_SCOPE.** Driver má skutečné menu/toolbar vstupy, textové psaní QTest, nativní potvrzení/zrušení dialogu a klávesové undo/redo. Konstrukční data se nevkládají controllerem ani přímou změnou geometrie. Volání světové geometrie, snapshotu a `to_dict` slouží k pozorování. Jediná náhrada `AuthorMainWindow` factory přidá izolované settings a časovač, vytvoří původní třídu a poté volá skutečné `app.main()`; nedodává dokument ani náhradní controller. Potvrzování varování používá skutečný výběr a tlačítko a omezuje se na explicitní známý kód fyzické nejistoty; tvrdé chyby nesmějí projít.
+
+`1108361` vkládá vlastní `src` před import aplikačních modulů. Skutečné `author_window.__file__` musí odpovídat tomuto worktree před vytvořením evidence adresáře a spuštěním GUI; cesta se ukládá do reportu. V již cachovaném cizím modulu je místo falešného přepnutí bezpečné odmítnutí. Na konci úspěšného běhu se musí shodovat aktuální HEAD i kompletní SHA256 pokrytých souborů se stavem na začátku. SHA256 pokrývá všechny Python zdroje aplikace, driver, native-dialog helper a pyproject. Vlastní review nepouštělo desktop ani QApplication.
+
+Při revizi byl upozorněn rozdíl mezi shodou hashů po dobu běhu a shodou se zdrojovým commitem. Owner jej uzavřel `d2a3b735`: ještě před `output.mkdir` a GUI se odmítá diff HEAD v aplikaci/harnessu/pyproject i nepřidaný pokrytý zdrojový soubor. Nezávislé důkazy mimo tyto zdrojové cesty přitom mohou vznikat souběžně. Diff kontroluje index i pracovní kopii proti HEAD. Revize nejde tak daleko, aby certifikovala případné externí import hooky nebo měnící se instalované třetí knihovny; runtime verze se evidují odděleně.
+
+Vlastní [zdroj orákula](evidence/pc006b-commands-review-import-binding.py) a [raw JSON](evidence/pc006b-commands-review-import-binding.json): **3 fresh subprocess případy PASS**, navíc **5 rozhodovacích případů guardu PASS**. Skript provedl bez desktopu skutečný importní prefix vytažený pomocí AST z revidovaného driveru, nikoli pouze ručně opsanou domněnku o Python path:
+
+- Bez opravy sdílený venv načetl `papercraft/src/.../author_window.py`.
+- S prefixem skutečného driveru načetl `papercraft-bend-integration/src/.../author_window.py`; všech 26 právě načtených aplikačních modulů pocházelo z integračního `src`.
+- S již načteným cizím modulem guard skončil požadovaným `ValueError` ještě před GUI a výstupy.
+- Extrahovaný blok kontroly commitovaných zdrojů přijal čisté zdroje i nepokrytou dokumentaci a odmítl pracovní změnu, staged změnu a nový nepřidaný pokrytý zdroj. Jde o test rozhodovacího bloku s explicitními vstupy, nikoli předstírání úpravy živého checkoutu během nativního běhu.
+
+Soubor driveru při této zkoušce odpovídal `d2a3b735` (prázdný `git diff` proti tomuto pinu); raw JSON obsahuje jeho hash `31d7ed628b0b7bff84c0f46d7d4cc97ecc0380db6dbd9c75084991c8aa52b65d`. Původní run04 zůstává FAIL s `KeyError: rename`; nové importní orákulum potvrzuje doloženou příčinu, ale nepřepisuje historickou evidenci na produktový FAIL ani PASS cílového zdroje.
+
+SK-007/SK-008 jsou úzké postupy navázané na K01 a skutečné selhání importu. Nesnižují normativní AC, nevytvářejí nové oprávnění a nenahrazují výrobní ani lidský důkaz. SK-007 explicitně požaduje uchovat jistou negativní dvojici po přidání nezávislé nejistoty; konkrétní integrovanou fyzickou interpretaci vrstev stále musí schválit review adaptéru. SK-008 vyžaduje skutečnou cestu importu, nikoli pouze deklarovaný Git pin. Ledger pravdivě drží účinnost obou **PENDING_NEXT_USE** a další použití NOT_RUN. Vlastní importní subprocess je přiměřené dílčí ověření opravy harnessu; sám neuzavírá další nativní použití ani účinnost u lidí. Záznam technického review lze doplnit odkazem na tento oddíl, ale stav účinnosti není důvod automaticky změnit.
+
+Meze: tento dodatek schvaluje uvedené změny harnessu a poučení, nikoli neproběhlý celý nativní model A/společný díl, geometrický adaptér, AC-US08, Inkscape nebo P3. Nativní desktop zůstal po celou revizi vyhrazen integračnímu ownerovi.

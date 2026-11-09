@@ -1,0 +1,30 @@
+{
+  "driver_sha256": "31d7ed628b0b7bff84c0f46d7d4cc97ecc0380db6dbd9c75084991c8aa52b65d",
+  "cases": {
+    "baseline": {
+      "returncode": 0,
+      "stdout": "{\"actual_module\": \"C:\\\\Users\\\\dalib\\\\projects\\\\papercraft\\\\src\\\\archpapercraft\\\\ui\\\\author_window.py\"}",
+      "stderr": ""
+    },
+    "bound": {
+      "returncode": 0,
+      "stdout": "{\"actual_module\": \"C:\\\\Users\\\\dalib\\\\projects\\\\papercraft-bend-integration\\\\src\\\\archpapercraft\\\\ui\\\\author_window.py\", \"application_modules_loaded\": 26, \"all_loaded_application_modules_in_worktree\": true}",
+      "stderr": ""
+    },
+    "cached-mismatch": {
+      "returncode": 0,
+      "stdout": "{\"status\": \"REJECTED_BEFORE_GUI_OR_OUTPUT\", \"error\": \"Actual application module is outside the pinned worktree\", \"cached_module\": \"C:\\\\Users\\\\dalib\\\\projects\\\\papercraft\\\\src\\\\archpapercraft\\\\ui\\\\author_window.py\"}",
+      "stderr": ""
+    }
+  },
+  "dirty_guard_ast_cases": {
+    "clean": "ACCEPTED",
+    "modified-tracked": "REJECTED",
+    "staged-tracked": "REJECTED",
+    "untracked-covered": "REJECTED",
+    "untracked-doc-outside-coverage": "ACCEPTED"
+  },
+  "evidence_kind": "fresh_subprocess_imports_only_no_GUI",
+  "native": "NOT_RUN",
+  "verdict": "PASS"
+}
