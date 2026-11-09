@@ -661,3 +661,171 @@ def test_closed_loft_seam_update_reorders_live_patches_without_replacing_identit
     assert p.parts[pid].frame == frame
     assert p.loft_status(s)["status"] == "EXACT"
     assert AuthorProject.from_dict(p.to_dict()).to_dict() == p.to_dict()
+
+
+@pytest.mark.parametrize("scale,model_factor", [(1, 1), (0.01, 100)])
+def test_long_semicircle_extrusion_refines_against_independent_intrinsic_area(
+    tmp_path, scale, model_factor
+):
+    from fractions import Fraction
+
+    from archpapercraft.authoring.curve_area import native_region_area_bounds
+
+    p = AuthorProject.new(scale=scale)
+    a = p.add_profile(
+        segments=[
+            {
+                "kind": "arc",
+                "start": [20 * model_factor, 0],
+                "end": [-20 * model_factor, 0],
+                "data": {"center": [0, 0], "sweep_deg": 180},
+            }
+        ],
+        closed=False,
+    )
+    b = p.copy_profile(
+        a, plane={"origin": [0, 0, 200 * model_factor], "u": [1, 0, 0], "v": [0, 1, 0]}
+    )
+    source = copy.deepcopy(p.profiles)
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    status = p.loft_status(s)
+    assert status["status"] == "EXACT"
+    assert p.profiles == source
+    attempts = status["area"]["refinement_attempts"]
+    assert len(attempts) > 1 and attempts[0]["status"] == "UNRESOLVED"
+    assert attempts[-1]["status"] == "CERTIFIED"
+    assert status["effective_tolerance_mm"] < status["requested_tolerance_mm"]
+    pid = p.part_for_surface(s)
+    p.set_placement(pid, p.pages[0].id, 25, 25)
+    bounds = native_region_area_bounds([p.parts[pid].paths["CUT"][0]["commands"]])
+    expected = 4000 * math.pi  # R20 semicircle's exact length 20pi times depth200.
+    assert max(abs(float(value) - expected) for value in bounds) <= max(0.01, expected * 1e-6)
+    assert Fraction(status["area"]["maximum_error_bound_exact"]) <= Fraction(
+        status["area"]["allowed_error_exact"]
+    )
+    assert status["paper_frame_area"]["status"] == "CERTIFIED"
+    assert not p.validate_layout()
+    target = tmp_path / "long-curved-strip.apcraft"
+    p.save(target)
+    reopened = load_project(target)
+    assert reopened.profiles == source
+    assert reopened.snapshot()["construction_checks"]["lofts"][s]["area"]["status"] == "CERTIFIED"
+
+
+def test_concentric_semicircle_frustum_uses_intrinsic_area_not_proxy_polygon():
+    from archpapercraft.authoring.curve_area import native_region_area_bounds
+
+    p = AuthorProject.new(scale=1)
+    a = p.add_profile(
+        segments=[
+            {
+                "kind": "arc",
+                "start": [20, 0],
+                "end": [-20, 0],
+                "data": {"center": [0, 0], "sweep_deg": 180},
+            }
+        ],
+        closed=False,
+    )
+    b = p.copy_profile(a, factor=1.2, plane={"origin": [0, 0, 10], "u": [1, 0, 0], "v": [0, 1, 0]})
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    status = p.loft_status(s)
+    assert (
+        status["status"] == "EXACT" and status["area"]["source_intrinsic"]["status"] == "CERTIFIED"
+    )
+    bounds = native_region_area_bounds([p.parts[p.part_for_surface(s)].paths["CUT"][0]["commands"]])
+    expected = 22 * math.pi * math.sqrt(116)  # Half frustum: (r0+r1)/2 * angle * slant.
+    assert max(abs(float(value) - expected) for value in bounds) <= 0.01
+
+
+def test_unproved_intrinsic_area_preserves_target_and_blocks_exact_and_export(monkeypatch):
+    from archpapercraft.authoring import loft_surface
+
+    monkeypatch.setattr(
+        loft_surface,
+        "_source_intrinsic_area",
+        lambda data: {
+            "status": "UNRESOLVED",
+            "message": "Deliberate independent area budget exhaustion",
+        },
+    )
+    loft_surface._analyze.cache_clear()
+    loft_surface._bound_analysis.cache_clear()
+    p, a, b = extrusion()
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    assert s in p.surfaces and p.profiles[a].segments and p.profiles[b].segments
+    assert p.loft_status(s)["status"] == "UNRESOLVED"
+    assert p.loft_status(s)["code"] == "LOFT_INTRINSIC_AREA_UNRESOLVED"
+    assert AuthorProject.from_dict(p.to_dict()).surfaces[s] == p.surfaces[s]
+    with pytest.raises(ValidationError, match="plocha"):
+        p.snapshot()
+
+
+def test_area_refinement_keeps_declared_node_cap_and_preserves_unresolved_target():
+    p = AuthorProject.new(scale=1)
+    a = p.add_profile(
+        segments=[
+            {
+                "kind": "arc",
+                "start": [20, 0],
+                "end": [-20, 0],
+                "data": {"center": [0, 0], "sweep_deg": 180},
+            }
+        ],
+        closed=False,
+    )
+    b = p.copy_profile(a, plane={"origin": [0, 0, 200], "u": [1, 0, 0], "v": [0, 1, 0]})
+    source = copy.deepcopy(p.profiles)
+    s = p.add_loft(a, b, correspondences=refs(p, a, b), max_segments=512)
+    status = p.loft_status(s)
+    assert status["status"] == "UNRESOLVED" and status["code"] == "LOFT_AREA_UNRESOLVED"
+    assert 1 < len(status["area"]["refinement_attempts"]) <= 5
+    assert p.surfaces[s].params["max_segments"] == 512 and p.profiles == source
+    assert AuthorProject.from_dict(p.to_dict()).surfaces[s] == p.surfaces[s]
+    with pytest.raises(ValidationError, match="Plocha rozvinu"):
+        p.snapshot()
+
+
+def test_actual_cached_native_area_is_checked_against_source_not_only_proxy_polygon():
+    p, a, b = extrusion()
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    pid = p.part_for_surface(s)
+    p.set_placement(pid, p.pages[0].id, 25, 25)
+    original = copy.deepcopy(p.profiles)
+    data = p.to_dict()
+    # Keep the proxy polygons and all source/revision fields unchanged. Only
+    # the actual manufactured cut becomes a valid strip of twice the area.
+    for command in data["parts"][pid]["paths"]["CUT"][0]["commands"]:
+        for index in range(1, len(command), 2):
+            command[index] *= 2
+    loaded = AuthorProject.from_dict(data)
+    status = loaded.loft_status(s)
+    assert status["status"] == "UNRESOLVED" and status["code"] == "LOFT_FRAME_AREA_UNRESOLVED"
+    assert loaded.parts[pid].polygons == p.parts[pid].polygons and loaded.profiles == original
+    with pytest.raises(ValidationError, match="plošnou přesnost"):
+        loaded.snapshot()
+    loaded.recompute()
+    assert loaded.loft_status(s)["status"] == "EXACT"
+    assert loaded.snapshot()["coverage"]["expected_part_ids"] == [pid]
+
+
+def test_numeric_intrinsic_certificate_must_bind_to_the_actual_source_mapping(monkeypatch):
+    from archpapercraft.authoring import loft_area, loft_surface
+
+    original = loft_area.certify_loft_intrinsic_area
+
+    def wrong_binding(*args, **kwargs):
+        report = original(*args, **kwargs)
+        assert report["status"] == "CERTIFIED"
+        report["coverage"]["correspondences"][0]["first_parameter_interval"] = [1, 0]
+        return report
+
+    monkeypatch.setattr(loft_area, "certify_loft_intrinsic_area", wrong_binding)
+    loft_surface._analyze.cache_clear()
+    loft_surface._bound_analysis.cache_clear()
+    p, a, b = extrusion()
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    assert p.loft_status(s)["status"] == "UNRESOLVED"
+    assert p.loft_status(s)["code"] == "LOFT_INTRINSIC_AREA_UNRESOLVED"
+    with pytest.raises(ValidationError, match="zdrojovým vazbám"):
+        p.snapshot()

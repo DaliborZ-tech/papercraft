@@ -69,7 +69,7 @@ def part_input(project, part):
     if any(project.surfaces[sid].kind == "ruled_loft" for sid in touched):
         # An older loft cache labelled every source corner mountain. Its
         # geometry/source digest alone cannot certify the repaired fold roles.
-        inputs["loft_paper_contract"] = "ANALYTIC_SIGNED_CREASES_V1"
+        inputs["loft_paper_contract"] = "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1"
     return digest(inputs)
 
 

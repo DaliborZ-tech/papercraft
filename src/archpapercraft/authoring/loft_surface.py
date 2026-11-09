@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 from dataclasses import asdict
+from fractions import Fraction
 from functools import lru_cache
 
 import numpy as np
@@ -14,6 +15,7 @@ from shapely import Polygon
 
 from . import curve_topology as topology
 from .commands import atomic
+from .curve_area import native_region_area_bounds
 from .curves import _control, derivative, evaluate
 from .errors import ValidationError
 from .geometry import material_polygon, number, path
@@ -251,8 +253,7 @@ def _reverse(segment):
     return result
 
 
-@lru_cache(maxsize=4)
-def _analyze(key):
+def _develop_once(key, effective_tolerance):
     data = json.loads(key)
     a, b = map(_profile_from_record, data["profiles"])
     params, scale = data["params"], data["scale"]
@@ -293,7 +294,7 @@ def _analyze(key):
         LoftProfile.from_profile(b),
         correspondence,
         scale=scale,
-        tolerance_mm=params["tolerance_mm"],
+        tolerance_mm=effective_tolerance,
         max_segments=params["max_segments"],
     )
     base = {
@@ -405,6 +406,176 @@ def _analyze(key):
         }
     base["flat_loop"] = loop
     return base
+
+
+def _area_interval_record(low, high):
+    return {
+        "lower_exact": str(low),
+        "upper_exact": str(high),
+        "lower_paper_mm2": math.nextafter(float(low), -math.inf),
+        "upper_paper_mm2": math.nextafter(float(high), math.inf),
+    }
+
+
+@lru_cache(maxsize=12)
+def _native_area_cached(commands, max_commands):
+    return native_region_area_bounds([commands], max_commands=max_commands)
+
+
+def _area_check(source, commands, max_commands):
+    """Independent source vs actual binary native material, in paper square mm."""
+    low, high = Fraction(source["area_lower_exact"]), Fraction(source["area_upper_exact"])
+    if low <= 0 or high < low:
+        raise ValueError("Intrinsic surface area is not proved finite and positive")
+    actual_low, actual_high = _native_area_cached(
+        tuple(tuple(command) for command in commands), max_commands
+    )
+    error = max(abs(actual_low - high), abs(actual_high - low))
+    allowed = max(Fraction(1, 100), low / 1000000)
+    return {
+        "status": "CERTIFIED" if error <= allowed else "UNRESOLVED",
+        "source_intrinsic": copy.deepcopy(source),
+        "actual_native": _area_interval_record(actual_low, actual_high),
+        "maximum_error_bound_exact": str(error),
+        "maximum_error_bound_paper_mm2": math.nextafter(float(error), math.inf),
+        "allowed_error_exact": str(allowed),
+        "allowed_error_paper_mm2": float(allowed),
+        "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+        "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+        "max_commands": max_commands,
+        "serialized_output": "NOT_VERIFIED",
+    }
+
+
+def _source_intrinsic_area(data):
+    try:
+        from .loft_area import certify_loft_intrinsic_area
+    except ImportError:
+        return {"status": "UNRESOLVED", "message": "Důkaz skutečné plochy není dostupný."}
+    first, second = map(_profile_from_record, data["profiles"])
+    references = tuple(
+        LoftCorrespondence(
+            r["first_segment_id"],
+            r["second_segment_id"],
+            tuple(r["first_interval"]),
+            tuple(r["second_interval"]),
+        )
+        for r in data["params"]["correspondences"]
+    )
+    report = certify_loft_intrinsic_area(
+        LoftProfile.from_profile(first),
+        LoftProfile.from_profile(second),
+        references,
+        scale=data["scale"],
+        absolute_budget_mm2=1e-4,
+        max_nodes=65536,
+        max_depth=24,
+    )
+    if report["status"] == "CERTIFIED":
+        expected = {
+            "first_profile_id": first.id,
+            "second_profile_id": second.id,
+            "first_closed": first.closed,
+            "second_closed": second.closed,
+            "expected_first_segment_ids": [s.id for s in first.segments],
+            "expected_second_segment_ids": [s.id for s in second.segments],
+            "correspondences": [
+                {
+                    "first_segment_id": r.first_segment_id,
+                    "second_segment_id": r.second_segment_id,
+                    "first_parameter_interval": list(r.first_interval),
+                    "second_parameter_interval": list(r.second_interval),
+                }
+                for r in references
+            ],
+        }
+        if any(report.get("coverage", {}).get(key) != value for key, value in expected.items()):
+            return {"status": "UNRESOLVED", "message": "Důkaz plochy neodpovídá zdrojovým vazbám."}
+    return report
+
+
+@lru_cache(maxsize=4)
+def _analyze(key):
+    data = json.loads(key)
+    requested = data["params"]["tolerance_mm"]
+    result = _develop_once(key, requested)
+    if result["status"] != "EXACT":
+        return result  # Preserve the original B3 witness/topology/budget diagnosis.
+    source = _source_intrinsic_area(data)
+    if source["status"] != "CERTIFIED":
+        return {
+            **result,
+            **_failure(
+                "UNRESOLVED",
+                "LOFT_INTRINSIC_AREA_UNRESOLVED",
+                "Skutečná plocha konstrukce není doložená: " + source.get("message", ""),
+                family=result["family"],
+                area={"status": "UNRESOLVED", "source_intrinsic": source},
+            ),
+        }
+    attempts = []
+    max_commands = (
+        2 * data["params"]["max_segments"] + 2 * len(data["params"]["correspondences"]) + 8
+    )
+    for attempt in range(5):
+        effective = requested / 10**attempt
+        if attempt:
+            candidate = _develop_once(key, effective)
+            if candidate["status"] != "EXACT":
+                attempts.append(
+                    {
+                        "attempt": attempt,
+                        "effective_tolerance_mm": effective,
+                        "status": candidate["status"],
+                        "code": candidate["code"],
+                        "message": candidate["message"],
+                    }
+                )
+                break
+            result = candidate
+        try:
+            area = _area_check(source, result["native_commands"], max_commands)
+        except (ValueError, ArithmeticError, TypeError, KeyError) as exc:
+            area = {
+                "status": "UNRESOLVED",
+                "source_intrinsic": copy.deepcopy(source),
+                "message": str(exc),
+            }
+        attempts.append(
+            {
+                "attempt": attempt,
+                "effective_tolerance_mm": effective,
+                **{
+                    k: v
+                    for k, v in area.items()
+                    if k
+                    in (
+                        "status",
+                        "message",
+                        "maximum_error_bound_exact",
+                        "maximum_error_bound_paper_mm2",
+                        "allowed_error_exact",
+                    )
+                },
+            }
+        )
+        result.update(
+            area={**area, "refinement_attempts": copy.deepcopy(attempts)},
+            requested_tolerance_mm=requested,
+            effective_tolerance_mm=effective,
+        )
+        if area["status"] == "CERTIFIED":
+            return result
+    return {
+        **result,
+        **_failure(
+            "UNRESOLVED",
+            "LOFT_AREA_UNRESOLVED",
+            "Plocha rozvinu není v požadované toleranci; konečný rozpočet zjemnění nestačil.",
+            family=result["family"],
+            area={**result["area"], "refinement_attempts": attempts},
+        ),
+    }
 
 
 @lru_cache(maxsize=8)
@@ -831,6 +1002,16 @@ def build_loft_part(project, old_part):
     proof = _native_topology(commands)
     if proof["status"] != "VALID":
         raise ValidationError("LOFT_FRAME_TOPOLOGY_UNRESOLVED: " + proof.get("reason", ""))
+    try:
+        area = _area_check(
+            result["area"]["source_intrinsic"], commands, result["area"]["max_commands"]
+        )
+    except (ValueError, ArithmeticError, TypeError, KeyError) as exc:
+        raise ValidationError("LOFT_FRAME_AREA_UNRESOLVED: plocha rámu není doložená.") from exc
+    if area["status"] != "CERTIFIED":
+        raise ValidationError(
+            "LOFT_FRAME_AREA_UNRESOLVED: rám rozvinu překročil plošnou toleranci."
+        )
     part.paths = {key: [] for key in ("CUT", "FOLD_MOUNTAIN", "FOLD_VALLEY", "TABS", "GUIDES")}
     part.paths["CUT"] = [{"commands": commands, "closed": True}]
     part.edges = []
@@ -899,6 +1080,26 @@ class LoftCommands:
         from .paper import part_input
 
         part = self.parts[surface.part_id]
+        stale = part.stale or part.input_digest != part_input(self, part)
+        frame_area, frame_topology, frame_failure = None, None, {}
+        if result["status"] == "EXACT" and not stale:
+            try:
+                frame_topology = _native_topology(part.paths["CUT"][0]["commands"])
+                if frame_topology["status"] != "VALID":
+                    raise ValueError("Uložený skutečný obrys nemá doloženou topologii.")
+                frame_area = _area_check(
+                    result["area"]["source_intrinsic"],
+                    part.paths["CUT"][0]["commands"],
+                    result["area"]["max_commands"],
+                )
+            except (ValueError, ArithmeticError, TypeError, KeyError, IndexError) as exc:
+                frame_area = {"status": "UNRESOLVED", "message": str(exc)}
+            if frame_area["status"] != "CERTIFIED":
+                frame_failure = {
+                    "status": "UNRESOLVED",
+                    "code": "LOFT_FRAME_AREA_UNRESOLVED",
+                    "message": "Uložený rozvin nemá doloženou plošnou přesnost.",
+                }
         return copy.deepcopy(
             {
                 "crease_geometry": crease_geometry(
@@ -906,13 +1107,16 @@ class LoftCommands:
                 ),
                 "paper_frame": asdict(part.frame),
                 "paper_input_digest": part.input_digest,
-                "paper_stale": part.stale or part.input_digest != part_input(self, part),
-                "paper_contract": "ANALYTIC_SIGNED_CREASES_V1",
+                "paper_stale": stale,
+                "paper_contract": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+                "paper_frame_area": frame_area,
+                "paper_frame_topology": frame_topology,
                 **{
                     key: value
                     for key, value in result.items()
                     if key not in ("solver", "native", "flat_loop", "native_commands")
                 },
+                **frame_failure,
             }
         )
 
