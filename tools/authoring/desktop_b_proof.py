@@ -223,6 +223,13 @@ def run_windows(output, expected_sha, fixture="all"):
     if sha != expected_sha:
         raise ValueError(f"Expected reviewed source {expected_sha}, actual HEAD {sha}")
     hashes = source_files()
+    changed = git(
+        "diff", "--name-only", "HEAD", "--", "src", "pyproject.toml",
+        "tools/authoring/desktop_b_proof.py", "tools/authoring/native_dialogs.py",
+    )
+    tracked = set(git("ls-files").splitlines())
+    if changed or set(hashes) - tracked:
+        raise ValueError("Native proof requires committed application and harness sources")
     output.mkdir(parents=True)  # Must not already exist.
     report = {
         "status": "RUNNING",
