@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import math
 from dataclasses import asdict, dataclass
+from fractions import Fraction
 from functools import lru_cache
 
 from shapely import Polygon, from_wkb
@@ -129,6 +130,29 @@ def _result(proxy, chords, signature, segment_ids):
     )
 
 
+def _is_exact_line_trace(profile, segment):
+    """A cubic control hull contained in its endpoint segment has that exact image.
+
+    Convex containment proves no point leaves the straight segment; continuity
+    and fixed endpoints prove every point of that segment is reached. This says
+    nothing about a linear source parameter, arclength or semantic curve kind.
+    Topological/regularity validation remains the caller's separate obligation.
+    """
+    if segment.kind != "cubic":
+        return False
+    a = tuple(Fraction(x) for x in profile.vertex(segment.start_vertex_id).point)
+    b = tuple(Fraction(x) for x in profile.vertex(segment.end_vertex_id).point)
+    d = tuple(y-x for x, y in zip(a, b))
+    square = sum(x*x for x in d)
+    if not square:
+        return False
+    for key in ("control1", "control2"):
+        p = tuple(Fraction(x)-x0 for x, x0 in zip(segment.data[key], a))
+        if d[0]*p[1] != d[1]*p[0] or not 0 <= sum(x*y for x, y in zip(d, p)) <= square:
+            return False
+    return True
+
+
 def _curved_certificates(project, surface_id):
     surface = project.surfaces[surface_id]
     if surface.kind != "planar":
@@ -139,7 +163,8 @@ def _curved_certificates(project, surface_id):
     found = {}
     for pid in [surface.profile_id, *surface.hole_profile_ids]:
         profile = project.profiles[pid]
-        curved_ids = {s.id for s in profile.segments if s.kind != "line"}
+        curved_ids = {s.id for s in profile.segments
+                      if s.kind != "line" and not _is_exact_line_trace(profile, s)}
         if not curved_ids:
             continue
         projection = project.profile_projection(pid)
