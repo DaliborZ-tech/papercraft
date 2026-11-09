@@ -1,6 +1,8 @@
 """Domain integration oracles: authored source, true mesh, persistent frames and truthful status."""
 
 import copy
+import hashlib
+import json
 import math
 
 import numpy as np
@@ -14,6 +16,34 @@ from archpapercraft.authoring import (
 )
 from archpapercraft.authoring.loft_geometry import sample_loft
 from archpapercraft.authoring.loft_surface import _native_topology, analysis
+
+
+def test_snapshot_loft_binding_can_be_verified_from_actual_source_records():
+    p, a, b = extrusion()
+    sid = p.add_loft(a, b, correspondences=refs(p, a, b))
+    pid = p.part_for_surface(sid)
+    p.set_placement(pid, p.pages[0].id, 30, 30)
+    report = p.snapshot()["construction_checks"]["lofts"][sid]
+    binding = report["source_binding"]
+    state = p.to_dict()
+    assert binding["profiles"] == [state["profiles"][a], state["profiles"][b]]
+    assert binding["surface"] == state["surfaces"][sid]
+    intrinsic = {
+        "profiles": binding["profiles"],
+        "params": binding["surface"]["params"],
+        "scale": binding["scale"],
+    }
+    digest = hashlib.sha256(
+        json.dumps(intrinsic, sort_keys=True, allow_nan=False).encode()
+    ).hexdigest()
+    assert digest == report["intrinsic_source_digest"]
+    actual = {"intrinsic_source_digest": digest, "surface": binding["surface"]}
+    assert (
+        hashlib.sha256(json.dumps(actual, sort_keys=True, allow_nan=False).encode()).hexdigest()
+        == report["source_digest"]
+    )
+    binding["profiles"][0]["name"] = "detached mutation"
+    assert p.profiles[a].name != "detached mutation"
 
 
 def refs(project, a, b):

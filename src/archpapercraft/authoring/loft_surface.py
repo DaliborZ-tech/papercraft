@@ -1111,6 +1111,13 @@ class LoftCommands:
                 "paper_contract": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
                 "paper_frame_area": frame_area,
                 "paper_frame_topology": frame_topology,
+                "source_binding": {
+                    "profiles": [
+                        asdict(self.profiles[pid]) for pid in surface.source_profile_ids()
+                    ],
+                    "surface": asdict(surface),
+                    "scale": self.scale,
+                },
                 **{
                     key: value
                     for key, value in result.items()
