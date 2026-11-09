@@ -1,0 +1,6 @@
+{
+  "source_sha": "55c4443d40beb36c83d26f8ae940b987c4facf9c",
+  "module_source_sha256": "65dba4c5480979e5984d0fc33131a73788f9c83280c4a634cd482535dfb288a2",
+  "method": "exact_git_blob_in_fresh_process_no_worktree_mutation",
+  "runtime_curves_module": "C:\\Users\\dalib\\projects\\papercraft-curve-numerics\\src\\archpapercraft\\authoring\\curves.py"
+}

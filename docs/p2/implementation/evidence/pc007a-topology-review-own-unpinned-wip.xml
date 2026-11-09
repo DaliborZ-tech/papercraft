@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="16" time="0.718" timestamp="2026-11-09T09:10:03.824923+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_hidden_cubic_crossing_is_invalid_even_when_chord_is_rectangle[1e-06]" time="0.002" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_hidden_cubic_crossing_is_invalid_even_when_chord_is_rectangle[1e-09]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_hidden_cubic_crossing_is_invalid_even_when_chord_is_rectangle[1e-12]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_adjacent_cubic_second_crossing_not_waived_by_shared_endpoint" time="0.011" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_disjoint_holes_inside_annular_like_native_boundary" time="0.000"><failure message="TypeError: 'NoneType' object is not subscriptable">def test_own_disjoint_holes_inside_annular_like_native_boundary():
+        outer=circle(0,0,10)
+        holes=(circle(-3,0,1,'left'),circle(3,0,1,'right'))
+&gt;       result=certify_region_topology(outer,holes)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(10.0, 0.0), end=(-10.0, 0.0), kind='arc', data=mappingproxy({'center': (0.0, 0.0), 'sweep_deg': 180}), segment_id='c0'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_nested_and_outside_holes_have_hard_witnesses" time="0.000"><failure message="TypeError: 'NoneType' object is not subscriptable">def test_own_nested_and_outside_holes_have_hard_witnesses():
+&gt;       result=certify_region_topology(circle(0,0,10),(circle(0,0,4,'h0'),circle(0,0,1,'h1')))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(10.0, 0.0), end=(-10.0, 0.0), kind='arc', data=mappingproxy({'center': (0.0, 0.0), 'sweep_deg': 180}), segment_id='c0'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_coincident_or_crossing_circle_holes_never_pass[0]" time="0.000"><failure message="TypeError: 'NoneType' object is not subscriptable">offset = 0
+
+    @pytest.mark.parametrize('offset',[0,1e-12])
+    def test_own_coincident_or_crossing_circle_holes_never_pass(offset):
+&gt;       result=certify_region_topology(circle(0,0,10),(circle(0,0,1,'a'),circle(offset,0,1,'b')))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(10.0, 0.0), end=(-10.0, 0.0), kind='arc', data=mappingproxy({'center': (0.0, 0.0), 'sweep_deg': 180}), segment_id='c0'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_coincident_or_crossing_circle_holes_never_pass[1e-12]" time="0.000"><failure message="TypeError: 'NoneType' object is not subscriptable">offset = 1e-12
+
+    @pytest.mark.parametrize('offset',[0,1e-12])
+    def test_own_coincident_or_crossing_circle_holes_never_pass(offset):
+&gt;       result=certify_region_topology(circle(0,0,10),(circle(0,0,1,'a'),circle(offset,0,1,'b')))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(10.0, 0.0), end=(-10.0, 0.0), kind='arc', data=mappingproxy({'center': (0.0, 0.0), 'sweep_deg': 180}), segment_id='c0'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[1e-14]" time="0.001"><failure message="TypeError: 'NoneType' object is not subscriptable">delta = 1e-14
+
+    @pytest.mark.parametrize('delta',[1e-14,math.ulp(1.0),math.ulp(1.0)/2])
+    def test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection(delta):
+        x=1+delta/2
+        arc=Curve((0,1),(1,0),'arc',{'center':(delta,0),'sweep_deg':-90},'native-quarter')
+        assert svg_commands(arc)=='M 0 1 A 1 1 0 0 0 1 0'
+        if x==1:
+            # The expression has rounded onto the actual native boundary. We avoid
+            # a zero-length authored line and make the contact explicit instead.
+            boundary=(arc,Curve((1,0),(1,2)),Curve((1,2),(0,2)),Curve((0,2),(0,1)))
+        else:
+            boundary=(arc,Curve((1,0),(x,0)),Curve((x,0),(x,2)),Curve((x,2),(0,2)),Curve((0,2),(0,1)))
+&gt;       result=certify_region_topology(boundary)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(0.0, 1.0), end=(1.0, 0.0), kind='arc', data=mappingproxy({'center': (1e-14, 0.0), 'sweep_deg': -90}), segment_id='native-quarter'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[2.220446049250313e-16]" time="0.001"><failure message="TypeError: 'NoneType' object is not subscriptable">delta = 2.220446049250313e-16
+
+    @pytest.mark.parametrize('delta',[1e-14,math.ulp(1.0),math.ulp(1.0)/2])
+    def test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection(delta):
+        x=1+delta/2
+        arc=Curve((0,1),(1,0),'arc',{'center':(delta,0),'sweep_deg':-90},'native-quarter')
+        assert svg_commands(arc)=='M 0 1 A 1 1 0 0 0 1 0'
+        if x==1:
+            # The expression has rounded onto the actual native boundary. We avoid
+            # a zero-length authored line and make the contact explicit instead.
+            boundary=(arc,Curve((1,0),(1,2)),Curve((1,2),(0,2)),Curve((0,2),(0,1)))
+        else:
+            boundary=(arc,Curve((1,0),(x,0)),Curve((x,0),(x,2)),Curve((x,2),(0,2)),Curve((0,2),(0,1)))
+&gt;       result=certify_region_topology(boundary)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(0.0, 1.0), end=(1.0, 0.0), kind='arc', data=mappingproxy({'center': (2.220446049250313e-16, 0...sweep_deg': -90}), segment_id='native-quarter'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[1.1102230246251565e-16]" time="0.001"><failure message="TypeError: 'NoneType' object is not subscriptable">delta = 1.1102230246251565e-16
+
+    @pytest.mark.parametrize('delta',[1e-14,math.ulp(1.0),math.ulp(1.0)/2])
+    def test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection(delta):
+        x=1+delta/2
+        arc=Curve((0,1),(1,0),'arc',{'center':(delta,0),'sweep_deg':-90},'native-quarter')
+        assert svg_commands(arc)=='M 0 1 A 1 1 0 0 0 1 0'
+        if x==1:
+            # The expression has rounded onto the actual native boundary. We avoid
+            # a zero-length authored line and make the contact explicit instead.
+            boundary=(arc,Curve((1,0),(1,2)),Curve((1,2),(0,2)),Curve((0,2),(0,1)))
+        else:
+            boundary=(arc,Curve((1,0),(x,0)),Curve((x,0),(x,2)),Curve((x,2),(0,2)),Curve((0,2),(0,1)))
+&gt;       result=certify_region_topology(boundary)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(0.0, 1.0), end=(1.0, 0.0), kind='arc', data=mappingproxy({'center': (1.1102230246251565e-16, ...sweep_deg': -90}), segment_id='native-quarter'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_both_semicircle_directions_form_simple_material_with_real_hole" time="0.000"><failure message="TypeError: 'NoneType' object is not subscriptable">def test_own_both_semicircle_directions_form_simple_material_with_real_hole():
+        upper,lower=circle(0,0,5)
+        outer=(Curve(lower.end,lower.start,'arc',{'center':(0,0),'sweep_deg':-180},'r0'),
+               Curve(upper.end,upper.start,'arc',{'center':(0,0),'sweep_deg':-180},'r1'))
+&gt;       assert certify_region_topology(outer,(circle(0,0,1),)).status=='VALID'
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(5.0, 0.0), end=(-5.0, 0.0), kind='arc', data=mappingproxy({'center': (0.0, 0.0), 'sweep_deg': -180}), segment_id='r0'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_global_budget_exhaustion_never_grants_valid[0]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_global_budget_exhaustion_never_grants_valid[1]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_global_budget_exhaustion_never_grants_valid[2]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-topology-review-own" name="test_own_source_tangent_hole_requires_strict_separation_not_point_sampling" time="0.000"><failure message="TypeError: 'NoneType' object is not subscriptable">def test_own_source_tangent_hole_requires_strict_separation_not_point_sampling():
+&gt;       result=certify_region_topology(circle(0,0,10),(circle(9,0,1,'t'),),max_nodes=1000)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-topology-review-own.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\curve_topology.py:486: in certify_region_topology
+    allowed = set(a.ends()) &amp; set(b.ends()) if adjacent else set()
+                  ^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = _Node(curve=Curve(start=(10.0, 0.0), end=(-10.0, 0.0), kind='arc', data=mappingproxy({'center': (0.0, 0.0), 'sweep_deg': 180}), segment_id='c0'), t0=0.0, t1=1.0, depth=0, controls=None, homogeneous=None, native=None)
+
+    def ends(self):
+        if self.controls is not None:
+            return self.controls[0], self.controls[-1]
+        return tuple(tuple(sum(value)/2 for value in point)
+&gt;                    for point in (_cartesian(self.homogeneous[0]),
+                                              ^^^^^^^^^^^^^^^^^^^
+                                   _cartesian(self.homogeneous[-1])))
+E       TypeError: 'NoneType' object is not subscriptable
+
+src\archpapercraft\authoring\curve_topology.py:64: TypeError</failure></testcase></testsuite></testsuites>
