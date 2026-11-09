@@ -242,6 +242,8 @@ def _patch(first, second, a, b, reference, parameters, flat_a, flat_b):
         "second_profile_id": second.profile_id,
         "first_segment_id": reference.first_segment_id,
         "second_segment_id": reference.second_segment_id,
+        "first_source_kind": a.kind,
+        "second_source_kind": b.kind,
         "first_parameter_interval": list(ta),
         "second_parameter_interval": list(tb),
         "parameters": list(parameters),
