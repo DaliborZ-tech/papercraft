@@ -6,6 +6,8 @@ Reviewer: samostatný agent `commands_review`, 9. 11. 2026; autor komponenty je 
 
 **Aktuální následná revize:** oprava `39f049dbd459f67dd27d9661773780a41612d59f` níže uzavírá L01; APPROVED_IN_NUMERIC_COMPONENT_SCOPE. Výše uvedený původní verdikt a FAIL zůstávají historickým důkazem.
 
+**Rozhodný finální zdroj komponenty:** `2f3ee8e283255a25729e836d81d9415a751822a6`, přezkoušeno v posledním dodatku. APPROVED_IN_NUMERIC_COMPONENT_SCOPE; L01 CLOSED.
+
 ## L01 — tětivová geometrická mez není mez interpolace v parametru
 
 Jednoduchý regulární zdrojový kubický segment má řídicí body `(0,0)`, `(1,0)`, `(3,0)`, `(6,0)`. Z nezávislé Bernsteinovy expanze plyne `C(t)=(3t+3t²,0)` a rychlost `3+6t >= 3`. Druhý profil je shodný ve výšce 10, tedy jde o normálovou extruzi bez singularity. Jeho správný rozvin je `[arclength(C,t),10v]=[3t+3t²,10v]`.
@@ -67,3 +69,11 @@ Celkový poziční bound nyní **sčítá** globální součet prefixových oblo
 Nové vlastní případy používají dvě navazující kubiky s `C(t)=(3t+3t²,3t²)` a zápornou normálovou hloubkou 7, paper scale 1 a 0,1. Analytická druhá derivace `(6,6)` nezávisle stanoví požadovanou místní interpolační mez. Body uvnitř deseti parametrických buněk mají očekávanou světovou polohu z polynomu a očekávanou flat x z nezávislé kvadratury explicitní rychlosti `hypot(3+6t,6t)`, v druhém patchi včetně celého prefixu prvního patche. Reportovaná mez kryla všechny tyto chyby, správně sečetla členy a malý rozpočet bezpečně odmítla.
 
 Původní `pc007a-loft-review-own-initial.xml` s chybou 0,75 zůstává zachovaný. Zelený nový běh potvrzuje opravu konkrétní příčiny i přenos na zakřivený vícepatchový případ; není důkaz nového člověka, fyzické stavby ani všech budoucích integrovaných mapování.
+
+### Závěrečný doplněk rezerv — `2f3ee8e`
+
+Rozhodný zdroj pro finální schválení je **`2f3ee8e283255a25729e836d81d9415a751822a6`**. Následná úzká oprava sčítá také místní parametrickou chybu a rezervu skutečného vyhodnocení zdroje, protože se mohou projevit současně. Dřívější maximum těchto dvou členů je nahrazené součtem před výběrem nejhoršího patche. Je to správné konzervativní zpřesnění, nikoli rozšíření tolerance.
+
+Znovu ověřeno na produkčních souborech shodných s tímto pinen (prázdný diff): **17 vlastních PASS / 0,89 s**, [JUnit](evidence/pc007a-loft-review-own-2f3ee8e.xml); **55 původních PASS / 2,36 s**, [JUnit](evidence/pc007a-loft-review-original-2f3ee8e.xml). Vlastní test navíc výslovně vyžaduje, aby reportovaný místní člen zahrnoval **součet** analytického `sqrt(72)*max_du²/8` a zdrojové numerické rezervy, oba v paper jednotkách. Předchozí XML označené `39f049d` je zachované jako meziběh fáze revize; pro schválení je rozhodný tento opakovaný běh a nový finální pin.
+
+**APPROVED_IN_NUMERIC_COMPONENT_SCOPE, L01 CLOSED.** Oddělené omezení staršího nativního arc writeru, finální integrace, nativní UI, člověk a P3 zůstávají mimo tento verdikt.

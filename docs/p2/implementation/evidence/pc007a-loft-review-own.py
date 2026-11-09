@@ -7,7 +7,7 @@ from scipy.integrate import quad
 from shapely import Point, Polygon
 from shapely.ops import unary_union
 
-from archpapercraft.authoring.curves import Curve
+from archpapercraft.authoring.curves import Curve, certify_curve
 from archpapercraft.authoring.loft_geometry import LoftProfile, LoftCorrespondence, flatten_loft, sample_loft
 
 
@@ -155,7 +155,8 @@ def test_L01_fix_global_prefix_plus_parameter_bounds_and_actual_largest_step(sca
     assert bound>=gap+interpolation+rounding
     # C''=(6,6), so interpolation bound must cover the largest delivered du.
     max_step=max(y-x for p in report['patches'] for x,y in zip(p['parameters'],p['parameters'][1:]))
-    assert interpolation>=scale*math.sqrt(72)*max_step**2/8
+    source_guard=certify_curve(first[0],chord_tolerance=0.001,length_tolerance=0.001).numerical_guard
+    assert interpolation>=scale*(math.sqrt(72)*max_step**2/8+source_guard)
     full_length=quad(lambda t:math.hypot(3+6*t,6*t),0,1,epsabs=1e-12)[0]
     for index in range(2):
         for u,v in [(0.013,0.1),(0.117,0.9),(0.499,0.7),(0.713,0.4),(0.997,0.8)]:
