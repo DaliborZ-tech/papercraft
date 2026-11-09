@@ -2780,7 +2780,10 @@
       "whole_P2_complete": false,
       "novice_participants": 0,
       "physical_proof": "NOT_RUN_P3",
-      "details_in_handoff": "docs/p2/implementation/CONTINUE_2026-11-10.md"
+      "details_in_handoff": "docs/p2/implementation/CONTINUE_2026-11-10.md",
+      "performance_runtime_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
+      "performance_handoff_sha": "d460446cd643478b8236df1e058522d63d72553c",
+      "performance_worktree_clean": true
     }
   }
 }
