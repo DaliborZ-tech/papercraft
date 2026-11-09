@@ -1,0 +1,36 @@
+{
+  "label": "after-immutable-cache-and-exact-collinear-cut",
+  "evidence_scope": "BACKEND_AND_OFFSCREEN_QT_LATENCY_NOT_NATIVE_OR_NOVICE_PROOF",
+  "source_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
+  "fixture": {
+    "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a9d155a-run01\\FAIL-partial-observed-state.json",
+    "sha256": "1314bef3b469c02361c785ab87a046fb85fb24b41fb0fcb40a7603ccb8677e00"
+  },
+  "runtime": {
+    "loft_module": "C:\\Users\\dalib\\projects\\papercraft-loft-performance\\src\\archpapercraft\\authoring\\loft_surface.py",
+    "qpa": "offscreen",
+    "loft_surface.py": "eb7d0e0d2580a6d564c586f763f23a2a6cfc1671439bcc16c7a73e64e19af9b7",
+    "project.py": "51ccaf698785cc10167a8d70d9dce87e3d79baa975152a8da547b6dd72458810",
+    "paper.py": "d14066f34292914ecda3cf89859bc219e3e3a3b8eb5206eff92304a4898d4cbb"
+  },
+  "operations": {
+    "cold_load_validate": 10.110777599969879,
+    "warm_world_mesh_1": 0.0866463000420481,
+    "warm_world_mesh_2": 0.07386070000939071,
+    "warm_status": 3.054652300081216,
+    "warm_validate": 0.15051669999957085,
+    "warm_layout": 1.7200071000261232,
+    "placement_command": 1.0542215999448672,
+    "qt_refresh": 2.343836799962446,
+    "qt_placement_command_and_refresh": 3.23747159994673
+  },
+  "loft_check": {
+    "status": "EXACT",
+    "source_digest": "dfde09b9639473df72527b87535666264020e3b67115e142fcaf0797ac34c682",
+    "paper_stale": false,
+    "area_status": "CERTIFIED"
+  },
+  "layout_issue_codes": [],
+  "qt_heartbeat_max_gap_seconds": 3.23943259997759,
+  "fixture_unchanged": true
+}
