@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="14" time="1.641" timestamp="2026-11-09T08:54:53.570544+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_actual_review_import_is_bound_to_the_profiles_worktree" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_p01_actual_cubic_self_crossing_cannot_be_certified_from_its_chord_rectangle" time="0.007"><failure message="Failed: DID NOT RAISE ValidationError">def test_p01_actual_cubic_self_crossing_cannot_be_certified_from_its_chord_rectangle():
+        p = AuthorProject.new(scale=1)
+        pid = p.add_profile(segments=[
+            {"kind": "cubic", "start": [0, .0005], "end": [10, .0005],
+             "control1": [3, -.001], "control2": [7, -.001]},
+            {"kind": "line", "start": [10, .0005], "end": [10, 0]},
+            {"kind": "line", "start": [10, 0], "end": [0, 0]},
+            {"kind": "line", "start": [0, 0], "end": [0, .0005]},
+        ])
+        before = p.to_dict()
+&gt;       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+docs\p2\implementation\evidence\pc007a-planar-review-own.py:57: Failed</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_p02_layout_cannot_certify_gap_smaller_than_known_native_outward_bulge" time="0.021"><failure message="Failed: DID NOT RAISE ValidationError">def test_p02_layout_cannot_certify_gap_smaller_than_known_native_outward_bulge():
+        p = AuthorProject.new(scale=1)
+        profile = p.add_profile(segments=[
+            {"kind": "line", "start": [0, 0], "end": [10, 0]},
+            {"kind": "cubic", "start": [10, 0], "end": [10, 10],
+             "control1": [10.0015, 3], "control2": [10.0015, 7]},
+            {"kind": "line", "start": [10, 10], "end": [0, 10]},
+            {"kind": "line", "start": [0, 10], "end": [0, 0]},
+        ])
+        a = p.add_surface(profile)
+        b = p.add_surface(p.add_profile([[0, 0], [2, 0], [2, 10], [0, 10]]))
+        p.set_placement(p.part_for_surface(a), p.pages[0].id, 40, 40)
+        p.set_placement(p.part_for_surface(b), p.pages[0].id, 50.0005, 40)
+        # Actual cubic at .5 is x=10+.75*.0015=10.001125; overlap width .000625.
+&gt;       with pytest.raises(ValidationError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValidationError
+
+docs\p2\implementation\evidence\pc007a-planar-review-own.py:76: Failed</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_native_concave_material_hole_is_not_filled_by_tessellation_or_native_restore" time="0.050" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_native_arc_mapping_handles_true_orthogonal_rotation_and_reflection[1]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_native_arc_mapping_handles_true_orthogonal_rotation_and_reflection[-1]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_existing_straight_seam_tab_on_curved_material_keeps_actual_arc_cut" time="0.195" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_small_detail_uses_native_size_not_chord_density[0.1-True]" time="0.019" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_small_detail_uses_native_size_not_chord_density[2-False]" time="0.072" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_small_detail_uses_native_size_not_chord_density[20-False]" time="0.129" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_actual_schema3_copy_preservation_survives_new_curve_commands_and_history" time="0.270" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_curve_editor_noop_preserves_raw_control_precision_and_cancel_is_staged" time="0.065" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_profile_copy_dialog_commits_visible_depth_using_model_units" time="0.003" /><testcase classname="docs.p2.implementation.evidence.pc007a-planar-review-own" name="test_curve_editor_invalid_pending_number_stops_without_touching_source" time="0.010" /></testsuite></testsuites>

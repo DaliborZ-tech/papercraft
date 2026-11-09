@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="15" time="1.026" timestamp="2026-11-09T09:55:42.846534+01:00" hostname="Dalibor"><testcase classname="" name="test_V01_original_pdf_numeric_lexeme_must_be_exact_or_refused" time="0.008"><failure message="AssertionError: assert Fraction(127, 360) == (Fraction(100000000000000001, 100000000000000000) * Fraction(127, 360))&#10; +  where Fraction(100000000000000001, 100000000000000000) = Fraction('1.00000000000000001')">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1165/test_V01_original_pdf_numeric_0')
+
+    def test_V01_original_pdf_numeric_lexeme_must_be_exact_or_refused(tmp_path):
+        token='1.00000000000000001'
+        path=pdf(tmp_path,part('a',f'{token} 1 m 10 1 l 10 10 l {token} 10 l h S'))
+        try:
+            actual=read_pdf_cut_regions(path)
+        except CurveOutputError:
+            return  # A truthful unsupported precision rejection is permitted.
+&gt;       assert actual['parts']['a']['loops'][0][0][1]==Fraction(token)*UNIT
+E       AssertionError: assert Fraction(127, 360) == (Fraction(100000000000000001, 100000000000000000) * Fraction(127, 360))
+E        +  where Fraction(100000000000000001, 100000000000000000) = Fraction('1.00000000000000001')
+
+..\..\..\..\projects\papercraft-profiles\docs\p2\implementation\evidence\pc007a-vector-output-review-own.py:67: AssertionError</failure></testcase><testcase classname="" name="test_V01_page_dictionary_numeric_lexemes_must_not_silently_round[MediaBox]" time="0.002"><failure message="AssertionError: assert Fraction(127, 1) == (Fraction(36000000000000000001, 100000000000000000) * Fraction(127, 360))&#10; +  where Fraction(36000000000000000001, 100000000000000000) = Fraction('360.00000000000000001')">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1165/test_V01_page_dictionary_numer0')
+field = 'MediaBox'
+
+    @pytest.mark.parametrize('field',['MediaBox','CropBox','Rotate','UserUnit'])
+    def test_V01_page_dictionary_numeric_lexemes_must_not_silently_round(tmp_path,field):
+        options={
+            'MediaBox':'/MediaBox [0 0 360.00000000000000001 360]',
+            'CropBox':'/MediaBox [0 0 360 360] /CropBox [0 0 359.99999999999999999 360]',
+            'Rotate':'/MediaBox [0 0 360 360] /Rotate 360.00000000000000001',
+            'UserUnit':'/MediaBox [0 0 360 360] /UserUnit 1.00000000000000001',
+        }
+        path=exact_page_pdf(tmp_path,options[field])
+        try:
+            actual=read_pdf_cut_regions(path)
+        except CurveOutputError:
+            return
+        if field=='MediaBox':
+&gt;           assert actual['pages'][0]['width_mm']==Fraction('360.00000000000000001')*UNIT
+E           AssertionError: assert Fraction(127, 1) == (Fraction(36000000000000000001, 100000000000000000) * Fraction(127, 360))
+E            +  where Fraction(36000000000000000001, 100000000000000000) = Fraction('360.00000000000000001')
+
+..\..\..\..\projects\papercraft-profiles\docs\p2\implementation\evidence\pc007a-vector-output-review-own.py:84: AssertionError</failure></testcase><testcase classname="" name="test_V01_page_dictionary_numeric_lexemes_must_not_silently_round[CropBox]" time="0.002"><failure message="Failed: Nonstandard exact CropBox silently rounded into accepted page geometry">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1165/test_V01_page_dictionary_numer1')
+field = 'CropBox'
+
+    @pytest.mark.parametrize('field',['MediaBox','CropBox','Rotate','UserUnit'])
+    def test_V01_page_dictionary_numeric_lexemes_must_not_silently_round(tmp_path,field):
+        options={
+            'MediaBox':'/MediaBox [0 0 360.00000000000000001 360]',
+            'CropBox':'/MediaBox [0 0 360 360] /CropBox [0 0 359.99999999999999999 360]',
+            'Rotate':'/MediaBox [0 0 360 360] /Rotate 360.00000000000000001',
+            'UserUnit':'/MediaBox [0 0 360 360] /UserUnit 1.00000000000000001',
+        }
+        path=exact_page_pdf(tmp_path,options[field])
+        try:
+            actual=read_pdf_cut_regions(path)
+        except CurveOutputError:
+            return
+        if field=='MediaBox':
+            assert actual['pages'][0]['width_mm']==Fraction('360.00000000000000001')*UNIT
+        else:
+&gt;           pytest.fail('Nonstandard exact '+field+' silently rounded into accepted page geometry')
+E           Failed: Nonstandard exact CropBox silently rounded into accepted page geometry
+
+..\..\..\..\projects\papercraft-profiles\docs\p2\implementation\evidence\pc007a-vector-output-review-own.py:86: Failed</failure></testcase><testcase classname="" name="test_V01_page_dictionary_numeric_lexemes_must_not_silently_round[Rotate]" time="0.002"><failure message="Failed: Nonstandard exact Rotate silently rounded into accepted page geometry">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1165/test_V01_page_dictionary_numer2')
+field = 'Rotate'
+
+    @pytest.mark.parametrize('field',['MediaBox','CropBox','Rotate','UserUnit'])
+    def test_V01_page_dictionary_numeric_lexemes_must_not_silently_round(tmp_path,field):
+        options={
+            'MediaBox':'/MediaBox [0 0 360.00000000000000001 360]',
+            'CropBox':'/MediaBox [0 0 360 360] /CropBox [0 0 359.99999999999999999 360]',
+            'Rotate':'/MediaBox [0 0 360 360] /Rotate 360.00000000000000001',
+            'UserUnit':'/MediaBox [0 0 360 360] /UserUnit 1.00000000000000001',
+        }
+        path=exact_page_pdf(tmp_path,options[field])
+        try:
+            actual=read_pdf_cut_regions(path)
+        except CurveOutputError:
+            return
+        if field=='MediaBox':
+            assert actual['pages'][0]['width_mm']==Fraction('360.00000000000000001')*UNIT
+        else:
+&gt;           pytest.fail('Nonstandard exact '+field+' silently rounded into accepted page geometry')
+E           Failed: Nonstandard exact Rotate silently rounded into accepted page geometry
+
+..\..\..\..\projects\papercraft-profiles\docs\p2\implementation\evidence\pc007a-vector-output-review-own.py:86: Failed</failure></testcase><testcase classname="" name="test_V01_page_dictionary_numeric_lexemes_must_not_silently_round[UserUnit]" time="0.002"><failure message="Failed: Nonstandard exact UserUnit silently rounded into accepted page geometry">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1165/test_V01_page_dictionary_numer3')
+field = 'UserUnit'
+
+    @pytest.mark.parametrize('field',['MediaBox','CropBox','Rotate','UserUnit'])
+    def test_V01_page_dictionary_numeric_lexemes_must_not_silently_round(tmp_path,field):
+        options={
+            'MediaBox':'/MediaBox [0 0 360.00000000000000001 360]',
+            'CropBox':'/MediaBox [0 0 360 360] /CropBox [0 0 359.99999999999999999 360]',
+            'Rotate':'/MediaBox [0 0 360 360] /Rotate 360.00000000000000001',
+            'UserUnit':'/MediaBox [0 0 360 360] /UserUnit 1.00000000000000001',
+        }
+        path=exact_page_pdf(tmp_path,options[field])
+        try:
+            actual=read_pdf_cut_regions(path)
+        except CurveOutputError:
+            return
+        if field=='MediaBox':
+            assert actual['pages'][0]['width_mm']==Fraction('360.00000000000000001')*UNIT
+        else:
+&gt;           pytest.fail('Nonstandard exact '+field+' silently rounded into accepted page geometry')
+E           Failed: Nonstandard exact UserUnit silently rounded into accepted page geometry
+
+..\..\..\..\projects\papercraft-profiles\docs\p2\implementation\evidence\pc007a-vector-output-review-own.py:86: Failed</failure></testcase><testcase classname="" name="test_own_pdf_composite_ctm_and_y_reflection_use_actual_order_and_units" time="0.002" /><testcase classname="" name="test_own_graphics_restore_prevents_ctm_leaking_to_next_part" time="0.002" /><testcase classname="" name="test_own_actual_pdf_hole_void_allows_separate_insert" time="0.476" /><testcase classname="" name="test_own_cut_role_and_unclosed_curve_cannot_disappear_from_coverage" time="0.004" /><testcase classname="" name="test_own_actual_cubic_hidden_crossing_blocks_geometrical_publication" time="0.003" /><testcase classname="" name="test_own_unsupported_clipping_singularity_and_stack_never_pass[W n]" time="0.002" /><testcase classname="" name="test_own_unsupported_clipping_singularity_and_stack_never_pass[0 0 0 1 0 0 cm]" time="0.002" /><testcase classname="" name="test_own_unsupported_clipping_singularity_and_stack_never_pass[Q]" time="0.002" /><testcase classname="" name="test_own_svg_exact_decimal_not_source_curve_or_float_surrogate" time="0.003" /><testcase classname="" name="test_own_real_arc_writer_has_actual_cubic_pdf_topology_and_distinct_svg_scope" time="0.213" /></testsuite></testsuites>
