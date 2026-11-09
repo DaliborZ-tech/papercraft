@@ -64,7 +64,13 @@ def _loops(text):
     return loops
 
 
-def validate_svg_curve_geometry(path, expected_parts):
+def read_svg_cut_regions(path, expected_parts):
+    """Read actual own-format native paths/placement; no topology certificate."""
+    return validate_svg_curve_geometry(path, expected_parts, _read_actual=True)
+
+
+def validate_svg_curve_geometry(path, expected_parts, *, max_nodes=20000,
+                                max_commands=20000, _read_actual=False):
     """Validate actual local CUT subpaths, preserving decimal operands exactly."""
     try:
         raw = Path(path).read_bytes()
@@ -108,7 +114,8 @@ def validate_svg_curve_geometry(path, expected_parts):
             expected = expected_parts.get(pid)
             if expected is None or pid in actual["parts"] or group not in list(root):
                 raise CurveOutputError("SVG změnilo úplné pokrytí papírových dílů.")
-            if not _PLACEMENT.fullmatch(group.get("transform", "")):
+            placement = _PLACEMENT.fullmatch(group.get("transform", ""))
+            if not placement:
                 raise CurveOutputError("SVG díl nemá podporované pevné umístění.",
                                        part_id=pid, part_name=expected.get("name"))
             roles = [node.get("data-role") for node in group if node.tag != _NS + "title"]
@@ -126,7 +133,12 @@ def validate_svg_curve_geometry(path, expected_parts):
                 if node.tag != _NS + "path" or node.get("transform"):
                     raise CurveOutputError("SVG řez používá nepodporovanou strukturu.", part_id=pid)
                 loops.extend(_loops(node.get("d", "")))
-            actual["parts"][pid] = {"page_index": expected["page_index"], "loops": loops}
+            actual["parts"][pid] = {
+                "page_index": expected["page_index"], "loops": loops,
+                "placement": [Fraction(value) for value in placement.groups()],
+            }
+        if _read_actual:
+            return actual
         report = {"status": "UNRESOLVED", "kind": "ACTUAL_STAGED_SVG_LOCAL_CUT_TOPOLOGY",
                   "svg_sha256": hashlib.sha256(raw).hexdigest(), "parts": {}, "separations": [],
                   "placement_scope": "SOURCE_CONSERVATIVE_OUTPUT_BUDGET_ENVELOPES; "
@@ -138,6 +150,7 @@ def validate_svg_curve_geometry(path, expected_parts):
         result = validate_native_output_regions(
             actual, expected_parts, report=report,
             check_separation=False, check_page_bounds=False,
+            max_nodes=max_nodes, max_commands=max_commands,
         )
         from archpapercraft.authoring.curve_area import native_region_area_bounds
 
@@ -150,7 +163,7 @@ def validate_svg_curve_geometry(path, expected_parts):
                 continue
             tabs = next(node for node in group if node.get("data-role") == "TABS")
             tab_area_upper = sum(
-                native_region_area_bounds([loop])[1]
+                native_region_area_bounds([loop], max_commands=max_commands)[1]
                 for node in tabs for loop in _loops(node.attrib["d"])
             )
             lower = Fraction(result["parts"][pid]["material_area_bounds_mm2"]["lower"])
