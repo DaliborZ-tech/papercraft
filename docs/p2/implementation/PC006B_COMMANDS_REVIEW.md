@@ -43,3 +43,21 @@ Doporučení při zapojení: buď přesně pojmenovat počet spojovacích prvků
 ## Co ještě neověřeno
 
 Zapojení příkazů do kontextu skutečného výběru, hlavní menu a klávesnice; C05 rozeditované vstupy před dialogem; chování společného finálního commitu se schema 3; skutečný nativní průchod včetně přepočtu značení a obou exportů. Tyto body čekají ověření v integračním balíku. AC-US08 s novým člověkem je NOT_RUN; offscreen testy jej nenahrazují. Fyzický důkaz zůstává P3.
+
+## Navazující revize zapojení `ccc2d7e` — 9. 11. 2026
+
+**UI integrační zdroj:** `ccc2d7e98b8d2d4e302de3f9c578a657a614ccb3`. Přečten konkrétní diff: menu Úpravy, F2, dvě kontextová tlačítka, dostupnost podle výběru a preflight před konstrukcí obou dialogů. `delete_part` úmyslně nemá globální Delete zkratku, která by mohla odstraňovat díl při psaní v poli. Změny odpovídají zachování názvů a bezpečnému experimentu v platném workflow; nevytvářejí novou produktovou bránu.
+
+**APPROVED_IN_COMPONENT_SCOPE pro tento UI delta. C-EDIT01 CLOSED:** text nyní přesně uvádí počet spojovacích prvků s chlopněmi. Náhled stále nelže, že jde o počet jednotlivých chlopní. Vlastní test přímo čte opravený text dialogu.
+
+- Přezkoušené stávající workspace + editing: **54 PASS / 6,05 s**, [JUnit](evidence/pc006b-commands-review-integrated-existing.xml).
+- Vlastní integrační případy: **4 PASS / 1,17 s**, [zdroj](evidence/pc006b-commands-review-integration.py), [JUnit](evidence/pc006b-commands-review-integration.xml).
+- Vlastní skutečně zaslaná klávesa F2 při rozepsané souřadnici potvrdila 12 m → 12000 model mm před dialogem; jeho zrušení zachovalo právě potvrzenou číselnou změnu.
+- Skutečný klik na postranní tlačítko odstranil právě vybraný druhý díl, zachoval první díl i jeho placement a jediné undo obnovilo přesný stav.
+- Zrušení výběru vypnulo oba vstupy odstranění, ale ponechalo přejmenování modelu; otevřený dialog neměl pole nevybraných entit.
+
+Vlastní test byl spuštěn s `QT_QPA_PLATFORM=offscreen`, `PYTHONPATH` explicitně na `papercraft-bend-integration/src` a `tests/authoring`, s `-c` na tamní `pyproject.toml`; první test ověřil skutečnou cestu importovaného modulu. Příkaz má stejný tvar jako výše, ale vstup je `pc006b-commands-review-integration.py` a JUnit `pc006b-commands-review-integration.xml`.
+
+**Přesná mez pinu:** během běhů byl HEAD integračního worktree `ccc2d7e`, avšak jiný agent souběžně měnil `authoring/bend.py` a jeho testy. `git diff ccc2d7e -- author_window.py author_editing.py editing.py test_workspace.py` byl prázdný. Tato revize proto schvaluje uvedené přesné UI/editing soubory a jejich integrační delta; neuděluje schválení celému znečištěnému pracovnímu stromu ani rozpracovanému adaptéru ohybu. Finální sjednocený commit potřebuje samostatné připnuté ověření/review. Testy zde neobsahovaly nové konektorové ohyby a neposuzují jejich správnost.
+
+Nativní OS průchod s novými příkazy, finální schema-3 balík, výrobní exporty, nový člověk a fyzické sestavení nadále nebyly tímto doplňkem provedeny. Historické evidence ani jejich zdrojové piny nebyly přepsány.
