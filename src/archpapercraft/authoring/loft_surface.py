@@ -730,6 +730,70 @@ def _local_frame(project, part, result):
     return rotation, np.asarray(origin)
 
 
+def crease_geometry(project, surface, result, front_side):
+    """One-sided analytic tangent-plane turns about the source C0-to-C1 ruling.
+
+    Supported EXACT families have a constant tangent plane along each ruling.
+    We evaluate its midpoint using BOTH live profile derivatives, never mesh
+    triangles, source chords or a uniform mountain label for all source corners.
+    Common proper rigid placement preserves this signed triple product.
+    """
+    from .paper import fold_direction
+
+    a, b = (project.profiles[pid] for pid in surface.source_profile_ids())
+
+    def endpoint(reference, endpoint):
+        values, tangents = [], []
+        for side, profile in (("first", a), ("second", b)):
+            curve = source_curve(profile, profile.segment(reference[side + "_segment_id"]))
+            interval = reference[side + "_interval"]
+            parameter = interval[endpoint]
+            values.append(profile.plane.world([evaluate(curve, parameter)])[0])
+            derivative_uv = derivative(curve, parameter)
+            tangents.append(
+                (
+                    np.asarray(profile.plane.u) * derivative_uv[0]
+                    + np.asarray(profile.plane.v) * derivative_uv[1]
+                )
+                * (interval[1] - interval[0])
+            )
+        ruling = values[1] - values[0]
+        return ruling, np.cross((tangents[0] + tangents[1]) / 2, ruling)
+
+    def unit(value):
+        length = math.hypot(*value)
+        if not math.isfinite(length) or length <= 0:
+            raise ValidationError("LOFT_CREASE_UNRESOLVED: ohyb nemá doloženou orientaci.")
+        return value / length
+
+    records = surface.params["correspondences"]
+    creases = []
+    if result["status"] != "EXACT":
+        return creases
+    for index, patch in enumerate(result["solver"]["patches"]):
+        if patch["join_before_kind"] != "FOLD_CREASE":
+            continue
+        _, previous = endpoint(records[index - 1], 1)
+        ruling, following = endpoint(records[index], 0)
+        before, after, axis = unit(previous), unit(following), unit(ruling)
+        sine = float(np.dot(axis, np.cross(before, after)))
+        cosine = float(np.dot(before, after))
+        if abs(sine) < 128 * math.ulp(1.0) and cosine < 0:
+            raise ValidationError("LOFT_CREASE_UNRESOLVED: směr obratu o 180° není jednoznačný.")
+        angle = math.atan2(sine, cosine)
+        creases.append(
+            {
+                "patch_id": records[index]["id"],
+                "ruling_id": records[index]["ruling_id"],
+                "signed_angle_deg": math.degrees(angle),
+                "role": fold_direction(angle, front_side),
+                "normal_scope": "ANALYTIC_ONE_SIDED_RULED_DERIVATIVES_AT_COMMON_RULING",
+                "axis_orientation": "FIRST_PROFILE_TO_SECOND_PROFILE",
+            }
+        )
+    return creases
+
+
 def build_loft_part(project, old_part):
     if len(old_part.surface_ids) != 1:
         raise ValidationError(
@@ -766,6 +830,7 @@ def build_loft_part(project, old_part):
     part.paths = {key: [] for key in ("CUT", "FOLD_MOUNTAIN", "FOLD_VALLEY", "TABS", "GUIDES")}
     part.paths["CUT"] = [{"commands": commands, "closed": True}]
     part.edges = []
+    creases = {c["patch_id"]: c for c in crease_geometry(project, surface, result, part.front_side)}
     for patch, reference in zip(result["solver"]["patches"], surface.params["correspondences"]):
         for side in ("first", "second"):
             points = mapped(patch["flat_" + side + "_paper_mm"])
@@ -790,7 +855,7 @@ def build_loft_part(project, old_part):
                     }
                 )
         if patch["join_before_kind"] == "FOLD_CREASE":
-            part.paths["FOLD_MOUNTAIN"].append(
+            part.paths[creases[reference["id"]]["role"]].append(
                 path(mapped([patch["flat_first_paper_mm"][0], patch["flat_second_paper_mm"][0]]))
             )
     center = Polygon(part.polygons[surface.id][0]).representative_point()
@@ -827,11 +892,18 @@ class LoftCommands:
                 "source_profile_ids": surface.source_profile_ids(),
             }
         result = analysis(self, surface)
+        from .paper import part_input
+
+        part = self.parts[surface.part_id]
         return copy.deepcopy(
             {
-                "paper_frame": asdict(self.parts[surface.part_id].frame),
-                "paper_input_digest": self.parts[surface.part_id].input_digest,
-                "paper_stale": self.parts[surface.part_id].stale,
+                "crease_geometry": crease_geometry(
+                    self, surface, result, self.parts[surface.part_id].front_side
+                ),
+                "paper_frame": asdict(part.frame),
+                "paper_input_digest": part.input_digest,
+                "paper_stale": part.stale or part.input_digest != part_input(self, part),
+                "paper_contract": "ANALYTIC_SIGNED_CREASES_V1",
                 **{
                     key: value
                     for key, value in result.items()
@@ -1019,8 +1091,10 @@ class LoftCommands:
             params["second_profile_id"] = second_profile_id
         if correspondences is not None:
             records = copy.deepcopy(correspondences)
-            if not isinstance(records, list) or not records or any(
-                not isinstance(record, dict) for record in records
+            if (
+                not isinstance(records, list)
+                or not records
+                or any(not isinstance(record, dict) for record in records)
             ):
                 raise ValidationError(
                     "Korespondence potřebuje neprázdný seznam zdrojových záznamů."

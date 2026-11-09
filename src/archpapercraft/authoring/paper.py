@@ -50,24 +50,27 @@ def part_input(project, part):
         touched.update((attachment.source_surface_id, attachment.target_surface_id))
     surfaces = {sid: asdict(project.surfaces[sid]) for sid in sorted(touched)}
     profile_ids = {pid for sid in touched for pid in project.surfaces[sid].source_profile_ids()}
-    return digest(
-        {
-            "scale": project.scale,
-            "surfaces": surfaces,
-            "profiles": {pid: asdict(project.profiles[pid]) for pid in sorted(profile_ids)},
-            "joints": [asdict(j) for j in sorted(joints, key=lambda j: j.id)],
-            "attachments": [asdict(a) for a in sorted(attachments, key=lambda a: a.id)],
-            "connectors": {
-                j.connector_id: asdict(project.connectors[j.connector_id])
-                for j in [*joints, *attachments]
-                if j.connector_id
-            },
-            "frame": asdict(part.frame),
-            "front_side": part.front_side,
-            "surface_ids": part.surface_ids,
-            "name": part.name,
-        }
-    )
+    inputs = {
+        "scale": project.scale,
+        "surfaces": surfaces,
+        "profiles": {pid: asdict(project.profiles[pid]) for pid in sorted(profile_ids)},
+        "joints": [asdict(j) for j in sorted(joints, key=lambda j: j.id)],
+        "attachments": [asdict(a) for a in sorted(attachments, key=lambda a: a.id)],
+        "connectors": {
+            j.connector_id: asdict(project.connectors[j.connector_id])
+            for j in [*joints, *attachments]
+            if j.connector_id
+        },
+        "frame": asdict(part.frame),
+        "front_side": part.front_side,
+        "surface_ids": part.surface_ids,
+        "name": part.name,
+    }
+    if any(project.surfaces[sid].kind == "ruled_loft" for sid in touched):
+        # An older loft cache labelled every source corner mountain. Its
+        # geometry/source digest alone cannot certify the repaired fold roles.
+        inputs["loft_paper_contract"] = "ANALYTIC_SIGNED_CREASES_V1"
+    return digest(inputs)
 
 
 def _rotation(angle):
@@ -134,6 +137,13 @@ def _polygon_loops(polygon):
     raise ValidationError("Rozvin nevytvořil plošný materiál.")
 
 
+def fold_direction(angle, front_side):
+    """Signed dihedral about the oriented source hinge, viewed from print side."""
+    if front_side == "inside":
+        angle = -angle
+    return "GUIDES" if abs(angle) < 1e-10 else ("FOLD_MOUNTAIN" if angle > 0 else "FOLD_VALLEY")
+
+
 def fold_role(project, source_id, target_id, edge_id, front_side):
     a, b = project.world_geometry(source_id), project.world_geometry(target_id)
     world = edge_world(project, source_id, edge_id)
@@ -142,9 +152,7 @@ def fold_role(project, source_id, target_id, edge_id, front_side):
         float(np.dot(tangent, np.cross(a["normal"], b["normal"]))),
         float(np.dot(a["normal"], b["normal"])),
     )
-    if front_side == "inside":
-        angle = -angle
-    return "GUIDES" if abs(angle) < 1e-10 else ("FOLD_MOUNTAIN" if angle > 0 else "FOLD_VALLEY")
+    return fold_direction(angle, front_side)
 
 
 def connector_contact(project, joint, connector):
@@ -391,9 +399,7 @@ def build_part(project, old_part):
         flat_normal = maps[source][0] @ source_normal / project.scale
         folded = trace_connector_contact(project, attachment, connector)
         angle = math.radians(folded[0]["fold_angle_deg"]) if folded else 0
-        if part.front_side == "inside":
-            angle = -angle
-        role = "GUIDES" if abs(angle) < 1e-10 else ("FOLD_MOUNTAIN" if angle > 0 else "FOLD_VALLEY")
+        role = fold_direction(angle, part.front_side)
         for shape in connector_shapes(connector, math.dist(*source_points)):
             points = (
                 source_points[0]

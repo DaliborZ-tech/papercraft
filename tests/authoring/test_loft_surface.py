@@ -177,7 +177,19 @@ def test_b1_gothic_20_30_to_24_36_depth10_preserves_roof_corner_native_c_and_lay
     assert status["native_topology"]["status"] == "VALID"
     assert status["representation"]["position_error_bound_paper_mm"] <= 0.008
     assert status["representation"]["boundary_length_error_bound_paper_mm"] <= 0.008
-    assert len(p.parts[pid].paths["FOLD_MOUNTAIN"]) == 2  # Pointed top and bottom source corner.
+    # Clockwise gothic outline: tangent at apex turns from (30,12.5) to
+    # (30,-12.5). Its C0->C1 ruling has positive z: signed turn is negative.
+    assert len(p.parts[pid].paths["FOLD_VALLEY"]) == 2
+    assert not p.parts[pid].paths["FOLD_MOUNTAIN"]
+    assert all(c["signed_angle_deg"] < 0 for c in status["crease_geometry"])
+    original_cut = copy.deepcopy(p.parts[pid].paths["CUT"])
+    original_params = copy.deepcopy(p.surfaces[s].params)
+    p.set_front_side(pid, "inside")
+    p.recompute()
+    assert len(p.parts[pid].paths["FOLD_MOUNTAIN"]) == 2
+    assert not p.parts[pid].paths["FOLD_VALLEY"]
+    assert p.parts[pid].paths["CUT"] == original_cut
+    assert p.surfaces[s].params == original_params
     assert any(c[0] == "C" for c in p.parts[pid].paths["CUT"][0]["commands"])
     mesh = p.world_geometry(s)
     assert len(mesh["vertex_sources"]) == len(mesh["vertex_normals"]) == len(mesh["vertices"])
@@ -200,6 +212,83 @@ def test_b1_gothic_20_30_to_24_36_depth10_preserves_roof_corner_native_c_and_lay
     assert reopened.surfaces[s].params == p.surfaces[s].params
     assert reopened.placements[pid] == p.placements[pid]
     assert reopened.parts[pid].frame == p.parts[pid].frame
+
+
+def test_s_shaped_source_has_opposite_analytic_fold_polarities_and_print_side_flips():
+    p = AuthorProject.new(scale=1)
+    a = p.add_profile([[0, 0], [20, 0], [20, 10], [40, 10]], closed=False)
+    b = p.copy_profile(a, plane={"origin": [0, 0, 10], "u": [1, 0, 0], "v": [0, 1, 0]})
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    pid = p.part_for_surface(s)
+
+    # Tangents x,y,x give normals -y,+x,-y and ruling +z. Therefore
+    # normal turns are +90,-90; cumulative paper coordinates are 20,30 mm.
+    def fold_x(role):
+        return [line["points"][0][0] for line in p.parts[pid].paths[role]]
+
+    assert fold_x("FOLD_MOUNTAIN") == [20]
+    assert fold_x("FOLD_VALLEY") == [30]
+    assert [c["signed_angle_deg"] for c in p.loft_status(s)["crease_geometry"]] == [90, -90]
+    cut, params = copy.deepcopy(p.parts[pid].paths["CUT"]), copy.deepcopy(p.surfaces[s].params)
+    p.set_front_side(pid, "inside")
+    assert fold_x("FOLD_MOUNTAIN") == [30]
+    assert fold_x("FOLD_VALLEY") == [20]
+    p.recompute()
+    assert fold_x("FOLD_MOUNTAIN") == [30]
+    assert fold_x("FOLD_VALLEY") == [20]
+    assert p.parts[pid].paths["CUT"] == cut and p.surfaces[s].params == params
+
+
+def test_pre_ld01_loft_cache_contract_requires_recompute_before_export(monkeypatch):
+    from archpapercraft.authoring import paper
+
+    # Reproduce the old engine's digest contract: source geometry and frame
+    # existed, but no signed-crease algorithm version was included.
+    digest = paper.digest
+    with monkeypatch.context() as context:
+        context.setattr(
+            paper,
+            "digest",
+            lambda data: digest(
+                {key: value for key, value in data.items() if key != "loft_paper_contract"}
+            ),
+        )
+        p, a, b = extrusion()
+        s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    restored = AuthorProject.from_dict(p.to_dict())
+    assert restored.loft_status(s)["paper_stale"]
+    assert "STALE" in [issue.code for issue in restored.validate_layout()]
+    with pytest.raises(ValidationError, match="neaktuální"):
+        restored.snapshot()
+    restored.recompute()
+    assert not restored.loft_status(s)["paper_stale"]
+
+
+def test_reversed_gothic_source_orientation_reverses_fold_polarity():
+    p = AuthorProject.new(scale=1)
+    original = gothic(p)
+    profile = p.profiles[original]
+    descriptors = []
+    for segment in reversed(profile.segments):
+        data = copy.deepcopy(segment.data)
+        if segment.kind == "arc":
+            data["sweep_deg"] = -data["sweep_deg"]
+        descriptors.append(
+            {
+                "kind": segment.kind,
+                "start": profile.vertex(segment.end_vertex_id).point,
+                "end": profile.vertex(segment.start_vertex_id).point,
+                "data": data,
+            }
+        )
+    a = p.add_profile(segments=descriptors)
+    b = p.copy_profile(a, factor=1.2, plane={"origin": [0, 0, 10], "u": [1, 0, 0], "v": [0, 1, 0]})
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    part = p.parts[p.part_for_surface(s)]
+    # Reversing u reverses both normals and the before/after ordering; around
+    # the same +v ruling each formerly negative corner becomes positive.
+    assert len(part.paths["FOLD_MOUNTAIN"]) == 2 and not part.paths["FOLD_VALLEY"]
+    assert all(c["signed_angle_deg"] > 0 for c in p.loft_status(s)["crease_geometry"])
 
 
 def test_b2_closed_gothic_profiles_make_true_planar_region_with_hole_and_native_arcs():
@@ -494,8 +583,7 @@ def test_existing_loft_preview_updates_detached_identity_without_duplicate_patch
     p, a, b = extrusion()
     s = p.add_loft(a, b, correspondences=refs(p, a, b))
     pid = p.part_for_surface(s)
-    p.set_placement(pid, p.pages[0].id, 60, 60, 30,
-                    position_locked=True, rotation_locked=True)
+    p.set_placement(pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True)
     other = p.copy_profile(a, plane={"origin": [0, 0, 12], "u": [1, 0, 0], "v": [0, 1, 0]})
     old = copy.deepcopy(p.surfaces[s].params)
     mapping = refs(p, a, other)
