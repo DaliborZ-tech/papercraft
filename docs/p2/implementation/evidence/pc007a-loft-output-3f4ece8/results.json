@@ -1,0 +1,137 @@
+{
+  "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+  "base_approved_core_sha": "a1cbf920397694f3b1d3e85a08052acdc3962a7b",
+  "binding_dependency_commits": [
+    "6f7defe277d915added21105be9b41d9dfaa13f0",
+    "79711418adbc3c9e40c4b65cf0e6db9d0c586afc"
+  ],
+  "dependency_review": "PENDING_WITH_THIS_COMPONENT",
+  "test_source_scope": "Full22 and existing66 executed immediately before source commit with unchanged source contents; selected2heavy rerun AFTER exact source pin. Source hashes recorded.",
+  "writer_import": "C:\\Users\\dalib\\projects\\papercraft-loft-output\\src\\archpapercraft\\exporter\\author_export.py",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "reportlab": "5.1.0",
+  "tests": {
+    "loft": {
+      "passed": 22,
+      "seconds": 57.64,
+      "junit_property_warning": "Original xunit2 warning retained; actual properties are present in preserved XML"
+    },
+    "existing_writer_regression": {
+      "passed": 66,
+      "seconds": 7.62
+    },
+    "exact_source_pin_heavy_repeat": {
+      "passed": 2,
+      "deselected": 20,
+      "seconds": 42.34
+    },
+    "ruff": "PASS",
+    "diff_check": "PASS"
+  },
+  "timings": {
+    "test_b1_gothic_native_boundaries_reach_both_actual_vector_outputs": {
+      "test_total_seconds": "38.030",
+      "properties": {}
+    },
+    "test_ld02_r20_h200_area_direct_to_both_actual_outputs_is_4000pi": {
+      "test_total_seconds": "3.630",
+      "properties": {
+        "commands": "1915",
+        "core_seconds": "2.244245699956082",
+        "writer_seconds": "1.375742799951695",
+        "pdf_area_bounds_mm2": "[12566.359467857481, 12566.359467857481]",
+        "svg_area_bounds_mm2": "[12566.35946785748, 12566.35946785748]"
+      }
+    }
+  },
+  "finite_budgets": {
+    "topology_nodes": 400000,
+    "area_commands": 40000
+  },
+  "models": {
+    "B1": {
+      "part_id": "433a13be-0997-401b-8950-437e7bebd141",
+      "feature_id": "64bfb93c-d171-4961-aafb-93a38caebb8d",
+      "source_profile_ids": [
+        "88f07371-a6e7-4788-8fa5-29fbbd54e537",
+        "999f7073-01d1-4ce8-a0ac-ed4c9aa77bb1"
+      ],
+      "source_digest": "3759cfed8d4547631c9d79e1cb26686cbdb400e218141141bc5466235614f474",
+      "independent_area_oracle_mm2": 1364.0463936207523,
+      "oracle_derivation": "1.1*(400+2*integral_R32.5_sqrt(100+.04*(32.5+12.5*cos(theta))^2)_theta_atan2(30,-12.5)_to_pi)",
+      "allowed_error_mm2": 0.01,
+      "actual_area_bounds_mm2": {
+        "pdf": [
+          1364.046287862694,
+          1364.046287862694
+        ],
+        "svg": [
+          1364.046287862694,
+          1364.046287862694
+        ]
+      },
+      "source_to_output_area": "PASS",
+      "scope": "BACKEND_AUTHORED_COMPONENT_FIXTURE_NOT_UI_PROOF"
+    },
+    "LD02": {
+      "part_id": "e881e9d0-17cc-4f98-8ce4-af3b79fee2ca",
+      "feature_id": "fea23b76-25cc-44b9-be4b-be9ce8a35654",
+      "source_profile_ids": [
+        "c2de9531-6a43-408d-8e46-03b848249974",
+        "941a0edc-19ad-4775-a50a-f970479be7de"
+      ],
+      "source_digest": "5493d3fd9d56ab286043caa3bd94ebff1344f57860741d3259d41a31cc577399",
+      "independent_area_oracle_mm2": 12566.370614359172,
+      "oracle_derivation": "20*pi*200",
+      "allowed_error_mm2": 0.012566370614359171,
+      "actual_area_bounds_mm2": {
+        "pdf": [
+          12566.359467857481,
+          12566.359467857481
+        ],
+        "svg": [
+          12566.35946785748,
+          12566.35946785748
+        ]
+      },
+      "source_to_output_area": "PASS",
+      "scope": "BACKEND_AUTHORED_COMPONENT_FIXTURE_NOT_UI_PROOF"
+    }
+  },
+  "source_file_sha256": {
+    "src/archpapercraft/exporter/author_export.py": "95fe2e3392d704c3125955e1d5513ceb7d8f35c0c97bb6717f33a90c34c04522",
+    "src/archpapercraft/exporter/curve_output_validation.py": "0187d27c9927ca846b0bbfdfe35589b7d8c683a36e0bbf1d2be70e2fcee9cfbf",
+    "src/archpapercraft/exporter/svg_curve_validation.py": "57ba93fd22d7f5f7d27e9b881fba1615721b5bf6f295d77e2f1934a4ae7ae4a5",
+    "src/archpapercraft/exporter/loft_output_validation.py": "baeba8242393597a6c8b0b3a6758cc85f8f7627316759e29efb0162e0aec9ed0",
+    "tests/authoring/test_loft_export.py": "558033d3f990396e4b71322bc6c01e2d73cdc5609ef0fc2b3a0b145f043676bc",
+    "src/archpapercraft/authoring/loft_surface.py": "7cedded96eeaec1a3e1500154f4a9bd99f4cd164370cf0a5dcbd57560b03b728",
+    "src/archpapercraft/authoring/project.py": "490a449435f543b3eee85a971bd3cf60fdd75a9d8a0fa74f04049dc195f55d07"
+  },
+  "artifact_sha256": {
+    "heavy-source-pin-junit.xml": "7d0ca23e3811cddb990225789bc052da20db39e8e2f53f2cd4ae5cc5c29f2f16",
+    "loft-output-junit.xml": "4c1db9bbf7e5130c52785cedb961bcc9485fe11293c57cb574cf2e14b9af746d",
+    "writer-regression-junit.xml": "59f691d4edfd15979d774c550241bfacc3abf31bec2a2ee91c201c155de9540f",
+    "B1/.author-export.json": "5f30192b85043f6c00f0a1abfe9d3a5a569a1b9925f249939a876a7256661184",
+    "B1/model.pdf": "0a41b8d6849645fbc562fa5a1fb598eb613b4488860ad3cd5191cb8da8b09b03",
+    "B1/page-378ad774-6fa9-4f2f-924f-bb59ad8cd616.svg": "a2e734a0cc04c472181667ea6258ddb9565efde58bc074fad9df49a71c351c5a",
+    "LD02/.author-export.json": "40e614088d416a67a26560b2eb1f78f6ca5af85148d162b4154663e90eb07ed3",
+    "LD02/model.pdf": "596f1d88fe2605e1c676d7eef087d9007baa8b4241c483c6d803b8b063be70cd",
+    "LD02/page-cdb4a492-f270-4c79-b106-6d0f60e2a67f.svg": "aafd0b630f8fcc8d3c628da18556a66119d039b89c8908604f8ac6bb42ff66e3"
+  },
+  "SK011_next_use": {
+    "case": "300 intrinsic -> 300.009 SVG -> 300.018 PDF",
+    "result": "Direct source gate rejects .018 despite each intermediate drift .009 <= .01; whole previous bundle and foreign bytes preserved",
+    "test": "test_direct_source_area_rejects_two_individually_small_stage_drifts",
+    "scope": "NARROW_COMPONENT_TRANSFER_VERIFIED; BROADER_EFFECT_PENDING"
+  },
+  "precision_diagnostic": {
+    "first_partial_run": "1PASS/1FAIL44.20seconds; B1 could not certify whole-chain serialized control perturbation with legacy ReportLab fp_str coordinates",
+    "claim_scope": "Failure of conservative proof budget, not a claim that actual physical ruling length was measured wrong",
+    "fix": "Precise numeric path tokens ONLY for bound loft parts; existing planar arc behavior unchanged; raw readers continue to verify actual bytes"
+  },
+  "independent_review": "PENDING",
+  "actual_ui": "NOT_RUN_BY_THIS_AGENT",
+  "new_user": "NOT_RUN",
+  "physical_build": "P3_NOT_VERIFIED",
+  "native_ui_performance": "Root reported preview92s and blocking numeric fields; not fixed/accepted by writer result"
+}
