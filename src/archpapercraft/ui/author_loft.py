@@ -346,6 +346,7 @@ class LoftProfilesDialog(QDialog):
         self.first_profile.currentIndexChanged.connect(self._profiles_changed)
         self.second_profile.currentIndexChanged.connect(self._profiles_changed)
         self.seam.currentIndexChanged.connect(self._mapping_changed)
+        self.seam.activated.connect(self._seam_reselected)
         self.confirm_pairs.toggled.connect(self._confirmation_changed)
         self.keep_target.toggled.connect(self._update_actions)
         self.tolerance.valueChanged.connect(self._settings_changed)
@@ -627,6 +628,19 @@ class LoftProfilesDialog(QDialog):
     def _mapping_changed(self, *_args):
         if self._updating:
             return
+        first, _second = self._profiles()
+        if self.sender() is self.seam and first is not None and first.closed:
+            index = next(
+                (i for i, row in enumerate(self.pair_rows) if row["id"] == self.seam.currentData()),
+                -1,
+            )
+            if index > 0:
+                # Choosing a seam is an authored cut: make the reordered
+                # request visible BEFORE any preview, not a backend side effect.
+                self._updating = True
+                self.pair_rows = self.pair_rows[index:] + self.pair_rows[:index]
+                self._rebuild_rows()
+                self._updating = False
         self.confirm_pairs.blockSignals(True)
         self.confirm_pairs.setChecked(False)
         self.confirm_pairs.blockSignals(False)
@@ -643,6 +657,16 @@ class LoftProfilesDialog(QDialog):
             "spoje, potvrďte je a spočítejte náhled."
         )
         self._redraw()
+
+    def _seam_reselected(self, *_args):
+        first, _second = self._profiles()
+        if (
+            first is not None
+            and first.closed
+            and self.pair_rows
+            and self.seam.currentData() != self.pair_rows[0]["id"]
+        ):
+            self._mapping_changed()
 
     def _settings_changed(self, *_args):
         if not self._updating:
@@ -697,6 +721,11 @@ class LoftProfilesDialog(QDialog):
             return "Dvě uložené dvojice mají tutéž identitu. Vadnou dvojici nahraďte výslovně."
         if self.seam.currentData() not in {row["id"] for row in self.pair_rows}:
             return "Vyberte začátek rozvíjení mezi zachovanými dvojicemi úseků."
+        if first.closed and self.seam.currentData() != self.pair_rows[0]["id"]:
+            return (
+                "Zvolený začátek spoje musí být první dvojicí. Přesuňte ji na začátek "
+                "nebo ji znovu zvolte v nabídce začátku rozvíjení."
+            )
         for side in ("first", "second"):
             values = [row[side].currentData() for row in self.pair_rows]
             profile = first if side == "first" else second
@@ -852,7 +881,8 @@ class LoftProfilesDialog(QDialog):
                 except (KeyError, ValueError, TypeError):
                     self.preview_result = None
                     self.feedback.setText(
-                        "Výsledek neodpovídá zadaným dvojicím nebo jejich směru. "
+                        "Výsledek neodpovídá zadaným dvojicím, jejich pořadí, "
+                        "směru nebo stálým vazbám. "
                         "Návrh nelze použít; opakujte výpočet."
                     )
         pending, self._pending_request = self._pending_request, None
@@ -873,14 +903,28 @@ class LoftProfilesDialog(QDialog):
                 "Výpočet nevrátil ověřitelný náhled. Upravte zadání a opakujte výpočet."
             )
             return
-        self.preview_result = copy.deepcopy(result)
-        params = result.get("params") or request["parameters"]
-        expected_pairs = {pair["id"]: pair for pair in request["parameters"]["correspondences"]}
+        candidate = copy.deepcopy(result)
+        requested = request["parameters"]
+        params = candidate.get("params")
+        planar_without_loft = (
+            candidate["status"] == "EXACT"
+            and candidate.get("family") == "PLANAR_REGION"
+            and params == {}
+        )
+        if planar_without_loft:
+            # A planar B2 region has no persistent loft/ruling records. Keep
+            # the explicit input map for add_loft's planar public dispatch.
+            params = copy.deepcopy(requested)
+        if not isinstance(params, dict):
+            raise ValueError("Preview did not return explicit authored parameters")
+        expected = requested["correspondences"]
+        expected_pairs = {pair["id"]: pair for pair in expected}
         actual_pairs = params["correspondences"]
-        if {pair["id"] for pair in actual_pairs} != set(expected_pairs) or len(actual_pairs) != len(
-            expected_pairs
-        ):
-            raise ValueError("Preview changed authored correspondence identities")
+        if [pair["id"] for pair in actual_pairs] != [pair["id"] for pair in expected]:
+            raise ValueError("Preview changed authored correspondence identity or order")
+        if params.get("seam_patch_id") != requested["seam_patch_id"]:
+            raise ValueError("Preview changed authored seam")
+        issued = [pair["id"] for pair in actual_pairs]
         for pair in actual_pairs:
             original = expected_pairs[pair["id"]]
             if any(
@@ -893,6 +937,24 @@ class LoftProfilesDialog(QDialog):
                 )
             ):
                 raise ValueError("Preview changed authored source pairing")
+            if not planar_without_loft:
+                ruling = pair.get("ruling_id")
+                if not _is_uuid(ruling) or (
+                    original.get("ruling_id") is not None and ruling != original["ruling_id"]
+                ):
+                    raise ValueError("Preview lost or replaced a persistent ruling identity")
+                issued.append(ruling)
+        if not planar_without_loft:
+            end = params.get("end_ruling_id")
+            if not _is_uuid(end) or (
+                requested.get("end_ruling_id") is not None and end != requested["end_ruling_id"]
+            ):
+                raise ValueError("Preview lost or replaced the end ruling identity")
+            issued.append(end)
+            if len(set(issued)) != len(issued):
+                raise ValueError("Preview assigned duplicate persistent identities")
+        # Validate the entire result before adopting even one new identity.
+        self.preview_result = candidate
         self._parameters_for_apply = {
             "first_profile_id": request["parameters"]["first_profile_id"],
             "second_profile_id": request["parameters"]["second_profile_id"],

@@ -642,3 +642,185 @@ def test_default_loaded_preview_uses_public_update_api_and_omits_immutable_input
     assert "end_ruling_id" not in calls[0][2] and "first_profile_id" not in calls[0][2]
     assert calls[0][2]["second_profile_id"] == params["second_profile_id"]
     assert widget._parameters_for_apply["end_ruling_id"] == params["end_ruling_id"]
+
+
+@pytest.mark.parametrize(
+    "mutation", ["order", "seam", "old_ruling", "old_end", "missing_old_ruling", "missing_old_end"]
+)
+def test_preview_must_preserve_exact_order_seam_and_existing_identity(qtbot, project, mutation):
+    def fake(_clone, _a, _b, **params):
+        result = preview_result(params)
+        actual = result["params"]
+        if mutation == "order":
+            actual["correspondences"].reverse()
+        elif mutation == "seam":
+            actual["seam_patch_id"] = params["correspondences"][1]["id"]
+        elif mutation == "old_ruling":
+            actual["correspondences"][0]["ruling_id"] = str(uuid4())
+        elif mutation == "old_end":
+            actual["end_ruling_id"] = str(uuid4())
+        elif mutation == "missing_old_ruling":
+            actual["correspondences"][0].pop("ruling_id")
+        else:
+            actual.pop("end_ruling_id")
+        return result
+
+    widget = dialog(qtbot, project, fake)
+    known_ruling, known_end = str(uuid4()), str(uuid4())
+    widget.pair_rows[0]["ruling_id"] = known_ruling
+    widget._end_ruling_id = known_end
+    before = project.to_dict(validate=False)
+    calculate(qtbot, widget)
+    qtbot.waitUntil(lambda: widget._running_job is None)
+    assert widget.preview_result is None and not widget.apply_button.isEnabled()
+    assert widget.pair_rows[0]["ruling_id"] == known_ruling
+    assert widget._end_ruling_id == known_end
+    assert "Návrh nelze použít" in widget.feedback.text()
+    assert project.to_dict(validate=False) == before
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "missing_ruling",
+        "missing_end",
+        "invalid_ruling",
+        "invalid_end",
+        "duplicate_ruling",
+        "duplicate_patch",
+    ],
+)
+def test_new_preview_identities_must_be_present_valid_unique_and_adopted_atomically(
+    qtbot, project, mutation
+):
+    def fake(_clone, _a, _b, **params):
+        result = preview_result(params)
+        actual = result["params"]
+        if mutation == "missing_ruling":
+            actual["correspondences"][1].pop("ruling_id")
+        elif mutation == "missing_end":
+            actual.pop("end_ruling_id")
+        elif mutation == "invalid_ruling":
+            actual["correspondences"][1]["ruling_id"] = "invalid"
+        elif mutation == "invalid_end":
+            actual["end_ruling_id"] = None
+        elif mutation == "duplicate_ruling":
+            actual["end_ruling_id"] = actual["correspondences"][0]["ruling_id"]
+        else:
+            actual["correspondences"][1]["ruling_id"] = actual["correspondences"][0]["id"]
+        return result
+
+    widget = dialog(qtbot, project, fake)
+    calculate(qtbot, widget)
+    qtbot.waitUntil(lambda: widget._running_job is None)
+    assert widget.preview_result is None and not widget.apply_button.isEnabled()
+    assert all(not row.get("ruling_id") for row in widget.pair_rows)
+    assert widget._end_ruling_id is None
+
+
+def test_closed_seam_choice_visibly_rotates_the_authored_request_before_preview(qtbot):
+    project = AuthorProject.new()
+    project.add_profile([[0, 0], [20, 0], [20, 10], [0, 10]])
+    project.add_profile([[0, 0], [24, 0], [24, 12], [0, 12]])
+    widget = dialog(qtbot, project)
+    original = [row["id"] for row in widget.pair_rows]
+    widget.seam.setFocus()
+    qtbot.keyClick(widget.seam, Qt.Key.Key_Down)
+    expected = original[1:] + original[:1]
+    assert [row["id"] for row in widget.pair_rows] == expected
+    assert (
+        widget.pairs.cellWidget(0, 0).currentData()
+        == project.profiles[widget.first_profile.currentData()].segments[1].id
+    )
+    assert widget.seam.currentData() == expected[0]
+    assert not widget.confirm_pairs.isChecked()
+    calculate(qtbot, widget)
+    wait_preview(qtbot, widget)
+    assert [row["id"] for row in widget._parameters_for_apply["correspondences"]] == expected
+    assert widget._parameters_for_apply["seam_patch_id"] == expected[0]
+
+
+def test_closed_row_move_requires_a_visible_first_seam_and_reselection_repairs_it(qtbot):
+    project = AuthorProject.new()
+    for scale in (1, 1.2):
+        project.add_profile([[0, 0], [20 * scale, 0], [20 * scale, 10 * scale], [0, 10 * scale]])
+    widget = dialog(qtbot, project)
+    seam = widget.seam.currentData()
+    widget.pairs.selectRow(0)
+    widget.move_pair(1)
+    assert widget.pair_rows[0]["id"] != seam and widget.seam.currentData() == seam
+    assert "první dvojicí" in widget.feedback.text()
+    assert not widget.calculate.isEnabled()
+    widget.seam.showPopup()
+    view = widget.seam.view()
+    rectangle = view.visualRect(view.currentIndex())
+    qtbot.mouseClick(view.viewport(), Qt.MouseButton.LeftButton, pos=rectangle.center())
+    assert widget.pair_rows[0]["id"] == seam
+    assert widget.seam.currentData() == seam
+
+
+def test_empty_nonplanar_preview_params_cannot_fall_back_to_unverified_request(qtbot, project):
+    widget = dialog(
+        qtbot,
+        project,
+        lambda *_args, **_kw: {
+            "status": "EXACT",
+            "family": "POSITIVE_HOMOTHETIC_CONE",
+            "params": {},
+        },
+    )
+    calculate(qtbot, widget)
+    qtbot.waitUntil(lambda: widget._running_job is None)
+    assert widget.preview_result is None and not widget.apply_button.isEnabled()
+
+
+@pytest.mark.skipif(
+    not hasattr(AuthorProject, "preview_loft_update"),
+    reason="Actual domain API is integrated by the owner in a separate source.",
+)
+def test_closed_seam_actual_public_api_creation_and_edit_preserve_exact_requested_identity(qtbot):
+    """Actual domain+widget API smoke; fixture creation is not the model B UI proof."""
+    project = AuthorProject.new()
+    first = project.add_profile([[0, 0], [20, 0], [20, 10], [0, 10]])
+    project.copy_profile(first, plane={"origin": [0, 0, 12], "u": [1, 0, 0], "v": [0, 1, 0]})
+    before = project.to_dict(validate=False)
+    widget = LoftProfilesDialog(project, first)
+    qtbot.addWidget(widget)
+    widget.show()
+    original = [row["id"] for row in widget.pair_rows]
+    widget.seam.setFocus()
+    qtbot.keyClick(widget.seam, Qt.Key.Key_Down)
+    expected = original[1:] + original[:1]
+    assert [row["id"] for row in widget.pair_rows] == expected
+    calculate(qtbot, widget)
+    qtbot.waitUntil(lambda: widget._running_job is None, timeout=30000)
+    assert widget.preview_result is not None, widget.feedback.text()
+    assert widget.preview_result["status"] == "EXACT", widget.feedback.text()
+    assert [row["id"] for row in widget.preview_result["params"]["correspondences"]] == expected
+    assert project.to_dict(validate=False) == before
+    qtbot.mouseClick(widget.apply_button, Qt.MouseButton.LeftButton)
+    surface_id = widget.apply(project)
+    original_params = copy.deepcopy(project.surfaces[surface_id].params)
+    assert project.loft_status(surface_id)["status"] == "EXACT"
+    editing = LoftProfilesDialog(project)
+    qtbot.addWidget(editing)
+    editing.show()
+    assert editing.load_parameters(first, original_params, existing_surface_id=surface_id)
+    editing.seam.setFocus()
+    qtbot.keyClick(editing.seam, Qt.Key.Key_Down)
+    requested = editing._parameters()
+    calculate(qtbot, editing)
+    qtbot.waitUntil(lambda: editing._running_job is None, timeout=30000)
+    assert editing.preview_result is not None, editing.feedback.text()
+    assert editing.preview_result["status"] == "EXACT", editing.feedback.text()
+    assert editing._parameters_for_apply["correspondences"] == requested["correspondences"]
+    assert editing._parameters_for_apply["end_ruling_id"] == original_params["end_ruling_id"]
+    qtbot.mouseClick(editing.apply_button, Qt.MouseButton.LeftButton)
+    assert editing.check_source(project)
+    parameters = copy.deepcopy(editing.result_parameters)
+    parameters.pop("first_profile_id")
+    parameters.pop("end_ruling_id")
+    project.update_loft(surface_id, **parameters)
+    assert project.surfaces[surface_id].params["correspondences"] == requested["correspondences"]
+    assert project.surfaces[surface_id].params["seam_patch_id"] == requested["seam_patch_id"]
+    assert project.loft_status(surface_id)["status"] == "EXACT"
