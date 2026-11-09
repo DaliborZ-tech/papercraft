@@ -1,5 +1,7 @@
 # ArchPapercraft Studio — zadání obnovy projektu
 
+> **Pozastaveno na žádost vlastníka 9.11.2026, pokračování 10.11.:** čti [navazovací předání](docs/p2/implementation/CONTINUE_2026-11-10.md). Rovinné křivky jsou publikované na `a27cf5a`; nová lokální integrace ostění má skutečné B2/Bézier průchody, zbývá výkonová revize a B1. Dokument rozlišuje přesné lokální větve, kladné důkazy i zachované neúspěchy. Nezačínej obnovu znovu a nepovažuj celé P2 za dokončené.
+
 > **Aktuální přírůstek 9.11.2026:** [Vlastní rovinné oblouky a Bézierovy křivky](docs/p2/implementation/PC007A_PLANAR_DELIVERY.md) mají 908 úspěšných testů, skutečný Windows průchod a oba Inkscape roundtripy na `63ab275`. [Nezávislá revize](docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md) schvaluje tento rovinný podbalík. Celý PC-007A pokračuje prostorovým ostěním B; C/D a historický model zůstávají v rozsahu. Nový uživatel: 0 účastníků, NOT_RUN; fyzický proof: P3. Publikace tohoto přírůstku se eviduje samostatně, není přijetím celé P2.
 
 > **Pokračování 9.11.2026:** [PC-006B — digitální předání A a společného dílu](docs/p2/implementation/PC006B_DELIVERY.md) má celý Windows→save/reopen→layout→SVG/PDF průchod, Inkscape a 630 testů na `eb08f97`; nezávislá revize je v předání. Test s novým člověkem má 0 účastníků a zůstává NOT_RUN. Následuje PC-007A, celý B/C/D a závěrečný historický model zůstávají autorizované. Historické odstavce níže nejsou pokyn začít znovu.
