@@ -363,7 +363,20 @@ def run_windows(output, expected_sha, fixture="all"):
             QTest.qWait(55)
 
         def number(self, widget, value):
-            self.visible(widget).setFocus()
+            self.visible(widget)
+            target = widget.window()
+            target.raise_()
+            target.activateWindow()
+            QTest.qWait(80)
+            widget.setFocus()
+            QTest.qWait(20)
+            focus = QApplication.focusWidget()
+            log("numeric_focus_context", window_active=target.isActiveWindow(),
+                focused_class=type(focus).__name__ if focus else None,
+                owns_focus=focus is widget or (focus is not None and widget.isAncestorOf(focus)))
+            check(target.isActiveWindow() and
+                  (focus is widget or (focus is not None and widget.isAncestorOf(focus))),
+                  "Numeric input target did not receive actual active-window focus")
             QTest.keyClick(widget, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
             text = f"{value:.6f}" if isinstance(value, float) else str(value)
             text = text.replace(".", widget.locale().decimalPoint())
@@ -371,6 +384,8 @@ def run_windows(output, expected_sha, fixture="all"):
             # Tab commits numeric text without activating a dialog's default OK.
             QTest.keyClick(widget, Qt.Key.Key_Tab)
             QTest.qWait(65)
+            log("numeric_after_tab", expected=value, interpreted_value=widget.value(),
+                visible_text=widget.text(), still_focused=widget.hasFocus())
             check(
                 math.isclose(widget.value(), value, abs_tol=max(0.000001, 1e-10 * abs(value))),
                 f"Numeric input lost: {value} != {widget.value()}",
