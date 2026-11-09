@@ -194,6 +194,7 @@ def run_windows(output, expected_sha, fixture="all"):
     from pypdf import PdfReader
     from pypdf.generic import ContentStream
     from PySide6.QtCore import QPoint, QPointF, QRectF, QSettings, Qt, QTimer
+    from PySide6.QtGui import QKeySequence
     from PySide6.QtTest import QTest
     from PySide6.QtWidgets import (
         QApplication,
@@ -316,6 +317,15 @@ def run_windows(output, expected_sha, fixture="all"):
             self.w = window
             self.roles = {}
             self.authored_top = None
+            self.action_counts = {}
+            for name, action in window.actions.items():
+                action.triggered.connect(
+                    lambda _checked=False, key=name: self.observed_action(key)
+                )
+
+        def observed_action(self, name):
+            self.action_counts[name] = self.action_counts.get(name, 0) + 1
+            log("observed_QAction_triggered", action=name, count=self.action_counts[name])
 
         def visible(self, widget):
             for header, box in self.w.sections.values():
@@ -388,12 +398,34 @@ def run_windows(output, expected_sha, fixture="all"):
             self.combo(widget, index)
 
         def shortcut(self, key, shift=False):
+            # A native Windows dialog may release activation. Sending a key to
+            # an inactive QWidget does not prove its window QAction fired.
+            self.w.raise_()
+            self.w.activateWindow()
+            QTest.qWait(80)
             self.w.setFocus()
             modifiers = Qt.KeyboardModifier.ControlModifier
             if shift:
                 modifiers |= Qt.KeyboardModifier.ShiftModifier
+            sequence = QKeySequence(modifiers.value | key.value)
+            expected = [
+                name for name, action in self.w.actions.items()
+                if action.shortcut().matches(sequence) == QKeySequence.SequenceMatch.ExactMatch
+            ]
+            before = {name: self.action_counts.get(name, 0) for name in expected}
+            active = QApplication.activeWindow()
+            focus = QApplication.focusWidget()
+            log("shortcut_context", sequence=sequence.toString(), expected_actions=expected,
+                window_active=self.w.isActiveWindow(),
+                active_window_title=active.windowTitle() if active else None,
+                focus_class=type(focus).__name__ if focus else None)
+            check(active is self.w and self.w.isActiveWindow(),
+                  "Shortcut target was not active after explicit native window activation")
             QTest.keyClick(self.w, key, modifiers)
             QTest.qWait(85)
+            observed = {name: [before[name], self.action_counts.get(name, 0)] for name in expected}
+            check(all(after == previous+1 for previous, after in observed.values()),
+                  "Actual shortcut did not trigger its expected window QAction: " + repr(observed))
 
         def action(self, name):
             action = self.w.actions[name]
