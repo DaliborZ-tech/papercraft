@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="0.813" timestamp="2026-11-09T12:23:29.347791+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-fix" name="test_entire_failed_response_is_read_only_for_draft_identity[invalid_end]" time="0.089" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-fix" name="test_entire_failed_response_is_read_only_for_draft_identity[collision_with_patch]" time="0.019" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-fix" name="test_entire_failed_response_is_read_only_for_draft_identity[message]" time="0.019"><failure message="AssertionError: assert {'first_profi...61e5d5c', ...} == {'first_profi...61e5d5c', ...}&#10;  &#10;  Omitting 5 identical items, use -vv to show&#10;  Differing items:&#10;[+5 more lines; full report in element text]">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001E03B493A40&gt;
+bad_field = 'message'
+
+    @pytest.mark.parametrize("bad_field", ["invalid_end", "collision_with_patch", "message"])
+    def test_entire_failed_response_is_read_only_for_draft_identity(qtbot, bad_field):
+        p = AuthorProject.new()
+        p.add_profile([[0, 0], [10, 0], [10, 10]], closed=False)
+        p.add_profile([[0, 0], [10, 0], [10, 10]], closed=False)
+    
+        def callback(_clone, _a, _b, **params):
+            params = copy.deepcopy(params)
+            for row in params["correspondences"]:
+                row["ruling_id"] = str(uuid4())
+            params["end_ruling_id"] = str(uuid4())
+            result = {"status": "EXACT", "params": params, "family": "TEST_ONLY"}
+            if bad_field == "invalid_end":
+                params["end_ruling_id"] = "broken"
+            elif bad_field == "collision_with_patch":
+                params["end_ruling_id"] = params["correspondences"][1]["id"]
+            else:
+                result["message"] = None
+            return result
+    
+        d = LoftProfilesDialog(p, preview_function=callback)
+        qtbot.addWidget(d)
+        d.show()
+        qtbot.waitExposed(d)
+        before = p.to_dict(validate=False)
+        expected = copy.deepcopy(d._parameters())
+        d.confirm_pairs.setChecked(True)
+        assert d.request_preview()
+        qtbot.waitUntil(lambda: d._running_job is None)
+        assert d.preview_result is None and not d.apply_button.isEnabled()
+&gt;       assert d._parameters() == expected
+E       AssertionError: assert {'first_profi...61e5d5c', ...} == {'first_profi...61e5d5c', ...}
+E         
+E         Omitting 5 identical items, use -vv to show
+E         Differing items:
+E         {'correspondences': [{'id': '6df40a5e-1a79-41d1-8eaa-d21ad61e5d5c', 'first_segment_id': 'f8131b76-c953-49f9-a024-a2a53...-43c2-a297-9106dfc1b5cd', 'second_segment_id': 'bce0f76c-7283-4f3c-a953-f27c9faf3e9d', 'first_interval': [0, 1], ...}]} != {'correspondences': [{'id': '6df40a5e-1a79-41d1-8eaa-d21ad61e5d5c', 'first_segment_id': 'f8131b76-c953-49f9-a024-a2a53...-43c2-a297-9106dfc1b5cd', 'second_segment_id': 'bce0f76c-7283-4f3c-a953-f27c9faf3e9d', 'first_interval': [0, 1], ...}]}
+E         Left contains 1 more item:
+E         {'end_r...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+docs\p2\implementation\evidence\pc007a-loft-ui-review-fix.py:44: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase></testsuite></testsuites>

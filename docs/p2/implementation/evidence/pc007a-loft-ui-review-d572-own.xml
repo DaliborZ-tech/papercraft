@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="9" time="0.925" timestamp="2026-11-09T12:13:28.260308+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_import_comes_from_exact_worktree" time="0.002" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_preview_preserves_authored_order_seam_and_persistent_identity[order]" time="0.095"><failure message="assert not True&#10; +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252AAAF7DC0&gt;()&#10; +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252AAAF7DC0&gt; = &lt;PySide6.QtWidgets.QPushButton(0x252a9e8b960) at 0x00000252AAAF7DC0&gt;.isEnabled&#10; +      where &lt;PySide6.QtWidgets.QPushButton(0x252a9e8b960) at 0x00000252AAAF7DC0&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x252a949d200) at 0x00000252C991D080&gt;.apply_button">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x00000252C9886EA0&gt;, mutation = 'order'
+
+    @pytest.mark.parametrize("mutation", ["order", "seam", "old_ruling", "old_end"])
+    def test_preview_preserves_authored_order_seam_and_persistent_identity(qtbot, mutation):
+        p = project()
+    
+        def callback(_clone, _a, _b, **params):
+            out = result(params)
+            if mutation == "order":
+                out["params"]["correspondences"].reverse()
+            elif mutation == "seam":
+                out["params"]["seam_patch_id"] = params["correspondences"][1]["id"]
+            elif mutation == "old_ruling":
+                out["params"]["correspondences"][0]["ruling_id"] = str(uuid4())
+            else:
+                out["params"]["end_ruling_id"] = str(uuid4())
+            return out
+    
+        d = dialog(qtbot, p, callback)
+        # A prior accepted preview has already issued these persistent identities.
+        d.pair_rows[0]["ruling_id"] = str(uuid4())
+        d._end_ruling_id = str(uuid4())
+        before = p.to_dict(validate=False)
+        run(qtbot, d)
+&gt;       assert not d.apply_button.isEnabled()
+E       assert not True
+E        +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252AAAF7DC0&gt;()
+E        +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252AAAF7DC0&gt; = &lt;PySide6.QtWidgets.QPushButton(0x252a9e8b960) at 0x00000252AAAF7DC0&gt;.isEnabled
+E        +      where &lt;PySide6.QtWidgets.QPushButton(0x252a9e8b960) at 0x00000252AAAF7DC0&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x252a949d200) at 0x00000252C991D080&gt;.apply_button
+
+docs\p2\implementation\evidence\pc007a-loft-ui-review-own.py:75: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_preview_preserves_authored_order_seam_and_persistent_identity[seam]" time="0.021"><failure message="assert not True&#10; +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1C2D00&gt;()&#10; +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1C2D00&gt; = &lt;PySide6.QtWidgets.QPushButton(0x252a9fd1ef0) at 0x00000252CA1C2D00&gt;.isEnabled&#10; +      where &lt;PySide6.QtWidgets.QPushButton(0x252a9fd1ef0) at 0x00000252CA1C2D00&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x25289c93b20) at 0x00000252C9C7EBC0&gt;.apply_button">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x00000252C9BF34D0&gt;, mutation = 'seam'
+
+    @pytest.mark.parametrize("mutation", ["order", "seam", "old_ruling", "old_end"])
+    def test_preview_preserves_authored_order_seam_and_persistent_identity(qtbot, mutation):
+        p = project()
+    
+        def callback(_clone, _a, _b, **params):
+            out = result(params)
+            if mutation == "order":
+                out["params"]["correspondences"].reverse()
+            elif mutation == "seam":
+                out["params"]["seam_patch_id"] = params["correspondences"][1]["id"]
+            elif mutation == "old_ruling":
+                out["params"]["correspondences"][0]["ruling_id"] = str(uuid4())
+            else:
+                out["params"]["end_ruling_id"] = str(uuid4())
+            return out
+    
+        d = dialog(qtbot, p, callback)
+        # A prior accepted preview has already issued these persistent identities.
+        d.pair_rows[0]["ruling_id"] = str(uuid4())
+        d._end_ruling_id = str(uuid4())
+        before = p.to_dict(validate=False)
+        run(qtbot, d)
+&gt;       assert not d.apply_button.isEnabled()
+E       assert not True
+E        +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1C2D00&gt;()
+E        +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1C2D00&gt; = &lt;PySide6.QtWidgets.QPushButton(0x252a9fd1ef0) at 0x00000252CA1C2D00&gt;.isEnabled
+E        +      where &lt;PySide6.QtWidgets.QPushButton(0x252a9fd1ef0) at 0x00000252CA1C2D00&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x25289c93b20) at 0x00000252C9C7EBC0&gt;.apply_button
+
+docs\p2\implementation\evidence\pc007a-loft-ui-review-own.py:75: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_preview_preserves_authored_order_seam_and_persistent_identity[old_ruling]" time="0.017"><failure message="assert not True&#10; +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1D5440&gt;()&#10; +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1D5440&gt; = &lt;PySide6.QtWidgets.QPushButton(0x25289cae7a0) at 0x00000252CA1D5440&gt;.isEnabled&#10; +      where &lt;PySide6.QtWidgets.QPushButton(0x25289cae7a0) at 0x00000252CA1D5440&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x252aa02beb0) at 0x00000252CA1D7A00&gt;.apply_button">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x00000252C9CA6CF0&gt;
+mutation = 'old_ruling'
+
+    @pytest.mark.parametrize("mutation", ["order", "seam", "old_ruling", "old_end"])
+    def test_preview_preserves_authored_order_seam_and_persistent_identity(qtbot, mutation):
+        p = project()
+    
+        def callback(_clone, _a, _b, **params):
+            out = result(params)
+            if mutation == "order":
+                out["params"]["correspondences"].reverse()
+            elif mutation == "seam":
+                out["params"]["seam_patch_id"] = params["correspondences"][1]["id"]
+            elif mutation == "old_ruling":
+                out["params"]["correspondences"][0]["ruling_id"] = str(uuid4())
+            else:
+                out["params"]["end_ruling_id"] = str(uuid4())
+            return out
+    
+        d = dialog(qtbot, p, callback)
+        # A prior accepted preview has already issued these persistent identities.
+        d.pair_rows[0]["ruling_id"] = str(uuid4())
+        d._end_ruling_id = str(uuid4())
+        before = p.to_dict(validate=False)
+        run(qtbot, d)
+&gt;       assert not d.apply_button.isEnabled()
+E       assert not True
+E        +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1D5440&gt;()
+E        +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA1D5440&gt; = &lt;PySide6.QtWidgets.QPushButton(0x25289cae7a0) at 0x00000252CA1D5440&gt;.isEnabled
+E        +      where &lt;PySide6.QtWidgets.QPushButton(0x25289cae7a0) at 0x00000252CA1D5440&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x252aa02beb0) at 0x00000252CA1D7A00&gt;.apply_button
+
+docs\p2\implementation\evidence\pc007a-loft-ui-review-own.py:75: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_preview_preserves_authored_order_seam_and_persistent_identity[old_end]" time="0.020"><failure message="assert not True&#10; +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA229180&gt;()&#10; +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA229180&gt; = &lt;PySide6.QtWidgets.QPushButton(0x252aa0682f0) at 0x00000252CA229180&gt;.isEnabled&#10; +      where &lt;PySide6.QtWidgets.QPushButton(0x252aa0682f0) at 0x00000252CA229180&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x252a9fd0b90) at 0x00000252CA22B5C0&gt;.apply_button">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x00000252CA1E46B0&gt;
+mutation = 'old_end'
+
+    @pytest.mark.parametrize("mutation", ["order", "seam", "old_ruling", "old_end"])
+    def test_preview_preserves_authored_order_seam_and_persistent_identity(qtbot, mutation):
+        p = project()
+    
+        def callback(_clone, _a, _b, **params):
+            out = result(params)
+            if mutation == "order":
+                out["params"]["correspondences"].reverse()
+            elif mutation == "seam":
+                out["params"]["seam_patch_id"] = params["correspondences"][1]["id"]
+            elif mutation == "old_ruling":
+                out["params"]["correspondences"][0]["ruling_id"] = str(uuid4())
+            else:
+                out["params"]["end_ruling_id"] = str(uuid4())
+            return out
+    
+        d = dialog(qtbot, p, callback)
+        # A prior accepted preview has already issued these persistent identities.
+        d.pair_rows[0]["ruling_id"] = str(uuid4())
+        d._end_ruling_id = str(uuid4())
+        before = p.to_dict(validate=False)
+        run(qtbot, d)
+&gt;       assert not d.apply_button.isEnabled()
+E       assert not True
+E        +  where True = &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA229180&gt;()
+E        +    where &lt;built-in method isEnabled of PySide6.QtWidgets.QPushButton object at 0x00000252CA229180&gt; = &lt;PySide6.QtWidgets.QPushButton(0x252aa0682f0) at 0x00000252CA229180&gt;.isEnabled
+E        +      where &lt;PySide6.QtWidgets.QPushButton(0x252aa0682f0) at 0x00000252CA229180&gt; = &lt;archpapercraft.ui.author_loft.LoftProfilesDialog(0x252a9fd0b90) at 0x00000252CA22B5C0&gt;.apply_button
+
+docs\p2\implementation\evidence\pc007a-loft-ui-review-own.py:75: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_accept_guards_live_geometry_change_without_revision_or_timer" time="0.021" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_cancel_drops_queued_work_and_late_result" time="0.028" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_c05_invalid_maximum_keyboard_submit_is_not_silently_corrected" time="0.011" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-ui-review-own" name="test_mutating_detached_clone_does_not_touch_original_and_cancel_remains_safe" time="0.017" /></testsuite></testsuites>
