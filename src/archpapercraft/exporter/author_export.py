@@ -553,6 +553,11 @@ def _validate(data: dict) -> None:
             raise SnapshotError(
                 "Snapshot does not exactly cover the authoritative material surfaces"
             )
+    if (data.get("construction_checks", {}).get("lofts")
+            or data.get("coverage", {}).get("expected_loft_surface_ids")):
+        from .loft_output_validation import validate_loft_snapshot
+
+        validate_loft_snapshot(data)
 
 
 def _font(font_path: str | Path | None, texts: list[str]) -> tuple[str, str, str]:
@@ -641,8 +646,12 @@ def _curve_bound(data: dict, *, arc_tolerance_mm=None) -> float:
 
 
 def _source_svg_bound(data):
-    return max((report["svg_deviation_bound_paper_mm"] for report in
-                data.get("construction_checks", {}).get("curve_profiles", {}).values()), default=0)
+    checks = data.get("construction_checks", {})
+    bounds = [report["svg_deviation_bound_paper_mm"]
+              for report in checks.get("curve_profiles", {}).values()]
+    bounds.extend(report["representation"]["position_error_bound_paper_mm"]
+                  for report in checks.get("lofts", {}).values())
+    return max(bounds, default=0)
 
 
 def _curve_output_expectations(data):
@@ -739,6 +748,28 @@ def _serialized_controls(code: str) -> list[tuple[Decimal, Decimal]]:
     if values:
         raise SnapshotError("Incomplete PDF path coordinate representation")
     return points
+
+
+def _precise_path(path, controls):
+    """Preserve native controls beyond ReportLab fp_str's six-digit tokens.
+
+    The installed backend's original code is checked before replacing numeric
+    operands only. Commands/order/closure stay unchanged; subsequent numeric
+    proof and the independent raw reader inspect these actual serialized bytes.
+    """
+    code = path.getCode()
+    if len(_serialized_controls(code)) != len(controls):
+        raise SnapshotError("Cannot bind precise PDF coordinates to the actual backend path")
+    operands = iter(value for point in controls for value in point)
+    result = []
+    for token in code.split():
+        if token in ("n", "m", "l", "c", "h", "S"):
+            result.append(token)
+        else:
+            result.append(format(float(next(operands)), ".17f").rstrip("0").rstrip(".") or "0")
+    if next(operands, None) is not None or not isinstance(path._code, list):
+        raise SnapshotError("Cannot verify the precise PDF path backend contract")
+    path._code[:] = [" ".join(result)]
 
 
 def _numeric_error(serialized, reference, matrices, media_height, placement=None) -> float:
@@ -1002,6 +1033,9 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
                         else:
                             path.close()
                             current = start
+                    if any(sid in data.get("construction_checks", {}).get("lofts", {})
+                           for sid in part.get("surface_ids", [])):
+                        _precise_path(path, controls)
                     numeric_bound = max(
                         numeric_bound,
                         _numeric_error(
@@ -1117,17 +1151,30 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
         checks = {}
         record = {"requested_interpolation_bound_mm": tolerance,
                   "actual_interpolation_bound_mm": curve_bound}
-        if data.get("construction_checks", {}).get("curve_profiles"):
+        construction = data.get("construction_checks", {})
+        if construction.get("curve_profiles") or construction.get("lofts"):
             from .curve_output_validation import validate_pdf_curve_geometry
+            from .loft_output_validation import (
+                LOFT_OUTPUT_MAX_COMMANDS,
+                LOFT_OUTPUT_MAX_NODES,
+                validate_loft_vector_outputs,
+            )
             from .svg_curve_validation import validate_svg_curve_geometry
 
             expected = _curve_output_expectations(data)
             allowed = data["construction_checks"].get("accepted_layout_overlaps", [])
-            checks["pdf"] = validate_pdf_curve_geometry(stage / "new/model.pdf", expected, allowed)
+            budgets = (
+                {"max_nodes": LOFT_OUTPUT_MAX_NODES, "max_commands": LOFT_OUTPUT_MAX_COMMANDS}
+                if construction.get("lofts") else {}
+            )
+            checks["pdf"] = validate_pdf_curve_geometry(
+                stage / "new/model.pdf", expected, allowed, **budgets,
+            )
             checks["svg"] = [
                 validate_svg_curve_geometry(
                     stage / "new" / name,
                     {pid: value for pid, value in expected.items() if value["page_index"] == index},
+                    **budgets,
                 )
                 for index, name in enumerate(names[:-1])
             ]
@@ -1140,6 +1187,11 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
                 attempts.append(record)
                 tolerance /= 10
                 continue
+            if construction.get("lofts"):
+                checks["lofts"] = validate_loft_vector_outputs(
+                    data, [stage / "new" / name for name in names[:-1]],
+                    stage / "new/model.pdf", expected_parts=expected,
+                )
             record["status"] = "ACTUAL_GEOMETRY_AND_AREA_VERIFIED"
         else:
             record["status"] = "POSITION_CHECKED_ONLY; NO_AUTHORED_MATERIAL_CERTIFICATE"

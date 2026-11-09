@@ -541,7 +541,8 @@ def _inside_page(loops, width, height, max_depth=24, max_nodes=20000):
 
 
 def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs=(), *, report,
-                                   check_separation=True, check_page_bounds=True):
+                                   check_separation=True, check_page_bounds=True,
+                                   max_nodes=20000, max_commands=20000):
     """Prove exactly supplied serialized manufacturing regions in a named scope.
 
     PDF supplies actual physical page coordinates and requests all checks. An SVG
@@ -561,6 +562,7 @@ def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs
         "same_page_part_separation": ("REQUESTED" if check_separation
                                       else "NOT_CHECKED_LOCAL_COORDINATES"),
     }
+    report["finite_budgets"] = {"topology_nodes": max_nodes, "area_commands": max_commands}
 
     def fail(reason, pid=None, page_index=None):
         record = expected_parts.get(pid, {}) if isinstance(expected_parts, dict) else {}
@@ -617,7 +619,9 @@ def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs
         candidates, chosen = [], None
         for index in sorted(range(len(loops)), key=lambda i: _extent_order(loops[i]), reverse=True):
             holes = [loop for i, loop in enumerate(loops) if i != index]
-            certificate = _certificate(certify_native_region_topology(loops[index], holes))
+            certificate = _certificate(certify_native_region_topology(
+                loops[index], holes, max_nodes=max_nodes,
+            ))
             candidates.append({"outer_index": index, "certificate": certificate})
             if certificate["status"] == "VALID":
                 chosen = (loops[index], holes)
@@ -630,7 +634,7 @@ def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs
         from archpapercraft.authoring.curve_area import native_region_area_bounds
 
         try:
-            area_lower, area_upper = native_region_area_bounds(loops)
+            area_lower, area_upper = native_region_area_bounds(loops, max_commands=max_commands)
         except ValueError as exc:
             fail("Plochu skutečného vektorového dílu nelze doložit: " + str(exc), pid, page_index)
         report["parts"][pid]["material_area_bounds_mm2"] = {
@@ -663,7 +667,9 @@ def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs
             record["status"] = "EXPLICIT_SOURCE_LAYOUT_OVERLAP_ACCEPTED"
         else:
             a, b = regions[first], regions[second]
-            certificate = _certificate(certify_native_region_separation(a[0], a[1], b[0], b[1]))
+            certificate = _certificate(certify_native_region_separation(
+                a[0], a[1], b[0], b[1], max_nodes=max_nodes,
+            ))
             record.update(status=certificate["status"], certificate=certificate)
         report["separations"].append(record)
         if record["status"] not in ("DISJOINT", "EXPLICIT_SOURCE_LAYOUT_OVERLAP_ACCEPTED"):
@@ -678,7 +684,8 @@ def validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs
     return _json_value(report)
 
 
-def validate_pdf_curve_geometry(path, expected_parts, allowed_overlap_pairs=()):
+def validate_pdf_curve_geometry(path, expected_parts, allowed_overlap_pairs=(), *,
+                                max_nodes=20000, max_commands=20000):
     """Certify the actual staged PDF; unsupported/inconclusive output blocks."""
     try:
         pdf_hash = hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -694,4 +701,5 @@ def validate_pdf_curve_geometry(path, expected_parts, allowed_overlap_pairs=()):
         raise CurveOutputError(exc.reason, part_id=exc.part_id, page_index=exc.page_index,
                                part_name=name, report=report) from exc
     return validate_native_output_regions(actual, expected_parts, allowed_overlap_pairs,
-                                          report=report)
+                                          report=report, max_nodes=max_nodes,
+                                          max_commands=max_commands)
