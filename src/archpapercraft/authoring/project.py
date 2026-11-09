@@ -821,6 +821,9 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             "coverage": {
                 "expected_part_ids": list(self.parts),
                 "expected_surface_ids": list(self.surfaces),
+                "expected_loft_surface_ids": [
+                    sid for sid, surface in self.surfaces.items() if surface.kind == "ruled_loft"
+                ],
                 "source_revisions": {pid: self.revision for pid in self.parts},
             },
             "pages": pages,
