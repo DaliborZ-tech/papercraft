@@ -480,3 +480,165 @@ def test_preview_cannot_silently_replace_authored_pairing(qtbot, project):
     qtbot.waitUntil(lambda: widget._running_job is None)
     assert widget.preview_result is None and not widget.apply_button.isEnabled()
     assert "neodpovídá zadaným dvojicím" in widget.feedback.text()
+
+
+def existing_params(project):
+    first, second = list(project.profiles.values())[:2]
+    rows = [
+        {
+            "id": str(uuid4()),
+            "ruling_id": str(uuid4()),
+            "first_segment_id": a.id,
+            "second_segment_id": b.id,
+            "first_interval": [0, 1],
+            "second_interval": [0, 1],
+        }
+        for a, b in zip(first.segments, second.segments)
+    ]
+    return first.id, {
+        "second_profile_id": second.id,
+        "correspondences": rows,
+        "seam_patch_id": rows[1]["id"],
+        "end_ruling_id": str(uuid4()),
+        "tolerance_mm": 0.004,
+        "max_segments": 8192,
+        "reference_state": "BOUND",
+    }
+
+
+def test_load_existing_mapping_preserves_ids_seam_orientation_and_current_source_fence(
+    qtbot, project, monkeypatch
+):
+    first_id, params = existing_params(project)
+    for row in params["correspondences"]:
+        row["first_interval"] = row["second_interval"] = [1, 0]
+    params["correspondences"].reverse()
+    before = project.to_dict(validate=False)
+    widget = dialog(qtbot, project)
+    assert widget.load_parameters(first_id, params, existing_surface_id=str(uuid4()))
+    assert widget.load_error is None and not widget.first_profile.isEnabled()
+    assert widget.confirm_pairs.isChecked() and widget.calculate.isEnabled()
+    assert widget.preview_result is None and not widget.apply_button.isEnabled()
+    assert widget._parameters()["correspondences"] == params["correspondences"]
+    assert widget.seam.currentData() == params["seam_patch_id"]
+    calculate(qtbot, widget)
+    wait_preview(qtbot, widget)
+    assert widget.apply_button.text() == "Použít změnu plochy"
+    qtbot.mouseClick(widget.apply_button, Qt.MouseButton.LeftButton)
+    assert widget.check_source(project)
+    assert widget.result_parameters["correspondences"] == params["correspondences"]
+    assert widget.result_parameters["end_ruling_id"] == params["end_ruling_id"]
+    assert widget.result_parameters["first_profile_id"] == first_id
+    assert project.to_dict(validate=False) == before
+    calls = []
+    monkeypatch.setattr(project, "add_loft", lambda *a, **kw: calls.append((a, kw)), raising=False)
+    with pytest.raises(ValueError, match="Existující plochu upravte"):
+        widget.apply(project)
+    assert not calls
+    project.name = "Changed after edit acceptance"
+    with pytest.raises(ValueError, match="Projekt se od potvrzení změnil"):
+        widget.check_source(project)
+
+
+def test_loaded_second_profile_retarget_preserves_rows_and_requires_explicit_new_segment_choices(
+    qtbot, project
+):
+    first_id, params = existing_params(project)
+    widget = dialog(qtbot, project)
+    widget.load_parameters(first_id, params, existing_surface_id=str(uuid4()))
+    calculate(qtbot, widget)
+    wait_preview(qtbot, widget)
+    old_ids = [(r["id"], r["ruling_id"]) for r in widget.pair_rows]
+    widget.second_profile.setFocus()
+    qtbot.keyClick(widget.second_profile, Qt.Key.Key_End)
+    assert widget.preview_result is None and not widget.apply_button.isEnabled()
+    assert not widget.confirm_pairs.isChecked()
+    assert [(r["id"], r["ruling_id"]) for r in widget.pair_rows] == old_ids
+    assert all(r["second"].currentIndex() == -1 for r in widget.pair_rows)
+    assert widget.first_profile.currentData() == first_id and not widget.first_profile.isEnabled()
+    assert widget.seam.currentData() == params["seam_patch_id"]
+    for index, row in enumerate(widget.pair_rows):
+        row["second"].setFocus()
+        qtbot.keyClick(row["second"], Qt.Key.Key_Home)
+        if index:
+            qtbot.keyClick(row["second"], Qt.Key.Key_Down)
+    calculate(qtbot, widget)
+    wait_preview(qtbot, widget)
+    assert widget._parameters_for_apply["second_profile_id"] == widget.second_profile.currentData()
+    assert widget._parameters_for_apply["correspondences"] != params["correspondences"]
+    assert [(r["id"], r["ruling_id"]) for r in widget.pair_rows] == old_ids
+
+
+def test_loaded_source_replacement_keeps_all_unmatched_rows_even_after_reordering(qtbot, project):
+    first_id, params = existing_params(project)
+    widget = dialog(qtbot, project)
+    widget.load_parameters(first_id, params, existing_surface_id=str(uuid4()))
+    project.update_profile(params["second_profile_id"], [[0, 0], [30, 0], [30, 20]], closed=False)
+    qtbot.waitUntil(lambda: widget.load_error is not None)
+    assert widget.load_error["code"] == "LOFT_SOURCE_SEGMENT_MISSING"
+    assert len(widget.pair_rows) == len(params["correspondences"])
+    assert all(row["second"].currentIndex() == -1 for row in widget.pair_rows)
+    assert not widget.calculate.isEnabled() and not widget.apply_button.isEnabled()
+    widget.pairs.selectRow(0)
+    widget.move_pair(1)
+    qtbot.wait(1)
+    assert all(row["second"].currentIndex() == -1 for row in widget.pair_rows)
+    assert {row["id"] for row in widget.pair_rows} == {
+        row["id"] for row in params["correspondences"]
+    }
+
+
+@pytest.mark.parametrize("missing", ["first", "second", "segment", "seam"])
+def test_load_missing_references_are_typed_and_never_replaced_by_index_fallback(
+    qtbot, project, missing
+):
+    first_id, params = existing_params(project)
+    if missing == "first":
+        first_id = str(uuid4())
+    elif missing == "second":
+        params["second_profile_id"] = str(uuid4())
+    elif missing == "segment":
+        params["correspondences"][0]["second_segment_id"] = str(uuid4())
+    else:
+        params["seam_patch_id"] = str(uuid4())
+    widget = dialog(qtbot, project)
+    assert not widget.load_parameters(first_id, params, existing_surface_id=str(uuid4()))
+    assert widget.load_error is not None
+    assert not widget.confirm_pairs.isChecked() and not widget.calculate.isEnabled()
+    assert len(widget.pair_rows) == 2
+    if missing == "first":
+        assert widget.first_profile.currentIndex() == -1 and not widget.first_profile.isEnabled()
+    elif missing == "second":
+        assert widget.second_profile.currentIndex() == -1
+    elif missing == "segment":
+        assert widget.pair_rows[0]["second"].currentIndex() == -1
+    else:
+        assert widget.seam.currentIndex() == -1
+        widget.pairs.selectRow(0)
+        widget.move_pair(1)
+        assert widget.seam.currentIndex() == -1
+
+
+def test_default_loaded_preview_uses_public_update_api_and_omits_immutable_inputs(
+    qtbot, project, monkeypatch
+):
+    first_id, params = existing_params(project)
+    surface_id, calls = str(uuid4()), []
+
+    def public_update(self, actual_surface_id, **kwargs):
+        calls.append((self is project, actual_surface_id, copy.deepcopy(kwargs)))
+        result = preview_result(kwargs)
+        result["params"]["end_ruling_id"] = params["end_ruling_id"]
+        return result
+
+    monkeypatch.setattr(AuthorProject, "preview_loft_update", public_update, raising=False)
+    widget = LoftProfilesDialog(project)
+    qtbot.addWidget(widget)
+    widget.show()
+    assert widget.load_parameters(first_id, params, existing_surface_id=surface_id)
+    calculate(qtbot, widget)
+    wait_preview(qtbot, widget)
+    assert calls[0][0] is False and calls[0][1] == surface_id
+    assert "end_ruling_id" not in calls[0][2] and "first_profile_id" not in calls[0][2]
+    assert calls[0][2]["second_profile_id"] == params["second_profile_id"]
+    assert widget._parameters_for_apply["end_ruling_id"] == params["end_ruling_id"]

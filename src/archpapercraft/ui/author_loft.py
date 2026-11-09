@@ -12,7 +12,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import numpy as np
 from PySide6.QtCore import QObject, QRunnable, Qt, QThreadPool, QTimer, Signal
@@ -49,6 +49,7 @@ from archpapercraft.ui.author_sketch import cosmetic
 
 _KINDS = {"line": "úsečka", "arc": "kruhový oblouk", "cubic": "Bézierova křivka"}
 _APPLY_KEYS = ("correspondences", "seam_patch_id", "end_ruling_id", "tolerance_mm", "max_segments")
+_UNSPECIFIED = object()
 
 
 def _snapshot(project):
@@ -66,7 +67,20 @@ def _matches(project, fingerprint):
         return False
 
 
-def _default_preview(project, first, second, **parameters):
+def _is_uuid(value):
+    try:
+        UUID(value)
+        return True
+    except (ValueError, TypeError, AttributeError):
+        return False
+
+
+def _default_preview(project, first, second, *, existing_surface_id=None, **parameters):
+    if existing_surface_id is not None:
+        parameters.pop("end_ruling_id", None)
+        return project.preview_loft_update(
+            existing_surface_id, second_profile_id=second, **parameters
+        )
     return project.preview_loft(first, second, **parameters)
 
 
@@ -91,6 +105,8 @@ class _PreviewJob(QRunnable):
             clone = self.project_type.from_dict(copy.deepcopy(self.request["state"]))
             parameters = copy.deepcopy(self.request["parameters"])
             first, second = parameters.pop("first_profile_id"), parameters.pop("second_profile_id")
+            if self.function is _default_preview and self.request.get("existing_surface_id"):
+                parameters["existing_surface_id"] = self.request["existing_surface_id"]
             result = self.function(clone, first, second, **parameters)
             self.signals.finished.emit(self.token, result, None)
         except Exception as exc:
@@ -189,6 +205,11 @@ class LoftProfilesDialog(QDialog):
         self._accepted_digest = None
         self._end_ruling_id = None
         self._pending_numeric_text = {}
+        self._edit_mode = False
+        self._loaded_first_profile_id = None
+        self._edit_identity_error = False
+        self.existing_surface_id = None
+        self.load_error = None
         self._source_revision = project.revision
         self.setWindowTitle("Plocha mezi dvěma profily")
         self.resize(920, 800)
@@ -341,6 +362,100 @@ class LoftProfilesDialog(QDialog):
         self._source_timer.timeout.connect(self._check_source_revision)
         self._source_timer.start()
 
+    def load_parameters(self, first_profile_id, params, *, existing_surface_id):
+        """Load authored correspondence for an explicitly selected existing loft.
+
+        The first source cannot be retargeted by update_loft. Missing sources
+        remain unmatched rows, never a fresh index-based proposal. A valid
+        loaded mapping is already an author's explicit choice, not auto-pairing.
+        No calculation, command or replacement of the document occurs here.
+        """
+        if self._closed:
+            return False
+        self._updating = True
+        self._edit_mode = True
+        self.existing_surface_id = existing_surface_id
+        self._loaded_first_profile_id = first_profile_id
+        self.first_profile.setEnabled(False)
+        self.first_profile.setPlaceholderText("Původní první profil chybí")
+        self.second_profile.setPlaceholderText("Vyberte druhý profil")
+        self.first_profile.setCurrentIndex(self.first_profile.findData(first_profile_id))
+        valid_envelope = isinstance(params, dict) and isinstance(
+            params.get("correspondences"), list
+        )
+        params = copy.deepcopy(params) if isinstance(params, dict) else {}
+        self.second_profile.setCurrentIndex(
+            self.second_profile.findData(params.get("second_profile_id"))
+        )
+        self._end_ruling_id = params.get("end_ruling_id")
+        self._edit_identity_error = not (
+            valid_envelope and _is_uuid(existing_surface_id) and _is_uuid(self._end_ruling_id)
+        )
+        self._pending_numeric_text.clear()
+        tolerance, maximum = params.get("tolerance_mm", 0.005), params.get("max_segments", 16384)
+        valid_budgets = (
+            type(tolerance) in (int, float)
+            and 0.000001 <= tolerance <= 0.01
+            and type(maximum) is int
+            and 2 <= maximum <= 65536
+        )
+        if valid_budgets:
+            self.tolerance.setValue(tolerance)
+            self.max_segments.setValue(maximum)
+        else:
+            self._edit_identity_error = True
+        self.pair_rows = []
+        for record in params.get("correspondences", []) if valid_envelope else []:
+            record = record if isinstance(record, dict) else {}
+            row = self._make_row(record.get("first_segment_id"), record.get("second_segment_id"))
+            row["id"], row["ruling_id"] = record.get("id"), record.get("ruling_id")
+            row["identity_error"] = not (
+                _is_uuid(row["id"])
+                and _is_uuid(row["ruling_id"])
+                and record.get("first_interval") in ([0, 1], [1, 0])
+                and record.get("second_interval") in ([0, 1], [1, 0])
+            )
+            row["reverse_first"].setChecked(record.get("first_interval") == [1, 0])
+            row["reverse_second"].setChecked(record.get("second_interval") == [1, 0])
+            self.pair_rows.append(row)
+        self._rebuild_rows()
+        self.seam.setCurrentIndex(self.seam.findData(params.get("seam_patch_id")))
+        self._updating = False
+        self.setWindowTitle("Upravit plochu mezi profily")
+        error = self._structural_error()
+        code = "LOFT_MAPPING_UNRESOLVED"
+        if not valid_envelope or not valid_budgets:
+            code = "LOFT_PARAMETERS_INVALID"
+        elif any(profile is None for profile in self._profiles()):
+            code = "LOFT_SOURCE_PROFILE_MISSING"
+        elif any(
+            row[side].currentData() is None
+            for row in self.pair_rows
+            for side in ("first", "second")
+        ):
+            code = "LOFT_SOURCE_SEGMENT_MISSING"
+        elif self._edit_identity_error or any(row.get("identity_error") for row in self.pair_rows):
+            code = "LOFT_REFERENCE_IDENTITY_INVALID"
+        elif self.seam.currentIndex() < 0:
+            code = "LOFT_SEAM_UNRESOLVED"
+        if not error and params.get("reference_state", "BOUND") != "BOUND":
+            error = (
+                "Uložené zdrojové vazby čekají na opravu. Zkontrolujte a potvrďte každou dvojici."
+            )
+            code = "LOFT_REFERENCE_UNRESOLVED"
+        self.load_error = {"code": code, "message": error} if error else None
+        self.confirm_pairs.blockSignals(True)
+        self.confirm_pairs.setChecked(error is None)
+        self.confirm_pairs.blockSignals(False)
+        message = error or (
+            "Načtena původní autorská korespondence včetně směru a začátku spoje. "
+            "Spočítejte aktuální náhled před potvrzením změny."
+        )
+        self._invalidate(message)
+        self.feedback.setText(message)
+        self._redraw()
+        return error is None
+
     @staticmethod
     def _profile_label(profile):
         native = profile_native_path(profile, (np.eye(2), np.zeros(2)))
@@ -362,18 +477,28 @@ class LoftProfilesDialog(QDialog):
         self.help_button.setText("Skrýt tipy" if checked else "Zobrazit tipy")
 
     def _profiles_changed(self, *_args):
+        if self._updating:
+            return
         self._updating = True
-        self._end_ruling_id = None
-        self.pair_rows = []
-        first, second = self._profiles()
-        if first is not None and second is not None and first.id != second.id:
-            for a, b in zip(first.segments, second.segments):
-                self.pair_rows.append(self._make_row(a.id, b.id))
+        if self._edit_mode:
+            # update_loft cannot retarget the first source. A new second source
+            # leaves existing rows present but unmatched, never paired by index.
+            self.first_profile.setCurrentIndex(
+                self.first_profile.findData(self._loaded_first_profile_id)
+            )
+        else:
+            self._end_ruling_id = None
+            self.pair_rows = []
+            self.seam.clear()
+            first, second = self._profiles()
+            if first is not None and second is not None and first.id != second.id:
+                for a, b in zip(first.segments, second.segments):
+                    self.pair_rows.append(self._make_row(a.id, b.id))
         self._rebuild_rows()
         self._updating = False
         self._mapping_changed()
 
-    def _make_row(self, first_id=None, second_id=None):
+    def _make_row(self, first_id=_UNSPECIFIED, second_id=_UNSPECIFIED):
         row = {"id": str(uuid4())}
         for side, profile, selected in zip(
             ("first", "second"), self._profiles(), (first_id, second_id)
@@ -392,7 +517,7 @@ class LoftProfilesDialog(QDialog):
                         f"({end.point[0]:g}, {end.point[1]:g})",
                         segment.id,
                     )
-                if selected is not None:
+                if selected is not _UNSPECIFIED:
                     combo.setCurrentIndex(combo.findData(selected))
             row[side] = combo
             reverse = QCheckBox("Zpět")
@@ -406,6 +531,7 @@ class LoftProfilesDialog(QDialog):
 
     def _rebuild_rows(self):
         selected = self.seam.currentData()
+        initial_proposal = self.seam.count() == 0 and not self._edit_mode
         # QTableWidget owns cell widgets and deletes them when their row goes
         # away. Preserve draft values/IDs, never reparent those owned widgets.
         records = []
@@ -418,6 +544,7 @@ class LoftProfilesDialog(QDialog):
                     "reverse_first": row["reverse_first"].isChecked(),
                     "reverse_second": row["reverse_second"].isChecked(),
                     "ruling_id": row.get("ruling_id"),
+                    "identity_error": row.get("identity_error", False),
                 }
             )
             for key in ("first", "second", "reverse_first", "reverse_second"):
@@ -432,6 +559,7 @@ class LoftProfilesDialog(QDialog):
         for index, record in enumerate(records):
             row = self._make_row(record["first_id"], record["second_id"])
             row["id"], row["ruling_id"] = record["id"], record["ruling_id"]
+            row["identity_error"] = record["identity_error"]
             row["reverse_first"].setChecked(record["reverse_first"])
             row["reverse_second"].setChecked(record["reverse_second"])
             self.pair_rows.append(row)
@@ -441,7 +569,7 @@ class LoftProfilesDialog(QDialog):
             kind = description[1] if len(description) > 1 else "vyberte úsek"
             self.seam.addItem(f"Dvojice {index + 1} · {kind}", row["id"])
         found = self.seam.findData(selected)
-        self.seam.setCurrentIndex(max(0, found))
+        self.seam.setCurrentIndex(0 if selected is None and initial_proposal else found)
         if self.pair_rows:
             self.pairs.selectRow(0)
         self.pairs.blockSignals(False)
@@ -502,8 +630,16 @@ class LoftProfilesDialog(QDialog):
         self.confirm_pairs.blockSignals(True)
         self.confirm_pairs.setChecked(False)
         self.confirm_pairs.blockSignals(False)
+        if self._edit_mode:
+            error = self._structural_error()
+            self.load_error = (
+                {"code": "LOFT_MAPPING_UNRESOLVED", "message": error} if error else None
+            )
         self._invalidate(
-            "Dvojice podle pořadí jsou pouze návrh. Zkontrolujte úseky, směry a začátek "
+            "Autorská korespondence se změnila. Zkontrolujte zachované dvojice a směry, "
+            "opravte nevybrané úseky a potvrďte aktuální mapu."
+            if self._edit_mode
+            else "Dvojice podle pořadí jsou pouze návrh. Zkontrolujte úseky, směry a začátek "
             "spoje, potvrďte je a spočítejte náhled."
         )
         self._redraw()
@@ -538,6 +674,15 @@ class LoftProfilesDialog(QDialog):
 
     def _structural_error(self):
         first, second = self._profiles()
+        if self._edit_mode and first is None:
+            return (
+                "První zdrojový profil chybí. Opravte původní zdroj v modelu "
+                "a otevřete úpravu znovu."
+            )
+        if self._edit_mode and second is None:
+            return (
+                "Druhý zdrojový profil chybí. Vyberte jiný profil a výslovně opravte dvojice úseků."
+            )
         if first is None or second is None:
             return "Nejprve nakreslete a vyberte dva vlastní profily."
         if first.id == second.id:
@@ -546,14 +691,20 @@ class LoftProfilesDialog(QDialog):
             )
         if not self.pair_rows:
             return "Přidejte alespoň jednu odpovídající dvojici úseků."
+        if self._edit_identity_error or any(row.get("identity_error") for row in self.pair_rows):
+            return "Uložené spojení ztratilo stálou identitu. Vadnou dvojici nahraďte výslovně."
+        if len({row["id"] for row in self.pair_rows}) != len(self.pair_rows):
+            return "Dvě uložené dvojice mají tutéž identitu. Vadnou dvojici nahraďte výslovně."
+        if self.seam.currentData() not in {row["id"] for row in self.pair_rows}:
+            return "Vyberte začátek rozvíjení mezi zachovanými dvojicemi úseků."
         for side in ("first", "second"):
             values = [row[side].currentData() for row in self.pair_rows]
             profile = first if side == "first" else second
-            if (
-                None in values
-                or len(values) != len(set(values))
-                or any(profile.segment(value) is None for value in values)
-            ):
+            if None in values or any(profile.segment(value) is None for value in values):
+                return (
+                    "Zdrojový úsek chybí. Vyberte pro každou označenou dvojici nový úsek výslovně."
+                )
+            if len(values) != len(set(values)):
                 return "Každý úsek smí být v návrhu pouze jednou. Opravte vybranou dvojici."
         return None
 
@@ -578,7 +729,11 @@ class LoftProfilesDialog(QDialog):
         )
         self.apply_button.setEnabled(not self._closed and valid and confirmed)
         self.apply_button.setText(
-            "Uchovat konstrukční cíl" if self.keep_target.isChecked() else "Vytvořit plochu"
+            "Uchovat konstrukční cíl"
+            if self.keep_target.isChecked()
+            else "Použít změnu plochy"
+            if self._edit_mode
+            else "Vytvořit plochu"
         )
         if error:
             self.feedback.setText(error)
@@ -649,6 +804,7 @@ class LoftProfilesDialog(QDialog):
             "state": state,
             "fingerprint": fingerprint,
             "parameters": self._parameters(),
+            "existing_surface_id": self.existing_surface_id,
         }
         self._latest_token = token
         self.cancel_calculation.setEnabled(True)
@@ -799,6 +955,11 @@ class LoftProfilesDialog(QDialog):
             self._invalidate(
                 "Zdrojový projekt se změnil. Zkontrolujte výběr profilů a spočítejte nový náhled."
             )
+            if self._edit_mode and self._structural_error():
+                self.load_error = {
+                    "code": "LOFT_SOURCE_SEGMENT_MISSING",
+                    "message": self._structural_error(),
+                }
             self._redraw()
 
     def cancel_preview(self):
@@ -827,12 +988,19 @@ class LoftProfilesDialog(QDialog):
             self.preview_changed.emit(None)
         super().done(result)
 
-    def apply(self, project):
-        """Called inside the host's one undo/rollback command; no state injection."""
+    def check_source(self, project):
+        """Fence both creation and host-owned update commands after acceptance."""
         if self.result() != QDialog.DialogCode.Accepted or self.result_parameters is None:
             raise ValueError("Nejprve potvrďte aktuální náhled plochy.")
         if not _matches(project, self._accepted_digest):
             raise ValueError("Projekt se od potvrzení změnil. Otevřete nový náhled plochy.")
+        return True
+
+    def apply(self, project):
+        """Create inside one host undo command; updates use check_source first."""
+        self.check_source(project)
+        if self._edit_mode:
+            raise ValueError("Existující plochu upravte veřejným příkazem pro aktualizaci.")
         params = copy.deepcopy(self.result_parameters)
         first, second = params.pop("first_profile_id"), params.pop("second_profile_id")
         return project.add_loft(
