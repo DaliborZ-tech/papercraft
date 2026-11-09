@@ -23,7 +23,9 @@ def test_snapshot_loft_binding_can_be_verified_from_actual_source_records():
     sid = p.add_loft(a, b, correspondences=refs(p, a, b))
     pid = p.part_for_surface(sid)
     p.set_placement(pid, p.pages[0].id, 30, 30)
-    report = p.snapshot()["construction_checks"]["lofts"][sid]
+    snapshot = p.snapshot()
+    assert snapshot["coverage"]["expected_loft_surface_ids"] == [sid]
+    report = snapshot["construction_checks"]["lofts"][sid]
     binding = report["source_binding"]
     state = p.to_dict()
     assert binding["profiles"] == [state["profiles"][a], state["profiles"][b]]
