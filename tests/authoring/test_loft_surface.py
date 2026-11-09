@@ -488,3 +488,33 @@ def test_missing_source_and_malformed_update_are_typed_atomic_commands():
         with pytest.raises(ValidationError):
             p.update_loft(s, correspondences=malformed)
         assert p.to_dict() == original
+
+
+def test_existing_loft_preview_updates_detached_identity_without_duplicate_patch_ids():
+    p, a, b = extrusion()
+    s = p.add_loft(a, b, correspondences=refs(p, a, b))
+    pid = p.part_for_surface(s)
+    p.set_placement(pid, p.pages[0].id, 60, 60, 30,
+                    position_locked=True, rotation_locked=True)
+    other = p.copy_profile(a, plane={"origin": [0, 0, 12], "u": [1, 0, 0], "v": [0, 1, 0]})
+    old = copy.deepcopy(p.surfaces[s].params)
+    mapping = refs(p, a, other)
+    for new, previous in zip(mapping, old["correspondences"]):
+        new.update(id=previous["id"], ruling_id=previous["ruling_id"])
+    before = p.to_dict()
+    result = p.preview_loft_update(s, second_profile_id=other, correspondences=mapping)
+    assert p.to_dict() == before
+    assert result["surface_id"] == s and result["part_id"] == pid
+    assert result["status"] == "EXACT" and result["paper_stale"]
+    preview = AuthorProject.from_dict(result["project_state"])
+    assert preview.parts[pid].frame == p.parts[pid].frame
+    assert preview.placements[pid] == p.placements[pid]
+    assert result["params"]["end_ruling_id"] == old["end_ruling_id"]
+    assert [r["id"] for r in result["params"]["correspondences"]] == [
+        r["id"] for r in old["correspondences"]
+    ]
+    assert max(v[2] for v in result["world_geometry"]["vertices"]) == 12
+    p.update_loft(s, second_profile_id=other, correspondences=result["params"]["correspondences"])
+    assert p.to_dict() == result["project_state"]
+    p.recompute()
+    assert not p.parts[pid].stale and p.placements[pid] == preview.placements[pid]

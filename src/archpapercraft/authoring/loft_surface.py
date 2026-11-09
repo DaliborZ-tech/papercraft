@@ -805,6 +805,16 @@ def build_loft_part(project, old_part):
 
 
 class LoftCommands:
+    def _loft_preview_result(self, surface_id):
+        return {
+            **self.loft_status(surface_id),
+            "surface_id": surface_id,
+            "part_id": self.part_for_surface(surface_id),
+            "params": copy.deepcopy(self.surfaces[surface_id].params),
+            "world_geometry": self.world_geometry(surface_id),
+            "project_state": self.to_dict(),
+        }
+
     def loft_status(self, surface_id):
         surface = self.surfaces[surface_id]
         if surface.kind == "planar":
@@ -853,14 +863,30 @@ class LoftCommands:
             max_segments=max_segments,
             name=name,
         )
-        return {
-            **clone.loft_status(sid),
-            "surface_id": sid,
-            "part_id": clone.part_for_surface(sid),
-            "params": copy.deepcopy(clone.surfaces[sid].params),
-            "world_geometry": clone.world_geometry(sid),
-            "project_state": clone.to_dict(),
-        }
+        return clone._loft_preview_result(sid)
+
+    def preview_loft_update(
+        self,
+        surface_id,
+        *,
+        second_profile_id=None,
+        correspondences=None,
+        seam_patch_id=None,
+        tolerance_mm=None,
+        max_segments=None,
+    ):
+        clone = copy.deepcopy(self)
+        clone.update_loft(
+            surface_id,
+            second_profile_id=second_profile_id,
+            correspondences=correspondences,
+            seam_patch_id=seam_patch_id,
+            tolerance_mm=tolerance_mm,
+            max_segments=max_segments,
+        )
+        # Source edits truthfully keep the previous paper cache stale until
+        # the author's recompute command; the actual source mesh is live.
+        return clone._loft_preview_result(surface_id)
 
     @atomic
     def add_loft(
