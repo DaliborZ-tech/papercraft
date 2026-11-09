@@ -1,0 +1,35 @@
+{
+  "source_sha": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+  "archive_sha256": "d4059cc6da927fe2ae7946fdda741132f1d4af8a6a812bd66e3484421abbe146",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-wp8wn_7r",
+  "actual_import_probes": {
+    "archpapercraft.exporter.author_export": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-wp8wn_7r\\src\\archpapercraft\\exporter\\author_export.py",
+      "source_lf_sha256": "53e096ef4525346b16a06953098a7946f226c16f4db74cf4fd45de8357b0a45c"
+    },
+    "archpapercraft.exporter.curve_output_validation": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-wp8wn_7r\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+      "source_lf_sha256": "591ea527b727b9b82e7902e191d9d2898ed166d39d3494bd529fb40b209a0f74"
+    },
+    "archpapercraft.exporter.svg_curve_validation": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-wp8wn_7r\\src\\archpapercraft\\exporter\\svg_curve_validation.py",
+      "source_lf_sha256": "4bf4ab7e2ef0d87bb727067e44fd70add4e36558b647aabd1d97c47469b60212"
+    },
+    "archpapercraft.authoring.curve_area": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-wp8wn_7r\\src\\archpapercraft\\authoring\\curve_area.py",
+      "source_lf_sha256": "8d6538d23bab25da9732ce0d76b36c2f8c66f3a69e7c753bede48f4d295f9de1"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 88%]\n.........                                                                [100%]\n81 passed in 2.98s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "..........                                                               [100%]\n10 passed in 2.50s\n",
+      "stderr": ""
+    }
+  }
+}

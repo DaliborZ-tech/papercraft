@@ -1,0 +1,35 @@
+{
+  "source_sha": "61168e0879157baba1193785b9856f24d1d1c959",
+  "archive_sha256": "eaa595135b7bc5e773e04d2acb7b9f46870d634a4c9490406935202ef073936d",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-material-integration-review-wgxsoy7p",
+  "actual_import_probe": {
+    "attachments": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-material-integration-review-wgxsoy7p\\src\\archpapercraft\\authoring\\attachments.py",
+      "source_lf_sha256": "4503bcf8f6b4b1e0ca240f7f941d80c78b890cbad0d646c3bdbb173d367c333a"
+    },
+    "bend": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-material-integration-review-wgxsoy7p\\src\\archpapercraft\\authoring\\bend.py",
+      "source_lf_sha256": "8dd905b7b135e92551544f32ae331e4d2db6ce7ba4babceb88bda1429e8c7c24"
+    },
+    "clearance": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-material-integration-review-wgxsoy7p\\src\\archpapercraft\\authoring\\clearance.py",
+      "source_lf_sha256": "ef1983a315d9ef1c411926575c6a0a2dcb013fc84f06b83d168bddd3039ee738"
+    },
+    "curve_material": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-material-integration-review-wgxsoy7p\\src\\archpapercraft\\authoring\\curve_material.py",
+      "source_lf_sha256": "798a0518381bdd8b11bdca546db4ac6cafdba0e0b7ff340a1db81daa08ece9eb"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 88%]\n.........                                                                [100%]\n81 passed in 21.13s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "..............                                                           [100%]\n14 passed in 5.46s\n",
+      "stderr": ""
+    }
+  }
+}

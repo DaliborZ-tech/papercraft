@@ -389,7 +389,7 @@
         ]
       },
       "product_correction": {
-        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_PLANAR_SCOPE; contact/bend integration pending",
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_PLANAR_CONTACT_BEND_SCOPE",
         "source_sha": "820ab6672d6a3f252391807b4c2c626c51a040bb",
         "description": "Native topology plus guaranteed/possible material and reserved output bounds; ambiguous layout is a hard unacknowledgeable error"
       },
@@ -402,13 +402,17 @@
         ]
       },
       "independent_review": {
-        "status": "PENDING_REVIEW_OF_SKILL_CHANGE",
-        "product_report": "docs/p2/implementation/PC007A_PLANAR_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "report": "docs/p2/implementation/PC007A_MATERIAL_INTEGRATION_REVIEW.md",
+        "additional_report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+        "scope": "Narrow skill text and source repair; broader effectiveness remains pending"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
-        "status": "IN_PROGRESS_NOT_YET_REVIEWED",
-        "ticket": "PC-007A curved contact and bend adapter"
+        "status": "VERIFIED_IN_BOUNDED_CURVED_CONTACT_AND_BEND_SCOPE",
+        "ticket": "PC-007A",
+        "evidence": "docs/p2/implementation/PC007A_MATERIAL_INTEGRATION_REVIEW.md",
+        "broader_transfer": "PENDING_NEXT_USE"
       }
     },
     {
@@ -440,13 +444,57 @@
         ]
       },
       "independent_review": {
-        "status": "PENDING_REVIEW_OF_SKILL_CHANGE",
-        "product_report": "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "report": "docs/p2/implementation/PC007A_MATERIAL_INTEGRATION_REVIEW.md",
+        "additional_report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+        "scope": "Narrow skill text and source repair; broader effectiveness remains pending"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "TECHNICAL_TRANSFER_TO_ACTUAL_OUTPUT_AUDIT_REVIEWED",
+        "ticket": "PC-007A",
+        "evidence": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+        "broader_transfer": "PENDING_NEXT_USE"
+      }
+    },
+    {
+      "id": "SK-011",
+      "changed_on": "2026-11-09",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC007A_AREA_INTEGRATION_REVIEW.md",
+        "problem": "V02: output met the position bound but exceeded the original net-area tolerance; harness used a looser derived annulus allowance"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "Derived position-envelope area allowance substituted for the independent normative area acceptance",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc007a-planar-artifact-review-2944c0f.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_ON_ACTUAL_OUTPUT",
+        "source_sha": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+        "description": "Exact actual SVG/PDF net-area bounds against original acceptance; bounded arc refinement, precise CTM and atomic rollback; actual native63 area error .003247751 < .010743363 mm2"
+      },
+      "skill_change": "Treat position, topology and net area as independent acceptances; check the entire source-to-output chain instead of granting the full tolerance to each intermediate representation",
+      "usage_example": "Extrusion area error is profile length error multiplied by depth; a small length error may still violate the original area acceptance",
+      "verification": {
+        "status": "PRODUCT_REPAIR_AND_ACTUAL_ARTIFACT_REVIEWED; newly written skill advice not yet used on a subsequent ticket",
+        "evidence": [
+          "docs/p2/implementation/PC007A_AREA_INTEGRATION_REVIEW.md",
+          "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+          "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_METADATA_REVIEW",
+        "product_report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
         "status": "NOT_RUN",
-        "ticket": "PC-007A/PC-009 actual manufacturing output validation"
+        "ticket": "PC-007A loft source-to-output integration"
       }
     }
   ]

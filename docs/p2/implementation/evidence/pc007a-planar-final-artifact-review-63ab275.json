@@ -1,0 +1,99 @@
+{
+  "source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
+  "production_source_unchanged_since": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+  "archive_sha256": "144795ebbe5f987b046a02e1d3a573401f3c32e34d12b7613b27b1b6ce648642",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-final-planar-review-tusql_va",
+  "actual_pdf_parser": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-final-planar-review-tusql_va\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+  "source_hash_bindings_count": 100,
+  "source_hash_binding_modes": [
+    "GIT_LF",
+    "WINDOWS_CRLF"
+  ],
+  "native_artifact_hash_count": 17,
+  "native_status": "PASS_REQUESTED_FIXTURE",
+  "native_elapsed_seconds": 63.406,
+  "observed_native_dialogs": 3,
+  "observed_action_counts": {
+    "rectangle": 2,
+    "hole": 1,
+    "draw": 1,
+    "edit_curve": 2,
+    "undo": 1,
+    "attach_inside": 1,
+    "recompute": 2,
+    "focus": 2,
+    "focus_all": 1,
+    "save": 1,
+    "new": 1,
+    "open": 1,
+    "export": 1
+  },
+  "project_id": "3bba971b-35a8-44bc-85c2-e2813d1ce450",
+  "snapshot_digest": "7b5b06d53ba1e95f05432f32a6a9b3056e4dac85c1a3b8a3035488a41030803b",
+  "pages": {
+    "page-878bc2af-ea42-4965-a195-8f649d9f0c9b.svg": [
+      "89238a6c-ec75-4035-b7da-deae07b910c2"
+    ],
+    "page-d7504779-c410-4310-9979-a218d653b519.svg": [
+      "0c693ab7-9440-41a4-9c2b-8617c4c18185",
+      "fcb0f1ce-0b22-46b3-bccb-4c452ff4dcfa"
+    ]
+  },
+  "actual_pdf_loop_areas_mm2": {
+    "89238a6c-ec75-4035-b7da-deae07b910c2": [
+      12000.000000000002,
+      1256.6338136850402
+    ],
+    "fcb0f1ce-0b22-46b3-bccb-4c452ff4dcfa": [
+      2188.0000000000005
+    ],
+    "0c693ab7-9440-41a4-9c2b-8617c4c18185": [
+      800.0000000000001
+    ]
+  },
+  "wall_net_error_mm2": 0.003247750877562794,
+  "wall_net_limit_mm2": 0.010743362938564083,
+  "hole_error_mm2": 0.0032477508771080466,
+  "hole_limit_mm2": 0.01,
+  "method": "EXACT_FRACTION_GREEN_INTEGRAL_OF_ACTUAL_RAW_PDF_CUBICS; INDEPENDENT_EXACT_SVG_RELATIVE_READER",
+  "actual_editor_audits": [
+    {
+      "directory": "pc007a-inkscape-63ab275-page1-run03",
+      "paths_checked": [
+        "path-fcb0f1ce-0b22-46b3-bccb-4c452ff4dcfa-CUT-0",
+        "path-fcb0f1ce-0b22-46b3-bccb-4c452ff4dcfa-TABS-0",
+        "path-fcb0f1ce-0b22-46b3-bccb-4c452ff4dcfa-GUIDES-0",
+        "path-0c693ab7-9440-41a4-9c2b-8617c4c18185-CUT-0"
+      ],
+      "native_arcs": 0,
+      "native_cubics": 1,
+      "exact_local_geometry_preserved": true,
+      "calibration_100mm": true,
+      "unicode_text_exact": "Žluťoučký – vlastní díl",
+      "original_bundle_hashes_unchanged": true,
+      "recorded_elapsed_seconds": 14.5
+    },
+    {
+      "directory": "pc007a-inkscape-63ab275-page2-run04",
+      "paths_checked": [
+        "path-89238a6c-ec75-4035-b7da-deae07b910c2-CUT-0",
+        "path-89238a6c-ec75-4035-b7da-deae07b910c2-CUT-1"
+      ],
+      "native_arcs": 4,
+      "native_cubics": 0,
+      "exact_local_geometry_preserved": true,
+      "calibration_100mm": true,
+      "unicode_text_exact": "Žluťoučký – vlastní díl",
+      "original_bundle_hashes_unchanged": true,
+      "recorded_elapsed_seconds": 14.093
+    }
+  ],
+  "full_original_suite_tests": 908,
+  "suite_failures_errors_skipped": 0,
+  "verdict": "APPROVED_IN_BOUNDED_PLANAR_AUTHORING_SLICE_SCOPE",
+  "V02": "CLOSED_ON_ACTUAL_NATIVE_SOURCE63_ARTIFACT",
+  "whole_PC007A": "IN_PROGRESS; LOFT_UI_NOT_APPROVED",
+  "P2": "NOT_COMPLETE",
+  "novice_participants": 0,
+  "physical": "NOT_RUN"
+}

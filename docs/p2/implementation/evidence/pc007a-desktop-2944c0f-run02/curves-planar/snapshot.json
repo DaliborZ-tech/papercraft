@@ -1,0 +1,1293 @@
+{
+  "project_id": "626008aa-49a2-41ac-8e48-3a8bc743a627",
+  "revision": 29,
+  "construction_checks": {
+    "material_profile": {
+      "thickness_mm": null,
+      "clearance_mm": 0.0,
+      "bend_radius_mm": 0.0,
+      "crease_zone_mm": 0.5
+    },
+    "assembly_digest": "9d5c084d56fd93998ebbbda6664a4d66823d3afa54ec2eedb5c4966da4483365",
+    "connector_bends": {
+      "cf031c52-db9f-4cac-a4ae-3945fc3f0a37": {
+        "status": "UNVERIFIED",
+        "tabs": [
+          {
+            "status": "UNVERIFIED",
+            "message": "Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified",
+            "tab_id": "eb9b2d32-63a3-4830-8d63-06711c1a5c89",
+            "obstacle_id": null,
+            "witness_angle_deg": null,
+            "witness_point_mm": null,
+            "certified_intervals": 0,
+            "examined_intervals": 1,
+            "numerical_guard_mm": 4.077330511816325e-06,
+            "envelope_padding_mm": 4.077330511816325e-06,
+            "material_thickness_mm": null,
+            "clearance_mm": 0.0,
+            "bend_radius_mm": 0.0,
+            "allowances": [
+              {
+                "obstacle_id": "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                "kind": "hinge",
+                "reason": "Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.",
+                "angle_interval_deg": [
+                  0.0,
+                  0.0
+                ],
+                "vertices_world_mm": [
+                  [
+                    80.5,
+                    -9.5,
+                    0.5
+                  ],
+                  [
+                    80.5,
+                    -9.5,
+                    -0.5
+                  ],
+                  [
+                    80.5,
+                    -10.5,
+                    0.5
+                  ],
+                  [
+                    80.5,
+                    -10.5,
+                    -0.5
+                  ],
+                  [
+                    -0.5,
+                    -9.5,
+                    0.5
+                  ],
+                  [
+                    -0.5,
+                    -9.5,
+                    -0.5
+                  ],
+                  [
+                    -0.5,
+                    -10.5,
+                    0.5
+                  ],
+                  [
+                    -0.5,
+                    -10.5,
+                    -0.5
+                  ]
+                ]
+              },
+              {
+                "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                "kind": "hinge",
+                "reason": "Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.",
+                "angle_interval_deg": [
+                  0.0,
+                  0.0
+                ],
+                "vertices_world_mm": [
+                  [
+                    80.5,
+                    -9.5,
+                    0.5
+                  ],
+                  [
+                    80.5,
+                    -9.5,
+                    -0.5
+                  ],
+                  [
+                    80.5,
+                    -10.5,
+                    0.5
+                  ],
+                  [
+                    80.5,
+                    -10.5,
+                    -0.5
+                  ],
+                  [
+                    -0.5,
+                    -9.5,
+                    0.5
+                  ],
+                  [
+                    -0.5,
+                    -9.5,
+                    -0.5
+                  ],
+                  [
+                    -0.5,
+                    -10.5,
+                    0.5
+                  ],
+                  [
+                    -0.5,
+                    -10.5,
+                    -0.5
+                  ]
+                ]
+              },
+              {
+                "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                "kind": "final_contact",
+                "reason": "Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.",
+                "angle_interval_deg": [
+                  0.0,
+                  0.0
+                ],
+                "vertices_world_mm": [
+                  [
+                    15.994986208713533,
+                    -11.999156192815605,
+                    -0.001
+                  ],
+                  [
+                    15.994986208713533,
+                    -11.999156192815605,
+                    0.001
+                  ],
+                  [
+                    80.00492517838468,
+                    -9.99884560001338,
+                    -0.001
+                  ],
+                  [
+                    80.00492517838468,
+                    -9.99884560001338,
+                    0.001
+                  ],
+                  [
+                    80.00504457468746,
+                    -10.000377210382604,
+                    -0.001
+                  ],
+                  [
+                    80.00504457468746,
+                    -10.000377210382604,
+                    0.001
+                  ],
+                  [
+                    64.00006225774828,
+                    -12.001,
+                    -0.001
+                  ],
+                  [
+                    64.00006225774828,
+                    -12.001,
+                    0.001
+                  ],
+                  [
+                    15.995015011170656,
+                    -12.001,
+                    -0.001
+                  ],
+                  [
+                    15.995015011170656,
+                    -12.001,
+                    0.001
+                  ]
+                ]
+              },
+              {
+                "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                "kind": "final_contact",
+                "reason": "Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.",
+                "angle_interval_deg": [
+                  0.0,
+                  0.0
+                ],
+                "vertices_world_mm": [
+                  [
+                    80.00501379128646,
+                    -10.000843807184397,
+                    -0.001
+                  ],
+                  [
+                    80.00501379128646,
+                    -10.000843807184397,
+                    0.001
+                  ],
+                  [
+                    15.999953318038795,
+                    -12.001001946973389,
+                    -0.001
+                  ],
+                  [
+                    15.999953318038795,
+                    -12.001001946973389,
+                    0.001
+                  ],
+                  [
+                    -0.005033253072804839,
+                    -10.000378625584437,
+                    -0.001
+                  ],
+                  [
+                    -0.005033253072804839,
+                    -10.000378625584437,
+                    0.001
+                  ],
+                  [
+                    -0.0049474229481710425,
+                    -9.999,
+                    -0.001
+                  ],
+                  [
+                    -0.0049474229481710425,
+                    -9.999,
+                    0.001
+                  ],
+                  [
+                    80.00498498882935,
+                    -9.999,
+                    -0.001
+                  ],
+                  [
+                    80.00498498882935,
+                    -9.999,
+                    0.001
+                  ]
+                ]
+              }
+            ],
+            "checked_obstacle_ids": [
+              "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+              "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+              "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a"
+            ],
+            "search_interval_limit": 128,
+            "search_depth_limit": 8,
+            "search_budget_exhausted": false,
+            "search_depth_limit_reached": false,
+            "coarse_intervals_examined": 1,
+            "witness_angles_examined": 1,
+            "proof_method": "bounded_breadth_first_material_lower_bound_collision_witness_search",
+            "material_domain": "COMPLETE_DECLARED_MATERIAL",
+            "empty_obstacle_ids": [],
+            "broad_phase_pruning": [
+              {
+                "obstacle_id": "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+                "disjoint_full_sweep_triangles": 772,
+                "interaction_inside_whole_fold_permission_triangles": 0,
+                "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS"
+              },
+              {
+                "obstacle_id": "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                "disjoint_full_sweep_triangles": 512,
+                "interaction_inside_whole_fold_permission_triangles": 257,
+                "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS"
+              }
+            ],
+            "assumptions": [
+              "complete_registry_of_planar_material_triangles",
+              "straight_hinge_rigid_motion_of_declared_convex_patches",
+              "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+              "explicit_finite_hinge_and_contact_volumes_only",
+              "physical_build_and_strength_NOT_VERIFIED"
+            ],
+            "material_envelopes": {
+              "guaranteed_check": {
+                "status": "UNVERIFIED",
+                "message": "Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified",
+                "tab_id": "eb9b2d32-63a3-4830-8d63-06711c1a5c89",
+                "obstacle_id": null,
+                "witness_angle_deg": null,
+                "witness_point_mm": null,
+                "certified_intervals": 0,
+                "examined_intervals": 1,
+                "numerical_guard_mm": 4.077330511816325e-06,
+                "envelope_padding_mm": 4.077330511816325e-06,
+                "material_thickness_mm": null,
+                "clearance_mm": 0.0,
+                "bend_radius_mm": 0.0,
+                "allowances": [
+                  {
+                    "obstacle_id": "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                    "kind": "hinge",
+                    "reason": "Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        80.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        -0.5
+                      ]
+                    ]
+                  },
+                  {
+                    "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                    "kind": "hinge",
+                    "reason": "Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        80.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        -0.5
+                      ]
+                    ]
+                  },
+                  {
+                    "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                    "kind": "final_contact",
+                    "reason": "Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        15.994986208713533,
+                        -11.999156192815605,
+                        -0.001
+                      ],
+                      [
+                        15.994986208713533,
+                        -11.999156192815605,
+                        0.001
+                      ],
+                      [
+                        80.00492517838468,
+                        -9.99884560001338,
+                        -0.001
+                      ],
+                      [
+                        80.00492517838468,
+                        -9.99884560001338,
+                        0.001
+                      ],
+                      [
+                        80.00504457468746,
+                        -10.000377210382604,
+                        -0.001
+                      ],
+                      [
+                        80.00504457468746,
+                        -10.000377210382604,
+                        0.001
+                      ],
+                      [
+                        64.00006225774828,
+                        -12.001,
+                        -0.001
+                      ],
+                      [
+                        64.00006225774828,
+                        -12.001,
+                        0.001
+                      ],
+                      [
+                        15.995015011170656,
+                        -12.001,
+                        -0.001
+                      ],
+                      [
+                        15.995015011170656,
+                        -12.001,
+                        0.001
+                      ]
+                    ]
+                  },
+                  {
+                    "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                    "kind": "final_contact",
+                    "reason": "Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        80.00501379128646,
+                        -10.000843807184397,
+                        -0.001
+                      ],
+                      [
+                        80.00501379128646,
+                        -10.000843807184397,
+                        0.001
+                      ],
+                      [
+                        15.999953318038795,
+                        -12.001001946973389,
+                        -0.001
+                      ],
+                      [
+                        15.999953318038795,
+                        -12.001001946973389,
+                        0.001
+                      ],
+                      [
+                        -0.005033253072804839,
+                        -10.000378625584437,
+                        -0.001
+                      ],
+                      [
+                        -0.005033253072804839,
+                        -10.000378625584437,
+                        0.001
+                      ],
+                      [
+                        -0.0049474229481710425,
+                        -9.999,
+                        -0.001
+                      ],
+                      [
+                        -0.0049474229481710425,
+                        -9.999,
+                        0.001
+                      ],
+                      [
+                        80.00498498882935,
+                        -9.999,
+                        -0.001
+                      ],
+                      [
+                        80.00498498882935,
+                        -9.999,
+                        0.001
+                      ]
+                    ]
+                  }
+                ],
+                "checked_obstacle_ids": [
+                  "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+                  "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                  "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a"
+                ],
+                "search_interval_limit": 128,
+                "search_depth_limit": 8,
+                "search_budget_exhausted": false,
+                "search_depth_limit_reached": false,
+                "coarse_intervals_examined": 1,
+                "witness_angles_examined": 1,
+                "proof_method": "bounded_breadth_first_material_lower_bound_collision_witness_search",
+                "material_domain": "GUARANTEED_LOWER_BOUND_ONLY",
+                "empty_obstacle_ids": [],
+                "broad_phase_pruning": [
+                  {
+                    "obstacle_id": "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+                    "disjoint_full_sweep_triangles": 516,
+                    "interaction_inside_whole_fold_permission_triangles": 0,
+                    "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS"
+                  },
+                  {
+                    "obstacle_id": "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                    "disjoint_full_sweep_triangles": 0,
+                    "interaction_inside_whole_fold_permission_triangles": 257,
+                    "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS"
+                  }
+                ],
+                "assumptions": [
+                  "complete_registry_of_planar_material_triangles",
+                  "straight_hinge_rigid_motion_of_declared_convex_patches",
+                  "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+                  "explicit_finite_hinge_and_contact_volumes_only",
+                  "physical_build_and_strength_NOT_VERIFIED"
+                ]
+              },
+              "possible_check": {
+                "status": "UNVERIFIED",
+                "message": "Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified",
+                "tab_id": "eb9b2d32-63a3-4830-8d63-06711c1a5c89",
+                "obstacle_id": null,
+                "witness_angle_deg": null,
+                "witness_point_mm": null,
+                "certified_intervals": 0,
+                "examined_intervals": 1,
+                "numerical_guard_mm": 4.077330511816325e-06,
+                "envelope_padding_mm": 4.077330511816325e-06,
+                "material_thickness_mm": null,
+                "clearance_mm": 0.0,
+                "bend_radius_mm": 0.0,
+                "allowances": [
+                  {
+                    "obstacle_id": "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                    "kind": "hinge",
+                    "reason": "Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        80.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        -0.5
+                      ]
+                    ]
+                  },
+                  {
+                    "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                    "kind": "hinge",
+                    "reason": "Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        80.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        80.5,
+                        -10.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -9.5,
+                        -0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        0.5
+                      ],
+                      [
+                        -0.5,
+                        -10.5,
+                        -0.5
+                      ]
+                    ]
+                  },
+                  {
+                    "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                    "kind": "final_contact",
+                    "reason": "Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        15.994986208713533,
+                        -11.999156192815605,
+                        -0.001
+                      ],
+                      [
+                        15.994986208713533,
+                        -11.999156192815605,
+                        0.001
+                      ],
+                      [
+                        80.00492517838468,
+                        -9.99884560001338,
+                        -0.001
+                      ],
+                      [
+                        80.00492517838468,
+                        -9.99884560001338,
+                        0.001
+                      ],
+                      [
+                        80.00504457468746,
+                        -10.000377210382604,
+                        -0.001
+                      ],
+                      [
+                        80.00504457468746,
+                        -10.000377210382604,
+                        0.001
+                      ],
+                      [
+                        64.00006225774828,
+                        -12.001,
+                        -0.001
+                      ],
+                      [
+                        64.00006225774828,
+                        -12.001,
+                        0.001
+                      ],
+                      [
+                        15.995015011170656,
+                        -12.001,
+                        -0.001
+                      ],
+                      [
+                        15.995015011170656,
+                        -12.001,
+                        0.001
+                      ]
+                    ]
+                  },
+                  {
+                    "obstacle_id": "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a",
+                    "kind": "final_contact",
+                    "reason": "Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.",
+                    "angle_interval_deg": [
+                      0.0,
+                      0.0
+                    ],
+                    "vertices_world_mm": [
+                      [
+                        80.00501379128646,
+                        -10.000843807184397,
+                        -0.001
+                      ],
+                      [
+                        80.00501379128646,
+                        -10.000843807184397,
+                        0.001
+                      ],
+                      [
+                        15.999953318038795,
+                        -12.001001946973389,
+                        -0.001
+                      ],
+                      [
+                        15.999953318038795,
+                        -12.001001946973389,
+                        0.001
+                      ],
+                      [
+                        -0.005033253072804839,
+                        -10.000378625584437,
+                        -0.001
+                      ],
+                      [
+                        -0.005033253072804839,
+                        -10.000378625584437,
+                        0.001
+                      ],
+                      [
+                        -0.0049474229481710425,
+                        -9.999,
+                        -0.001
+                      ],
+                      [
+                        -0.0049474229481710425,
+                        -9.999,
+                        0.001
+                      ],
+                      [
+                        80.00498498882935,
+                        -9.999,
+                        -0.001
+                      ],
+                      [
+                        80.00498498882935,
+                        -9.999,
+                        0.001
+                      ]
+                    ]
+                  }
+                ],
+                "checked_obstacle_ids": [
+                  "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+                  "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                  "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a"
+                ],
+                "search_interval_limit": 128,
+                "search_depth_limit": 8,
+                "search_budget_exhausted": false,
+                "search_depth_limit_reached": false,
+                "coarse_intervals_examined": 1,
+                "witness_angles_examined": 1,
+                "proof_method": "bounded_breadth_first_material_lower_bound_collision_witness_search",
+                "material_domain": "COMPLETE_DECLARED_MATERIAL",
+                "empty_obstacle_ids": [],
+                "broad_phase_pruning": [
+                  {
+                    "obstacle_id": "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+                    "disjoint_full_sweep_triangles": 772,
+                    "interaction_inside_whole_fold_permission_triangles": 0,
+                    "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS"
+                  },
+                  {
+                    "obstacle_id": "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+                    "disjoint_full_sweep_triangles": 512,
+                    "interaction_inside_whole_fold_permission_triangles": 257,
+                    "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS"
+                  }
+                ],
+                "assumptions": [
+                  "complete_registry_of_planar_material_triangles",
+                  "straight_hinge_rigid_motion_of_declared_convex_patches",
+                  "bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics",
+                  "explicit_finite_hinge_and_contact_volumes_only",
+                  "physical_build_and_strength_NOT_VERIFIED"
+                ]
+              },
+              "bounds": {
+                "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea": {
+                  "method": "GUARANTEED_LOWER_MATERIAL_AND_COMPLETE_PROXY_PLUS_OUTWARD_TUBES_UPPER",
+                  "guaranteed_empty": false,
+                  "omitted_lower_sliver_area_mm2": 19.051936802044427,
+                  "source_bound_mm": 0.0015059822235249168,
+                  "upper_tube_radius_mm": 0.0015059822308008746,
+                  "lower_triangle_count": 516,
+                  "upper_triangle_count": 772,
+                  "possible_material_fully_covered": true
+                },
+                "5da12192-fcf6-47c8-85ce-708cb336bcd3": {
+                  "method": "GUARANTEED_LOWER_MATERIAL_AND_COMPLETE_PROXY_PLUS_OUTWARD_TUBES_UPPER",
+                  "guaranteed_empty": false,
+                  "omitted_lower_sliver_area_mm2": 0.001383283923857873,
+                  "source_bound_mm": 0.0005079433735954505,
+                  "upper_tube_radius_mm": 0.0005079433808714083,
+                  "lower_triangle_count": 257,
+                  "upper_triangle_count": 769,
+                  "possible_material_fully_covered": true
+                }
+              },
+              "verdict_rule": "COLLISION_REQUIRES_GUARANTEED; CLEAR_REQUIRES_COMPLETE_POSSIBLE"
+            },
+            "expected_obstacle_ids": [
+              "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+              "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+              "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a"
+            ],
+            "unresolved_layer_obstacle_ids": [],
+            "not_evaluated_obstacle_ids": [],
+            "layer_geometry": "NO_UNRESOLVED_RECEIVER_LAYER_PAIRS",
+            "search_scope": "BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN",
+            "search_limits": {
+              "max_depth": 8,
+              "max_intervals": 128
+            }
+          }
+        ],
+        "material_profile": {
+          "thickness_mm": null,
+          "clearance_mm": 0.0,
+          "bend_radius_mm": 0.0,
+          "crease_zone_mm": 0.5
+        },
+        "assembly_digest": "9d5c084d56fd93998ebbbda6664a4d66823d3afa54ec2eedb5c4966da4483365",
+        "motion": "shorter_signed_rigid_fold; finite_crease_and_contact_reservations",
+        "assembly_scenario": "ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED",
+        "physical_build": "NOT_VERIFIED"
+      }
+    },
+    "curve_profiles": {
+      "b14ac412-7637-48fa-bf9b-bd228b64c4d7": {
+        "status": "CERTIFIED",
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "7c871987-30d8-4635-8c8b-68ab8c1c8ef3",
+          "36812363-57f0-45d2-b5ac-8f7f460633cf"
+        ],
+        "representation_budget_paper_mm": 0.002,
+        "chord_deviation_bound_paper_mm": 0.001505982129519327,
+        "length_lower_paper_mm": 125.66370614356639,
+        "length_upper_paper_mm": 125.66370614361708,
+        "svg_deviation_bound_paper_mm": 9.218659964258979e-11,
+        "svg_length_error_bound_paper_mm": 3.181343099303845e-10,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof."
+      },
+      "cbb76477-e2ac-40d7-a1f3-cb5ba52112bb": {
+        "status": "CERTIFIED",
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "f5b9d5ce-53b4-43df-8ff9-34aa36aeec93",
+          "7eb0fa47-14fe-452a-81fe-d066c24545b9",
+          "d02520ab-a02f-4f0c-b78f-95c6a8d059cb",
+          "ae1e066e-ad27-47f1-9462-c41c8b13eadf"
+        ],
+        "representation_budget_paper_mm": 0.002,
+        "chord_deviation_bound_paper_mm": 0.0005079433717764609,
+        "length_lower_paper_mm": 195.66486069288212,
+        "length_upper_paper_mm": 195.66532978660874,
+        "svg_deviation_bound_paper_mm": 0.0,
+        "svg_length_error_bound_paper_mm": 0.0,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof."
+      }
+    },
+    "curve_regions": {
+      "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea": {
+        "status": "VALID",
+        "reason": "Native manufacturing-curve topology proved",
+        "witness": null,
+        "examined_nodes": 44,
+        "numerical_guard": 4.656612873077393e-10,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "source_profile_ids": [
+          "1ce334c4-d0c8-4532-b65e-2cec94686cba",
+          "b14ac412-7637-48fa-bf9b-bd228b64c4d7"
+        ],
+        "source_revisions": {
+          "1ce334c4-d0c8-4532-b65e-2cec94686cba": 1,
+          "b14ac412-7637-48fa-bf9b-bd228b64c4d7": 1
+        }
+      },
+      "5da12192-fcf6-47c8-85ce-708cb336bcd3": {
+        "status": "VALID",
+        "reason": "Native manufacturing-curve topology proved",
+        "witness": null,
+        "examined_nodes": 10,
+        "numerical_guard": 2.3283064365386963e-10,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "source_profile_ids": [
+          "cbb76477-e2ac-40d7-a1f3-cb5ba52112bb"
+        ],
+        "source_revisions": {
+          "cbb76477-e2ac-40d7-a1f3-cb5ba52112bb": 1
+        }
+      }
+    },
+    "accepted_layout_overlaps": [],
+    "physical_build": "NOT_VERIFIED"
+  },
+  "scale_label": "1:100",
+  "coverage": {
+    "expected_part_ids": [
+      "60e00068-0819-430b-9076-6e59c789bb57",
+      "9c613fdd-af8e-4de2-86b5-c0b4484cf36e",
+      "989172a1-de38-48c4-a023-25162a6068fc"
+    ],
+    "expected_surface_ids": [
+      "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea",
+      "5da12192-fcf6-47c8-85ce-708cb336bcd3",
+      "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a"
+    ],
+    "source_revisions": {
+      "60e00068-0819-430b-9076-6e59c789bb57": 29,
+      "9c613fdd-af8e-4de2-86b5-c0b4484cf36e": 29,
+      "989172a1-de38-48c4-a023-25162a6068fc": 29
+    }
+  },
+  "pages": [
+    {
+      "id": "0c3f1f59-f423-4f3a-bd5d-37d9f649d291",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "60e00068-0819-430b-9076-6e59c789bb57",
+          "name": "P1 · Plocha 1",
+          "surface_ids": [
+            "3c30c9f1-eb99-4394-b578-a1dfec7bc2ea"
+          ],
+          "source_revision": 29,
+          "placement": {
+            "x_mm": 20.0,
+            "y_mm": 20.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    120.0,
+                    0.0
+                  ],
+                  [
+                    120.0,
+                    100.0
+                  ],
+                  [
+                    0.0,
+                    100.0
+                  ]
+                ],
+                "closed": true
+              },
+              {
+                "commands": [
+                  [
+                    "M",
+                    40.0,
+                    50.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    60.0,
+                    30.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    80.0,
+                    50.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    60.0,
+                    70.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    40.0,
+                    50.0
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P1 · Plocha 1",
+              "x": 20.00150590651898,
+              "y": 50.24541228522912,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4df77189-b0dc-4bd9-a2a3-526f0a344a17",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "9c613fdd-af8e-4de2-86b5-c0b4484cf36e",
+          "name": "P2 · Plocha 2",
+          "surface_ids": [
+            "5da12192-fcf6-47c8-85ce-708cb336bcd3"
+          ],
+          "source_revision": 29,
+          "placement": {
+            "x_mm": 40.0,
+            "y_mm": 60.0,
+            "rotation_deg": 17.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "commands": [
+                  [
+                    "M",
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "C",
+                    20.0,
+                    30.0,
+                    60.0,
+                    30.0,
+                    80.0,
+                    0.0
+                  ],
+                  [
+                    "L",
+                    80.0,
+                    -10.0
+                  ],
+                  [
+                    "L",
+                    64.0,
+                    -12.0
+                  ],
+                  [
+                    "L",
+                    16.0,
+                    -12.0
+                  ],
+                  [
+                    "L",
+                    0.0,
+                    -10.0
+                  ],
+                  [
+                    "L",
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [
+              {
+                "points": [
+                  [
+                    80.0,
+                    -10.0
+                  ],
+                  [
+                    0.0,
+                    -10.0
+                  ],
+                  [
+                    16.0,
+                    -12.0
+                  ],
+                  [
+                    64.0,
+                    -12.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "GUIDES": [
+              {
+                "points": [
+                  [
+                    80.0,
+                    -10.0
+                  ],
+                  [
+                    0.0,
+                    -10.0
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P2 · Plocha 2",
+              "x": 40.0,
+              "y": 6.3329315185546875,
+              "size_mm": 2.5
+            },
+            {
+              "text": "A1 · rub",
+              "x": 40.0,
+              "y": -10.0,
+              "size_mm": 2.0
+            }
+          ]
+        },
+        {
+          "id": "989172a1-de38-48c4-a023-25162a6068fc",
+          "name": "P3 · Plocha 3",
+          "surface_ids": [
+            "b2a0df51-1a24-4d7d-992c-a3ed7b9eb97a"
+          ],
+          "source_revision": 29,
+          "placement": {
+            "x_mm": 40.0,
+            "y_mm": 120.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    80.0,
+                    0.0
+                  ],
+                  [
+                    80.0,
+                    10.0
+                  ],
+                  [
+                    0.0,
+                    10.0
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P3 · Plocha 3",
+              "x": 40.0,
+              "y": 5.0,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source_sha": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+  "archive_sha256": "d4059cc6da927fe2ae7946fdda741132f1d4af8a6a812bd66e3484421abbe146",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-rg6sy1er",
+  "actual_import_probes": {
+    "archpapercraft.exporter.author_export": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-rg6sy1er\\src\\archpapercraft\\exporter\\author_export.py",
+      "source_lf_sha256": "53e096ef4525346b16a06953098a7946f226c16f4db74cf4fd45de8357b0a45c"
+    },
+    "archpapercraft.exporter.curve_output_validation": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-rg6sy1er\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+      "source_lf_sha256": "591ea527b727b9b82e7902e191d9d2898ed166d39d3494bd529fb40b209a0f74"
+    },
+    "archpapercraft.exporter.svg_curve_validation": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-rg6sy1er\\src\\archpapercraft\\exporter\\svg_curve_validation.py",
+      "source_lf_sha256": "4bf4ab7e2ef0d87bb727067e44fd70add4e36558b647aabd1d97c47469b60212"
+    },
+    "archpapercraft.authoring.curve_area": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-rg6sy1er\\src\\archpapercraft\\authoring\\curve_area.py",
+      "source_lf_sha256": "8d6538d23bab25da9732ce0d76b36c2f8c66f3a69e7c753bede48f4d295f9de1"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 88%]\n.........                                                                [100%]\n81 passed in 3.02s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": ".F........                                                               [100%]\n================================== FAILURES ===================================\n__ test_rotated_actual_raw_ctm_and_green_integral_with_different_dimensions ___\n\ntmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1197/test_rotated_actual_raw_ctm_an0')\n\n    def test_rotated_actual_raw_ctm_and_green_integral_with_different_dimensions(tmp_path):\n        project,pid=wall()\n        project.set_placement(pid,project.pages[0].id,75,8,29)\n>       writer.export_all(project.snapshot(),tmp_path/'bundle')\n                          ^^^^^^^^^^^^^^^^^^\n\n..\\..\\..\\..\\projects\\papercraft-profiles\\docs\\p2\\implementation\\evidence\\pc007a-area-integration-review-own.py:69: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <archpapercraft.authoring.project.AuthorProject object at 0x000001AE1D84CBC0>\n\n    def snapshot(self):\n        issues = self.validate_layout()\n        blocking = [i for i in issues if i.severity == \"error\" or not i.acknowledged]\n        if blocking:\n>           raise ValidationError(\n                \"Export vyžaduje opravu nebo potvrzení: \" + \"; \".join(i.message for i in blocking)\n            )\nE           archpapercraft.authoring.errors.ValidationError: Export vyžaduje opravu nebo potvrzení: Díl zasahuje do doporučeného tiskového okraje.\n\nsrc\\archpapercraft\\authoring\\project.py:749: ValidationError\n=========================== short test summary info ===========================\nFAILED ::test_rotated_actual_raw_ctm_and_green_integral_with_different_dimensions\n1 failed, 9 passed in 2.52s\n",
+      "stderr": ""
+    }
+  }
+}
