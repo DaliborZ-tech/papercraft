@@ -1,0 +1,21 @@
+{
+  "source_sha": "2944c0fc7bb899355d45fe1f16e49253c90560c4",
+  "archive_sha256": "46670cbb141087f417014e160bed50c70c9f1b400ecd5e95ceec4aa2f7dd9fe8",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-preview-review-brppadty",
+  "actual_import_probe": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-preview-review-brppadty\\src\\archpapercraft\\ui\\author_connectors.py",
+    "source_lf_sha256": "ea72d1bb316e4ebb87367694026544953a5976788b022bca152f480a6f8b0fd8"
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "...........................                                              [100%]\n27 passed in 45.62s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": ".....                                                                    [100%]\n5 passed in 21.82s\n",
+      "stderr": ""
+    }
+  }
+}

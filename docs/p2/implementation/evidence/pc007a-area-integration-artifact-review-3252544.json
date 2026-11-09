@@ -1,0 +1,113 @@
+{
+  "source_sha": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+  "source_isolation": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-wp8wn_7r",
+  "kind": "INDEPENDENT_OFFLINE_EXPORT_OF_NATIVE_SAVED_SNAPSHOT; NOT_A_NATIVE_EXPORT_REPLACEMENT",
+  "snapshot_sha256": "d1a41d444825aebc475cff280ee51d0961d98ad69e2bee4eab052dd435e573f9",
+  "artifact_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-v02-artifact-review-8vsslqf1",
+  "artifact_sha256": {
+    ".author-export.json": "778ed2bc7f60dc7c8623f7671f61c5d4b6f56843392239639b1dd5e863cc922f",
+    "model.pdf": "819d8bfbef8944c11657d1a76e4c80014314f35d7b69bc95abb004bafdf4eff4",
+    "page-0352b982-3789-410e-86dd-83725ab8dcc3.svg": "2aaafbe89b676c9e87e7ab6cd6e2d9ef29118070d5737ad682d5d319c1c2c2cc",
+    "page-99de793a-3bfb-44a1-96b6-6a70a3ef3de1.svg": "4067bb1a4f258ee5cc33e810e06e65cfb4057eb3b221b3d4dc33ee12b57e89b9"
+  },
+  "method": "EXACT_FRACTION_GREEN_INTEGRAL_OF_ACTUAL_PDF_CUBICS; ANALYTIC_400_PI",
+  "actual_loop_areas_mm2": {
+    "4981851a-a7d8-4090-993d-37e8c69e75d6": [
+      12000.000000000002,
+      1256.6338136850402
+    ],
+    "31c62d9c-2ef3-41c8-8082-59f5c49632d4": [
+      2188.0000000000005
+    ],
+    "21a64be7-9c27-431a-abd2-c8f0ee8cdc88": [
+      800.0000000000001
+    ]
+  },
+  "wall_outer": {
+    "actual": 12000.000000000002,
+    "expected": 12000,
+    "absolute_error": 1.8189894035458565e-12,
+    "allowed": 0.012
+  },
+  "wall_hole": {
+    "actual": 1256.6338136850402,
+    "expected": 1256.6370614359173,
+    "absolute_error": 0.0032477508771080466,
+    "allowed": 0.01
+  },
+  "wall_net": {
+    "actual": 10743.366186314961,
+    "expected": 10743.362938564083,
+    "absolute_error": 0.003247750877562794,
+    "allowed": 0.010743362938564083
+  },
+  "other_loop_oracles": {
+    "31c62d9c-2ef3-41c8-8082-59f5c49632d4": {
+      "actual": 2188.0000000000005,
+      "expected": 2188,
+      "absolute_error": 4.547473508864641e-13
+    },
+    "21a64be7-9c27-431a-abd2-c8f0ee8cdc88": {
+      "actual": 800.0000000000001,
+      "expected": 800,
+      "absolute_error": 1.1368683772161603e-13
+    }
+  },
+  "writer_area_agreement": {
+    "acceptance": "04_AREA_max(0.01_mm2,1e-6_BASE_AREA); AC-X04",
+    "comparisons": {
+      "21a64be7-9c27-431a-abd2-c8f0ee8cdc88": {
+        "absolute_difference_bound_mm2": "167822222223/1000000000000000000000000",
+        "allowed_area_error_mm2": "1/100",
+        "base_area_lower_bound_mm2": "800",
+        "pdf_area_bounds_mm2": [
+          "400000000000000083911111111/500000000000000000000000",
+          "800000000000000167822222223/1000000000000000000000000"
+        ],
+        "svg_area_bounds_mm2": [
+          "800",
+          "800"
+        ]
+      },
+      "31c62d9c-2ef3-41c8-8082-59f5c49632d4": {
+        "absolute_difference_bound_mm2": "339611098357/1000000000000000000000000",
+        "allowed_area_error_mm2": "1/100",
+        "base_area_lower_bound_mm2": "2060",
+        "pdf_area_bounds_mm2": [
+          "547000000000000084902774589/250000000000000000000000",
+          "2188000000000000339611098357/1000000000000000000000000"
+        ],
+        "svg_area_bounds_mm2": [
+          "2188",
+          "2188"
+        ]
+      },
+      "4981851a-a7d8-4090-993d-37e8c69e75d6": {
+        "absolute_difference_bound_mm2": "3247750879549104541773/1000000000000000000000000",
+        "allowed_area_error_mm2": "5371681469282041352307471323/500000000000000000000000000000",
+        "base_area_lower_bound_mm2": "5371681469282041352307471323/500000000000000000000000",
+        "pdf_area_bounds_mm2": [
+          "5371683093157481126859742209/500000000000000000000000",
+          "10743366186314962253719484419/1000000000000000000000000"
+        ],
+        "svg_area_bounds_mm2": [
+          "5371681469282041352307471323/500000000000000000000000",
+          "10743362938564082704614942647/1000000000000000000000000"
+        ]
+      }
+    },
+    "scope": "ACTUAL_NET_CUT_AREA_AGREEMENT; source flattening verified separately",
+    "status": "VERIFIED"
+  },
+  "actual_precision_attempts": [
+    {
+      "actual_interpolation_bound_mm": 6.834759534258708e-05,
+      "requested_interpolation_bound_mm": 0.0001,
+      "status": "ACTUAL_GEOMETRY_AND_AREA_VERIFIED"
+    }
+  ],
+  "native_3252544_run03_status": "FAIL",
+  "native_review_verdict": "PENDING_SUCCESSFUL_NATIVE_EXPORT_AND_ACTUAL_EDITOR_ROUNDTRIPS",
+  "physical": "NOT_RUN",
+  "new_user_count": 0
+}

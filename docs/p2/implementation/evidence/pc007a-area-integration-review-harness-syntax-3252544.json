@@ -1,0 +1,35 @@
+{
+  "source_sha": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+  "archive_sha256": "d4059cc6da927fe2ae7946fdda741132f1d4af8a6a812bd66e3484421abbe146",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-qxrz6osf",
+  "actual_import_probes": {
+    "archpapercraft.exporter.author_export": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-qxrz6osf\\src\\archpapercraft\\exporter\\author_export.py",
+      "source_lf_sha256": "53e096ef4525346b16a06953098a7946f226c16f4db74cf4fd45de8357b0a45c"
+    },
+    "archpapercraft.exporter.curve_output_validation": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-qxrz6osf\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+      "source_lf_sha256": "591ea527b727b9b82e7902e191d9d2898ed166d39d3494bd529fb40b209a0f74"
+    },
+    "archpapercraft.exporter.svg_curve_validation": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-qxrz6osf\\src\\archpapercraft\\exporter\\svg_curve_validation.py",
+      "source_lf_sha256": "4bf4ab7e2ef0d87bb727067e44fd70add4e36558b647aabd1d97c47469b60212"
+    },
+    "archpapercraft.authoring.curve_area": {
+      "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-area-integration-review-qxrz6osf\\src\\archpapercraft\\authoring\\curve_area.py",
+      "source_lf_sha256": "8d6538d23bab25da9732ce0d76b36c2f8c66f3a69e7c753bede48f4d295f9de1"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 88%]\n.........                                                                [100%]\n81 passed in 3.02s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 2,
+      "stdout": "\n=================================== ERRORS ====================================\n________________________ ERROR collecting test session ________________________\n..\\..\\..\\..\\projects\\papercraft\\.venv\\Lib\\site-packages\\_pytest\\python.py:528: in importtestmodule\n    mod = import_path(\n..\\..\\..\\..\\projects\\papercraft\\.venv\\Lib\\site-packages\\_pytest\\pathlib.py:640: in import_path\n    importlib.import_module(module_name)\n..\\..\\..\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\importlib\\__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1387: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1360: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:935: in _load_unlocked\n    ???\n..\\..\\..\\..\\projects\\papercraft\\.venv\\Lib\\site-packages\\_pytest\\assertion\\rewrite.py:176: in exec_module\n    source_hash, co = _rewrite_test(fn, self.config)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n..\\..\\..\\..\\projects\\papercraft\\.venv\\Lib\\site-packages\\_pytest\\assertion\\rewrite.py:339: in _rewrite_test\n    tree = ast.parse(source, filename=strfn)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n..\\..\\..\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\ast.py:52: in parse\n    return compile(source, filename, mode, flags,\nE     File \"C:\\Users\\dalib\\projects\\papercraft-profiles\\docs\\p2\\implementation\\evidence\\pc007a-area-integration-review-own.py\", line 118\nE       return {'svg':[{'parts':{'p':{'material_area_bounds_mm2':{'lower':str(svglo),'upper':str(svghi)},'base_area_lower_bound_mm2':str(base)}}}],\nE              ^\nE   SyntaxError: '{' was never closed\n=========================== short test summary info ===========================\nERROR \n!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.24s\n",
+      "stderr": ""
+    }
+  }
+}

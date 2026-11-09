@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="10" time="2.521" timestamp="2026-11-09T11:15:28.837786+01:00" hostname="Dalibor"><testcase classname="" name="test_original_v02_actual_polynomial_hole_and_net_area_now_meet_norm" time="0.407" /><testcase classname="" name="test_rotated_actual_raw_ctm_and_green_integral_with_different_dimensions" time="0.222"><failure message="archpapercraft.authoring.errors.ValidationError: Export vyžaduje opravu nebo potvrzení: Díl zasahuje do doporučeného tiskového okraje.">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1197/test_rotated_actual_raw_ctm_an0')
+
+    def test_rotated_actual_raw_ctm_and_green_integral_with_different_dimensions(tmp_path):
+        project,pid=wall()
+        project.set_placement(pid,project.pages[0].id,75,8,29)
+&gt;       writer.export_all(project.snapshot(),tmp_path/'bundle')
+                          ^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\projects\papercraft-profiles\docs\p2\implementation\evidence\pc007a-area-integration-review-own.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x000001AE1D84CBC0&gt;
+
+    def snapshot(self):
+        issues = self.validate_layout()
+        blocking = [i for i in issues if i.severity == "error" or not i.acknowledged]
+        if blocking:
+&gt;           raise ValidationError(
+                "Export vyžaduje opravu nebo potvrzení: " + "; ".join(i.message for i in blocking)
+            )
+E           archpapercraft.authoring.errors.ValidationError: Export vyžaduje opravu nebo potvrzení: Díl zasahuje do doporučeného tiskového okraje.
+
+src\archpapercraft\authoring\project.py:749: ValidationError</failure></testcase><testcase classname="" name="test_four_coarse_attempts_only_and_every_old_or_foreign_byte_preserved" time="0.480" /><testcase classname="" name="test_actual_coarse_writer_recovers_with_exactly_two_attempts" time="0.328" /><testcase classname="" name="test_other_geometry_failure_is_never_retried_and_preserves_bundle" time="0.395" /><testcase classname="" name="test_relative_budget_uses_base_excluding_large_tabs" time="0.000" /><testcase classname="" name="test_interval_midpoint_agreement_does_not_hide_large_possible_area_error" time="0.000" /><testcase classname="" name="test_editor_exact_decimal_relative_closure_is_canonical_but_nearby_is_not" time="0.001" /><testcase classname="" name="test_editor_closing_curve_cannot_be_replaced_by_z[C 1 2 3 4 0 0]" time="0.001" /><testcase classname="" name="test_editor_closing_curve_cannot_be_replaced_by_z[A 1 1 0 1 1 0 0]" time="0.001" /></testsuite></testsuites>

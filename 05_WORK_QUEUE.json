@@ -2028,24 +2028,24 @@
         "AC-US07"
       ],
       "acceptance_state": {
-        "AC-AU08": "NOT_RUN",
-        "AC-AU09": "NOT_RUN",
-        "AC-AU13": "NOT_RUN",
-        "AC-AU15": "NOT_RUN",
+        "AC-AU08": "PARTIAL_TECHNICAL_PASS: native arc/cubic UI, numeric edit, corners, save/reopen and both vector outputs on source63; full profile-to-profile workflow pending",
+        "AC-AU09": "NOT_RUN_END_TO_END: loft components under independent review, B1/B2/B3 and Bezier extrusion actual UI integration pending",
+        "AC-AU13": "PARTIAL: stable native source/trim IDs verified; full split/merge provenance not closed",
+        "AC-AU15": "PARTIAL_TECHNICAL_PASS: planar native curves actual Windows/save/reopen/layout/SVG/PDF/Inkscape; other supported cuts pending",
         "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
-        "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US02": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US03": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US04": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US05": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
-        "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
+        "AC-US01": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
+        "AC-US02": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
+        "AC-US03": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
+        "AC-US04": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
+        "AC-US05": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
+        "AC-US06": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
+        "AC-US07": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation"
       },
       "status": "IN_PROGRESS",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
-      "review": "independent reviewer of pinned commit required",
+      "review": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
       "estimate_person_days": [
         12,
         20
@@ -2063,9 +2063,10 @@
           "status": "IN_USE",
           "decision": "Preserve native source profiles and stable curve IDs; planar trims and separately verified ruled families, no closed-solid prerequisite",
           "evidence": [
-            "src/archpapercraft/authoring/profile_curves.py"
+            "src/archpapercraft/authoring/profile_curves.py",
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
           ],
-          "review": "PENDING integrated-source review"
+          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
         },
         {
           "skill": "papercraft-authoring-ui",
@@ -2074,9 +2075,10 @@
           "evidence": [
             "src/archpapercraft/ui/author_curves.py",
             "src/archpapercraft/ui/author_profile_placement.py",
-            "tests/authoring/test_curve_workspace.py"
+            "tests/authoring/test_curve_workspace.py",
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
           ],
-          "review": "PENDING integrated-source review"
+          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
         },
         {
           "skill": "papercraft-verification",
@@ -2085,9 +2087,10 @@
           "evidence": [
             "docs/p2/implementation/PC007A_PLANAR_REVIEW.md",
             "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md",
-            "docs/p2/implementation/PC007A_NATIVE_OUTPUT_TOPOLOGY_REVIEW.md"
+            "docs/p2/implementation/PC007A_NATIVE_OUTPUT_TOPOLOGY_REVIEW.md",
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
           ],
-          "review": "PENDING integrated-source review"
+          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
         },
         {
           "skill": "papercraft-delivery",
@@ -2095,9 +2098,10 @@
           "decision": "Continue after published technical B while retaining missing novice evidence; isolate numeric/loft/UI ownership and review concrete source",
           "evidence": [
             "docs/p2/implementation/PC006B_INTEGRATION.md",
-            "05_WORK_QUEUE.json"
+            "05_WORK_QUEUE.json",
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
           ],
-          "review": "PENDING integrated-source review"
+          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
         }
       ],
       "usability": {
@@ -2111,18 +2115,21 @@
           "AC-US06",
           "AC-US07"
         ],
-        "main_flow_evidence": [],
-        "status": "NOT_RUN",
+        "main_flow_evidence": [
+          "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
+          "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md"
+        ],
+        "status": "TECHNICAL_PLANAR_FLOW_VERIFIED; full loft flow pending; no novice observation",
         "implementation_in_this_slice": true,
         "defer_to_visual_redesign": false,
         "ui_rework_evidence": {
-          "status": "NOT_RUN",
-          "problem": null,
-          "reason": null,
-          "preserved_parts": null,
-          "before_after_flow": null,
-          "consistency_impact": null,
-          "workflow_alternative_decision": null
+          "status": "PLANAR_TECHNICAL_VERIFIED",
+          "problem": "Old points-only connector preview crashed on native curves; source selection and staged curve edit needed native paths",
+          "reason": "Keep native arc/cubic geometry and reversible author input across sketch, properties and material preview",
+          "preserved_parts": "Linked 3D/paper selection, controller undo, manual pages and locks, optional tips and direct shortcuts",
+          "before_after_flow": "Native611 failed at preview; source63 actual drawing, tab preview, Cancel/Apply/Undo, save/reopen and export PASS",
+          "consistency_impact": "Shared native path renderer and staged controller commands; actual QAction delivery observed",
+          "workflow_alternative_decision": "Within accepted workflow; no new product gate"
         }
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
@@ -2135,7 +2142,7 @@
         "no_acceptance_waived": true
       },
       "implementation_progress": {
-        "planar_native_curves": "Implemented actual UI sketch/edit/copy, schema4 copy-only legacy readers, source topology and output guards; native desktop/editor and final integrated review pending",
+        "planar_native_curves": "INDEPENDENTLY_APPROVED_DIGITAL_SLICE: source63, 908 tests, actual Windows and both Inkscape pages; docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
         "loft_numeric_component": {
           "status": "INDEPENDENTLY_APPROVED_COMPONENT_ONLY",
           "source_sha": "2f3ee8e283255a25729e836d81d9415a751822a6",
@@ -2150,8 +2157,18 @@
           "stable mixed-part anchors",
           "actual UI/save/reopen/layout/SVG/PDF"
         ],
-        "whole_ticket_complete": false
-      }
+        "whole_ticket_complete": false,
+        "loft_domain": "In isolated worktree, source a1cbf92; independent review in progress, no actual end-to-end B proof yet",
+        "loft_UI": "Widget-only source d572411; independent review in progress, main-window/core integration pending"
+      },
+      "reviewed_code_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
+      "technical_verdict": "APPROVED_IN_BOUNDED_PLANAR_AUTHORING_SLICE_SCOPE; whole ticket IN_PROGRESS",
+      "evidence": [
+        "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
+        "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+        "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
+        "docs/p2/implementation/evidence/pc007a-suite-63ab275-run03.xml"
+      ]
     },
     {
       "id": "PC-007B",
@@ -2436,7 +2453,7 @@
   "updated_on": "2026-11-09",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
   "working_branch": "revival/p2-profiles",
-  "release_readiness": "NOT_READY: PC-006A/B technical slices published; PC-007A native curves under verification; B/C/D, actual novice and final historic model pending",
+  "release_readiness": "NOT_READY: PC-006A/B technical slices published; PC-007A planar curves digitally verified/reviewed, publication pending metadata review; full B/C/D, actual novice and final historic model pending",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2699,16 +2716,16 @@
     "pause_reason": "Owner explicitly requested interruption and continuation documentation for tomorrow",
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-07.md",
-    "wip_source_sha": "4e9956bc8fdb8a91af5cd5a4aa62de481e3eb657",
+    "wip_source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
     "wip_branch": "revival/p2-profiles",
-    "next_required_technical_work": "Native curve sketch/edit/planar output and certified profile-to-profile B, independent review then real UI/save/reopen/layout/vector/editor proof",
+    "next_required_technical_work": "Finish actual B1/B2/B3 and Bezier extrusion through UI/save/reopen/manual layout/vector outputs, independent review and fixes; then C/D and historic model",
     "resumed_on": "2026-11-09",
     "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills",
-    "digital_source_sha": "eb08f97f3ced9c547bd818f97e47d29f9b73a548",
+    "digital_source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "PC-007A planar native curves, actual manufacturing topology and material envelopes; profile-to-profile B UI and full loft integration remain pending",
+    "active_work": "Publish reviewed planar native curves, then integrate actual profile-to-profile B UI/core/output",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2721,9 +2738,29 @@
         "report": "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md"
       },
       "curved_contact_and_bend": {
-        "status": "IMPLEMENTATION_AND_INDEPENDENT_REVIEW_PENDING",
-        "description": "Known chord-proxy false CLEAR requires guaranteed/possible material, preserved negative precedence and full-angle pruning proof"
+        "status": "CLOSED_VERIFIED_IN_BOUNDED_SCOPE",
+        "source_sha": "61168e0879157baba1193785b9856f24d1d1c959",
+        "report": "docs/p2/implementation/PC007A_MATERIAL_INTEGRATION_REVIEW.md",
+        "final_artifact_report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md"
+      },
+      "PDF_V02": {
+        "status": "CLOSED_ON_ACTUAL_NATIVE_SOURCE63",
+        "source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
+        "report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+        "product_repair": "3252544850c0d4a9c4465de8f359ec2a5350af27",
+        "original_area_tolerance_preserved": true
       }
+    },
+    "planar_verified_slice": {
+      "source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
+      "report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
+      "delivery": "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
+      "suite_passed": 908,
+      "windows_native": "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
+      "publication": "PENDING_METADATA_REVIEW_AND_INTEGRATION",
+      "whole_PC007A_complete": false,
+      "novice_participants": 0,
+      "physical_proof": "NOT_RUN_P3"
     }
   }
 }

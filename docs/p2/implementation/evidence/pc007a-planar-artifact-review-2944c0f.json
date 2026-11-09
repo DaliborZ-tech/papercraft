@@ -1,0 +1,81 @@
+{
+  "source_sha": "2944c0fc7bb899355d45fe1f16e49253c90560c4",
+  "pdf_reader_module": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-preview-review-brppadty\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+  "artifact_hashes_checked": 17,
+  "hashes": {
+    "curves-authored-manual-layout-desktop.png": "a2c6d3acde4fbe85f4103db6e8841d30af33a5acb79b3500a70ebac9daeee723",
+    "curves-authored-manual-layout-opengl.png": "dfade2e8a2adf84fdb680bab5a837d009f544eb849bd3b0ab7a08636e83ea286",
+    "curves-native-circle-hole-desktop.png": "1a03b7f4e7c0ae9081038ce5053edd37a79078a217ee519d18df52192cca93b2",
+    "curves-native-circle-hole-opengl.png": "0ddc7de4289300f6fa659d55d5123a1e181e6e5a53d1da40767ac36a167a7e4e",
+    "curves-planar/curves-planar.apcraft": "5135e2123aba09e7bdd678aef567e436ccccc144efa679556ab07742f7116a32",
+    "curves-planar/export/.author-export.json": "2e30d8415372af50b91bb0ab13197498d0f425026383150b37570a53de9959e8",
+    "curves-planar/export/model.pdf": "9db7e835becde982268f0fab7d59841e9f59a05c3fe2b1c48feec57ba7555201",
+    "curves-planar/export/page-0c3f1f59-f423-4f3a-bd5d-37d9f649d291.svg": "3f6a68b47ba4c8ce16b4d8947ea82f0b4ee6119921456d29a4ebc60799b5b88b",
+    "curves-planar/export/page-4df77189-b0dc-4bd9-a2a3-526f0a344a17.svg": "8369c28fc2dec2640c2cafe55bdd4af02f57fc2eeb01813628c2b76ffae6c99c",
+    "curves-planar/snapshot.json": "4ec670ec63d9ad73487d44418c0c5ba944266286176f8dd13cc1aa93697aad31",
+    "curves-planar-reopened-auto-frame-all-material-desktop.png": "c1a130f9373f7bf639a21afa68e7d24764349a7e482a6b1efeebe4e1adbfd131",
+    "curves-planar-reopened-auto-frame-all-material-opengl.png": "da739ccd79c988550ff8aa21952b96d2722c18017583f643d6dca08f9da0a5a7",
+    "curves-planar-reopened-desktop.png": "fd5dd7f0a6183e6001d6f60c723a0e8014b4f1c0008f50e8e15ba88abbf3719e",
+    "curves-planar-reopened-opengl.png": "da739ccd79c988550ff8aa21952b96d2722c18017583f643d6dca08f9da0a5a7",
+    "empty-real-app-desktop.png": "c1fb2d1f08b3cc72087a4b48dc34ae3d6dcaa6d046aba4fa36aab9f137180f43",
+    "empty-real-app-opengl.png": "6ba1a10974500215847bbce8a108c4e813e52343ad5568075844e5ed0b3fd6f6",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953"
+  },
+  "project_id": "626008aa-49a2-41ac-8e48-3a8bc743a627",
+  "parts": [
+    "60e00068-0819-430b-9076-6e59c789bb57",
+    "9c613fdd-af8e-4de2-86b5-c0b4484cf36e",
+    "989172a1-de38-48c4-a023-25162a6068fc"
+  ],
+  "physical_pdf_loop_areas_mm2": {
+    "60e00068-0819-430b-9076-6e59c789bb57": [
+      12000.002800000164,
+      1256.6035223018973
+    ],
+    "9c613fdd-af8e-4de2-86b5-c0b4484cf36e": [
+      2188.0019095605817
+    ],
+    "989172a1-de38-48c4-a023-25162a6068fc": [
+      800.0001866666776
+    ]
+  },
+  "pdf_circle_area": {
+    "expected": 1256.6370614359173,
+    "actual": 1256.6035223018973,
+    "absolute_error": 0.03353913401997488,
+    "normative_limit": 0.01
+  },
+  "pdf_net_wall_area": {
+    "expected": 10743.362938564083,
+    "actual": 10743.399277698267,
+    "absolute_error": 0.03633913418343582,
+    "normative_limit": 0.010743362938564083
+  },
+  "area_verdict": "FAIL",
+  "method": "EXACT_FRACTION_GREEN_INTEGRAL_OF_ACTUAL_SERIALIZED_CUBIC_POLYNOMIALS; analytic 400pi oracle",
+  "independent_editor_artifact_audits": [
+    {
+      "directory": "pc007a-inkscape-2944c0f-bezier-run02",
+      "recorded_harness_status": "FAIL",
+      "actual_local_native_geometry_unchanged": true,
+      "identified_paths_checked": 4,
+      "page_units_unchanged": true,
+      "exact_unicode_label": true,
+      "original_bundle_unchanged": true,
+      "note": "Explicit closing L versus implicit Z normalized with same geometric closure; historical harness result not overwritten"
+    },
+    {
+      "directory": "pc007a-inkscape-2944c0f-hole-run01",
+      "recorded_harness_status": "PASS",
+      "actual_local_native_geometry_unchanged": true,
+      "identified_paths_checked": 2,
+      "page_units_unchanged": true,
+      "exact_unicode_label": true,
+      "original_bundle_unchanged": true,
+      "note": "Explicit closing L versus implicit Z normalized with same geometric closure; historical harness result not overwritten"
+    }
+  ],
+  "full_PC007A": "NOT_APPROVED",
+  "physical_build": "NOT_RUN",
+  "novice_participants": 0
+}

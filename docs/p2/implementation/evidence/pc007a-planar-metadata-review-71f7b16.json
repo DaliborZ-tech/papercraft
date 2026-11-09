@@ -1,0 +1,47 @@
+{
+  "metadata_sha": "71f7b16e4eb220f327a5285321fee8f8b0f45d25",
+  "previous_metadata_sha": "92978e16628d165b404ea7d58e88449fef7b8aa5",
+  "reviewed_code_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
+  "protected_paths_unchanged": [
+    "src",
+    "tools",
+    "pyproject.toml",
+    "AGENTS.md",
+    "02_CODEX_MANDATE.md",
+    "03_EPICS_AND_ROADMAP.md",
+    "04_ACCEPTANCE_AND_VERIFICATION.md",
+    "docs/p2/v1.2"
+  ],
+  "delta_file_count": 113,
+  "reviewed_metadata_objects_sha256": {
+    "05_WORK_QUEUE.json": "6cc56a60e580909a7a2b482171b9d67170a0b237ed96b13e4861c71943ba5ed7",
+    "docs/p2/SKILL_IMPROVEMENTS.json": "693a6a8b67ed8dea78698f8f5ef7c1aff555e9ecd2696590cbfc7fcbcf51f7e8",
+    ".agents/skills/papercraft-verification/SKILL.md": "57a76bb39462d917929e0de65c34fbe982050eadb909aff8efafe0b73a96409e",
+    "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md": "18dea6fc7d252462fc4e86effeb3dec17258f0867da1a0262a93d7a2a68aa50f",
+    "00_START_HERE.md": "e4813005a9cdebbf6ac67896708b780db1e7edc0e7cbe1eac1c224dd50638b1e",
+    "docs/p2/implementation/evidence/pc007a-planar-final-artifact-review-63ab275.json": "b73eb6ff8fd949fba92d98644da2d313cbcedb03949bd8207cd7ac0d9d295134",
+    "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json": "a488578d3c82072858ddd408c319e8e3fed3ec5b98663edd75243ef2213782f3",
+    "docs/p2/implementation/evidence/pc007a-inkscape-63ab275-page1-run03/editor-results.json": "3f98b9060d1c75686b5ed1ea9d1d9d8102a3d3be3b95ece37598410d8ed2d62e",
+    "docs/p2/implementation/evidence/pc007a-inkscape-63ab275-page2-run04/editor-results.json": "fe9164cc8e54f2f56e1f7259a047514e2e6251cfcc2abc5927c9161190541626",
+    "docs/p2/implementation/evidence/pc007a-suite-63ab275-run03.xml": "4d6f59a72f0ec98943bc846e6c212dfebd931dc07c129e4e024c422928ff108b"
+  },
+  "local_document_links_checked": 30,
+  "missing_links": [],
+  "published_native_artifacts_rebound": 17,
+  "full_suite": {
+    "passed": 908,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "whole_PC007A": "IN_PROGRESS",
+  "P2": "IN_PROGRESS_NOT_READY",
+  "novice_participants": 0,
+  "physical": "NOT_RUN_P3",
+  "SK009_transfer_source": "61168e0879157baba1193785b9856f24d1d1c959",
+  "SK009_SK010_broader_effectiveness": "PENDING_NEXT_USE",
+  "SK011_skill_effectiveness": "PENDING_NEXT_USE; no next ticket use observed",
+  "SK011_metadata_review": "APPROVED_IN_SCOPE_BY_THIS_REPORT; ledger truth update may follow",
+  "verdict": "APPROVED_IN_PLANAR_METADATA_PUBLICATION_SCOPE",
+  "open_blocker_major": 0
+}
