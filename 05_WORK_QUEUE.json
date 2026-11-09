@@ -1857,30 +1857,43 @@
         {
           "skill": "papercraft-construction",
           "status": "IN_USE",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "decision": "Keep true overhang and receiving material; include other active assembled tabs during one-tab fold; explicit layer uncertainty, no physical certification",
+          "evidence": [
+            "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md",
+            "src/archpapercraft/authoring/bend.py"
+          ],
+          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
         },
         {
           "skill": "papercraft-authoring-ui",
           "status": "IN_USE",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "decision": "Contextual part deletion with concrete dependency preview and reusable sketches; named source/part selection; C05 pending numeric preflight for both actions",
+          "evidence": [
+            "src/archpapercraft/ui/author_window.py",
+            "tests/authoring/test_workspace.py"
+          ],
+          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
         },
         {
           "skill": "papercraft-verification",
           "status": "IN_USE",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "decision": "Use independent mid-fold witnesses and exact obstacle inventory, preserve old failing desktop runs; new native proof pinned to one source, no novice substitution",
+          "evidence": [
+            "tests/authoring/test_bend_adapter.py",
+            "tools/authoring/desktop_b_proof.py",
+            "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md"
+          ],
+          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
         },
         {
           "skill": "papercraft-delivery",
           "status": "IN_USE",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "decision": "Resume explicit owner pause without reopening accepted scope; isolate component ownership and independent reviewers; integration only after pinned verification and review",
+          "evidence": [
+            "docs/p2/implementation/CONTINUE_2026-11-07.md",
+            "05_WORK_QUEUE.json"
+          ],
+          "review": "COMPONENT_REVIEWS_EXIST; final integrated commit review PENDING"
         }
       ],
       "usability": {
@@ -1903,7 +1916,7 @@
           "protocol": "docs/p2/v1.2/USABILITY_TEST.md",
           "status": "NOT_RUN",
           "participants_observed": 0,
-          "reason": "Authoring version not implemented; no actual participant session has taken place",
+          "reason": "No eligible new participant currently available, confirmed by owner 2026-11-06; implementation and technical evidence continue independently",
           "required_before_first_author_version_fully_verified": true
         },
         "ui_rework_evidence": {
@@ -1928,7 +1941,7 @@
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "implementation_authorized_on": "2026-11-06",
-      "working_branch": "revival/p2-interior-domain",
+      "working_branch": "revival/p2-clearance-integration",
       "implementation_start_basis": "PC-006A CODE independently approved on 4b172e65af3cde19c865cf7594c63fa004aa1ba2",
       "component_checkpoint": {
         "domain_source_sha": "0db8f0239bea59369a123f210a4b4317f95ee237",
@@ -1938,9 +1951,15 @@
         "domain_review": "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md",
         "B-01": "INDEPENDENTLY_CLOSED_ON_4bb5c43",
         "B-02": "OPEN_MAJOR: continuous bend clearance implementation underway in isolated branch",
-        "native_complete_A": "NOT_RUN",
+        "native_complete_A": "run03 TECHNICAL_UI_PASS on 5b1161c, known camera/contact limitations preserved; new full-material registry native proof NOT_RUN",
         "novice_study": "NOT_RUN: owner confirmed no eligible new participant available; 0 participants",
-        "whole_ticket_verdict": "CHANGES_REQUIRED_UNTIL_REQUIRED_EVIDENCE_AND_AU07_COMPLETE"
+        "whole_ticket_verdict": "CHANGES_REQUIRED_UNTIL_REQUIRED_EVIDENCE_AND_AU07_COMPLETE",
+        "material_adapter_wip_source_sha": "4e9956bc8fdb8a91af5cd5a4aa62de481e3eb657",
+        "author_commands_integration_sha": "ccc2d7e",
+        "native_driver_sha": "bae88e2",
+        "B-03": "INDEPENDENTLY_CLOSED_ON_5b1161c",
+        "B-04": "INDEPENDENTLY_CLOSED_ON_a69c22a",
+        "B-05": "INDEPENDENTLY_CLOSED_ON_2550889"
       }
     },
     {
