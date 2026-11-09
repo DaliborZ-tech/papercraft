@@ -1,0 +1,337 @@
+{
+  "source_sha": "a1cbf920397694f3b1d3e85a08052acdc3962a7b",
+  "cases": {
+    "legacy-cap": {
+      "original_raw_sha256": "8a79748d84193b64d209ba6802a97e643c2c7c56bc3832858b4f92c85050aa18",
+      "read_result": {
+        "typed_rejection": "Star\u0161\u00ed form\u00e1t nezn\u00e1 k\u0159ivkov\u00e9 profily ani nerovinn\u00e9 konstruk\u010dn\u00ed plochy."
+      }
+    },
+    "open-seam": {
+      "original_raw_sha256": "d768a3d673e9f925e08c3ea8951590bceb42309b07d35a0380ad8bd2d6c780bd",
+      "read_result": {
+        "typed_rejection": "Neplatn\u00fd autorsk\u00fd projekt: \u0160ev mus\u00ed b\u00fdt prvn\u00ed korespondenc\u00ed; otev\u0159en\u00fd profil za\u010d\u00edn\u00e1 na sv\u00e9m konci."
+      }
+    },
+    "LD02_exact_original_project": {
+      "paper_stale_before": true,
+      "status_after": {
+        "crease_geometry": [],
+        "paper_frame": {
+          "root_surface_id": "5c7ce83a-193d-47bf-a4e3-aa4d8bcd5946",
+          "anchor_vertex_id": "f758491c-f4e8-4073-9d3f-bf7c3f354c29",
+          "axis_segment_id": "65a20168-4fe8-4914-a36f-59a06269c6ab"
+        },
+        "paper_input_digest": "d5036b76135a5871bbe6322ba0efa7ca54f8d3c80857a5b3b7160e986067d89e",
+        "paper_stale": false,
+        "paper_contract": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+        "paper_frame_area": {
+          "status": "CERTIFIED",
+          "source_intrinsic": {
+            "status": "CERTIFIED",
+            "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+            "area_lower_exact": "12566370614359172953850573533/1000000000000000000000000",
+            "area_upper_exact": "6283185307179586476925286767/500000000000000000000000",
+            "area_lower_paper_mm2": 12566.370614359172,
+            "area_upper_paper_mm2": 12566.370614359173,
+            "absolute_budget_mm2": 0.0001,
+            "examined_nodes": 1,
+            "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+            "coverage": {
+              "first_profile_id": "e6409072-51a2-4a9a-96a3-c0d61b0cee78",
+              "second_profile_id": "3ffba47f-5060-4400-850f-1070494c56c4",
+              "first_closed": false,
+              "second_closed": false,
+              "expected_first_segment_ids": [
+                "65a20168-4fe8-4914-a36f-59a06269c6ab"
+              ],
+              "expected_second_segment_ids": [
+                "ef1754f2-5bc3-4f28-86bd-af299cff6296"
+              ],
+              "correspondences": [
+                {
+                  "first_segment_id": "65a20168-4fe8-4914-a36f-59a06269c6ab",
+                  "second_segment_id": "ef1754f2-5bc3-4f28-86bd-af299cff6296",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+            },
+            "proof": {
+              "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+              "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+              "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+              "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+              "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+              "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+              "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+            }
+          },
+          "actual_native": {
+            "lower_exact": "3141589866964369548441027291/250000000000000000000000",
+            "upper_exact": "2513271893571495638752821833/200000000000000000000000",
+            "lower_paper_mm2": 12566.359467857475,
+            "upper_paper_mm2": 12566.359467857481
+          },
+          "maximum_error_bound_exact": "1114650169476008646437/100000000000000000000000",
+          "maximum_error_bound_paper_mm2": 0.011146501694760088,
+          "allowed_error_exact": "12566370614359172953850573533/1000000000000000000000000000000",
+          "allowed_error_paper_mm2": 0.012566370614359173,
+          "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+          "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+          "max_commands": 32778,
+          "serialized_output": "NOT_VERIFIED"
+        },
+        "paper_frame_topology": {
+          "status": "VALID",
+          "reason": "Supplied native path topology proved",
+          "witness": null,
+          "examined_nodes": 11481,
+          "numerical_guard": 7.275957614183426e-12,
+          "proof": [
+            "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+          ],
+          "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+          "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+        },
+        "source_digest": "1393d2ebfed1b6539e85aff7a84ce82424c0805414c6adac99d5466124758ab1",
+        "source_revisions": {
+          "e6409072-51a2-4a9a-96a3-c0d61b0cee78": 1,
+          "3ffba47f-5060-4400-850f-1070494c56c4": 1
+        },
+        "source_profile_ids": [
+          "e6409072-51a2-4a9a-96a3-c0d61b0cee78",
+          "3ffba47f-5060-4400-850f-1070494c56c4"
+        ],
+        "patches": [
+          {
+            "first_interval": [
+              0,
+              1
+            ],
+            "first_segment_id": "65a20168-4fe8-4914-a36f-59a06269c6ab",
+            "id": "74379995-094d-4b31-86b5-eebe1c39ea42",
+            "ruling_id": "120eaf05-5184-49bc-9fe8-780b78c8c0ed",
+            "second_interval": [
+              0,
+              1
+            ],
+            "second_segment_id": "ef1754f2-5bc3-4f28-86bd-af299cff6296"
+          }
+        ],
+        "flattening": {
+          "status": "EXACT",
+          "family": "NORMAL_EXTRUSION",
+          "representation_error_bound_paper_mm": 0.00014996769374228008,
+          "boundary_length_error_bound_paper_mm": 0.00014996769374228008,
+          "regularity_lower_bound_paper_mm2": 12566.370613102532,
+          "analytic_metric_identity": "d'=0; [integral |C'|, H v] preserves the first fundamental form; whole-curve rational chord/control-polygon length enclosures; pointwise C(u) and L(u) interpolation <=sup|C''|*du^2/8, because |L''|<=|C''|; arclength prefix errors sum globally",
+          "numerical_guard_paper_mm": 1.1641532182693481e-10,
+          "proof_scope": "DECLARED_REGULAR_PARAMETRIC_FAMILY_AND_BOUNDED_REPRESENTATION",
+          "source_topology_scope": "CALLER_VALIDATES_PROFILE_TOPOLOGY_AND_ASSEMBLED_INTERSECTIONS",
+          "seam": "FIRST_EXPLICIT_CORRESPONDENCE_BOUNDARY",
+          "physical_build": "NOT_VERIFIED",
+          "arclength_prefix_error_bound_paper_mm": 5.573251344515029e-05,
+          "parameter_interpolation_error_bound_paper_mm": 9.412388724946324e-05,
+          "node_rounding_reserve_paper_mm": 1.1129304766654968e-07,
+          "scale": 1.0,
+          "requested_error_budget_paper_mm": 0.0005,
+          "coverage": {
+            "first_profile_id": "e6409072-51a2-4a9a-96a3-c0d61b0cee78",
+            "second_profile_id": "3ffba47f-5060-4400-850f-1070494c56c4",
+            "expected_first_segment_ids": [
+              "65a20168-4fe8-4914-a36f-59a06269c6ab"
+            ],
+            "expected_second_segment_ids": [
+              "ef1754f2-5bc3-4f28-86bd-af299cff6296"
+            ],
+            "matched_first_segment_ids": [
+              "65a20168-4fe8-4914-a36f-59a06269c6ab"
+            ],
+            "matched_second_segment_ids": [
+              "ef1754f2-5bc3-4f28-86bd-af299cff6296"
+            ],
+            "first_closed": false,
+            "second_closed": false,
+            "scope": "EXPLICITLY_MATCHED_INTERVALS_ONLY; caller validates intended coverage"
+          }
+        },
+        "source_topology": {
+          "e6409072-51a2-4a9a-96a3-c0d61b0cee78": {
+            "status": "VALID",
+            "reason": "Open source chain proved simple without a closing chord",
+            "examined_nodes": 3
+          },
+          "3ffba47f-5060-4400-850f-1070494c56c4": {
+            "status": "VALID",
+            "reason": "Open source chain proved simple without a closing chord",
+            "examined_nodes": 3
+          }
+        },
+        "status": "EXACT",
+        "family": "NORMAL_EXTRUSION",
+        "code": "LOFT_EXACT",
+        "message": "P\u0159esn\u00e1 rodina loftu je dolo\u017een\u00e1 s uveden\u00fdmi mezemi.",
+        "representation": {
+          "status": "CERTIFIED_REPRESENTATION_ONLY",
+          "proof_scope": "REPRESENTATION_ONLY",
+          "topology": "CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS",
+          "physical_build": "NOT_VERIFIED",
+          "serialized_output": "NOT_VERIFIED",
+          "source_family": "NORMAL_EXTRUSION",
+          "position_error_bound_paper_mm": 0.0001499677937422801,
+          "boundary_length_error_bound_paper_mm": 0.0001499677937422801,
+          "source_position_error_bound_paper_mm": 0.00014996769374228008,
+          "line_interpolant_deviation_bound_paper_mm": 0.0,
+          "source_boundary_length_error_bound_paper_mm": 0.00014996769374228008,
+          "native_boundary_length_excess_bound_paper_mm": {
+            "first": 0.0,
+            "second": 0.0
+          },
+          "both_profile_boundaries_length_error_bound_paper_mm": 0.0002999355874845602,
+          "length_scope": "GLOBAL_FIRST_OR_SECOND_PROFILE_BOUNDARY_CHAIN; EXCLUDES_CLOSING_RULINGS",
+          "rounding_reserve_paper_mm": 1e-10,
+          "requested_position_budget_paper_mm": 0.008,
+          "requested_length_budget_paper_mm": 0.008,
+          "same_parameter_position_proof": "SOURCE_F_TO_LINE_DELTA_PLUS_BERNSTEIN_CONTROL_ETA",
+          "length_proof": "SOURCE_CHAIN_DEFICIT_PLUS_SUM_ACTUAL_CUBIC_CONTROL_POLYGON_MINUS_CHORD",
+          "serialization_scope": "BINARY_CONTROL_GEOMETRY_ONLY; PUBLISHER_BUDGET_IS_SEPARATE"
+        },
+        "closing_rulings": [
+          {
+            "world_length_paper_mm": 200.0,
+            "flat_length_paper_mm": 200.0,
+            "length_error_bound_paper_mm": 2.3283064365386963e-10,
+            "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS"
+          },
+          {
+            "world_length_paper_mm": 200.0,
+            "flat_length_paper_mm": 200.0,
+            "length_error_bound_paper_mm": 2.3283064365386963e-10,
+            "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS"
+          }
+        ],
+        "native_topology": {
+          "status": "VALID",
+          "reason": "Supplied native path topology proved",
+          "witness": null,
+          "examined_nodes": 11481,
+          "numerical_guard": 7.275957614183426e-12,
+          "proof": [
+            "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+          ],
+          "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+          "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+        },
+        "area": {
+          "status": "CERTIFIED",
+          "source_intrinsic": {
+            "status": "CERTIFIED",
+            "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+            "area_lower_exact": "12566370614359172953850573533/1000000000000000000000000",
+            "area_upper_exact": "6283185307179586476925286767/500000000000000000000000",
+            "area_lower_paper_mm2": 12566.370614359172,
+            "area_upper_paper_mm2": 12566.370614359173,
+            "absolute_budget_mm2": 0.0001,
+            "examined_nodes": 1,
+            "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+            "coverage": {
+              "first_profile_id": "e6409072-51a2-4a9a-96a3-c0d61b0cee78",
+              "second_profile_id": "3ffba47f-5060-4400-850f-1070494c56c4",
+              "first_closed": false,
+              "second_closed": false,
+              "expected_first_segment_ids": [
+                "65a20168-4fe8-4914-a36f-59a06269c6ab"
+              ],
+              "expected_second_segment_ids": [
+                "ef1754f2-5bc3-4f28-86bd-af299cff6296"
+              ],
+              "correspondences": [
+                {
+                  "first_segment_id": "65a20168-4fe8-4914-a36f-59a06269c6ab",
+                  "second_segment_id": "ef1754f2-5bc3-4f28-86bd-af299cff6296",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+            },
+            "proof": {
+              "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+              "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+              "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+              "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+              "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+              "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+              "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+            }
+          },
+          "actual_native": {
+            "lower_exact": "3141589866964369548441027291/250000000000000000000000",
+            "upper_exact": "2513271893571495638752821833/200000000000000000000000",
+            "lower_paper_mm2": 12566.359467857475,
+            "upper_paper_mm2": 12566.359467857481
+          },
+          "maximum_error_bound_exact": "1114650169476008646437/100000000000000000000000",
+          "maximum_error_bound_paper_mm2": 0.011146501694760088,
+          "allowed_error_exact": "12566370614359172953850573533/1000000000000000000000000000000",
+          "allowed_error_paper_mm2": 0.012566370614359173,
+          "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+          "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+          "max_commands": 32778,
+          "serialized_output": "NOT_VERIFIED",
+          "refinement_attempts": [
+            {
+              "attempt": 0,
+              "effective_tolerance_mm": 0.005,
+              "status": "UNRESOLVED",
+              "maximum_error_bound_exact": "14284662455333115157881/250000000000000000000000",
+              "maximum_error_bound_paper_mm2": 0.05713864982133247,
+              "allowed_error_exact": "12566370614359172953850573533/1000000000000000000000000000000"
+            },
+            {
+              "attempt": 1,
+              "effective_tolerance_mm": 0.0005,
+              "status": "CERTIFIED",
+              "maximum_error_bound_exact": "1114650169476008646437/100000000000000000000000",
+              "maximum_error_bound_paper_mm2": 0.011146501694760088,
+              "allowed_error_exact": "12566370614359172953850573533/1000000000000000000000000000000"
+            }
+          ]
+        },
+        "requested_tolerance_mm": 0.005,
+        "effective_tolerance_mm": 0.0005,
+        "feature_id": "5c7ce83a-193d-47bf-a4e3-aa4d8bcd5946",
+        "intrinsic_source_digest": "f1e69496d5b27637b501bc5e479b94b39d38eb19ddde444648352ffe523be6a1",
+        "feature_revision": 2
+      },
+      "actual_independent_native_area_exact": "13816858353722325/1099511627776",
+      "actual_independent_native_area_float": 12566.359467857477,
+      "layout_issues": [],
+      "snapshot_allowed": true
+    }
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "source_sha": "a1cbf920397694f3b1d3e85a08052acdc3962a7b",
+  "issues": [
+    {
+      "id": "f3a544341b0c2c27235848f7",
+      "code": "LOFT_FRAME_AREA_UNRESOLVED",
+      "severity": "error",
+      "message": "Ulo\u017een\u00fd rozvin nem\u00e1 dolo\u017eenou plo\u0161nou p\u0159esnost.",
+      "part_ids": [
+        "27f72968-7439-4740-8061-aa58c5187714"
+      ],
+      "joint_id": null,
+      "digest": "adbbae3885ce860ba0460c0eda91ca6e690bafba7009aa32cfcb3c36049d28af",
+      "acknowledged": false
+    }
+  ],
+  "loft_status": {
+    "crease_geometry": [
+      {
+        "patch_id": "38595481-98e2-4e5d-8182-7e0d4b0430cc",
+        "ruling_id": "dbaee27f-d41b-4172-9fc3-5c4c41475fee",
+        "signed_angle_deg": 90.0,
+        "role": "FOLD_MOUNTAIN",
+        "normal_scope": "ANALYTIC_ONE_SIDED_RULED_DERIVATIVES_AT_COMMON_RULING",
+        "axis_orientation": "FIRST_PROFILE_TO_SECOND_PROFILE"
+      },
+      {
+        "patch_id": "042250d8-056a-4a78-98f9-6b843b4b4a14",
+        "ruling_id": "e0bda04b-23aa-4184-9b73-fa34f5406829",
+        "signed_angle_deg": -90.0,
+        "role": "FOLD_VALLEY",
+        "normal_scope": "ANALYTIC_ONE_SIDED_RULED_DERIVATIVES_AT_COMMON_RULING",
+        "axis_orientation": "FIRST_PROFILE_TO_SECOND_PROFILE"
+      }
+    ],
+    "paper_frame": {
+      "root_surface_id": "ff343019-f10d-4bd1-b299-87b32e9b6302",
+      "anchor_vertex_id": "b9097afa-b98c-4e2a-a1c4-bfd32678e2ac",
+      "axis_segment_id": "a6335197-eaa0-4523-932a-172d537911d3"
+    },
+    "paper_input_digest": "d2097705440aec64d516562bbded07558caa2bd830929a426b18cc71246069af",
+    "paper_stale": false,
+    "paper_contract": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+    "paper_frame_area": {
+      "status": "UNRESOLVED",
+      "source_intrinsic": {
+        "status": "CERTIFIED",
+        "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+        "area_lower_exact": "499999999999999999999999999/1000000000000000000000000",
+        "area_upper_exact": "500000000000000000000000001/1000000000000000000000000",
+        "area_lower_paper_mm2": 499.99999999999994,
+        "area_upper_paper_mm2": 500.00000000000006,
+        "absolute_budget_mm2": 0.0001,
+        "examined_nodes": 3,
+        "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+        "coverage": {
+          "first_profile_id": "b6b460d3-87ca-420f-bb93-ed0976b846f5",
+          "second_profile_id": "92c5469d-b884-45a3-bd84-470845909b0c",
+          "first_closed": false,
+          "second_closed": false,
+          "expected_first_segment_ids": [
+            "a6335197-eaa0-4523-932a-172d537911d3",
+            "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+            "0ed5640c-ed4a-4965-9bf3-c62acbd76b74"
+          ],
+          "expected_second_segment_ids": [
+            "c1db29f9-a5ea-4d22-8354-a12910107c50",
+            "861dd257-ce2c-4502-9e59-0a5a67dbfd10",
+            "f8cf8b86-c358-4dee-a224-0f2e64d03945"
+          ],
+          "correspondences": [
+            {
+              "first_segment_id": "a6335197-eaa0-4523-932a-172d537911d3",
+              "second_segment_id": "c1db29f9-a5ea-4d22-8354-a12910107c50",
+              "first_parameter_interval": [
+                0,
+                1
+              ],
+              "second_parameter_interval": [
+                0,
+                1
+              ]
+            },
+            {
+              "first_segment_id": "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+              "second_segment_id": "861dd257-ce2c-4502-9e59-0a5a67dbfd10",
+              "first_parameter_interval": [
+                0,
+                1
+              ],
+              "second_parameter_interval": [
+                0,
+                1
+              ]
+            },
+            {
+              "first_segment_id": "0ed5640c-ed4a-4965-9bf3-c62acbd76b74",
+              "second_segment_id": "f8cf8b86-c358-4dee-a224-0f2e64d03945",
+              "first_parameter_interval": [
+                0,
+                1
+              ],
+              "second_parameter_interval": [
+                0,
+                1
+              ]
+            }
+          ],
+          "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+        },
+        "proof": {
+          "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+          "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+          "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+          "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+          "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+          "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+          "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+        }
+      },
+      "actual_native": {
+        "lower_exact": "495",
+        "upper_exact": "495",
+        "lower_paper_mm2": 494.99999999999994,
+        "upper_paper_mm2": 495.00000000000006
+      },
+      "maximum_error_bound_exact": "5000000000000000000000001/1000000000000000000000000",
+      "maximum_error_bound_paper_mm2": 5.000000000000001,
+      "allowed_error_exact": "1/100",
+      "allowed_error_paper_mm2": 0.01,
+      "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+      "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+      "max_commands": 32782,
+      "serialized_output": "NOT_VERIFIED"
+    },
+    "paper_frame_topology": {
+      "status": "VALID",
+      "reason": "Supplied native path topology proved",
+      "witness": null,
+      "examined_nodes": 46,
+      "numerical_guard": 1.8189894035458565e-12,
+      "proof": [
+        "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+        "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+        "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+        "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+        "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+        "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+      ],
+      "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+      "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+    },
+    "source_digest": "857f5bd197c479b5e6a219fdaed2d116f994d8aaa53ba32f5e88171bc0cee581",
+    "source_revisions": {
+      "b6b460d3-87ca-420f-bb93-ed0976b846f5": 1,
+      "92c5469d-b884-45a3-bd84-470845909b0c": 1
+    },
+    "source_profile_ids": [
+      "b6b460d3-87ca-420f-bb93-ed0976b846f5",
+      "92c5469d-b884-45a3-bd84-470845909b0c"
+    ],
+    "patches": [
+      {
+        "first_interval": [
+          0,
+          1
+        ],
+        "first_segment_id": "a6335197-eaa0-4523-932a-172d537911d3",
+        "id": "ed270c24-2c6d-4646-b1f2-e50922ca8787",
+        "ruling_id": "d90f44b7-0c06-475e-8544-bac79969200c",
+        "second_interval": [
+          0,
+          1
+        ],
+        "second_segment_id": "c1db29f9-a5ea-4d22-8354-a12910107c50"
+      },
+      {
+        "first_interval": [
+          0,
+          1
+        ],
+        "first_segment_id": "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+        "id": "38595481-98e2-4e5d-8182-7e0d4b0430cc",
+        "ruling_id": "dbaee27f-d41b-4172-9fc3-5c4c41475fee",
+        "second_interval": [
+          0,
+          1
+        ],
+        "second_segment_id": "861dd257-ce2c-4502-9e59-0a5a67dbfd10"
+      },
+      {
+        "first_interval": [
+          0,
+          1
+        ],
+        "first_segment_id": "0ed5640c-ed4a-4965-9bf3-c62acbd76b74",
+        "id": "042250d8-056a-4a78-98f9-6b843b4b4a14",
+        "ruling_id": "e0bda04b-23aa-4184-9b73-fa34f5406829",
+        "second_interval": [
+          0,
+          1
+        ],
+        "second_segment_id": "f8cf8b86-c358-4dee-a224-0f2e64d03945"
+      }
+    ],
+    "flattening": {
+      "status": "EXACT",
+      "family": "NORMAL_EXTRUSION",
+      "representation_error_bound_paper_mm": 8.824763142456504e-11,
+      "boundary_length_error_bound_paper_mm": 8.824763142456504e-11,
+      "regularity_lower_bound_paper_mm2": 99.99999998999999,
+      "analytic_metric_identity": "d'=0; [integral |C'|, H v] preserves the first fundamental form; whole-curve rational chord/control-polygon length enclosures; pointwise C(u) and L(u) interpolation <=sup|C''|*du^2/8, because |L''|<=|C''|; arclength prefix errors sum globally",
+      "numerical_guard_paper_mm": 2.9103830456733704e-11,
+      "proof_scope": "DECLARED_REGULAR_PARAMETRIC_FAMILY_AND_BOUNDED_REPRESENTATION",
+      "source_topology_scope": "CALLER_VALIDATES_PROFILE_TOPOLOGY_AND_ASSEMBLED_INTERSECTIONS",
+      "seam": "FIRST_EXPLICIT_CORRESPONDENCE_BOUNDARY",
+      "physical_build": "NOT_VERIFIED",
+      "arclength_prefix_error_bound_paper_mm": 2.6645352591003757e-14,
+      "parameter_interpolation_error_bound_paper_mm": 9.094947017729282e-13,
+      "node_rounding_reserve_paper_mm": 8.731149137020111e-11,
+      "scale": 1.0,
+      "requested_error_budget_paper_mm": 0.005,
+      "coverage": {
+        "first_profile_id": "b6b460d3-87ca-420f-bb93-ed0976b846f5",
+        "second_profile_id": "92c5469d-b884-45a3-bd84-470845909b0c",
+        "expected_first_segment_ids": [
+          "a6335197-eaa0-4523-932a-172d537911d3",
+          "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+          "0ed5640c-ed4a-4965-9bf3-c62acbd76b74"
+        ],
+        "expected_second_segment_ids": [
+          "c1db29f9-a5ea-4d22-8354-a12910107c50",
+          "861dd257-ce2c-4502-9e59-0a5a67dbfd10",
+          "f8cf8b86-c358-4dee-a224-0f2e64d03945"
+        ],
+        "matched_first_segment_ids": [
+          "a6335197-eaa0-4523-932a-172d537911d3",
+          "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+          "0ed5640c-ed4a-4965-9bf3-c62acbd76b74"
+        ],
+        "matched_second_segment_ids": [
+          "c1db29f9-a5ea-4d22-8354-a12910107c50",
+          "861dd257-ce2c-4502-9e59-0a5a67dbfd10",
+          "f8cf8b86-c358-4dee-a224-0f2e64d03945"
+        ],
+        "first_closed": false,
+        "second_closed": false,
+        "scope": "EXPLICITLY_MATCHED_INTERVALS_ONLY; caller validates intended coverage"
+      }
+    },
+    "source_topology": {
+      "b6b460d3-87ca-420f-bb93-ed0976b846f5": {
+        "status": "VALID",
+        "reason": "Open source chain proved simple without a closing chord",
+        "examined_nodes": 10
+      },
+      "92c5469d-b884-45a3-bd84-470845909b0c": {
+        "status": "VALID",
+        "reason": "Open source chain proved simple without a closing chord",
+        "examined_nodes": 10
+      }
+    },
+    "status": "UNRESOLVED",
+    "family": "NORMAL_EXTRUSION",
+    "code": "LOFT_FRAME_AREA_UNRESOLVED",
+    "message": "Ulo\u017een\u00fd rozvin nem\u00e1 dolo\u017eenou plo\u0161nou p\u0159esnost.",
+    "representation": {
+      "status": "CERTIFIED_REPRESENTATION_ONLY",
+      "proof_scope": "REPRESENTATION_ONLY",
+      "topology": "CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS",
+      "physical_build": "NOT_VERIFIED",
+      "serialized_output": "NOT_VERIFIED",
+      "source_family": "NORMAL_EXTRUSION",
+      "position_error_bound_paper_mm": 1.8824763142456509e-10,
+      "boundary_length_error_bound_paper_mm": 1.8824763142456509e-10,
+      "source_position_error_bound_paper_mm": 8.824763142456504e-11,
+      "line_interpolant_deviation_bound_paper_mm": 0.0,
+      "source_boundary_length_error_bound_paper_mm": 8.824763142456504e-11,
+      "native_boundary_length_excess_bound_paper_mm": {
+        "first": 0.0,
+        "second": 0.0
+      },
+      "both_profile_boundaries_length_error_bound_paper_mm": 3.7649526284913017e-10,
+      "length_scope": "GLOBAL_FIRST_OR_SECOND_PROFILE_BOUNDARY_CHAIN; EXCLUDES_CLOSING_RULINGS",
+      "rounding_reserve_paper_mm": 1e-10,
+      "requested_position_budget_paper_mm": 0.008,
+      "requested_length_budget_paper_mm": 0.008,
+      "same_parameter_position_proof": "SOURCE_F_TO_LINE_DELTA_PLUS_BERNSTEIN_CONTROL_ETA",
+      "length_proof": "SOURCE_CHAIN_DEFICIT_PLUS_SUM_ACTUAL_CUBIC_CONTROL_POLYGON_MINUS_CHORD",
+      "serialization_scope": "BINARY_CONTROL_GEOMETRY_ONLY; PUBLISHER_BUDGET_IS_SEPARATE"
+    },
+    "closing_rulings": [
+      {
+        "world_length_paper_mm": 10.0,
+        "flat_length_paper_mm": 10.0,
+        "length_error_bound_paper_mm": 5.820766091346741e-11,
+        "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS"
+      },
+      {
+        "world_length_paper_mm": 10.0,
+        "flat_length_paper_mm": 10.0,
+        "length_error_bound_paper_mm": 5.820766091346741e-11,
+        "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS"
+      }
+    ],
+    "native_topology": {
+      "status": "VALID",
+      "reason": "Supplied native path topology proved",
+      "witness": null,
+      "examined_nodes": 45,
+      "numerical_guard": 1.8189894035458565e-12,
+      "proof": [
+        "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+        "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+        "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+        "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+        "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+        "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+      ],
+      "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+      "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+    },
+    "area": {
+      "status": "CERTIFIED",
+      "source_intrinsic": {
+        "status": "CERTIFIED",
+        "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+        "area_lower_exact": "499999999999999999999999999/1000000000000000000000000",
+        "area_upper_exact": "500000000000000000000000001/1000000000000000000000000",
+        "area_lower_paper_mm2": 499.99999999999994,
+        "area_upper_paper_mm2": 500.00000000000006,
+        "absolute_budget_mm2": 0.0001,
+        "examined_nodes": 3,
+        "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+        "coverage": {
+          "first_profile_id": "b6b460d3-87ca-420f-bb93-ed0976b846f5",
+          "second_profile_id": "92c5469d-b884-45a3-bd84-470845909b0c",
+          "first_closed": false,
+          "second_closed": false,
+          "expected_first_segment_ids": [
+            "a6335197-eaa0-4523-932a-172d537911d3",
+            "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+            "0ed5640c-ed4a-4965-9bf3-c62acbd76b74"
+          ],
+          "expected_second_segment_ids": [
+            "c1db29f9-a5ea-4d22-8354-a12910107c50",
+            "861dd257-ce2c-4502-9e59-0a5a67dbfd10",
+            "f8cf8b86-c358-4dee-a224-0f2e64d03945"
+          ],
+          "correspondences": [
+            {
+              "first_segment_id": "a6335197-eaa0-4523-932a-172d537911d3",
+              "second_segment_id": "c1db29f9-a5ea-4d22-8354-a12910107c50",
+              "first_parameter_interval": [
+                0,
+                1
+              ],
+              "second_parameter_interval": [
+                0,
+                1
+              ]
+            },
+            {
+              "first_segment_id": "91f4e936-ae86-4388-a8e6-357ac3bdca8e",
+              "second_segment_id": "861dd257-ce2c-4502-9e59-0a5a67dbfd10",
+              "first_parameter_interval": [
+                0,
+                1
+              ],
+              "second_parameter_interval": [
+                0,
+                1
+              ]
+            },
+            {
+              "first_segment_id": "0ed5640c-ed4a-4965-9bf3-c62acbd76b74",
+              "second_segment_id": "f8cf8b86-c358-4dee-a224-0f2e64d03945",
+              "first_parameter_interval": [
+                0,
+                1
+              ],
+              "second_parameter_interval": [
+                0,
+                1
+              ]
+            }
+          ],
+          "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+        },
+        "proof": {
+          "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+          "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+          "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+          "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+          "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+          "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+          "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+        }
+      },
+      "actual_native": {
+        "lower_exact": "500",
+        "upper_exact": "500",
+        "lower_paper_mm2": 499.99999999999994,
+        "upper_paper_mm2": 500.00000000000006
+      },
+      "maximum_error_bound_exact": "1/1000000000000000000000000",
+      "maximum_error_bound_paper_mm2": 1.0000000000000001e-24,
+      "allowed_error_exact": "1/100",
+      "allowed_error_paper_mm2": 0.01,
+      "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+      "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+      "max_commands": 32782,
+      "serialized_output": "NOT_VERIFIED",
+      "refinement_attempts": [
+        {
+          "attempt": 0,
+          "effective_tolerance_mm": 0.005,
+          "status": "CERTIFIED",
+          "maximum_error_bound_exact": "1/1000000000000000000000000",
+          "maximum_error_bound_paper_mm2": 1.0000000000000001e-24,
+          "allowed_error_exact": "1/100"
+        }
+      ]
+    },
+    "requested_tolerance_mm": 0.005,
+    "effective_tolerance_mm": 0.005,
+    "feature_id": "ff343019-f10d-4bd1-b299-87b32e9b6302",
+    "intrinsic_source_digest": "ebfafc0c7a836b0f805d4831f501ec24f472aaab72ff96a74d31cd00bc7e6b40",
+    "feature_revision": 2
+  },
+  "snapshot": "Export vy\u017eaduje opravu nebo potvrzen\u00ed: Ulo\u017een\u00fd rozvin nem\u00e1 dolo\u017eenou plo\u0161nou p\u0159esnost."
+}

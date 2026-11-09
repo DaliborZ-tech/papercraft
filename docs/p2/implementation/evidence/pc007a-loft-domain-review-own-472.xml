@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="28" time="2.358" timestamp="2026-11-09T11:34:54.507077+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_LD01_signed_turns_and_print_side_are_real_fold_polarity[1]" time="0.017"><failure message="AssertionError: assert 2 == 0&#10; +  where 2 = len([{'points': [[20.0, 0.0], [20.0, 10.0]], 'closed': False}, {'points': [[30.0, 0.0], [30.0, 10.0]], 'closed': False}])&#10; +  and   0 = len([])">mirror = 1
+
+    @pytest.mark.parametrize('mirror',[1,-1])
+    def test_LD01_signed_turns_and_print_side_are_real_fold_polarity(mirror):
+        p,a,b=source([[0,0],[20,0],[20,10*mirror],[40,10*mirror]])
+        s=p.add_loft(a,b,correspondences=refs(p,a,b));pid=p.part_for_surface(s)
+        out=copy.deepcopy(p.parts[pid].paths)
+        # Around +z ruling the two true normal turns have opposite signs.
+&gt;       assert len(out['FOLD_MOUNTAIN'])==len(out['FOLD_VALLEY'])==1
+E       AssertionError: assert 2 == 0
+E        +  where 2 = len([{'points': [[20.0, 0.0], [20.0, 10.0]], 'closed': False}, {'points': [[30.0, 0.0], [30.0, 10.0]], 'closed': False}])
+E        +  and   0 = len([])
+
+docs\p2\implementation\evidence\pc007a-loft-domain-review-own.py:42: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_LD01_signed_turns_and_print_side_are_real_fold_polarity[-1]" time="0.013"><failure message="AssertionError: assert 2 == 0&#10; +  where 2 = len([{'points': [[20.0, 0.0], [20.0, 10.0]], 'closed': False}, {'points': [[30.0, 0.0], [30.0, 10.0]], 'closed': False}])&#10; +  and   0 = len([])">mirror = -1
+
+    @pytest.mark.parametrize('mirror',[1,-1])
+    def test_LD01_signed_turns_and_print_side_are_real_fold_polarity(mirror):
+        p,a,b=source([[0,0],[20,0],[20,10*mirror],[40,10*mirror]])
+        s=p.add_loft(a,b,correspondences=refs(p,a,b));pid=p.part_for_surface(s)
+        out=copy.deepcopy(p.parts[pid].paths)
+        # Around +z ruling the two true normal turns have opposite signs.
+&gt;       assert len(out['FOLD_MOUNTAIN'])==len(out['FOLD_VALLEY'])==1
+E       AssertionError: assert 2 == 0
+E        +  where 2 = len([{'points': [[20.0, 0.0], [20.0, 10.0]], 'closed': False}, {'points': [[30.0, 0.0], [30.0, 10.0]], 'closed': False}])
+E        +  and   0 = len([])
+
+docs\p2\implementation\evidence\pc007a-loft-domain-review-own.py:42: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_LD02_whole_native_area_has_normative_budget_or_blocks" time="0.409"><failure message="assert Fraction(7142331227666557578940281674512052503156718802910487472296153908203143, 125000000000000000000000000000000000000000000000000000000000000000000000) &lt;= Fraction(1570796326794896619231321691639751442098584699687552910487472296153908203143, 125000000000000000000000000000000000000000000000000000000000000000000000000000)&#10;[+1 more line; full report in element text]">def test_LD02_whole_native_area_has_normative_budget_or_blocks():
+        p=AuthorProject.new(scale=1);a=p.add_profile(segments=[dict(kind='arc',start=[20,0],end=[-20,0],data=dict(center=[0,0],sweep_deg=180))],closed=False)
+        b=p.copy_profile(a,plane=dict(origin=[0,0,200],u=[1,0,0],v=[0,1,0]))
+        s=p.add_loft(a,b,correspondences=refs(p,a,b));pid=p.part_for_surface(s)
+        if p.loft_status(s)['status']!='EXACT':
+            with pytest.raises(ValidationError):p.snapshot()
+            return
+        commands=p.parts[pid].paths['CUT'][0]['commands'];assert {c[0] for c in commands}&lt;={'M','L','Z'}
+        points=[tuple(map(Q,c[1:])) for c in commands if c[0] in ['M','L']]
+        actual=abs(sum(a[0]*b[1]-a[1]*b[0] for a,b in zip(points,points[1:]+points[:1])))/2
+        pi=Q('3.141592653589793238462643383279502884197169399375105820974944592307816406286')
+        expected=4000*pi;tolerance=max(Q(1,100),expected/1000000)
+&gt;       assert abs(actual-expected)&lt;=tolerance
+E       assert Fraction(7142331227666557578940281674512052503156718802910487472296153908203143, 125000000000000000000000000000000000000000000000000000000000000000000000) &lt;= Fraction(1570796326794896619231321691639751442098584699687552910487472296153908203143, 125000000000000000000000000000000000000000000000000000000000000000000000000000)
+E        +  where Fraction(7142331227666557578940281674512052503156718802910487472296153908203143, 125000000000000000000000000000000000000000000000000000000000000000000000) = abs((Fraction(221068924557130775, 17592186044416) - Fraction(1570796326794896619231321691639751442098584699687552910487472296153908203143, 125000000000000000000000000000000000000000000000000000000000000000000000)))
+
+docs\p2\implementation\evidence\pc007a-loft-domain-review-own.py:59: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_seam_reorders_real_cut_and_keeps_explicit_frame_locks" time="0.038" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_seam_duplicate_anchor_requires_incident_axis_identity_not_nearest" time="0.050" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_full_source_coverage_and_direct_world_uv_evaluation[False]" time="0.012" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_full_source_coverage_and_direct_world_uv_evaluation[True]" time="0.015" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_open_cubic_is_not_closed_by_fake_source_chord" time="0.433" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_coplanar_closed_loft_is_true_region_with_hole" time="0.007" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_unsupported_contact_cannot_invent_bottom_of_perimeter_loft" time="0.030" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_both_dependencies_cache_and_locked_anchor_survive_save_undo_redo[first]" time="0.072" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_both_dependencies_cache_and_locked_anchor_survive_save_undo_redo[second]" time="0.064" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_preview_binding_and_cache_results_are_detached_from_actual_feature" time="0.021" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_non_developable_target_persists_without_exact_or_snapshot" time="0.155" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_invalid_commands_have_no_partial_mutations[missing]" time="0.002" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_invalid_commands_have_no_partial_mutations[duplicate]" time="0.002" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_invalid_commands_have_no_partial_mutations[reverse_only_one]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_invalid_commands_have_no_partial_mutations[missing_second]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_invalid_commands_have_no_partial_mutations[uuid_collision]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_current_schema_invalid_source_refs_are_typed_errors[second_ref]" time="0.012" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_current_schema_invalid_source_refs_are_typed_errors[patch_id]" time="0.012" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_current_schema_invalid_source_refs_are_typed_errors[source_bool]" time="0.014" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_current_schema_invalid_source_refs_are_typed_errors[unknown_param]" time="0.011" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_rational_avl_sweep_matches_all_inclusive_bbox_pairs[17]" time="0.011" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_rational_avl_sweep_matches_all_inclusive_bbox_pairs[43]" time="0.016" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_rational_avl_sweep_matches_all_inclusive_bbox_pairs[91]" time="0.001"><failure message="ValueError: A source segment needs distinct endpoints">seed = 91
+
+    @pytest.mark.parametrize('seed',[17,43,91,131])
+    def test_rational_avl_sweep_matches_all_inclusive_bbox_pairs(seed):
+        randomizer=random.Random(seed);nodes=[];boxes=[];guard=Q(1,10**17)
+        for i in range(75):
+            x,y=Q(randomizer.randrange(-20,21),3),Q(randomizer.randrange(-20,21),7);w,h=Q(randomizer.randrange(0,12),3),Q(randomizer.randrange(0,12),7)
+&gt;           controls=((x,y),(x+w,y+h));curve=Curve(controls[0],controls[1],segment_id=str(i));nodes.append(topology._Node(curve,controls=controls));boxes.append(((x-guard,x+w+guard),(y-guard,y+h+guard)))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-loft-domain-review-own.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+&lt;string&gt;:8: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Curve(start=(Fraction(-14, 3), Fraction(6, 7)), end=(Fraction(-14, 3), Fraction(6, 7)), kind='line', data=None, segment_id='21')
+
+    def __post_init__(self):
+        start, end = _point(self.start), _point(self.end)
+        if start == end:
+&gt;           raise ValueError("A source segment needs distinct endpoints")
+E           ValueError: A source segment needs distinct endpoints
+
+..\..\AppData\Local\Temp\pc007a-review-loft-domain-472-8evruxu7\src\archpapercraft\authoring\curves.py:44: ValueError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_rational_avl_sweep_matches_all_inclusive_bbox_pairs[131]" time="0.014" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-domain-review-own" name="test_candidate_budget_exhaustion_and_hidden_cubic_crossing_never_VALID" time="0.001" /></testsuite></testsuites>

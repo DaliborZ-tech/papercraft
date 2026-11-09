@@ -1,0 +1,30 @@
+{
+  "loft_area": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\loft_area.py",
+    "actual_sha256": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238"
+  },
+  "loft_surface": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\loft_surface.py",
+    "actual_sha256": "a8b88e793c8082c8265c61853b98689df5472f2f5c5b8edc7d82849d73fb3764"
+  },
+  "paper": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\paper.py",
+    "actual_sha256": "02cf61165ea3e187d54411af2a3d1a58bf18d574da30ef454f71eccbc5783fee"
+  },
+  "project": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\project.py",
+    "actual_sha256": "e46e1cb1eb2c4452fe7b504744c10b06e67a70ddb53b79fe60628a2a7c91290f"
+  },
+  "loft_geometry": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\loft_geometry.py",
+    "actual_sha256": "65c09f5db438d6914023ea98f58a3be6c07e4d7960e0ae1581247e33cf936d90"
+  },
+  "curve_area": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\curve_area.py",
+    "actual_sha256": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9"
+  },
+  "curves": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni\\src\\archpapercraft\\authoring\\curves.py",
+    "actual_sha256": "acbea1c2b89ac9da0fab3d8855746ca1355719dbfcee7de2a57898aa30e002d2"
+  }
+}

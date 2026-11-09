@@ -1,0 +1,41 @@
+{
+  "source_sha": "a1cbf920397694f3b1d3e85a08052acdc3962a7b",
+  "archive": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-domain-a1c-dzbgu3ni",
+  "files": {
+    "src/archpapercraft/authoring/loft_area.py": {
+      "runtime_sha256": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238",
+      "git_bytes_sha256": "e2bc401fc7efacb8012dfdc94258469c7448a04477de7f3cbf7edde47ec78c0d",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/loft_surface.py": {
+      "runtime_sha256": "a8b88e793c8082c8265c61853b98689df5472f2f5c5b8edc7d82849d73fb3764",
+      "git_bytes_sha256": "5dc4449e1a3c121f79a7e608938959ead793f07a4f3579820aaf3995f6d8fc28",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/paper.py": {
+      "runtime_sha256": "02cf61165ea3e187d54411af2a3d1a58bf18d574da30ef454f71eccbc5783fee",
+      "git_bytes_sha256": "fcd22312a4f78ecc1d93d94a3d336dfab5f52a1ccdcae7bab6f83feb911be227",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/project.py": {
+      "runtime_sha256": "e46e1cb1eb2c4452fe7b504744c10b06e67a70ddb53b79fe60628a2a7c91290f",
+      "git_bytes_sha256": "9cbe42935230730d59ae243264cb9b28dad38d8c2d59d5c1d928e74672f0b74d",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/loft_geometry.py": {
+      "runtime_sha256": "65c09f5db438d6914023ea98f58a3be6c07e4d7960e0ae1581247e33cf936d90",
+      "git_bytes_sha256": "e9bcf8a963ee96aa0347a3497d3fc04b9ecfb03fd59e9358b2566f297146eb65",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/curve_area.py": {
+      "runtime_sha256": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9",
+      "git_bytes_sha256": "8d6538d23bab25da9732ce0d76b36c2f8c66f3a69e7c753bede48f4d295f9de1",
+      "eol_only": true
+    },
+    "tests/authoring/test_loft_area.py": {
+      "runtime_sha256": "3d26a343af27826136309d6c900f648394bd3590dfd552e66f969f0b4e74b637",
+      "git_bytes_sha256": "df666c85845fb0d4839b7f527a381ad1b513382327d0f3704a3724f83d59c992",
+      "eol_only": true
+    }
+  }
+}
