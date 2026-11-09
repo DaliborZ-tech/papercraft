@@ -1,0 +1,6 @@
+{
+  "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+  "cold_flatten_calls": 1,
+  "snapshot_unchanged": true,
+  "scope": "Cold source-binding recomputation is real; no OS/UI latency claim."
+}

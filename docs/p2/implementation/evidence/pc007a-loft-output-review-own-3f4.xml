@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="12" time="5.509" timestamp="2026-11-09T12:43:55.022434+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_exact_pinned_source_imports_and_committed_artifact_bytes" time="2.756" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_actual_stored_svg_pdf_against_independent_green_and_source_oracles[B1]" time="1.527" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_actual_stored_svg_pdf_against_independent_green_and_source_oracles[LD02]" time="0.034" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_same_area_cached_cut_swap_cannot_rebind_to_current_source" time="0.019" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft[missing_registry]" time="0.030" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft[reverse_profiles]" time="0.016" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft[revision]" time="0.016" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft[frame]" time="0.017"><failure message="Failed: DID NOT RAISE CurveOutputError">damage = 'frame'
+
+    @pytest.mark.parametrize('damage',['missing_registry','reverse_profiles','revision','frame','representation'])
+    def test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft(damage):
+        p,sid,pid=project();snap=p.snapshot();assert snap['construction_checks']['curve_profiles']=={}
+        report=snap['construction_checks']['lofts'][sid]
+        if damage=='missing_registry':snap['construction_checks']['lofts']={}
+        elif damage=='reverse_profiles':report['source_binding']['profiles'].reverse()
+        elif damage=='revision':report['feature_revision']+=1
+        elif damage=='frame':report['paper_frame']['axis_segment_id']=p.profiles[next(iter(p.profiles))].segments[-1].id
+        else:report['representation']['position_error_bound_paper_mm']=0
+&gt;       with pytest.raises(CurveOutputError):validate_loft_snapshot(snap)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE CurveOutputError
+
+docs\p2\implementation\evidence\pc007a-loft-output-review-own.py:186: Failed</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_source_binding_and_empty_planar_registry_cannot_hide_actual_loft[representation]" time="0.016" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_pure_loft_rotated_second_page_still_has_actual_output_guards" time="0.069" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_whole_source_budget_no_fresh_allowance_for_each_conversion" time="0.069"><failure message="TypeError: 'NoneType' object is not subscriptable">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1238/test_whole_source_budget_no_fr0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002B3220A2E40&gt;
+
+    def test_whole_source_budget_no_fresh_allowance_for_each_conversion(tmp_path,monkeypatch):
+        # Independent fixture: 112 -&gt;112.008 SVG -&gt;112.016 PDF, .01 final budget.
+        p,sid,pid=project();snap=p.snapshot();directory=tmp_path/'bundle';author_export.export_all(snap,directory);(directory/'foreign.dat').write_bytes(b'owner data\x00\xff');before=hashes(directory)
+        svg0,pdf0=author_export._svg,author_export._pdf
+        def svg(*args,**kwargs):
+            svg0(*args,**kwargs);path=args[4];tree=ET.parse(path);cut=tree.find(f'.//{NS}g[@data-role="CUT"]/{NS}path');d=cut.get('d');cut.set('d',re.sub(r'(?&lt;![\d.])7(?![\d.])','7.0005',d));tree.write(path,encoding='utf8',xml_declaration=True)
+        def pdf(*args,**kwargs):
+            out=pdf0(*args,**kwargs);path=args[3];reader=PdfReader(path);writer=PdfWriter()
+            for page in reader.pages:
+                raw=page.get_contents().get_data();match=re.search(rb'/APRole_CUT BMC(.*?)EMC',raw,re.S);block=match[1];changed,n=re.subn(rb'(?&lt;![\d.])7(?![\d.])',b'7.001',block);assert n&gt;=2;raw=raw[:match.start(1)]+changed+raw[match.end(1):];stream=DecodedStreamObject();stream.set_data(raw);page[NameObject('/Contents')]=stream;writer.add_page(page)
+            with path.open('wb') as f:writer.write(f)
+            return out
+        monkeypatch.setattr(author_export,'_svg',svg);monkeypatch.setattr(author_export,'_pdf',pdf)
+        with pytest.raises(CurveOutputError) as caught:author_export.export_all(snap,directory)
+&gt;       outs=caught.value.report['lofts'][sid]['outputs']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'NoneType' object is not subscriptable
+
+docs\p2\implementation\evidence\pc007a-loft-output-review-own.py:212: TypeError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-output-review-own" name="test_unavailable_actual_topology_budget_preserves_bundle_and_foreign_bytes" time="0.077" /></testsuite></testsuites>
