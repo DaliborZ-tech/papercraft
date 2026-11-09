@@ -100,6 +100,44 @@ def contact_tolerance(project, *regions, span=0):
     return min(0.01 / project.scale, max(1e-6, 1e-9 * max([span, *extents])))
 
 
+def _reject_implicit_curved_source(project, source, target, source_bounds, target_bounds,
+                                   target_region, tolerance):
+    """Only guaranteed source material can prove a known negative before refusal."""
+    lower = source_bounds.guaranteed
+    polygons = [lower] if lower.geom_type == "Polygon" else list(lower.geoms)
+    for polygon in polygons:
+        if polygon.geom_type != "Polygon" or polygon.is_empty:
+            continue
+        loops = [list(polygon.exterior.coords)[:-1],
+                 *[list(h.coords)[:-1] for h in polygon.interiors]]
+        mapped, distances = [], []
+        for loop in loops:
+            world = project._surface_world_points(source, loop)
+            uv, gap = world_to_uv(project, target, world)
+            mapped.append(uv)
+            distances.extend(gap)
+        gap = max(abs(float(value)) for value in distances)
+        if gap > tolerance:
+            raise ValidationError(f"ATTACHMENT_GAP: lepené plochy odděluje mezera {gap:g} mm.")
+        footprint = Polygon(mapped[0], mapped[1:])
+        _prove_material_contact(
+            target_bounds, footprint, tolerance, "GLUE_REGION_PARTIAL",
+            "zaručený zdrojový materiál přesahuje přijímající plochu.",
+            defer_uncertainty=True,
+        )
+        upper_available = footprint.intersection(target_region).intersection(target_bounds.possible)
+        if (footprint.area-upper_available.area > max(1e-8, footprint.area*1e-10)
+                or not target_region.buffer(tolerance).covers(footprint)):
+            raise ValidationError(
+                "GLUE_REGION_PARTIAL: zaručený zdrojový materiál přesahuje lepicí oblast protikusu."
+            )
+    raise ValidationError(
+        "CURVE_SOURCE_REGION_UNRESOLVED: určete na zdrojovém dílu vlastní lepicí oblast "
+        "uvnitř materiálu, dále od křivkové hrany nebo otvoru. "
+        "Celý zakřivený obrys nelze nahradit zmenšeným mnohoúhelníkem."
+    )
+
+
 def attachment_geometry(project, attachment):
     """Read-only diagnostics; a projection never substitutes for physical contact."""
     if attachment.unresolved:
@@ -176,6 +214,9 @@ def attachment_geometry(project, attachment):
         "zdrojová lepicí oblast není celá na materiálu.",
         defer_uncertainty=True,
     )
+    if implicit_curved_source:
+        _reject_implicit_curved_source(project, source, target, source_bounds, target_bounds,
+                                       target_region, tolerance)
     loops = [
         list(source_polygon.exterior.coords)[:-1],
         *[list(h.coords)[:-1] for h in source_polygon.interiors],
@@ -205,14 +246,6 @@ def attachment_geometry(project, attachment):
     if not target_region.buffer(tolerance).covers(footprint):
         raise ValidationError(
             "GLUE_REGION_PARTIAL: otisk přesahuje příjemce nad toleranci kontaktu."
-        )
-    if implicit_curved_source:
-        # A shrunken chord guarantee must never replace the authored whole part.
-        # Definite source/receiver/gap failures above retain their own verdict.
-        raise ValidationError(
-            "CURVE_SOURCE_REGION_UNRESOLVED: určete na zdrojovém dílu vlastní lepicí oblast "
-            "uvnitř materiálu, dále od křivkové hrany nebo otvoru. "
-            "Celý zakřivený obrys nelze nahradit zmenšeným mnohoúhelníkem."
         )
     if not all((source_proved, target_proved, footprint_proved)):
         _unresolved_curve_contact()

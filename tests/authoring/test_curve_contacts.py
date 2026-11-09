@@ -170,3 +170,31 @@ def test_definite_source_gap_is_not_weakened_by_curved_receiver_uncertainty():
     project.set_transform(source, [0, 0, 1])
     with pytest.raises(ValidationError, match="ATTACHMENT_GAP"):
         project.set_glue_region(source, receiver, points)
+
+
+def test_implicit_curved_source_proxy_cannot_invent_a_definite_missing_glue_area():
+    project = AuthorProject.new(scale=1)
+    profile = project.add_profile(segments=[
+        {"kind": "line", "start": [-20, 0], "end": [20, 0]},
+        {"kind": "line", "start": [20, 0], "end": [20, 20]},
+        {"kind": "line", "start": [20, 20], "end": [10, 20]},
+        {"kind": "arc", "start": [10, 20], "end": [-10, 20],
+         "data": {"center": [0, 20], "sweep_deg": -180}},
+        {"kind": "line", "start": [-10, 20], "end": [-20, 20]},
+        {"kind": "line", "start": [-20, 20], "end": [-20, 0]},
+    ])
+    source = project.add_surface(profile)
+    outline = copy.deepcopy(project.profile_outline(profile))
+    certificate = next(c for c in project.profile_projection(profile)["curves"]
+                       if c["segment_id"] == project.profiles[profile].segments[3].id)
+    midpoint_t = sum(certificate["parameter_intervals"][0])/2
+    true_point = [10*math.cos(-math.pi*midpoint_t), 20+10*math.sin(-math.pi*midpoint_t)]
+    index = next(i for i, point in enumerate(outline) if np.allclose(point, [10, 20]))
+    outline.insert(index+1, true_point)
+    # Refining one concave notch chord removes only false proxy paper; the
+    # true curved material still fits inside this receiver.
+    target = project.add_surface(project.add_profile(outline))
+    assert Polygon(project.profile_outline(profile)).difference(Polygon(outline)).area > 1e-8
+    assert surface_envelopes(project, source).guaranteed.difference(Polygon(outline)).is_empty
+    with pytest.raises(ValidationError, match="CURVE_SOURCE_REGION_UNRESOLVED"):
+        project.set_glue_region(source, target, outline)
