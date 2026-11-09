@@ -2,7 +2,9 @@
 
 import math
 
+import numpy as np
 import pytest
+from shapely import Point, Polygon
 
 from archpapercraft.authoring import AuthorProject
 
@@ -89,3 +91,130 @@ def test_large_crease_reservation_cannot_make_the_check_vacuously_clear():
     assert result["status"] == "UNRESOLVED"
     assert "příliš široký" in result["message"]
     assert any(i.code == "BEND_UNRESOLVED" for i in project.validate_layout())
+
+
+def add_far_tab(project, base, side):
+    profile = project.add_profile(
+        [[70, 0], [90, 0], [90, 20], [70, 20]],
+        plane={"origin": [0, 5, 0], "u": [1, 0, 0], "v": [0, 0, 1]},
+    )
+    source = project.add_surface(profile)
+    attachment = project.attach_edge_to_surface(
+        source, project.profiles[profile].segments[0].id, base,
+        target_side=side, glue_direction=-1,
+    )
+    return project.set_attachment_tab(attachment, width_mm=5, taper=1)
+
+
+def assert_complete_inventory(report):
+    expected = set(report["expected_obstacle_ids"])
+    checked = set(report["checked_obstacle_ids"])
+    unresolved = set(report["unresolved_layer_obstacle_ids"])
+    assert not checked & unresolved
+    assert expected == checked | unresolved
+
+
+def test_siblings_and_other_connectors_are_material_and_disabled_tabs_are_absent():
+    project, cid, _, base = own_wall_base()
+    project.set_connector(cid, count=2, gap_mm=2)
+    other = add_far_tab(project, base, "outside")
+    project.set_material_profile(thickness_mm=0.2)
+    tids = project.connectors[cid].tab_ids.copy()
+    other_tid = project.connectors[other].tab_ids[0]
+    result = project.connector_bend_clearance(cid)
+    assert result["status"] == "CLEAR", result
+    assert result["assembly_scenario"] == "ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED"
+    for report in result["tabs"]:
+        assert_complete_inventory(report)
+        assert "tab:" + report["tab_id"] not in report["expected_obstacle_ids"]
+        assert {"tab:" + tid for tid in [*tids, other_tid] if tid != report["tab_id"]} <= set(
+            report["checked_obstacle_ids"]
+        )
+    project.set_connector_tab(cid, tids[1], enabled=False)
+    project.set_connector(other, enabled=False)
+    updated = project.connector_bend_clearance(cid)
+    assert len(updated["tabs"]) == 1
+    assert updated["tabs"][0]["tab_id"] == tids[0]
+    assert all(not oid.startswith("tab:") for oid in updated["tabs"][0]["expected_obstacle_ids"])
+    assert project.connectors[cid].tab_ids == tids
+
+
+@pytest.mark.parametrize("known", [False, True])
+def test_opposite_sides_explicitly_retain_unresolved_material_without_false_collision(known):
+    project, cid, _, base = own_wall_base()
+    other = add_far_tab(project, base, "inside")
+    if known:
+        project.set_material_profile(thickness_mm=0.2)
+    result = project.connector_bend_clearance(cid)
+    assert result["status"] == ("UNRESOLVED" if known else "UNVERIFIED"), result
+    report = result["tabs"][0]
+    assert_complete_inventory(report)
+    assert report["unresolved_layer_obstacle_ids"] == [
+        "tab:" + project.connectors[other].tab_ids[0]
+    ]
+    obstacle = add_between_pose_obstacle(project)
+    collision = project.connector_bend_clearance(cid)
+    assert collision["status"] == "COLLISION", collision
+    assert collision["tabs"][0]["obstacle_id"] == obstacle
+    assert_complete_inventory(collision["tabs"][0])
+    assert collision["tabs"][0]["unresolved_layer_obstacle_ids"]
+
+
+def test_concave_other_tab_keeps_its_actual_void_in_the_obstacle_triangulation():
+    project, _, _, base = own_wall_base()
+    other = add_far_tab(project, base, "outside")
+    tid = project.connectors[other].tab_ids[0]
+    # 20*5 rectangle minus the 10*3 open notch = 70 mm2, not its 100 mm2 hull.
+    project.set_connector_tab(other, tid, shape="custom", outline_mm=[
+        [0, 0], [20, 0], [20, 5], [15, 5], [15, 2], [5, 2], [5, 5], [0, 5],
+    ])
+    record = next(r for r in project._bend_tab_obstacles() if r["tab_id"] == tid)
+    triangles = record["triangles"]
+    area = sum(np.linalg.norm(np.cross(t[1] - t[0], t[2] - t[0])) / 2 for t in triangles)
+    assert area == pytest.approx(70)
+    # Final footprint: x=70..90, y=0..5; the notch is x=75..85, y=0..3.
+    assert all(not Polygon(t[:, :2]).contains(Point(80, 1)) for t in triangles)
+    assert any(Polygon(t[:, :2]).covers(Point(72, 1)) for t in triangles)
+
+
+@pytest.mark.parametrize("known", [False, True])
+def test_other_authored_tab_blocks_mid_motion_while_endpoint_planes_are_free(known):
+    project, cid, *_ = own_wall_base()
+    # Negative construction fixture: another authored tab bridges a receiver
+    # opening, with insufficient glue support. Its actual material still must
+    # obstruct this tab; missing glue does not make that paper disappear.
+    plane = {"origin": [0, 3, 0], "u": [1, 0, 0], "v": [0, 0, 1]}
+    outer = project.add_profile([[10, -6], [70, -6], [70, 2], [10, 2]], plane=plane)
+    hole = project.add_profile([[19, -4.7], [61, -4.7], [61, 0.1], [19, 0.1]], plane=plane)
+    receiver = project.add_surface(outer)
+    source_profile = project.add_profile(
+        [[25, 0], [55, 0], [55, 3], [25, 3]],
+        plane={"origin": [0, 0, -4.9], "u": [1, 0, 0], "v": [0, 1, 0]},
+    )
+    source = project.add_surface(source_profile)
+    attachment = project.attach_edge_to_surface(
+        source, project.profiles[source_profile].segments[2].id, receiver,
+        target_side="outside", glue_direction=-1,
+    )
+    other = project.set_attachment_tab(attachment, width_mm=4, taper=1)
+    # Subsequent receiver editing invalidates existing glue support; the old
+    # authored tab remains material until its author explicitly changes it.
+    project.add_hole(receiver, hole)
+    if known:
+        project.set_material_profile(thickness_mm=0.1)
+    result = project.connector_bend_clearance(cid)
+    expected = "tab:" + project.connectors[other].tab_ids[0]
+    assert result["status"] == "COLLISION", result
+    report = result["tabs"][0]
+    assert report["obstacle_id"] == expected, report
+    assert -90 < report["witness_angle_deg"] < 0
+    assert_complete_inventory(report)
+    # Independently: folded obstacle y=3,z=-4.9..-0.9. Initial moving
+    # tab is y=5 and final moving tab is z=0, each at least 0.9 mm away.
+    triangles = next(r["triangles"] for r in project._bend_tab_obstacles()
+                     if r["id"] == expected)
+    assert np.allclose(triangles[:, :, 1], 3)
+    assert np.max(triangles[:, :, 2]) == pytest.approx(-0.9)
+    project.set_connector(other, enabled=False)
+    cleared = project.connector_bend_clearance(cid)
+    assert cleared["status"] == ("CLEAR" if known else "UNVERIFIED"), cleared

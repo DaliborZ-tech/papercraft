@@ -27,6 +27,30 @@ _MISSING = object()
 
 
 class BendCommands:
+    def _bend_tab_obstacles(self):
+        """Actual active tab material in its final pose, never a convex outline hull."""
+        records = []
+        for cid, connector in self.connectors.items():
+            if not connector.enabled:
+                continue
+            geometry = self._connector_geometry(cid)
+            for contact in geometry["tabs"]:
+                receiver = contact["receiver_surface_id"]
+                footprint = np.asarray(contact["footprint_uv_mm"])
+                points, faces = triangulate(footprint)
+                world = self._surface_world_points(receiver, points / self.scale) * self.scale
+                records.append({
+                    "id": "tab:" + contact["tab_id"],
+                    "tab_id": contact["tab_id"],
+                    "connector_id": cid,
+                    "receiver_id": receiver,
+                    "receiver_side": geometry["receiver_side"],
+                    "triangles": world[faces],
+                })
+        if len({r["id"] for r in records}) != len(records):
+            raise ValidationError("Aktivní chlopně nemají jednoznačné stabilní identity.")
+        return records
+
     def _validate_material_profile(self):
         profile = self.material_profile
         if not isinstance(profile, dict) or set(profile) != set(DEFAULT_MATERIAL_PROFILE):
@@ -123,6 +147,7 @@ class BendCommands:
             triangles = np.asarray(world["vertices"])[np.asarray(world["triangles"])] * self.scale
             obstacles.append(MaterialObstacle(sid, triangles, thickness))
         contact_by_id = {tab["tab_id"]: tab for tab in geometry["tabs"]}
+        assembled_tabs = self._bend_tab_obstacles()
         reports = []
         for tab in geometry["all_tabs"]:
             if not tab["enabled"]:
@@ -209,12 +234,48 @@ class BendCommands:
                                  "receiver" if o.id == receiver else "other")
                 for o in obstacles
             ]
+            # One tab moves while all other active tabs are already folded.
+            # Opposite receiver sides have no authored physical layer offset.
+            # Their zero-offset solids must not fabricate a certain collision.
+            # Keep them explicit in the unresolved inventory, never grant a
+            # blanket contact permission or erase another certain collision.
+            unresolved_layers = []
+            expected_ids = [o.id for o in obstacles_for_tab]
+            for record in assembled_tabs:
+                if record["tab_id"] == tab["id"]:
+                    continue
+                expected_ids.append(record["id"])
+                side = geometry["receiver_side"]
+                other_side = record["receiver_side"]
+                uncertain = record["receiver_id"] == receiver and (
+                    side == "unknown" or other_side == "unknown" or side != other_side
+                )
+                if uncertain:
+                    unresolved_layers.append(record["id"])
+                else:
+                    obstacles_for_tab.append(MaterialObstacle(
+                        record["id"], record["triangles"], thickness,
+                    ))
             result = check_fold_clearance(
                 sweep, material, obstacles_for_tab,
-                expected_obstacle_ids=list(self.surfaces), allowances=allowances,
+                expected_obstacle_ids=[o.id for o in obstacles_for_tab], allowances=allowances,
                 **({"max_depth": 8, "max_intervals": 128} if thickness is None else {}),
             )
             detail = asdict(result)
+            detail["expected_obstacle_ids"] = expected_ids
+            detail["unresolved_layer_obstacle_ids"] = unresolved_layers
+            detail["layer_geometry"] = (
+                "Opposite or unknown receiver sides require explicit physical layer offsets; "
+                "these obstacles are inventoried but their clearance is not established."
+                if unresolved_layers else "NO_UNRESOLVED_RECEIVER_LAYER_PAIRS"
+            )
+            if unresolved_layers and detail["status"] != "COLLISION":
+                detail["status"] = "UNVERIFIED" if thickness is None else "UNRESOLVED"
+                detail["message"] = (
+                    "Vzájemnou polohu vrstev chlopní na protilehlých nebo neurčených "
+                    "stranách příjemce nelze ověřit. Nejde o prokázanou kolizi ani "
+                    "volný prostor; určete skutečnou konstrukci vrstev."
+                )
             detail["search_scope"] = (
                 "BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN"
                 if thickness is None else "CONTINUOUS_DECLARED_MATERIAL_ENVELOPE"
@@ -231,5 +292,6 @@ class BendCommands:
             "material_profile": copy.deepcopy(profile),
             "assembly_digest": self._assembly_clearance_key(),
             "motion": "shorter_signed_rigid_fold; finite_crease_and_contact_reservations",
+            "assembly_scenario": "ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED",
             "physical_build": "NOT_VERIFIED",
         }
