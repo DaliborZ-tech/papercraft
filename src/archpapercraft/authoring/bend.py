@@ -149,6 +149,7 @@ class BendCommands:
         contact_by_id = {tab["tab_id"]: tab for tab in geometry["tabs"]}
         assembled_tabs = self._bend_tab_obstacles()
         reports = []
+        precedence = {"CLEAR": 0, "UNVERIFIED": 1, "UNRESOLVED": 2, "COLLISION": 3}
         for tab in geometry["all_tabs"]:
             if not tab["enabled"]:
                 continue
@@ -264,14 +265,21 @@ class BendCommands:
             detail = asdict(result)
             detail["expected_obstacle_ids"] = expected_ids
             detail["unresolved_layer_obstacle_ids"] = unresolved_layers
+            accounted = set(detail["checked_obstacle_ids"]) | set(unresolved_layers)
+            detail["not_evaluated_obstacle_ids"] = [
+                oid for oid in expected_ids if oid not in accounted
+            ]
             detail["layer_geometry"] = (
                 "Opposite or unknown receiver sides require explicit physical layer offsets; "
                 "these obstacles are inventoried but their clearance is not established."
                 if unresolved_layers else "NO_UNRESOLVED_RECEIVER_LAYER_PAIRS"
             )
             if unresolved_layers and detail["status"] != "COLLISION":
-                detail["status"] = "UNVERIFIED" if thickness is None else "UNRESOLVED"
-                detail["message"] = (
+                layer_status = "UNVERIFIED" if thickness is None else "UNRESOLVED"
+                detail["status"] = max(
+                    (detail["status"], layer_status), key=precedence.__getitem__,
+                )
+                detail["message"] += " " + (
                     "Vzájemnou polohu vrstev chlopní na protilehlých nebo neurčených "
                     "stranách příjemce nelze ověřit. Nejde o prokázanou kolizi ani "
                     "volný prostor; určete skutečnou konstrukci vrstev."
@@ -285,7 +293,6 @@ class BendCommands:
                 else {"max_depth": 12, "max_intervals": 4096}
             )
             reports.append(detail)
-        precedence = {"CLEAR": 0, "UNVERIFIED": 1, "UNRESOLVED": 2, "COLLISION": 3}
         status = max((r["status"] for r in reports), key=precedence.__getitem__)
         return {
             "status": status, "tabs": reports,

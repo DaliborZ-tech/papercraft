@@ -110,8 +110,10 @@ def assert_complete_inventory(report):
     expected = set(report["expected_obstacle_ids"])
     checked = set(report["checked_obstacle_ids"])
     unresolved = set(report["unresolved_layer_obstacle_ids"])
-    assert not checked & unresolved
-    assert expected == checked | unresolved
+    not_evaluated = set(report["not_evaluated_obstacle_ids"])
+    assert not checked & unresolved and not checked & not_evaluated
+    assert not unresolved & not_evaluated
+    assert expected == checked | unresolved | not_evaluated
 
 
 def test_siblings_and_other_connectors_are_material_and_disabled_tabs_are_absent():
@@ -218,3 +220,31 @@ def test_other_authored_tab_blocks_mid_motion_while_endpoint_planes_are_free(kno
     project.set_connector(other, enabled=False)
     cleared = project.connector_bend_clearance(cid)
     assert cleared["status"] == ("CLEAR" if known else "UNVERIFIED"), cleared
+
+
+def test_unresolved_precision_failure_cannot_be_downgraded_by_unknown_opposite_layers():
+    project, cid, _, base = own_wall_base()
+    # Valid authoring coordinates beyond the bend kernel's supported digital
+    # conditioning envelope must block, even with unknown paper thickness.
+    far = project.add_profile(
+        [[0, 0], [10, 0], [10, 10], [0, 10]],
+        plane={"origin": [2000000, 0, 0], "u": [1, 0, 0], "v": [0, 1, 0]},
+    )
+    project.add_surface(far)
+    before = project.connector_bend_clearance(cid)
+    assert before["status"] == "UNRESOLVED", before
+    assert "conditioning" in before["tabs"][0]["message"]
+    other = add_far_tab(project, base, "inside")
+    after = project.connector_bend_clearance(cid)
+    assert after["status"] == "UNRESOLVED", after
+    report = after["tabs"][0]
+    assert "conditioning" in report["message"]
+    assert report["checked_obstacle_ids"] == ()
+    assert report["unresolved_layer_obstacle_ids"] == [
+        "tab:" + project.connectors[other].tab_ids[0]
+    ]
+    assert set(report["not_evaluated_obstacle_ids"]) == set(project.surfaces)
+    assert_complete_inventory(report)
+    assert any(i.code == "BEND_UNRESOLVED"
+               and i.joint_id == project.connectors[cid].attachment_id
+               for i in project.validate_layout())
