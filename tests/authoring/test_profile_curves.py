@@ -137,6 +137,85 @@ def test_invalid_curve_change_rolls_back_source_and_existing_layout():
     assert project.to_dict() == before
 
 
+def test_shallow_native_cubic_crossing_is_blocked_before_valid_chord_material_can_be_created():
+    project = AuthorProject.new(scale=1)
+    pid = project.add_profile(segments=[
+        {"kind": "cubic", "start": [0, 0.0005], "end": [10, 0.0005],
+         "control1": [3, -0.001], "control2": [7, -0.001]},
+        {"kind": "line", "start": [10, 0.0005], "end": [10, 0]},
+        {"kind": "line", "start": [10, 0], "end": [0, 0]},
+        {"kind": "line", "start": [0, 0], "end": [0, 0.0005]},
+    ])
+    before = copy.deepcopy(project.to_dict())
+    with pytest.raises(ValidationError, match="kříží"):
+        project.add_surface(pid)
+    assert project.to_dict() == before
+
+
+def test_writer_refuses_invalidated_native_curve_proof_without_changing_previous_bundle(tmp_path):
+    import hashlib
+
+    from archpapercraft.exporter.author_export import SnapshotError
+
+    project = AuthorProject.new(scale=1)
+    sid = project.add_surface(quarter_profile(project))
+    project.set_placement(project.part_for_surface(sid), project.pages[0].id, 60, 60)
+    source = project.snapshot()
+    directory = tmp_path / "bundle"
+    export_all(source, directory)
+    before = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in directory.iterdir()}
+    corrupted = copy.deepcopy(source)
+    next(iter(corrupted["construction_checks"]["curve_regions"].values()))["status"] = "UNRESOLVED"
+    with pytest.raises(SnapshotError):
+        export_all(corrupted, directory)
+    after = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in directory.iterdir()}
+    assert after == before
+
+
+def bulged_native_material(project):
+    pid = project.add_profile(segments=[
+        {"kind": "line", "start": [0, 0], "end": [10, 0]},
+        {"kind": "cubic", "start": [10, 0], "end": [10, 10],
+         "control1": [10.0015, 3], "control2": [10.0015, 7]},
+        {"kind": "line", "start": [10, 10], "end": [0, 10]},
+        {"kind": "line", "start": [0, 10], "end": [0, 0]},
+    ])
+    return project.add_surface(pid)
+
+
+def test_native_bulge_between_display_chords_cannot_silently_overlap_another_cut():
+    project = AuthorProject.new(scale=1)
+    first = project.part_for_surface(bulged_native_material(project))
+    second = project.part_for_surface(project.add_surface(project.add_profile(
+        [[0, 0], [2, 0], [2, 10], [0, 10]]
+    )))
+    project.set_placement(first, project.pages[0].id, 40, 40)
+    project.set_placement(second, project.pages[0].id, 50.0005, 40)
+    issue = next(i for i in project.validate_layout() if i.code == "CURVE_LAYOUT_UNRESOLVED")
+    assert issue.severity == "error" and set(issue.part_ids) == {first, second}
+    with pytest.raises(ValidationError):
+        project.acknowledge(issue.id)
+    with pytest.raises(ValidationError):
+        project.snapshot()
+    project.set_placement(second, x_mm=50.01)
+    assert any(i.code == "CURVE_LAYOUT_UNRESOLVED" for i in project.validate_layout())
+    # Both printed boundaries reserve the output budget, including the straight
+    # neighbor. A display-chord gap alone is not printed clearance evidence.
+    project.set_placement(second, x_mm=50.04)
+    assert not project.validate_layout()
+    assert project.snapshot()["coverage"]["expected_part_ids"] == [first, second]
+
+
+def test_native_bulge_past_the_sheet_is_not_cleared_by_its_in_bounds_chord():
+    project = AuthorProject.new(scale=1)
+    part = project.part_for_surface(bulged_native_material(project))
+    project.set_placement(part, project.pages[0].id, 200, 40)
+    assert any(i.code == "CURVE_SHEET_UNRESOLVED" and i.severity == "error"
+               for i in project.validate_layout())
+    with pytest.raises(ValidationError):
+        project.snapshot()
+
+
 def test_published_schema_three_is_copy_only_even_after_undo_and_failed_command(tmp_path):
     source = (Path(__file__).resolve().parents[2] / "docs/p2/implementation/evidence/"
               "pc006b-desktop-eb08f97-run06/model-A/model-A.apcraft")

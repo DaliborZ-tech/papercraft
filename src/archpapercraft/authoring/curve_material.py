@@ -44,6 +44,7 @@ class MaterialEnvelopes:
 _EXACT = "EXACT_LINE_AND_TAB_MATERIAL; no tessellation reservation"
 _PROOF = (
     "CERTIFIED_CHORD_PLUS_NATIVE_SVG_BOUNDARY_TUBES; "
+    "optional output reservation also bounds serialized manufacturing paths. "
     "requires proven simple source loops and a current verified part projection. "
     "Each oriented rectangle extends by delta both along and normal to its chord, "
     "covering its Euclidean delta-neighborhood, including endpoint caps. "
@@ -157,11 +158,11 @@ def _curved_certificates(project, surface_id):
     return found
 
 
-def _chord_delta(certificate, factor, start, end):
+def _chord_delta(certificate, factor, start, end, output_error=0):
     source_bound = (certificate["max_chord_deviation_bound"]
                     + certificate["svg_deviation_bound"])
     scaled = math.nextafter(source_bound * factor, math.inf)
-    return math.nextafter(scaled + _rounding_guard(start, end), math.inf)
+    return math.nextafter(scaled + output_error + _rounding_guard(start, end), math.inf)
 
 
 def _check_chord_chain(edges):
@@ -210,18 +211,25 @@ def surface_envelopes(project, surface_id, *, paper=False):
     return _result(proxy, chords, _signature(project, [surface_id]), certificates)
 
 
-def part_envelopes(project, part):
+def part_envelopes(project, part, *, output_error_mm=0):
     """Return local paper-mm material bounds, including exact straight tabs.
 
-    The caller must verify the complete current part cache against its source
+    A nonzero output reservation covers every boundary, including straight
+    neighboring parts and tabs. The caller must verify the cache against source
     before using these sets. Missing/repeated curve chord coverage is rejected.
     """
     if part.stale:
         raise ValidationError("Materiálový díl je neaktuální. Nejprve jej přepočítejte.")
+    output_error_mm = number(output_error_mm, "Mez odchylky výstupu", nonnegative=True)
     polygons = [material_polygon(loops[0], loops[1:]) for loops in part.polygons.values()]
     polygons.extend(Polygon(path["points"]) for path in part.paths["TABS"])
     proxy = unary_union(polygons)
     chords, source_ids = [], set()
+    if output_error_mm:
+        for polygon in polygons:
+            for ring in [polygon.exterior, *polygon.interiors]:
+                points = [_finite_point(point) for point in ring.coords]
+                chords.extend((a, b, output_error_mm) for a, b in zip(points, points[1:]))
     for sid in part.surface_ids:
         certificates = _curved_certificates(project, sid)
         for segment_id, certificate in certificates.items():
@@ -236,5 +244,7 @@ def part_envelopes(project, part):
             source_ids.add(segment_id)
             for edge in edges:
                 a, b = _finite_point(edge["start"]), _finite_point(edge["end"])
-                chords.append((a, b, _chord_delta(certificate, project.scale, a, b)))
+                chords.append((a, b, _chord_delta(
+                    certificate, project.scale, a, b, output_error_mm,
+                )))
     return _result(proxy, chords, _signature(project, part.surface_ids), source_ids)

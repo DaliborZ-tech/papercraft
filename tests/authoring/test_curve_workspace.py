@@ -7,10 +7,27 @@ from PySide6.QtCore import QPointF, QRectF, Qt, QTimer
 from PySide6.QtWidgets import QApplication, QDialogButtonBox
 from test_workspace import window as _window_fixture
 
+from archpapercraft.exporter.curve_output_validation import CurveOutputError
 from archpapercraft.ui.author_curves import CurveEditorDialog
 
 pytestmark = pytest.mark.ui
 window = _window_fixture
+
+
+def test_actual_output_error_selects_the_part_for_repair_without_changing_source(window, qtbot):
+    sid = circle(window, qtbot)
+    pid = window.project.part_for_surface(sid)
+    before = copy.deepcopy(window.project.to_dict())
+    window.clear_selection()
+
+    def fail():
+        raise CurveOutputError("Zvětšete mezeru od jiného dílu.", part_id=pid,
+                               part_name="Vlastní oblouk", page_index=0)
+
+    assert window.run(fail) is None
+    assert window.selected_part == pid
+    assert "Vlastní oblouk" in window._test_warnings[-1]
+    assert window.project.to_dict() == before
 
 
 def prepare(window):

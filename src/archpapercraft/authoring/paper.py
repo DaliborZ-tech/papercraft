@@ -19,6 +19,7 @@ from .attachments import (
     source_outward,
     trace_connector_contact,
 )
+from .curve_material import part_envelopes
 from .errors import ValidationError
 from .geometry import material_polygon, page_points, path, signed_area
 from .model import Issue
@@ -423,8 +424,41 @@ def geometry_payload(part):
     }
 
 
+def _placed_curve_envelopes(project, part, placement, *, output_error_mm=0):
+    """Rigidly project verified cached chords before constructing outer bounds.
+
+    Constructing the tubes in page coordinates also reserves page-transform
+    rounding. This disposable projection never changes the authoring part.
+    """
+    projected = copy.copy(part)
+    projected.polygons = {
+        sid: [page_points(loop, placement).tolist() for loop in loops]
+        for sid, loops in part.polygons.items()
+    }
+    projected.edges = [
+        {**edge, "start": page_points([edge["start"]], placement)[0].tolist(),
+         "end": page_points([edge["end"]], placement)[0].tolist()}
+        for edge in part.edges
+    ]
+    projected.paths = {
+        "TABS": [path(page_points(p["points"], placement), True) for p in part.paths["TABS"]]
+    }
+    return part_envelopes(project, projected, output_error_mm=output_error_mm)
+
+
 def validate_layout(project):
-    issues, materials = [], {}
+    issues, materials, guaranteed_materials, possible_materials = [], {}, {}, {}
+    # A curved print workflow must reserve the published output budget on both
+    # sides of a gap, including an otherwise straight neighboring paper part.
+    # This is representation uncertainty, never a physical clearance claim.
+    from archpapercraft.precision import PDF_DIGITAL_BUDGET_MM
+
+    curved_material = any(
+        segment.kind != "line"
+        for surface in project.surfaces.values()
+        for pid in [surface.profile_id, *surface.hole_profile_ids]
+        if pid in project.profiles for segment in project.profiles[pid].segments
+    )
 
     def issue(code, message, parts=(), severity="error", joint_id=None, evidence=None):
         issue_id = digest([code, sorted(parts), joint_id])[:24]
@@ -500,15 +534,26 @@ def validate_layout(project):
                 Polygon(page_points(tab["points"], placement)) for tab in part.paths["TABS"]
             )
             material = unary_union(transformed)
+            envelope = _placed_curve_envelopes(
+                project, part, placement,
+                output_error_mm=PDF_DIGITAL_BUDGET_MM if curved_material else 0,
+            )
             materials[pid] = material
-            if not box(0, 0, page.width_mm, page.height_mm).covers(material):
+            guaranteed_materials[pid] = envelope.guaranteed
+            possible_materials[pid] = envelope.possible
+            sheet = box(0, 0, page.width_mm, page.height_mm)
+            if not sheet.covers(envelope.guaranteed):
                 issue("PHYSICAL_OVERFLOW", "Díl včetně chlopní přesahuje fyzický list.", (pid,))
+            elif not sheet.covers(envelope.possible):
+                issue("CURVE_SHEET_UNRESOLVED",
+                      "U křivky nelze doložit odstup od fyzického listu. "
+                      "Posuňte díl dál od okraje; obal zahrnuje mez odchylky křivky.", (pid,))
             elif not box(
                 page.margin_mm,
                 page.margin_mm,
                 page.width_mm - page.margin_mm,
                 page.height_mm - page.margin_mm,
-            ).covers(material):
+            ).covers(envelope.possible):
                 issue(
                     "PRINT_MARGIN",
                     "Díl zasahuje do doporučeného tiskového okraje.",
@@ -516,14 +561,14 @@ def validate_layout(project):
                     "warning",
                 )
             if (
-                material.intersection(
+                envelope.possible.intersection(
                     box(10, page.height_mm - 18, page.width_mm - 10, page.height_mm - 2)
                 ).area
                 > 1e-8
             ):
                 issue(
                     "PRINT_GUIDE_OVERLAP",
-                    "Díl překrývá kalibraci nebo pokyny v zápatí.",
+                    "Díl nebo obal křivkové nejistoty zasahuje do kalibrace či pokynů v zápatí.",
                     (pid,),
                     "warning",
                 )
@@ -536,15 +581,21 @@ def validate_layout(project):
     ids = list(materials)
     for index, a in enumerate(ids):
         for b in ids[index + 1 :]:
-            if (
-                project.placements[a].page_id == project.placements[b].page_id
-                and materials[a].intersection(materials[b]).area > 1e-8
-            ):
+            if project.placements[a].page_id != project.placements[b].page_id:
+                continue
+            if guaranteed_materials[a].intersection(guaranteed_materials[b]).area > 1e-8:
                 issue(
                     "MATERIAL_OVERLAP",
                     "Vystřihované díly se překrývají včetně chlopní.",
                     (a, b),
                     "warning",
+                )
+            elif possible_materials[a].intersection(possible_materials[b]).area > 1e-8:
+                issue(
+                    "CURVE_LAYOUT_UNRESOLVED",
+                    "Mezi díly nelze doložit volný odstup nativních křivek. "
+                    "Zvětšete rozestup; samotné tětivy v náhledu nejsou celý řezný obrys.",
+                    (a, b),
                 )
     # All connector kinds share one assembly-space registry. Page/tray position
     # must not hide a collision between tabs that meet on the same receiver.

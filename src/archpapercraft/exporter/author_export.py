@@ -36,6 +36,10 @@ from reportlab.pdfbase import pdfdoc, pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFError, TTFont
 from reportlab.pdfgen.canvas import Canvas
 
+from archpapercraft.precision import PDF_ARC_TOLERANCE_MM, PDF_DIGITAL_BUDGET_MM
+
+from .curve_output_validation import CurveOutputError
+
 ROLES = ("CUT", "FOLD_MOUNTAIN", "FOLD_VALLEY", "TABS", "LABELS", "ARTWORK", "GUIDES")
 SVG_NS = "http://www.w3.org/2000/svg"
 ET.register_namespace("", SVG_NS)
@@ -43,8 +47,6 @@ _ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]*\Z")
 _LOCK = threading.RLock()
 _MANIFEST = ".author-export.json"
 _INSTRUCTION = "Tisk 100 % / skutečná velikost. Kalibrace 100 mm na papíře."
-PDF_ARC_TOLERANCE_MM = 0.001
-PDF_DIGITAL_BUDGET_MM = 0.01
 
 
 class SnapshotError(ValueError):
@@ -374,6 +376,12 @@ def _validate(data: dict) -> None:
             ):
                 raise SnapshotError("Snapshot contains a blocked tab motion")
         curves = checks.get("curve_profiles", {})
+        regions = checks.get("curve_regions", {})
+        if not isinstance(regions, dict) or any(
+            not isinstance(report, dict) or report.get("status") != "VALID"
+            for report in regions.values()
+        ):
+            raise SnapshotError("Snapshot has unresolved native-curve material topology")
         if not isinstance(curves, dict):
             raise SnapshotError("Source curve checks must be an explicit registry")
         for report in curves.values():
@@ -388,6 +396,10 @@ def _validate(data: dict) -> None:
                 bound = _number(report.get(key), key)
                 if not 0 <= bound <= budget:
                     raise SnapshotError("A source curve bound exceeds its declared budget")
+            lower = _number(report.get("length_lower_paper_mm"), "Curve length lower bound")
+            upper = _number(report.get("length_upper_paper_mm"), "Curve length upper bound")
+            if lower < 0 or not lower <= upper <= lower + budget:
+                raise SnapshotError("Source curve length bounds exceed their budget")
     if "partial" in data and not isinstance(data["partial"], bool):
         raise SnapshotError("partial must be an explicit boolean")
     if (
@@ -619,6 +631,23 @@ def _curve_bound(data: dict) -> float:
     return bound
 
 
+def _source_svg_bound(data):
+    return max((report["svg_deviation_bound_paper_mm"] for report in
+                data.get("construction_checks", {}).get("curve_profiles", {}).values()), default=0)
+
+
+def _curve_output_expectations(data):
+    """Expected coverage, not expected coordinates for the serialized proof."""
+    return {
+        part["id"]: {
+            "page_index": page_index, "name": part.get("name", part["id"]),
+            "loop_count": sum(command[0] == "M" for path in part["paths"]["CUT"]
+                              for command in _commands(path)),
+        }
+        for page_index, page in enumerate(data["pages"]) for part in page["parts"]
+    }
+
+
 def _serialized_matrix(canvas) -> list[Decimal]:
     """Read the actual CTM token just emitted by this installed ReportLab.
 
@@ -709,7 +738,9 @@ def _svg(
             "data-page-id": page["id"],
             "data-pdf-arc-interpolation-error-bound-mm": _fmt(curve_bound),
             "data-pdf-numeric-serialization-error-bound-mm": _fmt(numeric_bound),
-            "data-pdf-combined-position-error-bound-mm": _fmt(curve_bound + numeric_bound),
+            "data-pdf-combined-position-error-bound-mm": _fmt(
+                _source_svg_bound(data) + curve_bound + numeric_bound
+            ),
         },
     )
     ET.SubElement(root, "title").text = str(data.get("name", data["project_id"]))
@@ -858,6 +889,7 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
             canvas.translate(place["x_mm"], place["y_mm"])
             canvas.rotate(_rotation(place))
             part_matrix = _serialized_matrix(canvas)
+            canvas._code.append(f"/APPart_{part['id']} BMC")
             # Fill tabs before manufacturing lines; no duplicate tab strokes.
             for role in (
                 "TABS",
@@ -868,6 +900,7 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
                 "GUIDES",
                 "LABELS",
             ):
+                canvas._code.append(f"/APRole_{role} BMC")
                 canvas.setLineWidth(0.15 if role == "GUIDES" else 0.25)
                 canvas.setStrokeColorRGB(
                     *((0.55, 0.6, 0.58) if role == "GUIDES" else (0.125, 0.17, 0.17))
@@ -923,9 +956,11 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
                         fill=int(role == "TABS"),
                         fillMode=0 if item.get("fill_rule", "evenodd") == "evenodd" else 1,
                     )
+                canvas._code.append("EMC")
             canvas.setFillColorRGB(0.125, 0.17, 0.17)
             for label in part.get("labels", []):
                 text(label["text"], label["x"], label["y"], label.get("size_mm", 2.5))
+            canvas._code.append("EMC")
             canvas.restoreState()
             part_matrix = None
         canvas.setDash([])
@@ -952,11 +987,13 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
         )
         canvas.restoreState()
         canvas.showPage()
-    if curve_bound + numeric_bound > PDF_DIGITAL_BUDGET_MM:
+    source_bound = _source_svg_bound(data)
+    if source_bound + curve_bound + numeric_bound > PDF_DIGITAL_BUDGET_MM:
         raise SnapshotError(
             "PDF numeric serialization cannot preserve the required 0.01 mm precision; "
             "choose a paper frame near the material instead of compensating extreme coordinates. "
-            f"Interpolation bound={curve_bound:.8g} mm, serialization bound={numeric_bound:.8g} mm."
+            f"Source/SVG bound={source_bound:.8g} mm, interpolation bound={curve_bound:.8g} mm, "
+            f"serialization bound={numeric_bound:.8g} mm."
         )
     if "construction_checks" in data:
         _, summary = _construction_metadata(data)
@@ -969,7 +1006,7 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
         + "; numeric_serialization_error_bound_mm="
         + _fmt(numeric_bound)
         + "; combined_position_error_bound_mm="
-        + _fmt(curve_bound + numeric_bound)
+        + _fmt(source_bound + curve_bound + numeric_bound)
     )
     canvas.save()
     return numeric_bound
@@ -1072,6 +1109,24 @@ def export_all(
                     curve_bound,
                     numeric_bound,
                 )
+            actual_curve_checks = {}
+            if data.get("construction_checks", {}).get("curve_profiles"):
+                from .curve_output_validation import validate_pdf_curve_geometry
+                from .svg_curve_validation import validate_svg_curve_geometry
+
+                expected = _curve_output_expectations(data)
+                allowed = data["construction_checks"].get("accepted_layout_overlaps", [])
+                actual_curve_checks["pdf"] = validate_pdf_curve_geometry(
+                    stage / "new/model.pdf", expected, allowed,
+                )
+                actual_curve_checks["svg"] = [
+                    validate_svg_curve_geometry(
+                        stage / "new" / name,
+                        {pid: record for pid, record in expected.items()
+                         if record["page_index"] == index},
+                    )
+                    for index, name in enumerate(names[:-1])
+                ]
             (stage / "new" / _MANIFEST).write_text(
                 json.dumps(
                     dict(
@@ -1087,7 +1142,10 @@ def export_all(
                         },
                         pdf_geometry_precision={
                             "numeric_serialization_bound_mm": numeric_bound,
-                            "combined_position_error_bound_mm": curve_bound + numeric_bound,
+                            "source_to_native_svg_bound_mm": _source_svg_bound(data),
+                            "combined_position_error_bound_mm": (
+                                _source_svg_bound(data) + curve_bound + numeric_bound
+                            ),
                             "required_digital_budget_mm": PDF_DIGITAL_BUDGET_MM,
                             "method": "serialized_CTM_and_Bernstein_control_difference",
                             "scope": (
@@ -1096,6 +1154,8 @@ def export_all(
                             ),
                         },
                         files=names,
+                        **({"actual_curve_output_checks": actual_curve_checks}
+                           if actual_curve_checks else {}),
                         **({"construction_checks": data["construction_checks"],
                             "construction_summary": _construction_metadata(data)[1]}
                            if "construction_checks" in data else {}),
@@ -1148,7 +1208,7 @@ def export_all(
                     f"Export failed ({exc}); rollback also failed: {'; '.join(rollback_errors)}",
                     stage,
                 ) from exc
-            if isinstance(exc, (SnapshotError, FontError, ExportWriteError)):
+            if isinstance(exc, (SnapshotError, FontError, ExportWriteError, CurveOutputError)):
                 raise
             raise ExportWriteError(f"Export failed; previous outputs restored: {exc}") from exc
         finally:

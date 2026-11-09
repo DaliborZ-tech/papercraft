@@ -283,6 +283,8 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
         first = asdict(profiles[0].plane)
         if any(asdict(p.plane) != first for p in profiles[1:]):
             raise ValidationError("Obrys a otvory musí být ve stejné pracovní rovině.")
+        if any(s.kind != "line" for p in profiles for s in p.segments):
+            self.curve_region_topology([p.id for p in profiles])
         return material_polygon(
             self.profile_outline(profiles[0].id),
             [self.profile_outline(p.id) for p in profiles[1:]],
@@ -789,6 +791,11 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                     cid: self.connector_bend_clearance(cid) for cid in self.connectors
                 },
                 "curve_profiles": self.curve_projection_reports(),
+                "curve_regions": self.curve_region_reports(),
+                "accepted_layout_overlaps": [
+                    list(issue.part_ids) for issue in issues
+                    if issue.code == "MATERIAL_OVERLAP" and issue.acknowledged
+                ],
                 "physical_build": "NOT_VERIFIED",
             },
             "scale_label": f"1:{1 / self.scale:g}",

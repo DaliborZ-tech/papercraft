@@ -15,6 +15,7 @@ import numpy as np
 from shapely import Polygon
 
 from .commands import atomic
+from .curve_topology import certify_region_topology
 from .curves import Curve, certify_curve, svg_commands
 from .errors import ValidationError
 from .geometry import number, vector
@@ -226,6 +227,46 @@ def move_curve_endpoint(profile, vertex_id, value):
 
 
 class ProfileCurveCommands:
+    def curve_region_topology(self, profile_ids):
+        profiles = [self.profiles[pid] for pid in profile_ids]
+        key = json.dumps([asdict(profile) for profile in profiles], sort_keys=True)
+        cache = getattr(self, "_curve_region_cache", None)
+        if cache is None:
+            cache = self._curve_region_cache = {}
+        if key not in cache:
+            loops = [tuple(source_curve(p, s) for s in p.segments) for p in profiles]
+            result = certify_region_topology(loops[0], loops[1:])
+            if len(cache) > 64:
+                cache.clear()
+            cache[key] = asdict(result)
+        result = copy.deepcopy(cache[key])
+        if result["status"] != "VALID":
+            message = (
+                "Obrys nebo jeho otvory se kříží, překrývají nebo neleží uvnitř. "
+                "Upravte tvar a polohu úseků."
+                if result["status"] == "INVALID" else
+                "Oddělenost nativních křivek nelze ověřit. Zvětšete těsné odstupy "
+                "nebo rozdělte problémový úsek; původní návrh zůstává zachovaný."
+            )
+            segments = (result.get("witness") or {}).get("segments", [])
+            names = [f"{p.name} · úsek {i + 1}" for p in profiles
+                     for i, s in enumerate(p.segments) if s.id in segments]
+            if names:
+                message += " " + " / ".join(names)
+            raise ValidationError(message)
+        return result
+
+    def curve_region_reports(self):
+        reports = {}
+        for sid, surface in self.surfaces.items():
+            pids = [surface.profile_id, *surface.hole_profile_ids]
+            if any(s.kind != "line" for pid in pids for s in self.profiles[pid].segments):
+                reports[sid] = {
+                    **self.curve_region_topology(pids), "source_profile_ids": pids,
+                    "source_revisions": {pid: self.profiles[pid].revision for pid in pids},
+                }
+        return reports
+
     def curve_projection_reports(self):
         used = {pid for surface in self.surfaces.values()
                 for pid in [surface.profile_id, *surface.hole_profile_ids]}

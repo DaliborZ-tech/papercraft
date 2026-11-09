@@ -172,8 +172,7 @@ def pdf_stroked_loops(reader):
 def source_files():
     paths = [
         *ROOT.joinpath("src").rglob("*.py"),
-        Path(__file__),
-        Path(__file__).with_name("native_dialogs.py"),
+        *ROOT.joinpath("tools/authoring").glob("*.py"),
         ROOT / "pyproject.toml",
     ]
     return {
@@ -225,7 +224,7 @@ def run_windows(output, expected_sha, fixture="all"):
     hashes = source_files()
     changed = git(
         "diff", "--name-only", "HEAD", "--", "src", "pyproject.toml",
-        "tools/authoring/desktop_b_proof.py", "tools/authoring/native_dialogs.py",
+        "tools/authoring",
     )
     tracked = set(git("ls-files").splitlines())
     if changed or set(hashes) - tracked:
@@ -235,7 +234,8 @@ def run_windows(output, expected_sha, fixture="all"):
         "status": "RUNNING",
         "source_sha": sha,
         "requested_fixture": fixture,
-        "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN"},
+        "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN",
+                           "curves-planar": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "actual_application_module": str(Path(author_window.__file__).resolve()),
@@ -487,7 +487,7 @@ def run_windows(output, expected_sha, fixture="all"):
             log("own_rectangle", role=role, surface_id=sid, model_mm=[width, height], plane=plane)
             return sid
 
-        def sketch_points(self, sketch, points):
+        def sketch_points(self, sketch, points, *, finish=True):
             # View-only framing is explicit; no model, input or signal is injected.
             xs, ys = [p[0] for p in points], [p[1] for p in points]
             margin = max(max(xs) - min(xs), max(ys) - min(ys), 100) * 0.15
@@ -507,8 +507,9 @@ def run_windows(output, expected_sha, fixture="all"):
                 check(sketch.viewport().rect().contains(pixel), "Sketch pixel outside view")
                 QTest.mouseClick(sketch.viewport(), Qt.MouseButton.LeftButton, pos=pixel)
                 QTest.qWait(25)
-            QTest.keyClick(sketch, Qt.Key.Key_Return)
-            QTest.qWait(75)
+            if finish:
+                QTest.keyClick(sketch, Qt.Key.Key_Return)
+                QTest.qWait(75)
 
         def polygon(self, role, points, plane="YZ", hole=False):
             self.data(self.w.plane, plane)
@@ -1139,6 +1140,8 @@ def run_windows(output, expected_sha, fixture="all"):
                     len(pdf_holes) == 1, "Independent PDF reader missed/duplicated brace hole cut"
                 )
                 step("A_true_hole_preserved_in_both_vector_outputs", pdf_page_hole=pdf_holes[0])
+            if name == "curves-planar":
+                self.audit_curve_vectors(directory, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
@@ -1147,6 +1150,114 @@ def run_windows(output, expected_sha, fixture="all"):
                 exact_scope="piecewise planar material; no curved-surface or physical claim",
                 digital_only_acknowledgements=accepted,
             )
+
+        def audit_curve_vectors(self, directory, svgs, pdf):
+            from vector_curve_oracle import pdf_stroked_areas, svg_signed_area
+
+            expected = {
+                self.roles["curve_facade"]: [400 * math.pi, 12000],
+                self.roles["curve_panel"]: [2188],
+                self.roles["curve_receiver"]: [800],
+            }
+            observations = []
+            for svg in svgs:
+                for group in ET.parse(svg).getroot():
+                    if "data-part-id" not in group.attrib:
+                        continue
+                    pid = group.attrib["data-part-id"]
+                    sid = next(sid for sid in expected
+                               if self.w.project.surfaces[sid].part_id == pid)
+                    cut = next(node for node in group if node.get("data-role") == "CUT")
+                    values = sorted(abs(svg_signed_area(node.attrib["d"])) for node in cut)
+                    check(len(values) == len(expected[sid]), "Native SVG lost a curve or hole loop")
+                    for value, wanted in zip(values, sorted(expected[sid])):
+                        observations.append(self.near(
+                            value, wanted, "actual native SVG area", 0.01,
+                        ))
+                    text = " ".join(node.attrib["d"] for node in cut)
+                    if sid == self.roles["curve_facade"]:
+                        check("A " in text and len(cut) == 2, "Circle hole lost native SVG arcs")
+                    elif sid == self.roles["curve_panel"]:
+                        check("C " in text, "Bezier source became a polygon in SVG")
+            values = sorted(value for _, value in pdf_stroked_areas(pdf))
+            wanted = sorted(value for entries in expected.values() for value in entries)
+            check(len(values) == len(wanted), "PDF omitted or duplicated actual CUT loops")
+            for value, target in zip(values, wanted):
+                observations.append(self.near(value, target, "actual PDF Green area", 0.01))
+            manifest = json.loads((directory / "export/.author-export.json").read_text())
+            check(manifest["actual_curve_output_checks"]["pdf"]["status"] == "VALID",
+                  "Actual staged PDF manufacturing proof absent")
+            step("native_curves_hole_tab_and_independent_vector_integrals",
+                 expected_areas_mm2=wanted, observations=observations,
+                 physical_build="NOT_RUN", novice_participants=0)
+
+        def curves_planar(self):
+            self.data(self.w.units, 1)
+            self.number(self.w.scale_field, 100)
+            facade = self.rectangle("curve_facade", 12000, 10000, "XZ")
+            self.data(self.w.curve_mode, "arc")
+            self.shortcut(Qt.Key.Key_H)
+            self.sketch_points(self.w.sketch, [
+                [4000, 5000], [6000, 3000], [8000, 5000], [6000, 7000], [4000, 5000],
+            ])
+            check(not self.w.sketch.drawing, "Two-arc hole did not become actual material void")
+            hole = self.w.project.surfaces[facade].hole_profile_ids
+            check(len(hole) == 1 and len(self.w.project.profiles[hole[0]].segments) == 2,
+                  "Circular hole source is not two native authored arcs")
+            self.capture("curves-native-circle-hole")
+            self.data(self.w.plane, "XY")
+            self.data(self.w.curve_mode, "cubic")
+            previous = set(self.w.project.surfaces)
+            self.shortcut(Qt.Key.Key_L)
+            self.sketch_points(self.w.sketch, [[0, 0], [2000, 3000], [6000, 3000], [8000, 0]],
+                               finish=False)
+            self.data(self.w.curve_mode, "line")
+            self.sketch_points(self.w.sketch, [[8000, -1000], [0, -1000], [0, 0]])
+            check(len(set(self.w.project.surfaces) - previous) == 1,
+                  "Mixed cubic/line outline did not create one own surface")
+            panel = next(iter(set(self.w.project.surfaces) - previous))
+            self.roles["curve_panel"] = panel
+            self.select(panel)
+            self.combo(self.w.curve_choice, 0)
+            original = copy.deepcopy(self.w.project.to_dict())
+
+            def cancel(dialog):
+                self.click(dialog.details)
+                self.number(dialog.fields["control1_y"], 3500)
+                self.click(dialog.buttons.button(QDialogButtonBox.StandardButton.Cancel))
+
+            self.modal(lambda: self.action("edit_curve"), cancel)
+            check(self.w.project.to_dict() == original, "Curve edit Cancel changed source")
+
+            def edit(dialog):
+                self.click(dialog.details)
+                self.number(dialog.fields["control1_y"], 3500)
+                self.ok(dialog)
+
+            self.modal(lambda: self.action("edit_curve"), edit)
+            check(self.w.project.to_dict() != original, "Numeric curve edit did not apply")
+            self.shortcut(Qt.Key.Key_Z)
+            check(self.w.project.to_dict() == original, "Curve edit Undo lost source or layout")
+            receiver = self.rectangle("curve_receiver", 8000, 1000, "XY", [0, -2000, 0])
+            aid = self.attach(panel, 2, receiver, direction=1)
+            cid = self.tab(panel, aid, width=2)
+            check(self.w.project.connectors[cid].enabled, "Actual straight tab was not created")
+            self.shortcut(Qt.Key.Key_R)
+            self.add_page()
+            self.place(facade, 0, 20, 20)
+            self.place(panel, 1, 40, 60, 17)
+            self.place(receiver, 1, 40, 120)
+            self.paper_drag(panel, locked=False)
+            self.place(panel, 1, 40, 60, 17)
+            self.click(self.w.position_lock)
+            self.click(self.w.rotation_lock)
+            self.paper_drag(panel, locked=True)
+            self.linked_pick()
+            self.capture("curves-authored-manual-layout")
+            step("native_own_arcs_bezier_edit_cancel_undo_tab_and_manual_pages",
+                 source_surface_ids=self.roles, circle_hole_profile=hole[0],
+                 connector_id=cid, preset_used=False)
+            self.finish("curves-planar")
 
         def author_commands(self, south):
             """Native user input, impact confirmation and reversible experimentation."""
@@ -1527,6 +1638,10 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"]["mixed-part"] = "RUNNING"
                 driver.mixed()
                 report["fixture_status"]["mixed-part"] = "PASS_TECHNICAL_UI"
+            if fixture == "curves-planar":
+                report["fixture_status"]["curves-planar"] = "RUNNING"
+                driver.curves_planar()
+                report["fixture_status"]["curves-planar"] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
                 len(native) == (6 if fixture == "all" else 3)
@@ -1599,7 +1714,7 @@ def main():
     parser.add_argument("--oracle-only", action="store_true")
     parser.add_argument(
         "--fixture",
-        choices=["all", "model-A", "mixed-part"],
+        choices=["all", "model-A", "mixed-part", "curves-planar"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",
     )

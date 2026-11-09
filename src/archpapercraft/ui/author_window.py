@@ -40,6 +40,7 @@ from PySide6.QtWidgets import (
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
+from archpapercraft.exporter.curve_output_validation import CurveOutputError
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
 from archpapercraft.ui.author_curves import CurveEditorDialog, CurveSketch
@@ -486,6 +487,10 @@ class AuthorMainWindow(QMainWindow):
         try:
             return operation()
         except Exception as exc:
+            if isinstance(exc, CurveOutputError) and exc.part_id in self.project.parts:
+                self.select_part(exc.part_id)
+                self.paper.focus_part(exc.part_id)
+                self.viewport.focus_selection()
             self._command_errors += 1
             self.statusBar().showMessage(str(exc), 12000)
             QMessageBox.warning(self, "Změnu nelze dokončit", str(exc))
