@@ -188,6 +188,9 @@ def git(*args):
 
 def run_windows(output, expected_sha, fixture="all"):
     # Imported only after explicit CLI entry and fresh-directory/source guards.
+    # The shared virtualenv may have an editable install pointing at another
+    # worktree. Bind actual imports, not just Git/hash metadata, to this source.
+    sys.path.insert(0, str(ROOT / "src"))
     import native_dialogs
     from pypdf import PdfReader
     from pypdf.generic import ContentStream
@@ -211,6 +214,11 @@ def run_windows(output, expected_sha, fixture="all"):
     from archpapercraft import app as entry
     from archpapercraft.ui import author_window
 
+    if Path(author_window.__file__).resolve() != (
+        ROOT / "src/archpapercraft/ui/author_window.py"
+    ).resolve():
+        raise ValueError("Actual application module is outside the pinned worktree")
+
     sha = git("rev-parse", "HEAD")
     if sha != expected_sha:
         raise ValueError(f"Expected reviewed source {expected_sha}, actual HEAD {sha}")
@@ -223,6 +231,7 @@ def run_windows(output, expected_sha, fixture="all"):
         "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
+        "actual_application_module": str(Path(author_window.__file__).resolve()),
         "platform": platform.platform(),
         "python": sys.version,
         "application_version": application_version,
