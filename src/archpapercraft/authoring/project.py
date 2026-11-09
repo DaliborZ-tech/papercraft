@@ -788,6 +788,7 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands):
                 "connector_bends": {
                     cid: self.connector_bend_clearance(cid) for cid in self.connectors
                 },
+                "curve_profiles": self.curve_projection_reports(),
                 "physical_build": "NOT_VERIFIED",
             },
             "scale_label": f"1:{1 / self.scale:g}",

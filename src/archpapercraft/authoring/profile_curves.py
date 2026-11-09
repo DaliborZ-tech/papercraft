@@ -45,9 +45,13 @@ def validate_native_path(path):
             raise ValidationError("Neplatné parametry nativního oblouku.")
 
 
-def _mapped_commands(curve, mapping):
+def _mapped_commands(curve, mapping, *, tolerance_mm=None):
+    options = {}
+    if tolerance_mm is not None:
+        model_tolerance = tolerance_mm / float(np.linalg.norm(mapping[0][:, 0]))
+        options = {"chord_tolerance": model_tolerance, "length_tolerance": model_tolerance}
     tokens = re.findall(r"[MLCAZ]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?",
-                        svg_commands(curve))
+                        svg_commands(curve, **options))
     sizes = {"M": 2, "L": 2, "C": 6, "A": 7, "Z": 0}
     commands, index = [], 0
     matrix, offset = mapping
@@ -60,10 +64,10 @@ def _mapped_commands(curve, mapping):
         values = list(map(float, tokens[index + 1:index + 1 + sizes[op]]))
         index += sizes[op] + 1
         if op == "A":
-            scale = np.linalg.norm(matrix[:, 0])
+            scale = float(np.linalg.norm(matrix[:, 0]))
             values[:2] = [values[0] * scale, values[1] * scale]
             if np.linalg.det(matrix) < 0:
-                values[5 - 1] = 1 - values[5 - 1]
+                values[4] = 1 - values[4]
             values[-2:] = mapped(values[-2:])
         else:
             values = [v for i in range(0, len(values), 2) for v in mapped(values[i:i + 2])]
@@ -136,7 +140,8 @@ def restore_native_cut_curves(project, part, mappings):
                         "key": (sid, segment.id),
                         "samples": samples[::-1] if reversed_ else samples,
                         "commands": _mapped_commands(
-                            _reversed_curve(curve) if reversed_ else curve, mappings[sid]
+                            _reversed_curve(curve) if reversed_ else curve, mappings[sid],
+                            tolerance_mm=0.002,
                         ),
                     })
     if not records:
@@ -221,6 +226,34 @@ def move_curve_endpoint(profile, vertex_id, value):
 
 
 class ProfileCurveCommands:
+    def curve_projection_reports(self):
+        used = {pid for surface in self.surfaces.values()
+                for pid in [surface.profile_id, *surface.hole_profile_ids]}
+        reports = {}
+        for pid in sorted(used):
+            profile = self.profiles[pid]
+            if all(s.kind == "line" for s in profile.segments):
+                continue
+            projection = self.profile_projection(pid)
+            reports[pid] = {
+                "status": "CERTIFIED", "family": "PLANAR_RIGID_ISOMETRY",
+                "source_revision": profile.revision,
+                "source_segment_ids": [s.id for s in profile.segments],
+                "representation_budget_paper_mm": 0.002,
+                "chord_deviation_bound_paper_mm": projection["chord_deviation_bound_paper_mm"],
+                "length_lower_paper_mm": projection["length_lower_paper_mm"],
+                "length_upper_paper_mm": projection["length_upper_paper_mm"],
+                "svg_deviation_bound_paper_mm": max(
+                    c["svg_deviation_bound"] for c in projection["curves"]
+                ) * self.scale,
+                "svg_length_error_bound_paper_mm": math.fsum(
+                    c["svg_length_error_bound"] for c in projection["curves"]
+                ) * self.scale,
+                "scope": "Native source and SVG bounds; display chords are not source identities. "
+                         "Planar map is an analytic rigid similarity, not a sampled loft proof.",
+            }
+        return reports
+
     def profile_projection(self, profile_id, *, tolerance_mm=0.002):
         """Bound each chord in paper mm; this is not a topology/loft proof."""
         profile = self.profiles[profile_id]
@@ -239,13 +272,20 @@ class ProfileCurveCommands:
                 curve, chord_tolerance=tolerance_mm / self.scale,
                 length_tolerance=tolerance_mm / (self.scale * len(profile.segments)),
             )
-            if certificate.status != "CERTIFIED":
+            reverse_certificate = certify_curve(
+                _reversed_curve(curve), chord_tolerance=tolerance_mm / self.scale,
+                length_tolerance=tolerance_mm / (self.scale * len(profile.segments)),
+            )
+            if certificate.status != "CERTIFIED" or reverse_certificate.status != "CERTIFIED":
                 raise ValidationError(
                     "Přesnost křivky nelze doložit v dostupném rozpočtu. "
                     "Zkontrolujte rozměry, řídicí body nebo rozdělte křivku. "
                     + certificate.message
                 )
-            curves.append(asdict(certificate))
+            recorded = asdict(certificate)
+            for field in ("svg_deviation_bound", "svg_length_error_bound"):
+                recorded[field] = max(recorded[field], getattr(reverse_certificate, field))
+            curves.append(recorded)
             points.extend(list(point) for point in certificate.points[:-1])
         if not profile.closed:
             points.append(list(profile.vertices[-1].point))

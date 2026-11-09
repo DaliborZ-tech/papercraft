@@ -92,6 +92,9 @@ class CurveSketch(AuthorSketch):
     def _next_step(self):
         if not self.drawing:
             return
+        self.status.emit(self.instruction_text())
+
+    def instruction_text(self):
         if not self.points:
             text = "Klikněte na počáteční bod profilu."
         elif self.segment_mode == "line":
@@ -105,7 +108,7 @@ class CurveSketch(AuthorSketch):
                     if not self.pending_points else
                     "Křivka: klikněte na druhý úchop u budoucího konce."
                     if len(self.pending_points) == 1 else "Křivka: klikněte na koncový bod.")
-        self.status.emit(text)
+        return text
 
     def start_outline(self, *, hole=False):
         self.curve_segments, self.pending_points, self._input_history = [], [], []

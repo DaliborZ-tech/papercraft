@@ -17,6 +17,7 @@ from archpapercraft.authoring import ValidationError
 class AuthorViewport(QOpenGLWidget):
     surface_selected = Signal(str)
     edge_selected = Signal(str, str)
+    profile_selected = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -27,6 +28,9 @@ class AuthorViewport(QOpenGLWidget):
         self.setFormat(fmt)
         self.project = None
         self.meshes = {}
+        self.profile_paths = {}
+        self.profile_problems = {}
+        self.selected_profile = None
         self.selected_surfaces = set()
         self.selected_edge = None
         self.relation = None
@@ -44,6 +48,16 @@ class AuthorViewport(QOpenGLWidget):
         self.meshes = (
             {sid: project.world_geometry(sid) for sid in project.surfaces} if project else {}
         )
+        used = ({p for s in project.surfaces.values() for p in [s.profile_id, *s.hole_profile_ids]}
+                if project else set())
+        self.profile_paths, self.profile_problems = {}, {}
+        for pid, profile in project.profiles.items() if project else []:
+            if pid not in used:
+                try:
+                    points = project.profile_outline(pid)
+                    self.profile_paths[pid] = profile.plane.world(points).tolist()
+                except ValidationError as exc:
+                    self.profile_problems[pid] = str(exc)
         if frame:
             self.focus_selection(all_surfaces=True)
         self.select_relation(self.relation)
@@ -52,6 +66,10 @@ class AuthorViewport(QOpenGLWidget):
     def select(self, surfaces=(), edge=None):
         self.selected_surfaces = set(surfaces)
         self.selected_edge = edge
+        self.update()
+
+    def select_profile(self, identity):
+        self.selected_profile = identity
         self.update()
 
     def select_relation(self, relation):
@@ -135,6 +153,10 @@ class AuthorViewport(QOpenGLWidget):
             else self.selected_surfaces
         )
         arrays = [self.meshes[sid]["vertices"] for sid in ids if sid in self.meshes]
+        if self.selected_profile in self.profile_paths and not all_surfaces:
+            arrays = [self.profile_paths[self.selected_profile]]
+        elif all_surfaces or not arrays:
+            arrays.extend(self.profile_paths.values())
         if arrays:
             points = np.vstack(arrays)
             self.center = (points.min(0) + points.max(0)) / 2
@@ -180,18 +202,29 @@ class AuthorViewport(QOpenGLWidget):
                 GL.glVertex3dv(edge["start"])
                 GL.glVertex3dv(edge["end"])
             GL.glEnd()
+        if self.profile_paths:
+            GL.glEnable(GL.GL_LINE_STIPPLE)
+            GL.glLineStipple(1, 0x00FF)
+            for pid, points in self.profile_paths.items():
+                GL.glColor3f(*((0.98, 0.40, 0.10) if pid == self.selected_profile
+                               else (0.25, 0.45, 0.75)))
+                GL.glBegin(GL.GL_LINE_LOOP if self.project.profiles[pid].closed
+                           else GL.GL_LINE_STRIP)
+                for point in points:
+                    GL.glVertex3dv(point)
+                GL.glEnd()
+            GL.glDisable(GL.GL_LINE_STIPPLE)
         if self.selected_edge:
             sid, eid = self.selected_edge
-            edge = next(
-                (e for e in self.meshes.get(sid, {}).get("boundary", []) if e["id"] == eid), None
-            )
-            if edge:
+            edges = [e for e in self.meshes.get(sid, {}).get("boundary", []) if e["id"] == eid]
+            if edges:
                 GL.glDisable(GL.GL_DEPTH_TEST)
                 GL.glColor3f(0.98, 0.29, 0.08)
                 GL.glLineWidth(4)
                 GL.glBegin(GL.GL_LINES)
-                GL.glVertex3dv(edge["start"])
-                GL.glVertex3dv(edge["end"])
+                for edge in edges:
+                    GL.glVertex3dv(edge["start"])
+                    GL.glVertex3dv(edge["end"])
                 GL.glEnd()
         if self.relation_paths:
             GL.glDisable(GL.GL_DEPTH_TEST)
@@ -206,7 +239,12 @@ class AuthorViewport(QOpenGLWidget):
         painter = QPainter(self)
         painter.setPen(QColor("#254e45"))
         painter.drawText(12, 22, "Prostor · vybraný díl se zvýrazní také na papíře")
-        if not self.meshes:
+        if self.selected_profile in self.profile_problems:
+            painter.drawText(12, 42,
+                             "Náhled profilu nelze ověřit. Upravte jeho křivku nebo rozměry.")
+        elif self.profile_paths:
+            painter.drawText(12, 42, "Čárkovaně: zdrojové profily, zatím nejsou papírovým dílem.")
+        elif not self.meshes:
             painter.drawText(12, 52, "Začněte kreslením vlastního obrysu vlevo.")
         elif self.relation_status:
             painter.drawText(12, 42, self.relation_status)
@@ -261,7 +299,18 @@ class AuthorViewport(QOpenGLWidget):
             else:
                 self.surface_selected.emit(sid)
         else:
-            self.surface_selected.emit("")
+            point = np.array([event.position().x(), event.position().y()])
+            candidates = []
+            for pid, points in self.profile_paths.items():
+                screen = self.project_points(points)[:, :2]
+                if self.project.profiles[pid].closed:
+                    screen = np.vstack([screen, screen[0]])
+                candidates.extend((self.segment_distance(point, a, b), pid)
+                                  for a, b in zip(screen, screen[1:]))
+            if candidates and min(candidates)[0] < 8:
+                self.profile_selected.emit(min(candidates)[1])
+            else:
+                self.surface_selected.emit("")
 
     def mouseMoveEvent(self, event):
         delta = event.position() - self._last

@@ -373,6 +373,21 @@ def _validate(data: dict) -> None:
                 for tab in tabs
             ):
                 raise SnapshotError("Snapshot contains a blocked tab motion")
+        curves = checks.get("curve_profiles", {})
+        if not isinstance(curves, dict):
+            raise SnapshotError("Source curve checks must be an explicit registry")
+        for report in curves.values():
+            if not isinstance(report, dict) or report.get("status") != "CERTIFIED":
+                raise SnapshotError("Snapshot contains an uncertified source curve")
+            budget = _number(report.get("representation_budget_paper_mm"),
+                             "Curve representation budget", positive=True)
+            if budget > PDF_DIGITAL_BUDGET_MM:
+                raise SnapshotError("Curve representation budget exceeds the digital limit")
+            for key in ("chord_deviation_bound_paper_mm", "svg_deviation_bound_paper_mm",
+                        "svg_length_error_bound_paper_mm"):
+                bound = _number(report.get(key), key)
+                if not 0 <= bound <= budget:
+                    raise SnapshotError("A source curve bound exceeds its declared budget")
     if "partial" in data and not isinstance(data["partial"], bool):
         raise SnapshotError("partial must be an explicit boolean")
     if (

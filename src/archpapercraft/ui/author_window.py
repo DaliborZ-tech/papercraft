@@ -42,10 +42,11 @@ from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
+from archpapercraft.ui.author_curves import CurveEditorDialog, CurveSketch
 from archpapercraft.ui.author_editing import DeletePartDialog, RenameDialog
 from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
-from archpapercraft.ui.author_sketch import AuthorSketch
+from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
 from archpapercraft.ui.author_viewport import AuthorViewport
 
 
@@ -100,7 +101,7 @@ class AuthorMainWindow(QMainWindow):
         self.context = QLabel()
         self.context.setWordWrap(True)
         layout.addWidget(self.context)
-        self.sketch = AuthorSketch()
+        self.sketch = CurveSketch()
         self.viewport = AuthorViewport()
         self.paper = AuthorPaperView()
         construction = QSplitter(Qt.Orientation.Vertical)
@@ -115,12 +116,14 @@ class AuthorMainWindow(QMainWindow):
         self.setCentralWidget(body)
         self.sketch.outline_finished.connect(self.create_outline)
         self.sketch.open_profile_finished.connect(self.create_open_profile)
+        self.sketch.curve_profile_finished.connect(self.create_curve_profile)
         self.sketch.vertex_selected.connect(self.select_vertex)
         self.sketch.vertex_moved.connect(self.move_vertex)
         self.sketch.status.connect(self.statusBar().showMessage)
         self.sketch.draft_changed.connect(self.update_guidance)
         self.viewport.surface_selected.connect(self.select_surface)
         self.viewport.edge_selected.connect(self.select_edge)
+        self.viewport.profile_selected.connect(self.select_profile)
         self.paper.part_selected.connect(self.select_part)
         # Completing a connection may rebuild the paper scene; finish the item event first.
         self.paper.edge_selected.connect(self.select_edge, Qt.ConnectionType.QueuedConnection)
@@ -181,6 +184,15 @@ class AuthorMainWindow(QMainWindow):
             self._action("draw", "Nakreslit vlastní díl", self.start_outline, "Ctrl+L")
         )
         construct.addAction(self._action("rectangle", "Obdélník z rozměrů…", self.create_rectangle))
+        construct.addAction(self._action(
+            "edit_curve", "Upravit vybraný úsek profilu…", self.edit_curve
+        ))
+        construct.addAction(self._action(
+            "copy_profile", "Kopie vybraného profilu do hloubky…", self.copy_selected_profile
+        ))
+        construct.addAction(self._action(
+            "profile_plane", "Hloubka a rovina vybraného profilu…", self.place_selected_profile
+        ))
         construct.addAction(
             self._action(
                 "open_profile",
@@ -248,6 +260,16 @@ class AuthorMainWindow(QMainWindow):
         toolbar = QToolBar("Tvorba a ověření", self)
         toolbar.setMovable(False)
         self.addToolBar(toolbar)
+        self.curve_mode = QComboBox()
+        for label, mode in (("Úsečka", "line"), ("Oblouk přes tři body", "arc"),
+                            ("Křivka se dvěma úchopy", "cubic")):
+            self.curve_mode.addItem(label, mode)
+        self.curve_mode.setToolTip("Tvar dalšího úseku při kreslení vlastního profilu")
+        self.curve_mode.currentIndexChanged.connect(self.change_curve_mode)
+        self.sketch.segment_mode_changed.connect(
+            lambda mode: self.curve_mode.setCurrentIndex(self.curve_mode.findData(mode))
+        )
+        toolbar.addWidget(self.curve_mode)
         for key in (
             "draw",
             "rectangle",
@@ -333,6 +355,19 @@ class AuthorMainWindow(QMainWindow):
         self.material_button = QPushButton("Papír a místo pro ohyb…")
         self.material_button.clicked.connect(self.edit_material)
         form.addRow(self.material_button)
+        form = self._section(layout, "Profil a křivky")
+        self.curve_choice = QComboBox()
+        self.curve_choice.currentIndexChanged.connect(self.choose_curve)
+        form.addRow("Úsek zdrojového profilu", self.curve_choice)
+        self.curve_edit_button = QPushButton("Upravit tvar a úchopy…")
+        self.curve_edit_button.clicked.connect(self.edit_curve)
+        form.addRow(self.curve_edit_button)
+        self.copy_profile_button = QPushButton("Kopie profilu do hloubky…")
+        self.copy_profile_button.clicked.connect(self.copy_selected_profile)
+        form.addRow(self.copy_profile_button)
+        self.profile_plane_button = QPushButton("Hloubka a rovina profilu…")
+        self.profile_plane_button.clicked.connect(self.place_selected_profile)
+        form.addRow(self.profile_plane_button)
         form = self._section(layout, "Bod obrysu")
         self.vertex_choice = QComboBox()
         self.vertex_choice.currentIndexChanged.connect(self.choose_vertex)
@@ -477,9 +512,12 @@ class AuthorMainWindow(QMainWindow):
         )
         self.actions["append_profile"].setEnabled(profile is not None and not profile.closed)
         self.actions["profile_surface"].setEnabled(
-            profile is not None and self.selected_surface is None and len(profile.vertices) >= 3
+            profile is not None and self.selected_surface is None
+            and (len(profile.vertices) >= 3 or any(s.kind != "line" for s in profile.segments))
         )
-        self.actions["finish"].setEnabled(self.sketch.drawing and len(self.sketch.points) >= 3)
+        self.actions["finish"].setEnabled(
+            self.sketch.drawing and len(self.sketch.points) >= 3 and not self.sketch.pending_points
+        )
         self.actions["undo"].setEnabled(
             self.controller.can_undo or bool(self.sketch.drawing and self.sketch.points)
         )
@@ -487,10 +525,7 @@ class AuthorMainWindow(QMainWindow):
         if self.connect_source:
             text = "Spojení: vyberte druhou hranu v prostoru nebo na papíře. Esc operaci zruší."
         elif self.sketch.drawing:
-            text = (
-                "Kreslení: klikněte na body, Enter uzavře obrys a vytvoří plochu. "
-                "Backspace vrátí bod, Esc zruší návrh."
-            )
+            text = self.sketch.instruction_text() + " Backspace vrátí vstup, Esc zruší návrh."
         elif profile is not None and self.selected_surface is None:
             text = (
                 "Vybraný profil ještě není tiskový díl. V nabídce Vytvořit přidejte body, "
@@ -656,13 +691,22 @@ class AuthorMainWindow(QMainWindow):
         self._raw["transform"] = raw_transform
         self.edge_choice.clear()
         if surface:
-            for index, edge in enumerate(self.project.world_geometry(surface.id)["boundary"]):
-                self.edge_choice.addItem(f"Okraj {index + 1}", edge["id"])
+            for profile_id in [surface.profile_id, *surface.hole_profile_ids]:
+                for edge in self.project.profiles[profile_id].segments:
+                    label = {"line": "Úsečka", "arc": "Oblouk", "cubic": "Křivka"}[edge.kind]
+                    self.edge_choice.addItem(f"{label} {self.edge_choice.count() + 1}", edge.id)
         self.edge_choice.setCurrentIndex(
             self.edge_choice.findData(self.selected_edge[1]) if self.selected_edge else -1
         )
-        self.connect_button.setEnabled(self.selected_edge is not None)
-        can_attach = self.selected_edge is not None and len(self.project.surfaces) > 1
+        straight = self.selected_edge is not None and any(
+            s.id == self.selected_edge[1] and s.kind == "line"
+            for profile in self.project.profiles.values() for s in profile.segments
+        )
+        self.connect_button.setEnabled(straight)
+        self.connect_button.setToolTip(
+            "Spojení přímých hran. Zakřivená hrana se nesmí zaměnit za její tětivu."
+        )
+        can_attach = straight and len(self.project.surfaces) > 1
         self.attach_inside_button.setEnabled(can_attach)
         self.actions["attach_inside"].setEnabled(can_attach)
         can_glue = self.selected_surface is not None and len(self.project.surfaces) > 1
@@ -714,6 +758,96 @@ class AuthorMainWindow(QMainWindow):
         self._raw["placement"] = raw
         self._raw["page"] = placement.page_id if placement else None
         self.connectors_panel.refresh()
+        self._populate_curve_choices()
+
+    def _populate_curve_choices(self):
+        previous = self.curve_choice.currentData()
+        self.curve_choice.clear()
+        surface = self.project.surfaces.get(self.selected_surface)
+        profile_ids = ([surface.profile_id, *surface.hole_profile_ids] if surface else
+                       [self.selected_profile] if self.selected_profile else [])
+        for pid in profile_ids:
+            profile = self.project.profiles[pid]
+            for index, segment in enumerate(profile.segments):
+                label = {"line": "Úsečka", "arc": "Oblouk", "cubic": "Křivka"}[segment.kind]
+                self.curve_choice.addItem(
+                    f"{profile.name} · {label} {index + 1}", (pid, segment.id)
+                )
+        selected = next((self.curve_choice.itemData(i) for i in range(self.curve_choice.count())
+                         if self.selected_edge and
+                         self.curve_choice.itemData(i)[1] == self.selected_edge[1]), previous)
+        index = next((i for i in range(self.curve_choice.count())
+                      if self.curve_choice.itemData(i) == selected), -1)
+        self.curve_choice.setCurrentIndex(index if index >= 0 else 0)
+        enabled = self.curve_choice.count() > 0
+        self.curve_edit_button.setEnabled(enabled)
+        self.actions["edit_curve"].setEnabled(enabled)
+        self.actions["copy_profile"].setEnabled(enabled)
+        self.actions["profile_plane"].setEnabled(enabled and surface is None)
+        self.copy_profile_button.setEnabled(enabled)
+        self.profile_plane_button.setEnabled(enabled and surface is None)
+        self.sections["Profil a křivky"][0].setVisible(enabled)
+        self.sections["Profil a křivky"][1].setVisible(enabled)
+
+    def choose_curve(self):
+        if self._updating or not self.curve_choice.currentData():
+            return
+        _, segment_id = self.curve_choice.currentData()
+        if self.selected_surface:
+            self.selected_edge = (self.selected_surface, segment_id)
+            self._sync_selection()
+
+    def edit_curve(self):
+        if not self._commit_pending_input():
+            return
+        pair = self.curve_choice.currentData()
+        if not pair:
+            return
+        pid, segment_id = pair
+        dialog = CurveEditorDialog(
+            self.project, pid, segment_id, unit_factor=self.unit_factor, parent=self,
+        )
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.run(lambda: self.controller.execute(
+                "Upravit zdrojovou křivku",
+                lambda p: p.set_profile_segment(pid, segment_id, **dialog.result_spec),
+            ))
+
+    def copy_selected_profile(self):
+        self._profile_placement_dialog(copying=True)
+
+    def place_selected_profile(self):
+        self._profile_placement_dialog(copying=False)
+
+    def _profile_placement_dialog(self, *, copying):
+        if not self._commit_pending_input():
+            return
+        choice = self.curve_choice.currentData()
+        if not choice or (not copying and self.selected_surface):
+            return
+        profile_id = choice[0]
+        dialog = ProfilePlacementDialog(
+            self.project, profile_id, copying=copying, unit_factor=self.unit_factor,
+            unit_label=self.units.currentText(), parent=self,
+        )
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+        spec = dialog.result_spec
+
+        def operation(project):
+            if copying:
+                return project.copy_profile(profile_id, **spec)
+            project.set_profile_plane(profile_id, **spec["plane"])
+            return profile_id
+
+        result = self.run(lambda: self.controller.execute("Umístit zdrojový profil", operation))
+        if result:
+            self.select_profile(result)
+            self.viewport.focus_selection(all_surfaces=True)
+
+    def change_curve_mode(self):
+        self.sketch.set_segment_mode(self.curve_mode.currentData())
+        self.update_guidance()
 
     def _populate_vertex(self):
         vertex = None
@@ -781,6 +915,7 @@ class AuthorMainWindow(QMainWindow):
     def _highlight(self):
         surfaces = self.project.parts[self.selected_part].surface_ids if self.selected_part else []
         self.viewport.select(surfaces, self.selected_edge)
+        self.viewport.select_profile(self.selected_profile if not self.selected_surface else None)
         self.paper.select(self.selected_part, self.selected_edge)
 
     def select_surface(self, surface_id):
@@ -1053,8 +1188,7 @@ class AuthorMainWindow(QMainWindow):
         if self._cancel_gesture():
             return
         if self.sketch.drawing and self.sketch.points:
-            self.sketch.points.pop()
-            self.sketch.redraw()
+            self.sketch.undo_draft_point()
             self.update_guidance()
             return
         self.controller.undo()
@@ -1063,6 +1197,36 @@ class AuthorMainWindow(QMainWindow):
         if self.sketch.drawing or self._cancel_gesture():
             return
         self.controller.redo()
+
+    def create_curve_profile(self, segments, closed, hole):
+        surface_id = (self.draft_surface or self.selected_surface) if hole else None
+        plane = self.draft_plane or (
+            self.project.profiles[self.project.surfaces[surface_id].profile_id].plane
+            if hole and surface_id else self.plane.currentData()
+        )
+
+        def operation(project):
+            pid = project.add_profile(
+                segments=segments, closed=closed, plane=plane,
+                name="Otvor" if hole else f"Profil {len(project.profiles) + 1}",
+            )
+            if not closed:
+                return pid
+            if hole:
+                project.add_hole(surface_id, pid)
+                return surface_id
+            return project.add_surface(pid, name=f"Plocha {len(project.surfaces) + 1}")
+
+        result = self.run(lambda: self.controller.execute(
+            "Vytvořit vlastní křivkový profil", operation
+        ))
+        if result:
+            self.sketch.complete_curve_draft()
+            self.draft_surface = self.draft_plane = None
+            self.select_surface(result) if closed else self.select_profile(result)
+            self.sketch.focus_surface()
+            self.viewport.focus_selection()
+        self.update_guidance()
 
     def create_outline(self, points, hole=False):
         surface_id = (self.draft_surface or self.selected_surface) if hole else None
