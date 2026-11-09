@@ -6,7 +6,7 @@ from __future__ import annotations
 import copy
 
 from PySide6.QtCore import QPointF, QRectF, QSignalBlocker, Qt, Signal
-from PySide6.QtGui import QColor, QPainter, QPainterPath, QPen
+from PySide6.QtGui import QColor, QPainter, QPainterPath, QPen, QTransform
 from PySide6.QtWidgets import (
     QAbstractSpinBox,
     QCheckBox,
@@ -28,6 +28,8 @@ from PySide6.QtWidgets import (
 
 from archpapercraft.authoring import AuthorProject
 from archpapercraft.authoring.model import Connector
+
+from .author_paper import _path
 
 
 def spin(low=0.01, high=10000, value=5):
@@ -79,12 +81,7 @@ class MaterialPreview(QGraphicsView):
         data = project.part_geometry(part_id)
         for role, paths in data["paths"].items():
             for source in paths:
-                points = source["points"]
-                path = QPainterPath(QPointF(points[0][0], -points[0][1]))
-                for x, y in points[1:]:
-                    path.lineTo(x, -y)
-                if source["closed"]:
-                    path.closeSubpath()
+                path = QTransform().scale(1, -1).map(_path(source))
                 color = {"TABS": "#a75800", "GUIDES": "#777b84", "CUT": "#263541"}.get(
                     role, "#147d8e"
                 )
