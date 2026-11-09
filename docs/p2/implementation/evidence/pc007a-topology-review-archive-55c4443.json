@@ -1,0 +1,18 @@
+{
+  "source_sha": "55c4443d40beb36c83d26f8ae940b987c4facf9c",
+  "archive_sha256": "8d017fd9739d07e310f22487ebb0835e14752b3d4157491e911ad6e1758bb7da",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-topology-review-9taicqye",
+  "method": "git_archive_exact_src_tests_pyproject_fresh_subprocess",
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "............................................................             [100%]\n60 passed in 2.25s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": "........F.......                                                         [100%]\n================================== FAILURES ===================================\n_ test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[1e-14] _\n\ndelta = 1e-14\n\n    @pytest.mark.parametrize('delta',[1e-14,math.ulp(1.0),math.ulp(1.0)/2])\n    def test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection(delta):\n        x=1+delta/2\n        arc=Curve((0,1),(1,0),'arc',{'center':(delta,0),'sweep_deg':-90},'native-quarter')\n        assert svg_commands(arc)=='M 0 1 A 1 1 0 0 0 1 0'\n        if x==1:\n            # The expression has rounded onto the actual native boundary. We avoid\n            # a zero-length authored line and make the contact explicit instead.\n            boundary=(arc,Curve((1,0),(1,2)),Curve((1,2),(0,2)),Curve((0,2),(0,1)))\n        else:\n            boundary=(arc,Curve((1,0),(x,0)),Curve((x,0),(x,2)),Curve((x,2),(0,2)),Curve((0,2),(0,1)))\n        result=certify_region_topology(boundary)\n        # Native unit quarter has x<=1. The short outward bridge followed by\n        # vertical x>=1 creates a simple closed Jordan boundary. Precision may\n        # remain unknown, but a nominal-center intersection is not a true witness.\n>       assert result.status!='INVALID',result\nE       AssertionError: TopologyCertificate(status='INVALID', reason='Authored curve boundaries intersect or overlap', witness={'segments': ['...D_ARC_ENDPOINT_CONSTRAINTS_WITHIN_FLOAT_EVALUATION_RESERVE', 'QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING'))\nE       assert 'INVALID' != 'INVALID'\nE        +  where 'INVALID' = TopologyCertificate(status='INVALID', reason='Authored curve boundaries intersect or overlap', witness={'segments': ['...D_ARC_ENDPOINT_CONSTRAINTS_WITHIN_FLOAT_EVALUATION_RESERVE', 'QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING')).status\n\n..\\..\\..\\..\\projects\\papercraft-curve-numerics\\docs\\p2\\implementation\\evidence\\pc007a-topology-review-own.py:71: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_T01_small_endpoint_constraint_cannot_fabricate_native_intersection[1e-14]\n1 failed, 15 passed in 0.73s\n",
+      "stderr": ""
+    }
+  }
+}

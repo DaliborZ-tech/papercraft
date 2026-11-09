@@ -50,3 +50,9 @@ Vlastní pozitivní/negativní očekávání zahrnuje skrytý kubický crossing 
 Před prací skutečně načteny čtyři projektové skills a příslušné AU08/09, včetně původní akceptace topologických děr. Konstrukční význam je skutečný vystřihovaný materiál, ne vizuálně podobný sampled polygon. UI musí rozlišit doloženou neplatnost od neprokázané přesnosti; T01 je problém produktu a důkazu, nikoli příležitost překrýt chybu nápovědou. Verification skill vyžadoval nezávislé nativní geometrické očekávání, raw FAIL a opravu atribuce souběžného WIP běhu. Delivery skill zakazuje vydat tuto komponentu za schválenou jen proto, že prošla původní sada.
 
 Pure topology komponenta nenahrazuje zdrojovou numerickou toleranci ani mez developability, pravidelnost loftu, rozvin/UI/save/reopen/layout/export, skutečný editor, nového člověka nebo fyzické P3. Navazující nový topologický pin potřebuje vlastní review skutečné emitované hranice; tento report nesmí být přenesen na něj bez kontroly.
+
+## Úplná izolace přes Git archive stejného zdroje
+
+Na požadavek integračního ownera byl `55c4443` zopakován ještě jednou i s izolací **všech** aplikačních zdrojů, autorových testů a pyproject z přesného `git archive`. Čerstvé subprocessy měly `PYTHONPATH` i pytest config pouze v čerstvé dočasné kopii. Žádný produkční soubor sdíleného worktree nebyl spuštěn nebo přepsán.
+
+[Archive runner](evidence/pc007a-topology-review-archive.py), [zdrojový pin, hash archivu a raw výstupy](evidence/pc007a-topology-review-archive-55c4443.json): **60 původních PASS / 2,25 s**, [JUnit](evidence/pc007a-topology-review-original-55c4443-archive.xml); **15 vlastních PASS, T01 FAIL / 0,73 s**, [JUnit](evidence/pc007a-topology-review-own-55c4443-archive.xml). Výsledek se shoduje s přesným module-blob během. T01 MAJOR zůstává OPEN do nového opravného pinu. Archive kopie byla ponechána v dočasném umístění pro dohledání; nic se nemaže z cizí práce.
