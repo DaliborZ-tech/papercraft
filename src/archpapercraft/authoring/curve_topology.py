@@ -24,6 +24,7 @@ class TopologyCertificate:
     numerical_guard: float
     proof: tuple[str, ...]
     geometry_scope: str = "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS"
+    entry_scope: str = "AUTHORED_CURVE_DESCRIPTORS"
 
 
 class _UnresolvedError(Exception):
@@ -167,29 +168,34 @@ def _native_arcs(curve):
     start, result = _fraction_point(curve.start), []
     for index, (radius, sweep, endpoint) in enumerate(arcs):
         end, r = _fraction_point(endpoint), Fraction(radius)
-        chord = _sub(end, start)
-        squared = _dot(chord, chord)
-        h2 = r*r-squared/4
-        if squared <= 0 or h2 <= 0:
-            raise _UnresolvedError("Native SVG arc is not a strictly minor circle interval")
-        distance, height = _isqrt(_iv(squared)), _isqrt(_iv(h2))
-        weight = _idiv(height, _iv(r))
-        sign = 1 if sweep else -1
-        perpendicular = (-chord[1]*sign, chord[0]*sign)
-        midpoint = tuple((a+b)/2 for a, b in zip(start, end))
-        ratio = _idiv(height, distance)
-        center = tuple(_iadd(_iv(m), _imul(_iv(p), ratio))
-                       for m, p in zip(midpoint, perpendicular))
-        q_weighted = tuple(_isub(_imul(weight, _iv(m)),
-                                _idiv(_imul(_iv(p), distance), _iv(4*r)))
-                           for m, p in zip(midpoint, perpendicular))
-        homogeneous = ((*(_iv(x) for x in start), _iv(1)),
-                       (*q_weighted, weight), (*(_iv(x) for x in end), _iv(1)))
-        native = {"center": center, "radius": r, "start": start, "end": end, "sign": sign}
-        result.append(_Node(curve, index/len(arcs), (index+1)/len(arcs),
-                            homogeneous=homogeneous, native=native))
+        result.append(_endpoint_arc_node(curve, start, end, r, sweep,
+                                         index/len(arcs), (index+1)/len(arcs)))
         start = end
     return result
+
+
+def _endpoint_arc_node(curve, start, end, radius, sweep, t0=0.0, t1=1.0):
+    """Direct exact-input builder; no conversion through source center/sweep."""
+    chord = _sub(end, start)
+    squared = _dot(chord, chord)
+    h2 = radius*radius-squared/4
+    if radius <= 0 or squared <= 0 or h2 <= 0:
+        raise _UnresolvedError("Native SVG arc is not a strictly minor circle interval")
+    distance, height = _isqrt(_iv(squared)), _isqrt(_iv(h2))
+    weight = _idiv(height, _iv(radius))
+    sign = 1 if sweep else -1
+    perpendicular = (-chord[1]*sign, chord[0]*sign)
+    midpoint = tuple((a+b)/2 for a, b in zip(start, end))
+    ratio = _idiv(height, distance)
+    center = tuple(_iadd(_iv(m), _imul(_iv(p), ratio))
+                   for m, p in zip(midpoint, perpendicular))
+    q_weighted = tuple(_isub(_imul(weight, _iv(m)),
+                            _idiv(_imul(_iv(p), distance), _iv(4*radius)))
+                       for m, p in zip(midpoint, perpendicular))
+    homogeneous = ((*(_iv(x) for x in start), _iv(1)),
+                   (*q_weighted, weight), (*(_iv(x) for x in end), _iv(1)))
+    native = {"center": center, "radius": radius, "start": start, "end": end, "sign": sign}
+    return _Node(curve, t0, t1, homogeneous=homogeneous, native=native)
 
 
 def _bbox(node, budget):
@@ -280,6 +286,8 @@ def _linear_witness(line, other, allowed):
         result = _witness(line, other, point, "BERNSTEIN_SIGN_CHANGE_WITHIN_LINE_INTERVAL")
         result["point"] = None  # The certified root is bracketed, not a sampled midpoint.
         result["line_side_values"] = [float(values[0]), float(values[-1])]
+        result["line_side_values_exact"] = [str(values[0]), str(values[-1])]
+        result["proper_interior_crossing"] = min(projections) > 0 and max(projections) < length2
         return result
     if len(points) == 2:
         determinant = _cross(direction, _sub(points[1], points[0]))
@@ -288,7 +296,9 @@ def _linear_witness(line, other, allowed):
             u = _cross(_sub(points[0], a), direction) / determinant
             point = tuple(x+t*v for x, v in zip(a, direction))
             if 0 <= t <= 1 and 0 <= u <= 1 and point not in allowed:
-                return _witness(line, other, point, "EXACT_RATIONAL_LINE_INTERSECTION")
+                result = _witness(line, other, point, "EXACT_RATIONAL_LINE_INTERSECTION")
+                result["proper_interior_crossing"] = 0 < t < 1 and 0 < u < 1
+                return result
     return None
 
 
@@ -312,11 +322,12 @@ def _native_arc_contains(node, point):
     return a[0] > 0 and b[0] > 0
 
 
-def _native_root_witness(a, b, point, method):
+def _native_root_witness(a, b, point, method, transverse=False):
     middle = tuple(sum(value)/2 for value in point)
     result = _witness(a, b, middle, method)
     result["point_bounds"] = [[float(lo), float(hi)] for lo, hi in point]
     result["point"] = None  # The interval, rather than its midpoint, encloses the true root.
+    result["proper_interior_crossing"] = transverse
     return result
 
 
@@ -343,7 +354,10 @@ def _analytic_arc_witness(a, b, allowed, budget):
                 continue
             point = tuple(_iadd(_iv(x), _imul(parameter, d)) for x, d in zip(start, direction))
             if _native_arc_contains(a, point):
-                return _native_root_witness(a, b, point, "NATIVE_SVG_CIRCLE_LINE_INTERVAL_ROOT")
+                return _native_root_witness(
+                    a, b, point, "NATIVE_SVG_CIRCLE_LINE_INTERVAL_ROOT",
+                    parameter[0] > 0 and parameter[1] < 1,
+                )
     elif b.native is not None:
         c1, r1 = b.native["center"], _iv(b.native["radius"])
         # Identical fixed-endpoint/radius/sweep geometry is an exact overlap,
@@ -376,7 +390,9 @@ def _analytic_arc_witness(a, b, allowed, budget):
             point = tuple(_iadd(p, _imul(_iv(sign), _imul(height, v)))
                           for p, v in zip(base, perpendicular))
             if _native_arc_contains(a, point) and _native_arc_contains(b, point):
-                return _native_root_witness(a, b, point, "NATIVE_SVG_CIRCLE_CIRCLE_INTERVAL_ROOT")
+                return _native_root_witness(
+                    a, b, point, "NATIVE_SVG_CIRCLE_CIRCLE_INTERVAL_ROOT", True,
+                )
     return None
 
 
@@ -450,6 +466,32 @@ def _winding(loop, point, budget):
     return winding
 
 
+def _check_region_nodes(nodes, query_points, budget):
+    """Shared native/source engine; all input construction precedes this proof."""
+    indexed = [(li, ni, node) for li, loop in enumerate(nodes) for ni, node in enumerate(loop)]
+    for (ia, ja, a), (ib, jb, b) in combinations(indexed, 2):
+        adjacent = ia == ib and (jb == ja+1 or (ja == 0 and jb == len(nodes[ia])-1))
+        allowed = set(a.ends()) & set(b.ends()) if adjacent else set()
+        _pair(a, b, allowed, budget)
+    for index, point in enumerate(query_points[1:], start=1):
+        if _winding(nodes[0], point, budget) == 0:
+            raise _InvalidError("A hole lies outside the outer authored boundary",
+                                {"hole": index-1, "point": [float(x) for x in point],
+                                 "point_exact": [str(x) for x in point], "winding": 0})
+        for other_index, other in enumerate(nodes[1:], start=1):
+            if index != other_index and _winding(other, point, budget) != 0:
+                raise _InvalidError("Authored holes are nested", {"hole": index-1,
+                                                                  "inside_hole": other_index-1})
+
+
+def _topology_proof():
+    return ("EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING")
+
+
 def certify_region_topology(outer, holes=(), *, max_depth=24, max_nodes=20000):
     """Prove supported simple native-curve loops and strictly contained holes.
 
@@ -469,11 +511,7 @@ def certify_region_topology(outer, holes=(), *, max_depth=24, max_nodes=20000):
               ))]
     magnitude = max((abs(x) for p in points for x in p), default=1.0)
     budget = _Budget(max_nodes, max_depth, 256*math.ulp(max(1.0, magnitude)))
-    proof = ("EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
-             "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
-             "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
-             "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
-             "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING")
+    proof = _topology_proof()
     try:
         if not math.isfinite(budget.guard):
             raise _UnresolvedError("Topology coordinate precision reserve is not finite")
@@ -504,20 +542,7 @@ def certify_region_topology(outer, holes=(), *, max_depth=24, max_nodes=20000):
                 else:
                     current.extend(_simple_pieces(_Node(curve, controls=_control(curve)), budget))
             nodes.append(current)
-        indexed = [(li, ni, node) for li, loop in enumerate(nodes) for ni, node in enumerate(loop)]
-        for (ia, ja, a), (ib, jb, b) in combinations(indexed, 2):
-            adjacent = ia == ib and (jb == ja+1 or (ja == 0 and jb == len(nodes[ia])-1))
-            allowed = set(a.ends()) & set(b.ends()) if adjacent else set()
-            _pair(a, b, allowed, budget)
-        for index, hole in enumerate(nodes[1:], start=1):
-            point = loops[index][0].start
-            if _winding(nodes[0], point, budget) == 0:
-                raise _InvalidError("A hole lies outside the outer authored boundary",
-                               {"hole": index-1, "point": list(point), "winding": 0})
-            for other_index, other in enumerate(nodes[1:], start=1):
-                if index != other_index and _winding(other, point, budget) != 0:
-                    raise _InvalidError("Authored holes are nested", {"hole": index-1,
-                                                                  "inside_hole": other_index-1})
+        _check_region_nodes(nodes, [loop[0].start for loop in loops], budget)
         return TopologyCertificate("VALID", "Native manufacturing-curve topology proved", None,
                                    budget.used, budget.guard, proof)
     except _InvalidError as exc:
@@ -525,3 +550,217 @@ def certify_region_topology(outer, holes=(), *, max_depth=24, max_nodes=20000):
                                    budget.used, budget.guard, proof)
     except (_UnresolvedError, ArithmeticError, ValueError) as exc:
         return TopologyCertificate("UNRESOLVED", str(exc), None, budget.used, budget.guard, proof)
+
+
+@dataclass(frozen=True)
+class _NativeCurve:
+    start: tuple
+    end: tuple
+    kind: str
+    segment_id: str
+
+
+def _native_scalar(value):
+    if isinstance(value, bool):
+        raise _UnresolvedError("Boolean is not a native coordinate")
+    return Fraction(value)
+
+
+def _parse_native_loop(commands, prefix, budget):
+    nodes, current, start, closed = [], None, None, False
+    sizes = {"M": 2, "L": 2, "C": 6, "A": 7, "Z": 0}
+    for index, command in enumerate(commands):
+        if not isinstance(command, (tuple, list)) or not command:
+            raise _UnresolvedError("Native commands must be nonempty tuple/list records")
+        operation = command[0]
+        if operation not in sizes or len(command)-1 != sizes[operation] or closed:
+            raise _UnresolvedError("Unsupported or malformed absolute native path command")
+        budget.tick()
+        values = tuple(_native_scalar(x) for x in command[1:])
+        if operation == "M":
+            if start is not None:
+                raise _UnresolvedError(
+                    "Each native boundary must contain exactly one closed subpath"
+                )
+            current = start = values
+            continue
+        if current is None:
+            raise _UnresolvedError("Native boundary must begin with an absolute M command")
+        if operation == "Z":
+            endpoint = start
+            closed = True
+        else:
+            endpoint = values[-2:]
+        kind = "cubic" if operation == "C" else "arc" if operation == "A" else "line"
+        curve = _NativeCurve(current, endpoint, kind, f"{prefix}:{index}")
+        if operation == "A":
+            rx, ry, rotation, large, sweep = values[:5]
+            if rx != ry or rx <= 0 or rotation != 0 or large != 0 or sweep not in (0, 1):
+                raise _UnresolvedError(
+                    "Only unrotated minor native circle A commands are supported"
+                )
+            if current != endpoint:
+                nodes.append(_endpoint_arc_node(curve, current, endpoint, rx, sweep))
+        elif operation == "C":
+            controls = (current, values[:2], values[2:4], endpoint)
+            if any(point != current for point in controls):
+                nodes.extend(_simple_pieces(_Node(curve, controls=controls), budget))
+        elif endpoint != current:
+            nodes.extend(_simple_pieces(_Node(curve, controls=(current, endpoint)), budget))
+        current = endpoint
+    if not closed:
+        raise _UnresolvedError("Native topology requires an explicit closed Z boundary")
+    if not nodes:
+        raise _InvalidError("Native boundary contains no material curve")
+    return nodes, start
+
+
+def _native_budget(command_loops, max_depth, max_nodes):
+    if type(max_depth) is not int or max_depth < 0:
+        raise ValueError("Topology depth must be a nonnegative integer")
+    if type(max_nodes) is not int or max_nodes < 0:
+        raise ValueError("Topology node budget must be a nonnegative integer")
+    numbers = [_native_scalar(value) for loop in command_loops
+               for command in loop for value in command[1:]]
+    magnitude = max((abs(x) for x in numbers), default=Fraction(1))
+    guard = 256*math.ulp(float(max(Fraction(1), magnitude)))
+    if not math.isfinite(guard):
+        raise _UnresolvedError("Native coordinate precision reserve is not finite")
+    return _Budget(max_nodes, max_depth, guard)
+
+
+def certify_native_region_topology(outer_commands, holes_commands=(), *,
+                                   max_depth=24, max_nodes=20000):
+    """Certify exactly supplied absolute M/L/C/A/Z coordinates, not a source surrogate.
+
+    Records are tuples/lists such as ('M',x,y), ('C',x1,y1,x2,y2,x,y),
+    ('A',r,r,0,0,sweep,x,y), ('Z',). Decimal, Fraction and decimal strings
+    remain exact rationals; floats retain their exact binary values. No source
+    Curve construction, center/sweep conversion or SVG reserialization occurs.
+    Each argument is one closed subpath; ellipses/major arcs are UNRESOLVED.
+    """
+    proof = _topology_proof()
+    geometry = "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY"
+    entry = "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+    budget = _Budget(max_nodes, max_depth, 0.0)
+    try:
+        loops = [tuple(outer_commands), *(tuple(hole) for hole in holes_commands)]
+        budget = _native_budget(loops, max_depth, max_nodes)
+        parsed = [_parse_native_loop(loop, f"loop-{index}", budget)
+                  for index, loop in enumerate(loops)]
+        _check_region_nodes([nodes for nodes, _ in parsed], [point for _, point in parsed], budget)
+        return TopologyCertificate("VALID", "Supplied native path topology proved", None,
+                                   budget.used, budget.guard, proof, geometry, entry)
+    except _InvalidError as exc:
+        return TopologyCertificate("INVALID", exc.reason, exc.witness, budget.used,
+                                   budget.guard, proof, geometry, entry)
+    except (_UnresolvedError, ArithmeticError, ValueError, TypeError, IndexError) as exc:
+        return TopologyCertificate("UNRESOLVED", str(exc), None, budget.used,
+                                   budget.guard, proof, geometry, entry)
+
+
+@dataclass(frozen=True)
+class RegionSeparationCertificate:
+    status: str
+    reason: str
+    witness: dict | None
+    examined_nodes: int
+    numerical_guard: float
+    proof: tuple[str, ...]
+    geometry_scope: str = "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY"
+    entry_scope: str = "TWO_SUPPLIED_NATIVE_MATERIAL_REGIONS_WITH_HOLES"
+
+
+def _material_contains(region, point, budget):
+    return _winding(region[0], point, budget) != 0 and all(
+        _winding(hole, point, budget) == 0 for hole in region[1:]
+    )
+
+
+def _strict_common_interior(first, second, budget):
+    """A verified interior point proves positive area, never global absence."""
+    boxes = [tuple((min(p[i] for n in region[0] for p in _hull(n)),
+                    max(p[i] for n in region[0] for p in _hull(n))) for i in (0, 1))
+             for region in (first, second)]
+    overlap = [(max(a[0], b[0]), min(a[1], b[1])) for a, b in zip(*boxes)]
+    if any(lo >= hi for lo, hi in overlap):
+        return None
+    for x in (Fraction(1, 2), Fraction(1, 4), Fraction(3, 4)):
+        for y in (Fraction(1, 2), Fraction(1, 4), Fraction(3, 4)):
+            point = tuple(lo+t*(hi-lo) for (lo, hi), t in zip(overlap, (x, y)))
+            try:
+                if all(_material_contains(region, point, budget) for region in (first, second)):
+                    return {"method": "CERTIFIED_STRICT_COMMON_INTERIOR_POINT",
+                            "point_exact": [str(value) for value in point]}
+            except _UnresolvedError:
+                if budget.used > budget.limit:
+                    raise
+                # A candidate on a boundary is not an area witness. Other
+                # candidates may still prove an open common interior.
+    return None
+
+
+def certify_native_region_separation(first_outer, first_holes, second_outer, second_holes, *,
+                                     max_depth=24, max_nodes=20000):
+    """Prove DISJOINT material or positive-area OVERLAP for exact supplied paths.
+
+    Both input regions must first pass their own topology proof. A boundary
+    touch/overlap alone never proves positive material area. Holes are voids;
+    containment is tested in both directions with certified material winding.
+    All unresolved contact, unsupported geometry and exhausted budgets block.
+    """
+    proof = (*_topology_proof(),
+             "POSITIVE_AREA_REQUIRES_STRICT_COMMON_INTERIOR_OR_PROVED_INTERIOR_BOUNDARY_CROSSING",
+             "DISJOINT_REQUIRES_BOUNDARY_SEPARATION_AND_SYMMETRIC_MATERIAL_WINDING")
+    budget = _Budget(max_nodes, max_depth, 0.0)
+
+    def result(status, reason, witness=None):
+        return RegionSeparationCertificate(status, reason, witness, budget.used,
+                                           budget.guard, proof)
+
+    try:
+        commands = [[tuple(first_outer), *(tuple(hole) for hole in first_holes)],
+                    [tuple(second_outer), *(tuple(hole) for hole in second_holes)]]
+        budget = _native_budget([loop for region in commands for loop in region],
+                                max_depth, max_nodes)
+        regions = []
+        for ri, command_loops in enumerate(commands):
+            parsed = [_parse_native_loop(loop, f"region-{ri}-loop-{li}", budget)
+                      for li, loop in enumerate(command_loops)]
+            nodes, points = [a for a, _ in parsed], [b for _, b in parsed]
+            _check_region_nodes(nodes, points, budget)
+            regions.append(nodes)
+        boundary_failure = None
+        try:
+            for a_loop in regions[0]:
+                for b_loop in regions[1]:
+                    for a in a_loop:
+                        for b in b_loop:
+                            _pair(a, b, set(), budget)
+        except _InvalidError as exc:
+            if exc.witness and exc.witness.get("proper_interior_crossing"):
+                return result("OVERLAP", "Proved interior material-boundary crossing",
+                              exc.witness)
+            boundary_failure = exc.reason
+        except _UnresolvedError as exc:
+            boundary_failure = str(exc)
+        if boundary_failure is None:
+            for own, other in ((regions[0], regions[1]), (regions[1], regions[0])):
+                point = own[0][0].ends()[0]
+                if _material_contains(other, point, budget):
+                    return result("OVERLAP", "Outer boundary lies strictly inside other material",
+                                  {"method": "STRICT_MATERIAL_CONTAINMENT_WITH_DISJOINT_BOUNDARIES",
+                                   "point_exact": [str(x) for x in point]})
+            return result("DISJOINT",
+                          "All boundaries separated and neither material contains the other")
+        if budget.used <= budget.limit:
+            witness = _strict_common_interior(*regions, budget)
+            if witness:
+                return result("OVERLAP", "Proved positive-area common material interior", witness)
+        return result("UNRESOLVED",
+                      "Boundary contact does not establish positive area: "+boundary_failure)
+    except _InvalidError as exc:
+        return result("UNRESOLVED", "An input material region is not valid: "+exc.reason,
+                      exc.witness)
+    except (_UnresolvedError, ArithmeticError, ValueError, TypeError, IndexError) as exc:
+        return result("UNRESOLVED", str(exc))

@@ -1,10 +1,16 @@
 """Native source topology proofs and regressions against chord-only validity."""
 
 import math
+from decimal import Decimal
+from fractions import Fraction
 
 import pytest
 
-from archpapercraft.authoring.curve_topology import certify_region_topology
+from archpapercraft.authoring.curve_topology import (
+    certify_native_region_separation,
+    certify_native_region_topology,
+    certify_region_topology,
+)
 from archpapercraft.authoring.curves import Curve
 
 
@@ -194,3 +200,164 @@ def test_winding_and_topology_are_orientation_independent():
     hole = circle((5, 5), 1)
     assert certify_region_topology(outer, (hole,)).status == "VALID"
     assert certify_region_topology(reverse, (hole,)).status == "VALID"
+
+
+def native_rectangle(left, bottom, right, top):
+    return (("M", left, bottom), ("L", right, bottom), ("L", right, top),
+            ("L", left, top), ("Z",))
+
+
+@pytest.mark.parametrize("gap,expected", [(Fraction(1, 10), "VALID"),
+                                         (Fraction(1, 10**14), "UNRESOLVED")])
+def test_raw_native_quarter_uses_exact_endpoint_circle_without_nominal_center(gap, expected):
+    path = (("M", 0, 1), ("A", 1, 1, 0, 0, 0, 1, 0), ("L", 1+gap, 0),
+            ("L", 1+gap, 2), ("L", 0, 2), ("Z",))
+    result = certify_native_region_topology(path)
+    assert result.status == expected, result
+    assert result.geometry_scope == "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY"
+    assert result.entry_scope.startswith("SUPPLIED_ABSOLUTE_NATIVE_PATH")
+
+
+@pytest.mark.parametrize("denominator", [10**20, 10**400])
+def test_exact_native_cubic_crossing_survives_decimal_gaps_that_float_would_erase(denominator):
+    delta = Fraction(1, denominator)
+    # Every y coordinate rounds to1 in binary float. The serialized/rational
+    # values instead prove two genuine crossings of the horizontal bottom.
+    path = (("M", 0, 1+delta/2),
+            ("C", 3, 1-delta, 7, 1-delta, 10, 1+delta/2),
+            ("L", 10, 1), ("L", 0, 1), ("Z",))
+    result = certify_native_region_topology(path)
+    assert result.status == "INVALID", result
+    assert result.witness["method"] == "BERNSTEIN_SIGN_CHANGE_WITHIN_LINE_INTERVAL"
+    sides = [Fraction(value) for value in result.witness["line_side_values_exact"]]
+    assert sides[0]*sides[1] < 0
+
+
+def test_raw_decimal_fraction_and_string_coordinates_remain_exact_through_hole_winding():
+    outer = native_rectangle(Decimal("0"), "0", Fraction(10), "10.000000")
+    clockwise_hole = (("M", "2", "2"), ("L", "2", "8"), ("L", "8", "8"),
+                      ("L", "8", "2"), ("Z",))
+    result = certify_native_region_topology(outer, (clockwise_hole,))
+    assert result.status == "VALID", result
+
+
+def test_actual_six_decimal_native_cubic_path_is_checked_after_serialization():
+    path = (("M", "0.000000", "0.000500"),
+            ("C", "3.000000", "-0.001000", "7.000000", "-0.001000", "10", "0.000500"),
+            ("L", "10.000000", "0.000000"), ("L", "0.000000", "0.000000"), ("Z",))
+    assert certify_native_region_topology(path).status == "INVALID"
+
+
+def test_native_z_adds_the_actual_implicit_closing_edge_and_zero_lines_are_noops():
+    triangle = (("M", 0, 0), ("L", 0, 0), ("L", 2, 0), ("L", 1, 1), ("Z",))
+    assert certify_native_region_topology(triangle).status == "VALID"
+    explicit = triangle[:-1]+(("L", 0, 0), ("Z",))
+    assert certify_native_region_topology(explicit).status == "VALID"
+
+
+@pytest.mark.parametrize("commands", [
+    (("M", 1, 0), ("A", 1, 2, 0, 0, 1, 0, 1), ("Z",)),
+    (("M", 1, 0), ("A", 1, 1, 0, 1, 1, 0, 1), ("Z",)),
+    (("M", 0, 0), ("l", 1, 0), ("Z",)),
+    (("M", 0, 0), ("L", 1, 0)),
+    (("M", 0, 0), ("M", 1, 1), ("Z",)),
+    (("M", 0, 0), ("L", "NaN", 1), ("Z",)),
+])
+def test_unsupported_or_unclosed_native_path_is_explicitly_unresolved(commands):
+    assert certify_native_region_topology(commands).status == "UNRESOLVED"
+
+
+def test_raw_native_budget_is_explicit_and_never_falls_back_to_source_geometry():
+    path = native_rectangle(0, 0, 10, 10)
+    result = certify_native_region_topology(path, max_nodes=0)
+    assert result.status == "UNRESOLVED" and "budget" in result.reason
+
+
+def separation(first, second, first_holes=(), second_holes=(), **limits):
+    return certify_native_region_separation(first, first_holes, second, second_holes, **limits)
+
+
+def test_native_material_regions_disjoint_and_strict_containment_are_distinguished():
+    outer = native_rectangle(0, 0, 10, 10)
+    apart = native_rectangle(20, 20, 25, 25)
+    inside = native_rectangle(2, 2, 4, 4)
+    assert separation(outer, apart).status == "DISJOINT"
+    result = separation(outer, inside)
+    assert result.status == "OVERLAP"
+    assert result.witness["method"] == "STRICT_MATERIAL_CONTAINMENT_WITH_DISJOINT_BOUNDARIES"
+    assert separation(inside, outer).status == "OVERLAP"
+
+
+def test_material_inside_other_regions_hole_is_disjoint_in_both_directions():
+    outer = native_rectangle(0, 0, 10, 10)
+    hole = native_rectangle(2, 2, 8, 8)
+    floating = native_rectangle(3, 3, 7, 7)
+    assert separation(outer, floating, first_holes=(hole,)).status == "DISJOINT"
+    assert separation(floating, outer, second_holes=(hole,)).status == "DISJOINT"
+    spanning_hole = native_rectangle(1, 1, 9, 9)
+    assert separation(outer, spanning_hole, first_holes=(hole,)).status == "OVERLAP"
+
+
+def test_transverse_crossing_proves_positive_material_area_not_only_boundary_intersection():
+    horizontal = native_rectangle(-3, -1, 3, 1)
+    vertical = native_rectangle(-1, -3, 1, 3)
+    result = separation(horizontal, vertical)
+    assert result.status == "OVERLAP"
+    assert (result.witness.get("proper_interior_crossing")
+            or result.witness["method"] == "CERTIFIED_STRICT_COMMON_INTERIOR_POINT")
+
+
+@pytest.mark.parametrize("second", [native_rectangle(10, 0, 20, 10),
+                                     native_rectangle(10, 10, 20, 20)])
+def test_native_boundary_edge_or_corner_touch_is_not_called_positive_area_overlap(second):
+    result = separation(native_rectangle(0, 0, 10, 10), second)
+    assert result.status == "UNRESOLVED", result
+    assert "positive area" in result.reason
+
+
+def test_coincident_boundaries_need_an_actual_common_interior_witness_for_positive_area():
+    outer = native_rectangle(0, 0, 10, 10)
+    result = separation(outer, outer)
+    assert result.status == "OVERLAP"
+    assert result.witness["method"] == "CERTIFIED_STRICT_COMMON_INTERIOR_POINT"
+
+
+def native_circle(x=0, y=0, radius=1):
+    return (("M", x+radius, y),
+            ("A", radius, radius, 0, 0, 1, x, y+radius),
+            ("A", radius, radius, 0, 0, 1, x-radius, y),
+            ("A", radius, radius, 0, 0, 1, x, y-radius),
+            ("A", radius, radius, 0, 0, 1, x+radius, y), ("Z",))
+
+
+def test_native_circle_region_separation_uses_interval_circle_geometry_and_hole_material():
+    first, separate, crossing = native_circle(), native_circle(3, 0), native_circle(1, 0)
+    assert separation(first, separate).status == "DISJOINT"
+    assert separation(first, crossing).status == "OVERLAP"
+    outer, hole = native_circle(radius=10), native_circle(radius=5)
+    floating = native_circle(radius=1)
+    assert separation(outer, floating, first_holes=(hole,)).status == "DISJOINT"
+
+
+def test_native_separation_budget_and_invalid_input_block_without_area_claim():
+    outer = native_rectangle(0, 0, 10, 10)
+    assert separation(outer, outer, max_nodes=0).status == "UNRESOLVED"
+    invalid = (("M", 0, 0), ("L", 10, 10), ("L", 0, 10), ("L", 10, 0), ("Z",))
+    result = separation(outer, invalid)
+    assert result.status == "UNRESOLVED" and "input material region" in result.reason
+
+
+def test_exact_fraction_separation_does_not_turn_tiny_positive_gap_into_overlap():
+    delta = Fraction(1, 10**40)
+    first = native_rectangle(0, 0, 1, 1)
+    apart = native_rectangle(1+delta, 0, 2, 1)
+    result = separation(first, apart, max_nodes=2000)
+    assert result.status in ("DISJOINT", "UNRESOLVED"), result
+
+
+def test_actual_native_cubic_material_crossing_uses_area_proof_not_chord_rectangles():
+    arch = (("M", 0, 0), ("C", 0, 8, 10, 8, 10, 0),
+            ("L", 10, -5), ("L", 0, -5), ("Z",))
+    across_top = native_rectangle(4, 4, 6, 8)
+    result = separation(arch, across_top)
+    assert result.status == "OVERLAP", result

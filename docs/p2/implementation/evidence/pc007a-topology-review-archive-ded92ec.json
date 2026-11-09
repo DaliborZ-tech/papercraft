@@ -1,0 +1,18 @@
+{
+  "source_sha": "ded92eca90225a52df50346516a6d99bb8e30c83",
+  "archive_sha256": "054d9d88d3e80e606337881f2b475334fe0736cee691be0c9ce48b3b867e3a7d",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-topology-review-doq3m996",
+  "method": "git_archive_exact_src_tests_pyproject_fresh_subprocess",
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "..............................................................           [100%]\n62 passed in 2.66s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "...................                                                      [100%]\n19 passed in 2.35s\n",
+      "stderr": ""
+    }
+  }
+}

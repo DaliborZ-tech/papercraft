@@ -4,6 +4,8 @@ Reviewer: samostatný agent `commands_review`, 9. 11. 2026; autor komponenty je 
 
 **Verdikt: CHANGES_REQUESTED — T01 MAJOR OPEN.** Byla nalezena konkrétní falešná tvrdá INVALID klasifikace nativní tiskové hranice. Deklarovaná assumption o endpoint constraints uvnitř floating rezervy tento problém neřeší. Následná oprava skutečné emitované geometrie se připravuje; není zatím tímto reportem schválená.
 
+**Aktuální následný verdikt:** oprava **`ded92eca90225a52df50346516a6d99bb8e30c83`** níže má APPROVED_IN_NATIVE_SVG_TOPOLOGY_COMPONENT_SCOPE; T01 CLOSED. Původní zdroj a FAIL výše zůstávají historickým důkazem.
+
 ## T01 — nominal center witness není důkaz průniku skutečného SVG
 
 Nezávislý reprodukční vstup má `delta=1e-14` a `x=1+delta/2`:
@@ -56,3 +58,26 @@ Pure topology komponenta nenahrazuje zdrojovou numerickou toleranci ani mez deve
 Na požadavek integračního ownera byl `55c4443` zopakován ještě jednou i s izolací **všech** aplikačních zdrojů, autorových testů a pyproject z přesného `git archive`. Čerstvé subprocessy měly `PYTHONPATH` i pytest config pouze v čerstvé dočasné kopii. Žádný produkční soubor sdíleného worktree nebyl spuštěn nebo přepsán.
 
 [Archive runner](evidence/pc007a-topology-review-archive.py), [zdrojový pin, hash archivu a raw výstupy](evidence/pc007a-topology-review-archive-55c4443.json): **60 původních PASS / 2,25 s**, [JUnit](evidence/pc007a-topology-review-original-55c4443-archive.xml); **15 vlastních PASS, T01 FAIL / 0,73 s**, [JUnit](evidence/pc007a-topology-review-own-55c4443-archive.xml). Výsledek se shoduje s přesným module-blob během. T01 MAJOR zůstává OPEN do nového opravného pinu. Archive kopie byla ponechána v dočasném umístění pro dohledání; nic se nemaže z cizí práce.
+
+## Následná revize skutečných SVG endpoint oblouků — `ded92ec`
+
+Přesný zdroj **`ded92eca90225a52df50346516a6d99bb8e30c83`**, 9. 11. 2026. Spuštěn kompletní izolovaný `git archive` zdrojů/testů/pyproject, fresh subprocess a importy pouze z této kopie. Žádný živý produkční soubor sdíleného checkoutu nebyl při přezkoušení použit. [Pin, hash archivu a raw](evidence/pc007a-topology-review-archive-ded92ec.json).
+
+**T01 CLOSED; APPROVED_IN_NATIVE_SVG_TOPOLOGY_COMPONENT_SCOPE.** Tato omezená formulace se vztahuje přesně na nové `geometry_scope = MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS`. Není to schválení přesné topologické ekvivalence původního nominal center+sweep pole ani libovolného PDF/tessellovaného výstupu.
+
+- Původní topology + curves sada: **62 PASS / 2,66 s**, [JUnit](evidence/pc007a-topology-review-original-ded92ec-archive.xml).
+- Vlastní samostatné případy: **19 PASS / 2,35 s**, [JUnit](evidence/pc007a-topology-review-own-ded92ec-archive.xml). Původní T01 orákulum významově nezměněné prošlo; staré FAIL XML se nepřepisovalo.
+
+Přečtena nová numerická reprezentace i rozhodovací větve. Každý skutečně emitovaný minor endpoint A úsek má přesné binární endpointy a poloměr; střed a kladná racionální kvadratická váha jsou uzavřené intervaly z vnějšího sqrt. Homogeneous řídicí intervaly ohraničují celou skutečnou kruhovou část. Dělení je racionální intervalové de Casteljau, nikoli rozdělení sampled polygonu. Kladné váhy dovolují použití kartézského control hull pro celou křivku. Halfplane endpoint-only test požaduje kontrolu celých intervalů a dovolí výjimku pouze skutečně pevnému společnému konci; nejistý midpoint intervalu se nestává novým přesným sdíleným vrcholem.
+
+Analytické kružnice pro tvrdé INVALID nyní vycházejí z intervalů skutečných SVG středů. Existence průniku a jeho pobyt uvnitř skutečných minor arc intervalů musí být přísně doložené; tečnost nebo neurčená diskriminanta není důvod k falešnému witnessu. Tvrdé překrytí totožného nebo obráceného A je založeno na shodě pevných endpointů, radius a sweep, nikoli domnělé shodě nominálních kružnic. Subdividované nejisté nativní části nevydávají analytický root pro původní celý interval.
+
+T01 s tenkým vnějším přemostěním správně končí UNRESOLVED bez falešného průniku. Dvě další sub-ULP varianty nezkonstruovaly nulovou úsečku ani nevydaly falešnou tvrdou neplatnost. Samostatný vlastní skutečný průnik nativního jednotkového čtvrtoblouku s vertikálou `x=0.9` zůstal INVALID s intervalovým witness a kořenem poblíž `(0.9,sqrt(1-0.9²))`. Přesně obrácené dva nativní čtvrtoblouky zůstaly INVALID kvůli doloženému překrytí. Nominal `180+1e-12°` skok již nepoužívá starou endpoint assumption jako důkaz: výsledek výslovně patří emitované hranici, zatímco odchylku od nominálního tvaru dokládá oddělený curve certifikát R01.
+
+Winding stále stojí na k query bodu disjunktních celých control boxech: homotopie na chordy je dovolena až po tomto důkazu. Intervaly na sdílených dělicích bodech se nenahrazují důkazem náhodných vzorků. Původní skryté cubic crossing případy, sousední návrat, otvory, nesting, coincident/crossing kružnice a vyčerpané rozpočty zůstaly v nezávislé sadě zachované.
+
+### Povinná integrační mez tohoto verdiktu
+
+Topologie skutečného SVG a metrická odchylka nominal→SVG jsou dva různé certifikáty. Samotná malá vzdálenost dvou hranic neprokazuje zachování otvoru nebo absenci dotyku. Pokud jiný výrobní writer používá jinou aproximaci (například PDF kubiky nebo chordy), musí integrace doložit topologii té konkrétní publikované hranice nebo bezpečný přenos se striktními mezemi separace; tento report jej automaticky neuděluje. Stejně tak intervaly pomocné racionální výrobní parametrizace nejsou bez další mapy prohlášené za přesnou zdrojovou center+sweep parametrizaci.
+
+Finální doménová validace, nativní UI, skutečný SVG editor, oba kompletní exporty, lidská přejímka a P3 musí být posouzeny samostatně. Doplněk nemění AC ani žádnou výrobní toleranci.
