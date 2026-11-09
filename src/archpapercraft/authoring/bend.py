@@ -10,10 +10,12 @@ from dataclasses import asdict
 
 import numpy as np
 from scipy.spatial.transform import Rotation
-from shapely import Polygon
+from shapely import Polygon, constrained_delaunay_triangles
+from shapely.ops import unary_union
 
 from .attachments import source_outward, surface_basis
 from .commands import atomic
+from .curve_material import surface_envelopes
 from .errors import ValidationError
 from .geometry import number, triangulate
 
@@ -26,7 +28,96 @@ DEFAULT_MATERIAL_PROFILE = {
 _MISSING = object()
 
 
+def _guaranteed_triangles(material):
+    """A guaranteed lower set may omit ill-conditioned derived slivers."""
+    triangles, omitted_area = [], 0.0
+    for face in constrained_delaunay_triangles(material).geoms:
+        if not material.covers(face):
+            raise ValidationError(
+                "Garantovaná triangulace zasahuje mimo skutečně doložený materiál."
+            )
+        points = np.asarray(face.exterior.coords[:-1])
+        singular = np.linalg.svd(points-points.mean(axis=0), compute_uv=False)
+        if len(singular) < 2 or singular[1] <= 0 or singular[0]/singular[1] > 4096:
+            omitted_area += face.area
+        else:
+            triangles.append(points)
+    return triangles, omitted_area
+
+
+def _upper_chord_rectangle(a, b, radius):
+    a, b = np.asarray(a), np.asarray(b)
+    tangent = (b-a)/math.dist(a, b)
+    normal = np.array([-tangent[1], tangent[0]])
+    points = np.array([a-radius*tangent-radius*normal, b+radius*tangent-radius*normal,
+                       b+radius*tangent+radius*normal, a-radius*tangent+radius*normal])
+    return Polygon(points), points[[[0, 1, 2], [0, 2, 3]]]
+
+
 class BendCommands:
+    def _bend_surface_bounds(self):
+        """Complete lower/upper material registries, including holes and components."""
+        key = self._assembly_clearance_key()
+        cached = getattr(self, "_bend_surface_bound_cache", None)
+        if cached is not None and cached[0] == key:
+            return cached[1]
+        records, proof = [], {}
+        for sid, surface in self.surfaces.items():
+            world = self.world_geometry(sid)
+            proxy = np.asarray(world["vertices"])[np.asarray(world["triangles"])]*self.scale
+            bounds = surface_envelopes(self, sid, paper=True)
+            if bounds.is_exact:
+                records.append((sid, proxy, proxy))
+                continue
+            lower_uv, omitted_area = _guaranteed_triangles(bounds.guaranteed)
+
+            def mapped(triangles):
+                if not len(triangles):
+                    return np.empty((0, 3, 3))
+                points = np.asarray(triangles).reshape(-1, 2)
+                world = self._surface_world_points(sid, points/self.scale)*self.scale
+                return world.reshape(-1, 3, 3)
+
+            lower = mapped(lower_uv)
+            # Decompose the possible material into the full proxy plus outward
+            # chord tubes, avoiding tiny Boolean-union slivers. Tube overlap is
+            # harmless: triangles represent the UNION of supplied material.
+            upper_uv, covers = [], [bounds.proxy]
+            tube_radius = 0.0
+            for pid in [surface.profile_id, *surface.hole_profile_ids]:
+                profile = self.profiles[pid]
+                ids = {s.id for s in profile.segments if s.kind != "line"}
+                if not ids:
+                    continue
+                for certificate in self.profile_projection(pid)["curves"]:
+                    if certificate["segment_id"] not in ids:
+                        continue
+                    points = np.asarray(certificate["points"])*self.scale
+                    for a, b in zip(points, points[1:]):
+                        magnitude = max(1., *(abs(float(v)) for p in (a, b) for v in p))
+                        radius = math.nextafter(bounds.max_error+512*math.ulp(magnitude), math.inf)
+                        rectangle, triangles = _upper_chord_rectangle(a, b, radius)
+                        covers.append(rectangle)
+                        upper_uv.extend(triangles)
+                        tube_radius = max(tube_radius, radius)
+            if not unary_union(covers).covers(bounds.possible):
+                raise ValidationError(
+                    "Možný křivkový materiál není úplně pokrytý obalem ohybu. "
+                    "Přepočítejte díl nebo upravte křivkový profil."
+                )
+            upper = np.concatenate([proxy, mapped(upper_uv)])
+            records.append((sid, lower, upper))
+            proof[sid] = {
+                "method": "GUARANTEED_LOWER_MATERIAL_AND_COMPLETE_PROXY_PLUS_OUTWARD_TUBES_UPPER",
+                "guaranteed_empty": not len(lower), "omitted_lower_sliver_area_mm2": omitted_area,
+                "source_bound_mm": bounds.max_error, "upper_tube_radius_mm": tube_radius,
+                "lower_triangle_count": len(lower), "upper_triangle_count": len(upper),
+                "possible_material_fully_covered": True,
+            }
+        value = records, proof
+        self._bend_surface_bound_cache = key, value
+        return value
+
     def _bend_tab_obstacles(self):
         """Actual active tab material in its final pose, never a convex outline hull."""
         records = []
@@ -141,11 +232,7 @@ class BendCommands:
         profile = self.material_profile
         thickness = profile["thickness_mm"]
         material = MaterialProfile(thickness, profile["clearance_mm"], profile["bend_radius_mm"])
-        obstacles = []
-        for sid in self.surfaces:
-            world = self.world_geometry(sid)
-            triangles = np.asarray(world["vertices"])[np.asarray(world["triangles"])] * self.scale
-            obstacles.append(MaterialObstacle(sid, triangles, thickness))
+        bounded_surfaces, bound_proof = self._bend_surface_bounds()
         contact_by_id = {tab["tab_id"]: tab for tab in geometry["tabs"]}
         assembled_tabs = self._bend_tab_obstacles()
         reports = []
@@ -229,19 +316,18 @@ class BendCommands:
                     "Finite approach/contact layer around the actual receiving footprint; "
                     "does not certify glue strength or remove other model parts.",
                 ))
-            obstacles_for_tab = [
-                MaterialObstacle(o.id, o.triangles_world_mm, o.thickness_mm,
-                                 "source" if o.id == source else
-                                 "receiver" if o.id == receiver else "other")
-                for o in obstacles
-            ]
+            lower_obstacles, upper_obstacles = [], []
+            for sid, lower, upper in bounded_surfaces:
+                role = "source" if sid == source else "receiver" if sid == receiver else "other"
+                lower_obstacles.append(MaterialObstacle(sid, lower, thickness, role))
+                upper_obstacles.append(MaterialObstacle(sid, upper, thickness, role))
             # One tab moves while all other active tabs are already folded.
             # Opposite receiver sides have no authored physical layer offset.
             # Their zero-offset solids must not fabricate a certain collision.
             # Keep them explicit in the unresolved inventory, never grant a
             # blanket contact permission or erase another certain collision.
             unresolved_layers = []
-            expected_ids = [o.id for o in obstacles_for_tab]
+            expected_ids = [o.id for o in upper_obstacles]
             for record in assembled_tabs:
                 if record["tab_id"] == tab["id"]:
                     continue
@@ -254,15 +340,43 @@ class BendCommands:
                 if uncertain:
                     unresolved_layers.append(record["id"])
                 else:
-                    obstacles_for_tab.append(MaterialObstacle(
-                        record["id"], record["triangles"], thickness,
-                    ))
-            result = check_fold_clearance(
-                sweep, material, obstacles_for_tab,
-                expected_obstacle_ids=[o.id for o in obstacles_for_tab], allowances=allowances,
-                **({"max_depth": 8, "max_intervals": 128} if thickness is None else {}),
-            )
-            detail = asdict(result)
+                    obstacle = MaterialObstacle(record["id"], record["triangles"], thickness)
+                    lower_obstacles.append(obstacle)
+                    upper_obstacles.append(obstacle)
+            options = {"expected_obstacle_ids": [o.id for o in upper_obstacles],
+                       "allowances": allowances,
+                       **({"max_depth": 8, "max_intervals": 128} if thickness is None else {})}
+            upper_result = check_fold_clearance(sweep, material, upper_obstacles, **options)
+            if not bound_proof:
+                detail = asdict(upper_result)
+            else:
+                lower_result = check_fold_clearance(
+                    sweep, material, lower_obstacles, lower_bound_only=True, **options,
+                )
+                if lower_result.status == "COLLISION":
+                    detail = asdict(lower_result)
+                elif upper_result.status == "CLEAR":
+                    detail = asdict(upper_result)
+                else:
+                    detail = asdict(upper_result)
+                    if upper_result.status == "COLLISION":
+                        detail.update(status="UNRESOLVED", witness_angle_deg=None,
+                                      witness_point_mm=None,
+                                      message="Možný křivkový obal zasahuje do ohybu, ale "
+                                      "střet se zaručeným materiálem nebyl doložen.")
+                    detail["status"] = max(
+                        (detail["status"], "UNRESOLVED" if lower_result.status == "UNRESOLVED"
+                         else "UNVERIFIED" if thickness is None else "UNRESOLVED"),
+                        key=precedence.__getitem__,
+                    )
+                detail["material_envelopes"] = {
+                    "guaranteed_check": asdict(lower_result),
+                    "possible_check": asdict(upper_result),
+                    "bounds": copy.deepcopy(bound_proof),
+                    "verdict_rule": (
+                        "COLLISION_REQUIRES_GUARANTEED; CLEAR_REQUIRES_COMPLETE_POSSIBLE"
+                    ),
+                }
             detail["expected_obstacle_ids"] = expected_ids
             detail["unresolved_layer_obstacle_ids"] = unresolved_layers
             accounted = set(detail["checked_obstacle_ids"]) | set(unresolved_layers)
@@ -301,4 +415,7 @@ class BendCommands:
             "motion": "shorter_signed_rigid_fold; finite_crease_and_contact_reservations",
             "assembly_scenario": "ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED",
             "physical_build": "NOT_VERIFIED",
+            **({"message": "U křivkového materiálu nelze doložit volný prostor pro ohyb. "
+                "Posuňte spoj dále od křivkové hrany nebo upravte profil a ověřte jej znovu."}
+               if bound_proof and status == "UNRESOLVED" else {}),
         }

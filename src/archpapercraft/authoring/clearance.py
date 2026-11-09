@@ -99,6 +99,9 @@ class ClearanceResult:
     coarse_intervals_examined: int = 0
     witness_angles_examined: int = 0
     proof_method: str = "analytic_continuous_sinusoid_projection_intervals_and_convex_SAT"
+    material_domain: str = "COMPLETE_DECLARED_MATERIAL"
+    empty_obstacle_ids: tuple[str, ...] = ()
+    broad_phase_pruning: tuple[dict, ...] = ()
     assumptions: tuple[str, ...] = field(
         default_factory=lambda: (
             "complete_registry_of_planar_material_triangles",
@@ -728,6 +731,7 @@ def check_fold_clearance(
     allowances: object = (),
     max_depth: int | None = None,
     max_intervals: int | None = None,
+    lower_bound_only: bool = False,
 ) -> ClearanceResult:
     """Certify a rigid digital sweep, or truthfully return why it is not proven.
 
@@ -741,9 +745,18 @@ def check_fold_clearance(
     A hull overlap or exhausted subdivision is UNRESOLVED, not collision/PASS.
     Radius is conservatively added to the whole sweep's displacement envelope;
     no inference of strain, material bendability, or automatic compensation is made.
+
+    Explicit lower_bound_only accepts empty material WITH its real registry ID.
+    Every witness then belongs to supplied guaranteed material, while CLEAR
+    concerns that lower set only and cannot certify absence in the real scene.
+    The default complete/upper contract still rejects empty obstacles.
     """
-    base = {"tab_id": sweep.tab_id}
+    base = {"tab_id": sweep.tab_id,
+            "material_domain": "GUARANTEED_LOWER_BOUND_ONLY" if lower_bound_only
+            else "COMPLETE_DECLARED_MATERIAL"}
     try:
+        if type(lower_bound_only) is not bool:
+            raise ValueError("Lower-bound material mode must be explicit boolean")
         unknown = material.thickness_mm is None
         thickness = 0.0 if unknown else _number(material.thickness_mm, positive=True)
         clearance, radius = _number(material.clearance_mm), _number(material.bend_radius_mm)
@@ -856,7 +869,19 @@ def check_fold_clearance(
                     ).tolist(),
                 }
             )
-        solids, original_triangles = [], {}
+        # Full-angle bounds include the rotating normal/thickness, never just
+        # endpoint poses. This proof can prune costly solid clipping without
+        # losing either a between-angle witness or a complete registry ID.
+        full_vertices = np.vstack([
+            points for patch in patches
+            for points in (patch-normal*thickness/2, patch+normal*thickness/2)
+        ])
+        sweep_bounds = np.asarray([
+            _projection_interval(full_vertices, axis, direction, low, high,
+                                 clearance+radius+4*guard)
+            for direction in np.eye(3)
+        ])
+        solids, original_triangles, empty_ids, pruning = [], {}, [], []
         for obstacle in items:
             t = (
                 0.0
@@ -864,25 +889,49 @@ def check_fold_clearance(
                 else _number(obstacle.thickness_mm, positive=True)
             )
             triangles = np.asarray(obstacle.triangles_world_mm, dtype=float)
-            if triangles.ndim != 3 or triangles.shape[1:] != (3, 3) or len(triangles) == 0:
+            if (triangles.ndim != 3 or triangles.shape[1:] != (3, 3)
+                    or (len(triangles) == 0 and not lower_bound_only)):
                 raise ValueError("Every obstacle needs its real nonempty triangle registry")
+            original_triangles[obstacle.id] = []
+            if len(triangles) == 0:
+                empty_ids.append(obstacle.id)
+            skipped_disjoint = skipped_permitted = 0
             for triangle in triangles - origin:
-                original_triangles.setdefault(obstacle.id, []).append(triangle)
                 face_normal = _normal(
                     np.cross(triangle[1] - triangle[0], triangle[2] - triangle[0])
                 )
                 proxy_thickness = max(t, 4 * guard)
-                hull = _hull(
-                    np.vstack(
-                        [
-                            triangle - face_normal * proxy_thickness / 2,
-                            triangle + face_normal * proxy_thickness / 2,
-                        ]
-                    )
+                prism = np.vstack([triangle-face_normal*proxy_thickness/2,
+                                   triangle+face_normal*proxy_thickness/2])
+                bounds = np.column_stack((prism.min(axis=0)-4*guard,
+                                          prism.max(axis=0)+4*guard))
+                interaction = np.column_stack((np.maximum(sweep_bounds[:, 0], bounds[:, 0]),
+                                               np.minimum(sweep_bounds[:, 1], bounds[:, 1])))
+                if np.any(interaction[:, 0] > interaction[:, 1]):
+                    skipped_disjoint += 1
+                    continue
+                corners = np.array([[x, y, z] for x in interaction[0]
+                                    for y in interaction[1] for z in interaction[2]])
+                wholly_permitted = any(
+                    sid == obstacle.id and a <= low and b >= high
+                    and np.max(corners @ equations[:, :3].T+equations[:, 3]) < -4*guard
+                    for sid, a, b, equations in planes
                 )
+                if wholly_permitted:
+                    skipped_permitted += 1
+                    continue
+                original_triangles[obstacle.id].append(triangle)
+                hull = _hull(prism)
                 if hull is None:
                     raise ValueError("Obstacle triangle prism is degenerate")
                 solids.append((obstacle.id, hull))
+            if skipped_disjoint or skipped_permitted:
+                pruning.append({
+                    "obstacle_id": obstacle.id,
+                    "disjoint_full_sweep_triangles": skipped_disjoint,
+                    "interaction_inside_whole_fold_permission_triangles": skipped_permitted,
+                    "scope": "ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS",
+                })
     except (ValueError, TypeError, IndexError, AttributeError, ZeroDivisionError) as exc:
         return ClearanceResult("UNRESOLVED", str(exc), **base)
 
@@ -892,6 +941,8 @@ def check_fold_clearance(
         envelope_padding_mm=padding,
         allowances=tuple(allowance_records),
         checked_obstacle_ids=tuple(identifiers),
+        empty_obstacle_ids=tuple(empty_ids),
+        broad_phase_pruning=tuple(pruning),
         material_thickness_mm=material.thickness_mm,
         clearance_mm=clearance,
         bend_radius_mm=radius,
