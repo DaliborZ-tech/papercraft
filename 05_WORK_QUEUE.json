@@ -2353,7 +2353,7 @@
   ],
   "updated_on": "2026-11-06",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-interior-domain",
+  "working_branch": "revival/p2-clearance-integration",
   "release_readiness": "NOT_READY: owner accepted full P2 v1.2; implementation PC-006A in progress; new-user and physical evidence not run",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
@@ -2482,7 +2482,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "PC-006A",
+  "current_authorized_package": "PC-006B",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2583,7 +2583,7 @@
       "PC-009",
       "PC-010"
     ],
-    "status": "PAUSED_BY_OWNER",
+    "status": "IN_PROGRESS",
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
@@ -2600,6 +2600,8 @@
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-07.md",
     "wip_source_sha": "4e9956bc8fdb8a91af5cd5a4aa62de481e3eb657",
     "wip_branch": "revival/p2-clearance-integration",
-    "next_required_technical_work": "Complete AU07 obstacle registry with every other active connector tab, then independent adapter review and new native proof"
+    "next_required_technical_work": "Complete AU07 obstacle registry with every other active connector tab, then independent adapter review and new native proof",
+    "resumed_on": "2026-11-09",
+    "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills"
   }
 }

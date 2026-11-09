@@ -42,6 +42,7 @@ from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.author_export import export_all
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
+from archpapercraft.ui.author_editing import DeletePartDialog, RenameDialog
 from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_sketch import AuthorSketch
@@ -169,6 +170,12 @@ class AuthorMainWindow(QMainWindow):
         edit = self.menuBar().addMenu("Úpravy")
         edit.addAction(self._action("undo", "Vrátit změnu", self.undo_command, "Ctrl+Z"))
         edit.addAction(self._action("redo", "Zopakovat změnu", self.redo_command, "Ctrl+Y"))
+        edit.addAction(self._action(
+            "rename", "Pojmenovat model a vybraný díl…", self.rename_selection, "F2"
+        ))
+        edit.addAction(self._action(
+            "delete_part", "Odstranit vybraný papírový díl…", self.delete_selected_part
+        ))
         construct = self.menuBar().addMenu("Vytvořit")
         construct.addAction(
             self._action("draw", "Nakreslit vlastní díl", self.start_outline, "Ctrl+L")
@@ -292,6 +299,14 @@ class AuthorMainWindow(QMainWindow):
         self.selection_label = QLabel("Zatím není vybraná plocha.")
         self.selection_label.setWordWrap(True)
         layout.addWidget(self.selection_label)
+        commands = QHBoxLayout()
+        self.rename_button = QPushButton("Pojmenovat…")
+        self.rename_button.clicked.connect(self.rename_selection)
+        commands.addWidget(self.rename_button)
+        self.delete_part_button = QPushButton("Odstranit díl…")
+        self.delete_part_button.clicked.connect(self.delete_selected_part)
+        commands.addWidget(self.delete_part_button)
+        layout.addLayout(commands)
         form = self._section(layout, "Jednotky a tvorba")
         self.units = QComboBox()
         for label, factor in [("m", 1000), ("cm", 10), ("mm", 1)]:
@@ -568,6 +583,7 @@ class AuthorMainWindow(QMainWindow):
             self.actions["undo"].setEnabled(self.controller.can_undo)
             self.actions["redo"].setEnabled(self.controller.can_redo)
             self.actions["hole"].setEnabled(self.selected_surface is not None)
+            self._update_edit_actions()
             self.actions["recompute"].setEnabled(bool(self.project.parts))
             self.actions["export"].setEnabled(bool(self.project.parts))
             self.setWindowTitle(
@@ -793,6 +809,7 @@ class AuthorMainWindow(QMainWindow):
             self._populate_properties()
             self._highlight()
             self.actions["hole"].setEnabled(self.selected_surface is not None)
+            self._update_edit_actions()
             self.update_guidance()
         finally:
             self._updating = False
@@ -1155,6 +1172,28 @@ class AuthorMainWindow(QMainWindow):
                     "Změnit měřítko", lambda p: p.set_scale(1 / self.scale_field.value())
                 )
             )
+
+    def _update_edit_actions(self):
+        selected = self.selected_part is not None
+        self.actions["delete_part"].setEnabled(selected)
+        self.delete_part_button.setEnabled(selected)
+
+    def rename_selection(self):
+        if not self._commit_pending_input():
+            return
+        dialog = RenameDialog(
+            self.project, surface_id=self.selected_surface,
+            part_id=self.selected_part, parent=self,
+        )
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.run(lambda: self.controller.execute("Pojmenovat model a díl", dialog.apply))
+
+    def delete_selected_part(self):
+        if not self._commit_pending_input() or self.selected_part is None:
+            return
+        dialog = DeletePartDialog(self.project, self.selected_part, self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.run(lambda: self.controller.execute("Odstranit papírový díl", dialog.apply))
 
     def edit_material(self):
         if not self._commit_pending_input():

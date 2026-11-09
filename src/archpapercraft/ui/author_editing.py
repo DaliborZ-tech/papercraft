@@ -57,7 +57,7 @@ class DeletePartDialog(QDialog):
                 )
         if not self.impact["joints"] and not self.impact["attachments"]:
             lines.append("  Žádné spoje s další plochou.")
-        lines.append(f"\nOdstraněné chlopně: {len(self.impact['connectors'])}.")
+        lines.append(f"\nOdstraněné spojovací prvky s chlopněmi: {len(self.impact['connectors'])}.")
         if self.impact["affected_parts"]:
             lines.append("\nTyto protikusy zůstanou na svých stránkách:")
             lines.extend(f"  P{p['number']}: {p['name']}" for p in self.impact["affected_parts"])

@@ -19,6 +19,134 @@ from archpapercraft.ui.author_window import AuthorMainWindow
 pytestmark = pytest.mark.ui
 
 
+def test_contextual_delete_preserves_sketch_and_is_one_reversible_command(window, qtbot):
+    from PySide6.QtWidgets import QApplication
+
+    from archpapercraft.ui.author_editing import DeletePartDialog
+
+    assert not window.actions["delete_part"].isEnabled()
+    sid = arrange_rectangle(window)
+    profile_id = window.project.surfaces[sid].profile_id
+    before = deepcopy(window.project.to_dict())
+    depth = len(window.controller._undo)
+
+    def confirm():
+        dialog = QApplication.activeModalWidget()
+        assert isinstance(dialog, DeletePartDialog)
+        qtbot.mouseClick(dialog.buttons.button(QDialogButtonBox.StandardButton.Ok),
+                         Qt.MouseButton.LeftButton)
+
+    QTimer.singleShot(0, confirm)
+    window.actions["delete_part"].trigger()
+    assert sid not in window.project.surfaces
+    assert profile_id in window.project.profiles
+    assert window.selected_surface is None and window.selected_part is None
+    assert not window.actions["delete_part"].isEnabled()
+    assert not window.delete_part_button.isEnabled()
+    assert len(window.controller._undo) == depth + 1
+    window.actions["undo"].trigger()
+    assert window.project.to_dict() == before
+    window.actions["redo"].trigger()
+    assert not window.project.surfaces and profile_id in window.project.profiles
+
+
+def test_delete_cancel_preserves_everything_and_does_not_capture_text_delete(window, qtbot):
+    from PySide6.QtWidgets import QApplication
+
+    from archpapercraft.ui.author_editing import DeletePartDialog
+
+    arrange_rectangle(window)
+    before = deepcopy(window.project.to_dict())
+    depth = len(window.controller._undo)
+
+    def cancel():
+        dialog = QApplication.activeModalWidget()
+        assert isinstance(dialog, DeletePartDialog)
+        dialog.reject()
+
+    QTimer.singleShot(0, cancel)
+    qtbot.mouseClick(window.delete_part_button, Qt.MouseButton.LeftButton)
+    assert window.project.to_dict() == before and len(window.controller._undo) == depth
+    assert window.actions["delete_part"].shortcut().isEmpty()
+    window.clear_selection()
+    assert not window.delete_part_button.isEnabled()
+
+
+@pytest.mark.parametrize("action", ["rename", "delete_part"])
+def test_edit_dialog_preflight_commits_visible_number_before_open(window, qtbot, action):
+    from PySide6.QtWidgets import QApplication
+
+    sid = arrange_rectangle(window)
+    profile = profile_of(window, sid)
+    identity = profile.vertices[1].id
+    window.select_vertex(profile.id, identity)
+    window.vertex_x.setFocus()
+    qtbot.keyClick(window.vertex_x, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+    qtbot.keyClicks(window.vertex_x, "11")  # No Enter before the action.
+    observed = []
+
+    def inspect_and_cancel():
+        dialog = QApplication.activeModalWidget()
+        observed.append(profile_of(window, sid).vertex(identity).point[0])
+        dialog.reject()
+
+    QTimer.singleShot(0, inspect_and_cancel)
+    window.actions[action].trigger()
+    assert observed == [11000.0]
+
+
+@pytest.mark.parametrize("action", ["rename", "delete_part"])
+def test_edit_dialog_invalid_pending_number_stops_before_dialog(window, qtbot, action, monkeypatch):
+    import archpapercraft.ui.author_window as module
+
+    sid = arrange_rectangle(window)
+    profile = profile_of(window, sid)
+    window.select_vertex(profile.id, profile.vertices[1].id)
+    before = deepcopy(window.project.to_dict())
+    window.vertex_x.setFocus()
+    qtbot.keyClick(window.vertex_x, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+    qtbot.keyClicks(window.vertex_x, "0")  # No Enter: preflight owns validation.
+
+    def unexpected(*args, **kwargs):
+        pytest.fail("Invalid geometry must stop before opening the edit dialog")
+
+    monkeypatch.setattr(module, "RenameDialog", unexpected)
+    monkeypatch.setattr(module, "DeletePartDialog", unexpected)
+    window.actions[action].trigger()
+    assert window._test_warnings and window.project.to_dict() == before
+
+
+def test_rename_from_empty_and_selected_workspace_survives_save_open(window, qtbot, tmp_path):
+    from PySide6.QtWidgets import QApplication
+
+    from archpapercraft.ui.author_editing import RenameDialog
+
+    def rename():
+        dialog = QApplication.activeModalWidget()
+        assert isinstance(dialog, RenameDialog)
+        dialog.project_name.setText("My authored model")
+        if dialog.surface_name is not None:
+            dialog.surface_name.setText("North wall")
+            dialog.part_name.setText("Wall with return")
+        dialog.accept()
+
+    QTimer.singleShot(0, rename)
+    window.actions["rename"].trigger()
+    assert window.project.name == "My authored model"
+    sid = arrange_rectangle(window)
+    pid = window.selected_part
+    QTimer.singleShot(0, rename)
+    window.actions["rename"].trigger()
+    assert window.project.surfaces[sid].name == "North wall"
+    assert window.project.parts[pid].name == "Wall with return"
+    target = tmp_path / "named.apcraft"
+    window.controller.save(target)
+    window.controller.new()
+    window.controller.open(target)
+    assert window.project.surfaces[sid].name == "North wall"
+    assert window.project.parts[pid].name == "Wall with return"
+
+
 def test_empty_paper_click_clears_linked_selection_and_contextual_actions(window, qtbot):
     arrange_rectangle(window)
     assert window.actions["hole"].isEnabled()
