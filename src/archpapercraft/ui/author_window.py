@@ -566,6 +566,17 @@ class AuthorMainWindow(QMainWindow):
                 "Začněte tlačítkem Nakreslit vlastní díl, nebo zadejte rozměry obdélníku. "
                 "Plocha se ukáže v prostoru i na papíře."
             )
+        elif (self.selected_surface and
+              self.project.surfaces[self.selected_surface].kind == "ruled_loft" and
+              self.viewport.meshes.get(self.selected_surface, {}).get("status") in
+              ("REJECTED", "UNRESOLVED")):
+            text = (
+                "Přesný rozvin této plochy není doložený. "
+                + self.viewport.meshes[self.selected_surface].get("message", "")
+                + " Upravte tvar nebo hloubku zdrojových profilů, případně jejich dvojice "
+                "a směr příkazem Upravit dvojice profilů a šev. "
+                "Samotný přepočet nezmění nerozvinutelný tvar."
+            )
         elif self.selected_part and self.project.parts[self.selected_part].stale:
             text = (
                 "Konstrukce se změnila. Papírový díl je neaktuální; "
