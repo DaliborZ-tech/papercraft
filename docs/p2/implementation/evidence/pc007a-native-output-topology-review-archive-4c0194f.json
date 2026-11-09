@@ -1,0 +1,18 @@
+{
+  "source_sha": "4c0194feab7cc49e6fd2ac91b7ae210694a28ce7",
+  "archive_sha256": "24c1dff1ed1e56f301a96ac51ae8d736e64dfb7016cd90fbae656de6b5ee88ac",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-native-output-review-c85ge7h8",
+  "method": "git_archive_exact_src_tests_pyproject_fresh_subprocess",
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 83%]\n..............                                                           [100%]\n86 passed in 2.54s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": ".....................                                                    [100%]\n21 passed in 0.60s\n",
+      "stderr": ""
+    }
+  }
+}
