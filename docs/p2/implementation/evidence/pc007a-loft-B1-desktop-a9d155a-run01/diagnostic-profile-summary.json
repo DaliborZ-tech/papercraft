@@ -1,0 +1,264 @@
+{
+  "note": "Diagnostic sampling perturbed interim native a9 run; not final latency proof",
+  "samples": 498,
+  "cumulative": [
+    {
+      "frame": [
+        "run_windows.<locals>.Driver.place",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        802
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "LoftDesktopSteps.loft_case",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\loft_desktop_steps.py",
+        140
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "run_windows.<locals>.run",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        1697
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "run_windows.<locals>.factory.<locals>.<lambda>",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        1740
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "main",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\app.py",
+        93
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "run_windows",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        1749
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "main",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        1790
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "<module>",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        1794
+      ],
+      "samples": 498
+    },
+    {
+      "frame": [
+        "AuthorMainWindow.move_part.<locals>.<lambda>",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\ui\\author_window.py",
+        1627
+      ],
+      "samples": 487
+    },
+    {
+      "frame": [
+        "AuthorMainWindow.run",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\ui\\author_window.py",
+        501
+      ],
+      "samples": 487
+    },
+    {
+      "frame": [
+        "AuthorMainWindow.move_part",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\ui\\author_window.py",
+        1626
+      ],
+      "samples": 487
+    },
+    {
+      "frame": [
+        "AuthorMainWindow.edit_placement",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\ui\\author_window.py",
+        1619
+      ],
+      "samples": 487
+    },
+    {
+      "frame": [
+        "run_windows.<locals>.Driver.number",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\desktop_b_proof.py",
+        372
+      ],
+      "samples": 487
+    },
+    {
+      "frame": [
+        "_deepcopy_list",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        196
+      ],
+      "samples": 283
+    },
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        136
+      ],
+      "samples": 283
+    },
+    {
+      "frame": [
+        "_deepcopy_dict",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        221
+      ],
+      "samples": 283
+    },
+    {
+      "frame": [
+        "analysis",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\authoring\\loft_surface.py",
+        645
+      ],
+      "samples": 259
+    },
+    {
+      "frame": [
+        "AuthorController.execute",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\application\\author_controller.py",
+        97
+      ],
+      "samples": 213
+    },
+    {
+      "frame": [
+        "AuthorProject.validate",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\authoring\\project.py",
+        900
+      ],
+      "samples": 212
+    },
+    {
+      "frame": [
+        "AuthorProject.world_geometry",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\authoring\\project.py",
+        354
+      ],
+      "samples": 209
+    }
+  ],
+  "leaf": [
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        118
+      ],
+      "samples": 90
+    },
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        128
+      ],
+      "samples": 22
+    },
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        127
+      ],
+      "samples": 21
+    },
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        136
+      ],
+      "samples": 20
+    },
+    {
+      "frame": [
+        "_deepcopy_list",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        196
+      ],
+      "samples": 17
+    },
+    {
+      "frame": [
+        "_keep_alive",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        242
+      ],
+      "samples": 15
+    },
+    {
+      "frame": [
+        "SketchPlane.world",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\src\\archpapercraft\\authoring\\model.py",
+        57
+      ],
+      "samples": 14
+    },
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        166
+      ],
+      "samples": 11
+    },
+    {
+      "frame": [
+        "_deepcopy_dict",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        221
+      ],
+      "samples": 10
+    },
+    {
+      "frame": [
+        "normalize_axis_tuple",
+        "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Lib\\site-packages\\numpy\\_core\\numeric.py",
+        1476
+      ],
+      "samples": 9
+    },
+    {
+      "frame": [
+        "deepcopy",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        134
+      ],
+      "samples": 9
+    },
+    {
+      "frame": [
+        "_deepcopy_dict",
+        "C:\\Users\\dalib\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\copy.py",
+        220
+      ],
+      "samples": 9
+    }
+  ]
+}

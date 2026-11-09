@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="7" time="2.017" timestamp="2026-11-09T12:33:53.505495+01:00" hostname="Dalibor"><testcase classname="" name="test_second_profile_tree_actual_selection_enables_live_plane_and_curve" time="0.171" /><testcase classname="" name="test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch" time="0.114"><failure message="AssertionError: assert ('1518a232-1a0...-46239e7ea56d' == '1518a232-1a0...-46239e7ea56d'&#10;  &#10;    1518a232-1a01-4025-9f2d-46239e7ea56d and 'caaa51e8-3e2...-4b266019d1fc' == '32b66e32-23f...-bf26c0f40a62'&#10;  &#10;  - 32b66e32-23f2-4168-b953-bf26c0f40a62&#10;  + caaa51e8-3e26-4a8f-af12-4b266019d1fc)">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x2410b0009d0) at 0x000002414ABEC880&gt;
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002410BC35580&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002410BD538F0&gt;
+
+    def test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch(window,qtbot,monkeypatch):
+        a,b,sid,pid=create(window,qtbot,monkeypatch)
+        segment=window.project.profiles[b].segments[-1].id
+        window.curve_choice.setCurrentIndex(window.curve_choice.findData((b,segment)))
+&gt;       assert window.selected_surface==sid and window.selected_profile==b
+E       AssertionError: assert ('1518a232-1a0...-46239e7ea56d' == '1518a232-1a0...-46239e7ea56d'
+E         
+E           1518a232-1a01-4025-9f2d-46239e7ea56d and 'caaa51e8-3e2...-4b266019d1fc' == '32b66e32-23f...-bf26c0f40a62'
+E         
+E         - 32b66e32-23f2-4168-b953-bf26c0f40a62
+E         + caaa51e8-3e26-4a8f-af12-4b266019d1fc)
+
+..\..\..\..\projects\papercraft-loft-integration\docs\p2\implementation\evidence\pc007a-loft-workspace-review-own.py:60: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="" name="test_noop_loft_edit_preserves_source_pair_ids_frame_placement_and_undo_depth" time="0.192" /><testcase classname="" name="test_changed_loft_tolerance_one_command_preserves_anchors_and_undo_redo" time="0.227" /><testcase classname="" name="test_cancel_profile_plane_from_second_source_has_no_mutation" time="0.139" /><testcase classname="" name="test_delete_actual_loft_dialog_preserves_both_profiles_and_restores_by_undo" time="0.148" /><testcase classname="" name="test_binding_detached_exact_hashes_scale_source_changes_and_coverage" time="0.035"><failure message="AssertionError: assert '56e2ded023b5...8f99865d6183c' == 'ac9621e59328...651af632613e8'&#10;  &#10;  - ac9621e5932823a71cb38d004f98b01ef4310cf512ecccb60e1651af632613e8&#10;  + 56e2ded023b5194703d5b926764ac0b9039cbd7108af08e61ba8f99865d6183c">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1231/test_binding_detached_exact_ha0')
+
+    def test_binding_detached_exact_hashes_scale_source_changes_and_coverage(tmp_path):
+        p=AuthorProject.new(scale=1)
+        a=p.add_profile([[0,0],[10,0],[10,5]],closed=False)
+        b=p.copy_profile(a,plane={'origin':[0,0,7],'u':[1,0,0],'v':[0,1,0]})
+        pairs=[{'first_segment_id':x.id,'second_segment_id':y.id,'first_interval':[0,1],'second_interval':[0,1]} for x,y in zip(p.profiles[a].segments,p.profiles[b].segments)]
+        sid=p.add_loft(a,b,correspondences=pairs);pid=p.part_for_surface(sid)
+        planar=p.add_surface(p.add_profile([[0,0],[2,0],[2,2],[0,2]]))
+        p.set_placement(pid,p.pages[0].id,30,30);p.set_placement(p.part_for_surface(planar),p.pages[0].id,70,70)
+        snapshot=p.snapshot();record=snapshot['construction_checks']['lofts'][sid];binding=record['source_binding'];state=p.to_dict()
+        assert snapshot['coverage']['expected_loft_surface_ids']==[sid]
+        assert set(snapshot['coverage']['expected_surface_ids'])=={sid,planar}
+        assert binding['profiles']==[state['profiles'][a],state['profiles'][b]]
+        assert binding['surface']==state['surfaces'][sid] and binding['scale']==1
+        intrinsic={'profiles':binding['profiles'],'params':binding['surface']['params'],'scale':1}
+&gt;       assert digest(intrinsic)==record['intrinsic_source_digest']
+E       AssertionError: assert '56e2ded023b5...8f99865d6183c' == 'ac9621e59328...651af632613e8'
+E         
+E         - ac9621e5932823a71cb38d004f98b01ef4310cf512ecccb60e1651af632613e8
+E         + 56e2ded023b5194703d5b926764ac0b9039cbd7108af08e61ba8f99865d6183c
+
+..\..\..\..\projects\papercraft-loft-integration\docs\p2\implementation\evidence\pc007a-loft-workspace-review-own.py:139: AssertionError</failure></testcase></testsuite></testsuites>

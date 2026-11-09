@@ -1,0 +1,27 @@
+{
+  "source_sha": "a9d155a1861edebfe9581bbd44fde11a56a5394c",
+  "archive_sha256": "41c382f1f37c8e923933793027c180d8a8c37b11acbf364a02d2a72ce4a3e689",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-pak0hr1m",
+  "actual_imports": {
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-pak0hr1m\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "620b6727e85aaae8899ceb32988227c9dd653398a14837aeee5c1bad9df01790"
+    },
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-pak0hr1m\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "lf_sha256": "03e49fb0895ea9752c032613e3ef0bcbf37a9dda8e2e217007c95d2fde4eae0a"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 93%]\n.....                                                                    [100%]\n77 passed in 72.80s (0:01:12)\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": ".F....F                                                                  [100%]\n================================== FAILURES ===================================\n___ test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch ____\n\nwindow = <archpapercraft.ui.author_window.AuthorMainWindow(0x2410b0009d0) at 0x000002414ABEC880>\nqtbot = <pytestqt.qtbot.QtBot object at 0x000002410BC35580>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002410BD538F0>\n\n    def test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch(window,qtbot,monkeypatch):\n        a,b,sid,pid=create(window,qtbot,monkeypatch)\n        segment=window.project.profiles[b].segments[-1].id\n        window.curve_choice.setCurrentIndex(window.curve_choice.findData((b,segment)))\n>       assert window.selected_surface==sid and window.selected_profile==b\nE       AssertionError: assert ('1518a232-1a0...-46239e7ea56d' == '1518a232-1a0...-46239e7ea56d'\nE         \nE           1518a232-1a01-4025-9f2d-46239e7ea56d and 'caaa51e8-3e2...-4b266019d1fc' == '32b66e32-23f...-bf26c0f40a62'\nE         \nE         - 32b66e32-23f2-4168-b953-bf26c0f40a62\nE         + caaa51e8-3e26-4a8f-af12-4b266019d1fc)\n\n..\\..\\..\\..\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-workspace-review-own.py:60: AssertionError\n---------------------------- Captured Qt messages -----------------------------\nQtWarningMsg: QOpenGLWidget is not supported on this platform.\nQtWarningMsg: This plugin does not support propagateSizeHints()\nQtWarningMsg: This plugin does not support createPlatformOpenGLContext!\nQtWarningMsg: QOpenGLWidget: Failed to create context\nQtWarningMsg: This plugin does not support raise()\nQtWarningMsg: This plugin does not support createPlatformOpenGLContext!\nQtWarningMsg: QOpenGLWidget: Failed to create context\nQtWarningMsg: This plugin does not support createPlatformOpenGLContext!\nQtWarningMsg: QOpenGLWidget: Failed to create context\n____ test_binding_detached_exact_hashes_scale_source_changes_and_coverage _____\n\ntmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1231/test_binding_detached_exact_ha0')\n\n    def test_binding_detached_exact_hashes_scale_source_changes_and_coverage(tmp_path):\n        p=AuthorProject.new(scale=1)\n        a=p.add_profile([[0,0],[10,0],[10,5]],closed=False)\n        b=p.copy_profile(a,plane={'origin':[0,0,7],'u':[1,0,0],'v':[0,1,0]})\n        pairs=[{'first_segment_id':x.id,'second_segment_id':y.id,'first_interval':[0,1],'second_interval':[0,1]} for x,y in zip(p.profiles[a].segments,p.profiles[b].segments)]\n        sid=p.add_loft(a,b,correspondences=pairs);pid=p.part_for_surface(sid)\n        planar=p.add_surface(p.add_profile([[0,0],[2,0],[2,2],[0,2]]))\n        p.set_placement(pid,p.pages[0].id,30,30);p.set_placement(p.part_for_surface(planar),p.pages[0].id,70,70)\n        snapshot=p.snapshot();record=snapshot['construction_checks']['lofts'][sid];binding=record['source_binding'];state=p.to_dict()\n        assert snapshot['coverage']['expected_loft_surface_ids']==[sid]\n        assert set(snapshot['coverage']['expected_surface_ids'])=={sid,planar}\n        assert binding['profiles']==[state['profiles'][a],state['profiles'][b]]\n        assert binding['surface']==state['surfaces'][sid] and binding['scale']==1\n        intrinsic={'profiles':binding['profiles'],'params':binding['surface']['params'],'scale':1}\n>       assert digest(intrinsic)==record['intrinsic_source_digest']\nE       AssertionError: assert '56e2ded023b5...8f99865d6183c' == 'ac9621e59328...651af632613e8'\nE         \nE         - ac9621e5932823a71cb38d004f98b01ef4310cf512ecccb60e1651af632613e8\nE         + 56e2ded023b5194703d5b926764ac0b9039cbd7108af08e61ba8f99865d6183c\n\n..\\..\\..\\..\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-workspace-review-own.py:139: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch\nFAILED ::test_binding_detached_exact_hashes_scale_source_changes_and_coverage\n2 failed, 5 passed in 2.02s\n",
+      "stderr": ""
+    }
+  }
+}

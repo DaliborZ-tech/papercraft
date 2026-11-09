@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="12" time="2.812" timestamp="2026-11-09T12:37:46.151673+01:00" hostname="Dalibor"><testcase classname="" name="test_second_profile_tree_actual_selection_enables_live_plane_and_curve" time="0.142" /><testcase classname="" name="test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch" time="0.125" /><testcase classname="" name="test_noop_loft_edit_preserves_source_pair_ids_frame_placement_and_undo_depth" time="0.188" /><testcase classname="" name="test_changed_loft_tolerance_one_command_preserves_anchors_and_undo_redo" time="0.231" /><testcase classname="" name="test_cancel_profile_plane_from_second_source_has_no_mutation" time="0.119" /><testcase classname="" name="test_delete_actual_loft_dialog_preserves_both_profiles_and_restores_by_undo" time="0.148" /><testcase classname="" name="test_binding_detached_exact_hashes_scale_source_changes_and_coverage" time="0.069" /><testcase classname="" name="test_stale_accepted_host_update_cannot_overwrite_concurrent_document_change" time="0.198" /><testcase classname="" name="test_loft_edge_guidance_does_not_offer_disabled_planar_join" time="0.110" /><testcase classname="" name="test_focused_actual_numeric_44_to_40_commits_after_tab_on_existing_loft" time="0.187" /><testcase classname="" name="test_invalid_second_plane_remains_repairable_from_source_ui" time="0.311" /><testcase classname="" name="test_source_revision_and_current_plane_change_digest_and_detached_records" time="0.022"><failure message="AttributeError: 'FixtureFunctionDefinition' object has no attribute 'project'">def test_source_revision_and_current_plane_change_digest_and_detached_records():
+        p=AuthorProject.new(scale=1)
+        a=p.add_profile([[0,0],[12,0]],closed=False)
+        b=p.copy_profile(a,plane={'origin':[0,0,5],'u':[1,0,0],'v':[0,1,0]})
+        pair={'first_segment_id':p.profiles[a].segments[0].id,'second_segment_id':p.profiles[b].segments[0].id,'first_interval':[0,1],'second_interval':[0,1]}
+        sid=p.add_loft(a,b,correspondences=[pair]);pid=p.part_for_surface(sid)
+        p.set_placement(pid,p.pages[0].id,30,30)
+        first=p.snapshot()['construction_checks']['lofts'][sid]
+        p.set_profile_plane(b,origin=[0,0,9],u=[1,0,0],v=[0,1,0])
+        current=p.loft_status(sid)
+        assert current['paper_stale']
+        assert current['source_binding']['profiles'][1]['plane']['origin']==[0,0,9]
+        assert current['source_revisions'][b]==p.profiles[b].revision
+        assert current['source_binding']['profiles'][1]['revision']==p.profiles[b].revision
+        assert current['intrinsic_source_digest']!=first['intrinsic_source_digest']
+        assert first['source_binding']['profiles'][1]['plane']['origin']==[0,0,5]
+        p.recompute();result=p.snapshot()['construction_checks']['lofts'][sid]
+        source=result['source_binding']
+        assert digest({'profiles':source['profiles'],'params':source['surface']['params'],'scale':source['scale']})==result['intrinsic_source_digest']
+&gt;       assert window.project.loft_status(sid)['status']!='EXACT'
+               ^^^^^^^^^^^^^^
+E       AttributeError: 'FixtureFunctionDefinition' object has no attribute 'project'
+
+..\..\..\..\projects\papercraft-loft-integration\docs\p2\implementation\evidence\pc007a-loft-workspace-review-own.py:234: AttributeError</failure></testcase></testsuite></testsuites>

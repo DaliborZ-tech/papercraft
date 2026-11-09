@@ -1,0 +1,27 @@
+{
+  "source_sha": "a9d155a1861edebfe9581bbd44fde11a56a5394c",
+  "archive_sha256": "41c382f1f37c8e923933793027c180d8a8c37b11acbf364a02d2a72ce4a3e689",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-pak0hr1m",
+  "actual_imports": {
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-pak0hr1m\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "620b6727e85aaae8899ceb32988227c9dd653398a14837aeee5c1bad9df01790"
+    },
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-pak0hr1m\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "lf_sha256": "03e49fb0895ea9752c032613e3ef0bcbf37a9dda8e2e217007c95d2fde4eae0a"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 93%]\n.....                                                                    [100%]\n77 passed in 72.80s (0:01:12)\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": "........F..                                                              [100%]\n================================== FAILURES ===================================\n_________ test_loft_edge_guidance_does_not_offer_disabled_planar_join _________\n\nwindow = <archpapercraft.ui.author_window.AuthorMainWindow(0x1826cc68900) at 0x00000182701F8D00>\nqtbot = <pytestqt.qtbot.QtBot object at 0x000001827017BEF0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001826DB1C8C0>\n\n    def test_loft_edge_guidance_does_not_offer_disabled_planar_join(window,qtbot,monkeypatch):\n        a,b,sid,pid=create(window,qtbot,monkeypatch)\n        window.select_edge(sid,window.project.profiles[b].segments[0].id)\n        assert not window.actions['attach_inside'].isEnabled() and not window.actions['glue_region'].isEnabled()\n>       assert '\\u0070\\u0159ipojit' not in window.hint.text(),window.hint.text()\nE       AssertionError: Vybranou hranu m\u016f\u017eete p\u0159ipojit k protikusu; potom ur\u010d\u00edte p\u0159ehyb nebo lepen\u00ed s chlopn\u00ed.\nE       assert 'p\u0159ipojit' not in 'Vybranou hr...\u00ed s chlopn\u00ed.'\nE         \nE         'p\u0159ipojit' is contained here:\nE           Vybranou hranu m\u016f\u017eete p\u0159ipojit k protikusu; potom ur\u010d\u00edte p\u0159ehyb nebo lepen\u00ed s chlopn\u00ed.\nE         ?                       ++++++++\n\n..\\..\\..\\..\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-workspace-review-own.py:173: AssertionError\n---------------------------- Captured Qt messages -----------------------------\nQtWarningMsg: QOpenGLWidget is not supported on this platform.\nQtWarningMsg: This plugin does not support propagateSizeHints()\nQtWarningMsg: This plugin does not support createPlatformOpenGLContext!\nQtWarningMsg: QOpenGLWidget: Failed to create context\nQtWarningMsg: This plugin does not support raise()\nQtWarningMsg: This plugin does not support createPlatformOpenGLContext!\nQtWarningMsg: QOpenGLWidget: Failed to create context\nQtWarningMsg: This plugin does not support createPlatformOpenGLContext!\nQtWarningMsg: QOpenGLWidget: Failed to create context\n=========================== short test summary info ===========================\nFAILED ::test_loft_edge_guidance_does_not_offer_disabled_planar_join - Assert...\n1 failed, 10 passed in 2.96s\n",
+      "stderr": ""
+    }
+  }
+}

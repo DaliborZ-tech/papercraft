@@ -1,0 +1,22 @@
+{
+  "source_sha": "10a21ac7effeb0a7aa6b928b1312e2aeb243fe3e",
+  "archive_sha256": "0e470ef9ce4166a617aec292ae4edc484cefbe01e80792d2127b18b05077e642",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-_769kc00",
+  "actual_imports": {
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-_769kc00\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "a663bec2f6fe7af3d4295a8465cb22a4951b8fca00d633c23408c1f8a9662d65"
+    },
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-_769kc00\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "lf_sha256": "03e49fb0895ea9752c032613e3ef0bcbf37a9dda8e2e217007c95d2fde4eae0a"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 0,
+      "stdout": "............                                                             [100%]\n12 passed in 2.89s\n",
+      "stderr": ""
+    }
+  }
+}

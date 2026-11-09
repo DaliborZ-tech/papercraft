@@ -1,0 +1,414 @@
+{
+  "actual_curve_output_checks": {
+    "area_agreement": {
+      "acceptance": "04_AREA_max(0.01_mm2,1e-6_BASE_AREA); AC-X04",
+      "comparisons": {
+        "964b9eff-7d6f-4002-a172-233cd028adcd": {
+          "absolute_difference_bound_mm2": "718042812562073975629/500000000000000000000000",
+          "allowed_area_error_mm2": "1/100",
+          "base_area_lower_bound_mm2": "110584061406360721993885047/200000000000000000000000",
+          "pdf_area_bounds_mm2": [
+            "276459435473089242910736989/500000000000000000000000",
+            "552918870946178485821473979/1000000000000000000000000"
+          ],
+          "svg_area_bounds_mm2": [
+            "110584061406360721993885047/200000000000000000000000",
+            "138230076757950902492356309/250000000000000000000000"
+          ]
+        },
+        "a5f2b135-bea7-410b-adfb-9761750dc69b": {
+          "absolute_difference_bound_mm2": "646800701086354241111/200000000000000000000000",
+          "allowed_area_error_mm2": "1/100",
+          "base_area_lower_bound_mm2": "1256637061435917295385057353/1000000000000000000000000",
+          "pdf_area_bounds_mm2": [
+            "1256633827432411863613851799/1000000000000000000000000",
+            "6283169137162059318069259/5000000000000000000000"
+          ],
+          "svg_area_bounds_mm2": [
+            "1256637061435917295385057353/1000000000000000000000000",
+            "628318530717958647692528677/500000000000000000000000"
+          ]
+        }
+      },
+      "scope": "ACTUAL_NET_CUT_AREA_AGREEMENT; source flattening verified separately",
+      "status": "VERIFIED"
+    },
+    "pdf": {
+      "arithmetic": "EXACT_FRACTIONS_OF_SUPPORTED_SERIALIZED_PDF_DECIMALS",
+      "finite_budgets": {
+        "area_commands": 20000,
+        "topology_nodes": 20000
+      },
+      "kind": "ACTUAL_STAGED_PDF_CURVE_GEOMETRY",
+      "new_user_test": "NOT_RUN",
+      "pages": [
+        {
+          "height_mm": "534600023/1800000",
+          "page_index": 0,
+          "width_mm": "63000001/300000"
+        },
+        {
+          "height_mm": "534600023/1800000",
+          "page_index": 1,
+          "width_mm": "63000001/300000"
+        }
+      ],
+      "parts": {
+        "964b9eff-7d6f-4002-a172-233cd028adcd": {
+          "loop_count": 2,
+          "material_area_bounds_mm2": {
+            "lower": "276459435473089242910736989/500000000000000000000000",
+            "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+            "upper": "552918870946178485821473979/1000000000000000000000000"
+          },
+          "name": "P2 \u00b7 Ost\u011bn\u00ed",
+          "page_bounds": {
+            "examined_nodes": 72,
+            "proof": "EXACT_RATIONAL_CUBIC_CONTROL_HULL_SUBDIVISION",
+            "status": "INSIDE"
+          },
+          "page_index": 1,
+          "topology_candidates": [
+            {
+              "certificate": {
+                "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+                "examined_nodes": 490,
+                "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+                "numerical_guard": 3.637978807091713e-12,
+                "proof": [
+                  "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+                  "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+                  "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+                  "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+                  "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+                  "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+                ],
+                "reason": "Supplied native path topology proved",
+                "status": "VALID",
+                "witness": null
+              },
+              "outer_index": 0
+            }
+          ]
+        },
+        "a5f2b135-bea7-410b-adfb-9761750dc69b": {
+          "loop_count": 1,
+          "material_area_bounds_mm2": {
+            "lower": "1256633827432411863613851799/1000000000000000000000000",
+            "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+            "upper": "6283169137162059318069259/5000000000000000000000"
+          },
+          "name": "P1 \u00b7 Plocha 1",
+          "page_bounds": {
+            "examined_nodes": 36,
+            "proof": "EXACT_RATIONAL_CUBIC_CONTROL_HULL_SUBDIVISION",
+            "status": "INSIDE"
+          },
+          "page_index": 0,
+          "topology_candidates": [
+            {
+              "certificate": {
+                "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+                "examined_nodes": 215,
+                "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+                "numerical_guard": 3.637978807091713e-12,
+                "proof": [
+                  "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+                  "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+                  "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+                  "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+                  "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+                  "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+                ],
+                "reason": "Supplied native path topology proved",
+                "status": "VALID",
+                "witness": null
+              },
+              "outer_index": 0
+            }
+          ]
+        }
+      },
+      "pdf_sha256": "45649bc639bdbb66005bcd8c778cf696944812e87713129904734a9902ccecb7",
+      "physical_build": "NOT_VERIFIED",
+      "proof_scope": {
+        "physical_page_bounds": "CERTIFIED_ACTUAL_COMMANDS",
+        "same_page_part_separation": "CERTIFIED_OR_EXPLICIT_SOURCE_ACK",
+        "within_part_topology": "EXACT_SUPPLIED_NATIVE_COMMANDS"
+      },
+      "separations": [],
+      "status": "VALID"
+    },
+    "svg": [
+      {
+        "arithmetic": "EXACT_FRACTIONS_OF_SERIALIZED_SVG_DECIMALS",
+        "finite_budgets": {
+          "area_commands": 20000,
+          "topology_nodes": 20000
+        },
+        "kind": "ACTUAL_STAGED_SVG_LOCAL_CUT_TOPOLOGY",
+        "new_user_test": "NOT_RUN",
+        "pages": [
+          {
+            "height_mm": "297",
+            "page_index": 0,
+            "width_mm": "210"
+          }
+        ],
+        "parts": {
+          "a5f2b135-bea7-410b-adfb-9761750dc69b": {
+            "base_area_lower_bound_mm2": "1256637061435917295385057353/1000000000000000000000000",
+            "loop_count": 1,
+            "material_area_bounds_mm2": {
+              "lower": "1256637061435917295385057353/1000000000000000000000000",
+              "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+              "upper": "628318530717958647692528677/500000000000000000000000"
+            },
+            "name": "P1 \u00b7 Plocha 1",
+            "page_bounds": {
+              "scope": "LOCAL_COORDINATES_ONLY",
+              "status": "NOT_CHECKED"
+            },
+            "page_index": 0,
+            "topology_candidates": [
+              {
+                "certificate": {
+                  "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+                  "examined_nodes": 28,
+                  "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+                  "numerical_guard": 1.8189894035458565e-12,
+                  "proof": [
+                    "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+                    "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+                    "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+                    "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+                    "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+                    "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+                  ],
+                  "reason": "Supplied native path topology proved",
+                  "status": "VALID",
+                  "witness": null
+                },
+                "outer_index": 0
+              }
+            ]
+          }
+        },
+        "physical_build": "NOT_VERIFIED",
+        "placement_scope": "SOURCE_CONSERVATIVE_OUTPUT_BUDGET_ENVELOPES; NO_EXACT_SERIALIZED_SVG_PAGE_SEPARATION_CLAIM",
+        "proof_scope": {
+          "physical_page_bounds": "NOT_CHECKED_LOCAL_COORDINATES",
+          "same_page_part_separation": "NOT_CHECKED_LOCAL_COORDINATES",
+          "within_part_topology": "EXACT_SUPPLIED_NATIVE_COMMANDS"
+        },
+        "separations": [],
+        "status": "VALID",
+        "svg_sha256": "9a71bdb6532f9bf2703137e5cdcb701641c108d855eb2739c29a80f692c9a3c8"
+      },
+      {
+        "arithmetic": "EXACT_FRACTIONS_OF_SERIALIZED_SVG_DECIMALS",
+        "finite_budgets": {
+          "area_commands": 20000,
+          "topology_nodes": 20000
+        },
+        "kind": "ACTUAL_STAGED_SVG_LOCAL_CUT_TOPOLOGY",
+        "new_user_test": "NOT_RUN",
+        "pages": [
+          {
+            "height_mm": "297",
+            "page_index": 1,
+            "width_mm": "210"
+          }
+        ],
+        "parts": {
+          "964b9eff-7d6f-4002-a172-233cd028adcd": {
+            "base_area_lower_bound_mm2": "110584061406360721993885047/200000000000000000000000",
+            "loop_count": 2,
+            "material_area_bounds_mm2": {
+              "lower": "110584061406360721993885047/200000000000000000000000",
+              "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+              "upper": "138230076757950902492356309/250000000000000000000000"
+            },
+            "name": "P2 \u00b7 Ost\u011bn\u00ed",
+            "page_bounds": {
+              "scope": "LOCAL_COORDINATES_ONLY",
+              "status": "NOT_CHECKED"
+            },
+            "page_index": 1,
+            "topology_candidates": [
+              {
+                "certificate": {
+                  "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+                  "examined_nodes": 260,
+                  "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+                  "numerical_guard": 1.8189894035458565e-12,
+                  "proof": [
+                    "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+                    "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+                    "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+                    "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+                    "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+                    "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+                  ],
+                  "reason": "Supplied native path topology proved",
+                  "status": "VALID",
+                  "witness": null
+                },
+                "outer_index": 0
+              }
+            ]
+          }
+        },
+        "physical_build": "NOT_VERIFIED",
+        "placement_scope": "SOURCE_CONSERVATIVE_OUTPUT_BUDGET_ENVELOPES; NO_EXACT_SERIALIZED_SVG_PAGE_SEPARATION_CLAIM",
+        "proof_scope": {
+          "physical_page_bounds": "NOT_CHECKED_LOCAL_COORDINATES",
+          "same_page_part_separation": "NOT_CHECKED_LOCAL_COORDINATES",
+          "within_part_topology": "EXACT_SUPPLIED_NATIVE_COMMANDS"
+        },
+        "separations": [],
+        "status": "VALID",
+        "svg_sha256": "78b7d495845981edc177299a7c748894a70ad0b4628ff114434b8feb26785096"
+      }
+    ]
+  },
+  "construction_checks": {
+    "accepted_layout_overlaps": [],
+    "assembly_digest": "b8ced584876b9999f9540e84e0685942088a23b1b048f8e0f1a319b0e55aba35",
+    "connector_bends": {},
+    "curve_profiles": {
+      "41b4087a-330c-41fd-9120-34d946948181": {
+        "chord_deviation_bound_paper_mm": 0.0015059821200313628,
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "length_lower_paper_mm": 125.66370614358536,
+        "length_upper_paper_mm": 125.6637061435981,
+        "representation_budget_paper_mm": 0.002,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof.",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "d56c4ce9-e176-4f4f-b4f0-a2ffbcf6082e",
+          "c8343be8-e40b-48d8-9313-3c78b5510854"
+        ],
+        "status": "CERTIFIED",
+        "svg_deviation_bound_paper_mm": 2.307816412766953e-11,
+        "svg_length_error_bound_paper_mm": 7.965602513631625e-11
+      },
+      "ae1aebda-7b04-4595-a5bf-38dbe572686a": {
+        "chord_deviation_bound_paper_mm": 0.0018071785465684123,
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "length_lower_paper_mm": 150.79644737229737,
+        "length_upper_paper_mm": 150.7964473723228,
+        "representation_budget_paper_mm": 0.002,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof.",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "6514619c-f75d-4c6a-81fa-309a3e3608f3",
+          "1d2ce785-1d69-4ae6-a62a-e0bd43c82ff7"
+        ],
+        "status": "CERTIFIED",
+        "svg_deviation_bound_paper_mm": 4.612591473500752e-11,
+        "svg_length_error_bound_paper_mm": 1.5921545142991013e-10
+      }
+    },
+    "curve_regions": {
+      "bb7b0418-8525-439d-b183-ca6cd1f11777": {
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "examined_nodes": 256,
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "numerical_guard": 1.1641532182693481e-10,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "reason": "Native manufacturing-curve topology proved",
+        "source_profile_ids": [
+          "ae1aebda-7b04-4595-a5bf-38dbe572686a",
+          "41b4087a-330c-41fd-9120-34d946948181"
+        ],
+        "source_revisions": {
+          "41b4087a-330c-41fd-9120-34d946948181": 1,
+          "ae1aebda-7b04-4595-a5bf-38dbe572686a": 1
+        },
+        "status": "VALID",
+        "witness": null
+      },
+      "eab12c77-8606-4975-8a7b-fe3878d7b2b4": {
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "examined_nodes": 26,
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "numerical_guard": 5.820766091346741e-11,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "reason": "Native manufacturing-curve topology proved",
+        "source_profile_ids": [
+          "41b4087a-330c-41fd-9120-34d946948181"
+        ],
+        "source_revisions": {
+          "41b4087a-330c-41fd-9120-34d946948181": 1
+        },
+        "status": "VALID",
+        "witness": null
+      }
+    },
+    "lofts": {},
+    "material_profile": {
+      "bend_radius_mm": 0.0,
+      "clearance_mm": 0.0,
+      "crease_zone_mm": 0.5,
+      "thickness_mm": null
+    },
+    "physical_build": "NOT_VERIFIED"
+  },
+  "construction_summary": {
+    "connector_statuses": {},
+    "construction_checks_digest": "06acf2c2b60374709d94aa211e9bc40e2e52a206d4c203916847f2f149e1dd90",
+    "material_profile": {
+      "bend_radius_mm": 0.0,
+      "clearance_mm": 0.0,
+      "crease_zone_mm": 0.5,
+      "thickness_mm": null
+    },
+    "physical_build": "NOT_VERIFIED",
+    "unknown_search_scope": "BOUNDED_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN"
+  },
+  "files": [
+    "page-e5081af9-1625-4334-b82e-c6966f25a355.svg",
+    "page-91c174db-2c9c-49be-b8d7-0c5d3ac9480b.svg",
+    "model.pdf"
+  ],
+  "font_sha256": "edfbd22a3d088fc2f5d7c79b8c9c732df6dc878a60f0a80be0f92a3c7a634404",
+  "pdf_arc_approximation": {
+    "bound_scope": "arc_to_cubic_before_numeric_serialization",
+    "max_interpolation_error_mm": 8.201711441110448e-05,
+    "method": "cubic_hermite",
+    "precision_attempts": [
+      {
+        "actual_interpolation_bound_mm": 8.201711441110448e-05,
+        "requested_interpolation_bound_mm": 0.0001,
+        "status": "ACTUAL_GEOMETRY_AND_AREA_VERIFIED"
+      }
+    ],
+    "requested_interpolation_bound_mm": 0.0001
+  },
+  "pdf_geometry_precision": {
+    "combined_position_error_bound_mm": 0.000100920460471341,
+    "method": "serialized_CTM_and_Bernstein_control_difference",
+    "numeric_serialization_bound_mm": 1.8903299934321796e-05,
+    "required_digital_budget_mm": 0.01,
+    "scope": "finite_input_paths_calibration_text_anchors; font_outlines_excluded",
+    "source_to_native_svg_bound_mm": 4.612591473500752e-11
+  },
+  "project_id": "e8a4da1e-d3c0-4fe2-b71a-18562cb77e86",
+  "schema_version": 1,
+  "snapshot_digest": "8df2c9c60c4ca595d2d85e388244f5bf9c34b29e047e08714d286e0495dd6fc8"
+}

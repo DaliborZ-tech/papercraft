@@ -2029,7 +2029,7 @@
       ],
       "acceptance_state": {
         "AC-AU08": "PARTIAL_TECHNICAL_PASS: native arc/cubic UI, numeric edit, corners, save/reopen and both vector outputs on source63; full profile-to-profile workflow pending",
-        "AC-AU09": "NOT_RUN_END_TO_END: loft components under independent review, B1/B2/B3 and Bezier extrusion actual UI integration pending",
+        "AC-AU09": "PARTIAL_TECHNICAL_PASS: B2 and normal Bezier extrusion actual Windows-to-vectors on23ce202; B1 full proof and B3-to-D not complete",
         "AC-AU13": "PARTIAL: stable native source/trim IDs verified; full split/merge provenance not closed",
         "AC-AU15": "PARTIAL_TECHNICAL_PASS: planar native curves actual Windows/save/reopen/layout/SVG/PDF/Inkscape; other supported cuts pending",
         "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
@@ -2134,7 +2134,7 @@
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "implementation_authorized_on": "2026-11-06",
-      "working_branch": "revival/p2-profiles",
+      "working_branch": "revival/p2-loft-integration",
       "implementation_started_on": "2026-11-09",
       "dependency_evidence": {
         "technical_prerequisite": "PC-006A/B implementation independently approved and published on 8e72cda",
@@ -2158,8 +2158,8 @@
           "actual UI/save/reopen/layout/SVG/PDF"
         ],
         "whole_ticket_complete": false,
-        "loft_domain": "In isolated worktree, source a1cbf92; independent review in progress, no actual end-to-end B proof yet",
-        "loft_UI": "Widget-only source d572411; independent review in progress, main-window/core integration pending"
+        "loft_domain": "APPROVED_IN_CORE_COMPONENT_SCOPE a1cbf920; LD01-04 CLOSED; actual UI/output integration not yet approved",
+        "loft_UI": "PARTIAL_NATIVE_PROOF: B2 and normal Bezier extrusion actual Windows/save/reopen/layout/vector outputs PASS on23ce202; B1 initial327s FAIL, performance repair and numeric focus diagnosis in progress; whole B not complete"
       },
       "reviewed_code_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
       "technical_verdict": "APPROVED_IN_BOUNDED_PLANAR_AUTHORING_SLICE_SCOPE; whole ticket IN_PROGRESS",
@@ -2167,7 +2167,8 @@
         "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
         "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
         "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
-        "docs/p2/implementation/evidence/pc007a-suite-63ab275-run03.xml"
+        "docs/p2/implementation/evidence/pc007a-suite-63ab275-run03.xml",
+        "docs/p2/implementation/PC007A_LOFT_PROGRESS.md"
       ]
     },
     {
@@ -2452,8 +2453,8 @@
   ],
   "updated_on": "2026-11-09",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-profiles",
-  "release_readiness": "NOT_READY: PC-006A/B technical slices published; PC-007A planar curves digitally verified/reviewed, publication pending metadata review; full B/C/D, actual novice and final historic model pending",
+  "working_branch": "revival/p2-loft-integration",
+  "release_readiness": "NOT_READY: PC-006A/B and PC-007A planar technical slices published; complete B/C/D, actual novice and final historic model pending",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2716,8 +2717,8 @@
     "pause_reason": "Owner explicitly requested interruption and continuation documentation for tomorrow",
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-07.md",
-    "wip_source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
-    "wip_branch": "revival/p2-profiles",
+    "wip_source_sha": "23ce202535bbd0ce7f2d4e5e975386f363bd2653",
+    "wip_branch": "revival/p2-loft-integration",
     "next_required_technical_work": "Finish actual B1/B2/B3 and Bezier extrusion through UI/save/reopen/manual layout/vector outputs, independent review and fixes; then C/D and historic model",
     "resumed_on": "2026-11-09",
     "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills",
@@ -2725,7 +2726,7 @@
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Publish reviewed planar native curves, then integrate actual profile-to-profile B UI/core/output",
+    "active_work": "Integrate reviewed two-profile core, author UI and actual serialized output; native B1/B2/Bezier diagnostics in progress; exact B3 refusal and bounded D segmentation follow",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2749,6 +2750,21 @@
         "report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
         "product_repair": "3252544850c0d4a9c4465de8f359ec2a5350af27",
         "original_area_tolerance_preserved": true
+      },
+      "loft_core": {
+        "status": "APPROVED_IN_CORE_COMPONENT_SCOPE",
+        "source_sha": "a1cbf920397694f3b1d3e85a08052acdc3962a7b",
+        "report": "docs/p2/implementation/PC007A_LOFT_DOMAIN_REVIEW.md"
+      },
+      "loft_UI_widget": {
+        "status": "APPROVED_IN_WIDGET_API_SCOPE",
+        "source_sha": "6efd70a33f377298a267b4a91214e5383eb548f5",
+        "report": "docs/p2/implementation/PC007A_LOFT_UI_REVIEW.md"
+      },
+      "loft_writer": {
+        "status": "PENDING_INDEPENDENT_REVIEW",
+        "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+        "evidence": "docs/p2/implementation/evidence/pc007a-loft-output-3f4ece8/results.json"
       }
     },
     "planar_verified_slice": {
@@ -2757,10 +2773,13 @@
       "delivery": "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
       "suite_passed": 908,
       "windows_native": "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
-      "publication": "PENDING_METADATA_REVIEW_AND_INTEGRATION",
+      "publication": "PUBLISHED_VERIFIED_LOCAL_REMOTE_SHA",
       "whole_PC007A_complete": false,
       "novice_participants": 0,
-      "physical_proof": "NOT_RUN_P3"
-    }
+      "physical_proof": "NOT_RUN_P3",
+      "published_sha": "a27cf5aaf76e7057a49d4b4cb7ec85a87855c17f",
+      "integration_report": "docs/p2/implementation/PC007A_PLANAR_INTEGRATION.md"
+    },
+    "loft_progress_report": "docs/p2/implementation/PC007A_LOFT_PROGRESS.md"
   }
 }

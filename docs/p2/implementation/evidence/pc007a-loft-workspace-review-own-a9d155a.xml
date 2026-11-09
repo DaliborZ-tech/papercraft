@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="11" time="2.957" timestamp="2026-11-09T12:36:24.039829+01:00" hostname="Dalibor"><testcase classname="" name="test_second_profile_tree_actual_selection_enables_live_plane_and_curve" time="0.165" /><testcase classname="" name="test_selecting_second_source_curve_keeps_loft_and_draws_correct_sketch" time="0.130" /><testcase classname="" name="test_noop_loft_edit_preserves_source_pair_ids_frame_placement_and_undo_depth" time="0.187" /><testcase classname="" name="test_changed_loft_tolerance_one_command_preserves_anchors_and_undo_redo" time="0.225" /><testcase classname="" name="test_cancel_profile_plane_from_second_source_has_no_mutation" time="0.130" /><testcase classname="" name="test_delete_actual_loft_dialog_preserves_both_profiles_and_restores_by_undo" time="0.141" /><testcase classname="" name="test_binding_detached_exact_hashes_scale_source_changes_and_coverage" time="0.086" /><testcase classname="" name="test_stale_accepted_host_update_cannot_overwrite_concurrent_document_change" time="0.175" /><testcase classname="" name="test_loft_edge_guidance_does_not_offer_disabled_planar_join" time="0.118"><failure message="AssertionError: Vybranou hranu můžete připojit k protikusu; potom určíte přehyb nebo lepení s chlopní.&#10;assert 'připojit' not in 'Vybranou hr...í s chlopní.'&#10;  &#10;  'připojit' is contained here:&#10;    Vybranou hranu můžete připojit k protikusu; potom určíte přehyb nebo lepení s chlopní.&#10;  ?                       ++++++++">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1826cc68900) at 0x00000182701F8D00&gt;
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001827017BEF0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001826DB1C8C0&gt;
+
+    def test_loft_edge_guidance_does_not_offer_disabled_planar_join(window,qtbot,monkeypatch):
+        a,b,sid,pid=create(window,qtbot,monkeypatch)
+        window.select_edge(sid,window.project.profiles[b].segments[0].id)
+        assert not window.actions['attach_inside'].isEnabled() and not window.actions['glue_region'].isEnabled()
+&gt;       assert '\u0070\u0159ipojit' not in window.hint.text(),window.hint.text()
+E       AssertionError: Vybranou hranu můžete připojit k protikusu; potom určíte přehyb nebo lepení s chlopní.
+E       assert 'připojit' not in 'Vybranou hr...í s chlopní.'
+E         
+E         'připojit' is contained here:
+E           Vybranou hranu můžete připojit k protikusu; potom určíte přehyb nebo lepení s chlopní.
+E         ?                       ++++++++
+
+..\..\..\..\projects\papercraft-loft-integration\docs\p2\implementation\evidence\pc007a-loft-workspace-review-own.py:173: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="" name="test_focused_actual_numeric_44_to_40_commits_after_tab_on_existing_loft" time="0.203" /><testcase classname="" name="test_invalid_second_plane_remains_repairable_from_source_ui" time="0.342" /></testsuite></testsuites>

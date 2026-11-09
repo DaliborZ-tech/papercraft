@@ -1,0 +1,22 @@
+{
+  "source_sha": "10a21ac7effeb0a7aa6b928b1312e2aeb243fe3e",
+  "archive_sha256": "0e470ef9ce4166a617aec292ae4edc484cefbe01e80792d2127b18b05077e642",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-kifoa6f9",
+  "actual_imports": {
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-kifoa6f9\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "a663bec2f6fe7af3d4295a8465cb22a4951b8fca00d633c23408c1f8a9662d65"
+    },
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-host-review-kifoa6f9\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "lf_sha256": "03e49fb0895ea9752c032613e3ef0bcbf37a9dda8e2e217007c95d2fde4eae0a"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 1,
+      "stdout": "...........F                                                             [100%]\n================================== FAILURES ===================================\n__ test_source_revision_and_current_plane_change_digest_and_detached_records __\n\n    def test_source_revision_and_current_plane_change_digest_and_detached_records():\n        p=AuthorProject.new(scale=1)\n        a=p.add_profile([[0,0],[12,0]],closed=False)\n        b=p.copy_profile(a,plane={'origin':[0,0,5],'u':[1,0,0],'v':[0,1,0]})\n        pair={'first_segment_id':p.profiles[a].segments[0].id,'second_segment_id':p.profiles[b].segments[0].id,'first_interval':[0,1],'second_interval':[0,1]}\n        sid=p.add_loft(a,b,correspondences=[pair]);pid=p.part_for_surface(sid)\n        p.set_placement(pid,p.pages[0].id,30,30)\n        first=p.snapshot()['construction_checks']['lofts'][sid]\n        p.set_profile_plane(b,origin=[0,0,9],u=[1,0,0],v=[0,1,0])\n        current=p.loft_status(sid)\n        assert current['paper_stale']\n        assert current['source_binding']['profiles'][1]['plane']['origin']==[0,0,9]\n        assert current['source_revisions'][b]==p.profiles[b].revision\n        assert current['source_binding']['profiles'][1]['revision']==p.profiles[b].revision\n        assert current['intrinsic_source_digest']!=first['intrinsic_source_digest']\n        assert first['source_binding']['profiles'][1]['plane']['origin']==[0,0,5]\n        p.recompute();result=p.snapshot()['construction_checks']['lofts'][sid]\n        source=result['source_binding']\n        assert digest({'profiles':source['profiles'],'params':source['surface']['params'],'scale':source['scale']})==result['intrinsic_source_digest']\n>       assert window.project.loft_status(sid)['status']!='EXACT'\n               ^^^^^^^^^^^^^^\nE       AttributeError: 'FixtureFunctionDefinition' object has no attribute 'project'\n\n..\\..\\..\\..\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-workspace-review-own.py:234: AttributeError\n=========================== short test summary info ===========================\nFAILED ::test_source_revision_and_current_plane_change_digest_and_detached_records\n1 failed, 11 passed in 2.81s\n",
+      "stderr": ""
+    }
+  }
+}
