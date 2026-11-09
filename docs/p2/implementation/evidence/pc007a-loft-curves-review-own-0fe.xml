@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="18" time="6.933" timestamp="2026-11-09T10:24:08.616730+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_unequal_nearline_actual_binary_proof_over_whole_parameter[parameters0-False]" time="0.004"><failure message="assert Fraction(8299761953989889, 36893488147419103232) &gt;= (Fraction(531184765055352929, 2361183241434822606848) - Fraction(1, 1267650600228229401496703205376))&#10; +  where Fraction(8299761953989889, 36893488147419103232) = Q(0.00022496549854070932)&#10; +  and   Fraction(531184765055352929, 2361183241434822606848) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000018572026EA0&gt;, Fraction(0, 1))&#10; +    where Fraction(0, 1) = Q(0)&#10;[+1 more line; full report in element text]">near_line = False, parameters = (0, 0.125, 0.5, 1)
+
+    @pytest.mark.parametrize('near_line',[False,True])
+    @pytest.mark.parametrize('parameters',[(0,.125,.5,1),(0,2**-20,.03125,.5,1)])
+    def test_unequal_nearline_actual_binary_proof_over_whole_parameter(near_line,parameters):
+        report,q,xscale,offset=synthetic(parameters,near_line=near_line);before=copy.deepcopy(report)
+        fit=fit_native_loft_boundaries(report,position_budget_mm=.1,length_budget_mm=.1,rounding_reserve_mm=0)
+&gt;       rational_whole_parameter_and_global_length(report,fit)
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+report = {'status': 'EXACT', 'family': 'POSITIVE_HOMOTHETIC_CONE', 'patches': [{'parameters': [0, 0.125, 0.5, 1], 'source_param...rofile_id': 'p-first', 'second_profile_id': 'p-second', ...}], 'representation_error_bound_paper_mm': 0.001953125, ...}
+fit = {'status': 'CERTIFIED_REPRESENTATION_ONLY', 'proof_scope': 'REPRESENTATION_ONLY', 'topology': 'CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS', 'physical_build': 'NOT_VERIFIED', ...}
+
+    def rational_whole_parameter_and_global_length(report,fit):
+        assert fit['status']=='CERTIFIED_REPRESENTATION_ONLY',fit.get('message')
+        residual=Q(fit['position_error_bound_paper_mm'])-Q(report['representation_error_bound_paper_mm'])-Q(fit['rounding_reserve_paper_mm'])
+        assert residual&gt;=0
+        totals=[Q(0),Q(0)]
+        for patch in fit['patches']:
+            for side_index,side in enumerate(['first','second']):
+                boundary=patch[side]
+                for segment in boundary['segments']:
+                    start,end=map(lambda p:tuple(map(Q,p)),[segment['start'],segment['end']])
+                    if segment['kind']=='line':continue
+                    controls=[start,tuple(map(Q,segment['data']['control1'])),tuple(map(Q,segment['data']['control2'])),end]
+                    line=[start,tuple((2*x+y)/3 for x,y in zip(start,end)),tuple((x+2*y)/3 for x,y in zip(start,end)),end]
+                    # Convex-hull theorem then covers EVERY local parameter, not a grid.
+                    for ctrl,elevated in zip(controls,line):
+                        square=sum((x-y)**2 for x,y in zip(ctrl,elevated))
+                        assert Q(segment['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert Q(boundary['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert residual**2&gt;=square
+                    extra=max(Q(0),sum((dist_enclosure(x,y)[1] for x,y in zip(controls,controls[1:])),Q(0))-dist_enclosure(start,end)[0])
+                    assert Q(segment['length_excess_bound_paper_mm'])&gt;=extra
+                    totals[side_index]+=extra
+&gt;               assert Q(boundary['length_excess_bound_paper_mm'])&gt;=sum((Q(s['length_excess_bound_paper_mm']) for s in boundary['segments']),Q(0))-Q(1,1&lt;&lt;100)
+E               assert Fraction(8299761953989889, 36893488147419103232) &gt;= (Fraction(531184765055352929, 2361183241434822606848) - Fraction(1, 1267650600228229401496703205376))
+E                +  where Fraction(8299761953989889, 36893488147419103232) = Q(0.00022496549854070932)
+E                +  and   Fraction(531184765055352929, 2361183241434822606848) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000018572026EA0&gt;, Fraction(0, 1))
+E                +    where Fraction(0, 1) = Q(0)
+E                +  and   Fraction(1, 1267650600228229401496703205376) = Q(1, (1 &lt;&lt; 100))
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:47: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_unequal_nearline_actual_binary_proof_over_whole_parameter[parameters0-True]" time="0.004" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_unequal_nearline_actual_binary_proof_over_whole_parameter[parameters1-False]" time="0.003"><failure message="assert Fraction(5304832567809513, 18446744073709551616) &gt;= (Fraction(1529013886441586835436745057632257, 5316911983139663491615228241121378304) - Fraction(1, 1267650600228229401496703205376))&#10; +  where Fraction(5304832567809513, 18446744073709551616) = Q(0.00028757554973454655)&#10; +  and   Fraction(1529013886441586835436745057632257, 5316911983139663491615228241121378304) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000018573091A80&gt;, Fraction(0, 1))&#10;[+2 more lines; full report in element text]">near_line = False, parameters = (0, 9.5367431640625e-07, 0.03125, 0.5, 1)
+
+    @pytest.mark.parametrize('near_line',[False,True])
+    @pytest.mark.parametrize('parameters',[(0,.125,.5,1),(0,2**-20,.03125,.5,1)])
+    def test_unequal_nearline_actual_binary_proof_over_whole_parameter(near_line,parameters):
+        report,q,xscale,offset=synthetic(parameters,near_line=near_line);before=copy.deepcopy(report)
+        fit=fit_native_loft_boundaries(report,position_budget_mm=.1,length_budget_mm=.1,rounding_reserve_mm=0)
+&gt;       rational_whole_parameter_and_global_length(report,fit)
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+report = {'status': 'EXACT', 'family': 'POSITIVE_HOMOTHETIC_CONE', 'patches': [{'parameters': [0, 9.5367431640625e-07, 0.03125,...rofile_id': 'p-first', 'second_profile_id': 'p-second', ...}], 'representation_error_bound_paper_mm': 0.001953125, ...}
+fit = {'status': 'CERTIFIED_REPRESENTATION_ONLY', 'proof_scope': 'REPRESENTATION_ONLY', 'topology': 'CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS', 'physical_build': 'NOT_VERIFIED', ...}
+
+    def rational_whole_parameter_and_global_length(report,fit):
+        assert fit['status']=='CERTIFIED_REPRESENTATION_ONLY',fit.get('message')
+        residual=Q(fit['position_error_bound_paper_mm'])-Q(report['representation_error_bound_paper_mm'])-Q(fit['rounding_reserve_paper_mm'])
+        assert residual&gt;=0
+        totals=[Q(0),Q(0)]
+        for patch in fit['patches']:
+            for side_index,side in enumerate(['first','second']):
+                boundary=patch[side]
+                for segment in boundary['segments']:
+                    start,end=map(lambda p:tuple(map(Q,p)),[segment['start'],segment['end']])
+                    if segment['kind']=='line':continue
+                    controls=[start,tuple(map(Q,segment['data']['control1'])),tuple(map(Q,segment['data']['control2'])),end]
+                    line=[start,tuple((2*x+y)/3 for x,y in zip(start,end)),tuple((x+2*y)/3 for x,y in zip(start,end)),end]
+                    # Convex-hull theorem then covers EVERY local parameter, not a grid.
+                    for ctrl,elevated in zip(controls,line):
+                        square=sum((x-y)**2 for x,y in zip(ctrl,elevated))
+                        assert Q(segment['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert Q(boundary['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert residual**2&gt;=square
+                    extra=max(Q(0),sum((dist_enclosure(x,y)[1] for x,y in zip(controls,controls[1:])),Q(0))-dist_enclosure(start,end)[0])
+                    assert Q(segment['length_excess_bound_paper_mm'])&gt;=extra
+                    totals[side_index]+=extra
+&gt;               assert Q(boundary['length_excess_bound_paper_mm'])&gt;=sum((Q(s['length_excess_bound_paper_mm']) for s in boundary['segments']),Q(0))-Q(1,1&lt;&lt;100)
+E               assert Fraction(5304832567809513, 18446744073709551616) &gt;= (Fraction(1529013886441586835436745057632257, 5316911983139663491615228241121378304) - Fraction(1, 1267650600228229401496703205376))
+E                +  where Fraction(5304832567809513, 18446744073709551616) = Q(0.00028757554973454655)
+E                +  and   Fraction(1529013886441586835436745057632257, 5316911983139663491615228241121378304) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000018573091A80&gt;, Fraction(0, 1))
+E                +    where Fraction(0, 1) = Q(0)
+E                +  and   Fraction(1, 1267650600228229401496703205376) = Q(1, (1 &lt;&lt; 100))
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:47: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_unequal_nearline_actual_binary_proof_over_whole_parameter[parameters1-True]" time="0.004" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_actual_source_circle_chains_have_independent_length_and_curve_bounds[7-2-11-False]" time="3.092" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_actual_source_circle_chains_have_independent_length_and_curve_bounds[13-0.5--9-False]" time="2.804"><failure message="assert Fraction(6077996584787969, 9444732965739290427392) &gt;= (Fraction(12447737005645760579, 19342813113834066795298816) - Fraction(1, 1267650600228229401496703205376))&#10; +  where Fraction(6077996584787969, 9444732965739290427392) = Q(6.435329200768157e-07)&#10; +  and   Fraction(12447737005645760579, 19342813113834066795298816) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000018532599C40&gt;, Fraction(0, 1))&#10; +    where Fraction(0, 1) = Q(0)&#10;[+1 more line; full report in element text]">r = 13, k = 0.5, depth = -9, reverse = False
+
+    @pytest.mark.parametrize('r,k,depth,reverse',[(7,2,11,False),(13,.5,-9,False),(7,2,0,True)])
+    def test_actual_source_circle_chains_have_independent_length_and_curve_bounds(r,k,depth,reverse):
+        interval=(1,0) if reverse else (0,1)
+        profiles=[LoftProfile((Curve((radius,0),(-radius,0),'arc',dict(center=(0,0),sweep_deg=180),name),),origin=(0,0,z),profile_id=name) for radius,z,name in [(r,0,'a'),(r*k,depth,'b')]]
+        report=flatten_loft(*profiles,[LoftCorrespondence('a','b',interval,interval)])
+        fit=fit_native_loft_boundaries(report)
+&gt;       rational_whole_parameter_and_global_length(report,fit)
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+report = {'status': 'EXACT', 'family': 'POSITIVE_HOMOTHETIC_CONE', 'patches': [{'first_profile_id': 'a', 'second_profile_id': '..._segment_id': 'a', 'second_segment_id': 'b', ...}], 'representation_error_bound_paper_mm': 0.00015209436086147213, ...}
+fit = {'status': 'CERTIFIED_REPRESENTATION_ONLY', 'proof_scope': 'REPRESENTATION_ONLY', 'topology': 'CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS', 'physical_build': 'NOT_VERIFIED', ...}
+
+    def rational_whole_parameter_and_global_length(report,fit):
+        assert fit['status']=='CERTIFIED_REPRESENTATION_ONLY',fit.get('message')
+        residual=Q(fit['position_error_bound_paper_mm'])-Q(report['representation_error_bound_paper_mm'])-Q(fit['rounding_reserve_paper_mm'])
+        assert residual&gt;=0
+        totals=[Q(0),Q(0)]
+        for patch in fit['patches']:
+            for side_index,side in enumerate(['first','second']):
+                boundary=patch[side]
+                for segment in boundary['segments']:
+                    start,end=map(lambda p:tuple(map(Q,p)),[segment['start'],segment['end']])
+                    if segment['kind']=='line':continue
+                    controls=[start,tuple(map(Q,segment['data']['control1'])),tuple(map(Q,segment['data']['control2'])),end]
+                    line=[start,tuple((2*x+y)/3 for x,y in zip(start,end)),tuple((x+2*y)/3 for x,y in zip(start,end)),end]
+                    # Convex-hull theorem then covers EVERY local parameter, not a grid.
+                    for ctrl,elevated in zip(controls,line):
+                        square=sum((x-y)**2 for x,y in zip(ctrl,elevated))
+                        assert Q(segment['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert Q(boundary['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert residual**2&gt;=square
+                    extra=max(Q(0),sum((dist_enclosure(x,y)[1] for x,y in zip(controls,controls[1:])),Q(0))-dist_enclosure(start,end)[0])
+                    assert Q(segment['length_excess_bound_paper_mm'])&gt;=extra
+                    totals[side_index]+=extra
+&gt;               assert Q(boundary['length_excess_bound_paper_mm'])&gt;=sum((Q(s['length_excess_bound_paper_mm']) for s in boundary['segments']),Q(0))-Q(1,1&lt;&lt;100)
+E               assert Fraction(6077996584787969, 9444732965739290427392) &gt;= (Fraction(12447737005645760579, 19342813113834066795298816) - Fraction(1, 1267650600228229401496703205376))
+E                +  where Fraction(6077996584787969, 9444732965739290427392) = Q(6.435329200768157e-07)
+E                +  and   Fraction(12447737005645760579, 19342813113834066795298816) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000018532599C40&gt;, Fraction(0, 1))
+E                +    where Fraction(0, 1) = Q(0)
+E                +  and   Fraction(1, 1267650600228229401496703205376) = Q(1, (1 &lt;&lt; 100))
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:47: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_actual_source_circle_chains_have_independent_length_and_curve_bounds[7-2-0-True]" time="0.117" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_global_length_sums_asymmetric_patches_and_rejects_local_only_budget" time="0.013"><failure message="assert Fraction(8299761953989889, 36893488147419103232) &gt;= (Fraction(531184765055352929, 2361183241434822606848) - Fraction(1, 1267650600228229401496703205376))&#10; +  where Fraction(8299761953989889, 36893488147419103232) = Q(0.00022496549854070932)&#10; +  and   Fraction(531184765055352929, 2361183241434822606848) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001853259A6C0&gt;, Fraction(0, 1))&#10; +    where Fraction(0, 1) = Q(0)&#10;[+1 more line; full report in element text]">def test_global_length_sums_asymmetric_patches_and_rejects_local_only_budget():
+        report,*_=synthetic(count=12)
+        for i,p in enumerate(report['patches']):
+            if i%2==0:p['flat_second_paper_mm']=[[x,0.5] for x,y in p['flat_second_paper_mm']]
+            else:p['flat_first_paper_mm']=[[x,0.] for x,y in p['flat_first_paper_mm']]
+        fit=fit_native_loft_boundaries(report,position_budget_mm=.1,length_budget_mm=.1)
+&gt;       rational_whole_parameter_and_global_length(report,fit)
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+report = {'status': 'EXACT', 'family': 'POSITIVE_HOMOTHETIC_CONE', 'patches': [{'parameters': [0, 0.125, 0.5, 1], 'source_param...e_id': 'p-first', 'second_profile_id': 'p-second', ...}, ...], 'representation_error_bound_paper_mm': 0.001953125, ...}
+fit = {'status': 'CERTIFIED_REPRESENTATION_ONLY', 'proof_scope': 'REPRESENTATION_ONLY', 'topology': 'CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS', 'physical_build': 'NOT_VERIFIED', ...}
+
+    def rational_whole_parameter_and_global_length(report,fit):
+        assert fit['status']=='CERTIFIED_REPRESENTATION_ONLY',fit.get('message')
+        residual=Q(fit['position_error_bound_paper_mm'])-Q(report['representation_error_bound_paper_mm'])-Q(fit['rounding_reserve_paper_mm'])
+        assert residual&gt;=0
+        totals=[Q(0),Q(0)]
+        for patch in fit['patches']:
+            for side_index,side in enumerate(['first','second']):
+                boundary=patch[side]
+                for segment in boundary['segments']:
+                    start,end=map(lambda p:tuple(map(Q,p)),[segment['start'],segment['end']])
+                    if segment['kind']=='line':continue
+                    controls=[start,tuple(map(Q,segment['data']['control1'])),tuple(map(Q,segment['data']['control2'])),end]
+                    line=[start,tuple((2*x+y)/3 for x,y in zip(start,end)),tuple((x+2*y)/3 for x,y in zip(start,end)),end]
+                    # Convex-hull theorem then covers EVERY local parameter, not a grid.
+                    for ctrl,elevated in zip(controls,line):
+                        square=sum((x-y)**2 for x,y in zip(ctrl,elevated))
+                        assert Q(segment['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert Q(boundary['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert residual**2&gt;=square
+                    extra=max(Q(0),sum((dist_enclosure(x,y)[1] for x,y in zip(controls,controls[1:])),Q(0))-dist_enclosure(start,end)[0])
+                    assert Q(segment['length_excess_bound_paper_mm'])&gt;=extra
+                    totals[side_index]+=extra
+&gt;               assert Q(boundary['length_excess_bound_paper_mm'])&gt;=sum((Q(s['length_excess_bound_paper_mm']) for s in boundary['segments']),Q(0))-Q(1,1&lt;&lt;100)
+E               assert Fraction(8299761953989889, 36893488147419103232) &gt;= (Fraction(531184765055352929, 2361183241434822606848) - Fraction(1, 1267650600228229401496703205376))
+E                +  where Fraction(8299761953989889, 36893488147419103232) = Q(0.00022496549854070932)
+E                +  and   Fraction(531184765055352929, 2361183241434822606848) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001853259A6C0&gt;, Fraction(0, 1))
+E                +    where Fraction(0, 1) = Q(0)
+E                +  and   Fraction(1, 1267650600228229401496703205376) = Q(1, (1 &lt;&lt; 100))
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:47: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_reverse_source_controls_and_closed_loop_whole_geometry" time="0.002"><failure message="assert Fraction(8299761953989889, 36893488147419103232) &gt;= (Fraction(531184765055352929, 2361183241434822606848) - Fraction(1, 1267650600228229401496703205376))&#10; +  where Fraction(8299761953989889, 36893488147419103232) = Q(0.00022496549854070932)&#10; +  and   Fraction(531184765055352929, 2361183241434822606848) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001853259AA40&gt;, Fraction(0, 1))&#10; +    where Fraction(0, 1) = Q(0)&#10;[+1 more line; full report in element text]">def test_reverse_source_controls_and_closed_loop_whole_geometry():
+        report,*_=synthetic();p=report['patches'][0];p['second_parameter_interval']=[1,0]
+        for row in p['source_parameters']:row[1]=1-row[1]
+&gt;       fit=fit_native_loft_boundaries(report,position_budget_mm=.1,length_budget_mm=.1);rational_whole_parameter_and_global_length(report,fit)
+                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+report = {'status': 'EXACT', 'family': 'POSITIVE_HOMOTHETIC_CONE', 'patches': [{'parameters': [0, 0.125, 0.5, 1], 'source_param...rofile_id': 'p-first', 'second_profile_id': 'p-second', ...}], 'representation_error_bound_paper_mm': 0.001953125, ...}
+fit = {'status': 'CERTIFIED_REPRESENTATION_ONLY', 'proof_scope': 'REPRESENTATION_ONLY', 'topology': 'CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS', 'physical_build': 'NOT_VERIFIED', ...}
+
+    def rational_whole_parameter_and_global_length(report,fit):
+        assert fit['status']=='CERTIFIED_REPRESENTATION_ONLY',fit.get('message')
+        residual=Q(fit['position_error_bound_paper_mm'])-Q(report['representation_error_bound_paper_mm'])-Q(fit['rounding_reserve_paper_mm'])
+        assert residual&gt;=0
+        totals=[Q(0),Q(0)]
+        for patch in fit['patches']:
+            for side_index,side in enumerate(['first','second']):
+                boundary=patch[side]
+                for segment in boundary['segments']:
+                    start,end=map(lambda p:tuple(map(Q,p)),[segment['start'],segment['end']])
+                    if segment['kind']=='line':continue
+                    controls=[start,tuple(map(Q,segment['data']['control1'])),tuple(map(Q,segment['data']['control2'])),end]
+                    line=[start,tuple((2*x+y)/3 for x,y in zip(start,end)),tuple((x+2*y)/3 for x,y in zip(start,end)),end]
+                    # Convex-hull theorem then covers EVERY local parameter, not a grid.
+                    for ctrl,elevated in zip(controls,line):
+                        square=sum((x-y)**2 for x,y in zip(ctrl,elevated))
+                        assert Q(segment['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert Q(boundary['line_interpolant_deviation_bound_paper_mm'])**2&gt;=square
+                        assert residual**2&gt;=square
+                    extra=max(Q(0),sum((dist_enclosure(x,y)[1] for x,y in zip(controls,controls[1:])),Q(0))-dist_enclosure(start,end)[0])
+                    assert Q(segment['length_excess_bound_paper_mm'])&gt;=extra
+                    totals[side_index]+=extra
+&gt;               assert Q(boundary['length_excess_bound_paper_mm'])&gt;=sum((Q(s['length_excess_bound_paper_mm']) for s in boundary['segments']),Q(0))-Q(1,1&lt;&lt;100)
+E               assert Fraction(8299761953989889, 36893488147419103232) &gt;= (Fraction(531184765055352929, 2361183241434822606848) - Fraction(1, 1267650600228229401496703205376))
+E                +  where Fraction(8299761953989889, 36893488147419103232) = Q(0.00022496549854070932)
+E                +  and   Fraction(531184765055352929, 2361183241434822606848) = sum(&lt;generator object rational_whole_parameter_and_global_length.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001853259AA40&gt;, Fraction(0, 1))
+E                +    where Fraction(0, 1) = Q(0)
+E                +  and   Fraction(1, 1267650600228229401496703205376) = Q(1, (1 &lt;&lt; 100))
+
+docs\p2\implementation\evidence\pc007a-loft-curves-review-own.py:47: AssertionError</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[negative_bound]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[nan_node]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[zero_interval]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[wrong_direction]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[missing_proof]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[zero_regularity]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[tight_position]" time="0.002" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[tiny_parameter]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.pc007a-loft-curves-review-own" name="test_adversarial_source_refusal_is_pure[fraction_node]" time="0.000" /></testsuite></testsuites>
