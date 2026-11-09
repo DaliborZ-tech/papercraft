@@ -4,6 +4,8 @@ Reviewer: samostatný agent `commands_review`, 9. 11. 2026; autor komponenty je 
 
 **Verdikt: CHANGES_REQUESTED — L01 MAJOR OPEN.** Nezávislá analytika potvrzuje zkoušené pravidelné rodiny a odmítání některých nepodporovaných případů, ale report může udávat nepravdivou mez chyby parametrického mapování. To brání použití certifikátu pro návazné spoje, autorské body a přesné source-reference mapování.
 
+**Aktuální následná revize:** oprava `39f049dbd459f67dd27d9661773780a41612d59f` níže uzavírá L01; APPROVED_IN_NUMERIC_COMPONENT_SCOPE. Výše uvedený původní verdikt a FAIL zůstávají historickým důkazem.
+
 ## L01 — tětivová geometrická mez není mez interpolace v parametru
 
 Jednoduchý regulární zdrojový kubický segment má řídicí body `(0,0)`, `(1,0)`, `(3,0)`, `(6,0)`. Z nezávislé Bernsteinovy expanze plyne `C(t)=(3t+3t²,0)` a rychlost `3+6t >= 3`. Druhý profil je shodný ve výšce 10, tedy jde o normálovou extruzi bez singularity. Jeho správný rozvin je `[arclength(C,t),10v]=[3t+3t²,10v]`.
@@ -48,3 +50,20 @@ Omezení rozsahu jsou v API viditelná: celý profil a jeho assembled intersecti
 Skutečně načteny čtyři projektové skills a příslušné AU09/B1/B2/B3, kontrakt a geometrické spiky. Konstrukční skill vyžaduje zachovat gotický roh a prázdný vnitřní region, což vlastní zkoušky kontrolují. UI skill znamená pravdivý význam certifikátu a opravitelné nepodporované korespondence; pure komponenta nepředstírá UI a L01 se nesmí skrýt jen textovou nápovědou. Verification skill vede ke skutečnému bodovému protikladu mimo vrcholy sítě a nezávislé analytické parametrizaci. Delivery skill vyžaduje opravu a nové review konkrétního pinu před předáním.
 
 Tato revize nepokrývá persistenci, skutečné nakreslení a editaci profilů/loftu v UI, ruční layout, SVG/PDF, editovatelnost v reálném editoru, nového uživatele ani fyzickou sestavitelnost. Celá PC-007A a AC-AU09 nejsou splněné existencí pure numerické komponenty. Předchozí samostatný nález R01 v `curves.py` zůstává navíc otevřený do vlastního opravného review.
+
+## Následné review opravy L01 — `39f049d`
+
+Přesný zdroj **`39f049dbd459f67dd27d9661773780a41612d59f`**, 9. 11. 2026. Přečtena změna numeriky i nové autorovy regrese, bez změn produkce reviewerem.
+
+**L01 CLOSED; APPROVED_IN_NUMERIC_COMPONENT_SCOPE** pro opravený loft a jeho hlášené meze v deklarovaných rodinách. Tato formulace neschvaluje celou PC-007A, nativní SVG writer ani dosud neuzavřený samostatný curve R01.
+
+Oprava ponechává původní geometrický/délkový certifikát a přidává nezávislé dělení pro interpolaci ve zdrojovém parametru: globální `M=sup|C''|`, požadované kroky z `M/(8*budget)` a závěrečnou mez ze **skutečného největšího rozdílu sousedních parametrů** ve sjednocené síti. Proto nerozhoduje jen nominální počet rovnoměrných kroků. Při pravidelné křivce má oblouková délka `L''=(C'·C'')/|C'|`, tedy `|L''|<=|C''|`. Stejná mez proto kryje místní lineární interpolaci pravé arclength souřadnice i světového bodu. Výpočet nevydává tuto identitu bez prokázané regularity.
+
+Celkový poziční bound nyní **sčítá** globální součet prefixových obloukových gapů, největší místní interpolační mez a numerickou rezervu uzlů. V předchozím `max(prefix,local)` by souběžné chyby mohly zůstat mimo mez. Konkrétní report tyto tři členy vystavuje samostatně. Maximální počet uzlů se po sjednocení sítí kontroluje znovu; nedostatečný rozpočet vrací UNRESOLVED, nikoli falešně přesnou síť.
+
+- Původní vlastní sada včetně nezměněného L01 orákula a dvě nové vícepatchové zkoušky: **17 PASS / 0,90 s**, [JUnit](evidence/pc007a-loft-review-own-39f049d.xml).
+- Autorovy curve+loft regrese: **55 PASS / 2,54 s**, [JUnit](evidence/pc007a-loft-review-original-39f049d.xml).
+
+Nové vlastní případy používají dvě navazující kubiky s `C(t)=(3t+3t²,3t²)` a zápornou normálovou hloubkou 7, paper scale 1 a 0,1. Analytická druhá derivace `(6,6)` nezávisle stanoví požadovanou místní interpolační mez. Body uvnitř deseti parametrických buněk mají očekávanou světovou polohu z polynomu a očekávanou flat x z nezávislé kvadratury explicitní rychlosti `hypot(3+6t,6t)`, v druhém patchi včetně celého prefixu prvního patche. Reportovaná mez kryla všechny tyto chyby, správně sečetla členy a malý rozpočet bezpečně odmítla.
+
+Původní `pc007a-loft-review-own-initial.xml` s chybou 0,75 zůstává zachovaný. Zelený nový běh potvrzuje opravu konkrétní příčiny i přenos na zakřivený vícepatchový případ; není důkaz nového člověka, fyzické stavby ani všech budoucích integrovaných mapování.

@@ -3,6 +3,7 @@ import math
 
 import numpy as np
 import pytest
+from scipy.integrate import quad
 from shapely import Point, Polygon
 from shapely.ops import unary_union
 
@@ -137,3 +138,31 @@ def test_L01_parameterwise_cubic_extrusion_error_is_not_geometric_chord_deviatio
     bound=report['representation_error_bound_paper_mm']
     assert math.dist(observed['world_model_mm'],[2.25,0,5])<=bound
     assert math.dist(observed['flat_paper_mm'],[2.25,5])<=bound
+
+
+@pytest.mark.parametrize('scale',[1.0,0.1])
+def test_L01_fix_global_prefix_plus_parameter_bounds_and_actual_largest_step(scale):
+    first=[Curve((0,0),(6,3),'cubic',{'control1':(1,0),'control2':(3,1)},'a0'),
+           Curve((6,3),(12,6),'cubic',{'control1':(7,3),'control2':(9,4)},'a1')]
+    second=[Curve(c.start,c.end,c.kind,dict(c.data),'b'+str(i)) for i,c in enumerate(first)]
+    a,b=LoftProfile(tuple(first)),LoftProfile(tuple(second),origin=(0,0,-7))
+    report=flatten_loft(a,b,pairs(a,b),scale=scale)
+    assert report['status']=='EXACT',report
+    gap=report['arclength_prefix_error_bound_paper_mm']
+    interpolation=report['parameter_interpolation_error_bound_paper_mm']
+    rounding=report['node_rounding_reserve_paper_mm']
+    bound=report['representation_error_bound_paper_mm']
+    assert bound>=gap+interpolation+rounding
+    # C''=(6,6), so interpolation bound must cover the largest delivered du.
+    max_step=max(y-x for p in report['patches'] for x,y in zip(p['parameters'],p['parameters'][1:]))
+    assert interpolation>=scale*math.sqrt(72)*max_step**2/8
+    full_length=quad(lambda t:math.hypot(3+6*t,6*t),0,1,epsabs=1e-12)[0]
+    for index in range(2):
+        for u,v in [(0.013,0.1),(0.117,0.9),(0.499,0.7),(0.713,0.4),(0.997,0.8)]:
+            observed=sample_loft(report,index,u,v)
+            expected_world=[6*index+3*u+3*u*u,3*index+3*u*u,-7*v]
+            local_length=quad(lambda t:math.hypot(3+6*t,6*t),0,u,epsabs=1e-12)[0]
+            expected_flat=[(index*full_length+local_length)*scale,7*v*scale]
+            assert math.dist(observed['world_model_mm'],expected_world)*scale<=bound
+            assert math.dist(observed['flat_paper_mm'],expected_flat)<=bound
+    assert flatten_loft(a,b,pairs(a,b),scale=scale,max_segments=2)['status']=='UNRESOLVED'
