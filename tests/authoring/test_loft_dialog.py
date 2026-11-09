@@ -774,6 +774,31 @@ def test_empty_nonplanar_preview_params_cannot_fall_back_to_unverified_request(q
     assert widget.preview_result is None and not widget.apply_button.isEnabled()
 
 
+@pytest.mark.parametrize("bad_field", ["message", "family", "tolerance_mm", "max_segments"])
+def test_malformed_response_is_rejected_before_any_new_draft_identity_is_adopted(
+    qtbot, project, bad_field
+):
+    def fake(_clone, _a, _b, **params):
+        result = preview_result(params)
+        if bad_field in ("message", "family"):
+            result[bad_field] = None
+        else:
+            result["params"][bad_field] = None
+        return result
+
+    widget = dialog(qtbot, project, fake)
+    before = copy.deepcopy(widget._parameters())
+    document = project.to_dict(validate=False)
+    published = []
+    widget.preview_changed.connect(published.append)
+    calculate(qtbot, widget)
+    qtbot.waitUntil(lambda: widget._running_job is None)
+    assert widget.preview_result is None and not widget.apply_button.isEnabled()
+    assert widget._parameters() == before
+    assert all(result is None for result in published)
+    assert project.to_dict(validate=False) == document
+
+
 @pytest.mark.skipif(
     not hasattr(AuthorProject, "preview_loft_update"),
     reason="Actual domain API is integrated by the owner in a separate source.",
