@@ -953,6 +953,21 @@ def _svg(
 
 def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: float = 0.0,
          *, arc_tolerance_mm=None) -> float:
+    class ExactPageBox(pdfdoc.PDFObject):
+        """This canvas only: avoid fp_str rounding the physical page origin.
+
+        The raw reader converts PDF's bottom origin using MediaBox height.
+        Rounding it independently from the precise page CTM translates every
+        manufactured point, even when all path operands are exact enough.
+        """
+
+        def __init__(self, values):
+            self.tokens = tuple(format(float(v), ".17f").rstrip("0").rstrip(".") or "0"
+                                for v in values)
+
+        def format(self, document):
+            return ("[ " + " ".join(self.tokens) + " ]").encode("ascii")
+
     mm = 72 / 25.4
     canvas = Canvas(str(target), invariant=1, pageCompression=1)
     canvas.setTitle(str(data.get("name", data["project_id"])))
@@ -984,10 +999,11 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
 
     for page_index, page in enumerate(data["pages"]):
         canvas.setPageSize((page["width_mm"] * mm, page["height_mm"] * mm))
+        page_box = ExactPageBox((0, 0, page["width_mm"]*mm, page["height_mm"]*mm))
         canvas.saveState()
         _precise_transform(canvas, (mm, 0, 0, -mm, 0, page["height_mm"] * mm))
         page_matrix = _serialized_matrix(canvas)
-        media_height = Decimal(pdfdoc.format(page["height_mm"] * mm, canvas._doc).decode("ascii"))
+        media_height = Decimal(page_box.tokens[-1])
         for part in page["parts"]:
             place = part["placement"]
             canvas.saveState()
@@ -1096,7 +1112,14 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
             2.5,
         )
         canvas.restoreState()
+        previous_pages = len(canvas._doc.Pages.pages)
         canvas.showPage()
+        pages = canvas._doc.Pages.pages
+        if (len(pages) != previous_pages+1 or pages[-1].Rotate != 0 or
+                pages[-1].pagewidth != page["width_mm"]*mm or
+                pages[-1].pageheight != page["height_mm"]*mm):
+            raise SnapshotError("Cannot bind the precise physical box to this PDF backend page")
+        pages[-1].MediaBox = page_box
     source_bound = _source_svg_bound(data)
     if source_bound + curve_bound + numeric_bound > PDF_DIGITAL_BUDGET_MM:
         raise SnapshotError(
