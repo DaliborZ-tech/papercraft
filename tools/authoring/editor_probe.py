@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import ctypes
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -21,6 +22,7 @@ import traceback
 import xml.etree.ElementTree as ET
 from ctypes import wintypes
 from fractions import Fraction
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -97,14 +99,80 @@ def _path_signature(value):
     return result
 
 
-def _same_path(before, after):
-    first, second = _path_signature(before), _path_signature(after)
-    assert len(first) == len(second), "Path topology changed in the external editor"
-    for a, b in zip(first, second):
-        assert a[0] == b[0] and len(a) == len(b), "Native curve/line command kind changed"
-        assert all(math.isclose(x, y, abs_tol=2e-5, rel_tol=0) for x, y in zip(a[1:], b[1:])), (
-            "Part-local path coordinates changed beyond SVG serialization tolerance"
+@lru_cache(maxsize=1)
+def _equivalence_module():
+    path = Path(__file__).with_name("editor_curve_equivalence.py")
+    spec = importlib.util.spec_from_file_location("author_editor_curve_equivalence", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _same_path(before, after, *, output=None, identity=None):
+    # A dropped syntax character cannot qualify a geometric comparison.
+    token = re.compile(r"[A-Za-z]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?")
+    for text in (before, after):
+        previous = 0
+        for match in token.finditer(text):
+            assert not text[previous : match.start()].strip(" \t\r\n,"), "Unknown SVG path syntax"
+            previous = match.end()
+        assert not text[previous:].strip(" \t\r\n,"), "Unknown SVG path syntax"
+    result = _equivalence_module().certify_path_equivalence(
+        _path_signature(before),
+        _path_signature(after),
+    )
+    if output is not None:
+        output[identity] = result
+    assert result["status"] == "CERTIFIED", "Editor curve equivalence unresolved: " + str(result)
+    return result
+
+
+def _part_frame_checks(original, final):
+    assert all(
+        original.attrib.get(key) is not None and original.attrib[key] == final.attrib.get(key)
+        for key in ("width", "height", "viewBox")
+    ), "Root physical units or viewBox changed"
+    before = {p.attrib["id"]: p for p in original.findall("s:g[@data-part-id]", NS)}
+    after = {p.attrib["id"]: p for p in final.findall("s:g[@data-part-id]", NS)}
+    assert before.keys() == after.keys(), "Actual part identity/group coverage changed"
+    result = {}
+    for identity, part in before.items():
+        current = after[identity]
+        assert part.attrib["data-part-id"] == current.attrib["data-part-id"]
+        assert tuple(p.attrib["data-role"] for p in part.findall("s:g", NS)) == ROLES
+        assert tuple(p.attrib["data-role"] for p in current.findall("s:g", NS)) == ROLES
+        for old_role, new_role in zip(part.findall("s:g", NS), current.findall("s:g", NS)):
+            assert old_role.attrib.get("id") == new_role.attrib.get("id"), "Role identity changed"
+            assert [p.attrib["id"] for p in old_role.findall("s:path[@id]", NS)] == [
+                p.attrib["id"] for p in new_role.findall("s:path[@id]", NS)
+            ], "Native paths moved to another manufacturing role"
+        proof = _equivalence_module().certify_linear_frame(
+            part.attrib.get("transform", ""),
+            current.attrib.get("transform", ""),
         )
+        assert proof["status"] == "CERTIFIED_TRANSLATION_ONLY", str(proof)
+        result[identity] = {
+            **proof,
+            "before": part.attrib.get("transform", ""),
+            "after": current.attrib.get("transform", ""),
+        }
+    original_ids = {node.attrib["id"]: node for node in original.iter() if "id" in node.attrib}
+    for tag in ("rect", "circle", "ellipse", "line", "polyline", "polygon", "image", "use"):
+        assert len(original.findall(".//s:" + tag, NS)) == len(final.findall(".//s:" + tag, NS)), (
+            "An extra or lost rendered geometry type appeared: " + tag
+        )
+    for node in final.iter():
+        assert not re.search(r"(?:^|;)\s*transform\s*:", node.attrib.get("style", ""), re.I)
+        if node.attrib.get("id") in before:
+            continue
+        transform = node.attrib.get("transform", "")
+        old = original_ids.get(node.attrib.get("id"))
+        if old is None:
+            assert not transform, "New hidden geometry frame appeared"
+        else:
+            assert old.attrib.get("transform", "") == transform, "Nested path/role frame changed"
+    assert not original.attrib.get("transform") and not final.attrib.get("transform")
+    return result
 
 
 def _send_keys(user32, text, foreground_guard):
@@ -174,6 +242,7 @@ def main():
     if not executable.is_file():
         parser.error("Native inkscape.exe sibling is absent")
     script_hash = _sha(Path(__file__))
+    helper_hash = _sha(Path(_equivalence_module().__file__))
     bundle = {p.name: _sha(p) for p in sorted(source_path.parent.iterdir()) if p.is_file()}
     out.mkdir(parents=True)
     environment = dict(os.environ)
@@ -184,6 +253,7 @@ def main():
         "source_sha": sha,
         "source_status_at_start": _git("status", "--porcelain=v1"),
         "script_sha256": script_hash,
+        "curve_equivalence_helper_sha256": helper_hash,
         "origin_source": str(source_path),
         "origin_bundle_sha256": bundle,
         "commands": [],
@@ -192,6 +262,7 @@ def main():
         "profile_directory": environment["INKSCAPE_PROFILE_DIR"],
         "editor_executables_sha256": {str(p): _sha(p) for p in {args.inkscape, executable}},
         "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+        "curve_equivalence": {},
     }
     process = None
     own_hwnd = None
@@ -521,14 +592,43 @@ def main():
         )
         added_ids = final_paths.keys() - paths.keys()
         displacements = {}
+        report["part_frame_checks"] = _part_frame_checks(original, final)
+        role_for_path = {
+            path.attrib["id"]: (group.attrib["data-part-id"], role.attrib["data-role"])
+            for group in parts
+            for role in group.findall("s:g", NS)
+            for path in role.findall("s:path[@id]", NS)
+        }
+        role_metrics = {}
         for identity, geometry in paths.items():
-            _same_path(geometry, final_paths[identity])
+            proof = _same_path(
+                geometry,
+                final_paths[identity],
+                output=report["curve_equivalence"],
+                identity=identity,
+            )
+            if identity in role_for_path:
+                key = ":".join(role_for_path[identity])
+                total = role_metrics.setdefault(key, {"length": Fraction(0), "area": Fraction(0)})
+                total["length"] += Fraction(proof["global_length_difference_bound_mm_exact"])
+                total["area"] += Fraction(proof["net_area_difference_bound_mm2_exact"])
             old, new = before_bounds[identity], after_bounds[identity]
             expected_delta = [10, 15] if identity in moved_ids else [0, 0]
             delta = [new[0] - old[0], new[1] - old[1]]
             assert all(math.isclose(a, b, abs_tol=0.002) for a, b in zip(delta, expected_delta))
             assert all(math.isclose(a, b, abs_tol=0.002) for a, b in zip(old[2:], new[2:]))
             displacements[identity] = delta
+        report["part_role_metric_totals"] = {
+            key: {
+                "global_length_difference_bound_mm_exact": str(value["length"]),
+                "net_area_difference_bound_mm2_exact": str(value["area"]),
+            }
+            for key, value in role_metrics.items()
+        }
+        assert all(
+            value["length"] <= Fraction(1, 100) and value["area"] <= Fraction(1, 100)
+            for value in role_metrics.values()
+        ), "Part/role GLOBAL metric budget exhausted"
         before_other_text = {
             p.attrib["id"]: "".join(p.itertext())
             for p in original.findall(".//s:text", NS)
@@ -545,7 +645,9 @@ def main():
         calibration = original.find(".//s:path[@data-calibration-mm='100']", NS)
         after_calibration = final.find(".//s:path[@data-calibration-mm='100']", NS)
         assert calibration is not None and after_calibration is not None
-        _same_path(calibration.attrib["d"], after_calibration.attrib["d"])
+        report["calibration_curve_equivalence"] = _same_path(
+            calibration.attrib["d"], after_calibration.attrib["d"]
+        )
         assert added_ids <= {after_calibration.attrib.get("id")}, (
             "An added ID belongs to something other than the original calibration path"
         )
@@ -564,13 +666,17 @@ def main():
         assert {p.name: _sha(p) for p in source_path.parent.iterdir() if p.is_file()} == bundle
         assert _sha(original_copy) == _sha(source_path), "Original copy was unexpectedly edited"
         assert _git("rev-parse", "HEAD") == sha and _sha(Path(__file__)) == script_hash
+        assert _sha(Path(_equivalence_module().__file__)) == helper_hash
         report["roundtrip_assertions"] = {
             "path_count": len(paths),
             "total_path_count_including_calibration": len(final.findall(".//s:path", NS)),
             "editor_added_id_to_existing_calibration": sorted(added_ids),
             "part_role_groups": list(ROLES),
             "native_path_commands_preserved": True,
-            "all_local_coordinates_unchanged_mm_tolerance": 0.00002,
+            "whole_curve_position_tolerance_mm": 0.00002,
+            "global_part_role_length_tolerance_mm": 0.01,
+            "direct_net_body_area_fixed_tolerance_mm2": 0.01,
+            "part_linear_frames_unchanged_translation_only": True,
             "other_text_objects_unchanged": True,
             "original_bundle_unchanged": True,
             "calibration_100mm_and_page_size_unchanged": True,
