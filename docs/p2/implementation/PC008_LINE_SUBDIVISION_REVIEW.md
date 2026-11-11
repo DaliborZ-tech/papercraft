@@ -123,3 +123,12 @@ Queue ukazuje správný source24e, reviewa03 a schválení pouze LINE technické
 V delivery/integration bylo ověřeno15 relativních odkazů. Nový integrační dokument pravdivě popisuje teprve plánovaný fast-forward/push; nevydává budoucí publication za skutečnost. V době revize čistý hlavní workspace/master, origin/master i skutečné ls-remote shodně ukazovaly **6796c63dc6aee0cd8331feb22df4e1c4afd0df27** a origin URL bylo očekávané https://github.com/DaliborZ-tech/papercraft.git. Root má při následné integraci znovu respektovat případné novější vzdálené změny.
 
 Whole AU13/AU14, C/schema6→7 adapter, curved/loft trim, PC009/010, novice0 a P3 nadále nejsou dokončené. V tomto mechanickém rozsahu není otevřený nález; **ověřený LINE balík je připraven k běžné integraci a pushi podle mandátu**. Skutečný publikovaný SHA se teprve ověří po pushi. Žádná nová1465sada ani desktopový průchod nebyly pro tuto dokumentační změnu vydávány za provedené.
+
+
+## Ověření skutečné publikace LINE — aafe649
+
+**APPROVED_IN_POSTPUBLICATION_FACTS_ONLY_SCOPE** pro přesný commit **aafe64951249f5a4d7d97cd8d87c8a2419c7e9c9**. Rozdíl tvoří pouze tři delivery/integration/evidence soubory; src/tools/tests/pyproject jsou stále identické se schváleným CODE24e08019. Nejde o C/UI review ani o nové přijetí celého AU13/P2.
+
+Reviewer znovu přímo přečetl lokální master, origin/master i skutečné `git ls-remote origin refs/heads/master`: všechny tři vracely **b2bbf89cda5e9260d64ebc766dca2759293dee5c**. Hlavní workspace byl čistý, očekávaný origin je https://github.com/DaliborZ-tech/papercraft.git. Master reflog dokládá Fast-forward z6796c63 na b2bbf89; předchozí baseline i nezávislé closure reviewc211 jsou ověřené ancestors publikovaného commitu. Není použito přepsání historie.
+
+Strojový záznam pc008-line-master-push-b2bbf89.json má stejné local/remote/published SHA, match=true a správné source/review scope. Nový dodatek zachovává původní plánovaný stav historicky a pak samostatně dokládá již provedený výsledek. Curved/loft trim, celý C, PC009/010, novice0 a fyzické P3 zůstávají výslovně nedokončené. Technický push není release ani produktová akceptace celého P2. Žádné testy/desktop se pro tuto faktickou dokumentační změnu neopakovaly.
