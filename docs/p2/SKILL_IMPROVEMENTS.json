@@ -481,11 +481,12 @@
       "skill_change": "Treat position, topology and net area as independent acceptances; check the entire source-to-output chain instead of granting the full tolerance to each intermediate representation",
       "usage_example": "Extrusion area error is profile length error multiplied by depth; a small length error may still violate the original area acceptance",
       "verification": {
-        "status": "PRODUCT_REPAIR_AND_ACTUAL_ARTIFACT_REVIEWED; newly written skill advice not yet used on a subsequent ticket",
+        "status": "PRODUCT_REPAIR_AND_ACTUAL_ARTIFACT_REVIEWED; bounded transfer to source-to-output loft validation independently verified",
         "evidence": [
           "docs/p2/implementation/PC007A_AREA_INTEGRATION_REVIEW.md",
           "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
-          "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json"
+          "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
+          "docs/p2/implementation/PC007A_LOFT_OUTPUT_REVIEW.md"
         ]
       },
       "independent_review": {
@@ -496,8 +497,50 @@
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
+        "status": "VERIFIED_IN_BOUNDED_LOFT_OUTPUT_SCOPE",
+        "ticket": "PC-007A",
+        "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
+        "evidence": "docs/p2/implementation/PC007A_LOFT_OUTPUT_REVIEW.md",
+        "example": "Independent negative112->112.008SVG->112.016PDF exceeds the original source-to-output0.01 area budget; previous bundle and unrelated bytes preserved",
+        "broader_transfer": "PENDING_NEXT_USE"
+      }
+    },
+    {
+      "id": "SK-012",
+      "changed_on": "2026-11-11",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md",
+        "problem": "PF-01: known older803L cache reported fresh after exact CUT compaction, while layout correctly refused it as INVALID_CACHE"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "Canonical representation changed without changing the cached proof capability contract",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc007a-loft-performance-review-real803-2e4.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_COMPONENT_SCOPE",
+        "source_sha": "7a4f782e084ef595b2507fe825514b0100f969e5",
+        "description": "One shared V2 paper capability in digest/status/material cache; old cache stale on load, current-capability poisoned CUT still blocked; explicit recompute preserves sources, IDs, frame and placement"
+      },
+      "skill_change": "Version a changed certified representation and verify both old-capability staleness and current-capability poisoning as separate negative cases",
+      "usage_example": "A derived-segmentation format update must invalidate its previous certificate without losing author layout",
+      "verification": {
+        "status": "PRODUCT_REPAIR_REVIEWED; newly written advice awaiting independent metadata review and next use",
+        "evidence": [
+          "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_SKILL_TEXT_REVIEW",
+        "product_report": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
         "status": "NOT_RUN",
-        "ticket": "PC-007A loft source-to-output integration"
+        "ticket": "PC-008 derived segmentation persistence"
       }
     }
   ]

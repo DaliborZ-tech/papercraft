@@ -1,0 +1,26 @@
+[
+  {
+    "path_id": "path-025ee94b-86c5-4eea-85aa-760a72b41367-CUT-0",
+    "commands_before": 9049,
+    "commands_after": 9049,
+    "max_coordinate_difference_mm": 0.0147198066519,
+    "area_before_mm2": 1364.046287862694,
+    "area_after_mm2": 1364.491998848006
+  },
+  {
+    "path_id": "path-025ee94b-86c5-4eea-85aa-760a72b41367-FOLD_VALLEY-0",
+    "commands_before": 2,
+    "commands_after": 2,
+    "max_coordinate_difference_mm": 3.69224e-07,
+    "area_before_mm2": 198.4324695050703,
+    "area_after_mm2": 198.432476116704
+  },
+  {
+    "path_id": "path-025ee94b-86c5-4eea-85aa-760a72b41367-FOLD_VALLEY-1",
+    "commands_before": 2,
+    "commands_after": 2,
+    "max_coordinate_difference_mm": 4.754528e-07,
+    "area_before_mm2": 284.0630325743111,
+    "area_after_mm2": 284.0630523319535
+  }
+]

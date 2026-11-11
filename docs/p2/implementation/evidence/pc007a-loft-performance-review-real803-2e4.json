@@ -1,0 +1,18 @@
+{
+  "runtime_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
+  "fixture": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-desktop-23ce202-run01\\loft-Bezier\\loft-Bezier.apcraft",
+  "fixture_sha256": "d10ee1fd2470117dcf45e158b7986e1d1bb0f8c205512048b150c6e434c1ecf3",
+  "command_count": 803,
+  "status": "EXACT",
+  "paper_stale": false,
+  "part_stale": false,
+  "layout_codes": [
+    "INVALID_CACHE"
+  ],
+  "after_command_count": 5,
+  "profiles_unchanged": true,
+  "placements_unchanged": true,
+  "frame_unchanged": true,
+  "source_file_unchanged": true,
+  "after_layout_codes": []
+}

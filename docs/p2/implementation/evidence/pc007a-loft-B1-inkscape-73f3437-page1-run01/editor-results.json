@@ -1,0 +1,115 @@
+{
+  "status": "FAIL",
+  "source_sha": "73f3437d07891eef7ac05f8610e16868b4707c12",
+  "source_status_at_start": "?? docs/p2/implementation/evidence/pc007a-loft-B1-desktop-73f3437-run01/",
+  "script_sha256": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+  "origin_source": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-73f3437-run01\\loft-B1\\export\\page-7ede3fd0-7917-4381-a150-c815c15a6acd.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "20ae1dd0116d9fddd9b442927375c127a77003531ef7a8784973058d2c995d60",
+    "model.pdf": "9b59399d38176d9c8f22214b6fa02714c25d0239f7963ad8b7647f36985f887c",
+    "page-58c37405-0d85-4d14-a84c-719c2e95539d.svg": "ea1f3d40ecc589ab4714aa3b840224562eae8642dadc064f9f39c04f2739b321",
+    "page-7ede3fd0-7917-4381-a150-c815c15a6acd.svg": "a2734798826059c95acd05b379eade8c977f4871eda9d8822ec1ca73a82fe3b0"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.75,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-73f3437-page1-run01\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 1.922,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,185.651,377.953,918.087\npart-9eaf9489-76b8-4724-a550-f1fc841c85e6,150.679,185.651,254.31,387.746\nrole-9eaf9489-76b8-4724-a550-f1fc841c85e6-CUT,150.679,185.651,229.546,387.746\npath-9eaf9489-76b8-4724-a550-f1fc841c85e6-CUT-0,150.679,185.651,229.546,387.746\n\nrole-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY,287.647,236.024,92.1611,166.544\npath-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY-0,287.647,236.024,30.7327,32.897\npath-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY-1,339.353,396.079,40.4551,6.48883\n\nrole-9eaf9489-76b8-4724-a550-f1fc841c85e6-LABELS,358.045,402.05,46.943,20.2122\nlabel-9eaf9489-76b8-4724-a550-f1fc841c85e6-0,358.045,402.05,46.943,20.2122\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-73f3437-page1-run01\\editor-original.svg",
+        "--actions=select-by-id:part-9eaf9489-76b8-4724-a550-f1fc841c85e6;transform-translate:10,15;select-clear;select-clear;select-by-id:label-9eaf9489-76b8-4724-a550-f1fc841c85e6-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-73f3437-page1-run01\\editor-edited.svg;export-do"
+      ],
+      "seconds": 1.672,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-73f3437-page1-run01\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 1.594,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,200.651,418.656,903.087\npart-9eaf9489-76b8-4724-a550-f1fc841c85e6,160.679,200.651,295.772,387.746\nrole-9eaf9489-76b8-4724-a550-f1fc841c85e6-CUT,160.679,200.651,229.546,387.746\npath-9eaf9489-76b8-4724-a550-f1fc841c85e6-CUT-0,160.679,200.651,229.546,387.746\n\nrole-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY,297.647,251.024,92.1611,166.544\npath-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY-0,297.647,251.024,30.7327,32.897\npath-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY-1,349.353,411.079,40.4551,6.48883\n\nrole-9eaf9489-76b8-4724-a550-f1fc841c85e6-LABELS,367.529,415.286,88.9221,34.6557\nlabel-9eaf9489-76b8-4724-a550-f1fc841c85e6-0,367.529,415.286,88.9221,34.6557\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-qddlfyy7",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "elapsed_seconds": 13.672,
+  "files_sha256": {
+    "editor-edited.svg": "e0fff2dbdefa2d430c9595275f9998454a5616857247744c5d0b0627ee10acf6",
+    "editor-gui.png": "1ac052dc012e653807c6abac140a30b7607f40c482ad0e026949a0ebbec685c4",
+    "editor-original.svg": "a2734798826059c95acd05b379eade8c977f4871eda9d8822ec1ca73a82fe3b0"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-9eaf9489-76b8-4724-a550-f1fc841c85e6",
+    "label_id": "label-9eaf9489-76b8-4724-a550-f1fc841c85e6-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "unchanged_by_actions; individual_native_GUI_edit_below",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "own_visible_windows": [
+    {
+      "hwnd": 4131344,
+      "title": "editor-edited.svg - Inkscape",
+      "class": "gdkWindowToplevel",
+      "width": 1936,
+      "height": 1048
+    }
+  ],
+  "initial_focus": {
+    "own_hwnd": 4131344,
+    "before_hwnd": 132916,
+    "direct_activation_returned": false,
+    "attached_activation_returned": true,
+    "input_queue_temporarily_attached": true,
+    "after_hwnd": 4131344
+  },
+  "native_gui_text_edit": {
+    "text": "Žluťoučký – vlastní díl",
+    "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+    "own_pid": 28724,
+    "own_hwnd": 4131344,
+    "foreground_verified_before_each_chord": true
+  },
+  "gui_capture": {
+    "method": "QScreen.grabWindow(actual_editor_hwnd)",
+    "width": 1520,
+    "height": 873
+  },
+  "error": "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\editor_probe.py\", line 525, in main\n    _same_path(geometry, final_paths[identity])\n  File \"C:\\Users\\dalib\\projects\\papercraft-loft-integration\\tools\\authoring\\editor_probe.py\", line 105, in _same_path\n    assert all(math.isclose(x, y, abs_tol=2e-5, rel_tol=0) for x, y in zip(a[1:], b[1:])), (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Part-local path coordinates changed beyond SVG serialization tolerance\n",
+  "origin_bundle_preserved_after_run": true
+}

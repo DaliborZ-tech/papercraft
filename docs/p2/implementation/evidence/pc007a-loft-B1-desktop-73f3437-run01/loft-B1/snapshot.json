@@ -1,0 +1,1547 @@
+{
+  "project_id": "ece5dcce-d96b-440b-85ef-d395b91222b4",
+  "revision": 21,
+  "construction_checks": {
+    "material_profile": {
+      "thickness_mm": null,
+      "clearance_mm": 0.0,
+      "bend_radius_mm": 0.0,
+      "crease_zone_mm": 0.5
+    },
+    "assembly_digest": "6b806643144d287d1fd990d7eaf5973d92e4666259f67c04dc9fd17f634a29b6",
+    "connector_bends": {},
+    "curve_profiles": {
+      "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc": {
+        "status": "CERTIFIED",
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+          "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+          "c089fc1a-3fac-4782-a17f-55a1735078a6"
+        ],
+        "representation_budget_paper_mm": 0.002,
+        "chord_deviation_bound_paper_mm": 0.0013716771874104348,
+        "length_lower_paper_mm": 116.44033846118093,
+        "length_upper_paper_mm": 116.4403384611866,
+        "svg_deviation_bound_paper_mm": 1.021997049978391e-11,
+        "svg_length_error_bound_paper_mm": 1.7655150660997503e-11,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof."
+      }
+    },
+    "curve_regions": {
+      "78483ce5-2fed-426b-bca5-7355b3618663": {
+        "status": "VALID",
+        "reason": "Native manufacturing-curve topology proved",
+        "witness": null,
+        "examined_nodes": 35,
+        "numerical_guard": 2.3283064365386963e-10,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "source_profile_ids": [
+          "ddd945ba-9832-4e81-84b3-43069366342e",
+          "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc"
+        ],
+        "source_revisions": {
+          "ddd945ba-9832-4e81-84b3-43069366342e": 1,
+          "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc": 1
+        }
+      }
+    },
+    "lofts": {
+      "7a0d9274-f33a-4aea-b400-3b06e94fbc43": {
+        "crease_geometry": [
+          {
+            "patch_id": "105c6440-2ec1-45dc-a42f-39764dac9f9a",
+            "ruling_id": "0f81c66a-4d77-437f-ac65-3d7aefe051f8",
+            "signed_angle_deg": -39.32247118876944,
+            "role": "FOLD_VALLEY",
+            "normal_scope": "ANALYTIC_ONE_SIDED_RULED_DERIVATIVES_AT_COMMON_RULING",
+            "axis_orientation": "FIRST_PROFILE_TO_SECOND_PROFILE"
+          },
+          {
+            "patch_id": "60d910d1-4616-4257-9e46-287201f60284",
+            "ruling_id": "b4e24cf4-a508-4123-b91a-38e664235a3a",
+            "signed_angle_deg": -90.00000000000003,
+            "role": "FOLD_VALLEY",
+            "normal_scope": "ANALYTIC_ONE_SIDED_RULED_DERIVATIVES_AT_COMMON_RULING",
+            "axis_orientation": "FIRST_PROFILE_TO_SECOND_PROFILE"
+          }
+        ],
+        "paper_frame": {
+          "root_surface_id": "7a0d9274-f33a-4aea-b400-3b06e94fbc43",
+          "anchor_vertex_id": "d6041b52-75b9-4bf6-86bf-c0eb82ee644c",
+          "axis_segment_id": "f75876c4-49ac-48e0-bcd5-757cacaba63f"
+        },
+        "paper_input_digest": "444cde5f720d2c3caa446c6b0564b15b1442412f6068588e82ff2b4200430660",
+        "paper_stale": false,
+        "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_BOUNDED_COALESCED_CUT_V3",
+        "paper_frame_area": {
+          "status": "CERTIFIED",
+          "source_intrinsic": {
+            "status": "CERTIFIED",
+            "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+            "area_lower_exact": "682023172020033582949496141/500000000000000000000000",
+            "area_upper_exact": "170505805399926618134254763/125000000000000000000000",
+            "area_lower_paper_mm2": 1364.046344040067,
+            "area_upper_paper_mm2": 1364.046443199413,
+            "absolute_budget_mm2": 0.0001,
+            "examined_nodes": 357,
+            "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+            "coverage": {
+              "first_profile_id": "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc",
+              "second_profile_id": "186f1d50-4ec3-4ccb-a373-8dded09c4555",
+              "first_closed": true,
+              "second_closed": true,
+              "expected_first_segment_ids": [
+                "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+                "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+                "c089fc1a-3fac-4782-a17f-55a1735078a6"
+              ],
+              "expected_second_segment_ids": [
+                "2f77e7aa-4f83-465b-b69d-712356bd0426",
+                "de0087d3-f4cd-4543-941a-6bcd68586061",
+                "16e69921-c2ef-4cf9-ad89-8dca62ac17a9"
+              ],
+              "correspondences": [
+                {
+                  "first_segment_id": "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+                  "second_segment_id": "2f77e7aa-4f83-465b-b69d-712356bd0426",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "first_segment_id": "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+                  "second_segment_id": "de0087d3-f4cd-4543-941a-6bcd68586061",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "first_segment_id": "c089fc1a-3fac-4782-a17f-55a1735078a6",
+                  "second_segment_id": "16e69921-c2ef-4cf9-ad89-8dca62ac17a9",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+            },
+            "proof": {
+              "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+              "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+              "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+              "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+              "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+              "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+              "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+            }
+          },
+          "actual_native": {
+            "lower_exact": "682023155169360836666699401/500000000000000000000000",
+            "upper_exact": "1364046310338721673333398803/1000000000000000000000000",
+            "lower_paper_mm2": 1364.0463103387215,
+            "upper_paper_mm2": 1364.046310338722
+          },
+          "maximum_error_bound_exact": "66430345635870319651/500000000000000000000000",
+          "maximum_error_bound_paper_mm2": 0.00013286069127174067,
+          "allowed_error_exact": "1/100",
+          "allowed_error_paper_mm2": 0.01,
+          "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+          "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+          "max_commands": 32782,
+          "serialized_output": "NOT_VERIFIED"
+        },
+        "paper_frame_topology": {
+          "status": "VALID",
+          "reason": "Supplied native path topology proved",
+          "witness": null,
+          "examined_nodes": 391,
+          "numerical_guard": 3.637978807091713e-12,
+          "proof": [
+            "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+          ],
+          "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+          "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+        },
+        "source_binding": {
+          "profiles": [
+            {
+              "id": "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc",
+              "name": "Otvor",
+              "vertices": [
+                {
+                  "id": "d6041b52-75b9-4bf6-86bf-c0eb82ee644c",
+                  "point": [
+                    -2000.0,
+                    0.0
+                  ]
+                },
+                {
+                  "id": "16b121b7-fcc0-4f68-ac39-139300c2f281",
+                  "point": [
+                    0.0,
+                    3000.0
+                  ]
+                },
+                {
+                  "id": "375ef5d3-d593-4b01-87c2-62759eb3f38f",
+                  "point": [
+                    2000.0,
+                    0.0
+                  ]
+                }
+              ],
+              "segments": [
+                {
+                  "id": "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+                  "kind": "arc",
+                  "start_vertex_id": "d6041b52-75b9-4bf6-86bf-c0eb82ee644c",
+                  "end_vertex_id": "16b121b7-fcc0-4f68-ac39-139300c2f281",
+                  "data": {
+                    "center": [
+                      1250.0,
+                      0.0
+                    ],
+                    "sweep_deg": -67.38013505195956
+                  }
+                },
+                {
+                  "id": "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+                  "kind": "arc",
+                  "start_vertex_id": "16b121b7-fcc0-4f68-ac39-139300c2f281",
+                  "end_vertex_id": "375ef5d3-d593-4b01-87c2-62759eb3f38f",
+                  "data": {
+                    "center": [
+                      -1250.0,
+                      0.0
+                    ],
+                    "sweep_deg": -67.38013505195956
+                  }
+                },
+                {
+                  "id": "c089fc1a-3fac-4782-a17f-55a1735078a6",
+                  "kind": "line",
+                  "start_vertex_id": "375ef5d3-d593-4b01-87c2-62759eb3f38f",
+                  "end_vertex_id": "d6041b52-75b9-4bf6-86bf-c0eb82ee644c",
+                  "data": {}
+                }
+              ],
+              "closed": true,
+              "plane": {
+                "origin": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "u": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "v": [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              },
+              "revision": 1
+            },
+            {
+              "id": "186f1d50-4ec3-4ccb-a373-8dded09c4555",
+              "name": "Otvor · kopie",
+              "vertices": [
+                {
+                  "id": "66c78523-3064-4bd5-91e7-c825f8cc4255",
+                  "point": [
+                    -2400.0,
+                    0.0
+                  ]
+                },
+                {
+                  "id": "555d224d-cb94-40cc-b526-c368931135b2",
+                  "point": [
+                    0.0,
+                    3600.0
+                  ]
+                },
+                {
+                  "id": "9af50538-b204-41be-b9ae-9e51dd4fec01",
+                  "point": [
+                    2400.0,
+                    0.0
+                  ]
+                }
+              ],
+              "segments": [
+                {
+                  "id": "2f77e7aa-4f83-465b-b69d-712356bd0426",
+                  "kind": "arc",
+                  "start_vertex_id": "66c78523-3064-4bd5-91e7-c825f8cc4255",
+                  "end_vertex_id": "555d224d-cb94-40cc-b526-c368931135b2",
+                  "data": {
+                    "center": [
+                      1500.0,
+                      0.0
+                    ],
+                    "sweep_deg": -67.38013505195956
+                  }
+                },
+                {
+                  "id": "de0087d3-f4cd-4543-941a-6bcd68586061",
+                  "kind": "arc",
+                  "start_vertex_id": "555d224d-cb94-40cc-b526-c368931135b2",
+                  "end_vertex_id": "9af50538-b204-41be-b9ae-9e51dd4fec01",
+                  "data": {
+                    "center": [
+                      -1500.0,
+                      0.0
+                    ],
+                    "sweep_deg": -67.38013505195956
+                  }
+                },
+                {
+                  "id": "16e69921-c2ef-4cf9-ad89-8dca62ac17a9",
+                  "kind": "line",
+                  "start_vertex_id": "9af50538-b204-41be-b9ae-9e51dd4fec01",
+                  "end_vertex_id": "66c78523-3064-4bd5-91e7-c825f8cc4255",
+                  "data": {}
+                }
+              ],
+              "closed": true,
+              "plane": {
+                "origin": [
+                  0.0,
+                  -1000.0,
+                  0.0
+                ],
+                "u": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "v": [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              },
+              "revision": 1
+            }
+          ],
+          "surface": {
+            "id": "7a0d9274-f33a-4aea-b400-3b06e94fbc43",
+            "name": "Ostění",
+            "profile_id": "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc",
+            "hole_profile_ids": [],
+            "kind": "ruled_loft",
+            "params": {
+              "second_profile_id": "186f1d50-4ec3-4ccb-a373-8dded09c4555",
+              "correspondences": [
+                {
+                  "id": "183166ae-b8fe-445c-bf88-f835a4b01906",
+                  "first_segment_id": "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+                  "second_segment_id": "2f77e7aa-4f83-465b-b69d-712356bd0426",
+                  "first_interval": [
+                    0,
+                    1
+                  ],
+                  "second_interval": [
+                    0,
+                    1
+                  ],
+                  "ruling_id": "a5ea6edb-e7aa-49b4-b8e4-a842a2a10580"
+                },
+                {
+                  "id": "105c6440-2ec1-45dc-a42f-39764dac9f9a",
+                  "first_segment_id": "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+                  "second_segment_id": "de0087d3-f4cd-4543-941a-6bcd68586061",
+                  "first_interval": [
+                    0,
+                    1
+                  ],
+                  "second_interval": [
+                    0,
+                    1
+                  ],
+                  "ruling_id": "0f81c66a-4d77-437f-ac65-3d7aefe051f8"
+                },
+                {
+                  "id": "60d910d1-4616-4257-9e46-287201f60284",
+                  "first_segment_id": "c089fc1a-3fac-4782-a17f-55a1735078a6",
+                  "second_segment_id": "16e69921-c2ef-4cf9-ad89-8dca62ac17a9",
+                  "first_interval": [
+                    0,
+                    1
+                  ],
+                  "second_interval": [
+                    0,
+                    1
+                  ],
+                  "ruling_id": "b4e24cf4-a508-4123-b91a-38e664235a3a"
+                }
+              ],
+              "seam_patch_id": "183166ae-b8fe-445c-bf88-f835a4b01906",
+              "end_ruling_id": "23c9b142-6d01-4369-a0f3-16b482cb3a8b",
+              "tolerance_mm": 0.005,
+              "max_segments": 16384,
+              "reference_state": "BOUND"
+            },
+            "position_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "rotation_deg": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "parent_transforms": [],
+            "revision": 3,
+            "part_id": "9eaf9489-76b8-4724-a550-f1fc841c85e6"
+          },
+          "scale": 0.01
+        },
+        "source_digest": "1b7d4c422d00122f7f5cde263ed710cdc860d666f6ec68cd99c5e1089f996748",
+        "source_revisions": {
+          "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc": 1,
+          "186f1d50-4ec3-4ccb-a373-8dded09c4555": 1
+        },
+        "source_profile_ids": [
+          "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc",
+          "186f1d50-4ec3-4ccb-a373-8dded09c4555"
+        ],
+        "patches": [
+          {
+            "first_interval": [
+              0,
+              1
+            ],
+            "first_segment_id": "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+            "id": "183166ae-b8fe-445c-bf88-f835a4b01906",
+            "ruling_id": "a5ea6edb-e7aa-49b4-b8e4-a842a2a10580",
+            "second_interval": [
+              0,
+              1
+            ],
+            "second_segment_id": "2f77e7aa-4f83-465b-b69d-712356bd0426"
+          },
+          {
+            "first_interval": [
+              0,
+              1
+            ],
+            "first_segment_id": "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+            "id": "105c6440-2ec1-45dc-a42f-39764dac9f9a",
+            "ruling_id": "0f81c66a-4d77-437f-ac65-3d7aefe051f8",
+            "second_interval": [
+              0,
+              1
+            ],
+            "second_segment_id": "de0087d3-f4cd-4543-941a-6bcd68586061"
+          },
+          {
+            "first_interval": [
+              0,
+              1
+            ],
+            "first_segment_id": "c089fc1a-3fac-4782-a17f-55a1735078a6",
+            "id": "60d910d1-4616-4257-9e46-287201f60284",
+            "ruling_id": "b4e24cf4-a508-4123-b91a-38e664235a3a",
+            "second_interval": [
+              0,
+              1
+            ],
+            "second_segment_id": "16e69921-c2ef-4cf9-ad89-8dca62ac17a9"
+          }
+        ],
+        "flattening": {
+          "status": "EXACT",
+          "family": "POSITIVE_HOMOTHETIC_CONE",
+          "representation_error_bound_paper_mm": 0.0003057239681925549,
+          "boundary_length_error_bound_paper_mm": 0.001499102415127109,
+          "regularity_lower_bound_paper_mm2": 382.20169226769855,
+          "analytic_metric_identity": "d'=(k-1)C0'; H*min|C0'|>0; r=|Q|, theta'=|Q x Q'|/r^2. Trapezoid error <=sup|theta'''|/(12N^2), polyline error <=sup|X''|/(8N^2). Boundary-length deficit <=sup|X''|^2/(12 min|X'| N^2) when N>=2M/m.",
+          "numerical_guard_paper_mm": 5.820766091346741e-11,
+          "proof_scope": "DECLARED_REGULAR_PARAMETRIC_FAMILY_AND_BOUNDED_REPRESENTATION",
+          "source_topology_scope": "CALLER_VALIDATES_PROFILE_TOPOLOGY_AND_ASSEMBLED_INTERSECTIONS",
+          "seam": "FIRST_EXPLICIT_CORRESPONDENCE_BOUNDARY",
+          "physical_build": "NOT_VERIFIED",
+          "homothety_factor": 1.2,
+          "total_developed_angle_rad": 2.129114362709074,
+          "angular_error_bound_rad": 3.2724997400258022e-06,
+          "scale": 0.01,
+          "requested_error_budget_paper_mm": 0.005,
+          "coverage": {
+            "first_profile_id": "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc",
+            "second_profile_id": "186f1d50-4ec3-4ccb-a373-8dded09c4555",
+            "expected_first_segment_ids": [
+              "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+              "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+              "c089fc1a-3fac-4782-a17f-55a1735078a6"
+            ],
+            "expected_second_segment_ids": [
+              "2f77e7aa-4f83-465b-b69d-712356bd0426",
+              "de0087d3-f4cd-4543-941a-6bcd68586061",
+              "16e69921-c2ef-4cf9-ad89-8dca62ac17a9"
+            ],
+            "matched_first_segment_ids": [
+              "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+              "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+              "c089fc1a-3fac-4782-a17f-55a1735078a6"
+            ],
+            "matched_second_segment_ids": [
+              "2f77e7aa-4f83-465b-b69d-712356bd0426",
+              "de0087d3-f4cd-4543-941a-6bcd68586061",
+              "16e69921-c2ef-4cf9-ad89-8dca62ac17a9"
+            ],
+            "first_closed": true,
+            "second_closed": true,
+            "scope": "EXPLICITLY_MATCHED_INTERVALS_ONLY; caller validates intended coverage"
+          }
+        },
+        "source_topology": {
+          "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc": {
+            "status": "VALID",
+            "reason": "Native manufacturing-curve topology proved",
+            "witness": null,
+            "examined_nodes": 12,
+            "numerical_guard": 1.1641532182693481e-10,
+            "proof": [
+              "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+              "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+              "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+              "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+              "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+              "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+            ],
+            "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+            "entry_scope": "AUTHORED_CURVE_DESCRIPTORS"
+          },
+          "186f1d50-4ec3-4ccb-a373-8dded09c4555": {
+            "status": "VALID",
+            "reason": "Native manufacturing-curve topology proved",
+            "witness": null,
+            "examined_nodes": 12,
+            "numerical_guard": 1.1641532182693481e-10,
+            "proof": [
+              "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+              "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+              "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+              "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+              "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+              "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+            ],
+            "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+            "entry_scope": "AUTHORED_CURVE_DESCRIPTORS"
+          }
+        },
+        "status": "EXACT",
+        "family": "POSITIVE_HOMOTHETIC_CONE",
+        "code": "LOFT_EXACT",
+        "message": "Přesná rodina loftu je doložená s uvedenými mezemi.",
+        "representation": {
+          "status": "CERTIFIED_REPRESENTATION_ONLY",
+          "proof_scope": "REPRESENTATION_ONLY",
+          "topology": "CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS",
+          "physical_build": "NOT_VERIFIED",
+          "serialized_output": "NOT_VERIFIED",
+          "source_family": "POSITIVE_HOMOTHETIC_CONE",
+          "position_error_bound_paper_mm": 0.00030901591090862495,
+          "boundary_length_error_bound_paper_mm": 0.0015368421567861002,
+          "source_position_error_bound_paper_mm": 0.0003057239681925549,
+          "line_interpolant_deviation_bound_paper_mm": 3.2918427160699238e-06,
+          "source_boundary_length_error_bound_paper_mm": 0.001499102415127109,
+          "native_boundary_length_excess_bound_paper_mm": {
+            "first": 3.144969893915201e-05,
+            "second": 3.773964165899073e-05
+          },
+          "both_profile_boundaries_length_error_bound_paper_mm": 0.003067394370852362,
+          "length_scope": "GLOBAL_FIRST_OR_SECOND_PROFILE_BOUNDARY_CHAIN; EXCLUDES_CLOSING_RULINGS",
+          "rounding_reserve_paper_mm": 1e-10,
+          "requested_position_budget_paper_mm": 0.008,
+          "requested_length_budget_paper_mm": 0.008,
+          "same_parameter_position_proof": "SOURCE_TO_FINE_BOUND_PLUS_EXACT_RESTRICTION_BERNSTEIN_BOUND",
+          "length_proof": "SOURCE_TO_FINE_BOUND_PLUS_GLOBAL_SUM_INTEGRAL_DERIVATIVE_DIFFERENCE_NORM",
+          "serialization_scope": "BINARY_CONTROL_GEOMETRY_ONLY; PUBLISHER_BUDGET_IS_SEPARATE",
+          "coalescing": {
+            "status": "CERTIFIED_SAME_U_AND_GLOBAL_LENGTH",
+            "candidates": 126,
+            "comparisons": 12519,
+            "max_candidates": 65536,
+            "max_comparisons": 262144,
+            "position_bound_exact": "1277447739088317/590295810358705651712",
+            "position_bound_paper_mm": 2.1640806468066397e-06,
+            "length_bound_exact": {
+              "first": "5160581967769518567443867340095/166153499473114484112975882535043072",
+              "second": "3096349424636435380504361056389/83076749736557242056487941267521536"
+            },
+            "length_bound_paper_mm": {
+              "first": 3.105912294435039e-05,
+              "second": 3.727095046995938e-05
+            },
+            "input_segments": 9046,
+            "output_segments": 66,
+            "topology_area_editor": "CALLER_MUST_VERIFY_SEPARATELY"
+          }
+        },
+        "closing_rulings": [
+          {
+            "world_length_paper_mm": 10.770329614269007,
+            "flat_length_paper_mm": 10.770329614269002,
+            "length_error_bound_paper_mm": 1.1642065089745302e-10,
+            "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS"
+          },
+          {
+            "world_length_paper_mm": 10.770329614269007,
+            "flat_length_paper_mm": 10.770329614269006,
+            "length_error_bound_paper_mm": 1.1641709818377421e-10,
+            "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS"
+          }
+        ],
+        "native_topology": {
+          "status": "VALID",
+          "reason": "Supplied native path topology proved",
+          "witness": null,
+          "examined_nodes": 377,
+          "numerical_guard": 3.637978807091713e-12,
+          "proof": [
+            "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+          ],
+          "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+          "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES"
+        },
+        "area": {
+          "status": "CERTIFIED",
+          "source_intrinsic": {
+            "status": "CERTIFIED",
+            "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+            "area_lower_exact": "682023172020033582949496141/500000000000000000000000",
+            "area_upper_exact": "170505805399926618134254763/125000000000000000000000",
+            "area_lower_paper_mm2": 1364.046344040067,
+            "area_upper_paper_mm2": 1364.046443199413,
+            "absolute_budget_mm2": 0.0001,
+            "examined_nodes": 357,
+            "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+            "coverage": {
+              "first_profile_id": "2a7cd3bd-e15b-4ab2-92f6-fb598b8c84dc",
+              "second_profile_id": "186f1d50-4ec3-4ccb-a373-8dded09c4555",
+              "first_closed": true,
+              "second_closed": true,
+              "expected_first_segment_ids": [
+                "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+                "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+                "c089fc1a-3fac-4782-a17f-55a1735078a6"
+              ],
+              "expected_second_segment_ids": [
+                "2f77e7aa-4f83-465b-b69d-712356bd0426",
+                "de0087d3-f4cd-4543-941a-6bcd68586061",
+                "16e69921-c2ef-4cf9-ad89-8dca62ac17a9"
+              ],
+              "correspondences": [
+                {
+                  "first_segment_id": "f75876c4-49ac-48e0-bcd5-757cacaba63f",
+                  "second_segment_id": "2f77e7aa-4f83-465b-b69d-712356bd0426",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "first_segment_id": "aac169d1-e854-424b-9bcc-de0baf7a67d3",
+                  "second_segment_id": "de0087d3-f4cd-4543-941a-6bcd68586061",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "first_segment_id": "c089fc1a-3fac-4782-a17f-55a1735078a6",
+                  "second_segment_id": "16e69921-c2ef-4cf9-ad89-8dca62ac17a9",
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+            },
+            "proof": {
+              "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+              "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+              "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+              "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+              "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+              "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+              "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+            }
+          },
+          "actual_native": {
+            "lower_exact": "1364046310338721975638962999/1000000000000000000000000",
+            "upper_exact": "1364046310338721975638963/1000000000000000000000",
+            "lower_paper_mm2": 1364.0463103387217,
+            "upper_paper_mm2": 1364.0463103387222
+          },
+          "maximum_error_bound_exact": "26572138193887015021/200000000000000000000000",
+          "maximum_error_bound_paper_mm2": 0.0001328606909694351,
+          "allowed_error_exact": "1/100",
+          "allowed_error_paper_mm2": 0.01,
+          "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+          "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+          "max_commands": 32782,
+          "serialized_output": "NOT_VERIFIED",
+          "refinement_attempts": [
+            {
+              "attempt": 0,
+              "effective_tolerance_mm": 0.005,
+              "status": "CERTIFIED",
+              "maximum_error_bound_exact": "26572138193887015021/200000000000000000000000",
+              "maximum_error_bound_paper_mm2": 0.0001328606909694351,
+              "allowed_error_exact": "1/100"
+            }
+          ]
+        },
+        "requested_tolerance_mm": 0.005,
+        "effective_tolerance_mm": 0.005,
+        "feature_id": "7a0d9274-f33a-4aea-b400-3b06e94fbc43",
+        "intrinsic_source_digest": "b51876b92c05c2d261f84f673d51e5055c45282e8b09baf883c426e151fb350d",
+        "feature_revision": 3
+      }
+    },
+    "accepted_layout_overlaps": [],
+    "physical_build": "NOT_VERIFIED"
+  },
+  "scale_label": "1:100",
+  "coverage": {
+    "expected_part_ids": [
+      "f1ce107c-1797-4b78-9278-20b401ca4274",
+      "9eaf9489-76b8-4724-a550-f1fc841c85e6"
+    ],
+    "expected_surface_ids": [
+      "78483ce5-2fed-426b-bca5-7355b3618663",
+      "7a0d9274-f33a-4aea-b400-3b06e94fbc43"
+    ],
+    "expected_loft_surface_ids": [
+      "7a0d9274-f33a-4aea-b400-3b06e94fbc43"
+    ],
+    "source_revisions": {
+      "f1ce107c-1797-4b78-9278-20b401ca4274": 21,
+      "9eaf9489-76b8-4724-a550-f1fc841c85e6": 21
+    }
+  },
+  "pages": [
+    {
+      "id": "58c37405-0d85-4d14-a84c-719c2e95539d",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "f1ce107c-1797-4b78-9278-20b401ca4274",
+          "name": "P1 · Plocha 1",
+          "surface_ids": [
+            "78483ce5-2fed-426b-bca5-7355b3618663"
+          ],
+          "source_revision": 21,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 40.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "points": [
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    120.0,
+                    0.0
+                  ],
+                  [
+                    120.0,
+                    100.0
+                  ],
+                  [
+                    0.0,
+                    100.0
+                  ]
+                ],
+                "closed": true
+              },
+              {
+                "commands": [
+                  [
+                    "M",
+                    40.0,
+                    20.0
+                  ],
+                  [
+                    "A",
+                    32.5,
+                    32.5,
+                    0.0,
+                    0.0,
+                    0.0,
+                    60.0,
+                    50.0
+                  ],
+                  [
+                    "A",
+                    32.5,
+                    32.5,
+                    0.0,
+                    0.0,
+                    0.0,
+                    80.0,
+                    20.0
+                  ],
+                  [
+                    "L",
+                    40.0,
+                    20.0
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P1 · Plocha 1",
+              "x": 60.0,
+              "y": 75.0,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7ede3fd0-7917-4381-a150-c815c15a6acd",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "9eaf9489-76b8-4724-a550-f1fc841c85e6",
+          "name": "P2 · Ostění",
+          "surface_ids": [
+            "7a0d9274-f33a-4aea-b400-3b06e94fbc43"
+          ],
+          "source_revision": 21,
+          "placement": {
+            "x_mm": 40.0,
+            "y_mm": 60.0,
+            "rotation_deg": 17.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "commands": [
+                  [
+                    "M",
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "C",
+                    0.770003114937717,
+                    -0.1809794990993312,
+                    1.5424596633626537,
+                    -0.3515208853140908,
+                    2.3170887276476604,
+                    -0.5115463770257903
+                  ],
+                  [
+                    "C",
+                    3.0980672104924225,
+                    -0.6728835530957924,
+                    3.881254201534828,
+                    -0.82353179024525,
+                    4.666363956163997,
+                    -0.9633879604272123
+                  ],
+                  [
+                    "C",
+                    5.451473710793167,
+                    -1.1032441306091745,
+                    6.238506489529555,
+                    -1.2323082283761346,
+                    7.027175450455224,
+                    -1.3504536700520913
+                  ],
+                  [
+                    "C",
+                    7.815844411380934,
+                    -1.4685991117280575,
+                    8.606149817159057,
+                    -1.5758258594928503,
+                    9.39780037208201,
+                    -1.6719844494434715
+                  ],
+                  [
+                    "C",
+                    10.183014743631928,
+                    -1.7673612622392225,
+                    10.969552726184906,
+                    -1.8518490591772074,
+                    11.757122482798316,
+                    -1.9252808262834444
+                  ],
+                  [
+                    "C",
+                    12.55114772922003,
+                    -1.9993144931200602,
+                    13.346222005438296,
+                    -2.062110068218483,
+                    14.142035164539582,
+                    -2.113476320292284
+                  ],
+                  [
+                    "C",
+                    14.937848323640866,
+                    -2.1648425723660853,
+                    15.734400619593778,
+                    -2.204779369075195,
+                    16.53136755429935,
+                    -2.2330774486592437
+                  ],
+                  [
+                    "C",
+                    17.328334489005012,
+                    -2.261375528243298,
+                    18.1257163078086,
+                    -2.278034728614555,
+                    18.92317105780539,
+                    -2.2828303812605557
+                  ],
+                  [
+                    "C",
+                    19.714142435850903,
+                    -2.287587044860648,
+                    20.505185764776456,
+                    -2.280672079083123,
+                    21.295947572817497,
+                    -2.2618542712234837
+                  ],
+                  [
+                    "C",
+                    22.093191035022976,
+                    -2.2428822190371225,
+                    22.890148590141905,
+                    -2.2118111952580746,
+                    23.68643506625949,
+                    -2.1683954733050754
+                  ],
+                  [
+                    "C",
+                    24.482721542376908,
+                    -2.1249797513520874,
+                    25.27833713980224,
+                    -2.069219091326594,
+                    26.072871280830455,
+                    -2.0008628494597414
+                  ],
+                  [
+                    "C",
+                    26.867405421858418,
+                    -1.9325066075927768,
+                    27.660858285243407,
+                    -1.8515545232696657,
+                    28.452791856068174,
+                    -1.757755288280289
+                  ],
+                  [
+                    "C",
+                    29.244725426893396,
+                    -1.6639560532901798,
+                    30.035139859311514,
+                    -1.557309389720446,
+                    30.823568070466862,
+                    -1.4375678644446679
+                  ],
+                  [
+                    "C",
+                    31.61199628162218,
+                    -1.317826339169715,
+                    32.39843839831804,
+                    -1.1849896608053072,
+                    33.18239708650959,
+                    -1.0388190342241885
+                  ],
+                  [
+                    "C",
+                    33.96635577470114,
+                    -0.8926484076430689,
+                    34.74783113150239,
+                    -0.7331435321594366,
+                    35.52629487650756,
+                    -0.5600791674578477
+                  ],
+                  [
+                    "C",
+                    36.30475862151257,
+                    -0.38701480275629935,
+                    37.080210782332884,
+                    -0.20039063032654347,
+                    37.85209207178448,
+                    -1.899139045562501e-15
+                  ],
+                  [
+                    "C",
+                    38.48063169493122,
+                    0.4802044784901025,
+                    39.10067470471964,
+                    0.9715254133851848,
+                    39.712043217781364,
+                    1.473408754421023
+                  ],
+                  [
+                    "C",
+                    40.328422948163464,
+                    1.9794058933350491,
+                    40.935985613054335,
+                    2.496139112404979,
+                    41.534582557536254,
+                    3.0230535029090606
+                  ],
+                  [
+                    "C",
+                    42.13317950201817,
+                    3.549967893413142,
+                    42.72281102259036,
+                    4.087063346182246,
+                    43.30335825081137,
+                    4.633800936644961
+                  ],
+                  [
+                    "C",
+                    43.88390547903241,
+                    5.180538527107704,
+                    44.455368722420914,
+                    5.7369181751952825,
+                    45.01765460119247,
+                    6.302419428613707
+                  ],
+                  [
+                    "C",
+                    45.57536905005608,
+                    6.863323110865872,
+                    46.12405508618498,
+                    7.433200661937602,
+                    46.66364201833312,
+                    8.011564120212817
+                  ],
+                  [
+                    "C",
+                    47.2076517941874,
+                    8.594668262572258,
+                    47.742412978603994,
+                    9.186397946769102,
+                    48.267869518707265,
+                    9.786275018697186
+                  ],
+                  [
+                    "C",
+                    48.79332605881053,
+                    10.386152090625274,
+                    49.30947826706355,
+                    10.994176559591528,
+                    49.816281958556935,
+                    11.609893292420292
+                  ],
+                  [
+                    "C",
+                    50.323085650050274,
+                    12.225610025248697,
+                    50.82054112996944,
+                    12.849019060292934,
+                    51.30861153383306,
+                    13.4796888292299
+                  ],
+                  [
+                    "C",
+                    51.792713885632686,
+                    14.10523120167138,
+                    52.267583433509934,
+                    14.737916823871295,
+                    52.73318703117305,
+                    15.377347536562475
+                  ],
+                  [
+                    "C",
+                    53.20260705176793,
+                    16.02201948460372,
+                    53.66260887634483,
+                    16.673547612794945,
+                    54.11315723161374,
+                    17.331547047156196
+                  ],
+                  [
+                    "C",
+                    54.56370558688265,
+                    17.989546481517728,
+                    55.0048007339433,
+                    18.65401734000278,
+                    55.43640211527461,
+                    19.324597181198207
+                  ],
+                  [
+                    "C",
+                    55.868003496606015,
+                    19.995177022393772,
+                    56.290111352484395,
+                    20.671865987766726,
+                    56.70267615976346,
+                    21.35432284012269
+                  ],
+                  [
+                    "C",
+                    57.11524096704254,
+                    22.03677969247893,
+                    57.51826294281964,
+                    22.725004595084556,
+                    57.91168026502017,
+                    23.418675904791773
+                  ],
+                  [
+                    "C",
+                    58.305097587220686,
+                    24.112347214498698,
+                    58.688910447784544,
+                    24.8114651146247,
+                    59.06304177956392,
+                    25.51572559323591
+                  ],
+                  [
+                    "C",
+                    59.437173111343284,
+                    26.219986071847117,
+                    59.80162307948282,
+                    26.92938933054959,
+                    60.15629684568261,
+                    27.64364670336353
+                  ],
+                  [
+                    "C",
+                    60.510970611883224,
+                    28.357904076177327,
+                    60.8558683048766,
+                    29.077015763334995,
+                    61.19087526135601,
+                    29.80070592185739
+                  ],
+                  [
+                    "L",
+                    63.311305032448345,
+                    69.74445457197338
+                  ],
+                  [
+                    "L",
+                    73.50928778334811,
+                    73.20872185559203
+                  ],
+                  [
+                    "L",
+                    70.96477205803731,
+                    25.27622347545285
+                  ],
+                  [
+                    "C",
+                    70.56276371026189,
+                    24.407795285226193,
+                    70.14888647866908,
+                    23.544861260636853,
+                    69.72327795922924,
+                    22.68775241326022
+                  ],
+                  [
+                    "C",
+                    69.29766943978935,
+                    21.830643565883612,
+                    68.86032947802191,
+                    20.97935965544073,
+                    68.4113718798868,
+                    20.134247081107077
+                  ],
+                  [
+                    "C",
+                    67.96241428175169,
+                    19.28913450677342,
+                    67.50183884907517,
+                    18.45019302662265,
+                    67.0297380624343,
+                    17.617787454974106
+                  ],
+                  [
+                    "C",
+                    66.55763727579345,
+                    16.78538188332533,
+                    66.07401090486167,
+                    15.959512000198588,
+                    65.57893313612627,
+                    15.14056377737122
+                  ],
+                  [
+                    "C",
+                    65.08385536739085,
+                    14.321615554544097,
+                    64.57732594033709,
+                    13.509588796096297,
+                    64.05940428273964,
+                    12.70489298666183
+                  ],
+                  [
+                    "C",
+                    63.5414826251422,
+                    11.900197177227113,
+                    63.0121684486691,
+                    11.102832147045218,
+                    62.47151042234659,
+                    10.31323282581142
+                  ],
+                  [
+                    "C",
+                    61.93085239602407,
+                    9.52363350457788,
+                    61.37885020653141,
+                    8.74179975074832,
+                    60.815546181817766,
+                    7.968193413098953
+                  ],
+                  [
+                    "C",
+                    60.25682186462223,
+                    7.2008765578696625,
+                    59.686978407169406,
+                    6.441653811229976,
+                    59.10605558500978,
+                    5.691002964299865
+                  ],
+                  [
+                    "C",
+                    58.52037110037356,
+                    4.934199241576015,
+                    57.92342452447099,
+                    4.186108399522475,
+                    57.31526009467843,
+                    3.4472483201283364
+                  ],
+                  [
+                    "C",
+                    56.70709566488594,
+                    2.708388240734277,
+                    56.087713014983166,
+                    1.9787588779738547,
+                    55.45716516685882,
+                    1.2589063916606082
+                  ],
+                  [
+                    "C",
+                    54.82661731873448,
+                    0.5390539053473618,
+                    54.18490389743536,
+                    -0.17102171568921715,
+                    53.53209216640985,
+                    -0.8707466865206365
+                  ],
+                  [
+                    "C",
+                    52.88458784783171,
+                    -1.5647828364509875,
+                    52.22616460447678,
+                    -2.2486358977366403,
+                    51.55690726584107,
+                    -2.921720316439564
+                  ],
+                  [
+                    "C",
+                    50.88216421131483,
+                    -3.600321820541765,
+                    50.19640831924861,
+                    -4.267977398246857,
+                    49.499751645383746,
+                    -4.924062506802061
+                  ],
+                  [
+                    "C",
+                    48.803094971518924,
+                    -5.580147615357229,
+                    48.09553714683234,
+                    -6.224662158679981,
+                    47.37722081345361,
+                    -6.85695942728514
+                  ],
+                  [
+                    "C",
+                    46.65890448007489,
+                    -7.489256695890299,
+                    45.92982928220539,
+                    -8.109336558774647,
+                    45.190173605747745,
+                    -8.716533125470788
+                  ],
+                  [
+                    "C",
+                    44.45653139007431,
+                    -9.31879313471412,
+                    43.712479778327065,
+                    -9.90837825658777,
+                    42.95823223055149,
+                    -10.484623630776015
+                  ],
+                  [
+                    "C",
+                    42.03197468320915,
+                    -10.725092387168127,
+                    41.10143209022497,
+                    -10.94904139408298,
+                    40.167275596219184,
+                    -11.156718631725429
+                  ],
+                  [
+                    "C",
+                    39.23311910221339,
+                    -11.364395869367076,
+                    38.29534867405173,
+                    -11.555801719947397,
+                    37.35459824822162,
+                    -11.731206471845042
+                  ],
+                  [
+                    "C",
+                    36.41384782239151,
+                    -11.906611223742686,
+                    35.47011728235701,
+                    -12.066015237779196,
+                    34.52400342897034,
+                    -12.209705068109614
+                  ],
+                  [
+                    "C",
+                    33.577889575583875,
+                    -12.353394898439998,
+                    32.62939225668159,
+                    -12.481370894724451,
+                    31.67907197169192,
+                    -12.59392997671236
+                  ],
+                  [
+                    "C",
+                    30.728751686702036,
+                    -12.706489058700294,
+                    29.776608250640507,
+                    -12.803631559887595,
+                    28.823167281406654,
+                    -12.885659050127705
+                  ],
+                  [
+                    "C",
+                    27.869726312173004,
+                    -12.967686540367797,
+                    26.914987595262897,
+                    -13.034599332397912,
+                    25.959443823921497,
+                    -13.086698198742102
+                  ],
+                  [
+                    "C",
+                    25.003900052580516,
+                    -13.138797065085553,
+                    24.047550986437503,
+                    -13.17608229362016,
+                    23.090858831791106,
+                    -13.19884875624419
+                  ],
+                  [
+                    "C",
+                    22.14194466214161,
+                    -13.221430125676054,
+                    21.192692667431277,
+                    -13.229728084608814,
+                    20.243527013776575,
+                    -13.224020088288682
+                  ],
+                  [
+                    "C",
+                    19.286581313780342,
+                    -13.218265305113466,
+                    18.329723131216,
+                    -13.198274264668473,
+                    17.37336280956933,
+                    -13.164316569167102
+                  ],
+                  [
+                    "C",
+                    16.417002487922133,
+                    -13.130358873666484,
+                    15.461139732778939,
+                    -13.082434717615444,
+                    14.506163941857606,
+                    -13.020795215126752
+                  ],
+                  [
+                    "C",
+                    13.551188150936273,
+                    -12.959155712638061,
+                    12.597099019474182,
+                    -12.883801022519554,
+                    11.644268723768088,
+                    -12.794960622316145
+                  ],
+                  [
+                    "C",
+                    10.699185015831961,
+                    -12.706842501789188,
+                    9.755339436768342,
+                    -12.60545714546324,
+                    8.81308219090852,
+                    -12.491004970108179
+                  ],
+                  [
+                    "C",
+                    7.863101525000568,
+                    -12.375614662168228,
+                    6.914735038066907,
+                    -12.246942564850677,
+                    5.96833228495638,
+                    -12.105168034838517
+                  ],
+                  [
+                    "C",
+                    5.021929531845502,
+                    -11.96339350482807,
+                    4.077490197361948,
+                    -11.808516587506666,
+                    3.135358491806908,
+                    -11.640689183288663
+                  ],
+                  [
+                    "C",
+                    2.1932267862518677,
+                    -11.472861779070659,
+                    1.2534023970009833,
+                    -11.292083894490961,
+                    0.31622821758730074,
+                    -11.098479283206967
+                  ],
+                  [
+                    "C",
+                    -0.6133266595547385,
+                    -10.90644869315292,
+                    -1.5402745176649466,
+                    -10.701799029696557,
+                    -2.4642782555898894,
+                    -10.48462363077601
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [
+              {
+                "points": [
+                  [
+                    37.85209207178448,
+                    -1.899139045562501e-15
+                  ],
+                  [
+                    42.95823223055149,
+                    -10.484623630776015
+                  ]
+                ],
+                "closed": false
+              },
+              {
+                "points": [
+                  [
+                    61.19087526135601,
+                    29.80070592185739
+                  ],
+                  [
+                    70.96477205803731,
+                    25.27622347545285
+                  ]
+                ],
+                "closed": false
+              }
+            ],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P2 · Ostění",
+              "x": 66.20762368969817,
+              "y": 29.983588187254092,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "files_sha256": {
+    "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-73f3437-page1-run01\\editor-original.svg": "a2734798826059c95acd05b379eade8c977f4871eda9d8822ec1ca73a82fe3b0",
+    "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-73f3437-page1-run01\\editor-edited.svg": "e0fff2dbdefa2d430c9595275f9998454a5616857247744c5d0b0627ee10acf6"
+  },
+  "paths": [
+    {
+      "id": "path-9eaf9489-76b8-4724-a550-f1fc841c85e6-CUT-0",
+      "commands": 69,
+      "closed_material_boundary": true,
+      "max_coordinate_difference_exact": "92610227/2000000000000",
+      "max_coordinate_difference_mm": 4.63051135e-05,
+      "worst_command_index": 60,
+      "coordinate_index": 1,
+      "original_normalized_value": "-26436530610227/2000000000000",
+      "edited_normalized_value": "-13218219/1000000",
+      "green_original_exact": "-2182474096541956681651754935923759906911633/1600000000000000000000000000000000000000",
+      "green_edited_exact": "-272809264019016932441/200000000000000000",
+      "green_original_mm2": -1364.0463103387228,
+      "green_edited_mm2": -1364.0463200950846,
+      "green_difference_exact": "15610178777876245064076240093088367/1600000000000000000000000000000000000000",
+      "green_difference_mm2": 9.756361736172654e-06,
+      "area_scope": "CLOSED_MATERIAL_AREA",
+      "serialization_2e5_pass": false,
+      "original_AC_position_001_pass": true,
+      "original_AC_area_001_pass": true
+    },
+    {
+      "id": "path-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY-0",
+      "commands": 2,
+      "closed_material_boundary": false,
+      "max_coordinate_difference_exact": "46153/125000000000",
+      "max_coordinate_difference_mm": 3.69224e-07,
+      "worst_command_index": 1,
+      "coordinate_index": 1,
+      "original_normalized_value": "-1310577953847/125000000000",
+      "edited_normalized_value": "-655289/62500",
+      "green_original_exact": "-12699678048324498138617075667782362783913/64000000000000000000000000000000000000",
+      "green_edited_exact": "-6201014878647/31250000000",
+      "green_original_mm2": -198.4324695050703,
+      "green_edited_mm2": -198.432476116704,
+      "green_difference_exact": "423144557861382924332217637216087/64000000000000000000000000000000000000",
+      "green_difference_mm2": 6.611633716584108e-06,
+      "area_scope": "OPEN_PATH_INTEGRAL_NOT_MATERIAL_AREA",
+      "serialization_2e5_pass": true,
+      "original_AC_position_001_pass": true,
+      "original_AC_area_001_pass": null
+    },
+    {
+      "id": "path-9eaf9489-76b8-4724-a550-f1fc841c85e6-FOLD_VALLEY-1",
+      "commands": 2,
+      "closed_material_boundary": false,
+      "max_coordinate_difference_exact": "148579/312500000000",
+      "max_coordinate_difference_mm": 4.754528e-07,
+      "worst_command_index": 1,
+      "coordinate_index": 1,
+      "original_normalized_value": "7898819836079/312500000000",
+      "edited_normalized_value": "25276223/1000000",
+      "green_original_exact": "-28406303257431110073048624211/100000000000000000000000000",
+      "green_edited_exact": "-568126104663907/2000000000000",
+      "green_original_mm2": -284.0630325743111,
+      "green_edited_mm2": -284.0630523319535,
+      "green_difference_exact": "1975764239926951375789/100000000000000000000000000",
+      "green_difference_mm2": 1.9757642399269515e-05,
+      "area_scope": "OPEN_PATH_INTEGRAL_NOT_MATERIAL_AREA",
+      "serialization_2e5_pass": true,
+      "original_AC_position_001_pass": true,
+      "original_AC_area_001_pass": null
+    }
+  ]
+}

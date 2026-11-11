@@ -71,6 +71,10 @@ class ExportWriteError(OSError):
         self.recovery_directory = recovery_directory
 
 
+class ExportCancelledError(ExportWriteError):
+    """Cancellation acknowledged before the atomic publication started."""
+
+
 def _number(value: Any, context: str, *, positive: bool = False) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise SnapshotError(f"{context}: expected a finite number")
@@ -1132,7 +1136,8 @@ def _remove_stage(stage: Path, parent: Path) -> None:
     shutil.rmtree(stage)
 
 
-def _write_validated_vectors(data, stage, names, font_name, family, digest, curve_bound):
+def _write_validated_vectors(data, stage, names, font_name, family, digest, curve_bound,
+                             checkpoint=lambda _phase: None):
     """Tighten arc representation inside the transaction, without relaxing AC.
 
     A positional bound alone cannot guarantee the independent area budget. Try
@@ -1141,6 +1146,7 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
     """
     tolerance, attempts = PDF_ARC_TOLERANCE_MM, []
     for attempt in range(4):
+        checkpoint("vectors")
         if attempt:
             curve_bound = _curve_bound(data, arc_tolerance_mm=tolerance)
         numeric_bound = _pdf(data, font_name, digest, stage / "new/model.pdf", curve_bound,
@@ -1153,6 +1159,7 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
                   "actual_interpolation_bound_mm": curve_bound}
         construction = data.get("construction_checks", {})
         if construction.get("curve_profiles") or construction.get("lofts"):
+            checkpoint("verify")
             from .curve_output_validation import validate_pdf_curve_geometry
             from .loft_output_validation import (
                 LOFT_OUTPUT_MAX_COMMANDS,
@@ -1201,7 +1208,8 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
 
 
 def export_all(
-    snapshot: dict, output_directory: str | Path, *, font_path: str | Path | None = None
+    snapshot: dict, output_directory: str | Path, *, font_path: str | Path | None = None,
+    checkpoint=None,
 ) -> list[Path]:
     """Write a complete vector bundle transactionally without mutating the snapshot.
 
@@ -1209,9 +1217,12 @@ def export_all(
     Old files owned by a previous manifest are replaced/removed as one rollback
     transaction; unrelated files in the chosen directory remain untouched.
     """
+    check = checkpoint if checkpoint is not None else lambda _phase: None
     with _LOCK:
+        check("prepare")
         data = _detached(snapshot)
         _validate(data)
+        check("prepare")
         try:
             curve_bound = _curve_bound(data)
         except (ArithmeticError, ValueError) as exc:
@@ -1262,7 +1273,8 @@ def export_all(
             (stage / "new").mkdir()
             (stage / "old").mkdir()
             curve_bound, numeric_bound, actual_curve_checks, used_tolerance, attempts = (
-                _write_validated_vectors(data, stage, names, font_name, family, digest, curve_bound)
+                _write_validated_vectors(data, stage, names, font_name, family, digest, curve_bound,
+                                         check)
             )
             (stage / "new" / _MANIFEST).write_text(
                 json.dumps(
@@ -1308,6 +1320,9 @@ def export_all(
                 with staged_file.open("rb+") as stream:
                     stream.flush()
                     os.fsync(stream.fileno())
+            # Cancellation is acknowledged only while old outputs are intact.
+            # Once publication starts, finish the transaction or roll it back.
+            check("publish")
             affected = list(dict.fromkeys([*names, *previous, _MANIFEST]))
             for name in affected:
                 current = directory / name

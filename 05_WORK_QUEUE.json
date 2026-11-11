@@ -925,7 +925,7 @@
         "AC-US06",
         "AC-US07"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "acceptance_state": {
@@ -1171,6 +1171,15 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
+      },
+      "component_progress_2026_11_11": {
+        "line_math": "eeaf081/62248d7 independently approved",
+        "curved_math": "3a0355f/548027a independently approved in mathematical component scope",
+        "domain_persistence": "95fa2c7 independently approved in LINE domain/persistence scope; review artifacts in isolated domain branch",
+        "batch_manual_placement": "0210118 independent review running",
+        "ui": "ea03025 real Qt preview/commands/grid/host;77 targeted regression PASS; independent review pending",
+        "native_D": "NOT_RUN",
+        "whole_ticket_acceptance": "NOT_RUN; mixed anchors, split/merge, full UI/export remain required"
       }
     },
     {
@@ -2173,7 +2182,22 @@
       "status_before_pause": "IN_PROGRESS",
       "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
       "continuation_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
-      "resumed_on": "2026-11-11"
+      "resumed_on": "2026-11-11",
+      "resumed_baseline_2026_11_11": {
+        "source_sha": "73f3437d07891eef7ac05f8610e16868b4707c12",
+        "full_suite": {
+          "status": "PASS",
+          "tests": 1175,
+          "seconds": 187.61,
+          "evidence": "docs/p2/implementation/evidence/pc007a-integrated-suite-73f3437-run02.xml"
+        },
+        "prior_suite_attempt": "ABORTED_WINDOWS_ACCESS_VIOLATION; cause UNRESOLVED; raw observation retained",
+        "native_B1": "PASS_REQUESTED_FIXTURE;194.11s",
+        "actual_editor_wall": "PASS",
+        "actual_editor_loft": "FAIL;69 native commands; exact drift0.0000463051135mm; area difference0.00000975636173617mm2; original norms pass, strict editor check fails",
+        "LX01": "OPEN; V4 narrow reserve allocation/source7ee42b3 is under independent review; no changed AC/editor preferences/harness",
+        "publication": "NOT_PUBLISHED"
+      }
     },
     {
       "id": "PC-007B",
@@ -2730,7 +2754,7 @@
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Independent review of performance2e42123, then integrated native B1, B3/derived D, C and remaining P2",
+    "active_work": "Repair LX01 real Inkscape geometry drift with bounded cubic coalescing; D domain and curved segmentation in isolated worktrees; C exploratory collar checkpoint retained",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2769,6 +2793,22 @@
         "status": "APPROVED_IN_LOFT_OUTPUT_COMPONENT_SCOPE",
         "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
         "report": "docs/p2/implementation/PC007A_LOFT_OUTPUT_REVIEW.md"
+      },
+      "loft_performance": {
+        "status": "APPROVED_IN_PERFORMANCE_COMPONENT_SCOPE",
+        "source_sha": "7a4f782e084ef595b2507fe825514b0100f969e5",
+        "report": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+      },
+      "async_export": {
+        "status": "APPROVED_IN_ASYNC_VECTOR_PUBLICATION_AND_HOST_SCOPE",
+        "source_sha": "e1948cfd11c095fd2aaf5643edd2403630ea4747",
+        "report": "docs/p2/implementation/PC007A_EXPORT_JOB_REVIEW.md"
+      },
+      "LX01_editor_rounding": {
+        "status": "OPEN_MAJOR",
+        "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
+        "report": "docs/p2/implementation/PC007A_LOFT_PROGRESS.md",
+        "repair_branch": "revival/p2-loft-coalescing"
       }
     },
     "planar_verified_slice": {
@@ -2807,6 +2847,13 @@
       "paused_on": "2026-11-09",
       "reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
       "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md"
+    },
+    "latest_integrated_baseline": {
+      "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
+      "suite_pass": 1128,
+      "native_B1": "PASS_REQUESTED_FIXTURE",
+      "B1_editor": "FAIL_LX01",
+      "published_on_master": false
     }
   }
 }

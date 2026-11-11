@@ -40,12 +40,12 @@ from PySide6.QtWidgets import (
 
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject
-from archpapercraft.exporter.author_export import export_all
 from archpapercraft.exporter.curve_output_validation import CurveOutputError
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
 from archpapercraft.ui.author_curves import CurveEditorDialog, CurveSketch
 from archpapercraft.ui.author_editing import DeletePartDialog, RenameDialog
+from archpapercraft.ui.author_export_job import ExportProgressDialog
 from archpapercraft.ui.author_loft import LoftProfilesDialog
 from archpapercraft.ui.author_manual_layout import ManualGridDialog
 from archpapercraft.ui.author_material import MaterialDialog
@@ -2167,12 +2167,23 @@ class AuthorMainWindow(QMainWindow):
         )
         if not target:
             return
-        result = self.run(lambda: export_all(snapshot, target))
+        progress = ExportProgressDialog(snapshot, target, self)
+        progress.exec()
+        if progress.cancelled:
+            self.statusBar().showMessage(str(progress.error), 12000)
+            return
+        if progress.error is not None:
+            def fail():
+                raise progress.error
+            self.run(fail)
+            return
+        result = progress.result_paths
         if result is not None:
             QMessageBox.information(
                 self,
                 "Export dokončen",
-                "Uloženo:\n"
+                ("Zrušení přišlo během dokončování; výstup byl již uložen.\n"
+                 if progress.finished_during_cancel else "") + "Uloženo:\n"
                 + "\n".join(Path(p).name for p in result)
                 + "\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm.",
             )

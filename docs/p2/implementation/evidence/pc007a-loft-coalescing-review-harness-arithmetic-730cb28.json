@@ -1,0 +1,27 @@
+{
+  "source_sha": "730cb28f2e3f221e03e7df174bf194ff577d6c3c",
+  "archive_sha256": "6a0ed6a5f8aa967bb5cbead773432b5f768657311ef4f711e1c4d170972c44ea",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-coalescing-review-lh_wq9x7",
+  "actual_imports": {
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-coalescing-review-lh_wq9x7\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "lf_sha256": "748b3ea4a1616c4afe3f2f6e95a21c4a2976d84c9fb4a210176658c95699bbc1"
+    },
+    "archpapercraft.authoring.loft_curve_compaction": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-coalescing-review-lh_wq9x7\\src\\archpapercraft\\authoring\\loft_curve_compaction.py",
+      "lf_sha256": "7178a8d4dc41b08981352263ac74d1fd8d7b6cb4bf1a4068294f295a36871610"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 57%]\n......................................................                   [100%]\n126 passed in 39.90s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": ".....F......                                                             [100%]\n================================== FAILURES ===================================\n__ test_many_actual_humps_prove_global_length_error_exceeds_max_local_error ___\n\n    def test_many_actual_humps_prove_global_length_error_exceeds_max_local_error():\n        chain,eps=hump_chain();source=native(chain,patches=2)\n        result=coalesce_native_loft_boundaries(source,merge_length_budget_mm=.001)\n        assert all(len(p['first']['segments'])==1 for p in result['patches'])\n        bound=F(result['coalescing']['length_bound_exact']['first'])\n        # Each curve length is at least total y variation through its midpoint.\n        # 62 full humps height3eps/4,2 end humps height3eps/8, minus coarse3eps.\n        rigorous_length_difference_lower=2*(62*F(3,4)+2*F(3,8)-3)*eps\n>       assert rigorous_length_difference_lower>100*eps\nE       assert Fraction(177, 2097152) > (100 * Fraction(1, 1048576))\n\n..\\..\\..\\..\\projects\\papercraft-loft-coalescing\\docs\\p2\\implementation\\evidence\\pc007a-loft-coalescing-review-own.py:113: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_many_actual_humps_prove_global_length_error_exceeds_max_local_error\n1 failed, 11 passed in 0.90s\n",
+      "stderr": ""
+    }
+  }
+}
