@@ -1177,9 +1177,10 @@
         "curved_math": "3a0355f/548027a independently approved in mathematical component scope",
         "domain_persistence": "95fa2c7 independently approved in LINE domain/persistence scope; review artifacts in isolated domain branch",
         "batch_manual_placement": "0210118 independent review running",
-        "ui": "ea03025 real Qt preview/commands/grid/host;77 targeted regression PASS; independent review pending",
-        "native_D": "NOT_RUN",
-        "whole_ticket_acceptance": "NOT_RUN; mixed anchors, split/merge, full UI/export remain required"
+        "ui": "1f677ef independently approved UI scope, DU01 fixed; combined runtime includes reviewed batch651",
+        "native_D": "First actual LINE D UI/save/reopen/manual two pages/SVG/PDF PASS42.125s on d762; proof harness and final integration review pending, no whole-D closure",
+        "whole_ticket_acceptance": "NOT_RUN; mixed anchors, split/merge, full UI/export remain required",
+        "writer": "26873c6 direct-source closed-registry/actual-vector guards under independent review; old c77 intermediate evidence retained"
       }
     },
     {
@@ -2038,9 +2039,9 @@
       ],
       "acceptance_state": {
         "AC-AU08": "PARTIAL_TECHNICAL_PASS: native arc/cubic UI, numeric edit, corners, save/reopen and both vector outputs on source63; full profile-to-profile workflow pending",
-        "AC-AU09": "PARTIAL_TECHNICAL_PASS: B2 and normal Bezier extrusion actual Windows-to-vectors on23ce202; B1 full proof and B3-to-D not complete",
+        "AC-AU09": "PARTIAL_TECHNICAL_VERIFICATION: B1/B2/Bezier native UI-save/reopen-layout-SVG/PDF and all5 Inkscape pages PASS on a46; B3/D NOT_RUN; whole AC not closed",
         "AC-AU13": "PARTIAL: stable native source/trim IDs verified; full split/merge provenance not closed",
-        "AC-AU15": "PARTIAL_TECHNICAL_PASS: planar native curves actual Windows/save/reopen/layout/SVG/PDF/Inkscape; other supported cuts pending",
+        "AC-AU15": "PARTIAL_SCOPE: A and B1/B2/Bezier actual digital flows verified; B3/D/C still required",
         "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
         "AC-US01": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
         "AC-US02": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
@@ -2073,9 +2074,10 @@
           "decision": "Preserve native source profiles and stable curve IDs; planar trims and separately verified ruled families, no closed-solid prerequisite",
           "evidence": [
             "src/archpapercraft/authoring/profile_curves.py",
-            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
+            "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         },
         {
           "skill": "papercraft-authoring-ui",
@@ -2085,9 +2087,10 @@
             "src/archpapercraft/ui/author_curves.py",
             "src/archpapercraft/ui/author_profile_placement.py",
             "tests/authoring/test_curve_workspace.py",
-            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
+            "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         },
         {
           "skill": "papercraft-verification",
@@ -2097,9 +2100,10 @@
             "docs/p2/implementation/PC007A_PLANAR_REVIEW.md",
             "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md",
             "docs/p2/implementation/PC007A_NATIVE_OUTPUT_TOPOLOGY_REVIEW.md",
-            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
+            "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         },
         {
           "skill": "papercraft-delivery",
@@ -2108,9 +2112,10 @@
           "evidence": [
             "docs/p2/implementation/PC006B_INTEGRATION.md",
             "05_WORK_QUEUE.json",
-            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md"
+            "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
+            "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "APPROVED_IN_PLANAR_SCOPE: docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending"
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         }
       ],
       "usability": {
@@ -2167,36 +2172,48 @@
           "actual UI/save/reopen/layout/SVG/PDF"
         ],
         "whole_ticket_complete": false,
-        "loft_domain": "APPROVED_IN_CORE_COMPONENT_SCOPE a1cbf920; LD01-04 CLOSED; actual UI/output integration not yet approved",
-        "loft_UI": "PARTIAL_NATIVE_PROOF: B2 and normal Bezier extrusion actual Windows/save/reopen/layout/vector outputs PASS on23ce202; B1 initial327s FAIL, performance repair and numeric focus diagnosis in progress; whole B not complete"
+        "loft_domain": "Independently approved core/source/area/native-output/performance/async/coalescing components; actual unified CODE a46 proof complete in B1/B2/Bezier scope",
+        "loft_UI": "ACTUAL_NATIVE_B1_B2_BEZIER_PASS_ON_a46; all5 actual Inkscape pages PASS; final integration review pending; B3/D not yet native-proven"
       },
-      "reviewed_code_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
-      "technical_verdict": "APPROVED_IN_BOUNDED_PLANAR_AUTHORING_SLICE_SCOPE; whole ticket IN_PROGRESS",
+      "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "technical_verdict": "APPROVED_IN_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE; whole PC007A/P2 IN_PROGRESS",
       "evidence": [
         "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
         "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
         "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
         "docs/p2/implementation/evidence/pc007a-suite-63ab275-run03.xml",
-        "docs/p2/implementation/PC007A_LOFT_PROGRESS.md"
+        "docs/p2/implementation/PC007A_LOFT_PROGRESS.md",
+        "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+        "docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md"
       ],
       "status_before_pause": "IN_PROGRESS",
       "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
       "continuation_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
       "resumed_on": "2026-11-11",
       "resumed_baseline_2026_11_11": {
-        "source_sha": "73f3437d07891eef7ac05f8610e16868b4707c12",
+        "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
         "full_suite": {
           "status": "PASS",
-          "tests": 1175,
-          "seconds": 187.61,
-          "evidence": "docs/p2/implementation/evidence/pc007a-integrated-suite-73f3437-run02.xml"
+          "tests": 1179,
+          "seconds": 220.34,
+          "evidence": "docs/p2/implementation/evidence/pc007a-integrated-suite-a46f179-run01.xml"
         },
-        "prior_suite_attempt": "ABORTED_WINDOWS_ACCESS_VIOLATION; cause UNRESOLVED; raw observation retained",
-        "native_B1": "PASS_REQUESTED_FIXTURE;194.11s",
-        "actual_editor_wall": "PASS",
-        "actual_editor_loft": "FAIL;69 native commands; exact drift0.0000463051135mm; area difference0.00000975636173617mm2; original norms pass, strict editor check fails",
-        "LX01": "OPEN; V4 narrow reserve allocation/source7ee42b3 is under independent review; no changed AC/editor preferences/harness",
-        "publication": "NOT_PUBLISHED"
+        "native_B1": "PASS_REQUESTED_FIXTURE;198.891s",
+        "native_B2": "PASS_REQUESTED_FIXTURE;52.64s",
+        "native_Bezier": "PASS_REQUESTED_FIXTURE;30.25s",
+        "actual_editor": "ALL5_PAGES_PASS; original harness and AC unchanged",
+        "prior_suite_abort": "73f3437 run01 Windows access violation at GC; cause unresolved, no full stderr; retained observation. Later full1175 and1179 PASS.",
+        "publication": "PUBLISHED_7ba8785_AND_REMOTE_SHA_VERIFIED; whole ticket still IN_PROGRESS"
+      },
+      "candidate_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "published_partial_increment": {
+        "scope": "B1/B2/Bezier technical increment, not whole PC007A/P2",
+        "published_sha": "7ba8785a04be82003db2bc70b5a5101d748fb8b1",
+        "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+        "report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+        "integration": "docs/p2/implementation/PC007A_LOFT_INTEGRATION.md",
+        "remote_verification": "docs/p2/implementation/evidence/pc007a-loft-master-push-7ba8785.json",
+        "method": "fast-forward and normal push; actual ls-remote SHA equals local master"
       }
     },
     {
@@ -2261,7 +2278,7 @@
         "AC-US06": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
         "AC-US07": "NOT_RUN: usability must be verified in this slice; no new-user result exists"
       },
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
@@ -2333,7 +2350,13 @@
         }
       },
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
-      "implementation_authorized_on": "2026-11-06"
+      "implementation_authorized_on": "2026-11-06",
+      "component_progress_2026_11_11": {
+        "source_sha": "54b9459c250d0c27a4528ab72983aac0b5bfd58e",
+        "branch": "revival/p2-curved-tabs (local, not published)",
+        "status": "Pure analytical collar certifier awaiting independent review; no current native body adapter, persistence, UI or vector proof; whole C NOT_RUN",
+        "scope": "whole-fold analytic body/siblings/disk cap, explicit budgets and physical P3 unknown; no whole-scene certificate"
+      }
     },
     {
       "id": "PC-012",
@@ -2481,8 +2504,8 @@
   ],
   "updated_on": "2026-11-11",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-loft-integration",
-  "release_readiness": "NOT_READY: resumed by owner; local loft performance review and complete B1 pending; B3/D/C, actual novice and historic model incomplete",
+  "working_branch": "revival/p2-segmentation-proof",
+  "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2564,7 +2587,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "IN_PROGRESS: A and mixed-part digital implementation verified; B/C/D, novice AC-US08, final historic AC-AU19 and final P2 review still pending",
+  "p2_digital_delivery": "IN_PROGRESS: A/mixed verified; B1/B2/Bezier current digital proof verified, B3/D/C, provenance/mixed changes, PC009, novice AC-US08 and final historic AC-AU19/P2 review remain required",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2745,16 +2768,16 @@
     "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
-    "wip_source_sha": "23ce202535bbd0ce7f2d4e5e975386f363bd2653",
-    "wip_branch": "revival/p2-loft-integration",
-    "next_required_technical_work": "Finish actual B1/B2/B3 and Bezier extrusion through UI/save/reopen/manual layout/vector outputs, independent review and fixes; then C/D and historic model",
+    "wip_source_sha": "d762fc6d2c543691b8918128b6b0d3e1da59313e",
+    "wip_branch": "revival/p2-segmentation-proof",
+    "next_required_technical_work": "Publish independently reviewed B1/B2/Bezier coherent increment; complete B3/D and C through actual UI/save/reopen/manual layout/SVG/PDF, split/merge provenance and mixed anchors, PC009, historic PC010 and missing novice evidence",
     "resumed_on": "2026-11-11",
     "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
-    "digital_source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
+    "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Repair LX01 real Inkscape geometry drift with bounded cubic coalescing; D domain and curved segmentation in isolated worktrees; C exploratory collar checkpoint retained",
+    "active_work": "B1/B2/Bezier published7ba with independent approval. D LINE first actual native flow passed on d762 (42.125s); D writer/source-to-output independent review running, B3/gothic native proof next. C pure analytic collar under independent review, native body/connector integration still required.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2805,10 +2828,21 @@
         "report": "docs/p2/implementation/PC007A_EXPORT_JOB_REVIEW.md"
       },
       "LX01_editor_rounding": {
-        "status": "OPEN_MAJOR",
-        "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
-        "report": "docs/p2/implementation/PC007A_LOFT_PROGRESS.md",
-        "repair_branch": "revival/p2-loft-coalescing"
+        "status": "CLOSED_VERIFIED_IN_CURRENT_a46_ARTIFACT_SCOPE",
+        "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+        "report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+        "repair_source_sha": "7ee42b397e0491bff87a0f76b7c07850ef5b56c3",
+        "component_review": "docs/p2/implementation/PC007A_LOFT_COALESCING_V4_REVIEW.md",
+        "actual_editor": "docs/p2/implementation/evidence/pc007a-loft-B1-inkscape-a46f179-loft-run01/editor-results.json",
+        "strict_serialization_tolerance_unchanged": true
+      },
+      "loft_integration": {
+        "status": "APPROVED_IN_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE",
+        "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+        "metadata_sha": "382a364d81e7975cb9c76f4a8eb1dfd72abc0c79",
+        "report": "docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md",
+        "open_major_findings": 0,
+        "whole_P2_acceptance": false
       }
     },
     "planar_verified_slice": {
@@ -2854,6 +2888,19 @@
       "native_B1": "PASS_REQUESTED_FIXTURE",
       "B1_editor": "FAIL_LX01",
       "published_on_master": false
-    }
+    },
+    "latest_verified_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+    "candidate_delivery_report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+    "publication_state": "PUBLISHED_AND_REMOTE_SHA_VERIFIED_IN_B1_B2_BEZIER_INCREMENT_SCOPE",
+    "latest_published_increment": {
+      "scope": "B1/B2/Bezier technical increment, not whole PC007A/P2",
+      "published_sha": "7ba8785a04be82003db2bc70b5a5101d748fb8b1",
+      "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+      "integration": "docs/p2/implementation/PC007A_LOFT_INTEGRATION.md",
+      "remote_verification": "docs/p2/implementation/evidence/pc007a-loft-master-push-7ba8785.json",
+      "method": "fast-forward and normal push; actual ls-remote SHA equals local master"
+    },
+    "wip_location": "C:/Users/dalib/projects/papercraft-segmentation-proof (isolated worktree; not published)"
   }
 }

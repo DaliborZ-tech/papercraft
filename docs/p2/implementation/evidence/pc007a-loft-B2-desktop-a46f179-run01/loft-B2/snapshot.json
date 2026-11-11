@@ -1,0 +1,354 @@
+{
+  "project_id": "0359a54c-42ea-422f-9ea5-2e556e5efa4d",
+  "revision": 18,
+  "construction_checks": {
+    "material_profile": {
+      "thickness_mm": null,
+      "clearance_mm": 0.0,
+      "bend_radius_mm": 0.0,
+      "crease_zone_mm": 0.5
+    },
+    "assembly_digest": "df2803ab2cf0d64732de59498c5d6330cdbafb2d38d998d7d7e0f842152bbb06",
+    "connector_bends": {},
+    "curve_profiles": {
+      "30b31ce3-e39b-439d-8c08-fb455a5bcf14": {
+        "status": "CERTIFIED",
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "76d078d0-28e1-403c-bfec-e3ad78bb6a1e",
+          "5d0cdd62-fecf-4b11-9728-d47258a6b225"
+        ],
+        "representation_budget_paper_mm": 0.002,
+        "chord_deviation_bound_paper_mm": 0.0015059821200313628,
+        "length_lower_paper_mm": 125.66370614358536,
+        "length_upper_paper_mm": 125.6637061435981,
+        "svg_deviation_bound_paper_mm": 2.307816412766953e-11,
+        "svg_length_error_bound_paper_mm": 7.965602513631625e-11,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof."
+      },
+      "3fc40148-bad1-4496-b6a2-9de6180e6ce1": {
+        "status": "CERTIFIED",
+        "family": "PLANAR_RIGID_ISOMETRY",
+        "source_revision": 1,
+        "source_segment_ids": [
+          "dbd93f01-e70c-48e0-a5bd-a3f2ad6129c2",
+          "316a615f-9c86-4df9-8d30-1ec06ac64e44"
+        ],
+        "representation_budget_paper_mm": 0.002,
+        "chord_deviation_bound_paper_mm": 0.0018071785465684123,
+        "length_lower_paper_mm": 150.79644737229737,
+        "length_upper_paper_mm": 150.7964473723228,
+        "svg_deviation_bound_paper_mm": 4.612591473500752e-11,
+        "svg_length_error_bound_paper_mm": 1.5921545142991013e-10,
+        "scope": "Native source and SVG bounds; display chords are not source identities. Planar map is an analytic rigid similarity, not a sampled loft proof."
+      }
+    },
+    "curve_regions": {
+      "8bd1f57c-1b75-436c-aaae-d0f2ba6910fe": {
+        "status": "VALID",
+        "reason": "Native manufacturing-curve topology proved",
+        "witness": null,
+        "examined_nodes": 26,
+        "numerical_guard": 5.820766091346741e-11,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "source_profile_ids": [
+          "30b31ce3-e39b-439d-8c08-fb455a5bcf14"
+        ],
+        "source_revisions": {
+          "30b31ce3-e39b-439d-8c08-fb455a5bcf14": 1
+        }
+      },
+      "e6c65bd3-2855-4476-8e96-6d81b7afeabb": {
+        "status": "VALID",
+        "reason": "Native manufacturing-curve topology proved",
+        "witness": null,
+        "examined_nodes": 256,
+        "numerical_guard": 1.1641532182693481e-10,
+        "proof": [
+          "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+          "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+          "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+          "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+          "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+          "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+        ],
+        "geometry_scope": "MANUFACTURING_NATIVE_SVG_ENDPOINT_ARCS_AND_AUTHORED_LINES_CUBICS",
+        "entry_scope": "AUTHORED_CURVE_DESCRIPTORS",
+        "source_profile_ids": [
+          "3fc40148-bad1-4496-b6a2-9de6180e6ce1",
+          "30b31ce3-e39b-439d-8c08-fb455a5bcf14"
+        ],
+        "source_revisions": {
+          "3fc40148-bad1-4496-b6a2-9de6180e6ce1": 1,
+          "30b31ce3-e39b-439d-8c08-fb455a5bcf14": 1
+        }
+      }
+    },
+    "lofts": {},
+    "accepted_layout_overlaps": [],
+    "physical_build": "NOT_VERIFIED"
+  },
+  "scale_label": "1:100",
+  "coverage": {
+    "expected_part_ids": [
+      "ff26ee04-7c3f-4157-920f-247c2125136b",
+      "084224d8-b8e8-43d7-a5c6-dc55e4898bd6"
+    ],
+    "expected_surface_ids": [
+      "8bd1f57c-1b75-436c-aaae-d0f2ba6910fe",
+      "e6c65bd3-2855-4476-8e96-6d81b7afeabb"
+    ],
+    "expected_loft_surface_ids": [],
+    "source_revisions": {
+      "ff26ee04-7c3f-4157-920f-247c2125136b": 18,
+      "084224d8-b8e8-43d7-a5c6-dc55e4898bd6": 18
+    }
+  },
+  "pages": [
+    {
+      "id": "f54b98ad-c0ef-4f1a-878a-3a89ba4c57c9",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "ff26ee04-7c3f-4157-920f-247c2125136b",
+          "name": "P1 · Plocha 1",
+          "surface_ids": [
+            "8bd1f57c-1b75-436c-aaae-d0f2ba6910fe"
+          ],
+          "source_revision": 18,
+          "placement": {
+            "x_mm": 30.0,
+            "y_mm": 40.0,
+            "rotation_deg": 0.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "commands": [
+                  [
+                    "M",
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    20.0,
+                    -20.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    40.0,
+                    0.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    20.0,
+                    20.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P1 · Plocha 1",
+              "x": 20.0,
+              "y": 0.2454122852291229,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "749de8c4-14aa-4447-842b-eefa96f38c3a",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "parts": [
+        {
+          "id": "084224d8-b8e8-43d7-a5c6-dc55e4898bd6",
+          "name": "P2 · Ostění",
+          "surface_ids": [
+            "e6c65bd3-2855-4476-8e96-6d81b7afeabb"
+          ],
+          "source_revision": 18,
+          "placement": {
+            "x_mm": 40.0,
+            "y_mm": 60.0,
+            "rotation_deg": 17.0
+          },
+          "paths": {
+            "CUT": [
+              {
+                "commands": [
+                  [
+                    "M",
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "A",
+                    24.0,
+                    24.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    24.0,
+                    -24.0
+                  ],
+                  [
+                    "A",
+                    24.0,
+                    24.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    48.0,
+                    0.0
+                  ],
+                  [
+                    "A",
+                    24.0,
+                    24.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    24.0,
+                    24.0
+                  ],
+                  [
+                    "A",
+                    24.0,
+                    24.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              },
+              {
+                "commands": [
+                  [
+                    "M",
+                    4.0,
+                    0.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    24.0,
+                    -20.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    44.0,
+                    0.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    24.0,
+                    20.0
+                  ],
+                  [
+                    "A",
+                    20.0,
+                    20.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    4.0,
+                    0.0
+                  ],
+                  [
+                    "Z"
+                  ]
+                ],
+                "closed": true
+              }
+            ],
+            "FOLD_MOUNTAIN": [],
+            "FOLD_VALLEY": [],
+            "TABS": [],
+            "GUIDES": [],
+            "LABELS": [],
+            "ARTWORK": []
+          },
+          "labels": [
+            {
+              "text": "P2 · Ostění",
+              "x": 2.0030118130379573,
+              "y": 0.2454122852291229,
+              "size_mm": 2.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

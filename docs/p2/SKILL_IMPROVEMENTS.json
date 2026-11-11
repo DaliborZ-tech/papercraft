@@ -528,19 +528,33 @@
       "skill_change": "Version a changed certified representation and verify both old-capability staleness and current-capability poisoning as separate negative cases",
       "usage_example": "A derived-segmentation format update must invalidate its previous certificate without losing author layout",
       "verification": {
-        "status": "PRODUCT_REPAIR_REVIEWED; newly written advice awaiting independent metadata review and next use",
+        "status": "PRODUCT_REPAIR_AND_SKILL_TEXT_INDEPENDENTLY_REVIEWED; narrow V3-to-V4 technical transfer independently verified",
         "evidence": [
-          "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+          "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md",
+          "docs/p2/implementation/PC007A_LOFT_COALESCING_V4_REVIEW.md",
+          "docs/p2/implementation/evidence/pc007a-loft-coalescing-v4-review-SK012.json"
         ]
       },
       "independent_review": {
-        "status": "PENDING_SKILL_TEXT_REVIEW",
-        "product_report": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+        "status": "APPROVED_IN_SCOPE",
+        "product_report": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md",
+        "skill_report": "docs/p2/implementation/PC007A_LOFT_COALESCING_V4_REVIEW.md",
+        "text_source_sha": "4f738c4e660a30e4027af71025cd939213712cc9",
+        "scope": "Changed canonical certified representation/capability; not ordinary source parameter edits"
       },
-      "effectiveness": "PENDING_NEXT_USE",
+      "effectiveness": "NARROW_TECHNICAL_TRANSFER_VERIFIED",
       "next_use": {
-        "status": "NOT_RUN",
-        "ticket": "PC-008 derived segmentation persistence"
+        "status": "VERIFIED_IN_CAPABILITY_VERSION_CHANGE_SCOPE",
+        "ticket": "PC-007A V3-to-V4 coalescing capability",
+        "source_sha": "7ee42b397e0491bff87a0f76b7c07850ef5b56c3",
+        "evidence": "docs/p2/implementation/PC007A_LOFT_COALESCING_V4_REVIEW.md",
+        "example": "Actual old B1 remains source/layout/frame bound and stale until explicit recompute; current V4 equal-area poisoned CUT remains blocked; save/reopen preserved"
+      },
+      "broader_effectiveness": "PENDING_NEXT_USE",
+      "further_transfer": {
+        "status": "PENDING_NEXT_USE",
+        "ticket": "PC-008 derived segmentation persistence",
+        "limits": "No novice, general effectiveness, native/editor or physical proof inferred from the narrow transfer"
       }
     },
     {

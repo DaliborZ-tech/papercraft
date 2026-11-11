@@ -1,0 +1,405 @@
+{
+  "code": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+  "metadata": "382a364d81e7975cb9c76f4a8eb1dfd72abc0c79",
+  "reader": "Independent Fraction Green L/C, Decimal80 circular A and analytic source integrals; PDF original numeric bytes via pypdf decompression only",
+  "native": [
+    {
+      "fixture": "B1",
+      "seconds": 198.891,
+      "artifact_hashes_git_equal": 17,
+      "source_footprint_equal": 108,
+      "reopen_snapshot_valid": true,
+      "dialogs": [
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a46f179-run01\\loft-B1\\loft-B1.apcraft",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Uložit model"
+        },
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a46f179-run01\\loft-B1\\loft-B1.apcraft",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Otevřít model"
+        },
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a46f179-run01\\loft-B1\\export",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Vyberte složku pro SVG a PDF",
+          "directory_confirmation": true
+        },
+        {
+          "kind": "real_QMessageBox",
+          "title": "Vektorový export",
+          "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+        },
+        {
+          "kind": "real_QMessageBox",
+          "title": "Export dokončen",
+          "text": "Uloženo:\npage-33b33bdb-3004-405e-a757-bd55d9a68953.svg\npage-c76c2a80-0a87-4885-8810-4e5dc8680ca9.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+        }
+      ],
+      "opengl": {
+        "version": "4.6.0 NVIDIA 610.71",
+        "vendor": "NVIDIA Corporation",
+        "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+      }
+    },
+    {
+      "fixture": "B2",
+      "seconds": 52.64,
+      "artifact_hashes_git_equal": 18,
+      "source_footprint_equal": 108,
+      "reopen_snapshot_valid": true,
+      "dialogs": [
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B2-desktop-a46f179-run01\\loft-B2\\loft-B2.apcraft",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Uložit model"
+        },
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B2-desktop-a46f179-run01\\loft-B2\\loft-B2.apcraft",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Otevřít model"
+        },
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B2-desktop-a46f179-run01\\loft-B2\\export",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Vyberte složku pro SVG a PDF",
+          "directory_confirmation": true
+        },
+        {
+          "kind": "real_QMessageBox",
+          "title": "Vektorový export",
+          "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+        },
+        {
+          "kind": "real_QMessageBox",
+          "title": "Export dokončen",
+          "text": "Uloženo:\npage-f54b98ad-c0ef-4f1a-878a-3a89ba4c57c9.svg\npage-749de8c4-14aa-4447-842b-eefa96f38c3a.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+        }
+      ],
+      "opengl": {
+        "version": "4.6.0 NVIDIA 610.71",
+        "vendor": "NVIDIA Corporation",
+        "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+      }
+    },
+    {
+      "fixture": "Bezier",
+      "seconds": 30.25,
+      "artifact_hashes_git_equal": 17,
+      "source_footprint_equal": 108,
+      "reopen_snapshot_valid": true,
+      "dialogs": [
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-desktop-a46f179-run01\\loft-Bezier\\loft-Bezier.apcraft",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Uložit model"
+        },
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-desktop-a46f179-run01\\loft-Bezier\\loft-Bezier.apcraft",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Otevřít model"
+        },
+        {
+          "path": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-desktop-a46f179-run01\\loft-Bezier\\export",
+          "native_seen": true,
+          "accepted": true,
+          "title": "Vyberte složku pro SVG a PDF",
+          "directory_confirmation": true
+        },
+        {
+          "kind": "real_QMessageBox",
+          "title": "Vektorový export",
+          "text": "Exportovat 1 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+        },
+        {
+          "kind": "real_QMessageBox",
+          "title": "Export dokončen",
+          "text": "Uloženo:\npage-32c72169-6e7a-4c2a-926a-2cd50adef59e.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+        }
+      ],
+      "opengl": {
+        "version": "4.6.0 NVIDIA 610.71",
+        "vendor": "NVIDIA Corporation",
+        "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+      }
+    }
+  ],
+  "editor": [
+    {
+      "run": "pc007a-loft-B1-inkscape-a46f179-loft-run01",
+      "source_original_exact": true,
+      "all4_output_hashes_and_original_bundle_equal": true,
+      "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "native_gui_text_edit": {
+        "text": "Žluťoučký – vlastní díl",
+        "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+        "own_pid": 75540,
+        "own_hwnd": 3737994,
+        "foreground_verified_before_each_chord": true
+      },
+      "assertions": {}
+    },
+    {
+      "run": "pc007a-loft-B1-inkscape-a46f179-wall-run01",
+      "source_original_exact": true,
+      "all4_output_hashes_and_original_bundle_equal": true,
+      "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "native_gui_text_edit": {
+        "text": "Žluťoučký – vlastní díl",
+        "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+        "own_pid": 65256,
+        "own_hwnd": 4065884,
+        "foreground_verified_before_each_chord": true
+      },
+      "assertions": {}
+    },
+    {
+      "run": "pc007a-loft-B2-inkscape-a46f179-band-run01",
+      "source_original_exact": true,
+      "all4_output_hashes_and_original_bundle_equal": true,
+      "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "native_gui_text_edit": {
+        "text": "Žluťoučký – vlastní díl",
+        "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+        "own_pid": 30628,
+        "own_hwnd": 5179686,
+        "foreground_verified_before_each_chord": true
+      },
+      "assertions": {}
+    },
+    {
+      "run": "pc007a-loft-B2-inkscape-a46f179-disk-run01",
+      "source_original_exact": true,
+      "all4_output_hashes_and_original_bundle_equal": true,
+      "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "native_gui_text_edit": {
+        "text": "Žluťoučký – vlastní díl",
+        "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+        "own_pid": 84092,
+        "own_hwnd": 2493280,
+        "foreground_verified_before_each_chord": true
+      },
+      "assertions": {}
+    },
+    {
+      "run": "pc007a-loft-Bezier-inkscape-a46f179-run01",
+      "source_original_exact": true,
+      "all4_output_hashes_and_original_bundle_equal": true,
+      "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "native_gui_text_edit": {
+        "text": "Žluťoučký – vlastní díl",
+        "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+        "own_pid": 71492,
+        "own_hwnd": 6818674,
+        "foreground_verified_before_each_chord": true
+      },
+      "assertions": {}
+    }
+  ],
+  "vectors": [
+    {
+      "kind": "wall",
+      "page_svg": "docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a46f179-run01\\loft-B1\\export\\page-33b33bdb-3004-405e-a757-bd55d9a68953.svg",
+      "part_id": "b0d86754-f8e5-4b9a-bdc3-a3364407675b",
+      "svg_native_command_counts": {
+        "M": 2,
+        "L": 4,
+        "Z": 2,
+        "A": 2
+      },
+      "true_cut_loops": 2,
+      "source_area_interval_mm2": [
+        "11132.844499905764011491407593438827130352266028492948294342462907221926311791610",
+        "11132.844500105764011491407601765499815040940168337033302449228638490933728113340"
+      ],
+      "actual_svg_net_mm2": "11132.844500005763547993646592179507034191393442706859802753725273446618722009134",
+      "actual_pdf_net_mm2": "11132.847299388562335423966805066931368901370221281532839506172839506172839506172",
+      "direct_source_error_upper_mm2": {
+        "svg": "1.00000463497761009585992780849546725630173499695503365044315006104206E-7",
+        "pdf": "0.002799482798323932559211628104238549104192788584545163709932284246527714562"
+      },
+      "original_area_tolerance_mm2": "0.011132844499905764011491407593438827130352266028492948294342462907221926311791610",
+      "pdf_no_image": true
+    },
+    {
+      "kind": "gothic",
+      "page_svg": "docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a46f179-run01\\loft-B1\\export\\page-c76c2a80-0a87-4885-8810-4e5dc8680ca9.svg",
+      "part_id": "3de7e4f5-74f9-4909-899e-53eff6080dc8",
+      "svg_native_command_counts": {
+        "M": 1,
+        "C": 16,
+        "L": 3,
+        "Z": 1
+      },
+      "true_cut_loops": 1,
+      "source_area_interval_mm2": [
+        "1364.0463936191806632738845133740373954424810276686140031766069679067485740361378",
+        "1364.0463936223242894420946427478372713113378465239204004083620900614301200832991"
+      ],
+      "actual_svg_net_mm2": "1364.0469891759033147760049091466012721843525000",
+      "actual_pdf_net_mm2": "1364.0469891759022205726279141846289604683691943959529845189909055784879371230575",
+      "direct_source_error_upper_mm2": {
+        "svg": "0.0005955567226515021203957725638767418714723313859968233930320932514259638622",
+        "pdf": "0.0005955567215572987434008105915650258881667273389813423839376717393630869197"
+      },
+      "original_area_tolerance_mm2": "0.01",
+      "pdf_no_image": true
+    },
+    {
+      "kind": "disk",
+      "page_svg": "docs\\p2\\implementation\\evidence\\pc007a-loft-B2-desktop-a46f179-run01\\loft-B2\\export\\page-f54b98ad-c0ef-4f1a-878a-3a89ba4c57c9.svg",
+      "part_id": "ff26ee04-7c3f-4157-920f-247c2125136b",
+      "svg_native_command_counts": {
+        "M": 1,
+        "A": 4,
+        "Z": 1
+      },
+      "true_cut_loops": 1,
+      "source_area_interval_mm2": [
+        "1256.6370614359173477030848234412801904113440440431581483975464196214767433593191",
+        "1256.6370614359173477030848234412801904113442440431581483975547462941614320334590"
+      ],
+      "actual_svg_net_mm2": "1256.6370614359172953850573533118011536788677597500423283899778369231265625144847",
+      "actual_pdf_net_mm2": "1256.6338274324118636138517991548028028597832445622663901234567901234567901234568",
+      "direct_source_error_upper_mm2": {
+        "svg": "5.23180274701294790367324764842931158200075769093710348695189743E-14",
+        "pdf": "0.0032340035054840892330242864773875515609994808917582740979561707046419100022"
+      },
+      "original_area_tolerance_mm2": "0.01",
+      "pdf_no_image": true
+    },
+    {
+      "kind": "ring",
+      "page_svg": "docs\\p2\\implementation\\evidence\\pc007a-loft-B2-desktop-a46f179-run01\\loft-B2\\export\\page-749de8c4-14aa-4447-842b-eefa96f38c3a.svg",
+      "part_id": "084224d8-b8e8-43d7-a5c6-dc55e4898bd6",
+      "svg_native_command_counts": {
+        "M": 2,
+        "A": 8,
+        "Z": 2
+      },
+      "true_cut_loops": 2,
+      "source_area_interval_mm2": [
+        "552.92030703180363298935732231416328378099132337898958529491809316509805424934127",
+        "552.92030703180363298935732231416328378099152337898958529492641983778274292348111"
+      ],
+      "actual_svg_net_mm2": "552.9203070318036099694252354571925076187018142900186244915902482461756875063732",
+      "actual_pdf_net_mm2": "552.9188709461784858214739782148627624944933454365057183289307763577846085021888",
+      "direct_source_error_upper_mm2": {
+        "svg": "2.301993208685697077616228970908897096080333617159160705541710791E-14",
+        "pdf": "0.00143608562514716788334409930052128649817794248386696599564347999813442129231"
+      },
+      "original_area_tolerance_mm2": "0.01",
+      "pdf_no_image": true
+    },
+    {
+      "kind": "bezier",
+      "page_svg": "docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-desktop-a46f179-run01\\loft-Bezier\\export\\page-32c72169-6e7a-4c2a-926a-2cd50adef59e.svg",
+      "part_id": "b531c9aa-55aa-4ef1-8bd1-638075541787",
+      "svg_native_command_counts": {
+        "M": 1,
+        "L": 3,
+        "Z": 1
+      },
+      "true_cut_loops": 1,
+      "source_area_interval_mm2": [
+        "956.65095238471328220701239962436458810741197628280279554120081137939669392104592",
+        "956.65095240810985050087767252426676383681263865052984167823307038856825925488921"
+      ],
+      "actual_svg_net_mm2": "956.649284434254",
+      "actual_pdf_net_mm2": "956.64928443425396338661527839944125934418709147603561963131118435599640487068965",
+      "direct_source_error_upper_mm2": {
+        "svg": "0.00166797385585050087767252426676383681263865052984167823307038856825925488921",
+        "pdf": "0.00166797385588711426239412482550449262554717449422204692188603257185438419956"
+      },
+      "original_area_tolerance_mm2": "0.01",
+      "pdf_no_image": true
+    }
+  ],
+  "source_eol_only_differences": [
+    {
+      "fixture": "B1",
+      "file": "tools/authoring/loft_desktop_steps.py",
+      "archive": "d142a1e2d4200dcfb3101d3f897887d5ef25ba7337b10ecaa30f46d05c6a5523",
+      "native_and_git": "dde0a8cbbb99d37206bc0627065e1e376bdc972beea00b3e0080d7048cbbd257"
+    },
+    {
+      "fixture": "B2",
+      "file": "tools/authoring/loft_desktop_steps.py",
+      "archive": "d142a1e2d4200dcfb3101d3f897887d5ef25ba7337b10ecaa30f46d05c6a5523",
+      "native_and_git": "dde0a8cbbb99d37206bc0627065e1e376bdc972beea00b3e0080d7048cbbd257"
+    },
+    {
+      "fixture": "Bezier",
+      "file": "tools/authoring/loft_desktop_steps.py",
+      "archive": "d142a1e2d4200dcfb3101d3f897887d5ef25ba7337b10ecaa30f46d05c6a5523",
+      "native_and_git": "dde0a8cbbb99d37206bc0627065e1e376bdc972beea00b3e0080d7048cbbd257"
+    }
+  ],
+  "runtime_equal_approved_V4": true,
+  "actual_imports": {
+    "archpapercraft.authoring.project": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-integrated-a46-rbgi46_a\\src\\archpapercraft\\authoring\\project.py",
+    "archpapercraft.exporter.author_export": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-integrated-a46-rbgi46_a\\src\\archpapercraft\\exporter\\author_export.py"
+  },
+  "full_suite": {
+    "actual": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1179",
+      "time": "220.337",
+      "timestamp": "2026-11-11T13:11:53.795403+01:00",
+      "hostname": "Dalibor"
+    },
+    "historical_V2_test_renamed_and_parametrized_with_V3_not_omitted": true,
+    "renamed": [
+      [
+        "tests.authoring.test_loft_curve_compaction",
+        "test_v2_cache_stales_on_load_preserving_raw_file_source_layout_and_frame"
+      ]
+    ],
+    "added_including_rename": [
+      [
+        "tests.authoring.test_loft_curve_compaction",
+        "test_larger_merge_reserve_is_clipped_to_original_total_budget_remainder"
+      ],
+      [
+        "tests.authoring.test_loft_curve_compaction",
+        "test_previous_cache_stales_preserving_raw_file_source_layout_frame[ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_EXACT_COLLINEAR_CUT_V2]"
+      ],
+      [
+        "tests.authoring.test_loft_curve_compaction",
+        "test_previous_cache_stales_preserving_raw_file_source_layout_frame[ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_BOUNDED_COALESCED_CUT_V3]"
+      ],
+      [
+        "tests.authoring.test_loft_editor_diagnostic",
+        "test_exact_green_matches_independent_rectangle_and_polynomial_arch_areas"
+      ],
+      [
+        "tests.authoring.test_loft_editor_diagnostic",
+        "test_diagnostic_retains_decimal_differences_and_relative_cumulative_error"
+      ]
+    ],
+    "prior_access_violation_cause": "UNRESOLVED; summary only, full stderr absent; later PASS does not diagnose cause"
+  },
+  "metadata_audit": {
+    "sha": "382a364d81e7975cb9c76f4a8eb1dfd72abc0c79",
+    "changed_paths": 88,
+    "all_changed_markdown_local_links_exist": 71,
+    "product_gate_accepted_contract_only": true,
+    "whole_ticket_and_P2_not_closed": true,
+    "novice_count": 0,
+    "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
+    "SK012": "matches own narrow V4 transfer verdict; further PC008/general/human effectiveness pending"
+  },
+  "verdict": "PASS_IN_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE_NOT_WHOLE_PC007A_P2_NOVICE_PHYSICAL"
+}

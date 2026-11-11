@@ -1,0 +1,71 @@
+{
+  "files_sha256": {
+    "docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-a46f179-loft-run01\\editor-original.svg": "51d9b7d1d0f1f5efff37b2e0c0676fbdd5f11282c4abe3c61d8bbbc39261b103",
+    "docs\\p2\\implementation\\evidence\\pc007a-loft-B1-inkscape-a46f179-loft-run01\\editor-edited.svg": "649f7c38426922bbb25c84cb53013a1dacd68d17f8bd097a0cb24e5640fbe193"
+  },
+  "paths": [
+    {
+      "id": "path-3de7e4f5-74f9-4909-899e-53eff6080dc8-CUT-0",
+      "commands": 21,
+      "closed_material_boundary": true,
+      "max_coordinate_difference_exact": "22575571/10000000000000",
+      "max_coordinate_difference_mm": 2.2575571e-06,
+      "worst_command_index": 18,
+      "coordinate_index": 1,
+      "original_normalized_value": "-132010477424429/10000000000000",
+      "edited_normalized_value": "-264021/20000",
+      "green_original_exact": "-545618795670361325910401963658640508873741/400000000000000000000000000000000000000",
+      "green_edited_exact": "-27280940216420993419/20000000000000000",
+      "green_original_mm2": -1364.0469891759033,
+      "green_edited_mm2": -1364.0470108210498,
+      "green_difference_exact": "8658058542469598036341359491126259/400000000000000000000000000000000000000",
+      "green_difference_mm2": 2.1645146356173996e-05,
+      "area_scope": "CLOSED_MATERIAL_AREA",
+      "serialization_2e5_pass": true,
+      "original_AC_position_001_pass": true,
+      "original_AC_area_001_pass": true
+    },
+    {
+      "id": "path-3de7e4f5-74f9-4909-899e-53eff6080dc8-FOLD_VALLEY-0",
+      "commands": 2,
+      "closed_material_boundary": false,
+      "max_coordinate_difference_exact": "46153/125000000000",
+      "max_coordinate_difference_mm": 3.69224e-07,
+      "worst_command_index": 1,
+      "coordinate_index": 1,
+      "original_normalized_value": "-1310577953847/125000000000",
+      "edited_normalized_value": "-655289/62500",
+      "green_original_exact": "-12699678048324498138617075667782362783913/64000000000000000000000000000000000000",
+      "green_edited_exact": "-6201014878647/31250000000",
+      "green_original_mm2": -198.4324695050703,
+      "green_edited_mm2": -198.432476116704,
+      "green_difference_exact": "423144557861382924332217637216087/64000000000000000000000000000000000000",
+      "green_difference_mm2": 6.611633716584108e-06,
+      "area_scope": "OPEN_PATH_INTEGRAL_NOT_MATERIAL_AREA",
+      "serialization_2e5_pass": true,
+      "original_AC_position_001_pass": true,
+      "original_AC_area_001_pass": null
+    },
+    {
+      "id": "path-3de7e4f5-74f9-4909-899e-53eff6080dc8-FOLD_VALLEY-1",
+      "commands": 2,
+      "closed_material_boundary": false,
+      "max_coordinate_difference_exact": "148579/312500000000",
+      "max_coordinate_difference_mm": 4.754528e-07,
+      "worst_command_index": 1,
+      "coordinate_index": 1,
+      "original_normalized_value": "7898819836079/312500000000",
+      "edited_normalized_value": "25276223/1000000",
+      "green_original_exact": "-28406303257431110073048624211/100000000000000000000000000",
+      "green_edited_exact": "-568126104663907/2000000000000",
+      "green_original_mm2": -284.0630325743111,
+      "green_edited_mm2": -284.0630523319535,
+      "green_difference_exact": "1975764239926951375789/100000000000000000000000000",
+      "green_difference_mm2": 1.9757642399269515e-05,
+      "area_scope": "OPEN_PATH_INTEGRAL_NOT_MATERIAL_AREA",
+      "serialization_2e5_pass": true,
+      "original_AC_position_001_pass": true,
+      "original_AC_area_001_pass": null
+    }
+  ]
+}

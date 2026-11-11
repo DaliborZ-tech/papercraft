@@ -1,0 +1,152 @@
+{
+  "status": "PASS",
+  "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+  "source_status_at_start": "?? docs/p2/implementation/evidence/pc007a-integrated-suite-a46f179-run01.log\n?? docs/p2/implementation/evidence/pc007a-integrated-suite-a46f179-run01.xml\n?? docs/p2/implementation/evidence/pc007a-loft-B1-desktop-a46f179-run01/\n?? docs/p2/implementation/evidence/pc007a-loft-B1-inkscape-a46f179-loft-run01/\n?? docs/p2/implementation/evidence/pc007a-loft-B1-inkscape-a46f179-wall-run01/\n?? docs/p2/implementation/evidence/pc007a-loft-B2-desktop-a46f179-run01/\n?? docs/p2/implementation/evidence/pc007a-loft-B2-inkscape-a46f179-band-run01/\n?? docs/p2/implementation/evidence/pc007a-loft-Bezier-desktop-a46f179-run01/\n?? docs/p2/implementation/evidence/pc007a-loft-integration-review-source.json",
+  "script_sha256": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+  "origin_source": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-desktop-a46f179-run01\\loft-Bezier\\export\\page-32c72169-6e7a-4c2a-926a-2cd50adef59e.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "2eeedb0cbae52b6aa59c3aa7421c0aa478b5007c2915f039aae35e289ae64187",
+    "model.pdf": "eef6039f566af309d10ba9b2d8af43ddb9786ab97c558ac6872efdd01b14a3d6",
+    "page-32c72169-6e7a-4c2a-926a-2cd50adef59e.svg": "26dfd438676a4972529c918af16e758ebfc1321718707f8d377c959eeb11ddf0"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.625,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-inkscape-a46f179-run01\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 2.015,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,226.182,459.745,877.556\npart-b531c9aa-55aa-4ef1-8bd1-638075541787,139.541,226.182,358,143.036\nrole-b531c9aa-55aa-4ef1-8bd1-638075541787-CUT,139.541,226.182,358,143.036\npath-b531c9aa-55aa-4ef1-8bd1-638075541787-CUT-0,139.541,226.182,358,143.036\n\n\n\nrole-b531c9aa-55aa-4ef1-8bd1-638075541787-LABELS,319.238,291.445,46.943,20.2122\nlabel-b531c9aa-55aa-4ef1-8bd1-638075541787-0,319.238,291.445,46.943,20.2122\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,146.198,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-inkscape-a46f179-run01\\editor-original.svg",
+        "--actions=select-by-id:part-b531c9aa-55aa-4ef1-8bd1-638075541787;transform-translate:10,15;select-clear;select-clear;select-by-id:label-b531c9aa-55aa-4ef1-8bd1-638075541787-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-inkscape-a46f179-run01\\editor-edited.svg;export-do"
+      ],
+      "seconds": 2.047,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-inkscape-a46f179-run01\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 1.672,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,241.182,469.745,862.556\npart-b531c9aa-55aa-4ef1-8bd1-638075541787,149.541,241.182,358,143.036\nrole-b531c9aa-55aa-4ef1-8bd1-638075541787-CUT,149.541,241.182,358,143.036\npath-b531c9aa-55aa-4ef1-8bd1-638075541787-CUT-0,149.541,241.182,358,143.036\n\n\n\nrole-b531c9aa-55aa-4ef1-8bd1-638075541787-LABELS,328.722,304.681,88.9221,34.6557\nlabel-b531c9aa-55aa-4ef1-8bd1-638075541787-0,328.722,304.681,88.9221,34.6557\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,146.198,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-inkscape-a46f179-run01\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-Bezier-inkscape-a46f179-run01\\editor-final-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 2.937,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-k469fpvt",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "elapsed_seconds": 17.906,
+  "files_sha256": {
+    "editor-edited.svg": "df9a9ee3c4d1d0672f1c6ef05f9b8c0d24ccc168e89d7130c48baebd2d8aa263",
+    "editor-final-render.png": "9d3e9d2bb3580e02299731bb54ce7adf19722bcf675556722a7d625bd33dda50",
+    "editor-gui.png": "23f57f4af7ef359bd38e03c1d9ea473b265ea39dabaa6639325f29a0ce550eee",
+    "editor-original.svg": "26dfd438676a4972529c918af16e758ebfc1321718707f8d377c959eeb11ddf0"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-b531c9aa-55aa-4ef1-8bd1-638075541787",
+    "label_id": "label-b531c9aa-55aa-4ef1-8bd1-638075541787-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "unchanged_by_actions; individual_native_GUI_edit_below",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "own_visible_windows": [
+    {
+      "hwnd": 6818674,
+      "title": "editor-edited.svg - Inkscape",
+      "class": "gdkWindowToplevel",
+      "width": 1936,
+      "height": 1048
+    }
+  ],
+  "initial_focus": {
+    "own_hwnd": 6818674,
+    "before_hwnd": 6818674,
+    "direct_activation_returned": true,
+    "after_hwnd": 6818674
+  },
+  "native_gui_text_edit": {
+    "text": "Žluťoučký – vlastní díl",
+    "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+    "own_pid": 71492,
+    "own_hwnd": 6818674,
+    "foreground_verified_before_each_chord": true
+  },
+  "gui_capture": {
+    "method": "QScreen.grabWindow(actual_editor_hwnd)",
+    "width": 1520,
+    "height": 873
+  },
+  "roundtrip_assertions": {
+    "path_count": 1,
+    "total_path_count_including_calibration": 2,
+    "editor_added_id_to_existing_calibration": [
+      "path2"
+    ],
+    "part_role_groups": [
+      "CUT",
+      "FOLD_MOUNTAIN",
+      "FOLD_VALLEY",
+      "TABS",
+      "LABELS",
+      "ARTWORK",
+      "GUIDES"
+    ],
+    "native_path_commands_preserved": true,
+    "all_local_coordinates_unchanged_mm_tolerance": 2e-05,
+    "other_text_objects_unchanged": true,
+    "original_bundle_unchanged": true,
+    "calibration_100mm_and_page_size_unchanged": true,
+    "cut_loop_count": 1,
+    "all_path_displacements_px": {
+      "path-b531c9aa-55aa-4ef1-8bd1-638075541787-CUT-0": [
+        10.0,
+        15.0
+      ]
+    }
+  },
+  "origin_bundle_preserved_after_run": true
+}
