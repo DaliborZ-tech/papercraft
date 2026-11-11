@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import math
 from dataclasses import asdict, replace
 from fractions import Fraction
 from functools import lru_cache
@@ -1052,6 +1053,109 @@ def _compact_material(check, material_report):
     }
 
 
+def _source_display_paths(project, prepared, slot):
+    """Floating display of the actual-source map, never a numerical certificate.
+
+    F_s uses the native theta/f/alpha but the current source R/k and common Q,
+    as specified in PC007B_SOURCE_TRANSFER_PROOF §2. The interval midpoints
+    here only select drawing coordinates; all acceptance uses whole intervals.
+    """
+    from .curved_tabs import Rim, Tab, _geometry
+
+    rim, tab = Rim(**slot["reference_rim"]), Tab(**slot["reference_tab"])
+    shape, binding = _geometry(rim, tab), prepared["rim_binding"]
+    native_radius, native_slope = float(shape["radius"]), float(shape["slope"])
+    radius = float(
+        sum(
+            Fraction(binding["source_radius_bounds"][key]) for key in ("lower_exact", "upper_exact")
+        )
+        / 2
+    )
+    slope = float(
+        sum(
+            Fraction(binding["source_radial_slope_bounds"][key])
+            for key in ("lower_exact", "upper_exact")
+        )
+        / 2
+    )
+    frame = binding["world_frame"]
+    angle = math.tau * float(Fraction(tab.center_turn))
+    sine, cosine = math.sin(angle), math.cos(angle)
+
+    def world(x, y, phase):
+        f = (
+            -native_slope
+            * x
+            * x
+            / native_radius
+            / (1 + math.sqrt(1 - (native_slope * x / native_radius) ** 2))
+            if native_slope
+            else 0.0
+        )
+        theta = (
+            math.asin(native_slope * x / native_radius) / native_slope
+            if native_slope
+            else x / native_radius
+        )
+        alpha = max(0.0, (float(shape["relief"]) - y) / (float(shape["relief"]) - f))
+        if phase == 1:
+            radial, vertical = -1.0, 0.0
+        else:
+            direction = phase * math.pi + (1 - phase) * math.acos(slope)
+            radial, vertical = math.cos(direction), math.sin(direction)
+        local = (
+            radius * (1 - alpha + alpha * math.cos(theta)) + (y - alpha * f) * radial,
+            radius * alpha * math.sin(theta) + (1 - alpha) * x,
+            (y - alpha * f) * vertical,
+        )
+        common = (
+            local[0] * cosine - local[1] * sine,
+            local[0] * sine + local[1] * cosine,
+            local[2],
+        )
+        result = [
+            frame["center_model_mm"][axis]
+            + sum(
+                frame[name][axis] * value
+                for name, value in zip(("radial", "tangent", "outward_z"), common, strict=True)
+            )
+            / project.scale
+            for axis in range(3)
+        ]
+        if not all(math.isfinite(value) for value in result):
+            raise CurvedConnectorError("Náhled skutečného zdroje není konečný.")
+        return result
+
+    hinge = []
+    halfwidth = float(shape["xe"])
+    for index in range(17):
+        x = halfwidth * (2 * index / 16 - 1)
+        f = (
+            -native_slope
+            * x
+            * x
+            / native_radius
+            / (1 + math.sqrt(1 - (native_slope * x / native_radius) ** 2))
+            if native_slope
+            else 0.0
+        )
+        hinge.append(world(x, f, 1))
+    glue = [
+        world(float(tangent), float(shape["radius"] - radial), 1)
+        for radial, tangent in shape["glue_triangle_local"]
+    ]
+    return {
+        "scope": "DISPLAY_ONLY_ACTUAL_SOURCE_INTERVAL_MIDPOINTS_NOT_PROOF",
+        "units": "model_mm",
+        "phase": 1,
+        "hinge_world": hinge,
+        "glue_patch_world": [*glue, glue[0][:]],
+        "source_radius_bounds_mm": copy.deepcopy(binding["source_radius_bounds"]),
+        "source_radial_slope_bounds": copy.deepcopy(binding["source_radial_slope_bounds"]),
+        "acceptance_uses_samples": False,
+    }
+
+
 class CurvedConnectorCommands:
     def _curved_domain_material_checks(self, owner_surface_id, bare_part):
         checks, slots = {}, []
@@ -1099,6 +1203,19 @@ class CurvedConnectorCommands:
         if not isinstance(report, dict) or set(report.get("active_tab_ids", [])) != expected:
             raise CurvedConnectorError("Skutečný řez pláště neprokazuje úplné identity záložek.")
         report["domain_connector_checks"] = checks
+        report["source_native_strain"] = {
+            "status": (
+                "SOURCE_NATIVE_STRAIN_CERTIFIED"
+                if all(
+                    check["source_transfer"]["status"] == "CERTIFIED_TRANSFER"
+                    for check in checks.values()
+                )
+                else "UNRESOLVED"
+            ),
+            "scope": "CURRENT_SOURCE_TO_SAME_ACTUAL_NATIVE_A_L_WHOLE_COLLAR_CHART",
+            "pdf_cubic_deformation": "NOT_CLAIMED",
+            "physical_build": "NOT_VERIFIED",
+        }
         report["domain_status"] = (
             "CERTIFIED_APPROXIMATE"
             if all(check["status"] == "CERTIFIED_APPROXIMATE" for check in checks.values())
@@ -1382,6 +1499,60 @@ class CurvedConnectorCommands:
             "material_report": material,
             "material_error": error,
             "proposed_record": asdict(clone.curved_connectors[cid]),
+        }
+
+    def curved_connector_geometry(self, connector_id):
+        """Readonly modeler selection packet, with explicit drawing-only 3D paths.
+
+        Stale/unresolved sources return authored slot identities and repair state
+        but no apparently current paper/assembled overlay. Every active command
+        is the same actual packet consumed by the canonical material composer.
+        """
+        status = self.curved_connector_status(connector_id)
+        record = self.curved_connectors[connector_id]
+        rows = []
+        for index, tab_id in enumerate(record.slot_ids):
+            override = record.tab_overrides.get(tab_id, {})
+            in_count = index < record.parameters["count"]
+            rows.append(
+                {
+                    "id": tab_id,
+                    "index": index,
+                    "in_current_count": in_count,
+                    "enabled": record.enabled and in_count and override.get("enabled", True),
+                    "tip_offset_mm": override.get("tip_offset_mm", 0),
+                    "paper_native_loop": None,
+                    "paper_shared_base_commands": None,
+                    "paper_cut_side_commands": None,
+                    "source_intervals": [],
+                    "assembled_display": None,
+                }
+            )
+        if status["status"] == "CERTIFIED_APPROXIMATE":
+            prepared = _prepare_native_slots(self, record)
+            packets = {slot["tab_id"]: slot for slot in prepared["slots"]}
+            for row in rows:
+                if not row["enabled"]:
+                    continue
+                slot = packets[row["id"]]
+                for key in (
+                    "paper_native_loop",
+                    "paper_shared_base_commands",
+                    "paper_cut_side_commands",
+                    "source_intervals",
+                ):
+                    row[key] = copy.deepcopy(slot[key])
+                row["assembled_display"] = _source_display_paths(self, prepared, slot)
+        return {
+            **status,
+            "contract": "READONLY_CURVED_SELECTION_NATIVE_PACKET_AND_SOURCE_DISPLAY_V1",
+            "mode": "APPROXIMATE",
+            "owner_part_id": self.part_for_surface(record.owner_surface_id),
+            "receiver_part_id": self.part_for_surface(record.receiver_surface_id),
+            "rim_side": record.rim_side,
+            "receiver_side": record.receiver_side,
+            "all_tabs": rows,
+            "display_is_proof": False,
         }
 
     @atomic
