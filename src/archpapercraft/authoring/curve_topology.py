@@ -630,6 +630,23 @@ def certify_region_topology(outer, holes=(), *, max_depth=24, max_nodes=20000):
     budget = _Budget(max_nodes, max_depth, 256*math.ulp(max(1.0, magnitude)))
     proof = _topology_proof()
     try:
+        from .profile_source_views import SourceCurveView
+        canonical_loops = []
+        for loop in loops:
+            canonical = []
+            for curve in loop:
+                if isinstance(curve, SourceCurveView) and curve.kind == "arc":
+                    whole = curve.legacy_whole_curve()
+                    if isinstance(whole, SourceCurveView):
+                        raise _UnresolvedError(
+                            "SOURCE_VIEW_TOPOLOGY_UNRESOLVED: partial analytic arc source "
+                            "requires the verified whole semantic source partition; "
+                            "an endpoint-A position bound is not source topology."
+                        )
+                    curve = whole
+                canonical.append(curve)
+            canonical_loops.append(tuple(canonical))
+        loops = canonical_loops
         if not math.isfinite(budget.guard):
             raise _UnresolvedError("Topology coordinate precision reserve is not finite")
         nodes = []
