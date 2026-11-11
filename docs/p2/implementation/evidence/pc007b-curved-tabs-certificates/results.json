@@ -1,0 +1,3892 @@
+{
+  "source_sha": "54b9459c250d0c27a4528ab72983aac0b5bfd58e",
+  "module_path": "C:\\Users\\dalib\\projects\\papercraft-curved-tabs\\src\\archpapercraft\\authoring\\curved_tabs.py",
+  "module_sha256": "f9e5c77a3a07487e24c5b735072f5d74c10ac46083b7c95d412035426797de78",
+  "proof_kind": "PURE_MATH_COMPONENT_ONLY_INDEPENDENT_REVIEW_PENDING",
+  "cases": {
+    "wide_cylinder": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "4948323060499059636092262704537579593739/2000000000000000000000000000000000000000",
+        "display_float": 2.4741615302495297
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          },
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          }
+        ],
+        "xe": {
+          "exact_fraction": "1",
+          "display_float": 1.0
+        },
+        "fe": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-3/4",
+              "display_float": -0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "3/4",
+              "display_float": 0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "516666666666666666666666666666666666667/10000000000000000000000000000000000000000",
+          "display_float": 0.051666666666666666
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "648688888888888888888888888888888888889/2000000000000000000000000000000000000000",
+          "display_float": 0.32434444444444444
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "4475833333333333333333333333333333333333/5000000000000000000000000000000000000000",
+          "display_float": 0.8951666666666667
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2483333333333333333333333333333333333333/10000000000000000000000000000000000000000",
+          "display_float": 0.24833333333333332
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          },
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "1/10",
+          "display_float": 0.1
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6365711601662167066075626942804335283977724967416685907179577343919951959077227905232503383855126565702186462185293700863170047576367827762419191721944182861686/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 60.83185307179586
+          },
+          {
+            "exact_fraction": "14544632495941785799252235463997057430243665114552340628160185498733237612691006083707836241297851720393204859884368382915395457637643298326234112364437344643516086/239095667179096214799630587603351946212358241081490075625691150895772669142293171790374723959018803080640551813372413352161427457787112871301360428333282470703125",
+            "display_float": 60.83185307179586
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "9/8",
+            "display_float": 1.125
+          },
+          {
+            "exact_fraction": "9/8",
+            "display_float": 1.125
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "wide_cone_lower": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "24382873315008965681888288848664468091451/10000000000000000000000000000000000000000",
+        "display_float": 2.4382873315008964
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "-1/3",
+          "display_float": -0.3333333333333333
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "999907422836444909857841349254387677833/10000000000000000000000000000000000000000",
+            "display_float": 0.09999074228364449
+          },
+          {
+            "exact_fraction": "499953711418222454928920674627193838917/5000000000000000000000000000000000000000",
+            "display_float": 0.09999074228364449
+          }
+        ],
+        "xe": {
+          "exact_fraction": "3600/3601",
+          "display_float": 0.9997222993612885
+        },
+        "fe": {
+          "exact_fraction": "60/3601",
+          "display_float": 0.01666203832268814
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-3600/3601",
+              "display_float": -0.9997222993612885
+            },
+            {
+              "exact_fraction": "60/3601",
+              "display_float": 0.01666203832268814
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "3600/3601",
+              "display_float": 0.9997222993612885
+            },
+            {
+              "exact_fraction": "60/3601",
+              "display_float": 0.01666203832268814
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-3600/3601",
+              "display_float": -0.9997222993612885
+            },
+            {
+              "exact_fraction": "60/3601",
+              "display_float": 0.01666203832268814
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "3600/3601",
+              "display_float": 0.9997222993612885
+            },
+            {
+              "exact_fraction": "60/3601",
+              "display_float": 0.01666203832268814
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "3600/3601",
+              "display_float": 0.9997222993612885
+            },
+            {
+              "exact_fraction": "60/3601",
+              "display_float": 0.01666203832268814
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-3600/3601",
+              "display_float": -0.9997222993612885
+            },
+            {
+              "exact_fraction": "60/3601",
+              "display_float": 0.01666203832268814
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-2700/3571",
+              "display_float": -0.7560907308877065
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "2700/3571",
+              "display_float": 0.7560907308877065
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "685056611981172075337015742168388298377/10000000000000000000000000000000000000000",
+          "display_float": 0.06850566119811721
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "123933343935192067103411038248418224923/625000000000000000000000000000000000000",
+          "display_float": 0.19829335029630732
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "123933343935192067103411038248418224923/625000000000000000000000000000000000000",
+          "display_float": 0.19829335029630732
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "2286889219110320877279003401104866871817/5000000000000000000000000000000000000000",
+          "display_float": 0.4573778438220642
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "8946461201156785144206491041273398369849/10000000000000000000000000000000000000000",
+          "display_float": 0.8946461201156786
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2195809559296825106223196164565664132959/10000000000000000000000000000000000000000",
+          "display_float": 0.21958095592968252
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "312471069636389034330575421641996149323/156250000000000000000000000000000000000",
+            "display_float": 1.99981484567289
+          },
+          {
+            "exact_fraction": "19998148456728898197156826985087753556673/10000000000000000000000000000000000000000",
+            "display_float": 1.99981484567289
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "200278164116828929068150208623087621697/2000000000000000000000000000000000000000",
+          "display_float": 0.10013908205841446
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6999195228529667525979932219721526944259843580168718272525785470648173108482592606054938122900575709145694480288133476259193837651762371057253349307619368779441935831212211/115057713544176755157849989084242601238497053368794921182574280477604492203346865023653698722530869247293594526126980781555175781250000000000000000000000000000000000000000",
+            "display_float": 60.832038226122975
+          },
+          {
+            "exact_fraction": "249875644155526961719687317701695837864416988977489307585617830644200736546072493098764477567460014488003744162347026103723423715552723703836944905639323511072574887539459449/4107632284598075269607218266550638515840118865924334183043640921975778874467110173135076827956053613921660883079312043264508247375488281250000000000000000000000000000000000",
+            "display_float": 60.832038226122975
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "4050/3571",
+            "display_float": 1.1341360963315599
+          },
+          {
+            "exact_fraction": "4050/3571",
+            "display_float": 1.1341360963315599
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "wide_cone_upper": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "74995706959281518792169502292112340335511/10000000000000000000000000000000000000000",
+        "display_float": 7.499570695928152
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "20",
+          "display_float": 20.0
+        },
+        "slope": {
+          "exact_fraction": "1/3",
+          "display_float": 0.3333333333333333
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "99997685281631018470720333857180539429/2000000000000000000000000000000000000000",
+            "display_float": 0.049998842640815506
+          },
+          {
+            "exact_fraction": "249994213204077546176800834642951348573/5000000000000000000000000000000000000000",
+            "display_float": 0.049998842640815506
+          }
+        ],
+        "xe": {
+          "exact_fraction": "14400/14401",
+          "display_float": 0.9999305603777515
+        },
+        "fe": {
+          "exact_fraction": "-120/14401",
+          "display_float": -0.008332754669814596
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-14400/14401",
+              "display_float": -0.9999305603777515
+            },
+            {
+              "exact_fraction": "-120/14401",
+              "display_float": -0.008332754669814596
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "14400/14401",
+              "display_float": 0.9999305603777515
+            },
+            {
+              "exact_fraction": "-120/14401",
+              "display_float": -0.008332754669814596
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-14400/14401",
+              "display_float": -0.9999305603777515
+            },
+            {
+              "exact_fraction": "-120/14401",
+              "display_float": -0.008332754669814596
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "14400/14401",
+              "display_float": 0.9999305603777515
+            },
+            {
+              "exact_fraction": "-120/14401",
+              "display_float": -0.008332754669814596
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "14400/14401",
+              "display_float": 0.9999305603777515
+            },
+            {
+              "exact_fraction": "-120/14401",
+              "display_float": -0.008332754669814596
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-14400/14401",
+              "display_float": -0.9999305603777515
+            },
+            {
+              "exact_fraction": "-120/14401",
+              "display_float": -0.008332754669814596
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "39/2",
+              "display_float": 19.5
+            },
+            {
+              "exact_fraction": "-10800/14461",
+              "display_float": -0.7468363183735565
+            }
+          ],
+          [
+            {
+              "exact_fraction": "39/2",
+              "display_float": 19.5
+            },
+            {
+              "exact_fraction": "10800/14461",
+              "display_float": 0.7468363183735565
+            }
+          ],
+          [
+            {
+              "exact_fraction": "18",
+              "display_float": 18.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "84486802551136566212539664815130968037/2500000000000000000000000000000000000000",
+          "display_float": 0.033794721020454624
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "7732703382951681085028572599613867203/80000000000000000000000000000000000000",
+          "display_float": 0.09665879228689601
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "7732703382951681085028572599613867203/80000000000000000000000000000000000000",
+          "display_float": 0.09665879228689601
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "2137284511555076729445537028034636232487/10000000000000000000000000000000000000000",
+          "display_float": 0.21372845115550768
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "9486364464094976713069203518719421683021/10000000000000000000000000000000000000000",
+          "display_float": 0.9486364464094976
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "864862655100873688324242974677386013441/2500000000000000000000000000000000000000",
+          "display_float": 0.34594506204034947
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "4999884264081550923536016692859026971451/2500000000000000000000000000000000000000",
+            "display_float": 1.9999537056326204
+          },
+          {
+            "exact_fraction": "3999907411265240738828813354287221577161/2000000000000000000000000000000000000000",
+            "display_float": 1.9999537056326204
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "100034734282737061479680444598819034387/2000000000000000000000000000000000000000",
+          "display_float": 0.05001736714136853
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "14228468603804689020845227385839998710079182374803987697622724587850624421187788869248122790790076288374808221417562252907056780106522915856674563090288747345966543781565047/115057713544176755157849989084242601238497053368794921182574280477604492203346865023653698722530869247293594526126980781555175781250000000000000000000000000000000000000000",
+            "display_float": 123.6637524379591
+          },
+          {
+            "exact_fraction": "8127443551179276415597002335065665663184336336523441169679507883513466341486687869964215612187151368830994567934061976477884222129283015660263668189838741545532666329241217993/65722116553569204313715492264810216253441901854789346928698254751612461991473762770161229247296857822746574129268992692232131958007812500000000000000000000000000000000000000",
+            "display_float": 123.6637524379591
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "16200/14461",
+            "display_float": 1.1202544775603347
+          },
+          {
+            "exact_fraction": "16200/14461",
+            "display_float": 1.1202544775603347
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "wide_near_positive": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "12370807651247649090225261997152327420257/5000000000000000000000000000000000000000",
+        "display_float": 2.4741615302495297
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "1/100000000000000000000",
+          "display_float": 1e-20
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "999999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 0.1
+          },
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          }
+        ],
+        "xe": {
+          "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+          "display_float": 1.0
+        },
+        "fe": {
+          "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+          "display_float": -5e-22
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -5e-22
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -5e-22
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -5e-22
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -5e-22
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -5e-22
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "-2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -5e-22
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-1000000000000000000000000000000000000000000/1333333333333333333333666666666666666666667",
+              "display_float": -0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "1000000000000000000000000000000000000000000/1333333333333333333333666666666666666666667",
+              "display_float": 0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "516666666666666666671666666666666666667/10000000000000000000000000000000000000000",
+          "display_float": 0.051666666666666666
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "1437976974008199401745976579343222064309/10000000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "1437976974008199401745976579343222064309/10000000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "648688888888888888896400288888888888889/2000000000000000000000000000000000000000",
+          "display_float": 0.32434444444444444
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "4475833333333333333333333333333333333333/5000000000000000000000000000000000000000",
+          "display_float": 0.8951666666666667
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "620833333333333333333333333333333333333/2500000000000000000000000000000000000000",
+          "display_float": 0.24833333333333332
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "19999999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 2.0
+          },
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "20000000000000000000001/200000000000000000000000",
+          "display_float": 0.1
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6365711601662167066075626942804335283977724967416685907179577343919951959077227905232503383855126565702186462185293700863170047576367827762419191721944182861686/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 60.83185307179586
+          },
+          {
+            "exact_fraction": "15991992551016658618272146578626239258401394091260290977300949387983198397610977711573463855015017939243315335245692473342043392609620553258264343799532700540432379014683607861/262888466214276817254861969059240865013767607419157387714793019006449847965895051080644916989187431290986296517075970768928527832031250000000000000000000000000000000000000000",
+            "display_float": 60.83185307179586
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "1500000000000000000000000000000000000000000/1333333333333333333333666666666666666666667",
+            "display_float": 1.125
+          },
+          {
+            "exact_fraction": "1500000000000000000000000000000000000000000/1333333333333333333333666666666666666666667",
+            "display_float": 1.125
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "wide_near_negative": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "12370807651247649090225261997152327420257/5000000000000000000000000000000000000000",
+        "display_float": 2.4741615302495297
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "-1/100000000000000000000",
+          "display_float": -1e-20
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "999999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 0.1
+          },
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          }
+        ],
+        "xe": {
+          "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+          "display_float": 1.0
+        },
+        "fe": {
+          "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+          "display_float": 5e-22
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 5e-22
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 5e-22
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 5e-22
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 5e-22
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 5e-22
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-4000000000000000000000000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "2000000000000000000000/4000000000000000000000000000000000000000001",
+              "display_float": 5e-22
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-3000000000000000000000000000000000000000000/3999999999999999999999000000000000000000001",
+              "display_float": -0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "3000000000000000000000000000000000000000000/3999999999999999999999000000000000000000001",
+              "display_float": 0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "516666666666666666671666666666666666667/10000000000000000000000000000000000000000",
+          "display_float": 0.051666666666666666
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "1437976974008199401745976579343222064309/10000000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "1437976974008199401745976579343222064309/10000000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "648688888888888888896400288888888888889/2000000000000000000000000000000000000000",
+          "display_float": 0.32434444444444444
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "4475833333333333333333333333333333333333/5000000000000000000000000000000000000000",
+          "display_float": 0.8951666666666667
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "620833333333333333333333333333333333333/2500000000000000000000000000000000000000",
+          "display_float": 0.24833333333333332
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "19999999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 2.0
+          },
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "20000000000000000000001/200000000000000000000000",
+          "display_float": 0.1
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6365711601662167066075626942804335283977724967416685907179577343919951959077227905232503383855126565702186462185293700863170047576367827762419191721944182861686/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 60.83185307179586
+          },
+          {
+            "exact_fraction": "15991992551016658618272146578626239258401394091260290977300949387983198397610977711573463855015017939243315335245692473342043392609620553258264343799532700540432379014683607861/262888466214276817254861969059240865013767607419157387714793019006449847965895051080644916989187431290986296517075970768928527832031250000000000000000000000000000000000000000",
+            "display_float": 60.83185307179586
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "4500000000000000000000000000000000000000000/3999999999999999999999000000000000000000001",
+            "display_float": 1.125
+          },
+          {
+            "exact_fraction": "4500000000000000000000000000000000000000000/3999999999999999999999000000000000000000001",
+            "display_float": 1.125
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "narrow_cylinder": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "491511450468896147168558214521363530617/2000000000000000000000000000000000000000",
+        "display_float": 0.24575572523444808
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "3/250",
+            "display_float": 0.012
+          },
+          {
+            "exact_fraction": "3/250",
+            "display_float": 0.012
+          }
+        ],
+        "xe": {
+          "exact_fraction": "3/25",
+          "display_float": 0.12
+        },
+        "fe": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "depth": {
+          "exact_fraction": "19/2",
+          "display_float": 9.5
+        },
+        "relief": {
+          "exact_fraction": "3/5",
+          "display_float": 0.6
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-3/25",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "3/25",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-3/25",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "3/25",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "3/25",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-3/25",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "-267/2375",
+              "display_float": -0.11242105263157895
+            }
+          ],
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "267/2375",
+              "display_float": 0.11242105263157895
+            }
+          ],
+          [
+            {
+              "exact_fraction": "1/2",
+              "display_float": 0.5
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "2259/3125000",
+          "display_float": 0.00072288
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "3618269157455795874961731472967541399/500000000000000000000000000000000000000",
+          "display_float": 0.007236538314911591
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "30150823272342000844053818634691814853/2500000000000000000000000000000000000000",
+          "display_float": 0.0120603293089368
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "5633089509/390625000000",
+          "display_float": 0.01442070914304
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "312102509/312500000",
+          "display_float": 0.9987280288
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "1516491/3125000",
+          "display_float": 0.48527712
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "6/25",
+            "display_float": 0.24
+          },
+          {
+            "exact_fraction": "6/25",
+            "display_float": 0.24
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "3/250",
+          "display_float": 0.012
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6549885711987270503536171153419476574104714386502233487360778839681825831072831966064360106499982701546240037574176706894141193182058081195259300593404143799186/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 62.59185307179587
+          },
+          {
+            "exact_fraction": "14965440870176995137299585298178956855577415618855763161261401924309797510381442066058895755465724813815132231075903830415199569963348616979724506718303921791953586/239095667179096214799630587603351946212358241081490075625691150895772669142293171790374723959018803080640551813372413352161427457787112871301360428333282470703125",
+            "display_float": 62.59185307179587
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "23763/23750",
+            "display_float": 1.0005473684210526
+          },
+          {
+            "exact_fraction": "23763/23750",
+            "display_float": 1.0005473684210526
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "narrow_cone_lower": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "2452748578633428459564738851929033783209/10000000000000000000000000000000000000000",
+        "display_float": 0.24527485786334285
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "-1/3",
+          "display_float": -0.3333333333333333
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "59999920000191999451430278089652659597/5000000000000000000000000000000000000000",
+            "display_float": 0.0119999840000384
+          },
+          {
+            "exact_fraction": "23999968000076799780572111235861063839/2000000000000000000000000000000000000000",
+            "display_float": 0.0119999840000384
+          }
+        ],
+        "xe": {
+          "exact_fraction": "30000/250001",
+          "display_float": 0.11999952000191999
+        },
+        "fe": {
+          "exact_fraction": "60/250001",
+          "display_float": 0.00023999904000384
+        },
+        "depth": {
+          "exact_fraction": "19/2",
+          "display_float": 9.5
+        },
+        "relief": {
+          "exact_fraction": "3/5",
+          "display_float": 0.6
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-30000/250001",
+              "display_float": -0.11999952000191999
+            },
+            {
+              "exact_fraction": "60/250001",
+              "display_float": 0.00023999904000384
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "30000/250001",
+              "display_float": 0.11999952000191999
+            },
+            {
+              "exact_fraction": "60/250001",
+              "display_float": 0.00023999904000384
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-30000/250001",
+              "display_float": -0.11999952000191999
+            },
+            {
+              "exact_fraction": "60/250001",
+              "display_float": 0.00023999904000384
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            {
+              "exact_fraction": "30",
+              "display_float": 30.0
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "30000/250001",
+              "display_float": 0.11999952000191999
+            },
+            {
+              "exact_fraction": "60/250001",
+              "display_float": 0.00023999904000384
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "30000/250001",
+              "display_float": 0.11999952000191999
+            },
+            {
+              "exact_fraction": "60/250001",
+              "display_float": 0.00023999904000384
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-30000/250001",
+              "display_float": -0.11999952000191999
+            },
+            {
+              "exact_fraction": "60/250001",
+              "display_float": 0.00023999904000384
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "-534000/4749899",
+              "display_float": -0.11242344310900085
+            }
+          ],
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "534000/4749899",
+              "display_float": 0.11242344310900085
+            }
+          ],
+          [
+            {
+              "exact_fraction": "1/2",
+              "display_float": 0.5
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "9631974272078984274098595144695715681/10000000000000000000000000000000000000000",
+          "display_float": 0.0009631974272078985
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "96674370167586504029389626829017815169/10000000000000000000000000000000000000000",
+          "display_float": 0.009667437016758651
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "160948543271125027104008314621630727197/10000000000000000000000000000000000000000",
+          "display_float": 0.016094854327112502
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "7696565878017722164658479571724411551/400000000000000000000000000000000000000",
+          "display_float": 0.019241414695044305
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "9987200347734064932146904800229190881623/10000000000000000000000000000000000000000",
+          "display_float": 0.9987200347734065
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2254811894408336423978891094997249091237/5000000000000000000000000000000000000000",
+          "display_float": 0.4509623788816673
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2399996800007679978057211123586106383887/10000000000000000000000000000000000000000",
+            "display_float": 0.239999680000768
+          },
+          {
+            "exact_fraction": "149999800000479998628575695224131648993/625000000000000000000000000000000000000",
+            "display_float": 0.239999680000768
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "30000600012000240004800096001920038401/2500000000000000000000000000000000000000",
+          "display_float": 0.012000240004800097
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "450104721109516779824957196465318573986210783445038972043357874652905489309622479191006472609374573775887230714490201089172491047320114391515471094683590236292607027658771/7191107096511047197365624317765162577406065835549682573910892529850280762709179063978356170158179327955849657882936298847198486328125000000000000000000000000000000000000",
+            "display_float": 62.5918533917951
+          },
+          {
+            "exact_fraction": "16454676335677893107444083212349095849386487831991626945818458387624188544870437873978829405618143942285361933659803435647600660888063823820073074944525335194477483995152357861/262888466214276817254861969059240865013767607419157387714793019006449847965895051080644916989187431290986296517075970768928527832031250000000000000000000000000000000000000000",
+            "display_float": 62.5918533917951
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "4752600/4749899",
+            "display_float": 1.0005686436701076
+          },
+          {
+            "exact_fraction": "4752600/4749899",
+            "display_float": 1.0005686436701076
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "narrow_cone_upper": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "3320151636096090787877732514330282862167/625000000000000000000000000000000000000",
+        "display_float": 5.312242617753745
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "20",
+          "display_float": 20.0
+        },
+        "slope": {
+          "exact_fraction": "1/3",
+          "display_float": 0.3333333333333333
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "59999980000011999991428578095232640697/10000000000000000000000000000000000000000",
+            "display_float": 0.0059999980000012
+          },
+          {
+            "exact_fraction": "29999990000005999995714289047616320349/5000000000000000000000000000000000000000",
+            "display_float": 0.0059999980000012
+          }
+        ],
+        "xe": {
+          "exact_fraction": "120000/1000001",
+          "display_float": 0.11999988000012
+        },
+        "fe": {
+          "exact_fraction": "-120/1000001",
+          "display_float": -0.00011999988000012
+        },
+        "depth": {
+          "exact_fraction": "19/2",
+          "display_float": 9.5
+        },
+        "relief": {
+          "exact_fraction": "3/5",
+          "display_float": 0.6
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-120000/1000001",
+              "display_float": -0.11999988000012
+            },
+            {
+              "exact_fraction": "-120/1000001",
+              "display_float": -0.00011999988000012
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "120000/1000001",
+              "display_float": 0.11999988000012
+            },
+            {
+              "exact_fraction": "-120/1000001",
+              "display_float": -0.00011999988000012
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-120000/1000001",
+              "display_float": -0.11999988000012
+            },
+            {
+              "exact_fraction": "-120/1000001",
+              "display_float": -0.00011999988000012
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            {
+              "exact_fraction": "60",
+              "display_float": 60.0
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "120000/1000001",
+              "display_float": 0.11999988000012
+            },
+            {
+              "exact_fraction": "-120/1000001",
+              "display_float": -0.00011999988000012
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "120000/1000001",
+              "display_float": 0.11999988000012
+            },
+            {
+              "exact_fraction": "-120/1000001",
+              "display_float": -0.00011999988000012
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-120000/1000001",
+              "display_float": -0.11999988000012
+            },
+            {
+              "exact_fraction": "-120/1000001",
+              "display_float": -0.00011999988000012
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "97/5",
+              "display_float": 19.4
+            },
+            {
+              "exact_fraction": "-2136000/19000259",
+              "display_float": -0.11241952017601445
+            }
+          ],
+          [
+            {
+              "exact_fraction": "97/5",
+              "display_float": 19.4
+            },
+            {
+              "exact_fraction": "2136000/19000259",
+              "display_float": 0.11241952017601445
+            }
+          ],
+          [
+            {
+              "exact_fraction": "21/2",
+              "display_float": 10.5
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "4807996792002460797981648283100290343/10000000000000000000000000000000000000000",
+          "display_float": 0.0004807996792002461
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "48167623422691899479531355794744930229/10000000000000000000000000000000000000000",
+          "display_float": 0.00481676234226919
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "80436475221612023377353807729986054029/10000000000000000000000000000000000000000",
+          "display_float": 0.008043647522161202
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "12012904356345596653667384361051051077/1250000000000000000000000000000000000000",
+          "display_float": 0.009610323485076478
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "1998760008746671312901024519746229845813/2000000000000000000000000000000000000000",
+          "display_float": 0.9993800043733356
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2541623220950132173911516116635205066549/5000000000000000000000000000000000000000",
+          "display_float": 0.5083246441900264
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "239999920000047999965714312380930562789/1000000000000000000000000000000000000000",
+            "display_float": 0.239999920000048
+          },
+          {
+            "exact_fraction": "2399999200000479999657143123809305627891/10000000000000000000000000000000000000000",
+            "display_float": 0.239999920000048
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "12000060000300001500007500037500187501/2000000000000000000000000000000000000000",
+          "display_float": 0.006000030000150001
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "14430964862322990996274292540330278026179304288749907167217941645899975912056159915108042116124281078446533931641634168081139303162847778443693305578287426626247610676096297/115057713544176755157849989084242601238497053368794921182574280477604492203346865023653698722530869247293594526126980781555175781250000000000000000000000000000000000000000",
+            "display_float": 125.42370622359168
+          },
+          {
+            "exact_fraction": "16486222878015031373963677283924116222667773949976979659813983638483672813171220190139720260022604973935730021742308190288943800248572680837189288172816934274444029100132826611/131444233107138408627430984529620432506883803709578693857396509503224923982947525540322458494593715645493148258537985384464263916015625000000000000000000000000000000000000000",
+            "display_float": 125.42370622359168
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "19010400/19000259",
+            "display_float": 1.0005337295665286
+          },
+          {
+            "exact_fraction": "19010400/19000259",
+            "display_float": 1.0005337295665286
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "narrow_near_positive": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "122877862617224036792132349445124308407/500000000000000000000000000000000000000",
+        "display_float": 0.24575572523444808
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "1/100000000000000000000",
+          "display_float": 1e-20
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "119999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 0.012
+          },
+          {
+            "exact_fraction": "3/250",
+            "display_float": 0.012
+          }
+        ],
+        "xe": {
+          "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+          "display_float": 0.12
+        },
+        "fe": {
+          "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+          "display_float": -7.2e-24
+        },
+        "depth": {
+          "exact_fraction": "19/2",
+          "display_float": 9.5
+        },
+        "relief": {
+          "exact_fraction": "3/5",
+          "display_float": 0.6
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -7.2e-24
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -7.2e-24
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -7.2e-24
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            0,
+            {
+              "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -7.2e-24
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -7.2e-24
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "-18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -7.2e-24
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "-5340000000000000000000000000000000000000000000/47500000000000000000000036000000000000000000171",
+              "display_float": -0.11242105263157895
+            }
+          ],
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "5340000000000000000000000000000000000000000000/47500000000000000000000036000000000000000000171",
+              "display_float": 0.11242105263157895
+            }
+          ],
+          [
+            {
+              "exact_fraction": "1/2",
+              "display_float": 0.5
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "7228800000000000000072000000000000001/10000000000000000000000000000000000000000",
+          "display_float": 0.00072288
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "36182691574557958749981174644171419187/5000000000000000000000000000000000000000",
+          "display_float": 0.007236538314911591
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "24120658617873600675484542497887067357/2000000000000000000000000000000000000000",
+          "display_float": 0.0120603293089368
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "144207091430400000001444907313133977601/10000000000000000000000000000000000000000",
+          "display_float": 0.01442070914304
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "9987280287999999999999999999999999999999/10000000000000000000000000000000000000000",
+          "display_float": 0.9987280288
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "4852771199999999999999999999999999999999/10000000000000000000000000000000000000000",
+          "display_float": 0.48527712
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2399999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 0.24
+          },
+          {
+            "exact_fraction": "6/25",
+            "display_float": 0.24
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "37500000000000000000000027/3125000000000000000000000000",
+          "display_float": 0.012
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6549885711987270503536171153419476574104714386502233487360778839681825831072831966064360106499982701546240037574176706894141193182058081195259300593404143799186/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 62.59185307179587
+          },
+          {
+            "exact_fraction": "16454676251553785816640703644170503180825625080318007979678985101434550130030953001475398908915987818315451217115746181895357601593995553258264343799532700540432379014683607861/262888466214276817254861969059240865013767607419157387714793019006449847965895051080644916989187431290986296517075970768928527832031250000000000000000000000000000000000000000",
+            "display_float": 62.59185307179587
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "47526000000000000000000000000000000000000000000/47500000000000000000000036000000000000000000171",
+            "display_float": 1.0005473684210526
+          },
+          {
+            "exact_fraction": "47526000000000000000000000000000000000000000000/47500000000000000000000036000000000000000000171",
+            "display_float": 1.0005473684210526
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "narrow_near_negative": {
+      "status": "CERTIFIED_APPROXIMATE",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "122877862617224036792132349445124308407/500000000000000000000000000000000000000",
+        "display_float": 0.24575572523444808
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "-1/100000000000000000000",
+          "display_float": -1e-20
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "119999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 0.012
+          },
+          {
+            "exact_fraction": "3/250",
+            "display_float": 0.012
+          }
+        ],
+        "xe": {
+          "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+          "display_float": 0.12
+        },
+        "fe": {
+          "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+          "display_float": 7.2e-24
+        },
+        "depth": {
+          "exact_fraction": "19/2",
+          "display_float": 9.5
+        },
+        "relief": {
+          "exact_fraction": "3/5",
+          "display_float": 0.6
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 7.2e-24
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 7.2e-24
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 7.2e-24
+            }
+          ],
+          [
+            "A",
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            {
+              "exact_fraction": "1000000000000000000000",
+              "display_float": 1e+21
+            },
+            0,
+            0,
+            1,
+            {
+              "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 7.2e-24
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 0.12
+            },
+            {
+              "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 7.2e-24
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-300000000000000000000000000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": -0.12
+            },
+            {
+              "exact_fraction": "18000000000000000000000/2500000000000000000000000000000000000000000009",
+              "display_float": 7.2e-24
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "-5340000000000000000000000000000000000000000000/47499999999999999999999964000000000000000000171",
+              "display_float": -0.11242105263157895
+            }
+          ],
+          [
+            {
+              "exact_fraction": "47/5",
+              "display_float": 9.4
+            },
+            {
+              "exact_fraction": "5340000000000000000000000000000000000000000000/47499999999999999999999964000000000000000000171",
+              "display_float": 0.11242105263157895
+            }
+          ],
+          [
+            {
+              "exact_fraction": "1/2",
+              "display_float": 0.5
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "7228800000000000000072000000000000001/10000000000000000000000000000000000000000",
+          "display_float": 0.00072288
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "36182691574557958749981174644171419187/5000000000000000000000000000000000000000",
+          "display_float": 0.007236538314911591
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "24120658617873600675484542497887067357/2000000000000000000000000000000000000000",
+          "display_float": 0.0120603293089368
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "144207091430400000001444907313133977601/10000000000000000000000000000000000000000",
+          "display_float": 0.01442070914304
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "9987280287999999999999999999999999999999/10000000000000000000000000000000000000000",
+          "display_float": 0.9987280288
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "4852771199999999999999999999999999999999/10000000000000000000000000000000000000000",
+          "display_float": 0.48527712
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2399999999999999999999999999999999999999/10000000000000000000000000000000000000000",
+            "display_float": 0.24
+          },
+          {
+            "exact_fraction": "6/25",
+            "display_float": 0.24
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "37500000000000000000000027/3125000000000000000000000000",
+          "display_float": 0.012
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6549885711987270503536171153419476574104714386502233487360778839681825831072831966064360106499982701546240037574176706894141193182058081195259300593404143799186/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 62.59185307179587
+          },
+          {
+            "exact_fraction": "16454676251553785816640703644170503180825625080318007979678985101434550130030953001475398908915987818315451217115746181895357601593995553258264343799532700540432379014683607861/262888466214276817254861969059240865013767607419157387714793019006449847965895051080644916989187431290986296517075970768928527832031250000000000000000000000000000000000000000",
+            "display_float": 62.59185307179587
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "47526000000000000000000000000000000000000000000/47499999999999999999999964000000000000000000171",
+            "display_float": 1.0005473684210526
+          },
+          {
+            "exact_fraction": "47526000000000000000000000000000000000000000000/47499999999999999999999964000000000000000000171",
+            "display_float": 1.0005473684210526
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "finite_budget": {
+      "status": "UNRESOLVED",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [
+        [
+          "UNRESOLVED",
+          "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "2d0df98d-0bb3-5805-8288-1100d687849f",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "3eff3203-522e-576e-a7a6-752e031254fe",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "4ece5be2-7678-5683-964a-ecd27b86f409",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "833bfa10-76e8-52d3-8941-53e921878649",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "820455e6-e187-5c77-8292-b2dde7e04da2",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "971ac915-274a-56a3-85f9-99f17e94368a",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "190610fa-7c18-52c5-9053-504bc43db0ab",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+          "Actual glue coverage is not fully proved"
+        ],
+        [
+          "UNRESOLVED",
+          "7d94a947-ef78-5d05-b81a-dbbe8f34abe4",
+          "Actual glue coverage is not fully proved"
+        ]
+      ],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "4948323060499059636092262704537579593739/2000000000000000000000000000000000000000",
+        "display_float": 2.4741615302495297
+      },
+      "cells_used": 0,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          },
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          }
+        ],
+        "xe": {
+          "exact_fraction": "1",
+          "display_float": 1.0
+        },
+        "fe": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-3/4",
+              "display_float": -0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "3/4",
+              "display_float": 0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "516666666666666666666666666666666666667/10000000000000000000000000000000000000000",
+          "display_float": 0.051666666666666666
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "648688888888888888888888888888888888889/2000000000000000000000000000000000000000",
+          "display_float": 0.32434444444444444
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "4475833333333333333333333333333333333333/5000000000000000000000000000000000000000",
+          "display_float": 0.8951666666666667
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2483333333333333333333333333333333333333/10000000000000000000000000000000000000000",
+          "display_float": 0.24833333333333332
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          },
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "1/10",
+          "display_float": 0.1
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6365711601662167066075626942804335283977724967416685907179577343919951959077227905232503383855126565702186462185293700863170047576367827762419191721944182861686/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 60.83185307179586
+          },
+          {
+            "exact_fraction": "14544632495941785799252235463997057430243665114552340628160185498733237612691006083707836241297851720393204859884368382915395457637643298326234112364437344643516086/239095667179096214799630587603351946212358241081490075625691150895772669142293171790374723959018803080640551813372413352161427457787112871301360428333282470703125",
+            "display_float": 60.83185307179586
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "0",
+            "display_float": 0.0
+          },
+          {
+            "exact_fraction": "9/8",
+            "display_float": 1.125
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "UNRESOLVED"
+      }
+    },
+    "unknown_material": {
+      "status": "UNVERIFIED",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [
+        [
+          "UNVERIFIED",
+          null,
+          "Material thickness is unknown"
+        ]
+      ],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "702a2d6b-12f2-5e77-b05f-aa33b802c4fd",
+        "ad6b8d7d-76af-507e-96a7-9b28fe79b3c2",
+        "2d0df98d-0bb3-5805-8288-1100d687849f",
+        "3eff3203-522e-576e-a7a6-752e031254fe",
+        "4ece5be2-7678-5683-964a-ecd27b86f409",
+        "833bfa10-76e8-52d3-8941-53e921878649",
+        "820455e6-e187-5c77-8292-b2dde7e04da2",
+        "971ac915-274a-56a3-85f9-99f17e94368a",
+        "190610fa-7c18-52c5-9053-504bc43db0ab",
+        "bbce7b36-fef1-541c-84d6-0fe82ac11a31",
+        "7d94a947-ef78-5d05-b81a-dbbe8f34abe4"
+      ],
+      "pair_count": 66,
+      "expected_active_pair_count": 66,
+      "whole_phase_min_pair_distance_lower_mm": {
+        "exact_fraction": "4948323060499059636092262704537579593739/2000000000000000000000000000000000000000",
+        "display_float": 2.4741615302495297
+      },
+      "cells_used": 12,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          },
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          }
+        ],
+        "xe": {
+          "exact_fraction": "1",
+          "display_float": 1.0
+        },
+        "fe": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-3/4",
+              "display_float": -0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "3/4",
+              "display_float": 0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "516666666666666666666666666666666666667/10000000000000000000000000000000000000000",
+          "display_float": 0.051666666666666666
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "648688888888888888888888888888888888889/2000000000000000000000000000000000000000",
+          "display_float": 0.32434444444444444
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "4475833333333333333333333333333333333333/5000000000000000000000000000000000000000",
+          "display_float": 0.8951666666666667
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2483333333333333333333333333333333333333/10000000000000000000000000000000000000000",
+          "display_float": 0.24833333333333332
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          },
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "1/10",
+          "display_float": 0.1
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6365711601662167066075626942804335283977724967416685907179577343919951959077227905232503383855126565702186462185293700863170047576367827762419191721944182861686/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 60.83185307179586
+          },
+          {
+            "exact_fraction": "14544632495941785799252235463997057430243665114552340628160185498733237612691006083707836241297851720393204859884368382915395457637643298326234112364437344643516086/239095667179096214799630587603351946212358241081490075625691150895772669142293171790374723959018803080640551813372413352161427457787112871301360428333282470703125",
+            "display_float": 60.83185307179586
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "9/8",
+            "display_float": 1.125
+          },
+          {
+            "exact_fraction": "9/8",
+            "display_float": 1.125
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "status": "BOUNDED"
+      }
+    },
+    "certain_hole_plus_unknown_barrier": {
+      "status": "INVALID",
+      "scope": "ANALYTIC_OPEN_BODY_SIBLING_TABS_AND_DISK_RECEIVER_ONLY",
+      "physical_status": "P3_NOT_RUN_NO_ELASTICITY_OR_ADHESIVE_CLAIM",
+      "problems": [
+        [
+          "INVALID",
+          "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+          "Actual receiver lacks required glue material"
+        ],
+        [
+          "UNRESOLVED",
+          [
+            "unresolved-beam"
+          ],
+          "Other assembly barriers have no complete fold proof in this component"
+        ]
+      ],
+      "expected_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc"
+      ],
+      "checked_ids": [
+        "a65c5e13-f741-5c48-b3dc-90c375edb1cc"
+      ],
+      "pair_count": 0,
+      "expected_active_pair_count": 0,
+      "whole_phase_min_pair_distance_lower_mm": null,
+      "cells_used": 1,
+      "first_tab": {
+        "tab_id": "a65c5e13-f741-5c48-b3dc-90c375edb1cc",
+        "enabled": true,
+        "owner_id": "body",
+        "receiver_id": "cap",
+        "radius": {
+          "exact_fraction": "10",
+          "display_float": 10.0
+        },
+        "slope": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "half_angle": [
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          },
+          {
+            "exact_fraction": "1/10",
+            "display_float": 0.1
+          }
+        ],
+        "xe": {
+          "exact_fraction": "1",
+          "display_float": 1.0
+        },
+        "fe": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "depth": {
+          "exact_fraction": "2",
+          "display_float": 2.0
+        },
+        "relief": {
+          "exact_fraction": "1/2",
+          "display_float": 0.5
+        },
+        "offset": {
+          "exact_fraction": "0",
+          "display_float": 0.0
+        },
+        "flat_native_loop": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "Z"
+          ]
+        ],
+        "shared_base_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "cut_side_commands": [
+          [
+            "M",
+            {
+              "exact_fraction": "1",
+              "display_float": 1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            },
+            {
+              "exact_fraction": "2",
+              "display_float": 2.0
+            }
+          ],
+          [
+            "L",
+            {
+              "exact_fraction": "-1",
+              "display_float": -1.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "glue_triangle_local": [
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "-3/4",
+              "display_float": -0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "19/2",
+              "display_float": 9.5
+            },
+            {
+              "exact_fraction": "3/4",
+              "display_float": 0.75
+            }
+          ],
+          [
+            {
+              "exact_fraction": "8",
+              "display_float": 8.0
+            },
+            {
+              "exact_fraction": "0",
+              "display_float": 0.0
+            }
+          ]
+        ],
+        "position_bound_mm": {
+          "exact_fraction": "516666666666666666666666666666666666667/10000000000000000000000000000000000000000",
+          "display_float": 0.051666666666666666
+        },
+        "differential_deformation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "jacobian_perturbation_bound": {
+          "exact_fraction": "359494243502049850432593796490534216491/2500000000000000000000000000000000000000",
+          "display_float": 0.14379769740081993
+        },
+        "metric_operator_error_bound": {
+          "exact_fraction": "648688888888888888888888888888888888889/2000000000000000000000000000000000000000",
+          "display_float": 0.32434444444444444
+        },
+        "collar_injectivity_margin": {
+          "exact_fraction": "4475833333333333333333333333333333333333/5000000000000000000000000000000000000000",
+          "display_float": 0.8951666666666667
+        },
+        "body_distance_lower_mm": {
+          "exact_fraction": "2483333333333333333333333333333333333333/10000000000000000000000000000000000000000",
+          "display_float": 0.24833333333333332
+        },
+        "source_arc_length_bounds_mm": [
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          },
+          {
+            "exact_fraction": "2",
+            "display_float": 2.0
+          }
+        ],
+        "angular_sector_half_bound": {
+          "exact_fraction": "1/10",
+          "display_float": 0.1
+        },
+        "center_turn": {
+          "exact_fraction": "1/24",
+          "display_float": 0.041666666666666664
+        },
+        "source_period_gap_bounds_mm": [
+          {
+            "exact_fraction": "6365711601662167066075626942804335283977724967416685907179577343919951959077227905232503383855126565702186462185293700863170047576367827762419191721944182861686/104644380866536044011672846940421187572153079025879306921137213501064699997502307290827683320940986275030440561865344335779060003233098541386425495147705078125",
+            "display_float": 60.83185307179586
+          },
+          {
+            "exact_fraction": "14544632495941785799252235463997057430243665114552340628160185498733237612691006083707836241297851720393204859884368382915395457637643298326234112364437344643516086/239095667179096214799630587603351946212358241081490075625691150895772669142293171790374723959018803080640551813372413352161427457787112871301360428333282470703125",
+            "display_float": 60.83185307179586
+          }
+        ],
+        "actual_glue_area_bounds_mm2": [
+          {
+            "exact_fraction": "0",
+            "display_float": 0.0
+          },
+          {
+            "exact_fraction": "0",
+            "display_float": 0.0
+          }
+        ],
+        "proven_uncovered_glue_area_mm2": {
+          "exact_fraction": "9/8",
+          "display_float": 1.125
+        },
+        "status": "INVALID"
+      }
+    }
+  }
+}
