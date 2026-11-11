@@ -388,6 +388,7 @@ def test_schema4_copy_preserves_source_and_layout_but_refuses_variant_capability
     p, _, _, _ = target()
     data = p.to_dict()
     data.pop("segmented_variants")
+    data.pop("profile_subdivisions")
     data.update(schema_version=4, writer_version="0.3.0-pc007a-profiles-experimental")
     path = tmp_path / "old-v4.apcraft"
     path.write_text(json.dumps(data), encoding="utf8")

@@ -72,6 +72,10 @@ def part_input(project, part):
         # Canonical CUT representation is a capability too: an older correct
         # sampled outline must become stale, not masquerade as a current cache.
         inputs["loft_paper_contract"] = LOFT_PAPER_CONTRACT
+    histories = {key: value for key, value in project.profile_subdivisions.items()
+                 if value["history"]["profile_id"] in profile_ids}
+    if histories:
+        inputs["profile_subdivisions"] = histories
     return digest(inputs)
 
 
@@ -84,18 +88,13 @@ def _frame_map(project, part):
     if frame.root_surface_id not in part.surface_ids:
         raise ValidationError("ANCHOR_UNRESOLVED: kořen dílu chybí.")
     profile = project.profiles[project.surfaces[frame.root_surface_id].profile_id]
-    vertex, segment = profile.vertex(frame.anchor_vertex_id), profile.segment(frame.axis_segment_id)
-    if vertex is None or segment is None:
-        raise ValidationError("ANCHOR_UNRESOLVED: zvolte znovu kotvu a směr dílu.")
-    start, end = (
-        profile.vertex(segment.start_vertex_id).point,
-        profile.vertex(segment.end_vertex_id).point,
-    )
+    anchor = project.resolve_profile_vertex(profile.id, frame.anchor_vertex_id)
+    _, (start, end) = project.resolve_profile_edge(profile.id, frame.axis_segment_id, axis=True)
     axis = np.asarray(end) - start
     if np.linalg.norm(axis) <= 1e-9:
         raise ValidationError("ANCHOR_UNRESOLVED: směr kotvy je nulový.")
     rotation = _rotation(-math.atan2(axis[1], axis[0])) * project.scale
-    return rotation, -rotation @ np.asarray(vertex.point)
+    return rotation, -rotation @ np.asarray(anchor)
 
 
 def _map_points(points, mapping):

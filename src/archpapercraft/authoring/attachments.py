@@ -17,6 +17,9 @@ def edge_source(project, surface_id, edge_id):
     for profile_id in [surface.profile_id, *surface.hole_profile_ids]:
         profile = project.profiles[profile_id]
         edge = profile.segment(edge_id)
+        if edge is None and project._subdivision_record(profile_id, edge_id) is not None:
+            semantic, points = project.resolve_profile_edge(profile_id, edge_id)
+            return profile, semantic, points
         if edge is not None:
             if edge.kind != "line":
                 raise ValidationError(

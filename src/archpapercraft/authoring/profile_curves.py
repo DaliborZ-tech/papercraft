@@ -360,6 +360,7 @@ class ProfileCurveCommands:
         if segment.kind == kind and segment.data == candidate:
             return
         segment.kind, segment.data = kind, candidate
+        self._sync_profile_subdivisions(profile_id)
         profile.validate()
         self.profile_projection(profile_id)
         profile.revision += 1

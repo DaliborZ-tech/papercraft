@@ -52,6 +52,7 @@ from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
 from archpapercraft.ui.author_segmentation import SegmentedVariantDialog
+from archpapercraft.ui.author_subdivision import SubdivisionDialog
 from archpapercraft.ui.author_viewport import AuthorViewport
 
 
@@ -192,6 +193,12 @@ class AuthorMainWindow(QMainWindow):
         construct.addAction(self._action("rectangle", "Obdélník z rozměrů…", self.create_rectangle))
         construct.addAction(self._action(
             "edit_curve", "Upravit vybraný úsek profilu…", self.edit_curve
+        ))
+        construct.addAction(self._action(
+            "split_profile", "Rozdělit vybraný úsek obrysu…", self.split_profile_segment
+        ))
+        construct.addAction(self._action(
+            "merge_profile", "Spojit původní úseky obrysu…", self.merge_profile_segments
         ))
         construct.addAction(self._action(
             "copy_profile", "Kopie vybraného profilu do hloubky…", self.copy_selected_profile
@@ -380,6 +387,12 @@ class AuthorMainWindow(QMainWindow):
         self.curve_edit_button = QPushButton("Upravit tvar a úchopy…")
         self.curve_edit_button.clicked.connect(self.edit_curve)
         form.addRow(self.curve_edit_button)
+        self.split_profile_button = QPushButton("Rozdělit úsek…")
+        self.split_profile_button.clicked.connect(self.split_profile_segment)
+        form.addRow(self.split_profile_button)
+        self.merge_profile_button = QPushButton("Spojit původní úseky…")
+        self.merge_profile_button.clicked.connect(self.merge_profile_segments)
+        form.addRow(self.merge_profile_button)
         self.copy_profile_button = QPushButton("Kopie profilu do hloubky…")
         self.copy_profile_button.clicked.connect(self.copy_selected_profile)
         form.addRow(self.copy_profile_button)
@@ -1028,6 +1041,17 @@ class AuthorMainWindow(QMainWindow):
         enabled = self.curve_choice.count() > 0
         self.curve_edit_button.setEnabled(enabled)
         self.actions["edit_curve"].setEnabled(enabled)
+        pair = self.curve_choice.currentData()
+        current = self.project.profiles[pair[0]].segment(pair[1]) if pair else None
+        line_selected = current is not None and current.kind == "line"
+        self.actions["split_profile"].setEnabled(line_selected)
+        self.split_profile_button.setEnabled(line_selected)
+        record = self.project._subdivision_record(*pair) if pair else None
+        merge_enabled = record is not None and len([
+            edge for edge in self.project.profiles[pair[0]].segments
+            if self.project._subdivision_record(pair[0], edge.id) is record]) >= 2
+        self.actions["merge_profile"].setEnabled(merge_enabled)
+        self.merge_profile_button.setEnabled(merge_enabled)
         self.actions["copy_profile"].setEnabled(enabled)
         plane_editable = enabled and (surface is None or surface.kind == "ruled_loft")
         self.actions["profile_plane"].setEnabled(plane_editable)
@@ -1065,6 +1089,47 @@ class AuthorMainWindow(QMainWindow):
                 "Upravit zdrojovou křivku",
                 lambda p: p.set_profile_segment(pid, segment_id, **dialog.result_spec),
             ))
+
+    def split_profile_segment(self):
+        self._profile_subdivision_dialog(joining=False)
+
+    def merge_profile_segments(self):
+        self._profile_subdivision_dialog(joining=True)
+
+    def _profile_subdivision_dialog(self, *, joining):
+        if not self._commit_pending_input():
+            return
+        pair = self.curve_choice.currentData()
+        if not pair:
+            return
+        profile_id, segment_id = pair
+        source_state = self.controller.digest(self.project.to_dict())
+        dialog = SubdivisionDialog(
+            self.project, profile_id, segment_id, joining=joining,
+            unit_factor=self.unit_factor, unit_label=self.units.currentText(), parent=self)
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+
+        def apply():
+            if self.controller.digest(self.project.to_dict()) != source_state:
+                raise ValueError("Projekt se od náhledu změnil. Otevřete dělení znovu.")
+            if joining:
+                new_id = self.controller.execute("Spojit původní úseky", lambda p:
+                    p.merge_profile_segments(profile_id, dialog.result_spec["segment_ids"]))
+                vertex_id = None
+            else:
+                result = self.controller.execute("Rozdělit úsek obrysu", lambda p:
+                    p.split_profile_segment(profile_id, **dialog.result_spec))
+                new_id, vertex_id = result["segment_ids"][0], result["vertex_id"]
+            self.selected_vertex = (profile_id, vertex_id) if vertex_id else None
+            self.selected_edge = (self.selected_surface, new_id) if self.selected_surface else None
+            index = self.curve_choice.findData((profile_id, new_id))
+            self.curve_choice.setCurrentIndex(index)
+            self._sync_selection()
+            self.statusBar().showMessage(
+                "Obrys upraven. Pokračujte přepočtem rozvinu; krok lze vrátit Ctrl+Z.", 10000)
+
+        self.run(apply)
 
     def copy_selected_profile(self):
         self._profile_placement_dialog(copying=True)
