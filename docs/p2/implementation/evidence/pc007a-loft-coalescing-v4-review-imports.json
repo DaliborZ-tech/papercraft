@@ -1,0 +1,18 @@
+{
+  "loft_curve_compaction": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-coalescing-v4-7ee-rft617we\\src\\archpapercraft\\authoring\\loft_curve_compaction.py",
+    "sha256": "61c9b8341ef4c8509a5422c0fbe936d097726f8660138d65da5873e46d13f1f6"
+  },
+  "loft_surface": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-coalescing-v4-7ee-rft617we\\src\\archpapercraft\\authoring\\loft_surface.py",
+    "sha256": "15da357e652cddae170c9e181ccc560386552e7acb8b7331f1ab0f400234da73"
+  },
+  "project": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-coalescing-v4-7ee-rft617we\\src\\archpapercraft\\authoring\\project.py",
+    "sha256": "27c6b4396fd460b2f1d2b09c1df5988e24d3fa823034a8795be622d9fa920951"
+  },
+  "paper": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-coalescing-v4-7ee-rft617we\\src\\archpapercraft\\authoring\\paper.py",
+    "sha256": "010bbb2b134c4a18fe2e7e6997ecd90c3764464e1f9c85a56ad92a227753fe32"
+  }
+}

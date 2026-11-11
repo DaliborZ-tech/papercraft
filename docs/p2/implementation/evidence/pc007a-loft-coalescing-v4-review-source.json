@@ -1,0 +1,26 @@
+{
+  "source_sha": "7ee42b397e0491bff87a0f76b7c07850ef5b56c3",
+  "archive": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-coalescing-v4-7ee-rft617we",
+  "files": {
+    "src/archpapercraft/authoring/loft_curve_compaction.py": {
+      "runtime_sha256": "61c9b8341ef4c8509a5422c0fbe936d097726f8660138d65da5873e46d13f1f6",
+      "git_bytes_sha256": "67c33b7dc63d27684b8b66870981e79e948fc7981a19bf098d43ebfaad21fd50",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/loft_surface.py": {
+      "runtime_sha256": "15da357e652cddae170c9e181ccc560386552e7acb8b7331f1ab0f400234da73",
+      "git_bytes_sha256": "f9946b3bac78b2a1a9f3fd7797d777dc2b7ec37de3ec67be79fe9d0cfa28bcbc",
+      "eol_only": true
+    },
+    "tests/authoring/test_loft_curve_compaction.py": {
+      "runtime_sha256": "e458c25dbf9478e3416ec19b4ee6db819a34f4fb220a4ce26e110fb91cbd0ecc",
+      "git_bytes_sha256": "cb47398a5eed1a6b31a00e3cd79c67c8fe0edd0470603ba9ac202d56fa8e5c0c",
+      "eol_only": true
+    },
+    "tests/authoring/test_loft_editor_diagnostic.py": {
+      "runtime_sha256": "723c99dc2ad19c0203ae70bf5add0ea651f28705bcbeaee5fb47b0429e015197",
+      "git_bytes_sha256": "8450e19a0cd05356af118d58e8bbf7acdf303c829526588a33fc1d3d2140d5d0",
+      "eol_only": true
+    }
+  }
+}
