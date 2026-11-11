@@ -93,6 +93,31 @@ def test_no_nominal_disk_replaces_an_unproved_actual_receiver(mutation):
         _receiver_binding(p, record, rim)
 
 
+@pytest.mark.parametrize("side", ["first", "second"])
+def test_ordinary_surface_translation_matches_exact_source_plane_placement(side):
+    p, record, rim = receiver_source(side, hole=(3, 2, .5), r1=20)
+    original_cap, original = _receiver_binding(p, record, rim)
+    receiver = p.surfaces[record.receiver_surface_id]
+    # Preserve the same actual world geometry using the ordinary surface tool.
+    shift = [4, -3, 30]
+    for pid in receiver.source_profile_ids():
+        profile = p.profiles[pid]
+        profile.plane.origin = [value-delta for value, delta in zip(profile.plane.origin, shift)]
+    p.set_transform(receiver.id, shift)
+    actual_cap, actual = _receiver_binding(p, record, p._circular_rim_binding(
+        record.owner_surface_id, side))
+    assert actual_cap == original_cap
+    for key in ("source_radial", "source_tangent", "source_outward",
+                "receiver_contact_is_printed_side"):
+        assert actual[key] == original[key]
+    assert actual["source_binding"]["receiver_translation_in_owner_source_exact"] == [
+        "4", "-3", "30"]
+    # No tolerance or center snapping: even one representable step is rejected.
+    p.set_transform(receiver.id, [4, -3, math.nextafter(30, math.inf)])
+    with pytest.raises(CurvedConnectorError, match="středu"):
+        _receiver_binding(p, record, p._circular_rim_binding(record.owner_surface_id, side))
+
+
 def test_actual_authored_hole_dominates_otherwise_positive_scoped_pure_contact():
     angle = math.pi / 12
     p, record, binding = receiver_source(hole=(9 * math.cos(angle), 9 * math.sin(angle), 0.2))
