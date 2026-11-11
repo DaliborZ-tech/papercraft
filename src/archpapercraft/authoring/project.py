@@ -553,6 +553,12 @@ class AuthorProject(
         x = placement.x_mm if x_mm is None else number(x_mm, "Poloha X")
         y = placement.y_mm if y_mm is None else number(y_mm, "Poloha Y")
         angle = placement.rotation_deg if rotation_deg is None else number(rotation_deg, "Úhel")
+        # A valid loaded int and its equal float compare numerically equal, but
+        # have different serialized JSON and therefore different save digests.
+        # Preserve the original scalar AFTER number/bool/finiteness validation.
+        x = placement.x_mm if x == placement.x_mm else x
+        y = placement.y_mm if y == placement.y_mm else y
+        angle = placement.rotation_deg if angle == placement.rotation_deg else angle
         if placement.position_locked and (
             new_page != placement.page_id or x != placement.x_mm or y != placement.y_mm
         ):
