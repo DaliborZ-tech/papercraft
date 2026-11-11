@@ -1,0 +1,18 @@
+{
+  "source_parent": "d762fc6d2c543691b8918128b6b0d3e1da59313e",
+  "new_source_identity": "sha256 per file; source_parent is not the new source commit",
+  "python": "3.12.15",
+  "actual_import": "C:\\Users\\dalib\\projects\\papercraft-au13-math\\src\\archpapercraft\\authoring\\curve_subdivision.py",
+  "sha256": {
+    "src/archpapercraft/authoring/curve_subdivision.py": "5c337d3bdf00396f38548d9eea24a4bc2d7bfc321a116d226fc0ba490bb294e0",
+    "tests/authoring/test_curve_subdivision.py": "7fb2f79a2e5455ce42afc821cefd4ebccca4844d50f15a55e17925b6f30603b6",
+    "src/archpapercraft/authoring/curves.py": "acbea1c2b89ac9da0fab3d8855746ca1355719dbfcee7de2a57898aa30e002d2",
+    "src/archpapercraft/authoring/curve_area.py": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9",
+    "src/archpapercraft/authoring/loft_area.py": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238",
+    "docs/p2/implementation/evidence/au13-subdivision-initial.xml": "23359acac2cb1775f8d4b262836926ce862c1e6d6387ad8f853b2c824f6ad286",
+    "docs/p2/implementation/evidence/au13-subdivision-final.xml": "a2a43265a671f0033f1694afb17feaa1177d231651ae15c88eade311c4af9fc7",
+    "docs/p2/implementation/evidence/au13-subdivision-regression.xml": "8e2ad654d35ce291950f4737bb3205b5d335a9ac4b552d1c708cdaed00b45008"
+  },
+  "independent_review": "PENDING",
+  "product_AU13": "INCOMPLETE: pure component only"
+}
