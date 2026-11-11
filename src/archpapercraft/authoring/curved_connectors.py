@@ -185,7 +185,10 @@ def _circle_source(profile):
 def _receiver_binding(project, record, rim_binding):
     """Exact common-source-frame disk/holes for the supported contact family.
 
-    Different, unproved transforms/planes are refused. No guessed nominal disk
+    Different, unproved transforms/planes are refused. An exact translation
+    with identity linear poses is pulled into the common source frame using
+    rational binary operands, never a nearest-center or tolerance fit.
+    No guessed nominal disk
     replaces authored holes, receiver side or the actual material source UUID.
     """
     from .curved_tabs import Cap, CircularHole
@@ -204,11 +207,18 @@ def _receiver_binding(project, record, rim_binding):
         project._surface_matrix(owner.id),
         project._surface_matrix(receiver.id),
     )
+    source_translation = (Fraction(0),) * 3
     if not np.array_equal(owner_matrix, receiver_matrix):
-        raise CurvedConnectorError(
-            "Plášť a příjemce zatím nemají doložený společný skutečný rám.",
-            code="RECEIVER_FRAME_UNRESOLVED",
-        )
+        if not (np.array_equal(owner_matrix[:3, :3], np.eye(3))
+                and np.array_equal(receiver_matrix[:3, :3], np.eye(3))):
+            raise CurvedConnectorError(
+                "Plášť a příjemce zatím nemají doložený společný skutečný rám.",
+                code="RECEIVER_FRAME_UNRESOLVED",
+            )
+        source_translation = tuple(Fraction(float(b))-Fraction(float(a))
+                                   for a, b in zip(owner_matrix[:3, 3], receiver_matrix[:3, 3]))
+        for circle in circles:
+            circle["center"] = tuple(a+b for a, b in zip(circle["center"], source_translation))
     first, second = [_circle_source(project.profiles[pid]) for pid in owner.source_profile_ids()]
     height = _dot(_sub(second["center"], first["center"]), first["normal"])
     if height == 0:
@@ -275,6 +285,8 @@ def _receiver_binding(project, record, rim_binding):
         "scale": project.scale,
         "owner_source_digest": rim_binding["source_digest"],
         "condition": "EXACT_COMMON_AUTHORED_POSE_AND_COPLANAR_COAXIAL_SOURCE_DISK_WITH_HOLES",
+        **({"receiver_translation_in_owner_source_exact": list(map(str, source_translation))}
+           if any(source_translation) else {}),
     }
     cap = Cap(outer["radius"] * scale, receiver.id, holes=tuple(holes), contact_side="front")
     return cap, {

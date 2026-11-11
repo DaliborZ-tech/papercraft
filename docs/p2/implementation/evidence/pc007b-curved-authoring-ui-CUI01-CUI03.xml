@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="6" time="8.737" timestamp="2026-11-11T17:08:18.443969+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_curved_authoring_ui" name="test_failed_numeric_preflight_restores_set_choice_and_keeps_raw_input_owner_context" time="1.312" /><testcase classname="tests.authoring.test_curved_authoring_ui" name="test_failed_numeric_preflight_restores_whole_set_checkbox_without_touching_authored_state" time="0.857" /><testcase classname="tests.authoring.test_curved_authoring_ui" name="test_current_circular_connector_guidance_matches_real_certification_and_next_step" time="3.043" /><testcase classname="tests.authoring.test_curved_authoring_ui" name="test_circular_guidance_does_not_grant_current_certification_to_stale_or_unresolved" time="2.071" /><testcase classname="tests.authoring.test_curved_authoring_ui" name="test_deleted_dialog_owner_invalidates_safely_and_discards_any_late_preview[False]" time="0.123"><failure message="AttributeError: 'AuthorProject' object has no attribute 'delete_material_part'">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002D21D4C3C20&gt;
+source = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...-curved-connectors-experimental', ...}, '76a47b7d-1405-4987-af57-941420cda2fd', '80adca4d-eca2-4895-a3ff-24754ec43e29')
+running = False
+
+    @pytest.mark.parametrize("running", [False, True])
+    def test_deleted_dialog_owner_invalidates_safely_and_discards_any_late_preview(
+        qtbot, source, running
+    ):
+        entered, release = threading.Event(), threading.Event()
+    
+        def callback(project, request):
+            entered.set()
+            assert release.wait(5)
+            return unresolved(project, request)
+    
+        project, widget = make_dialog(qtbot, source, callback if running else unresolved)
+        depth = widget.fields["depth_mm"].value()
+        try:
+            if running:
+                widget.request_preview()
+                qtbot.waitUntil(entered.is_set)
+&gt;           project.delete_material_part(project.part_for_surface(widget.owner_id))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'AuthorProject' object has no attribute 'delete_material_part'
+
+tests\authoring\test_curved_authoring_ui.py:694: AttributeError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="tests.authoring.test_curved_authoring_ui" name="test_deleted_dialog_owner_invalidates_safely_and_discards_any_late_preview[True]" time="0.197"><failure message="AttributeError: 'AuthorProject' object has no attribute 'delete_material_part'">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002D21F64D2B0&gt;
+source = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...-curved-connectors-experimental', ...}, '76a47b7d-1405-4987-af57-941420cda2fd', '80adca4d-eca2-4895-a3ff-24754ec43e29')
+running = True
+
+    @pytest.mark.parametrize("running", [False, True])
+    def test_deleted_dialog_owner_invalidates_safely_and_discards_any_late_preview(
+        qtbot, source, running
+    ):
+        entered, release = threading.Event(), threading.Event()
+    
+        def callback(project, request):
+            entered.set()
+            assert release.wait(5)
+            return unresolved(project, request)
+    
+        project, widget = make_dialog(qtbot, source, callback if running else unresolved)
+        depth = widget.fields["depth_mm"].value()
+        try:
+            if running:
+                widget.request_preview()
+                qtbot.waitUntil(entered.is_set)
+&gt;           project.delete_material_part(project.part_for_surface(widget.owner_id))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'AuthorProject' object has no attribute 'delete_material_part'
+
+tests\authoring\test_curved_authoring_ui.py:694: AttributeError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase></testsuite></testsuites>

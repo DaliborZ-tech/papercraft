@@ -571,6 +571,44 @@ class AuthorMainWindow(QMainWindow):
         self.hint.show()
         self.update_guidance()
 
+    def _curved_guidance(self):
+        surface = self.project.surfaces.get(self.selected_surface) if self.project else None
+        if surface is None or surface.kind != "ruled_loft":
+            return None
+        report = self.project.loft_status(surface.id)
+        if not report.get("representation", {}).get("circular_shell"):
+            return None
+        records = [record for record in self.project.curved_connectors.values()
+                   if record.owner_surface_id == surface.id]
+        selected = next((record for record in records
+                         if record.id == self.curved_panel.current_id), None)
+        if selected is None and len(records) == 1:
+            selected = records[0]
+        limit = " Fyzický výtisk a slepení ještě vyžadují ověření v P3."
+        if selected is None:
+            stale = ("Papírový díl kruhového pláště je neaktuální; přepočítejte jej (Ctrl+R). "
+                     if self.project.parts[surface.part_id].stale else "")
+            return (stale + "Kruhový plášť připojíte příkazem Dělené chlopně kruhového okraje. "
+                    "Vyberte skutečný disk příjemce a kontaktní stranu; existující sadu "
+                    "zvolte v panelu kruhových chlopní. Spoj je omezená APROXIMACE." + limit)
+        status = self.project.curved_connector_status(selected.id)["status"]
+        if status == "CERTIFIED_APPROXIMATE":
+            return ("Aktuální sada kruhových chlopní je digitálně doložená APROXIMACE. "
+                    "V panelu vyberte a upravte jednotlivé chlopně; po změně znovu "
+                    "přepočítejte celý díl (Ctrl+R) a zkontrolujte ruční stránky." + limit)
+        if status == "NOT_APPLICABLE":
+            return ("Kruhová sada nebo všechny její chlopně jsou vypnuté. "
+                    "V panelu je můžete zapnout a přepočítat materiál (Ctrl+R). "
+                    "Zapnutý kruhový spoj je omezená APROXIMACE." + limit)
+        if status == "STALE":
+            return ("Kruhové chlopně čekají na aktuální přepočet celého dílu (Ctrl+R). "
+                    "Potom zkontrolujte jejich stav a ruční stránky. "
+                    "Jde o omezenou APROXIMACI, nikoli již ověřený aktuální spoj." + limit)
+        return ("Kruhový spoj není digitálně doložený. V panelu vyberte jeho sadu "
+                "a opravte rozměry, kontaktní stranu, papír nebo skutečný příjemce. "
+                "Po opravě spočítejte nový náhled a přepočítejte celý díl. "
+                "Kruhové chlopně jsou omezená APROXIMACE." + limit)
+
     def update_guidance(self):
         profile = self.project.profiles.get(self.selected_profile) if self.project else None
         self.actions["open_profile"].setEnabled(
@@ -626,6 +664,8 @@ class AuthorMainWindow(QMainWindow):
                 "Samotný přepočet nezmění nerozvinutelný tvar. "
                 "Příkaz Odvodit rovinné díly nabídne konkrétní aproximaci s uvedenou mezí."
             )
+        elif (circular_tip := self._curved_guidance()) is not None:
+            text = circular_tip
         elif self.selected_part and self.project.parts[self.selected_part].stale:
             text = (
                 "Konstrukce se změnila. Papírový díl je neaktuální; "
