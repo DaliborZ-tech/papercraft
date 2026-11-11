@@ -145,6 +145,7 @@ def test_host_reference_print_selection_nested_tree_and_3d_paper_link(qtbot, gen
     )
     qtbot.addWidget(w)
     w.controller.project = p
+    w.controller._saved_digest = w.controller.digest(p.to_dict())
     w.refresh()
     rows = p.segmented_variants[vid].triangle_bindings
     child = rows[7]
@@ -185,3 +186,35 @@ def test_grid_reference_ids_rejected(qtbot, generation):
     p, target, _ = restore(generation)
     with pytest.raises(ValueError, match="tiskové"):
         grid(qtbot, p, [p.surfaces[target].part_id])
+
+
+def test_generation_choice_resets_old_child_without_switching_print_material(
+    qtbot, generation, tmp_path
+):
+    p, target, old = restore(generation)
+    preview = p.preview_segmented_variant(target, max_deviation_mm=0.51)
+    new = p.update_segmented_variant(
+        old, max_deviation_mm=0.51, preview_digest=preview["preview_digest"]
+    )
+    before = p.to_dict()
+    w = AuthorMainWindow(
+        settings=QSettings(str(tmp_path / "choice.ini"), QSettings.Format.IniFormat)
+    )
+    qtbot.addWidget(w)
+    w.controller.project = p
+    w.controller._saved_digest = w.controller.digest(p.to_dict())
+    w.refresh()
+    w.select_surface(p.segmented_variants[old].triangle_bindings[0]["surface_id"])
+    assert w.selected_generation == old and not w.page_choice.isEnabled()
+    w.generation_choice.setCurrentIndex(w.generation_choice.findData(new))
+    assert w.selected_generation == new and w.selected_surface == target
+    assert w.selected_edge is None and w.current_joint is None
+    assert w.selected_vertex[0] in p.surfaces[target].source_profile_ids()
+    assert w.tree.currentItem().data(0, Qt.ItemDataRole.UserRole) == ("variant", new)
+    assert set(w.viewport.meshes) == {target}
+    assert p.to_dict() == before and p.segmented_variants[new].print_selected
+    assert not w.page_choice.isEnabled()
+    w.generation_choice.setCurrentIndex(0)
+    assert w.selected_generation is None and w.selected_surface == target
+    assert p.to_dict() == before
+    w.controller._saved_digest = w.controller.digest(p.to_dict())

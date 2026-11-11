@@ -929,8 +929,16 @@ class AuthorMainWindow(QMainWindow):
 
     def choose_generation(self):
         if not self._updating:
+            target = self._segmentation_target()
             self.selected_generation = self.generation_choice.currentData()
-            self._sync_selection()
+            self.selected_edge = self.selected_vertex = self.current_joint = None
+            if target:
+                # A generation selection is a target-level context. Keeping a
+                # child of the previous generation selected would make the
+                # visible properties and generation actions disagree.
+                self.select_surface(target)
+            else:
+                self._sync_selection()
 
     def segment_surface(self):
         if not self._commit_pending_input() or not self._confirm_sketch_restart():
