@@ -1,0 +1,38 @@
+{
+  "source_sha": "0210118e02dd7f65dc6161b5f86cfda2b2dbdf29",
+  "scope": "BACKEND_PUBLIC_COMMAND_ONLY; NOT_UI_USER_OR_PHYSICAL_PROOF",
+  "update_count": 64,
+  "direct_setter": {
+    "seconds": 0.08380469982512295,
+    "full_validate_calls": 1
+  },
+  "existing_controller_pipeline": {
+    "seconds": 0.39682039991021156,
+    "full_validate_calls": 4,
+    "one_undo_redo": "PASS",
+    "note": "Controller still validates before/after through to_dict and explicit validate, independently of the setter"
+  },
+  "sequential_baseline_source_sha": "95fa2c7c0e5a5d50f0763ae2a461a4e5e2821872",
+  "sequential_baseline_seconds": 5.6904627999756485,
+  "comparison_scope": "One local core observation with warm immutable proof cache; not a stable speed guarantee or nativeUI test",
+  "tests": {
+    "passed": 59,
+    "seconds": 27.14,
+    "scope": "23batch+36domain on unchanged source immediately before pin"
+  },
+  "raw_guard_scope": "UnknownID/page, known fields, bool/numeric/finiteness, both existing locks, atomic rollback, no-op, explicit page/position/rotation only; no packing",
+  "immutable_generation_digest_preserved": true,
+  "source_sha256": "cb480953cc09af14726fb6019d099e85bc26307ebdb39fcd605bbdb4e1032adf",
+  "test_sha256": "5d9b022e3b1b3cd2958e489546e5266552a5de40419ff2581d41a3223e31ae21",
+  "artifact_sha256": {
+    "backend-after-explicit-batch.apcraft": "94c77597f506d77453f99636a404789a6140369f4c171dc66002666def25e95f",
+    "placement-regression-102.xml": "6786671970cd354dad87f6c1bf1b504101931377b268942610f39f524da44018",
+    "targeted-59.xml": "a33633458289f5009acdccbe7dd2803bea34a0cbe96b62efc8b7ea8d1b8ef59b"
+  },
+  "independent_review": "PENDING",
+  "existing_placement_regression": {
+    "passed": 102,
+    "seconds": 6.37,
+    "scope": "EXACT_0210118; domain/paper/controller/persistence/workspace/paper-view; Qt offscreen"
+  }
+}
