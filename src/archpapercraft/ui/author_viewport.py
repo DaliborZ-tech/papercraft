@@ -43,14 +43,18 @@ class AuthorViewport(QOpenGLWidget):
         self.setMinimumSize(220, 200)
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
 
-    def set_project(self, project, *, frame=False):
+    def set_project(self, project, *, frame=False, visible_surface_ids=None):
         self.project = project
+        visible = (set(project.surfaces) if project and visible_surface_ids is None
+                   else set(visible_surface_ids or ()))
         self.meshes = (
-            {sid: project.world_geometry(sid) for sid in project.surfaces} if project else {}
+            {sid: project.world_geometry(sid) for sid in project.surfaces if sid in visible}
+            if project else {}
         )
         used = ({p for s in project.surfaces.values() for p in s.source_profile_ids()}
                 if project else set())
-        loft_sources = ({p for s in project.surfaces.values() if s.kind == "ruled_loft"
+        loft_sources = ({p for s in project.surfaces.values()
+                         if s.kind == "ruled_loft" and s.id in visible
                          for p in s.source_profile_ids()} if project else set())
         self.profile_paths, self.profile_problems = {}, {}
         for pid, profile in project.profiles.items() if project else []:

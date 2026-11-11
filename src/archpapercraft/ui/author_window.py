@@ -33,6 +33,7 @@ from PySide6.QtWidgets import (
     QToolButton,
     QTreeWidget,
     QTreeWidgetItem,
+    QTreeWidgetItemIterator,
     QVBoxLayout,
     QWidget,
 )
@@ -46,9 +47,11 @@ from archpapercraft.ui.author_connectors import ConnectorPanel
 from archpapercraft.ui.author_curves import CurveEditorDialog, CurveSketch
 from archpapercraft.ui.author_editing import DeletePartDialog, RenameDialog
 from archpapercraft.ui.author_loft import LoftProfilesDialog
+from archpapercraft.ui.author_manual_layout import ManualGridDialog
 from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
+from archpapercraft.ui.author_segmentation import SegmentedVariantDialog
 from archpapercraft.ui.author_viewport import AuthorViewport
 
 
@@ -59,6 +62,7 @@ class AuthorMainWindow(QMainWindow):
         self.settings = settings or QSettings("ArchPapercraft", "Authoring")
         self.selected_surface = None
         self.selected_profile = None
+        self.selected_generation = None
         self.selected_edge = None
         self.selected_vertex = None
         self.connect_source = None
@@ -200,6 +204,12 @@ class AuthorMainWindow(QMainWindow):
         ))
         construct.addAction(self._action(
             "edit_loft", "Upravit profily a šev této plochy…", self.edit_loft
+        ))
+        construct.addAction(self._action(
+            "segment", "Odvodit rovinné díly s povolenou odchylkou…", self.segment_surface
+        ))
+        construct.addAction(self._action(
+            "manual_grid", "Ruční rozmístění více dílů…", self.manual_grid
         ))
         construct.addAction(
             self._action(
@@ -382,6 +392,22 @@ class AuthorMainWindow(QMainWindow):
         self.loft_edit_button = QPushButton("Upravit dvojice profilů a šev…")
         self.loft_edit_button.clicked.connect(self.edit_loft)
         form.addRow(self.loft_edit_button)
+        self.generation_choice = QComboBox()
+        self.generation_choice.currentIndexChanged.connect(self.choose_generation)
+        form.addRow("Odvozené generace", self.generation_choice)
+        self.segmentation_status = QLabel()
+        self.segmentation_status.setWordWrap(True)
+        self.segmentation_status.setTextFormat(Qt.TextFormat.PlainText)
+        form.addRow(self.segmentation_status)
+        self.segment_button = QPushButton("Odvodit rovinné díly…")
+        self.segment_button.clicked.connect(self.segment_surface)
+        form.addRow(self.segment_button)
+        self.select_generation_button = QPushButton("Použít vybranou generaci pro tisk")
+        self.select_generation_button.clicked.connect(self.use_generation)
+        form.addRow(self.select_generation_button)
+        self.restore_target_button = QPushButton("Vrátit původní konstrukční cíl")
+        self.restore_target_button.clicked.connect(self.restore_target)
+        form.addRow(self.restore_target_button)
         form = self._section(layout, "Bod obrysu")
         self.vertex_choice = QComboBox()
         self.vertex_choice.currentIndexChanged.connect(self.choose_vertex)
@@ -481,6 +507,9 @@ class AuthorMainWindow(QMainWindow):
         self.anchor_button = QPushButton("Změnit kotvu dílu…")
         self.anchor_button.clicked.connect(self.change_anchor)
         form.addRow(self.anchor_button)
+        self.manual_grid_button = QPushButton("Ruční rozmístění více dílů…")
+        self.manual_grid_button.clicked.connect(self.manual_grid)
+        form.addRow(self.manual_grid_button)
         row = QHBoxLayout()
         for text, callback in [("Přidat A4", self.add_page), ("Odebrat stránku", self.delete_page)]:
             button = QPushButton(text)
@@ -575,7 +604,8 @@ class AuthorMainWindow(QMainWindow):
                 + self.viewport.meshes[self.selected_surface].get("message", "")
                 + " Upravte tvar nebo hloubku zdrojových profilů, případně jejich dvojice "
                 "a směr příkazem Upravit dvojice profilů a šev. "
-                "Samotný přepočet nezmění nerozvinutelný tvar."
+                "Samotný přepočet nezmění nerozvinutelný tvar. "
+                "Příkaz Odvodit rovinné díly nabídne konkrétní aproximaci s uvedenou mezí."
             )
         elif self.selected_part and self.project.parts[self.selected_part].stale:
             text = (
@@ -621,13 +651,19 @@ class AuthorMainWindow(QMainWindow):
             if self.selected_profile not in self.project.profiles:
                 self.selected_profile = None
             self.tree.clear()
+            children = {r["surface_id"] for v in self.project.segmented_variants.values()
+                        for r in v.triangle_bindings}
+            parents = {}
             for sid, surface in self.project.surfaces.items():
+                if sid in children:
+                    continue
                 part = self.project.parts[surface.part_id]
                 item = QTreeWidgetItem(
                     [f"{surface.name} · {part.name}" + (" · přepočítat" if part.stale else "")]
                 )
                 item.setData(0, Qt.ItemDataRole.UserRole, sid)
                 self.tree.addTopLevelItem(item)
+                parents[sid] = item
                 if surface.kind == "ruled_loft":
                     for side, pid in zip(
                         ("První profil", "Druhý profil"), surface.source_profile_ids()
@@ -638,6 +674,26 @@ class AuthorMainWindow(QMainWindow):
                     item.setExpanded(True)
                 if sid == self.selected_surface:
                     self.tree.setCurrentItem(item)
+            for vid, variant in self.project.segmented_variants.items():
+                state = self.project.segmented_variant_status(vid)["status"]
+                group = QTreeWidgetItem([
+                    f"{variant.name} · {state} · " +
+                    ("tiskový materiál" if variant.print_selected else "uložená generace")
+                ])
+                group.setData(0, Qt.ItemDataRole.UserRole, ("variant", vid))
+                parents[variant.target_surface_id].addChild(group)
+                for record in variant.triangle_bindings:
+                    sid = record["surface_id"]
+                    item = QTreeWidgetItem([self.project.surfaces[sid].name])
+                    item.setData(0, Qt.ItemDataRole.UserRole, sid)
+                    group.addChild(item)
+                    if sid == self.selected_surface:
+                        self.tree.setCurrentItem(item)
+                group.setExpanded(variant.print_selected)
+                parents[variant.target_surface_id].setExpanded(True)
+                if (self.selected_generation == vid and
+                        self.selected_surface == variant.target_surface_id):
+                    self.tree.setCurrentItem(group)
             used_profiles = {
                 pid
                 for surface in self.project.surfaces.values()
@@ -653,10 +709,10 @@ class AuthorMainWindow(QMainWindow):
                     if self.selected_surface is None and pid == self.selected_profile:
                         self.tree.setCurrentItem(item)
             frame_views = self._frame_next
-            self.viewport.set_project(self.project, frame=frame_views)
+            self._set_viewport_project(frame=frame_views)
             self._frame_next = False
             self._show_source_sketch()
-            self.paper.set_project(self.project, frame=frame_views)
+            self.paper.set_project(self.project.print_material_view(), frame=frame_views)
             self._populate_properties()
             self._highlight()
             self.issues.clear()
@@ -689,6 +745,7 @@ class AuthorMainWindow(QMainWindow):
     def _populate_properties(self):
         surface = self.project.surfaces.get(self.selected_surface)
         part = self.project.parts.get(self.selected_part)
+        printable = part is not None and part.id in self.project.material_part_ids()
         profile = self.project.profiles.get(
             surface.profile_id if surface else self.selected_profile
         )
@@ -790,7 +847,8 @@ class AuthorMainWindow(QMainWindow):
         self.page_choice.addItem("Odkládací plocha", None)
         for index, page in enumerate(self.project.pages):
             self.page_choice.addItem(f"Stránka {index + 1}", page.id)
-        placement = self.project.placements.get(self.selected_part)
+        placement = self.project.placements.get(self.selected_part) if printable else None
+        self.page_choice.setEnabled(printable)
         self.page_choice.setCurrentIndex(
             self.page_choice.findData(placement.page_id) if placement else 0
         )
@@ -804,11 +862,13 @@ class AuthorMainWindow(QMainWindow):
             field.setValue(value)
         self.position_lock.setChecked(bool(placement and placement.position_locked))
         self.rotation_lock.setChecked(bool(placement and placement.rotation_locked))
-        self.position_lock.setEnabled(part is not None)
-        self.rotation_lock.setEnabled(part is not None)
+        self.position_lock.setEnabled(printable)
+        self.rotation_lock.setEnabled(printable)
         self.front_side.setCurrentIndex(self.front_side.findData(part.front_side) if part else 0)
-        self.front_side.setEnabled(part is not None)
-        self.anchor_button.setEnabled(part is not None)
+        self.front_side.setEnabled(printable)
+        self.anchor_button.setEnabled(printable)
+        self.manual_grid_button.setEnabled(bool(self.project.material_part_ids()))
+        self.actions["manual_grid"].setEnabled(bool(self.project.material_part_ids()))
         self._shown["placement"] = [
             f.value() for f in (self.paper_x, self.paper_y, self.paper_angle)
         ]
@@ -816,6 +876,124 @@ class AuthorMainWindow(QMainWindow):
         self._raw["page"] = placement.page_id if placement else None
         self.connectors_panel.refresh()
         self._populate_curve_choices()
+        self._populate_generations()
+
+    def _segmentation_target(self):
+        surface = self.project.surfaces.get(self.selected_surface)
+        if surface and surface.kind == "ruled_loft":
+            return surface.id
+        for variant in self.project.segmented_variants.values():
+            if any(r["surface_id"] == self.selected_surface for r in variant.triangle_bindings):
+                return variant.target_surface_id
+        return None
+
+    def _populate_generations(self):
+        target = self._segmentation_target()
+        self.generation_choice.clear()
+        self.generation_choice.addItem("Nová odvozená generace", None)
+        for vid, variant in self.project.segmented_variants.items():
+            if variant.target_surface_id == target:
+                self.generation_choice.addItem(
+                    variant.name + (" · pro tisk" if variant.print_selected else " · zachovaná"),
+                    vid,
+                )
+        if self.selected_generation not in self.project.segmented_variants:
+            self.selected_generation = None
+        index = self.generation_choice.findData(self.selected_generation)
+        self.generation_choice.setCurrentIndex(max(index, 0))
+        active = target is not None
+        variant = self.project.segmented_variants.get(self.selected_generation)
+        for widget in (self.generation_choice, self.segmentation_status, self.segment_button,
+                       self.select_generation_button, self.restore_target_button):
+            widget.setVisible(active)
+        self.actions["segment"].setEnabled(active and not self.sketch.drawing)
+        self.segment_button.setEnabled(active and not self.sketch.drawing)
+        self.segment_button.setText("Nová generace podle tohoto náhledu…" if variant
+                                    else "Odvodit rovinné díly…")
+        self.select_generation_button.setEnabled(bool(variant and not variant.print_selected and
+            self.project.segmented_variant_status(variant.id)["status"] == "APPROXIMATE"))
+        self.restore_target_button.setEnabled(any(
+            v.target_surface_id == target and v.print_selected
+            for v in self.project.segmented_variants.values()))
+        if variant:
+            state = self.project.segmented_variant_status(variant.id)
+            text = state["status"] + " · " + state["message"]
+        elif active:
+            text = ("Původní cíl zůstává uložený. Odvození vytvoří samostatné rovinné díly "
+                    "s doloženou mezí vůči tomuto cíli, nikoli přesný rozvin hladké plochy.")
+        else:
+            text = ""
+        if self.selected_part and self.selected_part not in self.project.material_part_ids():
+            text += " Tento prvek je zachovaná reference, netiskne se."
+        self.segmentation_status.setText(text)
+
+    def choose_generation(self):
+        if not self._updating:
+            self.selected_generation = self.generation_choice.currentData()
+            self._sync_selection()
+
+    def segment_surface(self):
+        if not self._commit_pending_input() or not self._confirm_sketch_restart():
+            return
+        target = self._segmentation_target()
+        if target is None:
+            return
+        dialog = SegmentedVariantDialog(
+            self.project, target, variant_id=self.selected_generation, parent=self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            result = self.run(lambda: self.controller.execute(
+                "Potvrdit odvozené rovinné díly", dialog.apply))
+            if result:
+                self.selected_generation = result
+                first = self.project.segmented_variants[result].triangle_bindings[0]["surface_id"]
+                self.select_surface(first)
+                self.viewport.focus_selection(all_surfaces=True)
+                self.paper.focus_part(self.selected_part)
+
+    def use_generation(self):
+        if not self._commit_pending_input() or not self.selected_generation:
+            return
+        vid = self.selected_generation
+        self.run(lambda: self.controller.execute(
+            "Zvolit odvozenou generaci pro tisk", lambda p: p.select_segmented_variant(vid)))
+
+    def manual_grid(self):
+        if not self._commit_pending_input():
+            return
+        variant = self.project.segmented_variants.get(self.selected_generation)
+        ids = ([r["part_id"] for r in variant.triangle_bindings]
+               if variant and variant.print_selected else
+               [pid for pid in self.project.parts if pid in self.project.material_part_ids()])
+        if not ids:
+            return
+        dialog = ManualGridDialog(self.project, ids, self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self.run(lambda: self.controller.execute("Ručně rozmístit vybrané díly", dialog.apply))
+            self.paper.fitInView(self.paper.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
+
+    def restore_target(self):
+        if not self._commit_pending_input():
+            return
+        target = self._segmentation_target()
+        if target:
+            self.run(lambda: self.controller.execute(
+                "Vrátit původní konstrukční cíl", lambda p: p.restore_segmented_target(target)))
+
+    def _set_viewport_project(self, *, frame=False):
+        visible = {sid for pid in self.project.material_part_ids()
+                   for sid in self.project.parts[pid].surface_ids}
+        target = self._segmentation_target()
+        if target and (self.selected_surface == target or
+                       self.selected_generation in self.project.segmented_variants):
+            for variant in self.project.segmented_variants.values():
+                if variant.target_surface_id == target:
+                    visible.difference_update(r["surface_id"] for r in variant.triangle_bindings)
+            if self.selected_surface == target:
+                visible.add(target)
+            else:
+                visible.update(r["surface_id"] for r in self.project.segmented_variants[
+                    self.selected_generation].triangle_bindings)
+        self.viewport.set_project(self.project, frame=frame, visible_surface_ids=visible)
 
     def _populate_curve_choices(self):
         previous = self.curve_choice.currentData()
@@ -1041,6 +1219,16 @@ class AuthorMainWindow(QMainWindow):
         if self._updating or surface_id not in self.project.surfaces:
             return
         self.selected_surface = surface_id
+        owning = next((v.id for v in self.project.segmented_variants.values()
+                       if any(r["surface_id"] == surface_id for r in v.triangle_bindings)), None)
+        if owning:
+            self.selected_generation = owning
+        elif (self.selected_generation not in self.project.segmented_variants or
+              self.project.segmented_variants[self.selected_generation].target_surface_id !=
+              surface_id):
+            self.selected_generation = None
+        if self.project.segmented_variants:
+            self._set_viewport_project()
         surface = self.project.surfaces[surface_id]
         self.selected_profile = next((pid for pid in surface.source_profile_ids()
             if self.selected_edge and any(s.id == self.selected_edge[1]
@@ -1054,12 +1242,17 @@ class AuthorMainWindow(QMainWindow):
     def _sync_selection(self):
         self._updating = True
         try:
-            for index in range(self.tree.topLevelItemCount()):
-                item = self.tree.topLevelItem(index)
-                if item.data(0, Qt.ItemDataRole.UserRole) == self.selected_surface:
+            selection = ("variant", self.selected_generation) if (
+                self.selected_generation in self.project.segmented_variants and
+                self.selected_surface == self.project.segmented_variants[
+                    self.selected_generation].target_surface_id) else self.selected_surface
+            iterator = QTreeWidgetItemIterator(self.tree)
+            while iterator.value():
+                item = iterator.value()
+                if item.data(0, Qt.ItemDataRole.UserRole) in (
+                        selection, ("profile", self.selected_profile)):
                     self.tree.setCurrentItem(item)
-                elif item.data(0, Qt.ItemDataRole.UserRole) == ("profile", self.selected_profile):
-                    self.tree.setCurrentItem(item)
+                iterator += 1
             self._populate_properties()
             self._highlight()
             self.actions["hole"].setEnabled(self._planar_selection())
@@ -1079,6 +1272,7 @@ class AuthorMainWindow(QMainWindow):
         if self._updating:
             return
         self.selected_surface = self.selected_profile = self.selected_edge = None
+        self.selected_generation = None
         self.selected_vertex = self.current_joint = None
         self._updating = True
         try:
@@ -1087,6 +1281,8 @@ class AuthorMainWindow(QMainWindow):
             self.sketch.set_project(self.project)
         finally:
             self._updating = False
+        if self.project.segmented_variants:
+            self._set_viewport_project()
         self._sync_selection()
 
     def select_edge(self, surface_id, edge_id):
@@ -1168,7 +1364,11 @@ class AuthorMainWindow(QMainWindow):
             data = self.tree.selectedItems()[0].data(0, Qt.ItemDataRole.UserRole)
             if isinstance(data, (tuple, list)) and data[0] == "profile":
                 self.select_profile(data[1])
+            elif isinstance(data, (tuple, list)) and data[0] == "variant":
+                self.selected_generation = data[1]
+                self.select_surface(self.project.segmented_variants[data[1]].target_surface_id)
             else:
+                self.selected_generation = None
                 self.select_surface(data)
 
     def start_outline(self):
@@ -1196,10 +1396,13 @@ class AuthorMainWindow(QMainWindow):
     def select_profile(self, profile_id):
         if self._updating or profile_id not in self.project.profiles:
             return
+        self.selected_generation = None
         self.selected_surface = self.selected_edge = self.selected_vertex = self.current_joint = (
             None
         )
         self.selected_profile = profile_id
+        if self.project.segmented_variants:
+            self._set_viewport_project()
         self.sketch.set_project(self.project, None, profile_id)
         self._sync_selection()
 
