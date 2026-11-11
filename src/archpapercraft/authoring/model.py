@@ -272,6 +272,32 @@ class Connector:
 
 
 @dataclass
+class CurvedConnector:
+    """Authored rim slots and explicitly recomputed attached material.
+
+    Source authority remains the live owner/receiver and complete assembly.
+    A stored proof is a cache, never permission to ignore changed geometry.
+    Slot identities and overrides survive resizing and temporarily lower counts.
+    """
+
+    id: str
+    name: str
+    owner_surface_id: str
+    rim_side: str
+    receiver_surface_id: str
+    receiver_side: str
+    parameters: dict
+    slot_ids: list[str]
+    tab_overrides: dict = field(default_factory=dict)
+    enabled: bool = True
+    revision: int = 1
+    source_binding: dict = field(default_factory=dict)
+    source_fingerprint: str = ""
+    certificate: dict = field(default_factory=dict)
+    material: dict = field(default_factory=dict)
+
+
+@dataclass
 class Attachment:
     """Assembly relation; source intervals remain authority over derived target UV."""
 

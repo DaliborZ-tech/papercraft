@@ -16,6 +16,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from .bend import DEFAULT_MATERIAL_PROFILE, BendCommands
+from .curved_connectors import CurvedConnectorCommands
 from .errors import ProjectFormatError, UnsupportedOperationError, ValidationError
 from .geometry import (
     material_polygon,
@@ -37,6 +38,7 @@ from .loft_surface import _analysis_readonly as loft_analysis
 from .model import (
     Attachment,
     Connector,
+    CurvedConnector,
     CurveSegment,
     Joint,
     MaterialPart,
@@ -63,8 +65,8 @@ from .profile_curves import ProfileCurveCommands, move_curve_endpoint
 from .segmented_surface import SegmentedCommands
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 5
-WRITER_VERSION = "0.3.0-pc008-segmented-variants-experimental"
+SCHEMA_VERSION = 6
+WRITER_VERSION = "0.3.0-pc007b-curved-connectors-experimental"
 _UNSET = object()
 
 
@@ -100,7 +102,8 @@ def _record(cls, data):
 
 
 class AuthorProject(
-    InteriorCommands, BendCommands, ProfileCurveCommands, LoftCommands, SegmentedCommands
+    InteriorCommands, BendCommands, ProfileCurveCommands, LoftCommands, SegmentedCommands,
+    CurvedConnectorCommands,
 ):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
@@ -113,6 +116,7 @@ class AuthorProject(
         self.loaded_from_schema, self.requires_save_as, self.loaded_source_path = None, False, None
         self.material_profile = copy.deepcopy(DEFAULT_MATERIAL_PROFILE)
         self.segmented_variants = {}
+        self.curved_connectors = {}
 
     @classmethod
     def new(cls, name="Nový model", scale=0.01):
@@ -143,6 +147,11 @@ class AuthorProject(
         for part in self.parts.values():
             if set(part.surface_ids) & affected:
                 part.stale = True
+        if affected:
+            # An unconnected scene face can move into the complete fold path.
+            # Geometry changes invalidate the whole owner; layout alone does not.
+            for record in self.curved_connectors.values():
+                self.parts[self.surfaces[record.owner_surface_id].part_id].stale = True
 
     def _profile_surfaces(self, profile_id):
         return [sid for sid, s in self.surfaces.items() if profile_id in s.source_profile_ids()]
@@ -443,6 +452,7 @@ class AuthorProject(
         ids = list(self.material_part_ids() if part_ids is None else part_ids)
         built = {pid: build_part(self, self.parts[pid]) for pid in ids}
         self.parts.update(built)
+        self._refresh_curved_material_caches(built)
 
     @atomic
     def set_anchor(self, part_id, root_surface_id, anchor_vertex_id=None, axis_segment_id=None):
@@ -815,10 +825,15 @@ class AuthorProject(
             self.validate()
             material = self.print_material_view()
             material._bend_cache = getattr(self, "_material_bend_cache", None)
-            result = BendCommands.connector_bend_clearance(material, connector_id)
+            material._curved_legacy_bend_cache = getattr(self, "_material_curved_bend_cache", None)
+            result = material._curved_legacy_bend_clearance(connector_id)
             self._material_bend_cache = getattr(material, "_bend_cache", None)
+            self._material_curved_bend_cache = getattr(material, "_curved_legacy_bend_cache", None)
             return result
-        return BendCommands.connector_bend_clearance(self, connector_id)
+        return self._curved_legacy_bend_clearance(connector_id)
+
+    def _assembly_clearance_key(self):
+        return self._curved_assembly_clearance_key()
 
     @property
     def issues(self):
@@ -832,6 +847,14 @@ class AuthorProject(
         self.acknowledgements[issue_id] = found.digest
 
     def snapshot(self):
+        if getattr(self, "_curved_source_context_only", False):
+            raise UnsupportedOperationError(
+                "Geometrický zdrojový kontext není úplný autorský projekt."
+            )
+        curved_issues = self.curved_connector_issues()
+        if curved_issues:
+            raise ValidationError("Export vyžaduje doložení kruhových chlopní: "
+                                  + "; ".join(issue.message for issue in curved_issues))
         issues = self.validate_layout()
         blocking = [i for i in issues if i.severity == "error" or not i.acknowledged]
         if blocking:
@@ -898,6 +921,10 @@ class AuthorProject(
             "project_id": self.project_id,
             "revision": self.revision,
             "construction_checks": {
+                **({"curved_source_project": self.to_dict(validate=False),
+                    "curved_connectors": {cid: self.curved_connector_status(cid)
+                                          for cid in self.curved_connectors}}
+                   if any(record.enabled for record in self.curved_connectors.values()) else {}),
                 **({"segmented_source_project": self.to_dict(validate=False)}
                    if self.segmented_variants else {}),
                 "material_profile": copy.deepcopy(self.material_profile),
@@ -1006,6 +1033,7 @@ class AuthorProject(
                 material_polygon(profile.points)
         extra_ids, derived_children = self._validate_segmented_variants()
         all_ids.extend(extra_ids)
+        all_ids.extend(self._validate_curved_connectors())
         expected_surfaces = []
         if set(self.parts) != set(self.placements):
             raise ValidationError("Každý díl musí mít právě jeden záznam umístění.")
@@ -1387,6 +1415,7 @@ class AuthorProject(
             "scale": self.scale,
             "material_profile": copy.deepcopy(self.material_profile),
             "segmented_variants": {vid: asdict(v) for vid, v in self.segmented_variants.items()},
+            "curved_connectors": {cid: asdict(v) for cid, v in self.curved_connectors.items()},
             "revision": self.revision,
             "next_part_number": self.next_part_number,
             "next_joint_number": self.next_joint_number,
@@ -1436,6 +1465,18 @@ class AuthorProject(
             and data["schema_version"] == 4
             and data.get("writer_version") == "0.3.0-pc007a-profiles-experimental"
         )
+        upgrading_e = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 5
+            and data.get("writer_version") == "0.3.0-pc008-segmented-variants-experimental"
+        )
+        if upgrading or upgrading_b or upgrading_c or upgrading_d or upgrading_e:
+            if "curved_connectors" in data:
+                raise ProjectFormatError("Starší formát nezná kruhové spojovací prvky.")
+            data["curved_connectors"] = {}
+        if upgrading_e:
+            data["schema_version"] = SCHEMA_VERSION
         if upgrading or upgrading_b or upgrading_c or upgrading_d:
             if not isinstance(data.get("surfaces"), dict):
                 raise ProjectFormatError("Starší registr povrchů musí být objekt.")
@@ -1543,6 +1584,7 @@ class AuthorProject(
             "scale",
             "material_profile",
             "segmented_variants",
+            "curved_connectors",
             "revision",
             "next_part_number",
             "next_joint_number",
@@ -1586,6 +1628,7 @@ class AuthorProject(
                 ("attachments", Attachment),
                 ("placements", Placement),
                 ("segmented_variants", SegmentedVariant),
+                ("curved_connectors", CurvedConnector),
             ):
                 if not isinstance(data[key], dict):
                     raise ProjectFormatError("Registry projektu musí být objekty.")
@@ -1625,6 +1668,10 @@ class AuthorProject(
             raise ProjectFormatError(f"Neplatný autorský projekt: {exc}") from exc
 
     def save(self, path):
+        if getattr(self, "_curved_source_context_only", False):
+            raise UnsupportedOperationError(
+                "Geometrický zdrojový kontext nelze uložit jako projekt."
+            )
         destination = Path(path)
         data = self.to_dict()
         if destination.exists():
@@ -1701,6 +1748,6 @@ def load_project(path):
         return LegacyProject(raw, source)
     project = AuthorProject.from_dict(data)
     project.loaded_from_schema = data.get("schema_version")
-    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4)
+    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4, 5)
     project.loaded_source_path = str(source.resolve())
     return project
