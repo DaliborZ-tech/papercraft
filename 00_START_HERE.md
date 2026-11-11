@@ -1,5 +1,7 @@
 # ArchPapercraft Studio — zadání obnovy projektu
 
+> **Obnoveno vlastníkem 11.11.2026:** pokračuje PC-007A v `revival/p2-loft-integration`. Výkonová komponenta a export na pozadí mají nezávislé review; sjednocený source `b127fc5` má 1128 úspěšných testů a celý skutečný B1 Windows průchod. Následné uložení hustého ostění v Inkscape ale překročilo polohovou i plošnou mez; tato oprava je otevřená. Aktuální stav je v jediné queue a [průběhu loftu](docs/p2/implementation/PC007A_LOFT_PROGRESS.md). Předání z9.11. níže je historické, nikoli aktivní pozastavení.
+
 > **Pozastaveno na žádost vlastníka 9.11.2026, pokračování 10.11.:** čti [navazovací předání](docs/p2/implementation/CONTINUE_2026-11-10.md). Rovinné křivky jsou publikované na `a27cf5a`; nová lokální integrace ostění má skutečné B2/Bézier průchody, zbývá výkonová revize a B1. Dokument rozlišuje přesné lokální větve, kladné důkazy i zachované neúspěchy. Nezačínej obnovu znovu a nepovažuj celé P2 za dokončené.
 
 > **Aktuální přírůstek 9.11.2026:** [Vlastní rovinné oblouky a Bézierovy křivky](docs/p2/implementation/PC007A_PLANAR_DELIVERY.md) mají 908 úspěšných testů, skutečný Windows průchod a oba Inkscape roundtripy na `63ab275`. [Nezávislá revize](docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md) schvaluje tento rovinný podbalík. Celý PC-007A pokračuje prostorovým ostěním B; C/D a historický model zůstávají v rozsahu. Nový uživatel: 0 účastníků, NOT_RUN; fyzický proof: P3. Publikace tohoto přírůstku se eviduje samostatně, není přijetím celé P2.

@@ -2730,7 +2730,7 @@
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Independent review of performance2e42123, then integrated native B1, B3/derived D, C and remaining P2",
+    "active_work": "Repair LX01 real Inkscape geometry drift with bounded cubic coalescing; D domain and curved segmentation in isolated worktrees; C exploratory collar checkpoint retained",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2769,6 +2769,22 @@
         "status": "APPROVED_IN_LOFT_OUTPUT_COMPONENT_SCOPE",
         "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
         "report": "docs/p2/implementation/PC007A_LOFT_OUTPUT_REVIEW.md"
+      },
+      "loft_performance": {
+        "status": "APPROVED_IN_PERFORMANCE_COMPONENT_SCOPE",
+        "source_sha": "7a4f782e084ef595b2507fe825514b0100f969e5",
+        "report": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+      },
+      "async_export": {
+        "status": "APPROVED_IN_ASYNC_VECTOR_PUBLICATION_AND_HOST_SCOPE",
+        "source_sha": "e1948cfd11c095fd2aaf5643edd2403630ea4747",
+        "report": "docs/p2/implementation/PC007A_EXPORT_JOB_REVIEW.md"
+      },
+      "LX01_editor_rounding": {
+        "status": "OPEN_MAJOR",
+        "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
+        "report": "docs/p2/implementation/PC007A_LOFT_PROGRESS.md",
+        "repair_branch": "revival/p2-loft-coalescing"
       }
     },
     "planar_verified_slice": {
@@ -2807,6 +2823,13 @@
       "paused_on": "2026-11-09",
       "reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
       "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md"
+    },
+    "latest_integrated_baseline": {
+      "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
+      "suite_pass": 1128,
+      "native_B1": "PASS_REQUESTED_FIXTURE",
+      "B1_editor": "FAIL_LX01",
+      "published_on_master": false
     }
   }
 }

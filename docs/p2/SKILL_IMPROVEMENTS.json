@@ -504,6 +504,44 @@
         "example": "Independent negative112->112.008SVG->112.016PDF exceeds the original source-to-output0.01 area budget; previous bundle and unrelated bytes preserved",
         "broader_transfer": "PENDING_NEXT_USE"
       }
+    },
+    {
+      "id": "SK-012",
+      "changed_on": "2026-11-11",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md",
+        "problem": "PF-01: known older803L cache reported fresh after exact CUT compaction, while layout correctly refused it as INVALID_CACHE"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "Canonical representation changed without changing the cached proof capability contract",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc007a-loft-performance-review-real803-2e4.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_COMPONENT_SCOPE",
+        "source_sha": "7a4f782e084ef595b2507fe825514b0100f969e5",
+        "description": "One shared V2 paper capability in digest/status/material cache; old cache stale on load, current-capability poisoned CUT still blocked; explicit recompute preserves sources, IDs, frame and placement"
+      },
+      "skill_change": "Version a changed certified representation and verify both old-capability staleness and current-capability poisoning as separate negative cases",
+      "usage_example": "A derived-segmentation format update must invalidate its previous certificate without losing author layout",
+      "verification": {
+        "status": "PRODUCT_REPAIR_REVIEWED; newly written advice awaiting independent metadata review and next use",
+        "evidence": [
+          "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_SKILL_TEXT_REVIEW",
+        "product_report": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "ticket": "PC-008 derived segmentation persistence"
+      }
     }
   ]
 }
