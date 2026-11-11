@@ -311,7 +311,8 @@ def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_par
             (source_area, body_area, frame_body, extension, frame_position, frame_length) = (
                 _source_material_area(data, item)
             )
-            area_budget = max(Fraction(1, 100), source_area[0] / 1000000)
+            # Connector material is compared, but cannot enlarge the body's AC.
+            area_budget = max(Fraction(1, 100), body_area[0] / 1000000)
             bound = Fraction(item["flattening"]["max_surface_deviation_paper_mm_exact"])
             requested = Fraction(proof["parameters"]["max_deviation_mm"])
             record = {
@@ -328,6 +329,8 @@ def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_par
                 "source_plane_to_canonical_frame_position_error_bound_exact": str(frame_position),
                 "source_plane_to_canonical_frame_body_length_error_bound_exact": str(frame_length),
                 "allowed_material_area_error_exact": str(area_budget),
+                "area_budget_basis": "SOURCE_PLANE_BODY_ONLY_EXCLUDES_CONNECTORS",
+                "area_budget_source_body_lower_exact": str(body_area[0]),
                 "outputs": {},
             }
             for kind, actual in (("svg", svg[pid]), ("pdf", pdf[pid])):
