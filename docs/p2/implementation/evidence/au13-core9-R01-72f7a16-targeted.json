@@ -1,0 +1,25 @@
+{
+  "source_commit": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
+  "base_commit": "7c61c7ee54233dc662420b5199e3a5d914da4441",
+  "finding": "CORE9-R01",
+  "status": "IMPLEMENTED_TARGETED_PASS_REVIEW_AND_REPLAY_PENDING_DO_NOT_MERGE",
+  "command": "PYTHONPATH=<own_worktree>/src QT_QPA_PLATFORM=offscreen python -m pytest -q tests/authoring/test_curved_profile_provenance.py -k \"retired_piece_cannot or active_curve_authority\" --tb=short",
+  "result": {
+    "passed": 8,
+    "deselected": 34,
+    "seconds": 1.79
+  },
+  "ruff": "PASS two owned paths",
+  "diff_check": "PASS",
+  "remaining": [
+    "Replay commands_review unchanged own oracles on this exact fix pin (only pin/path harness binding adapted in a separate copy, original raw preserved).",
+    "Extend consistent canonical-cache foreign history/profile/generation/source/span cases as required by reviewer.",
+    "Run relevant original A/B/C/D/LINE compatibility safety against the fixed pin; original 419 proof belongs to4f43 and is not recounted here.",
+    "Independent commands_review recheck and later root integration; no self approval."
+  ],
+  "runtime_files": {
+    "src/archpapercraft/authoring/profile_subdivision.py": "f2db87af11d658cb581a5fb0609f97ab8e42c2fcac77ef0132cd52ba045ab4b9"
+  },
+  "desktop": "NOT_RUN",
+  "master": "UNCHANGED"
+}
