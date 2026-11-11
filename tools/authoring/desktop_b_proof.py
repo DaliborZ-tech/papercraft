@@ -240,7 +240,8 @@ def run_windows(output, expected_sha, fixture="all"):
         "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN",
                            "curves-planar": "NOT_RUN", "loft-B1": "NOT_RUN",
                            "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN",
-                           "D-segmented": "NOT_RUN", "D-gothic": "NOT_RUN"},
+                           "D-segmented": "NOT_RUN", "D-gothic": "NOT_RUN",
+                           "AU13-line": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "actual_application_module": str(Path(author_window.__file__).resolve()),
@@ -333,8 +334,9 @@ def run_windows(output, expected_sha, fixture="all"):
 
     from loft_desktop_steps import LoftDesktopSteps
     from segmentation_desktop_steps import SegmentationDesktopSteps
+    from subdivision_desktop_steps import SubdivisionDesktopSteps
 
-    class Driver(LoftDesktopSteps, SegmentationDesktopSteps):
+    class Driver(LoftDesktopSteps, SegmentationDesktopSteps, SubdivisionDesktopSteps):
         def __init__(self, window):
             self.w = window
             self.check, self.step, self.log = check, step, log
@@ -1228,6 +1230,8 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.audit_loft_vectors(name, directory, svgs, pdf)
             if name in ("D-segmented", "D-gothic"):
                 self.audit_segmentation_vectors(directory, svgs, pdf)
+            if name == "AU13-line":
+                self.audit_subdivision_vectors(directory, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
@@ -1750,6 +1754,10 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"][fixture] = "RUNNING"
                 driver.segmentation_case(gothic=fixture == "D-gothic")
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
+            if fixture == "AU13-line":
+                report["fixture_status"][fixture] = "RUNNING"
+                driver.subdivision_case()
+                report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
                 len(native) == (6 if fixture == "all" else 3)
@@ -1770,12 +1778,12 @@ def run_windows(output, expected_sha, fixture="all"):
                     report["fixture_status"][name] = "FAIL"
             report.update(status="FAIL", error=traceback.format_exc(), failures=failures)
             try:
-                driver.capture("FAIL-last-state")
                 # This is a failed partial run artifact, never a replacement injected fixture.
                 (output / "FAIL-partial-observed-state.json").write_text(
                     json.dumps(window.project.to_dict(), ensure_ascii=False, indent=2),
                     encoding="utf8",
                 )
+                driver.capture("FAIL-last-state")
             except Exception:
                 report["capture_error"] = traceback.format_exc()
         finally:
@@ -1786,6 +1794,21 @@ def run_windows(output, expected_sha, fixture="all"):
 
     def factory(*args, **kwargs):
         window = original(*args, settings=settings, **kwargs)
+        original_run = window.run
+
+        def audited_run(operation):
+            def observed_operation():
+                try:
+                    return operation()
+                except Exception:
+                    report.setdefault("observed_command_exceptions", []).append(
+                        traceback.format_exc())
+                    raise
+            return original_run(observed_operation)
+
+        # Observe the original command boundary without replacing any command,
+        # geometry, result or exception. The real window still shows its error.
+        window.run = audited_run
         windows.append(window)
         timer = QTimer(window)
         timer.timeout.connect(close_messages)
@@ -1823,7 +1846,7 @@ def main():
     parser.add_argument(
         "--fixture",
         choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
-                 "loft-Bezier", "D-segmented", "D-gothic"],
+                 "loft-Bezier", "D-segmented", "D-gothic", "AU13-line"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",
     )

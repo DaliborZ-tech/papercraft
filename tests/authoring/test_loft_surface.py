@@ -649,6 +649,7 @@ def test_schema_three_copy_adapter_rejects_capabilities_it_never_defined(new_cap
     data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
+    data.pop("profile_subdivisions")
     with pytest.raises(ProjectFormatError, match="Starší formát"):
         AuthorProject.from_dict(data)
 
@@ -663,6 +664,7 @@ def test_schema_three_copy_adapter_still_preserves_known_planar_sources_and_layo
     data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
+    data.pop("profile_subdivisions")
     restored = AuthorProject.from_dict(data)
     assert restored.profiles == p.profiles and restored.surfaces == p.surfaces
     assert restored.parts[pid].frame == p.parts[pid].frame

@@ -621,7 +621,7 @@ def rebuild_curved_material_binding(body_binding, paper_frame, curved_inputs):
     }
     if (
         not isinstance(source, dict)
-        or set(source) != expected
+        or set(source) not in (expected, expected | {"profile_subdivisions"})
         or source["contract"] != CURVED_CONNECTOR_CONTRACT
     ):
         raise CurvedConnectorError("Chybí úplný aktuální autorský vstup kruhových chlopní.")
@@ -653,6 +653,8 @@ def rebuild_curved_material_binding(body_binding, paper_frame, curved_inputs):
     context.surfaces = {
         sid: _record(SurfaceFeature, raw) for sid, raw in source["surfaces"].items()
     }
+    context.profile_subdivisions = copy.deepcopy(source.get("profile_subdivisions", {}))
+    context._validate_profile_subdivisions()
     context.parts = {}
     fields = {"id", "name", "number", "lineage", "surface_ids", "frame", "front_side"}
     for pid, raw in source["parts"].items():
@@ -1757,6 +1759,11 @@ class CurvedConnectorCommands:
             },
             "surfaces": {sid: asdict(surface) for sid, surface in sorted(surfaces.items())},
             "profiles": {pid: asdict(self.profiles[pid]) for pid in sorted(profile_ids)},
+            **({"profile_subdivisions": copy.deepcopy({
+                key: value for key, value in self.profile_subdivisions.items()
+                if value["history"]["profile_id"] in profile_ids
+            })} if any(value["history"]["profile_id"] in profile_ids
+                       for value in self.profile_subdivisions.values()) else {}),
             "parts": {
                 pid: {
                     "id": pid,

@@ -1,0 +1,30 @@
+{
+  "source_sha": "694db185873f9f0ff962af009873167bc229347a",
+  "archive_sha256": "d8a38842a70cafad86e1392f4770c6afa0d7da45340a17ae6d4499164a271124",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-zqkkh9a1",
+  "actual_imports": {
+    "archpapercraft.authoring.curve_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-zqkkh9a1\\src\\archpapercraft\\authoring\\curve_subdivision.py",
+      "sha256_lf": "4d674d769e89c2b4d826c6fe1bb9a685e8414012ae55143c3219f1e76c0d6ad2"
+    },
+    "archpapercraft.authoring.profile_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-zqkkh9a1\\src\\archpapercraft\\authoring\\profile_subdivision.py",
+      "sha256_lf": "29b98b29a5579b2d05818ac8453a1d1f41ea303c8b040ba430acb159820c77fc"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-zqkkh9a1\\src\\archpapercraft\\authoring\\project.py",
+      "sha256_lf": "0d3952f38b3d0336b4f959867413beb0c0e1ac8e1a95fdc41c438108268f30a3"
+    },
+    "archpapercraft.ui.author_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-zqkkh9a1\\src\\archpapercraft\\ui\\author_subdivision.py",
+      "sha256_lf": "4dbec130f305925ea126ccf3f93085057ddc4dee749ad44459f45d6991811485"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 1,
+      "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n___ test_unrelated_hole_edit_does_not_destroy_a_valid_outer_edge_reference ____\n\n    def test_unrelated_hole_edit_does_not_destroy_a_valid_outer_edge_reference():\n     p,wall,roof,hole,joint=joined_surface_with_unrelated_hole()\n     assert not p.profile_subdivisions\n     profile=p.profiles[hole];p.move_vertex(hole,profile.vertices[1].id,[4500,1000])\n>    assert not p.joints[joint].unresolved\nE    AssertionError: assert not True\nE     +  where True = Joint(id='497d92fe-7d9b-4352-b0e2-b8a4e2e3ec45', surface_a='e9511c3a-d7b4-4252-92ef-daf13d9c4e7a', edge_a='01e4312c-5f...', edge_b='04a6dc33-26f7-4a29-a83d-eb7ce1031ba5', mode='cut', revision=1, connector_id=None, number=1, unresolved=True).unresolved\n\n..\\..\\..\\..\\projects\\papercraft-profile-subdivision-review\\docs\\p2\\implementation\\evidence\\pc008-line-subdivision-review-own.py:247: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_unrelated_hole_edit_does_not_destroy_a_valid_outer_edge_reference\n1 failed in 1.20s\n",
+      "stderr": ""
+    }
+  }
+}

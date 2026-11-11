@@ -1,0 +1,191 @@
+{
+  "status": "PASS_METADATA_IN_SCOPE_PENDING_MECHANICAL_CLOSURE",
+  "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+  "metadata_sha": "93f650c4a22a9d1dffd3b65c69f4b9505d5889f7",
+  "runtime_unchanged": true,
+  "normative_documents_unchanged": true,
+  "links_checked": 43,
+  "links": [
+    {
+      "source": ".agents/skills/papercraft-construction/SKILL.md",
+      "target": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-construction/SKILL.md",
+      "target": "docs/p2/v1.2/PRODUCT_ANALYSIS.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-construction/SKILL.md",
+      "target": "docs/p2/v1.2/ACCEPTANCE.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-construction/SKILL.md",
+      "target": "docs/p2/v1.2/GEOMETRY_SPIKES.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-construction/SKILL.md",
+      "target": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-construction/SKILL.md",
+      "target": "AGENTS.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/v1.2/AUTHORING_UX.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/v1.2/ACCEPTANCE.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/v1.2/USABILITY_TEST.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/SKILL_IMPROVEMENTS.json"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/implementation/PC006A_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/implementation/PC008_UI_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-authoring-ui/SKILL.md",
+      "target": "docs/p2/implementation/PC008_NATIVE_PROGRESS.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "04_ACCEPTANCE_AND_VERIFICATION.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/v1.2/ACCEPTANCE.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/v1.2/GEOMETRY_SPIKES.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/v1.2/INDEPENDENT_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "AGENTS.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/evidence/pc006b-desktop-95482c5-run04/results.json"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC006B_DOMAIN_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC007A_PLANAR_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC007A_VECTOR_OUTPUT_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC007A_AREA_INTEGRATION_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC008_SEGMENTED_OUTPUT_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/evidence/pc006a-C06-svg-text-whitespace.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-verification/SKILL.md",
+      "target": "docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-delivery/SKILL.md",
+      "target": "AGENTS.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-delivery/SKILL.md",
+      "target": "05_WORK_QUEUE.json"
+    },
+    {
+      "source": ".agents/skills/papercraft-delivery/SKILL.md",
+      "target": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-delivery/SKILL.md",
+      "target": "docs/p2/PAPER_ENGINE_REVIEW.md"
+    },
+    {
+      "source": ".agents/skills/papercraft-delivery/SKILL.md",
+      "target": "AGENTS.md"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/au13-line-full-suite-9b87c89-run02.xml"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/au13-line-full-suite-9b87c89-run02.log"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/au13-line-full-suite-run01-aborted.json"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/pc008-AU13-line-desktop-9b87c89-run01/results.json"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/pc008-AU13-line-desktop-9290a01-run02/results.json"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/au13-line-existing-tab-bend-fix-run01.xml"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/pc008-AU13-line-desktop-a770f8a-run03/results.json"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/au13-line-full-suite-24e0801-run05.xml"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/pc008-AU13-line-desktop-24e0801-run05/results.json"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/pc008-AU13-line-inkscape-24e0801-page1-run01/editor-results.json"
+    },
+    {
+      "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+      "target": "docs/p2/implementation/evidence/pc008-AU13-line-inkscape-24e0801-page2-run01/editor-results.json"
+    }
+  ],
+  "sk011_initial_transfer_failure_preserved": true,
+  "sk015_current_repair_documented": true,
+  "broader_effectiveness": "PENDING_NEXT_USE",
+  "current_package": "LINE_TECHNICAL_INCREMENT_ONLY_NOT_COMPLETE_AU13_AU14_PC008_P2",
+  "closure_notes": [
+    "Update reviewed LINE694 text to final24e",
+    "Separate expected8769.772228646 from actualSVG8769.772229 and actualPDF8769.772000000002",
+    "Mark current repair/text/artifact review approved by final report while preserving initial transfer failure and PENDING_NEXT_USE"
+  ]
+}

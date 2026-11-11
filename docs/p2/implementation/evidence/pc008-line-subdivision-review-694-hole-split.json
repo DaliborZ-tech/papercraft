@@ -1,0 +1,30 @@
+{
+  "source_sha": "694db185873f9f0ff962af009873167bc229347a",
+  "archive_sha256": "d8a38842a70cafad86e1392f4770c6afa0d7da45340a17ae6d4499164a271124",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-bxis3o_o",
+  "actual_imports": {
+    "archpapercraft.authoring.curve_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-bxis3o_o\\src\\archpapercraft\\authoring\\curve_subdivision.py",
+      "sha256_lf": "4d674d769e89c2b4d826c6fe1bb9a685e8414012ae55143c3219f1e76c0d6ad2"
+    },
+    "archpapercraft.authoring.profile_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-bxis3o_o\\src\\archpapercraft\\authoring\\profile_subdivision.py",
+      "sha256_lf": "29b98b29a5579b2d05818ac8453a1d1f41ea303c8b040ba430acb159820c77fc"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-bxis3o_o\\src\\archpapercraft\\authoring\\project.py",
+      "sha256_lf": "0d3952f38b3d0336b4f959867413beb0c0e1ac8e1a95fdc41c438108268f30a3"
+    },
+    "archpapercraft.ui.author_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-bxis3o_o\\src\\archpapercraft\\ui\\author_subdivision.py",
+      "sha256_lf": "4dbec130f305925ea126ccf3f93085057ddc4dee749ad44459f45d6991811485"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 1,
+      "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n_ test_subdivide_hole_does_not_resolve_outer_joint_against_the_wrong_profile __\n\n    def test_subdivide_hole_does_not_resolve_outer_joint_against_the_wrong_profile():\n     p,wall,roof,hole,joint=joined_surface_with_unrelated_hole()\n     before=copy.deepcopy(p.joints[joint]);profile=p.profiles[hole]\n>    p.split_profile_segment(hole,profile.segments[0].id,F(1,2))\n\n..\\..\\..\\..\\projects\\papercraft-profile-subdivision-review\\docs\\p2\\implementation\\evidence\\pc008-line-subdivision-review-own.py:239: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nsrc\\archpapercraft\\authoring\\commands.py:14: in command\n    result = method(self, *args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\archpapercraft\\authoring\\profile_subdivision.py:307: in split_profile_segment\n    self._check_subdivision_physical_references(profile_id)\nsrc\\archpapercraft\\authoring\\profile_subdivision.py:256: in _check_subdivision_physical_references\n    self.resolve_profile_edge(profile_id, edge_id)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <archpapercraft.authoring.project.AuthorProject object at 0x0000014334566210>\nprofile_id = '84aaa71c-e55e-423c-a0b3-e1c1b086a04a'\nsegment_id = '2a8c5580-47c4-40ab-a063-e5930e778548', axis = False\n\n    def resolve_profile_edge(self, profile_id, segment_id, *, axis=False):\n        \"\"\"A full historical trim remains one edge; a bent chain is unresolved.\n    \n        For a paper axis only, the semantic chord is the two material endpoints.\n        This does not turn a bent chain into a straight hinge or glue edge.\n        \"\"\"\n        profile = self.profiles[profile_id]\n        edge = profile.segment(segment_id)\n        if edge is not None:\n            return edge, np.array(\n                [\n                    profile.vertex(edge.start_vertex_id).point,\n                    profile.vertex(edge.end_vertex_id).point,\n                ]\n            )\n        record = self._subdivision_record(profile_id, segment_id)\n        if record is None:\n>           raise ValidationError(\"REFERENCE_UNRESOLVED: historick\u00e1 hrana chyb\u00ed. Vyberte ji znovu.\")\nE           archpapercraft.authoring.errors.ValidationError: REFERENCE_UNRESOLVED: historick\u00e1 hrana chyb\u00ed. Vyberte ji znovu.\n\nsrc\\archpapercraft\\authoring\\profile_subdivision.py:115: ValidationError\n=========================== short test summary info ===========================\nFAILED ::test_subdivide_hole_does_not_resolve_outer_joint_against_the_wrong_profile\n1 failed in 1.20s\n",
+      "stderr": ""
+    }
+  }
+}

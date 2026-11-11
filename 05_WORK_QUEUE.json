@@ -1121,38 +1121,42 @@
         {
           "skill": "papercraft-construction",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         },
         {
           "skill": "papercraft-authoring-ui",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         },
         {
           "skill": "papercraft-verification",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         },
         {
           "skill": "papercraft-delivery",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         }
       ],
       "usability": {
@@ -1192,9 +1196,22 @@
         "full_suite": "1370 PASS315.60s0fail0errors0skips; exacte782",
         "integration_review": "badf33d: APPROVED_IN_D_AND_GOTHIC_B3_TECHNICAL_INCREMENT_SCOPE for e782 + metadata89a14c5; DU02 CLOSED"
       },
-      "candidate_code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
-      "working_branch": "revival/p2-segmentation-gothic",
-      "implementation_started_on": "2026-11-11"
+      "candidate_code_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+      "working_branch": "revival/p2-profile-provenance",
+      "implementation_started_on": "2026-11-11",
+      "live_LINE_progress_2026_11_11": {
+        "code_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+        "working_branch": "revival/p2-profile-provenance",
+        "status": "APPROVED_IN_LINE_TECHNICAL_INCREMENT_SCOPE",
+        "report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+        "scope": "LINE split/inverse merge, historical joints/interior trace/semantic frame; not whole AU13/14",
+        "evidence": "1465PASS326.23s; actual Windows32.734s; both Inkscape pages15.672s/18.015s; final independent source/artifact/metadata audit approved in LINE scope, LS01-LS05+LINE-BEND01 closed; publication pending.",
+        "reviewer": "commands_review",
+        "open_external": "novice0/NOT_RUN; physicalP3/NOT_RUN",
+        "review_commit": "a03c2948f44a0dce55ed975d57a0cebcf1d95861",
+        "reviewed_metadata_sha": "93f650c4a22a9d1dffd3b65c69f4b9505d5889f7",
+        "review_report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_REVIEW.md"
+      }
     },
     {
       "id": "PC-009",

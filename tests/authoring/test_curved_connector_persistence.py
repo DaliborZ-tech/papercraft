@@ -53,6 +53,7 @@ def test_schema5_is_an_explicit_safe_copy_and_cannot_smuggle_the_new_registry(tm
     p.set_placement(pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True)
     data = p.to_dict()
     data.pop("curved_connectors")
+    data.pop("profile_subdivisions")
     data.update(schema_version=5, writer_version="0.3.0-pc008-segmented-variants-experimental")
     path = tmp_path / "schema5-original.apcraft"
     path.write_text(json.dumps(data), encoding="utf8")
@@ -78,7 +79,7 @@ def test_new_registry_roundtrips_authored_ids_and_does_not_invent_a_geometric_ce
     restored = AuthorProject.from_dict(p.to_dict())
     assert restored.curved_connectors == p.curved_connectors
     assert restored.curved_connectors[record.id].certificate == {}
-    assert restored.to_dict()["schema_version"] == 6
+    assert restored.to_dict()["schema_version"] == 8
     assert restored.curved_connector_status(record.id)["status"] in ("UNRESOLVED", "STALE")
     restored.curved_connectors[record.id].certificate = {"status": "CERTIFIED_APPROXIMATE"}
     with pytest.raises(ValidationError, match="kruhových"):

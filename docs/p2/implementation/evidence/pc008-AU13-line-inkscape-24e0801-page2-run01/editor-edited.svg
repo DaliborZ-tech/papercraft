@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   data-project-id="a1bdc5fc-a64b-41be-9639-3d13c55aefd5"
+   data-snapshot-digest="ee04ca2b96b455a609ce7467ee7d86bfa6eb978e1bc586c4632d6e18ead9c947"
+   data-page-id="93a0b8f8-90b3-406f-b2f8-c52c9467ee04"
+   data-pdf-arc-interpolation-error-bound-mm="0"
+   data-pdf-numeric-serialization-error-bound-mm="1.27777777594557e-05"
+   data-pdf-combined-position-error-bound-mm="1.27777777594557e-05"
+   data-construction-checks-digest="0d344a085ce8257ac72cdc1eb6e35f55d40bc86ba15dde861481a550bde59fb8"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="editor-edited.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.57727273"
+     inkscape:cx="397.55906"
+     inkscape:cy="560.3937"
+     inkscape:window-width="1520"
+     inkscape:window-height="873"
+     inkscape:window-x="1972"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <title
+     id="title1">a1bdc5fc-a64b-41be-9639-3d13c55aefd5</title>
+  <metadata
+     id="construction-checks">{&quot;accepted_layout_overlaps&quot;:[],&quot;assembly_digest&quot;:&quot;bfaaa246dfa03c8503fe29439470e95ead6619c2d2948b78885114b2b96eb02f&quot;,&quot;connector_bends&quot;:{&quot;09174466-58fb-481c-ae8b-bf7b3cdad0c6&quot;:{&quot;assembly_digest&quot;:&quot;bfaaa246dfa03c8503fe29439470e95ead6619c2d2948b78885114b2b96eb02f&quot;,&quot;assembly_scenario&quot;:&quot;ONE_TAB_MOVES_ALL_OTHER_ACTIVE_TABS_ALREADY_FOLDED&quot;,&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;motion&quot;:&quot;shorter_signed_rigid_fold; finite_crease_and_contact_reservations&quot;,&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tabs&quot;:[{&quot;allowances&quot;:[{&quot;angle_interval_deg&quot;:[0.0,90.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;b77acec1-4a5c-4266-8873-d097dad0def9&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[-0.5,0.5,0.5],[-0.5,-0.5,0.5],[-0.5,0.5,-0.5],[-0.5,-0.5,-0.5],[100.5,0.5,0.5],[100.5,-0.5,0.5],[100.5,0.5,-0.5],[100.5,-0.5,-0.5]]},{&quot;angle_interval_deg&quot;:[0.0,90.0],&quot;kind&quot;:&quot;hinge&quot;,&quot;obstacle_id&quot;:&quot;77a0e9b6-b50e-42a7-b13a-c3a1686f9e1a&quot;,&quot;reason&quot;:&quot;Declared finite local crease zone; deforming paper is not a cutout or a mechanically certified rigid solid inside this zone.&quot;,&quot;vertices_world_mm&quot;:[[-0.5,0.5,0.5],[-0.5,-0.5,0.5],[-0.5,0.5,-0.5],[-0.5,-0.5,-0.5],[100.5,0.5,0.5],[100.5,-0.5,0.5],[100.5,0.5,-0.5],[100.5,-0.5,-0.5]]},{&quot;angle_interval_deg&quot;:[89.88540836457935,90.0],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;77a0e9b6-b50e-42a7-b13a-c3a1686f9e1a&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[80.00501132664529,1.9991249707149428,-0.001],[80.00501132664529,1.9991249707149428,0.001],[-0.004939589471721319,-0.0011238021879808003,-0.001],[-0.004939589471721319,-0.0011238021879808003,0.001],[-0.005040990598602093,0.0005008885022516552,-0.001],[-0.005040990598602093,0.0005008885022516552,0.001],[19.999950124378874,2.000999999999999,-0.001],[19.999950124378874,2.000999999999999,0.001],[80.00498789244024,2.000999999999999,-0.001],[80.00498789244024,2.000999999999999,0.001]]},{&quot;angle_interval_deg&quot;:[89.88540836457935,90.0],&quot;kind&quot;:&quot;final_contact&quot;,&quot;obstacle_id&quot;:&quot;77a0e9b6-b50e-42a7-b13a-c3a1686f9e1a&quot;,&quot;reason&quot;:&quot;Finite approach/contact layer around the actual receiving footprint; does not certify glue strength or remove other model parts.&quot;,&quot;vertices_world_mm&quot;:[[-0.0050113266452854075,0.0008750292850550068,-0.001],[-0.0050113266452854075,0.0008750292850550068,0.001],[80.00003740088742,2.001001247473373,-0.001],[80.00003740088742,2.001001247473373,0.001],[100.00503124580914,0.0005018629811979736,-0.001],[100.00503124580914,0.0005018629811979736,0.001],[100.00495633946012,-0.0010000000000013642,-0.001],[100.00495633946012,-0.0010000000000013642,0.001],[-0.0049878924402446505,-0.0010000000000013642,-0.001],[-0.0049878924402446505,-0.0010000000000013642,0.001]]}],&quot;assumptions&quot;:[&quot;complete_registry_of_planar_material_triangles&quot;,&quot;straight_hinge_rigid_motion_of_declared_convex_patches&quot;,&quot;bend_radius_is_a_conservative_displacement_envelope_not_material_mechanics&quot;,&quot;explicit_finite_hinge_and_contact_volumes_only&quot;,&quot;physical_build_and_strength_NOT_VERIFIED&quot;],&quot;bend_radius_mm&quot;:0.0,&quot;broad_phase_pruning&quot;:[{&quot;disjoint_full_sweep_triangles&quot;:0,&quot;interaction_inside_whole_fold_permission_triangles&quot;:4,&quot;obstacle_id&quot;:&quot;b77acec1-4a5c-4266-8873-d097dad0def9&quot;,&quot;scope&quot;:&quot;ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS&quot;},{&quot;disjoint_full_sweep_triangles&quot;:2,&quot;interaction_inside_whole_fold_permission_triangles&quot;:0,&quot;obstacle_id&quot;:&quot;de0dee6e-73ca-46c4-a652-47e5bea3e018&quot;,&quot;scope&quot;:&quot;ALL_SIGNED_FOLD_ANGLES_AND_ROTATING_MATERIAL_THICKNESS&quot;}],&quot;certified_intervals&quot;:0,&quot;checked_obstacle_ids&quot;:[&quot;b77acec1-4a5c-4266-8873-d097dad0def9&quot;,&quot;de0dee6e-73ca-46c4-a652-47e5bea3e018&quot;,&quot;77a0e9b6-b50e-42a7-b13a-c3a1686f9e1a&quot;],&quot;clearance_mm&quot;:0.0,&quot;coarse_intervals_examined&quot;:2,&quot;empty_obstacle_ids&quot;:[],&quot;envelope_padding_mm&quot;:4.885825446443491e-06,&quot;examined_intervals&quot;:128,&quot;expected_obstacle_ids&quot;:[&quot;b77acec1-4a5c-4266-8873-d097dad0def9&quot;,&quot;de0dee6e-73ca-46c4-a652-47e5bea3e018&quot;,&quot;77a0e9b6-b50e-42a7-b13a-c3a1686f9e1a&quot;],&quot;layer_geometry&quot;:&quot;NO_UNRESOLVED_RECEIVER_LAYER_PAIRS&quot;,&quot;material_domain&quot;:&quot;COMPLETE_DECLARED_MATERIAL&quot;,&quot;material_thickness_mm&quot;:null,&quot;message&quot;:&quot;Bounded collision-witness search found no definite intersection; absence of collision has NOT been proved and material clearance remains unverified; interval budget exhausted&quot;,&quot;not_evaluated_obstacle_ids&quot;:[],&quot;numerical_guard_mm&quot;:4.885825446443491e-06,&quot;obstacle_id&quot;:null,&quot;proof_method&quot;:&quot;bounded_breadth_first_material_lower_bound_collision_witness_search&quot;,&quot;search_budget_exhausted&quot;:true,&quot;search_depth_limit&quot;:8,&quot;search_depth_limit_reached&quot;:false,&quot;search_interval_limit&quot;:128,&quot;search_limits&quot;:{&quot;max_depth&quot;:8,&quot;max_intervals&quot;:128},&quot;search_scope&quot;:&quot;BOUNDED_ZERO_THICKNESS_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN&quot;,&quot;status&quot;:&quot;UNVERIFIED&quot;,&quot;tab_id&quot;:&quot;e42a142c-c008-452f-9d4a-2c3c1d7cb2b5&quot;,&quot;unresolved_layer_obstacle_ids&quot;:[],&quot;witness_angle_deg&quot;:null,&quot;witness_angles_examined&quot;:131,&quot;witness_point_mm&quot;:null}]}},&quot;curve_profiles&quot;:{},&quot;curve_regions&quot;:{},&quot;lofts&quot;:{},&quot;material_profile&quot;:{&quot;bend_radius_mm&quot;:0.0,&quot;clearance_mm&quot;:0.0,&quot;crease_zone_mm&quot;:0.5,&quot;thickness_mm&quot;:null},&quot;physical_build&quot;:&quot;NOT_VERIFIED&quot;,&quot;reference_targets&quot;:{},&quot;segmented_variants&quot;:{}}</metadata>
+  <g
+     id="part-a98bbd27-13d1-4f31-b52b-565277beda30"
+     data-part-id="a98bbd27-13d1-4f31-b52b-565277beda30"
+     transform="rotate(30,-88.044396,148.88309)">
+    <title
+       id="title2">P1 · Plocha 1</title>
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-CUT"
+       data-role="CUT"
+       class="CUT"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <path
+         id="path-a98bbd27-13d1-4f31-b52b-565277beda30-CUT-0"
+         d="M 80,-2 H 20 L 0,0 V 40 86.097722 H 100 V 40 0 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN"
+       data-role="FOLD_MOUNTAIN"
+       class="FOLD_MOUNTAIN"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 1">
+      <path
+         id="path-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-0"
+         d="M 100,40 H 0"
+         fill-rule="evenodd" />
+      <path
+         id="path-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-1"
+         d="M 0,0 H 100"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_VALLEY"
+       data-role="FOLD_VALLEY"
+       class="FOLD_VALLEY"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       stroke-dasharray="2, 0.5, 0.5, 0.5" />
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-TABS"
+       data-role="TABS"
+       class="TABS"
+       fill="#eee6d5"
+       stroke="none"
+       stroke-width="0.25">
+      <path
+         id="path-a98bbd27-13d1-4f31-b52b-565277beda30-TABS-0"
+         d="M 0,0 H 100 L 80,-2 H 20 Z"
+         fill-rule="evenodd" />
+    </g>
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-LABELS"
+       data-role="LABELS"
+       class="LABELS"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25">
+      <text
+         id="label-a98bbd27-13d1-4f31-b52b-565277beda30-0"
+         x="50"
+         y="20"
+         font-size="2.5px"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none"
+         style="fill:#b43d28">Žluťoučký – vlastní díl</text>
+      <text
+         id="label-a98bbd27-13d1-4f31-b52b-565277beda30-1"
+         x="50"
+         y="0"
+         font-size="2px"
+         font-family="Arial"
+         xml:space="preserve"
+         fill="#202b2b"
+         stroke="none">A1 · rub</text>
+    </g>
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-ARTWORK"
+       data-role="ARTWORK"
+       class="ARTWORK"
+       fill="none"
+       stroke="#202b2b"
+       stroke-width="0.25" />
+    <g
+       id="role-a98bbd27-13d1-4f31-b52b-565277beda30-GUIDES"
+       data-role="GUIDES"
+       class="GUIDES"
+       fill="none"
+       stroke="#8c9894"
+       stroke-width="0.15" />
+  </g>
+  <g
+     id="page-GUIDES"
+     data-role="GUIDES">
+    <path
+       d="M 10 282 L 110 282"
+       stroke="#202b2b"
+       stroke-width="0.25"
+       fill="none"
+       data-calibration-mm="100"
+       id="path2" />
+    <text
+       id="page-label-0"
+       x="10"
+       y="287"
+       font-family="Arial"
+       xml:space="preserve"
+       font-size="2.5"
+       fill="#202b2b">Tisk 100 % / skutečná velikost. Kalibrace 100 mm na papíře.</text>
+    <text
+       id="page-label-1"
+       x="10"
+       y="292"
+       font-family="Arial"
+       xml:space="preserve"
+       font-size="2.5"
+       fill="#202b2b">Měřítko modelu 1:100 · Strana 2 / 2</text>
+  </g>
+</svg>

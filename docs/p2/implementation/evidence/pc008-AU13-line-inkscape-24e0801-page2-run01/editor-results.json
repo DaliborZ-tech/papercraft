@@ -1,0 +1,167 @@
+{
+  "status": "PASS",
+  "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+  "source_status_at_start": "M .agents/skills/papercraft-construction/SKILL.md\n M .agents/skills/papercraft-verification/SKILL.md\n M 05_WORK_QUEUE.json\n M docs/p2/SKILL_IMPROVEMENTS.json\n?? Temp/\n?? docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md\n?? docs/p2/implementation/evidence/au13-line-LS-fixes-and-physical-handle-run02.xml\n?? docs/p2/implementation/evidence/au13-line-LS-fixes-and-physical-handle-run03.xml\n?? docs/p2/implementation/evidence/au13-line-LS01-LS02-LS03-fixes-run01.xml\n?? docs/p2/implementation/evidence/au13-line-LS04-LS05-fix-run01.xml\n?? docs/p2/implementation/evidence/au13-line-LS04-LS05-fix-run02.xml\n?? docs/p2/implementation/evidence/au13-line-existing-tab-bend-fix-run01.xml\n?? docs/p2/implementation/evidence/au13-line-full-suite-694db18-run04.log\n?? docs/p2/implementation/evidence/au13-line-full-suite-694db18-run04.xml\n?? docs/p2/implementation/evidence/au13-line-full-suite-9b87c89-run02.log\n?? docs/p2/implementation/evidence/au13-line-full-suite-9b87c89-run02.xml\n?? docs/p2/implementation/evidence/au13-line-full-suite-a770f8a-run03.log\n?? docs/p2/implementation/evidence/au13-line-full-suite-a770f8a-run03.xml\n?? docs/p2/implementation/evidence/au13-line-full-suite-run01-aborted.json\n?? docs/p2/implementation/evidence/au13-line-full-suite-run01-aborted.log\n?? docs/p2/implementation/evidence/au13-line-historical-envelopes-run02.xml\n?? docs/p2/implementation/evidence/au13-line-initial.xml\n?? docs/p2/implementation/evidence/au13-line-own-initial.xml\n?? docs/p2/implementation/evidence/au13-line-own-run02.xml\n?? docs/p2/implementation/evidence/au13-line-regression-run01.xml\n?? docs/p2/implementation/evidence/au13-line-regression-run02.xml\n?? docs/p2/implementation/evidence/au13-line-ui-initial.xml\n?? docs/p2/implementation/evidence/pc008-AU13-line-desktop-24e0801-run05/\n?? docs/p2/implementation/evidence/pc008-AU13-line-desktop-694db18-run04/\n?? docs/p2/implementation/evidence/pc008-AU13-line-desktop-9290a01-run02/\n?? docs/p2/implementation/evidence/pc008-AU13-line-desktop-9b87c89-run01/\n?? docs/p2/implementation/evidence/pc008-AU13-line-desktop-a770f8a-run03/\n?? docs/p2/implementation/evidence/pc008-AU13-line-inkscape-24e0801-page1-run01/",
+  "script_sha256": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+  "origin_source": "C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-desktop-24e0801-run05\\AU13-line\\export\\page-93a0b8f8-90b3-406f-b2f8-c52c9467ee04.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "1579b85bc14b8c291a5b3fe3e763317752dc9c74b7d2d695faa54d1dfa7630bb",
+    "model.pdf": "20975c94ec634a077ab59bf5ff747b52a5eb977d8d4d6c747a0a677b95dbada2",
+    "page-79dbe83b-c777-40f5-b0b1-2c72d29ef93b.svg": "cc8603a7f715f6a3fc9b1d7277ef8835e2bdbac7f282a41b0d6f13d9c5166605",
+    "page-93a0b8f8-90b3-406f-b2f8-c52c9467ee04.svg": "34a43b87cd40ef0f75d4171c73798cd73d7345e33829f9e868ecf34cdd7af38f"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.906,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-inkscape-24e0801-page2-run01\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 2.172,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,226.165,516.916,877.572\npart-a98bbd27-13d1-4f31-b52b-565277beda30,63.4219,226.165,491.289,472.04\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-CUT,63.4219,226.165,491.289,472.04\npath-a98bbd27-13d1-4f31-b52b-565277beda30-CUT-0,63.4219,226.165,491.289,472.04\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN,150.945,226.363,403.38,320.721\npath-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-0,150.945,357.289,327.789,189.795\npath-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-1,226.535,226.363,327.789,189.795\n\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-TABS,226.772,226.772,327.317,188.976\npath-a98bbd27-13d1-4f31-b52b-565277beda30-TABS-0,226.772,226.772,327.317,188.976\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-LABELS,353.266,316.568,62.8871,97.6501\nlabel-a98bbd27-13d1-4f31-b52b-565277beda30-0,353.266,381.23,50.3875,32.9883\nlabel-a98bbd27-13d1-4f31-b52b-565277beda30-1,390.42,316.568,25.7327,18.0575\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-inkscape-24e0801-page2-run01\\editor-original.svg",
+        "--actions=select-by-id:part-a98bbd27-13d1-4f31-b52b-565277beda30;transform-translate:10,15;select-clear;select-clear;select-by-id:label-a98bbd27-13d1-4f31-b52b-565277beda30-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-inkscape-24e0801-page2-run01\\editor-edited.svg;export-do"
+      ],
+      "seconds": 2.188,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-inkscape-24e0801-page2-run01\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 2.031,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,241.165,526.916,862.572\npart-a98bbd27-13d1-4f31-b52b-565277beda30,73.4219,241.165,491.289,472.04\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-CUT,73.4219,241.165,491.289,472.04\npath-a98bbd27-13d1-4f31-b52b-565277beda30-CUT-0,73.4219,241.165,491.289,472.04\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN,160.945,241.363,403.38,320.721\npath-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-0,160.945,372.289,327.789,189.795\npath-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-1,236.535,241.363,327.789,189.795\n\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-TABS,236.772,241.772,327.317,188.976\npath-a98bbd27-13d1-4f31-b52b-565277beda30-TABS-0,236.772,241.772,327.317,188.976\nrole-a98bbd27-13d1-4f31-b52b-565277beda30-LABELS,362.799,331.568,82.1184,115.708\nlabel-a98bbd27-13d1-4f31-b52b-565277beda30-0,362.799,394.506,82.1184,52.7705\nlabel-a98bbd27-13d1-4f31-b52b-565277beda30-1,400.42,331.568,25.7327,18.0575\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-inkscape-24e0801-page2-run01\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\docs\\p2\\implementation\\evidence\\pc008-AU13-line-inkscape-24e0801-page2-run01\\editor-final-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 2.078,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-7zkce5qa",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "elapsed_seconds": 18.015,
+  "files_sha256": {
+    "editor-edited.svg": "7c37b9dd6d873ec9c32ca72f61f01022277461b55933627022320e59624807dd",
+    "editor-final-render.png": "d0a6fb871fd10e5992a66655ccdff4cf416fdfc192c5f0d38c708a74dbdf822c",
+    "editor-gui.png": "1e88c289380f29a4db2e47f0e44d7d39a988711d77be850447b59561d5cae302",
+    "editor-original.svg": "34a43b87cd40ef0f75d4171c73798cd73d7345e33829f9e868ecf34cdd7af38f"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-a98bbd27-13d1-4f31-b52b-565277beda30",
+    "label_id": "label-a98bbd27-13d1-4f31-b52b-565277beda30-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "unchanged_by_actions; individual_native_GUI_edit_below",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "own_visible_windows": [
+    {
+      "hwnd": 3213438,
+      "title": "editor-edited.svg - Inkscape",
+      "class": "gdkWindowToplevel",
+      "width": 1936,
+      "height": 1048
+    }
+  ],
+  "initial_focus": {
+    "own_hwnd": 3213438,
+    "before_hwnd": 132916,
+    "direct_activation_returned": false,
+    "attached_activation_returned": true,
+    "input_queue_temporarily_attached": true,
+    "after_hwnd": 3213438
+  },
+  "native_gui_text_edit": {
+    "text": "Žluťoučký – vlastní díl",
+    "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+    "own_pid": 83132,
+    "own_hwnd": 3213438,
+    "foreground_verified_before_each_chord": true
+  },
+  "gui_capture": {
+    "method": "QScreen.grabWindow(actual_editor_hwnd)",
+    "width": 1520,
+    "height": 873
+  },
+  "roundtrip_assertions": {
+    "path_count": 4,
+    "total_path_count_including_calibration": 5,
+    "editor_added_id_to_existing_calibration": [
+      "path2"
+    ],
+    "part_role_groups": [
+      "CUT",
+      "FOLD_MOUNTAIN",
+      "FOLD_VALLEY",
+      "TABS",
+      "LABELS",
+      "ARTWORK",
+      "GUIDES"
+    ],
+    "native_path_commands_preserved": true,
+    "all_local_coordinates_unchanged_mm_tolerance": 2e-05,
+    "other_text_objects_unchanged": true,
+    "original_bundle_unchanged": true,
+    "calibration_100mm_and_page_size_unchanged": true,
+    "cut_loop_count": 1,
+    "all_path_displacements_px": {
+      "path-a98bbd27-13d1-4f31-b52b-565277beda30-CUT-0": [
+        9.999999999999993,
+        15.0
+      ],
+      "path-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-0": [
+        10.0,
+        15.0
+      ],
+      "path-a98bbd27-13d1-4f31-b52b-565277beda30-FOLD_MOUNTAIN-1": [
+        10.0,
+        15.0
+      ],
+      "path-a98bbd27-13d1-4f31-b52b-565277beda30-TABS-0": [
+        10.0,
+        15.0
+      ]
+    }
+  },
+  "origin_bundle_preserved_after_run": true
+}

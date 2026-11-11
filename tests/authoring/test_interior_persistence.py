@@ -50,6 +50,7 @@ def legacy_a_document():
     data.update(schema_version=1, writer_version="0.3.0-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
+    data.pop("profile_subdivisions")
     del data["attachments"], data["next_attachment_number"], data["material_profile"]
     return data, sid
 

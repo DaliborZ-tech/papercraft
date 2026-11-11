@@ -62,11 +62,12 @@ from .paper import (
     validate_layout,
 )
 from .profile_curves import ProfileCurveCommands, move_curve_endpoint
+from .profile_subdivision import ProfileSubdivisionCommands
 from .segmented_surface import SegmentedCommands
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 6
-WRITER_VERSION = "0.3.0-pc007b-curved-connectors-experimental"
+SCHEMA_VERSION = 8
+WRITER_VERSION = "0.3.0-pc008-authoring-provenance-experimental"
 _UNSET = object()
 
 
@@ -102,8 +103,8 @@ def _record(cls, data):
 
 
 class AuthorProject(
-    InteriorCommands, BendCommands, ProfileCurveCommands, LoftCommands, SegmentedCommands,
-    CurvedConnectorCommands,
+    InteriorCommands, BendCommands, ProfileCurveCommands, ProfileSubdivisionCommands,
+    LoftCommands, SegmentedCommands, CurvedConnectorCommands,
 ):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
@@ -117,6 +118,7 @@ class AuthorProject(
         self.material_profile = copy.deepcopy(DEFAULT_MATERIAL_PROFILE)
         self.segmented_variants = {}
         self.curved_connectors = {}
+        self.profile_subdivisions = {}
 
     @classmethod
     def new(cls, name="Nový model", scale=0.01):
@@ -252,6 +254,7 @@ class AuthorProject(
         if value == vertex.point:
             return
         move_curve_endpoint(profile, vertex_id, value)
+        self._sync_profile_subdivisions(profile_id)
         profile.revision += 1
         self._touch(self._profile_surfaces(profile_id))
 
@@ -622,7 +625,9 @@ class AuthorProject(
         if surface_a == surface_b:
             raise ValidationError("Spoj musí mít dva různé povrchy.")
         if any(
-            (sid, edge) in [(j.surface_a, j.edge_a), (j.surface_b, j.edge_b)]
+            any(sid == old_sid and self.profile_edge_overlap(
+                self.surfaces[sid].profile_id, edge, old_edge)
+                for old_sid, old_edge in [(j.surface_a, j.edge_a), (j.surface_b, j.edge_b)])
             for j in self.joints.values()
             for sid, edge in [(surface_a, edge_a), (surface_b, edge_b)]
         ):
@@ -1034,6 +1039,7 @@ class AuthorProject(
         extra_ids, derived_children = self._validate_segmented_variants()
         all_ids.extend(extra_ids)
         all_ids.extend(self._validate_curved_connectors())
+        all_ids.extend(self._validate_profile_subdivisions())
         expected_surfaces = []
         if set(self.parts) != set(self.placements):
             raise ValidationError("Každý díl musí mít právě jeden záznam umístění.")
@@ -1132,11 +1138,9 @@ class AuthorProject(
             if part.frame.root_surface_id not in part.surface_ids:
                 raise ValidationError("Kotva nepatří do dílu.")
             root_profile = self.profiles[self.surfaces[part.frame.root_surface_id].profile_id]
-            if not part.stale and (
-                root_profile.vertex(part.frame.anchor_vertex_id) is None
-                or root_profile.segment(part.frame.axis_segment_id) is None
-            ):
-                raise ValidationError("Aktuální díl nemá platnou referenci kotvy.")
+            if not part.stale:
+                self.resolve_profile_vertex(root_profile.id, part.frame.anchor_vertex_id)
+                self.resolve_profile_edge(root_profile.id, part.frame.axis_segment_id, axis=True)
             if (
                 not isinstance(part.lineage, list)
                 or len(set(part.lineage)) != len(part.lineage)
@@ -1293,12 +1297,22 @@ class AuthorProject(
                     sid not in self.surfaces
                     or (
                         not joint.unresolved
-                        and self.profiles[self.surfaces[sid].profile_id].segment(edge_id) is None
+                        and not self._profile_edge_exists(self.surfaces[sid].profile_id, edge_id)
                     )
                     or (sid, edge_id) in occupied_edges
                 ):
                     raise ValidationError("Neplatná nebo vícekrát připojená hrana.")
                 occupied_edges.add((sid, edge_id))
+            for old_sid, old_edge in list(occupied_edges):
+                for sid, edge_id in (
+                    (joint.surface_a, joint.edge_a), (joint.surface_b, joint.edge_b)
+                ):
+                    if old_sid == sid and old_edge != edge_id and self.profile_edge_overlap(
+                        self.surfaces[sid].profile_id, old_edge, edge_id
+                    ):
+                        raise ValidationError(
+                            "Tentýž zdrojový interval má více konstrukčních spojů."
+                        )
             _revision(joint.revision)
             _revision(joint.number)
             if joint.number in numbers or joint.number >= self.next_joint_number:
@@ -1416,6 +1430,7 @@ class AuthorProject(
             "material_profile": copy.deepcopy(self.material_profile),
             "segmented_variants": {vid: asdict(v) for vid, v in self.segmented_variants.items()},
             "curved_connectors": {cid: asdict(v) for cid, v in self.curved_connectors.items()},
+            "profile_subdivisions": copy.deepcopy(self.profile_subdivisions),
             "revision": self.revision,
             "next_part_number": self.next_part_number,
             "next_joint_number": self.next_joint_number,
@@ -1471,11 +1486,28 @@ class AuthorProject(
             and data["schema_version"] == 5
             and data.get("writer_version") == "0.3.0-pc008-segmented-variants-experimental"
         )
-        if upgrading or upgrading_b or upgrading_c or upgrading_d or upgrading_e:
+        upgrading_f = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 6
+            and data.get("writer_version") == "0.3.0-pc007b-curved-connectors-experimental"
+        )
+        upgrading_g = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 7
+            and data.get("writer_version") == "0.3.0-pc008-profile-provenance-experimental"
+        )
+        upgrading_early = upgrading or upgrading_b or upgrading_c or upgrading_d or upgrading_e
+        if upgrading_early or upgrading_g:
             if "curved_connectors" in data:
                 raise ProjectFormatError("Starší formát nezná kruhové spojovací prvky.")
             data["curved_connectors"] = {}
-        if upgrading_e:
+        if upgrading_early or upgrading_f:
+            if "profile_subdivisions" in data:
+                raise ProjectFormatError("Starší formát nezná historii dělení profilů.")
+            data["profile_subdivisions"] = {}
+        if upgrading_e or upgrading_f or upgrading_g:
             data["schema_version"] = SCHEMA_VERSION
         if upgrading or upgrading_b or upgrading_c or upgrading_d:
             if not isinstance(data.get("surfaces"), dict):
@@ -1585,6 +1617,7 @@ class AuthorProject(
             "material_profile",
             "segmented_variants",
             "curved_connectors",
+            "profile_subdivisions",
             "revision",
             "next_part_number",
             "next_joint_number",
@@ -1619,6 +1652,7 @@ class AuthorProject(
                 "next_attachment_number",
                 "acknowledgements",
                 "material_profile",
+                "profile_subdivisions",
             ):
                 setattr(project, key, copy.deepcopy(data[key]))
             for key, cls_type in (
@@ -1748,6 +1782,6 @@ def load_project(path):
         return LegacyProject(raw, source)
     project = AuthorProject.from_dict(data)
     project.loaded_from_schema = data.get("schema_version")
-    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4, 5)
+    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4, 5, 6, 7)
     project.loaded_source_path = str(source.resolve())
     return project
