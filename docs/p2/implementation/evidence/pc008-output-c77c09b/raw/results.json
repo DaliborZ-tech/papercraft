@@ -1,0 +1,99 @@
+{
+  "source_sha": "c77c09baa6115ed9681765324bcd259f33adc998",
+  "imported_writer": "C:\\Users\\dalib\\projects\\papercraft-segmented-output\\src\\archpapercraft\\exporter\\author_export.py",
+  "proof_type": "PINNED_PUBLIC_BACKEND_TO_ACTUAL_SVG_PDF; NOT_NATIVE_UI",
+  "fixtures": {
+    "line64": {
+      "snapshot_seconds": 0.14479009993374348,
+      "export_seconds": {
+        "cold": 3.7671274999156594,
+        "warm": 3.4410454998724163
+      },
+      "canonical_cache": {
+        "cold": {
+          "hits": 1,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        },
+        "warm": {
+          "hits": 3,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        }
+      },
+      "cold_warm_all_bytes_equal": true,
+      "source_binding_json_bytes": 483127,
+      "snapshot_json_bytes": 854977,
+      "actual_part_count": 64,
+      "target_status": "REJECTED",
+      "actual_material_position_error_max_mm": 1.8308431467685956e-05,
+      "actual_material_area_error_max_mm2": 1.0882759994714178e-05,
+      "file_bytes": {
+        ".author-export.json": 3508575,
+        "model.pdf": 50352,
+        "page-532f0ed7-1082-479a-924c-a74aff8c99da.svg": 828797,
+        "page-d5e3d664-7d2b-4d77-9d8d-a2c2bed6eb35.svg": 828815
+      },
+      "bundle_bytes": 5216539,
+      "sha256": {
+        ".author-export.json": "3a5420d6d58ed1879ff308f657ca23a3d6b376471389350e494d078cdd31b567",
+        "model.pdf": "3da6cd5dccf23e885d0c01dccff13b626ceb5efc78052e6535e828acface046a",
+        "page-532f0ed7-1082-479a-924c-a74aff8c99da.svg": "d4959ac569e6e8017a4daa9f66894ba268eeb768f312b52c62e0cf4ad100145f",
+        "page-d5e3d664-7d2b-4d77-9d8d-a2c2bed6eb35.svg": "096e5ebc24ab47501cbea29004d85e0026d3a0e8a938b9f032b06160c8e30f65"
+      }
+    },
+    "curved96": {
+      "snapshot_seconds": 0.2509261998347938,
+      "export_seconds": {
+        "cold": 6.243361699860543,
+        "warm": 5.189319399883971
+      },
+      "canonical_cache": {
+        "cold": {
+          "hits": 1,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        },
+        "warm": {
+          "hits": 3,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        }
+      },
+      "cold_warm_all_bytes_equal": true,
+      "source_binding_json_bytes": 878257,
+      "snapshot_json_bytes": 1591773,
+      "actual_part_count": 96,
+      "target_status": "REJECTED",
+      "actual_material_position_error_max_mm": 1.797230697616918e-05,
+      "actual_material_area_error_max_mm2": 6.5199600026664995e-06,
+      "file_bytes": {
+        ".author-export.json": 6641780,
+        "model.pdf": 52653,
+        "page-3392b628-3475-413c-ae1c-93b3b0a7ab74.svg": 1550290,
+        "page-ac06d69d-85b4-48a0-9ee8-c03cb4b68a50.svg": 1551340
+      },
+      "bundle_bytes": 9796063,
+      "sha256": {
+        ".author-export.json": "e6b6551e74b43107f1af05d694f4ad70ec648867e741ec002ff049ee24bda99e",
+        "model.pdf": "cf795561e75980136be341ec2db37c8bed5a52f225f28eceb0572c702cb08847",
+        "page-3392b628-3475-413c-ae1c-93b3b0a7ab74.svg": "d3efbc703a1b17c7c0830867ceab41566ef2c9790358d54a3ead62c6c81f0bac",
+        "page-ac06d69d-85b4-48a0-9ee8-c03cb4b68a50.svg": "aeb99f3eca5a23a8f110fb73a43dd1f39dcba11db3cdbfae2fdb4e7b881efa6e"
+      }
+    }
+  },
+  "source_file_sha256": {
+    "src\\archpapercraft\\authoring\\project.py": "a117d092807decab108bf3ee13d157c55e6a1cb83e0c97c193a98117c4913e40",
+    "src\\archpapercraft\\exporter\\author_export.py": "71eb6bbc6c3ac00afd036538a9216732f1d9bea3e8a8a5dabcb07095e16dfe38",
+    "src\\archpapercraft\\exporter\\segmented_output_validation.py": "9cc4d12bb8db0e2f02b5df01c2f1a9fb3e0dc430992c0a4f44c26df7fa3052b7"
+  },
+  "independent_review": "PENDING",
+  "native_ui": "NOT_RUN",
+  "async_export_and_cancel": "NOT_RUN_IN_THIS_BASE; ROOT_ASYNC_INTEGRATION_REQUIRED",
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN"
+}

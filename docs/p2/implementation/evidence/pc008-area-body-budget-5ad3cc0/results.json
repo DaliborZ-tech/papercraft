@@ -1,0 +1,34 @@
+{
+  "source_sha": "5ad3cc0ac53ab68a09d1ff7ccd39fe90ade7f7c4",
+  "imported_validator": "C:\\Users\\dalib\\projects\\papercraft-segmented-output\\src\\archpapercraft\\exporter\\segmented_output_validation.py",
+  "proof_type": "NUMERICAL_COMPARATOR_WITH_ACTUAL_SVG_AND_PDF_NOT_DOMAIN_BEND_NATIVE",
+  "body_mm2": 20000,
+  "tab_mm2": [
+    0,
+    2000
+  ],
+  "allowed_area_error_mm2": 0.02,
+  "opposite_body_vertex_delta_mm": 0.00021,
+  "resulting_body_area_error_mm2": 0.021,
+  "hinge_and_tab": "UNCHANGED",
+  "source_fence_and_area_binding": "EXPLICIT_MATH_FIXTURE_IN_TEST_NOT_APPLICATION_APPROVAL",
+  "raw_final_state": "SVG baseline valid, PDF opposite BODY vertex shifted by0.00021; negative rejected",
+  "full_domain_large_tab_false_safe": "NOT_PROVEN; bend-unresolved attempts are not a product defect",
+  "independent_review": "PENDING",
+  "new_user": "NOT_RUN",
+  "native_ui": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "sha256": {
+    "C:\\Users\\dalib\\projects\\papercraft-segmented-output\\src\\archpapercraft\\exporter\\segmented_output_validation.py": "118b9e7a28dd99d19f51c31edd9e450f376af1114a514f33196fd597c2565be7",
+    "C:\\Users\\dalib\\projects\\papercraft-segmented-output\\tests\\authoring\\test_segmented_export.py": "4b6b8baddd1eadf5d2bbfc4d5ec90b38dee2bb1b5c2c42696bfc85962db4b81d"
+  },
+  "actual_files_sha256": {
+    "initial-numeric-harness-fraction-token-failure.xml": "d46841aac6147c4bc2e84001f4dc335edb31a396b614340bcf8e4b987ab80572",
+    "pinned-numeric-2.xml": "c7baa78590aed1559ec13b542b33ade006835b56829725fc27903a01db37692e",
+    "targeted-numeric-and-actual-producer-5-pass.xml": "2c09b6a780f55c03913844dae529a502f4504a263418b3ade934f1b86d7a9d11",
+    "raw\\test_numeric_actual_files_tab_0\\actual.pdf": "34aa32555944427aab945759c555873b01b62bda850dec13d89811598712fb12",
+    "raw\\test_numeric_actual_files_tab_0\\actual.svg": "b96efb91c36619e11a12be6b6a44ec7426e836be00d47a86b1bdb68c01989b43",
+    "raw\\test_numeric_actual_files_tab_1\\actual.pdf": "b812e7843897e3a59d598105e4f17dedb7562316362f4f66bfee61ed74b9a4da",
+    "raw\\test_numeric_actual_files_tab_1\\actual.svg": "65a4c3d8babd67cd6d37429b371fcc9454c789ed225689c3ef53dd4405210e13"
+  }
+}

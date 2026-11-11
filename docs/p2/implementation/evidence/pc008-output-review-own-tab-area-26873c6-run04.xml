@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.057" timestamp="2026-11-11T13:56:01.713057+01:00" hostname="Dalibor"><testcase classname="" name="test_tab_does_not_relax_source_body_area_budget" time="0.203"><failure message="AssertionError: [('warning', 'SMALL_TAB'), ('warning', 'MATERIAL_CLEARANCE_UNVERIFIED'), ('error', 'BEND_UNRESOLVED')]&#10;assert False&#10; +  where False = all(&lt;generator object source.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001DDA0435A40&gt;)">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001DDE0CA6D80&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1380/test_tab_does_not_relax_source0')
+
+    def test_tab_does_not_relax_source_body_area_budget(monkeypatch,tmp_path):
+&gt;       p,s,v,pid=source(large=True,tab=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\projects\papercraft-segmented-output\docs\p2\implementation\evidence\pc008-output-review-own.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+large = True, tab = True
+
+    def source(*,large=False,tab=False):
+        p=AuthorProject.new(scale=1)
+        x,y,z=(400,.02,1200) if large else (16,8,12)
+        a=p.add_profile([[0,0],[x,0]],closed=False)
+        b=p.add_profile([[0,0],[x,y]],closed=False,plane=dict(origin=[0,0,z],u=[1,0,0],v=[0,1,0]))
+        s=p.add_loft(a,b,correspondences=[dict(first_segment_id=p.profiles[a].segments[0].id,
+            second_segment_id=p.profiles[b].segments[0].id,first_interval=[0,1],second_interval=[0,1])])
+        limit=.25 if large else .26
+        preview=p.preview_segmented_variant(s,max_deviation_mm=limit)
+        assert preview['can_confirm'],preview['message']
+        v=p.add_segmented_variant(s,max_deviation_mm=limit,preview_digest=preview['preview_digest'])
+        rows=p.segmented_variants[v].triangle_bindings
+        p.pages[0].width_mm=8000 if large else 210
+        p.pages[0].height_mm=8000 if large else 297
+        p.set_placements({r['part_id']:dict(page_id=p.pages[0].id,x_mm=2000+(i%2)*3000 if large else 25+(i%4)*35,
+            y_mm=2000+(i//2)*3000 if large else 25+(i//4)*35) for i,r in enumerate(rows)})
+        owner=None
+        if tab:
+            p.set_material_profile(crease_zone_mm=.05);p.recompute()
+            if large:
+                r=rows[0];edge=p.profiles[r['profile_id']].segments[0].id
+                receiver=p.add_profile([[0,0],[x,0],[x,20],[0,20]])
+                target=p.add_surface(receiver)
+                joint=p.place_and_connect_edges(r['surface_id'],edge,target,p.profiles[receiver].segments[0].id,angle_deg=90)
+                p.set_placement(p.surfaces[target].part_id,p.pages[0].id,7000,1000)
+            else:
+                uses=p.segmented_variants[v].paired_seams[0]['uses'];byid={r['id']:r for r in rows}
+                r,t=(byid[u['triangle_id']] for u in uses)
+                joint=p.connect_edges(r['surface_id'],uses[0]['edge_id'],t['surface_id'],uses[1]['edge_id'])
+            p.set_tab(joint,owner=r['surface_id'],width_mm=.3,shape='triangle');owner=r['part_id']
+        issues=p.validate_layout()
+&gt;       assert all(i.severity=='warning' for i in issues),[(i.severity,i.code) for i in issues]
+E       AssertionError: [('warning', 'SMALL_TAB'), ('warning', 'MATERIAL_CLEARANCE_UNVERIFIED'), ('error', 'BEND_UNRESOLVED')]
+E       assert False
+E        +  where False = all(&lt;generator object source.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001DDA0435A40&gt;)
+
+..\..\..\..\projects\papercraft-segmented-output\docs\p2\implementation\evidence\pc008-output-review-own.py:44: AssertionError</failure></testcase></testsuite></testsuites>

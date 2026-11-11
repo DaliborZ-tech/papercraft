@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="2.071" timestamp="2026-11-11T13:20:47.860345+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmented_export" name="test_line_and_curved_variants_without_planar_curve_registry_get_actual_guards[line]" time="1.058"><error message="failed on setup with &quot;archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Nelze doložit odvozený materiál: Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají skutečnému zdrojovému projektu.&quot;">data = {'project_id': '39a23aa9-c14d-4f79-89fa-e77ba9eeb12e', 'revision': 70, 'construction_checks': {'segmented_source_proje...c258e56192e264e3511b930e53cfc9de3fd557d7c5b3f99d38b1721f9b1ba', 'connector_bends': {}, ...}, 'scale_label': '1:1', ...}
+
+    def validate_segmented_snapshot(data):
+        """Do not permit D guards to be skipped merely because curve_profiles={} ."""
+        checks, coverage = data.get("construction_checks", {}), data.get("coverage", {})
+        reports = checks.get("segmented_variants", {})
+        declared = coverage.get("expected_segmented_variant_ids", [])
+        tagged = any(
+            "flattening" in part for page in data.get("pages", []) for part in page.get("parts", [])
+        )
+        has_reference = bool(
+            checks.get("reference_targets")
+            or coverage.get("reference_surface_ids")
+            or coverage.get("inactive_variant_surface_ids")
+        )
+        source = checks.get("segmented_source_project")
+        if not (reports or declared or tagged or has_reference or source is not None):
+            return {}
+        try:
+            if (
+                not isinstance(reports, dict)
+                or not isinstance(declared, list)
+                or len(declared) != len(set(declared))
+                or set(reports) != set(declared)
+            ):
+                raise ValueError("Odvozené generace nemají úplný očekávaný registr.")
+            if not isinstance(source, dict) or not source.get("segmented_variants"):
+                raise ValueError("Chybí úplný skutečný zdrojový projekt odvozené varianty.")
+            source_json = _json(source)
+            canonical = json.loads(_canonical_snapshot(source_json))
+            if _json(data) != _json(canonical):
+&gt;               raise ValueError(
+                    "Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají "
+                    "skutečnému zdrojovému projektu."
+                )
+E               ValueError: Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají skutečnému zdrojovému projektu.
+
+src\archpapercraft\exporter\segmented_output_validation.py:120: ValueError
+
+The above exception was the direct cause of the following exception:
+
+source = ('line', {'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3.0-pc008-segmented-variants-experimental', ...})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x000001291856EB40&gt;, _basetemp=WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1355'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def bundle(source, tmp_path_factory):
+        p = project(source)
+        snapshot = p.snapshot()
+        directory = tmp_path_factory.mktemp("segmented-export") / "bundle"
+&gt;       author_export.export_all(snapshot, directory)
+
+tests\authoring\test_segmented_export.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\exporter\author_export.py:1234: in export_all
+    _validate(data)
+src\archpapercraft\exporter\author_export.py:563: in _validate
+    validate_segmented_snapshot(data)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+data = {'project_id': '39a23aa9-c14d-4f79-89fa-e77ba9eeb12e', 'revision': 70, 'construction_checks': {'segmented_source_proje...c258e56192e264e3511b930e53cfc9de3fd557d7c5b3f99d38b1721f9b1ba', 'connector_bends': {}, ...}, 'scale_label': '1:1', ...}
+
+    def validate_segmented_snapshot(data):
+        """Do not permit D guards to be skipped merely because curve_profiles={} ."""
+        checks, coverage = data.get("construction_checks", {}), data.get("coverage", {})
+        reports = checks.get("segmented_variants", {})
+        declared = coverage.get("expected_segmented_variant_ids", [])
+        tagged = any(
+            "flattening" in part for page in data.get("pages", []) for part in page.get("parts", [])
+        )
+        has_reference = bool(
+            checks.get("reference_targets")
+            or coverage.get("reference_surface_ids")
+            or coverage.get("inactive_variant_surface_ids")
+        )
+        source = checks.get("segmented_source_project")
+        if not (reports or declared or tagged or has_reference or source is not None):
+            return {}
+        try:
+            if (
+                not isinstance(reports, dict)
+                or not isinstance(declared, list)
+                or len(declared) != len(set(declared))
+                or set(reports) != set(declared)
+            ):
+                raise ValueError("Odvozené generace nemají úplný očekávaný registr.")
+            if not isinstance(source, dict) or not source.get("segmented_variants"):
+                raise ValueError("Chybí úplný skutečný zdrojový projekt odvozené varianty.")
+            source_json = _json(source)
+            canonical = json.loads(_canonical_snapshot(source_json))
+            if _json(data) != _json(canonical):
+                raise ValueError(
+                    "Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají "
+                    "skutečnému zdrojovému projektu."
+                )
+            bindings = {}
+            for page_index, page in enumerate(data["pages"]):
+                for part in page["parts"]:
+                    flattening = part.get("flattening")
+                    if flattening is None:
+                        continue
+                    if flattening.get("mode") != "APPROXIMATE":
+                        raise ValueError("Odvozený materiál nesmí být vydán za přesný původní cíl.")
+                    vid = flattening["variant_id"]
+                    report = reports[vid]
+                    if report["status"] != "APPROXIMATE" or report["mode"] != "APPROXIMATE":
+                        raise ValueError("Odvozená varianta není aktuální potvrzená aproximace.")
+                    row = next(
+                        row for row in report["triangle_bindings"] if row["part_id"] == part["id"]
+                    )
+                    bindings[part["id"]] = {
+                        "part": part,
+                        "page_index": page_index,
+                        "flattening": flattening,
+                        "report": report,
+                        "binding": row,
+                        "source_project_digest": hashlib.sha256(source_json.encode()).hexdigest(),
+                    }
+            return bindings
+        except (
+            ValueError,
+            KeyError,
+            TypeError,
+            IndexError,
+            StopIteration,
+            ArithmeticError,
+            RecursionError,
+        ) as exc:
+&gt;           raise CurveOutputError(
+                "Nelze doložit odvozený materiál: " + str(exc),
+                report={"status": "UNRESOLVED", "scope": "SEGMENTED_SOURCE_AND_MATERIAL_CLOSURE"},
+            ) from exc
+E           archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Nelze doložit odvozený materiál: Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají skutečnému zdrojovému projektu.
+
+src\archpapercraft\exporter\segmented_output_validation.py:157: CurveOutputError</error></testcase></testsuite></testsuites>
