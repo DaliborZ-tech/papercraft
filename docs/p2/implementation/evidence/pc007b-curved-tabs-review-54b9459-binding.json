@@ -1,0 +1,8 @@
+{
+  "source_pin": "54b9459c250d0c27a4528ab72983aac0b5bfd58e",
+  "evidence_head": "f577c36c0269b86173dbc01b5af476b647d12811",
+  "actual_module": "C:\\Users\\dalib\\projects\\papercraft-curved-tabs\\src\\archpapercraft\\authoring\\curved_tabs.py",
+  "sha256": "f9e5c77a3a07487e24c5b735072f5d74c10ac46083b7c95d412035426797de78",
+  "reviewer_script_sha256": "2bbbebcea326ea3c7c42871422656623ba411734d0675ef2dbe699e1d51b054a",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]"
+}
