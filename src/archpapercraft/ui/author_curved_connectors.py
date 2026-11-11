@@ -581,6 +581,16 @@ class CurvedConnectorDialog(QDialog):
         self.timer.start()
 
     def _refresh_labels(self):
+        if not self._owner_available():
+            self.compute.setEnabled(False)
+            self.apply_button.setEnabled(False)
+            self.front.setText("Původní plášť už v projektu není.")
+            self.feedback.setText(
+                "Původní plášť byl odstraněn. Zavřete tento návrh "
+                "a znovu vyberte existující plášť; starý výsledek se nepoužije."
+            )
+            return
+        self.compute.setEnabled(True)
         receiver = self.project.surfaces.get(self.receiver.currentData())
         owner_part = self.project.parts[self.project.part_for_surface(self.owner_id)]
         contact = self.receiver_side.currentData()
@@ -601,6 +611,10 @@ class CurvedConnectorDialog(QDialog):
         )
         self.fields["nominal_base_mm"].setEnabled(self.width_mode.currentData() == "width")
         self.fields["gap_mm"].setEnabled(self.width_mode.currentData() == "gap")
+
+    def _owner_available(self):
+        surface = self.project.surfaces.get(self.owner_id)
+        return surface is not None and surface.part_id in self.project.parts
 
     def edit_material(self):
         if not self.commit_fields():
@@ -718,6 +732,9 @@ class CurvedConnectorDialog(QDialog):
         }
 
     def request_preview(self):
+        if not self._owner_available():
+            self.invalidate()
+            return False
         if self._closed or not self.commit_fields():
             return False
         request = self.parameters()
@@ -816,9 +833,10 @@ class CurvedConnectorDialog(QDialog):
         if self.project.revision != self._revision:
             self._revision = self.project.revision
             self.invalidate()
-            self.feedback.setText(
-                "Projekt se změnil. Zkontrolujte aktuální zdroje a spočítejte nový náhled."
-            )
+            if self._owner_available():
+                self.feedback.setText(
+                    "Projekt se změnil. Zkontrolujte aktuální zdroje a spočítejte nový náhled."
+                )
 
     def cancel_preview(self):
         self.invalidate()
@@ -975,6 +993,8 @@ class CurvedConnectorPanel(QWidget):
             return
         cid = self.sets.currentData()
         if not self.host._commit_pending_input():
+            with QSignalBlocker(self.sets):
+                self.sets.setCurrentIndex(max(0, self.sets.findData(self.current_id)))
             return
         self.current_id = cid
         if cid:
@@ -996,9 +1016,29 @@ class CurvedConnectorPanel(QWidget):
             row = next(
                 (r for r in self.packet["all_tabs"] if r["id"] == self.tabs.currentData()), None
             )
-            self.toggle.setText(
-                "Vypnout vybranou chlopeň" if row and row["enabled"] else "Zapnout vybranou chlopeň"
-            )
+            record = self.host.project.curved_connectors[self.current_id]
+            available = bool(row and row["in_current_count"] and record.enabled)
+            self.toggle.setEnabled(available)
+            if not row or not row["in_current_count"]:
+                self.toggle.setText("Chlopeň je mimo aktuální počet")
+                self.toggle.setToolTip(
+                    "Nejprve výslovně zvyšte počet v úpravě sady. "
+                    "Uložená volba chlopně zůstává zachovaná."
+                )
+            elif not record.enabled:
+                self.toggle.setText("Celá sada je vypnutá")
+                self.toggle.setToolTip(
+                    "Nejprve výslovně zapněte celou sadu. Jednotlivé uložené volby se tím nemění."
+                )
+            else:
+                enabled = record.tab_overrides.get(row["id"], {}).get("enabled", True)
+                self.toggle.setText(
+                    "Vypnout vybranou chlopeň" if enabled else "Zapnout vybranou chlopeň"
+                )
+                self.toggle.setToolTip(
+                    "Změnit pouze autorskou volbu této chlopně; "
+                    "počet a stav sady zůstanou zachované."
+                )
             loop = (
                 row["paper_native_loop"]
                 if row and self.packet["status"] == "CERTIFIED_APPROXIMATE"
@@ -1039,6 +1079,13 @@ class CurvedConnectorPanel(QWidget):
             return
         sid, cid = self.tabs.currentData(), self.current_id
         record = self.host.project.curved_connectors[cid]
+        if (
+            not record.enabled
+            or sid not in record.slot_ids
+            or record.slot_ids.index(sid) >= record.parameters["count"]
+        ):
+            self.show_slot()
+            return
         enabled = record.tab_overrides.get(sid, {}).get("enabled", True)
         self.host.run(
             lambda: self.host.controller.execute(
@@ -1058,6 +1105,11 @@ class CurvedConnectorPanel(QWidget):
                     lambda p: p.update_curved_connector(cid, enabled=enabled),
                 )
             )
+        else:
+            with QSignalBlocker(self.set_enabled):
+                self.set_enabled.setChecked(
+                    self.host.project.curved_connectors[self.current_id].enabled
+                )
 
     def remove_set(self):
         if self.current_id and self.host._commit_pending_input():

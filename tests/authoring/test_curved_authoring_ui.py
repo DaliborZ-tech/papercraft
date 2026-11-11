@@ -566,3 +566,171 @@ def test_actual_dialog_supported_circular_bodies_and_both_rims_are_approximate_c
     assert len(geometry["all_tabs"]) == 12
     assert geometry["all_tabs"][0]["assembled_display"]["hinge_world"][0][2] == pytest.approx(z)
     assert project.loft_status(owner)["status"] == "EXACT"
+
+
+def two_authored_rim_sets(window, source):
+    project, owner, receiver = restore(source)
+    first = project.add_curved_connector(
+        owner, "first", receiver, receiver_side="inside", nominal_base_mm=0.24, min_glue_area_mm2=1
+    )
+    top = project.add_surface(circle(project, 10, 30))
+    second = project.add_curved_connector(
+        owner, "second", top, receiver_side="outside", nominal_base_mm=0.24, min_glue_area_mm2=1
+    )
+    window.controller.project = project
+    window.refresh()
+    window.select_surface(owner)
+    panel = window.curved_panel
+    panel.sets.setCurrentIndex(panel.sets.findData(first))
+    return project, panel, first, second
+
+
+def invalid_vertex_input(window, qtbot):
+    field = window.vertex_x.lineEdit()
+    field.setFocus()
+    field.selectAll()
+    qtbot.keyClick(field, Qt.Key.Key_Backspace)
+    assert not window.vertex_x.hasAcceptableInput()
+    return field.text()
+
+
+def test_failed_numeric_preflight_restores_set_choice_and_keeps_raw_input_owner_context(
+    window, source, qtbot
+):
+    project, panel, first, second = two_authored_rim_sets(window, source)
+    before = project.to_dict(validate=False)
+    owner, selected_tab, relation = (
+        window.selected_surface,
+        panel.tabs.currentData(),
+        window.viewport.relation,
+    )
+    tree = window.tree.currentItem()
+    raw = invalid_vertex_input(window, qtbot)
+    panel.sets.setCurrentIndex(panel.sets.findData(second))
+    assert panel.current_id == panel.sets.currentData() == first
+    assert project.to_dict(validate=False) == before
+    assert window.selected_surface == owner and window.tree.currentItem() is tree
+    assert panel.tabs.currentData() == selected_tab and window.viewport.relation == relation
+    assert window.vertex_x.lineEdit().text() == raw
+    assert not window.vertex_x.hasAcceptableInput()
+
+
+def test_failed_numeric_preflight_restores_whole_set_checkbox_without_touching_authored_state(
+    window, source, qtbot
+):
+    project, panel, first, _second = two_authored_rim_sets(window, source)
+    before = project.to_dict(validate=False)
+    owner, selected_tab, relation = (
+        window.selected_surface,
+        panel.tabs.currentData(),
+        window.viewport.relation,
+    )
+    assert project.curved_connectors[first].enabled and panel.set_enabled.isChecked()
+    raw = invalid_vertex_input(window, qtbot)
+    panel.set_enabled.setChecked(False)
+    assert panel.set_enabled.isChecked() is project.curved_connectors[first].enabled is True
+    assert panel.current_id == panel.sets.currentData() == first
+    assert project.to_dict(validate=False) == before
+    assert window.selected_surface == owner and panel.tabs.currentData() == selected_tab
+    assert window.viewport.relation == relation
+    assert window.vertex_x.lineEdit().text() == raw and not window.vertex_x.hasAcceptableInput()
+
+
+def test_current_circular_connector_guidance_matches_real_certification_and_next_step(
+    window, positive
+):
+    state, owner, _receiver, cid = positive
+    window.controller.project = AuthorProject.from_dict(copy.deepcopy(state))
+    window.refresh()
+    window.select_surface(owner)
+    window.curved_panel.sets.setCurrentIndex(window.curved_panel.sets.findData(cid))
+    window.update_guidance()
+    assert window.project.curved_connector_status(cid)["status"] == "CERTIFIED_APPROXIMATE"
+    assert "digitálně doložená APROXIMACE" in window.hint.text()
+    assert "zatím nemá ověřený spoj" not in window.hint.text()
+    assert "Ctrl+R" in window.hint.text() and "P3" in window.hint.text()
+
+
+def test_circular_guidance_does_not_grant_current_certification_to_stale_or_unresolved(
+    window, positive, monkeypatch
+):
+    state, owner, _receiver, cid = positive
+    window.controller.project = AuthorProject.from_dict(copy.deepcopy(state))
+    window.refresh()
+    window.select_surface(owner)
+    window.curved_panel.sets.setCurrentIndex(window.curved_panel.sets.findData(cid))
+    window.project.update_curved_connector(cid, nominal_base_mm=0.25)
+    window.refresh()
+    assert window.project.curved_connector_status(cid)["status"] == "STALE"
+    assert "čekají na aktuální přepočet" in window.hint.text()
+    assert "digitálně doložená" not in window.hint.text()
+    # This last branch tests consuming an explicit public status, not geometry.
+    monkeypatch.setattr(
+        window.project, "curved_connector_status", lambda _cid: {"status": "UNRESOLVED"}
+    )
+    window.update_guidance()
+    assert "není digitálně doložený" in window.hint.text()
+    assert "digitálně doložená APROXIMACE" not in window.hint.text()
+    assert "opravte" in window.hint.text() and "P3" in window.hint.text()
+
+
+@pytest.mark.parametrize("running", [False, True])
+def test_deleted_dialog_owner_invalidates_safely_and_discards_any_late_preview(
+    qtbot, source, running
+):
+    entered, release = threading.Event(), threading.Event()
+
+    def callback(project, request):
+        entered.set()
+        assert release.wait(5)
+        return unresolved(project, request)
+
+    project, widget = make_dialog(qtbot, source, callback if running else unresolved)
+    depth = widget.fields["depth_mm"].value()
+    try:
+        if running:
+            widget.request_preview()
+            qtbot.waitUntil(entered.is_set)
+        from archpapercraft.authoring.editing import delete_material_part
+
+        delete_material_part(project, project.part_for_surface(widget.owner_id))
+        widget._source_changed()
+        assert not widget.compute.isEnabled() and not widget.apply_button.isEnabled()
+        assert widget._packet is None and widget._pending is None
+        assert "Zavřete tento návrh" in widget.feedback.text()
+        assert widget.fields["depth_mm"].value() == depth
+        assert widget.request_preview() is False
+    finally:
+        release.set()
+    finish(qtbot, widget)
+    assert widget._packet is None and not widget.compute.isEnabled()
+    assert "Zavřete tento návrh" in widget.feedback.text()
+
+
+@pytest.mark.parametrize("inactive", ["outside_count", "whole_set_disabled"])
+def test_inactive_slot_action_explains_context_without_changing_latent_override(
+    window, positive, inactive
+):
+    state, owner, _receiver, cid = positive
+    project = AuthorProject.from_dict(copy.deepcopy(state))
+    if inactive == "outside_count":
+        project.update_curved_connector(cid, count=8)
+        index = 10
+    else:
+        project.update_curved_connector(cid, enabled=False)
+        index = 2
+    window.controller.project = project
+    window.refresh()
+    window.select_surface(owner)
+    panel = window.curved_panel
+    panel.sets.setCurrentIndex(panel.sets.findData(cid))
+    panel.tabs.setCurrentIndex(index)
+    before = project.to_dict(validate=False)
+    assert not panel.toggle.isEnabled()
+    assert (
+        "mimo aktuální počet" if inactive == "outside_count" else "sada je vypnutá"
+    ) in panel.toggle.text()
+    assert panel.toggle.toolTip()
+    panel.toggle.click()
+    panel.toggle_tab()  # The public handler also guards obsolete/action-disabled calls.
+    assert project.to_dict(validate=False) == before
