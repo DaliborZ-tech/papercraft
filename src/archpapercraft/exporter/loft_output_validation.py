@@ -130,9 +130,15 @@ def validate_loft_snapshot(data):
     has_curved = any(report.get("source_binding", {}).get("curved_material_inputs")
                      for report in reports.values() if isinstance(report, dict))
     if has_curved:
-        from archpapercraft.authoring.curved_connectors import validate_curved_snapshot_binding
+        from archpapercraft.authoring.errors import ValidationError
 
-        validate_curved_snapshot_binding(data)
+        try:
+            from archpapercraft.authoring.curved_connectors import validate_curved_snapshot_binding
+
+            validate_curved_snapshot_binding(data)
+        except (ValidationError, ValueError, TypeError, KeyError, ImportError) as exc:
+            raise CurveOutputError(
+                "Nelze ověřit úplné zdroje kruhového materiálu: " + str(exc)) from exc
     for sid, report in reports.items():
         try:
             if not isinstance(report, dict) or report.get("status") != "EXACT":

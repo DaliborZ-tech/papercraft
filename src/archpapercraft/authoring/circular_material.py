@@ -449,6 +449,8 @@ def compose_circular_rim_tabs(project, bare_part, slots):
         if (
             not record
             or record["owner_surface_id"] != sid
+            or slot["owner_surface_id"] != sid
+            or slot["tab_id"] not in record["slot_ids"]
             or record["rim_side"] != side
             or record["receiver_surface_id"] != slot["receiver_surface_id"]
             or slot["source_digest"] != fingerprint
@@ -499,6 +501,8 @@ def compose_circular_rim_tabs(project, bare_part, slots):
         )
         params = record["parameters"]
         override = record["tab_overrides"].get(tab.tab_id, {})
+        index = record["slot_ids"].index(tab.tab_id)
+        center = float(Q(2 * index + 1, 2 * params["count"]))
         if (
             tab.tab_id != slot["tab_id"]
             or tab.owner_id != sid
@@ -507,6 +511,9 @@ def compose_circular_rim_tabs(project, bare_part, slots):
             or _q(tab.depth_mm) != _q(params["depth_mm"])
             or _q(tab.relief_mm) != _q(params["relief_mm"])
             or _q(tab.tip_offset_mm) != _q(override.get("tip_offset_mm", 0))
+            or slot["source_turn"] != center
+            or tab.contact_side != "back"
+            or _q(tab.requested_min_gap_mm) != _q(params.get("gap_mm") or 0)
             or params["nominal_base_mm"] is not None
             and _q(tab.nominal_base_mm) != _q(params["nominal_base_mm"])
         ):
