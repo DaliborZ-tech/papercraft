@@ -1,0 +1,30 @@
+{
+  "source_commit": "62cb8bc3d84c5c3edf0c7faf08965ea5eef4b625",
+  "backend_dependency_provisional": "80493e6e9e48cb22548b9a55c2116d850e8e73f3",
+  "actual_module": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui\\src\\archpapercraft\\ui\\author_curved_connectors.py",
+  "sha256": {
+    "src/archpapercraft/ui/author_curved_connectors.py": "40526359376ccb5ca4ccbe5cecd58d23e2cabc3fb784b52d10f9203324a03996",
+    "src/archpapercraft/ui/author_window.py": "efa9324ca245fa4b00a972f9d3134309dab40f279ab4a854a6401d2c2bd545d6",
+    "src/archpapercraft/ui/author_viewport.py": "462185d55b10eda4f9879ca53fcc549e4dd81a2f162e0a4b185156bf49c065db",
+    "src/archpapercraft/ui/author_paper.py": "c304be052ebf68dd721b0e3ecf7fd131f3bd115aafb1e2a243257fbd8751087e",
+    "tests/authoring/test_curved_authoring_ui.py": "565c7ace4fd810deea5e8ced15f3593ecad46decd435c02205e57cd1f383c340"
+  },
+  "python": "3.12.15",
+  "pyside6": "6.12.0",
+  "qt_platform": "offscreen",
+  "junit_summary": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "47",
+    "time": "43.399",
+    "timestamp": "2026-11-11T16:53:14.419034+01:00",
+    "hostname": "Dalibor"
+  },
+  "human_participants": 0,
+  "human_usability": "NOT_RUN",
+  "native_C_workflow": "NOT_RUN_ROOT_OWNS_DESKTOP",
+  "physical_P3": "NOT_RUN",
+  "independent_UI_review": "PENDING"
+}
