@@ -1,0 +1,11 @@
+﻿{
+    "follow_up":  "run02: same source full 1175 PASS/187.61s with full verbose log; no tests omitted or tolerances changed",
+    "observed_stack":  "Garbage-collecting; dataclasses._asdict_inner/asdict; loft_surface._analysis_keys; validate_loft_world_geometry; project.validate; commands.command; loft_surface.preview_loft",
+    "exit_code":  1,
+    "cause":  "UNRESOLVED; do not describe as a diagnosed product or harness cause",
+    "command":  "python -m pytest -q -o junit_family=legacy --junitxml=docs/p2/implementation/evidence/pc007a-integrated-suite-73f3437-run01.xml",
+    "observed_progress":  "above 55 percent; no final JUnit was produced",
+    "evidence_limit":  "This observation preserves the tool result summary. Full stderr was not persisted; this is not a verbatim traceback.",
+    "status":  "ABORTED_WINDOWS_ACCESS_VIOLATION",
+    "source_sha":  "73f3437d07891eef7ac05f8610e16868b4707c12"
+}
