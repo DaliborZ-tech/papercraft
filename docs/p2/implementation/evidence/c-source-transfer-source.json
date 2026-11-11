@@ -1,0 +1,28 @@
+{
+  "source_parent": "d26c4c16ea259c55bdbedd0472a3faebaf5b8286",
+  "new_source_identity": "sha256 per file; parent is not new source commit",
+  "python": "3.12.15",
+  "actual_imports": {
+    "chart": "C:\\Users\\dalib\\projects\\papercraft-curved-tabs-transfer\\src\\archpapercraft\\authoring\\curved_tabs_chart.py",
+    "transfer": "C:\\Users\\dalib\\projects\\papercraft-curved-tabs-transfer\\src\\archpapercraft\\authoring\\curved_tabs_transfer.py"
+  },
+  "sha256": {
+    "src/archpapercraft/authoring/curved_tabs_chart.py": "a9fe8911a8a5d546105437f5c4287ebc5a50e75b0148183b5d2eccc8ad09a878",
+    "src/archpapercraft/authoring/curved_tabs_transfer.py": "9c8fff6754f181a03cb0fb4e844c728a90c964db4065b85402effdf1ebf407cb",
+    "tests/authoring/test_curved_tabs_chart.py": "35dab21ef709b413a924535123fea0ae5ff8f82c4ed955e9dc52c9439fd31123",
+    "tests/authoring/test_curved_tabs_transfer.py": "3523e1292533a77f3151c0060ae3a18ba68a1c7e99fb329d718719ec34e45ce7",
+    "src/archpapercraft/authoring/curved_tabs.py": "8c65ea9f01249185f3b0d75e5e580b87308eac8a41783300ca93f0cfc7ad26ed",
+    "src/archpapercraft/authoring/curve_topology.py": "7edd0a44ca4c1d3e9ab1f11dc8a24feef4f2c2ffb867cae2dccccfe001c9b8db",
+    "docs/p2/implementation/evidence/c-source-chart-initial.xml": "705d203bc213ce9573d79bcba42a66a141b8d28711e1bc26ff91b3821d6356e2",
+    "docs/p2/implementation/evidence/c-source-transfer-combined.xml": "0a2dbeefa5daab732b4488950caaa2489ecd429f3f428f8c820c449546b0438a",
+    "docs/p2/implementation/evidence/c-source-transfer-final.xml": "abc671319139598416bd5867e25975b97980b45231f5f229ffd736b418c328d9",
+    "docs/p2/implementation/evidence/c-source-transfer-freeze.xml": "39edaaa6cb2989355addca097d1d3291dd4b7daa414c37d69e3abe7b45f191da",
+    "docs/p2/implementation/evidence/c-source-transfer-initial.xml": "2ce0d7090ca5827cd1341976244aa89acce4577a23b43ce86c3ffe903d5b4a1b",
+    "docs/p2/implementation/evidence/c-source-transfer-per-slot.xml": "fae0f8269949c3d3d147d3de70f9f9268b9aeca4e5e39916ef20cfc1bdcbb6b7",
+    "docs/p2/implementation/evidence/c-source-transfer-pose.xml": "8bab56bb76b9559eeea50126c739f24964564cdfc77249d5c7047c05f33a8f58"
+  },
+  "independent_review": "PENDING",
+  "scope": "pure conditional math only; current registry/native union/cap binding are caller conditions; no UI/physical claim",
+  "targeted_tests": 58,
+  "related_tests": 133
+}
