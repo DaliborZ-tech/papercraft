@@ -54,6 +54,7 @@ from .paper import (
     ROLES,
     build_part,
     edge_world,
+    part_input,
     validate_joint_contact,
     validate_layout,
 )
@@ -1454,6 +1455,14 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                 project.parts[pid] = _record(MaterialPart, raw)
             project.pages = [_record(Page, p) for p in data["pages"]]
             project.validate()
+            for part in project.parts.values():
+                if (
+                    any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids)
+                    and part.input_digest != part_input(project, part)
+                ):
+                    # Keep the historical cache and author's frame/layout for
+                    # inspection. Only explicit recompute replaces its CUT.
+                    part.stale = True
             return project
         except (
             ValidationError,

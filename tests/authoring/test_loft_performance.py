@@ -97,6 +97,8 @@ def test_canonical_material_cache_is_detached_and_actual_cache_poison_is_compare
     for command in p.parts[pid].paths["CUT"][0]["commands"]:
         for index in range(1, len(command), 2):
             command[index] += 0.2
+    p = AuthorProject.from_dict(p.to_dict())
+    assert not p.parts[pid].stale  # A current capability is not a cache-repair bypass.
     assert "INVALID_CACHE" in [issue.code for issue in p.validate_layout()]
     with pytest.raises(ValidationError):
         p.snapshot()
@@ -193,6 +195,70 @@ def test_bezier_extrusion_cut_is_compact_but_source_parameter_map_remains_detail
     report = loft_surface.analysis(p, p.surfaces[sid])
     assert len(report["native"]["patches"][0]["first"]["segments"]) > 10
     assert report["area"]["status"] == "CERTIFIED"
+
+
+def test_older_loft_cut_contract_loads_stale_without_rewriting_author_work(tmp_path, monkeypatch):
+    from dataclasses import asdict
+
+    from archpapercraft.authoring import load_project
+
+    old_contract = "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1"
+    current_contract = loft_surface.LOFT_PAPER_CONTRACT
+    p, sid, _, _ = small_loft()
+    pid = p.part_for_surface(sid)
+    p.set_placement(
+        pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True
+    )
+    # Construct a preserved historical cache: same exact material locus but
+    # redundant L commands and the pre-compaction capability digest.
+    with monkeypatch.context() as legacy:
+        legacy.setattr(loft_surface, "LOFT_PAPER_CONTRACT", old_contract)
+        p.recompute()
+    commands = p.parts[pid].paths["CUT"][0]["commands"]
+    old_commands = [commands[0]]
+    start = commands[0][1:]
+    for command in commands[1:]:
+        if command[0] == "L":
+            end = command[1:]
+            old_commands.append(["L", *[(a + b) / 2 for a, b in zip(start, end)]])
+            start = end
+        old_commands.append(command)
+    p.parts[pid].paths["CUT"][0]["commands"] = old_commands
+    historical = p.to_dict()
+    original = copy.deepcopy(historical)
+    source = tmp_path / "pre-compaction.apcraft"
+    raw = json.dumps(historical, ensure_ascii=False).encode("utf-8")
+    source.write_bytes(raw)
+
+    loaded = load_project(source)
+    assert loaded.parts[pid].stale
+    status = loaded.loft_status(sid)
+    assert status["status"] == "EXACT"  # Source remains exactly developable.
+    assert status["paper_stale"] and status["paper_contract"] == current_contract
+    assert [issue.code for issue in loaded.validate_layout()] == ["STALE"]
+    with pytest.raises(ValidationError):
+        loaded.snapshot()
+    expected = copy.deepcopy(historical)
+    expected["parts"][pid]["stale"] = True
+    assert loaded.to_dict() == expected  # No implicit CUT/frame/ID/layout repair.
+    assert historical == original and source.read_bytes() == raw
+
+    loaded.recompute()
+    assert loaded.loft_status(sid)["paper_contract"] == current_contract
+    assert not loaded.loft_status(sid)["paper_stale"]
+    assert not loaded.parts[pid].stale and not loaded.validate_layout()
+    assert len(loaded.parts[pid].paths["CUT"][0]["commands"]) < len(old_commands)
+    assert loaded.to_dict()["profiles"] == historical["profiles"]
+    assert loaded.to_dict()["surfaces"] == historical["surfaces"]
+    assert asdict(loaded.parts[pid].frame) == historical["parts"][pid]["frame"]
+    assert loaded.to_dict()["placements"] == historical["placements"]
+    assert loaded.parts.keys() == historical["parts"].keys()
+    assert loaded.snapshot()["coverage"]["expected_part_ids"] == [pid]
+    assert source.read_bytes() == raw
+    loaded.save(tmp_path / "recomputed-copy.apcraft")
+    restored = load_project(tmp_path / "recomputed-copy.apcraft")
+    assert restored.to_dict() == loaded.to_dict()
+    assert not restored.parts[pid].stale and not restored.loft_status(sid)["paper_stale"]
 
 
 def latency_probe(source, output, *, label, qt=True):

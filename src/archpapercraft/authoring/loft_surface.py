@@ -34,6 +34,8 @@ from .model import (
 )
 from .profile_curves import source_curve
 
+LOFT_PAPER_CONTRACT = "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_EXACT_COLLINEAR_CUT_V2"
+
 _PARAMS = {
     "second_profile_id",
     "correspondences",
@@ -1146,7 +1148,7 @@ def build_loft_part(project, old_part):
             "surface_ids": old_part.surface_ids,
             "frame": asdict(old_part.frame),
             "front_side": old_part.front_side,
-            "capabilities": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+            "capabilities": LOFT_PAPER_CONTRACT,
         },
         sort_keys=True,
         allow_nan=False,
@@ -1220,7 +1222,7 @@ class LoftCommands:
                 "paper_frame": asdict(part.frame),
                 "paper_input_digest": part.input_digest,
                 "paper_stale": stale,
-                "paper_contract": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+                "paper_contract": LOFT_PAPER_CONTRACT,
                 "paper_frame_area": frame_area,
                 "paper_frame_topology": frame_topology,
                 "source_binding": {

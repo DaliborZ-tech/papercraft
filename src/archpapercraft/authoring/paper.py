@@ -67,9 +67,11 @@ def part_input(project, part):
         "name": part.name,
     }
     if any(project.surfaces[sid].kind == "ruled_loft" for sid in touched):
-        # An older loft cache labelled every source corner mountain. Its
-        # geometry/source digest alone cannot certify the repaired fold roles.
-        inputs["loft_paper_contract"] = "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1"
+        from .loft_surface import LOFT_PAPER_CONTRACT
+
+        # Canonical CUT representation is a capability too: an older correct
+        # sampled outline must become stale, not masquerade as a current cache.
+        inputs["loft_paper_contract"] = LOFT_PAPER_CONTRACT
     return digest(inputs)
 
 
