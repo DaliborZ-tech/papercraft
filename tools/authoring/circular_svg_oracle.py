@@ -8,8 +8,7 @@ interval certificate or a physical claim.
 """
 
 import re
-from decimal import Decimal
-from decimal import localcontext
+from decimal import Decimal, localcontext
 
 PI = Decimal("3.141592653589793238462643383279502884197169399375105820974944592307816406286"
        "208998628034825342117067982148086513282306647")
@@ -64,7 +63,7 @@ def svg_signed_area(value):
             if len(raw) != size:
                 raise ValueError("Incomplete SVG command")
             try:
-                values = list(map(D, raw))
+                values = list(map(Decimal, raw))
             except ArithmeticError as exc:
                 raise ValueError("Invalid SVG number") from exc
             if any(not x.is_finite() or abs(x) > Decimal("1e30")
