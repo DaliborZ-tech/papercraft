@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="18" time="30.385" timestamp="2026-11-11T13:21:25.719825+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmented_export" name="test_line_and_curved_variants_without_planar_curve_registry_get_actual_guards[line]" time="4.394" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-cut]" time="0.343" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-frame]" time="0.296" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-surface]" time="0.342" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-registry]" time="0.375" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-report]" time="0.339" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-reference]" time="0.341" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-missing]" time="0.302" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-status]" time="0.348" /><testcase classname="tests.authoring.test_segmented_export" name="test_authoritative_source_closure_rejects_snapshot_or_material_substitution[line-budget]" time="0.377" /><testcase classname="tests.authoring.test_segmented_export" name="test_cache_uses_complete_source_content_and_keeps_detached_return_values[line]" time="1.068" /><testcase classname="tests.authoring.test_segmented_export" name="test_author_changed_stable_paper_frame_remains_exportable[line]" time="4.097" /><testcase classname="tests.authoring.test_segmented_export" name="test_actual_file_mutation_is_blocked_before_owned_or_foreign_bytes_change[line-svg_position]" time="3.078" /><testcase classname="tests.authoring.test_segmented_export" name="test_actual_file_mutation_is_blocked_before_owned_or_foreign_bytes_change[line-svg_mode]" time="3.206" /><testcase classname="tests.authoring.test_segmented_export" name="test_actual_file_mutation_is_blocked_before_owned_or_foreign_bytes_change[line-pdf_position]" time="3.606" /><testcase classname="tests.authoring.test_segmented_export" name="test_actual_file_mutation_is_blocked_before_owned_or_foreign_bytes_change[line-pdf_mode]" time="3.350" /><testcase classname="tests.authoring.test_segmented_export" name="test_unrelated_material_cannot_be_excluded_by_forging_reference_coverage[line]" time="0.918" /><testcase classname="tests.authoring.test_segmented_export" name="test_line_and_curved_variants_without_planar_curve_registry_get_actual_guards[curved]" time="2.689"><error message="failed on setup with &quot;archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Nelze doložit odvozený materiál: Zdroj potřebuje konečná data JSON.&quot;">data = {'project_id': 'e453f255-997c-4451-99f7-277cf83d956e', 'revision': 7, 'construction_checks': {'segmented_source_projec...3c15b9a236d17f1a22caaf7fec3e586728d49ff44a8996a25ca9819136025', 'connector_bends': {}, ...}, 'scale_label': '1:1', ...}
+
+    def validate_segmented_snapshot(data):
+        """Do not permit D guards to be skipped merely because curve_profiles={} ."""
+        checks, coverage = data.get("construction_checks", {}), data.get("coverage", {})
+        reports = checks.get("segmented_variants", {})
+        declared = coverage.get("expected_segmented_variant_ids", [])
+        tagged = any(
+            "flattening" in part for page in data.get("pages", []) for part in page.get("parts", [])
+        )
+        has_reference = bool(
+            checks.get("reference_targets")
+            or coverage.get("reference_surface_ids")
+            or coverage.get("inactive_variant_surface_ids")
+        )
+        source = checks.get("segmented_source_project")
+        if not (reports or declared or tagged or has_reference or source is not None):
+            return {}
+        try:
+            if (
+                not isinstance(reports, dict)
+                or not isinstance(declared, list)
+                or len(declared) != len(set(declared))
+                or set(reports) != set(declared)
+            ):
+                raise ValueError("Odvozené generace nemají úplný očekávaný registr.")
+            if not isinstance(source, dict) or not source.get("segmented_variants"):
+                raise ValueError("Chybí úplný skutečný zdrojový projekt odvozené varianty.")
+            # Registry insertion order also determines the explicit snapshot order.
+            # Retain it for replay, while ordinary equality below sorts object keys.
+            source_json = _json(source, sort_keys=False)
+&gt;           canonical = json.loads(_canonical_snapshot(source_json))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src\archpapercraft\exporter\segmented_output_validation.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\exporter\segmented_output_validation.py:77: in _canonical_snapshot
+    return _json(canonical)
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'project_id': 'e453f255-997c-4451-99f7-277cf83d956e', 'revision': 7, 'construction_checks': {'segmented_source_projec...3c15b9a236d17f1a22caaf7fec3e586728d49ff44a8996a25ca9819136025', 'connector_bends': {}, ...}, 'scale_label': '1:1', ...}
+sort_keys = True
+
+    def _json(value, *, sort_keys=True):
+        pending, count = [(value, 0)], 0
+        while pending:
+            node, depth = pending.pop()
+            count += 1
+            if count &gt; MAX_SOURCE_NODES or depth &gt; MAX_SOURCE_DEPTH:
+                raise ValueError("Zdroj segmentace překročil konečný rozpočet struktury.")
+            if isinstance(node, dict):
+                if any(type(key) is not str for key in node):
+                    raise ValueError("Zdrojové klíče musí být řetězce.")
+                pending.extend((child, depth + 1) for child in node.values())
+            elif isinstance(node, list):
+                pending.extend((child, depth + 1) for child in node)
+            elif type(node) not in (str, int, float, bool, type(None)):
+&gt;               raise ValueError("Zdroj potřebuje konečná data JSON.")
+E               ValueError: Zdroj potřebuje konečná data JSON.
+
+src\archpapercraft\exporter\segmented_output_validation.py:46: ValueError
+
+The above exception was the direct cause of the following exception:
+
+source = ('curved', {'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3.0-pc008-segmented-variants-experimental', ...})
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x00000152CA62F1A0&gt;, _basetemp=WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1356'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def bundle(source, tmp_path_factory):
+        p = project(source)
+        snapshot = p.snapshot()
+        directory = tmp_path_factory.mktemp("segmented-export") / "bundle"
+&gt;       author_export.export_all(snapshot, directory)
+
+tests\authoring\test_segmented_export.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\exporter\author_export.py:1234: in export_all
+    _validate(data)
+src\archpapercraft\exporter\author_export.py:563: in _validate
+    validate_segmented_snapshot(data)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+data = {'project_id': 'e453f255-997c-4451-99f7-277cf83d956e', 'revision': 7, 'construction_checks': {'segmented_source_projec...3c15b9a236d17f1a22caaf7fec3e586728d49ff44a8996a25ca9819136025', 'connector_bends': {}, ...}, 'scale_label': '1:1', ...}
+
+    def validate_segmented_snapshot(data):
+        """Do not permit D guards to be skipped merely because curve_profiles={} ."""
+        checks, coverage = data.get("construction_checks", {}), data.get("coverage", {})
+        reports = checks.get("segmented_variants", {})
+        declared = coverage.get("expected_segmented_variant_ids", [])
+        tagged = any(
+            "flattening" in part for page in data.get("pages", []) for part in page.get("parts", [])
+        )
+        has_reference = bool(
+            checks.get("reference_targets")
+            or coverage.get("reference_surface_ids")
+            or coverage.get("inactive_variant_surface_ids")
+        )
+        source = checks.get("segmented_source_project")
+        if not (reports or declared or tagged or has_reference or source is not None):
+            return {}
+        try:
+            if (
+                not isinstance(reports, dict)
+                or not isinstance(declared, list)
+                or len(declared) != len(set(declared))
+                or set(reports) != set(declared)
+            ):
+                raise ValueError("Odvozené generace nemají úplný očekávaný registr.")
+            if not isinstance(source, dict) or not source.get("segmented_variants"):
+                raise ValueError("Chybí úplný skutečný zdrojový projekt odvozené varianty.")
+            # Registry insertion order also determines the explicit snapshot order.
+            # Retain it for replay, while ordinary equality below sorts object keys.
+            source_json = _json(source, sort_keys=False)
+            canonical = json.loads(_canonical_snapshot(source_json))
+            if _json(data) != _json(canonical):
+                raise ValueError(
+                    "Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají "
+                    "skutečnému zdrojovému projektu."
+                )
+            bindings = {}
+            for page_index, page in enumerate(data["pages"]):
+                for part in page["parts"]:
+                    flattening = part.get("flattening")
+                    if flattening is None:
+                        continue
+                    if flattening.get("mode") != "APPROXIMATE":
+                        raise ValueError("Odvozený materiál nesmí být vydán za přesný původní cíl.")
+                    vid = flattening["variant_id"]
+                    report = reports[vid]
+                    if report["status"] != "APPROXIMATE" or report["mode"] != "APPROXIMATE":
+                        raise ValueError("Odvozená varianta není aktuální potvrzená aproximace.")
+                    row = next(
+                        row for row in report["triangle_bindings"] if row["part_id"] == part["id"]
+                    )
+                    bindings[part["id"]] = {
+                        "part": part,
+                        "page_index": page_index,
+                        "flattening": flattening,
+                        "report": report,
+                        "binding": row,
+                        "source_project_digest": hashlib.sha256(source_json.encode()).hexdigest(),
+                    }
+            return bindings
+        except (
+            ValueError,
+            KeyError,
+            TypeError,
+            IndexError,
+            StopIteration,
+            ArithmeticError,
+            RecursionError,
+        ) as exc:
+&gt;           raise CurveOutputError(
+                "Nelze doložit odvozený materiál: " + str(exc),
+                report={"status": "UNRESOLVED", "scope": "SEGMENTED_SOURCE_AND_MATERIAL_CLOSURE"},
+            ) from exc
+E           archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Nelze doložit odvozený materiál: Zdroj potřebuje konečná data JSON.
+
+src\archpapercraft\exporter\segmented_output_validation.py:159: CurveOutputError</error></testcase></testsuite></testsuites>
