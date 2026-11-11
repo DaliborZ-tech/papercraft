@@ -941,10 +941,10 @@
         "AC-I03": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-I04": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-L10": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-AU12": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU12": "TECHNICAL_PROOF_COMPLETE_PENDING_FINAL_REVIEW: actual LINE and independent Gothic B3 budgets/confirm/save-reopen/manual pages/SVG-PDF and4 editor pages PASS1370tests; final integrated approval pending",
         "AC-AU13": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-AU14": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
-        "AC-AU15": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
+        "AC-AU15": "PARTIAL_SCOPE: D/B3 native and editor pipeline PASS on e782; whole P2/C/other cross-cutting AC remain required",
         "AC-AU16": "NOT_RUN: new v1.2 product scope; historical prototype evidence preserved separately",
         "AC-R04": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
         "AC-US01": "NOT_RUN: usability must be verified in this slice; no new-user result exists",
@@ -1120,31 +1120,39 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "evidence": [
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+          ],
+          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "evidence": [
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+          ],
+          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
         },
         {
           "skill": "papercraft-verification",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "evidence": [
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+          ],
+          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "IN_USE",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "evidence": [
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+          ],
+          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
         }
       ],
       "usability": {
@@ -1176,12 +1184,17 @@
         "line_math": "eeaf081/62248d7 independently approved",
         "curved_math": "3a0355f/548027a independently approved in mathematical component scope",
         "domain_persistence": "95fa2c7 independently approved in LINE domain/persistence scope; review artifacts in isolated domain branch",
-        "batch_manual_placement": "0210118 independent review running",
+        "batch_manual_placement": "65159f8 independently approved; BP01 closed",
         "ui": "1f677ef independently approved UI scope, DU01 fixed; combined runtime includes reviewed batch651",
-        "native_D": "First actual LINE D UI/save/reopen/manual two pages/SVG/PDF PASS42.125s on d762; proof harness and final integration review pending, no whole-D closure",
-        "whole_ticket_acceptance": "NOT_RUN; mixed anchors, split/merge, full UI/export remain required",
-        "writer": "26873c6 direct-source closed-registry/actual-vector guards under independent review; old c77 intermediate evidence retained"
-      }
+        "native_D": "CURRENT_e782_LINE_PASS39.109s; Gothic_B3_PASS99.313s; all4 actual Inkscape pagesPASS",
+        "whole_ticket_acceptance": "NOT_RUN: live AU13 split/merge/provenance, mixed AU14 changes, C and broader P2/usability still required; final D/B3 integration review approved in scoped increment only",
+        "writer": "5ad independently approved source-to-actual-vector component; SO01 CLOSED, body-only area normalization",
+        "full_suite": "1370 PASS315.60s0fail0errors0skips; exacte782",
+        "integration_review": "badf33d: APPROVED_IN_D_AND_GOTHIC_B3_TECHNICAL_INCREMENT_SCOPE for e782 + metadata89a14c5; DU02 CLOSED"
+      },
+      "candidate_code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+      "working_branch": "revival/p2-segmentation-gothic",
+      "implementation_started_on": "2026-11-11"
     },
     {
       "id": "PC-009",
@@ -2039,7 +2052,7 @@
       ],
       "acceptance_state": {
         "AC-AU08": "PARTIAL_TECHNICAL_PASS: native arc/cubic UI, numeric edit, corners, save/reopen and both vector outputs on source63; full profile-to-profile workflow pending",
-        "AC-AU09": "PARTIAL_TECHNICAL_VERIFICATION: B1/B2/Bezier native UI-save/reopen-layout-SVG/PDF and all5 Inkscape pages PASS on a46; B3/D NOT_RUN; whole AC not closed",
+        "AC-AU09": "B1/B2/Bezier published and independently approved; B3/D native/editor/current1370suitePASS on e782 awaiting final integrated review; full cross-cutting ticket criteria remain required",
         "AC-AU13": "PARTIAL: stable native source/trim IDs verified; full split/merge provenance not closed",
         "AC-AU15": "PARTIAL_SCOPE: A and B1/B2/Bezier actual digital flows verified; B3/D/C still required",
         "AC-R05": "NOT_RUN: v1.2 digital proof in P2; physical assembly proof in P3",
@@ -2173,7 +2186,8 @@
         ],
         "whole_ticket_complete": false,
         "loft_domain": "Independently approved core/source/area/native-output/performance/async/coalescing components; actual unified CODE a46 proof complete in B1/B2/Bezier scope",
-        "loft_UI": "ACTUAL_NATIVE_B1_B2_BEZIER_PASS_ON_a46; all5 actual Inkscape pages PASS; final integration review pending; B3/D not yet native-proven"
+        "loft_UI": "ACTUAL_NATIVE_B1_B2_BEZIER_PASS_ON_a46; all5 actual Inkscape pages PASS; final integration review pending; B3/D not yet native-proven",
+        "B3_to_D": "CURRENT_e782 independent Gothic drawing/nondevelopable exact refusal/96derivedparts+2true-holewalls/native persistence/manual layout/vector/2actualeditorpages PASS; final D integration review pending"
       },
       "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
       "technical_verdict": "APPROVED_IN_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE; whole PC007A/P2 IN_PROGRESS",
@@ -2504,7 +2518,7 @@
   ],
   "updated_on": "2026-11-11",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-segmentation-proof",
+  "working_branch": "revival/p2-segmentation-gothic",
   "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
@@ -2746,7 +2760,7 @@
     "whole_v12_contract_acceptance_implied": false
   },
   "current_delivery": {
-    "ticket": "PC-007A",
+    "ticket": "PC-008 D/B3 technical increment",
     "then": "PC-007B",
     "followed_by": [
       "PC-008",
@@ -2768,16 +2782,16 @@
     "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
-    "wip_source_sha": "d762fc6d2c543691b8918128b6b0d3e1da59313e",
-    "wip_branch": "revival/p2-segmentation-proof",
-    "next_required_technical_work": "Publish independently reviewed B1/B2/Bezier coherent increment; complete B3/D and C through actual UI/save/reopen/manual layout/SVG/PDF, split/merge provenance and mixed anchors, PC009, historic PC010 and missing novice evidence",
+    "wip_source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+    "wip_branch": "revival/p2-segmentation-gothic",
+    "next_required_technical_work": "Complete independently reviewed C composition/source-transfer/domain/UI and actual cylinder/cone/near-limit vectors; live split/merge/trim provenance and mixed anchors, PC009 and historic PC010. B and D/B3 are published. Missing novice evidence remains0/NOT_RUN.",
     "resumed_on": "2026-11-11",
     "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "B1/B2/Bezier published7ba with independent approval. D LINE first actual native flow passed on d762 (42.125s); D writer/source-to-output independent review running, B3/gothic native proof next. C pure analytic collar under independent review, native body/connector integration still required.",
+    "active_work": "Published D/B3 at1c71bee with local/remote SHA equal. Continue C body+connector+source-transfer/composition and live AU13/mixed-part proof, then PC009/PC010. P2 IN_PROGRESS; actual novice0/NOT_RUN.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2901,6 +2915,26 @@
       "remote_verification": "docs/p2/implementation/evidence/pc007a-loft-master-push-7ba8785.json",
       "method": "fast-forward and normal push; actual ls-remote SHA equals local master"
     },
-    "wip_location": "C:/Users/dalib/projects/papercraft-segmentation-proof (isolated worktree; not published)"
+    "wip_location": "C and live AU13 in isolated authoring branches; D/B3 is now published",
+    "candidate_D_delivery": {
+      "code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+      "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+      "review": "APPROVED_IN_D_AND_GOTHIC_B3_TECHNICAL_INCREMENT_SCOPE",
+      "scope": "D/B3 coherent technical increment; PC008/AU13 and full P2 incomplete",
+      "tests": 1370,
+      "new_user_count": 0,
+      "physical_proof": "P3_NOT_RUN",
+      "review_report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
+      "review_commit": "badf33db0472e71220cd63b2005ed7774567f15d",
+      "reviewed_metadata_sha": "89a14c57bab917d03ec3f63e6ada1ce04a89d0bb"
+    },
+    "published_D_increment": {
+      "published_sha": "1c71bee3ed4431720ab6e6b557b0ebae04ebe304",
+      "code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+      "review": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
+      "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+      "remote_verification": "docs/p2/implementation/evidence/pc008-master-push-1c71bee.json",
+      "status": "PUBLISHED_SCOPED_TECHNICAL_INCREMENT"
+    }
   }
 }
