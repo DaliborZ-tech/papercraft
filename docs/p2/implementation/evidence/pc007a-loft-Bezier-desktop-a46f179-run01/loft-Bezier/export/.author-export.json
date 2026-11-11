@@ -1,0 +1,772 @@
+{
+  "actual_curve_output_checks": {
+    "area_agreement": {
+      "acceptance": "04_AREA_max(0.01_mm2,1e-6_BASE_AREA); AC-X04",
+      "comparisons": {
+        "b531c9aa-55aa-4ef1-8bd1-638075541787": {
+          "absolute_difference_bound_mm2": "18306692361/500000000000000000000000",
+          "allowed_area_error_mm2": "1/100",
+          "base_area_lower_bound_mm2": "478324642217127/500000000000",
+          "pdf_area_bounds_mm2": [
+            "478324642217126981693307639/500000000000000000000000",
+            "956649284434253963386615279/1000000000000000000000000"
+          ],
+          "svg_area_bounds_mm2": [
+            "478324642217127/500000000000",
+            "478324642217127/500000000000"
+          ]
+        }
+      },
+      "scope": "ACTUAL_NET_CUT_AREA_AGREEMENT; source flattening verified separately",
+      "status": "VERIFIED"
+    },
+    "lofts": {
+      "area_scope": "DIRECT_SAME_INTRINSIC_SOURCE_TO_EACH_ACTUAL_OUTPUT_NOT_FRESH_STAGE_BUDGETS",
+      "lofts": {
+        "643e804f-a9ff-4db4-92bf-dcbc16806b61": {
+          "allowed_area_error_exact": "1/100",
+          "feature_id": "643e804f-a9ff-4db4-92bf-dcbc16806b61",
+          "intrinsic_source_digest": "d3fa75be95b25d352b51ccb6c91aca603683145b4e02096fb3ba62b3f5d3703c",
+          "outputs": {
+            "pdf": {
+              "area_exact": [
+                "478324642217126981693307639/500000000000000000000000",
+                "956649284434253963386615279/1000000000000000000000000"
+              ],
+              "closing_rulings": [
+                {
+                  "allowed_error_exact": "1/100",
+                  "total_error_bound_exact": "737462201919867089250025053998133491323645169187636964753/6333186975989760000000000000000000000000000000000000000000000000000"
+                },
+                {
+                  "allowed_error_exact": "1/100",
+                  "total_error_bound_exact": "737462201919867089250025053998133491323645169187636964753/6333186975989760000000000000000000000000000000000000000000000000000"
+                }
+              ],
+              "native_to_actual_position_error_bound_exact": "161848111295738841933060253567919572886697595645169187636964753/12666373951979520000000000000000000000000000000000000000000000000000",
+              "native_to_actual_whole_cut_length_error_bound_exact": "182201919867089250025053998133491323645169187636964753/6333186975989760000000000000000000000000000000000000000000000000000",
+              "source_to_actual_area_error_bound_exact": "848262970759703881143/500000000000000000000000",
+              "source_to_actual_position_error_bound_exact": "10835461580080749065321732128567919572886697595645169187636964753/12666373951979520000000000000000000000000000000000000000000000000000",
+              "source_to_actual_profile_length_error_bound_exact": "8503707567164372024847558000025053998133491323645169187636964753/6333186975989760000000000000000000000000000000000000000000000000000"
+            },
+            "svg": {
+              "area_exact": [
+                "478324642217127/500000000000",
+                "478324642217127/500000000000"
+              ],
+              "closing_rulings": [
+                {
+                  "allowed_error_exact": "1/100",
+                  "total_error_bound_exact": "45053881081326879812464130701/386856262276681335905976320000000000000"
+                },
+                {
+                  "allowed_error_exact": "1/100",
+                  "total_error_bound_exact": "45053881081326879812464130701/386856262276681335905976320000000000000"
+                }
+              ],
+              "native_to_actual_position_error_bound_exact": "17884807621919812464130701/773712524553362671811952640000000000000",
+              "native_to_actual_whole_cut_length_error_bound_exact": "17884807621919812464130701/386856262276681335905976320000000000000",
+              "source_to_actual_area_error_bound_exact": "424131485370698594391/250000000000000000000000",
+              "source_to_actual_position_error_bound_exact": "651986784424309494050079812464130701/773712524553362671811952640000000000000",
+              "source_to_actual_profile_length_error_bound_exact": "519440297190310052293919812464130701/386856262276681335905976320000000000000"
+            }
+          },
+          "part_id": "b531c9aa-55aa-4ef1-8bd1-638075541787",
+          "source_area_exact": [
+            "38266035239478071992089137/40000000000000000000000",
+            "239162745240048870698594391/250000000000000000000000"
+          ],
+          "source_digest": "0d9d99bf45fc969b7e40bd5eecf0dad0d4a6f5e19cf9e5a1de41a4e343e41d9b",
+          "source_profile_ids": [
+            "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+            "bf735679-018a-4e92-88f4-af4dbe4b63d4"
+          ]
+        }
+      },
+      "metric_scope": "WHOLE_BERNSTEIN_CONTROL_DIFFERENCES; SOURCE_F_TO_NATIVE_BOUND_ONCE",
+      "new_user_test": "NOT_RUN",
+      "physical_build": "NOT_VERIFIED",
+      "status": "VERIFIED"
+    },
+    "pdf": {
+      "arithmetic": "EXACT_FRACTIONS_OF_SUPPORTED_SERIALIZED_PDF_DECIMALS",
+      "finite_budgets": {
+        "area_commands": 40000,
+        "topology_nodes": 400000
+      },
+      "kind": "ACTUAL_STAGED_PDF_CURVE_GEOMETRY",
+      "new_user_test": "NOT_RUN",
+      "pages": [
+        {
+          "height_mm": "534600023/1800000",
+          "page_index": 0,
+          "width_mm": "63000001/300000"
+        }
+      ],
+      "parts": {
+        "b531c9aa-55aa-4ef1-8bd1-638075541787": {
+          "loop_count": 1,
+          "material_area_bounds_mm2": {
+            "lower": "478324642217126981693307639/500000000000000000000000",
+            "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+            "upper": "956649284434253963386615279/1000000000000000000000000"
+          },
+          "name": "P1 \u00b7 Ost\u011bn\u00ed",
+          "page_bounds": {
+            "examined_nodes": 0,
+            "proof": "EXACT_RATIONAL_CUBIC_CONTROL_HULL_SUBDIVISION",
+            "status": "INSIDE"
+          },
+          "page_index": 0,
+          "topology_candidates": [
+            {
+              "certificate": {
+                "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+                "examined_nodes": 38,
+                "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+                "numerical_guard": 7.275957614183426e-12,
+                "proof": [
+                  "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+                  "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+                  "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+                  "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+                  "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+                  "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+                ],
+                "reason": "Supplied native path topology proved",
+                "status": "VALID",
+                "witness": null
+              },
+              "outer_index": 0
+            }
+          ]
+        }
+      },
+      "pdf_sha256": "eef6039f566af309d10ba9b2d8af43ddb9786ab97c558ac6872efdd01b14a3d6",
+      "physical_build": "NOT_VERIFIED",
+      "proof_scope": {
+        "physical_page_bounds": "CERTIFIED_ACTUAL_COMMANDS",
+        "same_page_part_separation": "CERTIFIED_OR_EXPLICIT_SOURCE_ACK",
+        "within_part_topology": "EXACT_SUPPLIED_NATIVE_COMMANDS"
+      },
+      "separations": [],
+      "status": "VALID"
+    },
+    "svg": [
+      {
+        "arithmetic": "EXACT_FRACTIONS_OF_SERIALIZED_SVG_DECIMALS",
+        "finite_budgets": {
+          "area_commands": 40000,
+          "topology_nodes": 400000
+        },
+        "kind": "ACTUAL_STAGED_SVG_LOCAL_CUT_TOPOLOGY",
+        "new_user_test": "NOT_RUN",
+        "pages": [
+          {
+            "height_mm": "297",
+            "page_index": 0,
+            "width_mm": "210"
+          }
+        ],
+        "parts": {
+          "b531c9aa-55aa-4ef1-8bd1-638075541787": {
+            "base_area_lower_bound_mm2": "478324642217127/500000000000",
+            "loop_count": 1,
+            "material_area_bounds_mm2": {
+              "lower": "478324642217127/500000000000",
+              "scope": "NET_CUT_MATERIAL_WITH_PROVEN_OUTER_AND_HOLES",
+              "upper": "478324642217127/500000000000"
+            },
+            "name": "P1 \u00b7 Ost\u011bn\u00ed",
+            "page_bounds": {
+              "scope": "LOCAL_COORDINATES_ONLY",
+              "status": "NOT_CHECKED"
+            },
+            "page_index": 0,
+            "topology_candidates": [
+              {
+                "certificate": {
+                  "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+                  "examined_nodes": 21,
+                  "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+                  "numerical_guard": 3.637978807091713e-12,
+                  "proof": [
+                    "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+                    "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+                    "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+                    "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+                    "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+                    "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+                  ],
+                  "reason": "Supplied native path topology proved",
+                  "status": "VALID",
+                  "witness": null
+                },
+                "outer_index": 0
+              }
+            ]
+          }
+        },
+        "physical_build": "NOT_VERIFIED",
+        "placement_scope": "SOURCE_CONSERVATIVE_OUTPUT_BUDGET_ENVELOPES; NO_EXACT_SERIALIZED_SVG_PAGE_SEPARATION_CLAIM",
+        "proof_scope": {
+          "physical_page_bounds": "NOT_CHECKED_LOCAL_COORDINATES",
+          "same_page_part_separation": "NOT_CHECKED_LOCAL_COORDINATES",
+          "within_part_topology": "EXACT_SUPPLIED_NATIVE_COMMANDS"
+        },
+        "separations": [],
+        "status": "VALID",
+        "svg_sha256": "26dfd438676a4972529c918af16e758ebfc1321718707f8d377c959eeb11ddf0"
+      }
+    ]
+  },
+  "construction_checks": {
+    "accepted_layout_overlaps": [],
+    "assembly_digest": "817af741704ffb801d89f2fbc43b3aefdf58a7544b46fb20adf9339b1d29b40c",
+    "connector_bends": {},
+    "curve_profiles": {},
+    "curve_regions": {},
+    "lofts": {
+      "643e804f-a9ff-4db4-92bf-dcbc16806b61": {
+        "area": {
+          "actual_native": {
+            "lower_exact": "956649284434253814879411947/1000000000000000000000000",
+            "lower_paper_mm2": 956.6492844342537,
+            "upper_exact": "239162321108563453719852987/250000000000000000000000",
+            "upper_paper_mm2": 956.6492844342539
+          },
+          "allowed_error_exact": "1/100",
+          "allowed_error_paper_mm2": 0.01,
+          "max_commands": 32778,
+          "maximum_error_bound_exact": "1696525941667914965617/1000000000000000000000000",
+          "maximum_error_bound_paper_mm2": 0.0016965259416679152,
+          "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+          "refinement_attempts": [
+            {
+              "allowed_error_exact": "1/100",
+              "attempt": 0,
+              "effective_tolerance_mm": 0.005,
+              "maximum_error_bound_exact": "1696525941667914965617/1000000000000000000000000",
+              "maximum_error_bound_paper_mm2": 0.0016965259416679152,
+              "status": "CERTIFIED"
+            }
+          ],
+          "serialized_output": "NOT_VERIFIED",
+          "source_intrinsic": {
+            "absolute_budget_mm2": 0.0001,
+            "area_lower_exact": "38266035239478071992089137/40000000000000000000000",
+            "area_lower_paper_mm2": 956.6508809869517,
+            "area_upper_exact": "239162745240048870698594391/250000000000000000000000",
+            "area_upper_paper_mm2": 956.6509809601955,
+            "coverage": {
+              "correspondences": [
+                {
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "first_segment_id": "57b38d93-db18-4867-92bc-de0ddd16e6f2",
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_segment_id": "0324a620-dfda-45df-9919-a9141a0fe5d5"
+                }
+              ],
+              "expected_first_segment_ids": [
+                "57b38d93-db18-4867-92bc-de0ddd16e6f2"
+              ],
+              "expected_second_segment_ids": [
+                "0324a620-dfda-45df-9919-a9141a0fe5d5"
+              ],
+              "first_closed": false,
+              "first_profile_id": "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+              "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION",
+              "second_closed": false,
+              "second_profile_id": "bf735679-018a-4e92-88f4-af4dbe4b63d4"
+            },
+            "examined_nodes": 3435,
+            "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+            "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+            "proof": {
+              "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+              "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+              "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+              "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+              "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+              "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+              "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+            },
+            "status": "CERTIFIED"
+          },
+          "status": "CERTIFIED",
+          "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND"
+        },
+        "closing_rulings": [
+          {
+            "flat_length_paper_mm": 10.0,
+            "length_error_bound_paper_mm": 1.1641532182693481e-10,
+            "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS",
+            "world_length_paper_mm": 10.0
+          },
+          {
+            "flat_length_paper_mm": 10.0,
+            "length_error_bound_paper_mm": 1.1641532182693481e-10,
+            "scope": "STRAIGHT_RULED_INTERVAL_WITH_ACTUAL_SOURCE_ENDPOINTS",
+            "world_length_paper_mm": 10.0
+          }
+        ],
+        "code": "LOFT_EXACT",
+        "crease_geometry": [],
+        "effective_tolerance_mm": 0.005,
+        "family": "NORMAL_EXTRUSION",
+        "feature_id": "643e804f-a9ff-4db4-92bf-dcbc16806b61",
+        "feature_revision": 3,
+        "flattening": {
+          "analytic_metric_identity": "d'=0; [integral |C'|, H v] preserves the first fundamental form; whole-curve rational chord/control-polygon length enclosures; pointwise C(u) and L(u) interpolation <=sup|C''|*du^2/8, because |L''|<=|C''|; arclength prefix errors sum globally",
+          "arclength_prefix_error_bound_paper_mm": 0.0004013431833271852,
+          "boundary_length_error_bound_paper_mm": 0.0008139890653032002,
+          "coverage": {
+            "expected_first_segment_ids": [
+              "57b38d93-db18-4867-92bc-de0ddd16e6f2"
+            ],
+            "expected_second_segment_ids": [
+              "0324a620-dfda-45df-9919-a9141a0fe5d5"
+            ],
+            "first_closed": false,
+            "first_profile_id": "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+            "matched_first_segment_ids": [
+              "57b38d93-db18-4867-92bc-de0ddd16e6f2"
+            ],
+            "matched_second_segment_ids": [
+              "0324a620-dfda-45df-9919-a9141a0fe5d5"
+            ],
+            "scope": "EXPLICITLY_MATCHED_INTERVALS_ONLY; caller validates intended coverage",
+            "second_closed": false,
+            "second_profile_id": "bf735679-018a-4e92-88f4-af4dbe4b63d4"
+          },
+          "family": "NORMAL_EXTRUSION",
+          "node_rounding_reserve_paper_mm": 2.3283064365386963e-08,
+          "numerical_guard_paper_mm": 5.820766091346741e-11,
+          "parameter_interpolation_error_bound_paper_mm": 0.0004126225989116496,
+          "physical_build": "NOT_VERIFIED",
+          "proof_scope": "DECLARED_REGULAR_PARAMETRIC_FAMILY_AND_BOUNDED_REPRESENTATION",
+          "regularity_lower_bound_paper_mm2": 599.9999999399998,
+          "representation_error_bound_paper_mm": 0.0008139890653032002,
+          "requested_error_budget_paper_mm": 0.005,
+          "scale": 0.01,
+          "seam": "FIRST_EXPLICIT_CORRESPONDENCE_BOUNDARY",
+          "source_topology_scope": "CALLER_VALIDATES_PROFILE_TOPOLOGY_AND_ASSEMBLED_INTERSECTIONS",
+          "status": "EXACT"
+        },
+        "intrinsic_source_digest": "d3fa75be95b25d352b51ccb6c91aca603683145b4e02096fb3ba62b3f5d3703c",
+        "message": "P\u0159esn\u00e1 rodina loftu je dolo\u017een\u00e1 s uveden\u00fdmi mezemi.",
+        "native_topology": {
+          "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+          "examined_nodes": 21,
+          "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+          "numerical_guard": 3.637978807091713e-12,
+          "proof": [
+            "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+          ],
+          "reason": "Supplied native path topology proved",
+          "status": "VALID",
+          "witness": null
+        },
+        "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_BOUNDED_COALESCED_CUT_V4",
+        "paper_frame": {
+          "anchor_vertex_id": "784ee7a4-106d-4c72-9eff-6a01cb40c878",
+          "axis_segment_id": "57b38d93-db18-4867-92bc-de0ddd16e6f2",
+          "root_surface_id": "643e804f-a9ff-4db4-92bf-dcbc16806b61"
+        },
+        "paper_frame_area": {
+          "actual_native": {
+            "lower_exact": "956649284434253814879411947/1000000000000000000000000",
+            "lower_paper_mm2": 956.6492844342537,
+            "upper_exact": "239162321108563453719852987/250000000000000000000000",
+            "upper_paper_mm2": 956.6492844342539
+          },
+          "allowed_error_exact": "1/100",
+          "allowed_error_paper_mm2": 0.01,
+          "max_commands": 32778,
+          "maximum_error_bound_exact": "1696525941667914965617/1000000000000000000000000",
+          "maximum_error_bound_paper_mm2": 0.0016965259416679152,
+          "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+          "serialized_output": "NOT_VERIFIED",
+          "source_intrinsic": {
+            "absolute_budget_mm2": 0.0001,
+            "area_lower_exact": "38266035239478071992089137/40000000000000000000000",
+            "area_lower_paper_mm2": 956.6508809869517,
+            "area_upper_exact": "239162745240048870698594391/250000000000000000000000",
+            "area_upper_paper_mm2": 956.6509809601955,
+            "coverage": {
+              "correspondences": [
+                {
+                  "first_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "first_segment_id": "57b38d93-db18-4867-92bc-de0ddd16e6f2",
+                  "second_parameter_interval": [
+                    0,
+                    1
+                  ],
+                  "second_segment_id": "0324a620-dfda-45df-9919-a9141a0fe5d5"
+                }
+              ],
+              "expected_first_segment_ids": [
+                "57b38d93-db18-4867-92bc-de0ddd16e6f2"
+              ],
+              "expected_second_segment_ids": [
+                "0324a620-dfda-45df-9919-a9141a0fe5d5"
+              ],
+              "first_closed": false,
+              "first_profile_id": "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+              "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION",
+              "second_closed": false,
+              "second_profile_id": "bf735679-018a-4e92-88f4-af4dbe4b63d4"
+            },
+            "examined_nodes": 3435,
+            "family": "POSITIVE_HOMOTHETIC_RULED_SOURCE",
+            "numerical_guard_paper_mm2": 3.0000000000000003e-24,
+            "proof": {
+              "arc": "Rational Taylor sin/cos and pi/sqrt intervals; whole-interval norm derivative bound; Simpson h^5/2880 remainder",
+              "arc_source_semantics": "Analytic center/start/signed sweep; stored endpoint proximity is not a proof of opposite-orientation correspondence",
+              "area_identity": "(1+k)/2 * integral norm(C0' cross ((k-1)*C0+d)); scale^2",
+              "basis": "Actual rational world origins and identical supplied bases, never idealized unit axes",
+              "polynomial": "Exact Bernstein cross-product controls; Jensen lower and control-hull upper",
+              "rounding": "Outward rational operations; public area rounded OUTWARD on a 1e-24 mm2 grid",
+              "scope": "INTRINSIC_AREA_ONLY_NOT_A_FLATTENING_OR_TOPOLOGY_CERTIFICATE"
+            },
+            "status": "CERTIFIED"
+          },
+          "status": "CERTIFIED",
+          "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND"
+        },
+        "paper_frame_topology": {
+          "entry_scope": "SUPPLIED_ABSOLUTE_NATIVE_PATH_COMMANDS_EXACT_RATIONAL_COORDINATES",
+          "examined_nodes": 21,
+          "geometry_scope": "EXACTLY_SUPPLIED_NATIVE_PATH_GEOMETRY",
+          "numerical_guard": 3.637978807091713e-12,
+          "proof": [
+            "EXACT_RATIONAL_BERNSTEIN_HULLS_AND_MONOTONE_SELF_PROOFS",
+            "EXACT_OUTWARD_HULL_INTERVAL_SWEEP_THEN_ALL_CANDIDATE_PAIR_PROOFS",
+            "FIXED_ENDPOINT_NATIVE_SVG_ARCS_WITH_INTERVAL_RATIONAL_QUADRATIC_CONTROLS",
+            "ANALYTIC_INTERVAL_CIRCLE_INTERSECTION_WITNESSES",
+            "SHARED_ENDPOINT_ONLY_SEPARATING_HALFPLANES",
+            "QUERY_AVOIDING_CONVEX_HOMOTOPY_AND_EXACT_CHORD_WINDING"
+          ],
+          "reason": "Supplied native path topology proved",
+          "status": "VALID",
+          "witness": null
+        },
+        "paper_input_digest": "73cbb803b8940cc1a27aa4cdd0458bd9bddd59da338e81bc0a5d4f1e0b920697",
+        "paper_stale": false,
+        "patches": [
+          {
+            "first_interval": [
+              0,
+              1
+            ],
+            "first_segment_id": "57b38d93-db18-4867-92bc-de0ddd16e6f2",
+            "id": "1ab68cfa-785d-4139-b02f-3f78cfb24960",
+            "ruling_id": "3a9110d1-f130-45a7-910a-cce9b0c886c1",
+            "second_interval": [
+              0,
+              1
+            ],
+            "second_segment_id": "0324a620-dfda-45df-9919-a9141a0fe5d5"
+          }
+        ],
+        "representation": {
+          "both_profile_boundaries_length_error_bound_paper_mm": 0.002685443394998834,
+          "boundary_length_error_bound_paper_mm": 0.001342721697499417,
+          "coalescing": {
+            "candidates": 776,
+            "comparisons": 976,
+            "effective_global_side_length_budget_paper_mm": 0.006,
+            "effective_position_budget_paper_mm": 0.001,
+            "input_segments": 800,
+            "length_bound_exact": {
+              "first": "39013574819472003/73786976294838206464",
+              "second": "39013574819472003/73786976294838206464"
+            },
+            "length_bound_paper_mm": {
+              "first": 0.0005287325321962165,
+              "second": 0.0005287325321962165
+            },
+            "max_candidates": 65536,
+            "max_comparisons": 262144,
+            "output_segments": 734,
+            "position_bound_exact": "8466023391952897/295147905179352825856",
+            "position_bound_paper_mm": 2.8684002980838848e-05,
+            "status": "CERTIFIED_SAME_U_AND_GLOBAL_LENGTH",
+            "topology_area_editor": "CALLER_MUST_VERIFY_SEPARATELY",
+            "total_global_side_length_budget_paper_mm": 0.008,
+            "total_position_budget_paper_mm": 0.008
+          },
+          "length_proof": "SOURCE_TO_FINE_BOUND_PLUS_GLOBAL_SUM_INTEGRAL_DERIVATIVE_DIFFERENCE_NORM",
+          "length_scope": "GLOBAL_FIRST_OR_SECOND_PROFILE_BOUNDARY_CHAIN; EXCLUDES_CLOSING_RULINGS",
+          "line_interpolant_deviation_bound_paper_mm": 2.8684002980838848e-05,
+          "native_boundary_length_excess_bound_paper_mm": {
+            "first": 0.0005287325321962165,
+            "second": 0.0005287325321962165
+          },
+          "physical_build": "NOT_VERIFIED",
+          "position_error_bound_paper_mm": 0.0008426731682840393,
+          "proof_scope": "REPRESENTATION_ONLY",
+          "requested_length_budget_paper_mm": 0.008,
+          "requested_position_budget_paper_mm": 0.008,
+          "rounding_reserve_paper_mm": 1e-10,
+          "same_parameter_position_proof": "SOURCE_TO_FINE_BOUND_PLUS_EXACT_RESTRICTION_BERNSTEIN_BOUND",
+          "serialization_scope": "BINARY_CONTROL_GEOMETRY_ONLY; PUBLISHER_BUDGET_IS_SEPARATE",
+          "serialized_output": "NOT_VERIFIED",
+          "source_boundary_length_error_bound_paper_mm": 0.0008139890653032002,
+          "source_family": "NORMAL_EXTRUSION",
+          "source_position_error_bound_paper_mm": 0.0008139890653032002,
+          "status": "CERTIFIED_REPRESENTATION_ONLY",
+          "topology": "CALLER_VALIDATES_NATIVE_LOOPS_AND_ASSEMBLED_INTERSECTIONS"
+        },
+        "requested_tolerance_mm": 0.005,
+        "source_binding": {
+          "profiles": [
+            {
+              "closed": false,
+              "id": "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+              "name": "Profil 1",
+              "plane": {
+                "origin": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "u": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "v": [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              },
+              "revision": 1,
+              "segments": [
+                {
+                  "data": {
+                    "control1": [
+                      2000.0,
+                      3000.0
+                    ],
+                    "control2": [
+                      6000.0,
+                      3000.0
+                    ]
+                  },
+                  "end_vertex_id": "9d86dbcf-56b2-465b-9a68-9f39dd1c3966",
+                  "id": "57b38d93-db18-4867-92bc-de0ddd16e6f2",
+                  "kind": "cubic",
+                  "start_vertex_id": "784ee7a4-106d-4c72-9eff-6a01cb40c878"
+                }
+              ],
+              "vertices": [
+                {
+                  "id": "784ee7a4-106d-4c72-9eff-6a01cb40c878",
+                  "point": [
+                    0.0,
+                    0.0
+                  ]
+                },
+                {
+                  "id": "9d86dbcf-56b2-465b-9a68-9f39dd1c3966",
+                  "point": [
+                    8000.0,
+                    0.0
+                  ]
+                }
+              ]
+            },
+            {
+              "closed": false,
+              "id": "bf735679-018a-4e92-88f4-af4dbe4b63d4",
+              "name": "Profil 1 \u00b7 kopie",
+              "plane": {
+                "origin": [
+                  0.0,
+                  0.0,
+                  1000.0
+                ],
+                "u": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "v": [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              },
+              "revision": 1,
+              "segments": [
+                {
+                  "data": {
+                    "control1": [
+                      2000.0,
+                      3000.0
+                    ],
+                    "control2": [
+                      6000.0,
+                      3000.0
+                    ]
+                  },
+                  "end_vertex_id": "11370cc2-52b0-416a-b95d-19100ee7c6de",
+                  "id": "0324a620-dfda-45df-9919-a9141a0fe5d5",
+                  "kind": "cubic",
+                  "start_vertex_id": "1509332c-3930-46c1-8940-f119d28b9991"
+                }
+              ],
+              "vertices": [
+                {
+                  "id": "1509332c-3930-46c1-8940-f119d28b9991",
+                  "point": [
+                    0.0,
+                    0.0
+                  ]
+                },
+                {
+                  "id": "11370cc2-52b0-416a-b95d-19100ee7c6de",
+                  "point": [
+                    8000.0,
+                    0.0
+                  ]
+                }
+              ]
+            }
+          ],
+          "scale": 0.01,
+          "surface": {
+            "hole_profile_ids": [],
+            "id": "643e804f-a9ff-4db4-92bf-dcbc16806b61",
+            "kind": "ruled_loft",
+            "name": "Ost\u011bn\u00ed",
+            "params": {
+              "correspondences": [
+                {
+                  "first_interval": [
+                    0,
+                    1
+                  ],
+                  "first_segment_id": "57b38d93-db18-4867-92bc-de0ddd16e6f2",
+                  "id": "1ab68cfa-785d-4139-b02f-3f78cfb24960",
+                  "ruling_id": "3a9110d1-f130-45a7-910a-cce9b0c886c1",
+                  "second_interval": [
+                    0,
+                    1
+                  ],
+                  "second_segment_id": "0324a620-dfda-45df-9919-a9141a0fe5d5"
+                }
+              ],
+              "end_ruling_id": "5b1f7912-04ab-4ce3-a96a-d666df8a665d",
+              "max_segments": 16384,
+              "reference_state": "BOUND",
+              "seam_patch_id": "1ab68cfa-785d-4139-b02f-3f78cfb24960",
+              "second_profile_id": "bf735679-018a-4e92-88f4-af4dbe4b63d4",
+              "tolerance_mm": 0.005
+            },
+            "parent_transforms": [],
+            "part_id": "b531c9aa-55aa-4ef1-8bd1-638075541787",
+            "position_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "profile_id": "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+            "revision": 3,
+            "rotation_deg": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "source_digest": "0d9d99bf45fc969b7e40bd5eecf0dad0d4a6f5e19cf9e5a1de41a4e343e41d9b",
+        "source_profile_ids": [
+          "863ba60f-40fc-401d-8dd4-17f3c8be72c8",
+          "bf735679-018a-4e92-88f4-af4dbe4b63d4"
+        ],
+        "source_revisions": {
+          "863ba60f-40fc-401d-8dd4-17f3c8be72c8": 1,
+          "bf735679-018a-4e92-88f4-af4dbe4b63d4": 1
+        },
+        "source_topology": {
+          "863ba60f-40fc-401d-8dd4-17f3c8be72c8": {
+            "examined_nodes": 1,
+            "reason": "Open source chain proved simple without a closing chord",
+            "status": "VALID"
+          },
+          "bf735679-018a-4e92-88f4-af4dbe4b63d4": {
+            "examined_nodes": 1,
+            "reason": "Open source chain proved simple without a closing chord",
+            "status": "VALID"
+          }
+        },
+        "status": "EXACT"
+      }
+    },
+    "material_profile": {
+      "bend_radius_mm": 0.0,
+      "clearance_mm": 0.0,
+      "crease_zone_mm": 0.5,
+      "thickness_mm": null
+    },
+    "physical_build": "NOT_VERIFIED"
+  },
+  "construction_summary": {
+    "connector_statuses": {},
+    "construction_checks_digest": "0e942ab22da6911c3b05f3ba4ae1f4782a4fa318cb1f03fab0c35759ed35c020",
+    "material_profile": {
+      "bend_radius_mm": 0.0,
+      "clearance_mm": 0.0,
+      "crease_zone_mm": 0.5,
+      "thickness_mm": null
+    },
+    "physical_build": "NOT_VERIFIED",
+    "unknown_search_scope": "BOUNDED_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN"
+  },
+  "files": [
+    "page-32c72169-6e7a-4c2a-926a-2cd50adef59e.svg",
+    "model.pdf"
+  ],
+  "font_sha256": "edfbd22a3d088fc2f5d7c79b8c9c732df6dc878a60f0a80be0f92a3c7a634404",
+  "pdf_arc_approximation": {
+    "bound_scope": "arc_to_cubic_before_numeric_serialization",
+    "max_interpolation_error_mm": 0.0,
+    "method": "cubic_hermite",
+    "precision_attempts": [
+      {
+        "actual_interpolation_bound_mm": 0.0,
+        "requested_interpolation_bound_mm": 0.0001,
+        "status": "ACTUAL_GEOMETRY_AND_AREA_VERIFIED"
+      }
+    ],
+    "requested_interpolation_bound_mm": 0.0001
+  },
+  "pdf_geometry_precision": {
+    "combined_position_error_bound_mm": 0.0008554509460434951,
+    "method": "serialized_CTM_and_Bernstein_control_difference",
+    "numeric_serialization_bound_mm": 1.2777777759455695e-05,
+    "required_digital_budget_mm": 0.01,
+    "scope": "finite_input_paths_calibration_text_anchors; font_outlines_excluded",
+    "source_to_native_svg_bound_mm": 0.0008426731682840393
+  },
+  "project_id": "79c707a2-b893-4a87-a9ed-4e262b62fc1e",
+  "schema_version": 1,
+  "snapshot_digest": "24f4182e49eef778c29a5dd1cb5a121230a5f258c6e72415bc7ab4a0604d6960"
+}
