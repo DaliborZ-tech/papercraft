@@ -6,11 +6,45 @@ derivative remainder. Actual cubic lengths use rational subdivision bounds.
 """
 
 from fractions import Fraction as Q
+from xml.etree import ElementTree as ET
 
 from archpapercraft.authoring.circular_shell import _native_arc_length
 from archpapercraft.authoring.curve_area import _add, _mul, _neg, _point, _sqrt
 from archpapercraft.authoring.curve_topology import _endpoint_arc_node
 from archpapercraft.authoring.loft_area import _sin_cos
+
+
+def read_svg_role_regions(path, expected_parts, *, role, require_closed):
+    """Own-format native roles, retaining actual group placement and tokens."""
+    from .curve_output_validation import CurveOutputError
+    from .svg_curve_validation import _NS, _loops, read_svg_cut_regions
+
+    if role not in ("GUIDES", "TABS") or require_closed != (role == "TABS"):
+        raise CurveOutputError("Neznámý kontrakt skutečné kruhové SVG role.")
+    result = read_svg_cut_regions(path, expected_parts)
+    root = ET.parse(path).getroot()
+    for node in root.iter():
+        if any(key in node.attrib for key in ("opacity", "stroke-opacity", "fill-opacity")):
+            raise CurveOutputError("Kruhové výrobní SVG nesmí skrývat tištěný ohyb průhledností.")
+    for group in root:
+        pid = group.get("data-part-id")
+        if pid is None:
+            continue
+        selected = next(node for node in group if node.get("data-role") == role)
+        loops = []
+        for index, node in enumerate(selected):
+            if (
+                node.tag != _NS + "path"
+                or set(node.attrib) != {"id", "d", "fill-rule"}
+                or node.get("id") != f"path-{pid}-{role}-{index}"
+            ):
+                raise CurveOutputError("Kruhová SVG role změnila identitu nebo strukturu cest.")
+            paths = _loops(node.get("d", "") + ("" if require_closed else " Z"))
+            if len(paths) != 1:
+                raise CurveOutputError("Kruhová SVG role má jiný počet skutečných hranic.")
+            loops.append(paths[0] if require_closed else paths[0][:-1])
+        result["parts"][pid]["loops"] = loops
+    return result
 
 
 def _sub(a, b):
@@ -57,7 +91,7 @@ def _cubic_length(controls, budget, work):
     return low, high
 
 
-def _pdf_arc(start, command, cubics, target_start, work):
+def _pdf_arc(start, command, cubics, target_start, work, length_budget):
     node = _node(start, command)
     center, radius = node.native["center"], command[1]
     length = _native_arc_length(start, command[-2:], radius)
@@ -88,14 +122,29 @@ def _pdf_arc(start, command, cubics, target_start, work):
         bound = max(
             bound, *(sum(_error(x, iv) for x, iv in zip(q, v)) for q, v in zip(controls, ideal))
         )
-        lo, hi = _cubic_length(controls, Q(1, 1000000 * len(cubics)), work)
+        lo, hi = _cubic_length(controls, length_budget / len(cubics), work)
         actual_low, actual_high, p = actual_low + lo, actual_high + hi, cubic[-2:]
     # Component Hermite remainder M4*h^4/384, Euclidean <=sqrt(2) bound.
     bound += Q(3, 2) * radius * max(abs(t) for t in step) ** 4 / 384
     return bound, max(abs(actual_low - length[1]), abs(actual_high - length[0]))
 
 
-def coordinate_errors(source, target, *, details=None):
+def _conic_position(first, second):
+    """Positive-weight quotient bound; stable even for near-straight circles."""
+    a, b = first.homogeneous, second.homogeneous
+    wa, wb = min(p[2][0] for p in a), min(p[2][0] for p in b)
+    if min(wa, wb) <= 0:
+        raise ValueError("Actual circle lost its positive rational parameterization.")
+    numerator = max(sum(max(abs(x) for x in v) for v in p[:2]) for p in a)
+    dn = max(
+        sum(max(abs(x - y) for x in u for y in v) for u, v in zip(p[:2], q[:2]))
+        for p, q in zip(a, b)
+    )
+    dw = max(max(abs(x - y) for x in p[2] for y in q[2]) for p, q in zip(a, b))
+    return (dn + numerator / wa * dw) / wb
+
+
+def coordinate_errors(source, target, *, details=None, length_budget=Q(1, 1000000)):
     """Whole-interval error, optionally detached per SOURCE-command bounds."""
     source = [[c[0], *map(Q, c[1:])] for c in source]
     target = [[c[0], *map(Q, c[1:])] for c in target]
@@ -128,8 +177,9 @@ def coordinate_errors(source, target, *, details=None):
                 error = center_error + endpoint_error + abs(r0 - r1)
                 if min(r0, r1) <= 0 or error >= min(r0, r1) / 4:
                     raise ValueError("Actual A is outside the supported metric neighborhood.")
-                command_position = (
-                    center_error + abs(r0 - r1) + 4 * max(r0, r1) * error / min(r0, r1)
+                command_position = min(
+                    _conic_position(source_node, actual_node),
+                    center_error + abs(r0 - r1) + 4 * max(r0, r1) * error / min(r0, r1),
                 )
                 position = max(position, command_position)
                 actual_length = _native_arc_length(target_point, actual[-2:], r1)
@@ -145,7 +195,9 @@ def coordinate_errors(source, target, *, details=None):
                     cursor += 1
                     if sum(abs(x - y) for x, y in zip(cubics[-1][-2:], command[-2:])) < Q(1, 1000):
                         break
-                bound, deficit = _pdf_arc(source_point, command, cubics, target_point, work)
+                bound, deficit = _pdf_arc(
+                    source_point, command, cubics, target_point, work, length_budget
+                )
                 command_position = bound
                 position, length = max(position, bound), length + deficit
                 actual = cubics[-1]

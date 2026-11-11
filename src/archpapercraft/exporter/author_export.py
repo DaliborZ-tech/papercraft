@@ -1006,6 +1006,9 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
         media_height = Decimal(page_box.tokens[-1])
         for part in page["parts"]:
             place = part["placement"]
+            curved = next((data.get("construction_checks", {}).get("lofts", {})[sid]
+                           .get("curved_material") for sid in part.get("surface_ids", [])
+                           if sid in data.get("construction_checks", {}).get("lofts", {})), None)
             canvas.saveState()
             theta = math.radians(_rotation(place))
             c, s = math.cos(theta), math.sin(theta)
@@ -1054,8 +1057,18 @@ def _pdf(data: dict, font_name: str, digest: str, target: Path, curve_bound: flo
                             controls.extend(command[index : index + 2] for index in (1, 3, 5))
                             current = command[-2:]
                         elif op == "A":
+                            local_tolerance = arc_tolerance_mm
+                            if curved is not None and role in ("GUIDES", "TABS"):
+                                # This printed hinge conditions the collar proof.
+                                # Reserve room for actual serialization, rather
+                                # than spending a fresh body tolerance on it.
+                                hinge_tolerance = float(Fraction(
+                                    curved["publication_error_budget_exact"]))/16
+                                local_tolerance = min(
+                                    PDF_ARC_TOLERANCE_MM if local_tolerance is None
+                                    else local_tolerance, hinge_tolerance)
                             curves, _ = _arc_cubics(_arc(current, command),
-                                                     tolerance_mm=arc_tolerance_mm)
+                                                     tolerance_mm=local_tolerance)
                             for curve in curves:
                                 path.curveTo(*curve)
                                 controls.extend(curve[index : index + 2] for index in (0, 2, 4))
