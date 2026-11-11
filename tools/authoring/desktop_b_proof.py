@@ -213,6 +213,7 @@ def run_windows(output, expected_sha, fixture="all"):
     from archpapercraft import __version__ as application_version
     from archpapercraft import app as entry
     from archpapercraft.ui import author_window
+    from archpapercraft.ui.author_export_job import ExportProgressDialog
 
     if Path(author_window.__file__).resolve() != (
         ROOT / "src/archpapercraft/ui/author_window.py"
@@ -293,6 +294,21 @@ def run_windows(output, expected_sha, fixture="all"):
 
     def close_messages():
         dialog = QApplication.activeModalWidget()
+        if isinstance(dialog, ExportProgressDialog):
+            now = time.monotonic()
+            records = report.setdefault("export_progress", [])
+            if not records or records[-1]["dialog_identity"] != id(dialog):
+                records.append({"dialog_identity": id(dialog), "samples": 0,
+                                "max_observed_gap_seconds": 0, "phases": [], "last_at": now})
+            record = records[-1]
+            record["max_observed_gap_seconds"] = max(
+                record["max_observed_gap_seconds"], now - record["last_at"])
+            record["last_at"], record["samples"] = now, record["samples"] + 1
+            text = dialog.description.text()
+            if not record["phases"] or record["phases"][-1]["text"] != text:
+                record["phases"].append({"text": text, "elapsed_seconds": now-started})
+                dialog.screen().grabWindow(int(dialog.winId())).save(str(
+                    output / f"export-progress-{len(records)}-{len(record['phases'])}.png"))
         if isinstance(dialog, QMessageBox):
             data = {
                 "kind": "real_QMessageBox",
