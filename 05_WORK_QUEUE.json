@@ -2076,7 +2076,7 @@
             "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
             "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "Prior planar scope independently approved; relevant loft components independently approved; unified B1/B2/Bezier integration review pending. Whole B3/D and new-user evidence remain required."
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         },
         {
           "skill": "papercraft-authoring-ui",
@@ -2089,7 +2089,7 @@
             "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
             "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "Prior planar scope independently approved; relevant loft components independently approved; unified B1/B2/Bezier integration review pending. Whole B3/D and new-user evidence remain required."
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         },
         {
           "skill": "papercraft-verification",
@@ -2102,7 +2102,7 @@
             "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
             "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "Prior planar scope independently approved; relevant loft components independently approved; unified B1/B2/Bezier integration review pending. Whole B3/D and new-user evidence remain required."
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         },
         {
           "skill": "papercraft-delivery",
@@ -2114,7 +2114,7 @@
             "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
             "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
           ],
-          "review": "Prior planar scope independently approved; relevant loft components independently approved; unified B1/B2/Bezier integration review pending. Whole B3/D and new-user evidence remain required."
+          "review": "APPROVED_IN_PLANAR_AND_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE: docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md; full B3/D, whole P2, novice and physical proof remain required"
         }
       ],
       "usability": {
@@ -2174,15 +2174,16 @@
         "loft_domain": "Independently approved core/source/area/native-output/performance/async/coalescing components; actual unified CODE a46 proof complete in B1/B2/Bezier scope",
         "loft_UI": "ACTUAL_NATIVE_B1_B2_BEZIER_PASS_ON_a46; all5 actual Inkscape pages PASS; final integration review pending; B3/D not yet native-proven"
       },
-      "reviewed_code_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
-      "technical_verdict": "APPROVED_IN_BOUNDED_PLANAR_AUTHORING_SLICE_SCOPE; whole ticket IN_PROGRESS",
+      "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "technical_verdict": "APPROVED_IN_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE; whole PC007A/P2 IN_PROGRESS",
       "evidence": [
         "docs/p2/implementation/PC007A_PLANAR_DELIVERY.md",
         "docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md",
         "docs/p2/implementation/evidence/pc007a-desktop-63ab275-run04/results.json",
         "docs/p2/implementation/evidence/pc007a-suite-63ab275-run03.xml",
         "docs/p2/implementation/PC007A_LOFT_PROGRESS.md",
-        "docs/p2/implementation/PC007A_LOFT_DELIVERY.md"
+        "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+        "docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md"
       ],
       "status_before_pause": "IN_PROGRESS",
       "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
@@ -2201,7 +2202,7 @@
         "native_Bezier": "PASS_REQUESTED_FIXTURE;30.25s",
         "actual_editor": "ALL5_PAGES_PASS; original harness and AC unchanged",
         "prior_suite_abort": "73f3437 run01 Windows access violation at GC; cause unresolved, no full stderr; retained observation. Later full1175 and1179 PASS.",
-        "publication": "NOT_PUBLISHED; independent final integration review pending"
+        "publication": "INDEPENDENTLY_APPROVED; normal master integration/push pending"
       },
       "candidate_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b"
     },
@@ -2817,13 +2818,21 @@
         "report": "docs/p2/implementation/PC007A_EXPORT_JOB_REVIEW.md"
       },
       "LX01_editor_rounding": {
-        "status": "FIX_VERIFIED_IN_ACTUAL_CURRENT_EDITOR; integration review pending",
+        "status": "CLOSED_VERIFIED_IN_CURRENT_a46_ARTIFACT_SCOPE",
         "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
         "report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
         "repair_source_sha": "7ee42b397e0491bff87a0f76b7c07850ef5b56c3",
         "component_review": "docs/p2/implementation/PC007A_LOFT_COALESCING_V4_REVIEW.md",
         "actual_editor": "docs/p2/implementation/evidence/pc007a-loft-B1-inkscape-a46f179-loft-run01/editor-results.json",
         "strict_serialization_tolerance_unchanged": true
+      },
+      "loft_integration": {
+        "status": "APPROVED_IN_B1_B2_BEZIER_TECHNICAL_INTEGRATION_SCOPE",
+        "source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+        "metadata_sha": "382a364d81e7975cb9c76f4a8eb1dfd72abc0c79",
+        "report": "docs/p2/implementation/PC007A_LOFT_INTEGRATION_REVIEW.md",
+        "open_major_findings": 0,
+        "whole_P2_acceptance": false
       }
     },
     "planar_verified_slice": {
@@ -2872,6 +2881,6 @@
     },
     "latest_verified_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "candidate_delivery_report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
-    "publication_state": "PENDING_FINAL_INDEPENDENT_INTEGRATION_REVIEW"
+    "publication_state": "INDEPENDENTLY_APPROVED_COHERENT_INCREMENT_AWAITING_NORMAL_MASTER_PUSH"
   }
 }
