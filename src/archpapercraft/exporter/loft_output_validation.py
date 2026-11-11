@@ -14,8 +14,6 @@ from fractions import Fraction
 from functools import lru_cache
 from types import SimpleNamespace
 
-import numpy as np
-
 from archpapercraft.authoring.curve_area import native_region_area_bounds
 
 from .curve_output_validation import CurveOutputError, read_pdf_cut_regions
@@ -52,6 +50,7 @@ def _bound_source_native(source_json, frame_json):
     an independent replacement geometry oracle or a new refinement request.
     No mutable object owned by that source cache is changed or returned.
     """
+    from archpapercraft.authoring.circular_shell import transform_native_commands
     from archpapercraft.authoring.loft_surface import (
         _bound_analysis,
         _local_frame,
@@ -78,17 +77,8 @@ def _bound_source_native(source_json, frame_json):
     )
     part = SimpleNamespace(frame=SimpleNamespace(**json.loads(frame_json)))
     rotation, origin = _local_frame(project, part, result)
-    commands = []
-    for command in result["native_commands"]:
-        coordinates = (
-            (
-                (np.asarray([command[i : i + 2] for i in range(1, len(command), 2)]) - origin)
-                @ rotation.T
-            ).tolist()
-            if command[0] != "Z"
-            else []
-        )
-        commands.append((command[0], *(x for point in coordinates for x in point)))
+    commands = [tuple(c) for c in transform_native_commands(
+        result["native_commands"], rotation, origin)]
     return (
         tuple(commands),
         _digest(result["representation"]),
@@ -103,6 +93,8 @@ def validate_loft_snapshot(data):
     It never mutates or refines authored profiles or their requested parameters.
     A pure loft has no planar curve_profile entry; that must never skip proof.
     """
+    from archpapercraft.authoring.loft_surface import LOFT_PAPER_CONTRACT
+
     reports = data.get("construction_checks", {}).get("lofts", {})
     if not isinstance(reports, dict):
         raise ValueError("Loft kontroly potřebují úplný registr zdrojů.")
@@ -129,6 +121,8 @@ def validate_loft_snapshot(data):
                 raise ValueError("Důkaz loftu nepatří skutečnému dílu a feature UUID.")
             if report.get("paper_stale") is not False:
                 raise ValueError("Loft má zastaralý nebo neurčený rám rozvinu.")
+            if report.get("paper_contract") != LOFT_PAPER_CONTRACT:
+                raise ValueError("Loft používá starší nebo neznámý kontrakt výrobního rozvinu.")
             binding = report["source_binding"]
             profiles, surface = binding["profiles"], binding["surface"]
             if (
@@ -201,8 +195,10 @@ def validate_loft_snapshot(data):
             if len(paths) != 1 or not paths[0].get("closed"):
                 raise ValueError("Loft vyžaduje jediný úplný skutečný řezný obrys.")
             commands = paths[0]["commands"]
-            if any(c[0] not in ("M", "L", "C", "Z") for c in commands):
-                raise ValueError("Loft CUT musí zachovat původní nativní L/C hranice.")
+            has_arcs = any(c[0] == "A" for c in commands)
+            if (any(c[0] not in ("M", "L", "C", "A", "Z") for c in commands) or
+                    has_arcs and not report["representation"].get("circular_shell")):
+                raise ValueError("Loft CUT musí zachovat zdrojově doložené nativní hranice.")
             actual = native_region_area_bounds([commands], max_commands=LOFT_OUTPUT_MAX_COMMANDS)
             declared = report["paper_frame_area"]["actual_native"]
             if actual != (Fraction(declared["lower_exact"]), Fraction(declared["upper_exact"])):
@@ -241,6 +237,12 @@ def _placed(commands, placement):
     x, y = map(Fraction, placement[:2])
     result = []
     for command in commands:
+        if command[0] == "A":
+            if command[1] != command[2] or command[3] != 0:
+                raise ValueError("Only native circular A can be placed in a loft output.")
+            a, b = map(Fraction, command[-2:])
+            result.append(["A", *command[1:6], x+c*a-s*b, y+s*a+c*b])
+            continue
         coords = []
         for i in range(1, len(command), 2):
             a, b = map(Fraction, command[i : i + 2])
@@ -257,6 +259,10 @@ def _coordinate_errors(source, target):
     The latter is summed over the WHOLE CUT, hence bounds every boundary chain
     or ruling separately without granting a tolerance to each short segment.
     """
+    if any(c[0] == "A" for c in source):
+        from .circular_output_validation import coordinate_errors
+
+        return coordinate_errors(source, target)
     if len(source) != len(target):
         raise ValueError("Skutečný výstup změnil počet původních loft příkazů.")
     position = length = Fraction(0)
@@ -380,7 +386,11 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
         "status": "VERIFIED",
         "lofts": records,
         "area_scope": "DIRECT_SAME_INTRINSIC_SOURCE_TO_EACH_ACTUAL_OUTPUT_NOT_FRESH_STAGE_BUDGETS",
-        "metric_scope": "WHOLE_BERNSTEIN_CONTROL_DIFFERENCES; SOURCE_F_TO_NATIVE_BOUND_ONCE",
+        "metric_scope": (
+            "SOURCE_NATIVE_ARC_INTERVALS_AND_ACTUAL_PDF_HERMITE_LENGTH; SOURCE_BOUND_ONCE"
+            if any(item["report"]["representation"].get("circular_shell")
+                   for item in lofts.values()) else
+            "WHOLE_BERNSTEIN_CONTROL_DIFFERENCES; SOURCE_F_TO_NATIVE_BOUND_ONCE"),
         "physical_build": "NOT_VERIFIED",
         "new_user_test": "NOT_RUN",
     }

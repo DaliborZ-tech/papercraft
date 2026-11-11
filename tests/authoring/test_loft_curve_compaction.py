@@ -338,7 +338,7 @@ def test_previous_cache_stales_preserving_raw_file_source_layout_frame(
     loaded.save(tmp_path / "V3-copy.apcraft")
     restored = load_project(tmp_path / "V3-copy.apcraft")
     assert restored.to_dict() == loaded.to_dict()
-    assert restored.loft_status(sid)["paper_contract"].endswith("V4")
+    assert restored.loft_status(sid)["paper_contract"] == loft_surface.LOFT_PAPER_CONTRACT
 
 
 def replay_source_file(source, output):
