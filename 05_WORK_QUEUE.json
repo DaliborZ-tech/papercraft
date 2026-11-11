@@ -2783,7 +2783,7 @@
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
     "wip_source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
     "wip_branch": "revival/p2-segmentation-gothic",
-    "next_required_technical_work": "Publish independently reviewed B1/B2/Bezier coherent increment; complete B3/D and C through actual UI/save/reopen/manual layout/SVG/PDF, split/merge provenance and mixed anchors, PC009, historic PC010 and missing novice evidence",
+    "next_required_technical_work": "Finish independent D/B3 integration review and publish the verified coherent increment; continue C through actual UI/save/reopen/manual layout/SVG/PDF, live split/merge provenance and mixed anchors, PC009 and historic PC010. B1/B2/Bezier is already published. Missing novice evidence remains NOT_RUN, not replaced by automation.",
     "resumed_on": "2026-11-11",
     "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
