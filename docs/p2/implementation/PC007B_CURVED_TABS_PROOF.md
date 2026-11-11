@@ -33,6 +33,11 @@ doména při budoucím napojení; komponenta takové rozšíření neslibuje.
 a clearance. Default minGlue se v produktu nenašel, proto žádný nepřidáváme.
 Technický limit deformace není materiálová vlastnost papíru.
 
+Owner těla a příjemcova cap jsou v tomto podporovaném kontraktu samostatné
+entity s odlišnými ID. Stejné ID není implicitně kvalifikované rolí; takový
+nejednoznačný odkaz se odmítne. Doménový adaptér navíc ověří globálně jedinečné
+skutečné UUID a odpovídající registry; samotný math certifikát tuto registry nemá.
+
 `certify_tabs(...,max_cells,max_depth,max_pairs,unresolved_obstacle_ids)` vrací
 CERTIFIED_APPROXIMATE / UNVERIFIED / UNRESOLVED / INVALID s inventářem, každým
 aktivním dílem, páry a důvody. Neznámá tloušťka nevrátí CERTIFIED. Známá negativní

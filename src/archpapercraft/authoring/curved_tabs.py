@@ -373,6 +373,8 @@ def certify_tabs(rim, tabs, cap, limits, *, max_cells=10000, max_depth=14, max_p
         try:
             if not all((rim.rim_id, rim.body_id, cap.part_id, tab.tab_id)):
                 raise ValueError("Stable rim, body, receiver and tab identities required")
+            if rim.body_id == cap.part_id:
+                raise ValueError("Body owner and receiver cap must have distinct entity identities")
             if tab.owner_id != rim.body_id or tab.receiver_id != cap.part_id:
                 raise ValueError("Tab owner or actual receiver reference does not match")
             if tab.contact_side != "back" or cap.contact_side != "front":

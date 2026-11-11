@@ -208,6 +208,15 @@ def test_unknown_thickness_and_failed_whole_angle_bounds_are_not_clear():
     assert certify_tabs(rim, tabs, cap, replace(limits, clearance_mm=1))["status"] == "UNRESOLVED"
 
 
+def test_owner_and_cap_may_not_reuse_one_ambiguous_entity_identity():
+    rim, tabs, cap, limits = fixture()
+    same = replace(cap, part_id=rim.body_id)
+    linked = tuple(replace(tab, receiver_id=rim.body_id) for tab in tabs)
+    result = certify_tabs(rim, linked, same, limits)
+    assert result["status"] == "INVALID"
+    assert any("distinct entity identities" in p[2] for p in result["problems"])
+
+
 def test_source_gap_generation_validation_and_paper_seam_crossing():
     rim, tabs, cap, limits = fixture()
     generated = periodic_tabs(rim, "cap", count=12, gap_mm=Fraction(16, 5), depth_mm=2,
