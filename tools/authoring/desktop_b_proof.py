@@ -240,7 +240,7 @@ def run_windows(output, expected_sha, fixture="all"):
         "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN",
                            "curves-planar": "NOT_RUN", "loft-B1": "NOT_RUN",
                            "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN",
-                           "D-segmented": "NOT_RUN"},
+                           "D-segmented": "NOT_RUN", "D-gothic": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "actual_application_module": str(Path(author_window.__file__).resolve()),
@@ -882,10 +882,12 @@ def run_windows(output, expected_sha, fixture="all"):
                 for x, y in points
             ]
 
-        def linked_pick(self):
+        def linked_pick(self, only_surfaces=None):
             self.action("focus_all")
             picked = None
             for sid in self.w.viewport.meshes:
+                if only_surfaces is not None and sid not in only_surfaces:
+                    continue
                 geometry = self.w.project.world_geometry(sid)
                 for triangle in geometry["triangles"]:
                     center = [
@@ -1224,15 +1226,15 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.audit_curve_vectors(directory, svgs, pdf)
             if name.startswith("loft-"):
                 self.audit_loft_vectors(name, directory, svgs, pdf)
-            if name == "D-segmented":
+            if name in ("D-segmented", "D-gothic"):
                 self.audit_segmentation_vectors(directory, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
                 parts=sorted(actual_parts),
-                unfold_mode="APPROXIMATE" if name == "D-segmented" else "EXACT",
+                unfold_mode="APPROXIMATE" if name in ("D-segmented", "D-gothic") else "EXACT",
                 exact_scope=("exact planar triangles; retained smooth target remains REJECTED"
-                             if name == "D-segmented" else
+                             if name in ("D-segmented", "D-gothic") else
                              "certified ruled/planar family; no physical claim"
                              if name.startswith("loft-") else
                              "piecewise planar material; no curved-surface or physical claim"),
@@ -1744,9 +1746,9 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"][fixture] = "RUNNING"
                 driver.loft_case(fixture)
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
-            if fixture == "D-segmented":
+            if fixture in ("D-segmented", "D-gothic"):
                 report["fixture_status"][fixture] = "RUNNING"
-                driver.segmentation_case()
+                driver.segmentation_case(gothic=fixture == "D-gothic")
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
@@ -1821,7 +1823,7 @@ def main():
     parser.add_argument(
         "--fixture",
         choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
-                 "loft-Bezier", "D-segmented"],
+                 "loft-Bezier", "D-segmented", "D-gothic"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",
     )

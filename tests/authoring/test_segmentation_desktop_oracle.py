@@ -4,6 +4,7 @@ import importlib.util
 import math
 from fractions import Fraction
 from pathlib import Path
+from types import SimpleNamespace
 
 
 def oracle_module():
@@ -35,3 +36,33 @@ def test_reversing_triangle_does_not_change_cut_material_area():
     oracle = oracle_module()
     points = [[3, 2, 1], [3, 6, 1], [3, 2, 7]]
     assert oracle.triangle_area(points) == oracle.triangle_area(list(reversed(points))) == 12
+
+
+def test_native_circle_source_oracle_has_expected_area_points_and_source_depth():
+    oracle = oracle_module()
+    profile = SimpleNamespace(
+        vertices=[
+            SimpleNamespace(id="left", point=[-100, 0]),
+            SimpleNamespace(id="right", point=[100, 0]),
+        ],
+        segments=[
+            SimpleNamespace(
+                id="upper",
+                kind="arc",
+                start_vertex_id="left",
+                end_vertex_id="right",
+                data={"center": [0, 0], "sweep_deg": -180},
+            ),
+            SimpleNamespace(
+                id="lower",
+                kind="arc",
+                start_vertex_id="right",
+                end_vertex_id="left",
+                data={"center": [0, 0], "sweep_deg": -180},
+            ),
+        ],
+        plane=SimpleNamespace(origin=[0, 0, 37], u=[1, 0, 0], v=[0, 1, 0]),
+    )
+    assert math.isclose(oracle.profile_area(profile), math.pi, abs_tol=1e-12, rel_tol=0)
+    point = oracle.profile_point(profile, "upper", 0.5)
+    assert max(abs(a - b) for a, b in zip(point, [0, 1, 0.37])) < 1e-12
