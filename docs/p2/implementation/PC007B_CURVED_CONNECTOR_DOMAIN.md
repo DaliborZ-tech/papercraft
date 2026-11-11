@@ -1,6 +1,6 @@
 # Kruhové spojovací prvky: doména a uzavření zdroje
 
-Tento návrh a kód patří do autorizovaného modelu C z [P2 v1.2](../v1.2/P2_IMPLEMENTATION_CONTRACT.md) a [AC-AU07 / AC-AU16](../v1.2/ACCEPTANCE.md). Samostatně nenahrazují skutečný UI průchod, nového uživatele ani fyzický výtisk P3. Nezávislé schválení této doménové integrace je **PENDING**; schválené dílčí matematické komponenty mají užší podmíněný rozsah.
+Tento návrh a kód patří do autorizovaného modelu C z [P2 v1.2](../v1.2/P2_IMPLEMENTATION_CONTRACT.md) a [AC-AU07, AU10–11, AU15–17](../v1.2/ACCEPTANCE.md). Samostatně nenahrazují skutečný UI průchod, nového uživatele ani fyzický výtisk P3. Nezávislé schválení této doménové integrace je **PENDING**; schválené dílčí matematické komponenty mají užší podmíněný rozsah.
 
 ## Autorský záměr a změny
 
@@ -18,6 +18,10 @@ Známé schéma 5 se načte jako kopie s prázdným registrem. `requires_save_as
 4. Ostatní sestavený materiál: níže popsaná konzervativní kontrola je další nutná podmínka. Důkaz tělo–sourozenci–příjemce tuto scénu nenahrazuje.
 
 Uložené `certificate` a `material` jsou pouze odvozená cache. Stav porovnává jejich kompaktní otisky s čerstvým přepočtem, včetně skutečných příkazů, polygonů, hran a štítků. Poškozený aktuální důkaz blokuje stav; explicitní přepočet jej opraví. Otisk skutečných vstupů nezávisí jen na revizi a neobsahuje stránkové rozmístění. Vrácené struktury jsou oddělené; interní LRU ukládá jen neměnné kanonické řetězce, s konečnými počty položek.
+
+`source_native_strain.status=SOURCE_NATIVE_STRAIN_CERTIFIED` výslovně označuje přenos současného zdroje na tytéž skutečné nativní příkazy A/L přes celý límec. Nejde o nový derivační důkaz pozdějších PDF kubik ani fyzického chování papíru. Skutečný PDF výstup má samostatné vektorové polohové, délkové a plošné přejímky.
+
+Veřejné `curved_connector_geometry(cid)` propojuje výběr 3D a rozvinu bez přístupu UI do soukromých matematických helperů. Vrací celý stabilní pool slotů, stav vypnutí a vlastní vrchol, stejné skutečné nativní příkazy jako composer a pouze při čerstvém kladném stavu také vykreslovací závěs/lepicí trojúhelník ve světových modelových mm. Vykreslení používá referenční θ/f/α z téhož nativního grafu a současné zdrojové R/κ, společný prostorový rám a střed podle rovnice §2 matematického source-transfer proofu. Intervalové středy a konečné vzorky jsou **DISPLAY_ONLY**, nikoli nový důkaz. Při STALE/UNRESOLVED je geometrický overlay prázdný a stav popíše opravu. Vypnuté i dočasně nepoužívané sloty zůstávají dohledatelné svým UUID.
 
 ## Konzervativní kontrola celé scény
 
@@ -41,6 +45,7 @@ Snapshot navíc nese úplný skutečný autorský projekt. `validate_curved_snap
 
 - `test_curved_connector_sources.py`: skutečné disky/otvory, první/druhá kontaktní a potištěná strana, nesouhlas sestavené polohy, nativní packet a přenos pro válec, kužel oběma okraji a téměř válec; rekonstrukce z přesných zdrojů.
 - `test_curved_connector_scene.py`: nezávislý vzdálený objekt přesunutý dovnitř pohybu; Bézierova křivka s dalekými konci a blízkým vnitřkem; zachování původního skutečného svědka B-02 při neznámé/známé tloušťce i blízké C nejistotě; nezávislost uloženého důkazu na pořadí JSON registrů; poškozená cache; vypnutí všech slotů a opětovné zapnutí vlastního vrcholu.
+- `test_curved_connector_geometry.py`: nezávislý poloměr závěsu, podobnost lepicího trojúhelníku a správné modelové jednotky při prvním/druhém okraji a dvou měřítkách; shoda skutečných příkazů, oddělené návratové struktury, vypnuté/uchované sloty a skrytí zastaralého overlaye.
 - `test_curved_connector_persistence.py`: copy/Save-As, striktní formát, stabilní sloty, příkazy a undo/redo; tento záměrně nekruhový fixture sám není kladný výrobní důkaz.
 - Navazující composer testy jsou samostatnou závislostí a zahrnují skutečný backend save/reopen→SVG/PDF. Jejich úspěch není nativní UI, člověk ani fyzická sestavitelnost.
 
