@@ -1,0 +1,243 @@
+{
+  "reviewed_source_sha": "65b6dae843fe2ec74bb76aa884c1c7afaf826828",
+  "src_vs_8f_diff": "",
+  "probe_git_blob_sha256": "34eb06bac517ba283822e50d39cc3ccf582e7e2d257a122e3b930a6efa191a6a",
+  "raw_files": {
+    "results.json": "2f16227db3df563031a5df0d89dfbcb929f5927f58dc3d42cd96a272f5e07a67",
+    "scaling-observations.json": "a4b54244e2e2d4861a842207691e10974e143ff768c145f15dfbf610d0243f45"
+  },
+  "native_status": "FAIL",
+  "events": 308,
+  "counts": {
+    "MouseButtonPress": 46,
+    "MouseButtonRelease": 75,
+    "MouseMove": 142,
+    "Wheel": 45
+  },
+  "screens": [
+    {
+      "name": "PL2293H",
+      "device_pixel_ratio": 1.5,
+      "logical_dpi": 96.0,
+      "available_logical": [
+        0,
+        0,
+        1280,
+        688
+      ]
+    },
+    {
+      "name": "MNG007QX2-2",
+      "device_pixel_ratio": 1.875,
+      "logical_dpi": 96.0,
+      "available_logical": [
+        -1920,
+        0,
+        1024,
+        608
+      ]
+    }
+  ],
+  "last_wheel": [
+    {
+      "seconds": 108.0,
+      "type": "Wheel",
+      "target_class": "QWindow",
+      "target_name": "AuthorMainWindowClassWindow",
+      "local_point": [
+        526.6666666666666,
+        187.33333333333331
+      ],
+      "global_point": [
+        526.6666666666666,
+        197.55555555555554
+      ],
+      "modifiers": 67108864,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        314
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "angle_delta": [
+        0,
+        120
+      ]
+    },
+    {
+      "seconds": 108.0,
+      "type": "Wheel",
+      "target_class": "QWidget",
+      "target_name": "",
+      "local_point": [
+        254.66666666666663,
+        62.333333333333314
+      ],
+      "global_point": [
+        526.6666666666666,
+        197.55555555555554
+      ],
+      "modifiers": 67108864,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        314
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "angle_delta": [
+        0,
+        120
+      ]
+    }
+  ],
+  "last_pan": [
+    {
+      "seconds": 108.07799999997951,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "local_point": [
+        186.0,
+        156.0
+      ],
+      "global_point": [
+        790.0,
+        296.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        314
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "button": 4
+    },
+    {
+      "seconds": 108.07799999997951,
+      "type": "MouseMove",
+      "target_class": "QWidget",
+      "target_name": "",
+      "local_point": [
+        203.0,
+        167.0
+      ],
+      "global_point": [
+        807.0,
+        307.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        314
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "button": 0
+    },
+    {
+      "seconds": 108.07799999997951,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "local_point": [
+        203.0,
+        167.0
+      ],
+      "global_point": [
+        807.0,
+        307.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        314
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "button": 4
+    }
+  ],
+  "inferred_viewport_global_origin_from_press": [
+    604.0,
+    140.0
+  ],
+  "intended_window_center_from_observed_wheel_times_DPR": [
+    790.0,
+    281.0
+  ],
+  "interpretation": "Actual wheel global x lies left of paper viewport; no product-wheel failure established. Pan may clamp: scroll ranges and unique receiver identity were not recorded.",
+  "observed_new_users": 0,
+  "os_scaling_certification": "NOT_RUN",
+  "normative_ac_changed": false
+}
