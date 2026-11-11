@@ -134,4 +134,7 @@ def test_actual_svg_pdf_preserve_source_union_body_norm_and_tiny_tab_reserve(
     for output in result["outputs"].values():
         assert Q(output["tab_cut_position_error_exact"]) <= Q(1, 10**6)
         assert Q(output["tab_cut_global_length_error_exact"]) <= Q(1, 10**6)
+        for role in ("guides", "tabs"):
+            assert Q(output[role+"_position_error_exact"]) <= Q(1, 10**6)
+            assert Q(output[role+"_global_length_error_exact"]) <= Q(1, 10**6)
         assert Q(output["source_to_actual_area_error_bound_exact"]) <= Q(1, 100)

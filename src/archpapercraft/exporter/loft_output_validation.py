@@ -299,7 +299,7 @@ def _placed(commands, placement):
     return result
 
 
-def _coordinate_errors(source, target, *, details=None):
+def _coordinate_errors(source, target, *, details=None, length_budget=Fraction(1, 1000000)):
     """Whole-curve bounds, not samples; exact rational serialized operands.
 
     Position uses the maximum L1 control difference. Arc-length change is at
@@ -310,7 +310,7 @@ def _coordinate_errors(source, target, *, details=None):
     if any(c[0] == "A" for c in source):
         from .circular_output_validation import coordinate_errors
 
-        return coordinate_errors(source, target, details=details)
+        return coordinate_errors(source, target, details=details, length_budget=length_budget)
     if len(source) != len(target):
         raise ValueError("Skutečný výstup změnil počet původních loft příkazů.")
     position = length = Fraction(0)
@@ -354,6 +354,19 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
         }
         svg.update(read_svg_cut_regions(path, expected)["parts"])
     pdf = read_pdf_cut_regions(pdf_path)["parts"]
+    auxiliary = {}
+    if any(item["report"].get("curved_material") for item in lofts.values()):
+        from .circular_output_validation import read_svg_role_regions
+
+        for role in ("GUIDES", "TABS"):
+            svg_role = {}
+            for index, path in enumerate(svg_paths):
+                expected = {pid: value for pid, value in expected_parts.items()
+                            if value["page_index"] == index}
+                svg_role.update(read_svg_role_regions(
+                    path, expected, role=role, require_closed=role == "TABS")["parts"])
+            auxiliary[role] = {"svg": svg_role, "pdf": read_pdf_cut_regions(
+                pdf_path, role=role, require_closed=role == "TABS")["parts"]}
     records = {}
     for sid, item in lofts.items():
         part, report = item["part"], item["report"]
@@ -376,6 +389,10 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
             "source_area_exact": [str(low), str(high)],
             "allowed_area_error_exact": str(area_budget),
             "outputs": {},
+            **({"source_native_strain_scope": "SOURCE_NATIVE_A_CHART_DOMAIN_CERTIFICATE",
+                "actual_vector_scope": "CUT_GUIDE_FILL_POSITION_GLOBAL_LENGTH_AND_AREA_ONLY",
+                "actual_pdf_derivative_strain": "NOT_CLAIMED",
+                "physical_fold": "NOT_VERIFIED"} if material is not None else {}),
         }
         for kind, actual in (("svg", svg[pid]), ("pdf", pdf[pid])):
             try:
@@ -411,6 +428,32 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
                         "tab_cut_global_length_error_exact": str(tab_length),
                         "tab_publication_error_budget_exact": str(reserve),
                     }
+                    for role, index_key in (("GUIDES", "guide_path_index"),
+                                            ("TABS", "fill_path_index")):
+                        actual_role = auxiliary[role][kind][pid]
+                        source_paths = part["paths"].get(role, [])
+                        if (actual_role["page_index"] != item["page_index"] or
+                                len(actual_role["loops"]) != len(source_paths)):
+                            raise ValueError(
+                                "Tištěný ohyb nebo záložka ztratil úplné pokrytí cest.")
+                        role_position, role_length = Fraction(0), Fraction(0)
+                        for packet in material["slots"]:
+                            i = packet[index_key]
+                            reference = _placed(source_paths[i]["commands"], requested)
+                            actual_path = actual_role["loops"][i]
+                            if kind == "svg":
+                                actual_path = _placed(actual_path, actual_role["placement"])
+                            error, deficit = _coordinate_errors(
+                                reference, actual_path,
+                                length_budget=reserve/(64*max(1, len(material["slots"]))))
+                            role_position = max(role_position, error)
+                            role_length += deficit
+                        if role_position > reserve or role_length > reserve:
+                            raise ValueError(
+                                "Skutečný tištěný " + role + " vyčerpal vlastní rezervu chlopní.")
+                        material_metrics[role.lower()+"_position_error_exact"] = str(role_position)
+                        material_metrics[role.lower()+"_global_length_error_exact"] = str(
+                            role_length)
                 representation = report["representation"]
                 # position_error_bound already includes source F→line delta.
                 # Add ONLY the actual binary-native→serialized difference.
@@ -476,4 +519,5 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
             "WHOLE_BERNSTEIN_CONTROL_DIFFERENCES; SOURCE_F_TO_NATIVE_BOUND_ONCE"),
         "physical_build": "NOT_VERIFIED",
         "new_user_test": "NOT_RUN",
+        "actual_pdf_vector_metrics": "VERIFIED_NOT_A_PDF_DERIVATIVE_OR_PHYSICAL_FOLD_PROOF",
     }
