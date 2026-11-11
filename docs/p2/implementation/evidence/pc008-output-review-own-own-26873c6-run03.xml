@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="2.859" timestamp="2026-11-11T13:53:46.621343+01:00" hostname="Dalibor"><testcase classname="" name="test_direct_plane_oracle_against_actual_svg_tokens_and_pdf" time="1.605" /></testsuite></testsuites>

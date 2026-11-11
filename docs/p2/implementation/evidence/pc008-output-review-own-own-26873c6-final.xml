@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="14" time="2.084" timestamp="2026-11-11T13:58:37.094373+01:00" hostname="Dalibor"><testcase classname="" name="test_direct_plane_oracle_against_actual_svg_tokens_and_pdf" time="0.783" /><testcase classname="" name="test_closed_source_binding_negatives[omit_all]" time="0.004" /><testcase classname="" name="test_closed_source_binding_negatives[equal_area_cut]" time="0.017" /><testcase classname="" name="test_closed_source_binding_negatives[extra_tab]" time="0.017" /><testcase classname="" name="test_closed_source_binding_negatives[reference_mask]" time="0.017" /><testcase classname="" name="test_closed_source_binding_negatives[source_plane]" time="0.013" /><testcase classname="" name="test_closed_source_binding_negatives[status]" time="0.017" /><testcase classname="" name="test_closed_source_binding_negatives[deep]" time="0.004" /><testcase classname="" name="test_closed_source_binding_negatives[nan]" time="0.005" /><testcase classname="" name="test_closed_source_binding_negatives[uuid]" time="0.017" /><testcase classname="" name="test_cache_is_immutable_and_snapshot_source_is_detached" time="0.060" /><testcase classname="" name="test_actual_malformed_transform_fails_atomically" time="0.291" /><testcase classname="" name="test_precise_actual_svg_translation_retains_lexeme" time="0.004"><failure message="archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 1235">path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1382/test_precise_actual_svg_transl0/precise.svg')
+expected_parts = {'4748fe43-eabc-4643-82fb-827706de8aa2': {'page_index': 0, 'name': 'P2 · Segmentovaná varianta 1', 'loop_count': 1}, '...b7bceac2-6f6f-4195-9c3c-28a630b063b1': {'page_index': 0, 'name': 'P5 · Segmentovaná varianta 4', 'loop_count': 1}, ...}
+max_nodes = 20000, max_commands = 20000, _read_actual = True
+
+    def validate_svg_curve_geometry(path, expected_parts, *, max_nodes=20000,
+                                    max_commands=20000, _read_actual=False):
+        """Validate actual local CUT subpaths, preserving decimal operands exactly."""
+        try:
+            raw = Path(path).read_bytes()
+&gt;           root = ET.fromstring(raw)
+                   ^^^^^^^^^^^^^^^^^^
+
+src\archpapercraft\exporter\svg_curve_validation.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+text = b'&lt;?xml version=\'1.0\' encoding=\'utf8\'?&gt;\r\n&lt;svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" vi...reserve" font-size="2.5" fill="#202b2b"&gt;M\xc4\x9b\xc5\x99\xc3\xadtko modelu 1:1 \xc2\xb7 Strana 1 / 1&lt;/text&gt;&lt;/g&gt;&lt;/svg&gt;'
+parser = &lt;xml.etree.ElementTree.XMLParser object at 0x000001FFEFB92200&gt;
+
+    def XML(text, parser=None):
+        """Parse XML document from string constant.
+    
+        This function can be used to embed "XML Literals" in Python code.
+    
+        *text* is a string containing XML data, *parser* is an
+        optional parser instance, defaulting to the standard XMLParser.
+    
+        Returns an Element instance.
+    
+        """
+        if not parser:
+            parser = XMLParser(target=TreeBuilder())
+&gt;       parser.feed(text)
+E       xml.etree.ElementTree.ParseError: not well-formed (invalid token): line 2, column 1235
+
+..\..\..\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\xml\etree\ElementTree.py:1335: ParseError
+
+The above exception was the direct cause of the following exception:
+
+small_bundle = (&lt;archpapercraft.authoring.project.AuthorProject object at 0x000001FFEC977DA0&gt;, '1f8a1519-1b31-46cc-a5d1-6f7842cc34df'...'scale_label': '1:1', ...}, WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1382/own-D0/bundle'))
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1382/test_precise_actual_svg_transl0')
+
+    def test_precise_actual_svg_translation_retains_lexeme(small_bundle,tmp_path):
+        from archpapercraft.exporter.svg_curve_validation import read_svg_cut_regions
+        _,_,_,snapshot,out=small_bundle
+        original=next(out.glob('*.svg'));root=ET.parse(original).getroot()
+        group=root.find('{http://www.w3.org/2000/svg}g[@data-part-id]')
+        group.set('transform',re.sub(r'translate\([^ ]+', 'translate(25.00000000000000001',group.get('transform')))
+        changed=tmp_path/'precise.svg';ET.ElementTree(root).write(changed,encoding='utf8',xml_declaration=True)
+&gt;       result=read_svg_cut_regions(changed,author_export._curve_output_expectations(snapshot))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\projects\papercraft-segmented-output\docs\p2\implementation\evidence\pc008-output-review-own.py:165: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\exporter\svg_curve_validation.py:69: in read_svg_cut_regions
+    return validate_svg_curve_geometry(path, expected_parts, _read_actual=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1382/test_precise_actual_svg_transl0/precise.svg')
+expected_parts = {'4748fe43-eabc-4643-82fb-827706de8aa2': {'page_index': 0, 'name': 'P2 · Segmentovaná varianta 1', 'loop_count': 1}, '...b7bceac2-6f6f-4195-9c3c-28a630b063b1': {'page_index': 0, 'name': 'P5 · Segmentovaná varianta 4', 'loop_count': 1}, ...}
+max_nodes = 20000, max_commands = 20000, _read_actual = True
+
+    def validate_svg_curve_geometry(path, expected_parts, *, max_nodes=20000,
+                                    max_commands=20000, _read_actual=False):
+        """Validate actual local CUT subpaths, preserving decimal operands exactly."""
+        try:
+            raw = Path(path).read_bytes()
+            root = ET.fromstring(raw)
+            if root.tag != _NS + "svg" or root.get("viewBox", "").split()[:2] != ["0", "0"]:
+                raise CurveOutputError("SVG nemá očekávané papírové souřadnice.")
+            width, height = (Fraction(root.attrib[key].removesuffix("mm"))
+                             for key in ("width", "height"))
+            if width &lt;= 0 or height &lt;= 0 or any(
+                not root.attrib[key].endswith("mm") for key in ("width", "height")
+            ):
+                raise CurveOutputError("SVG nemá doložené fyzické jednotky stránky.")
+            if [Fraction(v) for v in root.attrib["viewBox"].split()] != [0, 0, width, height]:
+                raise CurveOutputError("SVG mění měřítko fyzické stránky.")
+            allowed_tags = {_NS + tag for tag in ("svg", "g", "path", "text", "title", "metadata")}
+            for node in root.iter():
+                if node.tag not in allowed_tags or any(
+                    key in node.attrib for key in
+                    ("style", "clip-path", "mask", "filter", "display", "visibility")
+                ) or (node.get("transform") and node.get("data-part-id") is None):
+                    raise CurveOutputError(
+                        "Výrobní SVG obsahuje nepodporovanou kresbu nebo změnu stavu."
+                    )
+            for child in root:
+                if child.tag in (_NS + "title", _NS + "metadata"):
+                    continue
+                if child.tag != _NS + "g" or (
+                    child.get("data-part-id") is None and child.get("id") != "page-GUIDES"
+                ):
+                    raise CurveOutputError(
+                        "Výrobní SVG obsahuje neoznačenou kresbu mimo díly a kalibraci."
+                    )
+            page_index = next((record["page_index"] for record in expected_parts.values()), 0)
+            actual = {"parts": {}, "pages": [{"page_index": page_index,
+                                              "width_mm": str(width), "height_mm": str(height)}],
+                      "arithmetic": "EXACT_FRACTIONS_OF_SERIALIZED_SVG_DECIMALS"}
+            for group in root.iter(_NS + "g"):
+                pid = group.get("data-part-id")
+                if pid is None:
+                    continue
+                expected = expected_parts.get(pid)
+                if expected is None or pid in actual["parts"] or group not in list(root):
+                    raise CurveOutputError("SVG změnilo úplné pokrytí papírových dílů.")
+                placement = _PLACEMENT.fullmatch(group.get("transform", ""))
+                if not placement:
+                    raise CurveOutputError("SVG díl nemá podporované pevné umístění.",
+                                           part_id=pid, part_name=expected.get("name"))
+                roles = [node.get("data-role") for node in group if node.tag != _NS + "title"]
+                if len(roles) != 7 or set(roles) != {
+                    "CUT", "FOLD_MOUNTAIN", "FOLD_VALLEY", "TABS", "LABELS", "ARTWORK", "GUIDES"
+                }:
+                    raise CurveOutputError(
+                        "SVG díl nemá úplné jednoznačné výrobní vrstvy.", part_id=pid,
+                    )
+                cut = [node for node in group if node.get("data-role") == "CUT"]
+                if len(cut) != 1 or cut[0].get("transform"):
+                    raise CurveOutputError("SVG dílu chybí jednoznačná vrstva řezů.", part_id=pid)
+                loops = []
+                for node in cut[0]:
+                    if node.tag != _NS + "path" or node.get("transform"):
+                        raise CurveOutputError("SVG řez používá nepodporovanou strukturu.", part_id=pid)
+                    loops.extend(_loops(node.get("d", "")))
+                actual["parts"][pid] = {
+                    "page_index": expected["page_index"], "loops": loops,
+                    "placement": [Fraction(value) for value in placement.groups()],
+                }
+            if _read_actual:
+                return actual
+            report = {"status": "UNRESOLVED", "kind": "ACTUAL_STAGED_SVG_LOCAL_CUT_TOPOLOGY",
+                      "svg_sha256": hashlib.sha256(raw).hexdigest(), "parts": {}, "separations": [],
+                      "placement_scope": "SOURCE_CONSERVATIVE_OUTPUT_BUDGET_ENVELOPES; "
+                                         "NO_EXACT_SERIALIZED_SVG_PAGE_SEPARATION_CLAIM",
+                      "physical_build": "NOT_VERIFIED", "new_user_test": "NOT_RUN"}
+            if not expected_parts and not actual["parts"]:
+                report["status"] = "NO_MATERIAL"
+                return report
+            result = validate_native_output_regions(
+                actual, expected_parts, report=report,
+                check_separation=False, check_page_bounds=False,
+                max_nodes=max_nodes, max_commands=max_commands,
+            )
+            from archpapercraft.authoring.curve_area import native_region_area_bounds
+    
+            # The area acceptance excludes tabs. Subtracting the SUM of their areas
+            # is a conservative lower bound for the base material even if their
+            # union overlaps. The validated cache supplies CUT = base union tabs.
+            for group in root:
+                pid = group.get("data-part-id")
+                if pid is None:
+                    continue
+                tabs = next(node for node in group if node.get("data-role") == "TABS")
+                tab_area_upper = sum(
+                    native_region_area_bounds([loop], max_commands=max_commands)[1]
+                    for node in tabs for loop in _loops(node.attrib["d"])
+                )
+                lower = Fraction(result["parts"][pid]["material_area_bounds_mm2"]["lower"])
+                result["parts"][pid]["base_area_lower_bound_mm2"] = str(max(0, lower-tab_area_upper))
+            return result
+        except CurveOutputError:
+            raise
+        except (OSError, ET.ParseError, ValueError, KeyError, TypeError) as exc:
+&gt;           raise CurveOutputError("Skutečné výrobní SVG nelze úplně ověřit: " + str(exc)) from exc
+E           archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 1235
+
+src\archpapercraft\exporter\svg_curve_validation.py:175: CurveOutputError</failure></testcase><testcase classname="" name="test_failure_after_first_owned_publication_restores_all_and_foreign" time="0.002"><failure message="ModuleNotFoundError: No module named 'archpapercraft.exporter.errors'">small_bundle = (&lt;archpapercraft.authoring.project.AuthorProject object at 0x000001FFEC977DA0&gt;, '1f8a1519-1b31-46cc-a5d1-6f7842cc34df'...'scale_label': '1:1', ...}, WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1382/own-D0/bundle'))
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1382/test_failure_after_first_owned0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001FFEEBD4D10&gt;
+
+    def test_failure_after_first_owned_publication_restores_all_and_foreign(small_bundle,tmp_path,monkeypatch):
+        import shutil
+&gt;       from archpapercraft.exporter.errors import ExportWriteError
+E       ModuleNotFoundError: No module named 'archpapercraft.exporter.errors'
+
+..\..\..\..\projects\papercraft-segmented-output\docs\p2\implementation\evidence\pc008-output-review-own.py:172: ModuleNotFoundError</failure></testcase></testsuite></testsuites>

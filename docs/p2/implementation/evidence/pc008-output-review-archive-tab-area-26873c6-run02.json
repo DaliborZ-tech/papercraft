@@ -1,0 +1,26 @@
+{
+  "source_sha": "26873c6d0950af412ba531f01440c3506b3dd6b1",
+  "archive_sha256": "adcaee161b34543e090422cd6933f6940888ee3fbfe3b791c8247de950edf003",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-q42njakl",
+  "actual_imports": {
+    "archpapercraft.exporter.segmented_output_validation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-q42njakl\\src\\archpapercraft\\exporter\\segmented_output_validation.py",
+      "lf_sha256": "29b0b4070695fb14b5642ae52919811dc5eac774f23520664453a223d5f12038"
+    },
+    "archpapercraft.exporter.author_export": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-q42njakl\\src\\archpapercraft\\exporter\\author_export.py",
+      "lf_sha256": "9df3fbc9e9362178e8d36afc47b7954cdd6c5e9f8aee16b9465925ced3ecf67e"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-q42njakl\\src\\archpapercraft\\authoring\\project.py",
+      "lf_sha256": "84309e6d8ac95057015d755297ec9bf34486ba219ab2e2165f36cd70f498a54c"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 1,
+      "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n_______________ test_tab_does_not_relax_source_body_area_budget _______________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C523516000>\ntmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1374/test_tab_does_not_relax_source0')\n\n    def test_tab_does_not_relax_source_body_area_budget(monkeypatch,tmp_path):\n>       p,s,v,pid=source(large=True,tab=True)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n..\\..\\..\\..\\projects\\papercraft-segmented-output\\docs\\p2\\implementation\\evidence\\pc008-output-review-own.py:47: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nlarge = True, tab = True\n\n    def source(*,large=False,tab=False):\n        p=AuthorProject.new(scale=1)\n        x,y,z=(400,.02,1200) if large else (16,8,12)\n        a=p.add_profile([[0,0],[x,0]],closed=False)\n        b=p.add_profile([[0,0],[x,y]],closed=False,plane=dict(origin=[0,0,z],u=[1,0,0],v=[0,1,0]))\n        s=p.add_loft(a,b,correspondences=[dict(first_segment_id=p.profiles[a].segments[0].id,\n            second_segment_id=p.profiles[b].segments[0].id,first_interval=[0,1],second_interval=[0,1])])\n        limit=.25 if large else .26\n        preview=p.preview_segmented_variant(s,max_deviation_mm=limit)\n        assert preview['can_confirm'],preview['message']\n        v=p.add_segmented_variant(s,max_deviation_mm=limit,preview_digest=preview['preview_digest'])\n        rows=p.segmented_variants[v].triangle_bindings\n        p.pages[0].width_mm=8000 if large else 210\n        p.pages[0].height_mm=8000 if large else 297\n        p.set_placements({r['part_id']:dict(page_id=p.pages[0].id,x_mm=2000+(i%2)*3000 if large else 25+(i%4)*35,\n            y_mm=2000+(i//2)*3000 if large else 25+(i//4)*35) for i,r in enumerate(rows)})\n        owner=None\n        if tab:\n            p.set_material_profile(crease_zone_mm=.05);p.recompute()\n            uses=p.segmented_variants[v].paired_seams[0]['uses'];byid={r['id']:r for r in rows}\n            r,t=(byid[u['triangle_id']] for u in uses)\n            joint=p.connect_edges(r['surface_id'],uses[0]['edge_id'],t['surface_id'],uses[1]['edge_id'])\n            p.set_tab(joint,owner=r['surface_id'],width_mm=.3,shape='triangle');owner=r['part_id']\n        issues=p.validate_layout()\n>       assert all(i.severity=='warning' for i in issues),[(i.code,i.message) for i in issues]\nE       AssertionError: [('SMALL_TAB', 'Chlope\u0148 je u\u017e\u0161\u00ed ne\u017e 2 mm na pap\u00ed\u0159e.'), ('MATERIAL_CLEARANCE_UNVERIFIED', 'Digit\u00e1ln\u00ed spoj nenahrazuje o...o\u017eky nelze v zadan\u00e9m materi\u00e1lov\u00e9m modelu dolo\u017eit. Zkontrolujte parametry pap\u00edru, m\u00edstn\u00ed p\u00e1s ohybu a geometrii spoje.')]\nE       assert False\nE        +  where False = all(<generator object source.<locals>.<genexpr> at 0x000001C562BA97D0>)\n\n..\\..\\..\\..\\projects\\papercraft-segmented-output\\docs\\p2\\implementation\\evidence\\pc008-output-review-own.py:36: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_tab_does_not_relax_source_body_area_budget - AssertionError: [(...\n1 failed in 0.99s\n",
+      "stderr": ""
+    }
+  }
+}
