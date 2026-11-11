@@ -1068,13 +1068,8 @@ def run_windows(output, expected_sha, fixture="all"):
 
             initial = camera()
             point = view.viewport().rect().center()
-            window_point = view.viewport().mapTo(self.w, point)
-            QTest.wheelEvent(
-                self.w.windowHandle(),
-                QPointF(window_point),
-                QPoint(0, 120),
-                stateKey=Qt.KeyboardModifier.ControlModifier,
-            )
+            native_dialogs.wheel_at(self.w, view.viewport(), point,
+                                   report.setdefault("native_camera_inputs", []))
             QTest.qWait(60)
             QTest.mousePress(view.viewport(), Qt.MouseButton.MiddleButton, pos=point)
             QTest.mouseMove(view.viewport(), point + QPoint(17, 11), delay=70)

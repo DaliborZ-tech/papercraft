@@ -25,6 +25,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--fixture", default="C-cylinder")
     args = parser.parse_args()
+    if args.output.exists():
+        parser.error("Scaling proof output must be a fresh directory")
     os.environ["QT_SCALE_FACTOR"] = str(args.scale)
     sys.path.insert(0, str(ROOT/"src"))
     from desktop_b_proof import run_windows
@@ -34,6 +36,7 @@ def main():
     from archpapercraft.ui.author_paper import AuthorPaperView
 
     records, screens, filters = [], [], []
+    owns_output = False
     started = time.monotonic()
 
     class Observer(QObject):
@@ -53,6 +56,8 @@ def main():
                     record = dict(seconds=time.monotonic()-started, type=event.type().name,
                                   target_class=type(watched).__name__,
                                   target_name=watched.objectName(),
+                                  target_is_paper=watched is paper,
+                                  target_is_paper_viewport=watched is paper.viewport(),
                                   local_point=[point.x(), point.y()],
                                   global_point=[event.globalPosition().x(),
                                                 event.globalPosition().y()],
@@ -64,7 +69,11 @@ def main():
                                   paper_viewport=[paper.viewport().width(),
                                                   paper.viewport().height()],
                                   paper_scroll=[paper.horizontalScrollBar().value(),
-                                                paper.verticalScrollBar().value()])
+                                                paper.verticalScrollBar().value()],
+                                  paper_scroll_ranges=[paper.horizontalScrollBar().minimum(),
+                                                       paper.horizontalScrollBar().maximum(),
+                                                       paper.verticalScrollBar().minimum(),
+                                                       paper.verticalScrollBar().maximum()])
                     if event.type() == QEvent.Type.Wheel:
                         record["angle_delta"] = [event.angleDelta().x(), event.angleDelta().y()]
                     else:
@@ -77,7 +86,9 @@ def main():
     original = AuthorPaperView.__init__
 
     def observed_init(paper, *values, **kwargs):
+        nonlocal owns_output
         original(paper, *values, **kwargs)
+        owns_output = True  # run_windows reached its own fresh-output application factory.
         app = QApplication.instance()
         for screen in app.screens():
             rect = screen.availableGeometry()
@@ -94,13 +105,14 @@ def main():
         result = run_windows(args.output.resolve(), args.expected_sha, args.fixture)
     finally:
         AuthorPaperView.__init__ = original
-        if args.output.is_dir():
+        if owns_output and args.output.is_dir():
             target = args.output/"scaling-observations.json"
-            target.write_text(json.dumps(dict(
-                requested_per_process_scale=args.scale, actual_screens=screens,
-                evidence_kind="actual native input; non-consuming event filter",
-                observed_new_users=0, os_scaling_certification="NOT_RUN",
-                events=records), indent=2)+"\n", encoding="utf-8")
+            with target.open("x", encoding="utf-8") as stream:
+                stream.write(json.dumps(dict(
+                    requested_per_process_scale=args.scale, actual_screens=screens,
+                    evidence_kind="actual native input; non-consuming event filter",
+                    observed_new_users=0, os_scaling_certification="NOT_RUN",
+                    events=records), indent=2)+"\n")
             print(json.dumps(dict(observation_file=str(target), events=len(records),
                                   sha256=hashlib.sha256(target.read_bytes()).hexdigest())))
     return result
