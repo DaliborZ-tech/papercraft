@@ -329,7 +329,7 @@ def test_sources_are_immutable_and_returned_geometry_is_detached():
 
 
 @pytest.mark.parametrize("kind", ["arc", "cubic"])
-def test_unproved_curved_source_families_are_explicitly_unsupported(kind):
+def test_curved_source_families_still_need_a_sufficient_whole_interior_budget(kind):
     if kind == "arc":
         a = Curve((20, 0), (-20, 0), "arc", {"center": (0, 0), "sweep_deg": 180}, "a")
         b = Curve((20, 0), (-20, 0), "arc", {"center": (0, 0), "sweep_deg": 180}, "b")
@@ -340,10 +340,11 @@ def test_unproved_curved_source_families_are_explicitly_unsupported(kind):
         LoftProfile((a,), profile_id="first"),
         LoftProfile((b,), origin=(0, 0, 30), profile_id="second"),
     )
-    result = segment_ruled_loft(first, second, (LoftCorrespondence("a", "b"),), scale=1)
+    result = segment_ruled_loft(
+        first, second, (LoftCorrespondence("a", "b"),), scale=1, max_cells=1
+    )
     assert result["status"] == "UNRESOLVED"
-    assert result["supported_source_kinds"] == ["line"]
-    assert "curved target" in result["next_action"]
+    assert "budget" in result["message"]
     assert "triangles" not in result
 
 

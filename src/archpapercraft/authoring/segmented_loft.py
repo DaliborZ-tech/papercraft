@@ -1,7 +1,8 @@
 """Bounded planar triangle islands derived from explicitly paired line profiles.
 
-This first numerical slice supports LINE/LINE ruled patches only. It never
-changes its sources and never grants EXACT to the smooth target. For
+The original LINE/LINE path below is preserved; curved source pairs dispatch
+to a separately certified interval helper. Neither path changes its sources
+or grants EXACT to the smooth target. For the LINE/LINE path,
 S=A+B*u+C*v+D*u*v, splitting a parameter rectangle along (0,0)--(1,1)
 has SAME-PARAMETER error <=|D|*du*dv/4 over both entire triangle interiors.
 The bound includes the actual rounded output vertices, not just ideal vertices.
@@ -338,9 +339,10 @@ def segment_ruled_loft(
 ) -> dict:
     """Return detached APPROXIMATE triangle-island geometry or UNRESOLVED.
 
-    All source segments must be lines, explicitly paired once over [0,1] or
-    [1,0]. Parameter subdivision is a conforming, globally refined dyadic tensor
-    grid, shared across patch boundaries. max_cells caps every candidate grid;
+    Source segments are explicitly paired once over [0,1] or [1,0]. The original
+    LINE/LINE payload and proof remain unchanged; ARC/CUBIC pairs dispatch to
+    their interval helper. Subdivision is a conforming dyadic tensor grid shared
+    across patch boundaries. max_cells caps every candidate grid;
     total examined cells are less than twice that cap. max_depth caps refinement
     rounds. No application UUID is generated: all output indices are result-local
     and provenance is the source segment/interval plus parameter triangle.
@@ -349,6 +351,18 @@ def segment_ruled_loft(
     try:
         if not isinstance(first, LoftProfile) or not isinstance(second, LoftProfile):
             raise ValueError("Segmentation needs two explicit source LoftProfile records")
+        if any(curve.kind != "line" for profile in (first, second) for curve in profile.curves):
+            from .segmented_loft_curves import segment_curved_loft
+
+            return segment_curved_loft(
+                first,
+                second,
+                correspondences,
+                scale=scale,
+                max_deviation_mm=max_deviation_mm,
+                max_cells=max_cells,
+                max_depth=max_depth,
+            )
         for value, name in ((scale, "Paper scale"), (max_deviation_mm, "Deviation budget")):
             if (
                 isinstance(value, bool)
