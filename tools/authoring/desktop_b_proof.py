@@ -1778,12 +1778,12 @@ def run_windows(output, expected_sha, fixture="all"):
                     report["fixture_status"][name] = "FAIL"
             report.update(status="FAIL", error=traceback.format_exc(), failures=failures)
             try:
-                driver.capture("FAIL-last-state")
                 # This is a failed partial run artifact, never a replacement injected fixture.
                 (output / "FAIL-partial-observed-state.json").write_text(
                     json.dumps(window.project.to_dict(), ensure_ascii=False, indent=2),
                     encoding="utf8",
                 )
+                driver.capture("FAIL-last-state")
             except Exception:
                 report["capture_error"] = traceback.format_exc()
         finally:
@@ -1794,6 +1794,21 @@ def run_windows(output, expected_sha, fixture="all"):
 
     def factory(*args, **kwargs):
         window = original(*args, settings=settings, **kwargs)
+        original_run = window.run
+
+        def audited_run(operation):
+            def observed_operation():
+                try:
+                    return operation()
+                except Exception:
+                    report.setdefault("observed_command_exceptions", []).append(
+                        traceback.format_exc())
+                    raise
+            return original_run(observed_operation)
+
+        # Observe the original command boundary without replacing any command,
+        # geometry, result or exception. The real window still shows its error.
+        window.run = audited_run
         windows.append(window)
         timer = QTimer(window)
         timer.timeout.connect(close_messages)
