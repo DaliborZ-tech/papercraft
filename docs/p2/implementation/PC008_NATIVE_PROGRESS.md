@@ -1,0 +1,9 @@
+# PC-008 — průběžný skutečný průchod D
+
+11.11.2026. První [Windows LINE D](evidence/pc008-D-desktop-d762fc6-run01/results.json) na CODE **`d762fc6d2c543691b8918128b6b0d3e1da59313e`** má **PASS_REQUESTED_FIXTURE /42,125s**. Aplikace skutečně nakreslila oba profily, odmítla EXACT, zamítla nesplnitelnou0,000001mm mez, vytvořila potvrzenou odvozenou64dílovou variantu s mezí0,25mm, ponechala původní cíl, prošla dvěma ručními stránkami32+32/undo-redo/drag/locks, editací zdroje→STALE→Ctrl+Z a nativním Save/New/Open/exportem. Snapshot i skutečné SVG/PDF nesou APPROXIMATE; source triangle area se čte jiným orákulem. [Projekt](evidence/pc008-D-desktop-d762fc6-run01/D-segmented/D-segmented.apcraft), [PDF](evidence/pc008-D-desktop-d762fc6-run01/D-segmented/export/model.pdf).
+
+Root provedl [88 cílených doménových/UI/performance regresí](evidence/pc008-integration-6cd5cce/domain-ui-88.xml) na předchozím kombinovaném6cd5cce a [52 exportních/asynchronních regresí](evidence/pc008-integration-d762fc6/output-async-52.xml) na d762. Nejde o celé testy projektu ani důkaz dalšího nového uživatele.
+
+**Toto není finální předání D.** Writer268 byl mezitím zpřesněn na nezávisle schválený5ad3cc0: relativní plošná mez má základ samotného těla bez chlopní. První fixture nemá chlopně, její původní.01mm² výsledek se tím nemění, ale pro konečnou integraci je5ad povinný. Nezávislý reviewer dále posuzuje driver, sjednocený runtime a artefakty. Actual B3/gotika a editorové roundtripy nových stránek zatím NOT_RUN.
+
+Reviewer při čtení skutečného layout screenshotu pozoroval natěsnané dlouhé výchozí názvy64 dílů (DU02); jde o čitelnost značení, nikoli hmotovou kolizi nebo pozorování nového člověka. Navazuje krátké číslované výchozí označení nových generací při zachování autorských názvů a úplného kontextu v UI; oprava ještě vyžaduje vlastní pin/review a nový skutečný layout. Nový uživatel0/NOT_RUN, fyzická stavba P3, zbytek P2 zůstává v rozsahu.
