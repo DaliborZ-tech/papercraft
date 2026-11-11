@@ -1,0 +1,26 @@
+{
+  "status": "PASS_FULL_REGRESSION",
+  "source_sha": "8f1ec6382d527c719133958e7eb6f78a724ef5d5",
+  "counts": {
+    "tests": 1751,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "elapsed_seconds_reported": 574.32,
+  "junit_elapsed_seconds": 574.317,
+  "command": "PYTHONPATH=<this-worktree>/src; QT_QPA_PLATFORM=offscreen; shared-venv/python -m pytest -q -o junit_family=legacy -o faulthandler_timeout=60 --junitxml=<fresh-Temp-file>",
+  "binding_recorded_after_run": true,
+  "post_run_HEAD_verified": "8f1ec6382d527c719133958e7eb6f78a724ef5d5",
+  "post_run_src_tests_tools_diff": "",
+  "post_run_import_check_with_same_explicit_PYTHONPATH_as_test_command": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\src\\archpapercraft\\__init__.py",
+  "sys_executable": "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+  "initial_binding_attempt": "Metadata-only first attempt omitted explicit PYTHONPATH and guard correctly refused the editable main-root import before recording a binding. The actual full-suite command already explicitly set its own worktree/src. This corrected post-run check repeats that setting.",
+  "scope": "Source8f complete existing tests; forthcoming independent circular SVG oracle helper is tested separately; not a new-user or physical proof.",
+  "new_users": 0,
+  "physical_P3": "NOT_RUN",
+  "files_sha256": {
+    "papercraft-c8-8f1ec63-full-run01.log": "d6288c0b723186c387ab050122c45a2d930eae2c54b0dedacb56bfb10964b8b7",
+    "papercraft-c8-8f1ec63-full-run01.xml": "bfc54f72ce7ed6bbd948288aa2d265b7b33f96bd51be3b771a66a6165b4c37a6"
+  }
+}

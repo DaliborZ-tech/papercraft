@@ -723,7 +723,7 @@
         "AC-US06",
         "AC-US07"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "verification_deferred": {
@@ -1197,7 +1197,7 @@
         "integration_review": "badf33d: APPROVED_IN_D_AND_GOTHIC_B3_TECHNICAL_INCREMENT_SCOPE for e782 + metadata89a14c5; DU02 CLOSED"
       },
       "candidate_code_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
-      "working_branch": "revival/p2-profile-provenance",
+      "working_branch": "revival/p2-curved-profile-provenance",
       "implementation_started_on": "2026-11-11",
       "live_LINE_progress_2026_11_11": {
         "code_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
@@ -1210,7 +1210,36 @@
         "open_external": "novice0/NOT_RUN; physicalP3/NOT_RUN",
         "review_commit": "a03c2948f44a0dce55ed975d57a0cebcf1d95861",
         "reviewed_metadata_sha": "93f650c4a22a9d1dffd3b65c69f4b9505d5889f7",
-        "review_report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_REVIEW.md"
+        "review_report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_REVIEW.md",
+        "publication": "PUBLISHED_VERIFIED_LOCAL_REMOTE_SHA",
+        "published_sha": "b2bbf89cda5e9260d64ebc766dca2759293dee5c"
+      },
+      "curved_source_views_progress": {
+        "source_sha": "a0073de13c6ceff182da605fa4cd6b2820df093e",
+        "helper_evidence_head": "e5277d3436ae5d5560e02d4e9d7136ed97d925e7",
+        "independent_review": "APPROVED_IN_RESTRICTED_HELPER_SCOPE; SV01 CLOSED by17ac8b0+2c8e83d; application/provenance/UI remain pending",
+        "live_application": "SCHEMA9 live ARC/CUBIC and semantic loft wire IN_PROGRESS in revival/p2-curved-profile-provenance; component/native proof pending",
+        "helper_independent_review_commit": "48522778f7026bcc65c61bd876e2bad78c3ccaea",
+        "local_unpublished_component": true,
+        "report_pending_local_path": "docs/p2/implementation/AU13_PROFILE_SOURCE_VIEWS.md"
+      },
+      "core9_review_checkpoint": {
+        "source_sha": "4f43a6427c7fbd25a87309ab31ad676ddd7794e1",
+        "author_evidence_head": "7c61c7ee54233dc662420b5199e3a5d914da4441",
+        "author_suite": "419 PASS; does not cover later R01 fix",
+        "review_commit": "b7348c257889955df1756813779a097a531fd754",
+        "verdict": "CHANGES_REQUIRED",
+        "CORE9_R01": "OPEN_PENDING_INDEPENDENT_FIX_REPLAY",
+        "fix_runtime": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
+        "fix_handoff": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
+        "fix_verification": "8 targeted author PASS1.79s; unchanged reviewer-oracles replay and expanded counterfeit/old-artifact checks PENDING",
+        "UI_handoff": "6af01c67c7555171bcdd7246cf9834c39afa8114",
+        "UI_runtime": "7ef51beddeb86b1ba5d31be8277803458bd4a9fb",
+        "UI_verification": "111 PASS0SKIP on original core4f, independent UI review and patched-core replay pending",
+        "remaining_hypotheses": [
+          "Empty-history exporter contexts accept a descriptor in direct spotcheck; complete export exploit not proven",
+          "Analogous retired LINE ID resurrection has not been reproduced; investigate before claiming a defect"
+        ]
       }
     },
     {
@@ -2328,31 +2357,39 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "APPLIED_WITH_COMPONENT_REVIEW; FINAL_INTEGRATION_PENDING",
+          "decision": "Separate exact rolled body, authored source-bound tabs/receiving material and physical proof; relief, real glue area and all selected scene material checked.",
+          "evidence": [
+            "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+          ],
+          "review": "docs/p2/implementation/PC007B_CIRCULAR_PRODUCER_REVIEW.md"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "APPLIED_WITH_COMPONENT_REVIEW; FINAL_INTEGRATION_PENDING",
+          "decision": "Detached cancellable previews, staged paper+intent oneUndo, CUI01-04 corrected after independent replay; invalid pending input retains visible context and raw text.",
+          "evidence": [
+            "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+          ],
+          "review": "docs/p2/implementation/PC007B_CURVED_AUTHORING_UI_REVIEW.md"
         },
         {
           "skill": "papercraft-verification",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "APPLIED_WITH_COMPONENT_REVIEW; FINAL_INTEGRATION_PENDING",
+          "decision": "Analytic independent source expectations, exact raw token vector audits, real native IO and Inkscape; retain every failed/disqualified attempt, no novice substitution.",
+          "evidence": [
+            "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+          ],
+          "review": "docs/p2/implementation/PC007B_CIRCULAR_PRODUCER_REVIEW.md"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
-          "review": "NOT_RUN"
+          "status": "APPLIED_WITH_COMPONENT_REVIEW; FINAL_INTEGRATION_PENDING",
+          "decision": "Review separate authors on pinned components, combine C and published LINE safely, fix actual native findings, preserve all evidence and independently verify before master push.",
+          "evidence": [
+            "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+          ],
+          "review": "docs/p2/implementation/PC007B_CURVED_AUTHORING_UI_REVIEW.md"
         }
       ],
       "usability": {
@@ -2383,10 +2420,60 @@
       "authorization_note": "Explicit owner acceptance P2 v1.2 with UI/UX, skills, usability and full A/B/C/D; no routine per-slice permission.",
       "implementation_authorized_on": "2026-11-06",
       "component_progress_2026_11_11": {
-        "source_sha": "54b9459c250d0c27a4528ab72983aac0b5bfd58e",
-        "branch": "revival/p2-curved-tabs (local, not published)",
-        "status": "Pure analytical collar certifier awaiting independent review; no current native body adapter, persistence, UI or vector proof; whole C NOT_RUN",
-        "scope": "whole-fold analytic body/siblings/disk cap, explicit budgets and physical P3 unknown; no whole-scene certificate"
+        "source_sha": "8f1ec6382d527c719133958e7eb6f78a724ef5d5",
+        "branch": "revival/p2-c-integrated-authoring",
+        "status": "FULL_REGRESSION_AND_ALL_THREE_NATIVE_CASES_PASS; ONE_NEAR_EDITOR_METRIC_CHECK_PENDING",
+        "body_review": "docs/p2/implementation/PC007B_CIRCULAR_BODY_FOUNDATION_REVIEW.md",
+        "consumer_composer_domain_review_commit": "df6dd20f1988cf98879a3987696e6f27c611a113",
+        "consumer_composer_domain_review": "docs/p2/implementation/PC007B_CIRCULAR_PRODUCER_REVIEW.md",
+        "UI_review_commit": "53e6d2812728b7f6f6ddd094ea649055f65509b6",
+        "UI_source_sha": "e1c06f5b068880ac22b28516ce69c66aee32603d",
+        "UI_review": "docs/p2/implementation/PC007B_CURVED_AUTHORING_UI_REVIEW.md",
+        "UI_findings": "CUI01-CUI04 CLOSED_VERIFIED_IN_COMPONENT_SCOPE",
+        "initial_native_cylinder": "docs/p2/implementation/evidence/pc007b-C-cylinder-desktop-d5a62d1-run01/results.json",
+        "initial_native_cylinder_status": "PASS_TECHNICAL_UI_107.906s_NOT_FINAL_SOURCE",
+        "initial_cone_failure": "docs/p2/implementation/evidence/pc007b-C-cone-desktop-d5a62d1-run01/results.json",
+        "translated_receiver_repair": "e42ee67; identity-linear exact translation, one-ULP negative; actual cone native replay PASS at8f",
+        "complete_C": false,
+        "new_user": "0 / NOT_RUN",
+        "physical_build": "NOT_RUN_P3",
+        "production_source_sha": "8f1ec6382d527c719133958e7eb6f78a724ef5d5",
+        "diagnostic_harness_source_sha": "52836321810f7a8a0c6a8d43b801f98ed875bbde",
+        "regression": {
+          "tests": 1751,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "elapsed_seconds": 574.32,
+          "binding": "docs/p2/implementation/evidence/pc007b-c8-full-8f1ec63-run01/binding.json"
+        },
+        "current_native_evidence": {
+          "cylinder": {
+            "status": "PASS_TECHNICAL_UI_FROM_EMPTY_NATIVE_IO_AND_VECTORS",
+            "elapsed_seconds": 111.719,
+            "report": "docs/p2/implementation/evidence/pc007b-C-cylinder-desktop-8f1ec63-run02/results.json"
+          },
+          "cone": {
+            "status": "PASS_TECHNICAL_UI_FROM_EMPTY_NATIVE_IO_AND_VECTORS",
+            "elapsed_seconds": 157.266,
+            "report": "docs/p2/implementation/evidence/pc007b-C-cone-desktop-8f1ec63-run02/results.json"
+          },
+          "near": {
+            "status": "PASS_TECHNICAL_UI_FROM_EMPTY_NATIVE_IO_AND_VECTORS",
+            "elapsed_seconds": 132.078,
+            "report": "docs/p2/implementation/evidence/pc007b-C-near-desktop-5283632-run02/results.json"
+          }
+        },
+        "editor_progress": "Cylinder/cone both actual pages PASS; near cap page PASS; near body editor preserved actual operations but old parameter-wise radius comparison FAIL. Actual material area change1.29e-6; whole-curve/length and direct-area qualification pending without widening tolerance.",
+        "paused_by_owner": true,
+        "editor_helper_pending": {
+          "source_sha": "a799072ea87043ff11ea632b76217456f4a4f0a9",
+          "evidence_head": "b9ff396cf9d319cbceb64d1cab0e0d8cb3effe30",
+          "author_tests_passed": 33,
+          "independent_review": "NOT_RUN",
+          "new_native_editor_replay": "NOT_RUN",
+          "in_C8_branch": false
+        }
       }
     },
     {
@@ -2535,7 +2622,7 @@
   ],
   "updated_on": "2026-11-11",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "revival/p2-segmentation-gothic",
+  "working_branch": "handoff/2026-11-11",
   "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
@@ -2618,7 +2705,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "IN_PROGRESS: A/mixed verified; B1/B2/Bezier current digital proof verified, B3/D/C, provenance/mixed changes, PC009, novice AC-US08 and final historic AC-AU19/P2 review remain required",
+  "p2_digital_delivery": "PAUSED_BY_OWNER_2026_11_11: implementation remains incomplete; accepted P2v1.2 authorization unchanged; resume next session from handoff. Published B/D/LINE; unmerged C8/CORE9, R01 and editor/scaling/final-historic proofs remain. Novice0/NOT_RUN, physicalP3/NOT_RUN.",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2684,7 +2771,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "PC-007A",
+  "current_authorized_package": "PC-007B + PC-008; continue PC-009/PC-010 without routine approval",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2777,14 +2864,14 @@
     "whole_v12_contract_acceptance_implied": false
   },
   "current_delivery": {
-    "ticket": "PC-008 D/B3 technical increment",
-    "then": "PC-007B",
+    "ticket": "PC-007B C authoring and PC-008 curved provenance",
+    "then": "PC-009",
     "followed_by": [
-      "PC-008",
+      "PC-008 remaining acceptance",
       "PC-009",
       "PC-010"
     ],
-    "status": "IN_PROGRESS",
+    "status": "PAUSED_BY_OWNER",
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
@@ -2794,21 +2881,21 @@
       "report": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md"
     },
     "status_before_pause": "IN_PROGRESS",
-    "paused_on": "2026-11-09",
-    "continuation_target_date": "2026-11-10",
-    "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
+    "paused_on": "2026-11-11",
+    "continuation_target_date": "NEXT_SESSION_NOT_SCHEDULED",
+    "pause_reason": "Owner explicitly requested documentary handoff and continuation next time.",
     "implementation_authorization_unchanged": true,
-    "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
-    "wip_source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
-    "wip_branch": "revival/p2-segmentation-gothic",
-    "next_required_technical_work": "Complete independently reviewed C composition/source-transfer/domain/UI and actual cylinder/cone/near-limit vectors; live split/merge/trim provenance and mixed anchors, PC009 and historic PC010. B and D/B3 are published. Missing novice evidence remains0/NOT_RUN.",
+    "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-11.md",
+    "wip_source_sha": "5747a2af2d70cd622de49c057544b584baa699c2",
+    "wip_branch": "revival/p2-c-integrated-authoring",
+    "next_required_technical_work": "Read CONTINUE_2026-11-11.md. Close CORE9-R01 with unchanged reviewer replay and expanded poison/orphan/old-artifact cases; investigate unproven empty-history exporter and LINE resurrection hypotheses. Merge reviewed core fix into actual UI. Independently review editor helper and replay Inkscape near page. Finish source-bound C8 metadata/integration review, then safe publication, full PC009 and own historical PC010. No routine owner approval; novice0/NOT_RUN, P3NOT_RUN.",
     "resumed_on": "2026-11-11",
     "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Published D/B3 at1c71bee with local/remote SHA equal. Continue C body+connector+source-transfer/composition and live AU13/mixed-part proof, then PC009/PC010. P2 IN_PROGRESS; actual novice0/NOT_RUN.",
+    "active_work": "PAUSED_BY_OWNER. C8 real native cases and source tests saved; near-editor comparator a799/b9ff needs independent review and actual replay; process scaling remains pending after safe foreground/hit-test refusal. CORE9 R01 fix72f7a16 exists with8 author tests but unchanged independent replay and broader matrix remain pending. UI6af contains old core4f; merge verified fix before further proof.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2906,7 +2993,8 @@
       "details_in_handoff": "docs/p2/implementation/CONTINUE_2026-11-10.md",
       "performance_runtime_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
       "performance_handoff_sha": "d460446cd643478b8236df1e058522d63d72553c",
-      "performance_worktree_clean": true
+      "performance_worktree_clean": true,
+      "historical_status_note": "Historical pre-publication WIP retained; superseded for B/D by their later actual published integrations and current active_work. Not a current pause or implementation gate."
     },
     "last_pause": {
       "paused_on": "2026-11-09",
@@ -2952,6 +3040,22 @@
       "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
       "remote_verification": "docs/p2/implementation/evidence/pc008-master-push-1c71bee.json",
       "status": "PUBLISHED_SCOPED_TECHNICAL_INCREMENT"
-    }
+    },
+    "LINE_publication": {
+      "status": "PUBLISHED_VERIFIED_LOCAL_REMOTE_SHA",
+      "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+      "published_sha": "b2bbf89cda5e9260d64ebc766dca2759293dee5c",
+      "facts_review_commit": "b1b519d93196151187bf774e015cfb1baf60d78b",
+      "report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_INTEGRATION.md",
+      "whole_AU13_AU14_complete": false
+    },
+    "pause_history": [
+      {
+        "paused_on": "2026-11-09",
+        "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
+        "continuation_target_date": "2026-11-10",
+        "resumed_on": "2026-11-11"
+      }
+    ]
   }
 }
