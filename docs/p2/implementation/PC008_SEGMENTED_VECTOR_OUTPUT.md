@@ -1,5 +1,8 @@
 # PC-008 — zdroj a skutečné výrobní výstupy odvozené varianty
 
+Následná úzká oprava relativní plošné meze je doložená samostatně v
+[BODY-only review fix](PC008_SEGMENTED_BODY_AREA_BUDGET_FIX.md), zdroj `5ad3cc0`.
+
 Finální komponentový zdroj: `26873c6d0950af412ba531f01440c3506b3dd6b1`,
 předek `c77c09baa6115ed9681765324bcd259f33adc998`, základ domény `e51f127`.
 Worktree `papercraft-segmented-output`, větev `revival/p2-segmented-output`.
