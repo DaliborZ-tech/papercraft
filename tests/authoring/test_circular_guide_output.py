@@ -116,11 +116,24 @@ def test_actual_svg_guide_fault_never_replaces_previous_bundle(tmp_path, monkeyp
                 + " L "
                 + " ".join(str(float(x)) for x in b),
             )
-        tree.write(path, encoding="utf8", xml_declaration=True)
+        tree.write(path, encoding="utf-8", xml_declaration=True)
+        # The fault must reach the role/geometry guard. Invalid XML is a
+        # different rejection and cannot prove a missing/reversed hinge test.
+        parsed = ET.parse(path)
+        assert parsed.getroot().tag == NS + "svg"
 
     monkeypatch.setattr(author_export, "_svg", altered)
-    with pytest.raises(CurveOutputError):
+    with pytest.raises(CurveOutputError) as rejected:
         author_export.export_all(snapshot, directory)
+    reason = rejected.value.reason
+    if mutation in ("omitted", "cross_role"):
+        assert "Kruhová SVG role změnila identitu" in reason
+    elif mutation == "extra":
+        assert "pokrytí cest" in reason
+    elif mutation == "ctm":
+        assert "řezy chlopní" in reason
+    else:
+        assert "tištěný GUIDES" in reason
     assert {path.name: path.read_bytes() for path in directory.iterdir()} == original_bytes
     assert not list(directory.glob(".author-export-*"))
 
