@@ -210,12 +210,14 @@ def _boundary(boundary, position_budget, length_budget, count, work):
 
 def coalesce_native_loft_boundaries(native, *, position_budget_mm=0.008,
                                     length_budget_mm=0.008,
-                                    merge_position_budget_mm=1e-5,
-                                    merge_length_budget_mm=1e-4,
+                                    merge_position_budget_mm=0.001,
+                                    merge_length_budget_mm=0.006,
                                     max_segments=65536, max_candidates=65536,
                                     max_comparisons=262144):
     """Detach a proved fit, preserving every fine provenance interval.
 
+    Merge reserves are internal allocations, clipped to the remainder of the
+    original total fit budgets. They never replace source error or area checks.
     Work exhaustion returns the ORIGINAL proved representation with an explicit
     NOT_APPLIED status, never a partially checked curve or partial certificate.
     The caller must still prove actual resulting topology and intrinsic area.
@@ -316,6 +318,10 @@ def coalesce_native_loft_boundaries(native, *, position_budget_mm=0.008,
         same_parameter_position_proof="SOURCE_TO_FINE_BOUND_PLUS_EXACT_RESTRICTION_BERNSTEIN_BOUND",
         length_proof="SOURCE_TO_FINE_BOUND_PLUS_GLOBAL_SUM_INTEGRAL_DERIVATIVE_DIFFERENCE_NORM",
         coalescing={"status": "CERTIFIED_SAME_U_AND_GLOBAL_LENGTH", **work,
+                    "effective_position_budget_paper_mm": float(position_limit),
+                    "effective_global_side_length_budget_paper_mm": float(length_limit),
+                    "total_position_budget_paper_mm": float(position_budget),
+                    "total_global_side_length_budget_paper_mm": float(length_budget),
                     "position_bound_exact": str(error), "position_bound_paper_mm": _upper(error),
                     "length_bound_exact": {s: str(lengths[s]) for s in lengths},
                     "length_bound_paper_mm": {s: _upper(lengths[s]) for s in lengths},

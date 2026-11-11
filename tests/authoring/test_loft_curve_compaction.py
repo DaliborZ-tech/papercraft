@@ -282,6 +282,16 @@ def test_input_cap_no_remaining_budget_and_repeat_call_do_not_silently_spend_aga
     assert coalesce_native_loft_boundaries(result) == result
 
 
+def test_larger_merge_reserve_is_clipped_to_original_total_budget_remainder():
+    native = synthetic_native(perturbed_chain(), patches=3)
+    result = coalesce_native_loft_boundaries(
+        native, position_budget_mm=.001001, length_budget_mm=.00201)
+    assert result["position_error_bound_paper_mm"] <= .001001
+    assert result["boundary_length_error_bound_paper_mm"] <= .00201
+    assert result["coalescing"]["effective_position_budget_paper_mm"] <= .000001000001
+    assert result["coalescing"]["effective_global_side_length_budget_paper_mm"] <= .000010000001
+
+
 @pytest.mark.parametrize("key", ["position_budget_mm", "length_budget_mm",
                                   "merge_position_budget_mm", "merge_length_budget_mm"])
 @pytest.mark.parametrize("value", [0, -1, True, float("nan"), float("inf")])
@@ -290,7 +300,13 @@ def test_invalid_error_budgets_are_rejected(key, value):
         coalesce_native_loft_boundaries(synthetic_native(perturbed_chain()), **{key: value})
 
 
-def test_v2_cache_stales_on_load_preserving_raw_file_source_layout_and_frame(tmp_path, monkeypatch):
+@pytest.mark.parametrize("old_contract", [
+    "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_EXACT_COLLINEAR_CUT_V2",
+    "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_BOUNDED_COALESCED_CUT_V3",
+])
+def test_previous_cache_stales_preserving_raw_file_source_layout_frame(
+    tmp_path, monkeypatch, old_contract
+):
     p = AuthorProject.new(scale=1)
     a = p.add_profile([[0, 0], [20, 0], [20, 10]], closed=False)
     b = p.copy_profile(a, plane={"origin": [0, 0, 10], "u": [1, 0, 0], "v": [0, 1, 0]})
@@ -300,8 +316,7 @@ def test_v2_cache_stales_on_load_preserving_raw_file_source_layout_and_frame(tmp
     pid = p.part_for_surface(sid)
     p.set_placement(pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True)
     with monkeypatch.context() as old:
-        old.setattr(loft_surface, "LOFT_PAPER_CONTRACT",
-                    "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_EXACT_COLLINEAR_CUT_V2")
+        old.setattr(loft_surface, "LOFT_PAPER_CONTRACT", old_contract)
         p.recompute()
     original = p.to_dict()
     source = tmp_path / "V2.apcraft"
@@ -323,7 +338,7 @@ def test_v2_cache_stales_on_load_preserving_raw_file_source_layout_and_frame(tmp
     loaded.save(tmp_path / "V3-copy.apcraft")
     restored = load_project(tmp_path / "V3-copy.apcraft")
     assert restored.to_dict() == loaded.to_dict()
-    assert restored.loft_status(sid)["paper_contract"].endswith("V3")
+    assert restored.loft_status(sid)["paper_contract"].endswith("V4")
 
 
 def replay_source_file(source, output):
@@ -381,7 +396,7 @@ def replay_source_file(source, output):
               "old_commands": len(original["parts"][pid]["paths"]["CUT"][0]["commands"]),
               "new_commands": len(p.parts[pid].paths["CUT"][0]["commands"]),
               "source_and_frame_and_layout_unchanged": True, "original_file_unchanged": True,
-              "v2_loaded_stale": True, "current_v3_poison_rejected": True,
+              "previous_contract_loaded_stale": True, "current_contract_poison_rejected": True,
               "save_reopen": True, "coalescing": native["coalescing"],
               "position_bound_paper_mm": native["position_error_bound_paper_mm"],
               "length_bound_paper_mm": native["boundary_length_error_bound_paper_mm"],
