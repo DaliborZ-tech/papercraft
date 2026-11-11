@@ -417,3 +417,46 @@ def test_measured_inverse_rejects_bad_distances_without_geometry_change(distance
     with pytest.raises(ValidationError):
         p.profile_segment_parameter_at_length(pid, p.profiles[pid].segments[0].id, distance)
     assert p.to_dict() == before
+
+
+@pytest.mark.parametrize("kind", ["arc", "cubic"])
+@pytest.mark.parametrize("retired", ["root", "left", "right"])
+def test_retired_piece_cannot_be_resurrected_with_a_self_consistent_descriptor(kind, retired):
+    p = AuthorProject.new(scale=0.1)
+    pid = profile(p, kind)
+    root = p.profiles[pid].segments[0].id
+    split = p.split_profile_segment(pid, root, Q(1, 3))
+    p.merge_profile_segments(pid, split["segment_ids"])
+    raw = p.to_dict()
+    retired_id = {"root": root, "left": split["segment_ids"][0], "right": split["segment_ids"][1]}[
+        retired
+    ]
+    segment = raw["profiles"][pid]["segments"][0]
+    segment["id"] = retired_id
+    segment["source_reference"]["piece_id"] = retired_id
+    with pytest.raises(ProjectFormatError):
+        AuthorProject.from_dict(raw)
+
+
+@pytest.mark.parametrize("kind", ["arc", "cubic"])
+def test_active_curve_authority_cannot_be_stripped_but_whole_replacement_keeps_archive(kind):
+    p = AuthorProject.new(scale=0.1)
+    a, b = profile(p, kind), profile(p, kind, height=10)
+    root = p.profiles[a].segments[0].id
+    sid = p.add_loft(
+        a,
+        b,
+        correspondences=[
+            {"first_segment_id": root, "second_segment_id": p.profiles[b].segments[0].id}
+        ],
+    )
+    p.split_profile_segment(a, root, Q(1, 3))
+    raw = p.to_dict()
+    raw["profiles"][a]["segments"][0]["source_reference"] = None
+    with pytest.raises(ProjectFormatError):
+        AuthorProject.from_dict(raw)
+    archive = copy.deepcopy(p.profile_subdivisions)
+    p.update_profile(a, [[0, 0], [4, 2], [8, 0]], closed=False)
+    assert p.profile_subdivisions == archive
+    assert p.surfaces[sid].params["reference_state"] == "UNRESOLVED"
+    assert AuthorProject.from_dict(p.to_dict()).to_dict() == p.to_dict()

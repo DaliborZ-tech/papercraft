@@ -669,6 +669,7 @@ class ProfileSubdivisionCommands:
         }
         retired = set()
         seen_edges = set()
+        active_piece_references = {}
         point_owners = {}
         projection_by_profile = {}
         canonical_by_profile = {}
@@ -746,6 +747,12 @@ class ProfileSubdivisionCommands:
                     raise ValidationError("Historické body různých zdrojů sdílejí stejné UUID.")
                 point_owners[vertex_id] = owners[vertex_id]
             for piece in history.pieces:
+                # The edge registry includes retired aliases too. Authority
+                # belongs only to the exact current replayed piece, qualified
+                # by its profile/history/source/generation/parameter interval.
+                active_piece_references[history.profile_id, piece.id] = source_reference(
+                    history, piece.id
+                )
                 active = profile.segment(piece.id)
                 if active is None:
                     # Explicit replacement retains old history for inspection.
@@ -839,10 +846,21 @@ class ProfileSubdivisionCommands:
             raise ValidationError("Historická hrana a materiálový bod nesmějí sdílet UUID.")
         for profile in self.profiles.values():
             for segment in profile.segments:
-                if segment.source_reference is not None and segment.id not in seen_edges:
+                reference = active_piece_references.get((profile.id, segment.id))
+                if segment.id in seen_edges and reference is None:
                     raise ValidationError(
-                        "Analytický descriptor nemá replayovaného vlastníka historie."
+                        "Historický úsek není aktivním dílem replayované historie."
                     )
+                if segment.source_reference is not None and segment.source_reference != reference:
+                    raise ValidationError(
+                        "Analytický descriptor nemá přesného aktivního vlastníka historie."
+                    )
+                if (
+                    reference is not None
+                    and reference["source"]["kind"] != "line"
+                    and segment.source_reference != reference
+                ):
+                    raise ValidationError("Aktivní analytický zdroj vyžaduje vlastní descriptor.")
         for maximum, length_error, source_length in projection_by_profile.values():
             # For a LINE, convexity bounds the entire source→actual segment by
             # endpoint errors. Length is 1-Lipschitz in each endpoint. SUM the
