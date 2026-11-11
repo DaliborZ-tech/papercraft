@@ -198,7 +198,7 @@ def test_infeasible_budget_is_typed_unresolved_without_any_partial_mutation(para
     assert p.to_dict() == before
 
 
-def test_curved_source_is_retained_and_typed_unresolved_in_this_line_only_slice():
+def test_curved_source_is_retained_by_generic_segmentation_without_implicit_conversion():
     p = AuthorProject.new(scale=1)
     a = p.add_profile(
         segments=[
@@ -226,8 +226,15 @@ def test_curved_source_is_retained_and_typed_unresolved_in_this_line_only_slice(
     )
     before = p.to_dict()
     result = p.preview_segmented_variant(s)
-    assert result["status"] == "UNRESOLVED" and "LINE/LINE" in result["message"]
+    assert result["status"] == "APPROXIMATE" and result["can_confirm"]
+    assert result["certificate"]["math"]["family"] == "INTERVAL_CURVED_RULED_TRIANGLE_ISLANDS"
     assert p.to_dict() == before
+    variant = p.add_segmented_variant(s, preview_digest=result["preview_digest"])
+    assert p.profiles[a].segments[0].kind == "cubic"
+    assert p.segmented_variants[variant].source_binding["profiles"] == [
+        before["profiles"][a],
+        before["profiles"][b],
+    ]
 
 
 def test_source_edit_invalidates_confirmation_and_old_layout_survives_recompute(laid_out_state):
