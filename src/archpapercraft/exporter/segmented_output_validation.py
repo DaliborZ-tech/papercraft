@@ -14,7 +14,7 @@ import xml.etree.ElementTree as ET
 from fractions import Fraction
 from functools import lru_cache
 
-from archpapercraft.authoring.curve_area import native_region_area_bounds
+from archpapercraft.authoring.curve_area import _div, _mul, _sqrt, native_region_area_bounds
 
 from .curve_output_validation import CurveOutputError, read_pdf_cut_regions
 from .loft_output_validation import _coordinate_errors, _placed
@@ -203,6 +203,88 @@ def _metadata(svg_paths, pdf_path, data):
                     raise ValueError("Skutečné SVG ztratilo režim nebo zdrojové UUID dílu.")
 
 
+def _source_material_area(data, item):
+    """Physical source-plane triangle plus proven net connector extension.
+
+    The source core area is computed BEFORE the canonical paper frame, directly
+    from exact supplied profile/plane operands. The connector increment is the
+    net union delta of its canonical authored paper-mm geometry, not a fresh
+    tolerance or a presumed whole tab added on top of overlapping material.
+    """
+    source = data["construction_checks"]["segmented_source_project"]
+    row, part = item["binding"], item["part"]
+    profile = source["profiles"][row["profile_id"]]
+    vertices = [tuple(map(Fraction, vertex["point"])) for vertex in profile["vertices"]]
+    if len(vertices) != 3 or profile["closed"] is not True:
+        raise ValueError("Zdroj materiálu již není původní rovinný trojúhelník.")
+    plane = profile["plane"]
+    u, v = tuple(map(Fraction, plane["u"])), tuple(map(Fraction, plane["v"]))
+    a, b = [
+        tuple(
+            (point[0] - vertices[0][0]) * x + (point[1] - vertices[0][1]) * y for x, y in zip(u, v)
+        )
+        for point in vertices[1:]
+    ]
+    cross = (a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0])
+    scale = Fraction(source["scale"])
+    body = tuple(value * scale * scale / 2 for value in _sqrt(sum(x * x for x in cross)))
+    core = source["parts"][part["id"]]["polygons"][row["surface_id"]]
+    if len(core) != 1 or len(core[0]) != 3:
+        raise ValueError("Kanonický rám nepokrývá právě původní materiálové jádro.")
+    frame_body = native_region_area_bounds([_commands({"points": core[0], "closed": True})])
+    union = native_region_area_bounds(
+        [_commands(path) for path in part["paths"]["CUT"]], max_commands=MAX_OUTPUT_COMMANDS
+    )
+    extension = union[0] - frame_body[1], union[1] - frame_body[0]
+    result = body[0] + extension[0], body[1] + extension[1]
+    if body[0] <= 0 or result[0] <= 0:
+        raise ValueError("Skutečný zdrojový materiál nemá kladnou plochu.")
+    frame = source["parts"][part["id"]]["frame"]
+    by_id = {vertex["id"]: tuple(map(Fraction, vertex["point"])) for vertex in profile["vertices"]}
+    anchor = by_id[frame["anchor_vertex_id"]]
+    segment = next(s for s in profile["segments"] if s["id"] == frame["axis_segment_id"])
+
+    def vector(first, second):
+        return tuple((second[0] - first[0]) * x + (second[1] - first[1]) * y for x, y in zip(u, v))
+
+    def cross(first, second):
+        x, y, z = first
+        a, b, c = second
+        return y * c - z * b, z * a - x * c, x * b - y * a
+
+    axis = vector(by_id[segment["start_vertex_id"]], by_id[segment["end_vertex_id"]])
+    normal = cross(u, v)
+    axis_length, normal_length = (_sqrt(sum(x * x for x in value)) for value in (axis, normal))
+    y_axis = cross(normal, axis)
+    y_denominator = _mul(axis_length, normal_length)
+    position_error = Fraction(0)
+    for vertex, actual in zip(vertices, core[0]):
+        delta = vector(anchor, vertex)
+        numerator_x = sum(x * y for x, y in zip(delta, axis)) * scale
+        numerator_y = sum(x * y for x, y in zip(delta, y_axis)) * scale
+        ideal = (
+            _div((numerator_x, numerator_x), axis_length),
+            _div((numerator_y, numerator_y), y_denominator),
+        )
+        error = sum(
+            max(abs(Fraction(coord) - low), abs(Fraction(coord) - high))
+            for coord, (low, high) in zip(actual, ideal)
+        )
+        position_error = max(position_error, error)
+    length_error = Fraction(0)
+    for i, j in ((0, 1), (1, 2), (2, 0)):
+        source_edge = tuple(
+            value * scale for value in _sqrt(sum(x * x for x in vector(vertices[i], vertices[j])))
+        )
+        actual_edge = _sqrt(
+            sum((Fraction(a) - Fraction(b)) ** 2 for a, b in zip(core[0][i], core[0][j]))
+        )
+        length_error += max(
+            abs(source_edge[0] - actual_edge[1]), abs(source_edge[1] - actual_edge[0])
+        )
+    return result, body, frame_body, extension, position_error, length_error
+
+
 def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
     """Direct canonical material→each actual file; target deviation added ONCE."""
     bindings = validate_segmented_snapshot(data)
@@ -226,7 +308,9 @@ def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_par
             placement = [place["x_mm"], place["y_mm"], place["rotation_deg"]]
             loops = [_commands(path) for path in part["paths"]["CUT"]]
             # Net material includes the proven body PLUS legitimate tab union.
-            source_area = native_region_area_bounds(loops, max_commands=MAX_OUTPUT_COMMANDS)
+            (source_area, body_area, frame_body, extension, frame_position, frame_length) = (
+                _source_material_area(data, item)
+            )
             area_budget = max(Fraction(1, 100), source_area[0] / 1000000)
             bound = Fraction(item["flattening"]["max_surface_deviation_paper_mm_exact"])
             requested = Fraction(proof["parameters"]["max_deviation_mm"])
@@ -238,6 +322,11 @@ def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_par
                 "source_parameter_key": item["binding"]["source_parameter_key"],
                 "source_project_digest": item["source_project_digest"],
                 "source_material_area_exact": [str(v) for v in source_area],
+                "source_plane_body_area_exact": [str(v) for v in body_area],
+                "canonical_frame_body_area_exact": [str(v) for v in frame_body],
+                "authored_net_connector_extension_area_exact": [str(v) for v in extension],
+                "source_plane_to_canonical_frame_position_error_bound_exact": str(frame_position),
+                "source_plane_to_canonical_frame_body_length_error_bound_exact": str(frame_length),
                 "allowed_material_area_error_exact": str(area_budget),
                 "outputs": {},
             }
@@ -258,16 +347,26 @@ def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_par
                 area_error = max(abs(area[0] - source_area[1]), abs(area[1] - source_area[0]))
                 # The mesh budget is not re-granted to the vector publisher.
                 # Publication has its own0.01mm material metric requirement.
-                if position > Fraction(1, 100) or length > Fraction(1, 100):
+                material_position = frame_position + position
+                material_length = frame_length + length
+                pose_operator = Fraction(
+                    proof["certificate"]["material_frame"]["pose_operator_upper_exact"]
+                )
+                target_position = bound + pose_operator * material_position
+                if material_position > Fraction(1, 100) or material_length > Fraction(1, 100):
                     raise ValueError("Skutečný výstup překročil digitální metriku materiálu.")
-                if area_error > area_budget or bound + position > requested:
+                if area_error > area_budget or target_position > requested:
                     raise ValueError("Skutečný výstup překročil plochu nebo původní target budget.")
                 record["outputs"][kind] = {
                     "actual_material_area_exact": [str(v) for v in area],
                     "source_material_to_actual_area_error_bound_exact": str(area_error),
-                    "source_material_to_actual_position_error_bound_exact": str(position),
-                    "source_material_to_actual_whole_cut_length_error_bound_exact": str(length),
-                    "original_target_to_actual_position_error_bound_exact": str(bound + position),
+                    "source_material_to_actual_position_error_bound_exact": str(material_position),
+                    "source_material_to_actual_whole_cut_length_error_bound_exact": str(
+                        material_length
+                    ),
+                    "canonical_frame_to_actual_position_error_bound_exact": str(position),
+                    "canonical_frame_to_actual_whole_cut_length_error_bound_exact": str(length),
+                    "original_target_to_actual_position_error_bound_exact": str(target_position),
                     "original_target_requested_budget_exact": str(requested),
                 }
             records[pid] = record
@@ -275,7 +374,7 @@ def validate_segmented_vector_outputs(data, svg_paths, pdf_path, *, expected_par
             "status": "VERIFIED",
             "parts": records,
             "mode": "APPROXIMATE_VS_RETAINED_ORIGINAL_TARGET",
-            "area_scope": "DIRECT_CANONICAL_MATERIAL_CORE_PLUS_LEGITIMATE_TABS_TO_EACH_FILE; "
+            "area_scope": "DIRECT_SOURCE_PLANE_BODY_PLUS_AUTHORED_NET_TAB_UNION_TO_EACH_FILE; "
             "NOT_EXACT_SMOOTH_TARGET_AREA",
             "physical_build": "NOT_VERIFIED",
             "new_user_test": "NOT_RUN",

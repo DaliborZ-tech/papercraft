@@ -74,6 +74,8 @@ def test_line_and_curved_variants_without_planar_curve_registry_get_actual_guard
             pytest.approx(expected)
         )
     for record in result["parts"].values():
+        variant = snapshot["construction_checks"]["segmented_variants"][record["variant_id"]]
+        certificate = variant["certificate"]["material_frame"]
         for actual in record["outputs"].values():
             assert Fraction(actual["source_material_to_actual_area_error_bound_exact"]) <= Fraction(
                 record["allowed_material_area_error_exact"]
@@ -84,6 +86,11 @@ def test_line_and_curved_variants_without_planar_curve_registry_get_actual_guard
             assert Fraction(
                 actual["original_target_to_actual_position_error_bound_exact"]
             ) <= Fraction(1, 4)
+            assert Fraction(actual["original_target_to_actual_position_error_bound_exact"]) == (
+                Fraction(certificate["max_target_to_material_deviation_paper_mm_exact"])
+                + Fraction(certificate["pose_operator_upper_exact"])
+                * Fraction(actual["source_material_to_actual_position_error_bound_exact"])
+            )  # Target→material bound ONCE, then publication reserve through the pose.
     modes = json.loads(PdfReader(directory / "model.pdf").metadata["/Keywords"])[
         "segmented_variant_modes"
     ]
@@ -300,3 +307,47 @@ def test_legitimate_tab_union_keeps_the_certified_body_and_is_not_a_false_exact(
         point[0] += 0.1
     with pytest.raises(CurveOutputError):
         validate_segmented_snapshot(forged)
+
+
+def test_direct_area_does_not_grant_another_full_budget_to_the_paper_frame(monkeypatch, tmp_path):
+    from archpapercraft.authoring import paper
+
+    p = load_project(
+        ROOT / "docs/p2/implementation/evidence/pc008-domain-95fa2c7/backend-fixture.apcraft"
+    )
+    original = paper._frame_map
+
+    def slightly_strained(*args):
+        rotation, offset = original(*args)
+        # Each individual area stage fits0.01mm², but their combined strain
+        # does not for the larger triangles. Source records stay unchanged.
+        return rotation * 1.00013, offset * 1.00013
+
+    monkeypatch.setattr(paper, "_frame_map", slightly_strained)
+    p.recompute()
+    snapshot = p.snapshot()
+    assert validate_segmented_snapshot(snapshot)  # Source/registry topology still closes.
+
+    def extra_serialized_strain(value):
+        result = copy.deepcopy(value)
+        pages = result["pages"] if "pages" in result else [result]
+        for page in pages:
+            for part in page["parts"]:
+                for path in part["paths"]["CUT"]:
+                    path["points"] = [
+                        [coordinate * 1.00013 for coordinate in point] for point in path["points"]
+                    ]
+        return result
+
+    original_pdf, original_svg = author_export._pdf, author_export._svg
+
+    def strained_pdf(data, *args, **kwargs):
+        return original_pdf(extra_serialized_strain(data), *args, **kwargs)
+
+    def strained_svg(page, *args, **kwargs):
+        return original_svg(extra_serialized_strain(page), *args, **kwargs)
+
+    monkeypatch.setattr(author_export, "_pdf", strained_pdf)
+    monkeypatch.setattr(author_export, "_svg", strained_svg)
+    with pytest.raises(CurveOutputError, match="plochu"):
+        author_export.export_all(snapshot, tmp_path / "strained-paper-frame")
