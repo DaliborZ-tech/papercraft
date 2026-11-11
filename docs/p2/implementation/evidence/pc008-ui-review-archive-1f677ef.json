@@ -1,0 +1,35 @@
+{
+  "source_sha": "1f677efbb38d7c586146990f0d8c3ad112515bc9",
+  "archive_sha256": "6d946a7a536fd879868438d8298a9403065cd73890da0ede3d6ee7da929950bf",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-mtx_o1_7",
+  "actual_imports": {
+    "archpapercraft.ui.author_segmentation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-mtx_o1_7\\src\\archpapercraft\\ui\\author_segmentation.py",
+      "lf_sha256": "05e1388a8e90faf42d991570cefb8d64cd0842b4e452de29b9d715d8f7ded024"
+    },
+    "archpapercraft.ui.author_manual_layout": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-mtx_o1_7\\src\\archpapercraft\\ui\\author_manual_layout.py",
+      "lf_sha256": "cbe576d8a33cfe1e4dd64da41a78ad5c2c5c4117d0bf2fa9c30da2f8c6ce5ea7"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-mtx_o1_7\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "4574be85d92ec9ce823f71b5c0fc50b450254dcc652c84b43bafc94af8481442"
+    },
+    "archpapercraft.ui.author_viewport": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-mtx_o1_7\\src\\archpapercraft\\ui\\author_viewport.py",
+      "lf_sha256": "f530dceb7db4ab2bd2de46baf151308704f4486e4df3fbfb715ad80263c5b61e"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "...........                                                              [100%]\n11 passed in 14.47s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "..................                                                       [100%]\n18 passed in 4.32s\n",
+      "stderr": ""
+    }
+  }
+}

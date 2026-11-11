@@ -1,0 +1,30 @@
+{
+  "source_sha": "ea03025cba5245acdaa83ae4a2575dd1b0e6a2e6",
+  "archive_sha256": "5bfb8485a4b8a1eb714d824975302b54aabdb11cd961038b07dffc1f0d59a2db",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-si5ier2b",
+  "actual_imports": {
+    "archpapercraft.ui.author_segmentation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-si5ier2b\\src\\archpapercraft\\ui\\author_segmentation.py",
+      "lf_sha256": "05e1388a8e90faf42d991570cefb8d64cd0842b4e452de29b9d715d8f7ded024"
+    },
+    "archpapercraft.ui.author_manual_layout": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-si5ier2b\\src\\archpapercraft\\ui\\author_manual_layout.py",
+      "lf_sha256": "cbe576d8a33cfe1e4dd64da41a78ad5c2c5c4117d0bf2fa9c30da2f8c6ce5ea7"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-si5ier2b\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "198fcb1eaa5685c1b4ed9a708834c0955a3b32c2b0f239b5fd6bbb8a753a9c8a"
+    },
+    "archpapercraft.ui.author_viewport": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-si5ier2b\\src\\archpapercraft\\ui\\author_viewport.py",
+      "lf_sha256": "f530dceb7db4ab2bd2de46baf151308704f4486e4df3fbfb715ad80263c5b61e"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 1,
+      "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n_ test_generation_combo_cannot_claim_a_different_generation_than_selected_child _\n\nqtbot = <pytestqt.qtbot.QtBot object at 0x0000029B22C6B830>\nfixture_state = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...XIMATE', 'mode': 'APPROXIMATE', 'can_confirm': True, 'target_surface_id': '77b5f678-3dd6-4b77-93ca-7432641ccfb0', ...})\ntmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1352/test_generation_combo_cannot_c0')\n\n    def test_generation_combo_cannot_claim_a_different_generation_than_selected_child(qtbot,fixture_state,tmp_path):\n        p,s,v=generation(fixture_state)\n        preview=p.preview_segmented_variant(s,max_deviation_mm=.51)\n        new=p.update_segmented_variant(v,max_deviation_mm=.51,preview_digest=preview['preview_digest'])\n        w=AuthorMainWindow(settings=QSettings(str(tmp_path/'select.ini'),QSettings.Format.IniFormat))\n        qtbot.addWidget(w);w.controller.project=p;w.refresh()\n        old_sid=p.segmented_variants[v].triangle_bindings[0]['surface_id']\n        w.select_surface(old_sid)\n        assert w.selected_generation==v\n        before=p.to_dict()\n        w.generation_choice.setCurrentIndex(w.generation_choice.findData(new))\n        w.controller._saved_digest=w.controller.digest(w.project.to_dict())\n        assert w.selected_generation==new and p.to_dict()==before\n        owning=next((variant.id for variant in p.segmented_variants.values()\n            if any(row['surface_id']==w.selected_surface for row in variant.triangle_bindings)),None)\n        # Selecting a generation may show its target or a member, but cannot retain a\n        # highlighted child from another generation while claiming the new one.\n>       assert owning in (None,w.selected_generation),dict(\n            selected_generation=w.selected_generation,selected_surface=w.selected_surface,\n            actual_owning_generation=owning,viewport_ids=list(w.viewport.meshes),\n            combo=w.generation_choice.currentText(),feedback=w.segmentation_status.text())\nE       AssertionError: {'selected_generation': '5206a73f-d736-48d7-b729-86d75b7888d7', 'selected_surface': 'c35e41e7-0082-42bc-97ce-2cbb1d98d...197-4f0f-885d-3ff98b6d4bdf', '6c6ddd2a-1954-4db7-bc72-37e39eb1985f', 'a58bf005-1936-469a-8e54-47b2905b443e', ...], ...}\nE       assert 'bbead84f-4adc-48b3-8c1e-754fe6e5c07d' in (None, '5206a73f-d736-48d7-b729-86d75b7888d7')\n\n..\\..\\..\\..\\projects\\papercraft-segmentation-ui\\docs\\p2\\implementation\\evidence\\pc008-ui-review-own.py:208: AssertionError\n---------------------------- Captured Qt messages -----------------------------\nQtWarningMsg: QOpenGLWidget is not supported on this platform.\nQtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.\nNote that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.\n=========================== short test summary info ===========================\nFAILED ::test_generation_combo_cannot_claim_a_different_generation_than_selected_child\n1 failed in 1.65s\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="21.590" timestamp="2026-11-11T13:34:01.024281+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmented_export" name="test_direct_area_does_not_grant_another_full_budget_to_the_paper_frame" time="0.444"><failure message="archpapercraft.authoring.errors.ValidationError: Rozvin ztrácí požadovanou plošnou přesnost.">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000021962010E30&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1367/test_direct_area_does_not_gran0')
+
+    def test_direct_area_does_not_grant_another_full_budget_to_the_paper_frame(monkeypatch, tmp_path):
+        from archpapercraft.authoring import paper
+    
+        p = load_project(
+            ROOT / "docs/p2/implementation/evidence/pc008-domain-95fa2c7/backend-fixture.apcraft"
+        )
+        original = paper._frame_map
+    
+        def slightly_strained(*args):
+            rotation, offset = original(*args)
+            # Simulate a pipeline strain: &lt;0.01mm position drift for the first
+            # printed triangle, but &gt;0.01mm² area drift. Source records stay exact.
+            return rotation * 1.0004, offset * 1.0004
+    
+        monkeypatch.setattr(paper, "_frame_map", slightly_strained)
+&gt;       p.recompute()
+
+tests\authoring\test_segmented_export.py:320: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\project.py:70: in command
+    value = method(self, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\project.py:438: in recompute
+    built = {pid: build_part(self, self.parts[pid]) for pid in ids}
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+project = &lt;archpapercraft.authoring.project.AuthorProject object at 0x00000219221E2A50&gt;
+old_part = MaterialPart(id='6dfa237d-3dcb-4151-a1e1-ab8f36aad8db', name='P38 · Segmentovaná varianta 37', surface_ids=['d919b652-...3004ecbe-1f55-474f-97e3-b8754eda0e26', 'start': [5.911805860260617, 8.089572082044157], 'end': [0.0, 0.0]}], number=38)
+
+    def build_part(project, old_part):
+        if any(project.surfaces[sid].kind == "ruled_loft" for sid in old_part.surface_ids):
+            from .loft_surface import build_loft_part
+    
+            return build_loft_part(project, old_part)
+        part = copy.deepcopy(old_part)
+        part.paths = {role: [] for role in ROLES}
+        part.polygons, part.edges, part.labels = {}, [], []
+        maps = {part.frame.root_surface_id: _frame_map(project, part)}
+        for joint in project.joints.values():
+            if {joint.surface_a, joint.surface_b} &amp; set(part.surface_ids):
+                validate_joint_contact(project, joint)
+        folds = [
+            j for j in project.joints.values() if j.mode == "fold" and j.surface_a in part.surface_ids
+        ]
+        if (
+            any(j.surface_b not in part.surface_ids for j in folds)
+            or len(folds) != len(part.surface_ids) - 1
+        ):
+            raise ValidationError("Přehyby dílu netvoří úplný strom.")
+        while len(maps) &lt; len(part.surface_ids):
+            progressed = False
+            for joint in folds:
+                a, b, ea, eb = joint.surface_a, joint.surface_b, joint.edge_a, joint.edge_b
+                if a not in maps and b in maps:
+                    a, b, ea, eb = b, a, eb, ea
+                if a not in maps or b in maps:
+                    continue
+                reversed_match = validate_joint_contact(project, joint)
+                target = _map_points(_edge_points(project, a, ea), maps[a])
+                source = _edge_points(project, b, eb)
+                if reversed_match:
+                    source = source[::-1]
+                vector_a, vector_b = target[1] - target[0], source[1] - source[0]
+                angle = math.atan2(vector_a[1], vector_a[0]) - math.atan2(vector_b[1], vector_b[0])
+                rotation = _rotation(angle) * project.scale
+                maps[b] = rotation, target[0] - rotation @ source[0]
+                progressed = True
+            if not progressed:
+                raise ValidationError("Přehyby obsahují cyklus nebo chybějící plochu.")
+        material = []
+        for sid in part.surface_ids:
+            surface = project.surfaces[sid]
+            profiles = [
+                project.profiles[pid] for pid in [surface.profile_id, *surface.hole_profile_ids]
+            ]
+            loops = [
+                _map_points(project.profile_outline(profile.id), maps[sid]).tolist()
+                for profile in profiles
+            ]
+            polygon = material_polygon(loops[0], loops[1:])
+            reference = (
+                project._source_polygon(surface.profile_id, surface.hole_profile_ids).area
+                * project.scale
+                * project.scale
+            )
+            if not math.isfinite(reference) or abs(polygon.area - reference) &gt; max(
+                0.01, 1e-6 * reference
+            ):
+&gt;               raise ValidationError("Rozvin ztrácí požadovanou plošnou přesnost.")
+E               archpapercraft.authoring.errors.ValidationError: Rozvin ztrácí požadovanou plošnou přesnost.
+
+src\archpapercraft\authoring\paper.py:267: ValidationError</failure></testcase><testcase classname="tests.authoring.test_segmented_export" name="test_line_and_curved_variants_without_planar_curve_registry_get_actual_guards[line]" time="4.545" /><testcase classname="tests.authoring.test_segmented_export" name="test_line_and_curved_variants_without_planar_curve_registry_get_actual_guards[curved]" time="8.738" /><testcase classname="tests.authoring.test_segmented_export" name="test_legitimate_tab_union_keeps_the_certified_body_and_is_not_a_false_exact" time="6.757" /></testsuite></testsuites>

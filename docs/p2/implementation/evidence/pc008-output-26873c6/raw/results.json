@@ -1,0 +1,100 @@
+{
+  "source_sha": "26873c6d0950af412ba531f01440c3506b3dd6b1",
+  "imported_writer": "C:\\Users\\dalib\\projects\\papercraft-segmented-output\\src\\archpapercraft\\exporter\\author_export.py",
+  "proof_type": "PINNED_PUBLIC_BACKEND_TO_ACTUAL_SVG_PDF; NOT_NATIVE_UI",
+  "fixtures": {
+    "line64": {
+      "snapshot_seconds": 0.1850480001885444,
+      "export_seconds": {
+        "cold": 5.139043899951503,
+        "warm": 4.325213900068775
+      },
+      "canonical_cache": {
+        "cold": {
+          "hits": 1,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        },
+        "warm": {
+          "hits": 3,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        }
+      },
+      "cold_warm_all_bytes_equal": true,
+      "source_binding_json_bytes": 483127,
+      "snapshot_json_bytes": 854977,
+      "actual_part_count": 64,
+      "target_status": "REJECTED",
+      "actual_material_position_error_max_mm": 1.8308431468992352e-05,
+      "actual_material_area_error_max_mm2": 1.0882759992380596e-05,
+      "file_bytes": {
+        ".author-export.json": 3704092,
+        "model.pdf": 50352,
+        "page-532f0ed7-1082-479a-924c-a74aff8c99da.svg": 828797,
+        "page-d5e3d664-7d2b-4d77-9d8d-a2c2bed6eb35.svg": 828815
+      },
+      "bundle_bytes": 5412056,
+      "sha256": {
+        ".author-export.json": "9f350d6004d045a8f7075fc8c1a32cb6fba4bf3245984acc350dc90e35e9e52e",
+        "model.pdf": "3da6cd5dccf23e885d0c01dccff13b626ceb5efc78052e6535e828acface046a",
+        "page-532f0ed7-1082-479a-924c-a74aff8c99da.svg": "d4959ac569e6e8017a4daa9f66894ba268eeb768f312b52c62e0cf4ad100145f",
+        "page-d5e3d664-7d2b-4d77-9d8d-a2c2bed6eb35.svg": "096e5ebc24ab47501cbea29004d85e0026d3a0e8a938b9f032b06160c8e30f65"
+      }
+    },
+    "curved96": {
+      "snapshot_seconds": 0.378929500002414,
+      "export_seconds": {
+        "cold": 10.59146389993839,
+        "warm": 9.18518940010108
+      },
+      "canonical_cache": {
+        "cold": {
+          "hits": 1,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        },
+        "warm": {
+          "hits": 3,
+          "misses": 1,
+          "maxsize": 2,
+          "currsize": 1
+        }
+      },
+      "cold_warm_all_bytes_equal": true,
+      "source_binding_json_bytes": 878257,
+      "snapshot_json_bytes": 1591773,
+      "actual_part_count": 96,
+      "target_status": "REJECTED",
+      "actual_material_position_error_max_mm": 1.7972306976459474e-05,
+      "actual_material_area_error_max_mm2": 6.519960002274266e-06,
+      "file_bytes": {
+        ".author-export.json": 6921701,
+        "model.pdf": 52653,
+        "page-3392b628-3475-413c-ae1c-93b3b0a7ab74.svg": 1550290,
+        "page-ac06d69d-85b4-48a0-9ee8-c03cb4b68a50.svg": 1551340
+      },
+      "bundle_bytes": 10075984,
+      "sha256": {
+        ".author-export.json": "6b097ea2708bd6081a365b8f54577476794e6c75da190ed08204159d2e7f241c",
+        "model.pdf": "cf795561e75980136be341ec2db37c8bed5a52f225f28eceb0572c702cb08847",
+        "page-3392b628-3475-413c-ae1c-93b3b0a7ab74.svg": "d3efbc703a1b17c7c0830867ceab41566ef2c9790358d54a3ead62c6c81f0bac",
+        "page-ac06d69d-85b4-48a0-9ee8-c03cb4b68a50.svg": "aeb99f3eca5a23a8f110fb73a43dd1f39dcba11db3cdbfae2fdb4e7b881efa6e"
+      }
+    }
+  },
+  "source_file_sha256": {
+    "src\\archpapercraft\\authoring\\project.py": "a117d092807decab108bf3ee13d157c55e6a1cb83e0c97c193a98117c4913e40",
+    "src\\archpapercraft\\exporter\\author_export.py": "71eb6bbc6c3ac00afd036538a9216732f1d9bea3e8a8a5dabcb07095e16dfe38",
+    "src\\archpapercraft\\exporter\\segmented_output_validation.py": "29b0b4070695fb14b5642ae52919811dc5eac774f23520664453a223d5f12038",
+    "docs\\p2\\implementation\\evidence\\pc008-output-26873c6\\probe.py": "85fcad4272c8b7d2c47ac38ce71147f9d107b5dfd444587e2b10b41ae71c8813"
+  },
+  "independent_review": "PENDING",
+  "native_ui": "NOT_RUN",
+  "async_export_and_cancel": "NOT_RUN_IN_THIS_BASE; ROOT_ASYNC_INTEGRATION_REQUIRED",
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN"
+}

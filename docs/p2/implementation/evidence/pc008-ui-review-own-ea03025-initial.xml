@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="17" time="3.479" timestamp="2026-11-11T13:12:28.096593+01:00" hostname="Dalibor"><testcase classname="" name="test_analytic_target_real_preview_then_changed_live_source_before_apply" time="0.205" /><testcase classname="" name="test_wrong_response_cannot_be_confirmed[target_surface_id-wrong]" time="0.042" /><testcase classname="" name="test_wrong_response_cannot_be_confirmed[status-EXACT]" time="0.043" /><testcase classname="" name="test_wrong_response_cannot_be_confirmed[can_confirm-False]" time="0.044" /><testcase classname="" name="test_wrong_response_cannot_be_confirmed[parameters-value3]" time="0.043" /><testcase classname="" name="test_wrong_response_cannot_be_confirmed[preview_digest-]" time="0.051" /><testcase classname="" name="test_invalid_limits_and_display_geometry_cannot_be_confirmed[excess_bound]" time="0.044" /><testcase classname="" name="test_invalid_limits_and_display_geometry_cannot_be_confirmed[negative_length]" time="0.047" /><testcase classname="" name="test_invalid_limits_and_display_geometry_cannot_be_confirmed[invalid_angle]" time="0.049" /><testcase classname="" name="test_invalid_limits_and_display_geometry_cannot_be_confirmed[bad_vertex]" time="0.041" /><testcase classname="" name="test_invalid_limits_and_display_geometry_cannot_be_confirmed[bad_face]" time="0.048" /><testcase classname="" name="test_invalid_limits_and_display_geometry_cannot_be_confirmed[wrong_count]" time="0.038" /><testcase classname="" name="test_async_latest_only_timer_keeps_running_close_ignores_detached_result" time="0.135" /><testcase classname="" name="test_preview_source_race_while_worker_runs_discards_result" time="0.059" /><testcase classname="" name="test_grid_late_rotation_lock_then_c05_then_atomic_undo" time="1.136" /><testcase classname="" name="test_grid_confirm_then_source_changed_fails_before_any_placement" time="0.208" /><testcase classname="" name="test_host_inactive_generation_reference_safety_and_old_plain_panel" time="0.086"><failure message="archpapercraft.authoring.errors.ValidationError: Operaci nelze provést: SegmentedCommands.add_segmented_variant() missing 1 required keyword-only argument: 'preview_digest'">self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x000001DCDE15A0F0&gt;
+args = ('137da99b-748b-48c1-9365-fe276fad7a17',)
+kwargs = {'max_deviation_mm': 0.5}
+
+    @wraps(method)
+    def command(self, *args, **kwargs):
+        before = copy.deepcopy(self.__dict__)
+        try:
+&gt;           result = method(self, *args, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: SegmentedCommands.add_segmented_variant() missing 1 required keyword-only argument: 'preview_digest'
+
+src\archpapercraft\authoring\commands.py:14: TypeError
+
+The above exception was the direct cause of the following exception:
+
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001DCDE15A7B0&gt;
+fixture_state = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...XIMATE', 'mode': 'APPROXIMATE', 'can_confirm': True, 'target_surface_id': '137da99b-748b-48c1-9365-fe276fad7a17', ...})
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1348/test_host_inactive_generation_0')
+
+    def test_host_inactive_generation_reference_safety_and_old_plain_panel(qtbot,fixture_state,tmp_path):
+        p,s,v=generation(fixture_state)
+&gt;       new=p.add_segmented_variant(s,max_deviation_mm=.5)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\projects\papercraft-segmentation-ui\docs\p2\implementation\evidence\pc008-ui-review-own.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x000001DCDE15A0F0&gt;
+args = ('137da99b-748b-48c1-9365-fe276fad7a17',)
+kwargs = {'max_deviation_mm': 0.5}
+
+    @wraps(method)
+    def command(self, *args, **kwargs):
+        before = copy.deepcopy(self.__dict__)
+        try:
+            result = method(self, *args, **kwargs)
+            self.validate()
+            return result
+        except Exception as exc:
+            self.__dict__.clear()
+            self.__dict__.update(before)
+            if isinstance(
+                exc, (KeyError, TypeError, ValueError, AttributeError, IndexError, OverflowError)
+            ) and not isinstance(exc, ValidationError):
+&gt;               raise ValidationError(f"Operaci nelze provést: {exc}") from exc
+E               archpapercraft.authoring.errors.ValidationError: Operaci nelze provést: SegmentedCommands.add_segmented_variant() missing 1 required keyword-only argument: 'preview_digest'
+
+src\archpapercraft\authoring\commands.py:23: ValidationError</failure></testcase></testsuite></testsuites>

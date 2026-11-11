@@ -16,6 +16,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from .bend import DEFAULT_MATERIAL_PROFILE, BendCommands
+from .curved_connectors import CurvedConnectorCommands
 from .errors import ProjectFormatError, UnsupportedOperationError, ValidationError
 from .geometry import (
     material_polygon,
@@ -37,6 +38,7 @@ from .loft_surface import _analysis_readonly as loft_analysis
 from .model import (
     Attachment,
     Connector,
+    CurvedConnector,
     CurveSegment,
     Joint,
     MaterialPart,
@@ -44,6 +46,7 @@ from .model import (
     PaperFrame,
     Placement,
     Profile,
+    SegmentedVariant,
     SketchPlane,
     SurfaceFeature,
     Vertex,
@@ -59,10 +62,11 @@ from .paper import (
     validate_layout,
 )
 from .profile_curves import ProfileCurveCommands, move_curve_endpoint
+from .segmented_surface import SegmentedCommands
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 4
-WRITER_VERSION = "0.3.0-pc007a-profiles-experimental"
+SCHEMA_VERSION = 6
+WRITER_VERSION = "0.3.0-pc007b-curved-connectors-experimental"
 _UNSET = object()
 
 
@@ -97,7 +101,10 @@ def _record(cls, data):
     return cls(**copy.deepcopy(data))
 
 
-class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCommands):
+class AuthorProject(
+    InteriorCommands, BendCommands, ProfileCurveCommands, LoftCommands, SegmentedCommands,
+    CurvedConnectorCommands,
+):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
         self.name, self.scale, self.revision = name, number(scale, "Měřítko", positive=True), 1
@@ -108,6 +115,8 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
         self.attachments, self.next_attachment_number = {}, 1
         self.loaded_from_schema, self.requires_save_as, self.loaded_source_path = None, False, None
         self.material_profile = copy.deepcopy(DEFAULT_MATERIAL_PROFILE)
+        self.segmented_variants = {}
+        self.curved_connectors = {}
 
     @classmethod
     def new(cls, name="Nový model", scale=0.01):
@@ -138,6 +147,11 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
         for part in self.parts.values():
             if set(part.surface_ids) & affected:
                 part.stale = True
+        if affected:
+            # An unconnected scene face can move into the complete fold path.
+            # Geometry changes invalidate the whole owner; layout alone does not.
+            for record in self.curved_connectors.values():
+                self.parts[self.surfaces[record.owner_surface_id].part_id].stale = True
 
     def _profile_surfaces(self, profile_id):
         return [sid for sid, s in self.surfaces.items() if profile_id in s.source_profile_ids()]
@@ -435,9 +449,10 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
 
     @atomic
     def recompute(self, part_ids=None):
-        ids = list(self.parts if part_ids is None else part_ids)
+        ids = list(self.material_part_ids() if part_ids is None else part_ids)
         built = {pid: build_part(self, self.parts[pid]) for pid in ids}
         self.parts.update(built)
+        self._refresh_curved_material_caches(built)
 
     @atomic
     def set_anchor(self, part_id, root_surface_id, anchor_vertex_id=None, axis_segment_id=None):
@@ -503,11 +518,63 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
         position_locked=None,
         rotation_locked=None,
     ):
+        self._apply_placement(
+            part_id,
+            page_id,
+            x_mm,
+            y_mm,
+            rotation_deg,
+            position_locked=position_locked,
+            rotation_locked=rotation_locked,
+        )
+        self._touch()
+
+    @atomic
+    def set_placements(self, updates):
+        """Apply explicit author choices in one rollback/validation boundary.
+
+        No packing, page choice, rotation or unlocking is inferred. Plain dict
+        keys are unique; non-plain mappings cannot override iteration to supply
+        duplicate identities. JSON duplicate keys are rejected by the reader.
+        """
+        if type(updates) is not dict:
+            raise ValidationError("Hromadné umístění potřebuje jednoznačný objekt změn dílů.")
+        allowed = {"page_id", "x_mm", "y_mm", "rotation_deg", "position_locked", "rotation_locked"}
+        changed = False
+        for part_id, values in updates.items():
+            if type(values) is not dict or set(values) - allowed:
+                raise ValidationError("Hromadné umístění obsahuje neznámá pole nebo typ změny.")
+            changed = self._apply_placement(part_id, **values) or changed
+        if changed:
+            self._touch()
+
+    def _apply_placement(
+        self,
+        part_id,
+        page_id=_UNSET,
+        x_mm=None,
+        y_mm=None,
+        rotation_deg=None,
+        *,
+        position_locked=None,
+        rotation_locked=None,
+    ):
+        if part_id not in self.parts or part_id not in self.placements:
+            raise ValidationError("Vybraný díl pro ruční umístění neexistuje.")
         placement = self.placements[part_id]
+        before = asdict(placement)
         new_page = placement.page_id if page_id is _UNSET else page_id
+        if new_page is not None and not any(page.id == new_page for page in self.pages):
+            raise ValidationError("Díl odkazuje na chybějící stránku.")
         x = placement.x_mm if x_mm is None else number(x_mm, "Poloha X")
         y = placement.y_mm if y_mm is None else number(y_mm, "Poloha Y")
         angle = placement.rotation_deg if rotation_deg is None else number(rotation_deg, "Úhel")
+        # A valid loaded int and its equal float compare numerically equal, but
+        # have different serialized JSON and therefore different save digests.
+        # Preserve the original scalar AFTER number/bool/finiteness validation.
+        x = placement.x_mm if x == placement.x_mm else x
+        y = placement.y_mm if y == placement.y_mm else y
+        angle = placement.rotation_deg if angle == placement.rotation_deg else angle
         if placement.position_locked and (
             new_page != placement.page_id or x != placement.x_mm or y != placement.y_mm
         ):
@@ -528,7 +595,7 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             if not isinstance(rotation_locked, bool):
                 raise ValidationError("Neplatný zámek natočení.")
             placement.rotation_locked = rotation_locked
-        self._touch()
+        return before != asdict(placement)
 
     def _components(self):
         neighbors = {sid: set() for sid in self.surfaces}
@@ -750,6 +817,24 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
     def validate_layout(self):
         return validate_layout(self)
 
+    def connector_bend_clearance(self, connector_id):
+        # Direct property-panel queries must use the same physical selection as
+        # layout/snapshot. Retained targets and inactive generations are explicit
+        # construction references, not extra coincident material obstacles.
+        if self.segmented_variants and not getattr(self, "_is_print_material_view", False):
+            self.validate()
+            material = self.print_material_view()
+            material._bend_cache = getattr(self, "_material_bend_cache", None)
+            material._curved_legacy_bend_cache = getattr(self, "_material_curved_bend_cache", None)
+            result = material._curved_legacy_bend_clearance(connector_id)
+            self._material_bend_cache = getattr(material, "_bend_cache", None)
+            self._material_curved_bend_cache = getattr(material, "_curved_legacy_bend_cache", None)
+            return result
+        return self._curved_legacy_bend_clearance(connector_id)
+
+    def _assembly_clearance_key(self):
+        return self._curved_assembly_clearance_key()
+
     @property
     def issues(self):
         return self.validate_layout()
@@ -762,18 +847,27 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
         self.acknowledgements[issue_id] = found.digest
 
     def snapshot(self):
+        if getattr(self, "_curved_source_context_only", False):
+            raise UnsupportedOperationError(
+                "Geometrický zdrojový kontext není úplný autorský projekt."
+            )
+        curved_issues = self.curved_connector_issues()
+        if curved_issues:
+            raise ValidationError("Export vyžaduje doložení kruhových chlopní: "
+                                  + "; ".join(issue.message for issue in curved_issues))
         issues = self.validate_layout()
         blocking = [i for i in issues if i.severity == "error" or not i.acknowledged]
         if blocking:
             raise ValidationError(
                 "Export vyžaduje opravu nebo potvrzení: " + "; ".join(i.message for i in blocking)
             )
-        if not self.parts:
+        material = self.print_material_view()
+        if not material.parts:
             raise ValidationError("Projekt zatím nemá žádný vystřihovaný díl.")
         pages = []
         for page in self.pages:
             parts = []
-            for pid, part in self.parts.items():
+            for pid, part in material.parts.items():
                 placement = self.placements[pid]
                 if placement.page_id != page.id:
                     continue
@@ -792,6 +886,29 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                         "labels": copy.deepcopy(part.labels),
                     }
                 )
+                owner = next(
+                    (
+                        v
+                        for v in self.segmented_variants.values()
+                        if v.print_selected
+                        and any(r["part_id"] == pid for r in v.triangle_bindings)
+                    ),
+                    None,
+                )
+                if owner is not None:
+                    record = next(r for r in owner.triangle_bindings if r["part_id"] == pid)
+                    parts[-1]["flattening"] = {
+                        "mode": "APPROXIMATE",
+                        "material_surface_mode": "EXACT_PLANAR_TRIANGLE",
+                        "scope": "TRIANGLE_CORE_VS_RETAINED_TARGET; CONNECTORS_CHECKED_SEPARATELY",
+                        "variant_id": owner.id,
+                        "target_surface_id": owner.target_surface_id,
+                        "triangle_id": record["id"],
+                        "source_parameter_key": record["source_parameter_key"],
+                        "max_surface_deviation_paper_mm_exact": owner.certificate["material_frame"][
+                            "max_target_to_material_deviation_paper_mm_exact"
+                        ],
+                    }
             pages.append(
                 {
                     "id": page.id,
@@ -804,17 +921,33 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             "project_id": self.project_id,
             "revision": self.revision,
             "construction_checks": {
+                **({"curved_source_project": self.to_dict(validate=False),
+                    "curved_connectors": {cid: self.curved_connector_status(cid)
+                                          for cid in self.curved_connectors}}
+                   if any(record.enabled for record in self.curved_connectors.values()) else {}),
+                **({"segmented_source_project": self.to_dict(validate=False)}
+                   if self.segmented_variants else {}),
                 "material_profile": copy.deepcopy(self.material_profile),
-                "assembly_digest": self._assembly_clearance_key(),
+                "assembly_digest": material._assembly_clearance_key(),
                 "connector_bends": {
-                    cid: self.connector_bend_clearance(cid) for cid in self.connectors
+                    cid: material.connector_bend_clearance(cid) for cid in material.connectors
                 },
-                "curve_profiles": self._planar_curve_reports("curve_projection_reports"),
-                "curve_regions": self._planar_curve_reports("curve_region_reports"),
+                "curve_profiles": material._planar_curve_reports("curve_projection_reports"),
+                "curve_regions": material._planar_curve_reports("curve_region_reports"),
                 "lofts": {
                     sid: self.loft_status(sid)
-                    for sid, surface in self.surfaces.items()
+                    for sid, surface in material.surfaces.items()
                     if surface.kind == "ruled_loft"
+                },
+                "segmented_variants": {
+                    vid: self.segmented_variant_status(vid)
+                    for vid, variant in self.segmented_variants.items()
+                    if variant.print_selected
+                },
+                "reference_targets": {
+                    variant.target_surface_id: self.loft_status(variant.target_surface_id)
+                    for variant in self.segmented_variants.values()
+                    if variant.print_selected
                 },
                 "accepted_layout_overlaps": [
                     list(issue.part_ids)
@@ -825,12 +958,31 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             },
             "scale_label": f"1:{1 / self.scale:g}",
             "coverage": {
-                "expected_part_ids": list(self.parts),
-                "expected_surface_ids": list(self.surfaces),
-                "expected_loft_surface_ids": [
-                    sid for sid, surface in self.surfaces.items() if surface.kind == "ruled_loft"
+                "expected_part_ids": list(material.parts),
+                "expected_surface_ids": list(material.surfaces),
+                "expected_segmented_variant_ids": [
+                    vid
+                    for vid, variant in self.segmented_variants.items()
+                    if variant.print_selected
                 ],
-                "source_revisions": {pid: self.revision for pid in self.parts},
+                "all_construction_surface_ids": list(self.surfaces),
+                "reference_surface_ids": [
+                    v.target_surface_id
+                    for v in self.segmented_variants.values()
+                    if v.print_selected
+                ],
+                "inactive_variant_surface_ids": [
+                    r["surface_id"]
+                    for v in self.segmented_variants.values()
+                    if not v.print_selected
+                    for r in v.triangle_bindings
+                ],
+                "expected_loft_surface_ids": [
+                    sid
+                    for sid, surface in material.surfaces.items()
+                    if surface.kind == "ruled_loft"
+                ],
+                "source_revisions": {pid: self.revision for pid in material.parts},
             },
             "pages": pages,
         }
@@ -879,6 +1031,9 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             )
             if profile.closed and all(s.kind == "line" for s in profile.segments):
                 material_polygon(profile.points)
+        extra_ids, derived_children = self._validate_segmented_variants()
+        all_ids.extend(extra_ids)
+        all_ids.extend(self._validate_curved_connectors())
         expected_surfaces = []
         if set(self.parts) != set(self.placements):
             raise ValidationError("Každý díl musí mít právě jeden záznam umístění.")
@@ -910,7 +1065,7 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                 ):
                     raise ValidationError("Loft nemá platný vlastní materiálový díl.")
                 continue
-            if surface.kind != "planar" or surface.params != {}:
+            if surface.kind != "planar" or (surface.params != {} and sid not in derived_children):
                 raise UnsupportedOperationError(
                     "Tento typ konstrukční plochy zatím není implementovaný."
                 )
@@ -1259,6 +1414,8 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             "name": self.name,
             "scale": self.scale,
             "material_profile": copy.deepcopy(self.material_profile),
+            "segmented_variants": {vid: asdict(v) for vid, v in self.segmented_variants.items()},
+            "curved_connectors": {cid: asdict(v) for cid, v in self.curved_connectors.items()},
             "revision": self.revision,
             "next_part_number": self.next_part_number,
             "next_joint_number": self.next_joint_number,
@@ -1302,6 +1459,37 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             and data["schema_version"] == 3
             and data.get("writer_version") == "0.3.0-pc006b-clearance-experimental"
         )
+        upgrading_d = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 4
+            and data.get("writer_version") == "0.3.0-pc007a-profiles-experimental"
+        )
+        upgrading_e = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 5
+            and data.get("writer_version") == "0.3.0-pc008-segmented-variants-experimental"
+        )
+        if upgrading or upgrading_b or upgrading_c or upgrading_d or upgrading_e:
+            if "curved_connectors" in data:
+                raise ProjectFormatError("Starší formát nezná kruhové spojovací prvky.")
+            data["curved_connectors"] = {}
+        if upgrading_e:
+            data["schema_version"] = SCHEMA_VERSION
+        if upgrading or upgrading_b or upgrading_c or upgrading_d:
+            if not isinstance(data.get("surfaces"), dict):
+                raise ProjectFormatError("Starší registr povrchů musí být objekt.")
+            if "segmented_variants" in data or any(
+                isinstance(s, dict)
+                and isinstance(s.get("params"), dict)
+                and {"segmented_variant_id", "triangle_id"} & set(s["params"])
+                for s in data.get("surfaces", {}).values()
+            ):
+                raise ProjectFormatError("Starší formát nezná odvozené segmentované varianty.")
+            data["segmented_variants"] = {}
+        if upgrading_d:
+            data["schema_version"] = SCHEMA_VERSION
         if upgrading or upgrading_b or upgrading_c:
             # These published experimental envelopes knew only straight
             # sketches and planar features. A version-label change must not
@@ -1395,6 +1583,8 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             "name",
             "scale",
             "material_profile",
+            "segmented_variants",
+            "curved_connectors",
             "revision",
             "next_part_number",
             "next_joint_number",
@@ -1437,6 +1627,8 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                 ("connectors", Connector),
                 ("attachments", Attachment),
                 ("placements", Placement),
+                ("segmented_variants", SegmentedVariant),
+                ("curved_connectors", CurvedConnector),
             ):
                 if not isinstance(data[key], dict):
                     raise ProjectFormatError("Registry projektu musí být objekty.")
@@ -1476,6 +1668,10 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
             raise ProjectFormatError(f"Neplatný autorský projekt: {exc}") from exc
 
     def save(self, path):
+        if getattr(self, "_curved_source_context_only", False):
+            raise UnsupportedOperationError(
+                "Geometrický zdrojový kontext nelze uložit jako projekt."
+            )
         destination = Path(path)
         data = self.to_dict()
         if destination.exists():
@@ -1552,6 +1748,6 @@ def load_project(path):
         return LegacyProject(raw, source)
     project = AuthorProject.from_dict(data)
     project.loaded_from_schema = data.get("schema_version")
-    project.requires_save_as = project.loaded_from_schema in (1, 2, 3)
+    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4, 5)
     project.loaded_source_path = str(source.resolve())
     return project

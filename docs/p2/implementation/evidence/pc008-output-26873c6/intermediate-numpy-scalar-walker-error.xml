@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="13" time="11.504" timestamp="2026-11-11T13:26:34.136825+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmented_export" name="test_legitimate_tab_union_keeps_the_certified_body_and_is_not_a_false_exact" time="3.288"><failure message="archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Nelze doložit odvozený materiál: Zdroj potřebuje konečná data JSON.">data = {'project_id': '39a23aa9-c14d-4f79-89fa-e77ba9eeb12e', 'revision': 73, 'construction_checks': {'segmented_source_proje...ly_digest': '79c6b026e2ef51923bfb231384324c83ed4c0007e7d59224d863c512fa75e274', ...}}, ...}, 'scale_label': '1:1', ...}
+
+    def validate_segmented_snapshot(data):
+        """Do not permit D guards to be skipped merely because curve_profiles={} ."""
+        checks, coverage = data.get("construction_checks", {}), data.get("coverage", {})
+        reports = checks.get("segmented_variants", {})
+        declared = coverage.get("expected_segmented_variant_ids", [])
+        tagged = any(
+            "flattening" in part for page in data.get("pages", []) for part in page.get("parts", [])
+        )
+        has_reference = bool(
+            checks.get("reference_targets")
+            or coverage.get("reference_surface_ids")
+            or coverage.get("inactive_variant_surface_ids")
+        )
+        source = checks.get("segmented_source_project")
+        if not (reports or declared or tagged or has_reference or source is not None):
+            return {}
+        try:
+            if (
+                not isinstance(reports, dict)
+                or not isinstance(declared, list)
+                or len(declared) != len(set(declared))
+                or set(reports) != set(declared)
+            ):
+                raise ValueError("Odvozené generace nemají úplný očekávaný registr.")
+            if not isinstance(source, dict) or not source.get("segmented_variants"):
+                raise ValueError("Chybí úplný skutečný zdrojový projekt odvozené varianty.")
+            # Registry insertion order also determines the explicit snapshot order.
+            # Retain it for replay, while ordinary equality below sorts object keys.
+            source_json = _json(source, sort_keys=False)
+&gt;           canonical = json.loads(_canonical_snapshot(source_json))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src\archpapercraft\exporter\segmented_output_validation.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\exporter\segmented_output_validation.py:83: in _canonical_snapshot
+    return _json(canonical)
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'project_id': '39a23aa9-c14d-4f79-89fa-e77ba9eeb12e', 'revision': 73, 'construction_checks': {'segmented_source_proje...ly_digest': '79c6b026e2ef51923bfb231384324c83ed4c0007e7d59224d863c512fa75e274', ...}}, ...}, 'scale_label': '1:1', ...}
+sort_keys = True
+
+    def _json(value, *, sort_keys=True):
+        pending, count = [(value, 0)], 0
+        while pending:
+            node, depth = pending.pop()
+            count += 1
+            if count &gt; MAX_SOURCE_NODES or depth &gt; MAX_SOURCE_DEPTH:
+                raise ValueError("Zdroj segmentace překročil konečný rozpočet struktury.")
+            if isinstance(node, dict):
+                if any(type(key) is not str for key in node):
+                    raise ValueError("Zdrojové klíče musí být řetězce.")
+                pending.extend((child, depth + 1) for child in node.values())
+            elif isinstance(node, (list, tuple)):
+                pending.extend((child, depth + 1) for child in node)
+            elif type(node) not in (str, int, float, bool, type(None)):
+&gt;               raise ValueError("Zdroj potřebuje konečná data JSON.")
+E               ValueError: Zdroj potřebuje konečná data JSON.
+
+src\archpapercraft\exporter\segmented_output_validation.py:47: ValueError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1363/test_legitimate_tab_union_keep0')
+
+    def test_legitimate_tab_union_keeps_the_certified_body_and_is_not_a_false_exact(tmp_path):
+        p = load_project(
+            ROOT / "docs/p2/implementation/evidence/pc008-domain-95fa2c7/backend-fixture.apcraft"
+        )
+        p.set_material_profile(crease_zone_mm=0.05)
+        p.recompute()
+        variant = next(iter(p.segmented_variants.values()))
+        first, second = variant.paired_seams[0]["uses"]
+        rows = {row["id"]: row for row in variant.triangle_bindings}
+        a, b = rows[first["triangle_id"]], rows[second["triangle_id"]]
+        joint = p.connect_edges(a["surface_id"], first["edge_id"], b["surface_id"], second["edge_id"])
+        p.set_tab(joint, owner=a["surface_id"], width_mm=0.3, shape="triangle")
+        issues = p.validate_layout()
+        assert issues and all(issue.severity == "warning" for issue in issues)
+        # This small regression fixture explicitly acknowledges the small tab and
+        # unknown material; it makes no claim about physical folding/buildability.
+        for issue in issues:
+            p.acknowledge(issue.id)
+        snapshot = p.snapshot()
+        part = next(part for part in snapshot["pages"][0]["parts"] if part["id"] == a["part_id"])
+        assert part["paths"]["TABS"]
+        assert part["paths"]["FOLD_VALLEY"] or part["paths"]["FOLD_MOUNTAIN"]
+        assert len(part["paths"]["CUT"][0]["points"]) == 4
+        directory = tmp_path / "body-plus-tab"
+&gt;       author_export.export_all(snapshot, directory)
+
+tests\authoring\test_segmented_export.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\exporter\author_export.py:1234: in export_all
+    _validate(data)
+src\archpapercraft\exporter\author_export.py:563: in _validate
+    validate_segmented_snapshot(data)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+data = {'project_id': '39a23aa9-c14d-4f79-89fa-e77ba9eeb12e', 'revision': 73, 'construction_checks': {'segmented_source_proje...ly_digest': '79c6b026e2ef51923bfb231384324c83ed4c0007e7d59224d863c512fa75e274', ...}}, ...}, 'scale_label': '1:1', ...}
+
+    def validate_segmented_snapshot(data):
+        """Do not permit D guards to be skipped merely because curve_profiles={} ."""
+        checks, coverage = data.get("construction_checks", {}), data.get("coverage", {})
+        reports = checks.get("segmented_variants", {})
+        declared = coverage.get("expected_segmented_variant_ids", [])
+        tagged = any(
+            "flattening" in part for page in data.get("pages", []) for part in page.get("parts", [])
+        )
+        has_reference = bool(
+            checks.get("reference_targets")
+            or coverage.get("reference_surface_ids")
+            or coverage.get("inactive_variant_surface_ids")
+        )
+        source = checks.get("segmented_source_project")
+        if not (reports or declared or tagged or has_reference or source is not None):
+            return {}
+        try:
+            if (
+                not isinstance(reports, dict)
+                or not isinstance(declared, list)
+                or len(declared) != len(set(declared))
+                or set(reports) != set(declared)
+            ):
+                raise ValueError("Odvozené generace nemají úplný očekávaný registr.")
+            if not isinstance(source, dict) or not source.get("segmented_variants"):
+                raise ValueError("Chybí úplný skutečný zdrojový projekt odvozené varianty.")
+            # Registry insertion order also determines the explicit snapshot order.
+            # Retain it for replay, while ordinary equality below sorts object keys.
+            source_json = _json(source, sort_keys=False)
+            canonical = json.loads(_canonical_snapshot(source_json))
+            if _json(data) != _json(canonical):
+                raise ValueError(
+                    "Snapshot, jeho materiál/řezy/rám/spoje nebo reference neodpovídají "
+                    "skutečnému zdrojovému projektu."
+                )
+            bindings = {}
+            for page_index, page in enumerate(data["pages"]):
+                for part in page["parts"]:
+                    flattening = part.get("flattening")
+                    if flattening is None:
+                        continue
+                    if flattening.get("mode") != "APPROXIMATE":
+                        raise ValueError("Odvozený materiál nesmí být vydán za přesný původní cíl.")
+                    vid = flattening["variant_id"]
+                    report = reports[vid]
+                    if report["status"] != "APPROXIMATE" or report["mode"] != "APPROXIMATE":
+                        raise ValueError("Odvozená varianta není aktuální potvrzená aproximace.")
+                    row = next(
+                        row for row in report["triangle_bindings"] if row["part_id"] == part["id"]
+                    )
+                    bindings[part["id"]] = {
+                        "part": part,
+                        "page_index": page_index,
+                        "flattening": flattening,
+                        "report": report,
+                        "binding": row,
+                        "source_project_digest": hashlib.sha256(source_json.encode()).hexdigest(),
+                    }
+            return bindings
+        except (
+            ValueError,
+            KeyError,
+            TypeError,
+            IndexError,
+            StopIteration,
+            ArithmeticError,
+            RecursionError,
+        ) as exc:
+&gt;           raise CurveOutputError(
+                "Nelze doložit odvozený materiál: " + str(exc),
+                report={"status": "UNRESOLVED", "scope": "SEGMENTED_SOURCE_AND_MATERIAL_CLOSURE"},
+            ) from exc
+E           archpapercraft.exporter.curve_output_validation.CurveOutputError: Vektorový výstup: Nelze doložit odvozený materiál: Zdroj potřebuje konečná data JSON.
+
+src\archpapercraft\exporter\segmented_output_validation.py:165: CurveOutputError</failure></testcase><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[line-MAX_SOURCE_BYTES]" time="0.520" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[line-MAX_SOURCE_NODES]" time="0.295" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[line-MAX_SOURCE_DEPTH]" time="0.334" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[line-MAX_SOURCE_PARTS]" time="0.360" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[line-MAX_SOURCE_VARIANTS]" time="0.270" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[line-MAX_SOURCE_PAGES]" time="0.324" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[curved-MAX_SOURCE_BYTES]" time="2.211" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[curved-MAX_SOURCE_NODES]" time="0.415" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[curved-MAX_SOURCE_DEPTH]" time="0.442" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[curved-MAX_SOURCE_PARTS]" time="0.464" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[curved-MAX_SOURCE_VARIANTS]" time="0.461" /><testcase classname="tests.authoring.test_segmented_export" name="test_finite_source_budget_exhaustion_is_typed_unresolved[curved-MAX_SOURCE_PAGES]" time="0.452" /></testsuite></testsuites>

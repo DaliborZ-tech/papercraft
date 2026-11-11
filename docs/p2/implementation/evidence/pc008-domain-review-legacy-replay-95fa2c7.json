@@ -1,0 +1,10 @@
+{
+  "source_sha": "95fa2c7c0e5a5d50f0763ae2a461a4e5e2821872",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-segmentation-domain-review-qspxrbu4",
+  "fixture_path": "docs/p2/implementation/evidence/pc006a-desktop-7da2403-run04/own-model.apcraft",
+  "fixture_git_blob_sha256": "c649da8478d5b36bf6ffeb764ff58c2e308ddb9c4a7d38191a2effcbb46b205d",
+  "note": "Initial1FAIL was missing reviewer archive fixture, not product.92 original and19 own already passed; only missing-fixture test replayed.",
+  "returncode": 0,
+  "stdout": ".                                                                        [100%]\n1 passed in 0.65s\n",
+  "stderr": ""
+}

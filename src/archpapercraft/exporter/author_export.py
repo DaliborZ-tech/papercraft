@@ -562,6 +562,9 @@ def _validate(data: dict) -> None:
         from .loft_output_validation import validate_loft_snapshot
 
         validate_loft_snapshot(data)
+    from .segmented_output_validation import validate_segmented_snapshot
+
+    validate_segmented_snapshot(data)
 
 
 def _font(font_path: str | Path | None, texts: list[str]) -> tuple[str, str, str]:
@@ -859,6 +862,13 @@ def _svg(
             },
         )
         ET.SubElement(group, "title").text = str(part.get("name", part["id"]))
+        if "flattening" in part:
+            record = part["flattening"]
+            for attr, key in (("data-flattening-mode", "mode"),
+                              ("data-segmented-variant-id", "variant_id"),
+                              ("data-target-surface-id", "target_surface_id"),
+                              ("data-segmented-triangle-id", "triangle_id")):
+                group.set(attr, str(record[key]))
         for role in ROLES:
             attrs = {
                 "id": f"role-{part['id']}-{role}",
@@ -1124,6 +1134,9 @@ def _construction_metadata(data):
         },
         "physical_build": "NOT_VERIFIED",
         "unknown_search_scope": "BOUNDED_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN",
+        "segmented_variant_modes": {
+            vid: report["mode"] for vid, report in checks.get("segmented_variants", {}).items()
+        },
     }
     return full, summary
 
@@ -1158,7 +1171,8 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
         record = {"requested_interpolation_bound_mm": tolerance,
                   "actual_interpolation_bound_mm": curve_bound}
         construction = data.get("construction_checks", {})
-        if construction.get("curve_profiles") or construction.get("lofts"):
+        if (construction.get("curve_profiles") or construction.get("lofts")
+                or construction.get("segmented_source_project")):
             checkpoint("verify")
             from .curve_output_validation import validate_pdf_curve_geometry
             from .loft_output_validation import (
@@ -1166,13 +1180,14 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
                 LOFT_OUTPUT_MAX_NODES,
                 validate_loft_vector_outputs,
             )
+            from .segmented_output_validation import validate_segmented_vector_outputs
             from .svg_curve_validation import validate_svg_curve_geometry
 
             expected = _curve_output_expectations(data)
             allowed = data["construction_checks"].get("accepted_layout_overlaps", [])
             budgets = (
                 {"max_nodes": LOFT_OUTPUT_MAX_NODES, "max_commands": LOFT_OUTPUT_MAX_COMMANDS}
-                if construction.get("lofts") else {}
+                if construction.get("lofts") or construction.get("segmented_source_project") else {}
             )
             checks["pdf"] = validate_pdf_curve_geometry(
                 stage / "new/model.pdf", expected, allowed, **budgets,
@@ -1196,6 +1211,11 @@ def _write_validated_vectors(data, stage, names, font_name, family, digest, curv
                 continue
             if construction.get("lofts"):
                 checks["lofts"] = validate_loft_vector_outputs(
+                    data, [stage / "new" / name for name in names[:-1]],
+                    stage / "new/model.pdf", expected_parts=expected,
+                )
+            if construction.get("segmented_source_project"):
+                checks["segmented_variants"] = validate_segmented_vector_outputs(
                     data, [stage / "new" / name for name in names[:-1]],
                     stage / "new/model.pdf", expected_parts=expected,
                 )

@@ -1,0 +1,54 @@
+{
+  "source_sha": "95fa2c7c0e5a5d50f0763ae2a461a4e5e2821872",
+  "actual_source_import": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-segmentation-domain-review-qspxrbu4\\src\\archpapercraft\\authoring\\segmented_surface.py",
+  "independent_source_formula": "S(u,v)=(16u,8uv,12v); S_u cross S_v=(96v,-192,128u)",
+  "analytic_nonzero_determinant": -1536,
+  "actual_determinant": "-1536",
+  "input_limit_paper_mm": 0.26,
+  "raw_math_deviation_exact": "1/4",
+  "actual_material_deviation_bound_exact": "25000000000000176867054772180779225735412256116442270331720237762464744878155007617054481393811973972119/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "actual_material_normal_angle_bound_deg_exact": "176731587608938392974953757128164805226776030971168471255933933846487798224354735433354058907238639764095612258194604717827749013661426246838747101135134872796728006397539633395488697149088055790703583795762051685281065573023621648620773993994868455351089785978999792809562894563960529/10471975511965977461542144610931676280657231331250352736583148640990609747867083433333333364749259869231265717959767166128362175305027327084391543082779256305162576934583633333333228613578213673558717911887224016570526761020020829805967501846923427235854662499000000000000000000000000",
+  "actual_flat_length_difference_bound_exact": "41936733098383622951679152934159265476857190639434205070846510057136205306500210631493017584508659006813152419/625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "embedding": {
+    "status": "CERTIFIED",
+    "projection_matrix_exact": [
+      [
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "triangle_pairs": 120,
+    "examined_pairs_all_projections": 120,
+    "pair_budget": 200000,
+    "proof": "EXACT_RATIONAL_PROJECTED_TRIANGLE_INTERIORS_AND_DECLARED_UV_CONTACTS",
+    "scope": "DELIVERED_RAW_TRIANGLE_GRAPH_BEFORE_COMMON_RIGID_POSE; MATERIAL_FRAME_PERTURBATION_BOUNDED_SEPARATELY"
+  },
+  "counts": {
+    "patches": 1,
+    "cells": 8,
+    "triangles": 16,
+    "triangle_island_parts": 16,
+    "paired_cut_seams": 18,
+    "source_boundary_cut_segments": 12,
+    "manufactured_triangle_cut_segments": 48
+  },
+  "target_status_after_confirmation": "REJECTED",
+  "material_mode": "APPROXIMATE",
+  "material_part_count": 16,
+  "construction_surface_count": 17,
+  "reference_surface_ids": [
+    "8feead43-811b-4b2e-a494-8257fbb38585"
+  ],
+  "two_page_part_counts": [
+    8,
+    8
+  ],
+  "schema_version": 5,
+  "scope": "COMPONENT_BACKEND_ONLY; UI_EXPORT_EDITOR_NOVICE_PHYSICAL_NOT_RUN"
+}

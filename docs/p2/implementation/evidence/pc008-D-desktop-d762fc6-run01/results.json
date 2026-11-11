@@ -1,0 +1,2788 @@
+{
+  "status": "PASS_REQUESTED_FIXTURE",
+  "source_sha": "d762fc6d2c543691b8918128b6b0d3e1da59313e",
+  "requested_fixture": "D-segmented",
+  "fixture_status": {
+    "model-A": "NOT_RUN",
+    "mixed-part": "NOT_RUN",
+    "curves-planar": "NOT_RUN",
+    "loft-B1": "NOT_RUN",
+    "loft-B2": "NOT_RUN",
+    "loft-Bezier": "NOT_RUN",
+    "D-segmented": "PASS_TECHNICAL_UI"
+  },
+  "source_status_at_start": "",
+  "source_files_sha256": {
+    "pyproject.toml": "7a5d40ab75f08734520a42a5400383f09bc5e4cebbe91c70fc28256cde7cf913",
+    "src/archpapercraft/__init__.py": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+    "src/archpapercraft/__main__.py": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+    "src/archpapercraft/app.py": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+    "src/archpapercraft/application/__init__.py": "68882fe29cec1ed6857a27ea2c4dd44c006d4ea9a93c4dd5497b83e575b4314c",
+    "src/archpapercraft/application/author_controller.py": "b3c2a4cfb1502e751465f1105e4ca9922d32392879c5538a1d6b1c6cf9965f84",
+    "src/archpapercraft/arch_presets/__init__.py": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+    "src/archpapercraft/arch_presets/buttress.py": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+    "src/archpapercraft/arch_presets/floor_slab.py": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+    "src/archpapercraft/arch_presets/gothic_window.py": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+    "src/archpapercraft/arch_presets/onion_dome.py": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+    "src/archpapercraft/arch_presets/opening.py": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+    "src/archpapercraft/arch_presets/roof.py": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+    "src/archpapercraft/arch_presets/tower.py": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+    "src/archpapercraft/arch_presets/wall.py": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+    "src/archpapercraft/authoring/__init__.py": "b0844fca50b090cdf265358924b44576866d929f19fc9743cf78aed47debcecf",
+    "src/archpapercraft/authoring/attachments.py": "b3811a4e68877cc2d3a98e6fa473f91df6c542ad64c76975ef6c08d2c44f2f64",
+    "src/archpapercraft/authoring/bend.py": "21a65f094de61b128535572f8842f436bb297bb606810b01c9c20ad864c4ba69",
+    "src/archpapercraft/authoring/clearance.py": "feef3c084826d1ce165bd46eb8e00766d7eecb837b32bc3c4c863720e310ef1a",
+    "src/archpapercraft/authoring/commands.py": "ae714672155bf0cadecb438f64565d84c7f5fc59f564dad34e513927423579b5",
+    "src/archpapercraft/authoring/curve_area.py": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9",
+    "src/archpapercraft/authoring/curve_material.py": "60be7aa11c8fbf2e431a9a625f51b900cfde52b3e7145309aa48a8c5ef7573fa",
+    "src/archpapercraft/authoring/curve_topology.py": "7edd0a44ca4c1d3e9ab1f11dc8a24feef4f2c2ffb867cae2dccccfe001c9b8db",
+    "src/archpapercraft/authoring/curves.py": "acbea1c2b89ac9da0fab3d8855746ca1355719dbfcee7de2a57898aa30e002d2",
+    "src/archpapercraft/authoring/editing.py": "dfa4ae01193f14713a79c603e67c7a7ac3e463cc9682f2d60636db525742360e",
+    "src/archpapercraft/authoring/errors.py": "c73b4d32e1f609eab78ae0f0067b5dc483d80435a92a77e89efe43ea12e9d838",
+    "src/archpapercraft/authoring/geometry.py": "a183daa0f705972ea482498bf795a0bacb19954c9b1c228735bcdda782c8e05e",
+    "src/archpapercraft/authoring/interior.py": "4d14e1efe69f7a45292b47208c10f1b10eaef93e1ecd4ce89688e2fe9faa0614",
+    "src/archpapercraft/authoring/loft_area.py": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238",
+    "src/archpapercraft/authoring/loft_curve_compaction.py": "61c9b8341ef4c8509a5422c0fbe936d097726f8660138d65da5873e46d13f1f6",
+    "src/archpapercraft/authoring/loft_curves.py": "321c74efe4567f8ead29fbb956d4cfdee89769129a0f8170b8f21957a8c37eba",
+    "src/archpapercraft/authoring/loft_geometry.py": "65c09f5db438d6914023ea98f58a3be6c07e4d7960e0ae1581247e33cf936d90",
+    "src/archpapercraft/authoring/loft_surface.py": "15da357e652cddae170c9e181ccc560386552e7acb8b7331f1ab0f400234da73",
+    "src/archpapercraft/authoring/model.py": "6373827475822d6f17633136847d86f63855ce709707240dd50d1aecee13c0f8",
+    "src/archpapercraft/authoring/paper.py": "c747da3b4cf80565d5cfb8e18156d240b19ee9c95da1b62f34855dcf6e85068e",
+    "src/archpapercraft/authoring/profile_curves.py": "393215821df8564f0f7617569595f5eea2653e9b85324a6b6b0e8a648bea5a75",
+    "src/archpapercraft/authoring/project.py": "dac8e1ca6fe31eee71523b96a670f3c21f97e616f9477e4423223b72ca74b56b",
+    "src/archpapercraft/authoring/segmented_loft.py": "2b44a56acdee4f796f0f76d97ee203d2634133099d069d1751a0b10f9e0da472",
+    "src/archpapercraft/authoring/segmented_loft_curves.py": "03808d3d7676968c6ff7aa5780ff630351886446be23ee874c8a1141c752f2e0",
+    "src/archpapercraft/authoring/segmented_surface.py": "f6131aa0efd015cbca7c8cce134bd316314f6f100ab56147daea5841c4a904ca",
+    "src/archpapercraft/commands/__init__.py": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+    "src/archpapercraft/commands/command_stack.py": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+    "src/archpapercraft/core_geometry/__init__.py": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+    "src/archpapercraft/core_geometry/backend.py": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+    "src/archpapercraft/core_geometry/mesh.py": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+    "src/archpapercraft/core_geometry/operations.py": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+    "src/archpapercraft/core_geometry/primitives.py": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+    "src/archpapercraft/core_geometry/stable_ids.py": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+    "src/archpapercraft/core_geometry/units.py": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+    "src/archpapercraft/core_geometry/validation.py": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+    "src/archpapercraft/exporter/__init__.py": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+    "src/archpapercraft/exporter/author_export.py": "bde8f69052254d3a902e961a73d3111572ccc12787a59edf9595360585978541",
+    "src/archpapercraft/exporter/curve_output_validation.py": "0187d27c9927ca846b0bbfdfe35589b7d8c683a36e0bbf1d2be70e2fcee9cfbf",
+    "src/archpapercraft/exporter/dxf_export.py": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+    "src/archpapercraft/exporter/loft_output_validation.py": "5fc22f84afc2f87d816a0c09957560eb6aa8ee6e79b4295ec6d69b6c8f6cde97",
+    "src/archpapercraft/exporter/pdf_export.py": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+    "src/archpapercraft/exporter/png_export.py": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+    "src/archpapercraft/exporter/segmented_output_validation.py": "c2105574db081e084bac42fd63e7b63cf22a3ec85b8e32a679cb336613850608",
+    "src/archpapercraft/exporter/svg_curve_validation.py": "57ba93fd22d7f5f7d27e9b881fba1615721b5bf6f295d77e2f1934a4ae7ae4a5",
+    "src/archpapercraft/exporter/svg_export.py": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+    "src/archpapercraft/layout_packer/__init__.py": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+    "src/archpapercraft/layout_packer/packer.py": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+    "src/archpapercraft/paper_analyzer/__init__.py": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+    "src/archpapercraft/paper_analyzer/classifier.py": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+    "src/archpapercraft/precision.py": "d1959526a99845adbe173e713e0abeb162425d000d6fc2427625d0314cf48317",
+    "src/archpapercraft/preferences/__init__.py": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+    "src/archpapercraft/preferences/settings.py": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+    "src/archpapercraft/project_io/__init__.py": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+    "src/archpapercraft/project_io/project.py": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+    "src/archpapercraft/scene_graph/__init__.py": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+    "src/archpapercraft/scene_graph/node.py": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+    "src/archpapercraft/scene_graph/scene.py": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+    "src/archpapercraft/scene_graph/snap.py": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+    "src/archpapercraft/scene_graph/transform.py": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+    "src/archpapercraft/seam_editor/__init__.py": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+    "src/archpapercraft/seam_editor/auto_seams.py": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+    "src/archpapercraft/seam_editor/seam_graph.py": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+    "src/archpapercraft/tabs_generator/__init__.py": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+    "src/archpapercraft/tabs_generator/build_guide.py": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+    "src/archpapercraft/tabs_generator/markings.py": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+    "src/archpapercraft/tabs_generator/tabs.py": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+    "src/archpapercraft/ui/__init__.py": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+    "src/archpapercraft/ui/author_attachment.py": "53fa23c0278c8f84bbedb1a3f3726da3bc69fa51a277b78c5b06aad7a0be59d6",
+    "src/archpapercraft/ui/author_connectors.py": "45be7038a1a6b276379963344a41be96ab4da3b83ce50b67b59e3948946ae134",
+    "src/archpapercraft/ui/author_curves.py": "bdc2d472cfd65ddd20415dc52262f1732e828c4d3a67f4690efeb93ea95b94ed",
+    "src/archpapercraft/ui/author_editing.py": "3a0590ca0f4613755220fd15d04255810b017ea2cc498fd2af13cffa5d8389ee",
+    "src/archpapercraft/ui/author_export_job.py": "669d5cfb555f69b7baebcd5953ba149ad6304a7c258501ee2c8a21009c63bc32",
+    "src/archpapercraft/ui/author_loft.py": "778b72d6ef361ec86a1b04e933262a983314ec7203cdbdb9f72d76fee15f9ff6",
+    "src/archpapercraft/ui/author_manual_layout.py": "f465983b101a6e56b0cefb518029c0123728bb5ce05ff867ace2aaf34009b501",
+    "src/archpapercraft/ui/author_material.py": "348775acf2f3a2829734052b775abfc0bbe9832d34bc284b1bd3e83802aeb4ab",
+    "src/archpapercraft/ui/author_paper.py": "3e9eb2a2626705b061edfedb31311123d443d9332654fd47319495949aa89dde",
+    "src/archpapercraft/ui/author_profile_placement.py": "5694f234355ec9ae1c69a1836f5a443758f6a51a0cbf2b155fc061bf7e422e98",
+    "src/archpapercraft/ui/author_segmentation.py": "ffc67da8501369cb3a7345643f20100ec088b77774aea80f00f62a2cb8c99f07",
+    "src/archpapercraft/ui/author_sketch.py": "0e8e5688f8711ced8783b20c12fc3bb31f10d1cea0f464164d9965e4883bf98e",
+    "src/archpapercraft/ui/author_viewport.py": "876b8c9f5e0f5e3e2a004a5538ce369ddc25d517bea046d8a04813cf3f3840a0",
+    "src/archpapercraft/ui/author_window.py": "f8e4d983955363b9e5d06fd544c5844e0df0005ab9a9e669f1731f123131df96",
+    "src/archpapercraft/ui/main_window.py": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+    "src/archpapercraft/ui/object_tree.py": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+    "src/archpapercraft/ui/papercraft_panel.py": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+    "src/archpapercraft/ui/preferences_dialog.py": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+    "src/archpapercraft/ui/properties_panel.py": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+    "src/archpapercraft/ui/viewport_3d.py": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+    "src/archpapercraft/ui/wizard.py": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+    "src/archpapercraft/unfolder/__init__.py": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+    "src/archpapercraft/unfolder/approx_unfold.py": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+    "src/archpapercraft/unfolder/exact_unfold.py": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+    "src/archpapercraft/unfolder/strategies.py": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+    "tools/authoring/desktop_b_proof.py": "8cd7ca05a2aa3c6c4f7bea7ddc8c64b886ca2882eebfc9818854b6ac0b0221e8",
+    "tools/authoring/desktop_proof.py": "eed46fcee2a40534835e311be5b23b946af7551152eb935ae6987eab8404859f",
+    "tools/authoring/editor_probe.py": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+    "tools/authoring/loft_desktop_steps.py": "d142a1e2d4200dcfb3101d3f897887d5ef25ba7337b10ecaa30f46d05c6a5523",
+    "tools/authoring/native_dialogs.py": "825076d2b29596980a7e3a2be4b6b846b2057cb99cc91a69cacc1082750a5167",
+    "tools/authoring/segmentation_desktop_steps.py": "9b51e44a01d353595f8c8905c8a7a7f607a9d741c484c53daf897a7202b9f248",
+    "tools/authoring/smoke.py": "1288018a91ebb6b3e50dd884796f3ad24854931873731f53403f15d8282e4b08",
+    "tools/authoring/vector_curve_oracle.py": "0085a92e7668b69febef9bd28ded60509b693c2a31c699ac4ab2de4f568210d1"
+  },
+  "actual_application_module": "C:\\Users\\dalib\\projects\\papercraft-segmentation-proof\\src\\archpapercraft\\ui\\author_window.py",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "application_version": "0.3.0",
+  "pid": 10616,
+  "oracle": {
+    "scale": 0.01,
+    "building_model_mm": {
+      "length": 10000,
+      "width": 6000,
+      "wall": 4000,
+      "ridge": 7000
+    },
+    "initial_roof_paper_mm": {
+      "length": 108,
+      "half_slope": 49.49747468305833
+    },
+    "roof_wall_trace_paper_mm": 7.0710678118654755,
+    "changed_south_eave_model_mm": 800,
+    "changed_south_slope_paper_mm": 53.74011537017761,
+    "changed_trace_from_eave_paper_mm": 11.313708498984761,
+    "areas_paper_mm2": {
+      "long_wall": 4000,
+      "gable_wall": 3300.0,
+      "base": 13000,
+      "brace_outer": 2700.0,
+      "brace_hole": 300,
+      "brace_net": 2400.0,
+      "soffit": 800,
+      "initial_half_roof": 5345.727265770299,
+      "changed_south_roof": 5803.932459979182
+    },
+    "authored_top_tabs": {
+      "hinge_length_mm": 100,
+      "count": 4,
+      "gap_mm": 1,
+      "base_length_mm": 24.0,
+      "triangle_width_mm": 5,
+      "triangle_area_mm2": 60.0,
+      "custom_outline_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          24,
+          0
+        ],
+        [
+          24,
+          2
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "custom_area_mm2": 56,
+      "active_count": 3,
+      "active_area_mm2": 176.0,
+      "existing_bottom_area_mm2": 144.0,
+      "wall_cut_area_mm2": 4320
+    },
+    "mixed": {
+      "initial_rise_model_mm": 3000,
+      "changed_rise_model_mm": 3500,
+      "initial_slope_model_mm": 4242.640687119285,
+      "changed_slope_model_mm": 4609.772228646444,
+      "changed_angle_deg": 49.398705354995535,
+      "page_number": 2,
+      "anchor_paper_mm": [
+        60,
+        60
+      ],
+      "rotation_deg": 30,
+      "wall_page_points_paper_mm": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ]
+    }
+  },
+  "versions": {
+    "PySide6": "6.12.0",
+    "numpy": "2.5.4",
+    "shapely": "2.2.0",
+    "pypdf": "6.21.4",
+    "reportlab": "5.1.0",
+    "PyOpenGL": "3.1.10"
+  },
+  "evidence_kind": "actual_app_main_QTest_widgets_own_PID_native_dialogs",
+  "new_user": "NOT_RUN",
+  "new_user_reason": "Owner confirmed no actual new participant is currently available",
+  "physical_build": "NOT_RUN",
+  "AU19": "NOT_RUN_PC010",
+  "started_local": "2026-11-11T13:44:29+0100",
+  "steps": [
+    {
+      "name": "D_stricter_unsatisfied_budget_blocks_confirmation",
+      "status": "PASS",
+      "budget_paper_mm": 1e-06,
+      "max_cells": 1,
+      "feedback": "Mez není doložená; odvozené díly nevznikly. SEGMENTATION_UNRESOLVED: The bounded segmentation cell budget was exhausted Změňte tvar/profily, přidejte skutečné švy nebo upravte mez a rozpočet.",
+      "elapsed_seconds": 0.0
+    },
+    {
+      "name": "D_actual_preview_whole_face_budget",
+      "status": "PASS",
+      "elapsed_seconds": 1.781999999890104,
+      "budget_paper_mm": 0.25,
+      "certificate": {
+        "status": "CERTIFIED",
+        "pose_operator_upper_exact": "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000001/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "max_reconstruction_error_paper_mm_exact": "120692623416695099311930841872852373590988493192995555405919067594013262764805573112384266931176623317287/28823037615171174400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "max_target_to_material_deviation_paper_mm_exact": "1099511627776029488860700830924897456665691614349021237425095946180519023209861819644229699855739418450168973174671965500654423/7036874417766400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "max_source_edge_to_flat_length_difference_bound_paper_mm_exact": "144200781403430062108523086513021549458753993211559688227480550802071898459047417812792228511305673237272836919504794619/6710886400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "flat_metric_rounding_reserve_paper_mm_exact": "2397283974497786140356332193590679782964690280786692842667903820045463099600038799667831/900719925474099200000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "max_material_normal_angle_deg_exact": "44849744054913561524735785867961676179405351830259305894694495963538450189326893927218236495938741063568384574207357603885028538216055490777917684083487890615350567980681781654699635671086147347484752642141320383238205946481697406941053055040364615498106731060727817666386104911011723/5235987755982988730771072305465838140328615665625176368291574320495304873933541716666666682374629934615632858979883583064181087652513663542195771541389628152581288467291816666666614306789106836779358955943612008285263380510010414902983750923461713617927331249500000000000000000000000",
+        "pose_normal_angle_reserve_deg_exact": "6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000/10471975511965977461542144610931676280657231331250352736583148640990609747867083433333333364749259869231265717959767166128362175305027327084391543082779256305162576934583633333333228613578213673558717911887224016570526761020020829805967501846923427235854662499",
+        "plane_normal_offset_bound_deg_exact": "1501261497075144510354018801650974395225299639345838829008710791476/314159265358979323846264338327950288419716939937510582097494459229718292436012503",
+        "normal_scope": "SOURCE_NORMAL_FIELD_TO_ACTUAL_MATERIAL_PLANE; CONDITION_AND_EXACT_RECONSTRUCTION_RESERVES",
+        "proof": "EXACT_RATIONAL_PLANE_RECONSTRUCTION_AND_POSE_OPERATOR_BOUND"
+      },
+      "counts": {
+        "patches": 1,
+        "cells": 32,
+        "triangles": 64,
+        "triangle_island_parts": 64,
+        "paired_cut_seams": 84,
+        "source_boundary_cut_segments": 24,
+        "manufactured_triangle_cut_segments": 192
+      }
+    },
+    {
+      "name": "D_explicit_manual_grid",
+      "status": "PASS",
+      "page": 1,
+      "first": 0,
+      "count": 32,
+      "columns": 8,
+      "origin_paper_mm": [
+        25,
+        25
+      ],
+      "pitch_paper_mm": [
+        18,
+        22
+      ],
+      "angle_deg": 0
+    },
+    {
+      "name": "D_explicit_manual_grid",
+      "status": "PASS",
+      "page": 2,
+      "first": 32,
+      "count": 32,
+      "columns": 8,
+      "origin_paper_mm": [
+        25,
+        25
+      ],
+      "pitch_paper_mm": [
+        18,
+        22
+      ],
+      "angle_deg": 0
+    },
+    {
+      "name": "actual_unlocked_manual_paper_drag",
+      "status": "PASS",
+      "part_id": "93e3040a-7286-42e4-a1ef-17395e18ccf0",
+      "anchor_before": [
+        25.0,
+        25.0
+      ],
+      "anchor_after": [
+        26.0,
+        26.0
+      ]
+    },
+    {
+      "name": "actual_locked_paper_drag",
+      "status": "PASS",
+      "part_id": "93e3040a-7286-42e4-a1ef-17395e18ccf0",
+      "anchor_before": [
+        25.0,
+        25.0
+      ],
+      "anchor_after": [
+        25.0,
+        25.0
+      ]
+    },
+    {
+      "name": "actual_assembled_3D_pick_links_paper",
+      "status": "PASS",
+      "surface_id": "f147a491-a95e-4754-a04e-920523bc5a38",
+      "world_probe_mm": [
+        333.3333333333333,
+        20.83333333333333,
+        249.99999999999997
+      ],
+      "pixel": [
+        268,
+        233
+      ]
+    },
+    {
+      "name": "D-segmented_reopen_auto_frame_and_refresh_preserves_authored_camera",
+      "status": "PASS",
+      "all_centers_visible_without_Home": [
+        {
+          "part_id": "93e3040a-7286-42e4-a1ef-17395e18ccf0",
+          "center_pixel": [
+            57,
+            185
+          ],
+          "bounds_pixel": [
+            48,
+            176,
+            18,
+            20
+          ]
+        },
+        {
+          "part_id": "bcdba997-d02d-4bb9-b3ee-4cad626febbe",
+          "center_pixel": [
+            81,
+            183
+          ],
+          "bounds_pixel": [
+            72,
+            176,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "ff4792e1-d7c6-4d9a-8f6f-df92e1c92803",
+          "center_pixel": [
+            100,
+            185
+          ],
+          "bounds_pixel": [
+            93,
+            176,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "1e2a1995-031e-48c8-a179-28fe97992277",
+          "center_pixel": [
+            123,
+            183
+          ],
+          "bounds_pixel": [
+            114,
+            176,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "487159d3-b9ca-41bc-8026-51540ddb1c7d",
+          "center_pixel": [
+            142,
+            185
+          ],
+          "bounds_pixel": [
+            135,
+            176,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "c6c11417-5d1d-4f1c-b739-425ddbb9ec7b",
+          "center_pixel": [
+            165,
+            183
+          ],
+          "bounds_pixel": [
+            156,
+            176,
+            18,
+            15
+          ]
+        },
+        {
+          "part_id": "e036a1a5-f3c9-4386-98f9-ab7ba65cd77e",
+          "center_pixel": [
+            183,
+            185
+          ],
+          "bounds_pixel": [
+            177,
+            176,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "1b92107d-0538-4058-a487-294141bb72bd",
+          "center_pixel": [
+            206,
+            183
+          ],
+          "bounds_pixel": [
+            198,
+            176,
+            18,
+            15
+          ]
+        },
+        {
+          "part_id": "9d0928fb-0aa4-41d3-8013-1fef4e562f2a",
+          "center_pixel": [
+            58,
+            210
+          ],
+          "bounds_pixel": [
+            52,
+            202,
+            13,
+            18
+          ]
+        },
+        {
+          "part_id": "f48e9c8b-5dc9-4f7d-a037-0f447e54cc4c",
+          "center_pixel": [
+            81,
+            208
+          ],
+          "bounds_pixel": [
+            72,
+            202,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "6fe2cc83-85fe-4562-a711-be4f8458a59d",
+          "center_pixel": [
+            100,
+            210
+          ],
+          "bounds_pixel": [
+            93,
+            202,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "dcbe5bc5-2d5a-4d4d-8c99-ddb23d509fd8",
+          "center_pixel": [
+            123,
+            208
+          ],
+          "bounds_pixel": [
+            114,
+            202,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "b95a8c00-71c8-4c7c-b81d-7cf3f50cc796",
+          "center_pixel": [
+            142,
+            210
+          ],
+          "bounds_pixel": [
+            135,
+            202,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "2d9c6882-2e90-480a-aa23-f9ec887b2489",
+          "center_pixel": [
+            165,
+            208
+          ],
+          "bounds_pixel": [
+            156,
+            202,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "a4c82922-9dca-40d6-9371-02abef1c741d",
+          "center_pixel": [
+            184,
+            210
+          ],
+          "bounds_pixel": [
+            177,
+            202,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "bc5dd4e4-8734-43c8-8be6-b4b6710fd55a",
+          "center_pixel": [
+            207,
+            208
+          ],
+          "bounds_pixel": [
+            198,
+            202,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "c036b9d9-bad8-4112-ae29-8570e4684dcf",
+          "center_pixel": [
+            58,
+            236
+          ],
+          "bounds_pixel": [
+            52,
+            227,
+            13,
+            18
+          ]
+        },
+        {
+          "part_id": "09f63b2f-c77a-45f2-a771-641248c9d6de",
+          "center_pixel": [
+            81,
+            234
+          ],
+          "bounds_pixel": [
+            72,
+            227,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "807adade-643b-4a17-8c76-29e764485e7e",
+          "center_pixel": [
+            100,
+            236
+          ],
+          "bounds_pixel": [
+            93,
+            227,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "a5295fc7-a8c7-4de9-ad0e-ec133d5fadd8",
+          "center_pixel": [
+            123,
+            234
+          ],
+          "bounds_pixel": [
+            114,
+            227,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "6abcab1f-5588-4f93-91f6-1f4ba5dbe5bf",
+          "center_pixel": [
+            142,
+            236
+          ],
+          "bounds_pixel": [
+            135,
+            227,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "aeca9a8a-df43-43b1-9cce-533a1e01dcdf",
+          "center_pixel": [
+            165,
+            234
+          ],
+          "bounds_pixel": [
+            156,
+            227,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "4210a485-7eac-4cf5-ad57-c02b45dc670c",
+          "center_pixel": [
+            184,
+            236
+          ],
+          "bounds_pixel": [
+            177,
+            227,
+            15,
+            18
+          ]
+        },
+        {
+          "part_id": "b42b2a75-6e35-451a-8e04-7a2cab6939df",
+          "center_pixel": [
+            207,
+            234
+          ],
+          "bounds_pixel": [
+            198,
+            227,
+            19,
+            15
+          ]
+        },
+        {
+          "part_id": "a0426c89-8081-4364-8b68-dbbaa51ddc7f",
+          "center_pixel": [
+            58,
+            262
+          ],
+          "bounds_pixel": [
+            52,
+            253,
+            13,
+            18
+          ]
+        },
+        {
+          "part_id": "9bf6cbdd-a5dd-4456-9840-51214255b2c0",
+          "center_pixel": [
+            81,
+            259
+          ],
+          "bounds_pixel": [
+            72,
+            253,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "4f931b88-1cd3-4703-8052-e44d84065f8d",
+          "center_pixel": [
+            100,
+            262
+          ],
+          "bounds_pixel": [
+            93,
+            253,
+            14,
+            18
+          ]
+        },
+        {
+          "part_id": "6f1d6168-bae7-439f-9afe-f88b0210a653",
+          "center_pixel": [
+            123,
+            259
+          ],
+          "bounds_pixel": [
+            114,
+            253,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "efb5f4ea-eaae-41ed-a67f-99793f8e31cf",
+          "center_pixel": [
+            142,
+            261
+          ],
+          "bounds_pixel": [
+            135,
+            253,
+            15,
+            18
+          ]
+        },
+        {
+          "part_id": "19ae4cc4-4630-47ab-9c5c-2fa7d60de4d3",
+          "center_pixel": [
+            165,
+            259
+          ],
+          "bounds_pixel": [
+            156,
+            253,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "c4717bcb-ca40-44f0-a76d-b60365d8144f",
+          "center_pixel": [
+            184,
+            261
+          ],
+          "bounds_pixel": [
+            177,
+            253,
+            15,
+            18
+          ]
+        },
+        {
+          "part_id": "2e7663d3-8428-42ea-8f3d-1666fba475ff",
+          "center_pixel": [
+            207,
+            259
+          ],
+          "bounds_pixel": [
+            198,
+            253,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "0a983689-03c7-4e81-9fc6-30170eff552c",
+          "center_pixel": [
+            330,
+            185
+          ],
+          "bounds_pixel": [
+            324,
+            176,
+            14,
+            19
+          ]
+        },
+        {
+          "part_id": "3648e733-6f7e-4ff4-a819-d36a76e78a34",
+          "center_pixel": [
+            354,
+            183
+          ],
+          "bounds_pixel": [
+            345,
+            176,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "c4feb2ca-047f-4c62-9e23-2c7077b04a39",
+          "center_pixel": [
+            372,
+            185
+          ],
+          "bounds_pixel": [
+            366,
+            176,
+            14,
+            19
+          ]
+        },
+        {
+          "part_id": "d2d2366f-d6dd-493a-8851-c4cf7e497999",
+          "center_pixel": [
+            396,
+            183
+          ],
+          "bounds_pixel": [
+            387,
+            176,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "f02b27ce-0a81-4a36-b295-538db1c3caf7",
+          "center_pixel": [
+            414,
+            185
+          ],
+          "bounds_pixel": [
+            407,
+            176,
+            15,
+            19
+          ]
+        },
+        {
+          "part_id": "a4328b15-f9a6-415f-86f3-9a8665703fb6",
+          "center_pixel": [
+            438,
+            183
+          ],
+          "bounds_pixel": [
+            428,
+            176,
+            20,
+            14
+          ]
+        },
+        {
+          "part_id": "d3562035-502e-408a-922d-c49a46abcb56",
+          "center_pixel": [
+            456,
+            185
+          ],
+          "bounds_pixel": [
+            449,
+            176,
+            16,
+            19
+          ]
+        },
+        {
+          "part_id": "4dc09cad-4555-4816-8380-c83d1a08de8c",
+          "center_pixel": [
+            480,
+            183
+          ],
+          "bounds_pixel": [
+            470,
+            176,
+            20,
+            14
+          ]
+        },
+        {
+          "part_id": "52825b91-aa8f-4ea0-b60a-831907fd3166",
+          "center_pixel": [
+            330,
+            211
+          ],
+          "bounds_pixel": [
+            324,
+            202,
+            14,
+            19
+          ]
+        },
+        {
+          "part_id": "04c8c9fe-5cca-4d56-a0ab-957d833c0646",
+          "center_pixel": [
+            354,
+            208
+          ],
+          "bounds_pixel": [
+            345,
+            202,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "ef8b6c8e-105b-409f-82aa-bd6efde4a855",
+          "center_pixel": [
+            372,
+            211
+          ],
+          "bounds_pixel": [
+            366,
+            202,
+            14,
+            19
+          ]
+        },
+        {
+          "part_id": "c1ce428a-efcf-48f7-9af2-fdae305401d6",
+          "center_pixel": [
+            396,
+            208
+          ],
+          "bounds_pixel": [
+            387,
+            202,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "368eef26-92f3-4192-9a81-e9d5e0279fdf",
+          "center_pixel": [
+            414,
+            211
+          ],
+          "bounds_pixel": [
+            407,
+            202,
+            15,
+            19
+          ]
+        },
+        {
+          "part_id": "71ae2be4-2607-4830-816b-3502cd9e2aff",
+          "center_pixel": [
+            438,
+            208
+          ],
+          "bounds_pixel": [
+            428,
+            202,
+            20,
+            14
+          ]
+        },
+        {
+          "part_id": "d80cbf1f-c022-4a1e-a37d-c692e7af4a95",
+          "center_pixel": [
+            457,
+            211
+          ],
+          "bounds_pixel": [
+            449,
+            202,
+            16,
+            19
+          ]
+        },
+        {
+          "part_id": "1ad1eb8a-e9e9-4a79-bf30-a08debb5820a",
+          "center_pixel": [
+            480,
+            208
+          ],
+          "bounds_pixel": [
+            470,
+            202,
+            20,
+            14
+          ]
+        },
+        {
+          "part_id": "7b2466f7-2fab-44f8-b8e5-8d9bb6dde0cd",
+          "center_pixel": [
+            330,
+            236
+          ],
+          "bounds_pixel": [
+            324,
+            227,
+            14,
+            20
+          ]
+        },
+        {
+          "part_id": "347fd702-67cf-42c2-947b-dde663172fc5",
+          "center_pixel": [
+            354,
+            234
+          ],
+          "bounds_pixel": [
+            345,
+            227,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "2498447d-080b-430c-ba31-3eb5bf13a203",
+          "center_pixel": [
+            372,
+            236
+          ],
+          "bounds_pixel": [
+            366,
+            227,
+            14,
+            20
+          ]
+        },
+        {
+          "part_id": "cbb449c5-884c-44b4-ae6a-11552891cf0f",
+          "center_pixel": [
+            396,
+            234
+          ],
+          "bounds_pixel": [
+            387,
+            227,
+            19,
+            14
+          ]
+        },
+        {
+          "part_id": "d15a471d-8240-43a6-a96e-64a5037a5db9",
+          "center_pixel": [
+            415,
+            236
+          ],
+          "bounds_pixel": [
+            407,
+            227,
+            16,
+            19
+          ]
+        },
+        {
+          "part_id": "e091fa90-ccc7-4a63-9392-f45a4b42f557",
+          "center_pixel": [
+            438,
+            234
+          ],
+          "bounds_pixel": [
+            428,
+            227,
+            21,
+            14
+          ]
+        },
+        {
+          "part_id": "26c20406-8b76-4e33-bc8e-83e3de030840",
+          "center_pixel": [
+            457,
+            236
+          ],
+          "bounds_pixel": [
+            449,
+            227,
+            16,
+            19
+          ]
+        },
+        {
+          "part_id": "9635e46f-a363-4b1e-82ca-870231d721cc",
+          "center_pixel": [
+            480,
+            234
+          ],
+          "bounds_pixel": [
+            470,
+            227,
+            21,
+            14
+          ]
+        },
+        {
+          "part_id": "c20ef21f-57df-484f-bd4e-15c159e9d240",
+          "center_pixel": [
+            330,
+            262
+          ],
+          "bounds_pixel": [
+            324,
+            253,
+            14,
+            19
+          ]
+        },
+        {
+          "part_id": "b7846caf-c108-4c7f-9954-c97da72ce5fe",
+          "center_pixel": [
+            354,
+            259
+          ],
+          "bounds_pixel": [
+            345,
+            253,
+            20,
+            14
+          ]
+        },
+        {
+          "part_id": "c5263b7a-8b53-4b1b-b0d5-419ea9170031",
+          "center_pixel": [
+            372,
+            262
+          ],
+          "bounds_pixel": [
+            366,
+            253,
+            14,
+            19
+          ]
+        },
+        {
+          "part_id": "a21828c6-ddd3-41ef-b5aa-e43815c6816e",
+          "center_pixel": [
+            396,
+            259
+          ],
+          "bounds_pixel": [
+            387,
+            253,
+            20,
+            14
+          ]
+        },
+        {
+          "part_id": "85e4e5be-1076-4d3e-9a1c-056f2a43d73d",
+          "center_pixel": [
+            415,
+            262
+          ],
+          "bounds_pixel": [
+            407,
+            253,
+            16,
+            19
+          ]
+        },
+        {
+          "part_id": "9992c451-c7d7-40f7-b540-b7473975bdf1",
+          "center_pixel": [
+            438,
+            259
+          ],
+          "bounds_pixel": [
+            428,
+            253,
+            21,
+            14
+          ]
+        },
+        {
+          "part_id": "8efb13d8-7a2b-44d2-9fed-8dc4d7b96ba8",
+          "center_pixel": [
+            457,
+            262
+          ],
+          "bounds_pixel": [
+            449,
+            253,
+            16,
+            19
+          ]
+        },
+        {
+          "part_id": "95858249-5801-48c3-94a9-332a8ebb97ec",
+          "center_pixel": [
+            480,
+            259
+          ],
+          "bounds_pixel": [
+            470,
+            253,
+            21,
+            14
+          ]
+        }
+      ],
+      "authored_camera": [
+        [
+          1.3333332289577933,
+          0.0,
+          0.0,
+          1.3333332289577933,
+          0.0,
+          0.0
+        ],
+        [
+          272.25002131218224,
+          143.25001121384796
+        ]
+      ]
+    },
+    {
+      "name": "D_actual_vector_coverage_source_triangle_areas",
+      "status": "PASS",
+      "target_surface_id": "c1cd3b76-bd7e-4549-a0ee-d2330ec2e77f",
+      "variant_id": "d6d70eda-1bdb-40bf-a6f7-da7e056dcf51",
+      "material_count": 64,
+      "reference_target_mode": "REJECTED",
+      "output_mode": "APPROXIMATE",
+      "observations": [
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.3125,
+          "expected": 20.3125,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.902717504464043,
+          "expected": 19.902717504464057,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.44726926297249,
+          "expected": 20.4472692629725,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.312500000000007,
+          "expected": 20.3125,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.846350100197423,
+          "expected": 20.846350100197398,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.977689972027473,
+          "expected": 20.977689972027424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.495025769058767,
+          "expected": 21.495025769058756,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.87500000000012,
+          "expected": 21.875,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.963137289060526,
+          "expected": 20.96313728906053,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.44726926297252,
+          "expected": 20.4472692629725,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.093749999999982,
+          "expected": 21.09375,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.84635010019747,
+          "expected": 20.846350100197398,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.48082357010552,
+          "expected": 21.4808235701055,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.495025769058863,
+          "expected": 21.495025769058756,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.110893278257688,
+          "expected": 22.110893278257667,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.371595411369277,
+          "expected": 22.371595411369302,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.706943733515324,
+          "expected": 21.70694373351532,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.093750000000078,
+          "expected": 21.09375,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.833107207003298,
+          "expected": 21.833107207003312,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.480823570105574,
+          "expected": 21.4808235701055,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.207297505549874,
+          "expected": 22.207297505549835,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.11089327825768,
+          "expected": 22.110893278257667,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.817315416422264,
+          "expected": 22.81731541642224,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.9639663385924,
+          "expected": 22.963966338592293,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.534695471649925,
+          "expected": 22.534695471649933,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.83310720700341,
+          "expected": 21.833107207003312,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.656249999999975,
+          "expected": 22.65625,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.207297505549818,
+          "expected": 22.207297505549835,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 23.0170622854004,
+          "expected": 23.017062285400367,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 22.81731541642234,
+          "expected": 22.81731541642224,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 23.606163952715832,
+          "expected": 23.606163952715825,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 23.644915547533788,
+          "expected": 23.64491554753368,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 18.81499152936295,
+          "expected": 18.814991529362963,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 18.895916597574736,
+          "expected": 18.895916597574725,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 18.960407967986864,
+          "expected": 18.96040796798687,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.327057620082805,
+          "expected": 19.327057620082783,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.39011507186072,
+          "expected": 19.390115071860713,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.025008778087972,
+          "expected": 20.025008778087965,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.08587520653509,
+          "expected": 20.085875206535064,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.963137289060537,
+          "expected": 20.96313728906053,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.008632907181926,
+          "expected": 19.008632907181937,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 18.960407967986878,
+          "expected": 18.96040796798687,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.152579175205084,
+          "expected": 19.152579175205098,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.39011507186072,
+          "expected": 19.390115071860713,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.578068884596362,
+          "expected": 19.578068884596355,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.085875206535068,
+          "expected": 20.085875206535064,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.267377767301326,
+          "expected": 20.267377767301323,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.02128757355267,
+          "expected": 21.021287573552673,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.327057620082776,
+          "expected": 19.327057620082783,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.152579175205116,
+          "expected": 19.152579175205098,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.468649678714232,
+          "expected": 19.46864967871424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.578068884596338,
+          "expected": 19.578068884596355,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.887378220871675,
+          "expected": 19.88737822087165,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.267377767301326,
+          "expected": 20.267377767301323,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.566322782950305,
+          "expected": 20.566322782950287,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.194781197266458,
+          "expected": 21.19478119726646,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.764235376052376,
+          "expected": 19.764235376052373,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.468649678714225,
+          "expected": 19.46864967871424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.90271750446405,
+          "expected": 19.902717504464057,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 19.887378220871668,
+          "expected": 19.88737822087165,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.312500000000014,
+          "expected": 20.3125,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.56632278295028,
+          "expected": 20.566322782950287,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 20.97768997202743,
+          "expected": 20.977689972027424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual SVG area",
+          "actual": 21.48082357010556,
+          "expected": 21.4808235701055,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 18.81499249999979,
+          "expected": 18.814991529362963,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 18.89591520959948,
+          "expected": 18.895916597574725,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 18.96040675243421,
+          "expected": 18.96040796798687,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 18.960408443609595,
+          "expected": 18.96040796798687,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.00863249999975,
+          "expected": 19.008632907181937,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.152578220695432,
+          "expected": 19.152579175205098,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.152580567674704,
+          "expected": 19.152579175205098,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.327057500000137,
+          "expected": 19.327057620082783,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.327057513406544,
+          "expected": 19.327057620082783,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.390115246271307,
+          "expected": 19.390115071860713,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.390116652675715,
+          "expected": 19.390115071860713,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.468646867897405,
+          "expected": 19.46864967871424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.46864895208182,
+          "expected": 19.46864967871424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.57806695564068,
+          "expected": 19.578068884596355,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.578069591987514,
+          "expected": 19.578068884596355,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.7642350000001,
+          "expected": 19.764235376052373,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.887375977328702,
+          "expected": 19.88737822087165,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.887377243276205,
+          "expected": 19.88737822087165,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.9027183818107,
+          "expected": 19.902717504464057,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.02501009785192,
+          "expected": 20.025008778087965,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.085872842795652,
+          "expected": 20.085875206535064,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.085875316681268,
+          "expected": 20.085875206535064,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.267376840774887,
+          "expected": 20.267377767301323,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.267376891773893,
+          "expected": 20.267377767301323,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.312500353928044,
+          "expected": 20.3125,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.566320233574515,
+          "expected": 20.566322782950287,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.56632083273871,
+          "expected": 20.566322782950287,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.963134909648943,
+          "expected": 20.96313728906053,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.97768788680878,
+          "expected": 20.977689972027424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.021287295945513,
+          "expected": 21.021287573552673,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.194781730449904,
+          "expected": 21.19478119726646,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.48081746949174,
+          "expected": 21.4808235701055,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 19.902716636616788,
+          "expected": 19.902717504464057,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.3125,
+          "expected": 20.3125,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.31250176579306,
+          "expected": 20.3125,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.447267622641448,
+          "expected": 20.4472692629725,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.44726845466994,
+          "expected": 20.4472692629725,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.846347028005766,
+          "expected": 20.846350100197398,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.846349759252917,
+          "expected": 20.846350100197398,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.963137499999903,
+          "expected": 20.96313728906053,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 20.977687774840888,
+          "expected": 20.977689972027424,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.093743759170138,
+          "expected": 21.09375,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.093750658146746,
+          "expected": 21.09375,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.48081522096072,
+          "expected": 21.4808235701055,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.480823556745236,
+          "expected": 21.4808235701055,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.49501931423947,
+          "expected": 21.495025769058756,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.49502461056545,
+          "expected": 21.495025769058756,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.70694249999997,
+          "expected": 21.70694373351532,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.83309838059904,
+          "expected": 21.833107207003312,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.833107549721717,
+          "expected": 21.833107207003312,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 21.874989117241057,
+          "expected": 21.875,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.11089062499923,
+          "expected": 22.110893278257667,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.110892381233498,
+          "expected": 22.110893278257667,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.207296562501142,
+          "expected": 22.207297505549835,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.20729672487687,
+          "expected": 22.207297505549835,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.37159624999913,
+          "expected": 22.371595411369302,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.534695000000283,
+          "expected": 22.534695471649933,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.65624893394852,
+          "expected": 22.65625,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.81731323580607,
+          "expected": 22.81731541642224,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.8173244318441,
+          "expected": 22.81731541642224,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 22.96397608454572,
+          "expected": 22.963966338592293,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 23.017061780012227,
+          "expected": 23.017062285400367,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 23.606162361256793,
+          "expected": 23.606163952715825,
+          "tolerance": 0.01
+        },
+        {
+          "label": "D source triangle to actual PDF area",
+          "actual": 23.644906264858946,
+          "expected": 23.64491554753368,
+          "tolerance": 0.01
+        }
+      ],
+      "scope": "source triangle cores; no physical assembly or smooth EXACT claim"
+    },
+    {
+      "name": "D-segmented_native_save_new_reopen_export",
+      "status": "PASS",
+      "pages": 2,
+      "parts": [
+        "04c8c9fe-5cca-4d56-a0ab-957d833c0646",
+        "09f63b2f-c77a-45f2-a771-641248c9d6de",
+        "0a983689-03c7-4e81-9fc6-30170eff552c",
+        "19ae4cc4-4630-47ab-9c5c-2fa7d60de4d3",
+        "1ad1eb8a-e9e9-4a79-bf30-a08debb5820a",
+        "1b92107d-0538-4058-a487-294141bb72bd",
+        "1e2a1995-031e-48c8-a179-28fe97992277",
+        "2498447d-080b-430c-ba31-3eb5bf13a203",
+        "26c20406-8b76-4e33-bc8e-83e3de030840",
+        "2d9c6882-2e90-480a-aa23-f9ec887b2489",
+        "2e7663d3-8428-42ea-8f3d-1666fba475ff",
+        "347fd702-67cf-42c2-947b-dde663172fc5",
+        "3648e733-6f7e-4ff4-a819-d36a76e78a34",
+        "368eef26-92f3-4192-9a81-e9d5e0279fdf",
+        "4210a485-7eac-4cf5-ad57-c02b45dc670c",
+        "487159d3-b9ca-41bc-8026-51540ddb1c7d",
+        "4dc09cad-4555-4816-8380-c83d1a08de8c",
+        "4f931b88-1cd3-4703-8052-e44d84065f8d",
+        "52825b91-aa8f-4ea0-b60a-831907fd3166",
+        "6abcab1f-5588-4f93-91f6-1f4ba5dbe5bf",
+        "6f1d6168-bae7-439f-9afe-f88b0210a653",
+        "6fe2cc83-85fe-4562-a711-be4f8458a59d",
+        "71ae2be4-2607-4830-816b-3502cd9e2aff",
+        "7b2466f7-2fab-44f8-b8e5-8d9bb6dde0cd",
+        "807adade-643b-4a17-8c76-29e764485e7e",
+        "85e4e5be-1076-4d3e-9a1c-056f2a43d73d",
+        "8efb13d8-7a2b-44d2-9fed-8dc4d7b96ba8",
+        "93e3040a-7286-42e4-a1ef-17395e18ccf0",
+        "95858249-5801-48c3-94a9-332a8ebb97ec",
+        "9635e46f-a363-4b1e-82ca-870231d721cc",
+        "9992c451-c7d7-40f7-b540-b7473975bdf1",
+        "9bf6cbdd-a5dd-4456-9840-51214255b2c0",
+        "9d0928fb-0aa4-41d3-8013-1fef4e562f2a",
+        "a0426c89-8081-4364-8b68-dbbaa51ddc7f",
+        "a21828c6-ddd3-41ef-b5aa-e43815c6816e",
+        "a4328b15-f9a6-415f-86f3-9a8665703fb6",
+        "a4c82922-9dca-40d6-9371-02abef1c741d",
+        "a5295fc7-a8c7-4de9-ad0e-ec133d5fadd8",
+        "aeca9a8a-df43-43b1-9cce-533a1e01dcdf",
+        "b42b2a75-6e35-451a-8e04-7a2cab6939df",
+        "b7846caf-c108-4c7f-9954-c97da72ce5fe",
+        "b95a8c00-71c8-4c7c-b81d-7cf3f50cc796",
+        "bc5dd4e4-8734-43c8-8be6-b4b6710fd55a",
+        "bcdba997-d02d-4bb9-b3ee-4cad626febbe",
+        "c036b9d9-bad8-4112-ae29-8570e4684dcf",
+        "c1ce428a-efcf-48f7-9af2-fdae305401d6",
+        "c20ef21f-57df-484f-bd4e-15c159e9d240",
+        "c4717bcb-ca40-44f0-a76d-b60365d8144f",
+        "c4feb2ca-047f-4c62-9e23-2c7077b04a39",
+        "c5263b7a-8b53-4b1b-b0d5-419ea9170031",
+        "c6c11417-5d1d-4f1c-b739-425ddbb9ec7b",
+        "cbb449c5-884c-44b4-ae6a-11552891cf0f",
+        "d15a471d-8240-43a6-a96e-64a5037a5db9",
+        "d2d2366f-d6dd-493a-8851-c4cf7e497999",
+        "d3562035-502e-408a-922d-c49a46abcb56",
+        "d80cbf1f-c022-4a1e-a37d-c692e7af4a95",
+        "dcbe5bc5-2d5a-4d4d-8c99-ddb23d509fd8",
+        "e036a1a5-f3c9-4386-98f9-ab7ba65cd77e",
+        "e091fa90-ccc7-4a63-9392-f45a4b42f557",
+        "ef8b6c8e-105b-409f-82aa-bd6efde4a855",
+        "efb5f4ea-eaae-41ed-a67f-99793f8e31cf",
+        "f02b27ce-0a81-4a36-b295-538db1c3caf7",
+        "f48e9c8b-5dc9-4f7d-a037-0f447e54cc4c",
+        "ff4792e1-d7c6-4d9a-8f6f-df92e1c92803"
+      ],
+      "unfold_mode": "APPROXIMATE",
+      "exact_scope": "exact planar triangles; retained smooth target remains REJECTED",
+      "digital_only_acknowledgements": []
+    }
+  ],
+  "inputs": [
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 100,
+      "interpreted_value": 100.0,
+      "visible_text": "100,000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 250,
+      "interpreted_value": 250.0,
+      "visible_text": "250,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 250,
+      "typed_text": "250",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+L",
+      "expected_actions": [
+        "draw"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "draw",
+      "count": 1
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          4000,
+          0
+        ]
+      ]
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "open_profile",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1,
+      "interpreted_value": 1.0,
+      "visible_text": "1,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1,
+      "typed_text": "1",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 3000,
+      "interpreted_value": 3000.0,
+      "visible_text": "3000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3000,
+      "typed_text": "3000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "copy_profile",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2000,
+      "interpreted_value": 2000.0,
+      "visible_text": "2000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 2000,
+      "typed_text": "2000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "loft",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1e-06,
+      "interpreted_value": 1e-06,
+      "visible_text": "0,000001 mm na papíře",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1e-06,
+      "typed_text": "0,000001",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1,
+      "interpreted_value": 1,
+      "visible_text": "1",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1,
+      "typed_text": "1",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "segment",
+      "count": 1
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "segment",
+      "count": 2
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 8,
+      "interpreted_value": 8,
+      "visible_text": "8",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 8,
+      "typed_text": "8",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 25,
+      "interpreted_value": 25.0,
+      "visible_text": "25,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 25,
+      "typed_text": "25",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 25,
+      "interpreted_value": 25.0,
+      "visible_text": "25,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 25,
+      "typed_text": "25",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 18,
+      "interpreted_value": 18.0,
+      "visible_text": "18,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 18,
+      "typed_text": "18",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 22,
+      "interpreted_value": 22.0,
+      "visible_text": "22,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 22,
+      "typed_text": "22",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "manual_grid",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 8,
+      "interpreted_value": 8,
+      "visible_text": "8",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 8,
+      "typed_text": "8",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 25,
+      "interpreted_value": 25.0,
+      "visible_text": "25,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 25,
+      "typed_text": "25",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 25,
+      "interpreted_value": 25.0,
+      "visible_text": "25,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 25,
+      "typed_text": "25",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 18,
+      "interpreted_value": 18.0,
+      "visible_text": "18,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 18,
+      "typed_text": "18",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 22,
+      "interpreted_value": 22.0,
+      "visible_text": "22,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 22,
+      "typed_text": "22",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "manual_grid",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 1
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 25,
+      "interpreted_value": 25.0,
+      "visible_text": "25,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 25,
+      "typed_text": "25",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 25,
+      "interpreted_value": 25.0,
+      "visible_text": "25,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 25,
+      "typed_text": "25",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 17,
+      "interpreted_value": 17.0,
+      "visible_text": "17,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 17,
+      "typed_text": "17",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus",
+      "count": 2
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1800,
+      "interpreted_value": 1800.0,
+      "visible_text": "1800,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1800,
+      "typed_text": "1800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 2
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus_all",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+S",
+      "expected_actions": [
+        "save"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "save",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+N",
+      "expected_actions": [
+        "new"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "new",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+O",
+      "expected_actions": [
+        "open"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "open",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+E",
+      "expected_actions": [
+        "export"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "export",
+      "count": 1
+    }
+  ],
+  "dialogs": [
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-segmentation-proof\\docs\\p2\\implementation\\evidence\\pc008-D-desktop-d762fc6-run01\\D-segmented\\D-segmented.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-segmentation-proof\\docs\\p2\\implementation\\evidence\\pc008-D-desktop-d762fc6-run01\\D-segmented\\D-segmented.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-segmentation-proof\\docs\\p2\\implementation\\evidence\\pc008-D-desktop-d762fc6-run01\\D-segmented\\export",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Vyberte složku pro SVG a PDF",
+      "directory_confirmation": true
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Vektorový export",
+      "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Export dokončen",
+      "text": "Uloženo:\npage-cb711fc2-b028-4192-a240-b4af21d45778.svg\npage-7fd14bcf-a4e3-4092-bb7a-2fe07d1b5eb0.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+    }
+  ],
+  "negative_cases": [],
+  "opengl": {
+    "version": "4.6.0 NVIDIA 610.71",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+  },
+  "elapsed_seconds": 42.125,
+  "files_sha256": {
+    "D-actual-approximate-preview-desktop.png": "db3b21b1be786e50fe009c5da396599a91eb014b2c761e5b004a3aaad7705a56",
+    "D-actual-approximate-preview-opengl.png": "cbbdf7d32edd2bddd0fdc60097a8f2336f8c3560a9a9dbdd11519f85fe2202fe",
+    "D-author-layout-before-save-desktop.png": "b54c67dbfe0199341ef16cd5875b2ac9d87d47410bcf2134c40a750461e1cc78",
+    "D-author-layout-before-save-opengl.png": "00dbdf23a81973d9e1a0dd391e5269c7eabe716da638e940f225269cca225b29",
+    "D-hard-budget-rejected-desktop.png": "849ad52501cc0c4de821ed903af7278d0b28e87a26ee754be7777836bd2062fe",
+    "D-hard-budget-rejected-opengl.png": "cbbdf7d32edd2bddd0fdc60097a8f2336f8c3560a9a9dbdd11519f85fe2202fe",
+    "D-manual-page1-desktop.png": "92dfe540b8c8b39e4369a0512128e8b9506c29df517163a7c7f44cdb2423c21a",
+    "D-manual-page1-opengl.png": "06fc671a6cbad484f45807f8387422c4c6a8150e9522e66c8dc0f1c3431650b5",
+    "D-manual-page2-desktop.png": "6fd5f964dee2a4d497230cd8bbfe518db29b6549037242e7055dea15c89dc15c",
+    "D-manual-page2-opengl.png": "06fc671a6cbad484f45807f8387422c4c6a8150e9522e66c8dc0f1c3431650b5",
+    "D-rejected-exact-target-desktop.png": "de465a326a9adcf2ea9ca1a8f65ae73f7a719d874118e7c165d27a638004544e",
+    "D-rejected-exact-target-opengl.png": "8704c8115092f7f8353051ac1e67804bc8c50826d1baf80c58a03a887d800edf",
+    "D-segmented/D-segmented.apcraft": "b981f7da88bf24672f3ef31613810c2896d97fd4dbb0ba91a595b9be7a3ab33e",
+    "D-segmented/export/.author-export.json": "2c5491c43b1fc53b2ce80fdab486d0d2c5d56861ba9e84c67826b5f96530988f",
+    "D-segmented/export/model.pdf": "63abd12ae03f937bad4d83646d5f5c1aeadb2eab555b56bc9e106900793cd9cd",
+    "D-segmented/export/page-7fd14bcf-a4e3-4092-bb7a-2fe07d1b5eb0.svg": "aa19d40951c2867e9780f57d7763f0c8f745eea73b7a32d12412230b129399f6",
+    "D-segmented/export/page-cb711fc2-b028-4192-a240-b4af21d45778.svg": "b19241fc4b6b98d8e90903342b3973a0b9769a1b1d37e919b9748da349ff44f8",
+    "D-segmented/snapshot.json": "98de81210c8b0761658fedb51ded126bc40f26cb952d56156caf63dc6ba1405f",
+    "D-segmented-reopened-auto-frame-all-material-desktop.png": "c0420fd76589c7320c105da0bfed0f8f053fa32352457bfbe7b05a635a0c2de9",
+    "D-segmented-reopened-auto-frame-all-material-opengl.png": "cc242296f083af68cb1ff30ac2a0a0be7aaf16ff47a4f725e210378a7a36485c",
+    "D-segmented-reopened-desktop.png": "bbfdff741630c73a53e34c78b45e72d0cb6afc79631b79d2664e96ef394d415a",
+    "D-segmented-reopened-opengl.png": "cc242296f083af68cb1ff30ac2a0a0be7aaf16ff47a4f725e210378a7a36485c",
+    "D-stale-source-error-desktop.png": "770e347d8b319aad99653bc8f8a6ec0fee9a796a3174345be03c713e5d197244",
+    "D-stale-source-error-opengl.png": "2c93e788bab2cf22463fe04fd9d38e36c8721af59d75e286e852bb04a145617b",
+    "empty-real-app-desktop.png": "c1fb2d1f08b3cc72087a4b48dc34ae3d6dcaa6d046aba4fa36aab9f137180f43",
+    "empty-real-app-opengl.png": "6ba1a10974500215847bbce8a108c4e813e52343ad5568075844e5ed0b3fd6f6",
+    "export-progress-1-1.png": "daf3d69e9390392b1599237fe110b1a1edc69b3cdd63323216291e0530094d29",
+    "export-progress-1-2.png": "bf27f46646ca2321cceec19ee726d8dc450bff8e0b2b02fa74ffc021e794c18c",
+    "export-progress-1-3.png": "531bff25789fdcda2b3849f4aa679a9c7d09b47d49031232ebb77dd45260adf2",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953"
+  },
+  "export_progress": [
+    {
+      "dialog_identity": 2079617031104,
+      "samples": 28,
+      "max_observed_gap_seconds": 0.11000000010244548,
+      "phases": [
+        {
+          "text": "Kontroluji model a připravuji podklady pro export…",
+          "elapsed_seconds": 37.96900000004098
+        },
+        {
+          "text": "Vytvářím editovatelné SVG stránky a vektorové PDF…",
+          "elapsed_seconds": 38.17200000002049
+        },
+        {
+          "text": "Ověřuji přesnost, otvory a úplnost skutečných výstupů…",
+          "elapsed_seconds": 38.39100000006147
+        }
+      ],
+      "last_at": 1058795.921
+    }
+  ],
+  "failures": []
+}

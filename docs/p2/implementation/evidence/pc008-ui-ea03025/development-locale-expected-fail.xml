@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="5" time="2.007" timestamp="2026-11-11T12:47:34.198766+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmentation_dialog" name="test_real_preview_explicit_confirmation_detached_geometry_and_single_undo" time="0.863" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_uncommitted_numeric_input_invalidates_and_invalid_input_blocks" time="0.055"><failure message="assert 12.0 == 0.125&#10; +  where 12.0 = &lt;built-in method value of PySide6.QtWidgets.QDoubleSpinBox object at 0x000001E1FE7AE640&gt;()&#10; +    where &lt;built-in method value of PySide6.QtWidgets.QDoubleSpinBox object at 0x000001E1FE7AE640&gt; = &lt;PySide6.QtWidgets.QDoubleSpinBox(0x1e1be74c7a0) at 0x000001E1FE7AE640&gt;.value&#10;[+1 more line; full report in element text]">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001E1FE08C8C0&gt;
+source_state = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3.0-pc008-segmented-variants-experimental', ...}, 'b4809a0b-1925-4fb4-8efe-880b4e9faa69')
+
+    def test_uncommitted_numeric_input_invalidates_and_invalid_input_blocks(qtbot, source_state):
+        w, p, _ = dialog(qtbot, source_state)
+        calculate(qtbot, w)
+        qtbot.mouseClick(w.confirm, Qt.MouseButton.LeftButton)
+        edit = w.deviation.lineEdit()
+        edit.setFocus()
+        edit.selectAll()
+        qtbot.keyClicks(edit, "0.125")
+        w.accept()  # No Enter or focus change before the command.
+        assert w.result() != QDialog.DialogCode.Accepted and w._preview is None
+&gt;       assert w.deviation.value() == 0.125
+E       assert 12.0 == 0.125
+E        +  where 12.0 = &lt;built-in method value of PySide6.QtWidgets.QDoubleSpinBox object at 0x000001E1FE7AE640&gt;()
+E        +    where &lt;built-in method value of PySide6.QtWidgets.QDoubleSpinBox object at 0x000001E1FE7AE640&gt; = &lt;PySide6.QtWidgets.QDoubleSpinBox(0x1e1be74c7a0) at 0x000001E1FE7AE640&gt;.value
+E        +      where &lt;PySide6.QtWidgets.QDoubleSpinBox(0x1e1be74c7a0) at 0x000001E1FE7AE640&gt; = &lt;archpapercraft.ui.author_segmentation.SegmentedVariantDialog(0x1e1be34a3e0) at 0x000001E1FDEB8540&gt;.deviation
+
+tests\authoring\test_segmentation_dialog.py:89: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="tests.authoring.test_segmentation_dialog" name="test_source_changed_after_preview_is_blocked_and_original_is_preserved" time="0.075" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_hard_budget_failure_never_enables_confirm" time="0.040" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_cancel_running_worker_does_not_mutate_or_publish_and_latest_request_wins" time="0.142" /></testsuite></testsuites>

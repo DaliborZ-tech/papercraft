@@ -1,0 +1,7 @@
+{
+  "source_sha": "3a0355f42a6ef5bc710ce3bd85c6280bf7cf39fe",
+  "historical_line_fixture": "docs/p2/implementation/evidence/pc008-segmentation-review-ad0cfa3-fixture.json",
+  "before_after_git_bytes_equal": true,
+  "fixture_sha256": "534385c60af099439da074e9f55b36c6d91ef855d7ea8da89f6046e2a503e3c5",
+  "new_author_line_payload_equality_test": "PASS in 61-case independent replay"
+}

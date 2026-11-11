@@ -1,0 +1,31 @@
+{
+  "source_sha": "5ad3cc0ac53ab68a09d1ff7ccd39fe90ade7f7c4",
+  "archive_sha256": "f0758a90e9ffd62711874ffc03ac763faf1a3fc4040de9a9a8f6f4baf60bbcbb",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-8nm9w13k",
+  "actual_imports": {
+    "archpapercraft.exporter.segmented_output_validation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-8nm9w13k\\src\\archpapercraft\\exporter\\segmented_output_validation.py",
+      "lf_sha256": "118b9e7a28dd99d19f51c31edd9e450f376af1114a514f33196fd597c2565be7"
+    },
+    "archpapercraft.exporter.author_export": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-8nm9w13k\\src\\archpapercraft\\exporter\\author_export.py",
+      "lf_sha256": "9df3fbc9e9362178e8d36afc47b7954cdd6c5e9f8aee16b9465925ced3ecf67e"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-output-review-8nm9w13k\\src\\archpapercraft\\authoring\\project.py",
+      "lf_sha256": "84309e6d8ac95057015d755297ec9bf34486ba219ab2e2165f36cd70f498a54c"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "...                                                                      [100%]\n3 passed in 7.03s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "..............                                                           [100%]\n14 passed, 1 deselected in 2.54s\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.460" timestamp="2026-11-11T14:01:43.769376+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmented_export" name="test_numeric_actual_files_tab_area_cannot_enlarge_the_body_error_budget[0]" time="0.026"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'plochu'&#10;  Actual message: 'Díl numeric-part, stránka 1: PDF souřadnice nemá úplnou dvojici čísel.'">tab_height = 0
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001F6CA9A0E90&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1384/test_numeric_actual_files_tab_0')
+
+    @pytest.mark.parametrize("tab_height", [0, 20])
+    def test_numeric_actual_files_tab_area_cannot_enlarge_the_body_error_budget(
+        tab_height, monkeypatch, tmp_path
+    ):
+        """COMPARATOR ONLY: real raw files, explicit math, not domain/bend/native proof.
+    
+        This fixture deliberately supplies the already-bound mathematical material
+        instead of claiming that a200mm hinge/tab has passed application bend gates.
+        Those guards remain intact in the separate legitimate-tab domain test.
+        """
+        from archpapercraft.exporter import segmented_output_validation as guard
+    
+        body_area = Fraction(200 * 200, 2)
+        tab_area = Fraction(200 * tab_height, 2)
+        union_area = body_area + tab_area
+        points = [[0, 0], [0, 200], [200, 0]] + ([[100, -tab_height]] if tab_height else [])
+        part = {
+            "id": "numeric-part",
+            "surface_ids": ["numeric-surface"],
+            "placement": {"x_mm": 5, "y_mm": 60, "rotation_deg": 0},
+            "paths": {"CUT": [{"points": points, "closed": True}]},
+            "flattening": {
+                "mode": "APPROXIMATE",
+                "variant_id": "numeric-variant",
+                "target_surface_id": "numeric-target",
+                "triangle_id": "numeric-triangle",
+                "max_surface_deviation_paper_mm_exact": "0",
+            },
+        }
+        proof = {
+            "mode": "APPROXIMATE",
+            "parameters": {"max_deviation_mm": 0.25},
+            "certificate": {"material_frame": {"pose_operator_upper_exact": "1"}},
+        }
+        page = {"id": "numeric-page", "width_mm": 210, "height_mm": 297, "parts": [part]}
+        data = {
+            "project_id": "numeric-comparator-only",
+            "scale_label": "1:1",
+            "pages": [page],
+            "construction_checks": {
+                "connector_bends": {},
+                "segmented_variants": {"numeric-variant": proof},
+                "fixture_scope": "NUMERICAL_COMPARATOR_NOT_DOMAIN_BEND_NATIVE",
+            },
+        }
+        item = {
+            "part": part,
+            "page_index": 0,
+            "flattening": part["flattening"],
+            "report": proof,
+            "binding": {"id": "numeric-triangle", "source_parameter_key": "numeric-source"},
+            "source_project_digest": "explicit-mathematical-fixture",
+        }
+        monkeypatch.setattr(guard, "validate_segmented_snapshot", lambda _: {part["id"]: item})
+        monkeypatch.setattr(
+            guard,
+            "_source_material_area",
+            lambda *_: (
+                (union_area, union_area),
+                (body_area, body_area),
+                (body_area, body_area),
+                (tab_area, tab_area),
+                Fraction(0),
+                Fraction(0),
+            ),
+        )
+        svg, pdf = tmp_path / "actual.svg", tmp_path / "actual.pdf"
+        expected = {part["id"]: {"page_index": 0, "loop_count": 1}}
+    
+        def write_svg(delta=0):
+            actual = copy.deepcopy(page)
+            actual["parts"][0]["paths"]["CUT"][0]["points"][1][1] += delta
+            author_export._svg(actual, data, "sans-serif", "numeric-fixture", svg, 0)
+    
+        def write_pdf(delta="0"):
+            # Independent explicit PDF decimal path, bypassing fp_str truncation.
+            # Only the opposite BODY vertex moves; hinge and TAB remain fixed.
+            mm, height_pt = 72 / 25.4, 297 * 72 / 25.4
+            canvas = Canvas(str(pdf), pagesize=(210 * mm, height_pt), invariant=1)
+            summary = author_export._construction_metadata(data)[1]
+            canvas.setKeywords(json.dumps(summary))
+            canvas._code.extend(
+                [
+                    f"{mm:.17g} 0 0 -{mm:.17g} 0 {height_pt:.17g} cm",
+                    "1 0 0 1 5 60 cm",
+                    "/APPart_numeric-part BMC",
+                    "/APRole_CUT BMC",
+                    "n 0 0 m 0 "
+                    + str(200 + Fraction(delta))
+                    + " l 200 0 l "
+                    + (f"100 {-tab_height} l " if tab_height else "")
+                    + "h S",
+                    "EMC",
+                    "EMC",
+                ]
+            )
+            canvas.save()
+    
+        write_svg()
+        write_pdf()
+        record = guard.validate_segmented_vector_outputs(data, [svg], pdf, expected_parts=expected)[
+            "parts"
+        ][part["id"]]
+        assert Fraction(record["allowed_material_area_error_exact"]) == Fraction(1, 50)
+        assert record["area_budget_basis"] == "SOURCE_PLANE_BODY_ONLY_EXCLUDES_CONNECTORS"
+        assert Fraction(record["area_budget_source_body_lower_exact"]) == body_area
+        assert Fraction(record["source_material_area_exact"][0]) == union_area
+        # B*delta/2=.021mm² exceeds body budget .02mm², and would wrongly fit a
+        # body+TAB budget .022mm². Both serialized formats must reject it directly.
+        write_svg(0.00021)
+        with pytest.raises(CurveOutputError, match="plochu"):
+            guard.validate_segmented_vector_outputs(data, [svg], pdf, expected_parts=expected)
+        write_svg()
+        write_pdf(".00021")
+&gt;       with pytest.raises(CurveOutputError, match="plochu"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'plochu'
+E         Actual message: 'Díl numeric-part, stránka 1: PDF souřadnice nemá úplnou dvojici čísel.'
+
+tests\authoring\test_segmented_export.py:471: AssertionError</failure></testcase><testcase classname="tests.authoring.test_segmented_export" name="test_numeric_actual_files_tab_area_cannot_enlarge_the_body_error_budget[20]" time="0.018"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'plochu'&#10;  Actual message: 'Díl numeric-part, stránka 1: PDF souřadnice nemá úplnou dvojici čísel.'">tab_height = 20
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001F68AB560C0&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1384/test_numeric_actual_files_tab_1')
+
+    @pytest.mark.parametrize("tab_height", [0, 20])
+    def test_numeric_actual_files_tab_area_cannot_enlarge_the_body_error_budget(
+        tab_height, monkeypatch, tmp_path
+    ):
+        """COMPARATOR ONLY: real raw files, explicit math, not domain/bend/native proof.
+    
+        This fixture deliberately supplies the already-bound mathematical material
+        instead of claiming that a200mm hinge/tab has passed application bend gates.
+        Those guards remain intact in the separate legitimate-tab domain test.
+        """
+        from archpapercraft.exporter import segmented_output_validation as guard
+    
+        body_area = Fraction(200 * 200, 2)
+        tab_area = Fraction(200 * tab_height, 2)
+        union_area = body_area + tab_area
+        points = [[0, 0], [0, 200], [200, 0]] + ([[100, -tab_height]] if tab_height else [])
+        part = {
+            "id": "numeric-part",
+            "surface_ids": ["numeric-surface"],
+            "placement": {"x_mm": 5, "y_mm": 60, "rotation_deg": 0},
+            "paths": {"CUT": [{"points": points, "closed": True}]},
+            "flattening": {
+                "mode": "APPROXIMATE",
+                "variant_id": "numeric-variant",
+                "target_surface_id": "numeric-target",
+                "triangle_id": "numeric-triangle",
+                "max_surface_deviation_paper_mm_exact": "0",
+            },
+        }
+        proof = {
+            "mode": "APPROXIMATE",
+            "parameters": {"max_deviation_mm": 0.25},
+            "certificate": {"material_frame": {"pose_operator_upper_exact": "1"}},
+        }
+        page = {"id": "numeric-page", "width_mm": 210, "height_mm": 297, "parts": [part]}
+        data = {
+            "project_id": "numeric-comparator-only",
+            "scale_label": "1:1",
+            "pages": [page],
+            "construction_checks": {
+                "connector_bends": {},
+                "segmented_variants": {"numeric-variant": proof},
+                "fixture_scope": "NUMERICAL_COMPARATOR_NOT_DOMAIN_BEND_NATIVE",
+            },
+        }
+        item = {
+            "part": part,
+            "page_index": 0,
+            "flattening": part["flattening"],
+            "report": proof,
+            "binding": {"id": "numeric-triangle", "source_parameter_key": "numeric-source"},
+            "source_project_digest": "explicit-mathematical-fixture",
+        }
+        monkeypatch.setattr(guard, "validate_segmented_snapshot", lambda _: {part["id"]: item})
+        monkeypatch.setattr(
+            guard,
+            "_source_material_area",
+            lambda *_: (
+                (union_area, union_area),
+                (body_area, body_area),
+                (body_area, body_area),
+                (tab_area, tab_area),
+                Fraction(0),
+                Fraction(0),
+            ),
+        )
+        svg, pdf = tmp_path / "actual.svg", tmp_path / "actual.pdf"
+        expected = {part["id"]: {"page_index": 0, "loop_count": 1}}
+    
+        def write_svg(delta=0):
+            actual = copy.deepcopy(page)
+            actual["parts"][0]["paths"]["CUT"][0]["points"][1][1] += delta
+            author_export._svg(actual, data, "sans-serif", "numeric-fixture", svg, 0)
+    
+        def write_pdf(delta="0"):
+            # Independent explicit PDF decimal path, bypassing fp_str truncation.
+            # Only the opposite BODY vertex moves; hinge and TAB remain fixed.
+            mm, height_pt = 72 / 25.4, 297 * 72 / 25.4
+            canvas = Canvas(str(pdf), pagesize=(210 * mm, height_pt), invariant=1)
+            summary = author_export._construction_metadata(data)[1]
+            canvas.setKeywords(json.dumps(summary))
+            canvas._code.extend(
+                [
+                    f"{mm:.17g} 0 0 -{mm:.17g} 0 {height_pt:.17g} cm",
+                    "1 0 0 1 5 60 cm",
+                    "/APPart_numeric-part BMC",
+                    "/APRole_CUT BMC",
+                    "n 0 0 m 0 "
+                    + str(200 + Fraction(delta))
+                    + " l 200 0 l "
+                    + (f"100 {-tab_height} l " if tab_height else "")
+                    + "h S",
+                    "EMC",
+                    "EMC",
+                ]
+            )
+            canvas.save()
+    
+        write_svg()
+        write_pdf()
+        record = guard.validate_segmented_vector_outputs(data, [svg], pdf, expected_parts=expected)[
+            "parts"
+        ][part["id"]]
+        assert Fraction(record["allowed_material_area_error_exact"]) == Fraction(1, 50)
+        assert record["area_budget_basis"] == "SOURCE_PLANE_BODY_ONLY_EXCLUDES_CONNECTORS"
+        assert Fraction(record["area_budget_source_body_lower_exact"]) == body_area
+        assert Fraction(record["source_material_area_exact"][0]) == union_area
+        # B*delta/2=.021mm² exceeds body budget .02mm², and would wrongly fit a
+        # body+TAB budget .022mm². Both serialized formats must reject it directly.
+        write_svg(0.00021)
+        with pytest.raises(CurveOutputError, match="plochu"):
+            guard.validate_segmented_vector_outputs(data, [svg], pdf, expected_parts=expected)
+        write_svg()
+        write_pdf(".00021")
+&gt;       with pytest.raises(CurveOutputError, match="plochu"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'plochu'
+E         Actual message: 'Díl numeric-part, stránka 1: PDF souřadnice nemá úplnou dvojici čísel.'
+
+tests\authoring\test_segmented_export.py:471: AssertionError</failure></testcase></testsuite></testsuites>

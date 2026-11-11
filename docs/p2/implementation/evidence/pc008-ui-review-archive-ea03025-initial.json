@@ -1,0 +1,35 @@
+{
+  "source_sha": "ea03025cba5245acdaa83ae4a2575dd1b0e6a2e6",
+  "archive_sha256": "5bfb8485a4b8a1eb714d824975302b54aabdb11cd961038b07dffc1f0d59a2db",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-_6rm6zpg",
+  "actual_imports": {
+    "archpapercraft.ui.author_segmentation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-_6rm6zpg\\src\\archpapercraft\\ui\\author_segmentation.py",
+      "lf_sha256": "05e1388a8e90faf42d991570cefb8d64cd0842b4e452de29b9d715d8f7ded024"
+    },
+    "archpapercraft.ui.author_manual_layout": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-_6rm6zpg\\src\\archpapercraft\\ui\\author_manual_layout.py",
+      "lf_sha256": "cbe576d8a33cfe1e4dd64da41a78ad5c2c5c4117d0bf2fa9c30da2f8c6ce5ea7"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-_6rm6zpg\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "198fcb1eaa5685c1b4ed9a708834c0955a3b32c2b0f239b5fd6bbb8a753a9c8a"
+    },
+    "archpapercraft.ui.author_viewport": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-_6rm6zpg\\src\\archpapercraft\\ui\\author_viewport.py",
+      "lf_sha256": "f530dceb7db4ab2bd2de46baf151308704f4486e4df3fbfb715ad80263c5b61e"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "..........................................                               [100%]\n42 passed in 22.79s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": "................F                                                        [100%]\n================================== FAILURES ===================================\n_____ test_host_inactive_generation_reference_safety_and_old_plain_panel ______\n\nself = <archpapercraft.authoring.project.AuthorProject object at 0x000001DCDE15A0F0>\nargs = ('137da99b-748b-48c1-9365-fe276fad7a17',)\nkwargs = {'max_deviation_mm': 0.5}\n\n    @wraps(method)\n    def command(self, *args, **kwargs):\n        before = copy.deepcopy(self.__dict__)\n        try:\n>           result = method(self, *args, **kwargs)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE           TypeError: SegmentedCommands.add_segmented_variant() missing 1 required keyword-only argument: 'preview_digest'\n\nsrc\\archpapercraft\\authoring\\commands.py:14: TypeError\n\nThe above exception was the direct cause of the following exception:\n\nqtbot = <pytestqt.qtbot.QtBot object at 0x000001DCDE15A7B0>\nfixture_state = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...XIMATE', 'mode': 'APPROXIMATE', 'can_confirm': True, 'target_surface_id': '137da99b-748b-48c1-9365-fe276fad7a17', ...})\ntmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1348/test_host_inactive_generation_0')\n\n    def test_host_inactive_generation_reference_safety_and_old_plain_panel(qtbot,fixture_state,tmp_path):\n        p,s,v=generation(fixture_state)\n>       new=p.add_segmented_variant(s,max_deviation_mm=.5)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n..\\..\\..\\..\\projects\\papercraft-segmentation-ui\\docs\\p2\\implementation\\evidence\\pc008-ui-review-own.py:170: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <archpapercraft.authoring.project.AuthorProject object at 0x000001DCDE15A0F0>\nargs = ('137da99b-748b-48c1-9365-fe276fad7a17',)\nkwargs = {'max_deviation_mm': 0.5}\n\n    @wraps(method)\n    def command(self, *args, **kwargs):\n        before = copy.deepcopy(self.__dict__)\n        try:\n            result = method(self, *args, **kwargs)\n            self.validate()\n            return result\n        except Exception as exc:\n            self.__dict__.clear()\n            self.__dict__.update(before)\n            if isinstance(\n                exc, (KeyError, TypeError, ValueError, AttributeError, IndexError, OverflowError)\n            ) and not isinstance(exc, ValidationError):\n>               raise ValidationError(f\"Operaci nelze prov\u00e9st: {exc}\") from exc\nE               archpapercraft.authoring.errors.ValidationError: Operaci nelze prov\u00e9st: SegmentedCommands.add_segmented_variant() missing 1 required keyword-only argument: 'preview_digest'\n\nsrc\\archpapercraft\\authoring\\commands.py:23: ValidationError\n=========================== short test summary info ===========================\nFAILED ::test_host_inactive_generation_reference_safety_and_old_plain_panel\n1 failed, 16 passed in 3.48s\n",
+      "stderr": ""
+    }
+  }
+}

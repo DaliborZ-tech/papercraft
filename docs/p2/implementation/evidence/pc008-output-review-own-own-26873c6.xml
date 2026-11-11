@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.730" timestamp="2026-11-11T13:52:37.946979+01:00" hostname="Dalibor"><testcase classname="" name="test_direct_plane_oracle_against_actual_svg_tokens_and_pdf" time="0.864"><failure message="TypeError: 'SketchPlane' object is not subscriptable">small_bundle = (&lt;archpapercraft.authoring.project.AuthorProject object at 0x000002470DF3F290&gt;, '682b36c7-f67e-452d-8b68-a76c4a6eb16e'...'scale_label': '1:1', ...}, WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1376/own-D0/bundle'))
+
+    def test_direct_plane_oracle_against_actual_svg_tokens_and_pdf(small_bundle):
+        from archpapercraft.exporter.curve_output_validation import read_pdf_cut_regions
+        p,s,v,snapshot,out=small_bundle
+        manifest=json.loads((out/'.author-export.json').read_text(encoding='utf8'))
+        records=manifest['actual_curve_output_checks']['segmented_variants']['parts']
+        actual_pdf=read_pdf_cut_regions(out/'model.pdf')['parts']
+        ns='{http://www.w3.org/2000/svg}'
+        actual_svg={}
+        for path in out.glob('*.svg'):
+            root=ET.parse(path).getroot()
+            for group in root.findall(f'{ns}g[@data-part-id]'):
+                cut=group.find(f"{ns}g[@data-role='CUT']")
+                if cut is None:
+                    cut=next(g for g in group if g.get('id','').endswith('-CUT'))
+                paths=cut.findall(f'{ns}path');assert len(paths)==1
+                tokens=re.findall(r'[MLZ]|[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?',paths[0].get('d'))
+                points=[];i=0
+                while i&lt;len(tokens):
+                    op=tokens[i];i+=1
+                    if op=='Z':continue
+                    assert op in ('M','L')
+                    points.append([Fraction(tokens[i]),Fraction(tokens[i+1])]);i+=2
+                actual_svg[group.get('data-part-id')]=triangle_area(points)
+        assert set(actual_svg)==set(actual_pdf)==p.material_part_ids()
+        for row in p.segmented_variants[v].triangle_bindings:
+            pid=row['part_id'];profile=p.profiles[row['profile_id']]
+&gt;           u,w=(tuple(map(Fraction,profile.plane[k])) for k in ('u','v'))
+            ^^^
+
+..\..\..\..\projects\papercraft-segmented-output\docs\p2\implementation\evidence\pc008-output-review-own.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = &lt;tuple_iterator object at 0x000002472E4A24D0&gt;
+
+&gt;   u,w=(tuple(map(Fraction,profile.plane[k])) for k in ('u','v'))
+                            ^^^^^^^^^^^^^^^^
+E   TypeError: 'SketchPlane' object is not subscriptable
+
+..\..\..\..\projects\papercraft-segmented-output\docs\p2\implementation\evidence\pc008-output-review-own.py:80: TypeError</failure></testcase></testsuite></testsuites>
