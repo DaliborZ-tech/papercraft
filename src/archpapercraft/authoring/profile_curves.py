@@ -247,7 +247,8 @@ class ProfileCurveCommands:
         if cache is None:
             cache = self._curve_region_cache = {}
         if key not in cache:
-            loops = [tuple(source_curve(p, s) for s in p.segments) for p in profiles]
+            from .profile_source_views import canonical_profile_curves
+            loops = [canonical_profile_curves(p) for p in profiles]
             result = certify_region_topology(loops[0], loops[1:])
             if len(cache) > 64:
                 cache.clear()
@@ -395,6 +396,11 @@ class ProfileCurveCommands:
         source = self.profiles[profile_id]
         factor = number(factor, "Poměr kopie", positive=True)
         center = np.asarray(vector(center, 2))
+        histories = self._profile_histories(profile_id)
+        if (any(s.source_reference is not None for s in source.segments) or
+                any(p.source.kind != "line" for h in histories.values() for p in h.pieces)):
+            return self._copy_profile_provenance(profile_id, factor=factor, center=center,
+                                                 plane=plane, name=name)
 
         def mapped(point):
             return (center + factor * (np.asarray(point) - center)).tolist()

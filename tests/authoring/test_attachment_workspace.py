@@ -119,6 +119,9 @@ def test_pending_angle_before_confirmation_matches_preview(qtbot):
 def test_schema_one_copy_policy_survives_command_undo_and_failed_save(tmp_path):
     project, *_ = construction()
     data = project.to_dict()
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=1, writer_version="0.3.0-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
@@ -223,6 +226,9 @@ def test_linked_receiver_overlay_shows_actual_folded_material_and_hides_invalid_
 def test_upgrade_workspace_explains_copy_and_offers_a_new_filename(qtbot, tmp_path, monkeypatch):
     project, *_ = construction()
     data = project.to_dict()
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=1, writer_version="0.3.0-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.

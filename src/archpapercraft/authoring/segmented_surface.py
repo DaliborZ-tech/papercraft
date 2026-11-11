@@ -59,10 +59,24 @@ def _digest(value):
 
 def _fingerprint(binding):
     data = copy.deepcopy(binding)
+    for profile in data["profiles"]:
+        _normalize_absent_source_defaults(profile)
     for record in [data["surface"], *data["profiles"]]:
         record.pop("name", None)
         record.pop("revision", None)
     return _digest(data)
+
+
+def _normalize_absent_source_defaults(profile):
+    """Hash-only schema compatibility; never rewrite generation source records.
+
+    An absent legacy CurveSegment.source_reference and the explicit current
+    None default denote the same unqualified curve. Every actual descriptor,
+    including all of its provenance, remains part of the geometric identity.
+    """
+    for segment in profile["segments"]:
+        if segment.get("source_reference", False) is None:
+            del segment["source_reference"]
 
 
 def _source_binding(project, target_id):
@@ -384,6 +398,7 @@ def _seam_use(report, records, use):
 
 def _geometry_binding(profile, surface):
     data = {"profile": asdict(profile), "surface": asdict(surface)}
+    _normalize_absent_source_defaults(data["profile"])
     for value in data.values():
         value.pop("revision", None)
         value.pop("name", None)

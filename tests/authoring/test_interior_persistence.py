@@ -47,6 +47,9 @@ def legacy_a_document():
         rotation_locked=True,
     )
     data = p.to_dict()
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=1, writer_version="0.3.0-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
@@ -63,7 +66,11 @@ def test_known_a_file_import_preserves_source_ids_layout_and_origin_requires_cop
     p = AuthorProject.load(path)
     assert p.loaded_from_schema == 1 and p.requires_save_as
     assert p.loaded_source_path == str(path.resolve())
-    assert p.to_dict()["profiles"] == data["profiles"]
+    expected_profiles = copy.deepcopy(data["profiles"])
+    for source_profile in expected_profiles.values():
+        for source_segment in source_profile["segments"]:
+            source_segment["source_reference"] = None
+    assert p.to_dict()["profiles"] == expected_profiles
     assert p.to_dict()["surfaces"] == data["surfaces"]
     assert p.to_dict()["placements"] == data["placements"]
     assert p.parts[p.part_for_surface(sid)].stale
@@ -99,6 +106,9 @@ def test_forged_schema_one_with_new_writer_is_not_a_supported_old_envelope():
     p, wall, roof, edge = wall_roof()
     p.attach_edge_to_surface(wall, edge, roof)
     data = p.to_dict()
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data["schema_version"] = 1
     del data["attachments"], data["next_attachment_number"]
     with pytest.raises(ProjectFormatError):

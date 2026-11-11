@@ -309,6 +309,52 @@ def canonical_projection(reference):
     }
 
 
+def canonical_profile_curves(profile):
+    """Current whole-source partition from self-contained live segment records.
+
+    This needs no project history lookup. The project separately checks each
+    descriptor against its replayed active history. Incomplete/edited groups
+    retain their exact restricted views; source topology can then say unresolved.
+    """
+    from .profile_curves import source_curve
+
+    curves = [source_curve(profile, segment) for segment in profile.segments]
+    result, index = [], 0
+    while index < len(curves):
+        curve = curves[index]
+        if not isinstance(curve, SourceCurveView):
+            result.append(curve)
+            index += 1
+            continue
+        group, end = [curve], index + 1
+        while end < len(curves):
+            candidate = curves[end]
+            if (
+                not isinstance(candidate, SourceCurveView)
+                or (candidate.history_id, candidate.generation, candidate.root_source)
+                != (curve.history_id, curve.generation, curve.root_source)
+                or group[-1].parameter_interval[1] != candidate.parameter_interval[0]
+            ):
+                break
+            group.append(candidate)
+            end += 1
+        if (group[0].parameter_interval[0], group[-1].parameter_interval[1]) == (0, 1):
+            result.append(
+                SourceCurveView(
+                    curve.root_source,
+                    (0, 1),
+                    profile_id=profile.id,
+                    history_id=curve.history_id,
+                    piece_id=curve.history_id,
+                    generation=curve.generation,
+                ).legacy_whole_curve()
+            )
+        else:
+            result.extend(group)
+        index = end
+    return tuple(result)
+
+
 def validate_projection(reference, *, kind, start, end, data):
     expected = canonical_projection(reference)
     actual = {"kind": kind, "start": list(start), "end": list(end), "data": dict(data)}

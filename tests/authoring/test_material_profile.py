@@ -74,6 +74,9 @@ def test_known_prior_b_draft_is_only_saved_as_copy_and_gets_no_measured_material
                           position_locked=True, rotation_locked=True)
     data = project.to_dict()
     del data["material_profile"]
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=2, writer_version="0.3.0-pc006b-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
