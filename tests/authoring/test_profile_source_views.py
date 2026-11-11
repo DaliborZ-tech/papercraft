@@ -372,3 +372,12 @@ def test_invalid_fraction_descriptor_has_typed_failure(field):
         reference["source"]["start"][0] = "1/0"
     with pytest.raises(ValueError):
         SourceCurveView.from_reference(reference)
+
+
+def test_invalid_fraction_numeric_budgets_have_typed_failure():
+    v = view(history("line"))
+    with pytest.raises(ValueError):
+        native_projection_certificate(v, position_budget="1/0", length_budget=.01, area_budget=.01)
+    with pytest.raises(ValueError):
+        source_region_area_bounds([Curve((0, 0), (1, 0)), Curve((1, 0), (0, 1)),
+                                   Curve((0, 1), (0, 0))], scale="1/0")

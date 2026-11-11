@@ -12,7 +12,8 @@ from dataclasses import dataclass
 from fractions import Fraction as Q
 from types import MappingProxyType
 
-from .curve_area import _add, _arc, _cross, _cubic, _mul, _neg, _pi, _point, _scalar, _sqrt
+from .curve_area import _add, _arc, _cross, _cubic, _mul, _neg, _pi, _point, _sqrt
+from .curve_area import _scalar as _area_scalar
 from .curve_subdivision import (
     CurveSource,
     CurveSubdivisionHistory,
@@ -35,6 +36,13 @@ _FIELDS = {
 
 class SourceViewError(ValueError):
     """A source reference is malformed, poisoned or mathematically unresolved."""
+
+
+def _scalar(value):
+    try:
+        return _area_scalar(value)
+    except (ArithmeticError, ValueError, TypeError) as exc:
+        raise SourceViewError("Source values require finite valid rational numbers.") from exc
 
 
 def _identity(value):
