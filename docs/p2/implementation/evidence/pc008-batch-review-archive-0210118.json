@@ -1,0 +1,21 @@
+{
+  "source_sha": "0210118e02dd7f65dc6161b5f86cfda2b2dbdf29",
+  "archive_sha256": "3e876e4b9888582c6a72984081ba0354bb12d96c041931ec9f7e2edca0db3c2a",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-batch-review-4w7r7uow",
+  "actual_import": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-batch-review-4w7r7uow\\src\\archpapercraft\\authoring\\project.py",
+    "lf_sha256": "8f5d45a3625cde8d5adb78a11484aa76b2c7c3864824c66df5265d8e2126bd69"
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "..........................................                               [100%]\n42 passed in 1.94s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": "..............F                                                          [100%]\n================================== FAILURES ===================================\n_ test_noop_loaded_integer_coordinates_do_not_make_a_dirty_unrecorded_change __\n\n    def test_noop_loaded_integer_coordinates_do_not_make_a_dirty_unrecorded_change():\n        p,ids=project();data=p.to_dict()\n        # Both int and float are valid persisted coordinates; preserve accepted raw precision.\n        data['placements'][ids[0]].update(x_mm=1,y_mm=2,rotation_deg=3)\n        p=AuthorProject.from_dict(data);c=AuthorController();c.project=p\n        c._saved_digest=c.digest(p.to_dict());before=copy.deepcopy(p.to_dict());revision=p.revision\n        c.execute('No-op explicit placement',lambda p:p.set_placements({ids[0]:{'x_mm':1,'y_mm':2,'rotation_deg':3}}))\n        assert c.project.revision==revision and not c.can_undo\n>       assert not c.dirty and c.digest(c.project.to_dict())==c.digest(before)\nE       assert (not True)\nE        +  where True = <archpapercraft.application.author_controller.AuthorController object at 0x00000225602CFD70>.dirty\n\n..\\..\\..\\..\\projects\\papercraft-segmentation-domain\\docs\\p2\\implementation\\evidence\\pc008-batch-review-own.py:98: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_noop_loaded_integer_coordinates_do_not_make_a_dirty_unrecorded_change\n1 failed, 14 passed in 1.14s\n",
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.810" timestamp="2026-11-11T12:56:02.346451+01:00" hostname="Dalibor"><testcase classname="" name="test_material_normals_cover_independent_rational_source_normal_field" time="0.165" /></testsuite></testsuites>
