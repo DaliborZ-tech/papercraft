@@ -43,6 +43,7 @@ from archpapercraft.authoring import AuthorProject
 from archpapercraft.exporter.curve_output_validation import CurveOutputError
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
+from archpapercraft.ui.author_curved_connectors import CurvedConnectorPanel
 from archpapercraft.ui.author_curves import CurveEditorDialog, CurveSketch
 from archpapercraft.ui.author_editing import DeletePartDialog, RenameDialog
 from archpapercraft.ui.author_export_job import ExportProgressDialog
@@ -211,6 +212,9 @@ class AuthorMainWindow(QMainWindow):
         ))
         construct.addAction(self._action(
             "edit_loft", "Upravit profily a šev této plochy…", self.edit_loft
+        ))
+        construct.addAction(self._action(
+            "curved_connector", "Dělené chlopně kruhového okraje…", self.create_curved_connector
         ))
         construct.addAction(self._action(
             "segment", "Odvodit rovinné díly s povolenou odchylkou…", self.segment_surface
@@ -490,6 +494,8 @@ class AuthorMainWindow(QMainWindow):
         self.connectors_panel = ConnectorPanel(self)
         self.connectors_panel.relation_changed.connect(self.show_connector_relation)
         form.addRow(self.connectors_panel)
+        self.curved_panel = CurvedConnectorPanel(self)
+        form.addRow(self.curved_panel)
         form = self._section(layout, "Díl na papíře")
         self.page_choice = QComboBox()
         self.page_choice.currentIndexChanged.connect(self.edit_placement)
@@ -732,7 +738,7 @@ class AuthorMainWindow(QMainWindow):
             self._populate_properties()
             self._highlight()
             self.issues.clear()
-            for issue in self.project.validate_layout():
+            for issue in self._current_issues():
                 label = (
                     "Přijato"
                     if issue.acknowledged
@@ -893,6 +899,10 @@ class AuthorMainWindow(QMainWindow):
         self.connectors_panel.refresh()
         self._populate_curve_choices()
         self._populate_generations()
+        self.curved_panel.refresh()
+
+    def create_curved_connector(self):
+        self.curved_panel.open_editor()
 
     def _segmentation_target(self):
         surface = self.project.surfaces.get(self.selected_surface)
@@ -1325,8 +1335,8 @@ class AuthorMainWindow(QMainWindow):
             iterator = QTreeWidgetItemIterator(self.tree)
             while iterator.value():
                 item = iterator.value()
-                if item.data(0, Qt.ItemDataRole.UserRole) in (
-                        selection, ("profile", self.selected_profile)):
+                target = selection if self.selected_surface else ("profile", self.selected_profile)
+                if item.data(0, Qt.ItemDataRole.UserRole) == target:
                     self.tree.setCurrentItem(item)
                 iterator += 1
             self._populate_properties()
@@ -2024,13 +2034,18 @@ class AuthorMainWindow(QMainWindow):
         selected = next(
             (
                 i
-                for i in self.project.validate_layout()
+                for i in self._current_issues()
                 if i.id == item.data(Qt.ItemDataRole.UserRole)
             ),
             None,
         )
         if selected and selected.part_ids:
             self.select_part(selected.part_ids[0])
+            if selected.id.startswith("curved:"):
+                cid = selected.id.partition(":")[2]
+                if cid in self.project.curved_connectors:
+                    self.curved_panel.current_id = cid
+                    self.curved_panel.refresh()
             if selected.joint_id:
                 kind = "attachment" if selected.joint_id in self.project.attachments else "joint"
                 self.select_connector_relation((kind, selected.joint_id))
@@ -2053,7 +2068,7 @@ class AuthorMainWindow(QMainWindow):
             next(
                 (
                     i
-                    for i in self.project.validate_layout()
+                    for i in self._current_issues()
                     if item and i.id == item.data(Qt.ItemDataRole.UserRole)
                 ),
                 None,
@@ -2064,6 +2079,12 @@ class AuthorMainWindow(QMainWindow):
         self.ack_button.setEnabled(
             selected is not None and selected.severity == "warning" and not selected.acknowledged
         )
+
+    def _current_issues(self):
+        issues = list(self.project.validate_layout())
+        known = {issue.id for issue in issues}
+        return issues + [issue for issue in self.project.curved_connector_issues()
+                         if issue.id not in known]
 
     def focus_selection(self):
         self.viewport.focus_selection()

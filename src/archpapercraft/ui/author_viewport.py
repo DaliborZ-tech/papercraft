@@ -34,6 +34,7 @@ class AuthorViewport(QOpenGLWidget):
         self.selected_surfaces = set()
         self.selected_edge = None
         self.relation = None
+        self.curved_tab_id = None
         self.relation_paths = []
         self.relation_status = ""
         self.related_surfaces = set()
@@ -88,6 +89,27 @@ class AuthorViewport(QOpenGLWidget):
         kind, identity = relation
         project = self.project
         try:
+            if kind == "curved":
+                record = project.curved_connectors[identity]
+                self.related_surfaces = {record.owner_surface_id, record.receiver_surface_id}
+                packet = project.curved_connector_geometry(identity)
+                self.relation_status = packet["message"]
+                if packet["status"] != "CERTIFIED_APPROXIMATE":
+                    self.update()
+                    return
+                for tab in packet["all_tabs"]:
+                    if self.curved_tab_id is not None and tab["id"] != self.curved_tab_id:
+                        continue
+                    display = tab["assembled_display"]
+                    if display is not None:
+                        self.relation_paths.append((display["hinge_world"], False, "#e17b00"))
+                        self.relation_paths.append((display["glue_patch_world"], True, "#a75800"))
+                self.relation_status = ("Kruhová chlopeň · APROXIMACE · "
+                                        "zobrazení lepicí plochy není fyzický důkaz")
+                if not self.relation_paths:
+                    self.relation_status = "Vybraná chlopeň je vypnutá nebo mimo aktuální počet."
+                self.update()
+                return
             if kind == "attachment":
                 record = project.attachments[identity]
                 self.related_surfaces = {record.source_surface_id, record.target_surface_id}
