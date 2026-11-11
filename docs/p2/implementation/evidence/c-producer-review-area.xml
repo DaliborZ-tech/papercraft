@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.901" timestamp="2026-11-11T16:40:28.152849+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007b-circular-producer-review-own" name="test_large_body_area_budget_excludes_tabs_and_atomic_bundle_is_retained" time="0.008"><failure message="archpapercraft.authoring.errors.ValidationError: Operaci nelze provést: LoftCommands.add_loft() missing 1 required keyword-only argument: 'correspondences'">self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x0000021ABFACED50&gt;
+args = ('d2e4dd70-0865-4783-a5cd-9e764894802b', '9910e270-392c-4340-b04c-b6d907b44344')
+kwargs = {}
+
+    @wraps(method)
+    def command(self, *args, **kwargs):
+        before = copy.deepcopy(self.__dict__)
+        try:
+&gt;           result = method(self, *args, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: LoftCommands.add_loft() missing 1 required keyword-only argument: 'correspondences'
+
+src\archpapercraft\authoring\commands.py:14: TypeError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1465/test_large_body_area_budget_ex0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000021ABFACC860&gt;
+
+    def test_large_body_area_budget_excludes_tabs_and_atomic_bundle_is_retained(tmp_path, monkeypatch):
+        # Independent numerical comparator: body=20000*pi, tabs=12*1.14. The fault
+        # is halfway BETWEEN body-only and body+tabs relative thresholds.
+        p = AuthorProject.new(scale=1)
+        a,b = circle(p,100),circle(p,100,100)
+&gt;       owner = p.add_loft(a,b)
+                ^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\pc007b-circular-producer-review-own.py:306: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x0000021ABFACED50&gt;
+args = ('d2e4dd70-0865-4783-a5cd-9e764894802b', '9910e270-392c-4340-b04c-b6d907b44344')
+kwargs = {}
+
+    @wraps(method)
+    def command(self, *args, **kwargs):
+        before = copy.deepcopy(self.__dict__)
+        try:
+            result = method(self, *args, **kwargs)
+            self.validate()
+            return result
+        except Exception as exc:
+            self.__dict__.clear()
+            self.__dict__.update(before)
+            if isinstance(
+                exc, (KeyError, TypeError, ValueError, AttributeError, IndexError, OverflowError)
+            ) and not isinstance(exc, ValidationError):
+&gt;               raise ValidationError(f"Operaci nelze provést: {exc}") from exc
+E               archpapercraft.authoring.errors.ValidationError: Operaci nelze provést: LoftCommands.add_loft() missing 1 required keyword-only argument: 'correspondences'
+
+src\archpapercraft\authoring\commands.py:23: ValidationError</failure></testcase></testsuite></testsuites>
