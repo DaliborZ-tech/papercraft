@@ -1,0 +1,30 @@
+{
+  "source_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
+  "before_sha": "10a21ac7effeb0a7aa6b928b1312e2aeb243fe3e",
+  "fixture_sha256": "31f2abf729f55429e1a4882e97995981972906c45c63b8e7c9eeb1dd6342bdf4",
+  "cut_count": 439,
+  "loft_status": "EXACT",
+  "part_stale": false,
+  "paper_stale": false,
+  "paper_contract": "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1",
+  "layout": [
+    {
+      "id": "628c3c39e74d35bcb826b6c5",
+      "code": "INVALID_CACHE",
+      "severity": "error",
+      "message": "Ulo\u017een\u00fd rozvin neodpov\u00edd\u00e1 zdrojov\u00e9 konstrukci. P\u0159epo\u010d\u00edtejte jej.",
+      "part_ids": [
+        "58343f0c-d4b8-44f1-ab09-048950ff444a"
+      ],
+      "joint_id": null,
+      "digest": "e9d6ec763dc4b0539ff4a63b023884c5dc6cb1ae7babaa4d934244669d3eaa78",
+      "acknowledged": false
+    }
+  ],
+  "snapshot": "BLOCKED: Export vy\u017eaduje opravu nebo potvrzen\u00ed: Ulo\u017een\u00fd rozvin neodpov\u00edd\u00e1 zdrojov\u00e9 konstrukci. P\u0159epo\u010d\u00edtejte jej.",
+  "after_commands": 5,
+  "after_issues": [],
+  "profile_unchanged": true,
+  "placement_unchanged": true,
+  "file_unchanged": true
+}
