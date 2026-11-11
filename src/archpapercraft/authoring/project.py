@@ -502,8 +502,54 @@ class AuthorProject(
         position_locked=None,
         rotation_locked=None,
     ):
+        self._apply_placement(
+            part_id,
+            page_id,
+            x_mm,
+            y_mm,
+            rotation_deg,
+            position_locked=position_locked,
+            rotation_locked=rotation_locked,
+        )
+        self._touch()
+
+    @atomic
+    def set_placements(self, updates):
+        """Apply explicit author choices in one rollback/validation boundary.
+
+        No packing, page choice, rotation or unlocking is inferred. Plain dict
+        keys are unique; non-plain mappings cannot override iteration to supply
+        duplicate identities. JSON duplicate keys are rejected by the reader.
+        """
+        if type(updates) is not dict:
+            raise ValidationError("Hromadné umístění potřebuje jednoznačný objekt změn dílů.")
+        allowed = {"page_id", "x_mm", "y_mm", "rotation_deg", "position_locked", "rotation_locked"}
+        changed = False
+        for part_id, values in updates.items():
+            if type(values) is not dict or set(values) - allowed:
+                raise ValidationError("Hromadné umístění obsahuje neznámá pole nebo typ změny.")
+            changed = self._apply_placement(part_id, **values) or changed
+        if changed:
+            self._touch()
+
+    def _apply_placement(
+        self,
+        part_id,
+        page_id=_UNSET,
+        x_mm=None,
+        y_mm=None,
+        rotation_deg=None,
+        *,
+        position_locked=None,
+        rotation_locked=None,
+    ):
+        if part_id not in self.parts or part_id not in self.placements:
+            raise ValidationError("Vybraný díl pro ruční umístění neexistuje.")
         placement = self.placements[part_id]
+        before = asdict(placement)
         new_page = placement.page_id if page_id is _UNSET else page_id
+        if new_page is not None and not any(page.id == new_page for page in self.pages):
+            raise ValidationError("Díl odkazuje na chybějící stránku.")
         x = placement.x_mm if x_mm is None else number(x_mm, "Poloha X")
         y = placement.y_mm if y_mm is None else number(y_mm, "Poloha Y")
         angle = placement.rotation_deg if rotation_deg is None else number(rotation_deg, "Úhel")
@@ -527,7 +573,7 @@ class AuthorProject(
             if not isinstance(rotation_locked, bool):
                 raise ValidationError("Neplatný zámek natočení.")
             placement.rotation_locked = rotation_locked
-        self._touch()
+        return before != asdict(placement)
 
     def _components(self):
         neighbors = {sid: set() for sid in self.surfaces}
