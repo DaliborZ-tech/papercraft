@@ -14,6 +14,7 @@ from types import SimpleNamespace
 import numpy as np
 
 from .commands import atomic
+from .curve_area import _sqrt
 from .curve_subdivision import (
     CurveSource,
     CurveSubdivisionHistory,
@@ -146,6 +147,40 @@ class ProfileSubdivisionCommands:
                     "REFERENCE_UNRESOLVED: upravené potomky nelze převést na jeden původní úsek. "
                     "Vyberte zdroj spoje znovu."
                 )
+            actual_chains = []
+            for use in result.uses:
+                active = profile.segment(use.piece_id)
+                a, b = [
+                    tuple(map(Fraction, profile.vertex(vid).point))
+                    for vid in (active.start_vertex_id, active.end_vertex_id)
+                ]
+                actual_chains.append(
+                    tuple(
+                        tuple(x + t * (y - x) for x, y in zip(a, b)) for t in (use.start, use.end)
+                    )
+                )
+            # A sub-budget position error does not license a false exact hinge.
+            # Check actual binary material, not only ideal history controls.
+            physical_ends = (
+                tuple(Fraction(float(v)) for v in first),
+                tuple(Fraction(float(v)) for v in last),
+            )
+            positions = []
+            extent = dx * dx + dy * dy
+            for chain in [*actual_chains, physical_ends]:
+                for x, y in chain:
+                    if (x - first[0]) * dy != (y - first[1]) * dx:
+                        raise ValidationError(
+                            "REFERENCE_UNRESOLVED: zaokrouhlené místo dělení nezachovává "
+                            "původní přímou hranu spoje. Vraťte dělení nebo zvolte jinou "
+                            "vzdálenost, například polovinu úseku."
+                        )
+            for chain in actual_chains:
+                positions.extend(
+                    ((x - first[0]) * dx + (y - first[1]) * dy) / extent for x, y in chain
+                )
+            if any(a > b for a, b in zip(positions, positions[1:])):
+                raise ValidationError("REFERENCE_UNRESOLVED: skutečný materiál mění směr hrany.")
             # Exact rational collinearity and monotonicity, not a visual fit.
             extent = dx * dx + dy * dy
             positions = []
@@ -194,18 +229,38 @@ class ProfileSubdivisionCommands:
             record["history"] = history.to_dict()
         for joint in self.joints.values():
             for sid, edge_id in ((joint.surface_a, joint.edge_a), (joint.surface_b, joint.edge_b)):
-                if self.surfaces[sid].profile_id == profile_id:
+                if profile_id in self.surfaces[sid].source_profile_ids():
                     try:
                         self.resolve_profile_edge(profile_id, edge_id)
                     except ValidationError:
                         joint.unresolved = True
         for attachment in self.attachments.values():
             surface = self.surfaces[attachment.source_surface_id]
-            if surface.profile_id == profile_id and attachment.source_edge_id:
+            if profile_id in surface.source_profile_ids() and attachment.source_edge_id:
                 try:
                     self.resolve_profile_edge(profile_id, attachment.source_edge_id)
                 except ValidationError:
                     attachment.unresolved = True
+
+    def _check_subdivision_physical_references(self, profile_id):
+        # A topology-only operation must not turn a healthy physical reference
+        # into a pretend straight edge. Reject numerical ambiguity atomically;
+        # explicit authored geometry edits use the separate unresolved path.
+        for joint in self.joints.values():
+            if not joint.unresolved:
+                for sid, edge_id in (
+                    (joint.surface_a, joint.edge_a),
+                    (joint.surface_b, joint.edge_b),
+                ):
+                    if profile_id in self.surfaces[sid].source_profile_ids():
+                        self.resolve_profile_edge(profile_id, edge_id)
+        for attachment in self.attachments.values():
+            if (
+                not attachment.unresolved
+                and attachment.source_edge_id
+                and profile_id in self.surfaces[attachment.source_surface_id].source_profile_ids()
+            ):
+                self.resolve_profile_edge(profile_id, attachment.source_edge_id)
 
     @atomic
     def split_profile_segment(self, profile_id, segment_id, parameter=0.5):
@@ -249,6 +304,7 @@ class ProfileSubdivisionCommands:
             }
         )
         record["points"][vertex_id] = [segment_id, str(Fraction(parameter))]
+        self._check_subdivision_physical_references(profile_id)
         profile.revision += 1
         self._touch(self._profile_surfaces(profile_id))
         return {"vertex_id": vertex_id, "segment_ids": [left_id, right_id]}
@@ -275,6 +331,7 @@ class ProfileSubdivisionCommands:
         del profile.vertices[index + 1 : index + len(ids)]
         record["history"] = changed.to_dict()
         record["edges"][merged_id] = [first, last]
+        self._check_subdivision_physical_references(profile_id)
         profile.revision += 1
         self._touch(self._profile_surfaces(profile_id))
         return merged_id
@@ -292,6 +349,8 @@ class ProfileSubdivisionCommands:
         }
         retired = set()
         seen_edges = set()
+        point_owners = {}
+        projection_by_profile = {}
         for root_id, record in self.profile_subdivisions.items():
             uuid(root_id)
             if not isinstance(record, dict) or set(record) != {"history", "edges", "points"}:
@@ -327,7 +386,11 @@ class ProfileSubdivisionCommands:
             # merely keeping the valid event list and swapping its vertex IDs.
             root_start, root_end = edges[root_id]
             expected_points = {root_start: [root_id, "0"], root_end: [root_id, "1"]}
-            for event in record["history"]["events"]:
+            owners = {
+                vertex_id: (history.profile_id, "ORIGINAL_SOURCE_VERTEX")
+                for vertex_id in (root_start, root_end)
+            }
+            for event_index, event in enumerate(record["history"]["events"]):
                 if event[0] == "split":
                     parent, left, right = edges[event[1]], edges[event[3]], edges[event[4]]
                     if left[0] != parent[0] or right[1] != parent[1] or left[1] != right[0]:
@@ -335,6 +398,7 @@ class ProfileSubdivisionCommands:
                     if left[1] in expected_points:
                         raise ValidationError("Nový řez nesmí znovu použít historický vrchol.")
                     expected_points[left[1]] = [event[1], event[2]]
+                    owners[left[1]] = (history.profile_id, root_id, event_index)
                 elif event[0] == "merge":
                     sources = [edges[item] for item in event[1]]
                     if any(a[1] != b[0] for a, b in zip(sources, sources[1:])) or (
@@ -356,6 +420,9 @@ class ProfileSubdivisionCommands:
                 SourcePointReference(
                     vertex_id, history.profile_id, reference[0], Fraction(reference[1])
                 )
+                if vertex_id in point_owners and point_owners[vertex_id] != owners[vertex_id]:
+                    raise ValidationError("Historické body různých zdrojů sdílejí stejné UUID.")
+                point_owners[vertex_id] = owners[vertex_id]
             for piece in history.pieces:
                 if piece.source.kind != "line":
                     raise ValidationError("Tento aplikační kontrakt dělení podporuje úsečky.")
@@ -374,5 +441,39 @@ class ProfileSubdivisionCommands:
                     )
                 ):
                     raise ValidationError("Aktivní geometrie neodpovídá zdroji dělení.")
+                exact = piece.controls_exact()
+                projected = [profile.vertex(vid).point for vid in edges[piece.id]]
+                errors = [
+                    sum(
+                        abs(Fraction(value) - coordinate)
+                        for value, coordinate in zip(actual, source)
+                    )
+                    for actual, source in zip(projected, (exact[0], exact[-1]))
+                ]
+                scale = Fraction(self.scale)
+                maximum, length_error, source_length = projection_by_profile.get(
+                    history.profile_id, (Fraction(0), Fraction(0), Fraction(0))
+                )
+                delta = tuple(b - a for a, b in zip(exact[0], exact[-1]))
+                projection_by_profile[history.profile_id] = (
+                    max(maximum, *(error * scale for error in errors)),
+                    length_error + sum(errors) * scale,
+                    source_length + _sqrt(sum(value * value for value in delta))[0] * scale,
+                )
             retired.update((set(edges) | set(points)) - active_ids)
+        if seen_edges & set(point_owners):
+            raise ValidationError("Historická hrana a materiálový bod nesmějí sdílet UUID.")
+        for maximum, length_error, source_length in projection_by_profile.values():
+            # For a LINE, convexity bounds the entire source→actual segment by
+            # endpoint errors. Length is 1-Lipschitz in each endpoint. SUM the
+            # complete profile's history errors, never grant each leaf .01mm.
+            # Historical segments supply a lower bound on the whole profile
+            # length; omitting unrelated curves makes this guard conservative.
+            length_budget = max(Fraction(1, 100), source_length / Fraction(10**6))
+            if maximum > Fraction(1, 100) or length_error > length_budget:
+                raise ValidationError(
+                    "SOURCE_PRECISION_UNRESOLVED: při těchto rozměrech nelze zachovat "
+                    "místo dělení v požadované přesnosti. Zvolte jinou vzdálenost, "
+                    "méně dělení nebo menší měřítko modelu."
+                )
         return retired

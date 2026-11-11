@@ -23,8 +23,16 @@ class SubdivisionDesktopSteps:
         body_id = p.surfaces[self.roles["AU13_wall"]].part_id
         base_id = p.surfaces[self.roles["AU13_base"]].part_id
         # Independent source lengths/areas, including the existing authored
-        # single trapezoid: b=90mm, depth=2mm, taper=.6 gives144mm2.
-        expected = {body_id: 4000+100*math.hypot(30, 35)+144, base_id: 13000}
+        # single trapezoid: authored full b=100mm, depth=2mm, taper=.6 ->160mm2.
+        # The previous run incorrectly assumed an unentered [.05,.95] trim.
+        attachment = next(a for a in p.attachments.values()
+                          if a.source_surface_id == self.roles["AU13_wall"])
+        connector = p.connectors[attachment.connector_id]
+        self.check(attachment.source_interval == [0, 1] and connector.width_mm == 2
+                   and connector.taper == .6 and connector.count == 1
+                   and connector.shape == "trapezoid" and not connector.tab_overrides,
+                   "Authored fixture differs from independently specified full100mm tab base")
+        expected = {body_id: 4000+100*math.hypot(30, 35)+160, base_id: 13000}
         source_areas = {}
         for part_id, target in expected.items():
             group = next(g for svg in svgs for g in ET.parse(svg).getroot().iter()

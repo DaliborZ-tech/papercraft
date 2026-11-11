@@ -238,3 +238,89 @@ def test_existing_tab_bend_uses_whole_semantic_hinge_after_source_split(known):
     assert project._connector_geometry(connector_id) == contact
     assert project.connectors[connector_id] == original
     assert project.attachments[aid].source_edge_id not in {s.id for s in profile.segments}
+
+
+def test_large_coordinates_reject_out_of_budget_projection_atomically():
+    project = AuthorProject.new(scale=1)
+    pid = project.add_profile([[1e16, 0], [1e16 + 4, 3]], closed=False)
+    before = project.to_dict()
+    with pytest.raises(ValidationError, match="SOURCE_PRECISION_UNRESOLVED"):
+        project.split_profile_segment(pid, project.profiles[pid].segments[0].id, Fraction(1, 4))
+    assert project.to_dict() == before
+
+
+def test_subbudget_rounding_is_not_a_false_exact_physical_hinge():
+    project = AuthorProject.new(scale=1 / 1024)
+    pid = project.add_profile([[1e16, 0], [1e16 + 4, 3]], closed=False)
+    original = project.profiles[pid].segments[0].id
+    project.split_profile_segment(pid, original, Fraction(1, 4))
+    with pytest.raises(ValidationError, match="REFERENCE_UNRESOLVED.*zaokrouhlen"):
+        project.resolve_profile_edge(pid, original)
+    # The semantic paper axis is a coordinate convention, not a hinge proof.
+    _, points = project.resolve_profile_edge(pid, original, axis=True)
+    np.testing.assert_array_equal(points, [[1e16, 0], [1e16 + 4, 3]])
+
+
+def test_global_projection_length_budget_is_not_reissued_to_each_history():
+    project = AuthorProject.new(scale=1 / 1024)
+    points = [point for i in range(6) for point in ([1e16 + 8 * i, 0], [1e16 + 8 * i + 4, 3])]
+    pid = project.add_profile(points, closed=False)
+    originals = [edge.id for edge in project.profiles[pid].segments[::2]]
+    for edge_id in originals[:5]:
+        project.split_profile_segment(pid, edge_id, Fraction(1, 4))
+    before = project.to_dict()
+    # Every individual point error=1/1024 paper mm; the whole-profile length
+    # deficit bound6*2/1024 exceeds.01, while5*2/1024 remains below it.
+    with pytest.raises(ValidationError, match="SOURCE_PRECISION_UNRESOLVED"):
+        project.split_profile_segment(pid, originals[5], Fraction(1, 4))
+    assert project.to_dict() == before
+
+
+def test_connected_oblique_rounding_rejects_split_but_exact_midpoint_keeps_join():
+    project = AuthorProject.new(scale=1)
+    first = project.add_profile([[0, 0], [120, 40], [100, 100], [-20, 60]])
+    second = project.add_profile([[0, 0], [-20, -60], [100, -20], [120, 40]])
+    a, b = project.add_surface(first), project.add_surface(second)
+    edge = project.profiles[first].segments[0].id
+    joint = project.connect_edges(a, edge, b, project.profiles[second].segments[3].id)
+    before = project.to_dict()
+    with pytest.raises(ValidationError, match="REFERENCE_UNRESOLVED.*zaokrouhlen"):
+        project.split_profile_segment(first, edge, Fraction(1, 3))
+    assert project.to_dict() == before
+    project.split_profile_segment(first, edge, Fraction(1, 2))
+    assert not project.joints[joint].unresolved
+    project.recompute()
+
+
+@pytest.mark.parametrize("alias_kind", ["vertex", "edge"])
+def test_retired_points_cannot_alias_another_profile_or_historical_edge(alias_kind):
+    project, wall, roof, _, _ = two_panels(scale=1)
+    records = []
+    for sid in (wall, roof):
+        profile = project.profiles[project.surfaces[sid].profile_id]
+        root = profile.segments[0].id
+        split = project.split_profile_segment(profile.id, root)
+        project.merge_profile_segments(profile.id, split["segment_ids"])
+        project.recompute()
+        records.append((root, split))
+    raw = project.to_dict()
+    alias = records[0][1]["vertex_id"] if alias_kind == "vertex" else records[0][0]
+    old = records[1][1]["vertex_id"]
+    record = raw["profile_subdivisions"][records[1][0]]
+    record["points"][alias] = record["points"].pop(old)
+    for ends in record["edges"].values():
+        ends[:] = [alias if value == old else value for value in ends]
+    with pytest.raises(ProjectFormatError):
+        AuthorProject.from_dict(raw)
+
+
+@pytest.mark.parametrize("parameter", ["1/0", "nan", "inf"])
+def test_malformed_history_fraction_has_typed_format_failure(parameter):
+    project, wall, _, _, _ = two_panels()
+    profile = project.profiles[project.surfaces[wall].profile_id]
+    root = profile.segments[0].id
+    project.split_profile_segment(profile.id, root)
+    raw = project.to_dict()
+    raw["profile_subdivisions"][root]["history"]["events"][0][2] = parameter
+    with pytest.raises(ProjectFormatError):
+        AuthorProject.from_dict(raw)

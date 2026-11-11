@@ -11,11 +11,19 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 
-from .curve_area import _add, _mul, _pi, _point, _scalar
+from .curve_area import _add, _mul, _pi, _point
+from .curve_area import _scalar as _area_scalar
 from .curves import Curve
 from .loft_area import _sin_cos
 
 _MAX_EVENTS = 1024
+
+
+def _scalar(value):
+    try:
+        return _area_scalar(value)
+    except ArithmeticError as exc:
+        raise ValueError("A source coordinate or parameter needs a valid finite rational") from exc
 
 
 def _id(value):
