@@ -2798,14 +2798,14 @@
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
     "wip_source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
     "wip_branch": "revival/p2-segmentation-gothic",
-    "next_required_technical_work": "Publish approved D/B3 coherent increment by safe master integration and ordinary push; continue C actual UI/save/reopen/manual layout/SVG/PDF, live split/merge provenance and mixed anchors, PC009 and historic PC010. B is already published. Missing novice evidence remains0/NOT_RUN.",
+    "next_required_technical_work": "Complete independently reviewed C composition/source-transfer/domain/UI and actual cylinder/cone/near-limit vectors; live split/merge/trim provenance and mixed anchors, PC009 and historic PC010. B and D/B3 are published. Missing novice evidence remains0/NOT_RUN.",
     "resumed_on": "2026-11-11",
     "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "D/B3 independently approved on e782 and metadata89a14c5;1370 regressions,2 actual Windows and4 Inkscape pages. Publication next. C body/connector/source-transfer and live AU13 in isolated branches; whole P2 remains IN_PROGRESS.",
+    "active_work": "Published D/B3 at1c71bee with local/remote SHA equal. Continue C body+connector+source-transfer/composition and live AU13/mixed-part proof, then PC009/PC010. P2 IN_PROGRESS; actual novice0/NOT_RUN.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2929,7 +2929,7 @@
       "remote_verification": "docs/p2/implementation/evidence/pc007a-loft-master-push-7ba8785.json",
       "method": "fast-forward and normal push; actual ls-remote SHA equals local master"
     },
-    "wip_location": "C:/Users/dalib/projects/papercraft-segmentation-gothic (isolated, not published)",
+    "wip_location": "C and live AU13 in isolated authoring branches; D/B3 is now published",
     "candidate_D_delivery": {
       "code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
       "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
@@ -2941,6 +2941,14 @@
       "review_report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
       "review_commit": "badf33db0472e71220cd63b2005ed7774567f15d",
       "reviewed_metadata_sha": "89a14c57bab917d03ec3f63e6ada1ce04a89d0bb"
+    },
+    "published_D_increment": {
+      "published_sha": "1c71bee3ed4431720ab6e6b557b0ebae04ebe304",
+      "code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+      "review": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
+      "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+      "remote_verification": "docs/p2/implementation/evidence/pc008-master-push-1c71bee.json",
+      "status": "PUBLISHED_SCOPED_TECHNICAL_INCREMENT"
     }
   }
 }

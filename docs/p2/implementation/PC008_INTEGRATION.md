@@ -22,6 +22,13 @@ kontrole mechanického uzavření je plánovaný běžný fast-forward a push ma
 Skutečný publikovaný SHA a následné porovnání ls-remote budou doloženy zvlášť;
 tento předpublikační záznam samotný netvrdí provedený push.
 
+**Následně skutečně provedeno:** fast-forward z4127299 na
+**1c71bee3ed4431720ab6e6b557b0ebae04ebe304**, běžný `git push origin master`,
+poté skutečné `git ls-remote origin refs/heads/master`. Lokální a vzdálené SHA
+jsou shodné; [uložená kontrola](evidence/pc008-master-push-1c71bee.json).
+Konflikty nevznikly a `src/tools/tests/pyproject` se proti ověřenému CODEe782
+nezměnily. [Vzdálený commit](https://github.com/DaliborZ-tech/papercraft/commit/1c71bee3ed4431720ab6e6b557b0ebae04ebe304).
+
 Celé PC-008 i P2 jsou IN_PROGRESS. Live AU13, mixed AU14, C, PC-009, závěrečný
 historický PC-010, AC-US08 (**0 / NOT_RUN**) a fyzické P3 zůstávají otevřené.
 Integrace není release ani produktové přijetí dokončeného P2. Kontraktv1.2
