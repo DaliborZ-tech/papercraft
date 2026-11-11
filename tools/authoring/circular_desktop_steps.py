@@ -151,7 +151,8 @@ class CircularDesktopSteps:
         self.finish(name)
 
     def audit_circular_vectors(self, directory, svgs, pdf):
-        from vector_curve_oracle import pdf_stroked_areas, svg_signed_area
+        from circular_svg_oracle import svg_signed_area
+        from vector_curve_oracle import pdf_stroked_areas
 
         data = self.circular_observation
         record = self.w.project.curved_connectors[data["connector_id"]]
@@ -169,7 +170,7 @@ class CircularDesktopSteps:
                 if group.get("data-part-id") != own:
                     continue
                 by_role = {child.get("data-role"): child for child in group}
-                loops = [abs(svg_signed_area(p.attrib["d"])) for p in by_role["CUT"]]
+                loops = [float(abs(svg_signed_area(p.attrib["d"]))) for p in by_role["CUT"]]
                 self.check(len(loops) == 1, "C CUT lost its single material union")
                 self.check(len(by_role["TABS"]) == 11, "C output retained an omitted tab")
                 svg_area = self.near(loops[0], expected, "C source/SVG material area",
