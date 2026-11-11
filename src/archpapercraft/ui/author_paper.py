@@ -167,6 +167,11 @@ class AuthorPartItem(QGraphicsObject):
             for edge in self.geometry.get("edges", []):
                 if (edge["surface_id"], edge["edge_id"]) == self.view.selected_edge:
                     painter.drawLine(QPointF(*edge["start"]), QPointF(*edge["end"]))
+        overlay = self.view.curved_overlay
+        if overlay and overlay[0] == self.part.id and not self.part.stale:
+            painter.setPen(QPen(QColor("#e47700"), 0.8))
+            painter.setBrush(Qt.BrushStyle.NoBrush)
+            painter.drawPath(_path({"commands": overlay[1], "closed": True}))
         painter.setPen(QPen(QColor("#287568"), 0.25))
         painter.drawLine(QPointF(-1.4, 0), QPointF(1.4, 0))
         painter.drawLine(QPointF(0, -1.4), QPointF(0, 1.4))
@@ -270,6 +275,7 @@ class AuthorPaperView(QGraphicsView):
         self.project = None
         self.part_items, self.page_origins = {}, {}
         self.selected_part, self.selected_edge = None, None
+        self.curved_overlay = None
         self.tray_origin = QPointF(500, 0)
         self.issue_overlays = []
         self._initialized, self._panning = False, False
@@ -361,6 +367,11 @@ class AuthorPaperView(QGraphicsView):
         self.selected_edge = tuple(edge) if edge else None
         for identity, item in self.part_items.items():
             item.setSelected(identity == part_id)
+            item.update()
+
+    def select_curved_tab(self, part_id=None, native_loop=None):
+        self.curved_overlay = (part_id, native_loop) if part_id and native_loop else None
+        for item in self.part_items.values():
             item.update()
 
     def focus_part(self, part_id):
