@@ -1,0 +1,45 @@
+{
+  "source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+  "metadata_sha": "89a14c57bab917d03ec3f63e6ada1ce04a89d0bb",
+  "normative_acceptance_unchanged": true,
+  "mechanical_metadata_delta": [
+    "05_WORK_QUEUE.json"
+  ],
+  "labels": [
+    {
+      "folder": "pc008-D-gothic-inkscape-e7826dd-page1-run01",
+      "generated_labels": 48,
+      "positive_label_bbox_overlaps": 0,
+      "max_actual_label_width_mm": 4.15528125,
+      "evidence": "Actual Inkscape query-all of untouched original SVG; 96px/in physical conversion"
+    },
+    {
+      "folder": "pc008-D-gothic-inkscape-e7826dd-page2-run01",
+      "generated_labels": 48,
+      "positive_label_bbox_overlaps": 0,
+      "max_actual_label_width_mm": 4.15528125,
+      "evidence": "Actual Inkscape query-all of untouched original SVG; 96px/in physical conversion"
+    },
+    {
+      "folder": "pc008-D-line-inkscape-e7826dd-page1-run01",
+      "generated_labels": 32,
+      "positive_label_bbox_overlaps": 0,
+      "max_actual_label_width_mm": 4.15528125,
+      "evidence": "Actual Inkscape query-all of untouched original SVG; 96px/in physical conversion"
+    },
+    {
+      "folder": "pc008-D-line-inkscape-e7826dd-page2-run01",
+      "generated_labels": 32,
+      "positive_label_bbox_overlaps": 0,
+      "max_actual_label_width_mm": 4.15528125,
+      "evidence": "Actual Inkscape query-all of untouched original SVG; 96px/in physical conversion"
+    }
+  ],
+  "DU02": "CLOSED_IN_ACTUAL_LINE_AND_GOTHIC_DEFAULT_LAYOUT_VECTOR_SCOPE",
+  "skills": {
+    "SK013": "APPROVED_TEXT_SCOPE; NEXT_USE_NOT_RUN",
+    "SK014": "APPROVED_LABEL_ADVICE_AND_CURRENT_REPAIR_SCOPE; OTHER_TYPES_PENDING",
+    "SK011_SO01": "APPROVED_BODY_ONLY_ADVICE_AND_BOUNDED_D_TRANSFER; COMPARATOR_ONLY_NEGATIVE_NOT_DOMAIN_FALSE_SAFE"
+  },
+  "limitations": "No novice/physical or whole PC008/P2 acceptance. Pending independent status fields may be truthfully updated to this review only."
+}

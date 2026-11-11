@@ -1,0 +1,109 @@
+{
+  "source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+  "metadata_sha": "89a14c57bab917d03ec3f63e6ada1ce04a89d0bb",
+  "source_equals_metadata_runtime": true,
+  "native": {
+    "line": {
+      "elapsed": 39.109,
+      "source_hashes": 115,
+      "artifact_hashes": 31,
+      "source_surfaces": 65,
+      "printed_parts": 64,
+      "triangles": 64,
+      "paired_seams": 84,
+      "page_parts": [
+        32,
+        32
+      ],
+      "max_svg_area_error": 1.1723955140041653e-13,
+      "max_pdf_area_error": 1.0882759994501612e-05,
+      "walls": [],
+      "new_user": "NOT_RUN",
+      "physical_build": "NOT_RUN"
+    },
+    "gothic": {
+      "elapsed": 99.313,
+      "source_hashes": 115,
+      "artifact_hashes": 30,
+      "source_surfaces": 99,
+      "printed_parts": 98,
+      "triangles": 96,
+      "paired_seams": 96,
+      "page_parts": [
+        49,
+        49
+      ],
+      "max_svg_area_error": 1.0658141036401503e-13,
+      "max_pdf_area_error": 6.519960003004144e-06,
+      "walls": [
+        {
+          "part_id": "8e8e29db-0091-4107-bdd5-0f798a56c5b8",
+          "hole_profile_id": "caedaaf5-30ca-45ce-a317-b2fce848c977",
+          "source_net_area": 11132.844500005764,
+          "actual_svg_net_area": 11132.844500005764,
+          "actual_pdf_net_area": 11132.847299388563,
+          "hole_area": 867.155499994236,
+          "actual_pdf_hole_area": 867.1527006114402
+        },
+        {
+          "part_id": "ce4b3017-4661-4cdd-b3c9-050754208bb4",
+          "hole_profile_id": "0552bc9b-8039-418b-b4e6-f29e1e599dc2",
+          "source_net_area": 11341.750329378128,
+          "actual_svg_net_area": 11341.750329378128,
+          "actual_pdf_net_area": 11341.752828288023,
+          "hole_area": 658.2496706218716,
+          "actual_pdf_hole_area": 658.2471717119802
+        }
+      ],
+      "new_user": "NOT_RUN",
+      "physical_build": "NOT_RUN"
+    }
+  },
+  "editors": [
+    {
+      "folder": "pc008-D-gothic-inkscape-e7826dd-page1-run01",
+      "seconds": 19.203,
+      "artifact_hashes": 4,
+      "native_arc_commands": 2,
+      "max_local_drift": 0.0,
+      "unicode_text": "Žluťoučký – vlastní díl",
+      "scope": "early actual author SVG editing; full AU17/DPI remains PC009"
+    },
+    {
+      "folder": "pc008-D-gothic-inkscape-e7826dd-page2-run01",
+      "seconds": 15.703,
+      "artifact_hashes": 4,
+      "native_arc_commands": 2,
+      "max_local_drift": 4.58066e-08,
+      "unicode_text": "Žluťoučký – vlastní díl",
+      "scope": "early actual author SVG editing; full AU17/DPI remains PC009"
+    },
+    {
+      "folder": "pc008-D-line-inkscape-e7826dd-page1-run01",
+      "seconds": 17.641,
+      "artifact_hashes": 4,
+      "native_arc_commands": 0,
+      "max_local_drift": 1.174518e-08,
+      "unicode_text": "Žluťoučký – vlastní díl",
+      "scope": "early actual author SVG editing; full AU17/DPI remains PC009"
+    },
+    {
+      "folder": "pc008-D-line-inkscape-e7826dd-page2-run01",
+      "seconds": 15.5,
+      "artifact_hashes": 4,
+      "native_arc_commands": 0,
+      "max_local_drift": 0.0,
+      "unicode_text": "Žluťoučký – vlastní díl",
+      "scope": "early actual author SVG editing; full AU17/DPI remains PC009"
+    }
+  ],
+  "suite": {
+    "tests": 1370,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "seconds": 315.601,
+    "sha256": "cba7d42bc6ecdaaf9695e424ed5b03f47d81f9b419c194efbf546497f823db22"
+  },
+  "status": "PASS_FINAL_D_B3_TECHNICAL_INCREMENT_AUDIT_NOT_WHOLE_PC008_OR_P2_ACCEPTANCE"
+}

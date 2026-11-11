@@ -1,0 +1,13 @@
+{
+  "source_sha": "d762fc6d2c543691b8918128b6b0d3e1da59313e",
+  "actual_module": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-integration-review-931dvl4m\\src\\archpapercraft\\authoring\\segmented_surface.py",
+  "source_fixture_sha256": "c0de8bb0852cfe5460c125888df7302d7577e32e21a753d2a01efce56fbef93a",
+  "checks": {
+    "curved_96_real_candidate_and_caller_mutation_does_not_poison_cache": "PASS",
+    "same_UUID_no_revision_actual_plane_change_invalidates_source_and_token": "PASS",
+    "actual_child_profile_poison_is_UNRESOLVED": "PASS",
+    "closed_profile_rejects_external_factory_field": "PASS"
+  },
+  "changed_source_candidate_status": "APPROXIMATE",
+  "scope": "INTEGRATED_CURVED_DOMAIN_BINDING_NOT_REPEAT_OF_CURVED_MATH_CERTIFICATION"
+}
