@@ -1,0 +1,31 @@
+{
+  "source_sha": "e1948cfd11c095fd2aaf5643edd2403630ea4747",
+  "archive_sha256": "8d1873a12409039bd26cee87f101c56da0f3ad8d49ac574f8d434fb918e59847",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-export-job-review-spoafxdk",
+  "actual_imports": {
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-export-job-review-spoafxdk\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "dab518326945c503c3fbcab8cf9193e444c12209464e5a2d1dd342d454686326"
+    },
+    "archpapercraft.ui.author_export_job": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-export-job-review-spoafxdk\\src\\archpapercraft\\ui\\author_export_job.py",
+      "lf_sha256": "9f8cce34a0735b2f1ef394ad77338a473e056974827a1f73492fda7b2f4f53aa"
+    },
+    "archpapercraft.exporter.author_export": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-export-job-review-spoafxdk\\src\\archpapercraft\\exporter\\author_export.py",
+      "lf_sha256": "0dab38855c6488e7e21ed91228bd3baca360c4089b220528128d9a3aec539289"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 81%]\n................                                                         [100%]\n88 passed in 6.62s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": ".............                                                            [100%]\n13 passed in 3.01s\n",
+      "stderr": ""
+    }
+  }
+}
