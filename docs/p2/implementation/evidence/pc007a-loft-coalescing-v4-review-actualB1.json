@@ -1,0 +1,46 @@
+{
+  "source_sha": "7ee42b397e0491bff87a0f76b7c07850ef5b56c3",
+  "module": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-coalescing-v4-7ee-rft617we\\src\\archpapercraft\\authoring\\loft_curve_compaction.py",
+  "fixture": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-73f3437-run01\\loft-B1\\loft-B1.apcraft",
+  "fixture_sha256": "5e183f24424eebc0ce33c9fddf99e37cee7af8ac9d596c3bba1b4fac6dcd3f35",
+  "old_commands": 69,
+  "new_commands": 21,
+  "source_layout_frame_identity_file_unchanged": true,
+  "current_poison_rejected": true,
+  "save_reopen": true,
+  "actual_native_green_area_exact": "9734164590219087871876847276546145802153448619773/7136238463529799405291429847247475681913733120",
+  "actual_native_green_area_mm2": 1364.046989175902,
+  "independent_source_area_interval_mm2": [
+    1364.0463936191807,
+    1364.0463936223243
+  ],
+  "source_to_native_area_error_upper_mm2": 0.0005955567213455688,
+  "coalescing": {
+    "status": "CERTIFIED_SAME_U_AND_GLOBAL_LENGTH",
+    "candidates": 30,
+    "comparisons": 11453,
+    "max_candidates": 65536,
+    "max_comparisons": 262144,
+    "effective_position_budget_paper_mm": 0.001,
+    "effective_global_side_length_budget_paper_mm": 0.006,
+    "total_position_budget_paper_mm": 0.008,
+    "total_global_side_length_budget_paper_mm": 0.008,
+    "position_bound_exact": "5965203967148307/36893488147419103232",
+    "position_bound_paper_mm": 0.00016168717751253363,
+    "length_bound_exact": {
+      "first": "35123747020662086555102200677095/20769187434139310514121985316880384",
+      "second": "21074248244453374043879616190653/10384593717069655257060992658440192"
+    },
+    "length_bound_paper_mm": {
+      "first": 0.001691146903654377,
+      "second": 0.002029376287472145
+    },
+    "input_segments": 9046,
+    "output_segments": 18,
+    "topology_area_editor": "CALLER_MUST_VERIFY_SEPARATELY"
+  },
+  "total_position_bound_mm": 0.0004685390077743519,
+  "total_global_side_length_bound_mm": 0.0035289474937882856,
+  "seconds": 15.415844999952242,
+  "native_and_editor": "NOT_RUN_BY_THIS_REVIEWER"
+}

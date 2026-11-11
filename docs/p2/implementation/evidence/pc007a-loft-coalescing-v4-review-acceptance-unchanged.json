@@ -1,0 +1,10 @@
+{
+  "base_sha": "730cb28f2e3f221e03e7df174bf194ff577d6c3c",
+  "source_sha": "7ee42b397e0491bff87a0f76b7c07850ef5b56c3",
+  "unchanged": {
+    "tools/authoring/editor_probe.py": "4311d81168b1db67b990aad18e4f43f7845aaa23c8b15d53dbdce0d2671a792c",
+    "docs/p2/v1.2/ACCEPTANCE.md": "93c4f342a4939c474b567e1e41551ffdcd340616556bd821e902c93aeb241a0f",
+    "04_ACCEPTANCE_AND_VERIFICATION.md": "6eb0bfdf809838edf7926218b4f318714ee9bf93b1bb4f639e965c066e68c809"
+  },
+  "ruff_live_text_equal_archive_after_EOL_only": true
+}
