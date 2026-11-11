@@ -15,6 +15,7 @@ from archpapercraft.authoring import (
     ValidationError,
     load_project,
 )
+from archpapercraft.authoring.editing import rename_author_entities
 from archpapercraft.authoring.segmented_surface import (
     SegmentationError,
     _digest,
@@ -107,6 +108,24 @@ def test_required_d_preview_is_detached_and_original_nonexact_target_survives():
     preview["source_binding"]["profiles"][0]["vertices"][0]["point"][0] = 999
     assert p.profiles[a].points[0] == [0.0, 0.0]
     assert p.profiles[b].points[1] == [40.0, 20.0]
+
+
+def test_generated_parts_have_short_unique_print_names_and_reopen_preserves_author_names(
+    generation_state,
+):
+    p, _, _, _, vid = restored(generation_state)
+    records = p.segmented_variants[vid].triangle_bindings
+    names = [p.parts[r["part_id"]].name for r in records]
+    assert len(names) == len(set(names)) == 64
+    assert all(name == f"P{p.parts[r['part_id']].number}" for name, r in zip(names, records))
+    assert all(p.parts[r["part_id"]].labels[0]["text"] == name for r, name in zip(records, names))
+    # Existing/custom authored names are not silently shortened on load.
+    pid = records[0]["part_id"]
+    rename_author_entities(p, part_id=pid, part_name="Owner custom name")
+    p.recompute([pid])
+    reopened = AuthorProject.from_dict(p.to_dict())
+    assert reopened.parts[pid].name == "Owner custom name"
+    assert reopened.parts[pid].labels[0]["text"] == "Owner custom name"
 
 
 def test_generation_has_unique_planar_material_and_immutable_uv_edge_mapping(generation_state):

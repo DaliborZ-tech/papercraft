@@ -684,7 +684,10 @@ class AuthorMainWindow(QMainWindow):
                 parents[variant.target_surface_id].addChild(group)
                 for record in variant.triangle_bindings:
                     sid = record["surface_id"]
-                    item = QTreeWidgetItem([self.project.surfaces[sid].name])
+                    item = QTreeWidgetItem([
+                        f"{self.project.parts[record['part_id']].name} · "
+                        f"{self.project.surfaces[sid].name}"
+                    ])
                     item.setData(0, Qt.ItemDataRole.UserRole, sid)
                     group.addChild(item)
                     if sid == self.selected_surface:

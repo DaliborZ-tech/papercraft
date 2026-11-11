@@ -595,7 +595,7 @@ class SegmentedCommands:
             self.next_part_number += 1
             part = MaterialPart(
                 pid,
-                f"P{number} · {child.name}",
+                f"P{number}",
                 [sid],
                 PaperFrame(sid, vertices[0].id, segments[0].id),
                 number=number,
