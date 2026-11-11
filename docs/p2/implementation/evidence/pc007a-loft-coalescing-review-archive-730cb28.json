@@ -1,0 +1,27 @@
+{
+  "source_sha": "730cb28f2e3f221e03e7df174bf194ff577d6c3c",
+  "archive_sha256": "6a0ed6a5f8aa967bb5cbead773432b5f768657311ef4f711e1c4d170972c44ea",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-coalescing-review-lh_wq9x7",
+  "actual_imports": {
+    "archpapercraft.authoring.loft_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-coalescing-review-lh_wq9x7\\src\\archpapercraft\\authoring\\loft_surface.py",
+      "lf_sha256": "748b3ea4a1616c4afe3f2f6e95a21c4a2976d84c9fb4a210176658c95699bbc1"
+    },
+    "archpapercraft.authoring.loft_curve_compaction": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-loft-coalescing-review-lh_wq9x7\\src\\archpapercraft\\authoring\\loft_curve_compaction.py",
+      "lf_sha256": "7178a8d4dc41b08981352263ac74d1fd8d7b6cb4bf1a4068294f295a36871610"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 57%]\n......................................................                   [100%]\n126 passed in 39.90s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": ".............                                                            [100%]\n13 passed in 0.79s\n",
+      "stderr": ""
+    }
+  }
+}
