@@ -1,0 +1,14 @@
+{
+  "loft_surface": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-perf-7a4-8d08fb5x\\src\\archpapercraft\\authoring\\loft_surface.py",
+    "sha256": "f6f75d5eb764d17bc0b7911368bbad9b2a845e657469d617f876ef2c5dd09586"
+  },
+  "paper": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-perf-7a4-8d08fb5x\\src\\archpapercraft\\authoring\\paper.py",
+    "sha256": "010bbb2b134c4a18fe2e7e6997ecd90c3764464e1f9c85a56ad92a227753fe32"
+  },
+  "project": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-perf-7a4-8d08fb5x\\src\\archpapercraft\\authoring\\project.py",
+    "sha256": "27c6b4396fd460b2f1d2b09c1df5988e24d3fa823034a8795be622d9fa920951"
+  }
+}

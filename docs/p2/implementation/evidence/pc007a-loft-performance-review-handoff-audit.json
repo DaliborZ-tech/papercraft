@@ -1,0 +1,16 @@
+{
+  "before": {
+    "committed_raw_sha256": "7e85153cc56e9e33777ddc6a5088d7ab830a6d2cc17ace7d6a855ec53908c094",
+    "source_sha": "10a21ac7effeb0a7aa6b928b1312e2aeb243fe3e",
+    "runtime_bytes_match_archive": true,
+    "fixture_bytes_match": true,
+    "scope": "BACKEND_AND_OFFSCREEN_QT_LATENCY_NOT_NATIVE_OR_NOVICE_PROOF"
+  },
+  "after": {
+    "committed_raw_sha256": "182842acae7f486b28a5127c1f1412d8915cf088b6749abd191b5e56cbfd4225",
+    "source_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
+    "runtime_bytes_match_archive": true,
+    "fixture_bytes_match": true,
+    "scope": "BACKEND_AND_OFFSCREEN_QT_LATENCY_NOT_NATIVE_OR_NOVICE_PROOF"
+  }
+}

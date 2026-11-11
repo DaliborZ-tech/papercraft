@@ -1,0 +1,26 @@
+{
+  "source_sha": "7a4f782e084ef595b2507fe825514b0100f969e5",
+  "archive": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-perf-7a4-8d08fb5x",
+  "source_files": {
+    "src/archpapercraft/authoring/loft_surface.py": {
+      "runtime_sha256": "f6f75d5eb764d17bc0b7911368bbad9b2a845e657469d617f876ef2c5dd09586",
+      "git_bytes_sha256": "6fc79986d309ac958d4f7143245032b575f868781addd6d38902d7df0aa43f32",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/project.py": {
+      "runtime_sha256": "27c6b4396fd460b2f1d2b09c1df5988e24d3fa823034a8795be622d9fa920951",
+      "git_bytes_sha256": "c3a7238edd7e9d25ed4f7dc19635a19ab4ddad07bf97f5f3e3593eb09508bc8e",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/paper.py": {
+      "runtime_sha256": "010bbb2b134c4a18fe2e7e6997ecd90c3764464e1f9c85a56ad92a227753fe32",
+      "git_bytes_sha256": "e75ad82e46d790e8bfde56ae79b2629be4d148ba5c263d44d2170b27c6ef0839",
+      "eol_only": true
+    },
+    "tests/authoring/test_loft_performance.py": {
+      "runtime_sha256": "463389b27d4690872734235477fc3a409331ab28680d263f66c07d96ee234b3c",
+      "git_bytes_sha256": "771c650b4b19c90ef8e3cfbe9dbf8f33178ba918ffe36bbc7015e410ff286b6b",
+      "eol_only": true
+    }
+  }
+}

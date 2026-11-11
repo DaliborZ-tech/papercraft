@@ -1,0 +1,16 @@
+{
+  "source_sha": "10a21ac7effeb0a7aa6b928b1312e2aeb243fe3e",
+  "module": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007a-review-loft-perf-before-dylrwy_o\\src\\archpapercraft\\authoring\\loft_surface.py",
+  "module_sha256": "7cedded96eeaec1a3e1500154f4a9bd99f4cd164370cf0a5dcbd57560b03b728",
+  "fixture": "C:\\Users\\dalib\\projects\\papercraft-loft-integration\\docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a9d155a-run01\\FAIL-partial-observed-state.json",
+  "fixture_sha256": "1314bef3b469c02361c785ab87a046fb85fb24b41fb0fcb40a7603ccb8677e00",
+  "scope": "ONE_LOCAL_BACKEND_TIMING_RUN; NOT_NATIVE_UI_OR_NOVICE_OR_STATISTICAL_PASS",
+  "operations": {
+    "cold_load": 9.902297700056806,
+    "warm_world_1": 1.6478779001627117,
+    "warm_world_2": 1.4806276999879628,
+    "warm_validate": 2.4443959000054747
+  },
+  "status": "EXACT",
+  "fixture_unchanged": true
+}
