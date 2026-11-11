@@ -505,16 +505,17 @@
         "broader_transfer": "PENDING_NEXT_USE"
       },
       "d_transfer_2026_11_11": {
-        "status": "DIRECT_SOURCE_COMPARATOR_PRODUCT_TRANSFER_INDEPENDENTLY_REVIEWED; actual final D artifact review pending",
+        "status": "DIRECT_SOURCE_COMPARATOR_AND_FINAL_ACTUAL_D_ARTIFACTS_INDEPENDENTLY_REVIEWED_IN_SCOPE",
         "source_sha": "5ad3cc0ac53ab68a09d1ff7ccd39fe90ade7f7c4",
         "report": "docs/p2/implementation/PC008_SEGMENTED_OUTPUT_REVIEW.md",
-        "limitations": "Initial268 direct chain transfer missed body-only normalization (SO01); only5ad fixes it. Counterexample is numeric comparator, not an end-to-end domain/bend false-SAFE. Broader efficacy remains pending."
+        "limitations": "Initial268 direct chain transfer missed body-only normalization (SO01); only5ad fixes it. Counterexample is numeric comparator, not an end-to-end domain/bend false-SAFE. Broader efficacy remains pending.",
+        "integration_report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md"
       },
       "additional_advice": {
         "reason": "SO01 body-plus-tab relative normalization violated original body-only formula",
         "skill_change": "Normalize original relative area budget on body alone while checking actual full material union",
         "example": "body20000/TAB2000/delta0.021 must fail original0.020 budget, not pass0.022",
-        "text_review": "PENDING_CURRENT_METADATA_REVIEW",
+        "text_review": "APPROVED_IN_SCOPE_AT_89a14c5_BY_COMMANDS_REVIEW; report PC008_INTEGRATION_REVIEW.md",
         "effectiveness": "PENDING_NEXT_USE"
       }
     },
@@ -593,7 +594,7 @@
       "skill_change": "Synchronize context and subordinate selection ownership; changing a label does not repair an inconsistent active tool context",
       "usage_example": "A generation choice selects its retained target, clears previous edge/vertex context and does not switch print material",
       "verification": {
-        "status": "PRODUCT_FIX_REVIEWED; new skill advice requires metadata review",
+        "status": "PRODUCT_FIX_AND_SKILL_TEXT_INDEPENDENTLY_REVIEWED_IN_DU01_SCOPE; further use remains NOT_RUN",
         "evidence": [
           "docs/p2/implementation/PC008_UI_REVIEW.md",
           "docs/p2/implementation/evidence/pc008-ui-review-own-1f677ef.xml"
@@ -628,21 +629,22 @@
         ]
       },
       "product_correction": {
-        "status": "IMPLEMENTED; code delta reviewed, final actual artifact review pending",
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_VERIFIED_ON_ACTUAL_LINE_AND_GOTHIC_LAYOUTS; DU02_CLOSED",
         "source_sha": "edb9a1e56498430541e50029d7a785be270ccae9",
         "description": "New generation parts get compact globally numbered P names; full surface context is retained in tree/properties and prior authored names survive load/rename"
       },
       "skill_change": "Assess generated production labels on actual layout, preserve compact identity and rich UI context separately",
       "usage_example": "Match P26 from paper to tree/3D; do not silently truncate an existing author name",
       "verification": {
-        "status": "1370 regressions and actual LINE/Gothic layout/vector/editor runs PASS on e782; independent artifact review pending",
+        "status": "1370 regressions and actual LINE/Gothic layout/vector/editor runs PASS on e782; independent artifact review approved in bounded scope",
         "evidence": [
           "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
-          "docs/p2/implementation/evidence/pc008-D-gothic-desktop-e7826dd-run01/results.json"
+          "docs/p2/implementation/evidence/pc008-D-gothic-desktop-e7826dd-run01/results.json",
+          "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md"
         ]
       },
       "independent_review": {
-        "status": "PENDING_SKILL_TEXT_AND_FINAL_LAYOUT_REVIEW",
+        "status": "APPROVED_IN_BOUNDED_LABEL_LAYOUT_AND_SKILL_TEXT_SCOPE; next-use efficacy remains pending",
         "report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md"
       },
       "effectiveness": "PENDING_NEXT_USE",

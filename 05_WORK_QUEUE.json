@@ -1184,12 +1184,13 @@
         "line_math": "eeaf081/62248d7 independently approved",
         "curved_math": "3a0355f/548027a independently approved in mathematical component scope",
         "domain_persistence": "95fa2c7 independently approved in LINE domain/persistence scope; review artifacts in isolated domain branch",
-        "batch_manual_placement": "0210118 independent review running",
+        "batch_manual_placement": "65159f8 independently approved; BP01 closed",
         "ui": "1f677ef independently approved UI scope, DU01 fixed; combined runtime includes reviewed batch651",
         "native_D": "CURRENT_e782_LINE_PASS39.109s; Gothic_B3_PASS99.313s; all4 actual Inkscape pagesPASS",
-        "whole_ticket_acceptance": "NOT_RUN: AU13 live split/merge/provenance and mixed changes, final independent D integration review, broader P2/usability remain required",
+        "whole_ticket_acceptance": "NOT_RUN: live AU13 split/merge/provenance, mixed AU14 changes, C and broader P2/usability still required; final D/B3 integration review approved in scoped increment only",
         "writer": "5ad independently approved source-to-actual-vector component; SO01 CLOSED, body-only area normalization",
-        "full_suite": "1370 PASS315.60s0fail0errors0skips; exacte782"
+        "full_suite": "1370 PASS315.60s0fail0errors0skips; exacte782",
+        "integration_review": "badf33d: APPROVED_IN_D_AND_GOTHIC_B3_TECHNICAL_INCREMENT_SCOPE for e782 + metadata89a14c5; DU02 CLOSED"
       },
       "candidate_code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
       "working_branch": "revival/p2-segmentation-gothic",
@@ -2759,7 +2760,7 @@
     "whole_v12_contract_acceptance_implied": false
   },
   "current_delivery": {
-    "ticket": "PC-007A",
+    "ticket": "PC-008 D/B3 technical increment",
     "then": "PC-007B",
     "followed_by": [
       "PC-008",
@@ -2783,14 +2784,14 @@
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
     "wip_source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
     "wip_branch": "revival/p2-segmentation-gothic",
-    "next_required_technical_work": "Publish independently reviewed B1/B2/Bezier coherent increment; complete B3/D and C through actual UI/save/reopen/manual layout/SVG/PDF, split/merge provenance and mixed anchors, PC009, historic PC010 and missing novice evidence",
+    "next_required_technical_work": "Publish approved D/B3 coherent increment by safe master integration and ordinary push; continue C actual UI/save/reopen/manual layout/SVG/PDF, live split/merge provenance and mixed anchors, PC009 and historic PC010. B is already published. Missing novice evidence remains0/NOT_RUN.",
     "resumed_on": "2026-11-11",
     "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "D/B3 full native LINE39.109s and independently drawn Gothic99.313s, all4 actual Inkscape pages PASS,1370 full regressions PASS315.60s. Final integration/artifact/metadata review pending. C body/connector and source-transfer math in isolated authorized branches; AU13 pure helper prepared, live app integration incomplete.",
+    "active_work": "D/B3 independently approved on e782 and metadata89a14c5;1370 regressions,2 actual Windows and4 Inkscape pages. Publication next. C body/connector/source-transfer and live AU13 in isolated branches; whole P2 remains IN_PROGRESS.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2918,11 +2919,14 @@
     "candidate_D_delivery": {
       "code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
       "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
-      "review": "PENDING_FINAL_INDEPENDENT_REVIEW",
+      "review": "APPROVED_IN_D_AND_GOTHIC_B3_TECHNICAL_INCREMENT_SCOPE",
       "scope": "D/B3 coherent technical increment; PC008/AU13 and full P2 incomplete",
       "tests": 1370,
       "new_user_count": 0,
-      "physical_proof": "P3_NOT_RUN"
+      "physical_proof": "P3_NOT_RUN",
+      "review_report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
+      "review_commit": "badf33db0472e71220cd63b2005ed7774567f15d",
+      "reviewed_metadata_sha": "89a14c57bab917d03ec3f63e6ada1ce04a89d0bb"
     }
   }
 }

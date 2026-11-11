@@ -1,0 +1,7 @@
+{
+  "source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+  "status": "OWN_HARNESS_PREPARATION_CORRECTED_NOT_PRODUCT_FAILURE",
+  "initial_failure": "Strict Python p.snapshot()==loaded JSON failed for Gothic only: four source-topology proof tuple fields serialize as JSON lists. LINE equality was already true; no numeric or registry difference.",
+  "correction": "Compare JSON-normalized recomputed snapshot with actual saved snapshot; retain all values and array ordering. Product unchanged.",
+  "second_preparation_failure": "The pinned full-suite log has a UTF-16 BOM (PowerShell output); unconditional UTF-8 decoding failed after all native/editor checks and the1370-case XML had already passed. Decode by explicit BOM, preserve original bytes. This is not a suite or product failure."
+}
