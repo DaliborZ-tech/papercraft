@@ -892,6 +892,8 @@ class AuthorProject(
             "project_id": self.project_id,
             "revision": self.revision,
             "construction_checks": {
+                **({"segmented_source_project": self.to_dict(validate=False)}
+                   if self.segmented_variants else {}),
                 "material_profile": copy.deepcopy(self.material_profile),
                 "assembly_digest": material._assembly_clearance_key(),
                 "connector_bends": {
