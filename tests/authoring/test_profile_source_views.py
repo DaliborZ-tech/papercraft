@@ -361,3 +361,14 @@ def test_retired_cubic_split_vertex_remains_the_exact_interior_source_point_afte
     merged = h.merge(["left", "right"], "merged")
     retired = historical_point(merged, reference)
     assert retired["status"] == "SINGLE" and retired["nominal_bounds_exact"] == expected
+
+
+@pytest.mark.parametrize("field", ["parameter", "coordinate"])
+def test_invalid_fraction_descriptor_has_typed_failure(field):
+    reference = source_reference(history("line"), "root")
+    if field == "parameter":
+        reference["parameter_interval"][1] = "1/0"
+    else:
+        reference["source"]["start"][0] = "1/0"
+    with pytest.raises(ValueError):
+        SourceCurveView.from_reference(reference)

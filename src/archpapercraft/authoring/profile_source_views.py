@@ -44,7 +44,10 @@ def _identity(value):
 
 
 def _parameter(value):
-    value = _scalar(value)
+    try:
+        value = _scalar(value)
+    except (ArithmeticError, ValueError, TypeError) as exc:
+        raise SourceViewError("Source parameters require finite valid rational values.") from exc
     if not 0 <= value <= 1:
         raise SourceViewError("Source parameters must lie in [0,1].")
     return value
