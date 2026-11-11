@@ -31,11 +31,16 @@ def wheel_at(window, viewport, point, records):
     avoids that mismatch and verifies the real desktop hit before global input.
     """
     USER32.GetForegroundWindow.restype = wintypes.HWND
+    USER32.SetForegroundWindow.argtypes = [wintypes.HWND]
+    USER32.SetForegroundWindow.restype = wintypes.BOOL
+    USER32.GetWindowThreadProcessId.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.DWORD)]
+    USER32.GetWindowThreadProcessId.restype = wintypes.DWORD
     USER32.GetAncestor.argtypes = [wintypes.HWND, wintypes.UINT]
     USER32.GetAncestor.restype = wintypes.HWND
     USER32.WindowFromPoint.argtypes = [wintypes.POINT]
     USER32.WindowFromPoint.restype = wintypes.HWND
     USER32.GetClientRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
+    USER32.GetWindowRect.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.RECT)]
     USER32.ClientToScreen.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.POINT)]
     USER32.GetCursorPos.argtypes = [ctypes.POINTER(wintypes.POINT)]
     USER32.keybd_event.argtypes = [wintypes.BYTE, wintypes.BYTE, wintypes.DWORD, wintypes.WPARAM]
@@ -44,11 +49,40 @@ def wheel_at(window, viewport, point, records):
     window.activateWindow()
     QTest.qWait(100)
     hwnd, pid = int(window.winId()), wintypes.DWORD()
-    USER32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
-    assert pid.value == os.getpid() and USER32.GetForegroundWindow() == hwnd, (
-        "Native wheel requires this proof's foreground window")
+    ctypes.set_last_error(0)
+    thread = USER32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
+    foreground = USER32.GetForegroundWindow()
+    record = dict(own_pid=pid.value, own_hwnd=hwnd, own_thread=thread,
+                  foreground_before=int(foreground or 0), pid_query_error=ctypes.get_last_error(),
+                  method="Win32 actual cursor Ctrl+wheel, verified own root HWND")
+    records.append(record)  # Retain the precondition even if it refuses all input.
+    assert thread and pid.value == os.getpid(), "Native wheel target is not this proof's window"
     assert not any(USER32.GetAsyncKeyState(key) & 0x8000 for key in (16, 17, 18, 1, 2, 4)), (
         "Refusing wheel input while an existing user modifier or mouse button is held")
+    if foreground != hwnd:
+        record["activation_returned"] = bool(USER32.SetForegroundWindow(hwnd))
+        QTest.qWait(100)
+    if USER32.GetForegroundWindow() != hwnd:
+        # Windows may refuse programmatic focus after a native file picker.
+        # A real click on our unobscured title bar follows normal activation.
+        frame, cursor = wintypes.RECT(), wintypes.POINT()
+        assert USER32.GetWindowRect(hwnd, ctypes.byref(frame))
+        assert USER32.GetCursorPos(ctypes.byref(cursor))
+        title = wintypes.POINT((frame.left+frame.right)//2, frame.top+16)
+        assert USER32.GetAncestor(USER32.WindowFromPoint(title), 2) == hwnd, (
+            "Own title bar is obscured; refusing activation input")
+        try:
+            assert USER32.SetCursorPos(title.x, title.y)
+            assert USER32.GetAncestor(USER32.WindowFromPoint(title), 2) == hwnd
+            USER32.mouse_event(0x0002, 0, 0, 0, 0)
+            USER32.mouse_event(0x0004, 0, 0, 0, 0)
+            QTest.qWait(100)
+            record["verified_titlebar_activation"] = [title.x, title.y]
+        finally:
+            USER32.SetCursorPos(cursor.x, cursor.y)
+    record["foreground_after_activation"] = int(USER32.GetForegroundWindow() or 0)
+    assert USER32.GetForegroundWindow() == hwnd, (
+        "Native wheel requires this proof's foreground window")
     logical = viewport.mapTo(window, point)
     rect, origin, previous = wintypes.RECT(), wintypes.POINT(), wintypes.POINT()
     assert USER32.GetClientRect(hwnd, ctypes.byref(rect))
@@ -61,11 +95,9 @@ def wheel_at(window, viewport, point, records):
     target = wintypes.POINT(origin.x+round(logical.x()*sx), origin.y+round(logical.y()*sy))
     hit = USER32.WindowFromPoint(target)
     assert USER32.GetAncestor(hit, 2) == hwnd, "Native wheel target is obscured by another window"
-    record = dict(own_pid=pid.value, own_hwnd=hwnd, hit_hwnd=int(hit),
-                  target_native=[target.x, target.y], target_logical=[logical.x(), logical.y()],
-                  native_client=[rect.right, rect.bottom], device_pixel_ratio=ratio,
-                  method="Win32 actual cursor Ctrl+wheel, verified own root HWND")
-    records.append(record)
+    record.update(hit_hwnd=int(hit), target_native=[target.x, target.y],
+                  target_logical=[logical.x(), logical.y()],
+                  native_client=[rect.right, rect.bottom], device_pixel_ratio=ratio)
     held = False
     try:
         assert USER32.SetCursorPos(target.x, target.y)
