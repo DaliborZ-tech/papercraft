@@ -253,7 +253,8 @@ def test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction(
     ready(qtbot, widget)
     distance = math.pi * 10 / 3 if kind == "arc" else 2
     widget.distance.lineEdit().selectAll()
-    qtbot.keyClicks(widget.distance.lineEdit(), f"{distance:.6f}")
+    qtbot.keyClicks(widget.distance.lineEdit(), widget.distance.locale().toString(
+        float(distance), "f", widget.distance.decimals()))
     qtbot.mouseClick(widget.compute, Qt.MouseButton.LeftButton)  # No Return first: C05.
     ready(qtbot, widget)
     qtbot.mouseClick(widget.buttons.button(QDialogButtonBox.StandardButton.Ok),
@@ -351,3 +352,39 @@ def test_actual_host_split_inverse_merge_undo_recompute_and_save_open_keep_layou
     assert len(window.project.profiles[profile_id].segments) == 2
     assert not window.actions["merge_profile"].isEnabled()
     assert window.project.placements[part_id] == layout
+
+
+@pytest.mark.parametrize("kind", ["arc", "cubic"])
+def test_actual_public_core_cancel_during_new_preview_keeps_original_source(qtbot, kind):
+    project, pid, eid = source(kind)
+    before = project.to_dict()
+    widget = dialog(qtbot, project, pid, eid)
+    ready(qtbot, widget)
+    widget.distance.setValue(2)
+    assert widget.preview()
+    widget.reject()
+    qtbot.waitUntil(lambda: widget._running is None, timeout=30000)
+    assert widget.result() == QDialog.DialogCode.Rejected
+    assert widget.result_spec is None and widget._packet is None
+    assert project.to_dict() == before
+
+
+def test_actual_inverse_merge_rejects_nonadjacent_children_without_fitting_or_mutation(qtbot):
+    project, pid, eid = source()
+    result = project.split_profile_segment(pid, eid, Fraction(1, 3))
+    project.split_profile_segment(pid, result["segment_ids"][1], Fraction(1, 2))
+    first = project.profiles[pid].segments[0].id
+    before = project.to_dict()
+    widget = SubdivisionDialog(project, pid, first, joining=True)
+    qtbot.addWidget(widget)
+    widget.show()
+    assert widget.choices.count() == 3
+    widget.choices.item(1).setSelected(False)
+    widget.preview()
+    qtbot.waitUntil(lambda: widget._running is None and "nelze použít" in
+                   widget.feedback.text(), timeout=30000)
+    assert widget._packet is None
+    assert not widget.buttons.button(QDialogButtonBox.StandardButton.Ok).isEnabled()
+    assert widget.compute.isEnabled() and widget.choices.isEnabled()
+    assert project.to_dict() == before
+    widget.reject()
