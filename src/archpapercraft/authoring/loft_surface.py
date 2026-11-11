@@ -20,6 +20,7 @@ from .curve_area import native_region_area_bounds
 from .curves import _control, derivative, evaluate
 from .errors import ValidationError
 from .geometry import material_polygon, number, path
+from .loft_curve_compaction import coalesce_native_loft_boundaries, reverse_segment
 from .loft_curves import fit_native_loft_boundaries
 from .loft_geometry import LoftCorrespondence, LoftProfile, flatten_loft
 from .model import (
@@ -34,7 +35,7 @@ from .model import (
 )
 from .profile_curves import source_curve
 
-LOFT_PAPER_CONTRACT = "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_EXACT_COLLINEAR_CUT_V2"
+LOFT_PAPER_CONTRACT = "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_BOUNDED_COALESCED_CUT_V3"
 
 _PARAMS = {
     "second_profile_id",
@@ -279,12 +280,7 @@ def _commands(segments):
 
 
 def _reverse(segment):
-    result = copy.deepcopy(segment)
-    result["start"], result["end"] = result["end"], result["start"]
-    if result["kind"] == "cubic":
-        d = result["data"]
-        d["control1"], d["control2"] = d["control2"], d["control1"]
-    return result
+    return reverse_segment(segment)
 
 
 def _develop_once(key, effective_tolerance):
@@ -351,6 +347,8 @@ def _develop_once(key, effective_tolerance):
     base["native"] = native
     if native["status"] != "CERTIFIED_REPRESENTATION_ONLY":
         return {**base, **_failure("UNRESOLVED", "LOFT_NATIVE_BOUND_UNRESOLVED", native["message"])}
+    native = coalesce_native_loft_boundaries(native)
+    base["native"] = native
     base["representation"] = {
         key: value for key, value in native.items() if key not in ("patches", "source_coverage")
     }
@@ -638,9 +636,15 @@ def _bound_analysis(intrinsic_key, surface_record):
                 for segment in patch[side]["segments"]:
                     segment["source"]["feature_id"] = feature_id
                     segment["source"]["patch_id"] = reference["id"]
+                    for source in segment["source"].get("subintervals", []):
+                        source["feature_id"] = feature_id
+                        source["patch_id"] = reference["id"]
             for segment in patch["closed_boundary_segments"]:
                 segment["source"]["feature_id"] = feature_id
                 segment["source"]["patch_id"] = reference["id"]
+                for source in segment["source"].get("subintervals", []):
+                    source["feature_id"] = feature_id
+                    source["patch_id"] = reference["id"]
                 if segment["source"].get("kind") == "EXPLICIT_MATCHED_RULING":
                     segment["source"]["ruling_id"] = (
                         reference["ruling_id"]
