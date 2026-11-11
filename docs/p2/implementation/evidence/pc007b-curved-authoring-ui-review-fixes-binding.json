@@ -1,0 +1,28 @@
+{
+  "source_sha": "e1c06f5b068880ac22b28516ce69c66aee32603d",
+  "checkout": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui",
+  "qt_qpa_platform": "offscreen",
+  "pythonpath": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui\\src",
+  "imports": {
+    "author_curved_connectors": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui\\src\\archpapercraft\\ui\\author_curved_connectors.py",
+    "author_window": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui\\src\\archpapercraft\\ui\\author_window.py"
+  },
+  "files_sha256": {
+    "src/archpapercraft/ui/author_curved_connectors.py": "0313044145451b58192ea7a612ce2a49a7e20cfe90deed3361bd3560508a3e6b",
+    "src/archpapercraft/ui/author_window.py": "99f37e4caf7adede5a172502fb2190b7a5c73b02e002ff6709b7c011ccd6affb",
+    "tests/authoring/test_curved_authoring_ui.py": "1ec1aa54b5ec4199d7e9361d13bd36b14b292c5fa4d5455b4daac3caa4de2b8b"
+  },
+  "junit": "docs/p2/implementation/evidence/pc007b-curved-authoring-ui-review-fixes.xml",
+  "junit_sha256": "7db908c64183e423a6ef6534224a81cbbe5bb85283aebc194258d1f1a25fb4c1",
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "34",
+    "time": "36.258",
+    "timestamp": "2026-11-11T17:12:42.001977+01:00",
+    "hostname": "Dalibor"
+  },
+  "scope": "34 focused fix/oracle/legacy workspace cases; not native, novice or physical proof"
+}
