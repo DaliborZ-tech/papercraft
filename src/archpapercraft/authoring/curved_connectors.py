@@ -685,11 +685,11 @@ def rebuild_curved_material_binding(body_binding, paper_frame, curved_inputs):
             if sid not in context.surfaces or context.surfaces[sid].part_id != pid:
                 raise CurvedConnectorError("Zdroj nepokrývá skutečné materiálové díly a plochy.")
         profile = context.profiles[context.surfaces[part.frame.root_surface_id].profile_id]
-        if (
-            profile.vertex(part.frame.anchor_vertex_id) is None
-            or profile.segment(part.frame.axis_segment_id) is None
-        ):
-            raise CurvedConnectorError("Zdrojový frame má ztracenou přesnou kotvu.")
+        try:
+            context.resolve_profile_vertex(profile.id, part.frame.anchor_vertex_id)
+            context.resolve_profile_edge(profile.id, part.frame.axis_segment_id, axis=True)
+        except ValueError as exc:
+            raise CurvedConnectorError("Zdrojový frame má ztracenou přesnou kotvu.") from exc
     if len(expected_surfaces) != len(set(expected_surfaces)) or set(expected_surfaces) != set(
         context.surfaces
     ):

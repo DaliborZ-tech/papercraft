@@ -241,7 +241,8 @@ def run_windows(output, expected_sha, fixture="all"):
                            "curves-planar": "NOT_RUN", "loft-B1": "NOT_RUN",
                            "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN",
                            "D-segmented": "NOT_RUN", "D-gothic": "NOT_RUN",
-                           "AU13-line": "NOT_RUN"},
+                           "AU13-line": "NOT_RUN", "C-cylinder": "NOT_RUN",
+                           "C-cone": "NOT_RUN", "C-near": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "actual_application_module": str(Path(author_window.__file__).resolve()),
@@ -332,11 +333,13 @@ def run_windows(output, expected_sha, fixture="all"):
             write_report()
             QApplication.instance().exit(1)
 
+    from circular_desktop_steps import CircularDesktopSteps
     from loft_desktop_steps import LoftDesktopSteps
     from segmentation_desktop_steps import SegmentationDesktopSteps
     from subdivision_desktop_steps import SubdivisionDesktopSteps
 
-    class Driver(LoftDesktopSteps, SegmentationDesktopSteps, SubdivisionDesktopSteps):
+    class Driver(LoftDesktopSteps, SegmentationDesktopSteps, SubdivisionDesktopSteps,
+                 CircularDesktopSteps):
         def __init__(self, window):
             self.w = window
             self.check, self.step, self.log = check, step, log
@@ -1232,15 +1235,21 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.audit_segmentation_vectors(directory, svgs, pdf)
             if name == "AU13-line":
                 self.audit_subdivision_vectors(directory, svgs, pdf)
+            if name.startswith("C-"):
+                self.audit_circular_vectors(directory, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
                 parts=sorted(actual_parts),
-                unfold_mode="APPROXIMATE" if name in ("D-segmented", "D-gothic") else "EXACT",
+                unfold_mode=("APPROXIMATE" if name in ("D-segmented", "D-gothic")
+                             or name.startswith("C-") else "EXACT"),
                 exact_scope=("exact planar triangles; retained smooth target remains REJECTED"
                              if name in ("D-segmented", "D-gothic") else
                              "certified ruled/planar family; no physical claim"
                              if name.startswith("loft-") else
+                             "exact circular body plus bounded approximate curved connectors; "
+                             "physical NOT_RUN"
+                             if name.startswith("C-") else
                              "piecewise planar material; no curved-surface or physical claim"),
                 digital_only_acknowledgements=accepted,
             )
@@ -1758,6 +1767,10 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"][fixture] = "RUNNING"
                 driver.subdivision_case()
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
+            if fixture.startswith("C-"):
+                report["fixture_status"][fixture] = "RUNNING"
+                driver.circular_case(fixture)
+                report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
                 len(native) == (6 if fixture == "all" else 3)
@@ -1846,7 +1859,8 @@ def main():
     parser.add_argument(
         "--fixture",
         choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
-                 "loft-Bezier", "D-segmented", "D-gothic", "AU13-line"],
+                 "loft-Bezier", "D-segmented", "D-gothic", "AU13-line",
+                 "C-cylinder", "C-cone", "C-near"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",
     )
