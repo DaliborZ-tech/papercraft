@@ -2,7 +2,7 @@
 
 Reviewer `/root/commands_review`, 11. 11. 2026, není autorem aplikace/UI (`/root`) ani čisté matematiky (`geometry_analysis`). Vlastní izolovaný worktree `papercraft-profile-subdivision-review`, větev `review/au13-line-9b87c89` vznikl z přesného **9b87c89e1507b1df56940e4c08d213532a5216ad**. Žádný produkční soubor se v něm nemění. Všechny běhy jsou navíc z fresh exact archivu konkrétního pinu, s explicitním PYTHONPATH, Qt offscreen a skutečnými import/hash guards. [Runner](evidence/pc008-line-subdivision-review-run.py), [vlastní oracles](evidence/pc008-line-subdivision-review-own.py).
 
-**Aktuální komponentový verdikt: APPROVED_IN_SCOPE na přesném SOURCE 24e08019a711c5c7c19ca73a5ac35e5093dfb4d0.** Pure algebra/provenance i živý LINE split/merge, persistence, source/physical adapters a dotčené Qt UI nemají po přezkoušení oprav zbývající doložený zásadní nález. LS01–LS05 jsou CLOSED / VERIFIED v níže uvedeném rozsahu. Toto je komponentové schválení; **finální nativní/vektorový artefaktový proof tohoto slice zůstává PENDING** do samostatné kontroly skutečných výsledků. Celé AU13/AU14/PC008/P2 se tímto review neuzavírá. Root vlastní OS desktop.
+**Finální verdikt: APPROVED_IN_LINE_TECHNICAL_INCREMENT_SCOPE.** Přesný CODE **24e08019a711c5c7c19ca73a5ac35e5093dfb4d0** a METADATA **93f650c4a22a9d1dffd3b65c69f4b9505d5889f7** prošly komponentovou i samostatnou kontrolou skutečných native/SVG/PDF/Inkscape artefaktů. LS01–LS05 a LINE-BEND01 jsou CLOSED / VERIFIED v tomto rozsahu; žádný zbývající zásadní nález bránící tomuto LINE přírůstku. Balík je technicky připraven k integraci/pushi po níže vymezené mechanické aktualizaci closure metadat a jejich úzké kontrole. Celé AU13/AU14/PC008/P2, produktové přijetí, nový uživatel ani fyzické P3 se tím neuzavírají.
 
 ## Skutečně provedené běhy
 
@@ -39,7 +39,7 @@ Live ARC/CUBIC split je explicitně odmítnut bez mutace. Loft φ/trim adapter n
 
 ## Nálezy, původní důkazy a uzavření
 
-**LINE-BEND01 — známý nativní missing consumer.** Původní 9b bend.py hledá retired whole-edge pouze v active world boundary, což u existující chlopně vede ke StopIteration. Root a770f8a8bed102bcf8538d0e57e4f5659f809949 převádí skutečný edge_source přes _surface_world_points a rozšiřuje assembly key o použité history a všechny skutečné source profily, včetně druhého profilu loftu. Zdroj zůstává celý, bez first-child. Dva vlastní replays 2/7 s known i unknown materiálem mají stejnou connector geometry a bend status před/po splitu. **Komponentová oprava ověřena; finální native proof čeká.** Původní fullsuite PASS nepřekrývá původní native FAIL.
+**LINE-BEND01 — známý nativní missing consumer.** Původní 9b bend.py hledá retired whole-edge pouze v active world boundary, což u existující chlopně vede ke StopIteration. Root a770f8a8bed102bcf8538d0e57e4f5659f809949 převádí skutečný edge_source přes _surface_world_points a rozšiřuje assembly key o použité history a všechny skutečné source profily, včetně druhého profilu loftu. Zdroj zůstává celý, bez first-child. Dva vlastní replays 2/7 s known i unknown materiálem mají stejnou connector geometry a bend status před/po splitu. **Komponentová oprava i finální skutečný native24e proof ověřeny.** Původní fullsuite PASS nepřekrývá původní native FAIL.
 
 **LS01 MAJOR — nekontrolovaná float projekce zdroje. CLOSED / VERIFIED po 694 a zachováno 24e.** 9b/a770 přijaly open LINE `(1e16,0)→(1e16+4,3)`, scale1, split1/4. Nový material point je `(1e16,.75)` místo exact `(1e16+1,.75)`; kolmá odchylka je 0.6 mm, ale historický full-edge dále tvrdí původní straight hinge. Původní vlastní repro beze změny expected nyní bezpečně odmítne. Source→actual whole-LINE position guard využívá convex endpoint L1 bound. Globální součet endpoint length reserves je uplatněn na celý profil napříč histories, nikoli nová .01 rezerva pro každý child.
 
@@ -69,10 +69,44 @@ Další vlastní oracle vytvoří přijatelné zaokrouhlení, ověří closed lo
 
 Delta9290a0156e112021d926075d05a9c6b5ca817a5c zachovává skutečný window.run a jeho operation: wrapper jen čte exception traceback a znovu vyhodí původní exception, skutečné UI stále zobrazuje chybu. FAIL-partial dictionary se zapisuje před screenshot capture, aby chyba fotografování neschovala source. Žádná domain command/result/geometry injekce.
 
-Opravená explicitní tab oracle `100×2×(1+.6)/2=160 mm²` odpovídá skutečně vytvořenému full[0,1] connectoru; driver kontroluje interval/width/taper/count/shape/overrides a původní .01 mm² se nemění. Historický expected90/144 FAIL zůstává. Independent wall+roof+tab expected je `4000+100*hypot(30,35)+160`, base13000 mm². Změny driveru se musejí ještě spojit s konečným skutečným artefaktovým důkazem.
+Opravená explicitní tab oracle `100×2×(1+.6)/2=160 mm²` odpovídá skutečně vytvořenému full[0,1] connectoru; driver kontroluje interval/width/taper/count/shape/overrides a původní .01 mm² se nemění. Historický expected90/144 FAIL zůstává. Independent wall+roof+tab expected je `4000+100*hypot(30,35)+160`, base13000 mm². Spojení driveru s konečným skutečným artefaktovým důkazem24e je ověřeno v následující části.
 
 ## Uplatněné skills a zbývající důkazy
 
 AGENTS a všechny čtyři skills byly skutečně načteny; po opravě24e znovu i čtyři dotčené texty. Construction oddělil source identity od hinge/material certainty a root/page kotvy; UI prověřil C05/stale/Cancel a srozumitelnou opravnou cestu; verification vedl k exact cubic/arc/trim oraclům, global aliases a samostatnému area svědku LS04 včetně holes a scale; delivery zachoval všechny pin/FAIL výsledky a neuzavírá celé P2 komponentovým PASS.
 
 Nové lessons/metadata autora se budou revidovat zvlášť; širší efficacy není prokázána touto opravou. Nový člověk0/NOT_RUN a P3 zůstávají oddělené, fyzické sestavení není potvrzené. Review nemění produkci ani native desktop. Finální source/artifact/publication scope musí být konkrétně doložen před integrací.
+
+
+## Finální samostatný audit skutečných artefaktů a metadat
+
+Audit neotevírá GUI. [Samostatný script](evidence/pc008-line-subdivision-review-artifacts.py) vytvořil fresh CODE archive a ověřil skutečné importy/hash; [raw výsledek](evidence/pc008-line-subdivision-review-artifacts-24e0801.json). METADATA93f650c zachovává published6796c63 jako ancestor a nemá žádný src/tools/tests/pyproject rozdíl oproti schválenému CODE24e. Normativní mandát/AC zůstávají beze změny. [Metadatový audit](evidence/pc008-line-subdivision-review-metadata-93f650c.json) ověřil také všech43 relativních odkazů v dotčených skills/delivery.
+
+Nativní výsledek skutečného app.main od prázdného projektu má119 source hashů shodných s připnutým archivem a22 ověřených artifact hashů; skutečný import author_window je v určeném source WT. Tři skutečné nativní dialogy Save/Open/Export byly přijaty. Snapshot po skutečném Save/New/Open je přesně shodný s novým načtením přes příslušnou produkční doménu, po standardní JSON normalizaci tuple/list. Uložená dictionary se nemění.
+
+Vlastní audit znovu a nezávisle přehrál obě uložené lineage historie z Fraction source intervals, bez použití history resolveru pro expected: spodní whole root split→merge→split a horní hinge split1/4. Souřadnice actual children odpovídají zdroji. Uložený wall/roof/base znamená3 source surfaces,2 skutečné material parts a2 stránky, bez vynechaného či reference-only prvku. Root axis, hinge a interior attachment používají historické root IDs; connector ponechává full[0,1],width2,taper.6,count1,trapezoid a vlastní tab ID. Part frame a placement mají správnou stránku2,[60,60],30° i oba locks. Všechny čtyři původní wall body mají samostatně odvozené stejné page coordinates před/po operacích. Nově vložené body je pouze doplňují.
+
+Očekávané plochy jsou odvozeny nezávisle z původních zadávaných rozměrů: wall4000, roof100√2125, tab160, base13000mm². Odmocnina používá vlastní integer-isqrt racionální interval s70 desetinnými místy, nikoli unfolded cache. Skutečné SVG je samostatně tokenizováno do Fraction LINE polygonu. Skutečné PDF načítá již nezávisle schválený precise raw-token/CTM decoder; vlastní exact shoelace počítá plochu až z jeho skutečných serializovaných kontur v papírových jednotkách. Decoder nebyl zaměněn za source nebo cache certifikát.
+
+| Materiál | Nezávislé očekávání | Skutečné SVG | Skutečné PDF / maximální chyba |
+|---|---|---|---|
+| wall+roof+tab | 8769.772228646443…mm² | 8769.772229mm² | 8769.772000000002…mm²; ≤0.000228647mm² |
+| základna | 13000mm² | 13000mm² | chyba ≤2.728×10^-12mm² |
+
+SVG chyba smíšeného dílu je ≤3.536×10^-7mm². Vše je pod původní .01mm² mezí; tab není důvodem zvětšit relativní body-only budget. Actual CUT pokrytí je přesně shodné s material part registry a správnými stránkami, closed paths jsou skutečně uzavřené v obou formátech. Není to tvrzení fyzické slepitelnosti; snapshot přiznává bounded bend UNVERIFIED, unknown material a přijetí pouze digitálního varování.
+
+Obě editorové kopie mají zdroj24e, shodný připnutý editor driver a po4 skutečných ověřených hashích. Originální bundle (.author-export.json, obě SVG i PDF) zůstal byte-identical. Nezávislá XML/token kontrola potvrzuje všechny původní path IDs, příkazy a local coordinates (max drift0 na stránce1 a2.9×10^-7mm na stránce2), role, oba page units/viewBox a100mm calibration. Přímý group transform změnil celek o10/15px, lineární část zůstala; změněný label má přesně „Žluťoučký – vlastní díl“ a požadovanou barvu. Ostatní texty zůstaly stejné. Reviewer viděl skutečné app i oba editor screenshots; agentní průchod není nový uživatel.
+
+Finální JUnit obsahuje **1465 skutečných testcase,0 failure/error/skip**, XML čas326.213s a odpovídající úplný UTF16 console log1465 passed/326.23s. Sada nebyla znovu pouštěna jen kvůli tomuto auditu. Native24e32.734s a Inkscape15.672s/18.015s jsou skutečné běhy autora, nezávisle kontrolované přes jejich zdroje a artefakty.
+
+Původní 9b/929 native FAIL zůstávají skutečným produkčním missing-consumer důkazem; 929 raw traceback potvrzuje StopIteration v retired-boundary lookup, žádná dodaná hotová geometrie jej nenahradila. A770 FAIL je naopak přesně zachované chybné oracle90/144 při skutečně zadaném100/160. Původní aborted fullsuite není1465 PASS a jeho důvod/schema-fixture oprava není oslabením loaderu. Vlastní audit měl dva krátké harness chyby: porovnal Python tuple snapshot s JSON listem a poté zaměnil Page list za ID dictionary. Jsou doloženy v [harness poznámce](evidence/pc008-line-subdivision-review-artifact-harness-attempt01.json); opravy mění pouze čtení/normalizaci očekávané reprezentace, nikoli produkt nebo numerické prahy.
+
+## Nové poučení, aktuální schválení a meze
+
+SK015 construction consumer-coverage rada odpovídá doložené příčině LINE-BEND01 a skutečné opravě/full-hinge bend/cache i actual selected-relation průchodu. Text neprohlašuje všechny jiné consumers automaticky za opravené. Aktuální product repair a text jsou **APPROVED_IN_SCOPE**; účinnost na příštím jiném consumeru zůstává **PENDING_NEXT_USE / NOT_RUN**.
+
+SK011 LINE transfer pravdivě zachovává **INITIAL_TRANSFER_FAILED_LS04**. Nový verification odstavec správně považuje i topologický command za producer a požaduje původní canonical source→actual body area, load/scale a jednu souhrnnou body-only normu pro otvory/plochy. Přímá oprava a její aktuální oracles/artefakty jsou schválené; to nesmí zpětně změnit první transfer na úspěšný ani prohlásit širší další efficacy za ověřenou.
+
+Metadata93f650c správně ponechává pending scope: live ARC/CUBIC adapters, loft trim/φ, širší AU13/AU14, C/schema6 adapter, PC009/010, novice0/NOT_RUN a P3/NOT_RUN; celé PC008/P2 zůstává IN_PROGRESS. Experimentální schema7 zná copy/SaveAs1–5 a nepropouští dosud neznámý C6 pouhou změnou verze. Toto schválení není dokončení budoucího integračního adaptéru ani produktové přijetí.
+
+Jediná zbývající předpublikační práce je mechanické closure metadata: v delivery rozlišit analytické očekávání a skutečně serializovanou plochu, zastaralý queue review text LINE694 změnit na24e a připojit toto finální schválení v queue/SK015/SK011 při zachování pending širších přejímek. Tento následný konkrétní commit má dostat úzký doc/source-identity recheck; není potřeba nová1465sada ani nový produktový souhlas.
