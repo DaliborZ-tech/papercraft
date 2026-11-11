@@ -24,6 +24,15 @@ metadat a jeho nezávislé kontrole lze provést fast-forward a běžný push po
 mandátu. Skutečný publikovaný SHA/ls-remote bude doložen zvlášť; tento záznam
 sám ještě netvrdí provedený push.
 
+Dodatečný skutečný záznam 11.11.2026: po nezávislém uzavření metadat
+`c21195f7aefe25bd5ee406ff85f25f772979f391` byl proveden fast-forward lokálního
+`master` a běžný push. Publikovaný commit je
+[`b2bbf89cda5e9260d64ebc766dca2759293dee5c`](https://github.com/DaliborZ-tech/papercraft/commit/b2bbf89cda5e9260d64ebc766dca2759293dee5c).
+Následné samostatné `git ls-remote origin refs/heads/master` opět ověřilo shodu
+lokálního a vzdáleného SHA; [strojový záznam](evidence/pc008-line-master-push-b2bbf89.json).
+Předchozí odstavec zachovává pravdivý stav před provedením akce; tento dodatek
+dokládá její výsledek.
+
 Curved/loft trim a phi adapters, celý C včetně UI, PC-009 a historický PC-010
 zůstávají v autorizovaném rozsahu. **AC-US08:0/NOT_RUN; fyzické P3/NOT_RUN.**
 Žádný technický push nevydává přijetí dokončeného P2 nebo release.
