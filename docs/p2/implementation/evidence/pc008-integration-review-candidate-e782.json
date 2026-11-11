@@ -1,0 +1,25 @@
+{
+  "source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+  "archive_sha256": "1848d428f658cc64c7af1e4f2c8b6f7e9e378e58c37aa12f8358f065166334c5",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-candidate-review-mz4z7x50",
+  "actual_imports": {
+    "archpapercraft.authoring.segmented_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-candidate-review-mz4z7x50\\src\\archpapercraft\\authoring\\segmented_surface.py",
+      "lf_sha256": "c0c58d19acbb0f6a473e754fc63718372c20af11dff124fc47f0a60b61c487f2"
+    },
+    "segmentation_desktop_steps": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-candidate-review-mz4z7x50\\tools\\authoring\\segmentation_desktop_steps.py",
+      "lf_sha256": "785dbbab0d782c2abb76545f1a708f7d3579dac2be36484587c0a3def15101fc"
+    }
+  },
+  "checks": {
+    "oracle_line_rotated_world_plane": "PASS",
+    "oracle_circle_both_sweeps_midpoint_and_Green": "PASS",
+    "oracle_triangle_area": "PASS",
+    "DU02_new16_global_short_names": "PASS",
+    "DU02_explicit_owner_rename_reopen": "PASS",
+    "DU02_old64_names_preserved_on_load": "PASS",
+    "current5ad_guard_revalidates_old64_source_and_actual_vectors": "PASS"
+  },
+  "limit": "Revalidation of historical d762 artifacts is not a new native run of e782 and not actual new-label layout proof"
+}

@@ -1,0 +1,446 @@
+{
+  "source_sha": "d762fc6d2c543691b8918128b6b0d3e1da59313e",
+  "archive_sha256": "08d2dbae4b185597d16d6442a4979836672f511ee4603fe73915ad46fde65aab",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-integration-review-931dvl4m",
+  "actual_imports": {
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-integration-review-931dvl4m\\src\\archpapercraft\\authoring\\project.py",
+      "lf_sha256": "95995a7e28ceb076c0bb9b6aab744d83fc1dab82ae163fabd6d9a682f40fb889"
+    },
+    "archpapercraft.authoring.segmented_surface": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-integration-review-931dvl4m\\src\\archpapercraft\\authoring\\segmented_surface.py",
+      "lf_sha256": "c9f7be977b9d61c05b5d9aa315ac7cccd257bcd3b1fd08ffb6abcbfc1bed62f2"
+    },
+    "archpapercraft.authoring.segmented_loft_curves": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-integration-review-931dvl4m\\src\\archpapercraft\\authoring\\segmented_loft_curves.py",
+      "lf_sha256": "81878c9075522f59b2050eb942e7fa227f9637895dd10458e2ca233cff91644d"
+    },
+    "archpapercraft.exporter.author_export": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-integration-review-931dvl4m\\src\\archpapercraft\\exporter\\author_export.py",
+      "lf_sha256": "85543490629cca969e56a7ff070ef7b75bdb9d5222b47b61c1bed4d0355d12e2"
+    }
+  },
+  "native_source_hashes_checked": 115,
+  "native_artifact_hashes_checked": 30,
+  "source_hash_encodings": {
+    "blob": 1,
+    "LF": 1,
+    "CRLF": 114
+  },
+  "source_surfaces": 65,
+  "printed_parts": 64,
+  "reference_targets": 1,
+  "pages": [
+    32,
+    32
+  ],
+  "uv_area_exact": "1",
+  "actual_area_observations": [
+    {
+      "part_id": "93e3040a-7286-42e4-a1ef-17395e18ccf0",
+      "svg_error_mm2": 1.1687700376609966e-14,
+      "pdf_error_mm2": 9.706370412326745e-07,
+      "page": 0
+    },
+    {
+      "part_id": "bcdba997-d02d-4bb9-b3ee-4cad626febbe",
+      "svg_error_mm2": 7.939470669740475e-15,
+      "pdf_error_mm2": 1.3879747217837911e-06,
+      "page": 0
+    },
+    {
+      "part_id": "ff4792e1-d7c6-4d9a-8f6f-df92e1c92803",
+      "svg_error_mm2": 5.67752832232764e-15,
+      "pdf_error_mm2": 1.2155533663202336e-06,
+      "page": 0
+    },
+    {
+      "part_id": "1e2a1995-031e-48c8-a179-28fe97992277",
+      "svg_error_mm2": 2.2985357834258372e-14,
+      "pdf_error_mm2": 1.0667427977290069e-07,
+      "page": 0
+    },
+    {
+      "part_id": "487159d3-b9ca-41bc-8026-51540ddb1c7d",
+      "svg_error_mm2": 6.6084204829246104e-15,
+      "pdf_error_mm2": 1.7440929063615708e-07,
+      "page": 0
+    },
+    {
+      "part_id": "c6c11417-5d1d-4f1c-b739-425ddbb9ec7b",
+      "svg_error_mm2": 9.904326820944875e-15,
+      "pdf_error_mm2": 1.319762040526103e-06,
+      "page": 0
+    },
+    {
+      "part_id": "e036a1a5-f3c9-4386-98f9-ab7ba65cd77e",
+      "svg_error_mm2": 2.3593636529802997e-14,
+      "pdf_error_mm2": 2.363739059788951e-06,
+      "page": 0
+    },
+    {
+      "part_id": "1b92107d-0538-4058-a487-294141bb72bd",
+      "svg_error_mm2": 1.0244354322207144e-14,
+      "pdf_error_mm2": 2.3794100240062363e-06,
+      "page": 0
+    },
+    {
+      "part_id": "9d0928fb-0aa4-41d3-8013-1fef4e562f2a",
+      "svg_error_mm2": 1.1528124013266256e-14,
+      "pdf_error_mm2": 4.0718193254053534e-07,
+      "page": 0
+    },
+    {
+      "part_id": "f48e9c8b-5dc9-4f7d-a037-0f447e54cc4c",
+      "svg_error_mm2": 6.9767812710339595e-15,
+      "pdf_error_mm2": 4.7562313367976676e-07,
+      "page": 0
+    },
+    {
+      "part_id": "6fe2cc83-85fe-4562-a711-be4f8458a59d",
+      "svg_error_mm2": 1.1288660937193255e-14,
+      "pdf_error_mm2": 9.545090941912646e-07,
+      "page": 0
+    },
+    {
+      "part_id": "dcbe5bc5-2d5a-4d4d-8c99-ddb23d509fd8",
+      "svg_error_mm2": 7.30407881258161e-15,
+      "pdf_error_mm2": 1.5808142906361575e-06,
+      "page": 0
+    },
+    {
+      "part_id": "b95a8c00-71c8-4c7c-b81d-7cf3f50cc796",
+      "svg_error_mm2": 2.924941171222586e-15,
+      "pdf_error_mm2": 7.073906481875199e-07,
+      "page": 0
+    },
+    {
+      "part_id": "2d9c6882-2e90-480a-aa23-f9ec887b2489",
+      "svg_error_mm2": 2.5091326797363474e-15,
+      "pdf_error_mm2": 1.1014644021104942e-07,
+      "page": 0
+    },
+    {
+      "part_id": "a4c82922-9dca-40d6-9371-02abef1c741d",
+      "svg_error_mm2": 5.756668483252369e-16,
+      "pdf_error_mm2": 9.265263197245327e-07,
+      "page": 0
+    },
+    {
+      "part_id": "bc5dd4e4-8734-43c8-8be6-b4b6710fd55a",
+      "svg_error_mm2": 4.368142030109391e-15,
+      "pdf_error_mm2": 2.776071679607684e-07,
+      "page": 0
+    },
+    {
+      "part_id": "c036b9d9-bad8-4112-ae29-8570e4684dcf",
+      "svg_error_mm2": 8.827287858699878e-15,
+      "pdf_error_mm2": 1.2008277977290067e-07,
+      "page": 0
+    },
+    {
+      "part_id": "09f63b2f-c77a-45f2-a771-641248c9d6de",
+      "svg_error_mm2": 2.0499481201882847e-14,
+      "pdf_error_mm2": 1.3924699058087358e-06,
+      "page": 0
+    },
+    {
+      "part_id": "807adade-643b-4a17-8c76-29e764485e7e",
+      "svg_error_mm2": 5.471537238985977e-15,
+      "pdf_error_mm2": 7.266322338516545e-07,
+      "page": 0
+    },
+    {
+      "part_id": "a5295fc7-a8c7-4de9-ad0e-ec133d5fadd8",
+      "svg_error_mm2": 1.7810723322702364e-14,
+      "pdf_error_mm2": 1.9289558518124805e-06,
+      "page": 0
+    },
+    {
+      "part_id": "6abcab1f-5588-4f93-91f6-1f4ba5dbe5bf",
+      "svg_error_mm2": 2.26148314507318e-14,
+      "pdf_error_mm2": 9.77595644951844e-07,
+      "page": 0
+    },
+    {
+      "part_id": "aeca9a8a-df43-43b1-9cce-533a1e01dcdf",
+      "svg_error_mm2": 3.535979807224863e-15,
+      "pdf_error_mm2": 8.755253197245328e-07,
+      "page": 0
+    },
+    {
+      "part_id": "4210a485-7eac-4cf5-ad57-c02b45dc670c",
+      "svg_error_mm2": 1.7934046050514692e-14,
+      "pdf_error_mm2": 1.9502112817647205e-06,
+      "page": 0
+    },
+    {
+      "part_id": "b42b2a75-6e35-451a-8e04-7a2cab6939df",
+      "svg_error_mm2": 3.744083638593706e-15,
+      "pdf_error_mm2": 5.331855415116174e-07,
+      "page": 0
+    },
+    {
+      "part_id": "a0426c89-8081-4364-8b68-dbbaa51ddc7f",
+      "svg_error_mm2": 4.175006915347296e-15,
+      "pdf_error_mm2": 3.760523666788958e-07,
+      "page": 0
+    },
+    {
+      "part_id": "9bf6cbdd-a5dd-4456-9840-51214255b2c0",
+      "svg_error_mm2": 1.3640712478548627e-14,
+      "pdf_error_mm2": 2.810816233851655e-06,
+      "page": 0
+    },
+    {
+      "part_id": "4f931b88-1cd3-4703-8052-e44d84065f8d",
+      "svg_error_mm2": 4.982507530016079e-15,
+      "pdf_error_mm2": 8.773464466920412e-07,
+      "page": 0
+    },
+    {
+      "part_id": "6f1d6168-bae7-439f-9afe-f88b0210a653",
+      "svg_error_mm2": 1.77880316107682e-14,
+      "pdf_error_mm2": 2.243542144951844e-06,
+      "page": 0
+    },
+    {
+      "part_id": "efb5f4ea-eaae-41ed-a67f-99793f8e31cf",
+      "svg_error_mm2": 1.27727761562528e-14,
+      "pdf_error_mm2": 3.539280042611112e-07,
+      "page": 0
+    },
+    {
+      "part_id": "19ae4cc4-4630-47ab-9c5c-2fa7d60de4d3",
+      "svg_error_mm2": 5.606181531527907e-15,
+      "pdf_error_mm2": 2.5493742817647207e-06,
+      "page": 0
+    },
+    {
+      "part_id": "c4717bcb-ca40-44f0-a76d-b60365d8144f",
+      "svg_error_mm2": 4.9182811192058684e-15,
+      "pdf_error_mm2": 2.0852184209073183e-06,
+      "page": 0
+    },
+    {
+      "part_id": "2e7663d3-8428-42ea-8f3d-1666fba475ff",
+      "svg_error_mm2": 5.52996653424614e-14,
+      "pdf_error_mm2": 6.100615495524683e-06,
+      "page": 0
+    },
+    {
+      "part_id": "0a983689-03c7-4e81-9fc6-30170eff552c",
+      "svg_error_mm2": 5e-71,
+      "pdf_error_mm2": 4.2611111111111115e-15,
+      "page": 1
+    },
+    {
+      "part_id": "3648e733-6f7e-4ff4-a819-d36a76e78a34",
+      "svg_error_mm2": 1.3486877561365179e-14,
+      "pdf_error_mm2": 8.678465533079591e-07,
+      "page": 1
+    },
+    {
+      "part_id": "c4feb2ca-047f-4c62-9e23-2c7077b04a39",
+      "svg_error_mm2": 7.512198002198195e-15,
+      "pdf_error_mm2": 8.08302996606592e-07,
+      "page": 1
+    },
+    {
+      "part_id": "d2d2366f-d6dd-493a-8851-c4cf7e497999",
+      "svg_error_mm2": 8.3529314325392e-15,
+      "pdf_error_mm2": 1.7657940042611114e-06,
+      "page": 1
+    },
+    {
+      "part_id": "f02b27ce-0a81-4a36-b295-538db1c3caf7",
+      "svg_error_mm2": 2.5477287583350606e-14,
+      "pdf_error_mm2": 3.409453920526638e-07,
+      "page": 1
+    },
+    {
+      "part_id": "a4328b15-f9a6-415f-86f3-9a8665703fb6",
+      "svg_error_mm2": 4.973040352377697e-14,
+      "pdf_error_mm2": 2.197187420907318e-06,
+      "page": 1
+    },
+    {
+      "part_id": "d3562035-502e-408a-922d-c49a46abcb56",
+      "svg_error_mm2": 7.59033134744709e-15,
+      "pdf_error_mm2": 1.158490752308937e-06,
+      "page": 1
+    },
+    {
+      "part_id": "4dc09cad-4555-4816-8380-c83d1a08de8c",
+      "svg_error_mm2": 1.18465389361843e-13,
+      "pdf_error_mm2": 1.0882759995411113e-05,
+      "page": 1
+    },
+    {
+      "part_id": "52825b91-aa8f-4ea0-b60a-831907fd3166",
+      "svg_error_mm2": 3.403836003144356e-15,
+      "pdf_error_mm2": 2.109394759937644e-07,
+      "page": 1
+    },
+    {
+      "part_id": "04c8c9fe-5cca-4d56-a0ab-957d833c0646",
+      "svg_error_mm2": 1.8296945437821206e-14,
+      "pdf_error_mm2": 1.6403304966065921e-06,
+      "page": 1
+    },
+    {
+      "part_id": "ef8b6c8e-105b-409f-82aa-bd6efde4a855",
+      "svg_error_mm2": 1.678614362387685e-14,
+      "pdf_error_mm2": 6.581475044250001e-07,
+      "page": 1
+    },
+    {
+      "part_id": "c1ce428a-efcf-48f7-9af2-fdae305401d6",
+      "svg_error_mm2": 7.18490737580137e-14,
+      "pdf_error_mm2": 3.072192392052664e-06,
+      "page": 1
+    },
+    {
+      "part_id": "368eef26-92f3-4192-9a81-e9d5e0279fdf",
+      "svg_error_mm2": 1.91712247093762e-14,
+      "pdf_error_mm2": 1.3361495524682041e-08,
+      "page": 1
+    },
+    {
+      "part_id": "71ae2be4-2607-4830-816b-3502cd9e2aff",
+      "svg_error_mm2": 1.0367303369711269e-13,
+      "pdf_error_mm2": 6.454818752308938e-06,
+      "page": 1
+    },
+    {
+      "part_id": "d80cbf1f-c022-4a1e-a37d-c692e7af4a95",
+      "svg_error_mm2": 2.4146254797104046e-14,
+      "pdf_error_mm2": 8.97027660544409e-07,
+      "page": 1
+    },
+    {
+      "part_id": "1ad1eb8a-e9e9-4a79-bf30-a08debb5820a",
+      "svg_error_mm2": 2.055381187692349e-14,
+      "pdf_error_mm2": 8.386307028892519e-07,
+      "page": 1
+    },
+    {
+      "part_id": "7b2466f7-2fab-44f8-b8e5-8d9bb6dde0cd",
+      "svg_error_mm2": 5.455574145248393e-15,
+      "pdf_error_mm2": 1.2335153149907918e-06,
+      "page": 1
+    },
+    {
+      "part_id": "347fd702-67cf-42c2-947b-dde663172fc5",
+      "svg_error_mm2": 7.57456091564855e-14,
+      "pdf_error_mm2": 6.240829995575002e-06,
+      "page": 1
+    },
+    {
+      "part_id": "2498447d-080b-430c-ba31-3eb5bf13a203",
+      "svg_error_mm2": 1.2174100831607036e-14,
+      "pdf_error_mm2": 3.427186917408052e-07,
+      "page": 1
+    },
+    {
+      "part_id": "cbb449c5-884c-44b4-ae6a-11552891cf0f",
+      "svg_error_mm2": 7.67596540831974e-14,
+      "pdf_error_mm2": 8.349145495524683e-06,
+      "page": 1
+    },
+    {
+      "part_id": "d15a471d-8240-43a6-a96e-64a5037a5db9",
+      "svg_error_mm2": 3.293838040219078e-14,
+      "pdf_error_mm2": 7.806728320554197e-07,
+      "page": 1
+    },
+    {
+      "part_id": "e091fa90-ccc7-4a63-9392-f45a4b42f557",
+      "svg_error_mm2": 1.6067217202239946e-14,
+      "pdf_error_mm2": 2.6532576605444095e-06,
+      "page": 1
+    },
+    {
+      "part_id": "26c20406-8b76-4e33-bc8e-83e3de030840",
+      "svg_error_mm2": 2.2550748551171498e-14,
+      "pdf_error_mm2": 2.1806152347844037e-06,
+      "page": 1
+    },
+    {
+      "part_id": "9635e46f-a363-4b1e-82ca-870231d721cc",
+      "svg_error_mm2": 1.0529964535551164e-13,
+      "pdf_error_mm2": 9.745952710146733e-06,
+      "page": 1
+    },
+    {
+      "part_id": "c20ef21f-57df-484f-bd4e-15c159e9d240",
+      "svg_error_mm2": 8.081995132921691e-15,
+      "pdf_error_mm2": 4.716499283547169e-07,
+      "page": 1
+    },
+    {
+      "part_id": "b7846caf-c108-4c7f-9954-c97da72ce5fe",
+      "svg_error_mm2": 9.449059712360722e-14,
+      "pdf_error_mm2": 8.826403308259197e-06,
+      "page": 1
+    },
+    {
+      "part_id": "c5263b7a-8b53-4b1b-b0d5-419ea9170031",
+      "svg_error_mm2": 2.362835177307505e-14,
+      "pdf_error_mm2": 1.0660509952472225e-06,
+      "page": 1
+    },
+    {
+      "part_id": "a21828c6-ddd3-41ef-b5aa-e43815c6816e",
+      "svg_error_mm2": 1.796401707732442e-14,
+      "pdf_error_mm2": 9.430498320554197e-07,
+      "page": 1
+    },
+    {
+      "part_id": "85e4e5be-1076-4d3e-9a1c-056f2a43d73d",
+      "svg_error_mm2": 3.0057097022408975e-14,
+      "pdf_error_mm2": 5.053883629193059e-07,
+      "page": 1
+    },
+    {
+      "part_id": "9992c451-c7d7-40f7-b540-b7473975bdf1",
+      "svg_error_mm2": 1.00086515730019e-13,
+      "pdf_error_mm2": 9.015422765215599e-06,
+      "page": 1
+    },
+    {
+      "part_id": "8efb13d8-7a2b-44d2-9fed-8dc4d7b96ba8",
+      "svg_error_mm2": 4.893766340909972e-15,
+      "pdf_error_mm2": 1.5914598195623498e-06,
+      "page": 1
+    },
+    {
+      "part_id": "95858249-5801-48c3-94a9-332a8ebb97ec",
+      "svg_error_mm2": 1.043243386791659e-13,
+      "pdf_error_mm2": 9.28267367617606e-06,
+      "page": 1
+    }
+  ],
+  "actual_actions": {
+    "draw": 1,
+    "open_profile": 1,
+    "copy_profile": 1,
+    "loft": 1,
+    "segment": 2,
+    "manual_grid": 2,
+    "undo": 2,
+    "redo": 1,
+    "focus": 2,
+    "focus_all": 1,
+    "save": 1,
+    "new": 1,
+    "open": 1,
+    "recompute": 1,
+    "export": 1
+  },
+  "native_dialogs": 3,
+  "native_elapsed_seconds": 42.125,
+  "new_user": "NOT_RUN",
+  "physical_build": "NOT_RUN",
+  "status": "PASS_PRELIMINARY_LINE_ARTIFACT_AUDIT_NOT_FINAL_D_ACCEPTANCE"
+}

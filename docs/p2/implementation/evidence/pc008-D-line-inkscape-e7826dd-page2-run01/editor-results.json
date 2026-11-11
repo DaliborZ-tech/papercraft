@@ -1,0 +1,277 @@
+{
+  "status": "PASS",
+  "source_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
+  "source_status_at_start": "?? docs/p2/implementation/evidence/pc008-D-gothic-desktop-e7826dd-run01/\n?? docs/p2/implementation/evidence/pc008-D-gothic-inkscape-e7826dd-page1-run01/\n?? docs/p2/implementation/evidence/pc008-D-gothic-inkscape-e7826dd-page2-run01/\n?? docs/p2/implementation/evidence/pc008-D-line-desktop-e7826dd-run01/\n?? docs/p2/implementation/evidence/pc008-D-line-inkscape-e7826dd-page1-run01/\n?? docs/p2/implementation/evidence/pc008-integrated-suite-e7826dd-run01.log\n?? docs/p2/implementation/evidence/pc008-integrated-suite-e7826dd-run01.xml",
+  "script_sha256": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+  "origin_source": "C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-desktop-e7826dd-run01\\D-segmented\\export\\page-d14fdf16-69e6-455e-92df-662a5136f1eb.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "06840f81b332e19858189d4b69e897f7ba257d825e6ac8a45b7d7fad286e8c89",
+    "model.pdf": "3d6145e0a478b74c13335d650d561f8e8889c67df3ba5d1c5a19a00d836025be",
+    "page-5371efa4-7f00-45b7-8cff-c539cc048b35.svg": "e4704fdca511f6ba50414028dcc6c253f0ee63596669455c999da12c197bdd66",
+    "page-d14fdf16-69e6-455e-92df-662a5136f1eb.svg": "bb56a7b45877e985876b826072a4b3a4ec1513872ef834e6c51169165aead6cb"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.75,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-inkscape-e7826dd-page2-run01\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 1.609,
+      "exit_code": 0,
+      "stdout": "svg33,37.7953,94.0157,576.814,1009.72\npart-93c3df79-d690-45f3-88aa-638bcc5fdb44,93.6427,94.0157,31.3742,32.8503\nrole-93c3df79-d690-45f3-88aa-638bcc5fdb44-CUT,93.6427,94.0157,20.2155,32.8503\npath-93c3df79-d690-45f3-88aa-638bcc5fdb44-CUT-0,93.6427,94.0157,20.2155,32.8503\n\n\n\nrole-93c3df79-d690-45f3-88aa-638bcc5fdb44-LABELS,109.39,103.051,15.6265,6.91129\nlabel-93c3df79-d690-45f3-88aa-638bcc5fdb44-0,109.39,103.051,15.6265,6.91129\n\n\npart-cb122914-dce7-4236-a4f7-094babc96b83,160.864,94.0157,39.7936,16.8831\nrole-cb122914-dce7-4236-a4f7-094babc96b83-CUT,160.864,94.0157,38.6035,16.8831\npath-cb122914-dce7-4236-a4f7-094babc96b83-CUT-0,160.864,94.0157,38.6035,16.8831\n\n\n\nrole-cb122914-dce7-4236-a4f7-094babc96b83-LABELS,184.953,95.5817,15.705,6.91129\nlabel-cb122914-dce7-4236-a4f7-094babc96b83-0,184.953,95.5817,15.705,6.91129\n\n\npart-551c7d7a-d2a9-4697-8f70-89d8151545a9,229.667,94.0157,32.2788,32.8233\nrole-551c7d7a-d2a9-4697-8f70-89d8151545a9-CUT,229.667,94.0157,21.947,32.8233\npath-551c7d7a-d2a9-4697-8f70-89d8151545a9-CUT-0,229.667,94.0157,21.947,32.8233\n\n\n\nrole-551c7d7a-d2a9-4697-8f70-89d8151545a9-LABELS,246.296,103.034,15.6496,6.91129\nlabel-551c7d7a-d2a9-4697-8f70-89d8151545a9-0,246.296,103.034,15.6496,6.91129\n\n\npart-2e0d7d3a-c5f0-42de-af88-e467520781ed,296.922,94.0157,39.9715,16.8318\nrole-2e0d7d3a-c5f0-42de-af88-e467520781ed-CUT,296.922,94.0157,39.49,16.8318\npath-2e0d7d3a-c5f0-42de-af88-e467520781ed-CUT-0,296.922,94.0157,39.49,16.8318\n\n\n\nrole-2e0d7d3a-c5f0-42de-af88-e467520781ed-LABELS,321.239,95.5605,15.6542,6.91129\nlabel-2e0d7d3a-c5f0-42de-af88-e467520781ed-0,321.239,95.5605,15.6542,6.91129\n\n\npart-c78d45ee-23bf-465e-ad36-14ded4b57d4d,365.684,94.0157,33.3692,32.7105\nrole-c78d45ee-23bf-465e-ad36-14ded4b57d4d-CUT,365.684,94.0157,23.9046,32.7105\npath-c78d45ee-23bf-465e-ad36-14ded4b57d4d-CUT-0,365.684,94.0157,23.9046,32.7105\n\n\n\nrole-c78d45ee-23bf-465e-ad36-14ded4b57d4d-LABELS,383.385,102.984,15.6681,6.91129\nlabel-c78d45ee-23bf-465e-ad36-14ded4b57d4d-0,383.385,102.984,15.6681,6.91129\n\n\npart-125075ca-92c5-49ba-bf83-f1a83a894b65,432.997,94.0157,40.4939,16.9233\nrole-125075ca-92c5-49ba-bf83-f1a83a894b65-CUT,432.997,94.0157,40.4939,16.9233\npath-125075ca-92c5-49ba-bf83-f1a83a894b65-CUT-0,432.997,94.0157,40.4939,16.9233\n\n\n\nrole-125075ca-92c5-49ba-bf83-f1a83a894b65-LABELS,457.514,95.61,15.6681,6.91129\nlabel-125075ca-92c5-49ba-bf83-f1a83a894b65-0,457.514,95.61,15.6681,6.91129\n\n\npart-5bc57494-5080-47bf-a87a-7d6578a90c9f,501.694,94.0157,34.5534,32.5306\nrole-5bc57494-5080-47bf-a87a-7d6578a90c9f-CUT,501.694,94.0157,26.0116,32.5306\npath-5bc57494-5080-47bf-a87a-7d6578a90c9f-CUT-0,501.694,94.0157,26.0116,32.5306\n\n\n\nrole-5bc57494-5080-47bf-a87a-7d6578a90c9f-LABELS,520.617,102.911,15.6312,6.90668\nlabel-5bc57494-5080-47bf-a87a-7d6578a90c9f-0,520.617,102.911,15.6312,6.90668\n\n\npart-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64,569.086,94.0157,41.6081,17.1327\nrole-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-CUT,569.086,94.0157,41.6081,17.1327\npath-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-CUT-0,569.086,94.0157,41.6081,17.1327\n\n\n\nrole-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-LABELS,593.781,95.7177,14.3485,6.79134\nlabel-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-0,593.781,95.7177,14.3485,6.79134\n\n\npart-e2487bcf-a2ca-464d-807e-2465ec02fc21,93.6564,177.165,31.319,33.8795\nrole-e2487bcf-a2ca-464d-807e-2465ec02fc21-CUT,93.6564,177.165,20.2018,33.8795\npath-e2487bcf-a2ca-464d-807e-2465ec02fc21-CUT-0,93.6564,177.165,20.2018,33.8795\n\n\n\nrole-e2487bcf-a2ca-464d-807e-2465ec02fc21-LABELS,109.39,186.693,15.585,6.79134\nlabel-e2487bcf-a2ca-464d-807e-2465ec02fc21-0,109.39,186.693,15.585,6.79134\n\n\npart-85ae30e6-3131-4d58-b9c0-f14b1123fcee,160.818,177.165,40.466,16.9412\nrole-85ae30e6-3131-4d58-b9c0-f14b1123fcee-CUT,160.818,177.165,39.4846,16.9412\npath-85ae30e6-3131-4d58-b9c0-f14b1123fcee-CUT-0,160.818,177.165,39.4846,16.9412\n\n\n\nrole-85ae30e6-3131-4d58-b9c0-f14b1123fcee-LABELS,185.63,178.762,15.6542,6.91129\nlabel-85ae30e6-3131-4d58-b9c0-f14b1123fcee-0,185.63,178.762,15.6542,6.91129\n\n\npart-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d,229.675,177.165,32.394,33.8416\nrole-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-CUT,229.675,177.165,22.2477,33.8416\npath-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-CUT-0,229.675,177.165,22.2477,33.8416\n\n\n\nrole-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-LABELS,246.443,186.696,15.6265,6.76366\nlabel-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-0,246.443,186.696,15.6265,6.76366\n\n\npart-373aac81-08df-4dcf-973c-c052e7ea15a7,296.868,177.165,40.8038,16.8258\nrole-373aac81-08df-4dcf-973c-c052e7ea15a7-CUT,296.868,177.165,40.5142,16.8258\npath-373aac81-08df-4dcf-973c-c052e7ea15a7-CUT-0,296.868,177.165,40.5142,16.8258\n\n\n\nrole-373aac81-08df-4dcf-973c-c052e7ea15a7-LABELS,321.967,178.738,15.705,6.879\nlabel-373aac81-08df-4dcf-973c-c052e7ea15a7-0,321.967,178.738,15.705,6.879\n\n\npart-788abde5-beb5-49a2-a964-a7a1fceaa8fd,365.686,177.165,33.6346,33.6913\nrole-788abde5-beb5-49a2-a964-a7a1fceaa8fd-CUT,365.686,177.165,24.5068,33.6913\npath-788abde5-beb5-49a2-a964-a7a1fceaa8fd-CUT-0,365.686,177.165,24.5068,33.6913\n\n\n\nrole-788abde5-beb5-49a2-a964-a7a1fceaa8fd-LABELS,383.671,186.599,15.6496,6.90668\nlabel-788abde5-beb5-49a2-a964-a7a1fceaa8fd-0,383.671,186.599,15.6496,6.90668\n\n\npart-dd8352c5-ed6e-4fab-a926-b59eb86b594d,432.935,177.165,41.6514,16.8527\nrole-dd8352c5-ed6e-4fab-a926-b59eb86b594d-CUT,432.935,177.165,41.6514,16.8527\npath-dd8352c5-ed6e-4fab-a926-b59eb86b594d-CUT-0,432.935,177.165,41.6514,16.8527\n\n\n\nrole-dd8352c5-ed6e-4fab-a926-b59eb86b594d-LABELS,458.291,178.756,15.6542,6.76366\nlabel-dd8352c5-ed6e-4fab-a926-b59eb86b594d-0,458.291,178.756,15.6542,6.76366\n\n\npart-852b4c30-6c5a-4816-bb73-8b9066b7659e,501.691,177.165,35.0082,33.4535\nrole-852b4c30-6c5a-4816-bb73-8b9066b7659e-CUT,501.691,177.165,26.8909,33.4535\npath-852b4c30-6c5a-4816-bb73-8b9066b7659e-CUT-0,501.691,177.165,26.8909,33.4535\n\n\n\nrole-852b4c30-6c5a-4816-bb73-8b9066b7659e-LABELS,521.031,186.496,15.6681,6.90668\nlabel-852b4c30-6c5a-4816-bb73-8b9066b7659e-0,521.031,186.496,15.6681,6.90668\n\n\npart-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9,569.018,177.165,42.8882,16.9983\nrole-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-CUT,569.018,177.165,42.8882,16.9983\npath-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-CUT-0,569.018,177.165,42.8882,16.9983\n\n\n\nrole-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-LABELS,594.608,178.804,15.6681,6.90668\nlabel-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-0,594.608,178.804,15.6681,6.90668\n\n\npart-136af557-a02c-4edd-b612-584b70ccbdb9,93.671,260.315,31.3506,35.0564\nrole-136af557-a02c-4edd-b612-584b70ccbdb9-CUT,93.671,260.315,20.1873,35.0564\npath-136af557-a02c-4edd-b612-584b70ccbdb9-CUT-0,93.671,260.315,20.1873,35.0564\n\n\n\nrole-136af557-a02c-4edd-b612-584b70ccbdb9-LABELS,109.39,270.404,15.6312,6.90668\nlabel-136af557-a02c-4edd-b612-584b70ccbdb9-0,109.39,270.404,15.6312,6.90668\n\n\npart-c8014608-732a-4f8c-86ed-3e03ef68003a,160.765,260.315,40.4995,17.0192\nrole-c8014608-732a-4f8c-86ed-3e03ef68003a-CUT,160.765,260.315,40.4995,17.0192\npath-c8014608-732a-4f8c-86ed-3e03ef68003a-CUT-0,160.765,260.315,40.4995,17.0192\n\n\n\nrole-c8014608-732a-4f8c-86ed-3e03ef68003a-LABELS,186.419,261.953,14.3485,6.90668\nlabel-c8014608-732a-4f8c-86ed-3e03ef68003a-0,186.419,261.953,14.3485,6.90668\n\n\npart-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a,229.685,260.315,32.4892,35.0056\nrole-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-CUT,229.685,260.315,22.5468,35.0056\npath-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-CUT-0,229.685,260.315,22.5468,35.0056\n\n\n\nrole-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-LABELS,246.589,270.372,15.585,6.90668\nlabel-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-0,246.589,270.372,15.585,6.90668\n\n\npart-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7,296.807,260.315,41.6616,16.8456\nrole-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-CUT,296.807,260.315,41.6616,16.8456\npath-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-CUT-0,296.807,260.315,41.6616,16.8456\n\n\n\nrole-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-LABELS,322.801,261.872,15.6542,6.91129\nlabel-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-0,322.801,261.872,15.6542,6.91129\n\n\npart-fdb17179-eb73-4b34-84e9-59738146fe72,365.691,260.315,33.8933,33.3196\nrole-fdb17179-eb73-4b34-84e9-59738146fe72-CUT,365.691,260.315,24.8818,33.3196\npath-fdb17179-eb73-4b34-84e9-59738146fe72-CUT-0,365.691,260.315,24.8818,33.3196\n\n\n\nrole-fdb17179-eb73-4b34-84e9-59738146fe72-LABELS,383.958,270.309,15.6265,6.879\nlabel-fdb17179-eb73-4b34-84e9-59738146fe72-0,383.958,270.309,15.6265,6.879\n\n\npart-d6795538-6651-4c55-8c45-0e98efc8949b,432.868,260.315,42.9215,16.8133\nrole-d6795538-6651-4c55-8c45-0e98efc8949b-CUT,432.868,260.315,42.9215,16.8133\npath-d6795538-6651-4c55-8c45-0e98efc8949b-CUT-0,432.868,260.315,42.9215,16.8133\n\n\n\nrole-d6795538-6651-4c55-8c45-0e98efc8949b-LABELS,459.17,261.889,15.705,6.879\nlabel-d6795538-6651-4c55-8c45-0e98efc8949b-0,459.17,261.889,15.705,6.879\n\n\npart-4243f83f-eda6-42da-af17-03d24abfbbed,501.691,260.315,35.4051,33.0677\nrole-4243f83f-eda6-42da-af17-03d24abfbbed-CUT,501.691,260.315,27.4402,33.0677\npath-4243f83f-eda6-42da-af17-03d24abfbbed-CUT-0,501.691,260.315,27.4402,33.0677\n\n\n\nrole-4243f83f-eda6-42da-af17-03d24abfbbed-LABELS,521.446,270.146,15.6496,6.90668\nlabel-4243f83f-eda6-42da-af17-03d24abfbbed-0,521.446,270.146,15.6496,6.90668\n\n\npart-b6d68d8b-bb09-4727-8c89-80c73d986d1b,568.943,260.315,44.271,16.8999\nrole-b6d68d8b-bb09-4727-8c89-80c73d986d1b-CUT,568.943,260.315,44.271,16.8999\npath-b6d68d8b-bb09-4727-8c89-80c73d986d1b-CUT-0,568.943,260.315,44.271,16.8999\n\n\n\nrole-b6d68d8b-bb09-4727-8c89-80c73d986d1b-LABELS,595.531,261.937,15.6542,6.879\nlabel-b6d68d8b-bb09-4727-8c89-80c73d986d1b-0,595.531,261.937,15.6542,6.879\n\n\npart-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce,93.6859,343.465,31.3726,36.3663\nrole-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-CUT,93.6859,343.465,20.1724,36.3663\npath-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-CUT-0,93.6859,343.465,20.1724,36.3663\n\n\n\nrole-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-LABELS,109.39,354.18,15.6681,6.90668\nlabel-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-0,109.39,354.18,15.6681,6.90668\n\n\npart-a5524347-55f1-489a-9621-30e97edcdbaa,160.706,343.465,42.2732,17.1124\nrole-a5524347-55f1-489a-9621-30e97edcdbaa-CUT,160.706,343.465,41.6383,17.1124\npath-a5524347-55f1-489a-9621-30e97edcdbaa-CUT-0,160.706,343.465,41.6383,17.1124\n\n\n\nrole-a5524347-55f1-489a-9621-30e97edcdbaa-LABELS,187.311,345.151,15.6681,6.90668\nlabel-a5524347-55f1-489a-9621-30e97edcdbaa-0,187.311,345.151,15.6681,6.90668\n\n\npart-2afe7844-bee9-4255-83c2-1cc70fed48df,229.696,343.465,32.6711,34.7115\nrole-2afe7844-bee9-4255-83c2-1cc70fed48df-CUT,229.696,343.465,22.7155,34.7115\npath-2afe7844-bee9-4255-83c2-1cc70fed48df-CUT-0,229.696,343.465,22.7155,34.7115\n\n\n\nrole-2afe7844-bee9-4255-83c2-1cc70fed48df-LABELS,246.736,354.139,15.6312,6.90668\nlabel-2afe7844-bee9-4255-83c2-1cc70fed48df-0,246.736,354.139,15.6312,6.90668\n\n\npart-f32f9b26-8a60-47da-8fe8-b3cab66dc126,298.355,343.465,41.3081,16.8869\nrole-f32f9b26-8a60-47da-8fe8-b3cab66dc126-CUT,298.355,343.465,41.3081,16.8869\npath-f32f9b26-8a60-47da-8fe8-b3cab66dc126-CUT-0,298.355,343.465,41.3081,16.8869\n\n\n\nrole-f32f9b26-8a60-47da-8fe8-b3cab66dc126-LABELS,323.733,345.045,14.3485,6.90668\nlabel-f32f9b26-8a60-47da-8fe8-b3cab66dc126-0,323.733,345.045,14.3485,6.90668\n\n\npart-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d,365.697,343.465,34.132,34.5051\nrole-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-CUT,365.697,343.465,25.4477,34.5051\npath-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-CUT-0,365.697,343.465,25.4477,34.5051\n\n\n\nrole-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-LABELS,384.244,354.025,15.585,6.90668\nlabel-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-0,384.244,354.025,15.585,6.90668\n\n\npart-c3fab0c1-be47-4d4f-9947-e860277e97c1,434.419,343.465,42.6694,16.8009\nrole-c3fab0c1-be47-4d4f-9947-e860277e97c1-CUT,434.419,343.465,42.6694,16.8009\npath-c3fab0c1-be47-4d4f-9947-e860277e97c1-CUT-0,434.419,343.465,42.6694,16.8009\n\n\n\nrole-c3fab0c1-be47-4d4f-9947-e860277e97c1-LABELS,460.141,345.008,15.6542,6.91129\nlabel-c3fab0c1-be47-4d4f-9947-e860277e97c1-0,460.141,345.008,15.6542,6.91129\n\n\npart-72b185c5-54b6-4018-9096-c36d7ea32fa1,501.692,343.465,35.7952,34.1839\nrole-72b185c5-54b6-4018-9096-c36d7ea32fa1-CUT,501.692,343.465,28.2664,34.1839\npath-72b185c5-54b6-4018-9096-c36d7ea32fa1-CUT-0,501.692,343.465,28.2664,34.1839\n\n\n\nrole-72b185c5-54b6-4018-9096-c36d7ea32fa1-LABELS,521.861,353.854,15.6265,6.90668\nlabel-72b185c5-54b6-4018-9096-c36d7ea32fa1-0,521.861,353.854,15.6265,6.90668\n\n\npart-f81d3eb9-6e42-4189-ac2b-10c52a391ab1,570.482,343.465,44.1281,16.8335\nrole-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-CUT,570.482,343.465,44.1281,16.8335\npath-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-CUT-0,570.482,343.465,44.1281,16.8335\n\n\n\nrole-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-LABELS,596.54,345.029,15.705,6.90668\nlabel-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-0,596.54,345.029,15.705,6.90668\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath33,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-inkscape-e7826dd-page2-run01\\editor-original.svg",
+        "--actions=select-by-id:part-93c3df79-d690-45f3-88aa-638bcc5fdb44;transform-translate:10,15;select-clear;select-clear;select-by-id:label-93c3df79-d690-45f3-88aa-638bcc5fdb44-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-inkscape-e7826dd-page2-run01\\editor-edited.svg;export-do"
+      ],
+      "seconds": 1.656,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-inkscape-e7826dd-page2-run01\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 1.61,
+      "exit_code": 0,
+      "stdout": "svg33,37.7953,94.0157,576.814,1009.72\npart-93c3df79-d690-45f3-88aa-638bcc5fdb44,103.643,109.016,106.125,32.8503\nrole-93c3df79-d690-45f3-88aa-638bcc5fdb44-CUT,103.643,109.016,20.2155,32.8503\npath-93c3df79-d690-45f3-88aa-638bcc5fdb44-CUT-0,103.643,109.016,20.2155,32.8503\n\n\n\nrole-93c3df79-d690-45f3-88aa-638bcc5fdb44-LABELS,118.851,116.399,90.9172,10.4315\nlabel-93c3df79-d690-45f3-88aa-638bcc5fdb44-0,118.851,116.399,90.9172,10.4315\n\n\npart-cb122914-dce7-4236-a4f7-094babc96b83,160.864,94.0157,39.7936,16.8831\nrole-cb122914-dce7-4236-a4f7-094babc96b83-CUT,160.864,94.0157,38.6035,16.8831\npath-cb122914-dce7-4236-a4f7-094babc96b83-CUT-0,160.864,94.0157,38.6035,16.8831\n\n\n\nrole-cb122914-dce7-4236-a4f7-094babc96b83-LABELS,184.953,95.5817,15.705,6.91129\nlabel-cb122914-dce7-4236-a4f7-094babc96b83-0,184.953,95.5817,15.705,6.91129\n\n\npart-551c7d7a-d2a9-4697-8f70-89d8151545a9,229.667,94.0157,32.2788,32.8233\nrole-551c7d7a-d2a9-4697-8f70-89d8151545a9-CUT,229.667,94.0157,21.947,32.8233\npath-551c7d7a-d2a9-4697-8f70-89d8151545a9-CUT-0,229.667,94.0157,21.947,32.8233\n\n\n\nrole-551c7d7a-d2a9-4697-8f70-89d8151545a9-LABELS,246.296,103.034,15.6496,6.91129\nlabel-551c7d7a-d2a9-4697-8f70-89d8151545a9-0,246.296,103.034,15.6496,6.91129\n\n\npart-2e0d7d3a-c5f0-42de-af88-e467520781ed,296.922,94.0157,39.9715,16.8318\nrole-2e0d7d3a-c5f0-42de-af88-e467520781ed-CUT,296.922,94.0157,39.49,16.8318\npath-2e0d7d3a-c5f0-42de-af88-e467520781ed-CUT-0,296.922,94.0157,39.49,16.8318\n\n\n\nrole-2e0d7d3a-c5f0-42de-af88-e467520781ed-LABELS,321.239,95.5605,15.6542,6.91129\nlabel-2e0d7d3a-c5f0-42de-af88-e467520781ed-0,321.239,95.5605,15.6542,6.91129\n\n\npart-c78d45ee-23bf-465e-ad36-14ded4b57d4d,365.684,94.0157,33.3692,32.7105\nrole-c78d45ee-23bf-465e-ad36-14ded4b57d4d-CUT,365.684,94.0157,23.9046,32.7105\npath-c78d45ee-23bf-465e-ad36-14ded4b57d4d-CUT-0,365.684,94.0157,23.9046,32.7105\n\n\n\nrole-c78d45ee-23bf-465e-ad36-14ded4b57d4d-LABELS,383.385,102.984,15.6681,6.91129\nlabel-c78d45ee-23bf-465e-ad36-14ded4b57d4d-0,383.385,102.984,15.6681,6.91129\n\n\npart-125075ca-92c5-49ba-bf83-f1a83a894b65,432.997,94.0157,40.4939,16.9233\nrole-125075ca-92c5-49ba-bf83-f1a83a894b65-CUT,432.997,94.0157,40.4939,16.9233\npath-125075ca-92c5-49ba-bf83-f1a83a894b65-CUT-0,432.997,94.0157,40.4939,16.9233\n\n\n\nrole-125075ca-92c5-49ba-bf83-f1a83a894b65-LABELS,457.514,95.61,15.6681,6.91129\nlabel-125075ca-92c5-49ba-bf83-f1a83a894b65-0,457.514,95.61,15.6681,6.91129\n\n\npart-5bc57494-5080-47bf-a87a-7d6578a90c9f,501.694,94.0157,34.5534,32.5306\nrole-5bc57494-5080-47bf-a87a-7d6578a90c9f-CUT,501.694,94.0157,26.0116,32.5306\npath-5bc57494-5080-47bf-a87a-7d6578a90c9f-CUT-0,501.694,94.0157,26.0116,32.5306\n\n\n\nrole-5bc57494-5080-47bf-a87a-7d6578a90c9f-LABELS,520.617,102.911,15.6312,6.90668\nlabel-5bc57494-5080-47bf-a87a-7d6578a90c9f-0,520.617,102.911,15.6312,6.90668\n\n\npart-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64,569.086,94.0157,41.6081,17.1327\nrole-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-CUT,569.086,94.0157,41.6081,17.1327\npath-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-CUT-0,569.086,94.0157,41.6081,17.1327\n\n\n\nrole-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-LABELS,593.781,95.7177,14.3485,6.79134\nlabel-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-0,593.781,95.7177,14.3485,6.79134\n\n\npart-e2487bcf-a2ca-464d-807e-2465ec02fc21,93.6564,177.165,31.319,33.8795\nrole-e2487bcf-a2ca-464d-807e-2465ec02fc21-CUT,93.6564,177.165,20.2018,33.8795\npath-e2487bcf-a2ca-464d-807e-2465ec02fc21-CUT-0,93.6564,177.165,20.2018,33.8795\n\n\n\nrole-e2487bcf-a2ca-464d-807e-2465ec02fc21-LABELS,109.39,186.693,15.585,6.79134\nlabel-e2487bcf-a2ca-464d-807e-2465ec02fc21-0,109.39,186.693,15.585,6.79134\n\n\npart-85ae30e6-3131-4d58-b9c0-f14b1123fcee,160.818,177.165,40.466,16.9412\nrole-85ae30e6-3131-4d58-b9c0-f14b1123fcee-CUT,160.818,177.165,39.4846,16.9412\npath-85ae30e6-3131-4d58-b9c0-f14b1123fcee-CUT-0,160.818,177.165,39.4846,16.9412\n\n\n\nrole-85ae30e6-3131-4d58-b9c0-f14b1123fcee-LABELS,185.63,178.762,15.6542,6.91129\nlabel-85ae30e6-3131-4d58-b9c0-f14b1123fcee-0,185.63,178.762,15.6542,6.91129\n\n\npart-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d,229.675,177.165,32.394,33.8416\nrole-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-CUT,229.675,177.165,22.2477,33.8416\npath-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-CUT-0,229.675,177.165,22.2477,33.8416\n\n\n\nrole-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-LABELS,246.443,186.696,15.6265,6.76366\nlabel-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-0,246.443,186.696,15.6265,6.76366\n\n\npart-373aac81-08df-4dcf-973c-c052e7ea15a7,296.868,177.165,40.8038,16.8258\nrole-373aac81-08df-4dcf-973c-c052e7ea15a7-CUT,296.868,177.165,40.5142,16.8258\npath-373aac81-08df-4dcf-973c-c052e7ea15a7-CUT-0,296.868,177.165,40.5142,16.8258\n\n\n\nrole-373aac81-08df-4dcf-973c-c052e7ea15a7-LABELS,321.967,178.738,15.705,6.879\nlabel-373aac81-08df-4dcf-973c-c052e7ea15a7-0,321.967,178.738,15.705,6.879\n\n\npart-788abde5-beb5-49a2-a964-a7a1fceaa8fd,365.686,177.165,33.6346,33.6913\nrole-788abde5-beb5-49a2-a964-a7a1fceaa8fd-CUT,365.686,177.165,24.5068,33.6913\npath-788abde5-beb5-49a2-a964-a7a1fceaa8fd-CUT-0,365.686,177.165,24.5068,33.6913\n\n\n\nrole-788abde5-beb5-49a2-a964-a7a1fceaa8fd-LABELS,383.671,186.599,15.6496,6.90668\nlabel-788abde5-beb5-49a2-a964-a7a1fceaa8fd-0,383.671,186.599,15.6496,6.90668\n\n\npart-dd8352c5-ed6e-4fab-a926-b59eb86b594d,432.935,177.165,41.6514,16.8527\nrole-dd8352c5-ed6e-4fab-a926-b59eb86b594d-CUT,432.935,177.165,41.6514,16.8527\npath-dd8352c5-ed6e-4fab-a926-b59eb86b594d-CUT-0,432.935,177.165,41.6514,16.8527\n\n\n\nrole-dd8352c5-ed6e-4fab-a926-b59eb86b594d-LABELS,458.291,178.756,15.6542,6.76366\nlabel-dd8352c5-ed6e-4fab-a926-b59eb86b594d-0,458.291,178.756,15.6542,6.76366\n\n\npart-852b4c30-6c5a-4816-bb73-8b9066b7659e,501.691,177.165,35.0082,33.4535\nrole-852b4c30-6c5a-4816-bb73-8b9066b7659e-CUT,501.691,177.165,26.8909,33.4535\npath-852b4c30-6c5a-4816-bb73-8b9066b7659e-CUT-0,501.691,177.165,26.8909,33.4535\n\n\n\nrole-852b4c30-6c5a-4816-bb73-8b9066b7659e-LABELS,521.031,186.496,15.6681,6.90668\nlabel-852b4c30-6c5a-4816-bb73-8b9066b7659e-0,521.031,186.496,15.6681,6.90668\n\n\npart-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9,569.018,177.165,42.8882,16.9983\nrole-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-CUT,569.018,177.165,42.8882,16.9983\npath-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-CUT-0,569.018,177.165,42.8882,16.9983\n\n\n\nrole-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-LABELS,594.608,178.804,15.6681,6.90668\nlabel-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-0,594.608,178.804,15.6681,6.90668\n\n\npart-136af557-a02c-4edd-b612-584b70ccbdb9,93.671,260.315,31.3506,35.0564\nrole-136af557-a02c-4edd-b612-584b70ccbdb9-CUT,93.671,260.315,20.1873,35.0564\npath-136af557-a02c-4edd-b612-584b70ccbdb9-CUT-0,93.671,260.315,20.1873,35.0564\n\n\n\nrole-136af557-a02c-4edd-b612-584b70ccbdb9-LABELS,109.39,270.404,15.6312,6.90668\nlabel-136af557-a02c-4edd-b612-584b70ccbdb9-0,109.39,270.404,15.6312,6.90668\n\n\npart-c8014608-732a-4f8c-86ed-3e03ef68003a,160.765,260.315,40.4995,17.0192\nrole-c8014608-732a-4f8c-86ed-3e03ef68003a-CUT,160.765,260.315,40.4995,17.0192\npath-c8014608-732a-4f8c-86ed-3e03ef68003a-CUT-0,160.765,260.315,40.4995,17.0192\n\n\n\nrole-c8014608-732a-4f8c-86ed-3e03ef68003a-LABELS,186.419,261.953,14.3485,6.90668\nlabel-c8014608-732a-4f8c-86ed-3e03ef68003a-0,186.419,261.953,14.3485,6.90668\n\n\npart-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a,229.685,260.315,32.4892,35.0056\nrole-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-CUT,229.685,260.315,22.5468,35.0056\npath-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-CUT-0,229.685,260.315,22.5468,35.0056\n\n\n\nrole-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-LABELS,246.589,270.372,15.585,6.90668\nlabel-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-0,246.589,270.372,15.585,6.90668\n\n\npart-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7,296.807,260.315,41.6616,16.8456\nrole-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-CUT,296.807,260.315,41.6616,16.8456\npath-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-CUT-0,296.807,260.315,41.6616,16.8456\n\n\n\nrole-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-LABELS,322.801,261.872,15.6542,6.91129\nlabel-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-0,322.801,261.872,15.6542,6.91129\n\n\npart-fdb17179-eb73-4b34-84e9-59738146fe72,365.691,260.315,33.8933,33.3196\nrole-fdb17179-eb73-4b34-84e9-59738146fe72-CUT,365.691,260.315,24.8818,33.3196\npath-fdb17179-eb73-4b34-84e9-59738146fe72-CUT-0,365.691,260.315,24.8818,33.3196\n\n\n\nrole-fdb17179-eb73-4b34-84e9-59738146fe72-LABELS,383.958,270.309,15.6265,6.879\nlabel-fdb17179-eb73-4b34-84e9-59738146fe72-0,383.958,270.309,15.6265,6.879\n\n\npart-d6795538-6651-4c55-8c45-0e98efc8949b,432.868,260.315,42.9215,16.8133\nrole-d6795538-6651-4c55-8c45-0e98efc8949b-CUT,432.868,260.315,42.9215,16.8133\npath-d6795538-6651-4c55-8c45-0e98efc8949b-CUT-0,432.868,260.315,42.9215,16.8133\n\n\n\nrole-d6795538-6651-4c55-8c45-0e98efc8949b-LABELS,459.17,261.889,15.705,6.879\nlabel-d6795538-6651-4c55-8c45-0e98efc8949b-0,459.17,261.889,15.705,6.879\n\n\npart-4243f83f-eda6-42da-af17-03d24abfbbed,501.691,260.315,35.4051,33.0677\nrole-4243f83f-eda6-42da-af17-03d24abfbbed-CUT,501.691,260.315,27.4402,33.0677\npath-4243f83f-eda6-42da-af17-03d24abfbbed-CUT-0,501.691,260.315,27.4402,33.0677\n\n\n\nrole-4243f83f-eda6-42da-af17-03d24abfbbed-LABELS,521.446,270.146,15.6496,6.90668\nlabel-4243f83f-eda6-42da-af17-03d24abfbbed-0,521.446,270.146,15.6496,6.90668\n\n\npart-b6d68d8b-bb09-4727-8c89-80c73d986d1b,568.943,260.315,44.271,16.8999\nrole-b6d68d8b-bb09-4727-8c89-80c73d986d1b-CUT,568.943,260.315,44.271,16.8999\npath-b6d68d8b-bb09-4727-8c89-80c73d986d1b-CUT-0,568.943,260.315,44.271,16.8999\n\n\n\nrole-b6d68d8b-bb09-4727-8c89-80c73d986d1b-LABELS,595.531,261.937,15.6542,6.879\nlabel-b6d68d8b-bb09-4727-8c89-80c73d986d1b-0,595.531,261.937,15.6542,6.879\n\n\npart-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce,93.6859,343.465,31.3726,36.3663\nrole-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-CUT,93.6859,343.465,20.1724,36.3663\npath-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-CUT-0,93.6859,343.465,20.1724,36.3663\n\n\n\nrole-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-LABELS,109.39,354.18,15.6681,6.90668\nlabel-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-0,109.39,354.18,15.6681,6.90668\n\n\npart-a5524347-55f1-489a-9621-30e97edcdbaa,160.706,343.465,42.2732,17.1124\nrole-a5524347-55f1-489a-9621-30e97edcdbaa-CUT,160.706,343.465,41.6383,17.1124\npath-a5524347-55f1-489a-9621-30e97edcdbaa-CUT-0,160.706,343.465,41.6383,17.1124\n\n\n\nrole-a5524347-55f1-489a-9621-30e97edcdbaa-LABELS,187.311,345.151,15.6681,6.90668\nlabel-a5524347-55f1-489a-9621-30e97edcdbaa-0,187.311,345.151,15.6681,6.90668\n\n\npart-2afe7844-bee9-4255-83c2-1cc70fed48df,229.696,343.465,32.6711,34.7115\nrole-2afe7844-bee9-4255-83c2-1cc70fed48df-CUT,229.696,343.465,22.7155,34.7115\npath-2afe7844-bee9-4255-83c2-1cc70fed48df-CUT-0,229.696,343.465,22.7155,34.7115\n\n\n\nrole-2afe7844-bee9-4255-83c2-1cc70fed48df-LABELS,246.736,354.139,15.6312,6.90668\nlabel-2afe7844-bee9-4255-83c2-1cc70fed48df-0,246.736,354.139,15.6312,6.90668\n\n\npart-f32f9b26-8a60-47da-8fe8-b3cab66dc126,298.355,343.465,41.3081,16.8869\nrole-f32f9b26-8a60-47da-8fe8-b3cab66dc126-CUT,298.355,343.465,41.3081,16.8869\npath-f32f9b26-8a60-47da-8fe8-b3cab66dc126-CUT-0,298.355,343.465,41.3081,16.8869\n\n\n\nrole-f32f9b26-8a60-47da-8fe8-b3cab66dc126-LABELS,323.733,345.045,14.3485,6.90668\nlabel-f32f9b26-8a60-47da-8fe8-b3cab66dc126-0,323.733,345.045,14.3485,6.90668\n\n\npart-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d,365.697,343.465,34.132,34.5051\nrole-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-CUT,365.697,343.465,25.4477,34.5051\npath-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-CUT-0,365.697,343.465,25.4477,34.5051\n\n\n\nrole-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-LABELS,384.244,354.025,15.585,6.90668\nlabel-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-0,384.244,354.025,15.585,6.90668\n\n\npart-c3fab0c1-be47-4d4f-9947-e860277e97c1,434.419,343.465,42.6694,16.8009\nrole-c3fab0c1-be47-4d4f-9947-e860277e97c1-CUT,434.419,343.465,42.6694,16.8009\npath-c3fab0c1-be47-4d4f-9947-e860277e97c1-CUT-0,434.419,343.465,42.6694,16.8009\n\n\n\nrole-c3fab0c1-be47-4d4f-9947-e860277e97c1-LABELS,460.141,345.008,15.6542,6.91129\nlabel-c3fab0c1-be47-4d4f-9947-e860277e97c1-0,460.141,345.008,15.6542,6.91129\n\n\npart-72b185c5-54b6-4018-9096-c36d7ea32fa1,501.692,343.465,35.7952,34.1839\nrole-72b185c5-54b6-4018-9096-c36d7ea32fa1-CUT,501.692,343.465,28.2664,34.1839\npath-72b185c5-54b6-4018-9096-c36d7ea32fa1-CUT-0,501.692,343.465,28.2664,34.1839\n\n\n\nrole-72b185c5-54b6-4018-9096-c36d7ea32fa1-LABELS,521.861,353.854,15.6265,6.90668\nlabel-72b185c5-54b6-4018-9096-c36d7ea32fa1-0,521.861,353.854,15.6265,6.90668\n\n\npart-f81d3eb9-6e42-4189-ac2b-10c52a391ab1,570.482,343.465,44.1281,16.8335\nrole-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-CUT,570.482,343.465,44.1281,16.8335\npath-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-CUT-0,570.482,343.465,44.1281,16.8335\n\n\n\nrole-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-LABELS,596.54,345.029,15.705,6.90668\nlabel-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-0,596.54,345.029,15.705,6.90668\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath33,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-inkscape-e7826dd-page2-run01\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft-segmentation-gothic\\docs\\p2\\implementation\\evidence\\pc008-D-line-inkscape-e7826dd-page2-run01\\editor-final-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 1.812,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-022melky",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "elapsed_seconds": 15.5,
+  "files_sha256": {
+    "editor-edited.svg": "d654335ab44968a00b80d93d79597644f1bf4fed947682491db728cbed2740f3",
+    "editor-final-render.png": "5a9e42f78ff2d7d8dc866af0e28d22dfb698dce6b26bc8d30b30b664d589eec2",
+    "editor-gui.png": "45508a62330dbaec107c1fb5a0cd2cdb534b26151ab742f1d35099ef71b1175e",
+    "editor-original.svg": "bb56a7b45877e985876b826072a4b3a4ec1513872ef834e6c51169165aead6cb"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-93c3df79-d690-45f3-88aa-638bcc5fdb44",
+    "label_id": "label-93c3df79-d690-45f3-88aa-638bcc5fdb44-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "unchanged_by_actions; individual_native_GUI_edit_below",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "own_visible_windows": [
+    {
+      "hwnd": 7539098,
+      "title": "editor-edited.svg - Inkscape",
+      "class": "gdkWindowToplevel",
+      "width": 1936,
+      "height": 1048
+    }
+  ],
+  "initial_focus": {
+    "own_hwnd": 7539098,
+    "before_hwnd": 7539098,
+    "direct_activation_returned": true,
+    "after_hwnd": 7539098
+  },
+  "native_gui_text_edit": {
+    "text": "Žluťoučký – vlastní díl",
+    "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+    "own_pid": 36628,
+    "own_hwnd": 7539098,
+    "foreground_verified_before_each_chord": true
+  },
+  "gui_capture": {
+    "method": "QScreen.grabWindow(actual_editor_hwnd)",
+    "width": 1520,
+    "height": 873
+  },
+  "roundtrip_assertions": {
+    "path_count": 32,
+    "total_path_count_including_calibration": 33,
+    "editor_added_id_to_existing_calibration": [
+      "path33"
+    ],
+    "part_role_groups": [
+      "CUT",
+      "FOLD_MOUNTAIN",
+      "FOLD_VALLEY",
+      "TABS",
+      "LABELS",
+      "ARTWORK",
+      "GUIDES"
+    ],
+    "native_path_commands_preserved": true,
+    "all_local_coordinates_unchanged_mm_tolerance": 2e-05,
+    "other_text_objects_unchanged": true,
+    "original_bundle_unchanged": true,
+    "calibration_100mm_and_page_size_unchanged": true,
+    "cut_loop_count": 1,
+    "all_path_displacements_px": {
+      "path-93c3df79-d690-45f3-88aa-638bcc5fdb44-CUT-0": [
+        10.000299999999996,
+        15.00030000000001
+      ],
+      "path-cb122914-dce7-4236-a4f7-094babc96b83-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-551c7d7a-d2a9-4697-8f70-89d8151545a9-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-2e0d7d3a-c5f0-42de-af88-e467520781ed-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-c78d45ee-23bf-465e-ad36-14ded4b57d4d-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-125075ca-92c5-49ba-bf83-f1a83a894b65-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-5bc57494-5080-47bf-a87a-7d6578a90c9f-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-b9b0c4e4-bbf7-4ad5-ae65-7c5c95719a64-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-e2487bcf-a2ca-464d-807e-2465ec02fc21-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-85ae30e6-3131-4d58-b9c0-f14b1123fcee-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-3ba4ea1e-75ef-4c0e-aa89-abfb2e5e9d0d-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-373aac81-08df-4dcf-973c-c052e7ea15a7-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-788abde5-beb5-49a2-a964-a7a1fceaa8fd-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-dd8352c5-ed6e-4fab-a926-b59eb86b594d-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-852b4c30-6c5a-4816-bb73-8b9066b7659e-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-caf2680d-e7c7-4ccb-b5a1-1822d6fdc2a9-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-136af557-a02c-4edd-b612-584b70ccbdb9-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-c8014608-732a-4f8c-86ed-3e03ef68003a-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-bd98c17e-54bd-4b6e-a57d-2fc286b1f34a-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-2ba1a7c1-f00d-4ce8-ab2b-0e28f5eedba7-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-fdb17179-eb73-4b34-84e9-59738146fe72-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-d6795538-6651-4c55-8c45-0e98efc8949b-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-4243f83f-eda6-42da-af17-03d24abfbbed-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-b6d68d8b-bb09-4727-8c89-80c73d986d1b-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-4f791ecc-44d3-4e7b-9d7e-84c1e63f44ce-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-a5524347-55f1-489a-9621-30e97edcdbaa-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-2afe7844-bee9-4255-83c2-1cc70fed48df-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-f32f9b26-8a60-47da-8fe8-b3cab66dc126-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-96bed8d7-5b50-4d78-93c0-ae86cdc1fd9d-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-c3fab0c1-be47-4d4f-9947-e860277e97c1-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-72b185c5-54b6-4018-9096-c36d7ea32fa1-CUT-0": [
+        0.0,
+        0.0
+      ],
+      "path-f81d3eb9-6e42-4189-ac2b-10c52a391ab1-CUT-0": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "origin_bundle_preserved_after_run": true
+}
