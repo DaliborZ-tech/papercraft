@@ -1,0 +1,85 @@
+{
+  "cases": [
+    {
+      "source_path": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cylinder-desktop-8f1ec63-run02\\C-cylinder\\C-cylinder.apcraft",
+      "source_sha256": "a1b6793b533775672f577d257c203f4e00314a596dead1ad6a6b61e7e34026a5",
+      "source_schema": 8,
+      "output_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-source9-copy-gaf4ulpk",
+      "proof_kind": "BACKEND_SOURCE_COPY_AND_ACTUAL_VECTOR_NOT_NATIVE_UI",
+      "status": "PASS",
+      "parts": 2,
+      "profiles": 2,
+      "schema_after": 9,
+      "acknowledged_warnings": [],
+      "output_sha256": {
+        "copy9.apcraft": "2d683ac47249b5b1bdbfe94cfdbea0fa32f16a83a276e8ccc132cbe86295eb3c",
+        "export\\.author-export.json": "da11361a11b093888d7a1371097eeb03d7ba756dda8e05793709803aabe7b384",
+        "export\\model.pdf": "b28925f9e20d178a72330a8825e042e41a2d659d11dcc23765a809c256d49369",
+        "export\\page-73b7af00-a14a-4ee3-9d52-e04f27e7e777.svg": "d7699b0c4697fff24dc63474f56d70f435ae5b63b7158789d558af032f2db28d",
+        "export\\page-e559b8f5-292f-41fc-8b9c-ee0a09b56feb.svg": "fcf8f45d41c535d20b7c002438ef5405c162f2b73d29da9bd5f4d8ad20e1dd84"
+      },
+      "elapsed_seconds": 2.4530000002123415
+    },
+    {
+      "source_path": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-desktop-8f1ec63-run02\\C-cone\\C-cone.apcraft",
+      "source_sha256": "d8107cff69f063532745d832fbf9efa9d597cedec4538d2aacc811e034f9df9d",
+      "source_schema": 8,
+      "output_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-source9-copy-pkgxi8s2",
+      "proof_kind": "BACKEND_SOURCE_COPY_AND_ACTUAL_VECTOR_NOT_NATIVE_UI",
+      "status": "PASS",
+      "parts": 2,
+      "profiles": 3,
+      "schema_after": 9,
+      "acknowledged_warnings": [],
+      "output_sha256": {
+        "copy9.apcraft": "99994cd21807e87702efec1279c2aded9d98becbece2cb77caa920ab4f7b9158",
+        "export\\.author-export.json": "aee0a61c5bca13b3cfb96aa6d2fe79adacfa2c1deb82471ef29877e286b72535",
+        "export\\model.pdf": "096b081cd9550d0f2cd6752808c8ffbba157b839c4af9e2bc12d5ddd990f96e6",
+        "export\\page-99e4ffb4-e2e3-46a7-83f5-f04fdb9a609b.svg": "ae66cadb2bcef9fcd60955a4385ebbceab3310e11cf9b2e9b0b06e7edc789040",
+        "export\\page-c2d50121-5df3-4d91-9703-07f45773759f.svg": "f6690d1573d12d7041d0a0d34bad36dc406d776b12e51a0936827a8e028b5e02"
+      },
+      "elapsed_seconds": 11.093999999808148
+    },
+    {
+      "source_path": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-near-desktop-8f1ec63-run01\\C-near\\C-near.apcraft",
+      "source_sha256": "aa4912de354814c9c0e350562941232e92b8a3bac803c6d48656015f790bd8a3",
+      "source_schema": 8,
+      "output_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-source9-copy-c_fyxcmb",
+      "proof_kind": "BACKEND_SOURCE_COPY_AND_ACTUAL_VECTOR_NOT_NATIVE_UI",
+      "status": "PASS",
+      "parts": 2,
+      "profiles": 2,
+      "schema_after": 9,
+      "acknowledged_warnings": [],
+      "output_sha256": {
+        "copy9.apcraft": "a1042c4e0b397204907327160e0b22e22687524d1507cbac41b8f68bd8e8051f",
+        "export\\.author-export.json": "cdd9162201aa948cc5f126baf82539cd2a2c44216c96582e905ee309c19e4c38",
+        "export\\model.pdf": "42899056ccd35ca7bd1c9d0cf2ec28bbbee557cca8cd61a35c1648a007ec41f6",
+        "export\\page-062de28e-4581-487b-a88c-254c8d34806a.svg": "b60e29c6806d6827cd344dd64de3bea6ddcdb98cf19183481d8148dde20bd1bd",
+        "export\\page-c554178d-122b-4bb6-a0b3-0ef8ca76f8f6.svg": "ed59b25a2f2a04b51c15a1136e16710f35806ceeab9bca150d0d680c13d2da02"
+      },
+      "elapsed_seconds": 5.625
+    }
+  ],
+  "native_ui": "NOT_RUN",
+  "new_user": "NOT_RUN",
+  "physical": "P3_PENDING",
+  "source_commit": "4f43a6427c7fbd25a87309ab31ad676ddd7794e1",
+  "runtime_sha256": {
+    "src/archpapercraft/authoring/circular_material.py": "223d2831026af37172428dd96d2fafacfb193e4a4cf982cfb892112287098cc0",
+    "src/archpapercraft/authoring/curved_connectors.py": "dc9ee0cdc4fb0b1d41b0229fbe046ce8bdb16acb6e4361b5353d9cf2ab2ca7b9",
+    "src/archpapercraft/authoring/loft_surface.py": "ce496233cc19bca12d10741a940b72c9775eac81d22e9eed546cf594d42dd252",
+    "src/archpapercraft/authoring/model.py": "b08b46b364774019c751c23809c979849c0bef5d14a73f4721e9b8dc75a6a6ed",
+    "src/archpapercraft/authoring/profile_curves.py": "ed1616707345cce48ef91d2eca852ac42800a38ddde7ab71d1e28f3643780d1a",
+    "src/archpapercraft/authoring/profile_source_views.py": "73d089b8d6bbdeca6cc287f5d8bcefd64df7dfa9374b6f61512062948e59dee4",
+    "src/archpapercraft/authoring/profile_subdivision.py": "4eaaabdb4c7d855471356c1ff778706fcd1a3755311452e821383776b88ce4dd",
+    "src/archpapercraft/authoring/project.py": "9844ded95e33af4c8a10465239877eebd7c4c6044bc40727074046f42fe298c9",
+    "src/archpapercraft/authoring/segmented_surface.py": "bd5f8f6f577f7abec92375c8a9ec1fae568dc965720b7d123dde3a8e5f64c423",
+    "src/archpapercraft/exporter/loft_output_validation.py": "1240b942c263890ce55a2be512ba5c21421d0268945824b9dccea4049d8c47a7"
+  },
+  "known_limits": [
+    "Backend replay of actual C8 files; no new UI/editor/novice/physical proof.",
+    "Historic generations and original files never rewritten.",
+    "Source-only nonzero ARC authored endpoint gap retained; topology can remain UNRESOLVED."
+  ]
+}

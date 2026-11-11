@@ -82,6 +82,9 @@ def _parameter(t):
 
 
 def _control(curve):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return curve.controls_exact()
     points = [curve.start, curve.end] if curve.kind == "line" else [
         curve.start, curve.data["control1"], curve.data["control2"], curve.end,
     ]
@@ -94,6 +97,9 @@ def _lerp(a, b, t):
 
 def evaluate(curve, t):
     """Evaluate the authored source, independent of display tessellation."""
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return curve.evaluate(t)
     t = _parameter(t)
     if t == 0:
         return curve.start
@@ -111,6 +117,9 @@ def evaluate(curve, t):
 
 
 def derivative(curve, t):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return tuple(float((a+b)/2) for a, b in curve.derivative_bounds(t))
     t = _parameter(t)
     if curve.kind == "arc":
         angle = math.radians(curve.data["sweep_deg"])
@@ -147,7 +156,7 @@ def svg_commands(curve, *, chord_tolerance=None, length_tolerance=None):
         if result.status != "CERTIFIED":
             raise ValueError("SVG geometry is not certified at the requested tolerances")
     def f(x):
-        return format(x, ".17g")
+        return format(float(x), ".17g")
 
     def point(p):
         return " ".join(f(x) for x in p)
@@ -188,6 +197,9 @@ def _distance_bounds(a, b):
 
 
 def _evaluation_guard(curve):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return curve.numerical_guard()
     points = [curve.start, curve.end, *curve.data.values()] if curve.kind == "cubic" else [
         curve.start, curve.end,
     ]
@@ -219,22 +231,33 @@ def _arc_svg_plan(curve):
     by pi*(D+e)/min(radius); triangle inequalities then bound the whole arc and
     its length, without assuming that sampled midpoints prove correctness.
     """
-    radius = math.dist(curve.start, curve.data["center"])
+    from .profile_source_views import SourceCurveView
+    view = isinstance(curve, SourceCurveView)
+    exact_radius = curve.radius_bounds() if view else None
+    radius = float(sum(exact_radius)/2) if view else math.dist(curve.start, curve.data["center"])
     sweep = curve.data["sweep_deg"]
     count = math.ceil(abs(sweep) / 90)
-    points = [evaluate(curve, index / count) for index in range(count + 1)]
+    points = [evaluate(curve, Fraction(index, count) if view else index/count)
+              for index in range(count + 1)]
     arcs = [(radius, int(sweep > 0), end) for end in points[1:]]
     center = tuple(Fraction(x) for x in curve.data["center"])
     initial = tuple(Fraction(x) for x in curve.start)
-    rlo, rhi = _distance_bounds(initial, center)
+    rlo, rhi = ((math.nextafter(float(exact_radius[0]), -math.inf),
+                  math.nextafter(float(exact_radius[1]), math.inf))
+                 if view else _distance_bounds(initial, center))
     if not math.isfinite(radius + rlo + rhi) or rlo <= 0:
         return arcs, math.inf, math.inf
     e = Fraction(_evaluation_guard(curve))
-    r, rmin, upper = Fraction(radius), Fraction(min(radius, rlo)), Fraction(rhi)
+    # A restricted view's actual SVG operands are decimal lexemes. Preserve
+    # those operands in the endpoint-circle proof, rather than proving the
+    # neighboring binary circle and assuming a near-tangent branch is stable.
+    r = Fraction(format(radius, ".17g")) if view else Fraction(radius)
+    rmin, upper = min(r, Fraction(rlo)), Fraction(rhi)
     radius_error = max(abs(r - Fraction(rlo)), abs(r - Fraction(rhi)))
     deviation_bounds, length_bounds = [], []
     for start, end in zip(points, points[1:]):
-        a, b = (tuple(Fraction(x) for x in point) for point in (start, end))
+        a, b = (tuple(Fraction(format(float(x), ".17g")) if view else Fraction(x)
+                      for x in point) for point in (start, end))
         dx, dy = (y - x for x, y in zip(a, b))
         squared = dx * dx + dy * dy
         if squared == 0 or r * r <= squared / 4:
@@ -321,7 +344,13 @@ def certify_curve(curve, *, chord_tolerance, length_tolerance, max_depth=24, max
         center = curve.data["center"]
         exact_start = tuple(Fraction(x) for x in curve.start)
         exact_center = tuple(Fraction(x) for x in center)
-        radius_lower, radius_upper = _distance_bounds(exact_start, exact_center)
+        from .profile_source_views import SourceCurveView
+        if isinstance(curve, SourceCurveView):
+            lo, hi = curve.radius_bounds()
+            radius_lower, radius_upper = (math.nextafter(float(lo), -math.inf),
+                                          math.nextafter(float(hi), math.inf))
+        else:
+            radius_lower, radius_upper = _distance_bounds(exact_start, exact_center)
         sweep_fraction = abs(Fraction(curve.data["sweep_deg"])) / 180
         _, svg_deviation, svg_length_error = _arc_svg_plan(curve)
     unresolved = (guard >= min(chord_tolerance, length_tolerance / 4)

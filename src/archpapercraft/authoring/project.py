@@ -66,8 +66,8 @@ from .profile_subdivision import ProfileSubdivisionCommands
 from .segmented_surface import SegmentedCommands
 
 APPLICATION = "ArchPapercraft.AuthorProject"
-SCHEMA_VERSION = 8
-WRITER_VERSION = "0.3.0-pc008-authoring-provenance-experimental"
+SCHEMA_VERSION = 9
+WRITER_VERSION = "0.3.0-pc008-curved-source-provenance-experimental"
 _UNSET = object()
 
 
@@ -103,8 +103,13 @@ def _record(cls, data):
 
 
 class AuthorProject(
-    InteriorCommands, BendCommands, ProfileCurveCommands, ProfileSubdivisionCommands,
-    LoftCommands, SegmentedCommands, CurvedConnectorCommands,
+    InteriorCommands,
+    BendCommands,
+    ProfileCurveCommands,
+    ProfileSubdivisionCommands,
+    LoftCommands,
+    SegmentedCommands,
+    CurvedConnectorCommands,
 ):
     def __init__(self, name="Nový model", scale=0.01):
         self.project_id = identity()
@@ -141,9 +146,10 @@ class AuthorProject(
             surface = self.surfaces[sid]
             if surface.kind == "ruled_loft":
                 for side, pid in zip(("first", "second"), surface.source_profile_ids()):
-                    if {r[side + "_segment_id"] for r in surface.params["correspondences"]} != {
-                        segment.id for segment in self.profiles[pid].segments
-                    }:
+                    resolved = self.profile_semantic_curves(
+                        pid, [r[side + "_segment_id"] for r in surface.params["correspondences"]]
+                    )
+                    if resolved["status"] != "RESOLVED" or not resolved["full_profile_coverage"]:
                         surface.params["reference_state"] = "UNRESOLVED"
             self.surfaces[sid].revision += 1
         for part in self.parts.values():
@@ -1498,7 +1504,29 @@ class AuthorProject(
             and data["schema_version"] == 7
             and data.get("writer_version") == "0.3.0-pc008-profile-provenance-experimental"
         )
+        upgrading_h = (
+            isinstance(data, dict)
+            and type(data.get("schema_version")) is int
+            and data["schema_version"] == 8
+            and data.get("writer_version") == "0.3.0-pc008-authoring-provenance-experimental"
+        )
         upgrading_early = upgrading or upgrading_b or upgrading_c or upgrading_d or upgrading_e
+        known_old = upgrading_early or upgrading_f or upgrading_g or upgrading_h
+        added_source_defaults = False
+        if isinstance(data, dict) and isinstance(data.get("profiles"), dict):
+            for profile in data["profiles"].values():
+                if not isinstance(profile, dict) or not isinstance(profile.get("segments"), list):
+                    raise ProjectFormatError("Profil potřebuje známý registr úseků.")
+                for segment in profile["segments"]:
+                    if not isinstance(segment, dict):
+                        raise ProjectFormatError("Profilový úsek musí být objekt.")
+                    if known_old and "source_reference" in segment:
+                        raise ProjectFormatError(
+                            "Starší formát nezná analytické zdrojové reference."
+                        )
+                    if known_old and "source_reference" not in segment:
+                        segment["source_reference"] = None
+                        added_source_defaults = True
         if upgrading_early or upgrading_g:
             if "curved_connectors" in data:
                 raise ProjectFormatError("Starší formát nezná kruhové spojovací prvky.")
@@ -1507,7 +1535,7 @@ class AuthorProject(
             if "profile_subdivisions" in data:
                 raise ProjectFormatError("Starší formát nezná historii dělení profilů.")
             data["profile_subdivisions"] = {}
-        if upgrading_e or upgrading_f or upgrading_g:
+        if upgrading_e or upgrading_f or upgrading_g or upgrading_h:
             data["schema_version"] = SCHEMA_VERSION
         if upgrading or upgrading_b or upgrading_c or upgrading_d:
             if not isinstance(data.get("surfaces"), dict):
@@ -1683,9 +1711,9 @@ class AuthorProject(
             project.validate()
             for part in project.parts.values():
                 if (
-                    any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids)
-                    and part.input_digest != part_input(project, part)
-                ):
+                    added_source_defaults
+                    or any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids)
+                ) and part.input_digest != part_input(project, part):
                     # Keep the historical cache and author's frame/layout for
                     # inspection. Only explicit recompute replaces its CUT.
                     part.stale = True
@@ -1782,6 +1810,6 @@ def load_project(path):
         return LegacyProject(raw, source)
     project = AuthorProject.from_dict(data)
     project.loaded_from_schema = data.get("schema_version")
-    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4, 5, 6, 7)
+    project.requires_save_as = project.loaded_from_schema in (1, 2, 3, 4, 5, 6, 7, 8)
     project.loaded_source_path = str(source.resolve())
     return project

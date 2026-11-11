@@ -105,7 +105,7 @@ def _source_coverage(project, rim, lower, upper):
     cursor, result = Q(0), []
     for source in rim["source_intervals"]:
         a, b = map(_q, source["parameter_interval"])
-        segment = profile.segment(source["segment_id"])
+        segment = project.resolve_profile_curve(profile.id, source["segment_id"])
         span = abs(_q(segment.data["sweep_deg"]) * (b - a)) / 360
         if span <= 0:
             raise ValidationError("A circular source interval has no positive coverage.")
@@ -258,7 +258,13 @@ def _edge_lists(project, part, result, side, *, proxy):
     source_profile = project.profiles[project.surfaces[part.surface_ids[0]].profile_id]
     offset, edges = Q(0), []
     for patch, native in zip(result["solver"]["patches"], result["native"]["patches"]):
-        sweep = abs(_q(source_profile.segment(patch["first_segment_id"]).data["sweep_deg"]))
+        sweep = abs(
+            _q(
+                project.resolve_profile_curve(source_profile.id, patch["first_segment_id"]).data[
+                    "sweep_deg"
+                ]
+            )
+        )
         if proxy:
             points = (
                 (np.asarray(patch["flat_" + side + "_paper_mm"]) - origin) @ rotation.T

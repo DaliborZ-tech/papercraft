@@ -646,6 +646,9 @@ def test_schema_three_copy_adapter_rejects_capabilities_it_never_defined(new_cap
     if new_capability == "loft":
         p.add_loft(a, b, correspondences=refs(p, a, b))
     data = p.to_dict()
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
@@ -661,6 +664,9 @@ def test_schema_three_copy_adapter_still_preserves_known_planar_sources_and_layo
     pid = p.part_for_surface(s)
     p.set_placement(pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True)
     data = p.to_dict()
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.

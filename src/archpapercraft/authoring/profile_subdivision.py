@@ -1,13 +1,14 @@
-"""Authored line subdivision with replayed trims and semantic paper anchors.
+"""Authored source subdivision with replayed trims and semantic paper anchors.
 
 This first application slice keeps a historical edge as one geometric edge.
 It never replaces a reference with the first descendant or the closest vertex.
-Arc/cubic application adapters are deliberately separate from this line slice.
+Curved pieces retain their original analytic source and exact parameter span.
 """
 
 from __future__ import annotations
 
 import copy
+import math
 from fractions import Fraction
 from types import SimpleNamespace
 
@@ -22,8 +23,17 @@ from .curve_subdivision import (
     TrimReference,
 )
 from .errors import ValidationError
+from .geometry import number
 from .model import CurveSegment, Vertex, identity, uuid
 from .profile_curves import source_curve
+from .profile_source_views import (
+    SourceCurveView,
+    canonical_projection,
+    history_chord,
+    semantic_reference_curves,
+    source_reference,
+    validate_projection,
+)
 
 
 def _piece_source(piece):
@@ -32,7 +42,15 @@ def _piece_source(piece):
 
 
 def _float_point(piece, parameter):
-    return [float(sum(interval) / 2) for interval in piece.point_bounds(parameter)]
+    view = SourceCurveView(
+        piece.source,
+        (piece.source_start, piece.source_end),
+        profile_id="projection",
+        history_id="projection",
+        piece_id=piece.id,
+        generation=piece.geometry_generation,
+    )
+    return list(view.evaluate(parameter))
 
 
 def _record_history(record):
@@ -40,6 +58,224 @@ def _record_history(record):
 
 
 class ProfileSubdivisionCommands:
+    def _copy_profile_provenance(self, profile_id, *, factor, center, plane, name):
+        from .curves import Curve
+        from .model import Profile, SketchPlane
+
+        source = self.profiles[profile_id]
+        target_id, ids = identity(), {}
+
+        def newid(old):
+            return ids.setdefault(old, identity())
+
+        def mapped(point):
+            return [float(c + factor * (float(x) - c)) for x, c in zip(point, center)]
+
+        def mapped_source(original):
+            data = (
+                {"center": mapped(original.center), "sweep_deg": float(original.sweep_deg)}
+                if original.kind == "arc"
+                else dict(zip(("control1", "control2"), map(mapped, original.controls)))
+                if original.kind == "cubic"
+                else {}
+            )
+            return CurveSource.from_curve(
+                Curve(
+                    tuple(mapped(original.start)), tuple(mapped(original.end)), original.kind, data
+                )
+            )
+
+        records, piece_refs = {}, {}
+        for old_root, record in self.profile_subdivisions.items():
+            if record["history"]["profile_id"] != profile_id:
+                continue
+            old = record["history"]
+            new = CurveSubdivisionHistory(
+                target_id, newid(old_root), mapped_source(CurveSource.from_dict(old["source"]))
+            )
+            for event in old["events"]:
+                if event[0] == "split":
+                    new = new.split(newid(event[1]), event[2], newid(event[3]), newid(event[4]))
+                elif event[0] == "merge":
+                    new = new.merge([newid(item) for item in event[1]], newid(event[2]))
+                else:
+                    new = new.edit(
+                        newid(event[1]), mapped_source(CurveSource.from_dict(dict(event[2])))
+                    )
+            records[newid(old_root)] = {
+                "history": new.to_dict(),
+                "edges": {
+                    newid(e): [newid(v) for v in ends] for e, ends in record["edges"].items()
+                },
+                "points": {
+                    newid(v): [newid(ref[0]), ref[1]] for v, ref in record["points"].items()
+                },
+            }
+            for piece in new.pieces:
+                piece_refs[piece.id] = source_reference(new, piece.id)
+        vertices = [Vertex(newid(v.id), mapped(v.point)) for v in source.vertices]
+        by_id = {v.id: v for v in vertices}
+        segments, projected = [], {}
+        for old in source.segments:
+            edge_id, a, b = newid(old.id), newid(old.start_vertex_id), newid(old.end_vertex_id)
+            if edge_id in piece_refs:
+                ref = piece_refs[edge_id]
+                cache = canonical_projection(ref)
+                for vid, point in ((a, cache["start"]), (b, cache["end"])):
+                    if vid in projected and projected[vid] != point:
+                        raise ValidationError(
+                            "SOURCE_PRECISION_UNRESOLVED: kopie nemá společný bod zdrojů."
+                        )
+                    projected[vid] = point
+                    by_id[vid].point = point
+                segments.append(CurveSegment(edge_id, cache["kind"], a, b, cache["data"], ref))
+            else:
+                data = copy.deepcopy(old.data)
+                for key in ("center", "control1", "control2"):
+                    if key in data:
+                        data[key] = mapped(data[key])
+                segments.append(CurveSegment(edge_id, old.kind, a, b, data))
+        target_plane = (
+            SketchPlane.named(plane)
+            if isinstance(plane, str)
+            else SketchPlane(**plane)
+            if isinstance(plane, dict)
+            else copy.deepcopy(plane or source.plane)
+        )
+        self.profiles[target_id] = Profile(
+            target_id,
+            name or source.name + " · kopie",
+            vertices,
+            segments,
+            source.closed,
+            target_plane,
+        )
+        self.profile_subdivisions.update(records)
+        self._touch([])
+        return target_id
+
+    def profile_segment_length(self, profile_id, segment_id, *, tolerance_model_mm=None):
+        from .curves import certify_curve
+
+        tolerance = number(
+            0.001 / self.scale if tolerance_model_mm is None else tolerance_model_mm,
+            "Přesnost vzdálenosti",
+            positive=True,
+        )
+        curve = self.resolve_profile_curve(profile_id, segment_id)
+        certificate = certify_curve(
+            curve, chord_tolerance=tolerance, length_tolerance=tolerance, max_segments=16384
+        )
+        if certificate.status != "CERTIFIED":
+            raise ValidationError(
+                "DISTANCE_UNRESOLVED: délku zdroje nelze v konečném rozpočtu doložit."
+            )
+        return {
+            "status": "CERTIFIED",
+            "lower": certificate.length_lower,
+            "upper": certificate.length_upper,
+            "units": "model_mm",
+        }
+
+    def profile_segment_parameter_at_length(
+        self, profile_id, segment_id, distance_model_mm, *, tolerance_model_mm=None
+    ):
+        from .curves import certify_curve
+
+        curve = self.resolve_profile_curve(profile_id, segment_id)
+        distance = number(distance_model_mm, "Vzdálenost od začátku", positive=True)
+        tolerance = number(
+            0.001 / self.scale if tolerance_model_mm is None else tolerance_model_mm,
+            "Přesnost vzdálenosti",
+            positive=True,
+        )
+        total = self.profile_segment_length(
+            profile_id, segment_id, tolerance_model_mm=tolerance / 16
+        )
+        if distance >= total["lower"]:
+            raise ValidationError(
+                "DISTANCE_UNRESOLVED: vzdálenost musí být prokazatelně uvnitř úseku."
+            )
+        target = Fraction(distance)
+        if curve.kind in ("line", "arc"):
+            parameter = target / ((Fraction(total["lower"]) + Fraction(total["upper"])) / 2)
+            lower, upper = (Fraction(total[k]) * parameter for k in ("lower", "upper"))
+        else:
+            if not isinstance(curve, SourceCurveView):
+                curve = SourceCurveView(
+                    CurveSource.from_curve(curve),
+                    (0, 1),
+                    profile_id=profile_id,
+                    history_id=segment_id,
+                    piece_id=segment_id,
+                    generation=0,
+                )
+            a, b = Fraction(0), Fraction(1)
+            for _ in range(64):
+                parameter = (a + b) / 2
+                prefix = curve.restricted(0, parameter)
+                certificate = certify_curve(
+                    prefix,
+                    chord_tolerance=tolerance,
+                    length_tolerance=tolerance / 16,
+                    max_segments=16384,
+                )
+                if certificate.status != "CERTIFIED":
+                    raise ValidationError("DISTANCE_UNRESOLVED: integrál délky není doložen.")
+                lower, upper = (
+                    Fraction(certificate.length_lower),
+                    Fraction(certificate.length_upper),
+                )
+                if max(abs(lower - target), abs(upper - target)) <= Fraction(tolerance) / 2:
+                    break
+                if upper < target:
+                    a = parameter
+                elif lower > target:
+                    b = parameter
+                else:
+                    raise ValidationError("DISTANCE_UNRESOLVED: interval délky je příliš široký.")
+            else:
+                raise ValidationError("DISTANCE_UNRESOLVED: vyčerpán konečný rozpočet hledání.")
+        error = max(abs(lower - target), abs(upper - target))
+        outward_error = math.nextafter(float(error), math.inf)
+        if error > Fraction(tolerance) or outward_error > tolerance or not 0 < parameter < 1:
+            raise ValidationError(
+                "DISTANCE_UNRESOLVED: požadovanou vzdálenost nelze doložit. "
+                "Zvolte jinou vzdálenost nebo menší měřítko modelu."
+            )
+        return {
+            "status": "CERTIFIED",
+            "parameter": parameter,
+            "distance_bounds_model_mm": [
+                math.nextafter(float(lower), -math.inf),
+                math.nextafter(float(upper), math.inf),
+            ],
+            "actual_error_bound_model_mm": outward_error,
+            "units": "model_mm",
+        }
+
+    def _profile_histories(self, profile_id):
+        return {
+            rid: _record_history(record)
+            for rid, record in self.profile_subdivisions.items()
+            if record["history"]["profile_id"] == profile_id
+        }
+
+    def profile_semantic_curves(self, profile_id, references):
+        if profile_id not in self.profiles:
+            raise ValidationError(
+                "SOURCE_REFERENCE_UNRESOLVED: profil už neexistuje. Vyberte jej znovu."
+            )
+        return semantic_reference_curves(
+            self.profiles[profile_id], self._profile_histories(profile_id), references
+        )
+
+    def resolve_profile_curve(self, profile_id, segment_id):
+        result = self.profile_semantic_curves(profile_id, [segment_id])
+        if result["status"] != "RESOLVED":
+            raise ValidationError("SOURCE_REFERENCE_UNRESOLVED: " + result["why"])
+        return result["curves"][0]
+
     def _profile_owns_source_edge(self, profile_id, edge_id):
         return (
             self.profiles[profile_id].segment(edge_id) is not None
@@ -128,6 +364,21 @@ class ProfileSubdivisionCommands:
                 "REFERENCE_UNRESOLVED: původní obrys byl nahrazen; vyberte zdroj znovu."
             )
         pieces = {piece.id: piece for piece in history.pieces}
+        if any(pieces[use.piece_id].source.kind != "line" for use in result.uses):
+            if not axis:
+                raise ValidationError("REFERENCE_UNRESOLVED: zakřivený zdroj není přímý ohyb.")
+            chord = history_chord(history, segment_id)
+            if chord["status"] != "RESOLVED":
+                raise ValidationError("ANCHOR_UNRESOLVED: " + chord["why"])
+            first_id, last_id = record["edges"][segment_id]
+            curve = chord["source_view"]
+            return SimpleNamespace(
+                id=segment_id,
+                kind=curve.kind,
+                data=dict(curve.data),
+                start_vertex_id=first_id,
+                end_vertex_id=last_id,
+            ), np.array(chord["points"])
         controls = [
             pieces[use.piece_id].source.controls_on(
                 pieces[use.piece_id].source_start
@@ -208,8 +459,8 @@ class ProfileSubdivisionCommands:
     def _sync_profile_subdivisions(self, profile_id):
         """Declare actual active geometry edits; preserve ancestry, invalidate fit.
 
-        Only active LINE sources belong to this slice. Original replacement
-        profiles leave historical references explicitly unresolved.
+        Unchanged curve projections retain the original source. Actual authored
+        edits create a new generation; mixed-generation old trims stay unresolved.
         """
         profile = self.profiles[profile_id]
         for record in self.profile_subdivisions.values():
@@ -219,6 +470,34 @@ class ProfileSubdivisionCommands:
             for piece in history.pieces:
                 segment = profile.segment(piece.id)
                 if segment is None:
+                    continue
+                if (
+                    piece.source.kind != "line"
+                    or segment.kind != "line"
+                    or segment.source_reference is not None
+                ):
+                    expected_ref = source_reference(history, piece.id)
+                    expected = canonical_projection(expected_ref)
+                    actual = {
+                        "kind": segment.kind,
+                        "data": segment.data,
+                        "start": profile.vertex(segment.start_vertex_id).point,
+                        "end": profile.vertex(segment.end_vertex_id).point,
+                    }
+                    if actual != expected:
+                        from .curves import Curve
+
+                        changed_source = CurveSource.from_curve(
+                            Curve(
+                                tuple(actual["start"]),
+                                tuple(actual["end"]),
+                                segment.kind,
+                                segment.data,
+                                segment.id,
+                            )
+                        )
+                        history = history.edit(piece.id, changed_source)
+                    segment.source_reference = source_reference(history, piece.id)
                     continue
                 if segment.kind != "line":
                     raise ValidationError(
@@ -289,10 +568,8 @@ class ProfileSubdivisionCommands:
     def split_profile_segment(self, profile_id, segment_id, parameter=0.5):
         profile = self.profiles[profile_id]
         segment = profile.segment(segment_id)
-        if segment is None or segment.kind != "line":
-            raise ValidationError(
-                "Vyberte aktivní úsečku obrysu. Křivkové dělení vyžaduje vlastní zdrojový adaptér."
-            )
+        if segment is None:
+            raise ValidationError("Vyberte aktivní zdrojový úsek obrysu.")
         record = self._subdivision_record(profile_id, segment_id)
         if record is None:
             history = CurveSubdivisionHistory(
@@ -311,14 +588,27 @@ class ProfileSubdivisionCommands:
             history = _record_history(record)
         left_id, right_id, vertex_id = identity(), identity(), identity()
         changed = history.split(segment_id, parameter, left_id, right_id)
-        left = next(piece for piece in changed.pieces if piece.id == left_id)
+        left, right = [
+            next(piece for piece in changed.pieces if piece.id == key)
+            for key in (left_id, right_id)
+        ]
         point = _float_point(left, 1)
         index = next(i for i, edge in enumerate(profile.segments) if edge.id == segment_id)
         profile.vertices.insert(index + 1, Vertex(vertex_id, point))
-        profile.segments[index : index + 1] = [
-            CurveSegment(left_id, "line", segment.start_vertex_id, vertex_id),
-            CurveSegment(right_id, "line", vertex_id, segment.end_vertex_id),
-        ]
+        children = []
+        for piece, first, last in (
+            (left, segment.start_vertex_id, vertex_id),
+            (right, vertex_id, segment.end_vertex_id),
+        ):
+            if piece.source.kind == "line" and segment.source_reference is None:
+                children.append(CurveSegment(piece.id, "line", first, last))
+            else:
+                ref = source_reference(changed, piece.id)
+                cache = canonical_projection(ref)
+                children.append(
+                    CurveSegment(piece.id, cache["kind"], first, last, cache["data"], ref)
+                )
+        profile.segments[index : index + 1] = children
         record["history"] = changed.to_dict()
         record["edges"].update(
             {
@@ -350,7 +640,14 @@ class ProfileSubdivisionCommands:
         history, merged_id = _record_history(record), identity()
         changed = history.merge(ids, merged_id)
         first, last = selected[0].start_vertex_id, selected[-1].end_vertex_id
-        profile.segments[index : index + len(ids)] = [CurveSegment(merged_id, "line", first, last)]
+        piece = next(p for p in changed.pieces if p.id == merged_id)
+        if piece.source.kind == "line" and all(s.source_reference is None for s in selected):
+            merged = CurveSegment(merged_id, "line", first, last)
+        else:
+            ref = source_reference(changed, merged_id)
+            cache = canonical_projection(ref)
+            merged = CurveSegment(merged_id, cache["kind"], first, last, cache["data"], ref)
+        profile.segments[index : index + len(ids)] = [merged]
         del profile.vertices[index + 1 : index + len(ids)]
         record["history"] = changed.to_dict()
         record["edges"][merged_id] = [first, last]
@@ -375,6 +672,7 @@ class ProfileSubdivisionCommands:
         point_owners = {}
         projection_by_profile = {}
         canonical_by_profile = {}
+        curved_projection_errors = {}
         for root_id, record in self.profile_subdivisions.items():
             uuid(root_id)
             if not isinstance(record, dict) or set(record) != {"history", "edges", "points"}:
@@ -448,14 +746,62 @@ class ProfileSubdivisionCommands:
                     raise ValidationError("Historické body různých zdrojů sdílejí stejné UUID.")
                 point_owners[vertex_id] = owners[vertex_id]
             for piece in history.pieces:
-                if piece.source.kind != "line":
-                    raise ValidationError("Tento aplikační kontrakt dělení podporuje úsečky.")
                 active = profile.segment(piece.id)
                 if active is None:
                     # Explicit replacement retains old history for inspection.
                     continue
                 if [active.start_vertex_id, active.end_vertex_id] != edges[piece.id]:
                     raise ValidationError("Aktivní úsek nemá původní incidence.")
+                if piece.source.kind != "line" or active.source_reference is not None:
+                    reference = source_reference(history, piece.id)
+                    if active.source_reference != reference:
+                        raise ValidationError(
+                            "Aktivní analytická reference neodpovídá replay historie."
+                        )
+                    source_view = validate_projection(
+                        reference,
+                        kind=active.kind,
+                        data=active.data,
+                        start=profile.vertex(active.start_vertex_id).point,
+                        end=profile.vertex(active.end_vertex_id).point,
+                    )
+                    from .profile_source_views import native_projection_certificate
+
+                    count = len(profile.segments)
+                    certificate = native_projection_certificate(
+                        source_view,
+                        position_budget=Fraction(1, 100) / Fraction(self.scale),
+                        length_budget=Fraction(1, 100) / (Fraction(self.scale) * count),
+                        area_budget=Fraction(1, 100) / (Fraction(self.scale) ** 2),
+                        max_segments=16384,
+                    )
+                    if certificate["status"] != "CERTIFIED":
+                        raise ValidationError(
+                            "SOURCE_PRECISION_UNRESOLVED: analytický zdroj nelze promítnout."
+                        )
+                    maximum, length_error, source_length = projection_by_profile.get(
+                        history.profile_id, (Fraction(0), Fraction(0), Fraction(0))
+                    )
+                    from .curves import certify_curve
+
+                    length = certify_curve(
+                        source_view,
+                        chord_tolerance=0.01 / self.scale,
+                        length_tolerance=0.01 / (self.scale * count),
+                    ).length_lower
+                    projection_by_profile[history.profile_id] = (
+                        max(
+                            maximum,
+                            Fraction(certificate["position_bound_exact"]) * Fraction(self.scale),
+                        ),
+                        length_error
+                        + Fraction(certificate["length_bound_exact"]) * Fraction(self.scale),
+                        source_length + Fraction(length) * Fraction(self.scale),
+                    )
+                    curved_projection_errors.setdefault(history.profile_id, {})[piece.id] = (
+                        certificate
+                    )
+                    continue
                 if (
                     active.kind != "line"
                     or active.data
@@ -491,6 +837,12 @@ class ProfileSubdivisionCommands:
             retired.update((set(edges) | set(points)) - active_ids)
         if seen_edges & set(point_owners):
             raise ValidationError("Historická hrana a materiálový bod nesmějí sdílet UUID.")
+        for profile in self.profiles.values():
+            for segment in profile.segments:
+                if segment.source_reference is not None and segment.id not in seen_edges:
+                    raise ValidationError(
+                        "Analytický descriptor nemá replayovaného vlastníka historie."
+                    )
         for maximum, length_error, source_length in projection_by_profile.values():
             # For a LINE, convexity bounds the entire source→actual segment by
             # endpoint errors. Length is 1-Lipschitz in each endpoint. SUM the
@@ -505,7 +857,116 @@ class ProfileSubdivisionCommands:
                     "méně dělení nebo menší měřítko modelu."
                 )
         self._check_subdivision_area(canonical_by_profile)
+        self._check_curved_subdivision_area(curved_projection_errors, canonical_by_profile)
         return retired
+
+    def _check_curved_subdivision_area(self, curved, canonical_lines):
+        if not curved:
+            return
+        from .curve_area import _neg, _point
+        from .profile_source_views import native_projection_certificate
+
+        records = {}
+        for pid, profile in self.profiles.items():
+            if not profile.closed:
+                continue
+            source, error = _point(Fraction(0)), Fraction(0)
+            for segment in profile.segments:
+                if segment.id in canonical_lines.get(pid, {}):
+                    a, b = canonical_lines[pid][segment.id]
+                    original = CurveSource("line", a, b)
+                    view = SourceCurveView(
+                        original,
+                        (0, 1),
+                        profile_id=pid,
+                        history_id=segment.id,
+                        piece_id=segment.id,
+                        generation=0,
+                    )
+                else:
+                    curve = source_curve(profile, segment)
+                    view = (
+                        curve
+                        if isinstance(curve, SourceCurveView)
+                        else SourceCurveView(
+                            CurveSource.from_curve(curve),
+                            (0, 1),
+                            profile_id=pid,
+                            history_id=segment.id,
+                            piece_id=segment.id,
+                            generation=0,
+                        )
+                    )
+                addition = view.green_integral_bounds()
+                source = (source[0] + addition[0], source[1] + addition[1])
+                if segment.id in curved.get(pid, {}):
+                    cert = curved[pid][segment.id]
+                else:
+                    cert = native_projection_certificate(
+                        view,
+                        position_budget=0.01 / self.scale,
+                        length_budget=0.01 / (self.scale * len(profile.segments)),
+                        area_budget=0.01 / (self.scale * self.scale),
+                    )
+                error += Fraction(cert["area_error_bound_exact"]) * Fraction(self.scale) ** 2
+            if source[0] <= 0 <= source[1]:
+                raise ValidationError(
+                    "SOURCE_AREA_UNRESOLVED: orientace původního obrysu není doložena."
+                )
+            area = _neg(source) if source[1] < 0 else source
+            records[pid] = (
+                area[0] * Fraction(self.scale) ** 2,
+                area[1] * Fraction(self.scale) ** 2,
+                error,
+            )
+
+        def check(error, lower):
+            if error > max(Fraction(1, 100), lower / Fraction(10**6)):
+                raise ValidationError(
+                    "SOURCE_AREA_UNRESOLVED: původní NET materiál překročil plochu."
+                )
+
+        for pid in curved:
+            if pid in records:
+                check(records[pid][2], records[pid][0])
+        for part in self.parts.values():
+            if not any(
+                pid in curved
+                for sid in part.surface_ids
+                for pid in self.surfaces[sid].source_profile_ids()
+            ):
+                continue
+            error = lower = Fraction(0)
+            for sid in part.surface_ids:
+                surface = self.surfaces[sid]
+                if surface.kind != "planar":
+                    continue
+                ids = surface.source_profile_ids()
+                if any(pid not in records for pid in ids):
+                    raise ValidationError(
+                        "SOURCE_AREA_UNRESOLVED: materiál nemá uzavřené původní zdroje."
+                    )
+                plane = self.profiles[surface.profile_id].plane
+                rotation = self._surface_matrix(sid)[:3, :3]
+                u, v = [
+                    tuple(
+                        sum(Fraction(float(rotation[i, j])) * Fraction(axis[j]) for j in range(3))
+                        for i in range(3)
+                    )
+                    for axis in (plane.u, plane.v)
+                ]
+                normal = (
+                    u[1] * v[2] - u[2] * v[1],
+                    u[2] * v[0] - u[0] * v[2],
+                    u[0] * v[1] - u[1] * v[0],
+                )
+                jacobian = _sqrt(sum(value * value for value in normal))
+                lower += (
+                    max(Fraction(0), records[ids[0]][0] - sum(records[h][1] for h in ids[1:]))
+                    * jacobian[0]
+                )
+                error += sum(records[pid][2] for pid in ids) * jacobian[1]
+            check(error, lower)
 
     def _check_subdivision_area(self, canonical_by_profile):
         """Direct whole-body Green difference, never a position annulus budget.

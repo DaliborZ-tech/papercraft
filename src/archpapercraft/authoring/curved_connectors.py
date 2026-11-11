@@ -137,14 +137,14 @@ def _sub(a, b):
 def _circle_source(profile):
     """Recognize the supplied material circle, never a display mesh or preset."""
     from .circular_shell import _exact_radius
-    from .profile_curves import source_curve
+    from .profile_source_views import canonical_profile_curves
 
     if not profile.closed or not profile.segments:
         raise CurvedConnectorError(
             "Příjemce potřebuje uzavřenou skutečnou kruhovou hranici.",
             code="RECEIVER_CIRCLE_UNRESOLVED",
         )
-    curves = [source_curve(profile, segment) for segment in profile.segments]
+    curves = canonical_profile_curves(profile)
     if any(curve.kind != "arc" for curve in curves):
         raise CurvedConnectorError(
             "Tento kruhový spoj potřebuje skutečný disk s kruhovými otvory.",
@@ -209,16 +209,20 @@ def _receiver_binding(project, record, rim_binding):
     )
     source_translation = (Fraction(0),) * 3
     if not np.array_equal(owner_matrix, receiver_matrix):
-        if not (np.array_equal(owner_matrix[:3, :3], np.eye(3))
-                and np.array_equal(receiver_matrix[:3, :3], np.eye(3))):
+        if not (
+            np.array_equal(owner_matrix[:3, :3], np.eye(3))
+            and np.array_equal(receiver_matrix[:3, :3], np.eye(3))
+        ):
             raise CurvedConnectorError(
                 "Plášť a příjemce zatím nemají doložený společný skutečný rám.",
                 code="RECEIVER_FRAME_UNRESOLVED",
             )
-        source_translation = tuple(Fraction(float(b))-Fraction(float(a))
-                                   for a, b in zip(owner_matrix[:3, 3], receiver_matrix[:3, 3]))
+        source_translation = tuple(
+            Fraction(float(b)) - Fraction(float(a))
+            for a, b in zip(owner_matrix[:3, 3], receiver_matrix[:3, 3])
+        )
         for circle in circles:
-            circle["center"] = tuple(a+b for a, b in zip(circle["center"], source_translation))
+            circle["center"] = tuple(a + b for a, b in zip(circle["center"], source_translation))
     first, second = [_circle_source(project.profiles[pid]) for pid in owner.source_profile_ids()]
     height = _dot(_sub(second["center"], first["center"]), first["normal"])
     if height == 0:
@@ -250,9 +254,9 @@ def _receiver_binding(project, record, rim_binding):
     # stored correspondence, avoiding a rounded libm point as a new authority.
     reference = owner.params["correspondences"][0]
     side = record.rim_side
-    segment = owner_profile.segment(reference[side + "_segment_id"])
-    start = owner_profile.vertex(segment.start_vertex_id).point
-    angle = Fraction(reference[side + "_interval"][0]) * Fraction(segment.data["sweep_deg"])
+    curve = project.resolve_profile_curve(owner_profile.id, reference[side + "_segment_id"])
+    start = curve.start
+    angle = Fraction(reference[side + "_interval"][0]) * Fraction(curve.data["sweep_deg"])
     if angle % 90:
         raise CurvedConnectorError("Zdrojový šev nemá doložený přesný kruhový rám.")
     radial2 = tuple(
@@ -285,8 +289,11 @@ def _receiver_binding(project, record, rim_binding):
         "scale": project.scale,
         "owner_source_digest": rim_binding["source_digest"],
         "condition": "EXACT_COMMON_AUTHORED_POSE_AND_COPLANAR_COAXIAL_SOURCE_DISK_WITH_HOLES",
-        **({"receiver_translation_in_owner_source_exact": list(map(str, source_translation))}
-           if any(source_translation) else {}),
+        **(
+            {"receiver_translation_in_owner_source_exact": list(map(str, source_translation))}
+            if any(source_translation)
+            else {}
+        ),
     }
     cap = Cap(outer["radius"] * scale, receiver.id, holes=tuple(holes), contact_side="front")
     return cap, {
@@ -350,7 +357,7 @@ def _source_fragments(project, owner_id, side, full_rim, interval):
     lower, upper = interval
     cursor, fragments = Fraction(0), []
     for source in full_rim["source_intervals"]:
-        segment = profile.segment(source["segment_id"])
+        segment = project.resolve_profile_curve(profile.id, source["segment_id"])
         a, b = map(Fraction, source["parameter_interval"])
         span = abs(Fraction(segment.data["sweep_deg"]) * (b - a)) / 360
         if span <= 0:
@@ -654,6 +661,14 @@ def rebuild_curved_material_binding(body_binding, paper_frame, curved_inputs):
         or source["scale"] != body_binding["scale"]
     ):
         raise CurvedConnectorError("Zdroj chlopní nenáleží skutečnému tělu a měřítku.")
+    owner_profile_ids = {p["id"] for p in body_binding["profiles"]}
+    owner_histories = {
+        key: value
+        for key, value in source.get("profile_subdivisions", {}).items()
+        if value["history"]["profile_id"] in owner_profile_ids
+    }
+    if body_binding.get("profile_subdivisions", {}) != owner_histories:
+        raise CurvedConnectorError("Zdroj těla nepokrývá skutečné dějiny profilů.")
     context = AuthorProject(name="Source-only curved material binding", scale=source["scale"])
     context.material_profile = copy.deepcopy(source["material_profile"])
     context._validate_material_profile()
@@ -742,6 +757,13 @@ def _native_slot_json(source_json, connector_id, frame_json):
     source = json.loads(source_json)
     binding = source["bound_sources"][source["owner_surface_id"]]
     body = {**binding, "scale": source["scale"]}
+    histories = {
+        key: value
+        for key, value in source.get("profile_subdivisions", {}).items()
+        if value["history"]["profile_id"] in {p["id"] for p in binding["profiles"]}
+    }
+    if histories:
+        body["profile_subdivisions"] = histories
     context = rebuild_curved_material_binding(body, json.loads(frame_json), source)
     record = context.curved_connectors[connector_id]
     return _json(_exact_json(_prepare_native_slots_uncached(context, record)))
@@ -817,6 +839,7 @@ def _surface_control_box(project, surface_id):
     """Exact affine hull enclosure of continuous material, never render mesh."""
     from .curved_tabs import _sqrt
     from .profile_curves import source_curve
+    from .profile_source_views import SourceCurveView
 
     surface = project.surfaces[surface_id]
     matrix = [[Fraction(value) for value in row] for row in project._surface_matrix(surface_id)]
@@ -832,6 +855,8 @@ def _surface_control_box(project, surface_id):
                     _sqrt(sum((Fraction(a) - b) ** 2 for a, b in zip(point, center)))[1]
                     for point in (curve.start, curve.end)
                 )
+                if isinstance(curve, SourceCurveView):
+                    radius = max(radius, curve.radius_bounds()[1])
                 points.extend(
                     (center[0] + x * radius, center[1] + y * radius)
                     for x in (-1, 1)
