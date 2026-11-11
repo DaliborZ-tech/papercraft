@@ -1,0 +1,16 @@
+{
+  "source_sha": "65159f82e6ac9809c5552a2a08ef77240f863556",
+  "archive_sha256": "dbafb608a7329fec9c5f85a5c698f53c63b5e2be239e3d1e26e95fff70b91001",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-batch-review-cr5lmub6",
+  "actual_import": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-batch-review-cr5lmub6\\src\\archpapercraft\\authoring\\project.py",
+    "lf_sha256": "d1578ec58de71eaf6f35a222fc0264710ef8461b00ecd3fc44e7a542e224d021"
+  },
+  "runs": {
+    "own": {
+      "returncode": 0,
+      "stdout": "...............                                                          [100%]\n15 passed in 1.15s\n",
+      "stderr": ""
+    }
+  }
+}

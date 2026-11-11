@@ -121,6 +121,29 @@ def test_empty_and_noop_batch_do_not_create_phantom_revision_or_history():
     assert p.to_dict() == before
 
 
+def test_noop_loaded_integer_scalars_preserve_json_save_digest_without_undo():
+    p, ids = three_parts()
+    state = p.to_dict()
+    state["placements"][ids[0]].update(x_mm=1, y_mm=2, rotation_deg=3)
+    c = AuthorController()
+    c.project = AuthorProject.from_dict(state)
+    before = c.project.to_dict()
+    c._saved_digest = c.digest(before)
+    c.execute(
+        "Same loaded coordinates",
+        lambda doc: doc.set_placements(
+            {
+                ids[0]: {"x_mm": 1, "y_mm": 2, "rotation_deg": 3},
+            }
+        ),
+    )
+    assert not c.dirty and not c.can_undo and c.project.to_dict() == before
+    placement = c.project.placements[ids[0]]
+    assert all(
+        type(value) is int for value in (placement.x_mm, placement.y_mm, placement.rotation_deg)
+    )
+
+
 def test_one_controller_undo_restores_all_author_choices():
     p, ids = three_parts()
     c = AuthorController()

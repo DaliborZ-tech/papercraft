@@ -1,0 +1,68 @@
+{
+  "source_sha": "95fa2c7c0e5a5d50f0763ae2a461a4e5e2821872",
+  "source_import": "C:\\Users\\dalib\\projects\\papercraft-segmentation-domain\\src\\archpapercraft\\authoring\\segmented_surface.py",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "PUBLIC_BACKEND_COMMANDS_ONLY; NOT_NATIVE_UI_OR_NEW_USER_OR_PHYSICAL_PROOF",
+  "source_math_dependency": "eeaf081 reviewed62248d7",
+  "target_id": "9e2d7ba8-9c96-433c-a108-50412deb87fb",
+  "source_profile_ids": [
+    "6f713c09-2c6e-43f5-9205-baa7375edb8f",
+    "144fc325-200b-4d58-b385-faae64938010"
+  ],
+  "target_status": "REJECTED",
+  "variant_id": "75c4744d-60cb-4dcc-95b9-51dd9883e42d",
+  "variant_mode": "APPROXIMATE",
+  "counts": {
+    "patches": 1,
+    "cells": 32,
+    "triangles": 64,
+    "triangle_island_parts": 64,
+    "paired_cut_seams": 84,
+    "source_boundary_cut_segments": 24,
+    "manufactured_triangle_cut_segments": 192
+  },
+  "raw_position_bound_paper_mm": 0.15625,
+  "actual_material_position_bound_paper_mm": 0.15625000000000389,
+  "normal_bound_deg": 8.565670155295006,
+  "source_to_flat_edge_length_bound_mm": 0.021487590879712606,
+  "manual_pages": [
+    32,
+    32
+  ],
+  "timings_seconds": {
+    "target_and_preview": 0.22556329984217882,
+    "confirm": 0.11828600009903312,
+    "64_sequential_public_placement_commands": 5.6904627999756485
+  },
+  "verification": {
+    "targeted": {
+      "passed": 36,
+      "seconds": 23.74,
+      "scope": "Final unchanged source content tested immediately before pin; artifact commands rerun on exactpin"
+    },
+    "earlier_full_suite": {
+      "passed": 911,
+      "seconds": 287.79,
+      "scope": "INTERMEDIATE_UNPINNED_WIP_BEFORE_FINAL_HOOKS; NOT_A_FINAL_PIN_PASS"
+    },
+    "ruff": "PASS",
+    "source_file_sha256": {
+      "src/archpapercraft/authoring/segmented_surface.py": "c9f7be977b9d61c05b5d9aa315ac7cccd257bcd3b1fd08ffb6abcbfc1bed62f2",
+      "src/archpapercraft/authoring/model.py": "6373827475822d6f17633136847d86f63855ce709707240dd50d1aecee13c0f8",
+      "src/archpapercraft/authoring/project.py": "196b180a46e9fbe4e3d2ef09c2b0ac90effe6c09bd0e81b91a0defaaa1605dcf",
+      "src/archpapercraft/authoring/paper.py": "9debc49ccbc61032f4d11f8e56f9a24474fb516e990d0d8d4dacd7d207134552",
+      "tests/authoring/test_segmented_surface.py": "2b06254f56c15220424274dd40c8583e7a14c02cc33c7f070293bd09bc4b3b0f"
+    }
+  },
+  "artifact_sha256": {
+    "backend-fixture.apcraft": "55b17f7821f1b3d6aa1869ed4f9537fbe008f3586a86a2b731a3ce2e58f3cb0a",
+    "earlier-intermediate-full-911.xml": "701950b3277fba9801f9c30ec97ad3fb43957cba714c41f93f7e697badd0846b",
+    "snapshot.json": "99cc28bca6d7299f5401d93dd87f2c280fe422055e74836fbffc95c25a6c9538",
+    "targeted-36.xml": "52932ddd79f17aa148fb87130d926ec86645eb82e773e07c5ed2445ddfeeeae5"
+  },
+  "independent_review": "PENDING",
+  "curved_segmentation": "NOT_MERGED; LINE component only; generic consumer contract retained",
+  "writer_and_ui_integration": "PENDING_ROOT",
+  "physical_build": "P3_NOT_VERIFIED",
+  "new_user_test": "NOT_RUN"
+}

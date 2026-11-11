@@ -1,0 +1,67 @@
+{
+  "source_sha": "518b91a9ce68706d872ee20c5765e3b2cbbda30e",
+  "imported_module": "C:\\Users\\dalib\\projects\\papercraft-segmentation-domain\\src\\archpapercraft\\authoring\\segmented_surface.py",
+  "proof_type": "PUBLIC_BACKEND_NOT_NATIVE_UI",
+  "fixture": "independent Gothic profiles20/30 and18/25,depth10,scale1",
+  "target_surface_id": "7107e150-71f8-4595-9a31-10fb07e0738a",
+  "profile_ids": [
+    "e91c5d6c-d6f1-4ef5-b3d1-189225141c75",
+    "e9e65bc4-b7f2-4962-a022-196cd9690b2e"
+  ],
+  "variant_id": "b999f067-7278-4416-b25d-b9a9967e6237",
+  "original_target_status": "REJECTED",
+  "material_mode": "APPROXIMATE",
+  "counts": {
+    "patches": 3,
+    "cells": 48,
+    "triangles": 96,
+    "triangle_island_parts": 96,
+    "paired_cut_seams": 96,
+    "source_boundary_cut_segments": 96,
+    "manufactured_triangle_cut_segments": 288
+  },
+  "embedding": {
+    "status": "CERTIFIED",
+    "projection_matrix_exact": [
+      [
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1/8"
+      ]
+    ],
+    "triangle_pairs": 4560,
+    "examined_pairs_all_projections": 4654,
+    "pair_budget": 200000,
+    "proof": "EXACT_RATIONAL_PROJECTED_TRIANGLE_INTERIORS_AND_DECLARED_UV_CONTACTS",
+    "scope": "DELIVERED_RAW_TRIANGLE_GRAPH_BEFORE_COMMON_RIGID_POSE; MATERIAL_FRAME_PERTURBATION_BOUNDED_SEPARATELY"
+  },
+  "raw_position_bound_paper_mm": 0.1865948501209102,
+  "material_position_bound_paper_mm": 0.18659485012091598,
+  "manual_page_part_counts": [
+    48,
+    48
+  ],
+  "save_reopen_equal": true,
+  "backend_runtime_seconds": {
+    "create_target_s": 0.03517169994302094,
+    "preview_cold_s": 1.876446699956432,
+    "confirm_warm_s": 0.24366839998401701,
+    "add_page_and_explicit_96_batch_s": 0.5583254999946803
+  },
+  "independent_bridge_review": "PENDING",
+  "native_ui": "NOT_RUN",
+  "vector_export": "NOT_RUN",
+  "new_user": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "file_sha256": {
+    "src\\archpapercraft\\authoring\\segmented_surface.py": "c9f7be977b9d61c05b5d9aa315ac7cccd257bcd3b1fd08ffb6abcbfc1bed62f2",
+    "tests\\authoring\\test_segmented_surface_curves.py": "9b53790f6a0f94a0dd2c7d6b0eb428f76d558e7ec9913593612ee866bb5cd904",
+    "docs\\p2\\implementation\\evidence\\pc008-curved-domain-518b91a\\raw\\gothic-backend.apcraft": "c0de8bb0852cfe5460c125888df7302d7577e32e21a753d2a01efce56fbef93a",
+    "docs\\p2\\implementation\\evidence\\pc008-curved-domain-518b91a\\raw\\snapshot.json": "c8e66a5dbcfd3e879873ae7b1ffaa3fe8f620297ff3e4e583e0b8b160c75fa14"
+  }
+}
