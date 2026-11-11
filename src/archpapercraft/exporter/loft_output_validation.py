@@ -86,6 +86,21 @@ def _bound_source_native(source_json, frame_json):
     )
 
 
+@lru_cache(maxsize=4)
+def _bound_curved_material(source_json, frame_json):
+    """Fresh source-only reconstruction; persisted material is never approval."""
+    from archpapercraft.authoring.curved_connectors import rebuild_curved_material_binding
+    from archpapercraft.authoring.loft_surface import build_loft_part
+
+    binding, frame = json.loads(source_json), json.loads(frame_json)
+    curved = binding.pop("curved_material_inputs")
+    project = rebuild_curved_material_binding(binding, frame, curved)
+    sid = binding["surface"]["id"]
+    part = build_loft_part(project, project.parts[project.surfaces[sid].part_id])
+    report = getattr(part, "_circular_material_report", None)
+    return json.dumps({"paths": part.paths, "material": report}, sort_keys=True, allow_nan=False)
+
+
 def validate_loft_snapshot(data):
     """Validate current feature/source UUID/revision/digest and canonical CUT.
 
@@ -112,6 +127,12 @@ def validate_loft_snapshot(data):
         for sid in part.get("surface_ids", [])
     }
     result = {}
+    has_curved = any(report.get("source_binding", {}).get("curved_material_inputs")
+                     for report in reports.values() if isinstance(report, dict))
+    if has_curved:
+        from archpapercraft.authoring.curved_connectors import validate_curved_snapshot_binding
+
+        validate_curved_snapshot_binding(data)
     for sid, report in reports.items():
         try:
             if not isinstance(report, dict) or report.get("status") != "EXACT":
@@ -176,13 +197,29 @@ def validate_loft_snapshot(data):
             source = report["area"]["source_intrinsic"]
             low, high = _positive_bounds(source)
             budget = max(Fraction(1, 100), low / 1000000)
+            material = None
+            if binding.get("curved_material_inputs"):
+                material = json.loads(_bound_curved_material(
+                    json.dumps(binding, sort_keys=True, allow_nan=False),
+                    json.dumps(report["paper_frame"], sort_keys=True, allow_nan=False),
+                ))
+                if report.get("curved_material") != material["material"]:
+                    raise ValueError("Materiál chlopní neodpovídá čerstvým skutečným zdrojům.")
             for key in ("area", "paper_frame_area"):
                 area = report[key]
-                if area.get("status") != "CERTIFIED" or area["source_intrinsic"] != source:
+                expected_source = (material["material"]["source_material_area"]
+                                   if key == "paper_frame_area" and material["material"]
+                                   else source) if material is not None else source
+                area_low, area_high = _positive_bounds(expected_source)
+                if area.get("status") != "CERTIFIED" or area["source_intrinsic"] != expected_source:
                     raise ValueError("Loft nemá plošný důkaz stejného skutečného zdroje.")
+                if (expected_source != source and
+                        (area.get("relative_area_basis") != "BODY_ONLY" or
+                         area.get("relative_area_basis_source") != source)):
+                    raise ValueError("Chlopně nesmějí navýšit relativní plošnou toleranci těla.")
                 native = area["actual_native"]
                 actual = Fraction(native["lower_exact"]), Fraction(native["upper_exact"])
-                error = max(abs(actual[0] - high), abs(actual[1] - low))
+                error = max(abs(actual[0] - area_high), abs(actual[1] - area_low))
                 if error > budget or Fraction(area["maximum_error_bound_exact"]) < error:
                     raise ValueError("Plošná mez loftu neodpovídá skutečnému zdroji.")
             if (
@@ -215,6 +252,11 @@ def validate_loft_snapshot(data):
                 json.dumps(binding, sort_keys=True, allow_nan=False),
                 json.dumps(report["paper_frame"], sort_keys=True, allow_nan=False),
             )
+            if material is not None:
+                expected_commands = tuple(tuple(c) for c in material["paths"]["CUT"][0]["commands"])
+                if any(part["paths"].get(role) != material["paths"].get(role)
+                       for role in ("TABS", "GUIDES")):
+                    raise ValueError("Chlopně nebo základny ohybů se liší od skutečných zdrojů.")
             if (
                 tuple(tuple(c) for c in commands) != expected_commands
                 or _digest(representation) != actual_representation
@@ -251,7 +293,7 @@ def _placed(commands, placement):
     return result
 
 
-def _coordinate_errors(source, target):
+def _coordinate_errors(source, target, *, details=None):
     """Whole-curve bounds, not samples; exact rational serialized operands.
 
     Position uses the maximum L1 control difference. Arc-length change is at
@@ -262,12 +304,13 @@ def _coordinate_errors(source, target):
     if any(c[0] == "A" for c in source):
         from .circular_output_validation import coordinate_errors
 
-        return coordinate_errors(source, target)
+        return coordinate_errors(source, target, details=details)
     if len(source) != len(target):
         raise ValueError("Skutečný výstup změnil počet původních loft příkazů.")
     position = length = Fraction(0)
     current_source = current_target = start_source = start_target = None
     for a, b in zip(source, target):
+        previous_length = length
         if a[0] != b[0] or len(a) != len(b):
             raise ValueError("Skutečný výstup změnil nativní topologii nebo L/C zdroje loftu.")
         op = a[0]
@@ -276,7 +319,11 @@ def _coordinate_errors(source, target):
         if op == "Z":
             pa, pb = [start_source], [start_target]
         errors = [(x - u, y - v) for (x, y), (u, v) in zip(pa, pb)]
-        position = max([position, *(abs(x) + abs(y) for x, y in errors)])
+        local_position = max(abs(x)+abs(y) for x, y in errors)
+        if op != "M":
+            local_position = max(local_position,
+                                 sum(abs(x-y) for x, y in zip(current_source, current_target)))
+        position = max(position, local_position)
         if op != "M":
             initial = tuple(x - y for x, y in zip(current_source, current_target))
             chain = [initial, *errors]
@@ -284,6 +331,8 @@ def _coordinate_errors(source, target):
         else:
             start_source, start_target = pa[0], pb[0]
         current_source, current_target = pa[-1], pb[-1]
+        if details is not None:
+            details.append({"position": local_position, "length": length-previous_length})
     return position, length
 
 
@@ -303,9 +352,11 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
     for sid, item in lofts.items():
         part, report = item["part"], item["report"]
         pid = part["id"]
-        source = report["area"]["source_intrinsic"]
+        body_source = report["area"]["source_intrinsic"]
+        material = report.get("curved_material")
+        source = material["source_material_area"] if material is not None else body_source
         low, high = _positive_bounds(source)
-        area_budget = max(Fraction(1, 100), low / 1000000)
+        area_budget = max(Fraction(1, 100), _positive_bounds(body_source)[0] / 1000000)
         placement = part["placement"]
         requested = [placement["x_mm"], placement["y_mm"], placement["rotation_deg"]]
         commands = part["paths"]["CUT"][0]["commands"]
@@ -332,16 +383,41 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
                 actual_commands = (
                     _placed(loops[0], actual["placement"]) if kind == "svg" else loops[0]
                 )
-                numeric_position, numeric_length = _coordinate_errors(expected, actual_commands)
+                details = []
+                numeric_position, numeric_length = _coordinate_errors(
+                    expected, actual_commands, details=details)
+                material_metrics = {}
+                if material is not None:
+                    owners = material["cut_command_ownership"]
+                    if len(owners) != len(details):
+                        raise ValueError("Chybí zdrojové pokrytí příkazů chlopní.")
+                    tab_position, tab_length = Fraction(0), Fraction(0)
+                    for owner, measured in zip(owners, details):
+                        if owner["kind"] == "TAB_CUT":
+                            tab_position = max(tab_position, measured["position"])
+                            tab_length += measured["length"]
+                    reserve = Fraction(material["publication_error_budget_exact"])
+                    if tab_position > reserve or tab_length > reserve:
+                        raise ValueError(
+                            "Skutečné řezy chlopní vyčerpaly vlastní publikační rezervu.")
+                    material_metrics = {
+                        "tab_cut_position_error_exact": str(tab_position),
+                        "tab_cut_global_length_error_exact": str(tab_length),
+                        "tab_publication_error_budget_exact": str(reserve),
+                    }
                 representation = report["representation"]
                 # position_error_bound already includes source F→line delta.
                 # Add ONLY the actual binary-native→serialized difference.
                 total_position = (
                     _fraction(representation["position_error_bound_paper_mm"]) + numeric_position
+                    + (Fraction(material["body_trim_position_error_exact"])
+                       if material is not None else 0)
                 )
                 total_length = (
                     _fraction(representation["boundary_length_error_bound_paper_mm"])
                     + numeric_length
+                    + (Fraction(material["body_trim_global_length_error_exact"])
+                       if material is not None else 0)
                 )
                 rulings = []
                 for ruling in report["closing_rulings"]:
@@ -357,6 +433,7 @@ def validate_loft_vector_outputs(data, svg_paths, pdf_path, *, expected_parts):
                             "Skutečný výstup překročil délkový rozpočet uzavíracího rulingu."
                         )
                 record["outputs"][kind] = {
+                    **material_metrics,
                     "area_exact": [str(v) for v in actual_area],
                     "source_to_actual_area_error_bound_exact": str(area_error),
                     "source_to_actual_position_error_bound_exact": str(total_position),

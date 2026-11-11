@@ -189,7 +189,7 @@ def test_old_v4_c_cache_recomputes_arcs_preserving_author_work(tmp_path, monkeyp
     assert source.read_bytes() == raw
     loaded.save(tmp_path / "V5-copy.apcraft")
     assert load_project(tmp_path / "V5-copy.apcraft").to_dict() == loaded.to_dict()
-    assert loaded.loft_status(sid)["paper_contract"].endswith("V5")
+    assert loaded.loft_status(sid)["paper_contract"] == loft_surface.LOFT_PAPER_CONTRACT
 
 
 def test_material_envelope_covers_true_arc_between_display_nodes():

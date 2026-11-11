@@ -1,0 +1,4135 @@
+{
+  "source_sha": "f79334635f69a864c6eb88e36c0c54d32cc70fd5",
+  "module": "C:\\Users\\dalib\\projects\\papercraft-circular-shell\\src\\archpapercraft\\authoring\\loft_surface.py",
+  "scope": "BACKEND_CHECKPOINT_NOT_FULL_C_OR_UI_EDITOR_NOVICE_PHYSICAL",
+  "models": {
+    "cylinder": {
+      "status": "EXACT",
+      "area": {
+        "status": "CERTIFIED",
+        "source_intrinsic": {
+          "status": "CERTIFIED",
+          "family": "RIGHT_CIRCULAR_SOURCE",
+          "area_lower_exact": "47123889803846898576939650749192543262957540990626587314624168884457743865401875449/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "area_upper_exact": "47123889803846898576939650749192543262957540990626587314624168885245633232479625551/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "area_lower_paper_mm2": 1884.9555921538756,
+          "area_upper_paper_mm2": 1884.955592153876,
+          "coverage": {
+            "first_profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+            "second_profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+            "first_closed": true,
+            "second_closed": true,
+            "expected_first_segment_ids": [
+              "d211c032-6054-4332-b000-6bd67a6079b3",
+              "c2d9086c-6857-4fba-9644-62dbdb02e09e"
+            ],
+            "expected_second_segment_ids": [
+              "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+              "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a"
+            ],
+            "correspondences": [
+              {
+                "first_segment_id": "d211c032-6054-4332-b000-6bd67a6079b3",
+                "second_segment_id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+                "first_parameter_interval": [
+                  0,
+                  1
+                ],
+                "second_parameter_interval": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "first_segment_id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+                "second_segment_id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+                "first_parameter_interval": [
+                  0,
+                  1
+                ],
+                "second_parameter_interval": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+          },
+          "proof": {
+            "area_identity": "pi*(R0+R1)*sqrt((R1-R0)^2+H^2)",
+            "source": "ACTUAL_BINARY_RATIONAL_RADII_HEIGHT_AND_SCALE; EXACT_COMMON_UNIT_BASIS",
+            "rounding": "OUTWARD_RATIONAL_PI_AND_SQRT; NO_FLAT_CACHE_INPUT"
+          }
+        },
+        "actual_native": {
+          "lower_exact": "1884955592153875869598778081/1000000000000000000000000",
+          "upper_exact": "942477796076937934799389041/500000000000000000000000",
+          "lower_paper_mm2": 1884.9555921538756,
+          "upper_paper_mm2": 1884.955592153876
+        },
+        "maximum_error_bound_exact": "1836970198724192543262957540990626587314624168885245633232479625551/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "maximum_error_bound_paper_mm2": 7.347880794896771e-14,
+        "allowed_error_exact": "1/100",
+        "allowed_error_paper_mm2": 0.01,
+        "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+        "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+        "max_commands": 32780,
+        "serialized_output": "NOT_VERIFIED",
+        "refinement_attempts": [
+          {
+            "attempt": 0,
+            "effective_tolerance_mm": 0.005,
+            "status": "CERTIFIED",
+            "maximum_error_bound_exact": "1836970198724192543262957540990626587314624168885245633232479625551/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "maximum_error_bound_paper_mm2": 7.347880794896771e-14,
+            "allowed_error_exact": "1/100"
+          }
+        ]
+      },
+      "source_profiles": {
+        "490938f5-c3b1-4aae-8f89-b634e93cbb76": {
+          "id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+          "name": "Obrys",
+          "vertices": [
+            {
+              "id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+              "point": [
+                10.0,
+                0.0
+              ]
+            },
+            {
+              "id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+              "point": [
+                -10.0,
+                0.0
+              ]
+            }
+          ],
+          "segments": [
+            {
+              "id": "d211c032-6054-4332-b000-6bd67a6079b3",
+              "kind": "arc",
+              "start_vertex_id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+              "end_vertex_id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            },
+            {
+              "id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+              "kind": "arc",
+              "start_vertex_id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+              "end_vertex_id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            }
+          ],
+          "closed": true,
+          "plane": {
+            "origin": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "u": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "v": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "revision": 1
+        },
+        "db8246f2-8623-42e7-9cd9-43c5029f0546": {
+          "id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+          "name": "Obrys",
+          "vertices": [
+            {
+              "id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+              "point": [
+                10.0,
+                0.0
+              ]
+            },
+            {
+              "id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+              "point": [
+                -10.0,
+                0.0
+              ]
+            }
+          ],
+          "segments": [
+            {
+              "id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+              "kind": "arc",
+              "start_vertex_id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+              "end_vertex_id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            },
+            {
+              "id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+              "kind": "arc",
+              "start_vertex_id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+              "end_vertex_id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            }
+          ],
+          "closed": true,
+          "plane": {
+            "origin": [
+              0.0,
+              0.0,
+              30.0
+            ],
+            "u": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "v": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "revision": 1
+        }
+      },
+      "native_cut": [
+        {
+          "commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "L",
+              31.41592653589793,
+              0.0
+            ],
+            [
+              "L",
+              62.83185307179586,
+              0.0
+            ],
+            [
+              "L",
+              62.83185307179586,
+              -30.0
+            ],
+            [
+              "L",
+              31.41592653589793,
+              -30.0
+            ],
+            [
+              "L",
+              0.0,
+              -30.0
+            ],
+            [
+              "Z"
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "rims": [
+        {
+          "surface_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+          "part_id": "c33d524d-65ab-41ec-81d4-93dd675a6534",
+          "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+          "rim_id": "2d044f87-570e-5e33-82d6-e921248df7b9",
+          "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+          "front_side": "outside",
+          "side": "first",
+          "source_turn": 0.0,
+          "source_turn_direction": -1,
+          "paper_stale": false,
+          "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5",
+          "material_cache_verified": true,
+          "source_binding": {
+            "profiles": [
+              {
+                "id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "d211c032-6054-4332-b000-6bd67a6079b3",
+                    "kind": "arc",
+                    "start_vertex_id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+                    "end_vertex_id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+                    "kind": "arc",
+                    "start_vertex_id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+                    "end_vertex_id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              },
+              {
+                "id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+                    "kind": "arc",
+                    "start_vertex_id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+                    "end_vertex_id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+                    "kind": "arc",
+                    "start_vertex_id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+                    "end_vertex_id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    30.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              }
+            ],
+            "surface": {
+              "id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "name": "Ost\u011bn\u00ed",
+              "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+              "hole_profile_ids": [],
+              "kind": "ruled_loft",
+              "params": {
+                "second_profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+                "correspondences": [
+                  {
+                    "first_segment_id": "d211c032-6054-4332-b000-6bd67a6079b3",
+                    "second_segment_id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "7ecf31d0-477b-4345-ac31-3b544ddadccb",
+                    "ruling_id": "76b3ed9b-d38c-40d6-85e8-d4cd57c14801"
+                  },
+                  {
+                    "first_segment_id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+                    "second_segment_id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "b1267368-4b11-4df0-921a-54b9f5a17f7c",
+                    "ruling_id": "63c7e818-ee63-4c59-8990-3f2a8d01d753"
+                  }
+                ],
+                "seam_patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb",
+                "end_ruling_id": "281f4458-1ca8-413c-a775-fc36b5b22441",
+                "tolerance_mm": 0.005,
+                "max_segments": 16384,
+                "reference_state": "BOUND"
+              },
+              "position_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_deg": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "parent_transforms": [],
+              "revision": 2,
+              "part_id": "c33d524d-65ab-41ec-81d4-93dd675a6534"
+            },
+            "scale": 1.0
+          },
+          "source_digest": "7b6e15582d1bdd776e2288ebfb16b5560351696c26b3589878d695876ad8439a",
+          "family": "RIGHT_CIRCULAR_CYLINDER",
+          "paper_units": "mm",
+          "source_scale_exact": "1",
+          "radius_mm": 10.0,
+          "radius_exact": "10",
+          "native_radial_slope_exact": "0",
+          "source_radial_slope_bounds": {
+            "lower_exact": "0",
+            "upper_exact": "0",
+            "lower": -5e-324,
+            "upper": 5e-324
+          },
+          "source_native_kappa_error_bound_exact": "0",
+          "source_native_radius_error_bound_exact": "0",
+          "native_tangent_error_mm_per_source_radian_exact": "2910648200169044071822665491333325559463158221238959612200270095084123/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "angular_correspondence": "COMMON_NATIVE_KAPPA_FULL_SOURCE_CIRCLE_ANGLE",
+          "source_radius_bounds": {
+            "lower_exact": "10",
+            "upper_exact": "10",
+            "lower": 9.999999999999998,
+            "upper": 10.000000000000002
+          },
+          "source_slant_bounds": {
+            "lower_exact": "299999999999999999999999999999999999999999999999999999999999999999999999999999999999999999/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "300000000000000000000000000000000000000000000000000000000000000000000000000000000000000001/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 29.999999999999996,
+            "upper": 30.000000000000004
+          },
+          "source_intervals": [
+            {
+              "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+              "segment_id": "d211c032-6054-4332-b000-6bd67a6079b3",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb"
+            },
+            {
+              "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+              "segment_id": "d211c032-6054-4332-b000-6bd67a6079b3",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb"
+            },
+            {
+              "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+              "segment_id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "b1267368-4b11-4df0-921a-54b9f5a17f7c"
+            },
+            {
+              "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+              "segment_id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "b1267368-4b11-4df0-921a-54b9f5a17f7c"
+            }
+          ],
+          "seam_patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb",
+          "seam_ruling_ids": [
+            "76b3ed9b-d38c-40d6-85e8-d4cd57c14801",
+            "281f4458-1ca8-413c-a775-fc36b5b22441"
+          ],
+          "world_frame": {
+            "center_model_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radial": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "tangent": [
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "outward_z": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "model_mm_per_paper_mm": 1.0,
+            "binary_gram_residual_bound_exact": "0"
+          },
+          "source_world_frame_intervals": {
+            "center_model_mm": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "radial": [
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "tangent": [
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "-12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "-12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -1.0000000000000002,
+                "upper": -0.9999999999999999
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "outward_z": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "-1",
+                "upper_exact": "-1",
+                "lower": -1.0000000000000002,
+                "upper": -0.9999999999999999
+              }
+            ],
+            "source_pose_gram_operator_bound_exact": "0",
+            "proof": "EXACT_SOURCE_UNIT_BASIS; RATIONAL_PI_TAYLOR_WHOLE_ANGLE; ACTUAL_BINARY_POSE"
+          },
+          "world_frame_operator_error_bound_exact": "56941262712283752184046772386698549/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "world_frame_center_error_bound_paper_mm_exact": "0",
+          "chart_to_canonical": {
+            "matrix": [
+              [
+                -1.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              0.0
+            ]
+          },
+          "chart_to_paper": {
+            "matrix": [
+              [
+                -1.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              0.0
+            ],
+            "matrix_exact": [
+              [
+                "-1",
+                "0"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "gram_operator_bound_exact": "0",
+            "map_kind": "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"
+          },
+          "canonical_boundary_commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "L",
+              31.41592653589793,
+              0.0
+            ],
+            [
+              "L",
+              62.83185307179586,
+              0.0
+            ]
+          ],
+          "paper_boundary_commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "L",
+              31.41592653589793,
+              0.0
+            ],
+            [
+              "L",
+              62.83185307179586,
+              0.0
+            ]
+          ],
+          "native_position_bound_paper_mm": 2.9106279750332006e-11,
+          "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE"
+        },
+        {
+          "surface_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+          "part_id": "c33d524d-65ab-41ec-81d4-93dd675a6534",
+          "profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+          "rim_id": "130d7cd1-b66d-5716-b648-22e17d52757e",
+          "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+          "front_side": "outside",
+          "side": "second",
+          "source_turn": 0.0,
+          "source_turn_direction": 1,
+          "paper_stale": false,
+          "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5",
+          "material_cache_verified": true,
+          "source_binding": {
+            "profiles": [
+              {
+                "id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "d211c032-6054-4332-b000-6bd67a6079b3",
+                    "kind": "arc",
+                    "start_vertex_id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+                    "end_vertex_id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+                    "kind": "arc",
+                    "start_vertex_id": "55d09161-27d6-4f29-aee1-50a2e41e1cb4",
+                    "end_vertex_id": "a49495f8-1118-490d-adea-0dde4996b2d2",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              },
+              {
+                "id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+                    "kind": "arc",
+                    "start_vertex_id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+                    "end_vertex_id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+                    "kind": "arc",
+                    "start_vertex_id": "74a8932a-a6b0-4583-9f1d-dedce22ab217",
+                    "end_vertex_id": "ced3074a-0ebc-47c9-9ee0-b285297da644",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    30.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              }
+            ],
+            "surface": {
+              "id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "name": "Ost\u011bn\u00ed",
+              "profile_id": "490938f5-c3b1-4aae-8f89-b634e93cbb76",
+              "hole_profile_ids": [],
+              "kind": "ruled_loft",
+              "params": {
+                "second_profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+                "correspondences": [
+                  {
+                    "first_segment_id": "d211c032-6054-4332-b000-6bd67a6079b3",
+                    "second_segment_id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "7ecf31d0-477b-4345-ac31-3b544ddadccb",
+                    "ruling_id": "76b3ed9b-d38c-40d6-85e8-d4cd57c14801"
+                  },
+                  {
+                    "first_segment_id": "c2d9086c-6857-4fba-9644-62dbdb02e09e",
+                    "second_segment_id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "b1267368-4b11-4df0-921a-54b9f5a17f7c",
+                    "ruling_id": "63c7e818-ee63-4c59-8990-3f2a8d01d753"
+                  }
+                ],
+                "seam_patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb",
+                "end_ruling_id": "281f4458-1ca8-413c-a775-fc36b5b22441",
+                "tolerance_mm": 0.005,
+                "max_segments": 16384,
+                "reference_state": "BOUND"
+              },
+              "position_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_deg": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "parent_transforms": [],
+              "revision": 2,
+              "part_id": "c33d524d-65ab-41ec-81d4-93dd675a6534"
+            },
+            "scale": 1.0
+          },
+          "source_digest": "7b6e15582d1bdd776e2288ebfb16b5560351696c26b3589878d695876ad8439a",
+          "family": "RIGHT_CIRCULAR_CYLINDER",
+          "paper_units": "mm",
+          "source_scale_exact": "1",
+          "radius_mm": 10.0,
+          "radius_exact": "10",
+          "native_radial_slope_exact": "0",
+          "source_radial_slope_bounds": {
+            "lower_exact": "0",
+            "upper_exact": "0",
+            "lower": -5e-324,
+            "upper": 5e-324
+          },
+          "source_native_kappa_error_bound_exact": "0",
+          "source_native_radius_error_bound_exact": "0",
+          "native_tangent_error_mm_per_source_radian_exact": "2910648200169044071822665491333325559463158221238959612200270095084123/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "angular_correspondence": "COMMON_NATIVE_KAPPA_FULL_SOURCE_CIRCLE_ANGLE",
+          "source_radius_bounds": {
+            "lower_exact": "10",
+            "upper_exact": "10",
+            "lower": 9.999999999999998,
+            "upper": 10.000000000000002
+          },
+          "source_slant_bounds": {
+            "lower_exact": "299999999999999999999999999999999999999999999999999999999999999999999999999999999999999999/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "300000000000000000000000000000000000000000000000000000000000000000000000000000000000000001/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 29.999999999999996,
+            "upper": 30.000000000000004
+          },
+          "source_intervals": [
+            {
+              "profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+              "segment_id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb"
+            },
+            {
+              "profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+              "segment_id": "fc23cd3f-18ca-40fa-9175-09dc891f65d9",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb"
+            },
+            {
+              "profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+              "segment_id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "b1267368-4b11-4df0-921a-54b9f5a17f7c"
+            },
+            {
+              "profile_id": "db8246f2-8623-42e7-9cd9-43c5029f0546",
+              "segment_id": "a0c95638-6be1-49a8-a8b7-c1f0dc12db5a",
+              "feature_id": "aaca1daa-cb04-4fec-90de-c9175248cb4d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "b1267368-4b11-4df0-921a-54b9f5a17f7c"
+            }
+          ],
+          "seam_patch_id": "7ecf31d0-477b-4345-ac31-3b544ddadccb",
+          "seam_ruling_ids": [
+            "76b3ed9b-d38c-40d6-85e8-d4cd57c14801",
+            "281f4458-1ca8-413c-a775-fc36b5b22441"
+          ],
+          "world_frame": {
+            "center_model_mm": [
+              0.0,
+              0.0,
+              30.0
+            ],
+            "radial": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "tangent": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "outward_z": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "model_mm_per_paper_mm": 1.0,
+            "binary_gram_residual_bound_exact": "0"
+          },
+          "source_world_frame_intervals": {
+            "center_model_mm": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "30",
+                "upper_exact": "30",
+                "lower": 29.999999999999996,
+                "upper": 30.000000000000004
+              }
+            ],
+            "radial": [
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "tangent": [
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "outward_z": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "1",
+                "upper_exact": "1",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              }
+            ],
+            "source_pose_gram_operator_bound_exact": "0",
+            "proof": "EXACT_SOURCE_UNIT_BASIS; RATIONAL_PI_TAYLOR_WHOLE_ANGLE; ACTUAL_BINARY_POSE"
+          },
+          "world_frame_operator_error_bound_exact": "56941262712283752184046772386698549/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "world_frame_center_error_bound_paper_mm_exact": "0",
+          "chart_to_canonical": {
+            "matrix": [
+              [
+                1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                -1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              -30.0
+            ]
+          },
+          "chart_to_paper": {
+            "matrix": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                -1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              -30.0
+            ],
+            "matrix_exact": [
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "-1"
+              ]
+            ],
+            "gram_operator_bound_exact": "0",
+            "map_kind": "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"
+          },
+          "canonical_boundary_commands": [
+            [
+              "M",
+              0.0,
+              -30.0
+            ],
+            [
+              "L",
+              31.41592653589793,
+              -30.0
+            ],
+            [
+              "L",
+              62.83185307179586,
+              -30.0
+            ]
+          ],
+          "paper_boundary_commands": [
+            [
+              "M",
+              0.0,
+              -30.0
+            ],
+            [
+              "L",
+              31.41592653589793,
+              -30.0
+            ],
+            [
+              "L",
+              62.83185307179586,
+              -30.0
+            ]
+          ],
+          "native_position_bound_paper_mm": 2.9106279750332006e-11,
+          "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE"
+        }
+      ]
+    },
+    "frustum": {
+      "status": "EXACT",
+      "area": {
+        "status": "CERTIFIED",
+        "source_intrinsic": {
+          "status": "CERTIFIED",
+          "family": "RIGHT_CIRCULAR_SOURCE",
+          "area_lower_exact": "282743338823081400749753418847823834254930791788105879071700508573523781752151590127/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "area_upper_exact": "141371669411540700374876709423911917127465395894052939535850254289125558977309045443/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "area_lower_paper_mm2": 2827.4333882308138,
+          "area_upper_paper_mm2": 2827.4333882308147,
+          "coverage": {
+            "first_profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+            "second_profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+            "first_closed": true,
+            "second_closed": true,
+            "expected_first_segment_ids": [
+              "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+              "f75d4686-5c92-40b1-8ee3-16f84c4ef714"
+            ],
+            "expected_second_segment_ids": [
+              "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+              "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4"
+            ],
+            "correspondences": [
+              {
+                "first_segment_id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+                "second_segment_id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+                "first_parameter_interval": [
+                  0,
+                  1
+                ],
+                "second_parameter_interval": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "first_segment_id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+                "second_segment_id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+                "first_parameter_interval": [
+                  0,
+                  1
+                ],
+                "second_parameter_interval": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+          },
+          "proof": {
+            "area_identity": "pi*(R0+R1)*sqrt((R1-R0)^2+H^2)",
+            "source": "ACTUAL_BINARY_RATIONAL_RADII_HEIGHT_AND_SCALE; EXACT_COMMON_UNIT_BASIS",
+            "rounding": "OUTWARD_RATIONAL_PI_AND_SQRT; NO_FLAT_CACHE_INPUT"
+          }
+        },
+        "actual_native": {
+          "lower_exact": "565486677646162797114480703/200000000000000000000000",
+          "upper_exact": "706858347057703496393100879/250000000000000000000000",
+          "lower_paper_mm2": 2827.4333882308133,
+          "upper_paper_mm2": 2827.433388230814
+        },
+        "maximum_error_bound_exact": "1096256533673911917127465395894052939535850254289125558977309045443/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "maximum_error_bound_paper_mm2": 2.192513067347824e-14,
+        "allowed_error_exact": "1/100",
+        "allowed_error_paper_mm2": 0.01,
+        "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+        "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+        "max_commands": 32780,
+        "serialized_output": "NOT_VERIFIED",
+        "refinement_attempts": [
+          {
+            "attempt": 0,
+            "effective_tolerance_mm": 0.005,
+            "status": "CERTIFIED",
+            "maximum_error_bound_exact": "1096256533673911917127465395894052939535850254289125558977309045443/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "maximum_error_bound_paper_mm2": 2.192513067347824e-14,
+            "allowed_error_exact": "1/100"
+          }
+        ]
+      },
+      "source_profiles": {
+        "ad65685d-4f61-4238-9e92-2e0fceb67002": {
+          "id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+          "name": "Obrys",
+          "vertices": [
+            {
+              "id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+              "point": [
+                10.0,
+                0.0
+              ]
+            },
+            {
+              "id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+              "point": [
+                -10.0,
+                0.0
+              ]
+            }
+          ],
+          "segments": [
+            {
+              "id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+              "kind": "arc",
+              "start_vertex_id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+              "end_vertex_id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            },
+            {
+              "id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+              "kind": "arc",
+              "start_vertex_id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+              "end_vertex_id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            }
+          ],
+          "closed": true,
+          "plane": {
+            "origin": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "u": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "v": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "revision": 1
+        },
+        "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6": {
+          "id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+          "name": "Obrys",
+          "vertices": [
+            {
+              "id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+              "point": [
+                20.0,
+                0.0
+              ]
+            },
+            {
+              "id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+              "point": [
+                -20.0,
+                0.0
+              ]
+            }
+          ],
+          "segments": [
+            {
+              "id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+              "kind": "arc",
+              "start_vertex_id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+              "end_vertex_id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            },
+            {
+              "id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+              "kind": "arc",
+              "start_vertex_id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+              "end_vertex_id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            }
+          ],
+          "closed": true,
+          "plane": {
+            "origin": [
+              0.0,
+              0.0,
+              28.284271247461902
+            ],
+            "u": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "v": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "revision": 1
+        }
+      },
+      "native_cut": [
+        {
+          "commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              15.0,
+              -4.01923788646684
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              30.0,
+              1.442222014787673e-15
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              40.98076211353316,
+              10.980762113533162
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              45.0,
+              25.98076211353316
+            ],
+            [
+              "L",
+              75.0,
+              25.980762113533164
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              0,
+              66.96152422706632,
+              -4.019237886466836
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              0,
+              45.00000000000001,
+              -25.980762113533157
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              0,
+              15.000000000000004,
+              -34.01923788646684
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              0,
+              -14.999999999999998,
+              -25.98076211353316
+            ],
+            [
+              "Z"
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "rims": [
+        {
+          "surface_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+          "part_id": "4e3a6f67-f5ea-4b1b-aaa6-94f8d6e7942f",
+          "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+          "rim_id": "a935059d-a020-5357-b227-18c53c662381",
+          "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+          "front_side": "outside",
+          "side": "first",
+          "source_turn": 0.0,
+          "source_turn_direction": -1,
+          "paper_stale": false,
+          "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5",
+          "material_cache_verified": true,
+          "source_binding": {
+            "profiles": [
+              {
+                "id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+                    "kind": "arc",
+                    "start_vertex_id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+                    "end_vertex_id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+                    "kind": "arc",
+                    "start_vertex_id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+                    "end_vertex_id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              },
+              {
+                "id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+                    "point": [
+                      20.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+                    "point": [
+                      -20.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+                    "kind": "arc",
+                    "start_vertex_id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+                    "end_vertex_id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+                    "kind": "arc",
+                    "start_vertex_id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+                    "end_vertex_id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    28.284271247461902
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              }
+            ],
+            "surface": {
+              "id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "name": "Ost\u011bn\u00ed",
+              "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+              "hole_profile_ids": [],
+              "kind": "ruled_loft",
+              "params": {
+                "second_profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+                "correspondences": [
+                  {
+                    "first_segment_id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+                    "second_segment_id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "e14ca17e-86fa-43c8-8077-82855c6313fc",
+                    "ruling_id": "b94930b8-b505-4960-82d4-a83c052a1dbe"
+                  },
+                  {
+                    "first_segment_id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+                    "second_segment_id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "d69dda97-3817-4b5d-bb9f-e7030750fa44",
+                    "ruling_id": "2f8fdcf9-3463-4229-aec2-d4cfeb33a7cc"
+                  }
+                ],
+                "seam_patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc",
+                "end_ruling_id": "8837cd21-b4e5-4e40-86cb-427f88540143",
+                "tolerance_mm": 0.005,
+                "max_segments": 16384,
+                "reference_state": "BOUND"
+              },
+              "position_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_deg": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "parent_transforms": [],
+              "revision": 2,
+              "part_id": "4e3a6f67-f5ea-4b1b-aaa6-94f8d6e7942f"
+            },
+            "scale": 1.0
+          },
+          "source_digest": "28a5d6fdd8a41479fb5f0c73aa9a518d42909a964fc0a4f7471701c08ba36973",
+          "family": "RIGHT_CIRCULAR_FRUSTUM",
+          "paper_units": "mm",
+          "source_scale_exact": "1",
+          "radius_mm": 10.0,
+          "radius_exact": "10",
+          "native_radial_slope_exact": "-1/3",
+          "source_radial_slope_bounds": {
+            "lower_exact": "-6666666666666666447666741315889023082699805609545064384315467717171925438524103/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "-16666666666666666119166853289722557706749514023862660960788669292929813596310257/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": -0.33333333333333337,
+            "upper": -0.33333333333333326
+          },
+          "source_native_kappa_error_bound_exact": "1642499440130832326879751457928412017117633992121210559211069229/150000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "source_native_radius_error_bound_exact": "0",
+          "native_tangent_error_mm_per_source_radian_exact": "11930482842688365849004716971741486771870874921425670735285392125514111210094100777074866894529157543435233314278755191206066498579680695915348926252998321377683381/409787351395347750000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "angular_correspondence": "COMMON_NATIVE_KAPPA_FULL_SOURCE_CIRCLE_ANGLE",
+          "source_radius_bounds": {
+            "lower_exact": "10",
+            "upper_exact": "10",
+            "lower": 9.999999999999998,
+            "upper": 10.000000000000002
+          },
+          "source_slant_bounds": {
+            "lower_exact": "4687500000000000153984322512265535703359969487221881431789222664764672021710924725030419/156250000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "150000000000000004927498320392497142507519023591100205817255125272469504694749591200973409/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 29.999999999999996,
+            "upper": 30.000000000000004
+          },
+          "source_intervals": [
+            {
+              "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+              "segment_id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc"
+            },
+            {
+              "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+              "segment_id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc"
+            },
+            {
+              "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+              "segment_id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "d69dda97-3817-4b5d-bb9f-e7030750fa44"
+            },
+            {
+              "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+              "segment_id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "d69dda97-3817-4b5d-bb9f-e7030750fa44"
+            }
+          ],
+          "seam_patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc",
+          "seam_ruling_ids": [
+            "b94930b8-b505-4960-82d4-a83c052a1dbe",
+            "8837cd21-b4e5-4e40-86cb-427f88540143"
+          ],
+          "world_frame": {
+            "center_model_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radial": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "tangent": [
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "outward_z": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "model_mm_per_paper_mm": 1.0,
+            "binary_gram_residual_bound_exact": "0"
+          },
+          "source_world_frame_intervals": {
+            "center_model_mm": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "radial": [
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "tangent": [
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "-12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "-12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -1.0000000000000002,
+                "upper": -0.9999999999999999
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "outward_z": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "-1",
+                "upper_exact": "-1",
+                "lower": -1.0000000000000002,
+                "upper": -0.9999999999999999
+              }
+            ],
+            "source_pose_gram_operator_bound_exact": "0",
+            "proof": "EXACT_SOURCE_UNIT_BASIS; RATIONAL_PI_TAYLOR_WHOLE_ANGLE; ACTUAL_BINARY_POSE"
+          },
+          "world_frame_operator_error_bound_exact": "56941262712283752184046772386698549/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "world_frame_center_error_bound_paper_mm_exact": "0",
+          "chart_to_canonical": {
+            "matrix": [
+              [
+                -1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              0.0
+            ]
+          },
+          "chart_to_paper": {
+            "matrix": [
+              [
+                -0.8660254037844387,
+                0.49999999999999994
+              ],
+              [
+                0.49999999999999994,
+                0.8660254037844387
+              ]
+            ],
+            "translation": [
+              0.0,
+              0.0
+            ],
+            "matrix_exact": [
+              [
+                "-7800463371553963/9007199254740992",
+                "9007199254740991/18014398509481984"
+              ],
+              [
+                "9007199254740991/18014398509481984",
+                "7800463371553963/9007199254740992"
+              ]
+            ],
+            "gram_operator_bound_exact": "16186576159107301/162259276829213363391578010288128",
+            "map_kind": "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"
+          },
+          "canonical_boundary_commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              15.0,
+              4.019237886466841
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              25.98076211353316,
+              15.0
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              30.0,
+              30.0
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              25.98076211353316,
+              45.0
+            ]
+          ],
+          "paper_boundary_commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              15.0,
+              -4.01923788646684
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              30.0,
+              1.442222014787673e-15
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              40.98076211353316,
+              10.980762113533162
+            ],
+            [
+              "A",
+              30.0,
+              30.0,
+              0,
+              0,
+              1,
+              45.0,
+              25.98076211353316
+            ]
+          ],
+          "native_position_bound_paper_mm": 2.9247457941048126e-11,
+          "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE"
+        },
+        {
+          "surface_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+          "part_id": "4e3a6f67-f5ea-4b1b-aaa6-94f8d6e7942f",
+          "profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+          "rim_id": "9f6dd50b-5258-54bd-a1f6-22e831140c61",
+          "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+          "front_side": "outside",
+          "side": "second",
+          "source_turn": 0.0,
+          "source_turn_direction": 1,
+          "paper_stale": false,
+          "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5",
+          "material_cache_verified": true,
+          "source_binding": {
+            "profiles": [
+              {
+                "id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+                    "kind": "arc",
+                    "start_vertex_id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+                    "end_vertex_id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+                    "kind": "arc",
+                    "start_vertex_id": "34f386b9-e997-4f17-863c-b858e4c31fa2",
+                    "end_vertex_id": "08c56acc-b6b3-432d-be5f-53781f491caf",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              },
+              {
+                "id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+                    "point": [
+                      20.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+                    "point": [
+                      -20.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+                    "kind": "arc",
+                    "start_vertex_id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+                    "end_vertex_id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+                    "kind": "arc",
+                    "start_vertex_id": "41af6af9-5bee-41e4-a074-4769af1be05b",
+                    "end_vertex_id": "d08c757e-7dde-48f5-aa18-131d7688bf0f",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    28.284271247461902
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              }
+            ],
+            "surface": {
+              "id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "name": "Ost\u011bn\u00ed",
+              "profile_id": "ad65685d-4f61-4238-9e92-2e0fceb67002",
+              "hole_profile_ids": [],
+              "kind": "ruled_loft",
+              "params": {
+                "second_profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+                "correspondences": [
+                  {
+                    "first_segment_id": "bd9dda49-e92b-49fc-b1e9-9f65ad899904",
+                    "second_segment_id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "e14ca17e-86fa-43c8-8077-82855c6313fc",
+                    "ruling_id": "b94930b8-b505-4960-82d4-a83c052a1dbe"
+                  },
+                  {
+                    "first_segment_id": "f75d4686-5c92-40b1-8ee3-16f84c4ef714",
+                    "second_segment_id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "d69dda97-3817-4b5d-bb9f-e7030750fa44",
+                    "ruling_id": "2f8fdcf9-3463-4229-aec2-d4cfeb33a7cc"
+                  }
+                ],
+                "seam_patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc",
+                "end_ruling_id": "8837cd21-b4e5-4e40-86cb-427f88540143",
+                "tolerance_mm": 0.005,
+                "max_segments": 16384,
+                "reference_state": "BOUND"
+              },
+              "position_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_deg": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "parent_transforms": [],
+              "revision": 2,
+              "part_id": "4e3a6f67-f5ea-4b1b-aaa6-94f8d6e7942f"
+            },
+            "scale": 1.0
+          },
+          "source_digest": "28a5d6fdd8a41479fb5f0c73aa9a518d42909a964fc0a4f7471701c08ba36973",
+          "family": "RIGHT_CIRCULAR_FRUSTUM",
+          "paper_units": "mm",
+          "source_scale_exact": "1",
+          "radius_mm": 20.0,
+          "radius_exact": "20",
+          "native_radial_slope_exact": "1/3",
+          "source_radial_slope_bounds": {
+            "lower_exact": "16666666666666666119166853289722557706749514023862660960788669292929813596310257/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "6666666666666666447666741315889023082699805609545064384315467717171925438524103/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 0.33333333333333326,
+            "upper": 0.33333333333333337
+          },
+          "source_native_kappa_error_bound_exact": "1642499440130832326879751457928412017117633992121210559211069229/150000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "source_native_radius_error_bound_exact": "0",
+          "native_tangent_error_mm_per_source_radian_exact": "5967292043526286647226320007668305619527124921425670735285392125514111210094100777074866894529157543435233314278755191206066498579680695915348926252998321377683381/204893675697673875000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "angular_correspondence": "COMMON_NATIVE_KAPPA_FULL_SOURCE_CIRCLE_ANGLE",
+          "source_radius_bounds": {
+            "lower_exact": "20",
+            "upper_exact": "20",
+            "lower": 19.999999999999996,
+            "upper": 20.000000000000004
+          },
+          "source_slant_bounds": {
+            "lower_exact": "4687500000000000153984322512265535703359969487221881431789222664764672021710924725030419/156250000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "150000000000000004927498320392497142507519023591100205817255125272469504694749591200973409/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 29.999999999999996,
+            "upper": 30.000000000000004
+          },
+          "source_intervals": [
+            {
+              "profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+              "segment_id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc"
+            },
+            {
+              "profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+              "segment_id": "77a7b38e-83ba-48d7-bcb2-a5b5c094ab82",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc"
+            },
+            {
+              "profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+              "segment_id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "d69dda97-3817-4b5d-bb9f-e7030750fa44"
+            },
+            {
+              "profile_id": "d16bb0c2-e9a4-46c8-9116-8f29f9fc7da6",
+              "segment_id": "d448a6c7-8cfc-4ec6-ad99-04a773b98ce4",
+              "feature_id": "07c9b909-8e2f-482b-a24a-27ee7206d62d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "d69dda97-3817-4b5d-bb9f-e7030750fa44"
+            }
+          ],
+          "seam_patch_id": "e14ca17e-86fa-43c8-8077-82855c6313fc",
+          "seam_ruling_ids": [
+            "b94930b8-b505-4960-82d4-a83c052a1dbe",
+            "8837cd21-b4e5-4e40-86cb-427f88540143"
+          ],
+          "world_frame": {
+            "center_model_mm": [
+              0.0,
+              0.0,
+              28.284271247461902
+            ],
+            "radial": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "tangent": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "outward_z": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "model_mm_per_paper_mm": 1.0,
+            "binary_gram_residual_bound_exact": "0"
+          },
+          "source_world_frame_intervals": {
+            "center_model_mm": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "124395540479019/4398046511104",
+                "upper_exact": "124395540479019/4398046511104",
+                "lower": 28.2842712474619,
+                "upper": 28.284271247461906
+              }
+            ],
+            "radial": [
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "tangent": [
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "outward_z": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "1",
+                "upper_exact": "1",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              }
+            ],
+            "source_pose_gram_operator_bound_exact": "0",
+            "proof": "EXACT_SOURCE_UNIT_BASIS; RATIONAL_PI_TAYLOR_WHOLE_ANGLE; ACTUAL_BINARY_POSE"
+          },
+          "world_frame_operator_error_bound_exact": "56941262712283752184046772386698549/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "world_frame_center_error_bound_paper_mm_exact": "0",
+          "chart_to_canonical": {
+            "matrix": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                -1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              -30.0
+            ]
+          },
+          "chart_to_paper": {
+            "matrix": [
+              [
+                0.8660254037844387,
+                -0.49999999999999994
+              ],
+              [
+                -0.49999999999999994,
+                -0.8660254037844387
+              ]
+            ],
+            "translation": [
+              -14.999999999999998,
+              -25.98076211353316
+            ],
+            "matrix_exact": [
+              [
+                "7800463371553963/9007199254740992",
+                "-9007199254740991/18014398509481984"
+              ],
+              [
+                "-9007199254740991/18014398509481984",
+                "-7800463371553963/9007199254740992"
+              ]
+            ],
+            "gram_operator_bound_exact": "16186576159107301/162259276829213363391578010288128",
+            "map_kind": "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"
+          },
+          "canonical_boundary_commands": [
+            [
+              "M",
+              0.0,
+              -30.0
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              30.0,
+              -21.96152422706632
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              51.96152422706632,
+              2.707108286005554e-64
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              60.0,
+              30.0
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              51.96152422706632,
+              60.0
+            ]
+          ],
+          "paper_boundary_commands": [
+            [
+              "M",
+              -14.999999999999998,
+              -25.98076211353316
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              15.000000000000004,
+              -34.01923788646684
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              45.00000000000001,
+              -25.980762113533157
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              66.96152422706632,
+              -4.019237886466836
+            ],
+            [
+              "A",
+              60.0,
+              60.0,
+              0,
+              0,
+              1,
+              75.0,
+              25.980762113533164
+            ]
+          ],
+          "native_position_bound_paper_mm": 2.9247457941048126e-11,
+          "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE"
+        }
+      ]
+    },
+    "near": {
+      "status": "EXACT",
+      "area": {
+        "status": "CERTIFIED",
+        "source_intrinsic": {
+          "status": "CERTIFIED",
+          "family": "RIGHT_CIRCULAR_SOURCE",
+          "area_lower_exact": "94247784320082826371695212324552392415171409031843740486449083285213402438154525563/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "area_upper_exact": "188495568640165652743390424649104784830342818063687480972898166573578362502197926579/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "area_lower_paper_mm2": 1884.9556864016563,
+          "area_upper_paper_mm2": 1884.9556864016567,
+          "coverage": {
+            "first_profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+            "second_profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+            "first_closed": true,
+            "second_closed": true,
+            "expected_first_segment_ids": [
+              "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+              "6af84978-0d7a-4503-b2dd-b5eb7212c422"
+            ],
+            "expected_second_segment_ids": [
+              "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+              "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6"
+            ],
+            "correspondences": [
+              {
+                "first_segment_id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+                "second_segment_id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+                "first_parameter_interval": [
+                  0,
+                  1
+                ],
+                "second_parameter_interval": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "first_segment_id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+                "second_segment_id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+                "first_parameter_interval": [
+                  0,
+                  1
+                ],
+                "second_parameter_interval": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "scope": "ALL_SOURCE_SEGMENTS_EXACTLY_ONCE_WITH_EXPLICIT_ORIENTATION"
+          },
+          "proof": {
+            "area_identity": "pi*(R0+R1)*sqrt((R1-R0)^2+H^2)",
+            "source": "ACTUAL_BINARY_RATIONAL_RADII_HEIGHT_AND_SCALE; EXACT_COMMON_UNIT_BASIS",
+            "rounding": "OUTWARD_RATIONAL_PI_AND_SQRT; NO_FLAT_CACHE_INPUT"
+          }
+        },
+        "actual_native": {
+          "lower_exact": "942477843200827771263971567/500000000000000000000000",
+          "upper_exact": "376991137280331108505588627/200000000000000000000000",
+          "lower_paper_mm2": 1884.9556864016554,
+          "upper_paper_mm2": 1884.9556864016558
+        },
+        "maximum_error_bound_exact": "98490596111249104784830342818063687480972898166573578362502197926579/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "maximum_error_bound_paper_mm2": 9.849059611124913e-13,
+        "allowed_error_exact": "1/100",
+        "allowed_error_paper_mm2": 0.01,
+        "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
+        "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
+        "max_commands": 32780,
+        "serialized_output": "NOT_VERIFIED",
+        "refinement_attempts": [
+          {
+            "attempt": 0,
+            "effective_tolerance_mm": 0.005,
+            "status": "CERTIFIED",
+            "maximum_error_bound_exact": "98490596111249104784830342818063687480972898166573578362502197926579/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "maximum_error_bound_paper_mm2": 9.849059611124913e-13,
+            "allowed_error_exact": "1/100"
+          }
+        ]
+      },
+      "source_profiles": {
+        "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c": {
+          "id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+          "name": "Obrys",
+          "vertices": [
+            {
+              "id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+              "point": [
+                10.0,
+                0.0
+              ]
+            },
+            {
+              "id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+              "point": [
+                -10.0,
+                0.0
+              ]
+            }
+          ],
+          "segments": [
+            {
+              "id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+              "kind": "arc",
+              "start_vertex_id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+              "end_vertex_id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            },
+            {
+              "id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+              "kind": "arc",
+              "start_vertex_id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+              "end_vertex_id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            }
+          ],
+          "closed": true,
+          "plane": {
+            "origin": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "u": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "v": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "revision": 1
+        },
+        "aed81c70-0e22-4a38-b024-7fda6ff126a2": {
+          "id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+          "name": "Obrys",
+          "vertices": [
+            {
+              "id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+              "point": [
+                10.000001,
+                0.0
+              ]
+            },
+            {
+              "id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+              "point": [
+                -10.000001,
+                0.0
+              ]
+            }
+          ],
+          "segments": [
+            {
+              "id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+              "kind": "arc",
+              "start_vertex_id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+              "end_vertex_id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            },
+            {
+              "id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+              "kind": "arc",
+              "start_vertex_id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+              "end_vertex_id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+              "data": {
+                "center": [
+                  0,
+                  0
+                ],
+                "sweep_deg": 180
+              }
+            }
+          ],
+          "closed": true,
+          "plane": {
+            "origin": [
+              0.0,
+              0.0,
+              30.0
+            ],
+            "u": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "v": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          },
+          "revision": 1
+        }
+      },
+      "native_cut": [
+        {
+          "commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              15.707963267948958,
+              -4.112335164042889e-07
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              31.415926535897917,
+              1.4735138764513833e-22
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              47.12388980384683,
+              1.2337005492128659e-06
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              62.83185307179567,
+              3.289868131234305e-06
+            ],
+            [
+              "L",
+              62.83185778418464,
+              -29.9999967101315
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              0,
+              47.123892945439486,
+              -29.99999876629929
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              0,
+              31.415928106694246,
+              -29.99999999999996
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              0,
+              15.70796326794896,
+              -30.00000041123352
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              0,
+              -1.5707963256193102e-06,
+              -29.99999999999996
+            ],
+            [
+              "Z"
+            ]
+          ],
+          "closed": true
+        }
+      ],
+      "rims": [
+        {
+          "surface_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+          "part_id": "1fe4832c-247c-4913-9e55-4bc93dee237f",
+          "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+          "rim_id": "43c7164b-ee4d-5f25-9268-37a05850dc21",
+          "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+          "front_side": "outside",
+          "side": "first",
+          "source_turn": 0.0,
+          "source_turn_direction": -1,
+          "paper_stale": false,
+          "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5",
+          "material_cache_verified": true,
+          "source_binding": {
+            "profiles": [
+              {
+                "id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+                    "kind": "arc",
+                    "start_vertex_id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+                    "end_vertex_id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+                    "kind": "arc",
+                    "start_vertex_id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+                    "end_vertex_id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              },
+              {
+                "id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+                    "point": [
+                      10.000001,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+                    "point": [
+                      -10.000001,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+                    "kind": "arc",
+                    "start_vertex_id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+                    "end_vertex_id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+                    "kind": "arc",
+                    "start_vertex_id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+                    "end_vertex_id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    30.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              }
+            ],
+            "surface": {
+              "id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "name": "Ost\u011bn\u00ed",
+              "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+              "hole_profile_ids": [],
+              "kind": "ruled_loft",
+              "params": {
+                "second_profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+                "correspondences": [
+                  {
+                    "first_segment_id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+                    "second_segment_id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "f31819ff-251a-4f14-aa5b-d02ca17fe733",
+                    "ruling_id": "ee24c9bd-416b-40b5-b0c6-75c64b85962a"
+                  },
+                  {
+                    "first_segment_id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+                    "second_segment_id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "6d32346e-216c-429f-8f62-c177d9b4c126",
+                    "ruling_id": "811d0cfe-60f7-48c3-b3bd-436bb1642986"
+                  }
+                ],
+                "seam_patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733",
+                "end_ruling_id": "2901fb6a-5667-4c07-af2b-524f6e64504f",
+                "tolerance_mm": 0.005,
+                "max_segments": 16384,
+                "reference_state": "BOUND"
+              },
+              "position_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_deg": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "parent_transforms": [],
+              "revision": 2,
+              "part_id": "1fe4832c-247c-4913-9e55-4bc93dee237f"
+            },
+            "scale": 1.0
+          },
+          "source_digest": "781142e87d045745ae8ccc673061bcb5cf845ccc5809e1baaf9e69e2a8645f43",
+          "family": "RIGHT_CIRCULAR_FRUSTUM",
+          "paper_units": "mm",
+          "source_scale_exact": "1",
+          "radius_mm": 10.0,
+          "radius_exact": "10",
+          "native_radial_slope_exact": "-83886080/2516582401883413",
+          "source_radial_slope_bounds": {
+            "lower_exact": "-3333333330838663305743491226682188581142659886591930820450429468310756739/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "-1666666665419331652871745613341094290571329943295965410225214734155378369/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": -3.333333330838664e-08,
+            "upper": -3.3333333308386626e-08
+          },
+          "source_native_kappa_error_bound_exact": "643394728308283072218503770601958889569748879074729212856248360882070207/251658240188341300000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "source_native_radius_error_bound_exact": "0",
+          "native_tangent_error_mm_per_source_radian_exact": "120107615548055228985419120701924604501802892851065858559556079343349979189201709191184712372080877907677898611569316879461008651655095082123612590198470992495054173404711775927690601013683595573624154409/491960793265058917868053111875874082279912278347500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "angular_correspondence": "COMMON_NATIVE_KAPPA_FULL_SOURCE_CIRCLE_ANGLE",
+          "source_radius_bounds": {
+            "lower_exact": "10",
+            "upper_exact": "10",
+            "lower": 9.999999999999998,
+            "upper": 10.000000000000002
+          },
+          "source_slant_bounds": {
+            "lower_exact": "150000000000000083333333208599901444960803655279384967984404615239367771477497385964009547/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "37500000000000020833333302149975361240200913819846241996101153809841942869374346491002387/1250000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 30.000000000000014,
+            "upper": 30.00000000000002
+          },
+          "source_intervals": [
+            {
+              "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+              "segment_id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733"
+            },
+            {
+              "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+              "segment_id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733"
+            },
+            {
+              "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+              "segment_id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "6d32346e-216c-429f-8f62-c177d9b4c126"
+            },
+            {
+              "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+              "segment_id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "6d32346e-216c-429f-8f62-c177d9b4c126"
+            }
+          ],
+          "seam_patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733",
+          "seam_ruling_ids": [
+            "ee24c9bd-416b-40b5-b0c6-75c64b85962a",
+            "2901fb6a-5667-4c07-af2b-524f6e64504f"
+          ],
+          "world_frame": {
+            "center_model_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radial": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "tangent": [
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "outward_z": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "model_mm_per_paper_mm": 1.0,
+            "binary_gram_residual_bound_exact": "0"
+          },
+          "source_world_frame_intervals": {
+            "center_model_mm": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "radial": [
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "tangent": [
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "-12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "-12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -1.0000000000000002,
+                "upper": -0.9999999999999999
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "outward_z": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "-1",
+                "upper_exact": "-1",
+                "lower": -1.0000000000000002,
+                "upper": -0.9999999999999999
+              }
+            ],
+            "source_pose_gram_operator_bound_exact": "0",
+            "proof": "EXACT_SOURCE_UNIT_BASIS; RATIONAL_PI_TAYLOR_WHOLE_ANGLE; ACTUAL_BINARY_POSE"
+          },
+          "world_frame_operator_error_bound_exact": "56941262712283752184046772386698549/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "world_frame_center_error_bound_paper_mm_exact": "0",
+          "chart_to_canonical": {
+            "matrix": [
+              [
+                -1.0,
+                -0.0
+              ],
+              [
+                -0.0,
+                1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              0.0
+            ]
+          },
+          "chart_to_paper": {
+            "matrix": [
+              [
+                -0.9999999999999987,
+                5.2359877520643675e-08
+              ],
+              [
+                5.2359877520643675e-08,
+                0.9999999999999987
+              ]
+            ],
+            "translation": [
+              0.0,
+              0.0
+            ],
+            "matrix_exact": [
+              [
+                "-2251799813685245/2251799813685248",
+                "7912400980820719/151115727451828646838272"
+              ],
+              [
+                "7912400980820719/151115727451828646838272",
+                "2251799813685245/2251799813685248"
+              ]
+            ],
+            "gram_operator_bound_exact": "1758860470337705301037712153377/11417981541647679048466287755595961091061972992",
+            "map_kind": "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"
+          },
+          "canonical_boundary_commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              15.707963267948958,
+              4.112335164042889e-07
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              31.415926535897874,
+              1.6449340656171545e-06
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              47.1238898038467,
+              3.7011016476385936e-06
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              62.83185307179541,
+              6.5797362624686e-06
+            ]
+          ],
+          "paper_boundary_commands": [
+            [
+              "M",
+              0.0,
+              0.0
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              15.707963267948958,
+              -4.112335164042889e-07
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              31.415926535897917,
+              1.4735138764513833e-22
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              47.12388980384683,
+              1.2337005492128659e-06
+            ],
+            [
+              "A",
+              300000000.2245203,
+              300000000.2245203,
+              0,
+              0,
+              1,
+              62.83185307179567,
+              3.289868131234305e-06
+            ]
+          ],
+          "native_position_bound_paper_mm": 0.0002448241437098722,
+          "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE"
+        },
+        {
+          "surface_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+          "part_id": "1fe4832c-247c-4913-9e55-4bc93dee237f",
+          "profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+          "rim_id": "9cbadb84-2063-5db3-950a-b72acbafb0d2",
+          "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+          "front_side": "outside",
+          "side": "second",
+          "source_turn": 0.0,
+          "source_turn_direction": 1,
+          "paper_stale": false,
+          "paper_contract": "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5",
+          "material_cache_verified": true,
+          "source_binding": {
+            "profiles": [
+              {
+                "id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+                    "point": [
+                      10.0,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+                    "point": [
+                      -10.0,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+                    "kind": "arc",
+                    "start_vertex_id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+                    "end_vertex_id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+                    "kind": "arc",
+                    "start_vertex_id": "bf15e65b-2209-4b76-b963-748664bbdf5d",
+                    "end_vertex_id": "ffcd1ca4-b954-450f-9045-2b3741df9cc4",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              },
+              {
+                "id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+                "name": "Obrys",
+                "vertices": [
+                  {
+                    "id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+                    "point": [
+                      10.000001,
+                      0.0
+                    ]
+                  },
+                  {
+                    "id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+                    "point": [
+                      -10.000001,
+                      0.0
+                    ]
+                  }
+                ],
+                "segments": [
+                  {
+                    "id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+                    "kind": "arc",
+                    "start_vertex_id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+                    "end_vertex_id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  },
+                  {
+                    "id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+                    "kind": "arc",
+                    "start_vertex_id": "87a4a023-d1f4-420b-99a3-a38ae7c05110",
+                    "end_vertex_id": "3efd877a-8ceb-4a48-9ea0-1855d63f1cca",
+                    "data": {
+                      "center": [
+                        0,
+                        0
+                      ],
+                      "sweep_deg": 180
+                    }
+                  }
+                ],
+                "closed": true,
+                "plane": {
+                  "origin": [
+                    0.0,
+                    0.0,
+                    30.0
+                  ],
+                  "u": [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  "v": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                },
+                "revision": 1
+              }
+            ],
+            "surface": {
+              "id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "name": "Ost\u011bn\u00ed",
+              "profile_id": "02d6e1a5-c615-4fa4-b9a1-b74b80a36a4c",
+              "hole_profile_ids": [],
+              "kind": "ruled_loft",
+              "params": {
+                "second_profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+                "correspondences": [
+                  {
+                    "first_segment_id": "8a58f35e-90dd-48fd-8061-6fa5844f6825",
+                    "second_segment_id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "f31819ff-251a-4f14-aa5b-d02ca17fe733",
+                    "ruling_id": "ee24c9bd-416b-40b5-b0c6-75c64b85962a"
+                  },
+                  {
+                    "first_segment_id": "6af84978-0d7a-4503-b2dd-b5eb7212c422",
+                    "second_segment_id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+                    "first_interval": [
+                      0,
+                      1
+                    ],
+                    "second_interval": [
+                      0,
+                      1
+                    ],
+                    "id": "6d32346e-216c-429f-8f62-c177d9b4c126",
+                    "ruling_id": "811d0cfe-60f7-48c3-b3bd-436bb1642986"
+                  }
+                ],
+                "seam_patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733",
+                "end_ruling_id": "2901fb6a-5667-4c07-af2b-524f6e64504f",
+                "tolerance_mm": 0.005,
+                "max_segments": 16384,
+                "reference_state": "BOUND"
+              },
+              "position_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_deg": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "parent_transforms": [],
+              "revision": 2,
+              "part_id": "1fe4832c-247c-4913-9e55-4bc93dee237f"
+            },
+            "scale": 1.0
+          },
+          "source_digest": "781142e87d045745ae8ccc673061bcb5cf845ccc5809e1baaf9e69e2a8645f43",
+          "family": "RIGHT_CIRCULAR_FRUSTUM",
+          "paper_units": "mm",
+          "source_scale_exact": "1",
+          "radius_mm": 10.000001,
+          "radius_exact": "25165826535416530/2516582401883413",
+          "native_radial_slope_exact": "83886080/2516582401883413",
+          "source_radial_slope_bounds": {
+            "lower_exact": "1666666665419331652871745613341094290571329943295965410225214734155378369/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "3333333330838663305743491226682188581142659886591930820450429468310756739/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 3.3333333308386626e-08,
+            "upper": 3.333333330838664e-08
+          },
+          "source_native_kappa_error_bound_exact": "643394728308283072218503770601958889569748879074729212856248360882070207/251658240188341300000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "source_native_radius_error_bound_exact": "895720789/1416709945921160824731893497856",
+          "native_tangent_error_mm_per_source_radian_exact": "15292578103274320022486924175887535414715891806151781080042782273357121545522872981260434582951523114265625564664695643790830585382272091917543405756224942672391969358857890148715205955639280311907935169/62638399908274634956520829994724548983662837760000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "angular_correspondence": "COMMON_NATIVE_KAPPA_FULL_SOURCE_CIRCLE_ANGLE",
+          "source_radius_bounds": {
+            "lower_exact": "5629500097163073/562949953421312",
+            "upper_exact": "5629500097163073/562949953421312",
+            "lower": 10.000000999999997,
+            "upper": 10.000001000000001
+          },
+          "source_slant_bounds": {
+            "lower_exact": "150000000000000083333333208599901444960803655279384967984404615239367771477497385964009547/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "upper_exact": "37500000000000020833333302149975361240200913819846241996101153809841942869374346491002387/1250000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "lower": 30.000000000000014,
+            "upper": 30.00000000000002
+          },
+          "source_intervals": [
+            {
+              "profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+              "segment_id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733"
+            },
+            {
+              "profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+              "segment_id": "9a1703bd-87f3-41ed-9da1-645b79bbff5e",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733"
+            },
+            {
+              "profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+              "segment_id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "loft_parameter_interval": [
+                0.0,
+                0.5
+              ],
+              "direction": 1,
+              "patch_id": "6d32346e-216c-429f-8f62-c177d9b4c126"
+            },
+            {
+              "profile_id": "aed81c70-0e22-4a38-b024-7fda6ff126a2",
+              "segment_id": "5a98856d-7fbe-4c3d-a8b9-58dff9acf2a6",
+              "feature_id": "688679ce-62e8-4476-9ef3-e51a2849419d",
+              "parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "loft_parameter_interval": [
+                0.5,
+                1.0
+              ],
+              "direction": 1,
+              "patch_id": "6d32346e-216c-429f-8f62-c177d9b4c126"
+            }
+          ],
+          "seam_patch_id": "f31819ff-251a-4f14-aa5b-d02ca17fe733",
+          "seam_ruling_ids": [
+            "ee24c9bd-416b-40b5-b0c6-75c64b85962a",
+            "2901fb6a-5667-4c07-af2b-524f6e64504f"
+          ],
+          "world_frame": {
+            "center_model_mm": [
+              0.0,
+              0.0,
+              30.0
+            ],
+            "radial": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "tangent": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "outward_z": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "model_mm_per_paper_mm": 1.0,
+            "binary_gram_residual_bound_exact": "0"
+          },
+          "source_world_frame_intervals": {
+            "center_model_mm": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "30",
+                "upper_exact": "30",
+                "lower": 29.999999999999996,
+                "upper": 30.000000000000004
+              }
+            ],
+            "radial": [
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "tangent": [
+              {
+                "lower_exact": "-4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "4860839499829100796199114715937681/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": -9.721678999658203e-47,
+                "upper": 9.721678999658203e-47
+              },
+              {
+                "lower_exact": "12499999999999999999999999999999999999999999986979894196886337153038085582309783/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "upper_exact": "12500000000000000000000000000000000000000000013020105803113662846961914417690217/12500000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              }
+            ],
+            "outward_z": [
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "0",
+                "upper_exact": "0",
+                "lower": -5e-324,
+                "upper": 5e-324
+              },
+              {
+                "lower_exact": "1",
+                "upper_exact": "1",
+                "lower": 0.9999999999999999,
+                "upper": 1.0000000000000002
+              }
+            ],
+            "source_pose_gram_operator_bound_exact": "0",
+            "proof": "EXACT_SOURCE_UNIT_BASIS; RATIONAL_PI_TAYLOR_WHOLE_ANGLE; ACTUAL_BINARY_POSE"
+          },
+          "world_frame_operator_error_bound_exact": "56941262712283752184046772386698549/25000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "world_frame_center_error_bound_paper_mm_exact": "0",
+          "chart_to_canonical": {
+            "matrix": [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                -1.0
+              ]
+            ],
+            "translation": [
+              0.0,
+              -30.0
+            ]
+          },
+          "chart_to_paper": {
+            "matrix": [
+              [
+                0.9999999999999987,
+                -5.2359877520643675e-08
+              ],
+              [
+                -5.2359877520643675e-08,
+                -0.9999999999999987
+              ]
+            ],
+            "translation": [
+              -1.5707963256193102e-06,
+              -29.99999999999996
+            ],
+            "matrix_exact": [
+              [
+                "2251799813685245/2251799813685248",
+                "-7912400980820719/151115727451828646838272"
+              ],
+              [
+                "-7912400980820719/151115727451828646838272",
+                "-2251799813685245/2251799813685248"
+              ]
+            ],
+            "gram_operator_bound_exact": "1758860470337705301037712153377/11417981541647679048466287755595961091061972992",
+            "map_kind": "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"
+          },
+          "canonical_boundary_commands": [
+            [
+              "M",
+              0.0,
+              -30.0
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              15.707964838745285,
+              -29.999999588766443
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              31.415929677490528,
+              -29.99999835506577
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              47.12389451623568,
+              -29.999996298897983
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              62.83185935498071,
+              -29.99999342026308
+            ]
+          ],
+          "paper_boundary_commands": [
+            [
+              "M",
+              -1.5707963256193102e-06,
+              -29.99999999999996
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              15.70796326794896,
+              -30.00000041123352
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              31.415928106694246,
+              -29.99999999999996
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              47.123892945439486,
+              -29.99999876629929
+            ],
+            [
+              "A",
+              300000030.2245203,
+              300000030.2245203,
+              0,
+              0,
+              1,
+              62.83185778418464,
+              -29.9999967101315
+            ]
+          ],
+          "native_position_bound_paper_mm": 0.0002448241437098722,
+          "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE"
+        }
+      ]
+    }
+  }
+}

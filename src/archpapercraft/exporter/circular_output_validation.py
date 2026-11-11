@@ -34,8 +34,10 @@ def _cubic_length(controls, budget, work):
         work[0] += 1
         if work[0] > 100000:
             raise ValueError("Actual PDF cubic length exhausted its finite proof budget.")
+
         def distance(a, b):
             return _sqrt(sum((x - y) ** 2 for x, y in zip(a, b)))
+
         lower = distance(values[0], values[-1])[0]
         upper = sum(distance(a, b)[1] for a, b in zip(values, values[1:]))
         if upper - lower <= allowance:
@@ -93,13 +95,16 @@ def _pdf_arc(start, command, cubics, target_start, work):
     return bound, max(abs(actual_low - length[1]), abs(actual_high - length[0]))
 
 
-def coordinate_errors(source, target):
+def coordinate_errors(source, target, *, details=None):
+    """Whole-interval error, optionally detached per SOURCE-command bounds."""
     source = [[c[0], *map(Q, c[1:])] for c in source]
     target = [[c[0], *map(Q, c[1:])] for c in target]
     position = length = Q(0)
     source_point = target_point = start_source = start_target = None
     cursor, work = 0, [0]
     for command in source:
+        previous_length = length
+        command_position = Q(0)
         op = command[0]
         if cursor >= len(target):
             raise ValueError("Actual circular output lost a source interval.")
@@ -123,9 +128,10 @@ def coordinate_errors(source, target):
                 error = center_error + endpoint_error + abs(r0 - r1)
                 if min(r0, r1) <= 0 or error >= min(r0, r1) / 4:
                     raise ValueError("Actual A is outside the supported metric neighborhood.")
-                position = max(
-                    position, center_error + abs(r0 - r1) + 4 * max(r0, r1) * error / min(r0, r1)
+                command_position = (
+                    center_error + abs(r0 - r1) + 4 * max(r0, r1) * error / min(r0, r1)
                 )
+                position = max(position, command_position)
                 actual_length = _native_arc_length(target_point, actual[-2:], r1)
                 length += max(
                     abs(actual_length[0] - source_length[1]),
@@ -140,11 +146,14 @@ def coordinate_errors(source, target):
                     if sum(abs(x - y) for x, y in zip(cubics[-1][-2:], command[-2:])) < Q(1, 1000):
                         break
                 bound, deficit = _pdf_arc(source_point, command, cubics, target_point, work)
+                command_position = bound
                 position, length = max(position, bound), length + deficit
                 actual = cubics[-1]
             else:
                 raise ValueError("Actual output replaced a native arc with unsupported geometry.")
             source_point, target_point = command[-2:], actual[-2:]
+            if details is not None:
+                details.append({"position": command_position, "length": length - previous_length})
             continue
         if op != actual[0] or len(command) != len(actual):
             raise ValueError("Actual circular output changed a source line/curve or coverage.")
@@ -153,7 +162,13 @@ def coordinate_errors(source, target):
         if op == "Z":
             a, b = [start_source], [start_target]
         errors = [(x - u, y - v) for (x, y), (u, v) in zip(a, b)]
-        position = max(position, *(abs(x) + abs(y) for x, y in errors))
+        command_position = max(abs(x) + abs(y) for x, y in errors)
+        # The initial endpoint also belongs to the manufactured line interval.
+        if op != "M":
+            command_position = max(
+                command_position, sum(abs(x - y) for x, y in zip(source_point, target_point))
+            )
+        position = max(position, command_position)
         if op != "M":
             chain = [tuple(x - y for x, y in zip(source_point, target_point)), *errors]
             length += sum(abs(x - u) + abs(y - v) for (x, y), (u, v) in zip(chain, chain[1:]))
@@ -161,6 +176,8 @@ def coordinate_errors(source, target):
             start_source, start_target = a[0], b[0]
         source_point, target_point = a[-1], b[-1]
         cursor += 1
+        if details is not None:
+            details.append({"position": command_position, "length": length - previous_length})
     if cursor != len(target):
         raise ValueError("Actual circular output contains unbound intervals.")
     return position, length

@@ -72,6 +72,11 @@ def part_input(project, part):
         # Canonical CUT representation is a capability too: an older correct
         # sampled outline must become stale, not masquerade as a current cache.
         inputs["loft_paper_contract"] = LOFT_PAPER_CONTRACT
+    curved = getattr(project, "curved_connector_inputs", None)
+    if curved is not None:
+        records = {sid: curved(sid) for sid in sorted(touched)}
+        if any(records.values()):
+            inputs["curved_material_inputs"] = records
     return digest(inputs)
 
 
@@ -464,7 +469,8 @@ def _placed_curve_envelopes(project, part, placement, *, output_error_mm=0):
         for edge in part.edges
     ]
     projected.paths = {
-        "TABS": [path(page_points(p["points"], placement), True) for p in part.paths["TABS"]]
+        "TABS": [path(page_points(p["points"], placement), True)
+                 for p in part.paths["TABS"] if "points" in p]
     }
     if loft:
         from .loft_surface import material_envelopes
@@ -577,11 +583,12 @@ def validate_layout(project):
                 )
             transformed.extend(
                 Polygon(page_points(tab["points"], placement)) for tab in part.paths["TABS"]
+                if "points" in tab
             )
             material = unary_union(transformed)
             envelope = _placed_curve_envelopes(
                 project,
-                part,
+                expected,
                 placement,
                 output_error_mm=PDF_DIGITAL_BUDGET_MM if curved_material else 0,
             )
