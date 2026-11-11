@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="9.149" timestamp="2026-11-11T17:01:21.866472+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007b-curved-ui-review-own" name="test_failed_c05_set_switch_keeps_combo_and_selected_set_consistent" time="1.504"><failure message="AssertionError: Failed numeric preflight left combo on another set while commands still own old set&#10;assert 'f3ece14f-451...-b62470e72876' == 'cd33e47c-8f8...-ee5d7abd670a'&#10;  &#10;  - cd33e47c-8f85-4b75-a34e-ee5d7abd670a&#10;  + f3ece14f-4517-4894-a4c4-b62470e72876">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x2917f4c9080) at 0x0000029135405180&gt;
+source = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...-curved-connectors-experimental', ...}, '4a759775-ef55-48d7-b2fb-fa71d41894aa', 'e924a557-cc8d-45d8-959b-ca77e369059f')
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x00000291314385C0&gt;
+
+    def test_failed_c05_set_switch_keeps_combo_and_selected_set_consistent(window,source,qtbot):
+     p,panel,a,b=two_rims(window,source);before=p.to_dict(validate=False)
+     invalid_main_number(window,qtbot);panel.sets.setCurrentIndex(panel.sets.findData(b))
+     assert p.to_dict(validate=False)==before and panel.current_id==a
+&gt;    assert panel.sets.currentData()==a,'Failed numeric preflight left combo on another set while commands still own old set'
+E    AssertionError: Failed numeric preflight left combo on another set while commands still own old set
+E    assert 'f3ece14f-451...-b62470e72876' == 'cd33e47c-8f8...-ee5d7abd670a'
+E      
+E      - cd33e47c-8f85-4b75-a34e-ee5d7abd670a
+E      + f3ece14f-4517-4894-a4c4-b62470e72876
+
+docs\p2\implementation\evidence\pc007b-curved-ui-review-own.py:27: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007b-curved-ui-review-own" name="test_failed_c05_whole_set_toggle_restores_visible_authored_state" time="1.146"><failure message="AssertionError: Visible checkbox disagrees with unchanged authored enabled state after rejected preflight&#10;assert False&#10; +  where False = &lt;built-in method isChecked of PySide6.QtWidgets.QCheckBox object at 0x0000029136071100&gt;()&#10; +    where &lt;built-in method isChecked of PySide6.QtWidgets.QCheckBox object at 0x0000029136071100&gt; = &lt;PySide6.QtWidgets.QCheckBox(0x2913281afb0) at 0x0000029136071100&gt;.isChecked&#10;[+1 more line; full report in element text]">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x291322b66e0) at 0x00000291361272C0&gt;
+source = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...-curved-connectors-experimental', ...}, '4a759775-ef55-48d7-b2fb-fa71d41894aa', 'e924a557-cc8d-45d8-959b-ca77e369059f')
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002913328F800&gt;
+
+    def test_failed_c05_whole_set_toggle_restores_visible_authored_state(window,source,qtbot):
+     p,panel,a,_=two_rims(window,source);assert p.curved_connectors[a].enabled
+     invalid_main_number(window,qtbot);panel.set_enabled.setChecked(False)
+     assert p.curved_connectors[a].enabled
+&gt;    assert panel.set_enabled.isChecked(),'Visible checkbox disagrees with unchanged authored enabled state after rejected preflight'
+E    AssertionError: Visible checkbox disagrees with unchanged authored enabled state after rejected preflight
+E    assert False
+E     +  where False = &lt;built-in method isChecked of PySide6.QtWidgets.QCheckBox object at 0x0000029136071100&gt;()
+E     +    where &lt;built-in method isChecked of PySide6.QtWidgets.QCheckBox object at 0x0000029136071100&gt; = &lt;PySide6.QtWidgets.QCheckBox(0x2913281afb0) at 0x0000029136071100&gt;.isChecked
+E     +      where &lt;PySide6.QtWidgets.QCheckBox(0x2913281afb0) at 0x0000029136071100&gt; = &lt;archpapercraft.ui.author_curved_connectors.CurvedConnectorPanel(0x291328058e0) at 0x0000029136072100&gt;.set_enabled
+
+docs\p2\implementation\evidence\pc007b-curved-ui-review-own.py:33: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007b-curved-ui-review-own" name="test_current_certified_c_guidance_does_not_call_its_existing_connection_unverified" time="5.370"><failure message="AssertionError: assert 'UNRESOLVED' == 'CERTIFIED_APPROXIMATE'&#10;  &#10;  - CERTIFIED_APPROXIMATE&#10;  + UNRESOLVED">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x29132806300) at 0x0000029135F4DA00&gt;
+source = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...-curved-connectors-experimental', ...}, '4a759775-ef55-48d7-b2fb-fa71d41894aa', 'e924a557-cc8d-45d8-959b-ca77e369059f')
+
+    def test_current_certified_c_guidance_does_not_call_its_existing_connection_unverified(window,source):
+     p,panel,a,_=two_rims(window,source)
+     p.recompute();window.refresh();panel.current_id=a;panel.refresh();window.update_guidance()
+&gt;    assert p.curved_connector_status(a)['status']=='CERTIFIED_APPROXIMATE'
+E    AssertionError: assert 'UNRESOLVED' == 'CERTIFIED_APPROXIMATE'
+E      
+E      - CERTIFIED_APPROXIMATE
+E      + UNRESOLVED
+
+docs\p2\implementation\evidence\pc007b-curved-ui-review-own.py:38: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase></testsuite></testsuites>

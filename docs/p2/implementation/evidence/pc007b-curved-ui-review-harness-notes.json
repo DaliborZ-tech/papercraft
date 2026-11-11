@@ -1,0 +1,20 @@
+{
+  "initial_own_run01": {
+    "status": "2_QUALIFIED_CUI01_FAILS_PLUS_1_UNQUALIFIED_GUIDANCE_FIXTURE_FAIL",
+    "cause": "Guidance fixture used two rim sets and was UNRESOLVED, so its failed CERTIFIED assertion was not a product evidence",
+    "repair": "Use existing independently checked real producer positive fixture with one set; unchanged negative guidance expectation then genuinely fails after explicit status==CERTIFIED assertion",
+    "qualified_evidence": "pc007b-curved-ui-review-own-guidance-run02.xml"
+  },
+  "proof_kinds": {
+    "own_tests": "offscreen real Qt/public domain; callbacks only concurrency/fault isolation",
+    "native_windows": "NOT_RUN_ROOT_EXCLUSIVE",
+    "new_user": "0_NOT_RUN",
+    "physical": "P3_NOT_RUN"
+  },
+  "inactive_slot_run05": {
+    "status": "DISQUALIFIED_NO_ACTUAL_BUTTON_ACTIVATION",
+    "cause": "QTest.mouseClick on the clipped/hidden scroll control did not trigger its clicked action; unchanged state made the weak positive assertion pass",
+    "repair": "Use the real QPushButton.click activation with its connected UI handler for this offscreen component test; native mouse/scroll proof remains root responsibility",
+    "qualified_evidence": "pc007b-curved-ui-review-own-inactive-slot-run06.xml"
+  }
+}
