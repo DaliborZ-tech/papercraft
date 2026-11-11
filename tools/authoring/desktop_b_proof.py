@@ -208,6 +208,7 @@ def run_windows(output, expected_sha, fixture="all"):
         QPushButton,
         QScrollArea,
         QToolBar,
+        QTreeWidgetItemIterator,
     )
 
     from archpapercraft import __version__ as application_version
@@ -237,7 +238,8 @@ def run_windows(output, expected_sha, fixture="all"):
         "requested_fixture": fixture,
         "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN",
                            "curves-planar": "NOT_RUN", "loft-B1": "NOT_RUN",
-                           "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN"},
+                           "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN",
+                           "D-segmented": "NOT_RUN"},
         "source_status_at_start": git("status", "--porcelain=v1"),
         "source_files_sha256": hashes,
         "actual_application_module": str(Path(author_window.__file__).resolve()),
@@ -314,8 +316,9 @@ def run_windows(output, expected_sha, fixture="all"):
             QApplication.instance().exit(1)
 
     from loft_desktop_steps import LoftDesktopSteps
+    from segmentation_desktop_steps import SegmentationDesktopSteps
 
-    class Driver(LoftDesktopSteps):
+    class Driver(LoftDesktopSteps, SegmentationDesktopSteps):
         def __init__(self, window):
             self.w = window
             self.check, self.step, self.log = check, step, log
@@ -505,11 +508,19 @@ def run_windows(output, expected_sha, fixture="all"):
             )
 
         def select(self, sid):
-            item = next(
-                self.w.tree.topLevelItem(i)
-                for i in range(self.w.tree.topLevelItemCount())
-                if self.w.tree.topLevelItem(i).data(0, Qt.ItemDataRole.UserRole) == sid
-            )
+            iterator = QTreeWidgetItemIterator(self.w.tree)
+            item = None
+            while iterator.value():
+                candidate = iterator.value()
+                if candidate.data(0, Qt.ItemDataRole.UserRole) == sid:
+                    item = candidate
+                    break
+                iterator += 1
+            check(item is not None, "Exact construction tree identity is absent")
+            parent = item.parent()
+            while parent:
+                parent.setExpanded(True)
+                parent = parent.parent()
             self.w.tree.scrollToItem(item)
             QTest.mouseClick(
                 self.w.tree.viewport(),
@@ -858,7 +869,7 @@ def run_windows(output, expected_sha, fixture="all"):
         def linked_pick(self):
             self.action("focus_all")
             picked = None
-            for sid in self.w.project.surfaces:
+            for sid in self.w.viewport.meshes:
                 geometry = self.w.project.world_geometry(sid)
                 for triangle in geometry["triangles"]:
                     center = [
@@ -991,8 +1002,9 @@ def run_windows(output, expected_sha, fixture="all"):
             view = self.w.paper
             viewport = view.viewport().rect()
             centers = []
+            material_ids = self.w.project.material_part_ids()
             for pid, place in self.w.project.placements.items():
-                if place.page_id is None:
+                if pid not in material_ids or place.page_id is None:
                     continue
                 item = view.part_items[pid]
                 pixel_bounds = view.mapFromScene(item.sceneBoundingRect()).boundingRect()
@@ -1013,7 +1025,7 @@ def run_windows(output, expected_sha, fixture="all"):
                         ],
                     }
                 )
-            check(len(centers) == len(self.w.project.parts), "Camera proof omitted a material part")
+            check(len(centers) == len(material_ids), "Camera proof omitted a material part")
             self.capture(f"{name}-reopened-auto-frame-all-material")
 
             def camera():
@@ -1099,7 +1111,8 @@ def run_windows(output, expected_sha, fixture="all"):
                 for g in ET.parse(svg).getroot().iter()
                 if "data-part-id" in g.attrib
             }
-            check(actual_parts == set(self.w.project.parts), "SVG material coverage mismatch")
+            check(actual_parts == self.w.project.material_part_ids(),
+                  "SVG material coverage mismatch")
             for page in pdf.pages:
                 check(not page["/Resources"].get("/XObject", {}), "PDF has raster/image XObjects")
                 check(
@@ -1195,12 +1208,16 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.audit_curve_vectors(directory, svgs, pdf)
             if name.startswith("loft-"):
                 self.audit_loft_vectors(name, directory, svgs, pdf)
+            if name == "D-segmented":
+                self.audit_segmentation_vectors(directory, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
                 parts=sorted(actual_parts),
-                unfold_mode="EXACT",
-                exact_scope=("certified ruled/planar family; no physical claim"
+                unfold_mode="APPROXIMATE" if name == "D-segmented" else "EXACT",
+                exact_scope=("exact planar triangles; retained smooth target remains REJECTED"
+                             if name == "D-segmented" else
+                             "certified ruled/planar family; no physical claim"
                              if name.startswith("loft-") else
                              "piecewise planar material; no curved-surface or physical claim"),
                 digital_only_acknowledgements=accepted,
@@ -1711,6 +1728,10 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"][fixture] = "RUNNING"
                 driver.loft_case(fixture)
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
+            if fixture == "D-segmented":
+                report["fixture_status"][fixture] = "RUNNING"
+                driver.segmentation_case()
+                report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
                 len(native) == (6 if fixture == "all" else 3)
@@ -1784,7 +1805,7 @@ def main():
     parser.add_argument(
         "--fixture",
         choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
-                 "loft-Bezier"],
+                 "loft-Bezier", "D-segmented"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",
     )
