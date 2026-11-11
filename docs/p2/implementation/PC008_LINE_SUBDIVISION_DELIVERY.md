@@ -1,8 +1,9 @@
 # Živé dělení úseček — dílčí AU13/AU14
 
 11.11.2026. Ověřený CODE **24e08019a711c5c7c19ca73a5ac35e5093dfb4d0**.
-Zdrojová/matematická/UI komponenta je nezávisle schválená; finální nezávislá
-revize skutečných native/editor artefaktů a metadat ještě čeká.
+Zdrojová/matematická/UI komponenta i skutečné native/editor artefakty a metadata
+jsou [nezávisle schválené](PC008_LINE_SUBDIVISION_REVIEW.md) v omezeném LINE
+rozsahu. [Integrace](PC008_LINE_SUBDIVISION_INTEGRATION.md) doloží publikovaný stav.
 Nejde o dokončené AU13, AU14, PC-008 nebo P2.
 
 ## Co autor může udělat
@@ -100,16 +101,18 @@ interior trace i chlopeň. Při page2/[60,60]/30°/obou locks rozdělí osu,
 provede inverse merge, rozdělí skutečný fold a zdroj lepicího připojení, vrátí
 a zopakuje krok a změní rise3000→3500. Původní wall vertices zůstanou na stejných
 souřadnicích. Následuje skutečný3D/paper pick, native Save/New/Open, ruční
-layout a SVG/PDF; celý body má přímo očekávaných8769,772228646mm² včetně160mm²
-tabu a základna13000mm². Aktuální kroky/projekty/exporty/snapshot jsou v uvedené
+layout a SVG/PDF. Analytické očekávání těla včetně160mm² tabu je
+8769,772228646mm²; skutečné SVG má8769,772229 a PDF přibližně8769,772000000mm².
+Očekávání základny je13000mm². Aktuální kroky/projekty/exporty/snapshot jsou v uvedené
 evidence složce. Editorové kopie změní celek, barvu a víceslovný Unicode text,
 originál zůstává byte-identical.
 
 Autorovy výběry a reviewerovy případy se nesčítají do1465. Dřívější a770
 1450 PASS311,48s a694 1459 PASS293,56s jsou historické běhy před posledními
 opravami; nenahrazují výše uvedený finální běh. Nezávislý reviewer
-`commands_review` provedl vlastní source/math/UI případy a nyní kontroluje
-skutečné artefakty a metadata odděleně od autora root.
+`commands_review` provedl vlastní source/math/UI případy a zkontroloval
+skutečné artefakty i metadata odděleně od autora root. Nemá otevřený zásadní
+nález v tomto omezeném přírůstku; širší produktové důkazy tím neuzavírá.
 
 ## Skills a další práce
 
@@ -119,7 +122,7 @@ whole-wall orákulu a uchování nativních selhání; delivery k omezenému LIN
 rozsahu a oddělené revizi. SK015 převádí LINE-BEND01 do kontroly dalších
 spotřebitelů. Účinnost na jiném spotřebiteli zůstává PENDING_NEXT_USE.
 
-Zbývají curved/loft trim adapters, nezávislé schválení a publikace tohoto
+Zbývají curved/loft trim adapters a publikace tohoto
 přírůstku, úplné AU13/AU14, C, PC-009 a historický PC-010. **Nový uživatel0 /
 NOT_RUN; fyzické P3 / NOT_RUN.** Technický průchod ani agentní revize je
 nenahrazují. Dokončený D/B3 je samostatně publikovaný; tento dokument jej
