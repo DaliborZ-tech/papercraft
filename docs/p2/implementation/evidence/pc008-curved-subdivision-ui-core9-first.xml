@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="16.266" timestamp="2026-11-11T18:12:46.846534+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction[arc]" time="0.447"><failure message="assert 0.3183098861837907 == 0.3333333333333333 ± 5.0e-07&#10;  &#10;  comparison failed&#10;  Obtained: 0.3183098861837907&#10;  Expected: 0.3333333333333333 ± 5.0e-07">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x0000017B7D007A70&gt;, kind = 'arc'
+
+    @pytest.mark.parametrize("kind", ["arc", "cubic"])
+    def test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction(qtbot, kind):
+        project, pid, eid = source(kind)
+        before = project.to_dict()
+        widget = dialog(qtbot, project, pid, eid)
+        ready(qtbot, widget)
+        distance = math.pi * 10 / 3 if kind == "arc" else 2
+        widget.distance.lineEdit().selectAll()
+        qtbot.keyClicks(widget.distance.lineEdit(), f"{distance:.6f}")
+        qtbot.mouseClick(widget.compute, Qt.MouseButton.LeftButton)  # No Return first: C05.
+        ready(qtbot, widget)
+        qtbot.mouseClick(widget.buttons.button(QDialogButtonBox.StandardButton.Ok),
+                         Qt.MouseButton.LeftButton)
+        assert widget.result() == QDialog.DialogCode.Accepted
+        t = widget.result_spec["parameter"]
+        assert isinstance(t, Fraction)
+        if kind == "arc":
+&gt;           assert float(t) == pytest.approx(1 / 3, abs=5e-7)
+E           assert 0.3183098861837907 == 0.3333333333333333 ± 5.0e-07
+E             
+E             comparison failed
+E             Obtained: 0.3183098861837907
+E             Expected: 0.3333333333333333 ± 5.0e-07
+
+tests\authoring\test_curved_subdivision_workspace.py:265: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction[cubic]" time="1.113" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_host_split_inverse_merge_undo_recompute_and_save_open_keep_layout[arc]" time="5.233" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_host_split_inverse_merge_undo_recompute_and_save_open_keep_layout[cubic]" time="8.341" /></testsuite></testsuites>

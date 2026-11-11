@@ -1,4 +1,20 @@
-# AU13 — měřené dělení křivek, rozpracovaná UI příprava
+# AU13 — měřené dělení křivek
+
+## Aktuální komponentové předání nad skutečným schema9 jádrem
+
+**Source freeze `7ef51beddeb86b1ba5d31be8277803458bd4a9fb`**, vlastní UI příprava `411d137f54187e1ff5bd9d53ee8449f949e42ce6` a připnuté jádro `4f43a6427c7fbd25a87309ab31ad676ddd7794e1` / jeho evidence `7c61c7ee54233dc662420b5199e3a5d914da4441`, integrováno bez konfliktu commitem `95a1f1f`. Samostatná větev `revival/p2-curved-profile-ui`; produkční doménu/schema/exporter autor UI neměnil. Jejich nezávislé review má samostatný rozsah.
+
+[Závěrečný připnutý JUnit](evidence/pc008-curved-subdivision-ui-core9-final.xml): **111 PASS / 0 SKIP / 138,41 s**. Jde o 18 vlastních AU13 UI případů (7 skutečných core průchodů a 11 UI negativů/context), 59 existujících C/LINE/curve/loft/segmentation workspace regresí a 34 doménových provenance regresí. [Source/import/hash vazba a reprodukční příkaz](evidence/pc008-curved-subdivision-ui-core9-binding.json) patří tomuto konkrétnímu zdroji, běh má vlastní `PYTHONPATH` a `QT_QPA_PLATFORM=offscreen`. Ruff a diff-check PASS. Počty se nesčítají s překrývajícími předchozími běhy.
+
+Čtyři původně čekající skutečné průchody nyní proběhly: oba typy ARC/CUBIC používají skutečnou délku a inverzi vzdálenosti přes public API, a oba projdou hlavním dialogem → jediný controller Undo/Redo → výslovný přepočet → zachovaný rámec, ruční rozmístění a zámky → save/open → inverzní merge. Analytické orákulum kubiky zůstává nezávislým integrálem rychlosti `L(t)=8t³−12t²+12t`; podíl vzdálenost/celková délka by dal chybný parametr. Skutečný Cancel běžícího nového náhledu prošel pro oba typy. Nesousední potomci stejné historie se odmítnou v UI bez fitu, změny dokumentu či povoleného potvrzení.
+
+Těchto sedm skutečných public-core případů nepoužívá dependency callback. Ostatních 11 vlastních případů cíleně zkouší scheduler, vadnou odpověď, typed chybu a C05/kontext; callbacky u těchto negativů nepředstírají úspěšné dělení. Potvrzení náhledu skutečného core také ponechává původní živý dokument beze změny, dokud hlavní controller příkaz opravdu neprovede.
+
+První [actual běh 3 PASS / 1 FAIL](evidence/pc008-curved-subdivision-ui-core9-first.xml) měl chybu harnessu: desetinná tečka v česky lokalizovaném spinboxu znamenala jiný vstup než zamýšlených 10,471976. Test nyní píše číslo přes konkrétní `QLocale`. [Další 14 PASS / 1 FAIL](evidence/pc008-curved-subdivision-ui-core9-run02.xml) zachytil další chybu harnessu, celočíselný argument nesprávného overloadu PySide `toString`; opraven explicitním float argumentem. Obě raw zůstávají zachované a nejsou nálezem produktu. [Opravený průběžný běh](evidence/pc008-curved-subdivision-ui-core9-run03.xml) má 15 PASS před doplněním dalších tří skutečných Cancel/invalid-merge případů.
+
+Nezávislé review tohoto UI source je **PENDING**. Důkaz je offscreen widget/controller komponenta, nikoli rootův celý nativní AU13 průchod od vlastního kreslení přes export a editor. Dokumentové a nativní důkazy C8 se tím zpětně nepřeznačují na C9. AC-US08 nový uživatel **0 / NOT_RUN**, fyzické P3 **NOT_RUN**. Následující WIP stav je výslovně historický.
+
+## Historický checkpoint před integrací nového jádra
 
 **WIP_SOURCE: `411d137f54187e1ff5bd9d53ee8449f949e42ce6`** ve větvi `revival/p2-curved-profile-ui`, WT `papercraft-curved-profile-ui`, základ `8f1ec6382d527c719133958e7eb6f78a724ef5d5` (C+LINE/schema8). Toto není hotový ani nezávisle schválený křivkový balík. Doménový schema9 runtime není v tomto checkpointu integrován.
 

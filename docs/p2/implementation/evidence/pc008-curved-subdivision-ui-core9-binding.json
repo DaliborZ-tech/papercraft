@@ -1,0 +1,49 @@
+{
+  "source_sha": "7ef51beddeb86b1ba5d31be8277803458bd4a9fb",
+  "core_source_sha": "4f43a6427c7fbd25a87309ab31ad676ddd7794e1",
+  "core_evidence_sha": "7c61c7ee54233dc662420b5199e3a5d914da4441",
+  "checkout": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui",
+  "qt_qpa_platform": "offscreen",
+  "pythonpath": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui\\src",
+  "imports": {
+    "author_subdivision": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui\\src\\archpapercraft\\ui\\author_subdivision.py",
+    "author_window": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui\\src\\archpapercraft\\ui\\author_window.py",
+    "profile_subdivision": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui\\src\\archpapercraft\\authoring\\profile_subdivision.py"
+  },
+  "files_sha256": {
+    "src/archpapercraft/ui/author_subdivision.py": "24921694e04d11ef1827500f87b503e09f1ec52982326cddd376ed4f03a6eae7",
+    "src/archpapercraft/ui/author_window.py": "f6f9d9cb911e5f0a666704f92df8d6335560cfecf0c6a9a25af11c435d0b1938",
+    "tests/authoring/test_curved_subdivision_workspace.py": "15ed56f9bf3aec7b6f40f760b84ca50c9d91eaa39a38d6bf5623c735dfe96af9",
+    "src/archpapercraft/authoring/profile_subdivision.py": "4eaaabdb4c7d855471356c1ff778706fcd1a3755311452e821383776b88ce4dd",
+    "src/archpapercraft/authoring/profile_source_views.py": "73d089b8d6bbdeca6cc287f5d8bcefd64df7dfa9374b6f61512062948e59dee4",
+    "src/archpapercraft/authoring/project.py": "9844ded95e33af4c8a10465239877eebd7c4c6044bc40727074046f42fe298c9",
+    "src/archpapercraft/authoring/model.py": "b08b46b364774019c751c23809c979849c0bef5d14a73f4721e9b8dc75a6a6ed"
+  },
+  "junit": "docs/p2/implementation/evidence/pc008-curved-subdivision-ui-core9-final.xml",
+  "junit_sha256": "8d128b80e06ac85b696a22e8b46a3f0e4cc1c80ad49246cada5addacd37e3d41",
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "111",
+    "time": "138.413",
+    "timestamp": "2026-11-11T18:14:56.634862+01:00",
+    "hostname": "Dalibor"
+  },
+  "command": [
+    "C:/Users/dalib/projects/papercraft/.venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/authoring/test_curved_subdivision_workspace.py",
+    "tests/authoring/test_subdivision_workspace.py",
+    "tests/authoring/test_curved_authoring_ui.py",
+    "tests/authoring/test_curve_workspace.py",
+    "tests/authoring/test_loft_workspace.py",
+    "tests/authoring/test_segmentation_workspace.py",
+    "tests/authoring/test_curved_profile_provenance.py",
+    "--junitxml=docs/p2/implementation/evidence/pc008-curved-subdivision-ui-core9-final.xml"
+  ],
+  "scope": "18 AU13 UI cases (7 actual core, 11 dependency/context negatives), 59 legacy UI, 34 core provenance. Offscreen component evidence; native/export-editor/new-user/physical proof not claimed. Independent review pending."
+}

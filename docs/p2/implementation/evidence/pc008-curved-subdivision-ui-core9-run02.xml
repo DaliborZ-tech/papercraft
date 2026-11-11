@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="15" time="16.775" timestamp="2026-11-11T18:13:18.655941+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_curve_worker_keeps_gui_responsive_cancel_discards_late_result" time="0.043" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_curve_worker_retains_only_latest_request_and_never_accepts_obsolete_result" time="0.023" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_external_source_change_blocks_preview_and_late_apply" time="0.023" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_raw_invalid_curve_distance_survives_focus_out_and_cancel" time="0.013" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_unresolved_length_remains_repairable_without_a_split_or_accept" time="0.013" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_malformed_response_does_not_enable_accept_or_publish_a_split[selection]" time="0.012" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_malformed_response_does_not_enable_accept_or_publish_a_split[parameter]" time="0.013" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_malformed_response_does_not_enable_accept_or_publish_a_split[length]" time="0.014" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_malformed_response_does_not_enable_accept_or_publish_a_split[error]" time="0.012" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_curve_choice_failed_main_numeric_preflight_rolls_back_visible_and_owner_context" time="0.466" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_curve_choice_commits_valid_pending_number_then_keeps_requested_source" time="0.102" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction[arc]" time="0.440" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction[cubic]" time="0.477"><failure message="ValueError: 'PySide6.QtCore.QLocale.toString' called with wrong argument values:&#10;  PySide6.QtCore.QLocale.toString(2, 'f', 6)&#10;Found signature:&#10;  PySide6.QtCore.QLocale.toString(f: float, /, format: str = 'g', precision: int = 6)">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002ACA6B6B230&gt;, kind = 'cubic'
+
+    @pytest.mark.parametrize("kind", ["arc", "cubic"])
+    def test_actual_public_core_curve_split_uses_measured_length_not_chord_fraction(qtbot, kind):
+        project, pid, eid = source(kind)
+        before = project.to_dict()
+        widget = dialog(qtbot, project, pid, eid)
+        ready(qtbot, widget)
+        distance = math.pi * 10 / 3 if kind == "arc" else 2
+        widget.distance.lineEdit().selectAll()
+&gt;       qtbot.keyClicks(widget.distance.lineEdit(), widget.distance.locale().toString(
+            distance, "f", widget.distance.decimals()))
+E       ValueError: 'PySide6.QtCore.QLocale.toString' called with wrong argument values:
+E         PySide6.QtCore.QLocale.toString(2, 'f', 6)
+E       Found signature:
+E         PySide6.QtCore.QLocale.toString(f: float, /, format: str = 'g', precision: int = 6)
+
+tests\authoring\test_curved_subdivision_workspace.py:256: ValueError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support propagateSizeHints()</failure></testcase><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_host_split_inverse_merge_undo_recompute_and_save_open_keep_layout[arc]" time="5.117" /><testcase classname="tests.authoring.test_curved_subdivision_workspace" name="test_actual_host_split_inverse_merge_undo_recompute_and_save_open_keep_layout[cubic]" time="9.092" /></testsuite></testsuites>
