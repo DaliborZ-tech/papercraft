@@ -1,0 +1,32 @@
+{
+  "source_sha": "8f1ec6382d527c719133958e7eb6f78a724ef5d5",
+  "actual_imports": {
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-line-integration-review\\src\\archpapercraft\\authoring\\project.py",
+      "sha256_lf": "37155c99a437e0e51efad939105b8410b11d2f5b8520f525363ada2bc8773fc7"
+    },
+    "archpapercraft.authoring.curved_connectors": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-line-integration-review\\src\\archpapercraft\\authoring\\curved_connectors.py",
+      "sha256_lf": "0f0714f55721b326f83a5b0d938ac1690b85e22ea724a5669478cfdaa0fd1bdb"
+    },
+    "archpapercraft.authoring.profile_subdivision": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-line-integration-review\\src\\archpapercraft\\authoring\\profile_subdivision.py",
+      "sha256_lf": "9de550ff06bf633328dc1cd63a80bca17f8632b8556bd40824fdab6e4f8f3971"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-line-integration-review\\src\\archpapercraft\\ui\\author_window.py",
+      "sha256_lf": "ed7daea962384bb49a89b5dcca5228e329477a23b2bba6313fd894ad501cc0ce"
+    },
+    "circular_desktop_steps": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-line-integration-review\\tools\\authoring\\circular_desktop_steps.py",
+      "sha256_lf": "fef7a778b4cdfefa16874c43d9a3c4867af0786ab1662035b0d285bb4ce920bd"
+    }
+  },
+  "qt_platform": "offscreen",
+  "own_source_sha256": "63184d423166be5d208ffb369a41155b01f9dd5b6cc7d752d01133fc31d21993",
+  "run": {
+    "exit": 0,
+    "stdout": ".......................                                                  [100%]\n23 passed in 12.97s\n",
+    "stderr": ""
+  }
+}

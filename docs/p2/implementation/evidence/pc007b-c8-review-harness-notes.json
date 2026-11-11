@@ -1,0 +1,22 @@
+{
+  "original_run01": {
+    "status": "TESTS_FINISHED_BUT_POST_RUN_METADATA_WRITE_FAILED",
+    "cause": "Runner tried to hash own-test file before it had been created; original JUnit remains intact, qualification rerun02 captures source+stdout+manifest",
+    "product_failure": false
+  },
+  "svg_initial_import_guard": {
+    "status": "GUARD_STOPPED_BEFORE_TESTS",
+    "cause": "git archive exported CRLF; original guard compared raw bytes to LF Git blob. LF-normalized archive text is byte-identical to pinned source; corrected guard records LF hash and actual path",
+    "product_failure": false
+  },
+  "svg_own_run02": {
+    "status": "OWN_FIXTURE_IMPORT_ERROR_5_FAIL_8_PASS",
+    "cause": "Independently extracted own reference functions needed import re in their execution globals. Corrected only own fixture; original raw/XML preserved, qualified run03 has13PASS",
+    "product_failure": false
+  },
+  "composed_offset_run02": {
+    "status": "SAFE_PRODUCT_REJECTION_DURING_FIXTURE_SETUP_NOT_A_FALSE_BINDING",
+    "cause": "Attempted half-mm hidden-offset counterexample with parent translation1e16 already fails public set_transform at world loft length-precision guard, atomically. Original test assumed setup would be admitted; revised oracle accepts this earlier safe rejection and passes run03",
+    "product_failure": false
+  }
+}

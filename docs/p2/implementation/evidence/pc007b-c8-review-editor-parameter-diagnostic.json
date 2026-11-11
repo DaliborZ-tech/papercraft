@@ -1,0 +1,19 @@
+{
+  "status": "PARAMETER_DIFFERENCE_NOT_GEOMETRY_VERDICT",
+  "editor_original_status": "FAIL",
+  "cut_arc_count": 19,
+  "max_radius_delta": 0.0041217,
+  "max_endpoint_delta": 4.641035e-07,
+  "max_chord": 15.707978975912138,
+  "fixed_endpoints_radius_only_sagitta_bound": "1.412487146496847293503093373428878548850824758900548195081959132917152771053141789024E-16",
+  "near_semicircle_counterexample": {
+    "chord": "20",
+    "R_before": "10",
+    "R_after": "10.00001",
+    "radius_parameter_delta": "0.00001",
+    "midpoint_geometric_drift": "0.014132139159264414479126753054149752617118714155158704986968674986694042910907594917",
+    "position_budget": "0.00002",
+    "must_reject": true
+  },
+  "limitations": "Large-radius sagitta bound assumes fixed endpoints/minor arcs; edited endpoint/global length/net area and transforms need separate whole-curve proof. Old FAIL preserved; no geometric equivalence declared."
+}
