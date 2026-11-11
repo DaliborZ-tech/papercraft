@@ -40,6 +40,12 @@ def _record_history(record):
 
 
 class ProfileSubdivisionCommands:
+    def _profile_owns_source_edge(self, profile_id, edge_id):
+        return (
+            self.profiles[profile_id].segment(edge_id) is not None
+            or self._subdivision_record(profile_id, edge_id) is not None
+        )
+
     def _profile_edge_exists(self, profile_id, segment_id):
         try:
             self.resolve_profile_edge(profile_id, segment_id)
@@ -225,18 +231,32 @@ class ProfileSubdivisionCommands:
                 if actual.start != tuple(Fraction(float(v)) for v in expected.start) or (
                     actual.end != tuple(Fraction(float(v)) for v in expected.end)
                 ):
-                    history = history.edit(piece.id, actual)
+                    # An untouched split material point keeps its exact source;
+                    # only actually edited endpoints declare new geometry.
+                    ends = tuple(
+                        source if point == tuple(Fraction(float(v)) for v in source) else point
+                        for point, source in zip(
+                            (actual.start, actual.end), (expected.start, expected.end)
+                        )
+                    )
+                    history = history.edit(piece.id, CurveSource("line", *ends))
             record["history"] = history.to_dict()
         for joint in self.joints.values():
             for sid, edge_id in ((joint.surface_a, joint.edge_a), (joint.surface_b, joint.edge_b)):
-                if profile_id in self.surfaces[sid].source_profile_ids():
+                if profile_id in self.surfaces[
+                    sid
+                ].source_profile_ids() and self._profile_owns_source_edge(profile_id, edge_id):
                     try:
                         self.resolve_profile_edge(profile_id, edge_id)
                     except ValidationError:
                         joint.unresolved = True
         for attachment in self.attachments.values():
             surface = self.surfaces[attachment.source_surface_id]
-            if profile_id in surface.source_profile_ids() and attachment.source_edge_id:
+            if (
+                profile_id in surface.source_profile_ids()
+                and attachment.source_edge_id
+                and self._profile_owns_source_edge(profile_id, attachment.source_edge_id)
+            ):
                 try:
                     self.resolve_profile_edge(profile_id, attachment.source_edge_id)
                 except ValidationError:
@@ -252,13 +272,16 @@ class ProfileSubdivisionCommands:
                     (joint.surface_a, joint.edge_a),
                     (joint.surface_b, joint.edge_b),
                 ):
-                    if profile_id in self.surfaces[sid].source_profile_ids():
+                    if profile_id in self.surfaces[
+                        sid
+                    ].source_profile_ids() and self._profile_owns_source_edge(profile_id, edge_id):
                         self.resolve_profile_edge(profile_id, edge_id)
         for attachment in self.attachments.values():
             if (
                 not attachment.unresolved
                 and attachment.source_edge_id
                 and profile_id in self.surfaces[attachment.source_surface_id].source_profile_ids()
+                and self._profile_owns_source_edge(profile_id, attachment.source_edge_id)
             ):
                 self.resolve_profile_edge(profile_id, attachment.source_edge_id)
 
@@ -351,6 +374,7 @@ class ProfileSubdivisionCommands:
         seen_edges = set()
         point_owners = {}
         projection_by_profile = {}
+        canonical_by_profile = {}
         for root_id, record in self.profile_subdivisions.items():
             uuid(root_id)
             if not isinstance(record, dict) or set(record) != {"history", "edges", "points"}:
@@ -442,6 +466,10 @@ class ProfileSubdivisionCommands:
                 ):
                     raise ValidationError("Aktivní geometrie neodpovídá zdroji dělení.")
                 exact = piece.controls_exact()
+                canonical_by_profile.setdefault(history.profile_id, {})[piece.id] = (
+                    exact[0],
+                    exact[-1],
+                )
                 projected = [profile.vertex(vid).point for vid in edges[piece.id]]
                 errors = [
                     sum(
@@ -476,4 +504,112 @@ class ProfileSubdivisionCommands:
                     "místo dělení v požadované přesnosti. Zvolte jinou vzdálenost, "
                     "méně dělení nebo menší měřítko modelu."
                 )
+        self._check_subdivision_area(canonical_by_profile)
         return retired
+
+    def _check_subdivision_area(self, canonical_by_profile):
+        """Direct whole-body Green difference, never a position annulus budget.
+
+        Untouched ARC/CUBIC contributions are identical and cancel exactly.
+        Mixed curves conservatively use the absolute .01mm² budget. Holes and
+        all faces of a material part share ONE body-only tolerance.
+        """
+        scale2 = Fraction(self.scale) ** 2
+        records = {}
+
+        def cross(a, b):
+            return a[0] * b[1] - a[1] * b[0]
+
+        def profile_area(pid):
+            if pid in records:
+                return records[pid]
+            profile = self.profiles[pid]
+            if not profile.closed:
+                records[pid] = None
+                return None
+            origin = tuple(map(Fraction, profile.vertices[0].point))
+            actual_sum = source_sum = Fraction(0)
+            sources = canonical_by_profile.get(pid, {})
+            chain = []
+            for edge in profile.segments:
+                actual = tuple(
+                    tuple(map(Fraction, profile.vertex(vid).point))
+                    for vid in (edge.start_vertex_id, edge.end_vertex_id)
+                )
+                source = sources.get(edge.id, actual)
+                chain.append(source)
+                if edge.kind == "line":
+                    a, b = (tuple(x - y for x, y in zip(point, origin)) for point in actual)
+                    c, d = (tuple(x - y for x, y in zip(point, origin)) for point in source)
+                    actual_sum += cross(a, b) / 2
+                    source_sum += cross(c, d) / 2
+            if any(a[1] != b[0] for a, b in zip(chain, [*chain[1:], chain[0]])):
+                raise ValidationError(
+                    "SOURCE_AREA_UNRESOLVED: zdrojové intervaly netvoří souvislý obrys. "
+                    "Vraťte úpravu nebo zvolte jiné místo dělení."
+                )
+            all_lines = all(edge.kind == "line" for edge in profile.segments)
+            if all_lines and actual_sum * source_sum <= 0:
+                raise ValidationError("SOURCE_AREA_UNRESOLVED: dělení změnilo orientaci obrysu.")
+            # | |A|-|B| | <= |A-B| also covers either loop orientation. All
+            # unchanged curved terms cancel without any sampled-area oracle.
+            difference = abs(actual_sum - source_sum) * scale2
+            source_area = abs(source_sum) * scale2 if all_lines else Fraction(0)
+            records[pid] = difference, source_area, all_lines
+            return records[pid]
+
+        def budget(source_lower):
+            return max(Fraction(1, 100), source_lower / Fraction(10**6))
+
+        for pid in canonical_by_profile:
+            result = profile_area(pid)
+            if result is not None and result[0] > budget(result[1]):
+                raise ValidationError(
+                    "SOURCE_AREA_UNRESOLVED: zaokrouhlení dělení změnilo plochu dílu "
+                    "nad požadovanou přesnost. Zvolte jinou vzdálenost nebo menší měřítko."
+                )
+        for part in self.parts.values():
+            touched = any(
+                pid in canonical_by_profile
+                for sid in part.surface_ids
+                for pid in self.surfaces[sid].source_profile_ids()
+            )
+            if not touched:
+                continue
+            error = lower = Fraction(0)
+            complete_reference = True
+            for sid in part.surface_ids:
+                surface = self.surfaces[sid]
+                if surface.kind != "planar":
+                    complete_reference = False
+                    continue
+                ids = [surface.profile_id, *surface.hole_profile_ids]
+                areas = [profile_area(pid) for pid in ids]
+                if any(area is None for area in areas):
+                    raise ValidationError("SOURCE_AREA_UNRESOLVED: materiál nemá uzavřený obrys.")
+                plane = self.profiles[surface.profile_id].plane
+                rotation = self._surface_matrix(sid)[:3, :3]
+                vectors = [
+                    tuple(
+                        sum(Fraction(float(rotation[i, j])) * Fraction(axis[j]) for j in range(3))
+                        for i in range(3)
+                    )
+                    for axis in (plane.u, plane.v)
+                ]
+                u, v = vectors
+                normal = (
+                    u[1] * v[2] - u[2] * v[1],
+                    u[2] * v[0] - u[0] * v[2],
+                    u[0] * v[1] - u[1] * v[0],
+                )
+                jacobian = _sqrt(sum(value * value for value in normal))
+                error += sum(area[0] for area in areas) * jacobian[1]
+                complete_reference &= all(area[2] for area in areas)
+                lower += max(Fraction(0), areas[0][1] - sum(a[1] for a in areas[1:])) * jacobian[0]
+            if not complete_reference:
+                lower = Fraction(0)
+            if error > budget(lower):
+                raise ValidationError(
+                    "SOURCE_AREA_UNRESOLVED: součet změn celého materiálového dílu včetně "
+                    "otvorů překročil plošnou přesnost. Vraťte dělení nebo změňte vzdálenost."
+                )

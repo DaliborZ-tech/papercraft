@@ -324,3 +324,94 @@ def test_malformed_history_fraction_has_typed_format_failure(parameter):
     raw["profile_subdivisions"][root]["history"]["events"][0][2] = parameter
     with pytest.raises(ProjectFormatError):
         AuthorProject.from_dict(raw)
+
+
+def test_closed_body_area_is_not_replaced_by_a_position_or_length_budget():
+    project = AuthorProject.new(scale=1 / 1024)
+    pid = project.add_profile([[1e16, 0], [1e16 + 2, 2**20], [1e16 + 4, 0]])
+    before = project.to_dict()
+    # Independent exact shoelace: initial2mm², float-projected split9/4mm².
+    with pytest.raises(ValidationError, match="SOURCE_AREA_UNRESOLVED"):
+        project.split_profile_segment(pid, project.profiles[pid].segments[0].id, Fraction(1, 4))
+    assert project.to_dict() == before
+
+
+def test_source_edit_keeps_untouched_exact_split_point_and_declares_new_shape():
+    project = AuthorProject.new(scale=0.01)
+    pid = project.add_profile([[0, 0], [120, 40], [100, 100], [-20, 60]])
+    sid = project.add_surface(pid)
+    profile = project.profiles[pid]
+    root = profile.segments[0].id
+    project.split_profile_segment(pid, root, Fraction(1, 3))
+    vertex = profile.vertices[0].id
+    project.move_vertex(pid, vertex, [-10, 0])
+    project.recompute()
+    assert not project.parts[project.part_for_surface(sid)].stale
+    assert AuthorProject.from_dict(project.to_dict()).to_dict() == project.to_dict()
+
+
+def test_mixed_arc_profile_keeps_unchanged_curve_terms_in_area_difference():
+    project = AuthorProject.new(scale=1)
+    pid = project.add_profile(
+        segments=[
+            {"kind": "line", "start": [0, 0], "end": [20, 0]},
+            {
+                "kind": "arc",
+                "start": [20, 0],
+                "end": [20, 20],
+                "data": {"center": [20, 10], "sweep_deg": 180},
+            },
+            {"kind": "line", "start": [20, 20], "end": [0, 20]},
+            {"kind": "line", "start": [0, 20], "end": [0, 0]},
+        ]
+    )
+    sid = project.add_surface(pid)
+    root = project.profiles[pid].segments[0].id
+    project.split_profile_segment(pid, root, Fraction(1, 3))
+    project.recompute()
+    assert not project.parts[project.part_for_surface(sid)].stale
+
+
+@pytest.mark.parametrize("operation", ["split", "move"])
+def test_hole_edit_preserves_unrelated_outer_edge_join_identity(operation):
+    project, wall, roof, first, second = two_panels()
+    hole = project.add_profile([[2000, 1000], [4000, 1000], [4000, 2000], [2000, 2000]])
+    project.add_hole(wall, hole)
+    joint = project.connect_edges(wall, first, roof, second)
+    before = copy.deepcopy(project.joints[joint])
+    profile = project.profiles[hole]
+    if operation == "split":
+        project.split_profile_segment(hole, profile.segments[0].id)
+    else:
+        project.move_vertex(hole, profile.vertices[0].id, [2100, 1100])
+    assert project.joints[joint] == before and not project.joints[joint].unresolved
+    project.recompute()
+
+
+def test_three_holes_share_whole_material_body_area_budget():
+    project = AuthorProject.new(scale=1 / 8192)
+    outer = project.add_profile(
+        [
+            [1e16 - 16, -(2**20)],
+            [1e16 + 64, -(2**20)],
+            [1e16 + 64, 3 * 2**20],
+            [1e16 - 16, 3 * 2**20],
+        ]
+    )
+    holes = [
+        project.add_profile(
+            [[1e16 + offset, 0], [1e16 + offset + 2, 2**20], [1e16 + offset + 4, 0]]
+        )
+        for offset in (0, 16, 32)
+    ]
+    project.add_surface(outer, holes)
+    for pid in holes[:2]:
+        project.split_profile_segment(pid, project.profiles[pid].segments[0].id, Fraction(1, 4))
+    before = project.to_dict()
+    # Each hole's delta1/256mm² is below.01, while the complete body delta
+    # 3/256 exceeds it. Body area is <10mm², so original norm is.01mm².
+    with pytest.raises(ValidationError, match="SOURCE_AREA_UNRESOLVED"):
+        project.split_profile_segment(
+            holes[2], project.profiles[holes[2]].segments[0].id, Fraction(1, 4)
+        )
+    assert project.to_dict() == before
