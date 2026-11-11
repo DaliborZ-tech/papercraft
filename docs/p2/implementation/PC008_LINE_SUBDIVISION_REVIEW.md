@@ -110,3 +110,16 @@ SK011 LINE transfer pravdivě zachovává **INITIAL_TRANSFER_FAILED_LS04**. Nov�
 Metadata93f650c správně ponechává pending scope: live ARC/CUBIC adapters, loft trim/φ, širší AU13/AU14, C/schema6 adapter, PC009/010, novice0/NOT_RUN a P3/NOT_RUN; celé PC008/P2 zůstává IN_PROGRESS. Experimentální schema7 zná copy/SaveAs1–5 a nepropouští dosud neznámý C6 pouhou změnou verze. Toto schválení není dokončení budoucího integračního adaptéru ani produktové přijetí.
 
 Jediná zbývající předpublikační práce je mechanické closure metadata: v delivery rozlišit analytické očekávání a skutečně serializovanou plochu, zastaralý queue review text LINE694 změnit na24e a připojit toto finální schválení v queue/SK015/SK011 při zachování pending širších přejímek. Tento následný konkrétní commit má dostat úzký doc/source-identity recheck; není potřeba nová1465sada ani nový produktový souhlas.
+
+
+## Závěrečná mechanická closure revize29f2ff97
+
+**APPROVED_IN_MECHANICAL_CLOSURE_SCOPE** pro přesný commit **29f2ff97cea8ecee6c244258e551fa4ab27588fb** (včetně closure69e8298), proti již schválenému CODE24e a metadata93f650c. Nejde o další změnu runtime nebo novou produktovou bránu.
+
+Git diff pro src/tools/tests/pyproject je prázdný; mandát a normativní AC jsou beze změny. Všech28 původních reviewerových report/evidence Git blobů je **byte-for-byte shodných** s a03c2948f44a0dce55ed975d57a0cebcf1d95861. Vyřešení add/add report konfliktu tedy zachovalo přesný nezávislý report, nikoli autorskou upravenou verzi. Nové historické FAIL ani číselné raw výsledky se nepřepisují.
+
+Queue ukazuje správný source24e, reviewa03 a schválení pouze LINE technického inkrementu. SK015 uzavírá současnou opravu/radu, ale další consumer zůstává NOT_RUN/PENDING_NEXT_USE. SK011 zachovává INITIAL_TRANSFER_FAILED_LS04 a odděluje schválenou aktuální plošnou opravu od budoucí efficacy. Delivery nyní správně rozlišuje analytické očekávání8769.772228646…, actual SVG8769.772229 a actual PDF≈8769.772000000 mm².
+
+V delivery/integration bylo ověřeno15 relativních odkazů. Nový integrační dokument pravdivě popisuje teprve plánovaný fast-forward/push; nevydává budoucí publication za skutečnost. V době revize čistý hlavní workspace/master, origin/master i skutečné ls-remote shodně ukazovaly **6796c63dc6aee0cd8331feb22df4e1c4afd0df27** a origin URL bylo očekávané https://github.com/DaliborZ-tech/papercraft.git. Root má při následné integraci znovu respektovat případné novější vzdálené změny.
+
+Whole AU13/AU14, C/schema6→7 adapter, curved/loft trim, PC009/010, novice0 a P3 nadále nejsou dokončené. V tomto mechanickém rozsahu není otevřený nález; **ověřený LINE balík je připraven k běžné integraci a pushi podle mandátu**. Skutečný publikovaný SHA se teprve ověří po pushi. Žádná nová1465sada ani desktopový průchod nebyly pro tuto dokumentační změnu vydávány za provedené.
