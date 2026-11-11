@@ -67,9 +67,11 @@ def part_input(project, part):
         "name": part.name,
     }
     if any(project.surfaces[sid].kind == "ruled_loft" for sid in touched):
-        # An older loft cache labelled every source corner mountain. Its
-        # geometry/source digest alone cannot certify the repaired fold roles.
-        inputs["loft_paper_contract"] = "ANALYTIC_SIGNED_CREASES_AND_INTRINSIC_AREA_V1"
+        from .loft_surface import LOFT_PAPER_CONTRACT
+
+        # Canonical CUT representation is a capability too: an older correct
+        # sampled outline must become stale, not masquerade as a current cache.
+        inputs["loft_paper_contract"] = LOFT_PAPER_CONTRACT
     return digest(inputs)
 
 
@@ -452,7 +454,8 @@ def _placed_curve_envelopes(project, part, placement, *, output_error_mm=0):
         sid: [page_points(loop, placement).tolist() for loop in loops]
         for sid, loops in part.polygons.items()
     }
-    projected.edges = [
+    loft = any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids)
+    projected.edges = [] if loft else [
         {
             **edge,
             "start": page_points([edge["start"]], placement)[0].tolist(),
@@ -463,7 +466,7 @@ def _placed_curve_envelopes(project, part, placement, *, output_error_mm=0):
     projected.paths = {
         "TABS": [path(page_points(p["points"], placement), True) for p in part.paths["TABS"]]
     }
-    if any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids):
+    if loft:
         from .loft_surface import material_envelopes
 
         return material_envelopes(project, projected, output_error_mm=output_error_mm)
@@ -543,7 +546,10 @@ def validate_layout(project):
             continue
         try:
             expected = build_part(project, part)
-            if geometry_payload(expected) != geometry_payload(part):
+            # Compare every actual cached field; copying both large detached
+            # payloads adds no validation and stalls an unchanged layout.
+            if any(getattr(expected, key) != getattr(part, key)
+                   for key in ("polygons", "paths", "labels", "edges")):
                 issue(
                     "INVALID_CACHE",
                     "Uložený rozvin neodpovídá zdrojové konstrukci. Přepočítejte jej.",

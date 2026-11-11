@@ -27,8 +27,13 @@ from .geometry import (
     vector,
 )
 from .interior import InteriorCommands
-from .loft_surface import LoftCommands, validate_loft_params, world_loft_geometry
-from .loft_surface import analysis as loft_analysis
+from .loft_surface import (
+    LoftCommands,
+    validate_loft_params,
+    validate_loft_world_geometry,
+    world_loft_geometry,
+)
+from .loft_surface import _analysis_readonly as loft_analysis
 from .model import (
     Attachment,
     Connector,
@@ -49,6 +54,7 @@ from .paper import (
     ROLES,
     build_part,
     edge_world,
+    part_input,
     validate_joint_contact,
     validate_layout,
 )
@@ -897,7 +903,7 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                     for report in result.get("source_topology", {}).values()
                 ):
                     raise ValidationError("Zdrojový profil loftu se kříží nebo překrývá.")
-                self.world_geometry(sid)
+                validate_loft_world_geometry(self, surface)
                 if (
                     surface.part_id not in self.parts
                     or sid not in self.parts[surface.part_id].surface_ids
@@ -1449,6 +1455,14 @@ class AuthorProject(InteriorCommands, BendCommands, ProfileCurveCommands, LoftCo
                 project.parts[pid] = _record(MaterialPart, raw)
             project.pages = [_record(Page, p) for p in data["pages"]]
             project.validate()
+            for part in project.parts.values():
+                if (
+                    any(project.surfaces[sid].kind == "ruled_loft" for sid in part.surface_ids)
+                    and part.input_digest != part_input(project, part)
+                ):
+                    # Keep the historical cache and author's frame/layout for
+                    # inspection. Only explicit recompute replaces its CUT.
+                    part.stale = True
             return project
         except (
             ValidationError,
