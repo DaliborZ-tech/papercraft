@@ -2041,7 +2041,7 @@
         "AC-US06": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation",
         "AC-US07": "PARTIAL_TECHNICAL_VERIFICATION: planar sketch/edit/select/undo/layout/export flow; docs/p2/implementation/PC007A_PLANAR_INTEGRATION_REVIEW.md; full loft workflow pending, no novice observation"
       },
-      "status": "PAUSED",
+      "status": "IN_PROGRESS",
       "gate": "GATE-P2",
       "execution_authorized_on_realization": true,
       "implementation_contract": "docs/p2/v1.2/P2_IMPLEMENTATION_CONTRACT.md",
@@ -2172,7 +2172,8 @@
       ],
       "status_before_pause": "IN_PROGRESS",
       "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
-      "continuation_report": "docs/p2/implementation/CONTINUE_2026-11-10.md"
+      "continuation_report": "docs/p2/implementation/CONTINUE_2026-11-10.md",
+      "resumed_on": "2026-11-11"
     },
     {
       "id": "PC-007B",
@@ -2454,10 +2455,10 @@
       ]
     }
   ],
-  "updated_on": "2026-11-09",
+  "updated_on": "2026-11-11",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
   "working_branch": "revival/p2-loft-integration",
-  "release_readiness": "NOT_READY: owner requested pause; planar slice published on a27cf5a, local loft package pending integrated performance review/full B1 proof, full B/C/D, novice and historic model incomplete",
+  "release_readiness": "NOT_READY: resumed by owner; local loft performance review and complete B1 pending; B3/D/C, actual novice and historic model incomplete",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2705,7 +2706,7 @@
       "PC-009",
       "PC-010"
     ],
-    "status": "PAUSED",
+    "status": "IN_PROGRESS",
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
@@ -2723,13 +2724,13 @@
     "wip_source_sha": "23ce202535bbd0ce7f2d4e5e975386f363bd2653",
     "wip_branch": "revival/p2-loft-integration",
     "next_required_technical_work": "Finish actual B1/B2/B3 and Bezier extrusion through UI/save/reopen/manual layout/vector outputs, independent review and fixes; then C/D and historic model",
-    "resumed_on": "2026-11-09",
-    "resume_source": "explicit_owner_request_to_continue_following_instructions_and_skills",
+    "resumed_on": "2026-11-11",
+    "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
     "digital_source_sha": "63ab275a5fe9b92bdb370a5ec3dedf1c5f70a65e",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Integrate reviewed two-profile core, author UI and actual serialized output; native B1/B2/Bezier diagnostics in progress; exact B3 refusal and bounded D segmentation follow",
+    "active_work": "Independent review of performance2e42123, then integrated native B1, B3/derived D, C and remaining P2",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -2765,9 +2766,9 @@
         "report": "docs/p2/implementation/PC007A_LOFT_UI_REVIEW.md"
       },
       "loft_writer": {
-        "status": "PENDING_INDEPENDENT_REVIEW",
+        "status": "APPROVED_IN_LOFT_OUTPUT_COMPONENT_SCOPE",
         "source_sha": "3f4ece8e54081164a1f5731518056712930ac14b",
-        "evidence": "docs/p2/implementation/evidence/pc007a-loft-output-3f4ece8/results.json"
+        "report": "docs/p2/implementation/PC007A_LOFT_OUTPUT_REVIEW.md"
       }
     },
     "planar_verified_slice": {
@@ -2801,6 +2802,11 @@
       "performance_runtime_sha": "2e4212388caef05adef42a4301bf367e7a6cb7f0",
       "performance_handoff_sha": "d460446cd643478b8236df1e058522d63d72553c",
       "performance_worktree_clean": true
+    },
+    "last_pause": {
+      "paused_on": "2026-11-09",
+      "reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
+      "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md"
     }
   }
 }
