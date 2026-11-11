@@ -13,4 +13,6 @@ U spoje uvnitř plochy zachovej skutečný obrys a přesah. Sleduj zdrojový int
 
 Při úpravě chlopně zahrň její tvar, ohyb a příjemce, nikoli jen překryv na stránce. V ticketu dolož konkrétní konstrukční rozhodnutí a dotčený fixture/AC. Fyzický závěr podlož skutečným výtiskem podle akceptace.
 
+Při dělení zdrojové hrany prověř všechny její spotřebitele, také ohyb existující chlopně a3D náhled spoje. [Nativní LINE průchod](../../../docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md) nalezl spotřebitele, který stále hledal zaniklé ID mezi aktuálními zobrazovanými hranami, přestože doména už uměla zachovaný celý zdroj. Příklad: rozděl hranu stěny s existující chlopní k základně při vybraném spoji, zachovej celý původní hinge a porovnej kontakt i kontrolu ohybu. První dítě ani nejbližší bod nejsou náhradou původní reference; přenos opravy na jiný typ spotřebitele musí mít vlastní důkaz.
+
 Pro doložený problém oprav produkt a zapiš úzké zlepšení postupu podle [smyčky v AGENTS](../../../AGENTS.md#projektové-skills-a-poučení). Neověřený přenos do dalšího použití zůstává pending.

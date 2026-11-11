@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.209" timestamp="2026-11-11T15:57:38.033266+01:00" hostname="Dalibor"><testcase classname="" name="test_subdivide_hole_does_not_resolve_outer_joint_against_the_wrong_profile" time="0.046"><failure message="archpapercraft.authoring.errors.ValidationError: REFERENCE_UNRESOLVED: historická hrana chybí. Vyberte ji znovu.">def test_subdivide_hole_does_not_resolve_outer_joint_against_the_wrong_profile():
+     p,wall,roof,hole,joint=joined_surface_with_unrelated_hole()
+     before=copy.deepcopy(p.joints[joint]);profile=p.profiles[hole]
+&gt;    p.split_profile_segment(hole,profile.segments[0].id,F(1,2))
+
+..\..\..\..\projects\papercraft-profile-subdivision-review\docs\p2\implementation\evidence\pc008-line-subdivision-review-own.py:239: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\commands.py:14: in command
+    result = method(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\profile_subdivision.py:307: in split_profile_segment
+    self._check_subdivision_physical_references(profile_id)
+src\archpapercraft\authoring\profile_subdivision.py:256: in _check_subdivision_physical_references
+    self.resolve_profile_edge(profile_id, edge_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x0000014334566210&gt;
+profile_id = '84aaa71c-e55e-423c-a0b3-e1c1b086a04a'
+segment_id = '2a8c5580-47c4-40ab-a063-e5930e778548', axis = False
+
+    def resolve_profile_edge(self, profile_id, segment_id, *, axis=False):
+        """A full historical trim remains one edge; a bent chain is unresolved.
+    
+        For a paper axis only, the semantic chord is the two material endpoints.
+        This does not turn a bent chain into a straight hinge or glue edge.
+        """
+        profile = self.profiles[profile_id]
+        edge = profile.segment(segment_id)
+        if edge is not None:
+            return edge, np.array(
+                [
+                    profile.vertex(edge.start_vertex_id).point,
+                    profile.vertex(edge.end_vertex_id).point,
+                ]
+            )
+        record = self._subdivision_record(profile_id, segment_id)
+        if record is None:
+&gt;           raise ValidationError("REFERENCE_UNRESOLVED: historická hrana chybí. Vyberte ji znovu.")
+E           archpapercraft.authoring.errors.ValidationError: REFERENCE_UNRESOLVED: historická hrana chybí. Vyberte ji znovu.
+
+src\archpapercraft\authoring\profile_subdivision.py:115: ValidationError</failure></testcase></testsuite></testsuites>

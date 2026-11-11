@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="16" time="1.232" timestamp="2026-11-11T15:07:24.130944+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_profile_subdivision" name="test_mixed_part_axis_split_merge_preserves_all_original_wall_coordinates_and_locks" file="tests\authoring\test_profile_subdivision.py" line="17" time="0.033"><failure message="ValueError: Nejprve vytvořte projekt.">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1400/test_mixed_part_axis_split_mer0')
+
+    def test_mixed_part_axis_split_merge_preserves_all_original_wall_coordinates_and_locks(tmp_path):
+        project, wall, roof, wall_edge, roof_edge = two_panels()
+        pid = project.part_for_surface(wall)
+        joint = project.connect_edges(wall, wall_edge, roof, roof_edge)
+        project.set_joint(joint, mode="fold", receiving_part_id=pid)
+        page = project.add_page()
+        project.set_placement(pid, page, 60, 60, 30, position_locked=True, rotation_locked=True)
+        profile = project.profiles[project.surfaces[wall].profile_id]
+        old_vertices = [vertex.id for vertex in profile.vertices]
+        axis = project.parts[pid].frame.axis_segment_id
+        frame, layout = copy.deepcopy(project.parts[pid].frame), copy.deepcopy(project.placements[pid])
+        before = page_points(project.parts[pid].polygons[wall][0], layout)
+        controller = AuthorController(project)
+&gt;       split = controller.execute("Rozdělit hranu", lambda p: p.split_profile_segment(profile.id, axis, Fraction(1, 3)))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\authoring\test_profile_subdivision.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.application.author_controller.AuthorController object at 0x000001F3769B8C80&gt;
+description = 'Rozdělit hranu'
+operation = &lt;function test_mixed_part_axis_split_merge_preserves_all_original_wall_coordinates_and_locks.&lt;locals&gt;.&lt;lambda&gt; at 0x000001F337A34B80&gt;
+recompute = False
+
+    def execute(self, description, operation, *, recompute=False):
+        if self.project is None:
+&gt;           raise ValueError("Nejprve vytvořte projekt.")
+E           ValueError: Nejprve vytvořte projekt.
+
+src\archpapercraft\application\author_controller.py:81: ValueError</failure></testcase><testcase classname="tests.authoring.test_profile_subdivision" name="test_divide_actual_joined_edge_keeps_one_joint_id_and_no_extra_fold" file="tests\authoring\test_profile_subdivision.py" line="53" time="0.032" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_interior_trace_split_keeps_interval_receiver_and_connector_ids" file="tests\authoring\test_profile_subdivision.py" line="68" time="0.033" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_retired_split_vertex_remains_a_semantic_anchor_after_inverse_merge" file="tests\authoring\test_profile_subdivision.py" line="84" time="0.037" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_edit_split_joined_chain_bends_reference_and_stays_saveable_unresolved" file="tests\authoring\test_profile_subdivision.py" line="100" time="0.037" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_replay_bound_project_rejects_mutated_incidence_or_active_geometry[point]" file="tests\authoring\test_profile_subdivision.py" line="119" time="0.012" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_replay_bound_project_rejects_mutated_incidence_or_active_geometry[incidence]" file="tests\authoring\test_profile_subdivision.py" line="119" time="0.012" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_replay_bound_project_rejects_mutated_incidence_or_active_geometry[geometry]" file="tests\authoring\test_profile_subdivision.py" line="119" time="0.013" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_replay_bound_project_rejects_mutated_incidence_or_active_geometry[alias]" file="tests\authoring\test_profile_subdivision.py" line="119" time="0.013" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_replay_bound_project_rejects_mutated_incidence_or_active_geometry[cache]" file="tests\authoring\test_profile_subdivision.py" line="119" time="0.012" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_invalid_live_split_is_atomic[False]" file="tests\authoring\test_profile_subdivision.py" line="141" time="0.010" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_invalid_live_split_is_atomic[True]" file="tests\authoring\test_profile_subdivision.py" line="141" time="0.011" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_invalid_live_split_is_atomic[0]" file="tests\authoring\test_profile_subdivision.py" line="141" time="0.010" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_invalid_live_split_is_atomic[1]" file="tests\authoring\test_profile_subdivision.py" line="141" time="0.011" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_invalid_live_split_is_atomic[-0.1]" file="tests\authoring\test_profile_subdivision.py" line="141" time="0.011" /><testcase classname="tests.authoring.test_profile_subdivision" name="test_invalid_live_split_is_atomic[nan]" file="tests\authoring\test_profile_subdivision.py" line="141" time="0.010" /></testsuite></testsuites>

@@ -1,0 +1,13 @@
+{
+  "status": "ABORTED_AFTER_KNOWN_HISTORICAL_FIXTURE_FAILURE",
+  "code_sha": "72ea4fe9037c10815a7da4624de127982b0b0fd1",
+  "collected_tests": 1447,
+  "completed_observed_passes": 6,
+  "completed_observed_failures": 1,
+  "junit_completed": false,
+  "log": "au13-line-full-suite-run01-aborted.log",
+  "reason": "Historical schema1 test built from current to_dict still contained new profile_subdivisions field. Strict known-version parser correctly refused it; the following UI test opened an unhandled error modal and stopped progress. Root stopped only verified own Python pytest PID46192, matching exact command-line junit filename.",
+  "correction": "Historical generated fixture envelopes now remove profile_subdivisions just as segmented_variants; no production parser relaxation, no removed tests. Eighty relevant persistence/UI/loft/material regressions passed31.87s after correction.",
+  "full_suite_claim": "NOT_PASS; later complete rerun required",
+  "other_failure_scope": "Separate from historical73f3437 Windows GC access violation; no claim that crash was diagnosed"
+}

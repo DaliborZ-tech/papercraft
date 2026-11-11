@@ -517,6 +517,20 @@
         "example": "body20000/TAB2000/delta0.021 must fail original0.020 budget, not pass0.022",
         "text_review": "APPROVED_IN_SCOPE_AT_89a14c5_BY_COMMANDS_REVIEW; report PC008_INTEGRATION_REVIEW.md",
         "effectiveness": "PENDING_NEXT_USE"
+      },
+      "line_transfer_2026_11_11": {
+        "status": "INITIAL_TRANSFER_FAILED_LS04; correction implemented, independent recheck pending",
+        "reason": "Topology-only source command respected position/length but changed closed intrinsic area2 to9/4mm2; consistent export of altered polygon would not recover original source acceptance",
+        "cause": "Profile subdivision validated point and global length projection but omitted direct original-source to actual closed-material Green difference",
+        "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+        "correction": "Exact source/actual closed area difference at command/load/scale, one body-only norm shared by holes and faces; unchanged curved terms cancel and mixed-profile reference conservatively zero",
+        "example": "Three actual holes each delta1/256mm2 pass individually but total3/256 must fail original0.01mm2 whole-body budget",
+        "evidence": [
+          "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+          "docs/p2/implementation/evidence/au13-line-LS04-LS05-fix-run02.xml"
+        ],
+        "text_review": "PENDING_CURRENT_LINE_METADATA_REVIEW",
+        "effectiveness": "PENDING_NEXT_USE"
       }
     },
     {
@@ -651,6 +665,47 @@
       "next_use": {
         "status": "NOT_RUN",
         "example": "Generated labels on another kind of small material part; no novice/physical inference"
+      }
+    },
+    {
+      "id": "SK-015",
+      "changed_on": "2026-11-11",
+      "skill": "papercraft-construction",
+      "reason": {
+        "source": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+        "problem": "LINE-BEND01: domain resolved a historical source edge after subdivision but continuous tab bend still searched active display boundary IDs, causing StopIteration and empty error during actual selected-relation refresh"
+      },
+      "cause": {
+        "status": "REPRODUCED_WITH_ORIGINAL_COMMAND_TRACEBACK",
+        "mechanism": "bend._check_connector_bend directly next(world_geometry.boundary id==retired_edge) instead of semantic edge_source; domain/component tests lacked an existing selected tab at source split",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc008-AU13-line-desktop-9290a01-run02/results.json",
+          "docs/p2/implementation/evidence/pc008-AU13-line-desktop-9290a01-run02/FAIL-partial-observed-state.json"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_TARGETED_PASS_INDEPENDENT_REVIEW_PENDING",
+        "source_sha": "a770f8a8bed102bcf8538d0e57e4f5659f809949",
+        "description": "Bend resolves the entire semantic source hinge and binds history/all source profiles in its cache key; new known/unknown-paper and selected-relation widget regressions. Further694 guards distinguish bounded geometry projection from exact physical handle eligibility."
+      },
+      "skill_change": "Trace every persistent edge consumer including existing-tab bend and selected3D relation; domain resolver alone does not prove pipeline coverage",
+      "usage_example": "Split the actual wall edge carrying a base tab while its relation is selected; keep full hinge/contact instead of substituting first child",
+      "verification": {
+        "status": "45targetedPASS16.48s, final24e1465PASS326.23s and actual native32.734s/both Inkscape pages PASS; final independent artifact/text review pending",
+        "evidence": [
+          "docs/p2/implementation/evidence/au13-line-existing-tab-bend-fix-run01.xml",
+          "docs/p2/implementation/evidence/pc008-AU13-line-desktop-a770f8a-run03/results.json",
+          "docs/p2/implementation/evidence/pc008-AU13-line-desktop-24e0801-run05/results.json"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING",
+        "report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "example": "A different persistent-reference consumer; regression of the same repaired bend is not next-use or a novice observation"
       }
     }
   ]

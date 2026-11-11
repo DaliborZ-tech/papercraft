@@ -1121,38 +1121,42 @@
         {
           "skill": "papercraft-construction",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "Published D/B3 reviewed at e782/metadata724 by commands_review; live LINE694 and new skill advice currently under independent review"
         },
         {
           "skill": "papercraft-authoring-ui",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "Published D/B3 reviewed at e782/metadata724 by commands_review; live LINE694 and new skill advice currently under independent review"
         },
         {
           "skill": "papercraft-verification",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "Published D/B3 reviewed at e782/metadata724 by commands_review; live LINE694 and new skill advice currently under independent review"
         },
         {
           "skill": "papercraft-delivery",
           "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
           "evidence": [
-            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md"
+            "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
           ],
-          "review": "Components domain95/math3a/batch651/UI1f/output5ad independently approved; final unified artifact and new skill text review pending"
+          "review": "Published D/B3 reviewed at e782/metadata724 by commands_review; live LINE694 and new skill advice currently under independent review"
         }
       ],
       "usability": {
@@ -1194,7 +1198,17 @@
       },
       "candidate_code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
       "working_branch": "revival/p2-segmentation-gothic",
-      "implementation_started_on": "2026-11-11"
+      "implementation_started_on": "2026-11-11",
+      "live_LINE_progress_2026_11_11": {
+        "code_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+        "working_branch": "revival/p2-profile-provenance",
+        "status": "SOURCE_COMPONENT_APPROVED_FINAL_ARTIFACT_REVIEW_PENDING",
+        "report": "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+        "scope": "LINE split/inverse merge, historical joints/interior trace/semantic frame; not whole AU13/14",
+        "evidence": "1465PASS326.23s; actual Windows32.734s; both actual Inkscape pages15.672s/18.015s. LS01-LS05 independently closed in source/math/UI scope; final artifact/meta review pending.",
+        "reviewer": "commands_review",
+        "open_external": "novice0/NOT_RUN; physicalP3/NOT_RUN"
+      }
     },
     {
       "id": "PC-009",

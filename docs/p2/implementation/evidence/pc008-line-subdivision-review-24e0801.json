@@ -1,0 +1,36 @@
+{
+  "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+  "archive_sha256": "36cb2b9ab067170b9b160599564c252ee3fd9690c7d2e7dd66b236dcadac2bb0",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-g7f7egj5",
+  "actual_imports": {
+    "archpapercraft.authoring.curve_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-g7f7egj5\\src\\archpapercraft\\authoring\\curve_subdivision.py",
+      "sha256_lf": "4d674d769e89c2b4d826c6fe1bb9a685e8414012ae55143c3219f1e76c0d6ad2"
+    },
+    "archpapercraft.authoring.profile_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-g7f7egj5\\src\\archpapercraft\\authoring\\profile_subdivision.py",
+      "sha256_lf": "9de550ff06bf633328dc1cd63a80bca17f8632b8556bd40824fdab6e4f8f3971"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-g7f7egj5\\src\\archpapercraft\\authoring\\project.py",
+      "sha256_lf": "0d3952f38b3d0336b4f959867413beb0c0e1ac8e1a95fdc41c438108268f30a3"
+    },
+    "archpapercraft.ui.author_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-g7f7egj5\\src\\archpapercraft\\ui\\author_subdivision.py",
+      "sha256_lf": "4dbec130f305925ea126ccf3f93085057ddc4dee749ad44459f45d6991811485"
+    }
+  },
+  "own_test_sha256_at_run": "e3dfe4b9938655251306ec65ef974e17f5478d04d6cd7b5763265eabfb7e7bf4",
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 75%]\n.......................                                                  [100%]\n95 passed in 4.51s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 0,
+      "stdout": "..........................                                               [100%]\n26 passed in 2.58s\n",
+      "stderr": ""
+    }
+  }
+}
