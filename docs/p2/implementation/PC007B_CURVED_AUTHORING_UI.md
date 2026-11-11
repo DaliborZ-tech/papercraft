@@ -1,5 +1,20 @@
 # C — autorské ovládání kruhových chlopní
 
+## Opravy nezávislé revize CUI01–CUI04
+
+Zdroj oprav: **`e1c06f5b068880ac22b28516ce69c66aee32603d`**. Následující původní předání a jeho zdrojové vazby jsou historické a zůstávají zachované.
+
+- **CUI01:** odmítnutý C05 preflight vrátí viditelnou volbu sady i checkbox do skutečného autorského stavu. Neplatný rozepsaný rozměr, dosavadní výběr a dokument zůstávají zachované.
+- **CUI02:** hlavní vedení rozlišuje skutečně podporovaný kruhový plášť a aktuální veřejný stav jeho sady. Digitálně doložená aproximace již nedostane protichůdné tvrzení, že spoj nemá ověření. STALE/UNRESOLVED/vypnuté sady mají vlastní dosažitelný další krok; fyzické ověření stále patří P3.
+- **CUI03:** odstraněný vlastník bezpečně zneplatní návrh, zakáže výpočet/potvrzení a nabídne zavření a opětovný výběr. Pozdní odpověď workeru se nepoužije. Jde o deterministickou komponentovou zkoušku source fence; modální dialog běžnou uživatelskou destrukci vlastníka nepovoluje, proto nejde o důkaz nativního pádu.
+- **CUI04:** slot mimo snížený počet nebo ve vypnuté sadě má vysvětlenou zakázanou přepínací akci. Label nemůže slibovat opačný úkon než uložený override. Klik ani přímé volání nemění počet, zapnutí sady či uloženou individuální volbu.
+
+[Připnutý cílený JUnit](evidence/pc007b-curved-authoring-ui-review-fixes.xml): **34 PASS / 30 deselected / 36,25 s** na uvedeném source pinu, offscreen. Běh zahrnuje 8 vlastních cílených případů, 6 beze změny převzatých kvalifikovaných případů nezávislého review a 20 existujících curve/loft/segmentation workspace regresí. Počty se nesčítají s původními 47 ani s průběžnými běhy. [Nová source/import vazba](evidence/pc007b-curved-authoring-ui-review-fixes-binding.json) patří pouze tomuto běhu. Ruff a diff-check PASS.
+
+První vlastní CUI03 harness chybně volal neexistující metodu místo veřejné funkce `editing.delete_material_part`; jeho [raw 2 FAIL / 4 PASS](evidence/pc007b-curved-authoring-ui-CUI01-CUI03-initial-harness.xml) zůstává zachován a není produktovým nálezem. Kvalifikované cizí reprodukce se neměnily. Poslední CUI02 negativní UNRESOLVED ověřuje mapování veřejného stavu pomocí dependency stubu; pozitivní i STALE případ používají skutečný producer.
+
+Skills se uplatnily konkrétně: UI C05/SK013 na odmítnutém přepnutí a latentním/effective stavu, konstrukce na oddělení digitální aproximace od fyzického spoje, verification na vlastním i nezměněném cizím orákulu a source/import vazbě, delivery na odděleném zdrojovém commitu a předání oprav jinému reviewerovi. Toto předání ještě neuděluje nezávislé schválení; nativní integrační průchod provede root. Nový uživatel **0 / NOT_RUN**, fyzický P3 **NOT_RUN**.
+
 UI source freeze: **`62cb8bc3d84c5c3edf0c7faf08965ea5eef4b625`**. Samostatná větev `revival/p2-curved-authoring-ui`; integrační owner slučuje výsledek až po cizím review. Backend závislost **`80493e6e9e48cb22548b9a55c2116d850e8e73f3`** je při tomto předání provizorní a má vlastní nezávislou revizi. Autor UI tím neschvaluje C matematiku ani producer. Schema ani exporter tento přírůstek nemění.
 
 ## Funkční průchod
