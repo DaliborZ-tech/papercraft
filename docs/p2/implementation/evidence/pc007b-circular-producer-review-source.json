@@ -1,0 +1,93 @@
+{
+  "source_sha": "80493e6e9e48cb22548b9a55c2116d850e8e73f3",
+  "equivalent_src_tests_tools": "e3413e56b33043754a4e6b54a91b35d9f9f03e24",
+  "test_only_fix_sha": "84117c484aee8049f339cc602ba19d70e1e3ccba",
+  "test_fix_src_diff": "EMPTY",
+  "reviewer": "geometry_analysis",
+  "scope": "INDEPENDENT_CONSUMER_COMPOSER_DOMAIN_PUBLICATION; OWN_MATH_DEPENDENCIES_EXCLUDED",
+  "math_dependency_foreign_approval": "0023902",
+  "python": "3.12.15",
+  "qt_platform": "offscreen",
+  "imports": {
+    "archpapercraft.authoring.curved_connectors": "C:\\Users\\dalib\\projects\\papercraft-circular-producer-review\\src\\archpapercraft\\authoring\\curved_connectors.py",
+    "archpapercraft.authoring.circular_material": "C:\\Users\\dalib\\projects\\papercraft-circular-producer-review\\src\\archpapercraft\\authoring\\circular_material.py",
+    "archpapercraft.authoring.project": "C:\\Users\\dalib\\projects\\papercraft-circular-producer-review\\src\\archpapercraft\\authoring\\project.py",
+    "archpapercraft.exporter.author_export": "C:\\Users\\dalib\\projects\\papercraft-circular-producer-review\\src\\archpapercraft\\exporter\\author_export.py",
+    "archpapercraft.exporter.curve_output_validation": "C:\\Users\\dalib\\projects\\papercraft-circular-producer-review\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+    "archpapercraft.exporter.loft_output_validation": "C:\\Users\\dalib\\projects\\papercraft-circular-producer-review\\src\\archpapercraft\\exporter\\loft_output_validation.py"
+  },
+  "source_files": {
+    "src/archpapercraft/authoring/curved_connectors.py": {
+      "sha256_raw": "949889a46498bc81c4fff1b258caf96427ab74abfc3ca6900fe60b3f565eb74e",
+      "git_blob": "4c51bbd89ec345c0a6860cd3e5ed793fecbf42e9"
+    },
+    "src/archpapercraft/authoring/circular_material.py": {
+      "sha256_raw": "401d523d36eaf45179f21f37f5bda48b93bbae2d79091f6b77e8d50bb1230426",
+      "git_blob": "dfdb16b8330c0b51b3f8fc7cc18744cd0c8af6d9"
+    },
+    "src/archpapercraft/authoring/project.py": {
+      "sha256_raw": "a0eff94851679f6ade2b72e4e6f9dc592711cc9f9794b5bbe735ed306d9f6f4f",
+      "git_blob": "dc14167e60345a6e9baea651c01c2ff1ef0ab627"
+    },
+    "src/archpapercraft/exporter/author_export.py": {
+      "sha256_raw": "b4dd67b3c4c4b4fda9247aae5cde09f1b93d0b3a6ec05b9f0c936af9fd6c2c39",
+      "git_blob": "e795d76c20069e573a2c29179d1abd78a1145e9d"
+    },
+    "src/archpapercraft/exporter/curve_output_validation.py": {
+      "sha256_raw": "0a53ab74e760b407b815e1f7213173a1c2304ce73e5cd992b14efd1691b82454",
+      "git_blob": "aa2d5be00d213102b13ece9e83d0e1bbd6d2ea06"
+    },
+    "src/archpapercraft/exporter/loft_output_validation.py": {
+      "sha256_raw": "60e20adfa6d279fb3b23722f5f3c7c63e19b010cb0227f439ec188541f58de48",
+      "git_blob": "ed2a0bf75f35545cfc356ac56010d7e84830dce9"
+    }
+  },
+  "evidence_sha256": {
+    "docs/p2/implementation/evidence/c-producer-review-area-fixed.xml": "9fa974a09d51d3cecc4214b1bfb5c7d49554ab3376eba095f414f83b913454d9",
+    "docs/p2/implementation/evidence/c-producer-review-area-qualified.xml": "1a6924bdf3b67657b1cc6adf909767d71d766b593838e8ffb4943789a1b1a236",
+    "docs/p2/implementation/evidence/c-producer-review-area-utf8valid.xml": "c733c06a99ece668f12c04a0216e65c3245ac9e33df569b7a039e7d1aae9565f",
+    "docs/p2/implementation/evidence/c-producer-review-area.xml": "ff72f637e5553259ebd12dfbab768d9eaf1680ede81df0557bc0a7bea6d5de0a",
+    "docs/p2/implementation/evidence/c-producer-review-author.xml": "22fc225d3ae01ccecbdcdcf0f94fcf234cf1e3b260bbd4c313a93cd6aef30bda",
+    "docs/p2/implementation/evidence/c-producer-review-fixed-delta.xml": "18bd9990760797412120775189d111a01f67909b526910bef755067845641c8d",
+    "docs/p2/implementation/evidence/c-producer-review-inner-control-current.xml": "2fa0d53e932b4e83d26b28a88fe1224e4c9aa69468f71df2e96bbe834b66ed10",
+    "docs/p2/implementation/evidence/c-producer-review-inner-control.xml": "9496c1b740b6ba261eab9710ff8bfd8e93a08b79f50f13204f60fbc8c65d1837",
+    "docs/p2/implementation/evidence/c-producer-review-own-complete.xml": "50508a7058b0a1f2295333f55c860e3963d5dac4699db06154550a6fb2434195",
+    "docs/p2/implementation/evidence/c-producer-review-own-final.xml": "90e2011b199266b0a42b4e168c5283a3eff29a8caf7242d76a3d496097ce1c35",
+    "docs/p2/implementation/evidence/c-producer-review-own-initial.xml": "4898904b489e1c5fb14531f218b135125514dda8cf8569afa5f62b38c5af2ad0",
+    "docs/p2/implementation/evidence/c-producer-review-valid-role.xml": "a867e39a71ebaa518d6e7215a9a032518b38eae11b1aea4dcd29fb5654e6048a",
+    "docs/p2/implementation/evidence/pc007b-circular-producer-review-own.py": "921566c350e35c3e78439c28229d0a488fa4cdd20cdd0f6564e4edfed2277718",
+    "docs/p2/implementation/evidence/pc007b-circular-producer-review-areas.json": "e0fe66be394f3ccf3de9a626a60cae19375c21d96c12e0f1d407a1eb1e36963d",
+    "docs/p2/implementation/evidence/c-producer-review-cancel.xml": "89d8afbb7bf3a36de765eda18bd43d325f3d6adfb201a789f51896e58538e386"
+  },
+  "tests": {
+    "c-producer-review-author.xml": {
+      "tests": "95",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "134.051"
+    },
+    "c-producer-review-own-complete.xml": {
+      "tests": "29",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "38.627"
+    },
+    "c-producer-review-fixed-delta.xml": {
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "20.966"
+    },
+    "c-producer-review-cancel.xml": {
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.727"
+    }
+  },
+  "desktop_editor_new_user_physical": "NOT_RUN"
+}
