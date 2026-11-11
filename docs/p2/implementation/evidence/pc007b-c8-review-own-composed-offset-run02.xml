@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.686" timestamp="2026-11-11T17:41:50.410478+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007b-c8-review-own" name="test_composed_float_pose_cannot_hide_an_authored_half_mm_receiver_offset" time="0.391"><failure message="archpapercraft.authoring.errors.ValidationError: Umístění loftu ztrácí délkovou přesnost modelu.">def test_composed_float_pose_cannot_hide_an_authored_half_mm_receiver_offset():
+     import numpy as np
+     p,record,_=receiver_source();owner=p.surfaces[record.owner_surface_id];receiver=p.surfaces[record.receiver_surface_id]
+     # Stored transforms are pure translations, so the independent mathematical
+     # world offset is exactly 1/2mm even when float matrix multiplication loses it.
+     parent=np.eye(4);parent[0,3]=1e16
+&gt;    p.set_transform(owner.id,parent_transforms=[parent.tolist()])
+
+docs\p2\implementation\evidence\pc007b-c8-review-own.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\project.py:80: in command
+    self.validate()
+src\archpapercraft\authoring\project.py:1067: in validate
+    validate_loft_world_geometry(self, surface)
+src\archpapercraft\authoring\loft_surface.py:708: in validate_loft_world_geometry
+    _world_mesh_json(*_analysis_keys(project, surface))
+src\archpapercraft\authoring\loft_surface.py:714: in _world_mesh_json
+    payload = _build_world_mesh(context, surface, _bound_analysis(key, surface_record))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+project = namespace(profiles={'c7af28de-51d3-45e3-ac8d-c59cd8ab8b23': Profile(id='c7af28de-51d3-45e3-ac8d-c59cd8ab8b23', name='O...4-4e01-bf37-d5e66cc1ffbd')}, scale=1.0, _surface_matrix=&lt;bound method AuthorProject._surface_matrix of namespace(...)&gt;)
+surface = SurfaceFeature(id='11358c8b-9add-4a33-8dcf-a2fe67b9caa1', name='Ostění', profile_id='c7af28de-51d3-45e3-ac8d-c59cd8ab8...0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]], revision=4, part_id='319c02bc-d974-4e01-bf37-d5e66cc1ffbd')
+result = {'source_digest': 'eb301fb2e3cb3614b549dfb5c8d569be1f1d15beb13dd7bbc5c44449903289e1', 'source_revisions': {'c7af28de-5...80bfba', 'id': '7abd0c1b-f401-44d0-a1e5-75b5e818e459', 'ruling_id': '932970ce-c523-4b54-8fb5-91d1df510c22', ...}], ...}
+
+    def _build_world_mesh(project, surface, result):
+        if surface.params["reference_state"] != "BOUND":
+            return {
+                "vertices": [],
+                "triangles": [],
+                "boundary": [],
+                "vertex_normals": [],
+                "triangle_sources": [],
+                "vertex_sources": [],
+                "status": "UNRESOLVED",
+                "message": result["message"],
+                "mesh_role": "NO_SOURCE_CORRESPONDENCE_NO_MESH",
+            }
+        a, b = (project.profiles[pid] for pid in surface.source_profile_ids())
+        matrix = project._surface_matrix(surface.id)
+        vertices, raw, normals, sources, triangles, triangle_sources, boundary = (
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+        )
+        solver_patches = result.get("solver", {}).get("patches", [])
+        patch_normals = []
+        for index, reference in enumerate(surface.params["correspondences"]):
+            ca, cb = (
+                source_curve(a, a.segment(reference["first_segment_id"])),
+                source_curve(b, b.segment(reference["second_segment_id"])),
+            )
+            ts = (
+                solver_patches[index]["parameters"]
+                if solver_patches
+                else np.linspace(0, 1, 33).tolist()
+            )
+            first, second = [], []
+            offset = len(vertices)
+            for t in ts:
+                ta = reference["first_interval"][0] + t * (
+                    reference["first_interval"][1] - reference["first_interval"][0]
+                )
+                tb = reference["second_interval"][0] + t * (
+                    reference["second_interval"][1] - reference["second_interval"][0]
+                )
+                pa, pb = a.plane.world([evaluate(ca, ta)])[0], b.plane.world([evaluate(cb, tb)])[0]
+                da, db = np.asarray(derivative(ca, ta)), np.asarray(derivative(cb, tb))
+                da = (da[0] * np.asarray(a.plane.u) + da[1] * np.asarray(a.plane.v)) * (
+                    reference["first_interval"][1] - reference["first_interval"][0]
+                )
+                db = (db[0] * np.asarray(b.plane.u) + db[1] * np.asarray(b.plane.v)) * (
+                    reference["second_interval"][1] - reference["second_interval"][0]
+                )
+                for v in (0.0, 1.0):
+                    point = (1 - v) * pa + v * pb
+                    normal = np.cross((1 - v) * da + v * db, pb - pa)
+                    length = np.linalg.norm(normal)
+                    normal = normal / length if length &gt; 0 else np.zeros(3)
+                    transformed = matrix[:3, :3] @ point + matrix[:3, 3]
+                    raw.append(point)
+                    vertices.append(transformed.tolist())
+                    normals.append((matrix[:3, :3] @ normal).tolist())
+                    sources.append(
+                        {
+                            "feature_id": surface.id,
+                            "patch_id": reference["id"],
+                            "u": t,
+                            "v": v,
+                            "first_profile_id": a.id,
+                            "second_profile_id": b.id,
+                            "first_segment_id": ca.segment_id,
+                            "second_segment_id": cb.segment_id,
+                            "first_parameter": ta,
+                            "second_parameter": tb,
+                        }
+                    )
+                    (first if v == 0 else second).append(transformed.tolist())
+            for i in range(len(ts) - 1):
+                for face in (
+                    [offset + 2 * i, offset + 2 * i + 2, offset + 2 * i + 1],
+                    [offset + 2 * i + 1, offset + 2 * i + 2, offset + 2 * i + 3],
+                ):
+                    triangles.append(face)
+                    triangle_sources.append(
+                        {
+                            "feature_id": surface.id,
+                            "patch_id": reference["id"],
+                            "uv": [[sources[j]["u"], sources[j]["v"]] for j in face],
+                        }
+                    )
+            planar_patch = result["status"] == "EXACT" and ca.kind == cb.kind == "line"
+            patch_normals.append(
+                {
+                    "patch_id": reference["id"],
+                    "vertex_range": [offset, len(vertices)],
+                    "normal_scope": "TRUE_SOURCE_DERIVATIVE_AT_EACH_VERTEX",
+                    "planar_patch": planar_patch,
+                    "constant_normal": normals[offset] if planar_patch else None,
+                }
+            )
+            for side, chain in (("first", first), ("second", second)):
+                for i, (p, q) in enumerate(zip(chain, chain[1:])):
+                    boundary.append(
+                        {
+                            "id": reference[side + "_segment_id"],
+                            "start": p,
+                            "end": q,
+                            "source": {
+                                "feature_id": surface.id,
+                                "patch_id": reference["id"],
+                                "profile_id": a.id if side == "first" else b.id,
+                                "role": side.upper(),
+                                "u_interval": [ts[i], ts[i + 1]],
+                            },
+                        }
+                    )
+            boundary.append(
+                {
+                    "id": reference["ruling_id"],
+                    "start": first[0],
+                    "end": second[0],
+                    "source": {
+                        "feature_id": surface.id,
+                        "patch_id": reference["id"],
+                        "role": "SEAM_START" if index == 0 else "CONSTRUCTION_RULING",
+                        "paired_ruling_id": surface.params["end_ruling_id"]
+                        if index == 0 and a.closed
+                        else None,
+                    },
+                }
+            )
+            if index == len(surface.params["correspondences"]) - 1:
+                boundary.append(
+                    {
+                        "id": surface.params["end_ruling_id"],
+                        "start": first[-1],
+                        "end": second[-1],
+                        "source": {
+                            "feature_id": surface.id,
+                            "patch_id": reference["id"],
+                            "role": "SEAM_END",
+                            "paired_ruling_id": surface.params["correspondences"][0]["ruling_id"]
+                            if a.closed
+                            else None,
+                        },
+                    }
+                )
+        actual = np.asarray(vertices)
+        raw = np.asarray(raw)
+        if not np.isfinite(actual).all():
+            raise ValidationError("Umístění loftu dává nekonečnou geometrii.")
+        source_areas, actual_areas = [], []
+        for face in triangles:
+            p, q, r = raw[face]
+            x, y, z = actual[face]
+            source_areas.append(math.hypot(*np.cross(q - p, r - p)) / 2 * project.scale**2)
+            actual_areas.append(math.hypot(*np.cross(y - x, z - x)) / 2 * project.scale**2)
+            for i, j in ((0, 1), (1, 2), (2, 0)):
+                expected = math.dist(raw[face[i]], raw[face[j]]) * project.scale
+                value = math.dist(actual[face[i]], actual[face[j]]) * project.scale
+                if abs(value - expected) &gt; max(0.01, 1e-6 * expected):
+&gt;                   raise ValidationError("Umístění loftu ztrácí délkovou přesnost modelu.")
+E                   archpapercraft.authoring.errors.ValidationError: Umístění loftu ztrácí délkovou přesnost modelu.
+
+src\archpapercraft\authoring\loft_surface.py:893: ValidationError</failure></testcase></testsuite></testsuites>
