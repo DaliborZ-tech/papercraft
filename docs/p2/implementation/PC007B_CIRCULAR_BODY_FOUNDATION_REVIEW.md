@@ -62,3 +62,6 @@ derivative/frame inputs a actual A packet; jeho vlastní scope výslovně řík�
 že nejde o kontakt/kolizi/strain certifikát. Bez následného transferu nesmí
 kompozice získat CLEAR pouze z polohové chyby. Původní34/154/35 autorovy běhy
 nejsou zde sečteny ani zpětně vydány za reviewerovy; rozhodné opakování je46.
+Autorovy lokální `Cbody-targeted-run01/02.xml`, `Cbody-final-API-run03.xml` a
+checkpoint `Cbody-f793346-checkpoint.json` byly následně beze změny překopírovány
+z Windows Temp do evidence tohoto review. Nejde o další testové běhy.
