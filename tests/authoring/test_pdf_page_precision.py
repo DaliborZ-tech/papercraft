@@ -11,9 +11,9 @@ from archpapercraft.exporter.curve_output_validation import read_pdf_cut_regions
 
 
 def test_a4_portrait_and_landscape_actual_page_boxes_do_not_translate_material(
-    shared_snapshot, tmp_path,
+    request, tmp_path,
 ):
-    snapshot = shared_snapshot
+    snapshot = request.getfixturevalue("shared_snapshot")
     export_all(snapshot, tmp_path / "bundle")
     pdf = tmp_path / "bundle" / "model.pdf"
     # Preserve original decimal lexemes, before PDF library float conversion.
