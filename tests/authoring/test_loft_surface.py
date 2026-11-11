@@ -647,6 +647,7 @@ def test_schema_three_copy_adapter_rejects_capabilities_it_never_defined(new_cap
         p.add_loft(a, b, correspondences=refs(p, a, b))
     data = p.to_dict()
     data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
+    data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     with pytest.raises(ProjectFormatError, match="Starší formát"):
         AuthorProject.from_dict(data)
 
@@ -659,6 +660,7 @@ def test_schema_three_copy_adapter_still_preserves_known_planar_sources_and_layo
     p.set_placement(pid, p.pages[0].id, 60, 60, 30, position_locked=True, rotation_locked=True)
     data = p.to_dict()
     data.update(schema_version=3, writer_version="0.3.0-pc006b-clearance-experimental")
+    data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     restored = AuthorProject.from_dict(data)
     assert restored.profiles == p.profiles and restored.surfaces == p.surfaces
     assert restored.parts[pid].frame == p.parts[pid].frame

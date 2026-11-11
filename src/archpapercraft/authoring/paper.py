@@ -477,14 +477,6 @@ def validate_layout(project):
     # This is representation uncertainty, never a physical clearance claim.
     from archpapercraft.precision import PDF_DIGITAL_BUDGET_MM
 
-    curved_material = any(
-        segment.kind != "line"
-        for surface in project.surfaces.values()
-        for pid in surface.source_profile_ids()
-        if pid in project.profiles
-        for segment in project.profiles[pid].segments
-    )
-
     def issue(code, message, parts=(), severity="error", joint_id=None, evidence=None):
         issue_id = digest([code, sorted(parts), joint_id])[:24]
         relevant = {}
@@ -527,6 +519,20 @@ def validate_layout(project):
     ) as exc:
         issue("INVALID_PROJECT", f"Projekt obsahuje neplatnou vazbu nebo geometrii: {exc}")
         return issues
+    for variant_id, variant in project.segmented_variants.items():
+        if variant.print_selected:
+            status = project.segmented_variant_status(variant_id)
+            if status["status"] != "APPROXIMATE":
+                issue("SEGMENTED_VARIANT_" + status["status"], status["message"],
+                      tuple(status["material_part_ids"]), evidence=status)
+    project = project.print_material_view()
+    curved_material = any(
+        segment.kind != "line"
+        for surface in project.surfaces.values()
+        for pid in surface.source_profile_ids()
+        if pid in project.profiles
+        for segment in project.profiles[pid].segments
+    )
     for pid, part in project.parts.items():
         loft = next(
             (sid for sid in part.surface_ids if project.surfaces[sid].kind == "ruled_loft"), None

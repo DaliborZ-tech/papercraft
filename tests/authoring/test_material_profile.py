@@ -75,6 +75,7 @@ def test_known_prior_b_draft_is_only_saved_as_copy_and_gets_no_measured_material
     data = project.to_dict()
     del data["material_profile"]
     data.update(schema_version=2, writer_version="0.3.0-pc006b-experimental")
+    data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     original = tmp_path / "earlier-B.apcraft"
     original.write_text(json.dumps(data), encoding="utf8")
     original_bytes = original.read_bytes()

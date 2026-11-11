@@ -48,6 +48,7 @@ def legacy_a_document():
     )
     data = p.to_dict()
     data.update(schema_version=1, writer_version="0.3.0-experimental")
+    data.pop("segmented_variants")  # Reconstruct the historical format envelope.
     del data["attachments"], data["next_attachment_number"], data["material_profile"]
     return data, sid
 

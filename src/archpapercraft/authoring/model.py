@@ -216,6 +216,29 @@ class Placement:
 
 
 @dataclass
+class SegmentedVariant:
+    """One immutable derived generation; only print selection is mutable.
+
+    Source/certificate/triangle provenance are validated against the canonical
+    bounded method on load. Editing a live source invalidates its confirmation;
+    author placements remain independent and are never silently regenerated.
+    """
+
+    id: str
+    name: str
+    target_surface_id: str
+    source_binding: dict
+    source_fingerprint: str
+    parameters: dict
+    certificate: dict
+    triangle_bindings: list
+    paired_seams: list
+    generation_digest: str
+    previous_variant_id: str | None = None
+    print_selected: bool = True
+
+
+@dataclass
 class Joint:
     id: str
     surface_a: str
