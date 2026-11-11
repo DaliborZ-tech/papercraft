@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="3.801" timestamp="2026-11-11T17:09:34.623397+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007b-curved-ui-review-own" name="test_slot_toggle_label_matches_authored_override_and_does_not_change_print_eligibility[outside_count]" time="2.009"><failure message="AssertionError: ('Zapnout vybranou chlopeň', {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '95e01618-78e5-4bb9-9fd0-bd992c0d5074': {'enabled': False}})&#10;assert False == True&#10; +  where False = &lt;built-in method get of dict object at 0x000002C4EC7DC180&gt;('enabled', True)&#10; +    where &lt;built-in method get of dict object at 0x000002C4EC7DC180&gt; = {'enabled': False}.get&#10;[+3 more lines; full report in element text]">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x2c4c7bb2a30) at 0x000002C4E997C8C0&gt;
+positive = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...'8eb72020-1464-44eb-9ce2-e9f6acef6297', '34e56448-09b8-45d8-9dcc-0cd2c37afa3a', 'bc2f6b93-8624-49c7-86cc-7155b394cccd')
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002C4E71DCB90&gt;
+reason = 'outside_count'
+
+    @pytest.mark.parametrize('reason',['outside_count','whole_set_disabled'])
+    def test_slot_toggle_label_matches_authored_override_and_does_not_change_print_eligibility(window,positive,qtbot,reason):
+     p,owner,_receiver=restore(positive[:3]);cid=positive[3];record=p.curved_connectors[cid]
+     index=10 if reason=='outside_count' else 2;slot=record.slot_ids[index]
+     if reason=='outside_count':p.update_curved_connector(cid,count=8)
+     else:p.update_curved_connector(cid,enabled=False)
+     window.controller.project=p;window.refresh();window.select_surface(owner)
+     panel=window.curved_panel;panel.sets.setCurrentIndex(panel.sets.findData(cid));panel.tabs.setCurrentIndex(panel.tabs.findData(slot))
+     count,enabled=record.parameters['count'],record.enabled
+     if not panel.toggle.isEnabled():return
+     text=panel.toggle.text();assert text.startswith(('Zapnout','Vypnout'))
+     requested_enabled=text.startswith('Zapnout')
+     panel.toggle.click()
+     actual=p.curved_connectors[cid]
+     assert actual.parameters['count']==count and actual.enabled==enabled
+&gt;    assert actual.tab_overrides.get(slot,{}).get('enabled',True)==requested_enabled,(text,actual.tab_overrides)
+E    AssertionError: ('Zapnout vybranou chlopeň', {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '95e01618-78e5-4bb9-9fd0-bd992c0d5074': {'enabled': False}})
+E    assert False == True
+E     +  where False = &lt;built-in method get of dict object at 0x000002C4EC7DC180&gt;('enabled', True)
+E     +    where &lt;built-in method get of dict object at 0x000002C4EC7DC180&gt; = {'enabled': False}.get
+E     +      where {'enabled': False} = &lt;built-in method get of dict object at 0x000002C4EBEEB5C0&gt;('95e01618-78e5-4bb9-9fd0-bd992c0d5074', {})
+E     +        where &lt;built-in method get of dict object at 0x000002C4EBEEB5C0&gt; = {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '95e01618-78e5-4bb9-9fd0-bd992c0d5074': {'enabled': False}}.get
+E     +          where {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '95e01618-78e5-4bb9-9fd0-bd992c0d5074': {'enabled': False}} = CurvedConnector(id='bc2f6b93-8624-49c7-86cc-7155b394cccd', name='Dělené kruhové chlopně', owner_surface_id='8eb72020-1...160fbdd-0455-495e-9681-d9b7c08961f6', '95e01618-78e5-4bb9-9fd0-bd992c0d5074', '3a66a6df-02ab-4358-94e0-2cee1e6d74c8']}).tab_overrides
+
+docs\p2\implementation\evidence\pc007b-curved-ui-review-own.py:109: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="docs.p2.implementation.evidence.pc007b-curved-ui-review-own" name="test_slot_toggle_label_matches_authored_override_and_does_not_change_print_eligibility[whole_set_disabled]" time="0.791"><failure message="AssertionError: ('Zapnout vybranou chlopeň', {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '74e15012-445b-4b57-b415-16af0084239e': {'enabled': False}})&#10;assert False == True&#10; +  where False = &lt;built-in method get of dict object at 0x000002C4EBC37140&gt;('enabled', True)&#10; +    where &lt;built-in method get of dict object at 0x000002C4EBC37140&gt; = {'enabled': False}.get&#10;[+3 more lines; full report in element text]">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x2c4e8c6e120) at 0x000002C4EBCE4E80&gt;
+positive = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 6, 'status': 'experimental', 'writer_version': '0.3...'8eb72020-1464-44eb-9ce2-e9f6acef6297', '34e56448-09b8-45d8-9dcc-0cd2c37afa3a', 'bc2f6b93-8624-49c7-86cc-7155b394cccd')
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000002C4EBDDD8E0&gt;
+reason = 'whole_set_disabled'
+
+    @pytest.mark.parametrize('reason',['outside_count','whole_set_disabled'])
+    def test_slot_toggle_label_matches_authored_override_and_does_not_change_print_eligibility(window,positive,qtbot,reason):
+     p,owner,_receiver=restore(positive[:3]);cid=positive[3];record=p.curved_connectors[cid]
+     index=10 if reason=='outside_count' else 2;slot=record.slot_ids[index]
+     if reason=='outside_count':p.update_curved_connector(cid,count=8)
+     else:p.update_curved_connector(cid,enabled=False)
+     window.controller.project=p;window.refresh();window.select_surface(owner)
+     panel=window.curved_panel;panel.sets.setCurrentIndex(panel.sets.findData(cid));panel.tabs.setCurrentIndex(panel.tabs.findData(slot))
+     count,enabled=record.parameters['count'],record.enabled
+     if not panel.toggle.isEnabled():return
+     text=panel.toggle.text();assert text.startswith(('Zapnout','Vypnout'))
+     requested_enabled=text.startswith('Zapnout')
+     panel.toggle.click()
+     actual=p.curved_connectors[cid]
+     assert actual.parameters['count']==count and actual.enabled==enabled
+&gt;    assert actual.tab_overrides.get(slot,{}).get('enabled',True)==requested_enabled,(text,actual.tab_overrides)
+E    AssertionError: ('Zapnout vybranou chlopeň', {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '74e15012-445b-4b57-b415-16af0084239e': {'enabled': False}})
+E    assert False == True
+E     +  where False = &lt;built-in method get of dict object at 0x000002C4EBC37140&gt;('enabled', True)
+E     +    where &lt;built-in method get of dict object at 0x000002C4EBC37140&gt; = {'enabled': False}.get
+E     +      where {'enabled': False} = &lt;built-in method get of dict object at 0x000002C4EC00ABC0&gt;('74e15012-445b-4b57-b415-16af0084239e', {})
+E     +        where &lt;built-in method get of dict object at 0x000002C4EC00ABC0&gt; = {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '74e15012-445b-4b57-b415-16af0084239e': {'enabled': False}}.get
+E     +          where {'bb36466f-75be-49cb-ae1f-d207f3890e18': {'enabled': False}, 'ffc50bd4-84fc-41d9-a5e2-d6ec8af6bdb2': {'tip_offset_mm': 0.01}, '74e15012-445b-4b57-b415-16af0084239e': {'enabled': False}} = CurvedConnector(id='bc2f6b93-8624-49c7-86cc-7155b394cccd', name='Dělené kruhové chlopně', owner_surface_id='8eb72020-1...160fbdd-0455-495e-9681-d9b7c08961f6', '95e01618-78e5-4bb9-9fd0-bd992c0d5074', '3a66a6df-02ab-4358-94e0-2cee1e6d74c8']}).tab_overrides
+
+docs\p2\implementation\evidence\pc007b-curved-ui-review-own.py:109: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support propagateSizeHints()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support raise()
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase></testsuite></testsuites>
