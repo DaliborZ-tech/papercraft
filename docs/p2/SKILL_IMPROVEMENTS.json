@@ -542,6 +542,45 @@
         "status": "NOT_RUN",
         "ticket": "PC-008 derived segmentation persistence"
       }
+    },
+    {
+      "id": "SK-013",
+      "changed_on": "2026-11-11",
+      "skill": "papercraft-authoring-ui",
+      "reason": {
+        "source": "docs/p2/implementation/PC008_UI_REVIEW.md",
+        "problem": "DU01: generation combo named a new context while an inactive child of another generation remained selected in tree/properties/3D"
+      },
+      "cause": {
+        "status": "REPRODUCED",
+        "mechanism": "choose_generation changed selected_generation and labels without changing the owner of selected_surface",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc008-ui-review-own-selection-ea03025.xml"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED_IN_COMPONENT_SCOPE",
+        "source_sha": "1f677efbb38d7c586146990f0d8c3ad112515bc9",
+        "description": "Changing generation moves selection to the retained target and synchronizes context/tree/properties/3D, preserving print_selected and project data"
+      },
+      "skill_change": "Synchronize context and subordinate selection ownership; changing a label does not repair an inconsistent active tool context",
+      "usage_example": "A generation choice selects its retained target, clears previous edge/vertex context and does not switch print material",
+      "verification": {
+        "status": "PRODUCT_FIX_REVIEWED; new skill advice requires metadata review",
+        "evidence": [
+          "docs/p2/implementation/PC008_UI_REVIEW.md",
+          "docs/p2/implementation/evidence/pc008-ui-review-own-1f677ef.xml"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_SKILL_TEXT_REVIEW",
+        "product_report": "docs/p2/implementation/PC008_UI_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "example": "A different context selector with subordinate material/profile selection; this repair itself is not a next-use efficacy proof"
+      }
     }
   ]
 }
