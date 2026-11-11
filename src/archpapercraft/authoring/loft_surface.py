@@ -44,7 +44,7 @@ from .model import (
 )
 from .profile_curves import source_curve
 
-LOFT_PAPER_CONTRACT = "ANALYTIC_SIGNED_CREASES_INTRINSIC_AREA_CIRCULAR_NATIVE_A_L_V5"
+LOFT_PAPER_CONTRACT = "ANALYTIC_CIRCULAR_BODY_CURVED_MATERIAL_SOURCE_UNION_V6"
 
 _PARAMS = {
     "second_profile_id",
@@ -453,7 +453,7 @@ def _native_area_cached(commands, max_commands):
     return native_region_area_bounds([commands], max_commands=max_commands)
 
 
-def _area_check(source, commands, max_commands):
+def _area_check(source, commands, max_commands, *, relative_basis=None):
     """Independent source vs actual binary native material, in paper square mm."""
     low, high = Fraction(source["area_lower_exact"]), Fraction(source["area_upper_exact"])
     if low <= 0 or high < low:
@@ -462,7 +462,8 @@ def _area_check(source, commands, max_commands):
         tuple(tuple(command) for command in commands), max_commands
     )
     error = max(abs(actual_low - high), abs(actual_high - low))
-    allowed = max(Fraction(1, 100), low / 1000000)
+    basis = low if relative_basis is None else Fraction(relative_basis["area_lower_exact"])
+    allowed = max(Fraction(1, 100), basis / 1000000)
     return {
         "status": "CERTIFIED" if error <= allowed else "UNRESOLVED",
         "source_intrinsic": copy.deepcopy(source),
@@ -474,6 +475,9 @@ def _area_check(source, commands, max_commands):
         "proof": "INDEPENDENT_INTRINSIC_AREA_VS_ACTUAL_NATIVE_GREEN_INTEGRAL_INTERVALS",
         "tolerance_scope": "MAX_0.01_PAPER_MM2_OR_1E-6_INTRINSIC_AREA_LOWER_BOUND",
         "max_commands": max_commands,
+        **({"relative_area_basis": "BODY_ONLY",
+            "relative_area_basis_source": copy.deepcopy(relative_basis)}
+           if relative_basis is not None else {}),
         "serialized_output": "NOT_VERIFIED",
     }
 
@@ -921,13 +925,20 @@ def material_envelopes(project, part, *, output_error_mm=0):
         # Analytic native A has a direct source proof, independent of the
         # display chords. Material queries need BOTH distances via the source.
         error += result["solver"]["representation_error_bound_paper_mm"]
+    composed = getattr(part, "_circular_material_report", None)
+    if composed is not None:
+        error += composed["proxy_extra_error_mm"]
     chords = [(tuple(a), tuple(b), error) for a, b in zip(loop, loop[1:] + loop[:1])]
     source_ids = tuple(
         r[side + "_segment_id"]
         for r in surface.params["correspondences"]
         for side in ("first", "second")
     )
-    return _result(Polygon(loop), chords, result["source_digest"], source_ids)
+    if composed is not None:
+        source_ids += tuple(composed["active_tab_ids"])
+    return _result(Polygon(loop), chords,
+                   composed["inputs_digest"] if composed is not None else result["source_digest"],
+                   source_ids)
 
 
 def has_small_loft_detail(project, part):
@@ -1155,6 +1166,25 @@ def build_loft_part(project, old_part):
     part.frame = copy.deepcopy(old_part.frame)
     for field, value in geometry.items():
         setattr(part, field, value)
+    if hasattr(part, "_circular_material_report"):
+        del part._circular_material_report
+    inputs_method = getattr(project, "curved_connector_inputs", None)
+    inputs = inputs_method(surface.id) if inputs_method is not None else {}
+    if inputs:
+        active = any(record.get("enabled") and record.get("owner_surface_id") == surface.id
+                     for record in inputs.get("curved_connectors", {}).values())
+        callback = getattr(project, "compose_curved_connector_material", None)
+        if active and callback is None:
+            raise ValidationError("CURVED_MATERIAL_UNRESOLVED: chybí kanonická kompozice chlopní.")
+        if callback is not None:
+            part = callback(surface.id, part)
+            if (part.id != old_part.id or part.surface_ids != old_part.surface_ids or
+                    part.frame != old_part.frame or part.front_side != old_part.front_side):
+                raise ValidationError(
+                    "Kompozice chlopní změnila zdrojovou identitu nebo kotvu dílu.")
+            if active and not hasattr(part, "_circular_material_report"):
+                raise ValidationError(
+                    "CURVED_MATERIAL_UNRESOLVED: chybí úplný důkaz materiálové unie.")
     from .paper import part_input
 
     part.input_digest = part_input(project, part)
@@ -1342,17 +1372,27 @@ class LoftCommands:
         part = self.parts[surface.part_id]
         stale = part.stale or part.input_digest != part_input(self, part)
         frame_area, frame_topology, frame_failure = None, None, {}
+        input_method = getattr(self, "curved_connector_inputs", None)
+        curved_inputs = input_method(surface_id) if input_method is not None else {}
+        curved_material = None
         if result["status"] == "EXACT" and not stale:
             try:
+                if curved_inputs:
+                    canonical = build_loft_part(self, part)
+                    curved_material = getattr(canonical, "_circular_material_report", None)
                 frame_topology = _native_topology(part.paths["CUT"][0]["commands"])
                 if frame_topology["status"] != "VALID":
                     raise ValueError("Uložený skutečný obrys nemá doloženou topologii.")
                 frame_area = _area_check(
+                    curved_material["source_material_area"] if curved_material is not None else
                     result["area"]["source_intrinsic"],
                     part.paths["CUT"][0]["commands"],
                     result["area"]["max_commands"],
+                    relative_basis=(result["area"]["source_intrinsic"]
+                                    if curved_material is not None else None),
                 )
-            except (ValueError, ArithmeticError, TypeError, KeyError, IndexError) as exc:
+            except (ValidationError, ValueError, ArithmeticError,
+                    TypeError, KeyError, IndexError) as exc:
                 frame_area = {"status": "UNRESOLVED", "message": str(exc)}
             if frame_area["status"] != "CERTIFIED":
                 frame_failure = {
@@ -1371,12 +1411,14 @@ class LoftCommands:
                 "paper_contract": LOFT_PAPER_CONTRACT,
                 "paper_frame_area": frame_area,
                 "paper_frame_topology": frame_topology,
+                **({"curved_material": curved_material} if curved_material is not None else {}),
                 "source_binding": {
                     "profiles": [
                         asdict(self.profiles[pid]) for pid in surface.source_profile_ids()
                     ],
                     "surface": asdict(surface),
                     "scale": self.scale,
+                    **({"curved_material_inputs": curved_inputs} if curved_inputs else {}),
                 },
                 **{
                     key: value
