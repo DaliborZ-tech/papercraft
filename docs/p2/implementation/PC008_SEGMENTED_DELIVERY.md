@@ -1,6 +1,6 @@
 # D a gotické B3 — digitální přírůstek řízené aproximace
 
-11.11.2026. Ověřený **CODE `e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea`**. Odvozený materiál nyní projde skutečnou aplikací až po oba vektorové výstupy; původní hladký cíl zůstává uložený a není falešně označen EXACT. Finální nezávislá integrační revize a publikace tohoto přírůstku jsou při zápisu pending. Celé PC-008/P2, nové lidské použití a fyzické sestavení tím nejsou dokončené.
+11.11.2026. Ověřený **CODE `e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea`**. Odvozený materiál nyní projde skutečnou aplikací až po oba vektorové výstupy; původní hladký cíl zůstává uložený a není falešně označen EXACT. [Finální nezávislá revize](PC008_INTEGRATION_REVIEW.md) schválila tento D/B3 technický přírůstek bez otevřených nálezů; [integrace a publikace](PC008_INTEGRATION.md) evidují skutečný následný stav. Celé PC-008/P2, nové lidské použití a fyzické sestavení tím nejsou dokončené.
 
 ## Výsledek pro autora
 
@@ -37,4 +37,4 @@ Formát5 je experimentální autorská doména; známé starší autorské form�
 
 ## Co zůstává otevřené
 
-Finální integrační review musí spojit právě tento CODE, nové skutečné artefakty a metadata, včetně opravy čitelných označení DU02; komponentové revize jej nenahrazují. Celé PC-008 ještě vyžaduje aplikační split/merge provenance a povinné změny společného dílu/trimů. C těla a dělené chlopně, výrobní/klávesnicová/DPI konsolidace PC-009 a závěrečný vlastní historický model PC-010 zůstávají v autorizovaném rozsahu. **AC-US08:0 nových účastníků / NOT_RUN; fyzický výtisk a sestavení P3 / NOT_RUN.** Technický GUI průchod ani matematika tyto důkazy nenahrazují. Aktuální stav a další autonomní práce: [queue](../../../05_WORK_QUEUE.json).
+Finální integrační review spojilo právě tento CODE, nové skutečné artefakty a metadata a uzavřelo opravu čitelných označení DU02. Celé PC-008 ještě vyžaduje aplikační split/merge provenance a povinné změny společného dílu/trimů. C těla a dělené chlopně, výrobní/klávesnicová/DPI konsolidace PC-009 a závěrečný vlastní historický model PC-010 zůstávají v autorizovaném rozsahu. **AC-US08:0 nových účastníků / NOT_RUN; fyzický výtisk a sestavení P3 / NOT_RUN.** Technický GUI průchod ani matematika tyto důkazy nenahrazují. Aktuální stav a další autonomní práce: [queue](../../../05_WORK_QUEUE.json).
