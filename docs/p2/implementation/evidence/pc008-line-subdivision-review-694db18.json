@@ -1,0 +1,35 @@
+{
+  "source_sha": "694db185873f9f0ff962af009873167bc229347a",
+  "archive_sha256": "d8a38842a70cafad86e1392f4770c6afa0d7da45340a17ae6d4499164a271124",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-mgst6k24",
+  "actual_imports": {
+    "archpapercraft.authoring.curve_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-mgst6k24\\src\\archpapercraft\\authoring\\curve_subdivision.py",
+      "sha256_lf": "4d674d769e89c2b4d826c6fe1bb9a685e8414012ae55143c3219f1e76c0d6ad2"
+    },
+    "archpapercraft.authoring.profile_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-mgst6k24\\src\\archpapercraft\\authoring\\profile_subdivision.py",
+      "sha256_lf": "29b98b29a5579b2d05818ac8453a1d1f41ea303c8b040ba430acb159820c77fc"
+    },
+    "archpapercraft.authoring.project": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-mgst6k24\\src\\archpapercraft\\authoring\\project.py",
+      "sha256_lf": "0d3952f38b3d0336b4f959867413beb0c0e1ac8e1a95fdc41c438108268f30a3"
+    },
+    "archpapercraft.ui.author_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-subdivision-review-mgst6k24\\src\\archpapercraft\\ui\\author_subdivision.py",
+      "sha256_lf": "4dbec130f305925ea126ccf3f93085057ddc4dee749ad44459f45d6991811485"
+    }
+  },
+  "runs": {
+    "original": {
+      "returncode": 0,
+      "stdout": "........................................................................ [ 80%]\n.................                                                        [100%]\n89 passed in 3.96s\n",
+      "stderr": ""
+    },
+    "own": {
+      "returncode": 1,
+      "stdout": "......................F                                                  [100%]\n================================== FAILURES ===================================\n___ test_closed_polygon_topology_only_split_preserves_original_area_budget ____\n\n    def test_closed_polygon_topology_only_split_preserves_original_area_budget():\n     p=AuthorProject.new(scale=1/1024)\n     pid=p.add_profile([[1e16,0],[1e16+2,2**20],[1e16+4,0]])\n     before=p.to_dict();profile=p.profiles[pid]\n     def exact_area():\n      points=[tuple(map(F,v.point)) for v in profile.vertices]\n      return abs(sum(a[0]*b[1]-a[1]*b[0] for a,b in zip(points,points[1:]+points[:1])))*F(p.scale)**2/2\n     old=exact_area();assert old==2\n     try:p.split_profile_segment(pid,profile.segments[0].id,F(1,4))\n     except ValidationError:\n      assert p.to_dict()==before;return\n     actual=exact_area()\n>    assert abs(actual-old)<=max(F(1,100),old/1000000),dict(source_area=str(old),actual_area=str(actual),delta=str(actual-old))\nE    AssertionError: {'source_area': '2', 'actual_area': '9/4', 'delta': '1/4'}\nE    assert Fraction(1, 4) <= Fraction(1, 100)\nE     +  where Fraction(1, 4) = abs((Fraction(9, 4) - Fraction(2, 1)))\nE     +  and   Fraction(1, 100) = max(Fraction(1, 100), (Fraction(2, 1) / 1000000))\nE     +    where Fraction(1, 100) = F(1, 100)\n\n..\\..\\..\\..\\projects\\papercraft-profile-subdivision-review\\docs\\p2\\implementation\\evidence\\pc008-line-subdivision-review-own.py:224: AssertionError\n=========================== short test summary info ===========================\nFAILED ::test_closed_polygon_topology_only_split_preserves_original_area_budget\n1 failed, 22 passed in 2.62s\n",
+      "stderr": ""
+    }
+  }
+}

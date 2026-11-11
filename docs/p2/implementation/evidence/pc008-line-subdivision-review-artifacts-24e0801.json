@@ -1,0 +1,138 @@
+{
+  "status": "PASS_LINE_TECHNICAL_INCREMENT_ARTIFACT_AUDIT_NOT_WHOLE_AU13_P2",
+  "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+  "metadata_sha": "93f650c4a22a9d1dffd3b65c69f4b9505d5889f7",
+  "archive_sha256": "fe8bc01b5bfe72f4b11be06490ac87a3690f73db9cd6dbdd8a62322621faadc0",
+  "archive_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-artifact-review-8aoe220g",
+  "actual_imports": {
+    "archpapercraft.authoring.profile_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-artifact-review-8aoe220g\\src\\archpapercraft\\authoring\\profile_subdivision.py",
+      "lf_sha256": "9de550ff06bf633328dc1cd63a80bca17f8632b8556bd40824fdab6e4f8f3971"
+    },
+    "archpapercraft.authoring.curve_subdivision": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-artifact-review-8aoe220g\\src\\archpapercraft\\authoring\\curve_subdivision.py",
+      "lf_sha256": "4d674d769e89c2b4d826c6fe1bb9a685e8414012ae55143c3219f1e76c0d6ad2"
+    },
+    "archpapercraft.exporter.curve_output_validation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-line-artifact-review-8aoe220g\\src\\archpapercraft\\exporter\\curve_output_validation.py",
+      "lf_sha256": "0068af233691b170437bc86a56eb5c1a10d999964cf363e1b51f9b9bf68994bc"
+    }
+  },
+  "runtime_identical": true,
+  "source_hashes": 119,
+  "artifact_hashes": 22,
+  "native_seconds": 32.734,
+  "actual_native_dialogs": 3,
+  "histories": [
+    {
+      "root": "4b59e907-58a6-441e-9dd1-e394fd8745ca",
+      "event_kinds": [
+        "split",
+        "merge",
+        "split"
+      ],
+      "active_intervals": {
+        "6007cd74-b57f-4808-ae76-88c461bae490": [
+          "0",
+          "5404319552844595/9007199254740992"
+        ],
+        "3cf0dd56-3dfb-4250-87c0-25e9fd752ab3": [
+          "5404319552844595/9007199254740992",
+          "1"
+        ]
+      }
+    },
+    {
+      "root": "65c4c660-2bb4-4405-8929-2a1dff951714",
+      "event_kinds": [
+        "split"
+      ],
+      "active_intervals": {
+        "182bbb5d-49b9-4637-afbb-bb3f1a2c590b": [
+          "0",
+          "1/4"
+        ],
+        "afe92419-4eaa-4675-a44d-409a9e6e13a2": [
+          "1/4",
+          "1"
+        ]
+      }
+    }
+  ],
+  "areas": {
+    "a98bbd27-13d1-4f31-b52b-565277beda30": {
+      "source_area_interval": [
+        "876977222864644365500113714088139657862340252436123200400387610272133551/100000000000000000000000000000000000000000000000000000000000000000000",
+        "54811076429040272843757107130508728616396265777257700025024225642008347/6250000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "svg_area_exact": "8769772229/1000000",
+      "pdf_area_exact": "6937026679687501798814181107609007205781522751034383942006355248493897806191/791015625000000000000000000000000000000000000000000000000000000000000000",
+      "svg_error_upper": 3.535563449988629e-07,
+      "pdf_error_upper": 0.0002286464413809447
+    },
+    "8fc429dc-f2b5-4c73-af91-6ba09f622a01": {
+      "source_area_interval": [
+        "13000",
+        "13000"
+      ],
+      "svg_area_exact": "13000",
+      "pdf_area_exact": "4113281250000000862875000000000045253/316406250000000000000000000000000",
+      "svg_error_upper": 0.0,
+      "pdf_error_upper": 2.727111111111111e-12
+    }
+  },
+  "editors": [
+    {
+      "page": 1,
+      "elapsed": 15.672,
+      "artifact_hashes": 4,
+      "path_count": 1,
+      "maximum_local_drift": 0.0,
+      "origin_bytes_preserved": true,
+      "unicode_text": "Žluťoučký – vlastní díl"
+    },
+    {
+      "page": 2,
+      "elapsed": 18.015,
+      "artifact_hashes": 4,
+      "path_count": 4,
+      "maximum_local_drift": 2.9e-07,
+      "origin_bytes_preserved": true,
+      "unicode_text": "Žluťoučký – vlastní díl"
+    }
+  ],
+  "suite": {
+    "tests": 1465,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "seconds": 326.213
+  },
+  "historical_failures": [
+    {
+      "folder": "pc008-AU13-line-desktop-9b87c89-run01",
+      "status": "FAIL",
+      "source": "9b87c89e1507b1df56940e4c08d213532a5216ad",
+      "error": "ivision_case()\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\subdivision_desktop_steps.py\", line 132, in subdivision_case\n    children = self.split_line(wall, 0, 3000)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\subdivision_desktop_steps.py\", line 65, in split_line\n    self.modal(lambda: self.action(\"split_profile\"), edit)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 507, in modal\n    check(not errors, \"Dialog proof failed: \" + \"\\n\".join(errors))\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 286, in check\n    raise AssertionError(\nAssertionError: Dialog proof failed: ; unexpected dialogs=[{'kind': 'real_QMessageBox', 'title': 'Změnu nelze dokončit', 'text': ''}]\n",
+      "original_command_trace": []
+    },
+    {
+      "folder": "pc008-AU13-line-desktop-9290a01-run02",
+      "status": "FAIL",
+      "source": "9290a0156e112021d926075d05a9c6b5ca817a5c",
+      "error": "ivision_case()\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\subdivision_desktop_steps.py\", line 132, in subdivision_case\n    children = self.split_line(wall, 0, 3000)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\subdivision_desktop_steps.py\", line 65, in split_line\n    self.modal(lambda: self.action(\"split_profile\"), edit)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 507, in modal\n    check(not errors, \"Dialog proof failed: \" + \"\\n\".join(errors))\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 286, in check\n    raise AssertionError(\nAssertionError: Dialog proof failed: ; unexpected dialogs=[{'kind': 'real_QMessageBox', 'title': 'Změnu nelze dokončit', 'text': ''}]\n",
+      "original_command_trace": [
+        "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 1802, in observed_operation\n    return operation()\n           ^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\ui\\author_window.py\", line 1121, in apply\n    result = self.controller.execute(\"Rozdělit úsek obrysu\", lambda p:\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\application\\author_controller.py\", line 97, in execute\n    self.on_change()\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\ui\\author_window.py\", line 728, in refresh\n    self._set_viewport_project(frame=frame_views)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\ui\\author_window.py\", line 1020, in _set_viewport_project\n    self.viewport.set_project(self.project, frame=frame, visible_surface_ids=visible)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\ui\\author_viewport.py\", line 69, in set_project\n    self.select_relation(self.relation)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\ui\\author_viewport.py\", line 116, in select_relation\n    connector = project.connector_geometry(connector_id)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\authoring\\interior.py\", line 481, in connector_geometry\n    bend = self.connector_bend_clearance(connector_id)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\authoring\\project.py\", line 827, in connector_bend_clearance\n    return BendCommands.connector_bend_clearance(self, connector_id)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\authoring\\bend.py\", line 196, in connector_bend_clearance\n    results[connector_id] = self._check_connector_bend(connector_id)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\src\\archpapercraft\\authoring\\bend.py\", line 225, in _check_connector_bend\n    edge = next(e for e in self.world_geometry(source)[\"boundary\"] if e[\"id\"] == edge_id)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n"
+      ]
+    },
+    {
+      "folder": "pc008-AU13-line-desktop-a770f8a-run03",
+      "status": "FAIL",
+      "source": "a770f8a8bed102bcf8538d0e57e4f5659f809949",
+      "error": "\\tools\\authoring\\subdivision_desktop_steps.py\", line 179, in subdivision_case\n    self.finish(\"AU13-line\")\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 1234, in finish\n    self.audit_subdivision_vectors(directory, svgs, pdf)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\subdivision_desktop_steps.py\", line 35, in audit_subdivision_vectors\n    self.near(actual, target, \"AU13 actual SVG material area\", .01)\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 864, in near\n    check(\n  File \"C:\\Users\\dalib\\projects\\papercraft-profile-provenance\\tools\\authoring\\desktop_b_proof.py\", line 286, in check\n    raise AssertionError(\nAssertionError: Independent oracle AU13 actual SVG material area: actual=8769.772228999998, expected=8753.772228646445, tol=0.01\n",
+      "original_command_trace": []
+    }
+  ],
+  "new_user": "NOT_RUN_0",
+  "physical": "NOT_RUN_P3"
+}

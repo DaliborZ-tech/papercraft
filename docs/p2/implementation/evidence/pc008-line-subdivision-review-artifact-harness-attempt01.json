@@ -1,0 +1,12 @@
+{
+  "status": "HARNESS_ASSERTION_FAILED_NOT_PRODUCT_FAILURE",
+  "source_sha": "24e08019a711c5c7c19ca73a5ac35e5093dfb4d0",
+  "assertion": "p.snapshot()==snapshot",
+  "cause": "Python tuples in construction_checks compare unequal to serialized JSON lists; project to_dict identical and JSON-normalized snapshot exactly equals stored snapshot",
+  "repair": "Compare json.loads(json.dumps(p.snapshot(),allow_nan=False)) with stored JSON; no data mutations or relaxed numeric assertion",
+  "second_attempt": {
+    "status": "HARNESS_TYPE_ASSUMPTION_ERROR_NOT_PRODUCT_FAILURE",
+    "cause": "list(p.pages).index(page_id) assumed an ID-keyed dictionary; actual domain pages is a list of Page objects",
+    "repair": "Use [page.id for page in p.pages], exact preserved ordering/ID equality"
+  }
+}

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="10" time="0.979" timestamp="2026-11-11T15:37:00.198908+01:00" hostname="Dalibor"><testcase classname="" name="test_cubic_restriction_matches_independent_endpoint_jet_formula[a0-b0]" time="0.002" /><testcase classname="" name="test_cubic_restriction_matches_independent_endpoint_jet_formula[a1-b1]" time="0.001" /><testcase classname="" name="test_cubic_restriction_matches_independent_endpoint_jet_formula[a2-b2]" time="0.001" /><testcase classname="" name="test_nonuniform_nested_history_and_reverse_trim_affine_coordinates" time="0.001" /><testcase classname="" name="test_shared_point_is_not_a_nearest_point_after_geometry_edit" time="0.000" /><testcase classname="" name="test_retired_identity_cannot_be_reused_and_one_edge_adapter_refuses_chain" time="0.000" /><testcase classname="" name="test_large_numeric_split_does_not_claim_unchanged_straight_material" time="0.001"><failure message="Failed: DID NOT RAISE ValidationError">def test_large_numeric_split_does_not_claim_unchanged_straight_material():
+     p=AuthorProject.new(scale=1)
+     pid=p.add_profile([[1e16,0],[1e16+4,3]],closed=False)
+     old=p.profiles[pid].segments[0].id;before=p.to_dict()
+     try:result=p.split_profile_segment(pid,old,F(1,4))
+     except ValidationError:
+      assert p.to_dict()==before;return
+     actual=p.profiles[pid].vertex(result['vertex_id']).point
+     a=p.profiles[pid].vertices[0].point;b=p.profiles[pid].vertices[-1].point
+     dx,dy=map(F,(b[0]-a[0],b[1]-a[1]));x,y=F(actual[0])-F(a[0]),F(actual[1])-F(a[1])
+     cross=dx*y-dy*x
+     deviation_squared=cross*cross/(dx*dx+dy*dy)
+     if deviation_squared&gt;F(1,10000):
+&gt;     with pytest.raises(ValidationError,match='UNRESOLVED'):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E     Failed: DID NOT RAISE ValidationError
+
+..\..\..\..\projects\papercraft-profile-subdivision-review\docs\p2\implementation\evidence\pc008-line-subdivision-review-own.py:57: Failed</failure></testcase><testcase classname="" name="test_global_retired_vertex_uuid_cannot_alias_a_different_profile" time="0.040"><failure message="Failed: DID NOT RAISE ProjectFormatError">def test_global_retired_vertex_uuid_cannot_alias_a_different_profile():
+     p,records=retired_pair();raw=p.to_dict()
+     first,second=records;alias=first[3]['vertex_id'];old=second[3]['vertex_id']
+     record=raw['profile_subdivisions'][second[2]]
+     record['points'][alias]=record['points'].pop(old)
+     for ends in record['edges'].values():
+      for i,value in enumerate(ends):
+       if value==old:ends[i]=alias
+&gt;    with pytest.raises(ProjectFormatError):AuthorProject.from_dict(raw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    Failed: DID NOT RAISE ProjectFormatError
+
+..\..\..\..\projects\papercraft-profile-subdivision-review\docs\p2\implementation\evidence\pc008-line-subdivision-review-own.py:79: Failed</failure></testcase><testcase classname="" name="test_malformed_rational_history_is_typed_format_error" time="0.030"><failure message="ZeroDivisionError: Fraction(1, 0)">def test_malformed_rational_history_is_typed_format_error():
+     p,records=retired_pair();raw=p.to_dict()
+     raw['profile_subdivisions'][records[0][2]]['history']['events'][0][2]='1/0'
+&gt;    with pytest.raises(ProjectFormatError):AuthorProject.from_dict(raw)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\projects\papercraft-profile-subdivision-review\docs\p2\implementation\evidence\pc008-line-subdivision-review-own.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\project.py:1636: in from_dict
+    project.validate()
+src\archpapercraft\authoring\project.py:1015: in validate
+    all_ids.extend(self._validate_profile_subdivisions())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\profile_subdivision.py:299: in _validate_profile_subdivisions
+    history = _record_history(record)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\profile_subdivision.py:38: in _record_history
+    return CurveSubdivisionHistory.from_dict(record["history"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\curve_subdivision.py:586: in from_dict
+    result = result.split(event[1], event[2], event[3], event[4])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\curve_subdivision.py:385: in split
+    t = _parameter(parameter)
+        ^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\authoring\curve_subdivision.py:28: in _parameter
+    result = _scalar(value)
+             ^^^^^^^^^^^^^^
+src\archpapercraft\authoring\curve_area.py:99: in _scalar
+    result = Fraction(value)
+             ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = &lt;class 'fractions.Fraction'&gt;, numerator = 1, denominator = 0
+
+    def __new__(cls, numerator=0, denominator=None):
+        """Constructs a Rational.
+    
+        Takes a string like '3/2' or '1.5', another Rational instance, a
+        numerator/denominator pair, or a float.
+    
+        Examples
+        --------
+    
+        &gt;&gt;&gt; Fraction(10, -8)
+        Fraction(-5, 4)
+        &gt;&gt;&gt; Fraction(Fraction(1, 7), 5)
+        Fraction(1, 35)
+        &gt;&gt;&gt; Fraction(Fraction(1, 7), Fraction(2, 3))
+        Fraction(3, 14)
+        &gt;&gt;&gt; Fraction('314')
+        Fraction(314, 1)
+        &gt;&gt;&gt; Fraction('-35/4')
+        Fraction(-35, 4)
+        &gt;&gt;&gt; Fraction('3.1415') # conversion from numeric string
+        Fraction(6283, 2000)
+        &gt;&gt;&gt; Fraction('-47e-2') # string may include a decimal exponent
+        Fraction(-47, 100)
+        &gt;&gt;&gt; Fraction(1.47)  # direct construction from float (exact conversion)
+        Fraction(6620291452234629, 4503599627370496)
+        &gt;&gt;&gt; Fraction(2.25)
+        Fraction(9, 4)
+        &gt;&gt;&gt; Fraction(Decimal('1.47'))
+        Fraction(147, 100)
+    
+        """
+        self = super(Fraction, cls).__new__(cls)
+    
+        if denominator is None:
+            if type(numerator) is int:
+                self._numerator = numerator
+                self._denominator = 1
+                return self
+    
+            elif isinstance(numerator, numbers.Rational):
+                self._numerator = numerator.numerator
+                self._denominator = numerator.denominator
+                return self
+    
+            elif isinstance(numerator, (float, Decimal)):
+                # Exact conversion
+                self._numerator, self._denominator = numerator.as_integer_ratio()
+                return self
+    
+            elif isinstance(numerator, str):
+                # Handle construction from strings.
+                m = _RATIONAL_FORMAT.match(numerator)
+                if m is None:
+                    raise ValueError('Invalid literal for Fraction: %r' %
+                                     numerator)
+                numerator = int(m.group('num') or '0')
+                denom = m.group('denom')
+                if denom:
+                    denominator = int(denom)
+                else:
+                    denominator = 1
+                    decimal = m.group('decimal')
+                    if decimal:
+                        decimal = decimal.replace('_', '')
+                        scale = 10**len(decimal)
+                        numerator = numerator * scale + int(decimal)
+                        denominator *= scale
+                    exp = m.group('exp')
+                    if exp:
+                        exp = int(exp)
+                        if exp &gt;= 0:
+                            numerator *= 10**exp
+                        else:
+                            denominator *= 10**-exp
+                if m.group('sign') == '-':
+                    numerator = -numerator
+    
+            else:
+                raise TypeError("argument should be a string "
+                                "or a Rational instance")
+    
+        elif type(numerator) is int is type(denominator):
+            pass # *very* normal case
+    
+        elif (isinstance(numerator, numbers.Rational) and
+            isinstance(denominator, numbers.Rational)):
+            numerator, denominator = (
+                numerator.numerator * denominator.denominator,
+                denominator.numerator * numerator.denominator
+                )
+        else:
+            raise TypeError("both arguments should be "
+                            "Rational instances")
+    
+        if denominator == 0:
+&gt;           raise ZeroDivisionError('Fraction(%s, 0)' % numerator)
+E           ZeroDivisionError: Fraction(1, 0)
+
+..\..\..\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\fractions.py:281: ZeroDivisionError</failure></testcase><testcase classname="" name="test_unknown_schema6_and_legacy_new_registry_are_rejected" time="0.000" /></testsuite></testsuites>
