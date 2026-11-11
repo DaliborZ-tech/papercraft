@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="10" time="6.236" timestamp="2026-11-11T12:57:07.311095+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_segmentation_workspace" name="test_manual_grid_explicit_subset_page_pitch_keeps_other_layout_and_one_undo" time="0.825"><failure message="AttributeError: 'NoneType' object has no attribute 'clear'">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001E013D8B410&gt;
+generation = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...segmented-variants-experimental', ...}, '5fb5ca53-cca9-43c0-a2ea-3ad711ebc9c3', '2bf88fe9-6ca6-4296-bd95-275b718f0031')
+
+    def test_manual_grid_explicit_subset_page_pitch_keeps_other_layout_and_one_undo(qtbot, generation):
+        p, _, vid = restore(generation)
+        ids = [r["part_id"] for r in p.segmented_variants[vid].triangle_bindings]
+        p.set_placement(ids[0], p.pages[0].id, 70, 80, 30, rotation_locked=True)
+        before = p.to_dict()
+&gt;       w = grid(qtbot, p, ids)
+            ^^^^^^^^^^^^^^^^^^^
+
+tests\authoring\test_segmentation_workspace.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\authoring\test_segmentation_workspace.py:48: in grid
+    w = ManualGridDialog(p, ids)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\ui\author_manual_layout.py:147: in __init__
+    self._invalidate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.ui.author_manual_layout.ManualGridDialog(0x1e06fb46c50) at 0x000001E0140CD140&gt;
+_args = ()
+
+    def _invalidate(self, *_args):
+        self._preview_updates = self._accepted_updates = None
+        self.buttons.button(QDialogButtonBox.StandardButton.Ok).setEnabled(False)
+&gt;       self.view.scene().clear()
+        ^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'clear'
+
+src\archpapercraft\ui\author_manual_layout.py:152: AttributeError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.</failure></testcase><testcase classname="tests.authoring.test_segmentation_workspace" name="test_grid_locked_piece_invalid_number_and_changed_source_block_without_mutation" time="0.282"><failure message="AttributeError: 'NoneType' object has no attribute 'clear'">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001E013ED6DB0&gt;
+generation = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...segmented-variants-experimental', ...}, '5fb5ca53-cca9-43c0-a2ea-3ad711ebc9c3', '2bf88fe9-6ca6-4296-bd95-275b718f0031')
+
+    def test_grid_locked_piece_invalid_number_and_changed_source_block_without_mutation(
+        qtbot, generation
+    ):
+        p, _, vid = restore(generation)
+        ids = [r["part_id"] for r in p.segmented_variants[vid].triangle_bindings]
+        p.set_placement(ids[0], position_locked=True)
+&gt;       w = grid(qtbot, p, ids)
+            ^^^^^^^^^^^^^^^^^^^
+
+tests\authoring\test_segmentation_workspace.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\authoring\test_segmentation_workspace.py:48: in grid
+    w = ManualGridDialog(p, ids)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\ui\author_manual_layout.py:147: in __init__
+    self._invalidate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.ui.author_manual_layout.ManualGridDialog(0x1e04d4dc050) at 0x000001E013CCF2C0&gt;
+_args = ()
+
+    def _invalidate(self, *_args):
+        self._preview_updates = self._accepted_updates = None
+        self.buttons.button(QDialogButtonBox.StandardButton.Ok).setEnabled(False)
+&gt;       self.view.scene().clear()
+        ^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'clear'
+
+src\archpapercraft\ui\author_manual_layout.py:152: AttributeError</failure></testcase><testcase classname="tests.authoring.test_segmentation_workspace" name="test_grid_typed_without_enter_cannot_apply_old_preview_and_cancel_is_safe" time="0.130"><failure message="AttributeError: 'NoneType' object has no attribute 'clear'">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001E013CDA720&gt;
+generation = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...segmented-variants-experimental', ...}, '5fb5ca53-cca9-43c0-a2ea-3ad711ebc9c3', '2bf88fe9-6ca6-4296-bd95-275b718f0031')
+
+    def test_grid_typed_without_enter_cannot_apply_old_preview_and_cancel_is_safe(qtbot, generation):
+        p, _, vid = restore(generation)
+        ids = [r["part_id"] for r in p.segmented_variants[vid].triangle_bindings]
+&gt;       w = grid(qtbot, p, ids)
+            ^^^^^^^^^^^^^^^^^^^
+
+tests\authoring\test_segmentation_workspace.py:125: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\authoring\test_segmentation_workspace.py:48: in grid
+    w = ManualGridDialog(p, ids)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+src\archpapercraft\ui\author_manual_layout.py:147: in __init__
+    self._invalidate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.ui.author_manual_layout.ManualGridDialog(0x1e01062cd60) at 0x000001E013E73B80&gt;
+_args = ()
+
+    def _invalidate(self, *_args):
+        self._preview_updates = self._accepted_updates = None
+        self.buttons.button(QDialogButtonBox.StandardButton.Ok).setEnabled(False)
+&gt;       self.view.scene().clear()
+        ^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'clear'
+
+src\archpapercraft\ui\author_manual_layout.py:152: AttributeError</failure></testcase><testcase classname="tests.authoring.test_segmentation_workspace" name="test_host_reference_print_selection_nested_tree_and_3d_paper_link" time="2.537" /><testcase classname="tests.authoring.test_segmentation_workspace" name="test_grid_reference_ids_rejected" time="0.169" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_real_preview_explicit_confirmation_detached_geometry_and_single_undo" time="0.939" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_uncommitted_numeric_input_invalidates_and_invalid_input_blocks" time="0.066" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_source_changed_after_preview_is_blocked_and_original_is_preserved" time="0.100" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_hard_budget_failure_never_enables_confirm" time="0.038" /><testcase classname="tests.authoring.test_segmentation_dialog" name="test_cancel_running_worker_does_not_mutate_or_publish_and_latest_request_wins" time="0.166" /></testsuite></testsuites>
