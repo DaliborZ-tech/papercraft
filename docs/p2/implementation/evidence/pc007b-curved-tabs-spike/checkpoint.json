@@ -1,0 +1,104 @@
+{
+  "source_base": "b127fc550fc8401a8f8c8f066ca948e81184b246",
+  "scope": "Early math spike; no production module, UI, export or physical proof",
+  "cases": [
+    {
+      "radius_mm": 10,
+      "signed_generator_radial_slope": 0,
+      "base_source_arclength_mm": 2.0,
+      "depth_mm": 2.0,
+      "relief_mm": 0.5,
+      "count": 12,
+      "source_gap_mm": 3.235987755982989,
+      "flat_base_endpoint_xy_mm": [
+        1.0,
+        0.0
+      ],
+      "rigid_glue_triangle_area_mm2": 1.125,
+      "radial_F_max_tangential_strain": 0.2,
+      "collar_correction_bound_candidate_mm": 0.051666666666666666,
+      "collar_differential_strain_bound_candidate": 0.14379769740081993,
+      "body_distance_outside_relief_lower_candidate_mm": 0.24833333333333335,
+      "adjacent_full_phase_distance_lower_candidate_mm": 2.078630008355636,
+      "glue_max_vertex_radius_mm": 9.529559276272959,
+      "sampled_contiguity_error_mm": 0.0,
+      "sampled_relief_continuity_error_mm": 0.0,
+      "proof_status": "EXPLORATORY_UNREVIEWED_NOT_A_CERTIFICATE"
+    },
+    {
+      "radius_mm": 10,
+      "signed_generator_radial_slope": -0.3333333333333333,
+      "base_source_arclength_mm": 2.0,
+      "depth_mm": 2.0,
+      "relief_mm": 0.5,
+      "count": 12,
+      "source_gap_mm": 3.235987755982989,
+      "flat_base_endpoint_xy_mm": [
+        0.9998148251026086,
+        0.01666512351394491
+      ],
+      "rigid_glue_triangle_area_mm2": 1.1342428266408224,
+      "radial_F_max_tangential_strain": 0.2,
+      "collar_correction_bound_candidate_mm": 0.06851851851851852,
+      "collar_differential_strain_bound_candidate": 0.19832267822729957,
+      "body_distance_outside_relief_lower_candidate_mm": 0.2195526689391798,
+      "adjacent_full_phase_distance_lower_candidate_mm": 2.0452931884838748,
+      "glue_max_vertex_radius_mm": 9.530046211612015,
+      "sampled_contiguity_error_mm": 0.0,
+      "sampled_relief_continuity_error_mm": 0.0,
+      "proof_status": "EXPLORATORY_UNREVIEWED_NOT_A_CERTIFICATE"
+    },
+    {
+      "radius_mm": 20,
+      "signed_generator_radial_slope": 0.3333333333333333,
+      "base_source_arclength_mm": 2.0,
+      "depth_mm": 2.0,
+      "relief_mm": 0.5,
+      "count": 12,
+      "source_gap_mm": 8.471975511965978,
+      "flat_base_endpoint_xy_mm": [
+        0.9999537043467036,
+        -0.00833314043388488
+      ],
+      "rigid_glue_triangle_area_mm2": 1.1202801913102975,
+      "radial_F_max_tangential_strain": 0.1,
+      "collar_correction_bound_candidate_mm": 0.033796296296296297,
+      "collar_differential_strain_bound_candidate": 0.09666225576835773,
+      "body_distance_outside_relief_lower_candidate_mm": 0.3459415578280687,
+      "adjacent_full_phase_distance_lower_candidate_mm": 7.3046386228882945,
+      "glue_max_vertex_radius_mm": 19.514297068867705,
+      "sampled_contiguity_error_mm": 0.0,
+      "sampled_relief_continuity_error_mm": 0.0,
+      "proof_status": "EXPLORATORY_UNREVIEWED_NOT_A_CERTIFICATE"
+    },
+    {
+      "radius_mm": 10,
+      "signed_generator_radial_slope": 1e-09,
+      "base_source_arclength_mm": 2.0,
+      "depth_mm": 2.0,
+      "relief_mm": 0.5,
+      "count": 12,
+      "source_gap_mm": 3.235987755982989,
+      "flat_base_endpoint_xy_mm": [
+        1.0000000000000002,
+        -5.000000000000002e-11
+      ],
+      "rigid_glue_triangle_area_mm2": 1.1249999999718754,
+      "radial_F_max_tangential_strain": 0.2,
+      "collar_correction_bound_candidate_mm": 0.051666666716666663,
+      "collar_differential_strain_bound_candidate": 0.14379769755683386,
+      "body_distance_outside_relief_lower_candidate_mm": 0.24833333333333335,
+      "adjacent_full_phase_distance_lower_candidate_mm": 2.0786300082556357,
+      "glue_max_vertex_radius_mm": 9.529559276271483,
+      "sampled_contiguity_error_mm": 0.0,
+      "sampled_relief_continuity_error_mm": 0.0,
+      "proof_status": "EXPLORATORY_UNREVIEWED_NOT_A_CERTIFICATE"
+    }
+  ],
+  "negative_evidence": {
+    "rigid_G_alone": "Disconnected from true curved base except midpoint",
+    "radial_F_depth2_R10": "Tangential shortening up to20%; not elastic-paper proof",
+    "collar": "Explicit differential deformation required, not rigid/EXACT",
+    "finite_samples": "Continuity samples do not certify whole-domain regularity"
+  }
+}
