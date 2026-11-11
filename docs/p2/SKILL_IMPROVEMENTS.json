@@ -503,6 +503,19 @@
         "evidence": "docs/p2/implementation/PC007A_LOFT_OUTPUT_REVIEW.md",
         "example": "Independent negative112->112.008SVG->112.016PDF exceeds the original source-to-output0.01 area budget; previous bundle and unrelated bytes preserved",
         "broader_transfer": "PENDING_NEXT_USE"
+      },
+      "d_transfer_2026_11_11": {
+        "status": "DIRECT_SOURCE_COMPARATOR_PRODUCT_TRANSFER_INDEPENDENTLY_REVIEWED; actual final D artifact review pending",
+        "source_sha": "5ad3cc0ac53ab68a09d1ff7ccd39fe90ade7f7c4",
+        "report": "docs/p2/implementation/PC008_SEGMENTED_OUTPUT_REVIEW.md",
+        "limitations": "Initial268 direct chain transfer missed body-only normalization (SO01); only5ad fixes it. Counterexample is numeric comparator, not an end-to-end domain/bend false-SAFE. Broader efficacy remains pending."
+      },
+      "additional_advice": {
+        "reason": "SO01 body-plus-tab relative normalization violated original body-only formula",
+        "skill_change": "Normalize original relative area budget on body alone while checking actual full material union",
+        "example": "body20000/TAB2000/delta0.021 must fail original0.020 budget, not pass0.022",
+        "text_review": "PENDING_CURRENT_METADATA_REVIEW",
+        "effectiveness": "PENDING_NEXT_USE"
       }
     },
     {
@@ -587,13 +600,55 @@
         ]
       },
       "independent_review": {
-        "status": "PENDING_SKILL_TEXT_REVIEW",
-        "product_report": "docs/p2/implementation/PC008_UI_REVIEW.md"
+        "status": "APPROVED_IN_DU01_TEXT_SCOPE",
+        "product_report": "docs/p2/implementation/PC008_UI_REVIEW.md",
+        "text_source_sha": "7cbdd26510973e1e2b1e60703e4d0d3192eb8a80",
+        "integration_report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
+        "scope": "Text/metadata advice consistent with DU01; fix itself is not next-use efficacy"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
         "status": "NOT_RUN",
         "example": "A different context selector with subordinate material/profile selection; this repair itself is not a next-use efficacy proof"
+      }
+    },
+    {
+      "id": "SK-014",
+      "changed_on": "2026-11-11",
+      "skill": "papercraft-authoring-ui",
+      "reason": {
+        "source": "docs/p2/implementation/PC008_NATIVE_PROGRESS.md",
+        "problem": "DU02: actual64-piece manual grid showed long generated print labels extending into adjacent cells"
+      },
+      "cause": {
+        "status": "OBSERVED_IN_ACTUAL_LAYOUT_AND_REPRODUCED_IN_CODE",
+        "mechanism": "Generated default part.name concatenated full construction name; the normal paper builder uses that name as its print label",
+        "evidence": [
+          "docs/p2/implementation/evidence/pc008-D-desktop-d762fc6-run01/D-author-layout-before-save-desktop.png"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED; code delta reviewed, final actual artifact review pending",
+        "source_sha": "edb9a1e56498430541e50029d7a785be270ccae9",
+        "description": "New generation parts get compact globally numbered P names; full surface context is retained in tree/properties and prior authored names survive load/rename"
+      },
+      "skill_change": "Assess generated production labels on actual layout, preserve compact identity and rich UI context separately",
+      "usage_example": "Match P26 from paper to tree/3D; do not silently truncate an existing author name",
+      "verification": {
+        "status": "1370 regressions and actual LINE/Gothic layout/vector/editor runs PASS on e782; independent artifact review pending",
+        "evidence": [
+          "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
+          "docs/p2/implementation/evidence/pc008-D-gothic-desktop-e7826dd-run01/results.json"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_SKILL_TEXT_AND_FINAL_LAYOUT_REVIEW",
+        "report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN",
+        "example": "Generated labels on another kind of small material part; no novice/physical inference"
       }
     }
   ]
