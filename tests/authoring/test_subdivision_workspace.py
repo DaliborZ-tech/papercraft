@@ -5,6 +5,7 @@ import copy
 import pytest
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtWidgets import QApplication, QDialog, QDialogButtonBox
+from test_curve_bend import wall_base
 from test_workspace import arrange_rectangle
 from test_workspace import window as _window_fixture
 
@@ -105,3 +106,18 @@ def test_cancel_split_keeps_history_layout_and_source(window, qtbot):
     window.actions["split_profile"].trigger()
     assert window.project.to_dict() == before
     assert len(window.controller._undo) == count
+
+
+def test_selected_existing_tab_refresh_survives_source_split(window):
+    project, connector_id, wall, _ = wall_base(known=False)
+    project.recompute()
+    window.controller.project = project
+    window.refresh()
+    window.select_surface(wall)
+    attachment_id = project.connectors[connector_id].attachment_id
+    window.viewport.select_relation(("attachment", attachment_id))
+    assert window.viewport.relation_paths
+    profile = project.profiles[project.surfaces[wall].profile_id]
+    window.controller.execute("Rozdělit zdroj s chlopní", lambda p:
+        p.split_profile_segment(profile.id, profile.segments[0].id))
+    assert window.viewport.relation_paths and not window._test_warnings

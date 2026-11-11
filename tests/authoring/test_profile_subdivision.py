@@ -6,6 +6,7 @@ from fractions import Fraction
 
 import numpy as np
 import pytest
+from test_curve_bend import wall_base
 from test_interior import wall_roof
 from test_paper import two_panels
 
@@ -219,3 +220,21 @@ def test_undo_redo_preserves_created_vertex_child_ids_and_retired_provenance():
     assert controller.project.to_dict() == before
     controller.redo()
     assert controller.project.to_dict() == changed
+
+
+@pytest.mark.parametrize("known", [False, True])
+def test_existing_tab_bend_uses_whole_semantic_hinge_after_source_split(known):
+    project, connector_id, wall, _ = wall_base(known=known)
+    aid = project.connectors[connector_id].attachment_id
+    profile = project.profiles[project.surfaces[wall].profile_id]
+    original = copy.deepcopy(project.connectors[connector_id])
+    before = project.connector_bend_clearance(connector_id)
+    contact = project._connector_geometry(connector_id)
+    key = project._assembly_clearance_key()
+    project.split_profile_segment(profile.id, profile.segments[0].id, Fraction(1, 3))
+    assert project._assembly_clearance_key() != key
+    after = project.connector_bend_clearance(connector_id)
+    assert after["status"] == before["status"]
+    assert project._connector_geometry(connector_id) == contact
+    assert project.connectors[connector_id] == original
+    assert project.attachments[aid].source_edge_id not in {s.id for s in profile.segments}

@@ -13,7 +13,7 @@ from scipy.spatial.transform import Rotation
 from shapely import Polygon, constrained_delaunay_triangles
 from shapely.ops import unary_union
 
-from .attachments import source_outward, surface_basis
+from .attachments import edge_source, source_outward, surface_basis
 from .commands import atomic
 from .curve_material import surface_envelopes
 from .errors import ValidationError
@@ -172,12 +172,15 @@ class BendCommands:
         self._touch(list(self.surfaces))
 
     def _assembly_clearance_key(self):
-        used = {pid for surface in self.surfaces.values()
-                for pid in [surface.profile_id, *surface.hole_profile_ids]}
+        used = {pid for surface in self.surfaces.values() for pid in surface.source_profile_ids()}
         state = {
             "scale": self.scale,
             "material_profile": self.material_profile,
             "profiles": {pid: asdict(self.profiles[pid]) for pid in sorted(used)},
+            "profile_subdivisions": {
+                key: value for key, value in self.profile_subdivisions.items()
+                if value["history"]["profile_id"] in used
+            },
             **{name: {key: asdict(value) for key, value in getattr(self, name).items()}
                for name in ("surfaces", "joints", "attachments", "connectors")},
         }
@@ -222,8 +225,10 @@ class BendCommands:
         else:
             relation = self.joints[connector.joint_id]
             edge_id = relation.edge_a if source == relation.surface_a else relation.edge_b
-        edge = next(e for e in self.world_geometry(source)["boundary"] if e["id"] == edge_id)
-        a, b = np.asarray([edge["start"], edge["end"]], dtype=float) * self.scale
+        # A source edge remains the same full semantic hinge after subdivision.
+        # Active display-boundary IDs are not its persistent material identity.
+        _, _, source_edge = edge_source(self, source, edge_id)
+        a, b = self._surface_world_points(source, source_edge) * self.scale
         axis = (b - a) / math.dist(a, b)
         _, outward = source_outward(self, source, edge_id)
         _, u, v = surface_basis(self, source)
