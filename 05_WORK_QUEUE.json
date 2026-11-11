@@ -2494,7 +2494,7 @@
   "updated_on": "2026-11-11",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
   "working_branch": "revival/p2-loft-integration",
-  "release_readiness": "NOT_READY: resumed by owner; local loft performance review and complete B1 pending; B3/D/C, actual novice and historic model incomplete",
+  "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
