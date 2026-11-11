@@ -77,6 +77,9 @@ def _mapped_commands(curve, mapping, *, tolerance_mm=None):
 
 
 def _reversed_curve(curve):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return curve.reversed()
     data = dict(curve.data)
     if curve.kind == "arc":
         data["sweep_deg"] = -data["sweep_deg"]
@@ -186,6 +189,16 @@ def restore_native_cut_curves(project, part, mappings):
 
 
 def source_curve(profile, segment):
+    reference = getattr(segment, "source_reference", None)
+    if reference is not None:
+        from .profile_source_views import SourceCurveView, validate_projection
+        SourceCurveView.from_reference(reference, expected_profile_id=profile.id,
+                                       expected_piece_id=segment.id)
+        return validate_projection(
+            reference, kind=segment.kind, data=segment.data,
+            start=profile.vertex(segment.start_vertex_id).point,
+            end=profile.vertex(segment.end_vertex_id).point,
+        )
     return Curve(
         tuple(profile.vertex(segment.start_vertex_id).point),
         tuple(profile.vertex(segment.end_vertex_id).point),
