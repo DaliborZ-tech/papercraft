@@ -74,6 +74,22 @@ def _authored(record):
     }
 
 
+def _has_active_tabs(record):
+    """Authored intent can remain while its entire material set is switched off."""
+    return record.enabled and any(
+        record.tab_overrides.get(tab_id, {}).get("enabled", True)
+        for tab_id in record.slot_ids[: record.parameters["count"]]
+    )
+
+
+def _connector_surface_ids(project, connector):
+    if connector.attachment_id:
+        relation = project.attachments[connector.attachment_id]
+        return {relation.source_surface_id, relation.target_surface_id}
+    relation = project.joints[connector.joint_id]
+    return {relation.surface_a, relation.surface_b}
+
+
 def _parameters(values):
     if not isinstance(values, dict) or set(values) != PARAMETERS:
         raise ValidationError("Kruhové chlopně potřebují úplné známé parametry.")
@@ -937,7 +953,7 @@ def _scene_clearance(project, record, prepared):
     other_padding = thickness / 2 + bend
     checked, unresolved = [], []
     physical = project.material_part_ids()
-    for sid, surface in project.surfaces.items():
+    for sid, surface in sorted(project.surfaces.items()):
         if surface.part_id not in physical or sid in (
             record.owner_surface_id,
             record.receiver_surface_id,
@@ -956,7 +972,7 @@ def _scene_clearance(project, record, prepared):
         )
         if distance <= 0:
             unresolved.append(sid)
-    for cid, connector in project.connectors.items():
+    for cid, connector in sorted(project.connectors.items()):
         if not connector.enabled or connector.owner_surface_id not in project.surfaces:
             continue
         if project.surfaces[connector.owner_surface_id].part_id not in physical:
@@ -974,8 +990,8 @@ def _scene_clearance(project, record, prepared):
         )
         if distance <= 0:
             unresolved.append(cid)
-    for other in project.curved_connectors.values():
-        if other.id == record.id or not other.enabled:
+    for other in sorted(project.curved_connectors.values(), key=lambda item: item.id):
+        if other.id == record.id or not _has_active_tabs(other):
             continue
         try:
             other_prepared = _prepare_native_slots(project, other)
@@ -1018,11 +1034,29 @@ def _scene_clearance(project, record, prepared):
     }
 
 
+def _compact_certificate(check, material_report):
+    return {
+        "contract": CURVED_CONNECTOR_CONTRACT,
+        "status": check["status"],
+        "source_transfer_digest": _digest(check["source_transfer"]),
+        "scene_digest": _digest(check["scene_clearance"]),
+        "material_digest": material_report["canonical_material_digest"],
+    }
+
+
+def _compact_material(check, material_report):
+    return {
+        "contract": material_report["contract"],
+        "canonical_material_digest": material_report["canonical_material_digest"],
+        "active_tab_ids": [slot["tab_id"] for slot in check["slots"] if slot["enabled"]],
+    }
+
+
 class CurvedConnectorCommands:
     def _curved_domain_material_checks(self, owner_surface_id, bare_part):
         checks, slots = {}, []
         for record in self.curved_connectors.values():
-            if record.owner_surface_id != owner_surface_id or not record.enabled:
+            if record.owner_surface_id != owner_surface_id or not _has_active_tabs(record):
                 continue
             prepared = _prepare_native_slots(self, record, bare_part)
             if any(
@@ -1108,20 +1142,8 @@ class CurvedConnectorCommands:
                 record = self.curved_connectors[cid]
                 record.source_binding = copy.deepcopy(check["source_binding"])
                 record.source_fingerprint = check["source_fingerprint"]
-                record.certificate = {
-                    "contract": CURVED_CONNECTOR_CONTRACT,
-                    "status": check["status"],
-                    "source_transfer_digest": _digest(check["source_transfer"]),
-                    "scene_digest": _digest(check["scene_clearance"]),
-                    "material_digest": report["canonical_material_digest"],
-                }
-                record.material = {
-                    "contract": report["contract"],
-                    "canonical_material_digest": report["canonical_material_digest"],
-                    "active_tab_ids": [
-                        slot["tab_id"] for slot in check["slots"] if slot["enabled"]
-                    ],
-                }
+                record.certificate = _compact_certificate(check, report)
+                record.material = _compact_material(check, report)
 
     def _curved_assembly_clearance_key(self):
         from .bend import BendCommands
@@ -1131,7 +1153,7 @@ class CurvedConnectorCommands:
             {
                 record.owner_surface_id
                 for record in self.curved_connectors.values()
-                if record.enabled and record.owner_surface_id in self.surfaces
+                if _has_active_tabs(record) and record.owner_surface_id in self.surfaces
             }
         )
         if not owners:
@@ -1153,7 +1175,10 @@ class CurvedConnectorCommands:
         """
         from .bend import BendCommands
 
-        records = [record for record in self.curved_connectors.values() if record.enabled]
+        records = sorted(
+            (record for record in self.curved_connectors.values() if _has_active_tabs(record)),
+            key=lambda item: item.id,
+        )
         if not records:
             return BendCommands.connector_bend_clearance(self, connector_id)
         key = self._assembly_clearance_key()
@@ -1190,6 +1215,29 @@ class CurvedConnectorCommands:
             )
             if distance <= 0:
                 unresolved.append(sid)
+        # The planar kernel cannot reconstruct a tab whose other relation end
+        # was omitted. Its whole-phase hinge-radius hull remains a conservative
+        # obstacle, instead of allowing a KeyError to erase another collision.
+        omitted_connectors = {
+            cid
+            for cid, value in self.connectors.items()
+            if _connector_surface_ids(self, value) & omitted_surfaces
+        }
+        for cid in sorted(omitted_connectors):
+            foreign = self.connectors[cid]
+            if not foreign.enabled:
+                continue
+            distance = _box_separation(moving, _expanded(_legacy_connector_box(self, cid), padding))
+            checked.append(
+                {
+                    "id": cid,
+                    "kind": "OMITTED_LEGACY_TAB_ALL_PHASE_HINGE_RADIUS_HULL",
+                    "status": "PROVEN_FAR" if distance > 0 else "UNRESOLVED_NEAR",
+                    "separation_lower_exact": str(distance),
+                }
+            )
+            if distance <= 0:
+                unresolved.append(cid)
         for record in records:
             try:
                 packet = _prepare_native_slots(self, record)
@@ -1221,9 +1269,7 @@ class CurvedConnectorCommands:
             sid: value for sid, value in self.surfaces.items() if sid not in omitted_surfaces
         }
         view.connectors = {
-            cid: value
-            for cid, value in self.connectors.items()
-            if value.owner_surface_id in view.surfaces
+            cid: value for cid, value in self.connectors.items() if cid not in omitted_connectors
         }
         view._assembly_clearance_key = lambda: _digest(
             {"complete_source": key, "planar_view": sorted(view.surfaces)}
@@ -1248,7 +1294,14 @@ class CurvedConnectorCommands:
                 if tab.get("status") != "COLLISION":
                     tab["status"] = "UNRESOLVED"
         result["curved_material_dependency"] = {
-            "status": "PROVEN_FAR" if not unresolved else "UNRESOLVED",
+            "status": (
+                "UNRESOLVED"
+                if unresolved
+                else "PROVEN_FAR"
+                if profile["thickness_mm"] is not None
+                else "UNVERIFIED_MATERIAL"
+            ),
+            "material_known": profile["thickness_mm"] is not None,
             "source_digest": key,
             "checked": checked,
             "unresolved_ids": sorted(set(unresolved)),
@@ -1311,11 +1364,23 @@ class CurvedConnectorCommands:
     def preview_curved_connector(self, *args, **kwargs):
         clone = copy.deepcopy(self)
         cid = clone.add_curved_connector(*args, **kwargs)
+        record = clone.curved_connectors[cid]
+        material = None
+        try:
+            clone.recompute([clone.surfaces[record.owner_surface_id].part_id])
+            material = clone.curved_connector_material_report(record.owner_surface_id)
+        except (ValidationError, ValueError, KeyError, AttributeError) as exc:
+            error = str(exc)
+        else:
+            error = None
         result = clone.curved_connector_status(cid)
         return {
             **result,
             "preview_only": True,
-            "can_confirm": False,
+            "can_confirm": result["status"] == "CERTIFIED_APPROXIMATE",
+            "can_create_authored_intent": True,
+            "material_report": material,
+            "material_error": error,
             "proposed_record": asdict(clone.curved_connectors[cid]),
         }
 
@@ -1376,11 +1441,11 @@ class CurvedConnectorCommands:
         record = self.curved_connectors[connector_id]
         source = self.curved_connector_inputs(record.owner_surface_id)
         fingerprint = _digest(source)
-        if not record.enabled:
+        if not _has_active_tabs(record):
             status, code, message = (
                 "NOT_APPLICABLE",
                 "CURVED_CONNECTOR_OFF",
-                "Sada kruhových záložek je vypnutá.",
+                "Sada kruhových záložek nebo všechny její sloty jsou vypnuté.",
             )
         elif record.source_binding and fingerprint != record.source_fingerprint:
             status, code, message = (
@@ -1412,6 +1477,12 @@ class CurvedConnectorCommands:
                     )
                 report = rebuilt._circular_material_report
                 check = report["domain_connector_checks"][record.id]
+                if record.certificate != _compact_certificate(
+                    check, report
+                ) or record.material != _compact_material(check, report):
+                    raise CurvedConnectorError(
+                        "Uložený důkaz kruhového materiálu je poškozený; přepočítejte díl."
+                    )
                 status = check["status"]
                 code = (
                     "CURVED_SOURCE_AND_MATERIAL_CERTIFIED"
@@ -1427,7 +1498,7 @@ class CurvedConnectorCommands:
                     message = "Zadejte tloušťku papíru; bez ní není prostor pohybu doložený."
             except (ValidationError, ValueError, KeyError, AttributeError) as exc:
                 status, code, message = "UNRESOLVED", "SOURCE_TRANSFER_UNRESOLVED", str(exc)
-        if not record.enabled:
+        if not _has_active_tabs(record):
             pass
         elif status == "CERTIFIED_APPROXIMATE" and record.source_fingerprint != fingerprint:
             status, code, message = (
@@ -1476,7 +1547,7 @@ class CurvedConnectorCommands:
         records = [
             record
             for record in self.curved_connectors.values()
-            if record.owner_surface_id == owner_surface_id and record.enabled
+            if record.owner_surface_id == owner_surface_id and _has_active_tabs(record)
         ]
         if not records:
             return {}
@@ -1495,7 +1566,7 @@ class CurvedConnectorCommands:
             "curved_connectors": {
                 record.id: _authored(record)
                 for record in sorted(self.curved_connectors.values(), key=lambda record: record.id)
-                if record.enabled and record.owner_surface_id in surfaces
+                if _has_active_tabs(record) and record.owner_surface_id in surfaces
             },
             "bound_sources": {
                 sid: {
@@ -1615,5 +1686,10 @@ class CurvedConnectorCommands:
                     raise ValidationError("Odvozený důkaz kruhové chlopně musí být objekt.")
             if not isinstance(record.source_fingerprint, str):
                 raise ValidationError("Kruhová chlopeň nemá platnou zdrojovou vazbu.")
+            if (
+                record.source_binding
+                and _digest(record.source_binding) != record.source_fingerprint
+            ):
+                raise ValidationError("Zdrojová vazba kruhové chlopně má rozporný otisk.")
             ids.extend([record.id, *record.slot_ids])
         return ids
