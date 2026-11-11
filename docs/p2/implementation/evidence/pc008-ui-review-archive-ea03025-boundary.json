@@ -1,0 +1,30 @@
+{
+  "source_sha": "ea03025cba5245acdaa83ae4a2575dd1b0e6a2e6",
+  "archive_sha256": "5bfb8485a4b8a1eb714d824975302b54aabdb11cd961038b07dffc1f0d59a2db",
+  "isolated_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-xnbiwbor",
+  "actual_imports": {
+    "archpapercraft.ui.author_segmentation": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-xnbiwbor\\src\\archpapercraft\\ui\\author_segmentation.py",
+      "lf_sha256": "05e1388a8e90faf42d991570cefb8d64cd0842b4e452de29b9d715d8f7ded024"
+    },
+    "archpapercraft.ui.author_manual_layout": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-xnbiwbor\\src\\archpapercraft\\ui\\author_manual_layout.py",
+      "lf_sha256": "cbe576d8a33cfe1e4dd64da41a78ad5c2c5c4117d0bf2fa9c30da2f8c6ce5ea7"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-xnbiwbor\\src\\archpapercraft\\ui\\author_window.py",
+      "lf_sha256": "198fcb1eaa5685c1b4ed9a708834c0955a3b32c2b0f239b5fd6bbb8a753a9c8a"
+    },
+    "archpapercraft.ui.author_viewport": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-D-ui-review-xnbiwbor\\src\\archpapercraft\\ui\\author_viewport.py",
+      "lf_sha256": "f530dceb7db4ab2bd2de46baf151308704f4486e4df3fbfb715ad80263c5b61e"
+    }
+  },
+  "runs": {
+    "own": {
+      "returncode": 1,
+      "stdout": "................F                                                        [100%]\n================================== FAILURES ===================================\n_____ test_host_inactive_generation_reference_safety_and_old_plain_panel ______\n\nqtbot = <pytestqt.qtbot.QtBot object at 0x000001C97755F860>\nfixture_state = ({'application': 'ArchPapercraft.AuthorProject', 'schema_version': 5, 'status': 'experimental', 'writer_version': '0.3...XIMATE', 'mode': 'APPROXIMATE', 'can_confirm': True, 'target_surface_id': 'a937ca4e-ccfa-4837-a0a5-4cc6626e39ff', ...})\ntmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1349/test_host_inactive_generation_0')\n\n    def test_host_inactive_generation_reference_safety_and_old_plain_panel(qtbot,fixture_state,tmp_path):\n        p,s,v=generation(fixture_state)\n        preview=p.preview_segmented_variant(s,max_deviation_mm=.5)\n>       new=p.update_segmented_variant(v,max_deviation_mm=.5,preview_digest=preview['preview_digest'])\n                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^\nE       KeyError: 'preview_digest'\n\n..\\..\\..\\..\\projects\\papercraft-segmentation-ui\\docs\\p2\\implementation\\evidence\\pc008-ui-review-own.py:171: KeyError\n=========================== short test summary info ===========================\nFAILED ::test_host_inactive_generation_reference_safety_and_old_plain_panel\n1 failed, 16 passed in 4.86s\n",
+      "stderr": ""
+    }
+  }
+}

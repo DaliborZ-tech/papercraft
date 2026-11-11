@@ -1,0 +1,6 @@
+{
+  "source_sha": "ea03025cba5245acdaa83ae4a2575dd1b0e6a2e6",
+  "result": "HARNESS_INTERRUPTED_NO_VERDICT",
+  "cause": "Own invariant test set saved digest after its assertion. On a failure teardown could show a dirty-close dialog. Runner was interrupted; no completed raw failure is claimed from that run.",
+  "correction": "Set saved digest before assertion and replay only the selection invariant. Production unchanged."
+}
