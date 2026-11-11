@@ -1,0 +1,26 @@
+{
+  "source_sha": "3a0355f42a6ef5bc710ce3bd85c6280bf7cf39fe",
+  "archive": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-review-curves-3a0-h18m9zh3",
+  "files": {
+    "src/archpapercraft/authoring/segmented_loft.py": {
+      "runtime_sha256": "2b44a56acdee4f796f0f76d97ee203d2634133099d069d1751a0b10f9e0da472",
+      "git_sha256": "a4d35437a8417d79e04f66cdf705824ee422fe7aaaf6856a8a36685003262cb4",
+      "eol_only": true
+    },
+    "src/archpapercraft/authoring/segmented_loft_curves.py": {
+      "runtime_sha256": "03808d3d7676968c6ff7aa5780ff630351886446be23ee874c8a1141c752f2e0",
+      "git_sha256": "81878c9075522f59b2050eb942e7fa227f9637895dd10458e2ca233cff91644d",
+      "eol_only": true
+    },
+    "tests/authoring/test_segmented_loft.py": {
+      "runtime_sha256": "fa5ed8644c10da78c89d48897b72cb17421fd28aecc53604ea680c7d98897406",
+      "git_sha256": "777ea975a85c43df14c40213e78dac1d1d870c45a024f5d2886a7b0e2f6110bb",
+      "eol_only": true
+    },
+    "tests/authoring/test_segmented_loft_curves.py": {
+      "runtime_sha256": "6f3a64bcb77c70ac4f1a0bbd97609ff4d23829b93f129462904e318923a8d9aa",
+      "git_sha256": "cd9c53945382ea048dcb93278b9414e852a1bcd3e5446207dded25017fd23bb2",
+      "eol_only": true
+    }
+  }
+}

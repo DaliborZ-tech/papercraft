@@ -1,0 +1,18 @@
+{
+  "segmented_loft": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-review-curves-3a0-h18m9zh3\\src\\archpapercraft\\authoring\\segmented_loft.py",
+    "sha256": "2b44a56acdee4f796f0f76d97ee203d2634133099d069d1751a0b10f9e0da472"
+  },
+  "segmented_loft_curves": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-review-curves-3a0-h18m9zh3\\src\\archpapercraft\\authoring\\segmented_loft_curves.py",
+    "sha256": "03808d3d7676968c6ff7aa5780ff630351886446be23ee874c8a1141c752f2e0"
+  },
+  "loft_area": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-review-curves-3a0-h18m9zh3\\src\\archpapercraft\\authoring\\loft_area.py",
+    "sha256": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238"
+  },
+  "curve_area": {
+    "module_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc008-review-curves-3a0-h18m9zh3\\src\\archpapercraft\\authoring\\curve_area.py",
+    "sha256": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9"
+  }
+}
