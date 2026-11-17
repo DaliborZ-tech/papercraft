@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from PySide6.QtCore import QEvent, QSettings, QSignalBlocker, Qt, QTimer
+from PySide6.QtCore import QEvent, QRectF, QSettings, QSignalBlocker, Qt, QTimer
 from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (
     QAbstractSpinBox,
@@ -2318,8 +2318,31 @@ class AuthorMainWindow(QMainWindow):
             if selected.joint_id:
                 kind = "attachment" if selected.joint_id in self.project.attachments else "joint"
                 self.select_connector_relation((kind, selected.joint_id))
-            self.paper.focus_part(selected.part_ids[0])
+            if selected.code == "UNPLACED":
+                part_id = selected.part_ids[0]
+                # Wait for the newly visible page viewport to receive its size.
+                QTimer.singleShot(0, lambda: self._focus_placement_target(part_id))
+            else:
+                self.paper.focus_part(selected.part_ids[0])
             self.paper.show_issue(selected)
+
+    def _focus_placement_target(self, part_id):
+        if self.workspace_context != "Stránky" or self.selected_part != part_id:
+            return
+        item = self.paper.part_items.get(part_id)
+        if item is None:
+            return
+        bounds = item.sceneBoundingRect()
+        if self.project.pages:
+            # Offer a visible destination without moving or packing any material.
+            counts = {page.id: 0 for page in self.project.pages}
+            for placement in self.project.placements.values():
+                if placement.page_id in counts:
+                    counts[placement.page_id] += 1
+            page = min(self.project.pages, key=lambda page: counts[page.id])
+            origin = self.paper.page_origins[page.id]
+            bounds = bounds.united(QRectF(origin.x(), origin.y(), page.width_mm, page.height_mm))
+        self.paper.fitInView(bounds.adjusted(-12, -12, 12, 12), Qt.AspectRatioMode.KeepAspectRatio)
 
     def acknowledge(self):
         item = self.issues.currentItem()
