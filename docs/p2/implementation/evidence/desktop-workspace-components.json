@@ -1,0 +1,28 @@
+﻿{
+    "schema":  1,
+    "source_commit":  "a9dc877acc91e62e52ca90df69c7b2ea82c03df4",
+    "source_files_sha256":  {
+                                "src/archpapercraft/ui/author_problems.py":  "516654523a41aa063780db284294f3b79a013f223fbed9d5d76ed905213b790b",
+                                "src/archpapercraft/ui/author_window.py":  "36700619f17723a43a021900706c6e9d99f47a25a5dbea337a9e19f013ebfc76",
+                                "src/archpapercraft/ui/author_workspace.py":  "dfe1f9521643d1d47101350c568debbe3c30d6399a5d10d58794a4e42569818d"
+                            },
+    "evidence_kind":  "OFFSCREEN_QT_COMPONENT_WORKFLOW",
+    "python":  "C:/Users/dalib/projects/papercraft/.venv/Scripts/python.exe",
+    "pythonpath":  "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\desktop-workspace\\src",
+    "platform":  "offscreen",
+    "module_identity":  "asserted inside test_activity_context_preserves_document_selection_history_and_placements",
+    "native_desktop":  "NOT_RUN_BY_AUTHOR",
+    "novice_user":  "NOT_RUN",
+    "physical_build":  "NOT_RUN",
+    "geometry_delta":  "NONE",
+    "junit":  "desktop-workspace-components.xml",
+    "result":  "168 PASS / 82.48 seconds",
+    "navigation_followup":  {
+                                "source_commit":  "b15d25a786659540fbffad34358d8c29d66f811c",
+                                "author_window_sha256":  "72c72ba0e713337494cbaa633d66fc20ba52d41dc1749bd0ad4ce50b8b176313",
+                                "result":  "52 PASS / 9.34 seconds",
+                                "junit":  "desktop-workspace-navigation-followup.xml",
+                                "reproduced_before":  "a9dc877: selected stash-only visible rectangle excluded the A4 origin on second navigation",
+                                "expected_after":  "whole selected part plus whole existing destination page visible; placements unchanged"
+                            }
+}

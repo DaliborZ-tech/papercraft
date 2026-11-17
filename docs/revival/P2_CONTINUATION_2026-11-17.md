@@ -45,3 +45,41 @@ finální nezávislé digitální ověření zůstávají rozpracované. AC-US08
 0 skutečných nových účastníků / NOT_RUN. Fyzické P3 je NOT_RUN.
 
 Integrace tohoto pokračování na master a ověření remote SHA zatím PENDING.
+
+## Desktop Workspace — implementační předání 17. 11.
+
+Nový frontend `a9dc877`, následná oprava navigace `b15d25a`, používá čtyři
+volně přístupné kontexty **Modelování / Spoje a rozvin / Stránky / Export**.
+Výchozí velké 3D uvolňuje skicu kreslení nebo výslovnému přepínači. Stránky
+upřednostňují papír s volitelným 3D; Export ponechává náhled a společnou
+připravenost. Kontexty drží jeden dokument, výběr, historii a ruční rozmístění.
+Menu a zkratky zůstávají dostupné; Ctrl+1–4 mění kontext, F8 otevře problémy.
+Převzatý `AuthorProblemsPanel` má původní kanonické issue/ack digesty,
+seskupení a jednotlivé cíle; navigace nepřesouvá ani nepotvrzuje materiál.
+
+Přepnutí nejdřív dokončí viditelný vstup. Syntakticky i geometricky odmítnuté
+číslo zachová přesný raw text a původní viditelný kontext. Stejně se ověřuje
+inline název vybrané plochy. Inspektor filtruje sekce, zalamuje celé popisky
+a ovladače; test při šířce 300 px včetně rozbalených pokročilých spojů nemá
+horizontální scroll. Základní logical velikost 1366×768 je ověřena komponentově;
+nenahrazuje nativní DPI/client měření. Běžný refresh zachovává kameru,
+Open a první zviditelnění papíru rámují po změně rozměru viewportu. F/Home
+pracují s aktivním pohledem. Potvrzený problém návratu UNPLACED nyní rámuje
+společně skutečný stash díl a existující cílovou stránku; běžné F nadále
+zaměřuje samotný díl.
+
+Na připnutém `a9dc877` prošlo **168 komponentových testů / 82,48 s**,
+na následné navigaci `b15d25a` **52 testů / 9,34 s**. V běžícím pytest je
+ověřen skutečný import z vlastní izolace, vlastní PYTHONPATH a sdílený Python.
+Celý widgetový průchod zahrnuje dvě vlastní stěny, editaci a Undo/Redo,
+dialog spoje, 3mm chlopeň, přepočet, ruční dvě A4, Save/New/Open a skutečný
+SVG/PDF writer. Nezávislé čtení SVG ověřuje plochy 4800 a 6744 mm² a 60mm
+přehyb; PDF má dvě A4. Změny produkčního zdroje se omezují na UI.
+[JUnit](../p2/implementation/evidence/desktop-workspace-components.xml),
+[source identity](../p2/implementation/evidence/desktop-workspace-components.json)
+a [navigační regrese](../p2/implementation/evidence/desktop-workspace-navigation-followup.xml).
+Použity projektové UI/delivery/verification skills na skutečných odmítnutích,
+průchodu a zdrojově vázaném důkazu; konstrukční/doménový kontrakt nezměněn.
+Nativní nezávislé UX review, společný recovery hook a integrační ověření
+následují u ostatních vlastníků. Nový lidský uživatel a fyzické sestavení
+zůstávají **NOT_RUN**; autorův komponentový průchod je nenahrazuje.
