@@ -1,0 +1,787 @@
+﻿{
+    "kind":  "OFFSCREEN_QT_ACTUAL_F8_FIT_ALL_COLLAPSE",
+    "source_files":  [
+                         {
+                             "path":  "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\workspace-house-191d24e-run01\\model-A\\model-A.apcraft",
+                             "sha256":  "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa"
+                         },
+                         {
+                             "path":  "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-recovery-review\\docs\\p2\\implementation\\evidence\\workspace-recovery-native\\own-four-part-model.apcraft",
+                             "sha256":  "d183ee40e18e5a21838b36ad99e2bd3f232855cbf8a1b107ae6d1ac5f6f692a9"
+                         }
+                     ],
+    "measurements":  [
+                         {
+                             "project":  "model-A.apcraft",
+                             "requested_expanded_dock":  null,
+                             "initial":  {
+                                             "window":  [
+                                                            1366,
+                                                            768
+                                                        ],
+                                             "viewport":  [
+                                                              838,
+                                                              537
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                118.73015282313548,
+                                                                53.69999999999996
+                                                            ],
+                                             "pixels_max":  [
+                                                                719.2698471768645,
+                                                                483.3
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1366,
+                                                                        768
+                                                                    ],
+                                                         "viewport":  [
+                                                                          838,
+                                                                          459
+                                                                      ],
+                                                         "dock":  146,
+                                                         "pixels_min":  [
+                                                                            162.34476749687002,
+                                                                            45.89999999999996
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            675.65523250313,
+                                                                            413.1
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1366,
+                                                                            768
+                                                                        ],
+                                                             "viewport":  [
+                                                                              838,
+                                                                              537
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                118.73015282313548,
+                                                                                53.69999999999996
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                719.2698471768645,
+                                                                                483.3
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "model-A.apcraft",
+                             "requested_expanded_dock":  180,
+                             "initial":  {
+                                             "window":  [
+                                                            1366,
+                                                            768
+                                                        ],
+                                             "viewport":  [
+                                                              838,
+                                                              537
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                118.73015282313548,
+                                                                53.69999999999996
+                                                            ],
+                                             "pixels_max":  [
+                                                                719.2698471768645,
+                                                                483.3
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1366,
+                                                                        768
+                                                                    ],
+                                                         "viewport":  [
+                                                                          838,
+                                                                          425
+                                                                      ],
+                                                         "dock":  180,
+                                                         "pixels_min":  [
+                                                                            181.35626620080555,
+                                                                            42.499999999999964
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            656.6437337991944,
+                                                                            382.5
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1366,
+                                                                            768
+                                                                        ],
+                                                             "viewport":  [
+                                                                              838,
+                                                                              537
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                118.73015282313548,
+                                                                                53.69999999999996
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                719.2698471768645,
+                                                                                483.3
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "model-A.apcraft",
+                             "requested_expanded_dock":  234,
+                             "initial":  {
+                                             "window":  [
+                                                            1366,
+                                                            768
+                                                        ],
+                                             "viewport":  [
+                                                              838,
+                                                              537
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                118.73015282313548,
+                                                                53.69999999999996
+                                                            ],
+                                             "pixels_max":  [
+                                                                719.2698471768645,
+                                                                483.3
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1366,
+                                                                        768
+                                                                    ],
+                                                         "viewport":  [
+                                                                          838,
+                                                                          371
+                                                                      ],
+                                                         "dock":  234,
+                                                         "pixels_min":  [
+                                                                            211.55099943646792,
+                                                                            37.09999999999997
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            626.4490005635321,
+                                                                            333.90000000000003
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1366,
+                                                                            768
+                                                                        ],
+                                                             "viewport":  [
+                                                                              838,
+                                                                              537
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                118.73015282313548,
+                                                                                53.69999999999996
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                719.2698471768645,
+                                                                                483.3
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "model-A.apcraft",
+                             "requested_expanded_dock":  null,
+                             "initial":  {
+                                             "window":  [
+                                                            1920,
+                                                            1009
+                                                        ],
+                                             "viewport":  [
+                                                              1392,
+                                                              778
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                260.97217671582763,
+                                                                77.79999999999994
+                                                            ],
+                                             "pixels_max":  [
+                                                                1131.0278232841724,
+                                                                700.2
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1920,
+                                                                        1009
+                                                                    ],
+                                                         "viewport":  [
+                                                                          1392,
+                                                                          700
+                                                                      ],
+                                                         "dock":  146,
+                                                         "pixels_min":  [
+                                                                            304.5867913895621,
+                                                                            69.99999999999994
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            1087.413208610438,
+                                                                            630.0
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1920,
+                                                                            1009
+                                                                        ],
+                                                             "viewport":  [
+                                                                              1392,
+                                                                              778
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                260.97217671582763,
+                                                                                77.79999999999994
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                1131.0278232841724,
+                                                                                700.2
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "model-A.apcraft",
+                             "requested_expanded_dock":  180,
+                             "initial":  {
+                                             "window":  [
+                                                            1920,
+                                                            1009
+                                                        ],
+                                             "viewport":  [
+                                                              1392,
+                                                              778
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                260.97217671582763,
+                                                                77.79999999999994
+                                                            ],
+                                             "pixels_max":  [
+                                                                1131.0278232841724,
+                                                                700.2
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1920,
+                                                                        1009
+                                                                    ],
+                                                         "viewport":  [
+                                                                          1392,
+                                                                          666
+                                                                      ],
+                                                         "dock":  180,
+                                                         "pixels_min":  [
+                                                                            323.5982900934976,
+                                                                            66.59999999999995
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            1068.4017099065024,
+                                                                            599.4
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1920,
+                                                                            1009
+                                                                        ],
+                                                             "viewport":  [
+                                                                              1392,
+                                                                              778
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                260.97217671582763,
+                                                                                77.79999999999994
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                1131.0278232841724,
+                                                                                700.2
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "model-A.apcraft",
+                             "requested_expanded_dock":  234,
+                             "initial":  {
+                                             "window":  [
+                                                            1920,
+                                                            1009
+                                                        ],
+                                             "viewport":  [
+                                                              1392,
+                                                              778
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                260.97217671582763,
+                                                                77.79999999999994
+                                                            ],
+                                             "pixels_max":  [
+                                                                1131.0278232841724,
+                                                                700.2
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1920,
+                                                                        1009
+                                                                    ],
+                                                         "viewport":  [
+                                                                          1392,
+                                                                          612
+                                                                      ],
+                                                         "dock":  234,
+                                                         "pixels_min":  [
+                                                                            353.79302332915995,
+                                                                            61.19999999999995
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            1038.20697667084,
+                                                                            550.8000000000001
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1920,
+                                                                            1009
+                                                                        ],
+                                                             "viewport":  [
+                                                                              1392,
+                                                                              778
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                260.97217671582763,
+                                                                                77.79999999999994
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                1131.0278232841724,
+                                                                                700.2
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "own-four-part-model.apcraft",
+                             "requested_expanded_dock":  null,
+                             "initial":  {
+                                             "window":  [
+                                                            1366,
+                                                            768
+                                                        ],
+                                             "viewport":  [
+                                                              838,
+                                                              537
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                83.79999999999998,
+                                                                87.5515333661633
+                                                            ],
+                                             "pixels_max":  [
+                                                                754.2,
+                                                                449.44846663383663
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1366,
+                                                                        768
+                                                                    ],
+                                                         "viewport":  [
+                                                                          838,
+                                                                          459
+                                                                      ],
+                                                         "dock":  146,
+                                                         "pixels_min":  [
+                                                                            83.80000000000003,
+                                                                            48.55153336616328
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            754.1999999999999,
+                                                                            410.44846663383663
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1366,
+                                                                            768
+                                                                        ],
+                                                             "viewport":  [
+                                                                              838,
+                                                                              537
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                26.837908496731977,
+                                                                                56.80212073557664
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                811.162091503268,
+                                                                                480.19787926442325
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "own-four-part-model.apcraft",
+                             "requested_expanded_dock":  180,
+                             "initial":  {
+                                             "window":  [
+                                                            1366,
+                                                            768
+                                                        ],
+                                             "viewport":  [
+                                                              838,
+                                                              537
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                83.79999999999998,
+                                                                87.5515333661633
+                                                            ],
+                                             "pixels_max":  [
+                                                                754.2,
+                                                                449.44846663383663
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1366,
+                                                                        768
+                                                                    ],
+                                                         "viewport":  [
+                                                                          838,
+                                                                          425
+                                                                      ],
+                                                         "dock":  180,
+                                                         "pixels_min":  [
+                                                                            104.08160881345535,
+                                                                            42.499999999999964
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            733.9183911865447,
+                                                                            382.49999999999994
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1366,
+                                                                            768
+                                                                        ],
+                                                             "viewport":  [
+                                                                              838,
+                                                                              537
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                21.091350430177698,
+                                                                                53.69999999999996
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                816.9086495698223,
+                                                                                483.29999999999995
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "own-four-part-model.apcraft",
+                             "requested_expanded_dock":  234,
+                             "initial":  {
+                                             "window":  [
+                                                            1366,
+                                                            768
+                                                        ],
+                                             "viewport":  [
+                                                              838,
+                                                              537
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                83.79999999999998,
+                                                                87.5515333661633
+                                                            ],
+                                             "pixels_max":  [
+                                                                754.2,
+                                                                449.44846663383663
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1366,
+                                                                        768
+                                                                    ],
+                                                         "viewport":  [
+                                                                          838,
+                                                                          371
+                                                                      ],
+                                                         "dock":  234,
+                                                         "pixels_min":  [
+                                                                            144.09476910539277,
+                                                                            37.09999999999997
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            693.9052308946073,
+                                                                            333.9
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1366,
+                                                                            768
+                                                                        ],
+                                                             "viewport":  [
+                                                                              838,
+                                                                              537
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                21.091350430177698,
+                                                                                53.69999999999996
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                816.9086495698223,
+                                                                                483.29999999999995
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "own-four-part-model.apcraft",
+                             "requested_expanded_dock":  null,
+                             "initial":  {
+                                             "window":  [
+                                                            1920,
+                                                            1009
+                                                        ],
+                                             "viewport":  [
+                                                              1392,
+                                                              778
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                119.51409801616063,
+                                                                77.79999999999994
+                                                            ],
+                                             "pixels_max":  [
+                                                                1272.4859019838393,
+                                                                700.1999999999999
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1920,
+                                                                        1009
+                                                                    ],
+                                                         "viewport":  [
+                                                                          1392,
+                                                                          700
+                                                                      ],
+                                                         "dock":  146,
+                                                         "pixels_min":  [
+                                                                            177.31088510451477,
+                                                                            69.99999999999994
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            1214.6891148954853,
+                                                                            629.9999999999999
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1920,
+                                                                            1009
+                                                                        ],
+                                                             "viewport":  [
+                                                                              1392,
+                                                                              778
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                119.51409801616063,
+                                                                                77.79999999999994
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                1272.4859019838393,
+                                                                                700.1999999999999
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "own-four-part-model.apcraft",
+                             "requested_expanded_dock":  180,
+                             "initial":  {
+                                             "window":  [
+                                                            1920,
+                                                            1009
+                                                        ],
+                                             "viewport":  [
+                                                              1392,
+                                                              778
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                119.51409801616063,
+                                                                77.79999999999994
+                                                            ],
+                                             "pixels_max":  [
+                                                                1272.4859019838393,
+                                                                700.1999999999999
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1920,
+                                                                        1009
+                                                                    ],
+                                                         "viewport":  [
+                                                                          1392,
+                                                                          666
+                                                                      ],
+                                                         "dock":  180,
+                                                         "pixels_min":  [
+                                                                            202.5043563994383,
+                                                                            66.59999999999995
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            1189.4956436005616,
+                                                                            599.4
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1920,
+                                                                            1009
+                                                                        ],
+                                                             "viewport":  [
+                                                                              1392,
+                                                                              778
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                119.51409801616063,
+                                                                                77.79999999999994
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                1272.4859019838393,
+                                                                                700.1999999999999
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         },
+                         {
+                             "project":  "own-four-part-model.apcraft",
+                             "requested_expanded_dock":  234,
+                             "initial":  {
+                                             "window":  [
+                                                            1920,
+                                                            1009
+                                                        ],
+                                             "viewport":  [
+                                                              1392,
+                                                              778
+                                                          ],
+                                             "dock":  68,
+                                             "pixels_min":  [
+                                                                119.51409801616063,
+                                                                77.79999999999994
+                                                            ],
+                                             "pixels_max":  [
+                                                                1272.4859019838393,
+                                                                700.1999999999999
+                                                            ],
+                                             "all_inside":  true
+                                         },
+                             "opened_then_fit_all":  {
+                                                         "window":  [
+                                                                        1920,
+                                                                        1009
+                                                                    ],
+                                                         "viewport":  [
+                                                                          1392,
+                                                                          612
+                                                                      ],
+                                                         "dock":  234,
+                                                         "pixels_min":  [
+                                                                            242.51751669137573,
+                                                                            61.19999999999995
+                                                                        ],
+                                                         "pixels_max":  [
+                                                                            1149.4824833086243,
+                                                                            550.8
+                                                                        ],
+                                                         "all_inside":  true
+                                                     },
+                             "collapsed_actual_button":  {
+                                                             "window":  [
+                                                                            1920,
+                                                                            1009
+                                                                        ],
+                                                             "viewport":  [
+                                                                              1392,
+                                                                              778
+                                                                          ],
+                                                             "dock":  68,
+                                                             "pixels_min":  [
+                                                                                119.51409801616063,
+                                                                                77.79999999999994
+                                                                            ],
+                                                             "pixels_max":  [
+                                                                                1272.4859019838393,
+                                                                                700.1999999999999
+                                                                            ],
+                                                             "all_inside":  true
+                                                         }
+                         }
+                     ],
+    "document_and_source_bytes_unchanged":  true,
+    "source_commit":  "8bae136c149d06afcbe73aa5db8051b624879a4a",
+    "author_window_sha256":  "04f1cd7f48048a497faf09901fafe144ccffe681484b23aa2551e46f02a6b941",
+    "native_desktop":  "NOT_RUN_BY_AUTHOR"
+}

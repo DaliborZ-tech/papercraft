@@ -514,3 +514,29 @@ aktivní CORE9 instrukce je opravená, tři příčiny/opravné scénáře jsou 
 a účinnost zůstává PENDING_NEXT_USE; expert nepředstírá human/P3/PO přijetí.
 Tehdejší konzervativní native-pending stav má nyní následovat doložené 191
 closure výše a nový dock nález odděleně. Historické d94 výsledky se nemění.
+### Vrácení místa po skrytí problémů — `8bae136`
+
+Nativní house screenshot i nezávislé pozorování potvrdily, že po F8 a Skrýt
+podrobnosti zůstala docku přidělena otevřená výška. Read-only komponentová
+reprodukce nad skutečným `workspace-house-191d24e-run01/model-A/model-A.apcraft`
+na `191d24e` naměřila při 1366×768 dock 68→146→146 px a viewport
+537→459→459 px; při 1920×1009 viewport 778→700→700 px.
+
+`8bae136c149d06afcbe73aa5db8051b624879a4a` pouze po výslovném skrytí
+podrobností odloží resizeDocks do dalšího průchodu event loop a po relayoutu
+jej zmenší na aktuální sizeHint. Netýká se plovoucího ani bočního docku a
+neběží při běžném refreshi. Stejné skutečné kliky po opravě vrátí dock na
+68 px a viewport na původních 537/778 px. Dvě regrese ověřují získaný prostor
+i zachování pozdější ruční výšky při refreshi; cíleně **52 PASS / 9,55 s**,
+Ruff a diff check PASS.
+
+Následný scénář F8→Vše→Skrýt byl navíc změřen nad nezměněnými uloženými
+native house a four-part projekty: obě velikosti okna, běžná otevřená výška
+a explicitních 180/234 px = 12 kombinací. Skalární projekční orákulum
+potvrdilo všechny skutečné worldvertices ve viewportu i po zvětšení výšky,
+bez změny span nebo další opravy kamery. Dokument a původní bytes zůstaly
+zachované. [Před opravou](../p2/implementation/evidence/problems-dock-before.json),
+[po opravě včetně projekce](../p2/implementation/evidence/problems-dock-after.json),
+[JUnit](../p2/implementation/evidence/problems-dock-components.xml).
+Autor nepoužil nativní desktop; finální neautorský native replay a přijetí
+zůstávají u nezávislého reviewera.

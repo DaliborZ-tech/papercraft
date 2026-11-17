@@ -1,0 +1,79 @@
+{
+  "source_commit": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
+  "kind": "OFFSCREEN_QT_ACTUAL_DETAILS_INTERACTION",
+  "project_source": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\workspace-house-191d24e-run01\\model-A\\model-A.apcraft",
+  "project_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+  "unchanged_document_and_source_bytes": true,
+  "measurements": [
+    {
+      "initial": {
+        "window": [
+          1366,
+          768
+        ],
+        "dock": 68,
+        "viewport": 537,
+        "dock_hint": 68,
+        "panel_hint": 52,
+        "details": false
+      },
+      "opened_F8": {
+        "window": [
+          1366,
+          768
+        ],
+        "dock": 146,
+        "viewport": 459,
+        "dock_hint": 234,
+        "panel_hint": 218,
+        "details": true
+      },
+      "collapsed_actual_button": {
+        "window": [
+          1366,
+          768
+        ],
+        "dock": 146,
+        "viewport": 459,
+        "dock_hint": 68,
+        "panel_hint": 52,
+        "details": false
+      }
+    },
+    {
+      "initial": {
+        "window": [
+          1920,
+          1009
+        ],
+        "dock": 68,
+        "viewport": 778,
+        "dock_hint": 68,
+        "panel_hint": 52,
+        "details": false
+      },
+      "opened_F8": {
+        "window": [
+          1920,
+          1009
+        ],
+        "dock": 146,
+        "viewport": 700,
+        "dock_hint": 234,
+        "panel_hint": 218,
+        "details": true
+      },
+      "collapsed_actual_button": {
+        "window": [
+          1920,
+          1009
+        ],
+        "dock": 146,
+        "viewport": 700,
+        "dock_hint": 68,
+        "panel_hint": 52,
+        "details": false
+      }
+    }
+  ]
+}
