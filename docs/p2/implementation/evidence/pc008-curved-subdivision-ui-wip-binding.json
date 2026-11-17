@@ -1,0 +1,28 @@
+{
+  "source_sha": "411d137f54187e1ff5bd9d53ee8449f949e42ce6",
+  "state": "WIP_SOURCE_ACTUAL_CURVED_CORE_POSITIVES_PENDING",
+  "checkout": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui",
+  "qt_qpa_platform": "offscreen",
+  "imports": {
+    "author_subdivision": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui\\src\\archpapercraft\\ui\\author_subdivision.py",
+    "author_window": "C:\\Users\\dalib\\projects\\papercraft-curved-profile-ui\\src\\archpapercraft\\ui\\author_window.py"
+  },
+  "files_sha256": {
+    "src/archpapercraft/ui/author_subdivision.py": "24921694e04d11ef1827500f87b503e09f1ec52982326cddd376ed4f03a6eae7",
+    "src/archpapercraft/ui/author_window.py": "f6f9d9cb911e5f0a666704f92df8d6335560cfecf0c6a9a25af11c435d0b1938",
+    "tests/authoring/test_curved_subdivision_workspace.py": "ebf357fa3e396edf8d7fa57bef0331bee65d413c2ef7382f8b85d4a5267687f3"
+  },
+  "junit": "docs/p2/implementation/evidence/pc008-curved-subdivision-ui-wip.xml",
+  "junit_sha256": "291b3f367567ee187c585814e40f3ff3e25c3d7964d8ea23280ae2507b9904e6",
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "70",
+    "time": "52.329",
+    "timestamp": "2026-11-11T17:48:22.842303+01:00",
+    "hostname": "Dalibor"
+  },
+  "scope": "11 new dependency-negative/context cases + 59 existing runtime UI regressions; 4 actual new-core positives excluded pending schema9 runtime pin"
+}

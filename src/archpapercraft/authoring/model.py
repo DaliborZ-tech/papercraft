@@ -70,6 +70,7 @@ class CurveSegment:
     start_vertex_id: str
     end_vertex_id: str
     data: dict = field(default_factory=dict)
+    source_reference: dict | None = None
 
 
 @dataclass
@@ -121,6 +122,20 @@ class Profile:
             a, b = self.vertices[index].point, self.vertices[(index + 1) % len(ids)].point
             if np.linalg.norm(np.asarray(b) - a) <= 1e-9:
                 raise ValidationError("Profil obsahuje nulový segment.")
+            if segment.source_reference is not None:
+                from .profile_source_views import SourceCurveView, validate_projection
+
+                for key in ("profile_id", "history_id", "piece_id"):
+                    uuid(segment.source_reference.get(key))
+                SourceCurveView.from_reference(
+                    segment.source_reference,
+                    expected_profile_id=self.id,
+                    expected_piece_id=segment.id,
+                )
+                validate_projection(
+                    segment.source_reference, kind=segment.kind, start=a, end=b, data=segment.data
+                )
+                continue
             if segment.kind == "line":
                 if segment.data != {}:
                     raise ValidationError("Úsečka neobsahuje další neznámé parametry.")

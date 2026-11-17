@@ -77,6 +77,9 @@ def _mapped_commands(curve, mapping, *, tolerance_mm=None):
 
 
 def _reversed_curve(curve):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return curve.reversed()
     data = dict(curve.data)
     if curve.kind == "arc":
         data["sweep_deg"] = -data["sweep_deg"]
@@ -186,6 +189,16 @@ def restore_native_cut_curves(project, part, mappings):
 
 
 def source_curve(profile, segment):
+    reference = getattr(segment, "source_reference", None)
+    if reference is not None:
+        from .profile_source_views import SourceCurveView, validate_projection
+        SourceCurveView.from_reference(reference, expected_profile_id=profile.id,
+                                       expected_piece_id=segment.id)
+        return validate_projection(
+            reference, kind=segment.kind, data=segment.data,
+            start=profile.vertex(segment.start_vertex_id).point,
+            end=profile.vertex(segment.end_vertex_id).point,
+        )
     return Curve(
         tuple(profile.vertex(segment.start_vertex_id).point),
         tuple(profile.vertex(segment.end_vertex_id).point),
@@ -234,7 +247,8 @@ class ProfileCurveCommands:
         if cache is None:
             cache = self._curve_region_cache = {}
         if key not in cache:
-            loops = [tuple(source_curve(p, s) for s in p.segments) for p in profiles]
+            from .profile_source_views import canonical_profile_curves
+            loops = [canonical_profile_curves(p) for p in profiles]
             result = certify_region_topology(loops[0], loops[1:])
             if len(cache) > 64:
                 cache.clear()
@@ -382,6 +396,11 @@ class ProfileCurveCommands:
         source = self.profiles[profile_id]
         factor = number(factor, "Poměr kopie", positive=True)
         center = np.asarray(vector(center, 2))
+        histories = self._profile_histories(profile_id)
+        if (any(s.source_reference is not None for s in source.segments) or
+                any(p.source.kind != "line" for h in histories.values() for p in h.pieces)):
+            return self._copy_profile_provenance(profile_id, factor=factor, center=center,
+                                                 plane=plane, name=name)
 
         def mapped(point):
             return (center + factor * (np.asarray(point) - center)).tolist()

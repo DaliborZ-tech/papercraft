@@ -24,25 +24,28 @@ class LoftProfile:
     v: tuple = (0, 1, 0)
     profile_id: str = ""
     closed: bool = False
+    semantic_complete: bool | None = None
 
     @classmethod
-    def from_profile(cls, profile):
+    def from_profile(cls, profile, *, histories=None, references=None):
+        from .profile_curves import source_curve
+        complete = None
+        if histories is not None or references is not None:
+            from .profile_source_views import semantic_reference_curves
+            resolved = semantic_reference_curves(profile, histories, references)
+            if resolved["status"] != "RESOLVED":
+                raise ValueError("SOURCE_REFERENCE_UNRESOLVED: " + resolved["why"])
+            curves, complete = resolved["curves"], resolved["full_profile_coverage"]
+        else:
+            curves = tuple(source_curve(profile, segment) for segment in profile.segments)
         return cls(
-            tuple(
-                Curve(
-                    tuple(profile.vertex(s.start_vertex_id).point),
-                    tuple(profile.vertex(s.end_vertex_id).point),
-                    s.kind,
-                    s.data,
-                    s.id,
-                )
-                for s in profile.segments
-            ),
+            curves,
             tuple(profile.plane.origin),
             tuple(profile.plane.u),
             tuple(profile.plane.v),
             profile.id,
             profile.closed,
+            complete,
         )
 
 
@@ -67,12 +70,21 @@ def _norm_bounds(p):
 
 
 def _controls(curve):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        if curve.kind == "arc":
+            raise ValueError(
+                "SOURCE_VIEW_UNRESOLVED: partial arc analytic controls need an adapter.")
+        return list(curve.controls_exact())
     if curve.kind == "cubic":
         return [curve.start, curve.data["control1"], curve.data["control2"], curve.end]
     return [curve.start, curve.end]
 
 
 def _reverse(curve):
+    from .profile_source_views import SourceCurveView
+    if isinstance(curve, SourceCurveView):
+        return curve.reversed()
     data = dict(curve.data)
     if curve.kind == "arc":
         data["sweep_deg"] = -data["sweep_deg"]
@@ -82,6 +94,10 @@ def _reverse(curve):
 
 
 def _profile(profile):
+    from .profile_source_views import SourceCurveView
+    if any(isinstance(curve, SourceCurveView) and curve.kind == "arc" for curve in profile.curves):
+        raise ValueError("SOURCE_VIEW_UNRESOLVED: analytic arc phase needs a loft-kernel adapter; "
+                         "use the proved complete semantic source partition.")
     arrays = [np.asarray(x, dtype=float) for x in (profile.origin, profile.u, profile.v)]
     if any(a.shape != (3,) or not np.isfinite(a).all() for a in arrays):
         raise ValueError("Profil potřebuje konečnou prostorovou pracovní rovinu.")
@@ -99,6 +115,9 @@ def _profile(profile):
 
 
 def _pair(first, second, correspondence):
+    if first.semantic_complete is False or second.semantic_complete is False:
+        raise ValueError(
+            "SOURCE_REFERENCE_UNRESOLVED: semantic intervals do not cover the profiles.")
     a = {c.segment_id: c for c in first.curves}
     b = {c.segment_id: c for c in second.curves}
     output = []

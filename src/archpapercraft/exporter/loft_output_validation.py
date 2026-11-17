@@ -54,31 +54,34 @@ def _bound_source_native(source_json, frame_json):
     from archpapercraft.authoring.loft_surface import (
         _bound_analysis,
         _local_frame,
-        _profile_from_record,
+        _source_context,
     )
 
     binding = json.loads(source_json)
     surface = binding["surface"]
+    intrinsic_data = {
+        "profiles": binding["profiles"],
+        "params": surface["params"],
+        "scale": binding["scale"],
+    }
+    if binding.get("profile_subdivisions"):
+        intrinsic_data["profile_subdivisions"] = binding["profile_subdivisions"]
     intrinsic_json = json.dumps(
-        {
-            "profiles": binding["profiles"],
-            "params": surface["params"],
-            "scale": binding["scale"],
-        },
+        intrinsic_data,
         sort_keys=True,
         allow_nan=False,
     )
     result = _bound_analysis(intrinsic_json, json.dumps(surface, sort_keys=True, allow_nan=False))
     if result["status"] != "EXACT":
         raise ValueError("Skutečný vázaný zdroj již nemá doložený přesný rozvin.")
-    project = SimpleNamespace(
-        profiles={p["id"]: _profile_from_record(p) for p in binding["profiles"]},
-        surfaces={surface["id"]: SimpleNamespace(**surface)},
+    project, _ = _source_context(
+        intrinsic_json, json.dumps(surface, sort_keys=True, allow_nan=False)
     )
     part = SimpleNamespace(frame=SimpleNamespace(**json.loads(frame_json)))
     rotation, origin = _local_frame(project, part, result)
-    commands = [tuple(c) for c in transform_native_commands(
-        result["native_commands"], rotation, origin)]
+    commands = [
+        tuple(c) for c in transform_native_commands(result["native_commands"], rotation, origin)
+    ]
     return (
         tuple(commands),
         _digest(result["representation"]),
@@ -127,8 +130,11 @@ def validate_loft_snapshot(data):
         for sid in part.get("surface_ids", [])
     }
     result = {}
-    has_curved = any(report.get("source_binding", {}).get("curved_material_inputs")
-                     for report in reports.values() if isinstance(report, dict))
+    has_curved = any(
+        report.get("source_binding", {}).get("curved_material_inputs")
+        for report in reports.values()
+        if isinstance(report, dict)
+    )
     if has_curved:
         from archpapercraft.authoring.errors import ValidationError
 
@@ -138,7 +144,8 @@ def validate_loft_snapshot(data):
             validate_curved_snapshot_binding(data)
         except (ValidationError, ValueError, TypeError, KeyError, ImportError) as exc:
             raise CurveOutputError(
-                "Nelze ověřit úplné zdroje kruhového materiálu: " + str(exc)) from exc
+                "Nelze ověřit úplné zdroje kruhového materiálu: " + str(exc)
+            ) from exc
     for sid, report in reports.items():
         try:
             if not isinstance(report, dict) or report.get("status") != "EXACT":
@@ -169,13 +176,14 @@ def validate_loft_snapshot(data):
             _fraction(binding["scale"])
             if binding["scale"] <= 0:
                 raise ValueError("Neplatné zdrojové měřítko loftu.")
-            intrinsic = _digest(
-                {
-                    "profiles": profiles,
-                    "params": surface["params"],
-                    "scale": binding["scale"],
-                }
-            )
+            intrinsic_data = {
+                "profiles": profiles,
+                "params": surface["params"],
+                "scale": binding["scale"],
+            }
+            if binding.get("profile_subdivisions"):
+                intrinsic_data["profile_subdivisions"] = binding["profile_subdivisions"]
+            intrinsic = _digest(intrinsic_data)
             if (
                 intrinsic != report["intrinsic_source_digest"]
                 or _digest({"intrinsic_source_digest": intrinsic, "surface": surface})
@@ -188,7 +196,13 @@ def validate_loft_snapshot(data):
                 raise ValueError("Chybí přesný zdrojový loft důkaz.")
             for index, side in enumerate(("first", "second")):
                 profile = profiles[index]
-                segments = [s["id"] for s in profile["segments"]]
+                if binding.get("profile_subdivisions"):
+                    from archpapercraft.authoring.loft_surface import _math_profiles
+
+                    _, semantic = _math_profiles(intrinsic_data)
+                    segments = [c.segment_id for c in semantic[index].curves]
+                else:
+                    segments = [s["id"] for s in profile["segments"]]
                 matched = [p[side + "_segment_id"] for p in report["patches"]]
                 if (
                     coverage[side + "_profile_id"] != profile["id"]
@@ -205,23 +219,32 @@ def validate_loft_snapshot(data):
             budget = max(Fraction(1, 100), low / 1000000)
             material = None
             if binding.get("curved_material_inputs"):
-                material = json.loads(_bound_curved_material(
-                    json.dumps(binding, sort_keys=True, allow_nan=False),
-                    json.dumps(report["paper_frame"], sort_keys=True, allow_nan=False),
-                ))
+                material = json.loads(
+                    _bound_curved_material(
+                        json.dumps(binding, sort_keys=True, allow_nan=False),
+                        json.dumps(report["paper_frame"], sort_keys=True, allow_nan=False),
+                    )
+                )
                 if report.get("curved_material") != material["material"]:
                     raise ValueError("Materiál chlopní neodpovídá čerstvým skutečným zdrojům.")
             for key in ("area", "paper_frame_area"):
                 area = report[key]
-                expected_source = (material["material"]["source_material_area"]
-                                   if key == "paper_frame_area" and material["material"]
-                                   else source) if material is not None else source
+                expected_source = (
+                    (
+                        material["material"]["source_material_area"]
+                        if key == "paper_frame_area" and material["material"]
+                        else source
+                    )
+                    if material is not None
+                    else source
+                )
                 area_low, area_high = _positive_bounds(expected_source)
                 if area.get("status") != "CERTIFIED" or area["source_intrinsic"] != expected_source:
                     raise ValueError("Loft nemá plošný důkaz stejného skutečného zdroje.")
-                if (expected_source != source and
-                        (area.get("relative_area_basis") != "BODY_ONLY" or
-                         area.get("relative_area_basis_source") != source)):
+                if expected_source != source and (
+                    area.get("relative_area_basis") != "BODY_ONLY"
+                    or area.get("relative_area_basis_source") != source
+                ):
                     raise ValueError("Chlopně nesmějí navýšit relativní plošnou toleranci těla.")
                 native = area["actual_native"]
                 actual = Fraction(native["lower_exact"]), Fraction(native["upper_exact"])
@@ -239,8 +262,11 @@ def validate_loft_snapshot(data):
                 raise ValueError("Loft vyžaduje jediný úplný skutečný řezný obrys.")
             commands = paths[0]["commands"]
             has_arcs = any(c[0] == "A" for c in commands)
-            if (any(c[0] not in ("M", "L", "C", "A", "Z") for c in commands) or
-                    has_arcs and not report["representation"].get("circular_shell")):
+            if (
+                any(c[0] not in ("M", "L", "C", "A", "Z") for c in commands)
+                or has_arcs
+                and not report["representation"].get("circular_shell")
+            ):
                 raise ValueError("Loft CUT musí zachovat zdrojově doložené nativní hranice.")
             actual = native_region_area_bounds([commands], max_commands=LOFT_OUTPUT_MAX_COMMANDS)
             declared = report["paper_frame_area"]["actual_native"]
@@ -260,8 +286,10 @@ def validate_loft_snapshot(data):
             )
             if material is not None:
                 expected_commands = tuple(tuple(c) for c in material["paths"]["CUT"][0]["commands"])
-                if any(part["paths"].get(role) != material["paths"].get(role)
-                       for role in ("TABS", "GUIDES")):
+                if any(
+                    part["paths"].get(role) != material["paths"].get(role)
+                    for role in ("TABS", "GUIDES")
+                ):
                     raise ValueError("Chlopně nebo základny ohybů se liší od skutečných zdrojů.")
             if (
                 tuple(tuple(c) for c in commands) != expected_commands

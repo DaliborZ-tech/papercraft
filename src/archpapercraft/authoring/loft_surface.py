@@ -42,7 +42,6 @@ from .model import (
     identity,
     uuid,
 )
-from .profile_curves import source_curve
 
 LOFT_PAPER_CONTRACT = "ANALYTIC_CIRCULAR_BODY_CURVED_MATERIAL_SOURCE_UNION_V6"
 
@@ -69,8 +68,11 @@ def _failure(status, code, message, **details):
     return {"status": status, "code": code, "message": message, "family": "UNPROVEN", **details}
 
 
-def _topology_profile(profile):
-    curves = [source_curve(profile, segment) for segment in profile.segments]
+def _topology_profile(profile, curves=None):
+    if curves is None:
+        from .profile_source_views import canonical_profile_curves
+
+        curves = canonical_profile_curves(profile)
     if profile.closed:
         return asdict(topology.certify_region_topology(curves))
     budget = topology._Budget(
@@ -139,6 +141,79 @@ def _profile_from_record(record):
         SketchPlane(**record["plane"]),
         record["revision"],
     )
+
+
+def _scoped_histories(project, profile_ids):
+    return {
+        key: copy.deepcopy(record)
+        for key, record in getattr(project, "profile_subdivisions", {}).items()
+        if record["history"]["profile_id"] in profile_ids
+    }
+
+
+def _intrinsic_data(project, surface):
+    data = {
+        "profiles": [asdict(project.profiles[pid]) for pid in surface.source_profile_ids()],
+        "params": surface.params,
+        "scale": project.scale,
+    }
+    histories = _scoped_histories(project, surface.source_profile_ids())
+    if histories:
+        data["profile_subdivisions"] = histories
+    return data
+
+
+def _math_profiles(data):
+    from .curve_subdivision import CurveSubdivisionHistory
+
+    profiles = list(map(_profile_from_record, data["profiles"]))
+    histories = {
+        key: CurveSubdivisionHistory.from_dict(record["history"])
+        for key, record in data.get("profile_subdivisions", {}).items()
+    }
+    source = []
+    for side, profile in zip(("first", "second"), profiles):
+        refs = [r[side + "_segment_id"] for r in data["params"]["correspondences"]]
+        source.append(
+            LoftProfile.from_profile(
+                profile,
+                histories={key: h for key, h in histories.items() if h.profile_id == profile.id},
+                references=refs,
+            )
+        )
+    return profiles, source
+
+
+def _semantic_curve(project, profile, segment_id):
+    from .curve_subdivision import CurveSubdivisionHistory
+    from .profile_source_views import semantic_reference_curves
+
+    histories = {
+        key: CurveSubdivisionHistory.from_dict(record["history"])
+        for key, record in _scoped_histories(project, [profile.id]).items()
+    }
+    resolved = semantic_reference_curves(profile, histories, [segment_id])
+    if resolved["status"] != "RESOLVED":
+        raise ValidationError("SOURCE_REFERENCE_UNRESOLVED: " + resolved["why"])
+    return resolved["curves"][0]
+
+
+def _source_edge(project, profile, segment_id):
+    segment = profile.segment(segment_id)
+    if segment is not None:
+        return segment
+    for record in _scoped_histories(project, [profile.id]).values():
+        if segment_id in record["edges"]:
+            a, b = record["edges"][segment_id]
+            curve = _semantic_curve(project, profile, segment_id)
+            return SimpleNamespace(
+                id=segment_id,
+                kind=curve.kind,
+                data=dict(curve.data),
+                start_vertex_id=a,
+                end_vertex_id=b,
+            )
+    raise ValidationError("ANCHOR_UNRESOLVED: zdrojová hrana chybí.")
 
 
 def validate_loft_params(project, surface, *, require_bound=False):
@@ -229,13 +304,16 @@ def validate_loft_params(project, surface, *, require_bound=False):
     if bound:
         for side, profile in (("first", a), ("second", b)):
             matched = [r[side + "_segment_id"] for r in records]
-            if len(set(matched)) != len(matched) or set(matched) != {
-                s.id for s in profile.segments
-            }:
+            resolved = project.profile_semantic_curves(profile.id, matched)
+            if (
+                len(set(matched)) != len(matched)
+                or resolved["status"] != "RESOLVED"
+                or not resolved["full_profile_coverage"]
+            ):
                 raise ValidationError("Korespondence musí pokrýt právě všechny úseky obou profilů.")
             endpoints = []
             for r in records:
-                s = profile.segment(r[side + "_segment_id"])
+                s = _source_edge(project, profile, r[side + "_segment_id"])
                 ends = (s.start_vertex_id, s.end_vertex_id)
                 endpoints.append(ends if r[side + "_interval"] == [0, 1] else ends[::-1])
             if any(x[1] != y[0] for x, y in zip(endpoints, endpoints[1:])):
@@ -302,7 +380,14 @@ def _develop_once(key, effective_tolerance):
             ),
             **binding,
         }
-    topology_reports = {p.id: _topology_profile(p) for p in (a, b)}
+    try:
+        _, (first_source, second_source) = _math_profiles(data)
+    except (ValueError, ValidationError) as exc:
+        return {**_failure("UNRESOLVED", "LOFT_REFERENCE_UNRESOLVED", str(exc)), **binding}
+    topology_reports = {
+        p.id: _topology_profile(p, source.curves)
+        for p, source in zip((a, b), (first_source, second_source))
+    }
     for result in topology_reports.values():
         if result["status"] != "VALID":
             return {
@@ -319,13 +404,26 @@ def _develop_once(key, effective_tolerance):
         )
         for r in params["correspondences"]
     )
-    first_source, second_source = LoftProfile.from_profile(a), LoftProfile.from_profile(b)
-    circular = build_circular_shell(first_source, second_source, correspondence, scale=scale,
-                                    tolerance_mm=effective_tolerance,
-                                    max_segments=params["max_segments"])
-    solver = circular[0] if circular else flatten_loft(
-        first_source, second_source, correspondence, scale=scale,
-        tolerance_mm=effective_tolerance, max_segments=params["max_segments"])
+    circular = build_circular_shell(
+        first_source,
+        second_source,
+        correspondence,
+        scale=scale,
+        tolerance_mm=effective_tolerance,
+        max_segments=params["max_segments"],
+    )
+    solver = (
+        circular[0]
+        if circular
+        else flatten_loft(
+            first_source,
+            second_source,
+            correspondence,
+            scale=scale,
+            tolerance_mm=effective_tolerance,
+            max_segments=params["max_segments"],
+        )
+    )
     base = {
         **binding,
         "solver": solver,
@@ -487,7 +585,7 @@ def _source_intrinsic_area(data):
         from .loft_area import certify_loft_intrinsic_area
     except ImportError:
         return {"status": "UNRESOLVED", "message": "Důkaz skutečné plochy není dostupný."}
-    first, second = map(_profile_from_record, data["profiles"])
+    (first, second), (source_first, source_second) = _math_profiles(data)
     references = tuple(
         LoftCorrespondence(
             r["first_segment_id"],
@@ -497,16 +595,19 @@ def _source_intrinsic_area(data):
         )
         for r in data["params"]["correspondences"]
     )
-    report = circular_source_area(LoftProfile.from_profile(first), LoftProfile.from_profile(second),
-                                  references, scale=data["scale"])
-    report = report if report is not None else certify_loft_intrinsic_area(
-        LoftProfile.from_profile(first),
-        LoftProfile.from_profile(second),
-        references,
-        scale=data["scale"],
-        absolute_budget_mm2=1e-4,
-        max_nodes=65536,
-        max_depth=24,
+    report = circular_source_area(source_first, source_second, references, scale=data["scale"])
+    report = (
+        report
+        if report is not None
+        else certify_loft_intrinsic_area(
+            source_first,
+            source_second,
+            references,
+            scale=data["scale"],
+            absolute_budget_mm2=1e-4,
+            max_nodes=65536,
+            max_depth=24,
+        )
     )
     if report["status"] == "CERTIFIED":
         expected = {
@@ -514,8 +615,8 @@ def _source_intrinsic_area(data):
             "second_profile_id": second.id,
             "first_closed": first.closed,
             "second_closed": second.closed,
-            "expected_first_segment_ids": [s.id for s in first.segments],
-            "expected_second_segment_ids": [s.id for s in second.segments],
+            "expected_first_segment_ids": [s.segment_id for s in source_first.curves],
+            "expected_second_segment_ids": [s.segment_id for s in source_second.curves],
             "correspondences": [
                 {
                     "first_segment_id": r.first_segment_id,
@@ -674,11 +775,7 @@ def _bound_analysis(intrinsic_key, surface_record):
 def _analysis_keys(project, surface):
     validate_loft_params(project, surface)
     key = json.dumps(
-        {
-            "profiles": [asdict(project.profiles[pid]) for pid in surface.source_profile_ids()],
-            "params": surface.params,
-            "scale": project.scale,
-        },
+        _intrinsic_data(project, surface),
         sort_keys=True,
         allow_nan=False,
     )
@@ -724,8 +821,27 @@ def _source_context(key, surface_record):
         profiles={p["id"]: _profile_from_record(p) for p in data["profiles"]},
         surfaces={surface.id: surface},
         scale=data["scale"],
+        profile_subdivisions=data.get("profile_subdivisions", {}),
     )
     context._surface_matrix = MethodType(AuthorProject._surface_matrix, context)
+    for name in (
+        "_profile_histories",
+        "profile_semantic_curves",
+        "_subdivision_record",
+        "resolve_profile_curve",
+        "resolve_profile_vertex",
+        "resolve_profile_edge",
+    ):
+        setattr(context, name, MethodType(getattr(AuthorProject, name), context))
+    if context.profile_subdivisions:
+        context.parts, context.joints, context.attachments, context.connectors = {}, {}, {}, {}
+        for name in (
+            "_validate_profile_subdivisions",
+            "_check_subdivision_area",
+            "_check_curved_subdivision_area",
+        ):
+            setattr(context, name, MethodType(getattr(AuthorProject, name), context))
+        context._validate_profile_subdivisions()
     return context, surface
 
 
@@ -757,8 +873,8 @@ def _build_world_mesh(project, surface, result):
     patch_normals = []
     for index, reference in enumerate(surface.params["correspondences"]):
         ca, cb = (
-            source_curve(a, a.segment(reference["first_segment_id"])),
-            source_curve(b, b.segment(reference["second_segment_id"])),
+            _semantic_curve(project, a, reference["first_segment_id"]),
+            _semantic_curve(project, b, reference["second_segment_id"]),
         )
         ts = (
             solver_patches[index]["parameters"]
@@ -956,44 +1072,88 @@ def has_small_loft_detail(project, part):
     return min(math.dist(a, b) for a, b in zip(points, points[1:])) < 0.5
 
 
+def _flat_semantic_point(project, profile, result, segment_id, parameter):
+    """Forward known source parameter into the certified flat interpolant.
+
+    This is not inverse picking, an exact analytic flattening, or a new hinge
+    certificate. Its source/flat positional enclosure is the solver's existing
+    global representation bound; selecting a chart origin is a rigid map only.
+    """
+    from .curve_subdivision import CurveSubdivisionHistory
+    from .loft_geometry import sample_loft
+    from .profile_source_views import history_chord
+
+    candidates = []
+    records = _scoped_histories(project, [profile.id])
+    source_record = next((r for r in records.values() if segment_id in r["edges"]), None)
+    source_view = None
+    if source_record is not None:
+        history = CurveSubdivisionHistory.from_dict(source_record["history"])
+        chord = history_chord(history, segment_id)
+        if chord["status"] != "RESOLVED":
+            raise ValidationError("ANCHOR_UNRESOLVED: zdroj kotvy m? r?zn? generace.")
+        source_view = chord["source_view"]
+    for index, patch in enumerate(result["solver"]["patches"]):
+        local_t = Fraction(parameter)
+        if patch["first_segment_id"] != segment_id:
+            if source_view is None or patch["first_segment_id"] not in source_record["edges"]:
+                continue
+            chord = history_chord(history, patch["first_segment_id"])
+            if chord["status"] != "RESOLVED":
+                continue
+            patch_view = chord["source_view"]
+            if (
+                patch_view.root_source != source_view.root_source
+                or patch_view.generation != source_view.generation
+            ):
+                continue
+            a, b = source_view.parameter_interval
+            c, d = patch_view.parameter_interval
+            local_t = (a + local_t * (b - a) - c) / (d - c)
+        p0, p1 = map(Fraction, patch["first_parameter_interval"])
+        u = (local_t - p0) / (p1 - p0)
+        if 0 <= u <= 1:
+            value = sample_loft(result["solver"], index, float(u), 0)["flat_paper_mm"]
+            if value not in candidates:
+                candidates.append(value)
+    if len(candidates) != 1:
+        raise ValidationError("ANCHOR_UNRESOLVED: bod nem? jedin? v?skyt v rozvinu.")
+    return candidates[0]
+
+
 def _local_frame(project, part, result):
     surface = project.surfaces[part.frame.root_surface_id]
     profile = project.profiles[surface.profile_id]
-    anchor, axis = (
-        profile.vertex(part.frame.anchor_vertex_id),
-        profile.segment(part.frame.axis_segment_id),
-    )
-    if anchor is None or axis is None:
-        raise ValidationError("ANCHOR_UNRESOLVED: zvolte znovu zdrojovou kotvu loftu.")
-    patch = next((p for p in result["solver"]["patches"] if p["first_segment_id"] == axis.id), None)
-    if patch is None:
-        raise ValidationError("ANCHOR_UNRESOLVED: úsek kotvy není v korespondenci.")
-    points = patch["flat_first_paper_mm"]
-    start, end = (
-        (points[0], points[-1])
-        if patch["first_parameter_interval"] == [0, 1]
-        else (points[-1], points[0])
-    )
-    if anchor.id == axis.start_vertex_id:
+    anchor_id = part.frame.anchor_vertex_id
+    axis = _source_edge(project, profile, part.frame.axis_segment_id)
+    start = _flat_semantic_point(project, profile, result, axis.id, Fraction(0))
+    end = _flat_semantic_point(project, profile, result, axis.id, Fraction(1))
+    if anchor_id == axis.start_vertex_id:
         origin = start
-    elif anchor.id == axis.end_vertex_id:
+    elif anchor_id == axis.end_vertex_id:
         origin = end
     else:
         candidates = []
-        for p in result["solver"]["patches"]:
-            segment = profile.segment(p["first_segment_id"])
-            ids = [segment.start_vertex_id, segment.end_vertex_id]
-            if p["first_parameter_interval"] == [1, 0]:
-                ids.reverse()
-            for vertex_id, point in zip(
-                ids, [p["flat_first_paper_mm"][0], p["flat_first_paper_mm"][-1]]
-            ):
-                if vertex_id == anchor.id and point not in candidates:
-                    candidates.append(point)
+        for patch in result["solver"]["patches"]:
+            segment = _source_edge(project, profile, patch["first_segment_id"])
+            for vertex_id, t in ((segment.start_vertex_id, 0), (segment.end_vertex_id, 1)):
+                if vertex_id == anchor_id:
+                    point = _flat_semantic_point(project, profile, result, segment.id, Fraction(t))
+                    if point not in candidates:
+                        candidates.append(point)
+        if not candidates:
+            for record in _scoped_histories(project, [profile.id]).values():
+                if anchor_id in record["points"]:
+                    segment_id, t = record["points"][anchor_id]
+                    point = _flat_semantic_point(project, profile, result, segment_id, Fraction(t))
+                    if point not in candidates:
+                        candidates.append(point)
         if len(candidates) != 1:
-            raise ValidationError("ANCHOR_UNRESOLVED: kotva má na otevřeném švu více výskytů.")
+            raise ValidationError("ANCHOR_UNRESOLVED: kotva m? na otev?en?m ?vu v?ce v?skyt?.")
         origin = candidates[0]
     dx, dy = np.asarray(end) - start
+    if math.hypot(dx, dy) == 0:
+        raise ValidationError("ANCHOR_UNRESOLVED: zdrojov? sm?r nem? nenulovou t?tivu rozvinu.")
     angle = -math.atan2(dy, dx)
     rotation = np.array([[math.cos(angle), -math.sin(angle)], [math.sin(angle), math.cos(angle)]])
     return rotation, np.asarray(origin)
@@ -1014,7 +1174,7 @@ def crease_geometry(project, surface, result, front_side):
     def endpoint(reference, endpoint):
         values, tangents = [], []
         for side, profile in (("first", a), ("second", b)):
-            curve = source_curve(profile, profile.segment(reference[side + "_segment_id"]))
+            curve = _semantic_curve(project, profile, reference[side + "_segment_id"])
             interval = reference[side + "_interval"]
             parameter = interval[endpoint]
             values.append(profile.plane.world([evaluate(curve, parameter)])[0])
@@ -1199,17 +1359,29 @@ class LoftCommands:
         return self._circular_rim_binding(surface_id, side, source_turn=source_turn,
                                           verify_material_cache=True)
 
-    def _circular_rim_binding(self, surface_id, side="first", *, source_turn=0.0,
-                              verify_material_cache=False, part_override=None):
+    def _circular_rim_binding(
+        self,
+        surface_id,
+        side="first",
+        *,
+        source_turn=0.0,
+        verify_material_cache=False,
+        part_override=None,
+    ):
         """Detached source/native rim adapter; never a tab/contact certificate.
 
         source_turn follows the ordered source loop from its explicit seam.
         Pure rim positive turns follow outward z; source_turn_direction records
         that conversion. The paper chart may reflect: sweep must then reverse.
         """
-        if side not in ("first", "second") or isinstance(source_turn, bool) or not (
-            isinstance(source_turn, (int, float)) and math.isfinite(source_turn)
-            and 0 <= source_turn <= 1
+        if (
+            side not in ("first", "second")
+            or isinstance(source_turn, bool)
+            or not (
+                isinstance(source_turn, (int, float))
+                and math.isfinite(source_turn)
+                and 0 <= source_turn <= 1
+            )
         ):
             raise ValidationError("Zvolte kruhový okraj a konečný parametr švu 0 až 1.")
         surface = self.surfaces[surface_id]
@@ -1222,128 +1394,206 @@ class LoftCommands:
         part = self.parts[surface.part_id] if part_override is None else part_override
         if part.id != surface.part_id or part.surface_ids != [surface_id]:
             raise ValidationError("Kruhový okraj musí patřit právě zvolenému zdrojovému dílu.")
-        stale = (part.stale or part.input_digest != part_input(self, part)
-                 if verify_material_cache else None)
+        stale = (
+            part.stale or part.input_digest != part_input(self, part)
+            if verify_material_cache
+            else None
+        )
         if verify_material_cache and not stale:
             expected = build_loft_part(self, part)
-            if any(getattr(expected, key) != getattr(part, key)
-                   for key in ("polygons", "paths", "labels", "edges")):
+            if any(
+                getattr(expected, key) != getattr(part, key)
+                for key in ("polygons", "paths", "labels", "edges")
+            ):
                 raise ValidationError("INVALID_CACHE: přepočítejte skutečný rozvin pláště.")
         index = 0 if side == "first" else 1
         profile = self.profiles[surface.source_profile_ids()[index]]
         reference = surface.params["correspondences"][0]
-        curve = source_curve(profile, profile.segment(reference[side+"_segment_id"]))
-        local = evaluate(curve, reference[side+"_interval"][0])
+        curve = _semantic_curve(self, profile, reference[side + "_segment_id"])
+        local = evaluate(curve, reference[side + "_interval"][0])
         center = np.asarray(shell["world_centers_model_mm"][index])
-        radial = (profile.plane.world([local])[0]-center)
+        radial = profile.plane.world([local])[0] - center
         radial /= np.linalg.norm(radial)
-        outward = np.asarray(shell["world_axis"])*(1 if index else -1)
+        outward = np.asarray(shell["world_axis"]) * (1 if index else -1)
         tangent = np.cross(outward, radial)
-        direction = (1 if index else -1)*shell["height_sign"]*shell["walk_sign"]
-        angle = direction*source_turn*math.tau
-        radial_at = math.cos(angle)*radial+math.sin(angle)*tangent
+        direction = (1 if index else -1) * shell["height_sign"] * shell["walk_sign"]
+        angle = direction * source_turn * math.tau
+        radial_at = math.cos(angle) * radial + math.sin(angle) * tangent
         tangent_at = np.cross(outward, radial_at)
         matrix = self._surface_matrix(surface_id)
         frame = matrix[:3, :3] @ np.column_stack((radial_at, tangent_at, outward))
-        gram = [[sum(Fraction(float(frame[k, i]))*Fraction(float(frame[k, j]))
-                     for k in range(3)) for j in range(3)] for i in range(3)]
-        residual = sum(abs(gram[i][j]-(1 if i == j else 0))
-                       for i in range(3) for j in range(3))
+        gram = [
+            [
+                sum(Fraction(float(frame[k, i])) * Fraction(float(frame[k, j])) for k in range(3))
+                for j in range(3)
+            ]
+            for i in range(3)
+        ]
+        residual = sum(abs(gram[i][j] - (1 if i == j else 0)) for i in range(3) for j in range(3))
         native_radius = Fraction(shell["native_radius_exact"][index])
         signed = shell["native_signed_flat_radius_exact"]
         if signed is None:
             kappa, phase = Fraction(0), 0.0
-            point = [float(native_radius)*math.tau*source_turn,
-                     0.0 if not index else -float(Fraction(shell["native_depth_exact"]))]
+            point = [
+                float(native_radius) * math.tau * source_turn,
+                0.0 if not index else -float(Fraction(shell["native_depth_exact"])),
+            ]
         else:
             radii = list(map(Fraction, signed))
-            kappa = native_radius/radii[index]*(1 if not index else -1)
-            phase = float(Fraction(shell["native_radius_exact"][0])/radii[0])*math.tau*source_turn
-            point = [float(radii[index])*math.sin(phase),
-                     float(radii[index])*(math.cos(phase)-1)+
-                     (0 if not index else float(radii[1]-radii[0]))]
+            kappa = native_radius / radii[index] * (1 if not index else -1)
+            phase = (
+                float(Fraction(shell["native_radius_exact"][0]) / radii[0]) * math.tau * source_turn
+            )
+            point = [
+                float(radii[index]) * math.sin(phase),
+                float(radii[index]) * (math.cos(phase) - 1)
+                + (0 if not index else float(radii[1] - radii[0])),
+            ]
         t, conormal = [math.cos(phase), -math.sin(phase)], [math.sin(phase), math.cos(phase)]
-        chart_matrix = np.column_stack((np.asarray(t)*direction,
-                                        np.asarray(conormal)*(1 if not index else -1)))
+        chart_matrix = np.column_stack(
+            (np.asarray(t) * direction, np.asarray(conormal) * (1 if not index else -1))
+        )
         rotation, origin = _local_frame(self, part, result)
         source_frame = rim_world_intervals(
-            profile, local,
-            Fraction(shell["source_radius_bounds"][index]["lower_exact"])/Fraction(self.scale),
-            matrix, source_turn=source_turn, walk_sign=shell["walk_sign"],
-            axis_sign=(1 if index else -1)*shell["height_sign"])
-        actual_center = matrix[:3, :3] @ center+matrix[:3, 3]
-        numeric_frame_values = {"center_model_mm": actual_center, "radial": frame[:, 0],
-                                "tangent": frame[:, 1], "outward_z": frame[:, 2]}
+            profile,
+            local,
+            Fraction(shell["source_radius_bounds"][index]["lower_exact"]) / Fraction(self.scale),
+            matrix,
+            source_turn=source_turn,
+            walk_sign=shell["walk_sign"],
+            axis_sign=(1 if index else -1) * shell["height_sign"],
+        )
+        actual_center = matrix[:3, :3] @ center + matrix[:3, 3]
+        numeric_frame_values = {
+            "center_model_mm": actual_center,
+            "radial": frame[:, 0],
+            "tangent": frame[:, 1],
+            "outward_z": frame[:, 2],
+        }
         frame_errors = {
-            key: [max(abs(Fraction(float(value))-Fraction(iv["lower_exact"])),
-                       abs(Fraction(float(value))-Fraction(iv["upper_exact"])))
-                  for value, iv in zip(values, source_frame[key])]
-            for key, values in numeric_frame_values.items()}
-        frame_operator = (sum(sum(frame_errors[key]) for key in ("radial", "tangent", "outward_z"))+
-                          Fraction(source_frame["source_pose_gram_operator_bound_exact"]))
+            key: [
+                max(
+                    abs(Fraction(float(value)) - Fraction(iv["lower_exact"])),
+                    abs(Fraction(float(value)) - Fraction(iv["upper_exact"])),
+                )
+                for value, iv in zip(values, source_frame[key])
+            ]
+            for key, values in numeric_frame_values.items()
+        }
+        frame_operator = sum(
+            sum(frame_errors[key]) for key in ("radial", "tangent", "outward_z")
+        ) + Fraction(source_frame["source_pose_gram_operator_bound_exact"])
         segments = [s for patch in result["native"]["patches"] for s in patch[side]["segments"]]
         boundary = _commands(segments)[:-1]  # Open rim, never invent the closing chord.
         bounds = copy.deepcopy(shell["source_first_kappa_bounds"])
         if index:
             lo, hi = Fraction(bounds["lower_exact"]), Fraction(bounds["upper_exact"])
-            bounds.update(lower_exact=str(-hi), upper_exact=str(-lo),
-                          lower=-bounds["upper"], upper=-bounds["lower"])
-        native_k_error = max(abs(kappa-Fraction(bounds[key]))
-                             for key in ("lower_exact", "upper_exact"))
+            bounds.update(
+                lower_exact=str(-hi),
+                upper_exact=str(-lo),
+                lower=-bounds["upper"],
+                upper=-bounds["lower"],
+            )
+        native_k_error = max(
+            abs(kappa - Fraction(bounds[key])) for key in ("lower_exact", "upper_exact")
+        )
         paper_matrix = rotation @ chart_matrix
-        paper_gram_error = sum(abs(sum(Fraction(float(paper_matrix[k, i]))*
-                                       Fraction(float(paper_matrix[k, j])) for k in range(2))-
-                                   (1 if i == j else 0)) for i in range(2) for j in range(2))
-        return copy.deepcopy({
-            "surface_id": surface_id, "part_id": part.id, "profile_id": profile.id,
-            "rim_id": str(uuid5(UUID(surface_id), f"CIRCULAR_RIM/{side}/{profile.id}")),
-            "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
-            "front_side": part.front_side,
-            "side": side, "source_turn": source_turn, "source_turn_direction": direction,
-            "paper_stale": stale, "paper_contract": LOFT_PAPER_CONTRACT,
-            "material_cache_verified": bool(verify_material_cache and not stale),
-            "source_binding": {"profiles": [asdict(self.profiles[pid])
-                                             for pid in surface.source_profile_ids()],
-                               "surface": asdict(surface), "scale": self.scale},
-            "source_digest": result["source_digest"], "family": shell["family"],
-            "paper_units": "mm", "source_scale_exact": str(Fraction(self.scale)),
-            "radius_mm": float(native_radius), "radius_exact": str(native_radius),
-            "native_radial_slope_exact": str(kappa), "source_radial_slope_bounds": bounds,
-            "source_native_kappa_error_bound_exact": str(native_k_error),
-            "source_native_radius_error_bound_exact": (
-                shell["native_radius_error_bound_exact"][index]),
-            "native_tangent_error_mm_per_source_radian_exact": (
-                shell["native_rim_tangent_error_mm_per_source_radian_exact"][index]),
-            "angular_correspondence": shell["native_reference_angular_correspondence"],
-            "source_radius_bounds": shell["source_radius_bounds"][index],
-            "source_slant_bounds": shell["source_slant_bounds"],
-            "source_intervals": [s["source"] for s in segments],
-            "seam_patch_id": surface.params["seam_patch_id"],
-            "seam_ruling_ids": [surface.params["correspondences"][0]["ruling_id"],
-                                surface.params["end_ruling_id"]],
-            "world_frame": {"center_model_mm": actual_center.tolist(),
-                            "radial": frame[:, 0].tolist(), "tangent": frame[:, 1].tolist(),
-                            "outward_z": frame[:, 2].tolist(),
-                            "model_mm_per_paper_mm": 1/self.scale,
-                            "binary_gram_residual_bound_exact": str(residual)},
-            "source_world_frame_intervals": source_frame,
-            "world_frame_operator_error_bound_exact": str(frame_operator),
-            "world_frame_center_error_bound_paper_mm_exact": (
-                str(sum(frame_errors["center_model_mm"])*Fraction(self.scale))),
-            "chart_to_canonical": {"matrix": chart_matrix.tolist(), "translation": point},
-            "chart_to_paper": {"matrix": paper_matrix.tolist(),
-                               "translation": (rotation @ (np.asarray(point)-origin)).tolist(),
-                               "matrix_exact": [[str(Fraction(float(v))) for v in row]
-                                                for row in paper_matrix],
-                               "gram_operator_bound_exact": str(paper_gram_error),
-                               "map_kind": (
-                                   "AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY")},
-            "canonical_boundary_commands": boundary,
-            "paper_boundary_commands": transform_native_commands(boundary, rotation, origin),
-            "native_position_bound_paper_mm": (
-                result["representation"]["position_error_bound_paper_mm"]),
-            "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE",
-        })
+        paper_gram_error = sum(
+            abs(
+                sum(
+                    Fraction(float(paper_matrix[k, i])) * Fraction(float(paper_matrix[k, j]))
+                    for k in range(2)
+                )
+                - (1 if i == j else 0)
+            )
+            for i in range(2)
+            for j in range(2)
+        )
+        return copy.deepcopy(
+            {
+                "surface_id": surface_id,
+                "part_id": part.id,
+                "profile_id": profile.id,
+                "rim_id": str(uuid5(UUID(surface_id), f"CIRCULAR_RIM/{side}/{profile.id}")),
+                "rim_id_kind": "DERIVED_SURFACE_PROFILE_SIDE_UUID; NOT_A_NEW_REGISTRY_ENTITY",
+                "front_side": part.front_side,
+                "side": side,
+                "source_turn": source_turn,
+                "source_turn_direction": direction,
+                "paper_stale": stale,
+                "paper_contract": LOFT_PAPER_CONTRACT,
+                "material_cache_verified": bool(verify_material_cache and not stale),
+                "source_binding": {
+                    "profiles": [
+                        asdict(self.profiles[pid]) for pid in surface.source_profile_ids()
+                    ],
+                    "surface": asdict(surface),
+                    "scale": self.scale,
+                    **(
+                        {
+                            "profile_subdivisions": _scoped_histories(
+                                self, surface.source_profile_ids()
+                            )
+                        }
+                        if _scoped_histories(self, surface.source_profile_ids())
+                        else {}
+                    ),
+                },
+                "source_digest": result["source_digest"],
+                "family": shell["family"],
+                "paper_units": "mm",
+                "source_scale_exact": str(Fraction(self.scale)),
+                "radius_mm": float(native_radius),
+                "radius_exact": str(native_radius),
+                "native_radial_slope_exact": str(kappa),
+                "source_radial_slope_bounds": bounds,
+                "source_native_kappa_error_bound_exact": str(native_k_error),
+                "source_native_radius_error_bound_exact": (
+                    shell["native_radius_error_bound_exact"][index]
+                ),
+                "native_tangent_error_mm_per_source_radian_exact": (
+                    shell["native_rim_tangent_error_mm_per_source_radian_exact"][index]
+                ),
+                "angular_correspondence": shell["native_reference_angular_correspondence"],
+                "source_radius_bounds": shell["source_radius_bounds"][index],
+                "source_slant_bounds": shell["source_slant_bounds"],
+                "source_intervals": [s["source"] for s in segments],
+                "seam_patch_id": surface.params["seam_patch_id"],
+                "seam_ruling_ids": [
+                    surface.params["correspondences"][0]["ruling_id"],
+                    surface.params["end_ruling_id"],
+                ],
+                "world_frame": {
+                    "center_model_mm": actual_center.tolist(),
+                    "radial": frame[:, 0].tolist(),
+                    "tangent": frame[:, 1].tolist(),
+                    "outward_z": frame[:, 2].tolist(),
+                    "model_mm_per_paper_mm": 1 / self.scale,
+                    "binary_gram_residual_bound_exact": str(residual),
+                },
+                "source_world_frame_intervals": source_frame,
+                "world_frame_operator_error_bound_exact": str(frame_operator),
+                "world_frame_center_error_bound_paper_mm_exact": (
+                    str(sum(frame_errors["center_model_mm"]) * Fraction(self.scale))
+                ),
+                "chart_to_canonical": {"matrix": chart_matrix.tolist(), "translation": point},
+                "chart_to_paper": {
+                    "matrix": paper_matrix.tolist(),
+                    "translation": (rotation @ (np.asarray(point) - origin)).tolist(),
+                    "matrix_exact": [
+                        [str(Fraction(float(v))) for v in row] for row in paper_matrix
+                    ],
+                    "gram_operator_bound_exact": str(paper_gram_error),
+                    "map_kind": ("AFFINE_REFERENCE_CHART; ACTUAL_A_PACKET_CHECKED_SEPARATELY"),
+                },
+                "canonical_boundary_commands": boundary,
+                "paper_boundary_commands": transform_native_commands(boundary, rotation, origin),
+                "native_position_bound_paper_mm": (
+                    result["representation"]["position_error_bound_paper_mm"]
+                ),
+                "scope": "SOURCE_AND_NATIVE_RIM_BINDING_ONLY_NOT_CONNECTOR_OR_CONTACT_CERTIFICATE",
+            }
+        )
 
     def _loft_preview_result(self, surface_id):
         return {
@@ -1384,15 +1634,23 @@ class LoftCommands:
                 if frame_topology["status"] != "VALID":
                     raise ValueError("Uložený skutečný obrys nemá doloženou topologii.")
                 frame_area = _area_check(
-                    curved_material["source_material_area"] if curved_material is not None else
-                    result["area"]["source_intrinsic"],
+                    curved_material["source_material_area"]
+                    if curved_material is not None
+                    else result["area"]["source_intrinsic"],
                     part.paths["CUT"][0]["commands"],
                     result["area"]["max_commands"],
-                    relative_basis=(result["area"]["source_intrinsic"]
-                                    if curved_material is not None else None),
+                    relative_basis=(
+                        result["area"]["source_intrinsic"] if curved_material is not None else None
+                    ),
                 )
-            except (ValidationError, ValueError, ArithmeticError,
-                    TypeError, KeyError, IndexError) as exc:
+            except (
+                ValidationError,
+                ValueError,
+                ArithmeticError,
+                TypeError,
+                KeyError,
+                IndexError,
+            ) as exc:
                 frame_area = {"status": "UNRESOLVED", "message": str(exc)}
             if frame_area["status"] != "CERTIFIED":
                 frame_failure = {
@@ -1406,6 +1664,12 @@ class LoftCommands:
                     self, surface, result, self.parts[surface.part_id].front_side
                 ),
                 "paper_frame": asdict(part.frame),
+                "paper_frame_source_mapping": {
+                    "mode": "KNOWN_PARAMETER_FORWARD_BOUNDED_REPRESENTATION",
+                    "position_error_bound_paper_mm": result.get("solver", {}).get(
+                        "representation_error_bound_paper_mm"),
+                    "scope": "RIGID_CHART_SELECTION_NOT_INVERSE_PICKING_OR_EXACT_HINGE",
+                },
                 "paper_input_digest": part.input_digest,
                 "paper_stale": stale,
                 "paper_contract": LOFT_PAPER_CONTRACT,
@@ -1418,6 +1682,15 @@ class LoftCommands:
                     ],
                     "surface": asdict(surface),
                     "scale": self.scale,
+                    **(
+                        {
+                            "profile_subdivisions": _scoped_histories(
+                                self, surface.source_profile_ids()
+                            )
+                        }
+                        if _scoped_histories(self, surface.source_profile_ids())
+                        else {}
+                    ),
                     **({"curved_material_inputs": curved_inputs} if curved_inputs else {}),
                 },
                 **{
@@ -1540,8 +1813,16 @@ class LoftCommands:
 
             family = _homothety(
                 _pair(
-                    LoftProfile.from_profile(a),
-                    LoftProfile.from_profile(b),
+                    LoftProfile.from_profile(
+                        a,
+                        histories=self._profile_histories(a.id),
+                        references=[r["first_segment_id"] for r in records],
+                    ),
+                    LoftProfile.from_profile(
+                        b,
+                        histories=self._profile_histories(b.id),
+                        references=[r["second_segment_id"] for r in records],
+                    ),
                     [
                         LoftCorrespondence(
                             r["first_segment_id"],
@@ -1567,7 +1848,10 @@ class LoftCommands:
             raise ValidationError(
                 "Rovinný pás potřebuje oddělený vnější obrys a skutečný vnitřní otvor."
             )
-        frame = PaperFrame(sid, a.vertices[0].id, a.segments[0].id)
+        # A historical whole-source correspondence must keep its original
+        # endpoint chord; the first current child is a different paper axis.
+        first_axis = _source_edge(self, a, records[0]["first_segment_id"])
+        frame = PaperFrame(sid, first_axis.start_vertex_id, first_axis.id)
         part = MaterialPart(
             pid,
             f"P{self.next_part_number} · {name}",

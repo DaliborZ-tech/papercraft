@@ -94,6 +94,12 @@ class CurveSource:
 
     @classmethod
     def from_curve(cls, curve: Curve):
+        from .profile_source_views import SourceCurveView
+        if isinstance(curve, SourceCurveView):
+            raise ValueError(
+                "SOURCE_VIEW_REQUIRES_EXPLICIT_ROOT_SOURCE_AND_PARAMETER_INTERVAL: "
+                "a floating child must not redefine an analytic source."
+            )
         data = curve.data
         return cls(
             curve.kind,

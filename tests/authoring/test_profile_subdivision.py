@@ -192,6 +192,9 @@ def test_schema5_known_copy_keeps_source_layout_and_origin_bytes(tmp_path):
         pid, project.pages[0].id, 45, 70, 17, position_locked=True, rotation_locked=True
     )
     raw = project.to_dict()
+    for source_profile in raw["profiles"].values():
+        for segment in source_profile["segments"]:
+            segment.pop("source_reference")
     raw.pop("profile_subdivisions")
     raw.pop("curved_connectors")
     raw.update(schema_version=5, writer_version="0.3.0-pc008-segmented-variants-experimental")
@@ -201,7 +204,13 @@ def test_schema5_known_copy_keeps_source_layout_and_origin_bytes(tmp_path):
     restored = load_project(origin)
     assert restored.requires_save_as and restored.loaded_from_schema == 5
     assert restored.profiles == project.profiles and restored.placements == project.placements
-    assert restored.parts == project.parts and restored.profile_subdivisions == {}
+    assert restored.profile_subdivisions == {}
+    for key, part in restored.parts.items():
+        # This synthetic fixture already carries a CURRENT derived digest.
+        # Actual old snapshots exercise invalidation separately.
+        assert part.stale == project.parts[key].stale
+        assert part.frame == project.parts[key].frame
+        assert part.paths == project.parts[key].paths
     restored.save(tmp_path / "v7-copy.apcraft")
     assert hashlib.sha256(origin.read_bytes()).hexdigest() == before
     assert load_project(tmp_path / "v7-copy.apcraft").to_dict() == restored.to_dict()

@@ -1,0 +1,75 @@
+{
+  "source_commit": "4f43a6427c7fbd25a87309ab31ad676ddd7794e1",
+  "counts": {
+    "tests": 419,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit": "au13-live-source9-4f43a64-coupled.xml",
+  "elapsed_seconds": 169.927,
+  "command": "PYTHONPATH=<own_worktree>/src QT_QPA_PLATFORM=offscreen python -m pytest -q tests/authoring/test_curved_profile_provenance.py tests/authoring/test_profile_source_views.py tests/authoring/test_profile_subdivision.py tests/authoring/test_circular_shell.py tests/authoring/test_circular_material.py tests/authoring/test_curved_connector_sources.py tests/authoring/test_curved_connector_persistence.py tests/authoring/test_segmented_surface.py tests/authoring/test_loft_surface.py tests/authoring/test_loft_curve_compaction.py tests/authoring/test_loft_curves.py tests/authoring/test_curve_topology.py tests/authoring/test_attachment_workspace.py tests/authoring/test_interior_persistence.py tests/authoring/test_material_profile.py --tb=short --junitxml=docs/p2/implementation/evidence/au13-live-source9-4f43a64-coupled.xml",
+  "runtime": {
+    "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "shapely": "2.2.0",
+    "geos": "3.14.1"
+  },
+  "actual_legacy_artifacts": [
+    {
+      "source": "docs\\p2\\implementation\\evidence\\pc006a-desktop-7da2403-run04\\own-model.apcraft",
+      "source_sha256": "c649da8478d5b36bf6ffeb764ff58c2e308ddb9c4a7d38191a2effcbb46b205d",
+      "schema": 1,
+      "parts": 2,
+      "profiles": 3,
+      "segmented_variants_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "evidence": "test_actual_published_artifacts_load_as_safe_copy_and_keep_authored_work: source bytes, saved generation dicts, IDs/frames/layout/locks/CUT before regen preserved; recompute and actual SVG/PDF pass"
+    },
+    {
+      "source": "docs\\p2\\implementation\\evidence\\pc007a-loft-B1-desktop-a46f179-run01\\loft-B1\\loft-B1.apcraft",
+      "source_sha256": "e8ab5600952813e528978fd4314890b8209f06bc1a1e0994a1203695c1551744",
+      "schema": 4,
+      "parts": 2,
+      "profiles": 3,
+      "segmented_variants_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "evidence": "test_actual_published_artifacts_load_as_safe_copy_and_keep_authored_work: source bytes, saved generation dicts, IDs/frames/layout/locks/CUT before regen preserved; recompute and actual SVG/PDF pass"
+    },
+    {
+      "source": "docs\\p2\\implementation\\evidence\\pc008-D-gothic-desktop-e7826dd-run01\\D-gothic\\D-gothic.apcraft",
+      "source_sha256": "55af07408f206fb03dd24e9f54f73756ad2ed0f30750ec8ea4f09563812c0f73",
+      "schema": 5,
+      "parts": 99,
+      "profiles": 100,
+      "segmented_variants_sha256": "91ccf43748dc1b6e48cbf10afecbede85f29b1403a690197f660ed9930253c03",
+      "evidence": "test_actual_published_artifacts_load_as_safe_copy_and_keep_authored_work: source bytes, saved generation dicts, IDs/frames/layout/locks/CUT before regen preserved; recompute and actual SVG/PDF pass"
+    },
+    {
+      "source": "docs\\p2\\implementation\\evidence\\pc007b-circular-material-67c44ae-run01\\cone-first\\authored.apcraft",
+      "source_sha256": "a57e108ea0a9e0fd14b8cea28b30e35116278cf82323aecd3bfecce16426490a",
+      "schema": 6,
+      "parts": 2,
+      "profiles": 3,
+      "segmented_variants_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "evidence": "test_actual_published_artifacts_load_as_safe_copy_and_keep_authored_work: source bytes, saved generation dicts, IDs/frames/layout/locks/CUT before regen preserved; recompute and actual SVG/PDF pass"
+    },
+    {
+      "source": "docs\\p2\\implementation\\evidence\\pc008-AU13-line-desktop-24e0801-run05\\AU13-line\\AU13-line.apcraft",
+      "source_sha256": "2ae0291499d78435ccf89a85fbc1ee88266d63983e267ba877cb6584270ffd8c",
+      "schema": 7,
+      "parts": 2,
+      "profiles": 3,
+      "segmented_variants_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "evidence": "test_actual_published_artifacts_load_as_safe_copy_and_keep_authored_work: source bytes, saved generation dicts, IDs/frames/layout/locks/CUT before regen preserved; recompute and actual SVG/PDF pass"
+    }
+  ],
+  "actual_c8_artifacts": "au13-live-source9-4f43a64-c8-copies.json",
+  "checks": {
+    "ruff": "PASS owned source and test paths",
+    "git_diff_check": "PASS",
+    "runtime_diff_since_pin": 0
+  },
+  "independent_review": "PENDING_OTHER_AGENT",
+  "ui": "PENDING_CURVED_PROFILE_UI_AGENT",
+  "new_user": "NOT_RUN",
+  "physical": "P3_PENDING"
+}

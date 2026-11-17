@@ -390,6 +390,9 @@ def test_schema4_copy_preserves_source_and_layout_but_refuses_variant_capability
     data.pop("segmented_variants")
     data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
     data.pop("profile_subdivisions")
+    for source_profile in data["profiles"].values():
+        for source_segment in source_profile["segments"]:
+            source_segment.pop("source_reference")
     data.update(schema_version=4, writer_version="0.3.0-pc007a-profiles-experimental")
     path = tmp_path / "old-v4.apcraft"
     path.write_text(json.dumps(data), encoding="utf8")
