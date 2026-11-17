@@ -186,8 +186,9 @@ def test_inline_surface_name_uses_history_and_context_validation(window, qtbot, 
 
 @pytest.mark.parametrize("separate_name", [False, True])
 def test_inline_name_keeps_mixed_component_and_explicit_paper_name(window, qtbot, separate_name):
-    from archpapercraft.authoring.editing import rename_author_entities
     from test_editing import connected_component
+
+    from archpapercraft.authoring.editing import rename_author_entities
 
     if separate_name:
         sid = arrange_rectangle(window)
