@@ -15,7 +15,7 @@ from pypdf import PdfReader, PdfWriter
 from pypdf.generic import DecodedStreamObject, NameObject
 from reportlab.pdfgen.canvas import Canvas
 
-from archpapercraft.authoring import load_project
+from archpapercraft.authoring import ValidationError, load_project
 from archpapercraft.exporter import author_export
 from archpapercraft.exporter.curve_output_validation import CurveOutputError
 from archpapercraft.exporter.segmented_output_validation import (
@@ -33,7 +33,22 @@ def source(request):
         "line": "pc008-domain-95fa2c7/backend-fixture.apcraft",
         "curved": "pc008-curved-domain-518b91a/raw/gothic-backend.apcraft",
     }[request.param]
-    p = load_project(ROOT / "docs/p2/implementation/evidence" / relative)
+    path = ROOT / "docs/p2/implementation/evidence" / relative
+    original_bytes = path.read_bytes()
+    p = load_project(path)
+    # These are immutable pre-schema9 examples. Copy loading intentionally
+    # retains their old cache as stale; publication requires explicit recompute.
+    frames = {pid: copy.deepcopy(part.frame) for pid, part in p.parts.items()}
+    placements = copy.deepcopy(p.placements)
+    profiles, generations = copy.deepcopy(p.profiles), copy.deepcopy(p.segmented_variants)
+    assert any(p.parts[pid].stale for pid in p.material_part_ids())
+    with pytest.raises(ValidationError):
+        p.snapshot()
+    p.recompute()
+    assert p.profiles == profiles and p.segmented_variants == generations
+    assert p.placements == placements
+    assert {pid: part.frame for pid, part in p.parts.items()} == frames
+    assert path.read_bytes() == original_bytes
     return request.param, p.to_dict()
 
 
