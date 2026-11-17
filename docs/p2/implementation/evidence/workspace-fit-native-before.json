@@ -1,0 +1,27 @@
+{
+  "source_file": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-recovery-review\\docs\\p2\\implementation\\evidence\\workspace-recovery-native\\own-four-part-model.apcraft",
+  "source_sha256": "d183ee40e18e5a21838b36ad99e2bd3f232855cbf8a1b107ae6d1ac5f6f692a9",
+  "viewport": [
+    838,
+    444
+  ],
+  "yaw": 30.0,
+  "pitch": 55.0,
+  "world_center": [
+    5000.0,
+    3500.0,
+    2000.0
+  ],
+  "span": 4102.735907715287,
+  "pixels_min": [
+    90.00290426629223,
+    127.11385767530162
+  ],
+  "pixels_max": [
+    747.9970957337079,
+    482.31385767530156
+  ],
+  "all_inside": false,
+  "source_commit": "b2d2798c897bdbe0048d3e5557ca9f8a8bc158a2",
+  "kind": "OFFSCREEN_READ_ONLY_NATIVE_SAVED_PROJECT"
+}

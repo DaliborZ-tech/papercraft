@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.873" timestamp="2026-11-17T19:28:21.811500+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_viewport_fit" name="test_fit_all_centers_actual_rotated_material_for_aspect_and_orbit[30-55-size0]" time="0.047"><failure message="assert np.float64(470.50729266184265) &lt;= (444 + 1e-08)&#10; +  where 444 = &lt;built-in method height of AuthorViewport object at 0x00000227FFD6FCC0&gt;()&#10; +    where &lt;built-in method height of AuthorViewport object at 0x00000227FFD6FCC0&gt; = &lt;archpapercraft.ui.author_viewport.AuthorViewport(0x227d56206b0) at 0x00000227FFD6FCC0&gt;.height">tests\authoring\test_viewport_fit.py:67: in test_fit_all_centers_actual_rotated_material_for_aspect_and_orbit
+    assert_centered_and_visible(viewport, points)
+tests\authoring\test_viewport_fit.py:49: in assert_centered_and_visible
+    assert high[1] &lt;= viewport.height() + 1e-8
+E   assert np.float64(470.50729266184265) &lt;= (444 + 1e-08)
+E    +  where 444 = &lt;built-in method height of AuthorViewport object at 0x00000227FFD6FCC0&gt;()
+E    +    where &lt;built-in method height of AuthorViewport object at 0x00000227FFD6FCC0&gt; = &lt;archpapercraft.ui.author_viewport.AuthorViewport(0x227d56206b0) at 0x00000227FFD6FCC0&gt;.height
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.</failure></testcase><testcase classname="tests.authoring.test_viewport_fit" name="test_fit_all_centers_actual_rotated_material_for_aspect_and_orbit[30-55-size1]" time="0.039"><failure message="AssertionError: &#10;Not equal to tolerance rtol=0, atol=1e-08&#10;&#10;Mismatched elements: 2 / 2 (100%)&#10;Mismatch at indices:&#10; [0]: 149.56794767068547 (ACTUAL), 150.0 (DESIRED)&#10; [1]: 378.55274085178826 (ACTUAL), 350.0 (DESIRED)&#10;Max absolute difference among violations: 28.55274085&#10;Max relative difference among violations: 0.08157926&#10; ACTUAL: array([149.567948, 378.552741])&#10; DESIRED: array([150., 350.])">tests\authoring\test_viewport_fit.py:67: in test_fit_all_centers_actual_rotated_material_for_aspect_and_orbit
+    assert_centered_and_visible(viewport, points)
+tests\authoring\test_viewport_fit.py:50: in assert_centered_and_visible
+    np.testing.assert_allclose((low + high)/2, [viewport.width()/2, viewport.height()/2],
+E   AssertionError: 
+E   Not equal to tolerance rtol=0, atol=1e-08
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 149.56794767068547 (ACTUAL), 150.0 (DESIRED)
+E    [1]: 378.55274085178826 (ACTUAL), 350.0 (DESIRED)
+E   Max absolute difference among violations: 28.55274085
+E   Max relative difference among violations: 0.08157926
+E    ACTUAL: array([149.567948, 378.552741])
+E    DESIRED: array([150., 350.])
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.</failure></testcase></testsuite></testsuites>

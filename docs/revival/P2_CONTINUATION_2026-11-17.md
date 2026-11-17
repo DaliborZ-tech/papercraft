@@ -179,6 +179,32 @@ průchodu a zdrojově vázaném důkazu; konstrukční/doménový kontrakt nezm�
 Nativní nezávislé UX review, společný recovery hook a integrační ověření
 následují u ostatních vlastníků. Nový lidský uživatel a fyzické sestavení
 zůstávají **NOT_RUN**; autorův komponentový průchod je nenahrazuje.
+
+### Oprava 3D zaměření asymetrického materiálu — `8830273`
+
+Nativní nezávislý screenshot `13-Modelovani-fit-all.png` na `d94f9b3` ukázal
+oříznutou dolní výztuhu po Vše. Read-only komponentový přepočet přímo nad
+původním `own-four-part-model.apcraft` (SHA256 `d183ee40…f692a9`)
+potvrdil při viewportu 838×444 a yaw30/pitch55 promítnuté Y 127,11 až 482,31:
+38,31 px materiálu leželo pod viewportem. Původní střed byl midpoint světového
+bbox, zatímco span už používal otočené hranice. U asymetrického materiálu tyto
+středy nejsou ekvivalentní.
+
+`883027333580fb53c1002cbe5fbfb791f01e1b4f` centruje skutečný bbox v osách
+kamery a převádí střed zpět do světa. Model, soubor, schema, span a picking se
+nemění. Původní nový projekční test před opravou zachytil dva FAIL; po opravě
+**65 testů PASS / 8,79 s**, včetně 15 kombinací yaw/pitch/aspect a zachování F
+nad vybranými plochami i samostatným vzdáleným profilem. Orákulum počítá skalárně
+otáčení a pixelovou projekci bez produkčních camera/project_points helperů.
+Staré očekávání světového středu v Home integračním testu bylo nahrazeno
+přísnou kontrolou vycentrování a viditelnosti skutečných vrcholů.
+
+[Původní native soubor — před opravou](../p2/implementation/evidence/workspace-fit-native-before.json),
+[stejný nezměněný soubor — po opravě](../p2/implementation/evidence/workspace-fit-native-after.json),
+[FAIL JUnit](../p2/implementation/evidence/workspace-fit-before.xml),
+[PASS JUnit](../p2/implementation/evidence/workspace-fit-after.xml).
+Jde o opravu frontendové kamery; nativní replay a nezávislé UI přijetí provádí
+jiný reviewer. Komponentová projekce není náhrada nativního ani lidského testu.
 ### DATA01 — oddělené koncepty a obnova, první autorský kandidát
 
 Zdroj `7edf31431de0a3aa4a0b20636e57c09ba3b405d2` (autor `editor_review`,

@@ -1,0 +1,32 @@
+{
+  "source_file": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-recovery-review\\docs\\p2\\implementation\\evidence\\workspace-recovery-native\\own-four-part-model.apcraft",
+  "source_sha256": "d183ee40e18e5a21838b36ad99e2bd3f232855cbf8a1b107ae6d1ac5f6f692a9",
+  "viewport": [
+    838,
+    444
+  ],
+  "yaw": 30.0,
+  "pitch": 55.0,
+  "world_center": [
+    4679.072051102437,
+    2944.1364869405543,
+    583.3347789482227
+  ],
+  "span": 4102.735907715287,
+  "pixels_min": [
+    90.00290426629218,
+    44.39999999999996
+  ],
+  "pixels_max": [
+    747.9970957337079,
+    399.59999999999997
+  ],
+  "all_inside": true,
+  "world_vertex_count": 24,
+  "source_commit": "883027333580fb53c1002cbe5fbfb791f01e1b4f",
+  "actual_module": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-house-driver\\src\\archpapercraft\\ui\\author_viewport.py",
+  "module_sha256": "add34c7c47e92d63ef89fa8507d5a20f6c62e3e20683614faac67c934d539565",
+  "source_file_bytes_unchanged": true,
+  "projection_oracle": "independent scalar yaw then negative-pitch rotation, no camera/project_points helper",
+  "kind": "OFFSCREEN_READ_ONLY_NATIVE_SAVED_PROJECT"
+}
