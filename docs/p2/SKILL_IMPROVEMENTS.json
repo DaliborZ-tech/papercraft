@@ -811,8 +811,10 @@
         ]
       },
       "independent_review": {
-        "status": "PRODUCT_OR_TOOL_APPROVED_SKILL_TEXT_REVIEW_PENDING",
-        "report": "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+        "status": "APPROVED_IN_SKILL_TEXT_AND_REPAIR_SCOPE",
+        "report": "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md",
+        "review_commit": "90257e38d46554aa7c83af27d001298ec3c891c0",
+        "integration_report": "docs/revival/P2_CONTINUATION_2026-11-17.md"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
@@ -847,8 +849,10 @@
         ]
       },
       "independent_review": {
-        "status": "PRODUCT_OR_TOOL_APPROVED_SKILL_TEXT_REVIEW_PENDING",
-        "report": "docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md"
+        "status": "APPROVED_IN_SKILL_TEXT_AND_REPAIR_SCOPE",
+        "report": "docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md",
+        "review_commit": "90257e38d46554aa7c83af27d001298ec3c891c0",
+        "integration_report": "docs/revival/P2_CONTINUATION_2026-11-17.md"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {

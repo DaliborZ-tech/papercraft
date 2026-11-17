@@ -1253,7 +1253,8 @@
           "Empty-history detached CUBIC export bypass: reproduced and fixed3e6f, independently verified",
           "Retired LINE ROOT/left/right+None accepted on7c61; existing72f7fix rejects all3",
           "Reversed quarter-ARC topology false-INVALID independently reproduced and fixed09b6811; canonical author order preserves source topology. Final complete suite running on a5eedc9."
-        ]
+        ],
+        "final_full_suite": "1916PASS/0FAIL/0ERROR/0SKIP710.39s, source4f110d9; preserved failing a5 lifecycle fixtures adapted with stronger explicit stale/recompute/preservation proof."
       }
     },
     {
@@ -1390,30 +1391,38 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
+          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
+          "evidence": [
+            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+          ],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
+          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
+          "evidence": [
+            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+          ],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-verification",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
+          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
+          "evidence": [
+            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+          ],
           "review": "NOT_RUN"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "NOT_RUN",
-          "decision": null,
-          "evidence": [],
+          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
+          "evidence": [
+            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+          ],
           "review": "NOT_RUN"
         }
       ],
@@ -1443,7 +1452,8 @@
           "workflow_alternative_decision": null
         }
       },
-      "continuation_2026_11_17": "Preparing opt-in actual after-reopen author edits for A/B/C/D; original main flows retained, new native proof NOT_RUN until execution."
+      "continuation_2026_11_17": "Preparing opt-in actual after-reopen author edits for A/B/C/D; original main flows retained, new native proof NOT_RUN until execution.",
+      "priority_update_2026_11_17": "Owner rejects currentUI target. Implement coordinated4context authoring workspace and safe drafts/recovery, evaluate complete first-modelGUI independently using local+web evidence; preserve every geometry/manual-layout/export capability. No new roadmap or general audit."
     },
     {
       "id": "PC-010",
@@ -2721,7 +2731,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "IN_PROGRESS: owner resumed P2 v1.2 on 2026-11-17. CORE9-R01 independent replay, consumer hypotheses and UI integration active; C editor/scaling, PC009/010 remain open. AC-US08 0/NOT_RUN; physical P3 NOT_RUN.",
+  "p2_digital_delivery": "IN_PROGRESS: CORE9/C9 technical candidate independently verified, full1916PASS; current UI explicitly NOT_PRODUCT_ACCEPTED by owner. Real workspace redesign/recovery and expert UX local+internet+GUI validation prioritized; PC010 actual model NOT_RUN, novice0/NOT_RUN, physicalP3NOT_RUN.",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2787,7 +2797,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "PC-007B + PC-008; continue PC-009/PC-010 without routine approval",
+  "current_authorized_package": "Close verified CORE9/C9 technical integration; prioritize PC009 authoring workspace and independent expert UX validation plus safe drafts/recovery before historical PC010.",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2880,7 +2890,7 @@
     "whole_v12_contract_acceptance_implied": false
   },
   "current_delivery": {
-    "ticket": "PC-007B C authoring and PC-008 curved provenance",
+    "ticket": "PC009 usable authoring workspace, recovery and independent expert UX; close verified C9 integrity",
     "then": "PC-009",
     "followed_by": [
       "PC-008 remaining acceptance",
@@ -2908,7 +2918,7 @@
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "R01/detached guard/source-order fixes reviewed. Current a5 native ARC/CUBIC and C cylinder Qt150/cone/near plus all6 actual Inkscape pages PASS. Fulla5 1867PASS/37FAIL/10ERROR exposes historical D fixtures exporting deliberately stale imports without explicit recompute; investigate/adapt fixtures with migration proof, no unproven product defect claim. PC009 after-reopen tool prepared for independent review/native; historical driver preparation active.",
+    "active_work": "CORE9/C9 full1916PASS and independent technical review closed; exact integration metadata review and publication. In parallel actual4-context workspace implementation, grouped actionable problems, safe draft/recovery, independent local+web patterns and practicalGUI expert review. PC010 draft driver preserved, actual historicalmodelNOT_RUN.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3083,8 +3093,35 @@
       "cone": "docs/p2/implementation/evidence/c-cone-native-a5eedc9-run01/results.json",
       "near": "docs/p2/implementation/evidence/c-near-native-a5eedc9-run01/results.json",
       "all_six_SVG_pages_actual_Inkscape": "PASS; separate source-bound editor-results in evidence",
-      "full_suite": "NOT_PASS: legacy D stale-cache fixtures require explicit recompute; actual product behavior under investigation",
-      "integrated": false
+      "full_suite": "1916PASS/0FAIL/0ERROR/0SKIP710.39s on4f110d9; runtime/tests/tools hashes match candidate; raw prior failures preserved.",
+      "integrated": false,
+      "independent_review": "APPROVED_IN_C9_TECHNICAL_INTEGRATION_SCOPE:90257e38d46554aa7c83af27d001298ec3c891c0; final metadata review pending"
+    },
+    "expert_usability": {
+      "status": "IN_PROGRESS",
+      "requested_by_owner": true,
+      "sources": "local product/contracts/manual and public internet workflows/firsthand experiences",
+      "proof_kind": "independent expert agent actualGUI evaluation; no human participant substitution",
+      "participant_count": 0
     }
+  },
+  "owner_priority_update_2026_11_17": {
+    "sources": [
+      "owner_product_audit_attachment_7b4dd5d4",
+      "owner_explicit_independent_agent_local_and_internet_patterns_request",
+      "owner_screenshot_and_workspace_redesign_attachment_b9ec4989"
+    ],
+    "current_UI_product_acceptance": "NOT_ACCEPTED",
+    "first_delivery": "Working desktop vertical slice: empty project, several walls, dimension edit, join/tab, unfold, manualA4layout, save/reopen, SVG/PDF.",
+    "contexts": [
+      "Modelovani",
+      "Spoje a rozvin",
+      "Stranky",
+      "Export"
+    ],
+    "design_owner": "root Engineering Lead; one coordinated interaction architecture",
+    "independent_validation": "Expert agent research and actualGUI review requested; not substituted for new-human AC-US08",
+    "data_protection": "Independent atomic recovery drafts in active AuthorController/AuthorMainWindow, never overwrite last valid user file.",
+    "historical_model": "Preparation preserved; actualPC010 after usable authoring workspace."
   }
 }

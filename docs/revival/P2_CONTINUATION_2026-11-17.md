@@ -35,14 +35,37 @@ přebírají a ověřují zvlášť. Tento záznam není produktová akceptace a
 
 ## Otevřený rozsah
 
-Široký běh na `6969069` odhalil dva false-INVALID případy obráceného kuželového
-oblouku. Oprava, její nezávislé review a finální úplná regrese právě probíhají;
-dosavadní dílčí PASS tento nález nezakrývá. Nový finální zdroj vyžaduje vhodný
-opakovaný průchod C a source-bound výstupy před technickou integrací.
+Regrese obrácených kuželových oblouků je opravena `09b6811` a nezávisle ověřena.
+Finální úplná sada `4f110d9`: **1916 PASS, 0 FAIL/ERROR/SKIP, 710,39 s**.
+Původní neúspěšné běhy zůstávají zachované. Archivní D fixtures nyní výslovně
+ověřují odmítnutí staré cache před přepočtem a zachování autorské práce po něm;
+jejich původní numerické a negativní přejímky se nemění. Nové current9 D
+projekty prošly save/reopen i skutečnými SVG/PDF.
 
-PC-009 konsolidace a změny po reopen, PC-010 vlastní historický model a jejich
-finální nezávislé digitální ověření zůstávají rozpracované. AC-US08 má stále
-0 skutečných nových účastníků / NOT_RUN. Fyzické P3 je NOT_RUN.
+Na stejném produkčním zdroji `a5eedc9` prošel znovu válec Qt150 (101,125 s),
+kužel (169,063 s), near (146,5 s) a všech šest jejich skutečných SVG stránek
+editací a uložením v Inkscape. Tyto nové výsledky mají vlastní source binding;
+nezávislé integrační review je níže.
+
+PC-009 konsolidace a změny po reopen jsou rozpracované. V odděleném kandidátu
+prošel skutečný A se dvěma stránkami a oběma zámky, včetně druhé změny po
+reopen; dosavadní C9 integrační scope tento novější frontendový přírůstek
+nezahrnuje. PC-010 má připravený scénář, skutečný historický model je NOT_RUN.
+AC-US08 má stále 0 skutečných nových účastníků / NOT_RUN. Fyzické P3 je NOT_RUN.
+
+## Aktuální produktová priorita vlastníka
+
+Následný audit a konkrétní PO rozhodnutí nad screenshotem odmítají současné
+UI jako cílovou podobu. Nejbližší výstup je fungující desktop se čtyřmi volnými
+kontexty **Modelování / Spoje a rozvin / Stránky / Export**, kontextovým
+inspektorem, dominantním pracovním pohledem, dohledatelným výběrem a seskupenými
+opravitelnými problémy. Rozpracovanou práci má chránit oddělený autosave draft
+a recovery. Geometrické a datové kontrakty se neoslabují.
+
+Vlastník výslovně požádal nezávislého agenta o zkušenosti a vzory z místních
+i internetových zdrojů a praktické hodnocení GUI. Jde o expertní agentní
+ověření, nikoli provedený test nového člověka. Implementace workspace a recovery
+probíhá v oddělených větvích; historický model nepředbíhá tuto nápravu.
 
 Integrace tohoto pokračování na master a ověření remote SHA zatím PENDING.
 
