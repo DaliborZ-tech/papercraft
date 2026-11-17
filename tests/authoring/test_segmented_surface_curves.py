@@ -192,4 +192,16 @@ def test_historical_line_generation_opens_unchanged_with_curved_backend():
     assert len(p.segmented_variants) == 1 and len(p.material_part_ids()) == 64
     variant = next(iter(p.segmented_variants))
     assert p.segmented_variant_status(variant)["status"] == "APPROXIMATE"
+    original_bytes = path.read_bytes()
+    frames = {pid: copy.deepcopy(part.frame) for pid, part in p.parts.items()}
+    placements = copy.deepcopy(p.placements)
+    profiles, generations = copy.deepcopy(p.profiles), copy.deepcopy(p.segmented_variants)
+    assert any(p.parts[pid].stale for pid in p.material_part_ids())
+    with pytest.raises(ValidationError):
+        p.snapshot()
+    p.recompute()
+    assert p.profiles == profiles and p.segmented_variants == generations
+    assert p.placements == placements
+    assert {pid: part.frame for pid, part in p.parts.items()} == frames
+    assert path.read_bytes() == original_bytes
     assert [len(page["parts"]) for page in p.snapshot()["pages"]] == [32, 32]
