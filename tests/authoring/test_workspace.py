@@ -24,6 +24,36 @@ def switch_workspace(qtbot, window, context):
     qtbot.wait(5)
 
 
+@pytest.mark.parametrize("size", [(1366, 768), (1920, 1009)])
+def test_hiding_problem_details_returns_actual_viewport_space_without_refresh_resizing(
+    window, qtbot, size
+):
+    arrange_rectangle(window)
+    window.resize(*size)
+    qtbot.wait(20)
+    collapsed_dock, initial_view = window.issues_dock.height(), window.viewport.height()
+    before = deepcopy(window.project.to_dict())
+    qtbot.keyClick(window, Qt.Key.Key_F8)
+    qtbot.wait(10)
+    assert window.problems.issues.isVisible()
+    expanded_view = window.viewport.height()
+    assert expanded_view < initial_view
+    qtbot.mouseClick(window.problems.details, Qt.MouseButton.LeftButton)
+    qtbot.wait(20)
+    assert not window.problems.issues.isVisible()
+    assert window.issues_dock.height() <= collapsed_dock + 2
+    assert window.viewport.height() >= initial_view - 2
+    assert window.viewport.height() > expanded_view
+    # A later user allocation belongs to the user, including an ordinary refresh.
+    window.resizeDocks([window.issues_dock], [collapsed_dock + 70], Qt.Orientation.Vertical)
+    qtbot.wait(10)
+    user_height, user_view = window.issues_dock.height(), window.viewport.height()
+    window.refresh()
+    qtbot.wait(10)
+    assert window.issues_dock.height() == user_height and window.viewport.height() == user_view
+    assert window.project.to_dict() == before
+
+
 def test_profile_section_respects_collapse_across_surface_selection_and_refresh(window, qtbot):
     from PySide6.QtWidgets import QScrollArea
 

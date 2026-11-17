@@ -271,6 +271,22 @@ class AuthorMainWindow(QMainWindow):
         issues_dock = self.issues_dock = QDockWidget("Co je potřeba zkontrolovat", self)
         issues_dock.setWidget(self.problems)
         self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, issues_dock)
+        self.problems.details.toggled.connect(self._problems_details_toggled)
+
+    def _problems_details_toggled(self, expanded):
+        if not expanded:
+            QTimer.singleShot(0, self._compact_problems_dock)
+
+    def _compact_problems_dock(self):
+        dock = self.issues_dock
+        if (self.problems.details.isChecked() or dock.isFloating() or not dock.isVisible()
+                or self.dockWidgetArea(dock) not in (
+                    Qt.DockWidgetArea.TopDockWidgetArea, Qt.DockWidgetArea.BottomDockWidgetArea)):
+            return
+        # Hiding details lowers the minimum but QMainWindow retains the expanded
+        # dock allocation. Reclaim it only for this explicit collapse interaction.
+        self.problems.layout().activate()
+        self.resizeDocks([dock], [dock.sizeHint().height()], Qt.Orientation.Vertical)
 
     def eventFilter(self, watched, event):
         # Validate before a problem click can move focus away from a raw edit.
