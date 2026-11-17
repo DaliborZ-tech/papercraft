@@ -258,3 +258,22 @@ neúspěšného nebo přeskočeného testu. Tento běh nezahrnuje následující
 pojmenování a skutečně sbalených profilových ovladačů nalezené v GUI.
 Nativní expertní průchod, produktové UX přijetí, nový člověk a fyzický model
 mají vlastní stav; počet automatických testů je nenahrazuje.
+
+### Nezavisle uzavreni recovery nalezu
+
+**Opravný pin `07025ed282b187c6454a8ae08abeb626c4833217`: oba DATA01 nálezy
+uzavřeny nezávislým replay.** Adapter serializuje skutečnou SketchPlane a před
+obnovou ji validuje i porovnává s přesnou rovinou původního vlastníka otvoru.
+Nenahrazuje ji pojmenovanou či nejbližší rovinou. Samostatný `pending_name`
+zachovává rozepsaný text včetně prázdného, váže jej na přesné surface ID a
+obnovuje jej po pracovním kontextu bez přepsání platného doménového názvu.
+Změna nezasahuje Window/controller ani geometrii. Původní assertions vlastních
+negativů zůstaly zachovány; navíc přibylo skutečné dokončení obnoveného otvoru
+dalšími dvěma QTest clicky a Enterem, s přesnou rovinou vzniklého hole profilu.
+
+Finální cílený běh **48 PASS / 0 FAIL**, včetně vlastních pěti případů a
+původních storage/controller/adapter regresí: [JUnit po opravě](../p2/implementation/evidence/data01-peer-fixed.xml),
+[source/hash binding](../p2/implementation/evidence/data01-peer-binding.json).
+Původní FAIL evidence výše zůstala zachována. Tento scoped peer verdict přijímá
+technický recovery přírůstek na uvedeném pinu; není review vlastního workspace,
+nativní použitelnostní akceptace, nový člověk ani fyzický proof.

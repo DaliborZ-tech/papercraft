@@ -57,6 +57,15 @@ def test_recovery_preserves_unfinished_hole_on_existing_wall(window, qtbot):
     assert window.sketch.hole and window.sketch.drawing
     assert len(window.sketch.points) == 2
     assert window.draft_plane == plane
+    qtbot.wait(5)
+    for x, y in ((2000, 2000), (1000, 2000)):
+        qtbot.mouseClick(window.sketch.viewport(), Qt.MouseButton.LeftButton,
+                         pos=window.sketch.mapFromScene(QPointF(x, -y)))
+    qtbot.keyClick(window.sketch, Qt.Key.Key_Return)
+    assert not window.sketch.drawing
+    owner = window.project.surfaces[window.selected_surface]
+    assert len(owner.hole_profile_ids) == 1
+    assert window.project.profiles[owner.hole_profile_ids[0]].plane == plane
 
 
 @pytest.mark.parametrize("raw_name", ["Brana pending", ""])

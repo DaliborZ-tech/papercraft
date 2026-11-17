@@ -1,0 +1,28 @@
+﻿{
+    "schema":  1,
+    "original_source_commit":  "bea802078b3a7e192b04052396221d69c7721b83",
+    "fixed_source_commit":  "07025ed282b187c6454a8ae08abeb626c4833217",
+    "reviewer_checkout":  "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\recovery-peer-review",
+    "files_sha256":  {
+                         "src/archpapercraft/application/author_controller.py":  "473aa69c89ed6d837fec18c631487e8cef68fe076ebd29b2964ef62e855574fa",
+                         "src/archpapercraft/ui/author_recovery.py":  "c7e2f370ab9c5adf071c87012b4305a285ff3ed86708dd808ba88edf76ba54fb",
+                         "src/archpapercraft/authoring/recovery.py":  "b85f0e223e5f03bd78aa498ac0db258cacc45de1095388f27aabc1072b456278",
+                         "tests/authoring/test_recovery_peer_review.py":  "8a5317b55564ea31a2398e0c2f134112b0b8b728325cb197f7f39fc1050cacd0"
+                     },
+    "source_delta_against_fixed_pin":  "NONE (git diff -- src)",
+    "python":  "C:/Users/dalib/projects/papercraft/.venv/Scripts/python.exe",
+    "pythonpath":  "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\recovery-peer-review\\src",
+    "qt_platform":  "offscreen",
+    "module_identity":  "asserted inside original and peer pytest tests",
+    "original_results":  "33 PASS original; 2 PASS / 3 FAIL peer cases (two root causes)",
+    "fixed_results":  "48 PASS / 10.31 seconds",
+    "original_junit":  [
+                           "data01-peer-existing.xml",
+                           "data01-peer-own.xml"
+                       ],
+    "fixed_junit":  "data01-peer-fixed.xml",
+    "scope":  "RecoveryStore, controller API, recovery adapter; no acceptance of reviewer-authored workspace",
+    "native_desktop":  "NOT_RUN_BY_PEER",
+    "new_user":  "NOT_RUN",
+    "physical_build":  "NOT_RUN"
+}
