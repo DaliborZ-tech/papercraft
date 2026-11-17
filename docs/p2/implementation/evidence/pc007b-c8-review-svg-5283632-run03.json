@@ -1,0 +1,21 @@
+{
+  "source_sha": "52836321810f7a8a0c6a8d43b801f98ed875bbde",
+  "archive_sha256": "0000865c20986f9a37a54f636fd1311200d7cba7e36a0b3b8da88bffaf71ae2a",
+  "actual_import": {
+    "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007b-c8-svg-review-jkc9qh0z\\tools\\authoring\\circular_svg_oracle.py",
+    "sha256_lf": "7ecec13081dda4e54903df1da7dabd57b5b6a7b531c2f76d252791e2482a7661"
+  },
+  "own_tests_sha256_at_run": "03a1e051aa60c9c4615eacd29da5207233ddb3818e3979bba4091858fe2ded47",
+  "runs": {
+    "author": {
+      "exit": 0,
+      "stdout": "................                                                         [100%]\n16 passed in 0.12s\n",
+      "stderr": ""
+    },
+    "own": {
+      "exit": 0,
+      "stdout": ".............                                                            [100%]\n13 passed in 0.46s\n",
+      "stderr": ""
+    }
+  }
+}

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 import math
+import time
 import xml.etree.ElementTree as ET
 
 from PySide6.QtCore import Qt
@@ -16,6 +17,149 @@ from PySide6.QtWidgets import QDialogButtonBox
 
 
 class SubdivisionDesktopSteps:
+    def curved_subdivision_case(self, name):
+        """Draw a live source and exercise its dependent loft through real UI."""
+        kind = "arc" if name == "AU13-arc" else "cubic"
+        self.data(self.w.units, 1)
+        self.number(self.w.scale_field, 100)
+        self.number(self.w.grid, 100)
+        self.data(self.w.plane, "XY")
+        self.data(self.w.curve_mode, kind)
+        self.shortcut(Qt.Key.Key_L)
+        points = ([[-1000, 0], [0, -1000], [1000, 0]] if kind == "arc" else
+                  [[0, 0], [0, 4000], [4000, 4000], [4000, 0]])
+        self.sketch_points(self.w.sketch, points, finish=False)
+        QTest.keyClick(self.w.sketch, Qt.Key.Key_Return, Qt.KeyboardModifier.ControlModifier)
+        QTest.qWait(100)
+        self.check(not self.w.sketch.drawing, "Open curved profile was not committed")
+        first = self.w.selected_profile
+        root = self.w.project.profiles[first].segments[0].id
+        second = self._copy_loft_profile(first, factor=1, depth=1000)
+        loft = self._create_loft(first, second)
+        self.data(self.w.curve_mode, "line")
+        base = self.rectangle("AU13_control", 4000, 2000)
+        self.shortcut(Qt.Key.Key_R)
+        self.add_page()
+        self.place(base, 0, 40, 50)
+        self.place(loft, 1, 55, 90, 17)
+        self.paper_drag(loft, locked=False)
+        self.place(loft, 1, 55, 90, 17)
+        self.click(self.w.position_lock)
+        self.click(self.w.rotation_lock)
+        part_id = self.w.project.part_for_surface(loft)
+        frame = copy.deepcopy(self.w.project.parts[part_id].frame)
+        placements = copy.deepcopy(self.w.project.placements)
+        params = copy.deepcopy(self.w.project.surfaces[loft].parameters)
+        source_ids = self.w.project.surfaces[loft].source_profile_ids()
+        self.select(loft)
+        self.data(self.w.curve_choice, (first, root))
+
+        def wait_preview(dialog):
+            start = time.monotonic()
+            while dialog._running is not None and time.monotonic()-start < 180:
+                QTest.qWait(60)
+            self.check(dialog._packet is not None, "Curved preview absent: "
+                       + dialog.feedback.text())
+
+        before = copy.deepcopy(self.w.project.to_dict())
+
+        def cancel_invalid(dialog):
+            wait_preview(dialog)
+            dialog.distance.setFocus()
+            QTest.keyClick(dialog.distance, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+            QTest.keyClicks(dialog.distance, "-")
+            self.click(dialog.compute)
+            self.check(not dialog.buttons.button(QDialogButtonBox.StandardButton.Ok).isEnabled(),
+                       "Invalid distance enabled confirmation")
+            self.capture(name+"-invalid-distance", dialog)
+            self.click(dialog.buttons.button(QDialogButtonBox.StandardButton.Cancel))
+
+        self.modal(lambda: self.action("split_profile"), cancel_invalid)
+        self.check(self.w.project.to_dict() == before, "Invalid/canceled split changed work")
+        observed = {}
+        distance = 1000*math.pi/3 if kind == "arc" else 2000
+
+        def split(dialog):
+            wait_preview(dialog)
+            dialog.distance.setFocus()
+            QTest.keyClick(dialog.distance, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
+            QTest.keyClicks(dialog.distance, dialog.distance.locale().toString(
+                float(distance), "f", dialog.distance.decimals()))
+            self.click(dialog.compute)  # Pending text commits without Enter.
+            wait_preview(dialog)
+            parameter = float(dialog._packet["parameters"]["parameter"])
+            paper_distance = (10*math.pi*parameter if kind == "arc" else
+                              80*parameter**3-120*parameter**2+120*parameter)
+            self.near(paper_distance, distance*.01, "Independent measured split distance", .0011)
+            observed.update(parameter=parameter, distance_paper_mm=paper_distance)
+            self.capture(name+"-measured-split", dialog)
+            self.ok(dialog)
+
+        self.modal(lambda: self.action("split_profile"), split)
+        children = [s.id for s in self.w.project.profiles[first].segments]
+        self.check(len(children) == 2 and root not in children,
+                   "Split did not create two live descendants")
+        self.check(self.w.project.parts[part_id].stale, "Source split did not stale loft")
+        changed = copy.deepcopy(self.w.project.to_dict())
+        self.shortcut(Qt.Key.Key_Z)
+        self.check(self.w.project.to_dict() == before, "Split Undo lost source/layout")
+        self.shortcut(Qt.Key.Key_Y)
+        self.check(self.w.project.to_dict() == changed, "Split Redo changed identities")
+        self.shortcut(Qt.Key.Key_R)
+
+        def invariant(label):
+            p = self.w.project
+            self.check(p.parts[part_id].frame == frame and p.placements == placements,
+                       label+": frame, locks or either manual placement changed")
+            self.check(p.surfaces[loft].parameters == params and
+                       p.surfaces[loft].source_profile_ids() == source_ids,
+                       label+": source IDs, correspondence, seam or trim changed")
+            self.check(not p.parts[part_id].stale, label+": derived loft is stale")
+
+        invariant("split recompute")
+        self.select(loft)
+        self.data(self.w.curve_choice, (first, children[0]))
+
+        def merge(dialog):
+            wait_preview(dialog)
+            self.check(len(dialog.choices.selectedItems()) == 2,
+                       "Inverse merge did not expose both adjacent source descendants")
+            self.capture(name+"-inverse-merge", dialog)
+            self.ok(dialog)
+
+        self.modal(lambda: self.action("merge_profile"), merge)
+        self.shortcut(Qt.Key.Key_R)
+        invariant("inverse merge")
+        self.check(len(self.w.project.profiles[first].segments) == 1 and
+                   self.w.project.profiles[first].segments[0].id not in [root, *children],
+                   "Inverse merge revived a retired identity")
+        self.paper_drag(loft, locked=True)
+        self.linked_pick()
+        self.roles["curved_subdivision_loft"] = loft
+        self.curved_subdivision_expected = (100*math.pi if kind == "arc" else 800)
+        self.capture(name+"-final-layout")
+        self.step("AU13_live_curved_source_split_merge_undo_and_manual_layout",
+                  fixture=name, source_profiles=source_ids, root=root, children=children,
+                  **observed)
+        self.finish(name)
+
+    def audit_curved_subdivision_vectors(self, directory, svgs, pdf):
+        from vector_curve_oracle import pdf_stroked_areas, svg_signed_area
+
+        pid = self.w.project.part_for_surface(self.roles["curved_subdivision_loft"])
+        cuts = [node for svg in svgs for group in ET.parse(svg).getroot()
+                if group.get("data-part-id") == pid for role in group
+                if role.get("data-role") == "CUT" for node in role]
+        self.check(len(cuts) == 1, "Curved source loft CUT coverage changed")
+        expected = self.curved_subdivision_expected
+        self.near(abs(svg_signed_area(cuts[0].attrib["d"])), expected,
+                  "Actual merged-source SVG material area", .01)
+        actual = [value for page, value in pdf_stroked_areas(pdf) if page == 1]
+        self.check(len(actual) == 1, "Curved source loft PDF CUT coverage changed")
+        self.near(actual[0], expected, "Actual merged-source PDF material area", .01)
+        self.step("AU13_curved_actual_vector_material", expected_area_mm2=expected,
+                  pdf_area_mm2=actual[0], source="independent arc length / cubic speed integral")
+
     def audit_subdivision_vectors(self, directory, svgs, pdf):
         from desktop_b_proof import area, pdf_stroked_loops, svg_line_loops
 

@@ -621,10 +621,25 @@
         "integration_report": "docs/p2/implementation/PC008_INTEGRATION_REVIEW.md",
         "scope": "Text/metadata advice consistent with DU01; fix itself is not next-use efficacy"
       },
-      "effectiveness": "PENDING_NEXT_USE",
+      "effectiveness": "VERIFIED_TECHNICALLY_IN_C_CONTEXT_AND_REJECTED_INPUT_SCOPE; broader use PENDING_NEXT_USE; novice0/NOT_RUN",
       "next_use": {
-        "status": "NOT_RUN",
-        "example": "A different context selector with subordinate material/profile selection; this repair itself is not a next-use efficacy proof"
+        "status": "INITIAL_TRANSFER_FAILED_CUI01_THEN_FIXED_AND_INDEPENDENTLY_REPLAYED",
+        "example": "C set selector with two owners exposed a tree-priority bug during implementation; independent CUI01 then exposed rejected pending-input control rollback missing. Both valid context and rejected C05 branches now have bounded technical proof.",
+        "source_sha": "e1c06f5b068880ac22b28516ce69c66aee32603d",
+        "independent_review_commit": "53e6d2812728b7f6f6ddd094ea649055f65509b6",
+        "report": "docs/p2/implementation/PC007B_CURVED_AUTHORING_UI_REVIEW.md",
+        "evidence_kind": "offscreen actual Qt widgets and independent source-bound replay; not a new human",
+        "observed_new_users": 0,
+        "broader_transfer": "PENDING_NEXT_USE"
+      },
+      "followup_improvement_2026_11_11": {
+        "problem": "CUI01: selection/checkbox can change visibly before a pending-input guard rejects the command",
+        "cause": "Guard preserved the document but did not restore the already changed control; a broad refresh would erase the invalid text to be repaired",
+        "product_fix": "e1c06f5: QSignalBlocker restores set choice/enabled control without touching raw pending input",
+        "skill_example": "Attempt to switch C set while vertex dimension is empty; keep previous owner/tree/control and raw invalid text",
+        "verification": "CUI01 independent unchanged oracles PASS in 9-case source-bound replay; original55 UI regressions PASS separately",
+        "skill_text_review": "PENDING_INTEGRATION_REVIEW",
+        "next_use_effectiveness": "PENDING_NEXT_USE_FOR_REFINED_ADVICE"
       }
     },
     {
@@ -704,8 +719,12 @@
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {
-        "status": "NOT_RUN",
-        "example": "A different persistent-reference consumer; regression of the same repaired bend is not next-use or a novice observation"
+        "status": "INITIAL_TRANSFER_FAILED_C_BOUNDED_FRAME_REPLAY_THEN_FIXED_PENDING_INTEGRATION_REVIEW",
+        "example": "C source-only material reconstruction still required an active paper-frame axis despite the LINE semantic resolver; a distant selected material part with a split axis exposed the failure.",
+        "cause_evidence": "docs/p2/implementation/evidence/pc007b-combined-format-diagnostics-run01/papercraft-c8-combined-run01.log",
+        "product_correction_source": "d5a62d1; rebuild_curved_material_binding carries scoped history and resolves complete historical frame axis/anchor",
+        "verification": "50 targeted PASS including real C status/material roundtrip with retired foreign-frame axis; independent reviewer own source cases performed, final report pending",
+        "broader_efficacy": "PENDING_NEXT_USE; no new-user or physical claim"
       }
     }
   ]

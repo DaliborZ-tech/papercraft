@@ -19,4 +19,13 @@ Před uložením, exportním snapshotem nebo rozhodnutím o neuložených změn�
 
 Přepnutí pracovního kontextu sjednoť s aktuálním podvýběrem, stromem, vlastnostmi a3D zvýrazněním. [DU01](../../../docs/p2/implementation/PC008_UI_REVIEW.md) ukázal novou generaci v panelu, ale stále vybraný díl staré generace. Nestačí změnit popisek; podvýběr převeď na jednoznačného vlastníka nebo jej zruš. Příklad: při volbě jiné odvozené generace se vybere její původní konstrukční cíl a uvolní stará hrana/bod, zatímco samostatná volba materiálu pro tisk se nezmění. Ověř oba vlastníky a bezpečný další příkaz; přenos na jiný přepínač zůstává neověřený, dokud není skutečně použit.
 
+Ověř také odmítnuté přepnutí při rozepsaném neplatném vstupu. CUI01 v
+[revizi kruhových chlopní](../../../docs/p2/implementation/PC007B_CURVED_AUTHORING_UI_REVIEW.md)
+ponechal správně původní dokument, ale combobox nebo checkbox již ukazoval
+novou volbu. Vrať dotčený ovladač k platnému kontextu bez vyvolání dalšího
+příkazu; zachovej chybný rozepsaný text pro opravu. Příklad: změna sady při
+prázdném rozměru nesmí ukázat cizí sadu ani smazat rozepsaný rozměr. Ověř
+výsledek příkazu i skutečně viditelný stav. Agentní replay tohoto případu
+nenahrazuje pozorování začátečníka.
+
 Výchozí výrobní označení posuzuj na skutečně rozmístěných dílech. DU02 v [průběhu D](../../../docs/p2/implementation/PC008_NATIVE_PROGRESS.md) ukázal, že dlouhý konstrukční název každého z64 dílů přesáhl sousední buňky. U nově generovaných dílů použij krátké jednoznačné označení a plný kontext zachovej ve stromu/vlastnostech; existující autorská jména nepřepisuj. Příklad: P26 se musí dát dohledat z papíru v3D i ve stromu. Ověř skutečný layout i vektorový výstup; screenshot autora není nový uživatel ani fyzický výtisk a účinek na jiném typu dílů zůstává pending.

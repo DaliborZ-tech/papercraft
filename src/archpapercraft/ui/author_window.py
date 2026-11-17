@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from PySide6.QtCore import QSettings, Qt, QTimer
+from PySide6.QtCore import QSettings, QSignalBlocker, Qt, QTimer
 from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (
     QAbstractSpinBox,
@@ -1088,14 +1088,18 @@ class AuthorMainWindow(QMainWindow):
         index = next((i for i in range(self.curve_choice.count())
                       if self.curve_choice.itemData(i) == selected), -1)
         self.curve_choice.setCurrentIndex(index if index >= 0 else 0)
+        self._curve_context = self.curve_choice.currentData()
         enabled = self.curve_choice.count() > 0
         self.curve_edit_button.setEnabled(enabled)
         self.actions["edit_curve"].setEnabled(enabled)
         pair = self.curve_choice.currentData()
         current = self.project.profiles[pair[0]].segment(pair[1]) if pair else None
-        line_selected = current is not None and current.kind == "line"
-        self.actions["split_profile"].setEnabled(line_selected)
-        self.split_profile_button.setEnabled(line_selected)
+        supported = current is not None and current.kind in ("line", "arc", "cubic")
+        self.actions["split_profile"].setEnabled(supported)
+        self.split_profile_button.setEnabled(supported)
+        self.split_profile_button.setToolTip(
+            "Přidejte bod ve vzdálenosti měřené po skutečném obrysu; tvar se nezmění."
+            if supported else "Nejprve vyberte úsek vlastního obrysu.")
         record = self.project._subdivision_record(*pair) if pair else None
         merge_enabled = record is not None and len([
             edge for edge in self.project.profiles[pair[0]].segments
@@ -1117,12 +1121,29 @@ class AuthorMainWindow(QMainWindow):
     def choose_curve(self):
         if self._updating or not self.curve_choice.currentData():
             return
-        profile_id, segment_id = self.curve_choice.currentData()
+        requested = self.curve_choice.currentData()
+        if not self._commit_pending_input():
+            with QSignalBlocker(self.curve_choice):
+                self.curve_choice.setCurrentIndex(
+                    next((i for i in range(self.curve_choice.count())
+                          if self.curve_choice.itemData(i) ==
+                          getattr(self, "_curve_context", None)), -1))
+            return
+        with QSignalBlocker(self.curve_choice):
+            self.curve_choice.setCurrentIndex(next(
+                (i for i in range(self.curve_choice.count())
+                 if self.curve_choice.itemData(i) == requested), -1))
+        if self.curve_choice.currentData() is None:
+            return
+        profile_id, segment_id = requested
+        self._curve_context = (profile_id, segment_id)
+        self.selected_profile = profile_id
+        self.selected_vertex = (
+            profile_id, self.project.profiles[profile_id].segment(segment_id).start_vertex_id)
         if self.selected_surface:
-            self.selected_profile = profile_id
             self.selected_edge = (self.selected_surface, segment_id)
-            self._show_source_sketch()
-            self._sync_selection()
+        self._show_source_sketch()
+        self._sync_selection()
 
     def edit_curve(self):
         if not self._commit_pending_input():
@@ -1153,7 +1174,7 @@ class AuthorMainWindow(QMainWindow):
         if not pair:
             return
         profile_id, segment_id = pair
-        source_state = self.controller.digest(self.project.to_dict())
+        source_state = self.controller.digest(self.project.to_dict(validate=False))
         dialog = SubdivisionDialog(
             self.project, profile_id, segment_id, joining=joining,
             unit_factor=self.unit_factor, unit_label=self.units.currentText(), parent=self)
@@ -1161,7 +1182,7 @@ class AuthorMainWindow(QMainWindow):
             return
 
         def apply():
-            if self.controller.digest(self.project.to_dict()) != source_state:
+            if self.controller.digest(self.project.to_dict(validate=False)) != source_state:
                 raise ValueError("Projekt se od náhledu změnil. Otevřete dělení znovu.")
             if joining:
                 new_id = self.controller.execute("Spojit původní úseky", lambda p:
