@@ -1,0 +1,44 @@
+{
+  "status": "RECORDED_PATH_REPLAY_PASS_NOT_NEW_NATIVE_EDITOR_RUN",
+  "runtime_head": "b9ff396cf9d319cbceb64d1cab0e0d8cb3effe30",
+  "path_count": 23,
+  "elapsed_seconds": 0.6156915000174195,
+  "part_role_totals_exact": {
+    "CUT": {
+      "length": "978791019222573560159518494646613880363369999207484899440574119034672364781/50000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "area": "128976615801029733166869973340226962074096039895784066180366895221957619793/100000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "TABS": {
+      "length": "1157179848923633081031595364522990619213815547300538377293021883353108779007/100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "area": "2014276169595639787046858299021165073342822272545882895316707860881028023/100000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "GUIDES": {
+      "length": "6544291787153175052356752361265242669652513013385226904264941759519976001/1250000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "area": "0"
+    }
+  },
+  "linear_frames": [
+    {
+      "status": "CERTIFIED_TRANSLATION_ONLY",
+      "net_angle_deg_exact": "17",
+      "allowed_operators": [
+        "translate",
+        "rotate"
+      ],
+      "units_condition": "UNCHANGED_ROOT_VIEWBOX_AND_PHYSICAL_SIZE"
+    }
+  ],
+  "origin_recorded_svg_sha256": {
+    "editor-original.svg": "cfc943885c29c00591c5f86cbc25b88a2be86c55ed0b1328cb0b75aa5a219d57",
+    "editor-edited.svg": "fad4dc8edf702fe8ae20869aebb9f016341ac7f741fc4e573f6d57474ba61c3a"
+  },
+  "reviewer": "editor_review",
+  "application_import": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\editor-review\\src\\archpapercraft\\__init__.py",
+  "source_sha256": {
+    "tools/authoring/editor_curve_equivalence.py": "3a20d7ea1f127db9b71c3a30d4e745a825e6161b3474de1bde19c1729cdb882f",
+    "tools/authoring/editor_probe.py": "43eeff47a034b9d11be095024c69452ede5a352d140d57e54dd9f49206810d64",
+    "docs/p2/implementation/evidence/editor-equivalence-review-own.py": "4cb9d3f5f89e71cf27cc0016921c715fa3b55ab5268e4837ef164ef8590889a4",
+    "docs/p2/implementation/evidence/editor-near-failed-5283632-paths.json": "3a0d519199a35cfbc57f4363fbfcab067b5b9c9ec2675dff6475a061b22464e4"
+  },
+  "limits": "Recorded path replay only; no new desktop or editor run"
+}
