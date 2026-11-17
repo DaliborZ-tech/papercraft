@@ -84,3 +84,43 @@ a omezený verdikt jiného agenta. Toto potvrzuje technické komponenty příkaz
 nikoli osvojitelnost začátečníkem. Finální integrovaný commit, nativní Windows
 ARC/CUBIC workflow přes export, nový uživatel AC-US08 a fyzické P3 nejsou tímto
 review schváleny a vyžadují vlastní důkazy.
+
+### Následná revize harnessu a přenosu poučení na 6969069
+
+Reviewer `editor_review` posoudil přesný root snapshot
+`696906954f3e6863a6c945a1afc0d62f9d60f769`. Jediná nová změna nástroje
+`subdivision_desktop_steps.py` čte v obou místech `SurfaceFeature.params`,
+jak tuto entitu skutečně deklaruje `model.py`. Původní
+[native FAIL](evidence/au13-arc-native-5415e2-run01/results.json) explicitně končí
+na neexistujícím atributu `parameters`. **APPROVED_IN_HARNESS_OBSERVATION_FIX_SCOPE**:
+oprava nepřepisuje parametry konstrukce a není opravou geometrie. Původní FAIL
+zůstává. Úspěch opakovaného nativního průchodu se z této source revize neodvozuje.
+
+Nové dva odstavce `papercraft-verification/SKILL.md` odpovídají konkrétním
+příčinám doloženým v CORE9 checkpointu a replay evidenci: pozdní přepsání
+`sys.path` v `tests/conftest.py`, záměna všech historických ID za aktivní
+replay autoritu a vynechaná kontrola při prázdném detached registru. Rada žádá
+skutečnou import kontrolu ve vykonávajícím procesu a přenos negativu přes writer,
+zachovává legitimní orphan/UNRESOLVED a nepožaduje novou historii pro platné
+legacy profily bez descriptoru. **APPROVED_IN_SK008_FOLLOWUP_AND_SK016_TEXT_SCOPE**.
+U obou nově zpřesněných postupů je správné ponechat účinnost
+**PENDING_NEXT_USE**; revize textu není jeho další použití ani finální doménové
+schválení. `SK-016.reason.source` v tomto pinu odkazuje na dosud nepřevzatý
+`AU13_CORE9_APPLICATION_REVIEW.md`; finální integrace musí převzít skutečný
+review report nebo odkaz přesměrovat na existující checkpoint.
+
+Přenos zpřesněného SK013 do volby zdrojové křivky byl zvlášť proveden nad
+skutečnými offscreen widgety na tomto pinu:
+[**2 PASS / 16 deselected / 1,37 s**](evidence/sk013-curved-context-review-6969069.xml).
+Při neplatném rozepsaném rozměru zůstává původní curve combobox, profil, hrana,
+vertex i strom a raw `-` lze opravit. Při platném rozepsaném rozměru se změna
+nejprve uloží jediným controller příkazem, pak zůstává požadovaný nový segment
+a jeho výchozí vertex, namísto kontextu předchozího refreshu. Import
+`author_window.__file__` byl explicitně ověřen ve vlastním `src`.
+
+Pro SK013 lze pravdivě doplnit další úzký přenos
+**VERIFIED_TECHNICALLY_IN_CURVED_SOURCE_CHOICE_VALID_AND_REJECTED_INPUT_SCOPE**,
+schválení zpřesněného textu v tomto rozsahu a odkaz na tento report/JUnit.
+Historické CUI01 selhání i následná oprava se zachovají; širší účinnost zůstává
+PENDING_NEXT_USE, nový člověk 0/NOT_RUN a fyzické P3 NOT_RUN. Reviewer neměnil
+queue, skills ani produkční zdroje a nevyslal žádný nativní desktopový vstup.
