@@ -1,0 +1,5356 @@
+{
+  "requested_per_process_scale": 1.5,
+  "actual_screens": [
+    {
+      "name": "PL2293H",
+      "device_pixel_ratio": 1.5,
+      "logical_dpi": 96.0,
+      "available_logical": [
+        0,
+        0,
+        1280,
+        688
+      ]
+    },
+    {
+      "name": "MNG007QX2-2",
+      "device_pixel_ratio": 1.875,
+      "logical_dpi": 96.0,
+      "available_logical": [
+        -1920,
+        0,
+        1024,
+        608
+      ]
+    }
+  ],
+  "evidence_kind": "actual native input; non-consuming event filter",
+  "observed_new_users": 0,
+  "os_scaling_certification": "NOT_RUN",
+  "events": [
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        121.0,
+        48.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        121.0,
+        48.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "CurveSketch",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        122.0,
+        49.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        122.0,
+        49.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        122.0,
+        49.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        131.0,
+        120.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.922000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorMainWindow",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        393.0,
+        173.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        156.0,
+        83.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        156.0,
+        83.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonRelease",
+      "target_class": "CurveSketch",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        157.0,
+        84.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        157.0,
+        84.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        157.0,
+        84.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        166.0,
+        155.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.952999999979511,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorMainWindow",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        428.0,
+        208.0
+      ],
+      "global_point": [
+        428.0,
+        223.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        191.0,
+        48.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        191.0,
+        48.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "CurveSketch",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        192.0,
+        49.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        192.0,
+        49.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        192.0,
+        49.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        201.0,
+        120.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 5.983999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorMainWindow",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        463.0,
+        173.0
+      ],
+      "global_point": [
+        463.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        156.0,
+        13.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        156.0,
+        13.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonRelease",
+      "target_class": "CurveSketch",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        157.0,
+        14.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        157.0,
+        14.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        157.0,
+        14.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        166.0,
+        85.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.015000000130385,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorMainWindow",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        428.0,
+        138.0
+      ],
+      "global_point": [
+        428.0,
+        153.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        121.0,
+        48.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        121.0,
+        48.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "CurveSketch",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        122.0,
+        49.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        122.0,
+        49.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        122.0,
+        49.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        131.0,
+        120.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.047000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorMainWindow",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        393.0,
+        173.0
+      ],
+      "global_point": [
+        393.0,
+        188.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -35,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.75,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.75,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.797000000020489,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        131.0
+      ],
+      "global_point": [
+        288.0,
+        167.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 6.797000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        131.0
+      ],
+      "global_point": [
+        288.0,
+        167.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 7.530999999959022,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        39.0,
+        11.0
+      ],
+      "global_point": [
+        650.0,
+        485.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 7.547000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        39.0,
+        11.0
+      ],
+      "global_point": [
+        650.0,
+        485.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.125,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.125,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.172000000020489,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        179.0
+      ],
+      "global_point": [
+        288.0,
+        215.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.172000000020489,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        179.0
+      ],
+      "global_point": [
+        288.0,
+        215.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.75,
+      "type": "MouseButtonPress",
+      "target_class": "QCheckBox",
+      "target_name": "loft_confirm_pairs",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        199.0,
+        665.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.75,
+      "type": "MouseButtonRelease",
+      "target_class": "QCheckBox",
+      "target_name": "loft_confirm_pairs",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        199.0,
+        665.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.858999999938533,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "loft_calculate",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        222.0,
+        11.0
+      ],
+      "global_point": [
+        403.0,
+        732.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 8.858999999938533,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "loft_calculate",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        222.0,
+        11.0
+      ],
+      "global_point": [
+        403.0,
+        732.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 15.344000000040978,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        47.0,
+        11.0
+      ],
+      "global_point": [
+        945.0,
+        784.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 15.344000000040978,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        47.0,
+        11.0
+      ],
+      "global_point": [
+        945.0,
+        784.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        55,
+        -40,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.062000000150874,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.062000000150874,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.17200000002049,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.187000000150874,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.219000000040978,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        227.0
+      ],
+      "global_point": [
+        288.0,
+        263.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.219000000040978,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        227.0
+      ],
+      "global_point": [
+        288.0,
+        263.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.437000000150874,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        39.0,
+        11.0
+      ],
+      "global_point": [
+        1008.0,
+        777.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.437000000150874,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        39.0,
+        11.0
+      ],
+      "global_point": [
+        1008.0,
+        777.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.608999999938533,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.625,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        134.0,
+        10.0
+      ],
+      "global_point": [
+        134.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.655999999959022,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        227.0
+      ],
+      "global_point": [
+        288.0,
+        263.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 16.655999999959022,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        178.0,
+        227.0
+      ],
+      "global_point": [
+        288.0,
+        263.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 17.375,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 17.375,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 33.45299999997951,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        401.0,
+        11.0
+      ],
+      "global_point": [
+        622.0,
+        270.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 33.45299999997951,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        401.0,
+        11.0
+      ],
+      "global_point": [
+        622.0,
+        270.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 33.687000000150874,
+      "type": "MouseButtonPress",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        349.0,
+        277.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 33.687000000150874,
+      "type": "MouseButtonRelease",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        349.0,
+        277.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 34.54700000002049,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        94.0,
+        11.0
+      ],
+      "global_point": [
+        717.0,
+        578.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 34.54700000002049,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        94.0,
+        11.0
+      ],
+      "global_point": [
+        717.0,
+        578.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 34.937000000150874,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 34.937000000150874,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 43.34400000004098,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 43.34400000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 54.53099999995902,
+      "type": "MouseButtonPress",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        229.0,
+        612.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 54.53099999995902,
+      "type": "MouseButtonRelease",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        229.0,
+        612.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 55.062000000150874,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 55.062000000150874,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        207.0,
+        11.0
+      ],
+      "global_point": [
+        418.0,
+        725.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 71.79700000002049,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        59.0,
+        11.0
+      ],
+      "global_point": [
+        902.0,
+        777.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 71.79700000002049,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        59.0,
+        11.0
+      ],
+      "global_point": [
+        902.0,
+        777.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 75.78099999995902,
+      "type": "MouseButtonPress",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        64.0,
+        11.0
+      ],
+      "global_point": [
+        1068.0,
+        418.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 75.78099999995902,
+      "type": "MouseButtonRelease",
+      "target_class": "QPushButton",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        64.0,
+        11.0
+      ],
+      "global_point": [
+        1068.0,
+        418.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        192,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 77.25,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        7.0
+      ],
+      "global_point": [
+        137.0,
+        114.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        470,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 77.25,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        7.0
+      ],
+      "global_point": [
+        137.0,
+        114.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        470,
+        -64,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 81.75,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        470,
+        -64,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 82.125,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        96.35781671159029
+      ],
+      "paper_viewport": [
+        359,
+        300
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        470,
+        -64,
+        89
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.0,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        333,
+        -35,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.0,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        333,
+        -35,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.06200000015087,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        221.0,
+        10.0
+      ],
+      "global_point": [
+        221.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        333,
+        -35,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.07799999997951,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        221.0,
+        10.0
+      ],
+      "global_point": [
+        221.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        333,
+        -35,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.125,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        120.0,
+        11.0
+      ],
+      "global_point": [
+        286.0,
+        47.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        333,
+        -35,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.125,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        120.0,
+        11.0
+      ],
+      "global_point": [
+        286.0,
+        47.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        1.1830903178432812,
+        0.0,
+        0.0,
+        1.1830903178432812,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        136.08428500496524,
+        89.59586466165413
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        -18,
+        -35
+      ],
+      "paper_scroll_ranges": [
+        -18,
+        333,
+        -35,
+        105
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.20299999997951,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        118.0,
+        73.0
+      ],
+      "global_point": [
+        722.0,
+        229.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 89.60899999993853,
+      "type": "MouseMove",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        136.0,
+        83.0
+      ],
+      "global_point": [
+        740.0,
+        239.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 0
+    },
+    {
+      "seconds": 89.60899999993853,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        136.0,
+        83.0
+      ],
+      "global_point": [
+        740.0,
+        239.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 91.20299999997951,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 91.20299999997951,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 95.15599999995902,
+      "type": "MouseButtonPress",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        1005.0,
+        388.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 95.15599999995902,
+      "type": "MouseButtonRelease",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        1005.0,
+        388.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 96.71900000004098,
+      "type": "MouseButtonPress",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        1005.0,
+        415.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 96.71900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QCheckBox",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        8.0,
+        10.0
+      ],
+      "global_point": [
+        1005.0,
+        415.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.25,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.25,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "qt_scrollarea_viewport",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        136.0,
+        23.0
+      ],
+      "global_point": [
+        137.0,
+        130.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.31200000015087,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        221.0,
+        10.0
+      ],
+      "global_point": [
+        221.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.32799999997951,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        221.0,
+        10.0
+      ],
+      "global_point": [
+        221.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.35899999993853,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        120.0,
+        11.0
+      ],
+      "global_point": [
+        286.0,
+        47.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.35899999993853,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        120.0,
+        11.0
+      ],
+      "global_point": [
+        286.0,
+        47.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.45299999997951,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        118.0,
+        73.0
+      ],
+      "global_point": [
+        722.0,
+        229.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.84400000004098,
+      "type": "MouseMove",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        136.0,
+        83.0
+      ],
+      "global_point": [
+        740.0,
+        239.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 0
+    },
+    {
+      "seconds": 98.84400000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        136.0,
+        83.0
+      ],
+      "global_point": [
+        740.0,
+        239.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.96900000004098,
+      "type": "MouseButtonPress",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        221.0,
+        10.0
+      ],
+      "global_point": [
+        221.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 98.96900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenuBar",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        221.0,
+        10.0
+      ],
+      "global_point": [
+        221.0,
+        25.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 99.01500000013039,
+      "type": "MouseButtonPress",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        120.0,
+        35.0
+      ],
+      "global_point": [
+        286.0,
+        71.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 99.01500000013039,
+      "type": "MouseButtonRelease",
+      "target_class": "QMenu",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        120.0,
+        35.0
+      ],
+      "global_point": [
+        286.0,
+        71.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        3.1605328059821294,
+        0.0,
+        0.0,
+        3.1605328059821294,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        323.0467970677261,
+        88.59265737410706
+      ],
+      "paper_viewport": [
+        359,
+        284
+      ],
+      "paper_scroll": [
+        842,
+        139
+      ],
+      "paper_scroll_ranges": [
+        -48,
+        1490,
+        -95,
+        754
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 102.64000000013039,
+      "type": "MouseButtonPress",
+      "target_class": "AuthorViewport",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        126.0,
+        131.0
+      ],
+      "global_point": [
+        397.0,
+        386.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        298
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 102.96900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorViewport",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        126.0,
+        131.0
+      ],
+      "global_point": [
+        397.0,
+        386.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        298
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 102.96900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        126.0,
+        231.0
+      ],
+      "global_point": [
+        397.0,
+        386.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        298
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 102.96900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QSplitter",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        126.0,
+        231.0
+      ],
+      "global_point": [
+        397.0,
+        386.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        298
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 102.96900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        135.0,
+        318.0
+      ],
+      "global_point": [
+        397.0,
+        386.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        298
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "button": 1
+    },
+    {
+      "seconds": 102.96900000004098,
+      "type": "MouseButtonRelease",
+      "target_class": "AuthorMainWindow",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": false,
+      "local_point": [
+        397.0,
+        371.0
+      ],
+      "global_point": [
+        397.0,
+        386.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        298
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "button": 1
+    }
+  ]
+}

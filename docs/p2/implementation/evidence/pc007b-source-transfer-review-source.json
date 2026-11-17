@@ -1,0 +1,20 @@
+{
+  "source_sha": "f10fa26ad86e232429c7000772d983a2ba9fc4f5",
+  "actual_module": "C:\\Users\\dalib\\projects\\papercraft-curved-tabs-transfer-review\\src\\archpapercraft\\authoring\\curved_tabs_transfer.py",
+  "files": {
+    "src/archpapercraft/authoring/curved_tabs_transfer.py": {
+      "actual_sha256": "213f8255cdea7628897a0b2a2aa74a5e3856dac0e8838ecaeb9512b3df70b65f",
+      "git_blob_sha256": "9c8fff6754f181a03cb0fb4e844c728a90c964db4065b85402effdf1ebf407cb"
+    },
+    "src/archpapercraft/authoring/curved_tabs_chart.py": {
+      "actual_sha256": "df13d4635ffdf836eb4ed760d90d747b325f6cd704342aab0d83e77c716505e7",
+      "git_blob_sha256": "a9fe8911a8a5d546105437f5c4287ebc5a50e75b0148183b5d2eccc8ad09a878"
+    },
+    "src/archpapercraft/authoring/curved_tabs.py": {
+      "actual_sha256": "8c65ea9f01249185f3b0d75e5e580b87308eac8a41783300ca93f0cfc7ad26ed",
+      "git_blob_sha256": "e64ef4cd8b886735203d7b2a75fbf050af861c7863a27ee2fb026d7024ac9d3b"
+    }
+  },
+  "independent_expected": "direct analytic Jacobian, exact cylinder shear/triangle, independent integer-sqrt bounds for actual binary H, no production geometry helper for expected",
+  "proof_scope": "conditional pure math only, binder/native body union/world source registry/export/UI/novice/physical NOT_PROVED"
+}

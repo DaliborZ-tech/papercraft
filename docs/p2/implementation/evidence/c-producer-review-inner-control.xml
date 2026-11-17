@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="4.801" timestamp="2026-11-11T16:47:32.819198+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007b-circular-producer-review-own" name="test_pdf_guide_inner_control_fault_is_not_hidden_by_unchanged_endpoints" time="3.765"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'tištěný GUIDES'&#10;  Actual message: 'Vektorový výstup: Nelze ověřit úplné zdroje kruhového materiálu: CURVED_CONNECTOR_UNRESOLVED: Kruhová publikace neodpovídá všem skutečným zdrojům a tiskovým dílům.'">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1477/test_pdf_guide_inner_control_f0')
+
+    def test_pdf_guide_inner_control_fault_is_not_hidden_by_unchanged_endpoints(tmp_path):
+        from pypdf import PdfWriter
+        from pypdf.generic import DecodedStreamObject, NameObject
+    
+        run = EVIDENCE / "pc007b-circular-material-67c44ae-run01/cone-first"
+        snapshot = json.loads((run / "snapshot.json").read_text(encoding="utf-8"))
+        sid = next(iter(snapshot["construction_checks"]["lofts"]))
+        pid = next(part["id"] for page in snapshot["pages"] for part in page["parts"]
+                   if part["surface_ids"] == [sid])
+        reader,writer = PdfReader(run/"vectors/model.pdf"),PdfWriter()
+        changed = False
+        for page in reader.pages:
+            raw = page.get_contents().get_data()
+            if f"/APPart_{pid} BMC".encode() in raw:
+                before,tail = raw.split(b"/APRole_GUIDES BMC",1)
+                guide,after = tail.split(b"EMC",1)
+                # The endpoint and both other control operands remain byte-exact.
+                pattern = rb"([-+0-9.]+) ([-+0-9.]+) ([-+0-9.]+) ([-+0-9.]+) ([-+0-9.]+) ([-+0-9.]+) c"
+                match = re.search(pattern,guide)
+                assert match
+                first = float(match[1])+.001
+                replacement = repr(first).encode()+b" "+b" ".join(match.groups()[1:])+b" c"
+                guide = guide[:match.start()]+replacement+guide[match.end():]
+                stream = DecodedStreamObject()
+                stream.set_data(before+b"/APRole_GUIDES BMC"+guide+b"EMC"+after)
+                page[NameObject("/Contents")] = stream
+                changed = True
+            writer.add_page(page)
+        assert changed
+        pdf = tmp_path/"control.pdf"
+        with pdf.open("wb") as handle:
+            writer.write(handle)
+        # The low-level role reader accepts a well-formed geometric cubic chain.
+        read_pdf_cut_regions(pdf,role="GUIDES",require_closed=False)
+        paths = [run/"vectors"/f"page-{page['id']}.svg" for page in snapshot["pages"]]
+&gt;       with pytest.raises(CurveOutputError,match="tištěný GUIDES"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'tištěný GUIDES'
+E         Actual message: 'Vektorový výstup: Nelze ověřit úplné zdroje kruhového materiálu: CURVED_CONNECTOR_UNRESOLVED: Kruhová publikace neodpovídá všem skutečným zdrojům a tiskovým dílům.'
+
+docs\p2\implementation\evidence\pc007b-circular-producer-review-own.py:517: AssertionError</failure></testcase></testsuite></testsuites>

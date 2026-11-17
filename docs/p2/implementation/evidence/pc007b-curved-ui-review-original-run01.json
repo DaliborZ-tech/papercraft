@@ -1,0 +1,28 @@
+{
+  "source_sha": "62cb8bc3d84c5c3edf0c7faf08965ea5eef4b625",
+  "source_handoff_sha": "9e1c7ed95690080a008edd101c45eeb6e006d9df",
+  "actual_imports": {
+    "archpapercraft.ui.author_curved_connectors": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui-review\\src\\archpapercraft\\ui\\author_curved_connectors.py",
+      "sha256_lf": "40526359376ccb5ca4ccbe5cecd58d23e2cabc3fb784b52d10f9203324a03996"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui-review\\src\\archpapercraft\\ui\\author_window.py",
+      "sha256_lf": "a4d1578ed888e62291fd15abde0f30edd5d3cb723c1b617405a36b0d539593ce"
+    },
+    "archpapercraft.ui.author_paper": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui-review\\src\\archpapercraft\\ui\\author_paper.py",
+      "sha256_lf": "0f5ed4f0e41ce7d6082310fe4f990a9bf75bd3328f315bd5521e77587dc166ff"
+    },
+    "archpapercraft.ui.author_viewport": {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-curved-authoring-ui-review\\src\\archpapercraft\\ui\\author_viewport.py",
+      "sha256_lf": "2e62f25213eae2fa1dab0973d951deae6afccb90a35a162585e9f02fd9608db9"
+    }
+  },
+  "qt_platform": "offscreen",
+  "run": {
+    "exit": 0,
+    "stdout": "...............................................                          [100%]\n47 passed in 48.01s\n",
+    "stderr": ""
+  }
+}

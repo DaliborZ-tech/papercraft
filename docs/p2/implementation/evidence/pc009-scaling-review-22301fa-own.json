@@ -1,0 +1,28 @@
+{
+  "source_sha": "22301faa45c8393cc127a3f117b0708cd48eea5f",
+  "script": "C:\\Users\\dalib\\projects\\papercraft-scaling-review\\tools\\authoring\\desktop_scaling_probe.py",
+  "cases": [
+    {
+      "case": "existing ordinary file",
+      "returncode": 2,
+      "stderr": "usage: desktop_scaling_probe.py [-h] --scale {1,1.5,2} --expected-sha\r\n                                EXPECTED_SHA --output OUTPUT\r\n                                [--fixture FIXTURE]\r\ndesktop_scaling_probe.py: error: Scaling proof output must be a fresh directory\r\n",
+      "preserved": true
+    },
+    {
+      "case": "existing directory and nested foreign bytes",
+      "returncode": 2,
+      "stderr": "usage: desktop_scaling_probe.py [-h] --scale {1,1.5,2} --expected-sha\r\n                                EXPECTED_SHA --output OUTPUT\r\n                                [--fixture FIXTURE]\r\ndesktop_scaling_probe.py: error: Scaling proof output must be a fresh directory\r\n",
+      "preserved": true
+    },
+    {
+      "case": "wrong SHA reports actual own worktree and creates no output",
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\r\n  File \"C:\\Users\\dalib\\projects\\papercraft-scaling-review\\tools\\authoring\\desktop_scaling_probe.py\", line 122, in <module>\r\n    raise SystemExit(main())\r\n                     ^^^^^^\r\n  File \"C:\\Users\\dalib\\projects\\papercraft-scaling-review\\tools\\authoring\\desktop_scaling_probe.py\", line 105, in main\r\n    result = run_windows(args.output.resolve(), args.expected_sha, args.fixture)\r\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\dalib\\projects\\papercraft-scaling-review\\tools\\authoring\\desktop_b_proof.py\", line 226, in run_windows\r\n    raise ValueError(f\"Expected reviewed source {expected_sha}, actual HEAD {sha}\")\r\nValueError: Expected reviewed source wrong-sha, actual HEAD 22301faa45c8393cc127a3f117b0708cd48eea5f\r\n",
+      "preserved": true
+    }
+  ],
+  "status": "PASS",
+  "executed_application": false,
+  "executed_native_input": false,
+  "git_script_sha256": "bad961054e17a6cf67c64164948f7bf3bf430796f265482609c25536814b435b"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS_TARGETED_INDEPENDENT_ORACLE_16_TESTS",
+  "source_sha": "52836321810f7a8a0c6a8d43b801f98ed875bbde",
+  "elapsed_seconds": 0.26,
+  "test_module": "tests/authoring/test_circular_svg_oracle.py",
+  "test_module_sha256": "c4289ce037b588b98115d859462efa8e3eb04ec27536f99b39e78e115097f432",
+  "helper": "tools/authoring/circular_svg_oracle.py",
+  "helper_sha256": "22680fcb82ec9dc852067d054edd5a854b56c8e335f316c0b8d54cd0db59f50c",
+  "production_src_diff_from_8f": "",
+  "scope": "Diagnostic SVG oracle only, no production numerical tolerance change; separate from 1751-test regression source8f.",
+  "files_sha256": {
+    "papercraft-circular-oracle-5283632-run03.log": "1e9cc6edd4541b9ecc347f1777a1a3a8f2830be5f06da4a08aee454389076e9a",
+    "papercraft-circular-oracle-5283632-run03.xml": "e2156fd500310fce4331c84a66b4d23981b378d32ba587f2a56ae435085deea4"
+  }
+}

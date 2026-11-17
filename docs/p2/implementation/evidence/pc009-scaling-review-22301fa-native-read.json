@@ -1,0 +1,21 @@
+{
+  "source_sha": "22301faa45c8393cc127a3f117b0708cd48eea5f",
+  "status": "FAIL",
+  "elapsed_seconds": 106.812,
+  "error": "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\tools\\authoring\\desktop_b_proof.py\", line 1767, in run\n    driver.circular_case(fixture)\n  File \"C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\tools\\authoring\\circular_desktop_steps.py\", line 151, in circular_case\n    self.finish(name)\n  File \"C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\tools\\authoring\\desktop_b_proof.py\", line 1109, in finish\n    self.camera_after_reopen(name)\n  File \"C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\tools\\authoring\\desktop_b_proof.py\", line 1071, in camera_after_reopen\n    native_dialogs.wheel_at(self.w, view.viewport(), point,\n  File \"C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\tools\\authoring\\native_dialogs.py\", line 48, in wheel_at\n    assert pid.value == os.getpid() and USER32.GetForegroundWindow() == hwnd, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Native wheel requires this proof's foreground window\n",
+  "native_camera_inputs": [],
+  "event_count": 294,
+  "event_errors": 0,
+  "last_observed_scroll_ranges": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "hashes": {
+    "results.json": "9ddf678ac0651e0070570d5303404d7bd9dcbe56d7e0f925646d0fc6500a3862",
+    "scaling-observations.json": "2348c28a3f451e9ffd09f22355d45d611e0c5b80e5e80ccc502cfc838b947edc"
+  },
+  "actual_input_attempted": false,
+  "product_failure_proven": false
+}

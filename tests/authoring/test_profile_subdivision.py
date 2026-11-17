@@ -193,6 +193,7 @@ def test_schema5_known_copy_keeps_source_layout_and_origin_bytes(tmp_path):
     )
     raw = project.to_dict()
     raw.pop("profile_subdivisions")
+    raw.pop("curved_connectors")
     raw.update(schema_version=5, writer_version="0.3.0-pc008-segmented-variants-experimental")
     origin = tmp_path / "v5.apcraft"
     origin.write_text(json.dumps(raw), encoding="utf8")

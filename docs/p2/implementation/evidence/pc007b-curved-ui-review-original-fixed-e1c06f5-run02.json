@@ -1,0 +1,30 @@
+{
+  "source_sha": "e1c06f5b068880ac22b28516ce69c66aee32603d",
+  "source_handoff_sha": "e1c06f5b068880ac22b28516ce69c66aee32603d",
+  "archive_sha256": "620c11a7ae911cc4f0b49c2cdfb961611efc22e1f919bb090fec6898041dee89",
+  "actual_imports": {
+    "archpapercraft.ui.author_curved_connectors": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007b-curved-ui-review-oh0f18mv\\src\\archpapercraft\\ui\\author_curved_connectors.py",
+      "sha256_lf": "0313044145451b58192ea7a612ce2a49a7e20cfe90deed3361bd3560508a3e6b"
+    },
+    "archpapercraft.ui.author_window": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007b-curved-ui-review-oh0f18mv\\src\\archpapercraft\\ui\\author_window.py",
+      "sha256_lf": "2ddceeebbc04c91b0ebf9604bb74bb075f5487e6b9839cabd2845ec69f7e574a"
+    },
+    "archpapercraft.ui.author_paper": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007b-curved-ui-review-oh0f18mv\\src\\archpapercraft\\ui\\author_paper.py",
+      "sha256_lf": "0f5ed4f0e41ce7d6082310fe4f990a9bf75bd3328f315bd5521e77587dc166ff"
+    },
+    "archpapercraft.ui.author_viewport": {
+      "path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\pc007b-curved-ui-review-oh0f18mv\\src\\archpapercraft\\ui\\author_viewport.py",
+      "sha256_lf": "2e62f25213eae2fa1dab0973d951deae6afccb90a35a162585e9f02fd9608db9"
+    }
+  },
+  "qt_platform": "offscreen",
+  "own_tests_sha256_at_run": "e4149b0da7db69e8f7ec5a3f2235971222a4e0d8485d65b5d16de56b6f1f48d9",
+  "run": {
+    "exit": 0,
+    "stdout": ".......................................................                  [100%]\n55 passed in 57.88s\n",
+    "stderr": ""
+  }
+}

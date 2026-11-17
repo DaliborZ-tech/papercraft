@@ -291,13 +291,19 @@ def _page_geometry(page, page_index, raw_geometry):
     return left, bottom, right, top
 
 
-def read_pdf_cut_regions(path):
+def read_pdf_cut_regions(path, *, role="CUT", require_closed=True):
     """Return actual marked CUT loops, with exact rational page-mm coordinates.
 
     This parser intentionally supports the own-writer format, not arbitrary PDF
     drawing programs. Unsupported CUT operators, clipping and unclosed paths
     block validation instead of disappearing from manufacturing coverage.
     """
+    if role not in ("CUT", "GUIDES", "TABS") or type(require_closed) is not bool:
+        raise CurveOutputError("Neznámá role přesného PDF čtení.")
+    if not require_closed and role != "GUIDES":
+        raise CurveOutputError("Výrobní CUT a TABS musejí zůstat uzavřené.")
+    selected_role = role
+    paint_ops = (b"f", b"f*") if role == "TABS" else (b"S", b"s")
     try:
         from pypdf import PdfReader
     except ImportError as exc:
@@ -334,7 +340,7 @@ def read_pdf_cut_regions(path):
             operations = _RawPdf(_raw_content(page)).operations()
             for operands, op in operations:
                 part_id, role = _context(marked)
-                cut = part_id is not None and role == "CUT"
+                cut = part_id is not None and role == selected_role
                 if op in (b"W", b"W*", b"Do", b"BI", b"ID", b"EI", b"INLINE IMAGE"):
                     fail("PDF obsahuje neočekávaný ořez nebo rastrový/formulářový výstup.")
                 if op in (b"BDC", b"gs") or (op == b"Tr" and operands and operands[0] != 0):
@@ -421,14 +427,14 @@ def read_pdf_cut_regions(path):
                         if operands:
                             fail("PDF uzávěr křivky má nečekané parametry.")
                         loops[-1].append(["Z"])
-                elif op in (b"S", b"s"):
+                elif op in paint_ops:
                     if operands or not loops:
                         fail("PDF výrobní řez nemá žádný úplný obrys.")
                     if op == b"s" and loops[-1][-1][0] != "Z":
                         loops[-1].append(["Z"])
-                    if any(loop[-1][0] != "Z" for loop in loops):
+                    if require_closed and any(loop[-1][0] != "Z" for loop in loops):
                         fail("PDF výrobní řez obsahuje neuzavřený obrys.")
-                    if any(len(loop) < 3 for loop in loops):
+                    if any(len(loop) < (3 if require_closed else 2) for loop in loops):
                         fail("PDF výrobní obrys nemá úplnou nenulovou hranici.")
                     result["parts"][part_id]["loops"].extend(loops)
                     loops, owner = [], None

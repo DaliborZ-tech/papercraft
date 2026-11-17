@@ -1,0 +1,153 @@
+{
+  "status": "PASS",
+  "source_sha": "8f1ec6382d527c719133958e7eb6f78a724ef5d5",
+  "source_status_at_start": "M .agents/skills/papercraft-authoring-ui/SKILL.md\n M 05_WORK_QUEUE.json\n M docs/p2/SKILL_IMPROVEMENTS.json\n?? docs/p2/implementation/evidence/pc007b-C-cone-desktop-8f1ec63-run02/\n?? docs/p2/implementation/evidence/pc007b-C-cone-desktop-d5a62d1-run01/\n?? docs/p2/implementation/evidence/pc007b-C-cylinder-desktop-8f1ec63-run02/\n?? docs/p2/implementation/evidence/pc007b-C-cylinder-desktop-d5a62d1-run01/\n?? docs/p2/implementation/evidence/pc007b-C-cylinder-inkscape-8f1ec63-page1-run01/\n?? docs/p2/implementation/evidence/pc007b-C-cylinder-inkscape-8f1ec63-page2-run01/\n?? docs/p2/implementation/evidence/pc007b-C-near-desktop-8f1ec63-run01/\n?? docs/p2/implementation/evidence/pc007b-combined-format-diagnostics-run01/README.md",
+  "script_sha256": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+  "origin_source": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-desktop-8f1ec63-run02\\C-cone\\export\\page-99e4ffb4-e2e3-46a7-83f5-f04fdb9a609b.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "9f5ff18155e9db29447cc38b498fe1c3462c44da18811370356e54985c02e377",
+    "model.pdf": "d84015ee75baa5d9d83d0e6f45b771b32468f309a1f4fb3db5e993ef29b2d03d",
+    "page-99e4ffb4-e2e3-46a7-83f5-f04fdb9a609b.svg": "2718438cf7e6fa6b6e3463c7fadfc6db0f44ffba1dcbf1b61e785a4116f4e880",
+    "page-c2d50121-5df3-4d91-9703-07f45773759f.svg": "eb0121b7cf2c814c6a541a43e1a26c4fa1e7dc635ca1dbe9e74555abf2c5cd11"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.641,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-inkscape-8f1ec63-page1-run01\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 1.75,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,112.913,377.953,990.824\npart-a411d867-f0b4-4327-9c1d-ba3af049f8e7,150.709,112.913,152.126,152.126\nrole-a411d867-f0b4-4327-9c1d-ba3af049f8e7-CUT,150.709,112.913,152.126,152.126\npath-a411d867-f0b4-4327-9c1d-ba3af049f8e7-CUT-0,150.709,112.913,152.126,152.126\n\n\n\nrole-a411d867-f0b4-4327-9c1d-ba3af049f8e7-LABELS,227.501,183.113,55.498,6.91129\nlabel-a411d867-f0b4-4327-9c1d-ba3af049f8e7-0,227.501,183.113,55.498,6.91129\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-inkscape-8f1ec63-page1-run01\\editor-original.svg",
+        "--actions=select-by-id:part-a411d867-f0b4-4327-9c1d-ba3af049f8e7;transform-translate:10,15;select-clear;select-clear;select-by-id:label-a411d867-f0b4-4327-9c1d-ba3af049f8e7-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-inkscape-8f1ec63-page1-run01\\editor-edited.svg;export-do"
+      ],
+      "seconds": 2.843,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-inkscape-8f1ec63-page1-run01\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 1.875,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,127.913,377.953,975.824\npart-a411d867-f0b4-4327-9c1d-ba3af049f8e7,160.709,127.913,167.169,152.126\nrole-a411d867-f0b4-4327-9c1d-ba3af049f8e7-CUT,160.709,127.913,152.126,152.126\npath-a411d867-f0b4-4327-9c1d-ba3af049f8e7-CUT-0,160.709,127.913,152.126,152.126\n\n\n\nrole-a411d867-f0b4-4327-9c1d-ba3af049f8e7-LABELS,236.961,196.461,90.9172,10.4315\nlabel-a411d867-f0b4-4327-9c1d-ba3af049f8e7-0,236.961,196.461,90.9172,10.4315\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-inkscape-8f1ec63-page1-run01\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cone-inkscape-8f1ec63-page1-run01\\editor-final-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 2.141,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-oafhi5yr",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "elapsed_seconds": 17.844,
+  "files_sha256": {
+    "editor-edited.svg": "b6d2c4ecf46ff9ed0938b18a9be084402ddbcbe22fdb46b9b345599a959b78e4",
+    "editor-final-render.png": "73b24ac804be14b7dc76faf55f82c190f58970f74bc5bc59af6865ab3b0d9ffa",
+    "editor-gui.png": "991fda41d220b1ba967b687b7fbe4b0ca700431e846507b0b566b982127a66f7",
+    "editor-original.svg": "2718438cf7e6fa6b6e3463c7fadfc6db0f44ffba1dcbf1b61e785a4116f4e880"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-a411d867-f0b4-4327-9c1d-ba3af049f8e7",
+    "label_id": "label-a411d867-f0b4-4327-9c1d-ba3af049f8e7-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "unchanged_by_actions; individual_native_GUI_edit_below",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "own_visible_windows": [
+    {
+      "hwnd": 1901418,
+      "title": "editor-edited.svg - Inkscape",
+      "class": "gdkWindowToplevel",
+      "width": 1936,
+      "height": 1048
+    }
+  ],
+  "initial_focus": {
+    "own_hwnd": 1901418,
+    "before_hwnd": 1901418,
+    "direct_activation_returned": true,
+    "after_hwnd": 1901418
+  },
+  "native_gui_text_edit": {
+    "text": "Žluťoučký – vlastní díl",
+    "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+    "own_pid": 56112,
+    "own_hwnd": 1901418,
+    "foreground_verified_before_each_chord": true
+  },
+  "gui_capture": {
+    "method": "QScreen.grabWindow(actual_editor_hwnd)",
+    "width": 1520,
+    "height": 873
+  },
+  "roundtrip_assertions": {
+    "path_count": 1,
+    "total_path_count_including_calibration": 2,
+    "editor_added_id_to_existing_calibration": [
+      "path2"
+    ],
+    "part_role_groups": [
+      "CUT",
+      "FOLD_MOUNTAIN",
+      "FOLD_VALLEY",
+      "TABS",
+      "LABELS",
+      "ARTWORK",
+      "GUIDES"
+    ],
+    "native_path_commands_preserved": true,
+    "all_local_coordinates_unchanged_mm_tolerance": 2e-05,
+    "other_text_objects_unchanged": true,
+    "original_bundle_unchanged": true,
+    "calibration_100mm_and_page_size_unchanged": true,
+    "cut_loop_count": 1,
+    "all_path_displacements_px": {
+      "path-a411d867-f0b4-4327-9c1d-ba3af049f8e7-CUT-0": [
+        10.0,
+        15.0
+      ]
+    }
+  },
+  "origin_bundle_preserved_after_run": true
+}

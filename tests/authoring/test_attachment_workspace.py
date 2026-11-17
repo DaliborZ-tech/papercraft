@@ -121,6 +121,7 @@ def test_schema_one_copy_policy_survives_command_undo_and_failed_save(tmp_path):
     data = project.to_dict()
     data.update(schema_version=1, writer_version="0.3.0-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
+    data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
     data.pop("profile_subdivisions")
     data.pop("attachments")
     data.pop("next_attachment_number")
@@ -224,6 +225,7 @@ def test_upgrade_workspace_explains_copy_and_offers_a_new_filename(qtbot, tmp_pa
     data = project.to_dict()
     data.update(schema_version=1, writer_version="0.3.0-experimental")
     data.pop("segmented_variants")  # Reconstruct the historical format envelope.
+    data.pop("curved_connectors")  # Reconstruct the pre-C format envelope.
     data.pop("profile_subdivisions")
     del data["attachments"], data["next_attachment_number"], data["material_profile"]
     origin = tmp_path / "original-author.apcraft"

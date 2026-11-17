@@ -122,8 +122,10 @@ whole-wall orákulu a uchování nativních selhání; delivery k omezenému LIN
 rozsahu a oddělené revizi. SK015 převádí LINE-BEND01 do kontroly dalších
 spotřebitelů. Účinnost na jiném spotřebiteli zůstává PENDING_NEXT_USE.
 
-Zbývají curved/loft trim adapters a publikace tohoto
-přírůstku, úplné AU13/AU14, C, PC-009 a historický PC-010. **Nový uživatel0 /
+LINE přírůstek byl následně publikován na `master` jako
+[`b2bbf89`](https://github.com/DaliborZ-tech/papercraft/commit/b2bbf89cda5e9260d64ebc766dca2759293dee5c);
+skutečný výsledek push/shody SHA je v [integračním dodatku](PC008_LINE_SUBDIVISION_INTEGRATION.md).
+Zbývají curved/loft trim adapters, úplné AU13/AU14, C, PC-009 a historický PC-010. **Nový uživatel0 /
 NOT_RUN; fyzické P3 / NOT_RUN.** Technický průchod ani agentní revize je
 nenahrazují. Dokončený D/B3 je samostatně publikovaný; tento dokument jej
 nepřepisuje na dokončené P2.

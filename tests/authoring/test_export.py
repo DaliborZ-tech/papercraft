@@ -463,9 +463,15 @@ def test_serialized_rotated_circle_has_separate_interpolation_and_numeric_bounds
             maximum = max(maximum, float(np.linalg.norm(actual - expected)))
     assert maximum <= combined + 1e-10
     if radius == 0.0001:
-        # Independent C02 reproduction: an interpolation-only promise did not
-        # cover ReportLab's rounded transformation and coordinate tokens.
-        assert maximum > interpolation
+        # C02 originally exceeded interpolation because MediaBox itself was
+        # rounded. A corrected producer need not retain that defect. The exact
+        # source endpoint has ZERO arc interpolation error: independently bind
+        # its actual serialized offset to the separate numeric certificate.
+        angle = math.radians(37)
+        endpoint = np.array([53.123456789+radius*math.cos(angle),
+                             71.987654321+radius*math.sin(angle)])
+        actual_numeric = float(np.linalg.norm(curves[0][0]-endpoint))
+        assert actual_numeric <= numeric + 1e-10
 
 
 def test_extreme_compensated_coordinates_refuse_inaccurate_pdf_and_preserve_bundle(

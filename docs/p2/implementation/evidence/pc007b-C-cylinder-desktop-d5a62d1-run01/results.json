@@ -1,0 +1,1143 @@
+{
+  "status": "PASS_REQUESTED_FIXTURE",
+  "source_sha": "d5a62d166bc313c632f21b57884b2eaca12a719f",
+  "requested_fixture": "C-cylinder",
+  "fixture_status": {
+    "model-A": "NOT_RUN",
+    "mixed-part": "NOT_RUN",
+    "curves-planar": "NOT_RUN",
+    "loft-B1": "NOT_RUN",
+    "loft-B2": "NOT_RUN",
+    "loft-Bezier": "NOT_RUN",
+    "D-segmented": "NOT_RUN",
+    "D-gothic": "NOT_RUN",
+    "AU13-line": "NOT_RUN",
+    "C-cylinder": "PASS_TECHNICAL_UI",
+    "C-cone": "NOT_RUN",
+    "C-near": "NOT_RUN"
+  },
+  "source_status_at_start": "",
+  "source_files_sha256": {
+    "pyproject.toml": "7a5d40ab75f08734520a42a5400383f09bc5e4cebbe91c70fc28256cde7cf913",
+    "src/archpapercraft/__init__.py": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+    "src/archpapercraft/__main__.py": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+    "src/archpapercraft/app.py": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+    "src/archpapercraft/application/__init__.py": "68882fe29cec1ed6857a27ea2c4dd44c006d4ea9a93c4dd5497b83e575b4314c",
+    "src/archpapercraft/application/author_controller.py": "b3c2a4cfb1502e751465f1105e4ca9922d32392879c5538a1d6b1c6cf9965f84",
+    "src/archpapercraft/arch_presets/__init__.py": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+    "src/archpapercraft/arch_presets/buttress.py": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+    "src/archpapercraft/arch_presets/floor_slab.py": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+    "src/archpapercraft/arch_presets/gothic_window.py": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+    "src/archpapercraft/arch_presets/onion_dome.py": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+    "src/archpapercraft/arch_presets/opening.py": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+    "src/archpapercraft/arch_presets/roof.py": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+    "src/archpapercraft/arch_presets/tower.py": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+    "src/archpapercraft/arch_presets/wall.py": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+    "src/archpapercraft/authoring/__init__.py": "b0844fca50b090cdf265358924b44576866d929f19fc9743cf78aed47debcecf",
+    "src/archpapercraft/authoring/attachments.py": "dd9c1787f4990b16348461b157afea2c31a3eaabbd70998f514ec5a4152cd75b",
+    "src/archpapercraft/authoring/bend.py": "a3fef029bfa1353a1f3f727bde62bbbe4ceb387cadb54090ac4418bf348a6009",
+    "src/archpapercraft/authoring/circular_material.py": "401d523d36eaf45179f21f37f5bda48b93bbae2d79091f6b77e8d50bb1230426",
+    "src/archpapercraft/authoring/circular_shell.py": "d5df14959df8cf0f30fc0b846536244e2b49a9fa91725dc3df33a67539926c3a",
+    "src/archpapercraft/authoring/clearance.py": "feef3c084826d1ce165bd46eb8e00766d7eecb837b32bc3c4c863720e310ef1a",
+    "src/archpapercraft/authoring/commands.py": "ae714672155bf0cadecb438f64565d84c7f5fc59f564dad34e513927423579b5",
+    "src/archpapercraft/authoring/curve_area.py": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9",
+    "src/archpapercraft/authoring/curve_material.py": "60be7aa11c8fbf2e431a9a625f51b900cfde52b3e7145309aa48a8c5ef7573fa",
+    "src/archpapercraft/authoring/curve_subdivision.py": "eba7d2352792dc8167978f04cee3194950cef561981fe16c5a90de15a2f68372",
+    "src/archpapercraft/authoring/curve_topology.py": "7edd0a44ca4c1d3e9ab1f11dc8a24feef4f2c2ffb867cae2dccccfe001c9b8db",
+    "src/archpapercraft/authoring/curved_connectors.py": "592122143131688cc757b861f7d51dd5d798335e54d73adf477a483b6294865c",
+    "src/archpapercraft/authoring/curved_tabs.py": "8c65ea9f01249185f3b0d75e5e580b87308eac8a41783300ca93f0cfc7ad26ed",
+    "src/archpapercraft/authoring/curved_tabs_chart.py": "df13d4635ffdf836eb4ed760d90d747b325f6cd704342aab0d83e77c716505e7",
+    "src/archpapercraft/authoring/curved_tabs_transfer.py": "213f8255cdea7628897a0b2a2aa74a5e3856dac0e8838ecaeb9512b3df70b65f",
+    "src/archpapercraft/authoring/curves.py": "acbea1c2b89ac9da0fab3d8855746ca1355719dbfcee7de2a57898aa30e002d2",
+    "src/archpapercraft/authoring/editing.py": "dfa4ae01193f14713a79c603e67c7a7ac3e463cc9682f2d60636db525742360e",
+    "src/archpapercraft/authoring/errors.py": "c73b4d32e1f609eab78ae0f0067b5dc483d80435a92a77e89efe43ea12e9d838",
+    "src/archpapercraft/authoring/geometry.py": "a183daa0f705972ea482498bf795a0bacb19954c9b1c228735bcdda782c8e05e",
+    "src/archpapercraft/authoring/interior.py": "4d14e1efe69f7a45292b47208c10f1b10eaef93e1ecd4ce89688e2fe9faa0614",
+    "src/archpapercraft/authoring/loft_area.py": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238",
+    "src/archpapercraft/authoring/loft_curve_compaction.py": "61c9b8341ef4c8509a5422c0fbe936d097726f8660138d65da5873e46d13f1f6",
+    "src/archpapercraft/authoring/loft_curves.py": "321c74efe4567f8ead29fbb956d4cfdee89769129a0f8170b8f21957a8c37eba",
+    "src/archpapercraft/authoring/loft_geometry.py": "65c09f5db438d6914023ea98f58a3be6c07e4d7960e0ae1581247e33cf936d90",
+    "src/archpapercraft/authoring/loft_surface.py": "13f57ce29a99db9160b945fba997fead084c57f3911aa6cc5397136bba0a2784",
+    "src/archpapercraft/authoring/model.py": "8b00222cc4991b4761800e6e638e1af7f02d3d703eaf498c60d787c8f5c4faa2",
+    "src/archpapercraft/authoring/paper.py": "4ce867c78857501e89ed9386f91e75554c55179872b450a1a126ef60957227c7",
+    "src/archpapercraft/authoring/profile_curves.py": "cf7e38c6b986adeace46bd76af233eab19ceab232a69714f47b75321e508454f",
+    "src/archpapercraft/authoring/profile_subdivision.py": "f960d77520d18997150fa9f93265fd6df929c6d4e33c5fe94a8c16cc52b83876",
+    "src/archpapercraft/authoring/project.py": "37155c99a437e0e51efad939105b8410b11d2f5b8520f525363ada2bc8773fc7",
+    "src/archpapercraft/authoring/segmented_loft.py": "2b44a56acdee4f796f0f76d97ee203d2634133099d069d1751a0b10f9e0da472",
+    "src/archpapercraft/authoring/segmented_loft_curves.py": "03808d3d7676968c6ff7aa5780ff630351886446be23ee874c8a1141c752f2e0",
+    "src/archpapercraft/authoring/segmented_surface.py": "48038d4f357808232dccc43af3cba2fbb34ef583754d0c62b446a9cc3cc5efbe",
+    "src/archpapercraft/commands/__init__.py": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+    "src/archpapercraft/commands/command_stack.py": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+    "src/archpapercraft/core_geometry/__init__.py": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+    "src/archpapercraft/core_geometry/backend.py": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+    "src/archpapercraft/core_geometry/mesh.py": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+    "src/archpapercraft/core_geometry/operations.py": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+    "src/archpapercraft/core_geometry/primitives.py": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+    "src/archpapercraft/core_geometry/stable_ids.py": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+    "src/archpapercraft/core_geometry/units.py": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+    "src/archpapercraft/core_geometry/validation.py": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+    "src/archpapercraft/exporter/__init__.py": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+    "src/archpapercraft/exporter/author_export.py": "b4dd67b3c4c4b4fda9247aae5cde09f1b93d0b3a6ec05b9f0c936af9fd6c2c39",
+    "src/archpapercraft/exporter/circular_output_validation.py": "14bd6099dd44245c85cf97e4b3510688b0f48415ba0648d58b431edf3be04fc6",
+    "src/archpapercraft/exporter/curve_output_validation.py": "0a53ab74e760b407b815e1f7213173a1c2304ce73e5cd992b14efd1691b82454",
+    "src/archpapercraft/exporter/dxf_export.py": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+    "src/archpapercraft/exporter/loft_output_validation.py": "60e20adfa6d279fb3b23722f5f3c7c63e19b010cb0227f439ec188541f58de48",
+    "src/archpapercraft/exporter/pdf_export.py": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+    "src/archpapercraft/exporter/png_export.py": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+    "src/archpapercraft/exporter/segmented_output_validation.py": "150e4d29a06125dcce4e8fdfca795b2393a766234b29b8b32795cca8c853d0b4",
+    "src/archpapercraft/exporter/svg_curve_validation.py": "57ba93fd22d7f5f7d27e9b881fba1615721b5bf6f295d77e2f1934a4ae7ae4a5",
+    "src/archpapercraft/exporter/svg_export.py": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+    "src/archpapercraft/layout_packer/__init__.py": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+    "src/archpapercraft/layout_packer/packer.py": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+    "src/archpapercraft/paper_analyzer/__init__.py": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+    "src/archpapercraft/paper_analyzer/classifier.py": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+    "src/archpapercraft/precision.py": "d1959526a99845adbe173e713e0abeb162425d000d6fc2427625d0314cf48317",
+    "src/archpapercraft/preferences/__init__.py": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+    "src/archpapercraft/preferences/settings.py": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+    "src/archpapercraft/project_io/__init__.py": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+    "src/archpapercraft/project_io/project.py": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+    "src/archpapercraft/scene_graph/__init__.py": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+    "src/archpapercraft/scene_graph/node.py": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+    "src/archpapercraft/scene_graph/scene.py": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+    "src/archpapercraft/scene_graph/snap.py": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+    "src/archpapercraft/scene_graph/transform.py": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+    "src/archpapercraft/seam_editor/__init__.py": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+    "src/archpapercraft/seam_editor/auto_seams.py": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+    "src/archpapercraft/seam_editor/seam_graph.py": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+    "src/archpapercraft/tabs_generator/__init__.py": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+    "src/archpapercraft/tabs_generator/build_guide.py": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+    "src/archpapercraft/tabs_generator/markings.py": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+    "src/archpapercraft/tabs_generator/tabs.py": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+    "src/archpapercraft/ui/__init__.py": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+    "src/archpapercraft/ui/author_attachment.py": "53fa23c0278c8f84bbedb1a3f3726da3bc69fa51a277b78c5b06aad7a0be59d6",
+    "src/archpapercraft/ui/author_connectors.py": "45be7038a1a6b276379963344a41be96ab4da3b83ce50b67b59e3948946ae134",
+    "src/archpapercraft/ui/author_curved_connectors.py": "e7d2afb07175733e3dfba8c2d5042f4f62dfa0ac7162a2464f0ffee3c6697d40",
+    "src/archpapercraft/ui/author_curves.py": "bdc2d472cfd65ddd20415dc52262f1732e828c4d3a67f4690efeb93ea95b94ed",
+    "src/archpapercraft/ui/author_editing.py": "3a0590ca0f4613755220fd15d04255810b017ea2cc498fd2af13cffa5d8389ee",
+    "src/archpapercraft/ui/author_export_job.py": "669d5cfb555f69b7baebcd5953ba149ad6304a7c258501ee2c8a21009c63bc32",
+    "src/archpapercraft/ui/author_loft.py": "778b72d6ef361ec86a1b04e933262a983314ec7203cdbdb9f72d76fee15f9ff6",
+    "src/archpapercraft/ui/author_manual_layout.py": "f465983b101a6e56b0cefb518029c0123728bb5ce05ff867ace2aaf34009b501",
+    "src/archpapercraft/ui/author_material.py": "348775acf2f3a2829734052b775abfc0bbe9832d34bc284b1bd3e83802aeb4ab",
+    "src/archpapercraft/ui/author_paper.py": "c304be052ebf68dd721b0e3ecf7fd131f3bd115aafb1e2a243257fbd8751087e",
+    "src/archpapercraft/ui/author_profile_placement.py": "5694f234355ec9ae1c69a1836f5a443758f6a51a0cbf2b155fc061bf7e422e98",
+    "src/archpapercraft/ui/author_segmentation.py": "ffc67da8501369cb3a7345643f20100ec088b77774aea80f00f62a2cb8c99f07",
+    "src/archpapercraft/ui/author_sketch.py": "0e8e5688f8711ced8783b20c12fc3bb31f10d1cea0f464164d9965e4883bf98e",
+    "src/archpapercraft/ui/author_subdivision.py": "9d4ee812af2f49b3f35ffd4472d7a3833aaa0c173acb98e77858831e96cca970",
+    "src/archpapercraft/ui/author_viewport.py": "462185d55b10eda4f9879ca53fcc549e4dd81a2f162e0a4b185156bf49c065db",
+    "src/archpapercraft/ui/author_window.py": "1f5ad93f76c6413a127666124223b5f4ea3f04a79136760dcd28d3669365986f",
+    "src/archpapercraft/ui/main_window.py": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+    "src/archpapercraft/ui/object_tree.py": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+    "src/archpapercraft/ui/papercraft_panel.py": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+    "src/archpapercraft/ui/preferences_dialog.py": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+    "src/archpapercraft/ui/properties_panel.py": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+    "src/archpapercraft/ui/viewport_3d.py": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+    "src/archpapercraft/ui/wizard.py": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+    "src/archpapercraft/unfolder/__init__.py": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+    "src/archpapercraft/unfolder/approx_unfold.py": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+    "src/archpapercraft/unfolder/exact_unfold.py": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+    "src/archpapercraft/unfolder/strategies.py": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+    "tools/authoring/circular_desktop_steps.py": "fef7a778b4cdfefa16874c43d9a3c4867af0786ab1662035b0d285bb4ce920bd",
+    "tools/authoring/desktop_b_proof.py": "bc50f6357272076fdf0e3a85b1d9372eed5df05b2b78d380f66e4294cb0ebe51",
+    "tools/authoring/desktop_proof.py": "eed46fcee2a40534835e311be5b23b946af7551152eb935ae6987eab8404859f",
+    "tools/authoring/editor_probe.py": "70ddf2ae52c85502d1e49c210433705bfcacf649b3111a42415b7c458558cb69",
+    "tools/authoring/loft_desktop_steps.py": "d142a1e2d4200dcfb3101d3f897887d5ef25ba7337b10ecaa30f46d05c6a5523",
+    "tools/authoring/native_dialogs.py": "825076d2b29596980a7e3a2be4b6b846b2057cb99cc91a69cacc1082750a5167",
+    "tools/authoring/segmentation_desktop_steps.py": "ff785067fa0f23e8106d3e8216676b7cf70eaf441193f9bfe1b443fab9e234b4",
+    "tools/authoring/smoke.py": "1288018a91ebb6b3e50dd884796f3ad24854931873731f53403f15d8282e4b08",
+    "tools/authoring/subdivision_desktop_steps.py": "258df6dd8758a911385293e259ecc3e3393019ec51176d0c82df41d75c3a113e",
+    "tools/authoring/vector_curve_oracle.py": "0085a92e7668b69febef9bd28ded60509b693c2a31c699ac4ab2de4f568210d1"
+  },
+  "actual_application_module": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\src\\archpapercraft\\ui\\author_window.py",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "application_version": "0.3.0",
+  "pid": 82556,
+  "oracle": {
+    "scale": 0.01,
+    "building_model_mm": {
+      "length": 10000,
+      "width": 6000,
+      "wall": 4000,
+      "ridge": 7000
+    },
+    "initial_roof_paper_mm": {
+      "length": 108,
+      "half_slope": 49.49747468305833
+    },
+    "roof_wall_trace_paper_mm": 7.0710678118654755,
+    "changed_south_eave_model_mm": 800,
+    "changed_south_slope_paper_mm": 53.74011537017761,
+    "changed_trace_from_eave_paper_mm": 11.313708498984761,
+    "areas_paper_mm2": {
+      "long_wall": 4000,
+      "gable_wall": 3300.0,
+      "base": 13000,
+      "brace_outer": 2700.0,
+      "brace_hole": 300,
+      "brace_net": 2400.0,
+      "soffit": 800,
+      "initial_half_roof": 5345.727265770299,
+      "changed_south_roof": 5803.932459979182
+    },
+    "authored_top_tabs": {
+      "hinge_length_mm": 100,
+      "count": 4,
+      "gap_mm": 1,
+      "base_length_mm": 24.0,
+      "triangle_width_mm": 5,
+      "triangle_area_mm2": 60.0,
+      "custom_outline_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          24,
+          0
+        ],
+        [
+          24,
+          2
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "custom_area_mm2": 56,
+      "active_count": 3,
+      "active_area_mm2": 176.0,
+      "existing_bottom_area_mm2": 144.0,
+      "wall_cut_area_mm2": 4320
+    },
+    "mixed": {
+      "initial_rise_model_mm": 3000,
+      "changed_rise_model_mm": 3500,
+      "initial_slope_model_mm": 4242.640687119285,
+      "changed_slope_model_mm": 4609.772228646444,
+      "changed_angle_deg": 49.398705354995535,
+      "page_number": 2,
+      "anchor_paper_mm": [
+        60,
+        60
+      ],
+      "rotation_deg": 30,
+      "wall_page_points_paper_mm": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ]
+    }
+  },
+  "versions": {
+    "PySide6": "6.12.0",
+    "numpy": "2.5.4",
+    "shapely": "2.2.0",
+    "pypdf": "6.21.4",
+    "reportlab": "5.1.0",
+    "PyOpenGL": "3.1.10"
+  },
+  "evidence_kind": "actual_app_main_QTest_widgets_own_PID_native_dialogs",
+  "new_user": "NOT_RUN",
+  "new_user_reason": "Owner confirmed no actual new participant is currently available",
+  "physical_build": "NOT_RUN",
+  "AU19": "NOT_RUN_PC010",
+  "started_local": "2026-11-11T17:10:55+0100",
+  "steps": [
+    {
+      "name": "actual_profile_pair_preview",
+      "status": "PASS",
+      "first_profile_id": "a4234441-6c53-4bb6-999e-e19d355b7bf3",
+      "second_profile_id": "ca54dcf5-083c-4efd-b612-77b3ea310763",
+      "elapsed_seconds": 6.625,
+      "family": "NORMAL_EXTRUSION",
+      "authored_parameters": {
+        "first_profile_id": "a4234441-6c53-4bb6-999e-e19d355b7bf3",
+        "second_profile_id": "ca54dcf5-083c-4efd-b612-77b3ea310763",
+        "correspondences": [
+          {
+            "id": "fb845b0f-def7-47a3-a35b-cdfd925e750b",
+            "first_segment_id": "430c8ffe-2eed-4733-877f-098e7a3a1588",
+            "second_segment_id": "96061ccc-c45e-4755-a40c-de77d1a6a245",
+            "first_interval": [
+              0,
+              1
+            ],
+            "second_interval": [
+              0,
+              1
+            ],
+            "ruling_id": "b133541c-1512-4a9f-9446-436b63f9e3c3"
+          },
+          {
+            "id": "9d3e787d-18e4-48fe-9049-5731961e29c9",
+            "first_segment_id": "b261ab92-3840-4cee-883b-6703c4b51f38",
+            "second_segment_id": "de9ab359-69d1-4dca-90f7-8100e6a7c4d7",
+            "first_interval": [
+              0,
+              1
+            ],
+            "second_interval": [
+              0,
+              1
+            ],
+            "ruling_id": "18bcd934-0ff5-41cd-bbb5-1b70731a5a84"
+          }
+        ],
+        "seam_patch_id": "fb845b0f-def7-47a3-a35b-cdfd925e750b",
+        "end_ruling_id": "a1302d61-fafe-4cba-8e49-17100096e71f",
+        "tolerance_mm": 0.005,
+        "max_segments": 16384
+      }
+    },
+    {
+      "name": "actual_unlocked_manual_paper_drag",
+      "status": "PASS",
+      "part_id": "11fabfcb-dd51-409c-8c10-1c11c2e3ac3b",
+      "anchor_before": [
+        55.0,
+        90.0
+      ],
+      "anchor_after": [
+        58.0,
+        91.0
+      ]
+    },
+    {
+      "name": "actual_locked_paper_drag",
+      "status": "PASS",
+      "part_id": "11fabfcb-dd51-409c-8c10-1c11c2e3ac3b",
+      "anchor_before": [
+        55.0,
+        90.0
+      ],
+      "anchor_after": [
+        55.0,
+        90.0
+      ]
+    },
+    {
+      "name": "actual_assembled_3D_pick_links_paper",
+      "status": "PASS",
+      "surface_id": "ab6b861c-7dbb-453f-8f3a-5029b84bcc19",
+      "world_probe_mm": [
+        -999.9172644224196,
+        -7.426318505451232,
+        1000.0
+      ],
+      "pixel": [
+        261,
+        181
+      ]
+    },
+    {
+      "name": "C_actual_creation_repair_cancel_undo_source_and_layout",
+      "status": "PASS",
+      "fixture": "C-cylinder",
+      "connector_id": "7c3c9419-dd72-4263-8178-2af6b8c0a4ee",
+      "slot_ids": [
+        "f23663ce-bcc9-42e7-ba0b-6494ce07f006",
+        "065f90d7-1c56-4522-9140-92ade5b23e01",
+        "5fd8ae24-d9a6-4cde-b0ca-7e25f453bb4a",
+        "bd037634-863a-40d6-ba70-4b610e381ae7",
+        "eec962c9-1d6f-4664-9ea7-3b7c73ee8398",
+        "93869dcc-8a4e-4c95-861f-315da44aadd6",
+        "41ba2b1a-0f1c-49d1-ac74-2bfb6e782ab5",
+        "873f173c-ce98-4e75-a67c-89566bce933e",
+        "46764e2b-3b6e-48ac-b983-049a3f33a3b2",
+        "3cc6ddab-7f75-4b36-b69e-498c8af5ae4c",
+        "2f84bd1d-13e7-4891-ac63-4b51b4e5c399",
+        "738db4cd-6ebd-4f9c-968c-069a4cb847b9"
+      ],
+      "r0": 10,
+      "r1": 10,
+      "height": 30.0,
+      "rim": "first",
+      "receiver_side": "inside"
+    },
+    {
+      "name": "C-cylinder_reopen_auto_frame_and_refresh_preserves_authored_camera",
+      "status": "PASS",
+      "all_centers_visible_without_Home": [
+        {
+          "part_id": "00a9fdce-5570-4588-b323-011bf560b452",
+          "center_pixel": [
+            84,
+            209
+          ],
+          "bounds_pixel": [
+            69,
+            194,
+            31,
+            32
+          ]
+        },
+        {
+          "part_id": "11fabfcb-dd51-409c-8c10-1c11c2e3ac3b",
+          "center_pixel": [
+            401,
+            255
+          ],
+          "bounds_pixel": [
+            355,
+            218,
+            93,
+            76
+          ]
+        }
+      ],
+      "authored_camera": [
+        [
+          1.3333332289577933,
+          0.0,
+          0.0,
+          1.3333332289577933,
+          0.0,
+          0.0
+        ],
+        [
+          303.7500237780546,
+          143.25001121384796
+        ]
+      ]
+    },
+    {
+      "name": "C_independent_source_and_actual_vector_material_area",
+      "status": "PASS",
+      "source_body_mm2": 1884.9555921538758,
+      "expected_union_mm2": 1897.4955921538758,
+      "actual_pdf_union_mm2": 1897.4955921538685,
+      "source_native_strain": "CERTIFIED_SEPARATELY_FROM_VECTOR_METRICS",
+      "physical_build": "NOT_RUN"
+    },
+    {
+      "name": "C-cylinder_native_save_new_reopen_export",
+      "status": "PASS",
+      "pages": 2,
+      "parts": [
+        "00a9fdce-5570-4588-b323-011bf560b452",
+        "11fabfcb-dd51-409c-8c10-1c11c2e3ac3b"
+      ],
+      "unfold_mode": "APPROXIMATE",
+      "exact_scope": "exact circular body plus bounded approximate curved connectors; physical NOT_RUN",
+      "digital_only_acknowledgements": []
+    }
+  ],
+  "inputs": [
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 100,
+      "interpreted_value": 100.0,
+      "visible_text": "100,000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 250,
+      "interpreted_value": 250.0,
+      "visible_text": "250,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 250,
+      "typed_text": "250",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+L",
+      "expected_actions": [
+        "draw"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "draw",
+      "count": 1
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          -1000,
+          0
+        ],
+        [
+          0,
+          -1000
+        ],
+        [
+          1000,
+          0
+        ],
+        [
+          0,
+          1000
+        ],
+        [
+          -1000,
+          0
+        ]
+      ]
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1,
+      "interpreted_value": 1.0,
+      "visible_text": "1,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1,
+      "typed_text": "1",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 3000,
+      "interpreted_value": 3000.0,
+      "visible_text": "3000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3000,
+      "typed_text": "3000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "copy_profile",
+      "count": 1
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "loft",
+      "count": 1
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "curved_connector",
+      "count": 1
+    },
+    {
+      "event": "actual_C_preview",
+      "status": "UNVERIFIED",
+      "feedback": "Spoj není digitálně doložený. Zadejte tloušťku papíru; bez ní není prostor pohybu doložený. Po uložení přepočítejte celý díl (Ctrl+R). Fyzický výtisk zůstává P3.",
+      "elapsed_seconds": 13.593999999808148
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0.2,
+      "interpreted_value": 0.2,
+      "visible_text": "0,2000 mm na papíře",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0.2,
+      "typed_text": "0,200000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0.01,
+      "interpreted_value": 0.01,
+      "visible_text": "0,0100 mm na papíře",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0.01,
+      "typed_text": "0,010000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,0000 mm na papíře",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_C_preview",
+      "status": "STALE",
+      "feedback": "Spoj není digitálně doložený. Zvolená strana příjemce nesměřuje do skutečného kontaktu. Po uložení přepočítejte celý díl (Ctrl+R). Fyzický výtisk zůstává P3.",
+      "elapsed_seconds": 10.047000000020489
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_C_preview",
+      "status": "UNRESOLVED",
+      "feedback": "Spoj není digitálně doložený. Pohyb nebo lepicí plocha záložek nejsou v aktuální sestavě doložené. Po uložení přepočítejte celý díl (Ctrl+R). Fyzický výtisk zůstává P3.",
+      "elapsed_seconds": 12.5
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0.24,
+      "interpreted_value": 0.24,
+      "visible_text": "0,240000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0.24,
+      "typed_text": "0,240000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0.01,
+      "interpreted_value": 0.01,
+      "visible_text": "0,010000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "curved_tip_offset",
+      "value": 0.01,
+      "typed_text": "0,010000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_C_preview",
+      "status": "CERTIFIED_APPROXIMATE",
+      "feedback": "APROXIMACE · aktuální digitální prostor a materiál jsou doložené. Zdroj, nativní materiál a zadaný digitální prostor pohybu jsou doložené. Po uložení přepočítejte celý díl (Ctrl+R). Fyzický výtisk zůstává P3.",
+      "elapsed_seconds": 18.109000000171363
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "curved_connector",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 40,
+      "interpreted_value": 40.0,
+      "visible_text": "40,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 40,
+      "typed_text": "40",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 50,
+      "interpreted_value": 50.0,
+      "visible_text": "50,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 50,
+      "typed_text": "50",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 55,
+      "interpreted_value": 55.0,
+      "visible_text": "55,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 55,
+      "typed_text": "55",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 90,
+      "interpreted_value": 90.0,
+      "visible_text": "90,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 90,
+      "typed_text": "90",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 17,
+      "interpreted_value": 17.0,
+      "visible_text": "17,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 17,
+      "typed_text": "17",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 55,
+      "interpreted_value": 55.0,
+      "visible_text": "55,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 55,
+      "typed_text": "55",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 90,
+      "interpreted_value": 90.0,
+      "visible_text": "90,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 90,
+      "typed_text": "90",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 17,
+      "interpreted_value": 17.0,
+      "visible_text": "17,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 17,
+      "typed_text": "17",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus",
+      "count": 2
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus_all",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+S",
+      "expected_actions": [
+        "save"
+      ],
+      "window_active": true,
+      "active_window_title": "* Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "save",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+N",
+      "expected_actions": [
+        "new"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "new",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+O",
+      "expected_actions": [
+        "open"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "open",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+E",
+      "expected_actions": [
+        "export"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "export",
+      "count": 1
+    }
+  ],
+  "dialogs": [
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cylinder-desktop-d5a62d1-run01\\C-cylinder\\C-cylinder.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cylinder-desktop-d5a62d1-run01\\C-cylinder\\C-cylinder.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\projects\\papercraft-c-integrated-authoring\\docs\\p2\\implementation\\evidence\\pc007b-C-cylinder-desktop-d5a62d1-run01\\C-cylinder\\export",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Vyberte složku pro SVG a PDF",
+      "directory_confirmation": true
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Vektorový export",
+      "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Export dokončen",
+      "text": "Uloženo:\npage-26803eb5-93fb-4ae8-8e32-6c31522ef2ed.svg\npage-cc51345b-4ddf-4a0f-a90e-17f9c5fad5a4.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+    }
+  ],
+  "negative_cases": [],
+  "opengl": {
+    "version": "4.6.0 NVIDIA 610.71",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+  },
+  "elapsed_seconds": 107.906,
+  "files_sha256": {
+    "C-cylinder/C-cylinder.apcraft": "043290ce7fad79617495b41a4bddc6ac32d93de7dbf905d6a91adbb73b8001d4",
+    "C-cylinder/export/.author-export.json": "7167c4d056c2ded168b31c1826460af1e336f18deb6ddd4e0a112b9a76f1b4ef",
+    "C-cylinder/export/model.pdf": "115c84f0b97457ec9ed3d7a628c6a53fd0c9fe5668e3ceefe747c7a90c3efa39",
+    "C-cylinder/export/page-26803eb5-93fb-4ae8-8e32-6c31522ef2ed.svg": "b516b9c6f4a92697bbba1a56288a160781427076f10c4fb9f133b487f55653a3",
+    "C-cylinder/export/page-cc51345b-4ddf-4a0f-a90e-17f9c5fad5a4.svg": "ba43a484cbc8677bd2b25c3b842f7b839b58682178e47aff511cd13570f3b6a8",
+    "C-cylinder/snapshot.json": "a95ebfcbc63c4e6ad4093472575952055cd6e752c9b471376454e3304a69a907",
+    "C-cylinder-actual-C-preview-desktop.png": "875a117e889f09551da5f6a49562e712bee490d3abee475eb7605ec5d1817a25",
+    "C-cylinder-actual-C-preview-opengl.png": "e554a8585251bcc0d3707707287411a0721c0544f9131ac315dcee99af021662",
+    "C-cylinder-authored-layout-desktop.png": "a6ce2a85937ee5fcccd9c3d67c3108146b87b7b0af57e38b0fb6a1f3e184e404",
+    "C-cylinder-authored-layout-opengl.png": "f9732204e6aae4ca41cc06ce073deaa4b782e56c230498aa1879b49369b6e7d2",
+    "C-cylinder-reopened-auto-frame-all-material-desktop.png": "6fe74d2562d44aa6045850483ca386e3c3382c36e54fbb5d8a940c0eb1fe5c86",
+    "C-cylinder-reopened-auto-frame-all-material-opengl.png": "3b8f6c07267bdf37a78298d639bc5925bd93fcca5694cd88837d4c4085eab16a",
+    "C-cylinder-reopened-desktop.png": "4561e2aff42c1d1248d6d03bf6a05e1face8172cb19059039a50c40eca1be613",
+    "C-cylinder-reopened-opengl.png": "3b8f6c07267bdf37a78298d639bc5925bd93fcca5694cd88837d4c4085eab16a",
+    "diagnostic-live-1311562.png": "f2795bb392e27c73a8bd8046d83286121893b60f0c5da37560016542f5e59be8",
+    "diagnostic-live-3279658.png": "7b685e06ef19977739991f91b267d7787d8c840f8e94a56214e9b772f2e27ebc",
+    "empty-real-app-desktop.png": "c1fb2d1f08b3cc72087a4b48dc34ae3d6dcaa6d046aba4fa36aab9f137180f43",
+    "empty-real-app-opengl.png": "6ba1a10974500215847bbce8a108c4e813e52343ad5568075844e5ed0b3fd6f6",
+    "export-progress-1-1.png": "daf3d69e9390392b1599237fe110b1a1edc69b3cdd63323216291e0530094d29",
+    "export-progress-1-2.png": "b5c1acc5173e91265401afc75684be26b37d23052841dab9e00232d750649cea",
+    "export-progress-1-3.png": "531bff25789fdcda2b3849f4aa679a9c7d09b47d49031232ebb77dd45260adf2",
+    "loft-actual-preview-desktop.png": "809d0ce6162ae4d056f20a7b00bbaa68607b4b7c5039df4eb312aaca0bc99a43",
+    "loft-actual-preview-opengl.png": "5f7921fc23f620b61dd8d834ea45ad0be9c71cb85f6de913be3137e6de6ebd58",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953"
+  },
+  "export_progress": [
+    {
+      "dialog_identity": 2233684450944,
+      "samples": 13,
+      "max_observed_gap_seconds": 0.11000000010244548,
+      "phases": [
+        {
+          "text": "Kontroluji model a připravuji podklady pro export…",
+          "elapsed_seconds": 106.06200000015087
+        },
+        {
+          "text": "Vytvářím editovatelné SVG stránky a vektorové PDF…",
+          "elapsed_seconds": 107.10900000017136
+        },
+        {
+          "text": "Ověřuji přesnost, otvory a úplnost skutečných výstupů…",
+          "elapsed_seconds": 107.21900000004098
+        }
+      ],
+      "last_at": 1071247.562
+    }
+  ],
+  "failures": []
+}

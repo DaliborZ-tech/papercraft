@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="7.086" timestamp="2026-11-11T16:41:06.456769+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.pc007b-circular-producer-review-own" name="test_large_body_area_budget_excludes_tabs_and_atomic_bundle_is_retained" time="6.075"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'plocha|ploch'&#10;  Actual message: 'Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 2660'">tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1468/test_large_body_area_budget_ex0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000014E1CC4C9B0&gt;
+
+    def test_large_body_area_budget_excludes_tabs_and_atomic_bundle_is_retained(tmp_path, monkeypatch):
+        # Independent numerical comparator: body=20000*pi, tabs=12*1.14. The fault
+        # is halfway BETWEEN body-only and body+tabs relative thresholds.
+        p = AuthorProject.new(scale=1)
+        a,b = circle(p,100),circle(p,100,100)
+        owner = p.add_loft(a,b,correspondences=[
+            {"first_segment_id":x.id,"second_segment_id":y.id,
+             "first_interval":[0,1],"second_interval":[0,1]}
+            for x,y in zip(p.profiles[a].segments,p.profiles[b].segments)])
+        receiver = p.add_surface(circle(p,100))
+        p.add_curved_connector(owner,"first",receiver,receiver_side="inside",
+                                nominal_base_mm=.24,min_glue_area_mm2=1)
+        p.set_material_profile(thickness_mm=.2,clearance_mm=.01)
+        p.recompute()
+        pid = p.part_for_surface(owner)
+        for page in p.pages:
+            page.width_mm,page.height_mm = 800,500
+        second = p.add_page()
+        p.pages[-1].width_mm,p.pages[-1].height_mm = 800,500
+        p.set_placement(pid,p.pages[0].id,70,200)
+        p.set_placement(p.part_for_surface(receiver),second,200,200)
+        for issue in p.validate_layout():
+            if issue.severity == "warning":
+                p.acknowledge(issue.id)
+        snapshot = p.snapshot()
+        bundle = tmp_path/"bundle"
+        author_export.export_all(snapshot,bundle)
+        before = {path.name:path.read_bytes() for path in bundle.iterdir()}
+        body_area, tabs_area = 20000*math.pi,12*.24*9.5/2
+        requested_error = (body_area+tabs_area/2)/1e6
+        assert body_area/1e6 &lt; requested_error &lt; (body_area+tabs_area)/1e6
+        move = requested_error/(200*math.pi)
+        original = author_export._svg
+        def changed(*args,**kwargs):
+            original(*args,**kwargs)
+            path = args[4]
+            tree = ET.parse(path)
+            for group in tree.getroot():
+                if group.get("data-part-id") != pid:
+                    continue
+                role = next(node for node in group if node.get("data-role") == "CUT")
+                tokens = role[0].get("d").split()
+                i = 0
+                while i &lt; len(tokens):
+                    opcode = tokens[i]
+                    size = {"M":2,"L":2,"A":7,"C":6,"Z":0}[opcode]
+                    if opcode in ("M","L") and abs(float(tokens[i+2])+100) &lt; 1e-8:
+                        tokens[i+2] = repr(float(tokens[i+2])-move)
+                    i += size+1
+                role[0].set("d"," ".join(tokens))
+            tree.write(path,encoding="utf8",xml_declaration=True)
+        monkeypatch.setattr(author_export,"_svg",changed)
+&gt;       with pytest.raises(CurveOutputError,match="plocha|ploch"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'plocha|ploch'
+E         Actual message: 'Vektorový výstup: Skutečné výrobní SVG nelze úplně ověřit: not well-formed (invalid token): line 2, column 2660'
+
+docs\p2\implementation\evidence\pc007b-circular-producer-review-own.py:353: AssertionError</failure></testcase></testsuite></testsuites>

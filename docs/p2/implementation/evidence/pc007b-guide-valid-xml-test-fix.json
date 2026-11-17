@@ -1,0 +1,14 @@
+{
+  "test_fix_commit": "84117c484aee8049f339cc602ba19d70e1e3ccba",
+  "production_runtime": "67c44aefabe45b12543367f7d38046e06a6efb4f",
+  "src_tree": "591ca8f7336051a0cd503eb2b9a24c742b71bc77",
+  "production_diff": "",
+  "test_file_sha256": "16b225447dba75871efdd1ece155d713d83eb0f998f3d6a773fbfb86237b8ea5",
+  "tests_passed": 7,
+  "seconds": 33.24,
+  "scope": "SIX_VALID_XML_SVG_GUIDE_FAULTS_AND_ONE_ACTUAL_CONE_FIRST_SVG_PDF",
+  "baseline_preserved": "pc007b-circular-material-67c44ae-targeted.xml",
+  "review": "PENDING_OTHER_AGENT",
+  "new_user": "NOT_RUN",
+  "physical": "NOT_VERIFIED"
+}

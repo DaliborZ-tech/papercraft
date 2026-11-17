@@ -1,0 +1,44 @@
+[
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-c-integrated-authoring",
+    "HEAD": "5747a2af2d70cd622de49c057544b584baa699c2",
+    "branch": "refs/heads/revival/p2-c-integrated-authoring",
+    "tracked_status": " M .agents/skills/papercraft-authoring-ui/SKILL.md\n M 05_WORK_QUEUE.json\n M docs/p2/SKILL_IMPROVEMENTS.json\n"
+  },
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-core9-review",
+    "HEAD": "b7348c257889955df1756813779a097a531fd754",
+    "branch": "refs/heads/review/core9-7c61c7e",
+    "tracked_status": ""
+  },
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-curved-profile-provenance",
+    "HEAD": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
+    "branch": "refs/heads/revival/p2-curved-profile-provenance",
+    "tracked_status": ""
+  },
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-curved-profile-ui",
+    "HEAD": "6af01c67c7555171bcdd7246cf9834c39afa8114",
+    "branch": "refs/heads/revival/p2-curved-profile-ui",
+    "tracked_status": ""
+  },
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-editor-curve-equivalence",
+    "HEAD": "b9ff396cf9d319cbceb64d1cab0e0d8cb3effe30",
+    "branch": "refs/heads/revival/p2-editor-curve-equivalence",
+    "tracked_status": ""
+  },
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-profile-source-views-review",
+    "HEAD": "48522778f7026bcc65c61bd876e2bad78c3ccaea",
+    "branch": "refs/heads/review/p2-profile-source-views",
+    "tracked_status": ""
+  },
+  {
+    "worktree": "C:/Users/dalib/projects/papercraft-scaling-review",
+    "HEAD": "bf2e8c521680f69453624233d47f299e1d422e18",
+    "branch": "refs/heads/review/scaling-22301fa",
+    "tracked_status": ""
+  }
+]
