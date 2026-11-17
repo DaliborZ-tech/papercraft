@@ -27,9 +27,14 @@ def window(qtbot, tmp_path, monkeypatch):
         widget.recovery = setup_recovery(widget)
     qtbot.addWidget(widget)
     monkeypatch.setattr(widget, "_confirm_replace", lambda: True)
+    monkeypatch.setattr(QMessageBox, "warning", lambda *_args: None)
     widget.show()
     qtbot.wait(10)
     yield widget
+    if hasattr(widget, "selection_name"):
+        surface = widget.project.surfaces.get(widget.selected_surface)
+        with QSignalBlocker(widget.selection_name):
+            widget.selection_name.setText(surface.name if surface else "")
     widget.recovery.finished_close()
 
 
@@ -393,3 +398,77 @@ os._exit(0)
     assert window.selected_vertex == (profile.id, profile.vertices[1].id)
     assert window.vertex_x.lineEdit().text() == "-"
     assert window.controller.recovered and window.controller.file_path is None
+
+
+@pytest.mark.parametrize("text", ["Žluťoučká věž – sever", ""])
+def test_clean_inline_name_checkpoint_keeps_raw_focus_domain_and_savepoint(window, qtbot,
+                                                                         tmp_path, text):
+    sid = arrange_rectangle(window)
+    original = tmp_path / "named-model.apcraft"
+    window.controller.save(original)
+    before, raw = window.project.to_dict(), original.read_bytes()
+    history = copy.deepcopy(window.controller._undo)
+    savepoint = window.controller._saved_digest
+    window.selection_name.setFocus()
+    window.selection_name.selectAll()
+    # Unicode text enters the actual editor via Qt; no editingFinished/Enter is emitted.
+    window.selection_name.insert(text)
+    assert window.selection_name.text() == text
+    focus = QApplication.focusWidget()
+    assert window.recovery.checkpoint()
+    path = window.recovery.store.path(window.recovery.session_id)
+    saved = window.recovery.store.read(path)
+    assert saved["document"] == before
+    assert saved["ui_draft"]["pending_name"] == {"surface_id": sid, "text": text}
+    assert QApplication.focusWidget() is focus
+    assert window.project.to_dict() == before and window.controller._undo == history
+    assert window.controller._saved_digest == savepoint and not window.controller.dirty
+    assert original.read_bytes() == raw
+
+
+@pytest.mark.parametrize("text", ["Žluťoučká věž – sever", ""])
+def test_restore_inline_name_preserves_exact_owner_until_explicit_confirmation(window, qtbot,
+                                                                             tmp_path, text):
+    sid = arrange_rectangle(window, name="Saved north wall")
+    other = arrange_rectangle(window, name="Unchanged south wall")
+    window.select_surface(sid)
+    original = tmp_path / "two-walls.apcraft"
+    window.controller.save(original)
+    before, original_bytes = window.project.to_dict(), original.read_bytes()
+    window.selection_name.setFocus()
+    window.selection_name.selectAll()
+    window.selection_name.insert(text)
+    assert window.recovery.checkpoint()
+    path = released(window)
+    window.controller.new()
+    assert window.recovery.restore(path)
+    assert window.project.to_dict() == before
+    assert window.selected_surface == sid and window.selected_part == before["surfaces"][sid][
+        "part_id"]
+    assert window.selection_name.text() == text and window.selection_name.hasFocus()
+    assert window.project.surfaces[other].name == "Unchanged south wall"
+    assert window.controller.file_path is None and window.controller.copy_source_path == original
+    assert window.controller._saved_digest is None and not window.controller.can_undo
+    qtbot.keyClick(window.selection_name, Qt.Key.Key_Return)
+    if text:
+        assert window.project.surfaces[sid].name == text
+        assert len(window.controller._undo) == 1
+        window.controller.undo()
+        assert window.project.to_dict() == before
+    else:
+        assert window.project.to_dict() == before and not window.controller.can_undo
+        assert window.selection_name.text() == "" and window.selection_name.hasFocus()
+    assert original.read_bytes() == original_bytes
+
+
+def test_pending_name_wrong_valid_surface_is_rejected_before_live_replacement(window):
+    sid = arrange_rectangle(window, name="North")
+    other = arrange_rectangle(window, name="South")
+    window.select_surface(sid)
+    ui = capture_ui(window)
+    ui["pending_name"] = {"surface_id": other, "text": "Foreign name"}
+    before = window.project.to_dict()
+    path = window.recovery.store.write(uuid4(), before, ui)
+    with pytest.raises(ValueError, match="Rozepsaný název"):
+        window.recovery.restore(path)
+    assert window.project.to_dict() == before and path.exists()

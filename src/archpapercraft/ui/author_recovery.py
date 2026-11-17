@@ -50,6 +50,15 @@ def _pending_number(host):
     return {"field": key, "text": field.lineEdit().text()}
 
 
+def _pending_name(host):
+    field = getattr(host, "selection_name", None)
+    surface = host.project.surfaces.get(host.selected_surface)
+    if (field is None or not field.hasFocus() or surface is None
+            or field.text() == surface.name):
+        return None
+    return {"surface_id": surface.id, "text": field.text()}
+
+
 def capture_ui(host):
     """Read raw input without interpretText, focus changes, commands or recompute."""
     sketch = host.sketch
@@ -65,6 +74,7 @@ def capture_ui(host):
         "joint": host.current_joint,
         "units": host.units.currentData(), "plane": host.plane.currentData(),
         "grid": host.grid.value(), "sketch": draft, "pending_number": _pending_number(host),
+        "pending_name": _pending_name(host),
         "context": getattr(host, "workspace_context", None),
         "sketch_visible": host.sketch.isVisibleTo(host),
     }
@@ -172,6 +182,14 @@ def _validated_ui(host, project, data):
                 and selection.get("profile") is None
                 or field in ("tab_width", "tab_taper") and data.get("joint") is None):
             raise ValueError("Rozepsaný vstup nemá odpovídající vybraný prvek.")
+    name = data.get("pending_name")
+    if name is not None:
+        field = getattr(host, "selection_name", None)
+        if (not isinstance(name, dict) or field is None
+                or name.get("surface_id") != surface or surface is None
+                or not isinstance(name.get("text"), str)
+                or len(name["text"]) > field.maxLength() or pending is not None):
+            raise ValueError("Rozepsaný název nemá odpovídající vybranou plochu.")
     return data
 
 
@@ -213,6 +231,7 @@ def restore_ui(host, data):
         host.sketch.segment_mode_changed.emit(host.sketch.segment_mode)
         host.sketch.draft_changed.emit()
     pending = data.get("pending_number")
+    name = data.get("pending_name")
     if pending:
         field = _fields(host)[pending["field"]]
         # Expose the existing property section if it was collapsed.
@@ -222,6 +241,12 @@ def restore_ui(host, data):
         with QSignalBlocker(field), QSignalBlocker(field.lineEdit()):
             field.lineEdit().setText(pending["text"])
         field.setFocus()
+    elif name is not None:
+        # Restore the raw editor only after its exact surface/context was restored.
+        # The last valid domain name remains unchanged until explicit confirmation.
+        with QSignalBlocker(host.selection_name):
+            host.selection_name.setText(name["text"])
+        host.selection_name.setFocus()
     elif sketch:
         host.sketch.setFocus()
     host.update_guidance()
@@ -266,7 +291,8 @@ class AuthorRecovery(QObject):
             state = self.host.project.to_dict(validate=False)
             ui = capture_ui(self.host)
             changed = self.host.controller.digest(state) != self.host.controller._saved_digest
-            if not changed and not ui["sketch"] and not ui["pending_number"]:
+            if (not changed and not ui["sketch"] and not ui["pending_number"]
+                    and not ui["pending_name"]):
                 self._clear_own()
                 return False
             if self.lease is None:

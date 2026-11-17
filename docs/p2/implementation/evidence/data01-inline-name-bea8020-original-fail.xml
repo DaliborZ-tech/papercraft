@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.124" timestamp="2026-11-17T19:04:41.621485+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_recovery_workspace" name="test_clean_inline_name_checkpoint_keeps_raw_focus_domain_and_savepoint[\u017dlu\u0165ou\u010dk\xe1 v\u011b\u017e \u2013 sever]" time="0.108"><failure message="assert False&#10; +  where False = checkpoint()&#10; +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7924e5bb0) at 0x000001A7FFC56840&gt;.checkpoint&#10; +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7924e5bb0) at 0x000001A7FFC56840&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1a7921c0570) at 0x000001A7FFBECF40&gt;.recovery">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1a7921c0570) at 0x000001A7FFBECF40&gt;
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001A7FFB12C00&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1618/test_clean_inline_name_checkpo0')
+text = 'Žluťoučká věž – sever'
+
+    @pytest.mark.parametrize("text", ["Žluťoučká věž – sever", ""])
+    def test_clean_inline_name_checkpoint_keeps_raw_focus_domain_and_savepoint(window, qtbot,
+                                                                             tmp_path, text):
+        sid = arrange_rectangle(window)
+        original = tmp_path / "named-model.apcraft"
+        window.controller.save(original)
+        before, raw = window.project.to_dict(), original.read_bytes()
+        history = copy.deepcopy(window.controller._undo)
+        savepoint = window.controller._saved_digest
+        window.selection_name.setFocus()
+        window.selection_name.selectAll()
+        # Unicode text enters the actual editor via Qt; no editingFinished/Enter is emitted.
+        window.selection_name.insert(text)
+        assert window.selection_name.text() == text
+        focus = QApplication.focusWidget()
+&gt;       assert window.recovery.checkpoint()
+E       assert False
+E        +  where False = checkpoint()
+E        +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7924e5bb0) at 0x000001A7FFC56840&gt;.checkpoint
+E        +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7924e5bb0) at 0x000001A7FFC56840&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1a7921c0570) at 0x000001A7FFBECF40&gt;.recovery
+
+tests\authoring\test_recovery_workspace.py:418: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="tests.authoring.test_recovery_workspace" name="test_clean_inline_name_checkpoint_keeps_raw_focus_domain_and_savepoint[]" time="0.087"><failure message="assert False&#10; +  where False = checkpoint()&#10; +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7928ee5b0) at 0x000001A7FFD4C540&gt;.checkpoint&#10; +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7928ee5b0) at 0x000001A7FFD4C540&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1a792455600) at 0x000001A7FFC54400&gt;.recovery">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1a792455600) at 0x000001A7FFC54400&gt;
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001A7FFCC9220&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1618/test_clean_inline_name_checkpo1')
+text = ''
+
+    @pytest.mark.parametrize("text", ["Žluťoučká věž – sever", ""])
+    def test_clean_inline_name_checkpoint_keeps_raw_focus_domain_and_savepoint(window, qtbot,
+                                                                             tmp_path, text):
+        sid = arrange_rectangle(window)
+        original = tmp_path / "named-model.apcraft"
+        window.controller.save(original)
+        before, raw = window.project.to_dict(), original.read_bytes()
+        history = copy.deepcopy(window.controller._undo)
+        savepoint = window.controller._saved_digest
+        window.selection_name.setFocus()
+        window.selection_name.selectAll()
+        # Unicode text enters the actual editor via Qt; no editingFinished/Enter is emitted.
+        window.selection_name.insert(text)
+        assert window.selection_name.text() == text
+        focus = QApplication.focusWidget()
+&gt;       assert window.recovery.checkpoint()
+E       assert False
+E        +  where False = checkpoint()
+E        +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7928ee5b0) at 0x000001A7FFD4C540&gt;.checkpoint
+E        +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1a7928ee5b0) at 0x000001A7FFD4C540&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1a792455600) at 0x000001A7FFC54400&gt;.recovery
+
+tests\authoring\test_recovery_workspace.py:418: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase></testsuite></testsuites>
