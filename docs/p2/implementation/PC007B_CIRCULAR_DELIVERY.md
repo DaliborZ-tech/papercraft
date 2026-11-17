@@ -152,3 +152,37 @@ zůstávají zachovaná. Tento úspěch prokazuje konkrétní C-cylinder workflo
 `QT_SCALE_FACTOR=1.5`, nikoli změnu systémového DPI, všechny monitory, nové
 uživatele, celé PC-009 ani fyzickou stavbu. OS scaling certification,
 AC-US08 a P3 zůstávají NOT_RUN; near-cylinder editorový důkaz má samostatný rozsah.
+
+## Úplná integrační sada po opravě D fixtures — 17. 11. 2026
+
+Přesný ověřený snapshot **4f110d9c8fe85224997257c764385e88ac188fe5**:
+celý `pytest tests -q` bez selekce, Qt offscreen,
+**1916 PASS /0 FAIL /0 ERROR /0 SKIP,710,39s**.
+Jediné varování se týká metadat record_property v JUnit xunit2.
+[JUnit](evidence/p2-candidate-4f110d9-full/junit.xml),
+[raw log](evidence/p2-candidate-4f110d9-full/pytest.log),
+[binding](evidence/p2-candidate-4f110d9-full/binding.json).
+Binding ověřil importy uvnitř stejného pytest procesu při startu, po collection
+a na konci; všechny aplikační moduly pocházejí z vlastního src. LF bytes celého
+src a všech sledovaných Python souborů tests/tools odpovídají připnutým Git
+blobům před i po běhu. [Ruff](evidence/p2-candidate-4f110d9-full/ruff.json):
+39 změněných Python souborů,0 nálezů. Diff check PASS.
+
+Produkční src je totožné s a5eedc9. Předchozí a5 běh s1867 PASS/37 FAIL/10 ERROR
+zůstává zachovaný jako neúspěch. Příčinou jeho D případů byla příprava archivních
+fixtures: nové safe-copy načtení úmyslně zachová starou cache jako stale,
+testy však rovnou požadovaly snapshot. Tři archivní případy teď nejprve doloží
+stale snapshot odmítnutí, potom explicitní přepočet se zachováním původních bytů,
+profilů, generací, identit, frame a ručního layoutu. Žádná původní numerická,
+poison, skutečná SVG/PDF ani budget negativní očekávání se nemění.
+
+Dva nové aktuální LINE/CURVED případy vznikají přes veřejné příkazy z nového
+projektu: preview/confirm APPROXIMATE varianty, ruční dvě stránky, oba locks,
+save/reopen s úplnou shodou stavu, snapshot, skutečné SVG/PDF a odmítnutí
+pozměněného CUT. Cíleně55 původních D testů PASS/86,55s a2 nové PASS/32,69s;
+tyto podmnožiny se k1916 nepřičítají.
+
+Jde o integrační verifikaci, nikoli nezávislé review vlastní opravy zdrojového
+pořadí09b6811 ani technický důkaz nového člověka nebo fyzického modelu.
+Schválení konkrétního integračního výsledku musí doložit jiný reviewer.
+Použitelnost s člověkem AC-US08 a fyzické P3 zůstávají NOT_RUN.
