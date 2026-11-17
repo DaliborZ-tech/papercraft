@@ -1,0 +1,11 @@
+{
+  "source_sha": "696906954f3e6863a6c945a1afc0d62f9d60f769",
+  "status": "INTERRUPTED_AFTER_CONFIRMED_FAILURES",
+  "reason": "Root authorized interruption at60% to prioritize full suite on repaired a5eedc9 without exclusions.",
+  "completed_progress_characters": 1224,
+  "observed_pass": 1220,
+  "observed_fail": 4,
+  "not_a_complete_suite": true,
+  "log_encoding": "utf16",
+  "source_scope": "Own isolated worktree; source LF hashes checked against pin before pytest; in-process binding hooks did not fail through observed collection/execution. Abrupt process stop means final import/file check and JUnit not completed."
+}
