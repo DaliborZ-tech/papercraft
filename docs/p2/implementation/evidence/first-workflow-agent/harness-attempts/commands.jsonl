@@ -1,0 +1,28 @@
+{"op":"dump"}
+{"op":"screen","name":"01-empty-1366"}
+{"op":"button","text":"Obdélník z rozměrů"}
+{"op":"dump"}
+{"op":"field","label":"Šířka","text":"10"}
+{"op":"field","label":"Výška","text":"7"}
+{"op":"button","text":"OK"}
+{"op":"dump"}
+{"op":"screen","name":"02-first-base"}
+{"op":"dump"}
+{"op":"screen","name":"02-first-base-settled"}
+{"op":"button","text":"Pojmenovat…"}
+{"op":"dump"}
+{"op":"field","label":"Model","text":"Prvni vlastni model"}
+{"op":"field","label":"Vybraná plocha","text":"Podlozka"}
+{"op":"field","label":"Papírový díl","text":"Podlozka"}
+{"op":"button","text":"Použít názvy"}
+{"op":"choose","label":"Nová pracovní rovina","text":"Svisle (stěna)"}
+{"op":"button","text":"Obdélník z rozměrů"}
+{"op":"field","label":"Šířka","text":"6"}
+{"op":"field","label":"Výška","text":"4"}
+{"op":"button","text":"OK"}
+{"op":"button","text":"Pojmenovat…"}
+{"op":"field","label":"Vybraná plocha","text":"Stena"}
+{"op":"field","label":"Papírový díl","text":"Stena"}
+{"op":"button","text":"Použít názvy"}
+{"op":"dump"}
+{"op":"quit"}

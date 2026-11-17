@@ -1,0 +1,74 @@
+{"op":"resize","size":[1366,768]}
+{"op":"dump"}
+{"op":"screen","name":"01-empty"}
+{"op":"button","text":"Obdélník z rozměrů"}
+{"op":"field","label":"Šířka","text":"10"}
+{"op":"field","label":"Výška","text":"7"}
+{"op":"button","text":"OK"}
+{"op":"button","text":"Pojmenovat…"}
+{"op":"field","label":"Model","text":"Prvni vlastni model"}
+{"op":"field","label":"Vybraná plocha","text":"Podlozka"}
+{"op":"field","label":"Papírový díl","text":"Podlozka"}
+{"op":"button","text":"Použít názvy"}
+{"op":"choose","label":"Nová pracovní rovina","text":"Svisle (stěna)"}
+{"op":"button","text":"Obdélník z rozměrů"}
+{"op":"field","label":"Šířka","text":"6"}
+{"op":"field","label":"Výška","text":"4"}
+{"op":"button","text":"OK"}
+{"op":"button","text":"Pojmenovat…"}
+{"op":"field","label":"Vybraná plocha","text":"Stena"}
+{"op":"field","label":"Papírový díl","text":"Stena"}
+{"op":"button","text":"Použít názvy"}
+{"op":"dump"}
+{"op":"screen","name":"02-two-own-parts"}
+{"op":"button","text":"Hrany, spoj a chlopeň"}
+{"op":"choose","label":"Okraj vybrané plochy","text":"Úsečka 1"}
+{"op":"button","text":"Připojit dovnitř plochy…"}
+{"op":"dump"}
+{"op":"button","text":"Nakreslit připojovací čáru"}
+{"op":"canvas","class":"ReceivingSketch","point":[2000,-2000]}
+{"op":"canvas","class":"ReceivingSketch","point":[8000,-2000]}
+{"op":"dump"}
+{"op":"dump"}
+{"op":"button","text":"Hrany, spoj a chlopeň"}
+{"op":"choose","label":"Okraj vybrané plochy","text":"Úsečka 1"}
+{"op":"dump"}
+{"op":"screen","name":"03-edge-choice-before-attach"}
+{"op":"button","text":"Připojit dovnitř plochy…"}
+{"op":"dump"}
+{"op":"button","text":"Nakreslit připojovací čáru"}
+{"op":"canvas","class":"ReceivingSketch","point":[2000,-2000]}
+{"op":"canvas","class":"ReceivingSketch","point":[8000,-2000]}
+{"op":"dump"}
+{"op":"dump"}
+{"op":"button","text":"Použít připojení"}
+{"op":"dump"}
+{"op":"screen","name":"04-connection"}
+{"op":"button","text":"Přidat chlopeň…"}
+{"op":"dump"}
+{"op":"field","label":"Šířka záložky","text":"4"}
+{"op":"choose","label":"Tvar","text":"Trojúhelníková"}
+{"op":"button","text":"OK"}
+{"op":"button","text":"Přepočítat papírové díly"}
+{"op":"dump"}
+{"op":"screen","name":"05-tab-and-contact"}
+{"op":"state"}
+{"op":"choose","label":"Vybraný bod","text":"Vlastní obrys · Bod 3"}
+{"op":"field","label":"Svisle v obrysu","text":"5"}
+{"op":"state"}
+{"op":"dump"}
+{"op":"key","key":"Ctrl+Z"}
+{"op":"state"}
+{"op":"dump"}
+{"op":"key","key":"Ctrl+Shift+Z"}
+{"op":"state"}
+{"op":"dump"}
+{"op":"field","label":"Svisle v obrysu","text":"0"}
+{"op":"dump"}
+{"op":"dump"}
+{"op":"screen","name":"06-rejected-zero-edge"}
+{"op":"key","key":"Return"}
+{"op":"state"}
+{"op":"key","key":"Ctrl+Y"}
+{"op":"state"}
+{"op":"dump"}

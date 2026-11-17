@@ -1,0 +1,522 @@
+{
+  "title": "* Prvni vlastni model — ArchPapercraft Studio",
+  "size": [
+    1366,
+    768
+  ],
+  "pid": 22700,
+  "hwnd": 1313336,
+  "dpi": 1.0,
+  "screen": [
+    0,
+    0,
+    1920,
+    1080
+  ],
+  "logical_dpi": 96.0,
+  "frame": [
+    20,
+    35,
+    1366,
+    799
+  ],
+  "minimum_hint": [
+    674,
+    571
+  ],
+  "menus": [
+    "Projekt",
+    "Úpravy",
+    "Vytvořit",
+    "Zobrazení a pomoc"
+  ],
+  "labels": [
+    "Vybranou hranu můžete připojit k protikusu; potom určíte přehyb nebo lepení s chlopní.",
+    "Stena · Stena",
+    "Stena · Stena",
+    "Rozměry modelu",
+    "Nová pracovní rovina",
+    "Měřítko 1 :",
+    "Síť obrysu (Alt obejde)",
+    "Úsek zdrojového profilu",
+    "Odvozené generace",
+    "Vybraný bod",
+    "Vodorovně",
+    "Svisle v obrysu",
+    "Okraj vybrané plochy",
+    "Spoje vybrané plochy",
+    "Protikus: Podlozka (P1)",
+    "Lepit na vnitřní stranu.\nTloušťka není známá. Omezené hledání střetů nedokazuje jejich nepřítomnost.\nDigitální kontakt nenahrazuje ověření ohybu a pevnosti výtiskem.",
+    "Vyberte kruhový plášť. Disk příjemce vytvořte samostatně z vlastního obrysu.",
+    "Umístění",
+    "Kotva X",
+    "Kotva Y",
+    "Natočení"
+  ],
+  "buttons": [
+    {
+      "text": "Přijmout vybrané varování pro tento stav",
+      "enabled": false
+    },
+    {
+      "text": "Pojmenovat…",
+      "enabled": true
+    },
+    {
+      "text": "Odstranit díl…",
+      "enabled": true
+    },
+    {
+      "text": "Papír a místo pro ohyb…",
+      "enabled": true
+    },
+    {
+      "text": "Upravit tvar a úchopy…",
+      "enabled": true
+    },
+    {
+      "text": "Rozdělit úsek…",
+      "enabled": true
+    },
+    {
+      "text": "Spojit původní úseky…",
+      "enabled": false
+    },
+    {
+      "text": "Kopie profilu do hloubky…",
+      "enabled": true
+    },
+    {
+      "text": "Hloubka a rovina profilu…",
+      "enabled": false
+    },
+    {
+      "text": "Plocha mezi dvěma profily…",
+      "enabled": true
+    },
+    {
+      "text": "Připojit k další hraně",
+      "enabled": true
+    },
+    {
+      "text": "Připojit dovnitř plochy…",
+      "enabled": true
+    },
+    {
+      "text": "Přilepit plochu oblastí…",
+      "enabled": true
+    },
+    {
+      "text": "Ukázat protikus",
+      "enabled": true
+    },
+    {
+      "text": "Upravit chlopeň…",
+      "enabled": true
+    },
+    {
+      "text": "Odebrat chlopeň",
+      "enabled": true
+    },
+    {
+      "text": "Samostatný lepicí pásek…",
+      "enabled": false
+    },
+    {
+      "text": "Odebrat vnitřní připojení",
+      "enabled": true
+    },
+    {
+      "text": "Upravit jednu…",
+      "enabled": true
+    },
+    {
+      "text": "Dělené chlopně kruhového okraje…",
+      "enabled": false
+    },
+    {
+      "text": "Upravit sadu / vrchol vybrané chlopně…",
+      "enabled": false
+    },
+    {
+      "text": "Vypnout vybranou chlopeň",
+      "enabled": false
+    },
+    {
+      "text": "Odebrat sadu chlopní",
+      "enabled": false
+    },
+    {
+      "text": "Změnit kotvu dílu…",
+      "enabled": true
+    },
+    {
+      "text": "Ruční rozmístění více dílů…",
+      "enabled": true
+    },
+    {
+      "text": "Přidat A4",
+      "enabled": true
+    },
+    {
+      "text": "Odebrat stránku",
+      "enabled": true
+    },
+    {
+      "text": "",
+      "enabled": true
+    },
+    {
+      "text": "Nakreslit vlastní díl",
+      "enabled": true
+    },
+    {
+      "text": "Obdélník z rozměrů",
+      "enabled": true
+    },
+    {
+      "text": "Uzavřít obrys a vytvořit plochu",
+      "enabled": false
+    },
+    {
+      "text": "Nakreslit otvor do vybrané plochy",
+      "enabled": true
+    },
+    {
+      "text": "Zrušit rozpracovanou operaci",
+      "enabled": true
+    },
+    {
+      "text": "Vrátit změnu",
+      "enabled": true
+    },
+    {
+      "text": "Zopakovat změnu",
+      "enabled": true
+    },
+    {
+      "text": "Přepočítat papírové díly",
+      "enabled": true
+    },
+    {
+      "text": "Jednotky a tvorba",
+      "enabled": true
+    },
+    {
+      "text": "Profil a křivky",
+      "enabled": true
+    },
+    {
+      "text": "Bod obrysu",
+      "enabled": true
+    },
+    {
+      "text": "Umístění v prostoru",
+      "enabled": true
+    },
+    {
+      "text": "Hrany, spoj a chlopeň",
+      "enabled": true
+    },
+    {
+      "text": "Autorské spoje a záložky",
+      "enabled": true
+    },
+    {
+      "text": "Díl na papíře",
+      "enabled": true
+    }
+  ],
+  "fields": [
+    {
+      "label": "Rozměry modelu",
+      "type": "QComboBox",
+      "visible": true,
+      "text": "m"
+    },
+    {
+      "label": "Nová pracovní rovina",
+      "type": "QComboBox",
+      "visible": true,
+      "text": "Svisle (stěna)"
+    },
+    {
+      "label": "Měřítko 1 :",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "100,000"
+    },
+    {
+      "label": "Síť obrysu (Alt obejde)",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "0,1000"
+    },
+    {
+      "label": "Úsek zdrojového profilu",
+      "type": "QComboBox",
+      "visible": true,
+      "text": "Vlastní obrys · Úsečka 1"
+    },
+    {
+      "label": "Odvozené generace",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Nová odvozená generace"
+    },
+    {
+      "label": "Vybraný bod",
+      "type": "QComboBox",
+      "visible": true,
+      "text": "Vlastní obrys · Bod 3"
+    },
+    {
+      "label": "Vodorovně",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "6,000000"
+    },
+    {
+      "label": "Svisle v obrysu",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "4,000000"
+    },
+    {
+      "label": "Posun X",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "2,000000"
+    },
+    {
+      "label": "Posun Y",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "2,000000"
+    },
+    {
+      "label": "Výška Z",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "0,000000"
+    },
+    {
+      "label": "Natočení X (°)",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "0,000000"
+    },
+    {
+      "label": "Natočení Y (°)",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "0,000000"
+    },
+    {
+      "label": "Natočení Z (°)",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "0,000000"
+    },
+    {
+      "label": "Okraj vybrané plochy",
+      "type": "QComboBox",
+      "visible": true,
+      "text": "Úsečka 1"
+    },
+    {
+      "label": "Existující spoj",
+      "type": "QComboBox",
+      "visible": false,
+      "text": ""
+    },
+    {
+      "label": "Způsob spojení",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Řez a lepení"
+    },
+    {
+      "label": "Chlopeň",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Bez chlopně"
+    },
+    {
+      "label": "Šířka na papíře",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "5,0000 mm"
+    },
+    {
+      "label": "Poměr zúžení",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "0,6000"
+    },
+    {
+      "label": "Tvar",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Zkosená"
+    },
+    {
+      "label": "Umístění",
+      "type": "QComboBox",
+      "visible": true,
+      "text": "Odkládací plocha"
+    },
+    {
+      "label": "Kotva X",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "120,000000 mm"
+    },
+    {
+      "label": "Kotva Y",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "0,000000 mm"
+    },
+    {
+      "label": "Natočení",
+      "type": "QDoubleSpinBox",
+      "visible": true,
+      "text": "0,000000°"
+    },
+    {
+      "label": "Přijímající plocha",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Podlozka"
+    },
+    {
+      "label": "Postup",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Umístit na nakreslenou čáru"
+    },
+    {
+      "label": "Úhel mezi plochami",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "90,000°"
+    },
+    {
+      "label": "Strana příjemce",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "Vnitřní strana plochy"
+    },
+    {
+      "label": "Kam se přehne chlopeň",
+      "type": "QComboBox",
+      "visible": false,
+      "text": "První strana připojovací čáry"
+    },
+    {
+      "label": "Od místa na zdrojové hraně (%)",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "0,0000"
+    },
+    {
+      "label": "Do místa na zdrojové hraně (%)",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "100,0000"
+    },
+    {
+      "label": "Začátek vodorovně",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "2,000000"
+    },
+    {
+      "label": "Začátek svisle",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "2,000000"
+    },
+    {
+      "label": "Konec vodorovně",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "8,000000"
+    },
+    {
+      "label": "Konec svisle",
+      "type": "QDoubleSpinBox",
+      "visible": false,
+      "text": "2,000000"
+    }
+  ],
+  "combo_options": {
+    "Rozměry modelu": [
+      "m",
+      "cm",
+      "mm"
+    ],
+    "Nová pracovní rovina": [
+      "Vodorovně (půdorys)",
+      "Svisle (stěna)",
+      "Svisle (čelo)"
+    ],
+    "Úsek zdrojového profilu": [
+      "Vlastní obrys · Úsečka 1",
+      "Vlastní obrys · Úsečka 2",
+      "Vlastní obrys · Úsečka 3",
+      "Vlastní obrys · Úsečka 4"
+    ],
+    "Odvozené generace": [
+      "Nová odvozená generace"
+    ],
+    "Vybraný bod": [
+      "Vlastní obrys · Bod 1",
+      "Vlastní obrys · Bod 2",
+      "Vlastní obrys · Bod 3",
+      "Vlastní obrys · Bod 4"
+    ],
+    "Okraj vybrané plochy": [
+      "Úsečka 1",
+      "Úsečka 2",
+      "Úsečka 3",
+      "Úsečka 4"
+    ],
+    "Existující spoj": [],
+    "Způsob spojení": [
+      "Řez a lepení",
+      "Souvislý přehyb"
+    ],
+    "Chlopeň": [
+      "Bez chlopně"
+    ],
+    "Tvar": [
+      "Zkosená",
+      "Trojúhelníková"
+    ],
+    "Umístění": [
+      "Odkládací plocha",
+      "Stránka 1"
+    ],
+    "Přijímající plocha": [
+      "Podlozka"
+    ],
+    "Postup": [
+      "Umístit na nakreslenou čáru",
+      "Připojit v současné prostorové poloze"
+    ],
+    "Strana příjemce": [
+      "Vnitřní strana plochy",
+      "Vnější strana plochy"
+    ],
+    "Kam se přehne chlopeň": [
+      "První strana připojovací čáry",
+      "Opačná strana připojovací čáry"
+    ]
+  },
+  "tree": [
+    "Podlozka · Podlozka",
+    "Stena · Stena"
+  ]
+}
