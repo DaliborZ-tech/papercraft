@@ -78,6 +78,7 @@ def test_acknowledgement_does_not_hide_or_accept_another_group_member(qtbot):
         lambda item: selected.append(item.data(Qt.ItemDataRole.UserRole)))
     qtbot.mouseClick(panel.primary, Qt.MouseButton.LeftButton)
     assert selected == [b.id]
+    assert panel.details.isChecked() and panel.ack_button.isVisible()
     assert project.acknowledgements == {}
     assert a.digest == "first-proof" and b.digest == "second-proof"
 

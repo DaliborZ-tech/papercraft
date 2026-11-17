@@ -162,6 +162,7 @@ class AuthorProblemsPanel(QWidget):
         self.primary.setText(
             "Umístit díly na stránky" if target and target.code == "UNPLACED" else
             "Přepočítat papírové díly" if target and target.code == "STALE" else
+            "Zkontrolovat varování" if target and target.severity.lower() == "warning" else
             "Přejít k nápravě" if target else
             "Export SVG/PDF" if self._has_parts else "Vytvořit první díl"
         )
@@ -178,6 +179,10 @@ class AuthorProblemsPanel(QWidget):
                 item = self.issues.currentItem()
                 selected = self._issues_by_id[item.data(Qt.ItemDataRole.UserRole)]
         if selected and not selected.acknowledged:
+            if selected.severity.lower() == "warning":
+                # Review and the explicit per-issue accept command must be
+                # visible at the destination, rather than another hidden step.
+                self.show_problems()
             self.issues.itemActivated.emit(item)
             if selected.code == "STALE":
                 self.action_requested.emit("recompute")
