@@ -113,6 +113,12 @@ class AuthorMainWindow(QMainWindow):
     def unit_factor(self):
         return float(self.units.currentData())
 
+    def _surface_title(self, surface):
+        part = self.project.parts[surface.part_id]
+        if part.name == f"P{part.number} · {surface.name}":
+            return f"{surface.name} · P{part.number}"
+        return f"{surface.name} · {part.name}"
+
     def set_workspace_context(self, name):
         """Change the view of one document, after accepting its visible edit."""
         if name not in CONTEXTS:
@@ -927,8 +933,9 @@ class AuthorMainWindow(QMainWindow):
                     continue
                 part = self.project.parts[surface.part_id]
                 item = QTreeWidgetItem(
-                    [f"{surface.name} · {part.name}" + (" · přepočítat" if part.stale else "")]
+                    [self._surface_title(surface) + (" · přepočítat" if part.stale else "")]
                 )
+                item.setToolTip(0, item.text(0))
                 item.setData(0, Qt.ItemDataRole.UserRole, sid)
                 self.tree.addTopLevelItem(item)
                 parents[sid] = item
@@ -1027,7 +1034,7 @@ class AuthorMainWindow(QMainWindow):
             header.setVisible(present)
             box.setVisible(present and header.isChecked())
         self.selection_label.setText(
-            f"{surface.name} · {part.name}"
+            self._surface_title(surface)
             if surface and part
             else f"{profile.name} · profil zatím není tiskový díl."
             if profile
