@@ -21,18 +21,19 @@ def simpson(function, low, high, count=8192):
     )
 
 
-def expected_gothic_area():
+def expected_gothic_area(depth_paper_mm=10):
     # Radius32.5, centers±12.5; scale1.2, normal depth10 paper mm.
     # Jacobian of S=(1-v)C+v(1.2C+d), integrated first over v.
-    return 440 + 2 * 1.1 * 32.5 * simpson(
-        lambda theta: math.sqrt(100 + .04 * (32.5 + 12.5 * math.cos(theta)) ** 2),
+    return 44*depth_paper_mm + 2 * 1.1 * 32.5 * simpson(
+        lambda theta: math.sqrt(depth_paper_mm**2 + .04 * (32.5 + 12.5 * math.cos(theta)) ** 2),
         math.atan2(30, -12.5), math.pi,
     )
 
 
-def expected_bezier_area():
+def expected_bezier_area(depth_paper_mm=10):
     # Own polynomial derivative of (0,0),(20,30),(60,30),(80,0).
-    return 10 * simpson(lambda u: math.hypot(60 + 120*u - 120*u*u, 90 - 180*u), 0, 1)
+    return depth_paper_mm * simpson(
+        lambda u: math.hypot(60 + 120*u - 120*u*u, 90 - 180*u), 0, 1)
 
 
 class LoftDesktopSteps:
@@ -134,6 +135,9 @@ class LoftDesktopSteps:
                    ("planar" if name == "loft-B2" else "ruled_loft"),
                    "B2 must be a real planar region; spatial loft cannot become a fake plane")
         self.shortcut(Qt.Key.Key_R)
+        if wall is None and getattr(self, "after_reopen_edit", False):
+            wall = self.rectangle("bezier_control", 2000, 2000, position=[10000, 0, 0])
+            self.shortcut(Qt.Key.Key_R)
         if wall:
             self.add_page()
             # Keep the circular disk's true curved material beyond the 10mm
@@ -165,9 +169,10 @@ class LoftDesktopSteps:
         from vector_curve_oracle import pdf_stroked_areas, svg_signed_area
 
         sid = self.roles["loft"]
-        expected = (expected_gothic_area() if name == "loft-B1" else
+        expected = (expected_gothic_area(getattr(self, "loft_depth_paper_mm", 10))
+                    if name == "loft-B1" else
                     math.pi * (24**2 - 20**2) if name == "loft-B2" else
-                    expected_bezier_area())
+                    expected_bezier_area(getattr(self, "loft_depth_paper_mm", 10)))
         all_svg_loops, observations = [], []
         for svg in svgs:
             for group in ET.parse(svg).getroot():
@@ -192,7 +197,7 @@ class LoftDesktopSteps:
                                           max(.01, 1e-6*reference)))
         if name != "loft-B2":
             # The loft is the only part on its page; the other page contains wall/hole.
-            page = 1 if name == "loft-B1" else 0
+            page = 1 if name == "loft-B1" or getattr(self, "after_reopen_edit", False) else 0
             own = [value for index, value in pdf_stroked_areas(pdf) if index == page]
             self.check(len(own) == 1, "Loft page has unexpected extra CUT material")
             observations.append(self.near(own[0], expected, "actual source/PDF loft area",

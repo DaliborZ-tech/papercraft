@@ -185,7 +185,7 @@ def git(*args):
     return subprocess.check_output(["git", *args], cwd=ROOT, text=True).strip()
 
 
-def run_windows(output, expected_sha, fixture="all"):
+def run_windows(output, expected_sha, fixture="all", *, after_reopen_edit=False):
     # Imported only after explicit CLI entry and fresh-directory/source guards.
     # The shared virtualenv may have an editable install pointing at another
     # worktree. Bind actual imports, not just Git/hash metadata, to this source.
@@ -237,6 +237,7 @@ def run_windows(output, expected_sha, fixture="all"):
         "status": "RUNNING",
         "source_sha": sha,
         "requested_fixture": fixture,
+        "after_reopen_edit_requested": after_reopen_edit,
         "fixture_status": {"model-A": "NOT_RUN", "mixed-part": "NOT_RUN",
                            "curves-planar": "NOT_RUN", "loft-B1": "NOT_RUN",
                            "loft-B2": "NOT_RUN", "loft-Bezier": "NOT_RUN",
@@ -335,17 +336,20 @@ def run_windows(output, expected_sha, fixture="all"):
 
     from circular_desktop_steps import CircularDesktopSteps
     from loft_desktop_steps import LoftDesktopSteps
+    from reopen_desktop_steps import ReopenDesktopSteps
     from segmentation_desktop_steps import SegmentationDesktopSteps
     from subdivision_desktop_steps import SubdivisionDesktopSteps
+    from workspace_desktop_steps import WorkspaceDesktopSteps
 
     class Driver(LoftDesktopSteps, SegmentationDesktopSteps, SubdivisionDesktopSteps,
-                 CircularDesktopSteps):
+                 CircularDesktopSteps, ReopenDesktopSteps, WorkspaceDesktopSteps):
         def __init__(self, window):
             self.w = window
             self.check, self.step, self.log = check, step, log
             self.roles = {}
             self.authored_top = None
             self.action_counts = {}
+            self.after_reopen_edit = after_reopen_edit
             for name, action in window.actions.items():
                 action.triggered.connect(
                     lambda _checked=False, key=name: self.observed_action(key)
@@ -356,6 +360,7 @@ def run_windows(output, expected_sha, fixture="all"):
             log("observed_QAction_triggered", action=name, count=self.action_counts[name])
 
         def visible(self, widget):
+            self.workspace_widget(widget)
             for header, box in self.w.sections.values():
                 if box.isAncestorOf(widget) and not header.isChecked():
                     self.click(header)
@@ -472,9 +477,10 @@ def run_windows(output, expected_sha, fixture="all"):
 
         def action(self, name):
             action = self.w.actions[name]
+            toolbar_action = getattr(self.w, "toolbar_actions", {}).get(name, action)
             for toolbar in self.w.findChildren(QToolBar):
-                button = toolbar.widgetForAction(action)
-                if button:
+                button = toolbar.widgetForAction(toolbar_action)
+                if button and toolbar_action.isVisible():
                     self.click(button)
                     return
             menu = next(obj for obj in action.associatedObjects() if isinstance(obj, QMenu))
@@ -529,6 +535,7 @@ def run_windows(output, expected_sha, fixture="all"):
             )
 
         def select(self, sid):
+            self.visible(self.w.tree)
             iterator = QTreeWidgetItemIterator(self.w.tree)
             item = None
             while iterator.value():
@@ -565,6 +572,7 @@ def run_windows(output, expected_sha, fixture="all"):
             self.modal(lambda: self.action("rectangle"), edit)
             sid = next(iter(set(self.w.project.surfaces) - before))
             self.roles[role] = sid
+            self.name_house_surface(role, sid)
             if position or rotation:
                 self.transform(sid, position or [0, 0, 0], rotation or [0, 0, 0])
             log("own_rectangle", role=role, surface_id=sid, model_mm=[width, height], plane=plane)
@@ -608,6 +616,7 @@ def run_windows(output, expected_sha, fixture="all"):
             )
             if not hole:
                 self.roles[role] = sid
+                self.name_house_surface(role, sid)
             log(
                 "own_clicked_hole" if hole else "own_clicked_polygon",
                 role=role,
@@ -888,7 +897,8 @@ def run_windows(output, expected_sha, fixture="all"):
             ]
 
         def linked_pick(self, only_surfaces=None):
-            self.action("focus_all")
+            self.workspace("Spoje a rozvin")
+            self.view_home(self.w.viewport)
             picked = None
             for sid in self.w.viewport.meshes:
                 if only_surfaces is not None and sid not in only_surfaces:
@@ -926,6 +936,7 @@ def run_windows(output, expected_sha, fixture="all"):
             step("actual_assembled_3D_pick_links_paper", **picked)
 
         def paper_drag(self, sid, *, locked):
+            self.workspace("Stránky")
             self.select(sid)
             self.action("focus")
             pid = self.w.project.surfaces[sid].part_id
@@ -986,12 +997,16 @@ def run_windows(output, expected_sha, fixture="all"):
                 + repr([(i.code, i.message) for i in issues]),
             )
             accepted = []
-            for issue in issues:
+            if issues:
+                self.action("problems")
+            while issues:
+                pending = {issue.id: issue for issue in issues}
                 item = next(
                     self.w.issues.item(i)
                     for i in range(self.w.issues.count())
-                    if self.w.issues.item(i).data(Qt.ItemDataRole.UserRole) == issue.id
+                    if self.w.issues.item(i).data(Qt.ItemDataRole.UserRole) in pending
                 )
+                issue = pending[item.data(Qt.ItemDataRole.UserRole)]
                 self.w.issues.scrollToItem(item)
                 QTest.mouseClick(
                     self.w.issues.viewport(),
@@ -1014,6 +1029,11 @@ def run_windows(output, expected_sha, fixture="all"):
                         "meaning": "digital_only_physical_NOT_RUN",
                     }
                 )
+                issues = [issue for issue in self.w.project.validate_layout()
+                          if not issue.acknowledged]
+                check(all(issue.severity == "warning" and issue.code in allowed
+                          for issue in issues),
+                      "Unexpected issue appeared during explicit warning review")
             check(
                 not any(i.severity == "error" for i in self.w.project.validate_layout()),
                 "A digital error cannot be acknowledged as a physical limitation",
@@ -1021,6 +1041,7 @@ def run_windows(output, expected_sha, fixture="all"):
             return accepted
 
         def camera_after_reopen(self, name):
+            self.workspace("Stránky")
             QTest.qWait(160)  # Allow the real deferred project-frame command to finish.
             view = self.w.paper
             viewport = view.viewport().rect()
@@ -1106,6 +1127,9 @@ def run_windows(output, expected_sha, fixture="all"):
             )
 
         def finish(self, name):
+            if after_reopen_edit:
+                check(len(self.w.project.pages) == 2,
+                      "PC009 requires the declared manual two-page layout")
             accepted = self.acknowledge_physical_warnings()
             directory = output / name
             directory.mkdir()
@@ -1121,6 +1145,20 @@ def run_windows(output, expected_sha, fixture="all"):
             self.shortcut(Qt.Key.Key_O)
             check(self.w.project.to_dict() == state, "Native reopen changed authorial state")
             self.camera_after_reopen(name)
+            if after_reopen_edit:
+                self.edit_after_reopen(name)
+                accepted.extend(self.acknowledge_physical_warnings())
+                self.shortcut(Qt.Key.Key_S)
+                check(not self.w.controller.dirty, "Saving the reopened edit failed")
+                edited = copy.deepcopy(self.w.project.to_dict())
+                self.shortcut(Qt.Key.Key_N)
+                native_dialogs.schedule_path(path, report["dialogs"])
+                self.shortcut(Qt.Key.Key_O)
+                check(self.w.project.to_dict() == edited and not self.w.controller.dirty,
+                      "Second native reopen lost changed source, generation or manual layout")
+                self.camera_after_reopen(name + "-changed")
+                step("PC009_changed_data_saved_and_reopened_again", fixture=name,
+                     observation=self.reopened_edit_observation)
             if name == "model-A":
                 self.audit_authored_tabs()
             snapshot = self.w.project.snapshot()  # Observation only; actual export remains UI.
@@ -1215,12 +1253,13 @@ def run_windows(output, expected_sha, fixture="all"):
                     any(abs(area(loop) - 300) <= AREA_TOL for loop in svg_loops),
                     "Independent SVG reader did not find actual 20×15mm brace opening cut",
                 )
-                # Brace is deliberately unrotated at[30,30] on page3, so its hole
-                # has independent page bounds[50,40]→[70,55], with no raster masking.
-                expected_bounds = [50, 40, 70, 55]
+                # Independent declared placements: PC009 uses [30,190] on page1;
+                # the historical three-page proof uses [30,30] on page3.
+                expected_bounds = [50, 200, 70, 215] if after_reopen_edit else [50, 40, 70, 55]
+                brace_page_index = 0 if after_reopen_edit else 2
                 pdf_holes = []
                 for page_index, loop in pdf_stroked_loops(pdf):
-                    if page_index == 2 and len(loop) == 4:
+                    if page_index == brace_page_index and len(loop) == 4:
                         bounds = [
                             min(p[0] for p in loop),
                             min(p[1] for p in loop),
@@ -1248,6 +1287,8 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.audit_curved_subdivision_vectors(directory, svgs, pdf)
             if name.startswith("C-"):
                 self.audit_circular_vectors(directory, svgs, pdf)
+            if after_reopen_edit:
+                self.audit_after_reopen_vectors(name, svgs, pdf)
             step(
                 f"{name}_native_save_new_reopen_export",
                 pages=len(svgs),
@@ -1387,9 +1428,9 @@ def run_windows(output, expected_sha, fixture="all"):
             """Native user input, impact confirmation and reversible experimentation."""
             def rename(dialog):
                 for field, text in (
-                    (dialog.project_name, "Own open architectural model A"),
-                    (dialog.surface_name, "South wall"),
-                    (dialog.part_name, "South wall with authored tabs"),
+                    (dialog.project_name, "Vlastni otevreny domecek"),
+                    (dialog.surface_name, "Jizni stena"),
+                    (dialog.part_name, "Jizni stena s chlopnemi"),
                 ):
                     self.visible(field).setFocus()
                     QTest.keyClick(field, Qt.Key.Key_A, Qt.KeyboardModifier.ControlModifier)
@@ -1397,7 +1438,7 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.ok(dialog)
 
             self.modal(lambda: self.action("rename"), rename)
-            check(self.w.project.surfaces[south].name == "South wall", "Typed name lost")
+            check(self.w.project.surfaces[south].name == "Jizni stena", "Typed name lost")
             self.capture("A-native-own-names")
             scrap = self.rectangle("temporary_scrap", 1000, 1000)
             profile = self.w.project.surfaces[scrap].profile_id
@@ -1501,6 +1542,7 @@ def run_windows(output, expected_sha, fixture="all"):
             brace_aid = self.attach(brace, 3, roof_south)
             band = self.tab(brace, brace_aid, width=2, band=True)
             self.roles["band_root"] = self.w.project.parts[band].frame.root_surface_id
+            self.name_house_surface("band_root", self.roles["band_root"])
             self.select(soffit)
 
             def glue(dialog):
@@ -1638,7 +1680,8 @@ def run_windows(output, expected_sha, fixture="all"):
                 trace_after=trace_after,
             )
             self.add_page()
-            self.add_page()
+            if not after_reopen_edit:
+                self.add_page()
             for role, page, x, y, rotation in [
                 ("south", 0, 30, 30, 5),
                 ("north", 0, 30, 110, 0),
@@ -1646,18 +1689,27 @@ def run_windows(output, expected_sha, fixture="all"):
                 ("east_gable", 0, 140, 130, 0),
                 ("roof_south", 1, 30, 30, 0),
                 ("base", 1, 30, 160, 0),
-                ("brace", 2, 30, 30, 0),
-                ("soffit", 2, 100, 120, 0),
-                ("band_root", 2, 40, 200, 0),
+                ("brace", 0 if after_reopen_edit else 2, 30, 190 if after_reopen_edit else 30, 0),
+                ("soffit", 0 if after_reopen_edit else 2, 100,
+                 250 if after_reopen_edit else 120, 0),
+                ("band_root", 0 if after_reopen_edit else 2, 40,
+                 270 if after_reopen_edit else 200, 0),
             ]:
                 self.place(self.roles[role], page, x, y, rotation)
-            self.place(brace, 0, 140, 210)
-            self.place(brace, 2, 30, 30)
+            self.place(brace, 1 if after_reopen_edit else 0, 140, 30 if after_reopen_edit else 210)
+            self.place(brace, 0 if after_reopen_edit else 2, 30, 190 if after_reopen_edit else 30)
             step("A_manual_piece_transfer_between_existing_pages")
             self.linked_pick()
             self.paper_drag(south, locked=False)
             self.place(south, 0, 30, 30, 5)  # Return manually to the exact declared layout.
-            self.capture("A-manual-three-page-layout")
+            if after_reopen_edit:
+                if not self.w.position_lock.isChecked():
+                    self.click(self.w.position_lock)
+                if not self.w.rotation_lock.isChecked():
+                    self.click(self.w.rotation_lock)
+                self.paper_drag(south, locked=True)
+            self.capture("A-manual-two-page-layout" if after_reopen_edit else
+                         "A-manual-three-page-layout")
             self.finish("model-A")
 
         def mixed(self):
@@ -1788,7 +1840,7 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             native = [record for record in report["dialogs"] if "native_seen" in record]
             check(
-                len(native) == (6 if fixture == "all" else 3)
+                len(native) == (6 if fixture == "all" else 4 if after_reopen_edit else 3)
                 and all(r["native_seen"] and r["accepted"] for r in native),
                 "Each requested complete fixture requires native save/open/export",
             )
@@ -1871,6 +1923,8 @@ def main():
     parser.add_argument("--output", type=Path)
     parser.add_argument("--expected-sha")
     parser.add_argument("--oracle-only", action="store_true")
+    parser.add_argument("--after-reopen-edit", action="store_true",
+                        help="PC009: edit after native reopen, undo/redo, save/reopen")
     parser.add_argument(
         "--fixture",
         choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
@@ -1880,6 +1934,12 @@ def main():
         help="A partial checkpoint never replaces the full A+mixed proof",
     )
     args = parser.parse_args()
+    if args.after_reopen_edit:
+        from reopen_desktop_steps import REOPEN_EDIT_FIXTURES
+
+        if args.fixture not in REOPEN_EDIT_FIXTURES:
+            parser.error("After-reopen edit is supported only for " +
+                         ", ".join(sorted(REOPEN_EDIT_FIXTURES)))
     if args.oracle_only:
         value = oracle()
         assert math.isclose(value["initial_roof_paper_mm"]["half_slope"], 49.49747468305833)
@@ -1893,7 +1953,8 @@ def main():
         parser.error("Native proof requires --output and --expected-sha")
     if args.output.resolve().exists():
         parser.error("Evidence output must be a fresh nonexistent directory")
-    return run_windows(args.output.resolve(), args.expected_sha, args.fixture)
+    return run_windows(args.output.resolve(), args.expected_sha, args.fixture,
+                       after_reopen_edit=args.after_reopen_edit)
 
 
 if __name__ == "__main__":
