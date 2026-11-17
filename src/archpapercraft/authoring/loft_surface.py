@@ -833,15 +833,17 @@ def _source_context(key, surface_record):
         "resolve_profile_edge",
     ):
         setattr(context, name, MethodType(getattr(AuthorProject, name), context))
-    if context.profile_subdivisions:
-        context.parts, context.joints, context.attachments, context.connectors = {}, {}, {}, {}
-        for name in (
-            "_validate_profile_subdivisions",
-            "_check_subdivision_area",
-            "_check_curved_subdivision_area",
-        ):
-            setattr(context, name, MethodType(getattr(AuthorProject, name), context))
-        context._validate_profile_subdivisions()
+    # An empty registry can be a missing authority, not only a legacy profile.
+    # Apply exactly the project-loader contract even when it has no records:
+    # self-contained descriptors certify geometry, never live replay identity.
+    context.parts, context.joints, context.attachments, context.connectors = {}, {}, {}, {}
+    for name in (
+        "_validate_profile_subdivisions",
+        "_check_subdivision_area",
+        "_check_curved_subdivision_area",
+    ):
+        setattr(context, name, MethodType(getattr(AuthorProject, name), context))
+    context._validate_profile_subdivisions()
     return context, surface
 
 
