@@ -614,3 +614,15 @@ omezuje schválení na ověřený základní průchod a ponechává PC009 A/B/C/
 IN_PROGRESS, human 0/NOT_RUN, PC010, P3 i UX/PO přijetí otevřené. Nové AC ani
 oprávnění nevznikají. Tento závěrečný krok byl pouze read-only metadata review,
 bez nového testovacího nebo desktopového běhu a bez runtime změn.
+
+### Nezávislé fact-only review publikace `28af79a0e05e954acba7c6807640762d8261b662`
+
+**APPROVED.** Delta obsahuje právě queue, tento report a publication JSON;
+src/tests/tools se proti publikovanému payloadu `7fa2fc6` nemění. Reviewer
+nezávisle ověřil local master, origin/master i přímý `git ls-remote`:
+všechny ukazují `7fa2fc60fd20f42a4635a3b7412be275bd2f4f61`, ve shodě
+se [záznamem publikace](evidence/p2-workspace-publication-7fa2fc6.json).
+Původní baseline i předchozí loft publikace jsou v pojmenovaných historických
+položkách zachované přesně. Aktuální publikace není vydávána za nové testy
+nebo PO přijetí; PC009 A/B/C/D, PC010, human 0/NOT_RUN a P3 zůstávají otevřené.
+Bez testovacího či GUI běhu a bez zásahu do otevřeného desktopu.
