@@ -208,6 +208,17 @@ observer četl neexistující `.parameters`;696 opravuje pouze dvě čtení na
 na nový camera-only nástroj42dca, Inkscape, nové jiné loft rodiny ani celý
 PC009. Nový člověk0/NOT_RUN, AC-AU19 NOT_RUN, fyzické P3 NOT_RUN.
 
+## Legacy fixture korekce —a5eedc9
+
+**APPROVED_IN_SCOPE pro testovou opravu a5eedc9b3a345320b9ae07e9e44bc7387c5ef73b.**
+Původní schema6/7 fixture přeznačovala novější envelope se schema9 polem
+`source_reference`; produkční reader správně odmítal i jeho None hodnotu.
+Oprava odstraňuje pouze prokazatelně None novější default, s assertion proti
+vymazání qualified zdroje. Přidané None i nonNone smuggling negativy ponechávají
+striktní reader beze změny. Nejde o oslabení starého formátu. Nezávislý replay
+celého dotčeného souboru: **3 PASS /1,78s**, [JUnit](evidence/au13-legacy-fixture-review-a5eed.xml).
+Původní full-suite FAIL se zachovává a celá nová suite má samostatný důkaz.
+
 ## Quarter-ARC source order —09b68111
 
 **APPROVED_IN_SCOPE pro09b68111bc89accfad7cbeb05e0f2cd843009d19.**
