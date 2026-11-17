@@ -17,6 +17,19 @@ Reviewer ověří také, zda důkaz pokrývá právě vydávaný commit a skute�
 
 Ve více worktrees ověř i cestu skutečně importovaného aplikačního modulu. Sdílené prostředí s editable instalací může spustit jiný checkout, přestože Git SHA a hashe souborů odpovídají zamýšlenému adresáři. Příklad: nativní B průchod [run04](../../../docs/p2/implementation/evidence/pc006b-desktop-95482c5-run04/results.json) nedostal novou akci; nástroj nyní váže import k vlastnímu `src` a před spuštěním kontroluje i zaznamená `__file__`. Takové selhání harnessu není produktová regrese ani PASS cílového zdroje.
 
+Při replay na jiném historickém zdroji proveď tuto kontrolu uvnitř procesu,
+který opravdu vykonává test. [CORE9 LINE replay](../../../docs/p2/implementation/CORE9_R01_CHECKPOINT.md)
+měl před pytest správný import, ale `conftest.py` následně předsunul jiný
+checkout. Původní výsledek je DISQUALIFIED; čistý subprocess s vlastním
+`__file__` a porovnáním Git blobů teprve rozlišil původní chybu od opravy.
+
+Při split/merge odděl archivní identitu od aktivního vlastníka. CORE9-R01
+vyžaduje porovnání descriptoru s aktuální replay piece, ne členství v unii
+historických UUID. Ověř retired root i oba potomky, chybějící descriptor,
+legitimní orphan/UNRESOLVED a zachování layoutu. Stejný negativ přenes do
+detached exportu: prázdný registr nesmí vypnout kontrolu povinné historie.
+Samotný loader tento další vstup nepokrývá.
+
 Při práci s nejistou geometrií porovnej známou negativní reprodukci také po přidání nezávislé nejistoty. V [K01](../../../docs/p2/implementation/PC006B_DOMAIN_REVIEW.md) vzdálená překážka s neznámou tloušťkou původně vymazala již prokázanou kolizi. Neurčená tloušťka či vrstva má zůstat explicitně nejistá, nesmí oslabit jistý negativní důkaz jiné dvojice. Použij oba vstupy a zachovej i meze hledání; nenahrazuj je obecnějším tvrzením o fyzické sestavitelnosti.
 
 Při nahrazení křivky tětivami ověř zvlášť metriku, topologii a skutečný materiál v každé dotčené kontrole. [P01/P02](../../../docs/p2/implementation/PC007A_PLANAR_REVIEW.md) prošly poziční tolerancí, přesto skryly průnik a překryv. Příklad: vlastní svědek mezi uzly musí ověřit také příjemce a celý ohyb; obal nejistoty nesmí dostat výsledek „volno“ jen proto, že proxy nekoliduje. Přenos opravy layoutu na kontakt či ohyb dolož samostatně.
