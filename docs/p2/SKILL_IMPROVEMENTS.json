@@ -376,7 +376,7 @@
         "cause_evidence": "docs/p2/implementation/evidence/core9-line-pre72-DISQUALIFIED.xml",
         "correction": "Retain disqualified result; verify __file__ and Git bytes inside clean replay subprocess.",
         "verification": "docs/p2/implementation/evidence/core9-line-source-pinned.json",
-        "skill_text_review": "PENDING_FINAL_CANDIDATE_REVIEW",
+        "skill_text_review": "APPROVED_IN_SCOPE: docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md, review1dc8276",
         "next_use_effectiveness": "PENDING_NEXT_USE_FOR_REFINED_ADVICE"
       }
     },
@@ -648,6 +648,14 @@
         "verification": "CUI01 independent unchanged oracles PASS in 9-case source-bound replay; original55 UI regressions PASS separately",
         "skill_text_review": "PENDING_INTEGRATION_REVIEW",
         "next_use_effectiveness": "PENDING_NEXT_USE_FOR_REFINED_ADVICE"
+      },
+      "further_transfer_2026_11_17": {
+        "status": "VERIFIED_TECHNICALLY_IN_CURVED_SOURCE_CHOICE_VALID_AND_REJECTED_INPUT_SCOPE",
+        "report": "docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md",
+        "evidence": "docs/p2/implementation/evidence/sk013-curved-context-review-6969069.xml",
+        "review_commit": "1dc8276727c1f011d57f09d7dea2761ef8c0ff1d",
+        "broader_transfer": "PENDING_NEXT_USE",
+        "observed_new_users": 0
       }
     },
     {
@@ -765,7 +773,10 @@
         ]
       },
       "independent_review": {
-        "status": "PENDING_SKILL_TEXT_AND_FINAL_CANDIDATE_REVIEW"
+        "status": "APPROVED_IN_SKILL_TEXT_SCOPE",
+        "source_sha": "696906954f3e6863a6c945a1afc0d62f9d60f769",
+        "report": "docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md",
+        "review_commit": "1dc8276727c1f011d57f09d7dea2761ef8c0ff1d"
       },
       "effectiveness": "PENDING_NEXT_USE",
       "next_use": {

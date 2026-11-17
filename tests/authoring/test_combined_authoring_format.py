@@ -31,6 +31,12 @@ def test_known_parallel_capabilities_open_as_copies_without_overwriting(
         profile = project.profiles[project.surfaces[sid].profile_id]
         project.split_profile_segment(profile.id, profile.segments[0].id, .5)
     raw = project.to_dict()
+    # Published schema6/7 segments predate the schema9 descriptor field. Only
+    # strip the absent legacy default; never erase a qualified analytic source
+    # to manufacture a supposedly compatible old document.
+    for profile in raw["profiles"].values():
+        for segment in profile["segments"]:
+            assert segment.pop("source_reference") is None
     raw.pop(absent)
     raw.update(schema_version=version, writer_version=writer)
     path = tmp_path / f"original-v{version}.apcraft"
@@ -49,6 +55,12 @@ def test_known_parallel_capabilities_open_as_copies_without_overwriting(
     restored.save(target)
     assert not load_project(target).requires_save_as
     assert load_project(target).to_dict() == restored.to_dict()
+    # Even a null newer descriptor is not part of either old envelope.
+    for descriptor in (None, {"piece_id": "counterfeit"}):
+        poisoned = copy.deepcopy(raw)
+        next(iter(poisoned["profiles"].values()))["segments"][0]["source_reference"] = descriptor
+        with pytest.raises(ProjectFormatError, match="Starší formát"):
+            AuthorProject.from_dict(poisoned)
     # Merely relabeling a newer capability as an old format remains invalid.
     raw[absent] = {}
     with pytest.raises(ProjectFormatError):
