@@ -1,0 +1,27 @@
+[
+  {
+    "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\own-first-model.apcraft",
+    "native_seen": true,
+    "accepted": true,
+    "title": "Ulo\u017eit model"
+  },
+  {
+    "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\own-first-model.apcraft",
+    "native_seen": false,
+    "accepted": false,
+    "error": "File dialog name control not reached"
+  },
+  {
+    "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\own-first-model.apcraft",
+    "native_seen": true,
+    "accepted": true,
+    "title": "Otev\u0159\u00edt model"
+  },
+  {
+    "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\export",
+    "native_seen": true,
+    "accepted": true,
+    "title": "Vyberte slo\u017eku pro SVG a PDF",
+    "directory_confirmation": true
+  }
+]

@@ -1,0 +1,2 @@
+{"pid": 22700, "target_hwnd": 2033812, "foreground_before": 18220762, "action": "Activate only own verified modal titlebar, then Enter to focused ReceivingSketch", "titlebar_hit": {"hwnd": 2033812, "pid": 22700, "point": [693, 16]}, "foreground_after": 2033812, "sent": true}
+{"pid": 22700, "target_hwnd": 2033812, "foreground_before": 131176, "action": "Activate only own verified modal titlebar; Enter completes actual two clicked trace points", "titlebar_hit": {"hwnd": 2033812, "pid": 22700, "point": [693, 16]}, "foreground_after": 2033812, "sent": true}

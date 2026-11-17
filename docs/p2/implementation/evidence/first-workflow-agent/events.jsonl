@@ -1,0 +1,151 @@
+{"start": true, "pid": 7484, "hwnd": 1575504, "source": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\src\\archpapercraft\\ui\\author_window.py", "evidence_type": "EXPERT_NATIVE_QT_WIDGET_AUTOMATION_NOT_NOVICE_HUMAN"}
+{"command": {"op": "resize", "size": [1366, 768]}, "status": "DONE"}
+{"command": {"op": "field", "label": "Šířka", "text": "10"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Výška", "text": "7"}, "status": "DONE"}
+{"command": {"op": "button", "text": "OK"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Obdélník z rozměrů"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Model", "text": "Prvni vlastni model"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Vybraná plocha", "text": "Podlozka"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Papírový díl", "text": "Podlozka"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Použít názvy"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Pojmenovat…"}, "status": "DONE"}
+{"command": {"op": "choose", "label": "Nová pracovní rovina", "text": "Svisle (stěna)"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Šířka", "text": "6"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Výška", "text": "4"}, "status": "DONE"}
+{"command": {"op": "button", "text": "OK"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Obdélník z rozměrů"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Vybraná plocha", "text": "Stena"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Papírový díl", "text": "Stena"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Použít názvy"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Pojmenovat…"}, "status": "DONE"}
+{"command": {"op": "choose", "label": "Okraj vybrané plochy", "text": "Úsečka 1"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Nakreslit připojovací čáru"}, "status": "DONE"}
+{"command": {"op": "canvas", "class": "ReceivingSketch", "point": [2000, -2000]}, "status": "DONE"}
+{"command": {"op": "canvas", "class": "ReceivingSketch", "point": [8000, -2000]}, "status": "DONE"}
+{"command": {"op": "key", "key": "Return"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Použít připojení"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Připojit dovnitř plochy…"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Šířka záložky", "text": "4"}, "status": "DONE"}
+{"command": {"op": "choose", "label": "Tvar", "text": "Trojúhelníková"}, "status": "DONE"}
+{"command": {"op": "button", "text": "OK"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Přidat chlopeň…"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Přepočítat papírové díly"}, "status": "DONE"}
+{"command": {"op": "path", "path": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/ux-review/docs/p2/implementation/evidence/first-workflow-agent/own-first-model.apcraft"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Ctrl+S"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "01-saved-own-wall-and-base"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "choose", "label": "Umístění", "text": "Stránka 1"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva X", "text": "40"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva Y", "text": "50"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Natočení", "text": "15"}, "status": "ERROR", "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\probe.py\", line 194, in do\n    execute(command)\n  File \"C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\probe.py\", line 116, in execute\n    assert len(matches)==1, command\n           ^^^^^^^^^^^^^^^\nAssertionError: {'op': 'field', 'label': 'Natočení', 'text': '15'}\n"}
+{"command": {"op": "check", "text": "Zamknout polohu"}, "status": "DONE"}
+{"command": {"op": "check", "text": "Zamknout natočení"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Přidat A4"}, "status": "DONE"}
+{"command": {"op": "tree", "text": "Podlozka"}, "status": "DONE"}
+{"command": {"op": "choose", "label": "Umístění", "text": "Stránka 2"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva X", "text": "40"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva Y", "text": "50"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "* Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "screen", "name": "02-manual-two-pages"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "* Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "* Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "* Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "issue", "text": "Digitální geometrie"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Přijmout vybrané varování pro tento stav"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Ctrl+S"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "tree", "text": "Stena"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva Y", "text": "50"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Tab"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Space"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Tab"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Space"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Ctrl+S"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "03-current-layout-controls"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "key", "key": "Ctrl+N"}, "status": "DONE"}
+{"command": {"op": "path", "path": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/ux-review/docs/p2/implementation/evidence/first-workflow-agent/own-first-model.apcraft"}, "status": "DONE"}
+{"command": {"op": "key", "key": "Ctrl+O"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "04-reopened-two-pages"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "menu", "path": ["Projekt", "Nový prázdný model"]}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "path", "path": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/ux-review/docs/p2/implementation/evidence/first-workflow-agent/own-first-model.apcraft"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"command": {"op": "menu", "path": ["Projekt", "Otevřít"]}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "05-actual-reopened"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "dump"}, "status": "ERROR", "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\probe.py\", line 194, in do\n    execute(command)\n  File \"C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\probe.py\", line 98, in execute\n    (OUT / \"ui.json\").write_text(json.dumps(dump(),ensure_ascii=False,indent=2),encoding=\"utf8\")\n                                            ^^^^^^\n  File \"C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\ux-review\\docs\\p2\\implementation\\evidence\\first-workflow-agent\\probe.py\", line 72, in dump\n    for w in context().findChildren(cls) if w.isVisible()],\n                                            ^^^^^^^^^^^^^\nRuntimeError: libshiboken: Internal C++ object (PySide6.QtWidgets.QPushButton) already deleted.\n"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "path", "path": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/ux-review/docs/p2/implementation/evidence/first-workflow-agent/export"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "06-export-complete"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "menu", "path": ["Projekt", "Exportovat"]}, "status": "DONE"}
+{"command": {"op": "canvas", "class": "AuthorPaperView", "point": [70, 70]}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "07-paper-to-model-selection"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Prvni vlastni model — ArchPapercraft Studio"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "08-3d-to-paper-selection"}, "status": "DONE"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"about_to_quit": true, "window_visible": false, "title": "Prvni vlastni model — ArchPapercraft Studio", "state": {"application": "ArchPapercraft.AuthorProject", "schema_version": 9, "status": "experimental", "writer_version": "0.3.0-pc008-curved-source-provenance-experimental", "project_id": "5ce614e9-bd9c-4350-932b-55669ff88538", "name": "Prvni vlastni model", "scale": 0.01, "material_profile": {"thickness_mm": null, "clearance_mm": 0.0, "bend_radius_mm": 0.0, "crease_zone_mm": 0.5}, "segmented_variants": {}, "curved_connectors": {}, "profile_subdivisions": {}, "revision": 19, "next_part_number": 3, "next_joint_number": 1, "next_attachment_number": 2, "profiles": {"f68a255c-539e-4fa5-840e-ed336614f23b": {"id": "f68a255c-539e-4fa5-840e-ed336614f23b", "name": "Vlastní obrys", "vertices": [{"id": "6a5db3c5-858c-4be2-8f25-b976454e63c2", "point": [0.0, 0.0]}, {"id": "d8b3c418-f210-4672-b14d-bf49c0d0e402", "point": [10000.0, 0.0]}, {"id": "2953ca88-8784-4b9d-bbf3-5856dfc67e84", "point": [10000.0, 7000.0]}, {"id": "67ddcc0d-fd8d-4a89-9327-5e4244f158bc", "point": [0.0, 7000.0]}], "segments": [{"id": "61ae0491-530f-44f5-ade0-0ae99308243a", "kind": "line", "start_vertex_id": "6a5db3c5-858c-4be2-8f25-b976454e63c2", "end_vertex_id": "d8b3c418-f210-4672-b14d-bf49c0d0e402", "data": {}, "source_reference": null}, {"id": "940cc0e4-c4f1-4344-8e24-c7fa5171ccbc", "kind": "line", "start_vertex_id": "d8b3c418-f210-4672-b14d-bf49c0d0e402", "end_vertex_id": "2953ca88-8784-4b9d-bbf3-5856dfc67e84", "data": {}, "source_reference": null}, {"id": "06d89d32-ccd8-43c1-9809-cf3ebade2f0f", "kind": "line", "start_vertex_id": "2953ca88-8784-4b9d-bbf3-5856dfc67e84", "end_vertex_id": "67ddcc0d-fd8d-4a89-9327-5e4244f158bc", "data": {}, "source_reference": null}, {"id": "03229ec1-1312-4ba3-9876-ef8270d05862", "kind": "line", "start_vertex_id": "67ddcc0d-fd8d-4a89-9327-5e4244f158bc", "end_vertex_id": "6a5db3c5-858c-4be2-8f25-b976454e63c2", "data": {}, "source_reference": null}], "closed": true, "plane": {"origin": [0.0, 0.0, 0.0], "u": [1.0, 0.0, 0.0], "v": [0.0, 1.0, 0.0]}, "revision": 1}, "595a84d5-c7cf-45e3-88b5-2b2c02743feb": {"id": "595a84d5-c7cf-45e3-88b5-2b2c02743feb", "name": "Vlastní obrys", "vertices": [{"id": "7d91ca30-746f-407e-bb7d-1bce5f8d5d7c", "point": [0.0, 0.0]}, {"id": "4082a098-0d9b-4ec2-9a35-fbf333babdc0", "point": [6000.0, 0.0]}, {"id": "2c311c2d-5ac4-4a9a-bdb2-47fc01da2e14", "point": [6000.0, 4000.0]}, {"id": "04a87b09-007b-4607-b069-aadeca16ce18", "point": [0.0, 4000.0]}], "segments": [{"id": "7836b47b-9cbd-496f-a326-066473ff5caf", "kind": "line", "start_vertex_id": "7d91ca30-746f-407e-bb7d-1bce5f8d5d7c", "end_vertex_id": "4082a098-0d9b-4ec2-9a35-fbf333babdc0", "data": {}, "source_reference": null}, {"id": "69934739-b7fb-4c26-a48c-cd45b31295a3", "kind": "line", "start_vertex_id": "4082a098-0d9b-4ec2-9a35-fbf333babdc0", "end_vertex_id": "2c311c2d-5ac4-4a9a-bdb2-47fc01da2e14", "data": {}, "source_reference": null}, {"id": "080ce984-a7a5-4ce6-81fd-7ad13f80a21c", "kind": "line", "start_vertex_id": "2c311c2d-5ac4-4a9a-bdb2-47fc01da2e14", "end_vertex_id": "04a87b09-007b-4607-b069-aadeca16ce18", "data": {}, "source_reference": null}, {"id": "f5e0b07b-2a57-4497-8c93-17fa75490053", "kind": "line", "start_vertex_id": "04a87b09-007b-4607-b069-aadeca16ce18", "end_vertex_id": "7d91ca30-746f-407e-bb7d-1bce5f8d5d7c", "data": {}, "source_reference": null}], "closed": true, "plane": {"origin": [0.0, 0.0, 0.0], "u": [1.0, 0.0, 0.0], "v": [0.0, 0.0, 1.0]}, "revision": 1}}, "surfaces": {"56d34fb8-3376-4e88-b11e-18106c537893": {"id": "56d34fb8-3376-4e88-b11e-18106c537893", "name": "Podlozka", "profile_id": "f68a255c-539e-4fa5-840e-ed336614f23b", "hole_profile_ids": [], "kind": "planar", "params": {}, "position_mm": [0.0, 0.0, 0.0], "rotation_deg": [0.0, 0.0, 0.0], "parent_transforms": [], "revision": 5, "part_id": "6ed4153b-20c7-498e-80ff-d116a4120ff8"}, "4531116e-387b-4fef-94f0-bbb287c0bd15": {"id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "name": "Stena", "profile_id": "595a84d5-c7cf-45e3-88b5-2b2c02743feb", "hole_profile_ids": [], "kind": "planar", "params": {}, "position_mm": [2000.0, 2000.0, 0.0], "rotation_deg": [0.0, 0.0, 0.0], "parent_transforms": [], "revision": 6, "part_id": "f6ccc725-64ba-4403-a7b8-32120240c69a"}}, "parts": {"6ed4153b-20c7-498e-80ff-d116a4120ff8": {"id": "6ed4153b-20c7-498e-80ff-d116a4120ff8", "name": "Podlozka", "surface_ids": ["56d34fb8-3376-4e88-b11e-18106c537893"], "frame": {"root_surface_id": "56d34fb8-3376-4e88-b11e-18106c537893", "anchor_vertex_id": "6a5db3c5-858c-4be2-8f25-b976454e63c2", "axis_segment_id": "61ae0491-530f-44f5-ade0-0ae99308243a"}, "stale": false, "source_revision": 11, "input_digest": "a4ea647a32d968d47b139f2b69dfc05981f4fd12850af14de84ea008f61d899f", "polygons": {"56d34fb8-3376-4e88-b11e-18106c537893": [[[0.0, 0.0], [100.0, 0.0], [100.0, 70.0], [0.0, 70.0]]]}, "paths": {"CUT": [{"points": [[0.0, 0.0], [100.0, 0.0], [100.0, 70.0], [0.0, 70.0]], "closed": true}], "FOLD_MOUNTAIN": [], "FOLD_VALLEY": [], "TABS": [], "GUIDES": []}, "labels": [{"text": "Podlozka", "x": 50.0, "y": 35.0, "size_mm": 2.5}], "lineage": [], "front_side": "outside", "edges": [{"surface_id": "56d34fb8-3376-4e88-b11e-18106c537893", "edge_id": "61ae0491-530f-44f5-ade0-0ae99308243a", "start": [0.0, 0.0], "end": [100.0, 0.0]}, {"surface_id": "56d34fb8-3376-4e88-b11e-18106c537893", "edge_id": "940cc0e4-c4f1-4344-8e24-c7fa5171ccbc", "start": [100.0, 0.0], "end": [100.0, 70.0]}, {"surface_id": "56d34fb8-3376-4e88-b11e-18106c537893", "edge_id": "06d89d32-ccd8-43c1-9809-cf3ebade2f0f", "start": [100.0, 70.0], "end": [0.0, 70.0]}, {"surface_id": "56d34fb8-3376-4e88-b11e-18106c537893", "edge_id": "03229ec1-1312-4ba3-9876-ef8270d05862", "start": [0.0, 70.0], "end": [0.0, 0.0]}], "number": 1}, "f6ccc725-64ba-4403-a7b8-32120240c69a": {"id": "f6ccc725-64ba-4403-a7b8-32120240c69a", "name": "Stena", "surface_ids": ["4531116e-387b-4fef-94f0-bbb287c0bd15"], "frame": {"root_surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "anchor_vertex_id": "7d91ca30-746f-407e-bb7d-1bce5f8d5d7c", "axis_segment_id": "7836b47b-9cbd-496f-a326-066473ff5caf"}, "stale": false, "source_revision": 11, "input_digest": "e22844dd7fa97a10cc8b3f75555f967ec16da7cbe0009a7d89aa9a697296628c", "polygons": {"4531116e-387b-4fef-94f0-bbb287c0bd15": [[[0.0, 0.0], [60.0, 0.0], [60.0, 40.0], [0.0, 40.0]]]}, "paths": {"CUT": [{"points": [[30.0, -4.0], [0.0, 0.0], [0.0, 40.0], [60.0, 40.0], [60.0, 0.0]], "closed": true}], "FOLD_MOUNTAIN": [{"points": [[0.0, 0.0], [60.0, 0.0]], "closed": false}], "FOLD_VALLEY": [], "TABS": [{"points": [[0.0, 0.0], [60.0, 0.0], [30.0, -4.0]], "closed": true}], "GUIDES": []}, "labels": [{"text": "Stena", "x": 30.0, "y": 20.0, "size_mm": 2.5}, {"text": "A1 · rub", "x": 30.0, "y": 0.0, "size_mm": 2.0}], "lineage": [], "front_side": "outside", "edges": [{"surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "edge_id": "7836b47b-9cbd-496f-a326-066473ff5caf", "start": [0.0, 0.0], "end": [60.0, 0.0]}, {"surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "edge_id": "69934739-b7fb-4c26-a48c-cd45b31295a3", "start": [60.0, 0.0], "end": [60.0, 40.0]}, {"surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "edge_id": "080ce984-a7a5-4ce6-81fd-7ad13f80a21c", "start": [60.0, 40.0], "end": [0.0, 40.0]}, {"surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "edge_id": "f5e0b07b-2a57-4497-8c93-17fa75490053", "start": [0.0, 40.0], "end": [0.0, 0.0]}], "number": 2}}, "joints": {}, "connectors": {"92748b5b-3b05-4596-93e4-83ba6bf37ea8": {"id": "92748b5b-3b05-4596-93e4-83ba6bf37ea8", "joint_id": "", "owner_surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "width_mm": 4.0, "taper": 0.6, "shape": "triangle", "revision": 3, "attachment_id": "b1de6619-03d5-402e-b51e-113192adf12d", "count": 1, "gap_mm": 0, "outline_mm": [], "enabled": true, "tab_ids": ["6538754a-56b0-4edd-adbb-109349380ece"], "tab_overrides": {}, "receiver_side": "unknown"}}, "placements": {"6ed4153b-20c7-498e-80ff-d116a4120ff8": {"page_id": "fd3c9dbd-3b38-45eb-9982-d6e025cee4e2", "x_mm": 40.0, "y_mm": 50.0, "rotation_deg": 0.0, "position_locked": false, "rotation_locked": false}, "f6ccc725-64ba-4403-a7b8-32120240c69a": {"page_id": "06473802-f309-4c8a-b8f9-f5a2f06b6426", "x_mm": 40.0, "y_mm": 50.0, "rotation_deg": 0.0, "position_locked": false, "rotation_locked": false}}, "attachments": {"b1de6619-03d5-402e-b51e-113192adf12d": {"id": "b1de6619-03d5-402e-b51e-113192adf12d", "kind": "surface_trace", "source_surface_id": "4531116e-387b-4fef-94f0-bbb287c0bd15", "target_surface_id": "56d34fb8-3376-4e88-b11e-18106c537893", "source_edge_id": "7836b47b-9cbd-496f-a326-066473ff5caf", "source_interval": [0.0, 1.0], "target_side": "inside", "glue_direction": 1, "target_region_uv": [], "source_region_uv": [], "requested_placement": {"target_start_uv": [2000.0, 2000.0], "target_end_uv": [8000.0, 2000.0], "angle_deg": 90.0, "target_matrix": [[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]}, "connector_id": "92748b5b-3b05-4596-93e4-83ba6bf37ea8", "revision": 1, "number": 1, "unresolved": false}}, "pages": [{"id": "06473802-f309-4c8a-b8f9-f5a2f06b6426", "width_mm": 210.0, "height_mm": 297.0, "margin_mm": 10.0}, {"id": "fd3c9dbd-3b38-45eb-9982-d6e025cee4e2", "width_mm": 210.0, "height_mm": 297.0, "margin_mm": 10.0}], "acknowledgements": {"b1ebb5f565163b1a0449bb7a": "cd2548af6a67832bb3c9a28d89ec9a4ab0bb1bd3b08f51e7349c18a28f6c2e52"}}}
+{"command": {"op": "quit"}, "status": "DONE"}

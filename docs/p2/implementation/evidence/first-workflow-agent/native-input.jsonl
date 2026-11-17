@@ -1,0 +1,3 @@
+{"pid": 7484, "target_hwnd": 2034234, "foreground_before": 18220762, "action": "Activate own export question then confirm with Enter", "titlebar_hit": {"hwnd": 2034234, "pid": 7484, "point": [693, 376]}, "foreground_after": 2034234, "sent": true}
+{"pid": 7484, "target_hwnd": 2230842, "action": "Dismiss actual export-complete notice with owned foreground Enter", "titlebar_hit": {"hwnd": 2230842, "pid": 7484, "point": [693, 349]}, "foreground_after": 2230842, "sent": true}
+{"pid": 7484, "target_hwnd": 1575504, "action": "Pick visible base in actual 3D viewport; compare paper and named selection", "titlebar_hit": [1575504, 7484], "target_hit": {"hwnd": 1575504, "pid": 7484, "logical": [360, 465], "screen": [380, 531]}, "sent": true}
