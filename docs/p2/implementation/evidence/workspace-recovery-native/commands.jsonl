@@ -1,0 +1,155 @@
+{"op":"resize","size":[1366,768]}
+{"op":"dump"}
+{"op":"screen","name":"01-Modelovani-empty"}
+{"op":"menu","path":["Vytvořit","Obdélník z rozměrů"]}
+{"op":"field","label":"Šířka","text":"10"}
+{"op":"field","label":"Výška","text":"7"}
+{"op":"button","text":"OK"}
+{"op":"entry","label":"Název vybrané plochy","text":"Podlozka"}
+{"op":"choose","label":"Nová pracovní rovina","text":"Svisle (stěna)"}
+{"op":"menu","path":["Vytvořit","Obdélník z rozměrů"]}
+{"op":"field","label":"Šířka","text":"6"}
+{"op":"field","label":"Výška","text":"4"}
+{"op":"button","text":"OK"}
+{"op":"entry","label":"Název vybrané plochy","text":"Stena"}
+{"op":"menu","path":["Vytvořit","Obdélník z rozměrů"]}
+{"op":"field","label":"Šířka","text":"2"}
+{"op":"field","label":"Výška","text":"1,5"}
+{"op":"button","text":"OK"}
+{"op":"entry","label":"Název vybrané plochy","text":"Stitek"}
+{"op":"menu","path":["Vytvořit","Obdélník z rozměrů"]}
+{"op":"field","label":"Šířka","text":"2"}
+{"op":"field","label":"Výška","text":"3"}
+{"op":"button","text":"OK"}
+{"op":"entry","label":"Název vybrané plochy","text":"Vyztuha"}
+{"op":"dump"}
+{"op":"observe","name":"four-authored-unplaced"}
+{"op":"screen","name":"02-Modelovani-four-parts"}
+{"op":"button","text":"Přepočítat papírové díly"}
+{"op":"dump"}
+{"op":"observe","name":"four-current-before-primary"}
+{"op":"button","text":"Umístit díly na stránky"}
+{"op":"observe","name":"UNPLACED-primary-first-entry"}
+{"op":"screen","name":"03-Stranky-primary-part-and-page"}
+{"op":"button","text":"Spoje a rozvin"}
+{"op":"button","text":"Umístit díly na stránky"}
+{"op":"observe","name":"UNPLACED-primary-second-entry"}
+{"op":"button","text":"Podrobnosti"}
+{"op":"button","text":"Další dotčený díl"}
+{"op":"observe","name":"UNPLACED-member2"}
+{"op":"button","text":"Další dotčený díl"}
+{"op":"observe","name":"UNPLACED-member3"}
+{"op":"button","text":"Další dotčený díl"}
+{"op":"observe","name":"UNPLACED-member4"}
+{"op":"button","text":"Další dotčený díl"}
+{"op":"observe","name":"UNPLACED-wrap-member1"}
+{"op":"dump"}
+{"op":"button","text":"Spoje a rozvin"}
+{"op":"tree","text":"Stena"}
+{"op":"choose","label":"Okraj vybrané plochy","text":"Úsečka 1"}
+{"op":"button","text":"Připojit dovnitř plochy…"}
+{"op":"button","text":"Nakreslit připojovací čáru"}
+{"op":"canvas","class":"ReceivingSketch","point":[2000,-2000]}
+{"op":"canvas","class":"ReceivingSketch","point":[8000,-2000]}
+{"op":"key","key":"Return"}
+{"op":"button","text":"Použít připojení"}
+{"op":"dump"}
+{"op":"screen","name":"04-Spoje-connected-wall"}
+{"op":"button","text":"Autorské spoje a záložky"}
+{"op":"button","text":"Přidat chlopeň…"}
+{"op":"field","label":"Šířka záložky","text":"4"}
+{"op":"choose","label":"Tvar","text":"Trojúhelníková"}
+{"op":"button","text":"OK"}
+{"op":"button","text":"Přepočítat papírové díly"}
+{"op":"dump"}
+{"op":"observe","name":"connection-and-tab"}
+{"op":"screen","name":"05-Spoje-tab"}
+{"op":"button","text":"Stránky"}
+{"op":"tree","text":"Stena"}
+{"op":"choose","label":"Umístění","text":"Stránka 1"}
+{"op":"field","label":"Kotva X","text":"40"}
+{"op":"field","label":"Kotva Y","text":"50"}
+{"op":"field","label":"Natočení","text":"15"}
+{"op":"observe","name":"wall-manual40-50-15"}
+{"op":"field","label":"Kotva X","text":"45"}
+{"op":"button","text":"Zpět"}
+{"op":"observe","name":"undo-wall40"}
+{"op":"button","text":"Znovu"}
+{"op":"observe","name":"redo-wall45"}
+{"op":"field","label":"Kotva X","text":"-20"}
+{"op":"observe","name":"outside-page-visible-error"}
+{"op":"dump"}
+{"op":"screen","name":"06-Stranky-outside-error"}
+{"op":"issue","text":"fyzický list"}
+{"op":"field","label":"Kotva X","text":"40"}
+{"op":"observe","name":"outside-page-repaired-in-UI"}
+{"op":"check","text":"Zamknout polohu"}
+{"op":"check","text":"Zamknout natočení"}
+{"op":"observe","name":"wall-both-locks-positive"}
+{"op":"tree","text":"Stitek"}
+{"op":"choose","label":"Umístění","text":"Stránka 1"}
+{"op":"field","label":"Kotva X","text":"130"}
+{"op":"field","label":"Kotva Y","text":"50"}
+{"op":"button","text":"Přidat A4"}
+{"op":"tree","text":"Podlozka"}
+{"op":"choose","label":"Umístění","text":"Stránka 2"}
+{"op":"field","label":"Kotva X","text":"40"}
+{"op":"field","label":"Kotva Y","text":"50"}
+{"op":"tree","text":"Vyztuha"}
+{"op":"choose","label":"Umístění","text":"Stránka 2"}
+{"op":"field","label":"Kotva X","text":"150"}
+{"op":"field","label":"Kotva Y","text":"50"}
+{"op":"observe","name":"all-four-placed-warning-unaccepted"}
+{"op":"dump"}
+{"op":"screen","name":"07-Stranky-manual-two-pages"}
+{"op":"button","text":"Zkontrolovat varování"}
+{"op":"observe","name":"warning-review-no-autoack"}
+{"op":"dump"}
+{"op":"screen","name":"08-warning-explicit-review"}
+{"op":"button","text":"Přijmout vybrané varování pro tento stav"}
+{"op":"observe","name":"warning-explicitly-acknowledged"}
+{"op":"key","key":"Ctrl+4"}
+{"op":"screen","name":"09-Export-ready-two-pages"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-recovery-review/docs/p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft"}
+{"op":"menu","path":["Projekt","Uložit"]}
+{"op":"button","text":"Vše"}
+{"op":"screen","name":"10-Export-all-two-A4"}
+{"op":"observe","name":"saved-model-before-export"}
+{"op":"state"}
+{"op":"button","text":"Export SVG/PDF"}
+{"op":"dump"}
+{"op":"screen","name":"11-export-dialog"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-recovery-review/docs/p2/implementation/evidence/workspace-recovery-native/export"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-recovery-review/docs/p2/implementation/evidence/workspace-recovery-native/export"}
+{"op":"dump"}
+{"op":"dump"}
+{"op":"screen","name":"12-export-complete"}
+{"op":"menu","path":["Projekt","Nový"]}
+{"op":"state"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-recovery-review/docs/p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft"}
+{"op":"menu","path":["Projekt","Otevřít"]}
+{"op":"menu","path":["Projekt","Nový"]}
+{"op":"state"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-recovery-review/docs/p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft"}
+{"op":"menu","path":["Projekt","Otevřít"]}
+{"op":"observe","name":"settled-reopen-positive-locks"}
+{"op":"state"}
+{"op":"key","key":"Ctrl+1"}
+{"op":"button","text":"Vše"}
+{"op":"screen","name":"13-Modelovani-fit-all"}
+{"op":"tree","text":"Stena"}
+{"op":"button","text":"Výběr"}
+{"op":"screen","name":"14-Modelovani-fit-wall"}
+{"op":"entry","label":"Název vybrané plochy","text":"Rozepsana Stena","commit":false}
+{"op":"timer_crash","text":"Rozepsana Stena"}
+{"op":"dump"}
+{"op":"screen","name":"15-startup-recovery-offer"}
+{"op":"button","text":"Obnovit kopii"}
+{"op":"observe","name":"recovery-restored-raw-name-positive"}
+{"op":"state"}
+{"op":"screen","name":"16-recovered-pending-name"}
+{"op":"entry","label":"Název vybrané plochy","text":"Stena","commit":true}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-recovery-review/docs/p2/implementation/evidence/workspace-recovery-native/recovered-four-part-model.apcraft"}
+{"op":"menu","path":["Projekt","Uložit"]}
+{"op":"observe","name":"recovered-copy-saved"}
+{"op":"quit"}

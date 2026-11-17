@@ -1,0 +1,59 @@
+{
+  "title": "Obnovit neuloženou práci",
+  "size": [
+    1366,
+    768
+  ],
+  "pid": 26744,
+  "hwnd": 4721114,
+  "dpi": 1.0,
+  "screen": [
+    0,
+    0,
+    1920,
+    1080
+  ],
+  "logical_dpi": 96.0,
+  "frame": [
+    277,
+    101,
+    1366,
+    799
+  ],
+  "minimum_hint": [
+    790,
+    471
+  ],
+  "menus": [
+    "Projekt",
+    "Úpravy",
+    "Vytvořit",
+    "Zobrazení a pomoc"
+  ],
+  "labels": [
+    "Po přerušení práce zůstaly tyto koncepty. Obnovení otevře neuloženou kopii, původní soubor nepřepíše. Později koncept zachová."
+  ],
+  "issues": [
+    "Nový model · 2026-11-17 18:23:54 UTC\nPůvodní soubor: C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-recovery-review\\docs\\p2\\implementation\\evidence\\workspace-recovery-native\\own-four-part-model.apcraft"
+  ],
+  "selected_name": "",
+  "workspace": "Modelování",
+  "checkboxes": [],
+  "buttons": [
+    {
+      "text": "Obnovit kopii",
+      "enabled": true
+    },
+    {
+      "text": "Zahodit koncept",
+      "enabled": true
+    },
+    {
+      "text": "Později",
+      "enabled": true
+    }
+  ],
+  "fields": [],
+  "combo_options": {},
+  "tree": []
+}

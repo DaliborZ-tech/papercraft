@@ -1,0 +1,15 @@
+{
+  "runtime_sha": "d94f9b329c1e1e73241e8b66b76924a72bfac214",
+  "actual_module": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-recovery-review\\src\\archpapercraft\\ui\\author_window.py",
+  "checkpoint": true,
+  "pending_name": {
+    "surface_id": "33639d99-0287-4ab2-9c7c-4fbb815d3ecf",
+    "text": "Unconfirmed author name"
+  },
+  "geometry_and_original_unchanged": true,
+  "restored_name": "Unconfirmed author name",
+  "restored_dirty": true,
+  "file_path": null,
+  "copy_source_path": "C:\\Users\\dalib\\AppData\\Local\\Temp\\tmp583xs4fd\\author.apcraft",
+  "source_case": "same beforebea clean-model unconfirmed-name expected now protected"
+}

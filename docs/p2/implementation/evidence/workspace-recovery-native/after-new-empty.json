@@ -1,0 +1,38 @@
+{
+  "application": "ArchPapercraft.AuthorProject",
+  "schema_version": 9,
+  "status": "experimental",
+  "writer_version": "0.3.0-pc008-curved-source-provenance-experimental",
+  "project_id": "4605ec0e-4eb7-45fe-8048-28ad97847f91",
+  "name": "Nový model",
+  "scale": 0.01,
+  "material_profile": {
+    "thickness_mm": null,
+    "clearance_mm": 0.0,
+    "bend_radius_mm": 0.0,
+    "crease_zone_mm": 0.5
+  },
+  "segmented_variants": {},
+  "curved_connectors": {},
+  "profile_subdivisions": {},
+  "revision": 1,
+  "next_part_number": 1,
+  "next_joint_number": 1,
+  "next_attachment_number": 1,
+  "profiles": {},
+  "surfaces": {},
+  "parts": {},
+  "joints": {},
+  "connectors": {},
+  "placements": {},
+  "attachments": {},
+  "pages": [
+    {
+      "id": "5882324d-9b0f-4a6c-9e1b-af28608286ec",
+      "width_mm": 210.0,
+      "height_mm": 297.0,
+      "margin_mm": 10.0
+    }
+  ],
+  "acknowledgements": {}
+}

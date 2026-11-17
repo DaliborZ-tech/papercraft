@@ -306,3 +306,77 @@ Ruff/diff check PASS. Core9 neautor samostatně oznámil 48 PASS na tomto CODE
 (43 původních + 5 vlastních); jeho připnutý review report přebírá integrátor.
 Autor nepřiděluje vlastní feature schválení. Společný native GUI průchod ještě
 PENDING; původní meze DATA01 a NOT_RUN člověka/P3 zůstávají platné.
+### Nezávislý skutečný průchod workspace + recovery, 17. 11. 2026
+
+Verdikt pro runtime `d94f9b329c1e1e73241e8b66b76924a72bfac214`:
+**CHANGES_REQUIRED pro UI; DATA01 APPROVED v níže ověřeném rozsahu.**
+Neautorský expert použil skutečnou Windows aplikaci 1366 × 768, DPR 1,
+Qt widget input s ověřenou Win32 aktivací vlastního PID/HWND a skutečné
+nativní filepickery. Není to naivní objevování ovládání ani nový člověk;
+AC-US08 zůstává NOT_RUN. Zdroje a přenosné pracovní vzory jsou v předchozím
+[doplňku USABILITY_TEST](../p2/v1.2/USABILITY_TEST.md).
+
+Od prázdného projektu vznikly pouze UI čtyři pojmenované obdélníky,
+stěna připojená nakreslenou vnitřní čarou k podložce a trojúhelníková
+chlopeň 4 mm. Dva listy A4 byly rozmístěny ručně, stěna otočena o 15°
+a oba skutečné domain locks zaškrtnuty TRUE. Zpět/Znovu vrátilo/obnovilo
+posun 40→45 mm. Záporná kotva vyvolala viditelný přesah listu; oprava
+ve stejném UI chybu odstranila. Primární UNPLACED přechod při prvním
+i opakovaném vstupu rámoval současně díl i A4; všechny čtyři členy skupiny
+šlo projít bez automatického umístění. Primární review varování odkrylo
+jeho text a explicitní přijetí; acknowledgement zůstal prázdný do vlastního
+kliknutí. Nejde o fyzické ověření papíru.
+
+[Editovatelný vlastní model](../p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft),
+[obnovená samostatná kopie](../p2/implementation/evidence/workspace-recovery-native/recovered-four-part-model.apcraft)
+a [skutečné SVG/PDF](../p2/implementation/evidence/workspace-recovery-native/export/)
+vznikly nativním Save/Open/Export. Po New byl model skutečně prázdný;
+settled reopen zachoval celý slovník projektu včetně identit a obou locks.
+Nezávislé čtení SVG cest a rozbalených PDF CUT tokenů dává shodně
+300 + 600 + 2520 + 7000 = **10420 mm²**, dva A4 a společný SVG snapshot digest.
+[Read-only aritmetika a vazba všech src/tools bytes](../p2/implementation/evidence/workspace-recovery-native/verify_outputs.py)
+prošla proti přesnému d94; [výsledek](../p2/implementation/evidence/workspace-recovery-native/results.json)
+uvádí také skutečné importy a dva PID 19920/26744. Harness byl před spuštěním
+zmrazen na `57efd391e5be1c625e9e7b68b1c2a54a8aec2910`.
+
+Skutečný 30s autosave timer zachytil nepotvrzený text „Rozepsana Stena“
+v čistém uloženém projektu. Až po jeho zápisu se proces ukončil `os._exit(23)`;
+checkpoint nebyl vynucen testem. Nový proces nabídl Obnovit kopii, obnovil
+přesný raw vstup vlastníka a kompletní dokument jako dirty kopii bez file_path.
+Po vědomém vrácení rozepsaného textu na původní „Stena“ uživatel uložil novou
+kopii. Původní soubor, dokument v konceptu, reopen i nová kopie se shodují.
+Raw obnova je vidět na [snímku](../p2/implementation/evidence/workspace-recovery-native/16-recovered-pending-name.png).
+Původní neúspěch inline-name na bea je zachován; [stejná nezávislá reprodukce po opravě](../p2/implementation/evidence/data01-inline-name-independent-after.json)
+prošla. Čtyři vlastní negativy na d94 **4 PASS / 1,09 s** pokrývají živé
+dvě leases, neplatný výběr před replace, neúspěšný periodic os.replace
+se zachováním posledních bytes/origin/history a corrupt/foreign ochranu;
+[JUnit](../p2/implementation/evidence/workspace-recovery-native/independent-recovery.xml),
+[skutečné importy uvnitř pytest procesu](../p2/implementation/evidence/workspace-recovery-native/independent-recovery-binding.json).
+Původní peer očekávání otvorů a raw názvů zůstávají samostatným doplňujícím důkazem.
+Mez: nezahrnuje nepotvrzené ovladače samostatných preview dialogů ani výkon
+neomezeně velkých projektů.
+
+Konkrétní přetrvávající UI nálezy pro opravu a nový nezávislý replay:
+
+- Vlastní název „Stena“ se na papíře/problémech/SVG/PDF mění na „P2 · Plocha 2“.
+  Technický provázaný výběr funguje, ale začátečník musí znovu párovat jména.
+  U jednoznačné samostatné plochy má automatické part jméno následovat název;
+  explicitní odlišný název a mixed-part musí zůstat zachovány.
+- **Vše** po reopen a návratu do Modelování stále ořízne spodní část modelu:
+  [přímý důkaz](../p2/implementation/evidence/workspace-recovery-native/13-Modelovani-fit-all.png).
+  Vybraná stěna po **Výběr** je celá; okolí smí být oříznuté.
+  Rozměrnější viewport sám tento problém neřeší.
+- Sbalený „Profil a křivky“ současně ukazuje své rozsáhlé potomky a zatěžuje
+  prostou stěnu. Jde o skutečnou nefunkční skupinu, nikoli potřebu dalšího tipu.
+
+Tyto body brání schválení celého základního UI cíle d94; technicky úspěšný
+výstup je nezakrývá. Po opravě je nutný pinned replay. Snímky
+[Modelování](../p2/implementation/evidence/workspace-recovery-native/02-Modelovani-four-parts.png),
+[Spoje](../p2/implementation/evidence/workspace-recovery-native/05-Spoje-tab.png),
+[Stránky s cílem](../p2/implementation/evidence/workspace-recovery-native/03-Stranky-primary-part-and-page.png),
+[Export po Vše](../p2/implementation/evidence/workspace-recovery-native/10-Export-all-two-A4.png)
+a úplný [raw log](../p2/implementation/evidence/workspace-recovery-native/events.jsonl)
+zachovávají i chyby automatizačního selectoru/modal timing; ty nejsou označeny
+za produktové chyby. Žádná doménová/JSON injekce modelu, packing ani interní
+UUID jako povinná znalost uživatele nebyly použity. Desktop byl po ukončení
+vlastního procesu vrácen rootu.
