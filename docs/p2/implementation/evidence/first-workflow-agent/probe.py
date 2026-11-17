@@ -60,6 +60,9 @@ def fields():
 def dump():
     return dict(title=context().windowTitle(), size=[window.width(), window.height()],
                 pid=os.getpid(), hwnd=int(window.winId()),
+                dpi=window.devicePixelRatioF(), screen=app.primaryScreen().geometry().getRect(),
+                logical_dpi=app.primaryScreen().logicalDotsPerInch(),
+                frame=window.frameGeometry().getRect(), minimum_hint=[window.minimumSizeHint().width(),window.minimumSizeHint().height()],
                 menus=[a.text() for a in window.menuBar().actions()],
                 labels=[w.text() for w in context().findChildren(QLabel) if w.isVisible()],
                 buttons=[dict(text=w.text(), enabled=w.isEnabled()) for cls in (QPushButton,QToolButton)
@@ -150,6 +153,9 @@ def execute(command):
     elif op == "state":
         # Read-only observation. Never used to construct or alter the model.
         (OUT / "observed.json").write_text(json.dumps(window.project.to_dict(),ensure_ascii=False,indent=2),encoding="utf8")
+    elif op == "resize":
+        window.resize(*command["size"])
+        window.move(20,35)
     elif op == "quit":
         app.quit()
     else:raise ValueError(op)
@@ -173,6 +179,8 @@ def poll():
         QTimer.singleShot(0,do)
 
 timer=QTimer();timer.timeout.connect(poll);timer.start(200)
+app.aboutToQuit.connect(lambda: log(dict(about_to_quit=True,window_visible=window.isVisible(),title=window.windowTitle(),state=window.project.to_dict())))
+heartbeat=QTimer();heartbeat.timeout.connect(lambda:log(dict(heartbeat=True,visible=window.isVisible(),title=window.windowTitle())));heartbeat.start(10000)
 log(dict(start=True,pid=os.getpid(),hwnd=int(window.winId()),source=source.__file__,
          evidence_type="EXPERT_NATIVE_QT_WIDGET_AUTOMATION_NOT_NOVICE_HUMAN"))
 app.exec()
