@@ -174,3 +174,44 @@ authoring-ui — editorové změny transformace nesmějí měnit řeznou geometr
 delivery — přesný zdroj, zachovaný FAIL a oprava vrácená jinému autorovi.
 Nový native Inkscape průchod, vlastní GUI model, novice AC-US08 a fyzické P3
 zůstávají touto revizí **NOT_RUN**. Recorded replay nezavřel původní native FAIL.
+
+### Re-review opravy na 5415e2
+
+Stejný nezávislý reviewer 17. 11. 2026 zkontroloval přesný integrační kandidát
+`5415e2bc45f0a073d202144f1281557377afbc61`, autor opravy `/root`.
+**EDITOR-R01 CLOSED / VERIFIED; APPROVED_IN_EDITOR_CURVE_EQUIVALENCE_AND_FRAME_GUARD_SCOPE.**
+Driver odmítá `<style>` v obou dokumentech, inline geometrické CSS vlastnosti
+i neanalyzované escapování/komentáře. Matematický helper ani jeho tolerance se
+nezměnily. Původní vlastní stylesheet negativ nyní beze změny očekávání PASS;
+původní FAIL výše a jeho JUnit zůstávají zachované.
+
+[Nový cílený běh](evidence/editor-equivalence-review-5415e2-repaired.xml):
+**50 PASS / 1,36 s**, tři původní soubory včetně čtyř opravných regresí (37)
+a všech 13 vlastních případů. Recorded replay **23/23 CERTIFIED / 0,46 s**
+zachovává původní přísné meze i totožné celkové délkové/plošné certifikáty;
+[kompaktní vazba zdroje](evidence/editor-equivalence-review-5415e2-binding.json).
+Ruff všech čtyř dotčených nástrojů a diff-check PASS. Nová skutečná editace
+v Inkscape tímto review provedena nebyla; native průchod vlastní integrátor.
+
+Source review diagnostické delty v témže kandidátu zahrnul
+`native_dialogs.py::wheel_at`: dočasné zvednutí míří jen na předem ověřené
+vlastní PID/HWND; před titlebar klikem zůstává PID i hit-test, před wheel navíc
+foreground a mapování klienta podle DPR. `finally` vrací cursor a běžný z-order.
+Reviewer žádný nativní vstup nevyslal. Toto omezené source review neprohlašuje
+úspěšné Qt150 ověření, vlastnictví cílového widgetu ani opravenou kameru.
+
+Nové `AU13-arc/cubic` nativní fixtures byly posouzeny zdrojově: skutečné UI
+kreslení, dělení, inverse merge, Undo/Redo, explicitní přepočet, ruční dvě stránky,
+oba locks a následující save/new/open/výstup používají stávající driver.
+Nezávislé očekávání ARC je `r=10`, polovina kružnice délky `10π`, extruze
+`10 mm`, tedy `100π mm²`. Kubika s paper controls
+`(0,0),(0,40),(40,40),(40,0)` má rychlost `120(2t²−2t+1)` a integrál
+`80t³−120t²+120t`; celková délka `80 mm`, při extruzi `10 mm` plocha `800 mm²`.
+Tyto analytické orákuly jsou správné. Jejich skutečné runtime výsledky nejsou
+součástí tohoto source review a nesmějí se odvodit ze samotného kódu fixture.
+
+UI soubory `author_subdivision.py` a `author_window.py` jsou proti nezávisle
+zkontrolovanému `1b8037a6266dcd5d849bbddf0044b8ee8d4bb963` beze změny;
+komponentové výsledky jsou v [UI revizi](PC008_CURVED_SUBDIVISION_UI.md).
+Otevřené doménové consumer hypotézy, finální native důkazy, AC-US08 a P3 tímto
+omezeným schválením zůstávají nedotčeny.
