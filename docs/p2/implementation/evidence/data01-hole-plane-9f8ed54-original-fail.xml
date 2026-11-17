@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.090" timestamp="2026-11-17T19:08:13.302324+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_recovery_workspace" name="test_hole_draft_preserves_exact_owner_plane_and_can_finish_after_restore[XZ]" time="0.113"><failure message="AssertionError: Záložní koncept se nepodařilo uložit: Object of type SketchPlane is not JSON serializable&#10;assert False&#10; +  where False = checkpoint()&#10; +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f04fceea00) at 0x000001F050CAC080&gt;.checkpoint&#10; +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f04fceea00) at 0x000001F050CAC080&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1f02ec2b390) at 0x000001F050C810C0&gt;.recovery">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1f02ec2b390) at 0x000001F050C810C0&gt;
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001F050C6C9E0&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1625/test_hole_draft_preserves_exac0')
+plane = 'XZ'
+
+    @pytest.mark.parametrize("plane", ["XZ", {
+        "origin": [37, -11, 42], "u": [0, 1, 0], "v": [0, 0, 1],
+    }])
+    def test_hole_draft_preserves_exact_owner_plane_and_can_finish_after_restore(window, qtbot,
+                                                                              tmp_path, plane):
+        def create(project):
+            pid = project.add_profile([[0, 0], [10000, 0], [10000, 6000], [0, 6000]], plane=plane)
+            return project.add_surface(pid, name="Wall with authored plane")
+    
+        sid = window.controller.execute("Author wall", create)
+        window.select_surface(sid)
+        original = tmp_path / "wall-before-hole.apcraft"
+        window.controller.save(original)
+        before, raw = window.project.to_dict(), original.read_bytes()
+        owner_plane = asdict(window.project.profiles[window.project.surfaces[sid].profile_id].plane)
+        window.actions["hole"].trigger()
+        for x, y in ((1000, 1000), (2000, 1000)):
+            qtbot.mouseClick(window.sketch.viewport(), Qt.MouseButton.LeftButton,
+                             pos=window.sketch.mapFromScene(QPointF(x, -y)))
+        assert window.sketch.hole and len(window.sketch.points) == 2
+        assert window.project.to_dict() == before
+&gt;       assert window.recovery.checkpoint(), window.statusBar().currentMessage()
+E       AssertionError: Záložní koncept se nepodařilo uložit: Object of type SketchPlane is not JSON serializable
+E       assert False
+E        +  where False = checkpoint()
+E        +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f04fceea00) at 0x000001F050CAC080&gt;.checkpoint
+E        +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f04fceea00) at 0x000001F050CAC080&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1f02ec2b390) at 0x000001F050C810C0&gt;.recovery
+
+tests\authoring\test_recovery_workspace.py:499: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="tests.authoring.test_recovery_workspace" name="test_hole_draft_preserves_exact_owner_plane_and_can_finish_after_restore[plane1]" time="0.076"><failure message="AssertionError: Záložní koncept se nepodařilo uložit: Object of type SketchPlane is not JSON serializable&#10;assert False&#10; +  where False = checkpoint()&#10; +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f0500ce310) at 0x000001F0531FE840&gt;.checkpoint&#10; +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f0500ce310) at 0x000001F0531FE840&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1f04fc87120) at 0x000001F0531FDF80&gt;.recovery">window = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1f04fc87120) at 0x000001F0531FDF80&gt;
+qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001F050B9B860&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1625/test_hole_draft_preserves_exac1')
+plane = {'origin': [37, -11, 42], 'u': [0, 1, 0], 'v': [0, 0, 1]}
+
+    @pytest.mark.parametrize("plane", ["XZ", {
+        "origin": [37, -11, 42], "u": [0, 1, 0], "v": [0, 0, 1],
+    }])
+    def test_hole_draft_preserves_exact_owner_plane_and_can_finish_after_restore(window, qtbot,
+                                                                              tmp_path, plane):
+        def create(project):
+            pid = project.add_profile([[0, 0], [10000, 0], [10000, 6000], [0, 6000]], plane=plane)
+            return project.add_surface(pid, name="Wall with authored plane")
+    
+        sid = window.controller.execute("Author wall", create)
+        window.select_surface(sid)
+        original = tmp_path / "wall-before-hole.apcraft"
+        window.controller.save(original)
+        before, raw = window.project.to_dict(), original.read_bytes()
+        owner_plane = asdict(window.project.profiles[window.project.surfaces[sid].profile_id].plane)
+        window.actions["hole"].trigger()
+        for x, y in ((1000, 1000), (2000, 1000)):
+            qtbot.mouseClick(window.sketch.viewport(), Qt.MouseButton.LeftButton,
+                             pos=window.sketch.mapFromScene(QPointF(x, -y)))
+        assert window.sketch.hole and len(window.sketch.points) == 2
+        assert window.project.to_dict() == before
+&gt;       assert window.recovery.checkpoint(), window.statusBar().currentMessage()
+E       AssertionError: Záložní koncept se nepodařilo uložit: Object of type SketchPlane is not JSON serializable
+E       assert False
+E        +  where False = checkpoint()
+E        +    where checkpoint = &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f0500ce310) at 0x000001F0531FE840&gt;.checkpoint
+E        +      where &lt;archpapercraft.ui.author_recovery.AuthorRecovery(0x1f0500ce310) at 0x000001F0531FE840&gt; = &lt;archpapercraft.ui.author_window.AuthorMainWindow(0x1f04fc87120) at 0x000001F0531FDF80&gt;.recovery
+
+tests\authoring\test_recovery_workspace.py:499: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase></testsuite></testsuites>

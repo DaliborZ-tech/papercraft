@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import math
+from dataclasses import asdict
 from pathlib import Path
 from uuid import uuid4
 
@@ -23,6 +24,7 @@ from PySide6.QtWidgets import (
 
 from archpapercraft.authoring import AuthorProject
 from archpapercraft.authoring.curves import Curve
+from archpapercraft.authoring.model import SketchPlane
 from archpapercraft.authoring.recovery import RecoveryStore
 
 
@@ -67,7 +69,9 @@ def capture_ui(host):
         draft = {name: copy.deepcopy(getattr(sketch, name)) for name in (
             "points", "curve_segments", "pending_points", "segment_mode", "hole", "_input_history",
         )}
-        draft.update(plane=host.draft_plane, surface=host.draft_surface)
+        plane = host.draft_plane
+        draft.update(plane=asdict(plane) if isinstance(plane, SketchPlane) else plane,
+                     surface=host.draft_surface)
     return {
         "selection": {name: copy.deepcopy(getattr(host, "selected_" + name))
                       for name in ("surface", "profile", "generation", "edge", "vertex")},
@@ -85,9 +89,20 @@ def _point(point):
             and all(type(x) in (int, float) and math.isfinite(x) for x in point))
 
 
+def _draft_plane(record):
+    if isinstance(record, str):
+        plane = SketchPlane.named(record)
+    elif isinstance(record, dict) and set(record) == {"origin", "u", "v"}:
+        plane = SketchPlane(**copy.deepcopy(record))
+    else:
+        raise ValueError("Koncept obsahuje neplatnou pracovní rovinu obrysu.")
+    plane.validate()
+    return plane
+
+
 def _sketch_state(state, *, history=False):
     if (not isinstance(state, dict) or state.get("segment_mode") not in ("line", "arc", "cubic")
-            or type(state.get("hole")) is not bool or state.get("plane") not in ("XY", "XZ", "YZ")
+            or type(state.get("hole")) is not bool
             or not isinstance(state.get("points"), list) or not history and not state["points"]
             or not all(_point(p) for p in state["points"])
             or not isinstance(state.get("pending_points"), list)
@@ -96,6 +111,7 @@ def _sketch_state(state, *, history=False):
                 state["segment_mode"]]
             or not isinstance(state.get("curve_segments"), list)):
         raise ValueError("Rozpracovaný obrys v konceptu není platný.")
+    _draft_plane(state.get("plane"))
     segments = state["curve_segments"]
     if len(segments) != max(0, len(state["points"]) - 1):
         raise ValueError("Rozpracovaný obrys nemá souvislé úseky.")
@@ -166,9 +182,13 @@ def _validated_ui(host, project, data):
     sketch = data.get("sketch")
     if sketch is not None:
         _sketch_state(sketch)
-        if sketch["hole"] and (sketch.get("surface") not in project.surfaces
-                or sketch["surface"] != selection.get("surface")):
-            raise ValueError("Plocha rozpracovaného otvoru již není dostupná.")
+        if sketch["hole"]:
+            owner = project.surfaces.get(sketch.get("surface"))
+            if owner is None or owner.id != selection.get("surface") or owner.kind != "planar":
+                raise ValueError("Plocha rozpracovaného otvoru již není dostupná.")
+            if asdict(_draft_plane(sketch["plane"])) != asdict(project.profiles[
+                    owner.profile_id].plane):
+                raise ValueError("Rovina rozpracovaného otvoru nepatří k původní ploše.")
     pending = data.get("pending_number")
     if pending is not None and (not isinstance(pending, dict)
             or pending.get("field") not in _fields(host) or not isinstance(pending.get("text"), str)
@@ -225,7 +245,9 @@ def restore_ui(host, data):
             setattr(host.sketch, name, copy.deepcopy(sketch[name]))
         host.sketch._input_history = copy.deepcopy(sketch["_input_history"])
         host.sketch.drawing = True
-        host.draft_surface, host.draft_plane = sketch.get("surface"), sketch["plane"]
+        host.draft_surface = sketch.get("surface")
+        host.draft_plane = (_draft_plane(sketch["plane"])
+                            if isinstance(sketch["plane"], dict) else sketch["plane"])
         host.sketch.setCursor(Qt.CursorShape.CrossCursor)
         host.sketch.redraw()
         host.sketch.segment_mode_changed.emit(host.sketch.segment_mode)

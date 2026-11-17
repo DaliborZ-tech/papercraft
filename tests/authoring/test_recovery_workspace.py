@@ -4,11 +4,12 @@ import copy
 import os
 import subprocess
 import sys
+from dataclasses import asdict
 from pathlib import Path
 from uuid import uuid4
 
 import pytest
-from PySide6.QtCore import QSettings, QSignalBlocker, Qt, QTimer
+from PySide6.QtCore import QPointF, QSettings, QSignalBlocker, Qt, QTimer
 from PySide6.QtWidgets import QApplication, QDialog, QListWidget, QMessageBox, QPushButton
 from test_workspace import arrange_rectangle
 
@@ -470,5 +471,63 @@ def test_pending_name_wrong_valid_surface_is_rejected_before_live_replacement(wi
     before = window.project.to_dict()
     path = window.recovery.store.write(uuid4(), before, ui)
     with pytest.raises(ValueError, match="Rozepsaný název"):
+        window.recovery.restore(path)
+    assert window.project.to_dict() == before and path.exists()
+
+
+@pytest.mark.parametrize("plane", ["XZ", {
+    "origin": [37, -11, 42], "u": [0, 1, 0], "v": [0, 0, 1],
+}])
+def test_hole_draft_preserves_exact_owner_plane_and_can_finish_after_restore(window, qtbot,
+                                                                          tmp_path, plane):
+    def create(project):
+        pid = project.add_profile([[0, 0], [10000, 0], [10000, 6000], [0, 6000]], plane=plane)
+        return project.add_surface(pid, name="Wall with authored plane")
+
+    sid = window.controller.execute("Author wall", create)
+    window.select_surface(sid)
+    original = tmp_path / "wall-before-hole.apcraft"
+    window.controller.save(original)
+    before, raw = window.project.to_dict(), original.read_bytes()
+    owner_plane = asdict(window.project.profiles[window.project.surfaces[sid].profile_id].plane)
+    window.actions["hole"].trigger()
+    for x, y in ((1000, 1000), (2000, 1000)):
+        qtbot.mouseClick(window.sketch.viewport(), Qt.MouseButton.LeftButton,
+                         pos=window.sketch.mapFromScene(QPointF(x, -y)))
+    assert window.sketch.hole and len(window.sketch.points) == 2
+    assert window.project.to_dict() == before
+    assert window.recovery.checkpoint(), window.statusBar().currentMessage()
+    path = released(window)
+    assert window.recovery.store.read(path)["ui_draft"]["sketch"]["plane"] == owner_plane
+    window.controller.new()
+    assert window.recovery.restore(path)
+    assert window.project.to_dict() == before and window.selected_surface == sid
+    assert window.sketch.drawing and window.sketch.hole and window.draft_surface == sid
+    assert asdict(window.draft_plane) == owner_plane
+    for x, y in ((2000, 2000), (1000, 2000)):
+        qtbot.mouseClick(window.sketch.viewport(), Qt.MouseButton.LeftButton,
+                         pos=window.sketch.mapFromScene(QPointF(x, -y)))
+    qtbot.keyClick(window.sketch, Qt.Key.Key_Return)
+    holes = window.project.surfaces[sid].hole_profile_ids
+    assert len(holes) == 1
+    assert asdict(window.project.profiles[holes[0]].plane) == owner_plane
+    assert len(window.controller._undo) == 1
+    assert original.read_bytes() == raw
+
+
+@pytest.mark.parametrize("plane", [
+    {"origin": [0, 0, 1], "u": [1, 0, 0], "v": [0, 1, 0]},
+    {"origin": [0, 0, 0], "u": [2, 0, 0], "v": [0, 1, 0]},
+    "YZ",
+])
+def test_hole_wrong_or_invalid_plane_is_rejected_without_replacing_work(window, plane):
+    arrange_rectangle(window)
+    window.actions["hole"].trigger()
+    window.sketch._add_point([1000, 1000])
+    window.sketch._add_point([2000, 1000])
+    before, ui = window.project.to_dict(), capture_ui(window)
+    ui["sketch"]["plane"] = plane
+    path = window.recovery.store.write(uuid4(), before, ui)
+    with pytest.raises(ValueError):
         window.recovery.restore(path)
     assert window.project.to_dict() == before and path.exists()
