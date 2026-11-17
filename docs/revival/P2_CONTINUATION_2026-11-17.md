@@ -47,10 +47,11 @@ kužel (169,063 s), near (146,5 s) a všech šest jejich skutečných SVG strán
 editací a uložením v Inkscape. Tyto nové výsledky mají vlastní source binding;
 nezávislé integrační review je níže.
 
-PC-009 konsolidace a změny po reopen jsou rozpracované. V odděleném kandidátu
-prošel skutečný A se dvěma stránkami a oběma zámky, včetně druhé změny po
-reopen; dosavadní C9 integrační scope tento novější frontendový přírůstek
-nezahrnuje. PC-010 má připravený scénář, skutečný historický model je NOT_RUN.
+PC-009 konsolidace A/B/C/D zůstává rozpracovaná. První nový workspace má
+vlastní nezávislé review a skutečný ruční dům A se dvěma stránkami, oběma
+zámky i druhou změnou po reopen. Tento přírůstek je publikován jako `7fa2fc6`;
+není převzatým schválením dřívějšího C9 scope. PC-010 má připravený scénář,
+skutečný historický model je NOT_RUN.
 AC-US08 má stále 0 skutečných nových účastníků / NOT_RUN. Fyzické P3 je NOT_RUN.
 
 ## Aktuální produktová priorita vlastníka
@@ -64,12 +65,17 @@ a recovery. Geometrické a datové kontrakty se neoslabují.
 
 Vlastník výslovně požádal nezávislého agenta o zkušenosti a vzory z místních
 i internetových zdrojů a praktické hodnocení GUI. Jde o expertní agentní
-ověření, nikoli provedený test nového člověka. Implementace workspace a recovery
-probíhá v oddělených větvích; historický model nepředbíhá tuto nápravu.
+ověření, nikoli provedený test nového člověka. První workspace a recovery jsou
+implementované a nezávisle ověřené; historický model nepředbíhá společnou
+kontrolu použitelného autorského desktopu.
 
 C9 technický přírůstek byl integrován a pushnut jako `6efa881`; lokální master,
 origin/master i přímý ls-remote měly shodné SHA. [Záznam publikace](evidence/p2-c9-publication-6efa881.json).
-Nový workspace a recovery jsou samostatný probíhající přírůstek.
+První workspace/recovery přírůstek byl následně samostatně přezkoumán,
+integrován fast-forward a normálně pushnut jako `7fa2fc6`; všechny tři SHA
+se opět shodovaly. [Záznam publikace](evidence/p2-workspace-publication-7fa2fc6.json).
+Otevřená pracovní kopie ručně vytvořeného domku umožňuje kontrolu skutečného
+desktopu. Produktové UX přijetí a zbývající PC009/PC010/P3 se tím neuzavírají.
 
 ## Nezávislé integrační review C9 — f5f06b2
 

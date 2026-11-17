@@ -1,0 +1,17 @@
+{
+  "published_payload_sha": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+  "reviewed_runtime_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
+  "reviewed_final_metadata_sha": "9d39e07c780282f6375d3d875b22d9bc2f850f8a",
+  "independent_review_commit": "82bd9deba3cba5f15bb6a4adfb3dbd661e4f790d",
+  "integration": "fast-forward from6efa881; normal git push origin master",
+  "remote": "https://github.com/DaliborZ-tech/papercraft.git",
+  "verified_utc": "2026-11-17T18:52:15.100374+00:00",
+  "local_master": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+  "origin_master": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+  "direct_ls_remote_master": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+  "product_acceptance": false,
+  "whole_P2_complete": false,
+  "new_human_participants": 0,
+  "physical_P3": "NOT_RUN",
+  "note": "This records actual publication before this fact-only commit. Later fact/review commits preserve the same runtime."
+}

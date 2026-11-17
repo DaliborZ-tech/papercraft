@@ -2743,7 +2743,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "IN_PROGRESS: C9 published6efa881. First redesigned four-context workspace/recovery increment independently approved in verified base-flow scope; actual manual house11surfaces/9parts/2A4 with save/reopen edit and SVG/PDF, actual timer/crash recovery, and native128 repair closure. Full1978PASS on d94 +final141targetedPASS. Owner UX product acceptance NOT_RUN; full A/B/C/D consolidation/PC010/human/P3 remain.",
+  "p2_digital_delivery": "IN_PROGRESS: C9 published6efa881. First redesigned four-context workspace/recovery increment published7fa2fc6 and independently approved in verified base-flow scope; actual manual house11surfaces/9parts/2A4 with save/reopen edit and SVG/PDF, actual timer/crash recovery, and native128 repair closure. Full1978PASS on d94 +final141targetedPASS. Owner UX product acceptance NOT_RUN; full A/B/C/D consolidation/PC010/human/P3 remain.",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2809,7 +2809,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "Publish independently verified PC009 first authoring workspace/recovery increment and present functioning desktop with editable manual house; owner UX review precedes historical PC010.",
+  "current_authorized_package": "Owner review of actual published workspace/recovery desktop and editable manual house; then remaining PC009 A/B/C/D consolidation before historicalPC010.",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2923,14 +2923,14 @@
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-11.md",
     "wip_source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
     "wip_branch": "revival/p2-continuation-20261117",
-    "next_required_technical_work": "Safely integrate/push reviewed workspace/recovery increment, verify local/remote SHA and present actual editable desktop. Collect owner UX review on functioning authoring workflow; continue remaining PC009 A/B/C/D consolidation afterwards. Historical PC010 actual NOT_RUN until usable workspace; humanAC-US08 and physicalP3 remain NOT_RUN.",
+    "next_required_technical_work": "Collect owner UX review on the functioning published desktop and address concrete findings; continue remaining PC009 A/B/C/D consolidation afterwards. Historical PC010 actual NOT_RUN until usable workspace; humanAC-US08 and physicalP3 remain NOT_RUN. No routine permission for authorized in-scope work.",
     "resumed_on": "2026-11-17",
     "resume_source": "explicit_owner_PO_CONTINUATION_attachment_2026_11_17",
     "digital_source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Verified first workspace/recovery increment ready for safe integration/push and owner desktop review. All4 actual GUI findings closed independently; whole PC009 A/B/C/D acceptance remains in progress.",
+    "active_work": "Published reviewed first workspace/recovery increment and opened independent editable house copy for owner desktop review. Remaining PC009 A/B/C/D consolidation, owner UX acceptance, historical PC010 and human/P3 evidence remain open.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3037,25 +3037,26 @@
       "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-10.md"
     },
     "latest_integrated_baseline": {
-      "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
-      "suite_pass": 1128,
-      "native_B1": "PASS_REQUESTED_FIXTURE",
-      "B1_editor": "FAIL_LX01",
-      "published_on_master": false
+      "source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
+      "published_sha": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+      "full_suite_source": "d94f9b329c1e1e73241e8b66b76924a72bfac214",
+      "full_suite_pass": 1978,
+      "final_targeted_pass": 141,
+      "scope": "First workspace/recovery increment; source-bound full and repair suites are separate, not added",
+      "whole_P2_acceptance": false
     },
     "latest_verified_code_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
     "candidate_delivery_report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
-    "publication_state": "PUBLISHED_AND_REMOTE_SHA_VERIFIED_IN_B1_B2_BEZIER_INCREMENT_SCOPE",
+    "publication_state": "PUBLISHED_VERIFIED_LOCAL_REMOTE_SHA_IN_FIRST_WORKSPACE_RECOVERY_SCOPE",
     "latest_published_increment": {
-      "scope": "B1/B2/Bezier technical increment, not whole PC007A/P2",
-      "published_sha": "7ba8785a04be82003db2bc70b5a5101d748fb8b1",
-      "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
-      "report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
-      "integration": "docs/p2/implementation/PC007A_LOFT_INTEGRATION.md",
-      "remote_verification": "docs/p2/implementation/evidence/pc007a-loft-master-push-7ba8785.json",
-      "method": "fast-forward and normal push; actual ls-remote SHA equals local master"
+      "scope": "First four-context authoring workspace, grouped problems, consistent names/navigation and separate recovery; not whole PC009/P2 or owner UX acceptance",
+      "published_sha": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+      "reviewed_code_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
+      "report": "docs/revival/P2_CONTINUATION_2026-11-17.md",
+      "remote_verification": "docs/revival/evidence/p2-workspace-publication-7fa2fc6.json",
+      "method": "fast-forward and normal push; actual direct ls-remote SHA equals local master"
     },
-    "wip_location": "C and live AU13 in isolated authoring branches; D/B3 is now published",
+    "wip_location": "Published first workspace/recovery increment7fa2fc6; separate preserved preparation for remaining PC009 and historicalPC010. No new historical actual proof claimed.",
     "candidate_D_delivery": {
       "code_sha": "e7826dd9b8b90843cdba72a6ae6fd52f0936a1ea",
       "report": "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
@@ -3131,14 +3132,32 @@
       "final_targeted": "141PASS/0FAIL/0ERROR/0SKIP22.52s; source/import/LFblob guard, all meaningful UI/recovery/camera/naming/dock tests",
       "native_recovery": "Actual30s timer -> os._exit -> newPID restore raw name and exact four-part/two-page document -> SaveAs; original preserved",
       "product_acceptance": "NOT_RUN_OWNER_REVIEW_REQUIRED",
-      "published": false,
+      "published": true,
       "human_novice": "0/NOT_RUN",
       "physical": "P3_NOT_RUN",
       "native_house": "docs/p2/implementation/evidence/workspace-house-191d24e-run01/results.json",
       "native_expert_repair": "docs/p2/implementation/evidence/workspace-repair-native/results.json",
       "final_native_dock": "docs/p2/implementation/evidence/workspace-final-dock-native/results.json",
       "independent_review": "APPROVED_IN_VERIFIED_BASE_WORKSPACE_RECOVERY_SCOPE; source191 then narrow128",
-      "publication_state": "READY_FOR_AUTHORIZED_INTEGRATION_AND_REMOTE_VERIFICATION"
+      "publication_state": "PUBLISHED_VERIFIED_LOCAL_REMOTE_SHA",
+      "published_sha": "7fa2fc60fd20f42a4635a3b7412be275bd2f4f61",
+      "publication_evidence": "docs/revival/evidence/p2-workspace-publication-7fa2fc6.json"
+    },
+    "published_loft_increment": {
+      "scope": "B1/B2/Bezier technical increment, not whole PC007A/P2",
+      "published_sha": "7ba8785a04be82003db2bc70b5a5101d748fb8b1",
+      "reviewed_code_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
+      "report": "docs/p2/implementation/PC007A_LOFT_DELIVERY.md",
+      "integration": "docs/p2/implementation/PC007A_LOFT_INTEGRATION.md",
+      "remote_verification": "docs/p2/implementation/evidence/pc007a-loft-master-push-7ba8785.json",
+      "method": "fast-forward and normal push; actual ls-remote SHA equals local master"
+    },
+    "previous_integrated_baseline": {
+      "source_sha": "b127fc550fc8401a8f8c8f066ca948e81184b246",
+      "suite_pass": 1128,
+      "native_B1": "PASS_REQUESTED_FIXTURE",
+      "B1_editor": "FAIL_LX01",
+      "published_on_master": false
     }
   },
   "owner_priority_update_2026_11_17": {
