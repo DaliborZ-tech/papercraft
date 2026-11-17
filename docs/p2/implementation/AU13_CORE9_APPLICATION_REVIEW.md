@@ -29,3 +29,72 @@ Oprava musí každý aktivní nenulový descriptor porovnat s přesnou aktivní 
 4. Zvlášť revidovat následný UI pin, až bude hotový. Native Windows/editor vlastní root. Dokončit source review před technickou integrací; žádné schválení či push neověřeného CORE9.
 
 Načteny AGENTS a všechny čtyři projektové skills, normativní přesnost a AC-AU13/14/15/16/17 + AC-US. Construction: historie není první child ani nový radius z projekce. Verification: samostatné negativy, původní length polynomial a skutečný import pin; FAIL se uchovává. UI: budoucí widget/native scope výslovně oddělen. Delivery: nezávislá otevřená revize a konkrétní navázání, bez přijetí nedokončeného balíku. Normativní AC a tolerance nebyly změněny.
+
+## Nezávislé uzavření opravy R01 — 17.11.2026
+
+Reviewer `core9_review` je jiný agent než původní autor i nynější integrační
+autor. Vlastní izolace mimo projekty:
+`C:/Users/dalib/.codex/workspaces/papercraft-20261117/core9-review`.
+Posuzovaný fix **72f7a168b0ecbc58ecd0f014cb1555f11d6339ba**, testovaný checkout
+**6064f222dfa87f6c46837f11ed9da5c04a6523cb** má shodnou produkci.
+Historický report výše, původní negativy a původní FAIL se zachovávají.
+
+**Verdikt: R01 CLOSED / APPROVED_IN_SCOPE pro tento doménový fix.** Každý
+aktuální descriptor se nyní porovnává s přesným aktivním replay piece daného
+profilu; členství v unii historických UUID už nestačí. Guard odmítá i retired
+ID bez descriptoru. Mapa přitom nevyžaduje přítomnost orphan piece po explicitní
+náhradě celého obrysu. Kontrola skutečné aktivní projekce a incidence zůstává
+v původním replay průchodu, bez nearest/first-child nebo radius-fit fallbacku.
+
+| Běh | Přesný zdroj a výsledek | Důkaz |
+|---|---|---|
+| Původní nezměněné orákulum |7c61c7ee: **6 FAIL +10 PASS**,32,65s; očekávané znovupotvrzení původní chyby | [JUnit](evidence/au13-core9-r01-baseline-7c61-replay.xml), [log](evidence/au13-core9-r01-baseline-7c61-replay.log) |
+| Totéž orákulum po opravě |6064f222/src72f7a168: **16 PASS**,32,47s | [kopie](evidence/au13-core9-r01-unchanged-own.py), [JUnit](evidence/au13-core9-r01-fixed-6064-replay.xml) |
+| Nová nezávislá matice |6064f222: **33 PASS**,62,19s | [orákulum](evidence/au13-core9-r01-matrix-own.py), [JUnit](evidence/au13-core9-r01-matrix-6064.xml) |
+| Původní autorské regrese |6064f222: **42 PASS**,54,06s; doplňková regrese, nikoli nezávislé autorství testů | [JUnit](evidence/au13-core9-r01-author42-6064.xml) |
+
+V původním orákulu se změnil pouze literal PIN pro nový checkout; AST všech
+funkcí včetně dekorátorů zůstává shodné. Baseline běžel v druhé nové izolaci
+na skutečném7c61. Každý pytest proces měl vlastní explicitní `PYTHONPATH` a
+import assertion. [Binding](evidence/au13-core9-r01-binding.json) dokládá
+`project.__file__`, Python, normalizované blob hashe šesti modulů, hashe JUnit
+a sedmi původních projektů. Pomocný sběrač metadat se při prvním spuštění bez
+`PYTHONPATH` správně zastavil import assertion před zápisem; poté byl spuštěn
+s vlastním zdrojem. Tento odmítnutý sběrač není žádný testovací PASS.
+
+Nová matice zahrnuje retired ROOT/left/right×ARC/CUBIC také s None, prázdným
+či boolean descriptorem; chybějící/None aktivní autoritu a konzistentně cizí
+analytický zdroj společně se všemi nativními cache body a daty. Nestačí tedy
+jen samostatné poškození jednoho pole. Pozitivní whole-outline orphan i
+mixed-generation úprava zachovají starou korespondenci, retired kotvu,
+odvozené cesty, stránky67/83/30° a oba locks, nedotčený profil a uložitelný
+UNRESOLVED stav; snapshot ho odmítne bez mutace práce.
+
+Skutečné archivní A, B1, D-gothic, LINE a všechny tři poslední C8 projekty
+(válec/kužel/near) prošly read-only načtením, odmítnutím přepisu originálu,
+SaveAs9/reopen, explicitním přepočtem a skutečným zápisem SVG/PDF. Všechna
+původní zdrojová UUID, body, data, plochy, spoje, generace, kotvy a ruční
+placementy kontroluje samostatné čtení původního JSON; původní byte hashe
+zůstávají stejné. Jde o **backendový replay existujících artefaktů**, nikoli
+nový průchod v desktopu nebo Inkscape.
+
+Uplatnění skills je konkrétní: construction zachovává celý historický zdroj
+a retired kotvu; verification reprodukuje původní FAIL na správném checkoutu,
+zkouší konzistentní counterfeit a původní artefakty; delivery připíná nezávislý
+verdikt ke konkrétnímu fixu a nepřenáší ho na UI; authoring-ui chrání bezpečný
+návrat k uložené práci, skutečné widget/native pokrytí ale tímto neběželo.
+Pravidlo importu bylo skutečně použito i při odmítnutém pomocném sběrači.
+
+LINE hypotéza byla mezitím nezávisle potvrzena a v opravě uzavřena: stejný
+[samostatný Python skript](evidence/au13-core9-r01-line-process-own.py) bez
+pytest/conftest načte na [původním7c61](evidence/au13-core9-r01-line-7c61-process.json)
+všechna tři retired LINE root/left/right UUID s None, ale na
+[opravě72f7](evidence/au13-core9-r01-line-72f7-process.json) všechny tři odmítne.
+Každý proces uvnitř ověřuje import i byte shodu tří modulů s deklarovaným pinem.
+Tento důkaz platí pro původní7c61; nepředstírá zpětné zjištění na jiném masteru.
+
+**Otevřený rozsah:** samostatná hypotéza prázdné historie v detached exporteru,
+následné UI a jeho skutečný
+ARC/CUBIC desktop, finální integrační snapshot a metadata ještě vyžadují vlastní
+kontrolu. Toto schválení samo nepovoluje vydávat celý CORE9/C/P2 za hotový.
+Nový lidský uživatel0/NOT_RUN; fyzické P3 NOT_RUN.
