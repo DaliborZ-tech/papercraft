@@ -244,3 +244,17 @@ stejné druhé příčině. [Původní JUnit](../p2/implementation/evidence/data
 [vlastní JUnit s oběma nálezy](../p2/implementation/evidence/data01-peer-own.xml).
 Zdroj se v této revizi neopravuje; autor adapteru i root dostali přesné
 reprodukce. Následuje nezávislý replay stejných očekávání na opravném pinu.
+
+### Celá integrační regrese workspace/recovery `d94f9b3`
+
+Na neměnném `d94f9b329c1e1e73241e8b66b76924a72bfac214` prošlo
+**1978 testů, 0 FAIL/ERROR/SKIP / 596,44 s**. Běžící proces ověřil skutečné
+importy z integračního worktree a shodné LF Git SHA256 všech sledovaných
+Python souborů v `src`, `tests`, `tools` před a po běhu.
+[JUnit](../p2/implementation/evidence/workspace-final-d94f9b3-full.xml),
+[source binding](../p2/implementation/evidence/workspace-final-d94f9b3-full.json).
+Jediné pytest upozornění se týká formátu `record_property`/JUnit, nikoli
+neúspěšného nebo přeskočeného testu. Tento běh nezahrnuje následující opravy
+pojmenování a skutečně sbalených profilových ovladačů nalezené v GUI.
+Nativní expertní průchod, produktové UX přijetí, nový člověk a fyzický model
+mají vlastní stav; počet automatických testů je nenahrazuje.
