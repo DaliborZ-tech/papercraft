@@ -1,0 +1,66 @@
+{
+  "source_pin": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
+  "harness_pin": "9783f4492decc23bb737d8cb91bd0f26a0aaeae1",
+  "verdict": "APPROVED_IN_SCOPE",
+  "actual_process": {
+    "start": true,
+    "pid": 39116,
+    "hwnd": 5900732,
+    "source": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-repair-review\\src\\archpapercraft\\ui\\author_window.py",
+    "evidence_type": "EXPERT_NATIVE_QT_WIDGET_AUTOMATION_NOT_NOVICE_HUMAN"
+  },
+  "metrics": {
+    "own": {
+      "expanded_dock": 156,
+      "collapsed_dock": 62,
+      "expanded_viewport": [
+        838,
+        443
+      ],
+      "collapsed_viewport": [
+        838,
+        537
+      ],
+      "span_unchanged": true,
+      "center_unchanged": true
+    },
+    "house": {
+      "expanded_dock": 156,
+      "collapsed_dock": 62,
+      "expanded_viewport": [
+        838,
+        443
+      ],
+      "collapsed_viewport": [
+        838,
+        537
+      ],
+      "span_unchanged": true,
+      "center_unchanged": true
+    }
+  },
+  "actual_screenshots_entire_models_visible": true,
+  "domain_unchanged": true,
+  "evidence_kind": "INDEPENDENT_EXPERT_NATIVE_NOT_NOVICE_HUMAN",
+  "human_participants": 0,
+  "physical": "NOT_RUN",
+  "pc010": "NOT_RUN",
+  "artifact_sha256": {
+    "01-own-fourparts-expanded.png": "7062a8e9bd32a7664b58742fa50ec82c264e8a5dfb51ad2dccc417395ca8c24b",
+    "02-own-fourparts-collapsed.png": "614715604d9944db7fcd559c10c2c60d2a3578a1e948ec5ebd175698461c10f1",
+    "03-house-expanded.png": "53dd984d2a7040d0bf7ac4c793a594f9e04739cf1e595aa5d720ff2c7f1bf299",
+    "04-house-collapsed.png": "3fcc2b1f79cf0d1e938b3969b363104b374e1905967741db35ab6de4ae6a1bf3",
+    "commands.jsonl": "fed72973df37441e27ebc66927f1e1811dfd3811acb81cc40d32f274f308f1c0",
+    "events.jsonl": "62f59339a9570dd601c41e91da9482f494485b70099adb6a8a5b9c7ee450373b",
+    "house-collapsed.json": "7b18e663709581fa99b5b373086c4073a564e07d7ac7209631477344a11f655e",
+    "house-expanded.json": "b0a03f4c53f37bc599c0da06c1e949a70646afb2ff0c7941edf408ed4efaf356",
+    "native-dialogs.json": "424cdcee2ac43e4470342c2ee8f91d5d126cc288e874cfe1be6b0fe89b09d485",
+    "observed.json": "2ea7ebb53f5860303a1ed3f984e0cb8aca3a0066d5ba4820aabb72376a44016d",
+    "own-collapsed.json": "4a13158b624a6729629feefa70cdb8d1dc6d835ddb8b90e69aac8ba699efb46b",
+    "own-expanded.json": "a8d8d3c144ffca8d52e12ee1461abf3169946e5e0c1858eaee73d1c1a5f2f3ef",
+    "probe.py": "70676c7234b7234afcab37345c1c9110c86e48817b93b6530b62b597192e1416",
+    "source-binding.json": "7dfa503f85ed5916be9ecdb401b3ca2426f85c3a98ef6d3ad644e1c1cbc9df30",
+    "targeted.xml": "976493b915ebf27c1c43b377f12561f9a2f711046ae1704e2b216939e356db24",
+    "ui.json": "7b18e663709581fa99b5b373086c4073a564e07d7ac7209631477344a11f655e"
+  }
+}

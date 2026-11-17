@@ -540,3 +540,36 @@ zachované. [Před opravou](../p2/implementation/evidence/problems-dock-before.j
 [JUnit](../p2/implementation/evidence/problems-dock-components.xml).
 Autor nepoužil nativní desktop; finální neautorský native replay a přijetí
 zůstávají u nezávislého reviewera.
+
+#### Finální neautorské closure `128a0dd2fe24a2a6a8898af5380bc31f6469355d`
+
+**APPROVED v rozsahu workspace + problémy + DATA01 recovery.** Agregát od
+publikovaného `6efa881` mění právě sedm produkčních souborů: controller
+lifecycle, atomic recovery store, raw UI recovery adapter, skupinové problémy,
+čtyři kontexty, main window a projekční framing. Všechny jsou pokryté předchozí
+neautorskou kontrolou; delta od schváleného 191 jsou jen explicitní deferred
+collapse callback a dva parametrizované testy. Callback respektuje znovu
+otevřené details a floating/side/hidden dock; obyčejný refresh uživatelskou
+výšku nemění. Nová doménová geometrie ani fallback identit nepřibývají.
+
+Skutečný nativní průchod 1366 × 768 na obou existujících modelech
+**F8 → Vše → Skrýt podrobnosti** vrátil dock **156→62 px** a pohled
+**838×443→838×537 px (+94 px)**. Span i center se přesně nezměnily;
+[vlastní čtyřdílný model](../p2/implementation/evidence/workspace-final-dock-native/02-own-fourparts-collapsed.png)
+i [rootův domek](../p2/implementation/evidence/workspace-final-dock-native/04-house-collapsed.png)
+jsou celé viditelné. Dokument domu zůstal přesně shodný, žádný automatizační
+příkaz neselhal. Tím je i poslední doložený dock nález CLOSED.
+[Source-bound výsledek a metrics](../p2/implementation/evidence/workspace-final-dock-native/results.json)
+uvádějí vlastní PID/HWND a actual `__file__`; harness byl předem zmrazen
+na `9783f4492decc23bb737d8cb91bd0f26a0aaeae1`. Všechny src/tools LF bytes
+odpovídají přesnému 128. Cílený neautorský replay opravy **2 PASS / 1,30 s**
+ověřil i zachování pozdější ruční výšky při refresh;
+[JUnit](../p2/implementation/evidence/workspace-final-dock-native/targeted.xml),
+[source/import binding uvnitř pytest](../p2/implementation/evidence/workspace-final-dock-native/source-binding.json).
+Rozsáhlé sady se bez další změny neopakovaly: zůstávají původní full1978 na d94
+a neautorských130 na 191. Native proces je ukončen a desktop vrácen rootu.
+
+README/manuál a queue/SK019/skill update `1a60818` mají schválené věcné meze
+z předchozího review; závěrečná metadata mají jen promítnout tato konkrétní
+closure. Nejde o PO přijetí celého P2, nový human test (0/NOT_RUN), historický
+PC010 ani fyzický P3. Původní negativní důkazy a limity obnovy zůstávají zachované.

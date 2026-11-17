@@ -1,0 +1,22 @@
+{"op":"resize","size":[1366,768]}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-repair-review/docs/p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft"}
+{"op":"menu","path":["Projekt","Otevřít"]}
+{"op":"key","key":"Ctrl+1"}
+{"op":"key","key":"F8"}
+{"op":"button","text":"Vše"}
+{"op":"dump"}
+{"op":"screen","name":"01-own-fourparts-expanded"}
+{"op":"button","text":"Skrýt podrobnosti"}
+{"op":"dump"}
+{"op":"screen","name":"02-own-fourparts-collapsed"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/integration/docs/p2/implementation/evidence/workspace-house-191d24e-run01/model-A/model-A.apcraft"}
+{"op":"menu","path":["Projekt","Otevřít"]}
+{"op":"key","key":"F8"}
+{"op":"button","text":"Vše"}
+{"op":"dump"}
+{"op":"screen","name":"03-house-expanded"}
+{"op":"button","text":"Skrýt podrobnosti"}
+{"op":"dump"}
+{"op":"screen","name":"04-house-collapsed"}
+{"op":"state"}
+{"op":"quit"}
