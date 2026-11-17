@@ -14,9 +14,11 @@ v [README](../README.md#instalace-a-spuštění).
    **Vytvořit → Obdélník z rozměrů…** (na liště **Díl z obdélníku**).
    Zadejte například šířku `5000` a výšku `3000` mm a potvrďte.
    Při 1:100 má samotné tělo tohoto dílu na papíře 50 × 30 mm.
-4. Plochu vyberte kliknutím ve 3D nebo ve stromu **Konstrukce**. V horním
-   poli Vlastností změňte její název a potvrďte Enter. **Pojmenovat…** (`F2`)
-   umožňuje pojmenovat i model a papírový díl.
+4. Plochu vyberte kliknutím ve 3D nebo ve stromu **Model → Moje plochy a díly**.
+   V horním poli Vlastností změňte její název a potvrďte Enter. U samostatné
+   plochy se přejmenuje i dosud automaticky pojmenovaný papírový díl, včetně
+   výstupu; odlišné vlastní názvy a složené díly upravte přes **Pojmenovat…**
+   (`F2`), kde lze pojmenovat i model.
 5. V části **Bod obrysu** vyberte konkrétní bod a upravte **Vodorovně** /
    **Svisle v obrysu**. Číslo potvrďte Enter. Přesný rozměr obdélníku tak lze
    změnit úpravou jeho bodů; část **Umístění v prostoru** mění posun a natočení
@@ -142,7 +144,7 @@ na papíře prostřední tlačítko posouvá a **Ctrl + kolečko** přibližuje.
 | Ctrl+J / Ctrl+Shift+J | Připojit hranu dovnitř plochy / přilepit plochu oblastí |
 | Ctrl+R / Ctrl+E | Přepočítat papírové díly / exportovat SVG a PDF |
 | F2 / F8 | Pojmenovat model a díl / Problémy a připravenost |
-| F / Home | Zaměřit vybraný díl / zaměřit celý model a stránky |
+| F / Home | Zaměřit výběr / vše v aktivním pohledu |
 | F1 | Připomenout postup a znovu zapnout tipy |
 
 Zkratky F a Home používejte s fokusem v pracovním pohledu.
@@ -156,5 +158,7 @@ Fyzický výtisk a sestavení **P3: NOT_RUN**. Tento rychlý start ani agentní
 ověření GUI tato dvě ověření nenahrazují.
 
 [Původní příručka 0.2 je zachovaná v archivu](archive/manual_cs-v0.2-before-workspace-2026-11-17.md).
-Popis současného ovládání vychází z `author_window.py`, `author_workspace.py`
-a `author_recovery.py` ve zdroji `d94f9b3`.
+Aktuální implementace ovládání:
+[autorské okno](../src/archpapercraft/ui/author_window.py),
+[pracovní kontexty](../src/archpapercraft/ui/author_workspace.py) a
+[obnova práce](../src/archpapercraft/ui/author_recovery.py).
