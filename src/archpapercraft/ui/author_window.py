@@ -1,4 +1,4 @@
-"""Sketch-first authoring workspace linking source construction and paper parts."""
+"""Activity workspaces linking source construction, joints, paper and export."""
 # ruff: noqa: N802 -- Qt closeEvent uses the framework's method name.
 
 from __future__ import annotations
@@ -6,11 +6,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from PySide6.QtCore import QSettings, QSignalBlocker, Qt, QTimer
+from PySide6.QtCore import QEvent, QSettings, QSignalBlocker, Qt, QTimer
 from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import (
     QAbstractSpinBox,
     QApplication,
+    QBoxLayout,
     QCheckBox,
     QComboBox,
     QDialog,
@@ -21,13 +22,13 @@ from PySide6.QtWidgets import (
     QFormLayout,
     QHBoxLayout,
     QLabel,
-    QListWidget,
-    QListWidgetItem,
+    QLineEdit,
     QMainWindow,
     QMessageBox,
     QPlainTextEdit,
     QPushButton,
     QScrollArea,
+    QSizePolicy,
     QSplitter,
     QToolBar,
     QToolButton,
@@ -40,6 +41,7 @@ from PySide6.QtWidgets import (
 
 from archpapercraft.application.author_controller import AuthorController
 from archpapercraft.authoring import AuthorProject
+from archpapercraft.authoring.editing import rename_author_entities
 from archpapercraft.exporter.curve_output_validation import CurveOutputError
 from archpapercraft.ui.author_attachment import AttachmentDialog, GlueRegionDialog
 from archpapercraft.ui.author_connectors import ConnectorPanel
@@ -51,16 +53,19 @@ from archpapercraft.ui.author_loft import LoftProfilesDialog
 from archpapercraft.ui.author_manual_layout import ManualGridDialog
 from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
+from archpapercraft.ui.author_problems import AuthorProblemsPanel
 from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
 from archpapercraft.ui.author_segmentation import SegmentedVariantDialog
 from archpapercraft.ui.author_subdivision import SubdivisionDialog
 from archpapercraft.ui.author_viewport import AuthorViewport
+from archpapercraft.ui.author_workspace import CONTEXTS, AuthorWorkspaceBar, wrap_control_text
 
 
 class AuthorMainWindow(QMainWindow):
     def __init__(self, parent=None, *, settings=None):
         super().__init__(parent)
-        self.resize(1660, 960)
+        self.resize(1366, 768)
+        self.setMinimumSize(900, 600)
         self.settings = settings or QSettings("ArchPapercraft", "Authoring")
         self.selected_surface = None
         self.selected_profile = None
@@ -74,6 +79,12 @@ class AuthorMainWindow(QMainWindow):
         self._shown = {}
         self._raw = {}
         self.sections = {}
+        self.section_containers = {}
+        self.workspace_context = CONTEXTS[0]
+        self._sketch_visible = False
+        self._preview_visible = False
+        self._paper_frame_pending = True
+        self._viewport_frame_pending = True
         self._frame_next = True
         self._command_errors = 0
         self._committing_input = False
@@ -82,6 +93,7 @@ class AuthorMainWindow(QMainWindow):
         self._build_workspace()
         self._build_actions()
         self._build_properties()
+        self._apply_workspace_context()
         self.controller.new()
         QTimer.singleShot(0, self._initial_frame)
 
@@ -99,28 +111,119 @@ class AuthorMainWindow(QMainWindow):
     def unit_factor(self):
         return float(self.units.currentData())
 
+    def set_workspace_context(self, name):
+        """Change the view of one document, after accepting its visible edit."""
+        if name not in CONTEXTS:
+            raise ValueError(name)
+        if not self._commit_pending_input():
+            self.workspace_bar.set_context(self.workspace_context)
+            return False
+        self.workspace_context = name
+        self._apply_workspace_context()
+        return True
+
+    def set_sketch_visible(self, visible):
+        if not visible and not self._commit_pending_input():
+            self.workspace_bar.sketch_button.setChecked(self._sketch_visible)
+            return
+        self._sketch_visible = visible
+        self._apply_workspace_context()
+        if visible:
+            self.sketch.setFocus()
+            self.sketch.focus_surface()
+
+    def set_preview_visible(self, visible):
+        self._preview_visible = visible
+        self._apply_workspace_context()
+
+    def _apply_workspace_context(self):
+        name = self.workspace_context
+        self.workspace_bar.set_context(name)
+        modeling = name == "Modelování"
+        self.workspace_bar.sketch_button.setChecked(self._sketch_visible)
+        self.workspace_bar.preview_button.setChecked(self._preview_visible)
+        self.sketch.setVisible(modeling and self._sketch_visible)
+        self.viewport.setVisible(name in CONTEXTS[:2] or
+                                 (name == "Stránky" and self._preview_visible))
+        self.construction_splitter.setVisible(name in CONTEXTS[:2] or
+                                              (name == "Stránky" and self._preview_visible))
+        self.paper.setVisible(not modeling)
+        if modeling and self._sketch_visible:
+            self.construction_splitter.setSizes([420, 350])
+        if name == "Spoje a rozvin":
+            self.workspace_splitter.setSizes([500, 500])
+        elif name == "Stránky":
+            self.workspace_splitter.setSizes([240, 760])
+        groups = {
+            "Modelování": {"Jednotky a tvorba", "Profil a křivky", "Bod obrysu",
+                           "Umístění v prostoru"},
+            "Spoje a rozvin": {"Hrany, spoj a chlopeň", "Autorské spoje a záložky"},
+            "Stránky": {"Díl na papíře"},
+            "Export": set(),
+        }
+        for title, container in self.section_containers.items():
+            container.setVisible(title in groups[name])
+        if hasattr(self, "properties_dock"):
+            self.properties_dock.setVisible(name != "Export")
+        self.tree_dock.setVisible(name != "Export")
+        visible = {"save", "undo", "redo", "focus", "focus_all"}
+        if modeling:
+            visible.update(("draw", "rectangle", "hole"))
+            if self._sketch_visible:
+                visible.update(("finish", "cancel"))
+        elif name == "Spoje a rozvin":
+            visible.update(("connect", "recompute"))
+        elif name == "Stránky":
+            visible.update(("manual_grid", "recompute"))
+        else:
+            visible.update(("export", "recompute"))
+        if hasattr(self, "context_toolbar"):
+            self.curve_mode_action.setVisible(modeling and self._sketch_visible)
+            for key, action in self.toolbar_actions.items():
+                action.setVisible(key in visible)
+        QTimer.singleShot(0, self._frame_pending_views)
+        if self.project and hasattr(self, "selection_label"):
+            self.update_guidance()
+
+    def _frame_pending_views(self):
+        if self._viewport_frame_pending and self.viewport.isVisible():
+            self.viewport.focus_selection(all_surfaces=True)
+            self._viewport_frame_pending = False
+        if self._paper_frame_pending and self.paper.isVisible():
+            self.paper.fitInView(self.paper.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
+            self._paper_frame_pending = False
+
     def _build_workspace(self):
         body = QWidget()
         layout = QVBoxLayout(body)
+        layout.setContentsMargins(8, 6, 8, 6)
+        layout.setSpacing(6)
+        self.workspace_bar = AuthorWorkspaceBar()
+        self.workspace_bar.context_requested.connect(self.set_workspace_context)
+        self.workspace_bar.sketch_requested.connect(self.set_sketch_visible)
+        self.workspace_bar.preview_requested.connect(self.set_preview_visible)
+        layout.addWidget(self.workspace_bar)
         self.hint = QLabel()
+        self.hint.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.hint.setWordWrap(True)
-        self.hint.setStyleSheet("QLabel { background: #e8f3ef; padding: 9px; color: #254f42; }")
+        self.hint.setContentsMargins(4, 2, 4, 2)
         layout.addWidget(self.hint)
         self.context = QLabel()
+        self.context.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.context.setWordWrap(True)
         layout.addWidget(self.context)
         self.sketch = CurveSketch()
         self.viewport = AuthorViewport()
         self.paper = AuthorPaperView()
-        construction = QSplitter(Qt.Orientation.Vertical)
-        construction.addWidget(self.sketch)
+        construction = self.construction_splitter = QSplitter(Qt.Orientation.Vertical)
         construction.addWidget(self.viewport)
+        construction.addWidget(self.sketch)
         construction.setSizes([430, 320])
         self.workspace_splitter = QSplitter(Qt.Orientation.Horizontal)
         self.workspace_splitter.addWidget(construction)
         self.workspace_splitter.addWidget(self.paper)
         self.workspace_splitter.setSizes([560, 640])
-        layout.addWidget(self.workspace_splitter)
+        layout.addWidget(self.workspace_splitter, 1)
         self.setCentralWidget(body)
         self.sketch.outline_finished.connect(self.create_outline)
         self.sketch.open_profile_finished.connect(self.create_open_profile)
@@ -139,23 +242,43 @@ class AuthorMainWindow(QMainWindow):
         self.tree = QTreeWidget()
         self.tree.setHeaderLabel("Moje plochy a díly")
         self.tree.itemSelectionChanged.connect(self.tree_selection)
-        tree_dock = QDockWidget("Konstrukce", self)
+        tree_dock = self.tree_dock = QDockWidget("Model", self)
+        self.tree.setMinimumWidth(150)
+        self.tree.setMaximumWidth(300)
         tree_dock.setWidget(self.tree)
         self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, tree_dock)
-        self.issues = QListWidget()
+        self.problems = AuthorProblemsPanel(self)
+        for widget in (self.problems.primary, self.problems.details, self.problems.next_part,
+                       self.problems.issues):
+            widget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        for widget in self.problems.findChildren(QWidget):
+            widget.installEventFilter(self)
+        self.issues = self.problems.issues
         self.issues.itemClicked.connect(self.select_issue)
         self.issues.itemActivated.connect(self.select_issue)
         self.issues.currentItemChanged.connect(lambda *_: self.update_ack_button())
-        self.issues.setMaximumHeight(130)
-        issues_box = QWidget()
-        issues_layout = QVBoxLayout(issues_box)
-        issues_layout.addWidget(self.issues)
-        self.ack_button = QPushButton("Přijmout vybrané varování pro tento stav")
+        self.ack_button = self.problems.ack_button
         self.ack_button.clicked.connect(self.acknowledge)
-        issues_layout.addWidget(self.ack_button)
-        issues_dock = QDockWidget("Co je potřeba zkontrolovat", self)
-        issues_dock.setWidget(issues_box)
+        self.problems.action_requested.connect(self._problem_action)
+        issues_dock = self.issues_dock = QDockWidget("Co je potřeba zkontrolovat", self)
+        issues_dock.setWidget(self.problems)
         self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, issues_dock)
+
+    def eventFilter(self, watched, event):
+        # Validate before a problem click can move focus away from a raw edit.
+        if (event.type() == QEvent.Type.MouseButtonPress and
+                self.problems.isAncestorOf(watched) and not self._commit_pending_input()):
+            return True
+        return super().eventFilter(watched, event)
+
+    def _problem_action(self, key):
+        if self._commit_pending_input() and key in self.actions:
+            self.actions[key].trigger()
+
+    def show_problems(self):
+        if self._commit_pending_input():
+            self.issues_dock.show()
+            self.problems.show_problems()
 
     def _action(self, key, text, slot, shortcut=None):
         action = QAction(text, self)
@@ -251,6 +374,9 @@ class AuthorMainWindow(QMainWindow):
             self._action("hole", "Nakreslit otvor do vybrané plochy", self.start_hole, "Ctrl+H")
         )
         construct.addAction(
+            self._action("connect", "Spojit vybrané hrany", self.start_connection)
+        )
+        construct.addAction(
             self._action(
                 "attach_inside", "Připojit hranu dovnitř plochy…", self.attach_inside, "Ctrl+J"
             )
@@ -272,6 +398,16 @@ class AuthorMainWindow(QMainWindow):
             )
         )
         view_menu = self.menuBar().addMenu("Zobrazení a pomoc")
+        contexts_menu = view_menu.addMenu("Pracovní kontext")
+        for index, name in enumerate(CONTEXTS, 1):
+            contexts_menu.addAction(self._action(
+                f"workspace_{index}", name,
+                lambda _checked=False, name=name: self.set_workspace_context(name),
+                f"Ctrl+{index}",
+            ))
+        view_menu.addAction(self._action(
+            "problems", "Problémy a připravenost", self.show_problems, "F8"
+        ))
         view_menu.addAction(self._action("focus", "Zaměřit vybraný díl", self.focus_selection, "F"))
         view_menu.addAction(
             self._action("focus_all", "Zaměřit celý model a stránky", self.focus_all, "Home")
@@ -286,7 +422,7 @@ class AuthorMainWindow(QMainWindow):
         self.tips_action.toggled.connect(self.set_tips)
         view_menu.addAction(self.tips_action)
         view_menu.addAction(self._action("repeat_tip", "Připomenout postup", self.repeat_tip, "F1"))
-        toolbar = QToolBar("Tvorba a ověření", self)
+        toolbar = self.context_toolbar = QToolBar("Pracovní příkazy", self)
         toolbar.setMovable(False)
         self.addToolBar(toolbar)
         self.curve_mode = QComboBox()
@@ -298,8 +434,17 @@ class AuthorMainWindow(QMainWindow):
         self.sketch.segment_mode_changed.connect(
             lambda mode: self.curve_mode.setCurrentIndex(self.curve_mode.findData(mode))
         )
-        toolbar.addWidget(self.curve_mode)
+        self.curve_mode_action = toolbar.addWidget(self.curve_mode)
+        self.toolbar_actions = {}
+        captions = {"save": "Uložit", "undo": "Zpět", "redo": "Znovu",
+                    "draw": "Obrys", "rectangle": "Díl z obdélníku", "hole": "Otvor",
+                    "finish": "Dokončit", "cancel": "Zrušit", "focus": "Výběr",
+                    "focus_all": "Vše", "recompute": "Přepočítat",
+                    "manual_grid": "Rozmístit…", "attach_inside": "Připojit…",
+                    "connect": "Spojit hrany",
+                    "export": "SVG a PDF…"}
         for key in (
+            "save",
             "draw",
             "rectangle",
             "finish",
@@ -308,9 +453,23 @@ class AuthorMainWindow(QMainWindow):
             "undo",
             "redo",
             "recompute",
+            "manual_grid",
+            "connect",
+            "attach_inside",
+            "focus",
+            "focus_all",
             "export",
         ):
-            toolbar.addAction(self.actions[key])
+            original = self.actions[key]
+            action = QAction(captions[key], self)
+            action.setToolTip(original.text())
+            action.triggered.connect(original.trigger)
+            original.changed.connect(
+                lambda original=original, action=action: action.setEnabled(original.isEnabled())
+            )
+            action.setEnabled(original.isEnabled())
+            self.toolbar_actions[key] = action
+            toolbar.addAction(action)
 
     @staticmethod
     def _spin(low=-1e9, high=1e9, decimals=6, suffix=""):
@@ -322,6 +481,13 @@ class AuthorMainWindow(QMainWindow):
         return field
 
     def _section(self, layout, title, *, collapsed=False):
+        container = QWidget()
+        section_layout = QVBoxLayout(container)
+        section_layout.setContentsMargins(0, 0, 0, 0)
+        section_layout.setSpacing(3)
+        layout.addWidget(container)
+        self.section_containers[title] = container
+        layout = section_layout
         button = QToolButton()
         button.setText(title)
         button.setCheckable(True)
@@ -332,6 +498,10 @@ class AuthorMainWindow(QMainWindow):
         box = QWidget()
         form = QFormLayout(box)
         form.setContentsMargins(2, 4, 2, 10)
+        form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
+        form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        form.setHorizontalSpacing(8)
+        form.setVerticalSpacing(6)
         layout.addWidget(box)
         box.setVisible(not collapsed)
         button.toggled.connect(box.setVisible)
@@ -350,7 +520,12 @@ class AuthorMainWindow(QMainWindow):
         self.selection_label = QLabel("Zatím není vybraná plocha.")
         self.selection_label.setWordWrap(True)
         layout.addWidget(self.selection_label)
-        commands = QHBoxLayout()
+        self.selection_name = QLineEdit()
+        self.selection_name.setPlaceholderText("Vlastní název vybrané plochy")
+        self.selection_name.setAccessibleName("Název vybrané plochy")
+        self.selection_name.editingFinished.connect(self._commit_selection_name)
+        layout.addWidget(self.selection_name)
+        commands = QVBoxLayout()
         self.rename_button = QPushButton("Pojmenovat…")
         self.rename_button.clicked.connect(self.rename_selection)
         commands.addWidget(self.rename_button)
@@ -384,7 +559,7 @@ class AuthorMainWindow(QMainWindow):
         self.material_button = QPushButton("Papír a místo pro ohyb…")
         self.material_button.clicked.connect(self.edit_material)
         form.addRow(self.material_button)
-        form = self._section(layout, "Profil a křivky")
+        form = self._section(layout, "Profil a křivky", collapsed=True)
         self.curve_choice = QComboBox()
         self.curve_choice.currentIndexChanged.connect(self.choose_curve)
         form.addRow("Úsek zdrojového profilu", self.curve_choice)
@@ -490,7 +665,7 @@ class AuthorMainWindow(QMainWindow):
         self.partner_button = QPushButton("Ukázat protikus")
         self.partner_button.clicked.connect(self.show_partner)
         form.addRow(self.partner_button)
-        form = self._section(layout, "Autorské spoje a záložky")
+        form = self._section(layout, "Autorské spoje a záložky", collapsed=True)
         self.connectors_panel = ConnectorPanel(self)
         self.connectors_panel.relation_changed.connect(self.show_connector_relation)
         form.addRow(self.connectors_panel)
@@ -540,9 +715,27 @@ class AuthorMainWindow(QMainWindow):
         scroll.setWidgetResizable(True)
         scroll.setWidget(widget)
         scroll.setMinimumWidth(280)
-        dock = QDockWidget("Vlastnosti a další krok", self)
+        for label in widget.findChildren(QLabel):
+            label.setWordWrap(True)
+        for form in widget.findChildren(QFormLayout):
+            form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
+            form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        # The inspector has a narrow, scrollable column. Stack paired commands
+        # instead of letting a horizontal button row widen every property.
+        for row in widget.findChildren(QHBoxLayout):
+            row.setDirection(QBoxLayout.Direction.TopToBottom)
+        for combo in widget.findChildren(QComboBox):
+            combo.setMinimumContentsLength(12)
+            combo.setSizeAdjustPolicy(
+                QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon
+            )
+        for button in (widget.findChildren(QPushButton) + widget.findChildren(QToolButton)
+                       + widget.findChildren(QCheckBox)):
+            wrap_control_text(button)
+        dock = self.properties_dock = QDockWidget("Vlastnosti", self)
         dock.setWidget(scroll)
         self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, dock)
+        self.resizeDocks([self.tree_dock, dock], [190, 310], Qt.Orientation.Horizontal)
 
     def run(self, operation):
         try:
@@ -637,6 +830,11 @@ class AuthorMainWindow(QMainWindow):
             text = "Spojení: vyberte druhou hranu v prostoru nebo na papíře. Esc operaci zruší."
         elif self.sketch.drawing:
             text = self.sketch.instruction_text() + " Backspace vrátí vstup, Esc zruší návrh."
+        elif self.workspace_context == "Export":
+            text = "Zkontrolujte připravenost dole a náhled stránek. Export vytvoří SVG a PDF."
+        elif self.workspace_context == "Stránky":
+            text = ("Vyberte díl na papíře nebo ve stromu. Přesuňte jej na stránku tažením "
+                    "nebo zadejte stránku, polohu a natočení ve vlastnostech.")
         elif profile is not None and self.selected_surface is None:
             used_by_loft = any(s.kind == "ruled_loft" and profile.id in s.source_profile_ids()
                                for s in self.project.surfaces.values())
@@ -649,8 +847,8 @@ class AuthorMainWindow(QMainWindow):
             )
         elif not self.project or not self.project.surfaces:
             text = (
-                "Začněte tlačítkem Nakreslit vlastní díl, nebo zadejte rozměry obdélníku. "
-                "Plocha se ukáže v prostoru i na papíře."
+                "Začněte tlačítkem Obrys, nebo vytvořte díl z obdélníku. "
+                "Novou plochu uvidíte v prostoru; papírový díl ve Spojích a rozvinu."
             )
         elif (self.selected_surface and
               self.project.surfaces[self.selected_surface].kind == "ruled_loft" and
@@ -679,7 +877,11 @@ class AuthorMainWindow(QMainWindow):
                 "Upravit dvojice profilů a šev. Připojení této prostorové plochy "
                 "zatím nemá ověřený spoj; nelze je nahradit přímou tětivou."
             )
-        elif self.selected_edge:
+        elif self.current_joint:
+            text = ("Vybraný spoj můžete upravit nebo ukázat jeho protikus. "
+                    "Aktuální papírové díly umístěte v kontextu Stránky; "
+                    "potřebný přepočet nabízí připravenost dole.")
+        elif self.selected_edge and self.workspace_context == "Spoje a rozvin":
             text = (
                 "Vybranou hranu můžete připojit k protikusu; "
                 "potom určíte přehyb nebo lepení s chlopní."
@@ -687,7 +889,7 @@ class AuthorMainWindow(QMainWindow):
         else:
             text = (
                 "Vyberte plochu ve stromu, v prostoru nebo na papíře. "
-                "Body měníte v kresbě; díly přetahujete na stránky."
+                "Tvar upravíte ve skice; spojování a stránky mají vlastní pracovní kontext."
             )
         self.hint.setText(text)
         self.hint.setVisible(self.tips_action.isChecked())
@@ -771,24 +973,15 @@ class AuthorMainWindow(QMainWindow):
                     if self.selected_surface is None and pid == self.selected_profile:
                         self.tree.setCurrentItem(item)
             frame_views = self._frame_next
+            if frame_views:
+                self._paper_frame_pending = self._viewport_frame_pending = True
             self._set_viewport_project(frame=frame_views)
             self._frame_next = False
             self._show_source_sketch()
             self.paper.set_project(self.project.print_material_view(), frame=frame_views)
             self._populate_properties()
             self._highlight()
-            self.issues.clear()
-            for issue in self._current_issues():
-                label = (
-                    "Přijato"
-                    if issue.acknowledged
-                    else "Chyba"
-                    if issue.severity.lower() == "error"
-                    else "Varování"
-                )
-                item = QListWidgetItem(f"{label}: {issue.message}")
-                item.setData(Qt.ItemDataRole.UserRole, issue.id)
-                self.issues.addItem(item)
+            self.problems.set_issues(self._current_issues(), self.project)
             self.update_ack_button()
             self.actions["undo"].setEnabled(self.controller.can_undo)
             self.actions["redo"].setEnabled(self.controller.can_redo)
@@ -801,6 +994,7 @@ class AuthorMainWindow(QMainWindow):
                 "— ArchPapercraft Studio"
             )
             self.update_guidance()
+            QTimer.singleShot(0, self._frame_pending_views)
         finally:
             self._updating = False
 
@@ -811,6 +1005,8 @@ class AuthorMainWindow(QMainWindow):
         profile = self.project.profiles.get(
             surface.profile_id if surface else self.selected_profile
         )
+        self.selection_name.setEnabled(surface is not None)
+        self.selection_name.setText(surface.name if surface else "")
         unit = self.unit_factor
         for title in (
             "Bod obrysu",
@@ -879,6 +1075,7 @@ class AuthorMainWindow(QMainWindow):
             for profile in self.project.profiles.values() for s in profile.segments
         )
         self.connect_button.setEnabled(straight)
+        self.actions["connect"].setEnabled(straight)
         self.connect_button.setToolTip(
             "Spojení přímých hran. Zakřivená hrana se nesmí zaměnit za její tětivu."
         )
@@ -1527,6 +1724,9 @@ class AuthorMainWindow(QMainWindow):
         self.connect_source = None
         self.draft_surface = None
         self.draft_plane = self.plane.currentData()
+        if not self.set_workspace_context("Modelování"):
+            return
+        self.set_sketch_visible(True)
         self.sketch.start_outline()
         self.update_guidance()
 
@@ -1633,6 +1833,9 @@ class AuthorMainWindow(QMainWindow):
             self.draft_surface = self.selected_surface
             surface = self.project.surfaces[self.selected_surface]
             self.draft_plane = self.project.profiles[surface.profile_id].plane
+            if not self.set_workspace_context("Modelování"):
+                return
+            self.set_sketch_visible(True)
             self.sketch.start_outline(hole=True)
             self.update_guidance()
 
@@ -2101,7 +2304,12 @@ class AuthorMainWindow(QMainWindow):
             None,
         )
         if selected and selected.part_ids:
+            context = ("Spoje a rozvin" if selected.joint_id or selected.code == "STALE" or
+                       selected.id.startswith("curved:") else "Stránky")
+            if not self.set_workspace_context(context):
+                return
             self.select_part(selected.part_ids[0])
+            self.viewport.focus_selection()
             if selected.id.startswith("curved:"):
                 cid = selected.id.partition(":")[2]
                 if cid in self.project.curved_connectors:
@@ -2147,15 +2355,28 @@ class AuthorMainWindow(QMainWindow):
         return issues + [issue for issue in self.project.curved_connector_issues()
                          if issue.id not in known]
 
+    def _active_view(self):
+        focus = QApplication.focusWidget()
+        for view in (self.sketch, self.viewport, self.paper):
+            if view.isVisible() and (focus is view or view.isAncestorOf(focus)):
+                return view
+        return self.paper if self.workspace_context in ("Stránky", "Export") else self.viewport
+
     def focus_selection(self):
-        self.viewport.focus_selection()
-        self.sketch.focus_surface()
-        if self.selected_part:
+        view = self._active_view()
+        if view is self.viewport:
+            self.viewport.focus_selection()
+        elif view is self.sketch:
+            self.sketch.focus_surface()
+        elif self.selected_part:
             self.paper.focus_part(self.selected_part)
 
     def focus_all(self):
-        self.viewport.focus_selection(all_surfaces=True)
-        self.paper.fitInView(self.paper.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
+        view = self._active_view()
+        if view is self.viewport:
+            self.viewport.focus_selection(all_surfaces=True)
+        else:
+            view.fitInView(view.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
 
     def _confirm_replace(self):
         if not self._commit_pending_input():
@@ -2343,6 +2564,8 @@ class AuthorMainWindow(QMainWindow):
         if self._committing_input:
             return True
         field = QApplication.focusWidget()
+        if field is self.selection_name:
+            return self._commit_selection_name()
         while field is not None and field is not self and not isinstance(field, QAbstractSpinBox):
             field = field.parentWidget()
         if not isinstance(field, QAbstractSpinBox) or not self.isAncestorOf(field):
@@ -2355,15 +2578,41 @@ class AuthorMainWindow(QMainWindow):
             field.setFocus()
             return False
         errors_before = self._command_errors
+        raw_text = field.lineEdit().text()
         self._committing_input = True
         try:
             field.interpretText()
             field.editingFinished.emit()
             # Native dialogs must not commit another edit after a snapshot was taken.
-            field.clearFocus()
+            if self._command_errors == errors_before:
+                field.clearFocus()
+            else:
+                # A rejected domain command refreshes its restored snapshot. Keep
+                # the author's rejected input visible so it can be corrected.
+                field.lineEdit().setText(raw_text)
+                field.setFocus()
         finally:
             self._committing_input = False
         return self._command_errors == errors_before
+
+    def _commit_selection_name(self):
+        if self._updating or self.selected_surface not in self.project.surfaces:
+            return True
+        raw = self.selection_name.text()
+        if raw == self.project.surfaces[self.selected_surface].name:
+            return True
+        errors_before = self._command_errors
+        self.run(lambda: self.controller.execute(
+            "Pojmenovat plochu",
+            lambda project: rename_author_entities(
+                project, surface_id=self.selected_surface, surface_name=raw
+            ),
+        ))
+        if self._command_errors != errors_before:
+            self.selection_name.setText(raw)
+            self.selection_name.setFocus()
+            return False
+        return True
 
     def closeEvent(self, event):
         if self._confirm_replace():

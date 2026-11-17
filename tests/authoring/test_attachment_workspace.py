@@ -319,6 +319,7 @@ def test_same_project_reopen_frames_paper_but_ordinary_refresh_preserves_authors
     monkeypatch.setattr(QFileDialog, "getOpenFileName", lambda *args: (str(source), ""))
     window.open_project()
     window.show()
+    qtbot.mouseClick(window.workspace_bar.buttons["Stránky"], Qt.MouseButton.LeftButton)
     qtbot.wait(50)
     window.paper.resetTransform()
     window.paper.scale(20, 20)

@@ -19,6 +19,281 @@ from archpapercraft.ui.author_window import AuthorMainWindow
 pytestmark = pytest.mark.ui
 
 
+def switch_workspace(qtbot, window, context):
+    qtbot.mouseClick(window.workspace_bar.buttons[context], Qt.MouseButton.LeftButton)
+    qtbot.wait(5)
+
+
+def test_activity_context_preserves_document_selection_history_and_placements(window, qtbot):
+    from pathlib import Path
+
+    import archpapercraft.ui.author_window as module
+
+    assert Path(module.__file__).resolve() == (
+        Path(__file__).resolve().parents[2] / "src/archpapercraft/ui/author_window.py"
+    )
+    sid = arrange_rectangle(window)
+    before = deepcopy(window.project.to_dict())
+    history = len(window.controller._undo)
+    selection = (window.selected_surface, window.selected_profile, window.selected_vertex)
+    window.resize(1366, 768)
+    assert window.width() == 1366
+    assert window.viewport.isVisible() and not window.sketch.isVisible()
+    assert not window.paper.isVisible()
+    for context in ("Spoje a rozvin", "Stránky", "Export", "Modelování"):
+        switch_workspace(qtbot, window, context)
+        assert window.workspace_context == context
+        assert window.project.to_dict() == before
+        assert len(window.controller._undo) == history
+        assert (window.selected_surface, window.selected_profile,
+                window.selected_vertex) == selection
+        assert window.viewport.selected_surfaces == {sid}
+        assert window.paper.selected_part == window.selected_part
+    assert window.section_containers["Bod obrysu"].isVisible()
+    assert not window.section_containers["Hrany, spoj a chlopeň"].isVisible()
+    assert window.actions["export"].isVisible()  # Advanced menus remain available.
+    assert not window.toolbar_actions["export"].isVisible()
+
+
+@pytest.mark.parametrize("raw", ["", "-"])
+def test_rejected_context_restores_visible_mode_and_raw_edit(window, qtbot, raw):
+    arrange_rectangle(window)
+    before = deepcopy(window.project.to_dict())
+    field = window.vertex_x
+    field.setFocus()
+    field.lineEdit().selectAll()
+    field.lineEdit().setText(raw)
+    assert not field.hasAcceptableInput()
+    switch_workspace(qtbot, window, "Stránky")
+    assert window.workspace_context == "Modelování"
+    assert window.workspace_bar.buttons["Modelování"].isChecked()
+    assert not window.workspace_bar.buttons["Stránky"].isChecked()
+    assert field.lineEdit().text() == raw
+    assert field.hasFocus()
+    assert window.project.to_dict() == before
+    assert window._test_warnings
+    field.lineEdit().setText("0")  # Leave a valid field for teardown.
+
+
+def test_switch_commits_valid_pending_edit_and_rejects_invalid_geometry(window, qtbot):
+    sid = arrange_rectangle(window)
+    window.vertex_choice.setCurrentIndex(1)
+    vertex_id = window.selected_vertex[1]
+    window.vertex_x.setFocus()
+    window.vertex_x.lineEdit().selectAll()
+    qtbot.keyClicks(window.vertex_x, "11")  # Default units are metres.
+    switch_workspace(qtbot, window, "Stránky")
+    assert profile_of(window, sid).vertex(vertex_id).point == [11000.0, 0.0]
+    assert window.workspace_context == "Stránky"
+    window.actions["undo"].trigger()
+    assert profile_of(window, sid).vertex(vertex_id).point == [10000.0, 0.0]
+    switch_workspace(qtbot, window, "Modelování")
+    window.vertex_x.setFocus()
+    window.vertex_x.lineEdit().selectAll()
+    qtbot.keyClicks(window.vertex_x, "0")  # Coincident vertex is rejected by the command.
+    switch_workspace(qtbot, window, "Export")
+    assert window.workspace_context == "Modelování"
+    assert window.vertex_x.lineEdit().text().startswith("0")
+    assert profile_of(window, sid).vertex(vertex_id).point == [10000.0, 0.0]
+
+
+def test_active_fit_and_refresh_preserve_other_cameras(window, qtbot):
+    arrange_rectangle(window)
+    switch_workspace(qtbot, window, "Stránky")
+    window.paper.scale(1.7, 1.7)
+    paper_transform = window.paper.transform()
+    window.viewport.span = 12345
+    window.viewport.pan[:] = [31, 42]
+    window.refresh()
+    qtbot.wait(5)
+    assert window.paper.transform() == paper_transform
+    assert window.viewport.span == 12345 and list(window.viewport.pan) == [31, 42]
+    window.paper.setFocus()
+    window.focus_all()
+    assert window.paper.transform() != paper_transform
+    assert window.viewport.span == 12345
+    switch_workspace(qtbot, window, "Modelování")
+    paper_transform = window.paper.transform()
+    window.viewport.setFocus()
+    window.focus_selection()
+    assert window.viewport.span != 12345
+    assert window.paper.transform() == paper_transform
+    window.actions["draw"].trigger()
+    assert window.sketch.isVisible() and window.sketch.drawing
+    window.actions["cancel"].trigger()
+
+
+def test_inline_surface_name_uses_history_and_context_validation(window, qtbot):
+    sid = arrange_rectangle(window)
+    original = window.project.surfaces[sid].name
+    window.selection_name.setFocus()
+    window.selection_name.selectAll()
+    qtbot.keyClicks(window.selection_name, "Vlastni severni stena")
+    switch_workspace(qtbot, window, "Spoje a rozvin")
+    assert window.project.surfaces[sid].name == "Vlastni severni stena"
+    window.actions["undo"].trigger()
+    assert window.project.surfaces[sid].name == original
+    window.actions["redo"].trigger()
+    assert window.project.surfaces[sid].name == "Vlastni severni stena"
+    window.selection_name.setFocus()
+    window.selection_name.selectAll()
+    qtbot.keyClick(window.selection_name, Qt.Key.Key_Backspace)
+    switch_workspace(qtbot, window, "Export")
+    assert window.workspace_context == "Spoje a rozvin"
+    assert window.selection_name.text() == ""
+    assert window.project.surfaces[sid].name == "Vlastni severni stena"
+    window.selection_name.setText("Vlastni severni stena")
+
+
+def test_problem_navigation_validates_raw_then_focuses_actual_unplaced_part(window, qtbot):
+    sid = arrange_rectangle(window)
+    before = deepcopy(window.project.to_dict())
+    window.vertex_x.setFocus()
+    window.vertex_x.lineEdit().setText("-")
+    qtbot.mouseClick(window.problems.primary, Qt.MouseButton.LeftButton)
+    assert window.workspace_context == "Modelování"
+    assert window.vertex_x.lineEdit().text() == "-"
+    assert window.project.to_dict() == before
+    window.vertex_x.lineEdit().setText("0")
+    qtbot.keyClick(window, Qt.Key.Key_F8)
+    assert window.issues.isVisible() and window.issues.hasFocus()
+    qtbot.keyClick(window.issues, Qt.Key.Key_Return)
+    assert window.workspace_context == "Stránky"
+    assert window.selected_surface == sid
+    assert window.project.to_dict() == before  # Navigation never packs or changes layout.
+
+
+def test_responsive_properties_keep_complete_labels_and_values(window, qtbot):
+    from PySide6.QtWidgets import QFormLayout, QScrollArea
+
+    arrange_rectangle(window)
+    window.resize(1366, 768)
+    switch_workspace(qtbot, window, "Spoje a rozvin")
+    scroll = window.properties_dock.findChild(QScrollArea)
+    window.resizeDocks([window.properties_dock], [300], Qt.Orientation.Horizontal)
+    qtbot.wait(10)
+    scroll.ensureWidgetVisible(window.edge_choice)
+    assert scroll.horizontalScrollBar().maximum() == 0
+    assert window.edge_choice.isVisible()
+    label = window.edge_form.labelForField(window.edge_choice)
+    assert label.wordWrap() and label.isVisible()
+    assert scroll.viewport().rect().contains(label.mapTo(scroll.viewport(), QPoint(0, 0)))
+    assert window.edge_form.rowWrapPolicy() == QFormLayout.RowWrapPolicy.WrapLongRows
+    assert not window.section_containers["Profil a křivky"].isVisible()
+    assert not window.sections["Autorské spoje a záložky"][1].isVisible()
+    qtbot.mouseClick(window.sections["Autorské spoje a záložky"][0], Qt.MouseButton.LeftButton)
+    qtbot.wait(5)
+    assert window.sections["Autorské spoje a záložky"][1].isVisible()
+    assert scroll.horizontalScrollBar().maximum() == 0
+
+
+def test_two_walls_activity_edit_joint_tab_two_pages_save_open_and_vectors(
+    window, qtbot, tmp_path, monkeypatch
+):
+    """Real dialog/widget commands and IO; no native or novice-user claim."""
+    import re
+    import xml.etree.ElementTree as ET
+
+    from pypdf import PdfReader
+    from PySide6.QtWidgets import QDoubleSpinBox
+
+    from archpapercraft.authoring import load_project
+
+    window.units.setCurrentIndex(window.units.findData(1))
+    window.plane.setCurrentIndex(window.plane.findData("XZ"))
+
+    def rectangle(width):
+        def accept():
+            dialog = QApplication.activeModalWidget()
+            fields = dialog.findChildren(QDoubleSpinBox)
+            fields[0].setValue(width)
+            fields[1].setValue(6000)
+            dialog.accept()
+        QTimer.singleShot(0, accept)
+        window.actions["rectangle"].trigger()
+        return window.selected_surface
+
+    first, second = rectangle(10000), rectangle(8000)
+    assert len(window.project.surfaces) == 2
+    window.select_surface(first)
+    window.vertex_choice.setCurrentIndex(1)
+    set_number(qtbot, window.vertex_x, "11000")
+    assert profile_of(window, first).vertices[1].point == [11000, 0]
+    window.actions["undo"].trigger()
+    window.actions["redo"].trigger()
+    # Keep both connecting vertical edges exactly 6000 mm long.
+    window.vertex_choice.setCurrentIndex(2)
+    set_number(qtbot, window.vertex_x, "11000")
+    switch_workspace(qtbot, window, "Spoje a rozvin")
+    window.select_edge(first, profile_of(window, first).segments[1].id)
+    qtbot.mouseClick(window.connect_button, Qt.MouseButton.LeftButton)
+    QTimer.singleShot(0, lambda: QApplication.activeModalWidget().accept())
+    window.select_edge(second, profile_of(window, second).segments[3].id)
+    assert len(window.project.joints) == 1
+    joint_id = next(iter(window.project.joints))
+    window.tab_owner.setCurrentIndex(window.tab_owner.findData(first))
+    set_number(qtbot, window.tab_width, "3")
+    assert window.project.joints[joint_id].connector_id
+    window.actions["recompute"].trigger()
+    assert all(not part.stale for part in window.project.parts.values())
+    switch_workspace(qtbot, window, "Stránky")
+    window.add_page()
+    for index, sid in enumerate((first, second)):
+        window.select_surface(sid)
+        window.page_choice.setCurrentIndex(window.page_choice.findData(window.project.pages[index].id))
+        set_number(qtbot, window.paper_x, "30")
+        set_number(qtbot, window.paper_y, "40")
+    assert len(window.project.pages) == 2
+    path = tmp_path / "two-walls.apcraft"
+    monkeypatch.setattr(QFileDialog, "getSaveFileName", lambda *a, **k: (str(path), ""))
+    assert window.save_project()
+    saved = deepcopy(window.project.to_dict())
+    window.new_project()
+    assert not window.project.surfaces
+    monkeypatch.setattr(QFileDialog, "getOpenFileName", lambda *a, **k: (str(path), ""))
+    window.open_project()
+    assert window.project.to_dict() == saved == load_project(path).to_dict()
+    qtbot.wait(10)
+    # A new project is framed after Open, even when paper was hidden at load time.
+    switch_workspace(qtbot, window, "Export")
+    window.show_problems()
+    for row in range(window.issues.count()):
+        window.issues.setCurrentRow(row)
+        if window.ack_button.isEnabled():
+            qtbot.mouseClick(window.ack_button, Qt.MouseButton.LeftButton)
+    for page_id in window.paper.page_origins:
+        assert page_id in {page.id for page in window.project.pages}
+    output = tmp_path / "vectors"
+    output.mkdir()
+    monkeypatch.setattr(QMessageBox, "question", lambda *a, **k: QMessageBox.StandardButton.Ok)
+    monkeypatch.setattr(QMessageBox, "information", lambda *a, **k: None)
+    monkeypatch.setattr(QFileDialog, "getExistingDirectory", lambda *a, **k: str(output))
+    window.actions["export"].trigger()
+    assert len(list(output.glob("*.svg"))) == 2, window._test_warnings
+    assert len(list(output.glob("*.pdf"))) == 1
+    ns = {"s": "http://www.w3.org/2000/svg"}
+    areas, folds = [], []
+    for svg in output.glob("*.svg"):
+        root = ET.parse(svg).getroot()
+        assert root.attrib["viewBox"] == "0 0 210 297"
+        for path in root.findall(".//s:g[@data-role='CUT']/s:path", ns):
+            values = list(map(float, re.findall(r"[-+]?\d+(?:\.\d+)?", path.attrib["d"])))
+            points = list(zip(values[::2], values[1::2]))
+            areas.append(abs(sum(a[0]*b[1] - a[1]*b[0]
+                                 for a, b in zip(points, points[1:] + points[:1]))) / 2)
+        for path in root.findall(".//s:g[@data-role='FOLD_MOUNTAIN']/s:path", ns):
+            x1, y1, x2, y2 = map(float, re.findall(r"[-+]?\d+(?:\.\d+)?", path.attrib["d"]))
+            folds.append(((x2-x1)**2 + (y2-y1)**2)**0.5)
+    # Two own walls 110×60 and 80×60; tapered 3 mm tab has bases 60 and 36.
+    assert sorted(areas) == pytest.approx([4800, 6600 + 3*(60+36)/2])
+    assert folds == pytest.approx([60])
+    pdf = PdfReader(output / "model.pdf")
+    assert len(pdf.pages) == 2
+    assert all(float(page.mediabox.width) * 25.4 / 72 == pytest.approx(210)
+               for page in pdf.pages)
+    assert not window._test_warnings
+
+
 def test_contextual_delete_preserves_sketch_and_is_one_reversible_command(window, qtbot):
     from PySide6.QtWidgets import QApplication
 
@@ -393,6 +668,8 @@ def test_invalid_hole_retains_editable_draft_and_escape_preserves_prior_project(
 
 def test_stable_vertex_drag_is_undoable_and_does_not_implicitly_recompute(window, qtbot):
     sid = arrange_rectangle(window)
+    qtbot.mouseClick(window.workspace_bar.sketch_button, Qt.MouseButton.LeftButton)
+    qtbot.wait(10)
     profile = profile_of(window, sid)
     vertex = profile.vertices[2]
     identity, pid = vertex.id, window.selected_part
