@@ -39,3 +39,88 @@ Dosavadní nové negativní komponenty používají výslovné dependency callba
 Předchozí [69 PASS / 4 deselected / 51,90 s](evidence/pc008-curved-subdivision-ui-before-core.xml) je průběžný nepřipnutý běh před doplněním valid-context regrese a její opravou; nedokazuje finální WIP source.
 
 Skills: konstrukce — zachování skutečného obrysu a původního zdroje místo nového fitu; UI — měřené jednotky, viditelný bod, C05 a SK013 přímo v příkazu; verification — nezávislé analytické očekávání a oddělení callback/native/novice důkazu; delivery — izolace, WIP source freeze a návrat k pozitivům po doménovém pinu. Otevřené pozitivy ani integrace se neoznačují PASS. Nativní Windows/editor ověření patří rootovi; AC-US08 nový uživatel **0 / NOT_RUN**, fyzické P3 **NOT_RUN**.
+
+## Nezávislá komponentová revize 17. 11. 2026
+
+Reviewer `editor_review`, jiný agent než autor UI. Posouzeny změny
+`411d137f54187e1ff5bd9d53ee8449f949e42ce6` + `7ef51beddeb86b1ba5d31be8277803458bd4a9fb`
+v `author_subdivision.py`, `author_window.py` a příslušných testech proti
+`8f1ec6382d527c719133958e7eb6f78a724ef5d5`. Ověřený snapshot
+`1b8037a6266dcd5d849bbddf0044b8ee8d4bb963` je bezkonfliktní merge UI předání
+`406fa6f` a core R01 předání `6064f222`; nejde o finální root integrační pin.
+[Importy a SHA-256 skutečných zdrojů](evidence/curved-ui-review-20261117-binding.json)
+ukazují vlastní izolovaný worktree mimo `projects`, explicitní `PYTHONPATH`
+a Qt offscreen. Reviewer produkci, queue ani skills neměnil.
+
+**APPROVED_IN_CURVED_SUBDIVISION_UI_COMPONENT_SCOPE, 0 otevřených nálezů v tomto rozsahu.**
+Čtením zdroje ověřeno oddělení worker snapshotu od živého dokumentu, token a
+fingerprint při publikaci i host apply, jediný aktivní a poslední pending request,
+invalidace při rozepsaném textu, Cancel/close bez čekání na výpočet a zachování
+jediného controller příkazu. Akce vychází ze skutečné LINE/ARC/CUBIC volby;
+odmítnutý pending vstup vrací viditelný kontext a neschovává chybný text.
+
+- Původních 18 curved-subdivision případů: **18 PASS / 16,71 s**,
+  [JUnit](evidence/curved-ui-review-20261117-baseline.xml). Zahrnují skutečný
+  public core, měřený ARC/CUBIC parametr, inverse merge, Undo/Redo, přepočet,
+  frame/layout/oba locks, save/open, C05 i vadné odpovědi.
+- Relevantní předchozí LINE/C/curve/loft/segmentation workspace regrese:
+  **59 PASS / 50,21 s**, [JUnit](evidence/curved-ui-review-20261117-regressions.xml).
+- Vlastních 7 skutečných public-core/UI případů: **7 PASS / 8,49 s**,
+  [testy](../../../tests/authoring/test_curved_subdivision_review.py),
+  [JUnit](evidence/curved-ui-review-20261117-own-formatted.xml). Řízené zdržení
+  stále volá původní `_curve_preview`, nenahrazuje solver packetem: ARC i CUBIC
+  zahodí počáteční a prostřední request při zadání 3→7 mm a Accept před dokončením;
+  analytický oracle ověří skutečně potvrzených 7 mm. Oba typy zachovají GUI
+  heartbeat, Cancel a dokument přes pozdní skutečný výsledek. Neplatné rozepsané
+  číslo po platném náhledu nic nepotvrdí. Skutečné kreslicí circle UI rozdělí
+  druhý ARC a ponechá nový vertex ve výběru i viditelných vlastnostech.
+- Ruff vlastních testů a `git diff --check` PASS. Běhy se nepřičítají k historickým
+  111 ani k jiným překrývajícím se sadám.
+
+Skills se uplatnily konkrétně: konstrukce — měření po původním analytickém zdroji;
+UI — pending input, viditelný výběr a bezpečný Cancel; verification — skutečný
+solver pod řízeným zpožděním a nezávislá kubická délka; delivery — přesný snapshot
+a omezený verdikt jiného agenta. Toto potvrzuje technické komponenty příkazu,
+nikoli osvojitelnost začátečníkem. Finální integrovaný commit, nativní Windows
+ARC/CUBIC workflow přes export, nový uživatel AC-US08 a fyzické P3 nejsou tímto
+review schváleny a vyžadují vlastní důkazy.
+
+### Následná revize harnessu a přenosu poučení na 6969069
+
+Reviewer `editor_review` posoudil přesný root snapshot
+`696906954f3e6863a6c945a1afc0d62f9d60f769`. Jediná nová změna nástroje
+`subdivision_desktop_steps.py` čte v obou místech `SurfaceFeature.params`,
+jak tuto entitu skutečně deklaruje `model.py`. Původní
+[native FAIL](evidence/au13-arc-native-5415e2-run01/results.json) explicitně končí
+na neexistujícím atributu `parameters`. **APPROVED_IN_HARNESS_OBSERVATION_FIX_SCOPE**:
+oprava nepřepisuje parametry konstrukce a není opravou geometrie. Původní FAIL
+zůstává. Úspěch opakovaného nativního průchodu se z této source revize neodvozuje.
+
+Nové dva odstavce `papercraft-verification/SKILL.md` odpovídají konkrétním
+příčinám doloženým v CORE9 checkpointu a replay evidenci: pozdní přepsání
+`sys.path` v `tests/conftest.py`, záměna všech historických ID za aktivní
+replay autoritu a vynechaná kontrola při prázdném detached registru. Rada žádá
+skutečnou import kontrolu ve vykonávajícím procesu a přenos negativu přes writer,
+zachovává legitimní orphan/UNRESOLVED a nepožaduje novou historii pro platné
+legacy profily bez descriptoru. **APPROVED_IN_SK008_FOLLOWUP_AND_SK016_TEXT_SCOPE**.
+U obou nově zpřesněných postupů je správné ponechat účinnost
+**PENDING_NEXT_USE**; revize textu není jeho další použití ani finální doménové
+schválení. `SK-016.reason.source` v tomto pinu odkazuje na dosud nepřevzatý
+`AU13_CORE9_APPLICATION_REVIEW.md`; finální integrace musí převzít skutečný
+review report nebo odkaz přesměrovat na existující checkpoint.
+
+Přenos zpřesněného SK013 do volby zdrojové křivky byl zvlášť proveden nad
+skutečnými offscreen widgety na tomto pinu:
+[**2 PASS / 16 deselected / 1,37 s**](evidence/sk013-curved-context-review-6969069.xml).
+Při neplatném rozepsaném rozměru zůstává původní curve combobox, profil, hrana,
+vertex i strom a raw `-` lze opravit. Při platném rozepsaném rozměru se změna
+nejprve uloží jediným controller příkazem, pak zůstává požadovaný nový segment
+a jeho výchozí vertex, namísto kontextu předchozího refreshu. Import
+`author_window.__file__` byl explicitně ověřen ve vlastním `src`.
+
+Pro SK013 lze pravdivě doplnit další úzký přenos
+**VERIFIED_TECHNICALLY_IN_CURVED_SOURCE_CHOICE_VALID_AND_REJECTED_INPUT_SCOPE**,
+schválení zpřesněného textu v tomto rozsahu a odkaz na tento report/JUnit.
+Historické CUI01 selhání i následná oprava se zachovají; širší účinnost zůstává
+PENDING_NEXT_USE, nový člověk 0/NOT_RUN a fyzické P3 NOT_RUN. Reviewer neměnil
+queue, skills ani produkční zdroje a nevyslal žádný nativní desktopový vstup.

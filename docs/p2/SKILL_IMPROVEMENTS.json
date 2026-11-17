@@ -370,6 +370,14 @@
       "next_use": {
         "status": "NOT_RUN",
         "ticket": "PC-006B"
+      },
+      "followup_2026_11_17": {
+        "problem": "Historical LINE replay imported correct source before pytest; conftest then inserted another checkout.",
+        "cause_evidence": "docs/p2/implementation/evidence/core9-line-pre72-DISQUALIFIED.xml",
+        "correction": "Retain disqualified result; verify __file__ and Git bytes inside clean replay subprocess.",
+        "verification": "docs/p2/implementation/evidence/core9-line-source-pinned.json",
+        "skill_text_review": "PENDING_FINAL_CANDIDATE_REVIEW",
+        "next_use_effectiveness": "PENDING_NEXT_USE_FOR_REFINED_ADVICE"
       }
     },
     {
@@ -725,6 +733,43 @@
         "product_correction_source": "d5a62d1; rebuild_curved_material_binding carries scoped history and resolves complete historical frame axis/anchor",
         "verification": "50 targeted PASS including real C status/material roundtrip with retired foreign-frame axis; independent reviewer own source cases performed, final report pending",
         "broader_efficacy": "PENDING_NEXT_USE; no new-user or physical claim"
+      }
+    },
+    {
+      "id": "SK-016",
+      "changed_on": "2026-11-17",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/AU13_CORE9_APPLICATION_REVIEW.md",
+        "problem": "Retired root/children were accepted as live descriptors; empty detached history skipped authoritative replay."
+      },
+      "cause": {
+        "status": "INDEPENDENTLY_REPRODUCED",
+        "mechanism": "Historical ID union used as active authority; detached context conditionally validated only truthy registry.",
+        "evidence": [
+          "docs/p2/implementation/CORE9_R01_CHECKPOINT.md"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_INDEPENDENT_FINAL_REVIEW_IN_PROGRESS",
+        "source_sha": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
+        "detached_fix_sha": "3e6fbb636f57d394ca0e5433553dc394e1b9379e"
+      },
+      "skill_change": "Compare current replay owner rather than historical ID membership; replay omission through the actual detached writer while preserving legitimate orphan history.",
+      "usage_example": "ARC/CUBIC retired ROOT/left/right +None and counterfeit descriptors; clear detached history and regenerate declared digests, then assert writer refusal and preservation of existing bundle.",
+      "verification": {
+        "status": "DOMAIN_AND_WRITER_INDEPENDENT_REPLAY_PASS_FINAL_CANDIDATE_PENDING",
+        "evidence": [
+          "docs/p2/implementation/AU13_CORE9_APPLICATION_REVIEW.md",
+          "docs/p2/implementation/CORE9_R01_CHECKPOINT.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PENDING_SKILL_TEXT_AND_FINAL_CANDIDATE_REVIEW"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN"
       }
     }
   ]

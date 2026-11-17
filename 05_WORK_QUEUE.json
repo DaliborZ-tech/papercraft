@@ -1120,41 +1120,53 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
+          "status": "APPLIED_COMPONENT_REVIEW_PASSED_FINAL_NATIVE_AND_INTEGRATION_PENDING",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance; CORE9 continuation: active replay authority, typed measured split/merge with source/anchor/manual-layout preservation; independent original/fix replay and detached writer negatives.",
           "evidence": [
             "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
-            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+            "docs/p2/implementation/AU13_CORE9_APPLICATION_REVIEW.md",
+            "docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md",
+            "docs/p2/implementation/CORE9_R01_CHECKPOINT.md"
           ],
           "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
+          "status": "APPLIED_COMPONENT_REVIEW_PASSED_FINAL_NATIVE_AND_INTEGRATION_PENDING",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance; CORE9 continuation: active replay authority, typed measured split/merge with source/anchor/manual-layout preservation; independent original/fix replay and detached writer negatives.",
           "evidence": [
             "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
-            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+            "docs/p2/implementation/AU13_CORE9_APPLICATION_REVIEW.md",
+            "docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md",
+            "docs/p2/implementation/CORE9_R01_CHECKPOINT.md"
           ],
           "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         },
         {
           "skill": "papercraft-verification",
-          "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
+          "status": "APPLIED_COMPONENT_REVIEW_PASSED_FINAL_NATIVE_AND_INTEGRATION_PENDING",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance; CORE9 continuation: active replay authority, typed measured split/merge with source/anchor/manual-layout preservation; independent original/fix replay and detached writer negatives.",
           "evidence": [
             "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
-            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+            "docs/p2/implementation/AU13_CORE9_APPLICATION_REVIEW.md",
+            "docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md",
+            "docs/p2/implementation/CORE9_R01_CHECKPOINT.md"
           ],
           "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         },
         {
           "skill": "papercraft-delivery",
-          "status": "IN_USE",
-          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance",
+          "status": "APPLIED_COMPONENT_REVIEW_PASSED_FINAL_NATIVE_AND_INTEGRATION_PENDING",
+          "decision": "Retain original nonexact target and author layout, explicit approximate generation and contextual UI, closed source-to-actual vector verification, independently reviewed components with actual native/editor evidence; live LINE preserves full historical hinge/semantic paper frame, rejects unsafe numerical physical references and keeps source/edit/undo provenance; CORE9 continuation: active replay authority, typed measured split/merge with source/anchor/manual-layout preservation; independent original/fix replay and detached writer negatives.",
           "evidence": [
             "docs/p2/implementation/PC008_SEGMENTED_DELIVERY.md",
-            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md"
+            "docs/p2/implementation/PC008_LINE_SUBDIVISION_DELIVERY.md",
+            "docs/p2/implementation/AU13_CORE9_APPLICATION_REVIEW.md",
+            "docs/p2/implementation/PC008_CURVED_SUBDIVISION_UI.md",
+            "docs/p2/implementation/CORE9_R01_CHECKPOINT.md"
           ],
           "review": "D/B3 published and independently reviewed at e782; LINE24e with metadata93f650c and its actual native/editor artifacts independently approved by commands_review; broader skills efficacy/new-user/whole AU13 remain pending"
         }

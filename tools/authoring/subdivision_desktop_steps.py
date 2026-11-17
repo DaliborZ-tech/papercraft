@@ -49,7 +49,7 @@ class SubdivisionDesktopSteps:
         part_id = self.w.project.part_for_surface(loft)
         frame = copy.deepcopy(self.w.project.parts[part_id].frame)
         placements = copy.deepcopy(self.w.project.placements)
-        params = copy.deepcopy(self.w.project.surfaces[loft].parameters)
+        params = copy.deepcopy(self.w.project.surfaces[loft].params)
         source_ids = self.w.project.surfaces[loft].source_profile_ids()
         self.select(loft)
         self.data(self.w.curve_choice, (first, root))
@@ -111,7 +111,7 @@ class SubdivisionDesktopSteps:
             p = self.w.project
             self.check(p.parts[part_id].frame == frame and p.placements == placements,
                        label+": frame, locks or either manual placement changed")
-            self.check(p.surfaces[loft].parameters == params and
+            self.check(p.surfaces[loft].params == params and
                        p.surfaces[loft].source_profile_ids() == source_ids,
                        label+": source IDs, correspondence, seam or trim changed")
             self.check(not p.parts[part_id].stale, label+": derived loft is stale")

@@ -1,0 +1,21 @@
+{
+  "reviewer": "editor_review",
+  "source_sha": "1b8037a6266dcd5d849bbddf0044b8ee8d4bb963",
+  "parents": [
+    "406fa6f83f51bb9ebb65dc1226080f1f813d2e7f",
+    "6064f222dfa87f6c46837f11ed9da5c04a6523cb"
+  ],
+  "imports": {
+    "subdivision": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\curved-ui-review\\src\\archpapercraft\\ui\\author_subdivision.py",
+    "window": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\curved-ui-review\\src\\archpapercraft\\ui\\author_window.py"
+  },
+  "qt_platform": "offscreen",
+  "actual_file_sha256": {
+    "src/archpapercraft/ui/author_subdivision.py": "24921694e04d11ef1827500f87b503e09f1ec52982326cddd376ed4f03a6eae7",
+    "src/archpapercraft/ui/author_window.py": "f6f9d9cb911e5f0a666704f92df8d6335560cfecf0c6a9a25af11c435d0b1938",
+    "src/archpapercraft/authoring/profile_subdivision.py": "f2db87af11d658cb581a5fb0609f97ab8e42c2fcac77ef0132cd52ba045ab4b9",
+    "tests/authoring/test_curved_subdivision_workspace.py": "8e013e25d1a969be4a2cb18e9539bf7b9a968ca1e8088d0e98f2dd98bb7b6700",
+    "tests/authoring/test_curved_subdivision_review.py": "651e7a5511249830221febfc0642aa09d33faa11e4ac1243825cd14ecb48dd41"
+  },
+  "scope": "Independent curved split/merge UI component review; no desktop, native editor, new-user or physical proof"
+}
