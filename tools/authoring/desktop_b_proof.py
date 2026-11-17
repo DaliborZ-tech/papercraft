@@ -1810,6 +1810,20 @@ def run_windows(output, expected_sha, fixture="all", *, after_reopen_edit=False)
                 report["fixture_status"]["model-A"] = "RUNNING"
                 driver.building()
                 report["fixture_status"]["model-A"] = "PASS_TECHNICAL_UI"
+                if fixture == "model-A" and hasattr(window, "workspace_bar"):
+                    if window.problems.details.isChecked():
+                        driver.click(window.problems.details)
+                    driver.workspace("Modelování")
+                    if window.sketch.isVisible():
+                        driver.click(window.workspace_bar.sketch_button)
+                    driver.view_home(window.viewport)
+                    driver.capture("workspace-house-modeling")
+                    driver.workspace("Stránky")
+                    driver.view_home(window.paper)
+                    driver.capture("workspace-house-pages")
+                    driver.workspace("Export")
+                    driver.view_home(window.paper)
+                    driver.capture("workspace-house-export")
             if fixture in ("all", "mixed-part"):
                 report["fixture_status"]["mixed-part"] = "RUNNING"
                 driver.mixed()
