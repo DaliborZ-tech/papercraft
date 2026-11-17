@@ -1315,7 +1315,9 @@ class AuthorMainWindow(QMainWindow):
         self.loft_edit_button.setVisible(editable_loft)
         self.loft_edit_button.setEnabled(editable_loft)
         self.sections["Profil a křivky"][0].setVisible(enabled)
-        self.sections["Profil a křivky"][1].setVisible(enabled)
+        self.sections["Profil a křivky"][1].setVisible(
+            enabled and self.sections["Profil a křivky"][0].isChecked()
+        )
 
     def choose_curve(self):
         if self._updating or not self.curve_choice.currentData():

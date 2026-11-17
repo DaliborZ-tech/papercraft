@@ -24,6 +24,29 @@ def switch_workspace(qtbot, window, context):
     qtbot.wait(5)
 
 
+def test_profile_section_respects_collapse_across_surface_selection_and_refresh(window, qtbot):
+    from PySide6.QtWidgets import QScrollArea
+
+    first = arrange_rectangle(window)
+    second = arrange_rectangle(window, name="Druha vlastni plocha")
+    header, body = window.sections["Profil a křivky"]
+    assert header.isVisible() and not header.isChecked() and not body.isVisible()
+    window.select_surface(first)
+    window.refresh()
+    assert not header.isChecked() and not body.isVisible()
+    window.properties_dock.findChild(QScrollArea).ensureWidgetVisible(header)
+    qtbot.mouseClick(header, Qt.MouseButton.LeftButton)
+    assert header.isChecked() and body.isVisible()
+    window.select_surface(second)
+    window.refresh()
+    assert header.isChecked() and body.isVisible()
+    window.properties_dock.findChild(QScrollArea).ensureWidgetVisible(header)
+    qtbot.mouseClick(header, Qt.MouseButton.LeftButton)
+    window.select_surface(first)
+    window.refresh()
+    assert not header.isChecked() and not body.isVisible()
+
+
 def test_activity_context_preserves_document_selection_history_and_placements(window, qtbot):
     from pathlib import Path
 
