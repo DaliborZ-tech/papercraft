@@ -277,3 +277,32 @@ původních storage/controller/adapter regresí: [JUnit po opravě](../p2/implem
 Původní FAIL evidence výše zůstala zachována. Tento scoped peer verdict přijímá
 technický recovery přírůstek na uvedeném pinu; není review vlastního workspace,
 nativní použitelnostní akceptace, nový člověk ani fyzický proof.
+### DATA01 — integrace nového názvu a přesné roviny otvoru
+
+Společný frontend/recovery kandidát `bea8020` přidal `selection_name`; jeho
+rozepsaný text v čistém uloženém modelu dosavadní numeric-only capture nechránil.
+Nezávisle potvrdil identity reviewer a core9 peer; vlastní reprodukce mají
+[2 FAIL](../p2/implementation/evidence/data01-inline-name-bea8020-original-fail.xml).
+Core9 současně doložil neserializovatelný SketchPlane rozpracovaného otvoru;
+vlastní XZ/custom-plane reprodukce mají
+[2 FAIL](../p2/implementation/evidence/data01-hole-plane-9f8ed54-original-fail.xml).
+
+Opravy `9f8ed54` a finální CODE `07025ed282b187c6454a8ae08abeb626c4833217`
+mění pouze recovery adapter, bez zásahu do Window/controlleru: raw název
+včetně prázdného je oddělený od posledního platného názvu a vázaný na přesnou
+vybranou plochu; časovač jej nepotvrzuje. Rovinu otvoru zapisuje jako origin/u/v,
+ověří její platnost a přesnou shodu s profilem vlastníka a obnoví ji bez volby
+náhradní roviny. Actual hole action → QTest body → restore → další body/Enter
+vytvořilo otvor v přesně stejné XZ i vlastní posunuté rovině. Odlišná platná
+rovina, vadné osy a cizí platný vlastník raw názvu se odmítnou před výměnou práce.
+
+Připnutý in-process source/blob/import-bound běh na `07025ed`:
+**106 PASS / 0 FAIL/ERROR/SKIP, 31,08 s** (43 recovery + 63 existujících
+controller/workspace/curve/profile/segmentation/problems regresí).
+[JUnit](../p2/implementation/evidence/data01-07025ed-regression.xml),
+[raw](../p2/implementation/evidence/data01-07025ed-regression.log),
+[binding](../p2/implementation/evidence/data01-07025ed-regression-binding.json).
+Ruff/diff check PASS. Core9 neautor samostatně oznámil 48 PASS na tomto CODE
+(43 původních + 5 vlastních); jeho připnutý review report přebírá integrátor.
+Autor nepřiděluje vlastní feature schválení. Společný native GUI průchod ještě
+PENDING; původní meze DATA01 a NOT_RUN člověka/P3 zůstávají platné.
