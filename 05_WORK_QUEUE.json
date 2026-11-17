@@ -1232,7 +1232,7 @@
         "CORE9_R01": "OPEN_PENDING_INDEPENDENT_FIX_REPLAY",
         "fix_runtime": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
         "fix_handoff": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
-        "fix_verification": "8 targeted author PASS1.79s; unchanged reviewer-oracles replay and expanded counterfeit/old-artifact checks PENDING",
+        "fix_verification": "Independent replay active: original 6 FAIL +10 PASS reproduced on7c61; unchanged16 PASS on72f7/6064. Expanded counterfeit/orphan/old-artifact checks and final candidate review IN_PROGRESS.",
         "UI_handoff": "6af01c67c7555171bcdd7246cf9834c39afa8114",
         "UI_runtime": "7ef51beddeb86b1ba5d31be8277803458bd4a9fb",
         "UI_verification": "111 PASS0SKIP on original core4f, independent UI review and patched-core replay pending",
@@ -2620,9 +2620,9 @@
       ]
     }
   ],
-  "updated_on": "2026-11-11",
+  "updated_on": "2026-11-17",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
-  "working_branch": "handoff/2026-11-11",
+  "working_branch": "revival/p2-continuation-20261117",
   "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
@@ -2705,7 +2705,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "PAUSED_BY_OWNER_2026_11_11: implementation remains incomplete; accepted P2v1.2 authorization unchanged; resume next session from handoff. Published B/D/LINE; unmerged C8/CORE9, R01 and editor/scaling/final-historic proofs remain. Novice0/NOT_RUN, physicalP3/NOT_RUN.",
+  "p2_digital_delivery": "IN_PROGRESS: owner resumed P2 v1.2 on 2026-11-17. CORE9-R01 independent replay, consumer hypotheses and UI integration active; C editor/scaling, PC009/010 remain open. AC-US08 0/NOT_RUN; physical P3 NOT_RUN.",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2871,7 +2871,7 @@
       "PC-009",
       "PC-010"
     ],
-    "status": "PAUSED_BY_OWNER",
+    "status": "IN_PROGRESS",
     "new_routine_permission_required": false,
     "final_historic_model_ticket": "PC-010 / AC-AU19",
     "previous_verified": {
@@ -2881,21 +2881,18 @@
       "report": "docs/p2/implementation/PC006B_MATERIAL_REVIEW.md"
     },
     "status_before_pause": "IN_PROGRESS",
-    "paused_on": "2026-11-11",
-    "continuation_target_date": "NEXT_SESSION_NOT_SCHEDULED",
-    "pause_reason": "Owner explicitly requested documentary handoff and continuation next time.",
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-11.md",
     "wip_source_sha": "5747a2af2d70cd622de49c057544b584baa699c2",
-    "wip_branch": "revival/p2-c-integrated-authoring",
+    "wip_branch": "revival/p2-continuation-20261117",
     "next_required_technical_work": "Read CONTINUE_2026-11-11.md. Close CORE9-R01 with unchanged reviewer replay and expanded poison/orphan/old-artifact cases; investigate unproven empty-history exporter and LINE resurrection hypotheses. Merge reviewed core fix into actual UI. Independently review editor helper and replay Inkscape near page. Finish source-bound C8 metadata/integration review, then safe publication, full PC009 and own historical PC010. No routine owner approval; novice0/NOT_RUN, P3NOT_RUN.",
-    "resumed_on": "2026-11-11",
-    "resume_source": "explicit_owner_request_to_continue_according_to_handoff_and_project_rules",
+    "resumed_on": "2026-11-17",
+    "resume_source": "explicit_owner_PO_CONTINUATION_attachment_2026_11_17",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "PAUSED_BY_OWNER. C8 real native cases and source tests saved; near-editor comparator a799/b9ff needs independent review and actual replay; process scaling remains pending after safe foreground/hit-test refusal. CORE9 R01 fix72f7a16 exists with8 author tests but unchanged independent replay and broader matrix remain pending. UI6af contains old core4f; merge verified fix before further proof.",
+    "active_work": "Independent unchanged R01 replay + expanded matrix; investigate empty-history/LINE separately. Prepare corrected core/UI candidate, independently review editor comparator, then actual native GUI/editor/scaling. No full P2 claim.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3055,6 +3052,12 @@
         "pause_reason": "Owner explicitly requested finishing the current task, handoff documentation and continuation tomorrow",
         "continuation_target_date": "2026-11-10",
         "resumed_on": "2026-11-11"
+      },
+      {
+        "paused_on": "2026-11-11",
+        "pause_reason": "Owner explicitly requested documentary handoff and continuation next time.",
+        "continuation_target_date": "NEXT_SESSION_NOT_SCHEDULED",
+        "resumed_on": "2026-11-17"
       }
     ]
   }

@@ -68,17 +68,30 @@ def wheel_at(window, viewport, point, records):
         frame, cursor = wintypes.RECT(), wintypes.POINT()
         assert USER32.GetWindowRect(hwnd, ctypes.byref(frame))
         assert USER32.GetCursorPos(ctypes.byref(cursor))
-        title = wintypes.POINT((frame.left+frame.right)//2, frame.top+16)
-        assert USER32.GetAncestor(USER32.WindowFromPoint(title), 2) == hwnd, (
-            "Own title bar is obscured; refusing activation input")
+        USER32.SetWindowPos.argtypes = [wintypes.HWND, wintypes.HWND, ctypes.c_int,
+                                       ctypes.c_int, ctypes.c_int, ctypes.c_int, wintypes.UINT]
+        # Match the editor probe's verified activation: raise only our HWND,
+        # retain hit testing, and restore ordinary z-order and the cursor.
+        raised = bool(USER32.SetWindowPos(hwnd, wintypes.HWND(-1), 0, 0, 0, 0, 0x43))
         try:
+            QTest.qWait(120)
+            assert USER32.GetWindowRect(hwnd, ctypes.byref(frame))
+            title = wintypes.POINT((frame.left+frame.right)//2, frame.top+16)
+            hit = USER32.WindowFromPoint(title)
+            hit_pid = wintypes.DWORD()
+            USER32.GetWindowThreadProcessId(hit, ctypes.byref(hit_pid))
+            record["titlebar_hit"] = dict(hwnd=int(hit or 0), pid=hit_pid.value)
+            assert hit_pid.value == os.getpid() and USER32.GetAncestor(hit, 2) == hwnd, (
+                "Own title bar is obscured; refusing activation input")
             assert USER32.SetCursorPos(title.x, title.y)
-            assert USER32.GetAncestor(USER32.WindowFromPoint(title), 2) == hwnd
+            assert USER32.WindowFromPoint(title) == hit
             USER32.mouse_event(0x0002, 0, 0, 0, 0)
             USER32.mouse_event(0x0004, 0, 0, 0, 0)
             QTest.qWait(100)
             record["verified_titlebar_activation"] = [title.x, title.y]
         finally:
+            if raised:
+                USER32.SetWindowPos(hwnd, wintypes.HWND(-2), 0, 0, 0, 0, 0x43)
             USER32.SetCursorPos(cursor.x, cursor.y)
     record["foreground_after_activation"] = int(USER32.GetForegroundWindow() or 0)
     assert USER32.GetForegroundWindow() == hwnd, (

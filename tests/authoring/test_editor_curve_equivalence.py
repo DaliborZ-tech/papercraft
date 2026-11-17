@@ -182,7 +182,8 @@ def test_unknown_path_characters_do_not_disappear_in_parser():
         probe._same_path("M 0 0 L 10 0", "M 0 0 ! L 10 0")
 
 
-@pytest.mark.parametrize("damage", ["nested_scale", "role", "units", "css", "extra_geometry"])
+@pytest.mark.parametrize("damage", ["nested_scale", "role", "units", "css", "extra_geometry",
+                                    "stylesheet", "css_rotate", "css_escaped", "css_comment"])
 def test_actual_xml_frame_guard_rejects_hidden_operator_role_or_unit_changes(damage):
     root = ET.Element(
         "{" + probe.NS["s"] + "}svg",
@@ -209,6 +210,16 @@ def test_actual_xml_frame_guard_rejects_hidden_operator_role_or_unit_changes(dam
         edited.set("width", "210px")
     elif damage == "css":
         edited[0][0].set("style", "transform:scale(1)")
+    elif damage == "stylesheet":
+        ET.SubElement(edited, "{" + probe.NS["s"] + "}style").text = (
+            "#path-CUT {transform:rotate(180deg);transform-origin:5px 5px;}"
+        )
+    elif damage == "css_rotate":
+        edited[0][0].set("style", "rotate:180deg")
+    elif damage == "css_escaped":
+        edited[0][0].set("style", r"tr\61nsform:rotate(180deg)")
+    elif damage == "css_comment":
+        edited[0][0].set("style", "trans/**/form:rotate(180deg)")
     else:
         ET.SubElement(edited, "{" + probe.NS["s"] + "}rect")
     with pytest.raises(AssertionError):

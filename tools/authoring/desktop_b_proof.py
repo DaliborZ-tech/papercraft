@@ -1230,6 +1230,8 @@ def run_windows(output, expected_sha, fixture="all"):
                 self.audit_segmentation_vectors(directory, svgs, pdf)
             if name == "AU13-line":
                 self.audit_subdivision_vectors(directory, svgs, pdf)
+            if name in ("AU13-arc", "AU13-cubic"):
+                self.audit_curved_subdivision_vectors(directory, svgs, pdf)
             if name.startswith("C-"):
                 self.audit_circular_vectors(directory, svgs, pdf)
             step(
@@ -1762,6 +1764,10 @@ def run_windows(output, expected_sha, fixture="all"):
                 report["fixture_status"][fixture] = "RUNNING"
                 driver.subdivision_case()
                 report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
+            if fixture in ("AU13-arc", "AU13-cubic"):
+                report["fixture_status"][fixture] = "RUNNING"
+                driver.curved_subdivision_case(fixture)
+                report["fixture_status"][fixture] = "PASS_TECHNICAL_UI"
             if fixture.startswith("C-"):
                 report["fixture_status"][fixture] = "RUNNING"
                 driver.circular_case(fixture)
@@ -1854,7 +1860,7 @@ def main():
     parser.add_argument(
         "--fixture",
         choices=["all", "model-A", "mixed-part", "curves-planar", "loft-B1", "loft-B2",
-                 "loft-Bezier", "D-segmented", "D-gothic", "AU13-line",
+                 "loft-Bezier", "D-segmented", "D-gothic", "AU13-line", "AU13-arc", "AU13-cubic",
                  "C-cylinder", "C-cone", "C-near"],
         default="all",
         help="A partial checkpoint never replaces the full A+mixed proof",

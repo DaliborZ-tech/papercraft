@@ -128,6 +128,13 @@ def _same_path(before, after, *, output=None, identity=None):
 
 
 def _part_frame_checks(original, final):
+    # Path tokens and even unchanged editor bboxes cannot reveal a stylesheet
+    # rotating an asymmetric cut inside the same box. This bounded proof does
+    # not implement the CSS cascade, so neither input may carry a stylesheet.
+    for root in (original, final):
+        assert not any(node.tag.rsplit("}", 1)[-1] == "style" for node in root.iter()), (
+            "Stylesheet geometry is outside the certified editor frame contract"
+        )
     assert all(
         original.attrib.get(key) is not None and original.attrib[key] == final.attrib.get(key)
         for key in ("width", "height", "viewBox")
@@ -162,7 +169,14 @@ def _part_frame_checks(original, final):
             "An extra or lost rendered geometry type appeared: " + tag
         )
     for node in final.iter():
-        assert not re.search(r"(?:^|;)\s*transform\s*:", node.attrib.get("style", ""), re.I)
+        style = node.attrib.get("style", "")
+        assert not any(marker in style for marker in ("\\", "/*", "*/")), (
+            "Escaped or commented CSS is outside the certified editor frame contract"
+        )
+        assert not re.search(
+            r"(?:^|;)\s*(?:transform(?:-origin|-box)?|translate|rotate|scale|offset-[\w-]+|"
+            r"d|x|y|cx|cy|r|rx|ry|width|height|all)\s*:", style, re.I
+        ), "CSS geometry is outside the certified editor frame contract"
         if node.attrib.get("id") in before:
             continue
         transform = node.attrib.get("transform", "")
