@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="5" time="2.194" timestamp="2026-11-17T17:49:31.068750+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.au13-topology-order-own" name="test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[0-False]" time="0.892" /><testcase classname="docs.p2.implementation.evidence.au13-topology-order-own" name="test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[0-True]" time="0.017"><failure message="archpapercraft.authoring.errors.ValidationError: Zdrojový profil loftu se kříží nebo překrývá.">reverse = True, seam = 0
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1570/test_quarters_keep_independent1')
+
+    @pytest.mark.parametrize("reverse", [False, True])
+    @pytest.mark.parametrize("seam", [0, 1])
+    def test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam(
+            reverse, seam, tmp_path):
+        p = AuthorProject.new(scale=0.1)
+        a, b = quarters(p, 13, 0), quarters(p, 5, -17)
+        original_a, original_b = copy.deepcopy(p.profiles[a]), copy.deepcopy(p.profiles[b])
+        pairs = list(zip(p.profiles[a].segments, p.profiles[b].segments))
+        if reverse:
+            pairs.reverse()
+        pairs = pairs[seam:] + pairs[:seam]
+        interval = [1, 0] if reverse else [0, 1]
+        refs = [dict(first_segment_id=x.id, second_segment_id=y.id,
+                     first_interval=interval[:], second_interval=interval[:]) for x, y in pairs]
+&gt;       sid = p.add_loft(a, b, correspondences=refs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\au13-topology-order-own.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\commands.py:15: in command
+    self.validate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x00000251EB46CC20&gt;
+
+    def validate(self):
+        uuid(self.project_id)
+        self._validate_material_profile()
+        if not isinstance(self.name, str):
+            raise ValidationError("Název projektu musí být text.")
+        number(self.scale, "Měřítko", positive=True)
+        _revision(self.revision)
+        _revision(self.next_part_number)
+        _revision(self.next_joint_number)
+        all_ids = [self.project_id]
+        for pid, profile in self.profiles.items():
+            if profile.id != pid:
+                raise ValidationError("Identita profilu nesouhlasí s registrem.")
+            profile.validate()
+            all_ids.extend(
+                [pid, *[v.id for v in profile.vertices], *[s.id for s in profile.segments]]
+            )
+            if profile.closed and all(s.kind == "line" for s in profile.segments):
+                material_polygon(profile.points)
+        extra_ids, derived_children = self._validate_segmented_variants()
+        all_ids.extend(extra_ids)
+        all_ids.extend(self._validate_curved_connectors())
+        all_ids.extend(self._validate_profile_subdivisions())
+        expected_surfaces = []
+        if set(self.parts) != set(self.placements):
+            raise ValidationError("Každý díl musí mít právě jeden záznam umístění.")
+        for sid, surface in self.surfaces.items():
+            uuid(sid)
+            all_ids.append(sid)
+            if (
+                surface.id != sid
+                or surface.profile_id not in self.profiles
+                or not isinstance(surface.name, str)
+            ):
+                raise ValidationError("Neplatný registr povrchů.")
+            if surface.kind == "ruled_loft":
+                all_ids.extend(validate_loft_params(self, surface))
+                vector(surface.position_mm, 3)
+                vector(surface.rotation_deg, 3)
+                _revision(surface.revision)
+                self._surface_matrix(sid)
+                result = loft_analysis(self, surface)
+                if any(
+                    report["status"] == "INVALID"
+                    for report in result.get("source_topology", {}).values()
+                ):
+&gt;                   raise ValidationError("Zdrojový profil loftu se kříží nebo překrývá.")
+E                   archpapercraft.authoring.errors.ValidationError: Zdrojový profil loftu se kříží nebo překrývá.
+
+src\archpapercraft\authoring\project.py:1072: ValidationError</failure></testcase><testcase classname="docs.p2.implementation.evidence.au13-topology-order-own" name="test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[1-False]" time="0.504" /><testcase classname="docs.p2.implementation.evidence.au13-topology-order-own" name="test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[1-True]" time="0.018"><failure message="archpapercraft.authoring.errors.ValidationError: Zdrojový profil loftu se kříží nebo překrývá.">reverse = True, seam = 1
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1570/test_quarters_keep_independent3')
+
+    @pytest.mark.parametrize("reverse", [False, True])
+    @pytest.mark.parametrize("seam", [0, 1])
+    def test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam(
+            reverse, seam, tmp_path):
+        p = AuthorProject.new(scale=0.1)
+        a, b = quarters(p, 13, 0), quarters(p, 5, -17)
+        original_a, original_b = copy.deepcopy(p.profiles[a]), copy.deepcopy(p.profiles[b])
+        pairs = list(zip(p.profiles[a].segments, p.profiles[b].segments))
+        if reverse:
+            pairs.reverse()
+        pairs = pairs[seam:] + pairs[:seam]
+        interval = [1, 0] if reverse else [0, 1]
+        refs = [dict(first_segment_id=x.id, second_segment_id=y.id,
+                     first_interval=interval[:], second_interval=interval[:]) for x, y in pairs]
+&gt;       sid = p.add_loft(a, b, correspondences=refs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\au13-topology-order-own.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\commands.py:15: in command
+    self.validate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;archpapercraft.authoring.project.AuthorProject object at 0x00000251E9393C50&gt;
+
+    def validate(self):
+        uuid(self.project_id)
+        self._validate_material_profile()
+        if not isinstance(self.name, str):
+            raise ValidationError("Název projektu musí být text.")
+        number(self.scale, "Měřítko", positive=True)
+        _revision(self.revision)
+        _revision(self.next_part_number)
+        _revision(self.next_joint_number)
+        all_ids = [self.project_id]
+        for pid, profile in self.profiles.items():
+            if profile.id != pid:
+                raise ValidationError("Identita profilu nesouhlasí s registrem.")
+            profile.validate()
+            all_ids.extend(
+                [pid, *[v.id for v in profile.vertices], *[s.id for s in profile.segments]]
+            )
+            if profile.closed and all(s.kind == "line" for s in profile.segments):
+                material_polygon(profile.points)
+        extra_ids, derived_children = self._validate_segmented_variants()
+        all_ids.extend(extra_ids)
+        all_ids.extend(self._validate_curved_connectors())
+        all_ids.extend(self._validate_profile_subdivisions())
+        expected_surfaces = []
+        if set(self.parts) != set(self.placements):
+            raise ValidationError("Každý díl musí mít právě jeden záznam umístění.")
+        for sid, surface in self.surfaces.items():
+            uuid(sid)
+            all_ids.append(sid)
+            if (
+                surface.id != sid
+                or surface.profile_id not in self.profiles
+                or not isinstance(surface.name, str)
+            ):
+                raise ValidationError("Neplatný registr povrchů.")
+            if surface.kind == "ruled_loft":
+                all_ids.extend(validate_loft_params(self, surface))
+                vector(surface.position_mm, 3)
+                vector(surface.rotation_deg, 3)
+                _revision(surface.revision)
+                self._surface_matrix(sid)
+                result = loft_analysis(self, surface)
+                if any(
+                    report["status"] == "INVALID"
+                    for report in result.get("source_topology", {}).values()
+                ):
+&gt;                   raise ValidationError("Zdrojový profil loftu se kříží nebo překrývá.")
+E                   archpapercraft.authoring.errors.ValidationError: Zdrojový profil loftu se kříží nebo překrývá.
+
+src\archpapercraft\authoring\project.py:1072: ValidationError</failure></testcase><testcase classname="docs.p2.implementation.evidence.au13-topology-order-own" name="test_crossed_correspondence_cannot_be_repaired_by_source_sorting" time="0.003" /></testsuite></testsuites>

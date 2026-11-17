@@ -207,3 +207,29 @@ observer četl neexistující `.parameters`;696 opravuje pouze dvě čtení na
 `.params`. Nejde o zametenou vadu produktu. Toto review nepřenáší native PASS
 na nový camera-only nástroj42dca, Inkscape, nové jiné loft rodiny ani celý
 PC009. Nový člověk0/NOT_RUN, AC-AU19 NOT_RUN, fyzické P3 NOT_RUN.
+
+## Quarter-ARC source order —09b68111
+
+**APPROVED_IN_SCOPE pro09b68111bc89accfad7cbeb05e0f2cd843009d19.**
+Nezávislý [odlišný fixture](evidence/au13-topology-order-own.py) má čtyři
+čtvrtoblouky r13/r5 v hloubce−17 a původní i obrácenou korespondenci, každý
+také s posunutým švem. Na stejné produkci jako696 byl výsledek
+[2 FAIL reversed +3 PASS](evidence/au13-topology-order-before-696.xml).
+Po opravě totožná očekávání spolu s6 autorskými regresními případy dávají
+**11 PASS /5,52s**, [JUnit](evidence/au13-topology-order-after-09b.xml).
+
+Oprava používá existující `canonical_profile_curves` v pořadí autorských
+segment UUID pouze pro topologii původního profilu. Nemění source intervals,
+reversed correspondence ani flattening order; samostatné ID/incidence kontroly
+korespondencí zůstávají. Úmyslně překřížená korespondence je nadále atomicky
+odmítnuta. Žádný endpoint/nearest/first-child fallback nevzniká.
+
+Vlastní očekávání poloměrů rozvinu a plochy `π·18·sqrt(353)·0,01` nezávisí
+na výrobním helperu. Jednostranný split2/7→přepočet→merge zachová CUT, zdrojové
+body druhého profilu, nový merged UUID, původní params/frame a61/87/31° s oběma
+locks přes save/reopen. Dalších **24 vlastních authority/counterfeit/orphan
+a mixed-generation regresí PASS /3,76s**, [JUnit](evidence/au13-topology-order-authority-09b.xml).
+[Přenos existujících native souborů](evidence/au13-topology-order-native-transfer-09b.json)
+znovu načetl skutečné ARC/CUBIC schema9 projekty: snapshoty po JSON normalizaci
+zůstaly přesně shodné. Nativní desktop se tímto znovu neprohlašuje provedený
+na09b; finální běhy a celá suite mají vlastní kontrolu.
