@@ -1,0 +1,178 @@
+{
+  "source_sha": "42dca6279f4fbabeb922f950a8480e305a7d8c55",
+  "reviewer": "editor_review",
+  "evidence_directory": "c-cylinder-qt150-42dca62-run01",
+  "source_file_hashes_checked": 132,
+  "artifact_manifest_files_checked": 22,
+  "result_status": "PASS_REQUESTED_FIXTURE",
+  "event_count": 134,
+  "paper_wheel_events": [
+    {
+      "seconds": 76.09399999998277,
+      "type": "Wheel",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        186.0,
+        155.66666666666663
+      ],
+      "global_point": [
+        790.0,
+        296.0
+      ],
+      "modifiers": 67108864,
+      "paper_transform": [
+        0.5913709348825795,
+        0.0,
+        0.0,
+        0.5913709348825795,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.77664208937836,
+        148.80677221222066
+      ],
+      "paper_viewport": [
+        373,
+        314
+      ],
+      "paper_scroll": [
+        0,
+        0
+      ],
+      "paper_scroll_ranges": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "angle_delta": [
+        0,
+        120
+      ]
+    }
+  ],
+  "middle_press_release": [
+    {
+      "seconds": 76.32799999997951,
+      "type": "MouseButtonPress",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        186.0,
+        156.0
+      ],
+      "global_point": [
+        790.0,
+        296.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.6800765751149664,
+        0.0,
+        0.0,
+        0.6800765751149664,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        285.2619941617669,
+        138.2197291299283
+      ],
+      "paper_viewport": [
+        373,
+        300
+      ],
+      "paper_scroll": [
+        8,
+        0
+      ],
+      "paper_scroll_ranges": [
+        -10,
+        25,
+        0,
+        0
+      ],
+      "button": 4
+    },
+    {
+      "seconds": 76.32799999997951,
+      "type": "MouseButtonRelease",
+      "target_class": "QWidget",
+      "target_name": "",
+      "target_is_paper": false,
+      "target_is_paper_viewport": true,
+      "local_point": [
+        203.0,
+        139.0
+      ],
+      "global_point": [
+        807.0,
+        279.0
+      ],
+      "modifiers": 0,
+      "paper_transform": [
+        0.6800765751149664,
+        0.0,
+        0.0,
+        0.6800765751149664,
+        0.0,
+        0.0
+      ],
+      "paper_center": [
+        260.26480910635433,
+        138.2197291299283
+      ],
+      "paper_viewport": [
+        373,
+        300
+      ],
+      "paper_scroll": [
+        -9,
+        0
+      ],
+      "paper_scroll_ranges": [
+        -10,
+        25,
+        0,
+        0
+      ],
+      "button": 4
+    }
+  ],
+  "source_own_pid_hwnd": [
+    {
+      "own_pid": 34092,
+      "own_hwnd": 2689196,
+      "own_thread": 33812,
+      "foreground_before": 2689196,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 2689196,
+      "hit_hwnd": 2689196,
+      "target_native": [
+        1185,
+        444
+      ],
+      "target_logical": [
+        790,
+        281
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.5
+    }
+  ],
+  "reviewed_evidence_sha256": {
+    "results.json": "2713fbf2be0baa87a8c0bf8121eda954d3b810bfe86d66bc84ff6de2847b7adb",
+    "scaling-observations.json": "b0e0fc019fc94d191aec62b7fe907cd85b10017ea6470e44e3ebaf7bd3e9b863"
+  },
+  "scope": "Qt process1.5 actual viewport/zoom/pan and refresh; no OS DPI certification, new user or physical proof"
+}

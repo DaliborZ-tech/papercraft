@@ -120,3 +120,35 @@ průchody a výstupy, PC-010 vytvoří vlastní historický model přes skutečn
 a dodá závěrečné nezávislé ověření. **AC-US08:0 nových lidí/NOT_RUN;
 fyzické P3/NOT_RUN.** Produktové přijetí kontraktu zůstává platné a není
 přijetím dokončené implementace.
+
+## Nezávislá revize Qt150 kamery 17. 11. 2026
+
+Reviewer `editor_review`, jiný agent než autor nástroje. **APPROVED_IN_QT150_CYLINDER_NATIVE_CAMERA_PROOF_SCOPE**
+na přesném `42dca6279f4fbabeb922f950a8480e305a7d8c55`; bez otevřeného nálezu
+v této diagnostické deltě. Produkční kameru tato změna neopravovala. Driver nyní
+odděleně vyžaduje každé zvětšení `×1,15`, existující scroll range po nejvýše
+šesti skutečných wheel vstupech, následnou samostatnou změnu středu při middle
+pan a nezměněnou autorskou kameru i dokument po obyčejném Ctrl+R.
+
+[Skutečný C-cylinder běh](evidence/c-cylinder-qt150-42dca62-run01/results.json)
+je **PASS_REQUESTED_FIXTURE / 80,046 s**. Nezávislý reviewer porovnal všech
+132 zaznamenaných source hashes s vlastním checkoutem tohoto pinu a všech
+22 souborů runtime manifestu; vše shodné. Skutečný application import patří
+integračnímu worktree. [134 skutečných událostí](evidence/c-cylinder-qt150-42dca62-run01/scaling-observations.json)
+obsahuje wheel doručený přímo viewportu rozvinu s Ctrl a `angleDelta=120`:
+zoom `0,5913709348825795 → 0,6800765751149664`, tedy právě `×1,15`.
+Own PID `34092`, HWND `2689196`, foreground i hit-test jsou shodné; nativní
+bod `[1185,444]` odpovídá logickému globálnímu `[790,296]` při DPR `1,5`.
+
+Následující middle press/release míří do téhož viewportu. Při nezměněném zoomu
+se horizontální scrollbar posune `8 → −9` v rozsahu `[−10,25]`, centrum
+`[285,261994;138,219729] → [260,264809;138,219729]`; to samostatně dokládá pan.
+Následné Ctrl+R zachová právě tuto kameru a čistý nezměněný dokument.
+[Kompaktní nezávislé vazby a pozorování](evidence/qt150-camera-review-42dca62-binding.json)
+obsahují hashe raw výsledku a událostí. Reviewer žádný desktopový vstup nevyslal.
+
+Historická selhání Qt wheel vstupu a bezpečná foreground/hit-test odmítnutí
+zůstávají zachovaná. Tento úspěch prokazuje konkrétní C-cylinder workflow při
+`QT_SCALE_FACTOR=1.5`, nikoli změnu systémového DPI, všechny monitory, nové
+uživatele, celé PC-009 ani fyzickou stavbu. OS scaling certification,
+AC-US08 a P3 zůstávají NOT_RUN; near-cylinder editorový důkaz má samostatný rozsah.

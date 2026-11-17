@@ -1239,18 +1239,20 @@
         "source_sha": "4f43a6427c7fbd25a87309ab31ad676ddd7794e1",
         "author_evidence_head": "7c61c7ee54233dc662420b5199e3a5d914da4441",
         "author_suite": "419 PASS; does not cover later R01 fix",
-        "review_commit": "b7348c257889955df1756813779a097a531fd754",
-        "verdict": "CHANGES_REQUIRED",
-        "CORE9_R01": "OPEN_PENDING_INDEPENDENT_FIX_REPLAY",
+        "review_commit": "d216d9670463b1b1b78b28445d524caa607bd1ba",
+        "verdict": "APPROVED_IN_CORE9_AND_WIDGET_SCOPE_NOT_FULL_P2",
+        "CORE9_R01": "CLOSED_INDEPENDENTLY_VERIFIED_IN_SCOPE",
         "fix_runtime": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
         "fix_handoff": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
-        "fix_verification": "Independent replay active: original 6 FAIL +10 PASS reproduced on7c61; unchanged16 PASS on72f7/6064. Expanded counterfeit/orphan/old-artifact checks and final candidate review IN_PROGRESS.",
+        "fix_verification": "Independent unchanged replay16PASS, expanded33PASS, author42PASS; original6FAIL retained. Detached omission reproduced through actual writer and fixed3e6f; legacy/qualified/orphan preserve source and output.",
         "UI_handoff": "6af01c67c7555171bcdd7246cf9834c39afa8114",
         "UI_runtime": "7ef51beddeb86b1ba5d31be8277803458bd4a9fb",
-        "UI_verification": "111 PASS0SKIP on original core4f, independent UI review and patched-core replay pending",
-        "remaining_hypotheses": [
-          "Empty-history exporter contexts accept a descriptor in direct spotcheck; complete export exploit not proven",
-          "Analogous retired LINE ID resurrection has not been reproduced; investigate before claiming a defect"
+        "UI_verification": "Native ARC29.75s +CUBIC91.64s PASS on6969069 and independent component/source review. Final candidate still requires reverseARC regression repair and fullsuite.",
+        "remaining_hypotheses": [],
+        "confirmed_followups": [
+          "Empty-history detached CUBIC export bypass: reproduced and fixed3e6f, independently verified",
+          "Retired LINE ROOT/left/right+None accepted on7c61; existing72f7fix rejects all3",
+          "Reversed quarter-ARC topology false-INVALID: fullsuite696 found2 cases, repair/review IN_PROGRESS"
         ]
       }
     },
@@ -2904,7 +2906,7 @@
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Independent unchanged R01 replay + expanded matrix; investigate empty-history/LINE separately. Prepare corrected core/UI candidate, independently review editor comparator, then actual native GUI/editor/scaling. No full P2 claim.",
+    "active_work": "R01 and detached history guard independently closed; ARC/CUBIC native and Qt150 cylinder PASS, original near page actual editor PASS. Complete suite found2 reversed quarter-ARC false-INVALID cases; repair and final review active. PC009 after-reopen proof next, then historical PC010; novice0/NOT_RUN and P3NOT_RUN.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3071,6 +3073,7 @@
         "continuation_target_date": "NEXT_SESSION_NOT_SCHEDULED",
         "resumed_on": "2026-11-17"
       }
-    ]
+    ],
+    "continuation_report": "docs/revival/P2_CONTINUATION_2026-11-17.md"
   }
 }
