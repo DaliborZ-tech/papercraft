@@ -67,7 +67,9 @@ i internetových zdrojů a praktické hodnocení GUI. Jde o expertní agentní
 ověření, nikoli provedený test nového člověka. Implementace workspace a recovery
 probíhá v oddělených větvích; historický model nepředbíhá tuto nápravu.
 
-Integrace tohoto pokračování na master a ověření remote SHA zatím PENDING.
+C9 technický přírůstek byl integrován a pushnut jako `6efa881`; lokální master,
+origin/master i přímý ls-remote měly shodné SHA. [Záznam publikace](evidence/p2-c9-publication-6efa881.json).
+Nový workspace a recovery jsou samostatný probíhající přírůstek.
 
 ## Nezávislé integrační review C9 — f5f06b2
 

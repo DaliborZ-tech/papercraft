@@ -858,6 +858,40 @@
       "next_use": {
         "status": "NOT_RUN"
       }
+    },
+    {
+      "id": "SK-019",
+      "changed_on": "2026-11-17",
+      "skill": "papercraft-authoring-ui",
+      "reason": {
+        "source": "owner_screenshot_and_explicit_workspace_rejection_b9ec4989",
+        "problem": "Individually verified functions accumulated into competing sketch/3D/paper views, a long toolbar and repeated problems; owner rejected the workspace as a product."
+      },
+      "cause": {
+        "status": "IMPLEMENTATION_STRUCTURE_AND_OWNER_OBSERVATION_CONFIRMED",
+        "mechanism": "Persistent three-view split and feature-oriented property sections were extended without implementing the activity contexts already specified in AUTHORING_UX.",
+        "evidence": [
+          "src/archpapercraft/ui/author_window.py at6efa881",
+          "docs/revival/P2_CONTINUATION_2026-11-17.md"
+        ],
+        "not_claimed": "No human usability session; initial1366 first-show growth was corrected as a DPI/harness observation, not a proven minimum-size product defect."
+      },
+      "product_correction": {
+        "status": "IN_PROGRESS",
+        "description": "One activity-based workspace and contextual tools; grouped actionable problems; preserved data/selection/history/advanced commands. Independent expert local+web+actualGUI evaluation."
+      },
+      "skill_change": "Before adding a feature, establish its place in the activity, dominant view, selection, inspector and next step; review a complete actual workflow under a single product design owner.",
+      "usage_example": "After joining walls and adding a tab, expose the pages action and a grouped unplaced count; retain direct access to advanced construction without keeping all views and forms equally dominant.",
+      "verification": {
+        "status": "PENDING_WORKING_DESKTOP_AND_INDEPENDENT_REPLAY"
+      },
+      "independent_review": {
+        "status": "PENDING"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN"
+      }
     }
   ]
 }

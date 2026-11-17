@@ -3094,8 +3094,10 @@
       "near": "docs/p2/implementation/evidence/c-near-native-a5eedc9-run01/results.json",
       "all_six_SVG_pages_actual_Inkscape": "PASS; separate source-bound editor-results in evidence",
       "full_suite": "1916PASS/0FAIL/0ERROR/0SKIP710.39s on4f110d9; runtime/tests/tools hashes match candidate; raw prior failures preserved.",
-      "integrated": false,
-      "independent_review": "APPROVED_IN_C9_TECHNICAL_INTEGRATION_SCOPE:90257e38d46554aa7c83af27d001298ec3c891c0; final metadata review pending"
+      "integrated": true,
+      "independent_review": "APPROVED_IN_C9_TECHNICAL_INTEGRATION_SCOPE plus exact4c43094metadata:90257e3/6efa881",
+      "published_sha": "6efa881c3495f6432099cc03694cc138f29e18b2",
+      "publication_evidence": "docs/revival/evidence/p2-c9-publication-6efa881.json"
     },
     "expert_usability": {
       "status": "IN_PROGRESS",
