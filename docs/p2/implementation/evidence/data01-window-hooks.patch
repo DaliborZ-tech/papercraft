@@ -1,0 +1,27 @@
+diff --git a/src/archpapercraft/ui/author_window.py b/src/archpapercraft/ui/author_window.py
+--- a/src/archpapercraft/ui/author_window.py
++++ b/src/archpapercraft/ui/author_window.py
+@@ -52,6 +52,7 @@
+ from archpapercraft.ui.author_material import MaterialDialog
+ from archpapercraft.ui.author_paper import AuthorPaperView
+ from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
++from archpapercraft.ui.author_recovery import setup_recovery
+ from archpapercraft.ui.author_segmentation import SegmentedVariantDialog
+ from archpapercraft.ui.author_subdivision import SubdivisionDialog
+ from archpapercraft.ui.author_viewport import AuthorViewport
+@@ -86,6 +87,7 @@
+         self._build_properties()
+         self.controller.new()
+         QTimer.singleShot(0, self._initial_frame)
++        self.recovery = setup_recovery(self)
+ 
+     @property
+     def project(self):
+@@ -2367,6 +2369,6 @@
+ 
+     def closeEvent(self, event):
+-        if self._confirm_replace():
++        if self._confirm_replace() and self.recovery.finished_close():
+             event.accept()
+         else:
+             event.ignore()

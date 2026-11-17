@@ -16,8 +16,11 @@ class AuthorController:
         self.file_path = None
         self.copy_source_path = None
         self.on_change = on_change or (lambda: None)
+        self.on_document_event = lambda _event: None
+        self.before_document_replace = lambda: True
         self._undo, self._redo = [], []
         self._saved_digest = None
+        self.recovered = False
 
     @staticmethod
     def digest(state):
@@ -40,25 +43,34 @@ class AuthorController:
         return bool(self._redo)
 
     def new(self, name="Nový model", scale=0.01):
-        self.project = AuthorProject.new(name=name, scale=scale)
+        project = AuthorProject.new(name=name, scale=scale)
+        if not self.before_document_replace():
+            return None
+        self.project = project
         self.file_path = None
         self.copy_source_path = None
+        self.recovered = False
         self._undo.clear()
         self._redo.clear()
         self._saved_digest = self.digest(self.project.to_dict())
         self.on_change()
+        self.on_document_event("replaced")
 
     def open(self, path):
         loaded = load_project(path)
         if not isinstance(loaded, AuthorProject):
             return loaded
+        if not self.before_document_replace():
+            return None
         self.project = loaded
         self.copy_source_path = Path(path) if loaded.requires_save_as else None
         self.file_path = None if self.copy_source_path else Path(path)
+        self.recovered = False
         self._undo.clear()
         self._redo.clear()
         self._saved_digest = self.digest(loaded.to_dict())
         self.on_change()
+        self.on_document_event("replaced")
         return loaded
 
     def save(self, path=None):
@@ -72,9 +84,24 @@ class AuthorController:
         self.project.save(target)
         self.file_path = target
         self.copy_source_path = None
+        self.recovered = False
         self._saved_digest = self.digest(self.project.to_dict())
         self.on_change()
+        self.on_document_event("saved")
         return target
+
+    def restore_recovery(self, state, original_path=None):
+        # Parse completely before replacing any live work. Recovery is an unsaved
+        # copy, so Ctrl+S must ask for a new path and retain the source-file guard.
+        recovered = AuthorProject.from_dict(state)
+        self.project = recovered
+        self.file_path = None
+        self.copy_source_path = Path(original_path) if original_path else None
+        self._saved_digest = None
+        self._undo.clear()
+        self._redo.clear()
+        self.recovered = True
+        self.on_change()
 
     def execute(self, description, operation, *, recompute=False):
         if self.project is None:
