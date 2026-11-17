@@ -187,10 +187,15 @@ class AuthorViewport(QOpenGLWidget):
             arrays.extend(self.profile_paths.values())
         if arrays:
             points = np.vstack(arrays)
-            self.center = (points.min(0) + points.max(0)) / 2
             self.pan[:] = 0
             _, view = self.camera()
-            extents = np.ptp(points @ view[:3, :3].T, axis=0)
+            rotation = view[:3, :3]
+            rotated = points @ rotation.T
+            low, high = rotated.min(0), rotated.max(0)
+            # An asymmetric model's world-box midpoint need not project to the
+            # middle of its visible bounds. Center those bounds in camera axes.
+            self.center = ((low + high) / 2) @ rotation
+            extents = high - low
             aspect = max(self.width() / max(self.height(), 1), 0.1)
             self.span = max(float(extents[1]) / 2, float(extents[0]) / (2 * aspect), 1.0) * 1.25
         self.update()

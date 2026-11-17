@@ -299,7 +299,11 @@ def test_relationship_selection_and_issue_repair_target_are_shared_between_panel
     window.viewport.center = np.array([700.0, 800.0, 900.0])
     window.viewport.setFocus()
     qtbot.keyClick(window.viewport, Qt.Key.Key_Home)
-    np.testing.assert_allclose(window.viewport.center, [50, 50, 10])
+    from test_viewport_fit import assert_centered_and_visible
+
+    # The correct camera center comes from projected material, not its world box.
+    points = np.vstack([mesh["vertices"] for mesh in window.viewport.meshes.values()])
+    assert_centered_and_visible(window.viewport, points)
     assert not window.controller.dirty  # Selection and repair navigation never edit the model.
 
 
