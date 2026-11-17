@@ -1252,7 +1252,7 @@
         "confirmed_followups": [
           "Empty-history detached CUBIC export bypass: reproduced and fixed3e6f, independently verified",
           "Retired LINE ROOT/left/right+None accepted on7c61; existing72f7fix rejects all3",
-          "Reversed quarter-ARC topology false-INVALID: fullsuite696 found2 cases, repair/review IN_PROGRESS"
+          "Reversed quarter-ARC topology false-INVALID independently reproduced and fixed09b6811; canonical author order preserves source topology. Final complete suite running on a5eedc9."
         ]
       }
     },
@@ -1295,7 +1295,7 @@
         "AC-US07",
         "AC-US08"
       ],
-      "status": "PLANNED",
+      "status": "IN_PROGRESS",
       "execution_authorized_on_realization": true,
       "gate": "GATE-P2",
       "acceptance_state": {
@@ -1442,7 +1442,8 @@
           "consistency_impact": null,
           "workflow_alternative_decision": null
         }
-      }
+      },
+      "continuation_2026_11_17": "Preparing opt-in actual after-reopen author edits for A/B/C/D; original main flows retained, new native proof NOT_RUN until execution."
     },
     {
       "id": "PC-010",
@@ -1608,7 +1609,8 @@
         "replaces_A_B_C_D_or_novice_test": false,
         "physical_build": "P3; not claimed by digital proof",
         "source_artwork": "original construction; reference artwork is not copied"
-      }
+      },
+      "preparation_2026_11_17": "Own historical gate/tower driver preparation from prior construction reference analyses; actual UI construction AC-AU19 NOT_RUN pending consolidated PC009."
     },
     {
       "id": "PC-011",
@@ -2906,7 +2908,7 @@
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "R01 and detached history guard independently closed; ARC/CUBIC native and Qt150 cylinder PASS, original near page actual editor PASS. Complete suite found2 reversed quarter-ARC false-INVALID cases; repair and final review active. PC009 after-reopen proof next, then historical PC010; novice0/NOT_RUN and P3NOT_RUN.",
+    "active_work": "R01/detached guard/source-order fixes reviewed. Current a5 native ARC/CUBIC and C cylinder Qt150/cone/near plus all6 actual Inkscape pages PASS. Fulla5 1867PASS/37FAIL/10ERROR exposes historical D fixtures exporting deliberately stale imports without explicit recompute; investigate/adapt fixtures with migration proof, no unproven product defect claim. PC009 after-reopen tool prepared for independent review/native; historical driver preparation active.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3074,6 +3076,15 @@
         "resumed_on": "2026-11-17"
       }
     ],
-    "continuation_report": "docs/revival/P2_CONTINUATION_2026-11-17.md"
+    "continuation_report": "docs/revival/P2_CONTINUATION_2026-11-17.md",
+    "C9_native_candidate": {
+      "source_sha": "a5eedc9b3a345320b9ae07e9e44bc7387c5ef73b",
+      "cylinder_Qt150": "docs/p2/implementation/evidence/c-cylinder-qt150-a5eedc9-run02/results.json",
+      "cone": "docs/p2/implementation/evidence/c-cone-native-a5eedc9-run01/results.json",
+      "near": "docs/p2/implementation/evidence/c-near-native-a5eedc9-run01/results.json",
+      "all_six_SVG_pages_actual_Inkscape": "PASS; separate source-bound editor-results in evidence",
+      "full_suite": "NOT_PASS: legacy D stale-cache fixtures require explicit recompute; actual product behavior under investigation",
+      "integrated": false
+    }
   }
 }

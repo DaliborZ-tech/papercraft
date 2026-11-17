@@ -30,6 +30,12 @@ legitimní orphan/UNRESOLVED a zachování layoutu. Stejný negativ přenes do
 detached exportu: prázdný registr nesmí vypnout kontrolu povinné historie.
 Samotný loader tento další vstup nepokrývá.
 
+Topologii zdrojového obrysu ověř v jeho vlastním orientovaném pořadí,
+odděleně od průchodu korespondencí. [Obrácené čtvrtoblouky](../../../docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md)
+byly platné, ale pořadí reverse korespondencí z nich při kontrole vytvořilo
+nesouvislou smyčku. Při dalším zásahu do mapování ověř oba směry i posunutý
+šev a zároveň zachovej odmítnutí skutečně překřížených párů.
+
 Při práci s nejistou geometrií porovnej známou negativní reprodukci také po přidání nezávislé nejistoty. V [K01](../../../docs/p2/implementation/PC006B_DOMAIN_REVIEW.md) vzdálená překážka s neznámou tloušťkou původně vymazala již prokázanou kolizi. Neurčená tloušťka či vrstva má zůstat explicitně nejistá, nesmí oslabit jistý negativní důkaz jiné dvojice. Použij oba vstupy a zachovej i meze hledání; nenahrazuj je obecnějším tvrzením o fyzické sestavitelnosti.
 
 Při nahrazení křivky tětivami ověř zvlášť metriku, topologii a skutečný materiál v každé dotčené kontrole. [P01/P02](../../../docs/p2/implementation/PC007A_PLANAR_REVIEW.md) prošly poziční tolerancí, přesto skryly průnik a překryv. Příklad: vlastní svědek mezi uzly musí ověřit také příjemce a celý ohyb; obal nejistoty nesmí dostat výsledek „volno“ jen proto, že proxy nekoliduje. Přenos opravy layoutu na kontakt či ohyb dolož samostatně.
@@ -43,5 +49,12 @@ Za materiálový producer považuj i příkaz, který má pouze dělit topologii
 Relativní plošnou toleranci normalizuj původním tělem bez chlopní, i když ověřuješ celý výsledný materiálový union. [SO01](../../../docs/p2/implementation/PC008_SEGMENTED_OUTPUT_REVIEW.md) našel ve writeru normalizaci tělem i chlopněmi; izolovaný numerický comparator se skutečnými SVG/PDF tokeny rozlišil body20000mm², tab2000mm² a chybu0,021mm²: správná mez je0,020, nikoli0,022. Způsobilost takového numerického fixture nezaměňuj za doménový/bend/native důkaz; původní velké modely se bezpečně zastavily na jiné kontrole. Další použití rady musí znovu ověřit oba odlišné základy plochy.
 
 Editovatelnost ověř také skutečným psaním a uložením v cílovém editoru. [C-06](../../../docs/p2/implementation/evidence/pc006a-C06-svg-text-whitespace.md) prošel původním XML/render auditem, ale při postupném psaní víceslovného popisku v Inkscape mizely mezery. Příklad: uprav jeden label na víceslovný Unicode text, ulož a nezávisle přečti přesný obsah i nezměněné ostatní objekty. Odliš bezpečné odmítnutí vstupu testovacím nástrojem od produktové vady; uchovej oba výsledky. Úspěch jednoho editoru necertifikuje jiné editory, jiné konstrukční řezy ani nového uživatele.
+
+Při geometrickém srovnání editorového souboru odděl parametry křivky od jejího
+skutečného průběhu a zkontroluj i rámec. [EDITOR-R01](../../../docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md)
+ukázal, že CSS rotace asymetrického řezu může zachovat `d` i bounding box.
+Neanalyzovanou změnu rámce bezpečně odmítni; úspěšný numerický comparator
+neprokazuje účinek stylesheetu. Rozdíl zaokrouhleného poloměru naopak posuď
+celokřivkovou polohou, délkou a přímou plochou v původních mezích.
 
 Při změně certifikované reprezentace verzuj také kontrakt odvozené cache. [PF-01](../../../docs/p2/implementation/PC007A_LOFT_PERFORMANCE_REVIEW.md) zachoval správnou geometrii, ale starý 803bodový řez se tvářil jako aktuální a končil chybou cache. Ověř načtení starého výsledku jako neaktuálního, zachování zdroje/kotvy/layoutu a explicitní přepočet; zvlášť ověř, že poškozený výsledek se současným kontraktem zůstává blokovaný. Příklad přenosu: nová verze odvozené segmentace nesmí mlčky přijmout starý certifikát ani zahodit rozmístění autora.

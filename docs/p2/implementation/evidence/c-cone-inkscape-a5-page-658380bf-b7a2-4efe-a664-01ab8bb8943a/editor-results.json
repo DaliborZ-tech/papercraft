@@ -1,0 +1,210 @@
+{
+  "status": "PASS",
+  "source_sha": "a5eedc9b3a345320b9ae07e9e44bc7387c5ef73b",
+  "source_status_at_start": "M .agents/skills/papercraft-verification/SKILL.md\n M 05_WORK_QUEUE.json\n M docs/p2/SKILL_IMPROVEMENTS.json\n?? docs/p2/implementation/evidence/c-cone-native-a5eedc9-run01/\n?? docs/p2/implementation/evidence/c-cylinder-inkscape-a5-page-49e28d0b-ab8d-4c49-a1e7-1aa9b7773b58/\n?? docs/p2/implementation/evidence/c-cylinder-inkscape-a5-page-c9c9d65a-6794-4b8d-b391-505202cfbaa0/\n?? docs/p2/implementation/evidence/c-cylinder-qt150-a5eedc9-run02/\n?? docs/p2/implementation/evidence/c-near-current-inkscape-a5eedc9-run01/\n?? docs/p2/implementation/evidence/c-near-native-a5eedc9-run01/",
+  "script_sha256": "b254141acb41c0dfa3c859991fc019d966666f816b3be490470b9703adc33cc0",
+  "curve_equivalence_helper_sha256": "3a20d7ea1f127db9b71c3a30d4e745a825e6161b3474de1bde19c1729cdb882f",
+  "origin_source": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-native-a5eedc9-run01\\C-cone\\export\\page-658380bf-b7a2-4efe-a664-01ab8bb8943a.svg",
+  "origin_bundle_sha256": {
+    ".author-export.json": "e724627314ee63131c0e4f364e3ffe912e9c33f4185b847a959a3521d86368da",
+    "model.pdf": "8542964775eb9e12c21cd64c9e1296d7c38d2c14ecb3c59a05fb249dd15e653d",
+    "page-658380bf-b7a2-4efe-a664-01ab8bb8943a.svg": "001093e6094a05109edd0761d1fc1c7ddf5562b851fc71474a1db662e0dfecff",
+    "page-dc337d6a-455f-4d47-b4c0-cc08b8f6085d.svg": "8521aa4fc58f654790325adc1a75031de446ae9abd835818983a6e8dae6e070f"
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "--version"
+      ],
+      "seconds": 0.406,
+      "exit_code": 0,
+      "stdout": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a\\editor-original.svg",
+        "--query-all"
+      ],
+      "seconds": 1.438,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,112.913,377.953,990.824\npart-07df5ba3-b20d-4d08-a4fb-428453dc01c1,150.709,112.913,152.126,152.126\nrole-07df5ba3-b20d-4d08-a4fb-428453dc01c1-CUT,150.709,112.913,152.126,152.126\npath-07df5ba3-b20d-4d08-a4fb-428453dc01c1-CUT-0,150.709,112.913,152.126,152.126\n\n\n\nrole-07df5ba3-b20d-4d08-a4fb-428453dc01c1-LABELS,227.501,183.113,55.498,6.91129\nlabel-07df5ba3-b20d-4d08-a4fb-428453dc01c1-0,227.501,183.113,55.498,6.91129\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a\\editor-original.svg",
+        "--actions=select-by-id:part-07df5ba3-b20d-4d08-a4fb-428453dc01c1;transform-translate:10,15;select-clear;select-clear;select-by-id:label-07df5ba3-b20d-4d08-a4fb-428453dc01c1-0;object-set-property:fill,#b43d28;export-filename:C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a\\editor-edited.svg;export-do"
+      ],
+      "seconds": 1.5,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a\\editor-edited.svg",
+        "--query-all"
+      ],
+      "seconds": 1.406,
+      "exit_code": 0,
+      "stdout": "svg2,37.7953,127.913,377.953,975.824\npart-07df5ba3-b20d-4d08-a4fb-428453dc01c1,160.709,127.913,167.169,152.126\nrole-07df5ba3-b20d-4d08-a4fb-428453dc01c1-CUT,160.709,127.913,152.126,152.126\npath-07df5ba3-b20d-4d08-a4fb-428453dc01c1-CUT-0,160.709,127.913,152.126,152.126\n\n\n\nrole-07df5ba3-b20d-4d08-a4fb-428453dc01c1-LABELS,236.961,196.461,90.9172,10.4315\nlabel-07df5ba3-b20d-4d08-a4fb-428453dc01c1-0,236.961,196.461,90.9172,10.4315\n\n\npage-GUIDES,37.7953,1065.35,377.953,38.3831\npath2,37.7953,1065.35,377.953,0.944882\npage-label-0,38.0167,1077.85,251.746,8.75677\npage-label-1,38.4966,1096.74,147.435,6.99434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com",
+        "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a\\editor-edited.svg",
+        "--export-filename=C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a\\editor-final-render.png",
+        "--export-width=840"
+      ],
+      "seconds": 1.5,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "physical_build": "NOT_RUN",
+  "new_user_test": "NOT_RUN",
+  "profile_directory": "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-author-inkscape-49orr9wx",
+  "editor_executables_sha256": {
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.com": "4057b55e6bd892512fab3488bded271adfb8fa987cb7378b045055f051907f48",
+    "C:\\Users\\dalib\\AppData\\Local\\Temp\\papercraft-p2-editor-tools\\inkscape\\bin\\inkscape.exe": "f3e3bbe91ca5f16dbcf0d5716a35f64be42bbacefd09550016e3854e0afec26a"
+  },
+  "scope": "early actual author SVG editing; full AU17/DPI remains PC009",
+  "curve_equivalence": {
+    "path-07df5ba3-b20d-4d08-a4fb-428453dc01c1-CUT-0": {
+      "status": "CERTIFIED",
+      "position_limit_mm_exact": "1/50000",
+      "length_limit_mm_exact": "1/100",
+      "area_limit_mm2_exact": "1/100",
+      "scope": "CERTIFIED_SOURCE_EDITOR_EQUIVALENCE_NOT_NEW_SOURCE_OR_PHYSICAL_APPROVAL",
+      "max_position_bound_mm_exact": "0",
+      "global_length_difference_bound_mm_exact": "0",
+      "net_area_difference_bound_mm2_exact": "0",
+      "closed_loop_count": 1,
+      "topology": {
+        "status": "EXACT_UNCHANGED_GEOMETRY"
+      },
+      "command_count": 6
+    }
+  },
+  "elapsed_seconds": 13.844,
+  "files_sha256": {
+    "editor-edited.svg": "d62421a8b460506e146ec2332c15fce14190490236f49673b4dca94288b0ca50",
+    "editor-final-render.png": "73b24ac804be14b7dc76faf55f82c190f58970f74bc5bc59af6865ab3b0d9ffa",
+    "editor-gui.png": "68f9a062ce3fbc8aa491cb7f791fd92fa1bccca4bc9ba28b97b2752b21d111b1",
+    "editor-original.svg": "001093e6094a05109edd0761d1fc1c7ddf5562b851fc71474a1db662e0dfecff"
+  },
+  "inkscape_version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+  "actual_inkscape_action_edits": {
+    "part_id": "part-07df5ba3-b20d-4d08-a4fb-428453dc01c1",
+    "label_id": "label-07df5ba3-b20d-4d08-a4fb-428453dc01c1-0",
+    "translation_px": [
+      10,
+      15
+    ],
+    "fill": "#b43d28",
+    "text": "unchanged_by_actions; individual_native_GUI_edit_below",
+    "method": "Inkscape executable native actions, not XML writes"
+  },
+  "own_visible_windows": [
+    {
+      "hwnd": 1444280,
+      "title": "editor-edited.svg - Inkscape",
+      "class": "gdkWindowToplevel",
+      "width": 1936,
+      "height": 1048
+    }
+  ],
+  "initial_focus": {
+    "own_hwnd": 1444280,
+    "before_hwnd": 18220762,
+    "direct_activation_returned": false,
+    "attached_activation_returned": true,
+    "input_queue_temporarily_attached": true,
+    "after_hwnd": 1444280
+  },
+  "native_gui_text_edit": {
+    "text": "Žluťoučký – vlastní díl",
+    "method": "F8/CtrlA/own-window Unicode SendInput/CtrlS",
+    "own_pid": 10144,
+    "own_hwnd": 1444280,
+    "foreground_verified_before_each_chord": true
+  },
+  "gui_capture": {
+    "method": "QScreen.grabWindow(actual_editor_hwnd)",
+    "width": 1520,
+    "height": 873
+  },
+  "part_frame_checks": {
+    "part-07df5ba3-b20d-4d08-a4fb-428453dc01c1": {
+      "status": "CERTIFIED_TRANSLATION_ONLY",
+      "net_angle_deg_exact": "0",
+      "allowed_operators": [
+        "translate",
+        "rotate"
+      ],
+      "units_condition": "UNCHANGED_ROOT_VIEWBOX_AND_PHYSICAL_SIZE",
+      "before": "translate(40 50) rotate(0)",
+      "after": "translate(42.645833,53.96875)"
+    }
+  },
+  "part_role_metric_totals": {
+    "07df5ba3-b20d-4d08-a4fb-428453dc01c1:CUT": {
+      "global_length_difference_bound_mm_exact": "0",
+      "net_area_difference_bound_mm2_exact": "0"
+    }
+  },
+  "calibration_curve_equivalence": {
+    "status": "CERTIFIED",
+    "position_limit_mm_exact": "1/50000",
+    "length_limit_mm_exact": "1/100",
+    "area_limit_mm2_exact": "1/100",
+    "scope": "CERTIFIED_SOURCE_EDITOR_EQUIVALENCE_NOT_NEW_SOURCE_OR_PHYSICAL_APPROVAL",
+    "max_position_bound_mm_exact": "0",
+    "global_length_difference_bound_mm_exact": "0",
+    "net_area_difference_bound_mm2_exact": "0",
+    "closed_loop_count": 0,
+    "topology": {
+      "status": "EXACT_UNCHANGED_GEOMETRY"
+    },
+    "command_count": 2
+  },
+  "roundtrip_assertions": {
+    "path_count": 1,
+    "total_path_count_including_calibration": 2,
+    "editor_added_id_to_existing_calibration": [
+      "path2"
+    ],
+    "part_role_groups": [
+      "CUT",
+      "FOLD_MOUNTAIN",
+      "FOLD_VALLEY",
+      "TABS",
+      "LABELS",
+      "ARTWORK",
+      "GUIDES"
+    ],
+    "native_path_commands_preserved": true,
+    "whole_curve_position_tolerance_mm": 2e-05,
+    "global_part_role_length_tolerance_mm": 0.01,
+    "direct_net_body_area_fixed_tolerance_mm2": 0.01,
+    "part_linear_frames_unchanged_translation_only": true,
+    "other_text_objects_unchanged": true,
+    "original_bundle_unchanged": true,
+    "calibration_100mm_and_page_size_unchanged": true,
+    "cut_loop_count": 1,
+    "all_path_displacements_px": {
+      "path-07df5ba3-b20d-4d08-a4fb-428453dc01c1-CUT-0": [
+        10.0,
+        15.0
+      ]
+    }
+  },
+  "origin_bundle_preserved_after_run": true
+}

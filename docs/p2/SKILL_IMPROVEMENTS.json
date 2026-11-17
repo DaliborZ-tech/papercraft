@@ -782,6 +782,78 @@
       "next_use": {
         "status": "NOT_RUN"
       }
+    },
+    {
+      "id": "SK-017",
+      "changed_on": "2026-11-17",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md",
+        "problem": "Valid reversed quarter-ARC loft falsely rejected as crossing/overlap."
+      },
+      "cause": {
+        "status": "INDEPENDENTLY_REPRODUCED",
+        "mechanism": "Topology consumed correspondence traversal order instead of the canonical oriented source boundary.",
+        "evidence": [
+          "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+        ]
+      },
+      "product_correction": {
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_VERIFIED_IN_SCOPE",
+        "source_sha": "09b68111bc89accfad7cbeb05e0f2cd843009d19"
+      },
+      "skill_change": "Check forward/reverse correspondence and shifted seam on the same authored profile; crossed pairs must still fail atomically.",
+      "usage_example": "Check forward/reverse correspondence and shifted seam on the same authored profile; crossed pairs must still fail atomically.",
+      "verification": {
+        "status": "ORIGINAL_NEGATIVE_AND_REPAIRED_REPLAY_PASS",
+        "evidence": [
+          "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PRODUCT_OR_TOOL_APPROVED_SKILL_TEXT_REVIEW_PENDING",
+        "report": "docs/p2/implementation/PC007B_CIRCULAR_DELIVERY.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN"
+      }
+    },
+    {
+      "id": "SK-018",
+      "changed_on": "2026-11-17",
+      "skill": "papercraft-verification",
+      "reason": {
+        "source": "docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md",
+        "problem": "Editor proof accepted hidden stylesheet geometry despite unchanged path tokens and bounding box."
+      },
+      "cause": {
+        "status": "INDEPENDENTLY_REPRODUCED",
+        "mechanism": "XML frame guard inspected transform attributes/inline declarations but omitted stylesheet cascade.",
+        "evidence": [
+          "docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md"
+        ]
+      },
+      "product_correction": {
+        "status": "VERIFICATION_TOOL_REPAIRED_NOT_A_PRODUCT_GEOMETRY_DEFECT",
+        "source_sha": "5415e2bc45f0a073d202144f1281557377afbc61"
+      },
+      "skill_change": "An asymmetric triangle rotated180deg can retain its bbox and d; reject unanalyzed CSS frames, while separately certifying rounded native near-cylinder arcs.",
+      "usage_example": "An asymmetric triangle rotated180deg can retain its bbox and d; reject unanalyzed CSS frames, while separately certifying rounded native near-cylinder arcs.",
+      "verification": {
+        "status": "ORIGINAL_NEGATIVE_AND_REPAIRED_REPLAY_PASS",
+        "evidence": [
+          "docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md"
+        ]
+      },
+      "independent_review": {
+        "status": "PRODUCT_OR_TOOL_APPROVED_SKILL_TEXT_REVIEW_PENDING",
+        "report": "docs/p2/implementation/EDITOR_CURVE_EQUIVALENCE.md"
+      },
+      "effectiveness": "PENDING_NEXT_USE",
+      "next_use": {
+        "status": "NOT_RUN"
+      }
     }
   ]
 }
