@@ -171,3 +171,39 @@ Tento verdikt není kontrolou rootova dosud běžícího nativního Windows/edit
 průchodu, nového comparator guardu, škálování, celé regresní sady ani pozdějších
 předávacích metadat. Tyto výstupy mají samostatné source-bound důkazy a review.
 Celý P2, AC-US08 a fyzické P3 tímto nejsou přijaty ani dokončeny.
+
+## Skutečný native ARC/CUBIC průchod — evidence6969069 na42dca627
+
+**APPROVED_IN_SCOPE pro oba doložené nativní subdivision průchody a jejich
+soubory.** Produkce6969069/42dca627 zůstává byte shodná s posouzeným5415.
+[Nezávislý audit](evidence/au13-native-artifact-review-own.py) a jeho
+[výsledek](evidence/au13-native-artifact-review-42dca.json) ověřily48/48
+původních output hashů a každý ze132 runtime/source hashů obou běhů proti
+Git6969069. ARC run02 trval29,75s, CUBIC run01 91,64s; import ukazuje skutečný
+integrační checkout, vlastní PID, nativní OpenGL a skutečné Save/Open/Export
+dialogy. Četba driveru, input/action logů a screenshotů potvrzuje vlastní
+kreslení od prázdného projektu, měřený split/merge, Undo/Redo, neplatný vstup,
+ruční dvě stránky/locks a3D↔2D picking. Reviewer desktop znovu neovládal.
+
+Oba skutečné saved schema9 projekty se otevřou v aktuálním zdroji a jejich
+JSON snapshot přesně odpovídá archivnímu snapshotu; původní projekt se nemění.
+První pomocná audit assertion porovnávala Python tuple v topologickém proofu
+s JSON listem; audit pak explicitně normalizoval jen JSON container kontrakt.
+Původní root a děti zůstávají retired, aktuální merged UUID je nové, původní
+root kotvy, correspondence/seam i55/90/17° na druhé stránce a oba locks drží.
+SVG, PDF subject a manifest nesou stejný ručně přepočtený snapshot digest.
+
+Samostatný Fraction lexer použil původní číselné tokeny SVG a dekomprimovaného
+PDF streamu včetně skutečného CTM, bez původního float orákula. ARC má očekávání
+`100π =314,1592653589793mm²`, oba výstupy314,154455352098mm²,
+chyba0,004810006881mm². CUBIC má očekávání800mm², SVG799,996938547659mm²,
+PDF799,9969385476588mm², chyba0,003061452341mm². Obě jsou pod původní0,01mm²
+mezí. Split vzdálenosti10,47197551 a20,000093598883paper mm potvrzuje vlastní
+obloukový/rychlostní integrál. Vektorový výstup obsahuje oba díly na dvou A4
+stránkách a žádné raster XObjects.
+
+Původní [FAIL5415](evidence/au13-arc-native-5415e2-run01/results.json) zůstává:
+observer četl neexistující `.parameters`;696 opravuje pouze dvě čtení na
+`.params`. Nejde o zametenou vadu produktu. Toto review nepřenáší native PASS
+na nový camera-only nástroj42dca, Inkscape, nové jiné loft rodiny ani celý
+PC009. Nový člověk0/NOT_RUN, AC-AU19 NOT_RUN, fyzické P3 NOT_RUN.
