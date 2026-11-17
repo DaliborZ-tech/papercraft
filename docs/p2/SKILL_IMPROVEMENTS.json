@@ -904,7 +904,18 @@
       "next_use": {
         "status": "NOT_RUN"
       },
-      "followup_example": "A closed profile group must hide descendants after selection/refresh; a simple named object keeps its printed name after Undo/Redo/reopen; Fit All must contain asymmetric projected geometry at actual viewport dimensions. Developer-driven replay is not a new human."
+      "followup_example": "A closed profile group must hide descendants after selection/refresh; a simple named object keeps its printed name after Undo/Redo/reopen; Fit All must contain asymmetric projected geometry at actual viewport dimensions. Developer-driven replay is not a new human.",
+      "further_observation_2026_11_17": {
+        "status": "WHOLE_FLOW_METHOD_APPLIED_FOUND_ADDITIONAL_UX_FRICTION",
+        "source_sha": "bfb3be7db6aaaa79d3e47e54e7a178cfd17a3d71",
+        "evidence": "docs/p2/implementation/evidence/po-five-task-bfb3be7/observations.json",
+        "observation": "Previously valid individual framing/selection commands did not guarantee a visible counterpart after paper zoom and context resize. Export inherited the close-up. Prior technical evidence remains valid within its scope.",
+        "implementation_cause": "NOT_INVESTIGATED_IN_OBSERVATION_ONLY_TASK",
+        "product_correction": "PENDING_PO_CONTROL03_AND04; no fix or efficacy claimed",
+        "observer": "informed root agent using actual screen and OS input, not new human",
+        "skill_text_change": "None in this observation-only task; existing whole-flow advice used.",
+        "next_use_effectiveness": "PENDING_NEXT_USE"
+      }
     }
   ]
 }

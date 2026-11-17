@@ -626,3 +626,32 @@ Původní baseline i předchozí loft publikace jsou v pojmenovaných historick�
 položkách zachované přesně. Aktuální publikace není vydávána za nové testy
 nebo PO přijetí; PC009 A/B/C/D, PC010, human 0/NOT_RUN a P3 zůstávají otevřené.
 Bez testovacího či GUI běhu a bez zásahu do otevřeného desktopu.
+# Praktická produktová kontrola pěti úloh — 17. 11. 2026
+
+Vlastník hodnotí první workspace jako technicky přijatelný přírůstek;
+finální UX přijetí zůstává otevřené. Celý dům vytvořil integrační agent.
+Nezávislý agent vytvořil menší čtyřdílný model a ověřil soubory domu;
+neproběhly dva nezávislé průchody tvorbou celého domu.
+
+Následující kontrolu provedl root na skutečném `bfb3be7` vizuálně přes OS myš
+a klávesnici podle aktuálních snímků, bez hledání cest v manuálu či kódu UI.
+Je to informovaný agent, nikoli nový člověk nebo vlastník osobně; nepoužil
+předchozí scénář domku ani další regresní sadu. Bootstrap pouze otevřel
+skutečné prázdné AuthorMainWindow s oddělenými settings, bez injekce modelu.
+
+| Úloha | Výsledek pozorování |
+|---|---|
+| Nový jednoduchý díl | Dokončeno a uloženo. Tlačítko prvního dílu je malé vpravo dole; instrukce „obrysu vlevo“ neodpovídá skice otevřené dole. |
+| Rozměr stěny a bezpečný návrat | Dokončeno s obtížemi: dva horní body na 4,5 m místo přímého ovladače výšky. Vrácení obou změn obnovilo původní dokument. |
+| Papírový díl, přiblížení a přesun | Dokončeno: zachovaný výběr Severní stěny, příkaz Výběr zvětší díl, tažení posune kotvu 30/110 → 35/112 mm; poté Zpět. |
+| Spoj a protikus | Částečně: A2 a severní střecha jsou v rozbalené sekci Autorské spoje. Ukázat protikus vybere střechu, papír však zůstane u původní stěny. Zúžení pohledů po přepnutí kontextu oba ořízne; ruční Vše opraví 3D. |
+| Přehled exportu | Částečně: vstup převezme detail dílu bez hran stránek. Po ručním Vše jsou dvě A4; až potvrzení říká 2 stránky, 1:100, SVG/PDF. Souhrn devíti dílů, rozmístění a měřítka chybí. Potvrzení bylo zrušeno, nový writer proof se netvrdí. |
+
+[Snímky, uložený první díl a stručné pozorování](../p2/implementation/evidence/po-five-task-bfb3be7/observations.json)
+zachovávají i meze ověření. [Kontrola zachování](../p2/implementation/evidence/po-five-task-bfb3be7/preservation.json)
+potvrzuje shodné SHA256 původního domku a pracovní kopie po vrácení změn.
+P1 nálezy PO-CONTROL01–04 jsou otevřené v jediné queue; implementační příčina
+přechodů nebyla v této pozorovací úloze zkoumána a žádná oprava se netvrdí.
+Produktový kód, testy, skills text a původní důkazy zůstávají beze změny.
+AC-US08 má nadále nula nových lidí; tato kontrola není jeho splněním.
+

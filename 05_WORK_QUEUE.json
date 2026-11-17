@@ -1449,9 +1449,10 @@
           "docs/p2/implementation/evidence/workspace-house-191d24e-run01/results.json",
           "docs/p2/implementation/evidence/workspace-repair-native/results.json",
           "docs/p2/implementation/evidence/workspace-final-128a0dd-targeted.json",
-          "docs/p2/implementation/evidence/workspace-final-dock-native/results.json"
+          "docs/p2/implementation/evidence/workspace-final-dock-native/results.json",
+          "docs/p2/implementation/evidence/po-five-task-bfb3be7/observations.json"
         ],
-        "status": "INDEPENDENT_EXPERT_BASE_FLOW_APPROVED; NEW_HUMAN_NOT_RUN",
+        "status": "PRIOR_TECHNICAL_SCOPE_APPROVED; FIVE_TASK_PRODUCT_FRICTION_OPEN; NEW_HUMAN_NOT_RUN",
         "implementation_in_this_slice": true,
         "defer_to_visual_redesign": false,
         "ui_rework_evidence": {
@@ -1465,7 +1466,51 @@
         }
       },
       "continuation_2026_11_17": "First redesigned workspace/recovery increment independently approved; native ownexpert story, timer/crash restoration, repaired names/framing/collapse/dock and complete manual house A11surfaces/9parts/2A4/reopen author edit/SVG/PDF. Whole A/B/C/D consolidation and owner product acceptance remain open.",
-      "priority_update_2026_11_17": "Owner rejects currentUI target. Implement coordinated4context authoring workspace and safe drafts/recovery, evaluate complete first-modelGUI independently using local+web evidence; preserve every geometry/manual-layout/export capability. No new roadmap or general audit."
+      "priority_update_2026_11_17": "Owner rejects currentUI target. Implement coordinated4context authoring workspace and safe drafts/recovery, evaluate complete first-modelGUI independently using local+web evidence; preserve every geometry/manual-layout/export capability. No new roadmap or general audit.",
+      "owner_workspace_review": {
+        "owner_verdict": "FIRST_INCREMENT_TECHNICALLY_ACCEPTABLE; FINAL_UX_OPEN",
+        "source": "Explicit owner product review after inspecting GitHub commit bfb3be7, native evidence and independent review;17November2026",
+        "clarification": "Integration agent created full house; independent agent created own smaller four-part model and reviewed house files. Not two full independent house-creation walkthroughs.",
+        "new_human_usability": "NOT_RUN",
+        "final_UX_product_acceptance": "OPEN",
+        "agent_five_task_control": {
+          "status": "COMPLETED_3_WITH_2_PARTIAL",
+          "source_sha": "bfb3be7db6aaaa79d3e47e54e7a178cfd17a3d71",
+          "kind": "Five-task product walkthrough by the informed authoring agent, driven visually through guarded OS mouse/keyboard input; not an unattended replay, new-human test, or second independent complete-house creation.",
+          "evidence": "docs/p2/implementation/evidence/po-five-task-bfb3be7/observations.json",
+          "original_preserved": true,
+          "no_product_fix_claimed": true
+        },
+        "complete_house_authoring_walkthroughs": 1,
+        "independent_complete_house_authoring_walkthroughs": 0,
+        "independent_four_part_walkthroughs": 1
+      },
+      "product_control_findings": [
+        {
+          "id": "PO-CONTROL01",
+          "priority": "P1",
+          "status": "OPEN",
+          "problem": "First action is peripheral; drawing guidance says left though sketch opens below."
+        },
+        {
+          "id": "PO-CONTROL02",
+          "priority": "P1",
+          "status": "OPEN",
+          "problem": "Wall dimension edit requires coordinating outline vertices; changed geometry emits technical assembly errors. Safe Undo works."
+        },
+        {
+          "id": "PO-CONTROL03",
+          "priority": "P1",
+          "status": "OPEN",
+          "problem": "After fitting paper part, context switch clips views; Show counterpart selects roof but leaves its paper part offscreen."
+        },
+        {
+          "id": "PO-CONTROL04",
+          "priority": "P1",
+          "status": "OPEN",
+          "problem": "Export inherits part close-up and lacks concise part/page/placement/scale readiness summary;2pages/1:100 appear only in confirmation."
+        }
+      ]
     },
     {
       "id": "PC-010",
@@ -2809,7 +2854,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "Owner review of actual published workspace/recovery desktop and editable manual house; then remaining PC009 A/B/C/D consolidation before historicalPC010.",
+  "current_authorized_package": "PC009: address concrete five-task product-control friction before expanding authoring features or historicalPC010; first technical workspace increment acceptable, finalUX open.",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2923,14 +2968,14 @@
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-11.md",
     "wip_source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
     "wip_branch": "revival/p2-continuation-20261117",
-    "next_required_technical_work": "Collect owner UX review on the functioning published desktop and address concrete findings; continue remaining PC009 A/B/C/D consolidation afterwards. Historical PC010 actual NOT_RUN until usable workspace; humanAC-US08 and physicalP3 remain NOT_RUN. No routine permission for authorized in-scope work.",
+    "next_required_technical_work": "Repair supported modeler dimension editing, visible cross-context/counterpart navigation and export readiness summary; make first creation action dominant and resolve stale guidance. Preserve geometry/identities/manual layout/recovery; verify the same five practical tasks afterwards. Owner hierarchy/visual findings and remaining A/B/C/D stay open; PC010/human/P3 NOT_RUN.",
     "resumed_on": "2026-11-17",
     "resume_source": "explicit_owner_PO_CONTINUATION_attachment_2026_11_17",
     "digital_source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "Published reviewed first workspace/recovery increment and opened independent editable house copy for owner desktop review. Remaining PC009 A/B/C/D consolidation, owner UX acceptance, historical PC010 and human/P3 evidence remain open.",
+    "active_work": "Requested visual five-task product control completed onbfb3be7:3completed(1withdimensionfriction),2partial(counterpart/export). Original model and saved copy byte-identical after Undo. Production unchanged; concrete P1 UX repairs pending.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3166,7 +3211,7 @@
       "owner_explicit_independent_agent_local_and_internet_patterns_request",
       "owner_screenshot_and_workspace_redesign_attachment_b9ec4989"
     ],
-    "current_UI_product_acceptance": "NOT_ACCEPTED",
+    "current_UI_product_acceptance": "FIRST_TECHNICAL_INCREMENT_ACCEPTABLE_PER_OWNER; FINAL_UX_OPEN",
     "first_delivery": "Working desktop vertical slice: empty project, several walls, dimension edit, join/tab, unfold, manualA4layout, save/reopen, SVG/PDF.",
     "contexts": [
       "Modelovani",
@@ -3178,5 +3223,23 @@
     "independent_validation": "Expert agent research and actualGUI review requested; not substituted for new-human AC-US08",
     "data_protection": "Independent atomic recovery drafts in active AuthorController/AuthorMainWindow, never overwrite last valid user file.",
     "historical_model": "Preparation preserved; actualPC010 after usable authoring workspace."
+  },
+  "owner_workspace_review_2026_11_17": {
+    "owner_verdict": "FIRST_INCREMENT_TECHNICALLY_ACCEPTABLE; FINAL_UX_OPEN",
+    "source": "Explicit owner product review after inspecting GitHub commit bfb3be7, native evidence and independent review;17November2026",
+    "clarification": "Integration agent created full house; independent agent created own smaller four-part model and reviewed house files. Not two full independent house-creation walkthroughs.",
+    "new_human_usability": "NOT_RUN",
+    "final_UX_product_acceptance": "OPEN",
+    "agent_five_task_control": {
+      "status": "COMPLETED_3_WITH_2_PARTIAL",
+      "source_sha": "bfb3be7db6aaaa79d3e47e54e7a178cfd17a3d71",
+      "kind": "Five-task product walkthrough by the informed authoring agent, driven visually through guarded OS mouse/keyboard input; not an unattended replay, new-human test, or second independent complete-house creation.",
+      "evidence": "docs/p2/implementation/evidence/po-five-task-bfb3be7/observations.json",
+      "original_preserved": true,
+      "no_product_fix_claimed": true
+    },
+    "complete_house_authoring_walkthroughs": 1,
+    "independent_complete_house_authoring_walkthroughs": 0,
+    "independent_four_part_walkthroughs": 1
   }
 }

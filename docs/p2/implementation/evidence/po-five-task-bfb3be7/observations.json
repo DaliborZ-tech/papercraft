@@ -1,0 +1,59 @@
+{
+  "kind": "Five-task product walkthrough by the informed authoring agent, driven visually through guarded OS mouse/keyboard input; not an unattended replay, new-human test, or second independent complete-house creation.",
+  "source_sha": "bfb3be7db6aaaa79d3e47e54e7a178cfd17a3d71",
+  "product_or_manual_code_consulted_for_click_paths": false,
+  "production_changes": false,
+  "new_regression_suite_run": false,
+  "outcomes": [
+    {
+      "task": 1,
+      "status": "COMPLETED",
+      "observation": "Created and saved a new closed four-point part from the empty project via visible first-part action and Finish. The action is peripheral and the viewport instruction incorrectly says left while sketch is below."
+    },
+    {
+      "task": 2,
+      "status": "COMPLETED_WITH_FRICTION",
+      "observation": "Selected north wall, edited two upper outline points to4.5m, then reverted both via toolbar Undo. No direct width/height control was found. The exploratory one-point edit was also reverted. Saved house copy is byte-identical to original."
+    },
+    {
+      "task": 3,
+      "status": "COMPLETED",
+      "observation": "Pages preserves north wall selection. Toolbar Selection fits the part and makes labels readable. Native drag moved anchor30,110 to35,112mm; Undo restored it."
+    },
+    {
+      "task": 4,
+      "status": "PARTIAL",
+      "observation": "Found A2 and north roof counterpart under collapsed author joints. Show counterpart selects correct roof in3D/tree. Paper remains focused on previous wall; shrinking to two views clips both. Manual Fit All recovers3D only."
+    },
+    {
+      "task": 5,
+      "status": "PARTIAL",
+      "observation": "Export initially inherits close-up and hides page borders. After manual All, two pages are visible; confirmation says2pages at1:100 andSVG/PDF. No nine-part/placement/scale readiness summary is present. Confirmation cancelled; writer not exercised again."
+    }
+  ],
+  "preservation": {
+    "kind": "Post-walkthrough read-only preservation check, not a regression suite",
+    "source_sha": "bfb3be7db6aaaa79d3e47e54e7a178cfd17a3d71",
+    "original_before_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+    "original_after_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+    "walkthrough_copy_after_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+    "original_untouched": true,
+    "document_restored_after_undo": true,
+    "first_part_saved": true
+  },
+  "artifacts_sha256": {
+    "02-empty-visible.png": "f678c988174dc6500d9859d20960df6ee3889d9e449e7f1c5087d3504652f5cb",
+    "05-first-part-created.png": "71acd780b02ac824e799cc4361258537a8c19e84f5586a5eeabb8ef1a53f0536",
+    "18-height-changed.png": "551732521301dbdca57a3c0eac047cbedd88b2d346f72c103930be924627fb52",
+    "20-undo-settled.png": "9d432b7ddfb416d2d078afd491435cd194a569df1405dcb731380848c8dcfe7f",
+    "22-paper-wall-fit.png": "db180f845b5639d69c5ac5127f9cc8c9b3585817a42278c3f373ea9c1ed1167f",
+    "23-paper-wall-moved.png": "06eb1e23608e8640c1d6865588f300698ccf758ef925c30aa8296d23ddfc976f",
+    "27-show-counterpart.png": "f1c2b34749dbcb92e5260320ff43d81e50395dc6e772b9e33ce2e987654b8005",
+    "29-export-arrival.png": "00b0f59dfb6b428912accdf2832a468786d16f1a700eaa4b3aedb18d05b3f134",
+    "31-export-confirmation.png": "28cda6412530f64a9f1542cdcd03d3a12697bd31141a00ae197af96fff73a3fb",
+    "process.json": "175172fe5c71a8186b3b38f20ffb3e40bea73fb3f8447ee24a0fcea65f4c557a",
+    "preservation.json": "8d26ce861eb23ab6d9acf7ded0ecbc64a37ee54ad06c347d8c9dd5e4e79ed58f",
+    "inputs.jsonl": "692170beaa730bfcfbe5d1efe00e6e2257de19cb5fff12c07e901eea493f62dc",
+    "first-part.apcraft": "3390f8229ce024d038f0ae2b3d7d52900355fbd5bef29ee7dbb2eb2eb68a4a8e"
+  }
+}

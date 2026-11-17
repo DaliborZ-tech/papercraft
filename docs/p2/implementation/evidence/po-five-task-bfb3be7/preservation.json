@@ -1,0 +1,10 @@
+{
+  "kind": "Post-walkthrough read-only preservation check, not a regression suite",
+  "source_sha": "bfb3be7db6aaaa79d3e47e54e7a178cfd17a3d71",
+  "original_before_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+  "original_after_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+  "walkthrough_copy_after_sha256": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+  "original_untouched": true,
+  "document_restored_after_undo": true,
+  "first_part_saved": true
+}
