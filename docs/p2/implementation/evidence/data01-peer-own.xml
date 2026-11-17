@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="5" time="1.080" timestamp="2026-11-17T19:08:24.983951+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_recovery_peer_review" name="test_peer_adapter_import_identity" time="0.001" /><testcase classname="tests.authoring.test_recovery_peer_review" name="test_recovery_preserves_unfinished_hole_on_existing_wall" time="0.101"><failure message="AssertionError: Záložní koncept se nepodařilo uložit: Object of type SketchPlane is not JSON serializable&#10;assert False">tests\authoring\test_recovery_peer_review.py:47: in test_recovery_preserves_unfinished_hole_on_existing_wall
+    assert checkpointed, window.statusBar().currentMessage()
+E   AssertionError: Záložní koncept se nepodařilo uložit: Object of type SketchPlane is not JSON serializable
+E   assert False
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: QFontDatabase: Cannot find font directory C:/Users/dalib/projects/papercraft/.venv/Lib/site-packages/PySide6/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="tests.authoring.test_recovery_peer_review" name="test_clean_document_with_unconfirmed_inline_name_is_checkpointed[Brana pending]" time="0.047"><failure message="AssertionError: Pending inline name has no separate draft&#10;assert False">tests\authoring\test_recovery_peer_review.py:80: in test_clean_document_with_unconfirmed_inline_name_is_checkpointed
+    assert checkpointed, "Pending inline name has no separate draft"
+E   AssertionError: Pending inline name has no separate draft
+E   assert False
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="tests.authoring.test_recovery_peer_review" name="test_clean_document_with_unconfirmed_inline_name_is_checkpointed[]" time="0.053"><failure message="AssertionError: Pending inline name has no separate draft&#10;assert False">tests\authoring\test_recovery_peer_review.py:80: in test_clean_document_with_unconfirmed_inline_name_is_checkpointed
+    assert checkpointed, "Pending inline name has no separate draft"
+E   AssertionError: Pending inline name has no separate draft
+E   assert False
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase><testcase classname="tests.authoring.test_recovery_peer_review" name="test_fsync_failure_preserves_last_valid_draft_original_and_cleans_temp" time="0.018" /></testsuite></testsuites>

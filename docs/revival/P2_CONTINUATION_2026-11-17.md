@@ -215,3 +215,32 @@ náhledů. Zápis je synchronní lokální atomic operace; není doložená výk
 libovolně velkém projektu. Native desktop tohoto přírůstku, společný nový
 workspace a nezávislé review feature jsou PENDING; autor je sám neschvaluje.
 Nový člověk AC-US08 i fyzické P3 zůstávají NOT_RUN.
+
+### Nezávislé DATA01 peer review společného pinu `bea8020`
+
+Reviewer není autor RecoveryStore/controller API/adapteru; vlastní workspace
+tímto review neschvaluje. Izolace `recovery-peer-review`, vlastní PYTHONPATH,
+Qt offscreen a shared Python; import adapteru ověřen uvnitř pytest. Původních
+**33 recovery testů PASS / 9,14 s** zahrnuje skutečné přerušení procesu,
+dead-lock převzetí, původní soubor, dirty kopii, C/D data i disk-full a mazání.
+Vlastní fsync negativ navíc zachová přesné bytes posledního konceptu a
+původního souboru a uklidí nedokončený temporary soubor.
+
+Dvě konkrétní mezery v adapteru vyžadují opravu DATA01:
+
+- **DATA01-R01-01:** skutečná akce Otvor + dva body do existující stěny nese
+  `draft_plane` jako `SketchPlane`. `capture_ui` jej vloží přímo do JSON,
+  checkpoint vrátí False s `Object of type SketchPlane is not JSON serializable`.
+  Poslední dobrý koncept zůstane zachován, nové body otvoru se však neukládají.
+  Budoucí oprava musí přesně obnovit rovinu vlastníka otvoru, bez odhadu XY.
+- **DATA01-R01-02:** potvrzena již avizovaná integrační mezera inline názvu:
+  čistý model + rozepsaný `selection_name` (platný text nebo prázdný neplatný
+  název) nejsou `sketch` ani `pending_number`, takže checkpoint vrátí False
+  a koncept nevytvoří. Po přerušení práce tento raw vstup chybí.
+
+[Vlastní frozen testy](../../tests/authoring/test_recovery_peer_review.py)
+mají na `bea8020` **2 PASS / 3 FAIL / 1,07 s**, dvě parametrizace odpovídají
+stejné druhé příčině. [Původní JUnit](../p2/implementation/evidence/data01-peer-existing.xml),
+[vlastní JUnit s oběma nálezy](../p2/implementation/evidence/data01-peer-own.xml).
+Zdroj se v této revizi neopravuje; autor adapteru i root dostali přesné
+reprodukce. Následuje nezávislý replay stejných očekávání na opravném pinu.
