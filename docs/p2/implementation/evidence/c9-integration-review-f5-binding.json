@@ -1,0 +1,27 @@
+{
+  "candidate": "f5f06b2014d5a576d4eb7bdbd4182668cacbb4cd",
+  "full_suite_source": "4f110d9c8fe85224997257c764385e88ac188fe5",
+  "full_suite_evidence": "aeb8ec78f22e89e9f3ebf7db04376844cd133258",
+  "full_junit": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "1916",
+    "time": "710.352",
+    "timestamp": "2026-11-17T18:07:27.179885+01:00",
+    "hostname": "Dalibor"
+  },
+  "file_hashes_checked": 255,
+  "imports_at_finish_checked": 106,
+  "src_tree": "049979b375533ed957f30c059b5aa58141957914",
+  "tests_tree": "1ea477aefd8fae7f65d80dc012dc64be9ed31131",
+  "independent_D_replay": "57 PASS166.37s on f5",
+  "scope": "Integration verification, not P2 product acceptance or release",
+  "imports_at_finish_worktree": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/quarter-arc-fix",
+  "component_src_identity": {
+    "3e6fbb6": 115,
+    "5415e2": 2,
+    "09b6811": 1
+  }
+}

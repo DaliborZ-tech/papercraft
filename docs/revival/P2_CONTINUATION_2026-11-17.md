@@ -45,3 +45,54 @@ finální nezávislé digitální ověření zůstávají rozpracované. AC-US08
 0 skutečných nových účastníků / NOT_RUN. Fyzické P3 je NOT_RUN.
 
 Integrace tohoto pokračování na master a ověření remote SHA zatím PENDING.
+
+## Nezávislé integrační review C9 — f5f06b2
+
+Reviewer `editor_review` není autorem produkční delty. Posouzen přesný
+`f5f06b2014d5a576d4eb7bdbd4182668cacbb4cd` proti baseline
+`00db953cd8d936fb7d99d0503c7bd2ecd04bf369`. Vlastní připravovaný PC009
+after-reopen driver v tomto kandidátu není a toto review jej neschvaluje.
+
+**APPROVED_IN_C9_TECHNICAL_INTEGRATION_SCOPE**, bez otevřeného technického
+nálezu. Finální předávací metadata po nové změně produktových priorit a
+publikace mají ještě svůj konkrétní následný pin; toto není přijetí P2 ani release.
+
+- Celé `src` odpovídá již nezávisle posouzeným komponentám: 115 souborů z
+  `3e6fbb6`, dva UI soubory z `5415e2`, `loft_surface.py` z `09b6811`.
+  Tools jsou shodné s posouzeným `42dca62`; žádná skrytá integrační změna
+  producentu, identity, tolerance nebo GUI handleru nepřibyla.
+- [Úplná sada na 4f110d9](../p2/implementation/evidence/p2-candidate-4f110d9-full/binding.json):
+  **1916 PASS / 0 failures, errors, skips / 710,39 s**. Ověřeno 255 skutečných
+  source/test/tool hashů vůči f5 a všech 106 in-process importů z vlastního
+  `quarter-arc-fix/src`. `src` i `tests` Git trees jsou mezi 4f a f5 shodné.
+  Ruff dotčených souborů PASS; původních 47 selhání a5 se zachovává jako FAIL.
+- Oprava tří legacy D fixture v `4f110d9` požaduje stale a odmítnutý snapshot,
+  potom explicitní recompute a invariant profilů, generací, kotev, layoutu a
+  originálních bytů. Původní poison/output očekávání nebyla změněna. Vlastní
+  replay všech tří souborů: [57 PASS / 166,37 s](../p2/implementation/evidence/c9-integration-review-f5-D-tests.xml),
+  včetně dvou nových fresh schema9 LINE/CURVED save/reopen/SVG/PDF/poison případů.
+- [Vlastní audit skutečných výstupů](../p2/implementation/evidence/c9-integration-review-f5-artifacts.json)
+  znovu ověřil všechny tři finální C projekty na a5: každý 132 runtime hashů a
+  22 artifact hashů, přesný snapshot/manifest/SVG/PDF digest, aktuální schema9,
+  příjemce, zachovaný vypnutý slot a upravený vrchol, dvě stránky a oba locks.
+  Nezávislé analytické plochy proti skutečnému SVG/PDF splňují původní 0,01 mm².
+  Všech šest finálních Inkscape stránek má 24 shodných artifact hashů, zachovaný
+  originální bundle, opakovanou celokřivkovou/frame kontrolu a přesně uložený
+  víceslovný Unicode label. Screenshoty skutečného C náhledu, layoutu a editoru
+  byly zkontrolovány; žádný nový desktopový vstup reviewer nevyslal.
+- Oba původní native ARC/CUBIC saved projekty se ve f5 načetly a daly přesně
+  původní JSON snapshot; ověřeno dalších 48 output hashů. Přenos není novým
+  native během. Qt150 má oddělené již posouzené skutečné viewport/own-HWND
+  události, samostatný zoom/pan a zachování po refreshi.
+
+[Vazba integračního review](../p2/implementation/evidence/c9-integration-review-f5-binding.json)
+a [opakovatelný čtenář artefaktů](../p2/implementation/evidence/c9-integration-review-own.py).
+SK008/013/016 odpovídají doložené příčině a vymezenému technickému přenosu.
+Nové odstavce a záznamy SK017/018 jsou **APPROVED_IN_SKILL_TEXT_SCOPE**: oddělují
+orientovanou zdrojovou topologii od korespondence a CSS frame od operandů/bbox.
+Účinnost SK008 follow-up a SK016/017/018 správně zůstává PENDING_NEXT_USE;
+SK013 má pouze prokázaný technický přenos valid/rejected context, ne člověka.
+Konstrukční, UI, verification a delivery skills jsou doloženy konkrétními
+source-bound negativy, zachováním práce, skutečnými soubory a jiným reviewerem.
+Bezpečná první verze a navazující DATA01/UX práce zůstávají otevřené; AC-US08
+0/NOT_RUN, PC010/AC-AU19 a fyzické P3 se tímto schválením neuzavírají.

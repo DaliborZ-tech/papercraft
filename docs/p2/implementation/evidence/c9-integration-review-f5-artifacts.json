@@ -1,0 +1,102 @@
+{
+  "native_pin": "a5eedc9b3a345320b9ae07e9e44bc7387c5ef73b",
+  "import": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\editor-review\\src\\archpapercraft\\authoring\\project.py",
+  "reviewed_candidate": "f5f06b2014d5a576d4eb7bdbd4182668cacbb4cd",
+  "native": [
+    {
+      "directory": "c-cylinder-qt150-a5eedc9-run02",
+      "elapsed_seconds": 101.125,
+      "source_hashes": 132,
+      "artifact_hashes": 22,
+      "snapshot_digest": "d0b80b06dc458b169eed1e4839aad438d31ffd4514ca2c09f3291d4bab50525a",
+      "svg_area": 1897.495592153877,
+      "pdf_area": 1897.4955921538685,
+      "independent_analytic_expected_area": 1897.4955921538758
+    },
+    {
+      "directory": "c-cone-native-a5eedc9-run01",
+      "elapsed_seconds": 169.063,
+      "source_hashes": 132,
+      "artifact_hashes": 22,
+      "snapshot_digest": "86dc686398895a45cc654fb47733170976044cd7546c54faecc03a2f4602be1b",
+      "svg_area": 2839.973323116419,
+      "pdf_area": 2839.9732485552063,
+      "independent_analytic_expected_area": 2839.9733231164187
+    },
+    {
+      "directory": "c-near-native-a5eedc9-run01",
+      "elapsed_seconds": 146.5,
+      "source_hashes": 132,
+      "artifact_hashes": 22,
+      "snapshot_digest": "45858f1780e7d6f58f8f4f385a89323035522ef51b6ceb566974f5f1ad1f96be",
+      "svg_area": 1897.4965346421352,
+      "pdf_area": 1897.4965344919726,
+      "independent_analytic_expected_area": 1897.4965346318822
+    }
+  ],
+  "editors": [
+    {
+      "directory": "c-cone-inkscape-a5-page-658380bf-b7a2-4efe-a664-01ab8bb8943a",
+      "artifacts": 4,
+      "compared_paths": 1,
+      "frames": 1,
+      "actual_saved_unicode": "Žluťoučký – vlastní díl"
+    },
+    {
+      "directory": "c-cone-inkscape-a5-page-dc337d6a-455f-4d47-b4c0-cc08b8f6085d",
+      "artifacts": 4,
+      "compared_paths": 23,
+      "frames": 1,
+      "actual_saved_unicode": "Žluťoučký – vlastní díl"
+    },
+    {
+      "directory": "c-cylinder-inkscape-a5-page-49e28d0b-ab8d-4c49-a1e7-1aa9b7773b58",
+      "artifacts": 4,
+      "compared_paths": 23,
+      "frames": 1,
+      "actual_saved_unicode": "Žluťoučký – vlastní díl"
+    },
+    {
+      "directory": "c-cylinder-inkscape-a5-page-c9c9d65a-6794-4b8d-b391-505202cfbaa0",
+      "artifacts": 4,
+      "compared_paths": 1,
+      "frames": 1,
+      "actual_saved_unicode": "Žluťoučký – vlastní díl"
+    },
+    {
+      "directory": "c-near-current-inkscape-a5eedc9-run01",
+      "artifacts": 4,
+      "compared_paths": 23,
+      "frames": 1,
+      "actual_saved_unicode": "Žluťoučký – vlastní díl"
+    },
+    {
+      "directory": "c-near-inkscape-a5-page-e61e0355-ea20-4503-871d-98eea2ae79c9",
+      "artifacts": 4,
+      "compared_paths": 1,
+      "frames": 1,
+      "actual_saved_unicode": "Žluťoučký – vlastní díl"
+    }
+  ],
+  "historic_source_transfer": [
+    {
+      "kind": "arc",
+      "native_source": "696906954f3e6863a6c945a1afc0d62f9d60f769",
+      "checked_artifacts": 24,
+      "current_snapshot_identical": true,
+      "new_native_run_claimed": false
+    },
+    {
+      "kind": "cubic",
+      "native_source": "696906954f3e6863a6c945a1afc0d62f9d60f769",
+      "checked_artifacts": 24,
+      "current_snapshot_identical": true,
+      "new_native_run_claimed": false
+    }
+  ],
+  "no_desktop_input": true,
+  "audit_diagnostics": [
+    "Initial overly strict clean-tree guard encountered only earlier untracked docs evidence; actual runtime source hashes all matched.",
+    "Own cone oracle initially used ideal sqrt800 instead of the actual six-decimal model-mm input2828.427125; entered depth is used without changing tolerances."
+  ]
+}
