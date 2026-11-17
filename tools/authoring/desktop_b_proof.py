@@ -1068,16 +1068,28 @@ def run_windows(output, expected_sha, fixture="all"):
 
             initial = camera()
             point = view.viewport().rect().center()
-            native_dialogs.wheel_at(self.w, view.viewport(), point,
-                                   report.setdefault("native_camera_inputs", []))
-            QTest.qWait(60)
+            bars = [view.horizontalScrollBar(), view.verticalScrollBar()]
+            for _ in range(6):
+                previous_zoom = camera()[0][0]
+                native_dialogs.wheel_at(self.w, view.viewport(), point,
+                                       report.setdefault("native_camera_inputs", []))
+                QTest.qWait(60)
+                check(math.isclose(camera()[0][0], previous_zoom*1.15, rel_tol=1e-10),
+                      "Actual Ctrl+wheel did not reach the paper zoom handler")
+                if any(bar.maximum() > bar.minimum() for bar in bars):
+                    break
+            check(any(bar.maximum() > bar.minimum() for bar in bars),
+                  "Pan proof has no scroll range after bounded real zoom input")
+            zoomed = camera()
+            delta = QPoint(*[-17 if bar.value() == bar.minimum() else 17 for bar in bars])
             QTest.mousePress(view.viewport(), Qt.MouseButton.MiddleButton, pos=point)
-            QTest.mouseMove(view.viewport(), point + QPoint(17, 11), delay=70)
+            QTest.mouseMove(view.viewport(), point + delta, delay=70)
             QTest.mouseRelease(
-                view.viewport(), Qt.MouseButton.MiddleButton, pos=point + QPoint(17, 11)
+                view.viewport(), Qt.MouseButton.MiddleButton, pos=point + delta
             )
             authored = camera()
-            check(authored != initial, "Actual wheel/pan did not change the view camera")
+            check(zoomed != initial and authored[1] != zoomed[1],
+                  "Actual middle-button pan did not move the already zoomed paper camera")
             state = copy.deepcopy(self.w.project.to_dict())
             self.shortcut(Qt.Key.Key_R)  # Real ordinary UI refresh, already current material.
             check(camera() == authored, "Ordinary refresh reset the author's zoom/pan")
@@ -1088,6 +1100,8 @@ def run_windows(output, expected_sha, fixture="all"):
             step(
                 f"{name}_reopen_auto_frame_and_refresh_preserves_authored_camera",
                 all_centers_visible_without_Home=centers,
+                camera_after_zoom=zoomed,
+                pan_scroll_ranges=[[bar.minimum(), bar.maximum()] for bar in bars],
                 authored_camera=authored,
             )
 
