@@ -1,95 +1,51 @@
 # ArchPapercraft Studio
 
-Aktuální autorský režim0.3.0 začíná prázdným projektem: vlastní úsečkové profily, konkávní plochy a skutečné otvory, propojený výběr3D/papír, základní švy/chlopně, ruční stránky, undo/save/reopen a vektorové SVG/PDF. [Co bylo skutečně dodáno a ověřeno](docs/p2/implementation/PC006A_DELIVERY.md). Vnitřní připojení s přesahy, křivkové ostění a stočené pláště se dále dodávají podle přijatéhoP2v1.2; nejsou tímto označeny hotové. Následující původní seznam popisuje širší vizi a historické funkce; není certifikátem správnosti staré geometrické pipeline.
+Pracovní autorská verze **0.3.0** pro vytváření vlastních papírových modelů
+architektury. Začíná prázdným modelem; vlastní plochy a profily propojuje s 3D
+náhledem, spoji, papírovými díly a ručním rozmístěním na stránky.
 
-**Architektura-first 3D modelář s exportem vystřihovánek (PDF/SVG/DXF)**
+**[Český rychlý start](docs/manual_cs.md)** vede od prvního obdélníku nebo skici
+přes úpravu rozměrů a spoj až k uložení a exportu.
 
-> *Jedna aplikace, ve které postavím 3D model historické/moderní architektury
-> a jedním klikem dostanu profesionální vystřihovánku v měřítku, se značením,
-> chlopněmi a návodem.*
-
----
-
-## Hlavní funkce
-
-| Oblast | Popis |
+| Pracovní kontext | K čemu slouží |
 |---|---|
-| **3D Modelář** | Parametrické architektonické objekty (zdi, okna, střechy, cibulky, věže) |
-| **Analýza povrchů** | Klasifikace ploch (rovinné / vyvinutelné / nevyvinutelné) |
-| **Automatické švy** | Inteligentní dělení modelu na díly podle ostrých hran a velikosti |
-| **Rozklad (Unfold)** | Přesný rozvin pro roviny, góry/prstence pro cibulky |
-| **Chlopně & značení** | Oušky, horní/dolní přehyby, číslování dílů, párování hran |
-| **Rozmístění** | Automatické balení dílů na listy papíru (shelf-packing) |
-| **Export** | PDF (přesné měřítko), SVG (vrstvy), DXF (pro plotr/laser), PNG (náhled) |
-| **Stavební návod** | Legenda, seznam dílů, tabulka párování hran, doporučené pořadí |
+| Modelování | Vlastní obrysy a otvory, výběr, názvy, body a umístění ploch; volitelná Skica |
+| Spoje a rozvin | Hrany, přehyby a lepení, chlopně, přepočet papírových dílů |
+| Stránky | Ruční umístění a natočení dílů na A4, zámky a rozmístění podle zadaných roztečí |
+| Export | Kontrola připravenosti a společný export editovatelných SVG a vektorového PDF |
 
-## Instalace
+Projekt ukládá příkaz **Uložit** do `.apcraft`. Oddělený 30sekundový záložní
+koncept umožňuje obnovu po přerušení práce; nepřepisuje uložený projekt.
+[Rozsah obnovy a ochrana originálu](docs/manual_cs.md#uložení-a-obnova-práce).
 
-```bash
-# Vytvoření virtuálního prostředí
+## Instalace a spuštění
+
+Python **3.10+**. Příklad pro Windows PowerShell v kořeni repozitáře:
+
+```powershell
 python -m venv .venv
-.venv\Scripts\activate   # Windows
-# source .venv/bin/activate  # Linux
-
-# Instalace projektu (vývojový režim)
-pip install -e ".[dev]"
-
-# (Volitelně) OpenCascade back-end pro přesná B-Rep tělesa
-pip install pythonocc-core
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m archpapercraft
 ```
 
-## Spuštění
+Instalovaný vstupní příkaz je také `archpapercraft`.
 
-```bash
-archpapercraft          # přes entry-point
-# nebo
-python -m archpapercraft
+## Vývojové ověření
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pytest tests -q
 ```
 
-## Spuštění testů
+Aktuální stav dodávání je v [pracovní frontě](05_WORK_QUEUE.json) a
+[záznamu pokračování](docs/revival/P2_CONTINUATION_2026-11-17.md).
+Test s novým uživatelem **AC-US08: NOT_RUN (0 účastníků)**;
+fyzický výtisk a sestavení **P3: NOT_RUN**. Pracovní verze ani technické
+ověření nejsou závěrečnou produktovou akceptací P2.
 
-```bash
-pytest tests/ -v
-```
+Původní [README](docs/archive/README-before-workspace-2026-11-17.md) a
+[manuál 0.2](docs/archive/manual_cs-v0.2-before-workspace-2026-11-17.md)
+jsou zachované jako historické texty. Pro současné autorské UI platí rychlý
+start výše.
 
-## Architektura projektu
-
-```
-src/archpapercraft/
-├── app.py                   # Vstupní bod aplikace
-├── core_geometry/           # Primitiva, mesh operace, validace
-├── scene_graph/             # Transformace, hierarchie uzlů, scéna
-├── arch_presets/            # Parametrické arch. prvky (zeď, střecha, okno…)
-├── paper_analyzer/          # Klasifikace povrchů, kontrola vyrobitelnosti
-├── seam_editor/             # Graf švů, automatické švy, zamykání
-├── unfolder/                # Přesný rozvin, góry, prstence, fazetový rozklad
-├── tabs_generator/          # Generátor chlopní a značení, stavební návod
-├── layout_packer/           # Balení dílů na stránky, dlaždicový tisk
-├── exporter/                # PDF, SVG, DXF, PNG export
-├── project_io/              # Projektový formát (.apcraft), autosave, snapshoty
-├── commands/                # Undo/Redo systém (Command pattern)
-├── preferences/             # Nastavení aplikace (zkratky, snap, UI)
-└── ui/                      # PySide6 GUI (viewport, panely, průvodce…)
-tests/                       # Testovací sada (pytest)
-samples/                     # Ukázkové projekty
-docs/                        # Dokumentace
-```
-
-## Technický stack
-
-* **GUI** — PySide6 (Qt 6)
-* **CAD jádro** — OpenCascade (pythonocc-core) pro B-Rep tělesa, booleany, revolve
-* **Triangulace** — OpenCascade mesh + numpy fallback
-* **Export** — reportlab (PDF), svgwrite (SVG), ezdxf (DXF), Pillow (PNG)
-
-## Cílové skupiny
-
-- **Papíroví modeláři** — detail, přesnost, chlopně, značení, textury
-- **Studenti architektury / designu** — rychlé hmotové modely v měřítku
-- **Školy a kroužky** — jednoduché ovládání, výukové šablony
-- **Makers (plotr/laser)** — DXF vrstvy cut/score, přesné čáry a tolerance
-- **Muzea / turistické atrakce** — generování modelů památek (suvenýry)
-
-## Licence
-
-MIT
+Licence: MIT.
