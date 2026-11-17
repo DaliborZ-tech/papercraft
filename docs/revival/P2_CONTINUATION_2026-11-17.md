@@ -437,3 +437,39 @@ a nezměněnými zdrojovými hashi:
 Úplný běh d94 výše zůstává samostatným výsledkem; počty se nesčítají.
 Po tomto průchodu se ještě opravuje přetrvávající prázdná výška docku při
 výslovném skrytí podrobností problémů. Nezávislý native repair replay následuje.
+#### Nezávislé review oprav na `191d24e653af2bc63cfa6e77d46b998eb516cf32`
+
+**Code/offscreen APPROVED v rozsahu workspace + recovery; native repair replay
+zatím NOT_RUN, desktop má výhradně root.** Původní d94 CHANGES_REQUIRED výše
+zůstává platný historický výsledek. Přezkoumány konkrétní delty naming bce/318,
+collapse 279 a framing 883 plus agregát raw recovery. Přejmenování používá
+jeden existující undo příkaz a zachovává part UUID/číslo/layout; propagace je
+omezena na jedinou plochu a přesně rozpoznané automatické jméno. Explicitní
+odlišný název a mixed-part zůstávají samostatné. Sbalení nyní respektuje
+checked stav headeru i při refresh. Fit centruje midpoint promítnutých bounds
+zpět v souřadnicích modelu; ortogonální inverse je správně transpose rotace.
+Nemění se geometrie, rozsah vybraných objektů ani papírový layout.
+
+Nezávislý replay **130 PASS / 21,93 s**, bez vynechaných testů v tomto cíleném
+rozsahu: workspace, attachments, všechny recovery suites a původní fit orákula.
+Navíc dvě vlastní varianty následného přejmenování a devět vlastních projekcí
+**skutečného vlastního nativního APcraft** při třech úhlech a třech viewports
+potvrzují viditelnost všech bodů a střed obrazových bounds, bez použití
+camera/project_points pro expected. [Vlastní testy](../../tests/authoring/test_workspace_repair_independent.py),
+[JUnit](../p2/implementation/evidence/workspace-repair-final.xml),
+[src/tools LF blobs a skutečné importy uvnitř pytest](../p2/implementation/evidence/workspace-repair-final-binding.json).
+Ruff vlastních testů PASS. Diagnostický
+[první pokus](../p2/implementation/evidence/workspace-repair-independent-before.xml)
+obsahuje jednu chybnou expertní domněnku o automatickém trimování jména;
+existující doména úmyslně zachovává platný raw text. Po přečtení `_name` je
+vlastní expectation přesná shoda raw textu v obou jménech a další rename;
+nejde o změnu AC ani opravu produktu. Druhý dílčí replay 43 PASS je rovněž zachován.
+
+Skills se projevily konkrétně: konstrukce drží oddělený autorský a papírový
+rozměr a fyzický limit chlopně; authoring-ui posuzuje návaznost vlastních názvů
+a skutečně skryté pokročilé akce; verification váže actualfile, src a imports
+a rozlišuje skalární projekci od nativního vykreslení; delivery zachovává
+původní FAIL a předává konkrétní opravy k neautorskému replay. README a rychlý
+manuál odpovídají čtyřem kontextům a neslibují human/P3 PASS. Jedna současná
+queue položka `next_required_technical_work` ještě zmiňuje již uzavřené CORE9
+hypotézy; root ji má srovnat s aktuálním C9closed stavem, bez změny historie.

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="1.237" timestamp="2026-11-17T19:29:00.634502+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_workspace_repair_independent" name="test_inline_name_stays_consistent_after_normalization_and_second_rename[South wall]" time="0.087" /><testcase classname="tests.authoring.test_workspace_repair_independent" name="test_inline_name_stays_consistent_after_normalization_and_second_rename[  South wall  ]" time="0.052"><failure message="AssertionError: assert '  South wall  ' == 'South wall'&#10;  &#10;  - South wall&#10;  +   South wall  &#10;  ? ++          ++">qtbot = &lt;pytestqt.qtbot.QtBot object at 0x000001D950BB9280&gt;
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1640/test_inline_name_stays_consist1')
+raw = '  South wall  '
+
+    @pytest.mark.parametrize("raw", ["South wall", "  South wall  "])
+    def test_inline_name_stays_consistent_after_normalization_and_second_rename(qtbot,tmp_path,raw):
+        host=AuthorMainWindow(settings=QSettings(str(tmp_path/'own.ini'),QSettings.IniFormat))
+        qtbot.addWidget(host)
+        host._confirm_replace=lambda:True
+        host.show()
+        def prepare(project):
+            profile=project.add_profile([[0,0],[6000,0],[6000,4000],[0,4000]])
+            return project.add_surface(profile)
+        sid=host.controller.execute('Independent rectangle',prepare)
+        host.select_surface(sid)
+        pid=host.project.surfaces[sid].part_id
+        host.selection_name.setFocus()
+        host.selection_name.selectAll()
+        qtbot.keyClicks(host.selection_name,raw)
+        qtbot.keyClick(host.selection_name,Qt.Key_Return)
+&gt;       assert host.project.surfaces[sid].name=='South wall'
+E       AssertionError: assert '  South wall  ' == 'South wall'
+E         
+E         - South wall
+E         +   South wall  
+E         ? ++          ++
+
+tests\authoring\test_workspace_repair_independent.py:23: AssertionError
+---------------------------- Captured Qt messages -----------------------------
+QtWarningMsg: QOpenGLWidget is not supported on this platform.
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context
+QtWarningMsg: This plugin does not support createPlatformOpenGLContext!
+QtWarningMsg: QOpenGLWidget: Failed to create context</failure></testcase></testsuite></testsuites>
