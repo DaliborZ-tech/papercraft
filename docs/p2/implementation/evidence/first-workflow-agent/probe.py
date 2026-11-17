@@ -18,8 +18,9 @@ from PySide6.QtTest import QTest
 from PySide6.QtWidgets import (
     QApplication, QComboBox, QDialogButtonBox, QDoubleSpinBox, QFormLayout,
     QGraphicsView, QLabel, QLineEdit, QPushButton, QScrollArea, QToolButton,
-    QTreeWidget, QWidget,
+    QTreeWidget, QWidget, QListWidget, QCheckBox,
 )
+from shiboken6 import isValid
 from archpapercraft.ui.author_window import AuthorMainWindow
 import archpapercraft.ui.author_window as source
 
@@ -64,7 +65,9 @@ def dump():
                 logical_dpi=app.primaryScreen().logicalDotsPerInch(),
                 frame=window.frameGeometry().getRect(), minimum_hint=[window.minimumSizeHint().width(),window.minimumSizeHint().height()],
                 menus=[a.text() for a in window.menuBar().actions()],
-                labels=[w.text() for w in context().findChildren(QLabel) if w.isVisible()],
+                labels=[w.text() for w in context().findChildren(QLabel) if isValid(w) and w.isVisible()],
+                issues=[list_widget.item(i).text() for list_widget in context().findChildren(QListWidget)
+                        for i in range(list_widget.count())],
                 buttons=[dict(text=w.text(), enabled=w.isEnabled()) for cls in (QPushButton,QToolButton)
                          for w in context().findChildren(cls) if w.isVisible()],
                 fields=[dict(label=label, type=w.metaObject().className(), visible=w.isVisible(),
@@ -94,7 +97,7 @@ def execute(command):
     if op == "dump":
         (OUT / "ui.json").write_text(json.dumps(dump(),ensure_ascii=False,indent=2),encoding="utf8")
     elif op == "screen":
-        app.primaryScreen().grabWindow(int(window.winId())).save(str(OUT / (command["name"]+".png")))
+        app.primaryScreen().grabWindow(int(context().winId())).save(str(OUT / (command["name"]+".png")))
     elif op == "menu":
         menus=window.menuBar()
         action=next(a for a in menus.actions() if command["path"][0] in a.text())
@@ -123,7 +126,22 @@ def execute(command):
             QTest.keyClicks(widget,command["text"])
             if command.get("commit",True):QTest.keyClick(widget,Qt.Key_Tab)
     elif op == "key":
-        QTest.keySequence(context(),command["key"])
+        QTest.keySequence(app.focusWidget() or context(),command["key"])
+    elif op == "path":
+        # Reuse only the verified own-PID native file-picker adapter, never a
+        # standard model/workflow driver or a fake file-dialog return value.
+        sys.path.insert(0,str(ROOT / "tools/authoring"))
+        from native_dialogs import schedule_path
+        schedule_path(Path(command["path"]),native_records)
+    elif op == "check":
+        widget=next(w for w in context().findChildren(QCheckBox) if w.text()==command["text"])
+        click(widget)
+    elif op == "issue":
+        matches=[(widget,i) for widget in context().findChildren(QListWidget)
+                 for i in range(widget.count()) if command["text"] in widget.item(i).text()]
+        assert len(matches)==1
+        widget,i=matches[0];widget.scrollToItem(widget.item(i))
+        QTest.mouseClick(widget.viewport(),Qt.LeftButton,pos=widget.visualItemRect(widget.item(i)).center())
     elif op == "tree":
         tree=window.tree
         matches=tree.findItems(command["text"],Qt.MatchContains | Qt.MatchRecursive)
@@ -162,6 +180,7 @@ def execute(command):
 
 
 count=0
+native_records=[]
 def poll():
     global count
     path=OUT/"commands.jsonl"
@@ -180,7 +199,7 @@ def poll():
 
 timer=QTimer();timer.timeout.connect(poll);timer.start(200)
 app.aboutToQuit.connect(lambda: log(dict(about_to_quit=True,window_visible=window.isVisible(),title=window.windowTitle(),state=window.project.to_dict())))
-heartbeat=QTimer();heartbeat.timeout.connect(lambda:log(dict(heartbeat=True,visible=window.isVisible(),title=window.windowTitle())));heartbeat.start(10000)
+heartbeat=QTimer();heartbeat.timeout.connect(lambda:(log(dict(heartbeat=True,visible=window.isVisible(),title=window.windowTitle())), (OUT/'native-dialogs.json').write_text(json.dumps(native_records,indent=2),encoding='utf8')));heartbeat.start(10000)
 log(dict(start=True,pid=os.getpid(),hwnd=int(window.winId()),source=source.__file__,
          evidence_type="EXPERT_NATIVE_QT_WIDGET_AUTOMATION_NOT_NOVICE_HUMAN"))
 app.exec()
