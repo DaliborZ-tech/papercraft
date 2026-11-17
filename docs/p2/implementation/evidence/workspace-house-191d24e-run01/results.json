@@ -1,0 +1,5635 @@
+{
+  "status": "PASS_REQUESTED_FIXTURE",
+  "source_sha": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
+  "requested_fixture": "model-A",
+  "after_reopen_edit_requested": true,
+  "fixture_status": {
+    "model-A": "PASS_TECHNICAL_UI",
+    "mixed-part": "NOT_RUN",
+    "curves-planar": "NOT_RUN",
+    "loft-B1": "NOT_RUN",
+    "loft-B2": "NOT_RUN",
+    "loft-Bezier": "NOT_RUN",
+    "D-segmented": "NOT_RUN",
+    "D-gothic": "NOT_RUN",
+    "AU13-line": "NOT_RUN",
+    "C-cylinder": "NOT_RUN",
+    "C-cone": "NOT_RUN",
+    "C-near": "NOT_RUN"
+  },
+  "source_status_at_start": "",
+  "source_files_sha256": {
+    "pyproject.toml": "7a5d40ab75f08734520a42a5400383f09bc5e4cebbe91c70fc28256cde7cf913",
+    "src/archpapercraft/__init__.py": "206abf74cf67f9545a232c2ba7f0e7dc7d2cd4993a75022770ff22f020c1f162",
+    "src/archpapercraft/__main__.py": "d68505b4a2edb93d47ca192d716934f0fcd96d521ea6a3e3b39c54d0db3a512b",
+    "src/archpapercraft/app.py": "83c2f0a9b0fb74e2d741009d033bddd78ef156bf4cc8096931681caed1ffc715",
+    "src/archpapercraft/application/__init__.py": "68882fe29cec1ed6857a27ea2c4dd44c006d4ea9a93c4dd5497b83e575b4314c",
+    "src/archpapercraft/application/author_controller.py": "473aa69c89ed6d837fec18c631487e8cef68fe076ebd29b2964ef62e855574fa",
+    "src/archpapercraft/arch_presets/__init__.py": "d1908ae43b4c8b136536692e7c2d0862cd0e4519ae5c2e4a11d4d3f2eedd3f20",
+    "src/archpapercraft/arch_presets/buttress.py": "940f4168f87334b2315ea4bc3f7962207bdca30de3404eae6765cafa6aeb5a5f",
+    "src/archpapercraft/arch_presets/floor_slab.py": "8a077a32554c678e50b27737f0dc49742b50ee3079018d61b40bce37b06efd69",
+    "src/archpapercraft/arch_presets/gothic_window.py": "434ddd736b1ea40710ba3f22e175d08e972778d1fb69a007d835da39dbff7056",
+    "src/archpapercraft/arch_presets/onion_dome.py": "195cc2ea3a484dc22198e63e400afc1e9ddd1e84c6d1553096cc9aa3c8eeb36f",
+    "src/archpapercraft/arch_presets/opening.py": "7124792c6f470b46dd6cd2a9df6be87a91a3775c6ae385e71f7a7b6eac6c7ed4",
+    "src/archpapercraft/arch_presets/roof.py": "e2700225a5b4d1735c67c2faa0113d228b580f6af8514a9918d238accc9c1ecb",
+    "src/archpapercraft/arch_presets/tower.py": "115bd945d8b65117ee14f56ff0a9482426cfb6d9d5cc9237c5198f4f2617f971",
+    "src/archpapercraft/arch_presets/wall.py": "1b3896e5bc4224f3b092aebb1de6370a8102e94286ae24f2ba337634e95c765c",
+    "src/archpapercraft/authoring/__init__.py": "b0844fca50b090cdf265358924b44576866d929f19fc9743cf78aed47debcecf",
+    "src/archpapercraft/authoring/attachments.py": "dd9c1787f4990b16348461b157afea2c31a3eaabbd70998f514ec5a4152cd75b",
+    "src/archpapercraft/authoring/bend.py": "a3fef029bfa1353a1f3f727bde62bbbe4ceb387cadb54090ac4418bf348a6009",
+    "src/archpapercraft/authoring/circular_material.py": "223d2831026af37172428dd96d2fafacfb193e4a4cf982cfb892112287098cc0",
+    "src/archpapercraft/authoring/circular_shell.py": "d5df14959df8cf0f30fc0b846536244e2b49a9fa91725dc3df33a67539926c3a",
+    "src/archpapercraft/authoring/clearance.py": "feef3c084826d1ce165bd46eb8e00766d7eecb837b32bc3c4c863720e310ef1a",
+    "src/archpapercraft/authoring/commands.py": "ae714672155bf0cadecb438f64565d84c7f5fc59f564dad34e513927423579b5",
+    "src/archpapercraft/authoring/curve_area.py": "3932bc7485f86fc96943f8dd4367c8b3188633b27be74be2c7180d50c92912b9",
+    "src/archpapercraft/authoring/curve_material.py": "60be7aa11c8fbf2e431a9a625f51b900cfde52b3e7145309aa48a8c5ef7573fa",
+    "src/archpapercraft/authoring/curve_subdivision.py": "147a0b7c86ab1618848793c209f6ca14bc553665d9b8e271840f16654ca9730c",
+    "src/archpapercraft/authoring/curve_topology.py": "25e062a0b0132ae37c99bff4bf88ac4bb9a0cb8d59ed9364828555e0dd42ca55",
+    "src/archpapercraft/authoring/curved_connectors.py": "dc9ee0cdc4fb0b1d41b0229fbe046ce8bdb16acb6e4361b5353d9cf2ab2ca7b9",
+    "src/archpapercraft/authoring/curved_tabs.py": "8c65ea9f01249185f3b0d75e5e580b87308eac8a41783300ca93f0cfc7ad26ed",
+    "src/archpapercraft/authoring/curved_tabs_chart.py": "df13d4635ffdf836eb4ed760d90d747b325f6cd704342aab0d83e77c716505e7",
+    "src/archpapercraft/authoring/curved_tabs_transfer.py": "213f8255cdea7628897a0b2a2aa74a5e3856dac0e8838ecaeb9512b3df70b65f",
+    "src/archpapercraft/authoring/curves.py": "698bcda493ca71a204b0d3ea0fd78b0bc189ad611e0ff9b8bfc8ff54f4b9d81a",
+    "src/archpapercraft/authoring/editing.py": "dfa4ae01193f14713a79c603e67c7a7ac3e463cc9682f2d60636db525742360e",
+    "src/archpapercraft/authoring/errors.py": "c73b4d32e1f609eab78ae0f0067b5dc483d80435a92a77e89efe43ea12e9d838",
+    "src/archpapercraft/authoring/geometry.py": "a183daa0f705972ea482498bf795a0bacb19954c9b1c228735bcdda782c8e05e",
+    "src/archpapercraft/authoring/interior.py": "4d14e1efe69f7a45292b47208c10f1b10eaef93e1ecd4ce89688e2fe9faa0614",
+    "src/archpapercraft/authoring/loft_area.py": "1e5289c591a632987d87c70461d338ac7634a5aa9919f27826b486cf63aee238",
+    "src/archpapercraft/authoring/loft_curve_compaction.py": "61c9b8341ef4c8509a5422c0fbe936d097726f8660138d65da5873e46d13f1f6",
+    "src/archpapercraft/authoring/loft_curves.py": "321c74efe4567f8ead29fbb956d4cfdee89769129a0f8170b8f21957a8c37eba",
+    "src/archpapercraft/authoring/loft_geometry.py": "9e23361227b4f9d6f1f6ac767b00429577039d190c34366af8fe4034c159c648",
+    "src/archpapercraft/authoring/loft_surface.py": "24c8902ac0c811349dbc4ce7a4aed9f7752a6bc658918a56854a69515e0341b9",
+    "src/archpapercraft/authoring/model.py": "b08b46b364774019c751c23809c979849c0bef5d14a73f4721e9b8dc75a6a6ed",
+    "src/archpapercraft/authoring/paper.py": "2afa3313781a978289e673b60ef3f24ef597880e319721016ec306896a949bfd",
+    "src/archpapercraft/authoring/profile_curves.py": "ed1616707345cce48ef91d2eca852ac42800a38ddde7ab71d1e28f3643780d1a",
+    "src/archpapercraft/authoring/profile_source_views.py": "73d089b8d6bbdeca6cc287f5d8bcefd64df7dfa9374b6f61512062948e59dee4",
+    "src/archpapercraft/authoring/profile_subdivision.py": "f2db87af11d658cb581a5fb0609f97ab8e42c2fcac77ef0132cd52ba045ab4b9",
+    "src/archpapercraft/authoring/project.py": "9844ded95e33af4c8a10465239877eebd7c4c6044bc40727074046f42fe298c9",
+    "src/archpapercraft/authoring/recovery.py": "b85f0e223e5f03bd78aa498ac0db258cacc45de1095388f27aabc1072b456278",
+    "src/archpapercraft/authoring/segmented_loft.py": "2b44a56acdee4f796f0f76d97ee203d2634133099d069d1751a0b10f9e0da472",
+    "src/archpapercraft/authoring/segmented_loft_curves.py": "03808d3d7676968c6ff7aa5780ff630351886446be23ee874c8a1141c752f2e0",
+    "src/archpapercraft/authoring/segmented_surface.py": "bd5f8f6f577f7abec92375c8a9ec1fae568dc965720b7d123dde3a8e5f64c423",
+    "src/archpapercraft/commands/__init__.py": "d0ea5751319dc73b3e71e41e4a13f60faa074813d14ac5c9161105e43edd5733",
+    "src/archpapercraft/commands/command_stack.py": "03e7ae501112131d7f371175d1544b754447570fadede4be4aafc1ff354b510d",
+    "src/archpapercraft/core_geometry/__init__.py": "d77b3b1cce40c6ee9d24777adb83816ce85397a41098a3060d22627972cd4e13",
+    "src/archpapercraft/core_geometry/backend.py": "2a006d5cc572ea8f4cb9a66a274914ab183c141e0f893b30aa7c91dbabe71b4d",
+    "src/archpapercraft/core_geometry/mesh.py": "48696f4af46f8b62afb4847e9932d273ab47ab27cfe47e35fa3de2001f571e64",
+    "src/archpapercraft/core_geometry/operations.py": "ff8593cfc3aeca1d488c33e756710d200769dc1eacfef9ad9a51cf60c592de39",
+    "src/archpapercraft/core_geometry/primitives.py": "e260273ef3e7c262015301f923cd92d66dbf4b4fde5e46d7c3ad6feaf33a010c",
+    "src/archpapercraft/core_geometry/stable_ids.py": "a4d60958111b48110a5786f6533c50feb72836e425393521302f9f904f72147e",
+    "src/archpapercraft/core_geometry/units.py": "e2a192f69ec811e736d28421ef75273a02e8ef848a2637cf697896b825d8c3e4",
+    "src/archpapercraft/core_geometry/validation.py": "ca2d6b0a6ec301fb26d68e2a98c8e6ec073791d4cc66b057a796fe42c550a321",
+    "src/archpapercraft/exporter/__init__.py": "291acd7224b75a972a42a7c5037f20f7ff0c9067fb8b292fa80f8d91a16002be",
+    "src/archpapercraft/exporter/author_export.py": "b4dd67b3c4c4b4fda9247aae5cde09f1b93d0b3a6ec05b9f0c936af9fd6c2c39",
+    "src/archpapercraft/exporter/circular_output_validation.py": "14bd6099dd44245c85cf97e4b3510688b0f48415ba0648d58b431edf3be04fc6",
+    "src/archpapercraft/exporter/curve_output_validation.py": "0a53ab74e760b407b815e1f7213173a1c2304ce73e5cd992b14efd1691b82454",
+    "src/archpapercraft/exporter/dxf_export.py": "862b5166b582b36615a0a9077d842399c458ac56ddf5144d54a1aa896e847475",
+    "src/archpapercraft/exporter/loft_output_validation.py": "1240b942c263890ce55a2be512ba5c21421d0268945824b9dccea4049d8c47a7",
+    "src/archpapercraft/exporter/pdf_export.py": "23d8a1d8fdd8ff10d025cdd52ec0f82adb69ccb0b7266ec6fe57bba1911f4986",
+    "src/archpapercraft/exporter/png_export.py": "e9c21156ef2bce57fff88e0f40de0f00910bd8334e4ccbf3919912b339c9483d",
+    "src/archpapercraft/exporter/segmented_output_validation.py": "150e4d29a06125dcce4e8fdfca795b2393a766234b29b8b32795cca8c853d0b4",
+    "src/archpapercraft/exporter/svg_curve_validation.py": "57ba93fd22d7f5f7d27e9b881fba1615721b5bf6f295d77e2f1934a4ae7ae4a5",
+    "src/archpapercraft/exporter/svg_export.py": "c4140bb70c4b3705c3a717c981bfd04620b99c9e61124b913ab92b5e8c4a3c0d",
+    "src/archpapercraft/layout_packer/__init__.py": "e5a1bed15e2323ee2345ca68c7ca2eec8d6560cd0b996288b34f990496b1062f",
+    "src/archpapercraft/layout_packer/packer.py": "220df2b4727fcc06c33c3c14d32177c5eff72d25b3ec408b9cee395523c5a939",
+    "src/archpapercraft/paper_analyzer/__init__.py": "68fb1806e7e1110cca60824abcc1c1be278fd6c936a7864d403a7a81b50b8a20",
+    "src/archpapercraft/paper_analyzer/classifier.py": "242f8974d54b2826531ca6e687b7b778e5c3ed95640a5417456b8712eb3fc77e",
+    "src/archpapercraft/precision.py": "d1959526a99845adbe173e713e0abeb162425d000d6fc2427625d0314cf48317",
+    "src/archpapercraft/preferences/__init__.py": "793c51b9985df9e2f68acdc232a544932e37bf146ab57c6a2e9517ecfd4a5c91",
+    "src/archpapercraft/preferences/settings.py": "de54a8b913dae518812927d143db33f095e33b42ddab0367de8f6b2ee7053047",
+    "src/archpapercraft/project_io/__init__.py": "71f473d7dc179c7ac98f50347a26552350f9d16fa31e5ab2acb63d03be5a6210",
+    "src/archpapercraft/project_io/project.py": "cf6156d7f277c7de886997e3b4991c2831f790aa77e57d5542c0993e6c501fbf",
+    "src/archpapercraft/scene_graph/__init__.py": "1f308d3546635f2eefd00a10420d879c5ef3c77b1976ed4bf33bdb164471af33",
+    "src/archpapercraft/scene_graph/node.py": "c03bd44daaaa6c0a640a56351ceb9c1ec84231642a288baa3a7fc8cf164a75fc",
+    "src/archpapercraft/scene_graph/scene.py": "02d6320c37471c14a47f7db434ff1121990f0df549478def1875b72e125c0e4a",
+    "src/archpapercraft/scene_graph/snap.py": "3d8a93cbb734144e1b32c1817ebb22ab4de1faed4665002620ce8b09110a5f83",
+    "src/archpapercraft/scene_graph/transform.py": "611cf83baa7582a68b058a09100a6842a887619ff20a209256f4fea7ea28fe34",
+    "src/archpapercraft/seam_editor/__init__.py": "8ad950dfdc10e49489fcb227f77425f10f2aa785d31827d60c917eb578eedbbd",
+    "src/archpapercraft/seam_editor/auto_seams.py": "f758f6a2f74dcce2952cc063fa70c24aea83a5982f4804a2cdb6de946201105c",
+    "src/archpapercraft/seam_editor/seam_graph.py": "3308b08e79c474171010295f61dfa5f9294b444665515ff8e600ee33c3f3a11a",
+    "src/archpapercraft/tabs_generator/__init__.py": "0832cf402b15264f877ccbde5787cbf04db149d50900b8d2e46cb485b49f6282",
+    "src/archpapercraft/tabs_generator/build_guide.py": "ca8c1271c766b6d0cbb64c31114e48519334097a698cd34eb778d78d73a12626",
+    "src/archpapercraft/tabs_generator/markings.py": "ea0121ded80a8a521dca1e733c00488747e543e7a827dc00800e3badac51456e",
+    "src/archpapercraft/tabs_generator/tabs.py": "4a74bda7030c5d6641695e913b6c3c6ebf627b15c08e8d774fa08dde521798e5",
+    "src/archpapercraft/ui/__init__.py": "be690a93959cd494cca8a38c79e9c7490f42f363a1f7bc39c486dbd5225674ba",
+    "src/archpapercraft/ui/author_attachment.py": "53fa23c0278c8f84bbedb1a3f3726da3bc69fa51a277b78c5b06aad7a0be59d6",
+    "src/archpapercraft/ui/author_connectors.py": "45be7038a1a6b276379963344a41be96ab4da3b83ce50b67b59e3948946ae134",
+    "src/archpapercraft/ui/author_curved_connectors.py": "92fda43bd4d509ff3681df255cb4836cd13f32f36ca35251cf65c0dfcbe39658",
+    "src/archpapercraft/ui/author_curves.py": "bdc2d472cfd65ddd20415dc52262f1732e828c4d3a67f4690efeb93ea95b94ed",
+    "src/archpapercraft/ui/author_editing.py": "3a0590ca0f4613755220fd15d04255810b017ea2cc498fd2af13cffa5d8389ee",
+    "src/archpapercraft/ui/author_export_job.py": "669d5cfb555f69b7baebcd5953ba149ad6304a7c258501ee2c8a21009c63bc32",
+    "src/archpapercraft/ui/author_loft.py": "778b72d6ef361ec86a1b04e933262a983314ec7203cdbdb9f72d76fee15f9ff6",
+    "src/archpapercraft/ui/author_manual_layout.py": "f465983b101a6e56b0cefb518029c0123728bb5ce05ff867ace2aaf34009b501",
+    "src/archpapercraft/ui/author_material.py": "348775acf2f3a2829734052b775abfc0bbe9832d34bc284b1bd3e83802aeb4ab",
+    "src/archpapercraft/ui/author_paper.py": "c304be052ebf68dd721b0e3ecf7fd131f3bd115aafb1e2a243257fbd8751087e",
+    "src/archpapercraft/ui/author_problems.py": "516654523a41aa063780db284294f3b79a013f223fbed9d5d76ed905213b790b",
+    "src/archpapercraft/ui/author_profile_placement.py": "5694f234355ec9ae1c69a1836f5a443758f6a51a0cbf2b155fc061bf7e422e98",
+    "src/archpapercraft/ui/author_recovery.py": "c7e2f370ab9c5adf071c87012b4305a285ff3ed86708dd808ba88edf76ba54fb",
+    "src/archpapercraft/ui/author_segmentation.py": "ffc67da8501369cb3a7345643f20100ec088b77774aea80f00f62a2cb8c99f07",
+    "src/archpapercraft/ui/author_sketch.py": "0e8e5688f8711ced8783b20c12fc3bb31f10d1cea0f464164d9965e4883bf98e",
+    "src/archpapercraft/ui/author_subdivision.py": "24921694e04d11ef1827500f87b503e09f1ec52982326cddd376ed4f03a6eae7",
+    "src/archpapercraft/ui/author_viewport.py": "add34c7c47e92d63ef89fa8507d5a20f6c62e3e20683614faac67c934d539565",
+    "src/archpapercraft/ui/author_window.py": "ed84188332bd72a4b50e5b110b3c59dc2fa3807f05302a7eb64a6b37da3ba3da",
+    "src/archpapercraft/ui/author_workspace.py": "cfd51839e702ded0a35a326256e7bdd8a71e952eaa9b8c027824d5fcd70ce0c1",
+    "src/archpapercraft/ui/main_window.py": "f85f67dc0980fb051b4dd0f6dab07d6277423f30c744f752ab1be20270cc18d7",
+    "src/archpapercraft/ui/object_tree.py": "67a1c91bcee4db4697460f928f76226e28a6c9aed701cf098d3517da56727f0b",
+    "src/archpapercraft/ui/papercraft_panel.py": "02c201ad9e9d883a3ca48f956a4077cfe13783577bb8d7fa4be5f6cab478e6c8",
+    "src/archpapercraft/ui/preferences_dialog.py": "0c464fb7bb1f3712472c88ef2868e53f76c0e3ee78ebbd25d943073ba461b0ac",
+    "src/archpapercraft/ui/properties_panel.py": "822d39df9afc9475084e23b19ca9c6714826cd958a91cb8e9fe3eb3198a9b09f",
+    "src/archpapercraft/ui/viewport_3d.py": "fa851f24d541712781e4b9a7346424bfe9429e62b2cbc250d483c4eb69d610c4",
+    "src/archpapercraft/ui/wizard.py": "2ac975ed9cd021652904db36898fdf89ee962338e67cbf97cd30b8a4467d5178",
+    "src/archpapercraft/unfolder/__init__.py": "6a4e1f02a94e10f0bb25638c81ab177d58f87e9fb4442a3412249d1052b27916",
+    "src/archpapercraft/unfolder/approx_unfold.py": "2e4f2e31a30c64ffa81656be27f7c85252c2037d7ff919a1c108a5274d77aaaa",
+    "src/archpapercraft/unfolder/exact_unfold.py": "706b148c630b66f2825a262e590441eda0a088d553c2f199b322e23a5056b08b",
+    "src/archpapercraft/unfolder/strategies.py": "1033d5f9b6575224f5cd24a5a01350b5768cbd28514d57931a7e070fb8cbadbc",
+    "tools/authoring/circular_desktop_steps.py": "583a1559646592d74dcf40464b1cc583af7df92f37d2e36c10fe84154961bbd9",
+    "tools/authoring/circular_svg_oracle.py": "22680fcb82ec9dc852067d054edd5a854b56c8e335f316c0b8d54cd0db59f50c",
+    "tools/authoring/desktop_b_proof.py": "35de28d59163a2418e7b406dae86059622439ccc2c78f0009804f8773d7f64e1",
+    "tools/authoring/desktop_proof.py": "eed46fcee2a40534835e311be5b23b946af7551152eb935ae6987eab8404859f",
+    "tools/authoring/desktop_scaling_probe.py": "c4b2e5037ac8b67cd575f8bd4163654cd2653524ffd587906c4c95542d5f286c",
+    "tools/authoring/editor_curve_equivalence.py": "3a20d7ea1f127db9b71c3a30d4e745a825e6161b3474de1bde19c1729cdb882f",
+    "tools/authoring/editor_probe.py": "b254141acb41c0dfa3c859991fc019d966666f816b3be490470b9703adc33cc0",
+    "tools/authoring/loft_desktop_steps.py": "deae04158afc3fcb19095340f4484e5232b99cc3125e3a26e00307e8a575dbc7",
+    "tools/authoring/native_dialogs.py": "cb25938fd3fcce99dfb882f5fc4c8876432338f2a0062c6508c5f7987dc4e76e",
+    "tools/authoring/reopen_desktop_steps.py": "def85069a73c2ca1189c28a760544561602d6e07676a699671eee01c7aaa04cc",
+    "tools/authoring/segmentation_desktop_steps.py": "ff785067fa0f23e8106d3e8216676b7cf70eaf441193f9bfe1b443fab9e234b4",
+    "tools/authoring/smoke.py": "1288018a91ebb6b3e50dd884796f3ad24854931873731f53403f15d8282e4b08",
+    "tools/authoring/subdivision_desktop_steps.py": "0813add3f5267c21ab5a5531bf652019dfdfb317129a4876df2a256c97106322",
+    "tools/authoring/vector_curve_oracle.py": "0085a92e7668b69febef9bd28ded60509b693c2a31c699ac4ab2de4f568210d1",
+    "tools/authoring/workspace_desktop_steps.py": "6fe602e9f36033db473eb9e4c24542032bc3914b371dfc37bd01089162998de7"
+  },
+  "actual_application_module": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\src\\archpapercraft\\ui\\author_window.py",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "application_version": "0.3.0",
+  "pid": 27752,
+  "oracle": {
+    "scale": 0.01,
+    "building_model_mm": {
+      "length": 10000,
+      "width": 6000,
+      "wall": 4000,
+      "ridge": 7000
+    },
+    "initial_roof_paper_mm": {
+      "length": 108,
+      "half_slope": 49.49747468305833
+    },
+    "roof_wall_trace_paper_mm": 7.0710678118654755,
+    "changed_south_eave_model_mm": 800,
+    "changed_south_slope_paper_mm": 53.74011537017761,
+    "changed_trace_from_eave_paper_mm": 11.313708498984761,
+    "areas_paper_mm2": {
+      "long_wall": 4000,
+      "gable_wall": 3300.0,
+      "base": 13000,
+      "brace_outer": 2700.0,
+      "brace_hole": 300,
+      "brace_net": 2400.0,
+      "soffit": 800,
+      "initial_half_roof": 5345.727265770299,
+      "changed_south_roof": 5803.932459979182
+    },
+    "authored_top_tabs": {
+      "hinge_length_mm": 100,
+      "count": 4,
+      "gap_mm": 1,
+      "base_length_mm": 24.0,
+      "triangle_width_mm": 5,
+      "triangle_area_mm2": 60.0,
+      "custom_outline_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          24,
+          0
+        ],
+        [
+          24,
+          2
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "custom_area_mm2": 56,
+      "active_count": 3,
+      "active_area_mm2": 176.0,
+      "existing_bottom_area_mm2": 144.0,
+      "wall_cut_area_mm2": 4320
+    },
+    "mixed": {
+      "initial_rise_model_mm": 3000,
+      "changed_rise_model_mm": 3500,
+      "initial_slope_model_mm": 4242.640687119285,
+      "changed_slope_model_mm": 4609.772228646444,
+      "changed_angle_deg": 49.398705354995535,
+      "page_number": 2,
+      "anchor_paper_mm": [
+        60,
+        60
+      ],
+      "rotation_deg": 30,
+      "wall_page_points_paper_mm": [
+        [
+          60.0,
+          60.0
+        ],
+        [
+          146.60254037844388,
+          110.0
+        ],
+        [
+          126.60254037844388,
+          144.64101615137756
+        ],
+        [
+          40.0,
+          94.64101615137756
+        ]
+      ]
+    }
+  },
+  "versions": {
+    "PySide6": "6.12.0",
+    "numpy": "2.5.4",
+    "shapely": "2.2.0",
+    "pypdf": "6.21.4",
+    "reportlab": "5.1.0",
+    "PyOpenGL": "3.1.10"
+  },
+  "evidence_kind": "actual_app_main_QTest_widgets_own_PID_native_dialogs",
+  "new_user": "NOT_RUN",
+  "new_user_reason": "Owner confirmed no actual new participant is currently available",
+  "physical_build": "NOT_RUN",
+  "AU19": "NOT_RUN_PC010",
+  "started_local": "2026-11-17T19:30:35+0100",
+  "steps": [
+    {
+      "name": "native_own_names_delete_cancel_confirm_undo_redo_material_noop",
+      "status": "PASS",
+      "preserved_source_profile": "177a1a9e-7c03-4eb4-9d8d-8211ef4d9ac4",
+      "physical_material": "UNKNOWN; no physical clearance certificate"
+    },
+    {
+      "name": "A_full_open_building_base_brace_hole_band_soffit",
+      "status": "PASS",
+      "checks": [
+        {
+          "label": "south net area",
+          "actual": 4000.0,
+          "expected": 4000,
+          "tolerance": 0.01
+        },
+        {
+          "label": "north net area",
+          "actual": 4000.0,
+          "expected": 4000,
+          "tolerance": 0.01
+        },
+        {
+          "label": "west_gable net area",
+          "actual": 3300.0,
+          "expected": 3300.0,
+          "tolerance": 0.01
+        },
+        {
+          "label": "east_gable net area",
+          "actual": 3300.0,
+          "expected": 3300.0,
+          "tolerance": 0.01
+        },
+        {
+          "label": "base net area",
+          "actual": 13000.0,
+          "expected": 13000,
+          "tolerance": 0.01
+        },
+        {
+          "label": "brace net area",
+          "actual": 2400.0,
+          "expected": 2400.0,
+          "tolerance": 0.01
+        },
+        {
+          "label": "soffit net area",
+          "actual": 800.0,
+          "expected": 800,
+          "tolerance": 0.01
+        },
+        {
+          "label": "roof_south net area",
+          "actual": 5345.727265439999,
+          "expected": 5345.727265770299,
+          "tolerance": 0.01
+        },
+        {
+          "label": "roof_north net area",
+          "actual": 5345.727265439999,
+          "expected": 5345.727265770299,
+          "tolerance": 0.01
+        },
+        {
+          "label": "wall trace along initial roof",
+          "actual": 7.0710678118654755,
+          "expected": 7.0710678118654755,
+          "tolerance": 0.01
+        }
+      ],
+      "roles": {
+        "south": "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+        "north": "2194569c-8cd9-4757-8804-fd6625b0a1bc",
+        "west_gable": "b8d9f67a-dd84-4757-9965-7f87963207f6",
+        "east_gable": "d93552da-e07e-4173-b156-b0f55705a135",
+        "roof_south": "75549fb4-a564-4cac-b372-afb4c6c77044",
+        "roof_north": "74a014d1-803e-4c3f-9634-9258caad6785",
+        "base": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+        "brace": "dafd3082-1c7b-4ee9-83a3-76367e5c135f",
+        "soffit": "2a9f39fd-468f-4688-8703-e175c407ecdb",
+        "band_root": "b1acb940-ad0a-40e6-8aff-6c3cbeb6cf93"
+      }
+    },
+    {
+      "name": "A_positive_split_triangles_individual_off_and_drawn_custom_tab",
+      "status": "PASS",
+      "connector_id": "5da26589-5d6f-408a-bc7c-ecc775baa90f",
+      "tab_ids": [
+        "36edf05e-17d1-499a-8f30-95711a17c187",
+        "660e795e-a682-4164-882d-8c94487be764",
+        "71eababb-7567-44c9-8d43-b69dbcc84ce0",
+        "7fdfc37a-217c-400a-b679-cf327e07fa5f"
+      ],
+      "disabled_id": "660e795e-a682-4164-882d-8c94487be764",
+      "custom_id": "71eababb-7567-44c9-8d43-b69dbcc84ce0",
+      "active_area_mm2": 176,
+      "existing_bottom_area_mm2": 144,
+      "wall_material_mm2": 4000,
+      "wall_cut_mm2": 4320
+    },
+    {
+      "name": "A_asymmetric_500_to_800_model_mm_eave_preserves_live_trace",
+      "status": "PASS",
+      "trace_before": [
+        [
+          10400.0,
+          707.1067811865476
+        ],
+        [
+          400.0,
+          707.1067811865476
+        ]
+      ],
+      "trace_after": [
+        [
+          10400.0,
+          707.1067811865476
+        ],
+        [
+          400.0,
+          707.1067811865476
+        ]
+      ]
+    },
+    {
+      "name": "A_manual_piece_transfer_between_existing_pages",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_assembled_3D_pick_links_paper",
+      "status": "PASS",
+      "surface_id": "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+      "world_probe_mm": [
+        6666.666666666667,
+        0.0,
+        1333.3333333333333
+      ],
+      "pixel": [
+        448,
+        440
+      ]
+    },
+    {
+      "name": "actual_unlocked_manual_paper_drag",
+      "status": "PASS",
+      "part_id": "fb26c480-6de0-40ac-96d3-64636a825fa7",
+      "anchor_before": [
+        30.0,
+        30.0
+      ],
+      "anchor_after": [
+        32.0,
+        31.0
+      ]
+    },
+    {
+      "name": "actual_locked_paper_drag",
+      "status": "PASS",
+      "part_id": "fb26c480-6de0-40ac-96d3-64636a825fa7",
+      "anchor_before": [
+        30.0,
+        30.0
+      ],
+      "anchor_after": [
+        30.0,
+        30.0
+      ]
+    },
+    {
+      "name": "model-A_reopen_auto_frame_and_refresh_preserves_authored_camera",
+      "status": "PASS",
+      "all_centers_visible_without_Home": [
+        {
+          "part_id": "fb26c480-6de0-40ac-96d3-64636a825fa7",
+          "center_pixel": [
+            457,
+            233
+          ],
+          "bounds_pixel": [
+            394,
+            197,
+            128,
+            73
+          ]
+        },
+        {
+          "part_id": "cadc5767-0729-4d67-aa75-f53846c8d3d0",
+          "center_pixel": [
+            460,
+            320
+          ],
+          "bounds_pixel": [
+            399,
+            291,
+            122,
+            58
+          ]
+        },
+        {
+          "part_id": "97fd2cf6-3bbc-4e11-99d7-60786cc06814",
+          "center_pixel": [
+            563,
+            244
+          ],
+          "bounds_pixel": [
+            525,
+            200,
+            77,
+            89
+          ]
+        },
+        {
+          "part_id": "fb290ae5-a3e5-4872-ad5a-c9e457bf2040",
+          "center_pixel": [
+            563,
+            359
+          ],
+          "bounds_pixel": [
+            525,
+            314,
+            77,
+            90
+          ]
+        },
+        {
+          "part_id": "73a8614a-2f22-46a7-9a08-36f238dfca21",
+          "center_pixel": [
+            734,
+            263
+          ],
+          "bounds_pixel": [
+            668,
+            200,
+            132,
+            127
+          ]
+        },
+        {
+          "part_id": "95a3860f-c7d7-4a74-9884-46773a2c2830",
+          "center_pixel": [
+            746,
+            410
+          ],
+          "bounds_pixel": [
+            668,
+            349,
+            157,
+            123
+          ]
+        },
+        {
+          "part_id": "8314ab00-66bc-436d-be47-70a6e93befe6",
+          "center_pixel": [
+            437,
+            422
+          ],
+          "bounds_pixel": [
+            399,
+            383,
+            77,
+            78
+          ]
+        },
+        {
+          "part_id": "7acf45a9-a540-4648-9666-2dbfbccb408a",
+          "center_pixel": [
+            528,
+            462
+          ],
+          "bounds_pixel": [
+            479,
+            452,
+            100,
+            20
+          ]
+        },
+        {
+          "part_id": "e16632a4-e4a2-4e05-836f-bff0d97ad483",
+          "center_pixel": [
+            438,
+            479
+          ],
+          "bounds_pixel": [
+            410,
+            473,
+            57,
+            13
+          ]
+        }
+      ],
+      "camera_after_zoom": [
+        [
+          2.004524747297032,
+          0.0,
+          0.0,
+          2.004524747297032,
+          0.0,
+          0.0
+        ],
+        [
+          281.36345074338266,
+          149.16253860331813
+        ]
+      ],
+      "pan_scroll_ranges": [
+        [
+          0,
+          0
+        ],
+        [
+          -60,
+          -24
+        ]
+      ],
+      "authored_camera": [
+        [
+          2.004524747297032,
+          0.0,
+          0.0,
+          2.004524747297032,
+          0.0,
+          0.0
+        ],
+        [
+          281.36345074338266,
+          140.68172537169133
+        ]
+      ]
+    },
+    {
+      "name": "PC009_actual_widget_edit_after_reopen_undo_redo_preserves_manual_work",
+      "status": "PASS",
+      "fixture": "model-A",
+      "commands": 2,
+      "retained_placements": 9,
+      "observation": {
+        "kind": "north_eave_500_to_600_model_mm",
+        "surface_id": "74a014d1-803e-4c3f-9634-9258caad6785",
+        "expected_shared_roof_area_mm2": 11302.394790485774
+      }
+    },
+    {
+      "name": "model-A-changed_reopen_auto_frame_and_refresh_preserves_authored_camera",
+      "status": "PASS",
+      "all_centers_visible_without_Home": [
+        {
+          "part_id": "fb26c480-6de0-40ac-96d3-64636a825fa7",
+          "center_pixel": [
+            457,
+            233
+          ],
+          "bounds_pixel": [
+            394,
+            197,
+            128,
+            73
+          ]
+        },
+        {
+          "part_id": "cadc5767-0729-4d67-aa75-f53846c8d3d0",
+          "center_pixel": [
+            460,
+            320
+          ],
+          "bounds_pixel": [
+            399,
+            291,
+            122,
+            58
+          ]
+        },
+        {
+          "part_id": "97fd2cf6-3bbc-4e11-99d7-60786cc06814",
+          "center_pixel": [
+            563,
+            244
+          ],
+          "bounds_pixel": [
+            525,
+            200,
+            77,
+            89
+          ]
+        },
+        {
+          "part_id": "fb290ae5-a3e5-4872-ad5a-c9e457bf2040",
+          "center_pixel": [
+            563,
+            359
+          ],
+          "bounds_pixel": [
+            525,
+            314,
+            77,
+            90
+          ]
+        },
+        {
+          "part_id": "73a8614a-2f22-46a7-9a08-36f238dfca21",
+          "center_pixel": [
+            734,
+            264
+          ],
+          "bounds_pixel": [
+            668,
+            200,
+            132,
+            129
+          ]
+        },
+        {
+          "part_id": "95a3860f-c7d7-4a74-9884-46773a2c2830",
+          "center_pixel": [
+            746,
+            410
+          ],
+          "bounds_pixel": [
+            668,
+            349,
+            157,
+            123
+          ]
+        },
+        {
+          "part_id": "8314ab00-66bc-436d-be47-70a6e93befe6",
+          "center_pixel": [
+            437,
+            422
+          ],
+          "bounds_pixel": [
+            399,
+            383,
+            77,
+            78
+          ]
+        },
+        {
+          "part_id": "7acf45a9-a540-4648-9666-2dbfbccb408a",
+          "center_pixel": [
+            528,
+            462
+          ],
+          "bounds_pixel": [
+            479,
+            452,
+            100,
+            20
+          ]
+        },
+        {
+          "part_id": "e16632a4-e4a2-4e05-836f-bff0d97ad483",
+          "center_pixel": [
+            438,
+            479
+          ],
+          "bounds_pixel": [
+            410,
+            473,
+            57,
+            13
+          ]
+        }
+      ],
+      "camera_after_zoom": [
+        [
+          2.004524747297032,
+          0.0,
+          0.0,
+          2.004524747297032,
+          0.0,
+          0.0
+        ],
+        [
+          281.36345074338266,
+          149.16253860331813
+        ]
+      ],
+      "pan_scroll_ranges": [
+        [
+          0,
+          0
+        ],
+        [
+          -60,
+          -24
+        ]
+      ],
+      "authored_camera": [
+        [
+          2.004524747297032,
+          0.0,
+          0.0,
+          2.004524747297032,
+          0.0,
+          0.0
+        ],
+        [
+          281.36345074338266,
+          140.68172537169133
+        ]
+      ]
+    },
+    {
+      "name": "PC009_changed_data_saved_and_reopened_again",
+      "status": "PASS",
+      "fixture": "model-A",
+      "observation": {
+        "kind": "north_eave_500_to_600_model_mm",
+        "surface_id": "74a014d1-803e-4c3f-9634-9258caad6785",
+        "expected_shared_roof_area_mm2": 11302.394790485774
+      }
+    },
+    {
+      "name": "A_authored_split_off_custom_tabs_persist_in_SVG_and_PDF",
+      "status": "PASS",
+      "connector_id": "5da26589-5d6f-408a-bc7c-ecc775baa90f",
+      "tab_ids": [
+        "36edf05e-17d1-499a-8f30-95711a17c187",
+        "660e795e-a682-4164-882d-8c94487be764",
+        "71eababb-7567-44c9-8d43-b69dbcc84ce0",
+        "7fdfc37a-217c-400a-b679-cf327e07fa5f"
+      ],
+      "svg_active_tab_areas_mm2": [
+        56.0,
+        60.0,
+        60.0,
+        144.0
+      ],
+      "pdf_cut_area_mm2": 4320.000000000003
+    },
+    {
+      "name": "A_true_hole_preserved_in_both_vector_outputs",
+      "status": "PASS",
+      "pdf_page_hole": [
+        [
+          50.0,
+          200.00000000000006
+        ],
+        [
+          70.0,
+          200.00000000000006
+        ],
+        [
+          70.0,
+          215.00000000000006
+        ],
+        [
+          50.0,
+          215.00000000000006
+        ]
+      ]
+    },
+    {
+      "name": "PC009_reopened_north_roof_change_in_actual_vectors",
+      "status": "PASS",
+      "expected_shared_roof_area_mm2": 11302.394790485774,
+      "pdf_area_mm2": 11302.394400000005
+    },
+    {
+      "name": "model-A_native_save_new_reopen_export",
+      "status": "PASS",
+      "pages": 2,
+      "parts": [
+        "73a8614a-2f22-46a7-9a08-36f238dfca21",
+        "7acf45a9-a540-4648-9666-2dbfbccb408a",
+        "8314ab00-66bc-436d-be47-70a6e93befe6",
+        "95a3860f-c7d7-4a74-9884-46773a2c2830",
+        "97fd2cf6-3bbc-4e11-99d7-60786cc06814",
+        "cadc5767-0729-4d67-aa75-f53846c8d3d0",
+        "e16632a4-e4a2-4e05-836f-bff0d97ad483",
+        "fb26c480-6de0-40ac-96d3-64636a825fa7",
+        "fb290ae5-a3e5-4872-ad5a-c9e457bf2040"
+      ],
+      "unfold_mode": "EXACT",
+      "exact_scope": "piecewise planar material; no curved-surface or physical claim",
+      "digital_only_acknowledgements": [
+        {
+          "id": "9329db259788bab272f54c8b",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "af76ae7f8323da7cdcecc75c",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "a50a1fe177ac11f1dc9d07fb",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "79c4c7b4e0f0fd0e2fa69f07",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "820983aa2e9d1a9faaef02b8",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "dc43059503384864f99120e3",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "15a6c7807dec684c1fbe5224",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "9e4a839feb4abb3ff7504b66",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "5bb99f3f8ff3cc454bdcf342",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "2017c9c7370eacc35c0b7dcc",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "ee3922d3361e659023ad07e9",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "66ec2ffbccc618c4b72ab20c",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "43f06c343ce35617bb2097b5",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "f9a556c779f15e206765c153",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "9329db259788bab272f54c8b",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "af76ae7f8323da7cdcecc75c",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "a50a1fe177ac11f1dc9d07fb",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "79c4c7b4e0f0fd0e2fa69f07",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "820983aa2e9d1a9faaef02b8",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "dc43059503384864f99120e3",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "15a6c7807dec684c1fbe5224",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "9e4a839feb4abb3ff7504b66",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "5bb99f3f8ff3cc454bdcf342",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "2017c9c7370eacc35c0b7dcc",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "ee3922d3361e659023ad07e9",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "43f06c343ce35617bb2097b5",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        },
+        {
+          "id": "f9a556c779f15e206765c153",
+          "code": "MATERIAL_CLEARANCE_UNVERIFIED",
+          "message": "Digitální geometrie nenahrazuje skutečné ohnutí, lepení a pevnost konkrétního papíru. Při neznámé tloušťce je hledání střetů omezené a nedokazuje jejich nepřítomnost; ověřte výtiskem.",
+          "meaning": "digital_only_physical_NOT_RUN"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 100,
+      "interpreted_value": 100.0,
+      "visible_text": "100,000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10000,
+      "interpreted_value": 10000.0,
+      "visible_text": "10000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4000,
+      "interpreted_value": 4000.0,
+      "visible_text": "4000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 1
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "south",
+      "text": "Jizni stena"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "south",
+      "surface_id": "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rename",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1000,
+      "interpreted_value": 1000.0,
+      "visible_text": "1000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1000,
+      "interpreted_value": 1000.0,
+      "visible_text": "1000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 2
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "temporary_scrap",
+      "text": "Docasny dil"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "temporary_scrap",
+      "surface_id": "755fb9c6-95ba-4244-a355-16f29f5b7621",
+      "model_mm": [
+        1000,
+        1000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "delete_part",
+      "count": 1
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "delete_part",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 1
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "material",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10000,
+      "interpreted_value": 10000.0,
+      "visible_text": "10000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4000,
+      "interpreted_value": 4000.0,
+      "visible_text": "4000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4000,
+      "typed_text": "4000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 3
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "north",
+      "text": "Severni stena"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 6000,
+      "interpreted_value": 6000.0,
+      "visible_text": "6000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 6000,
+      "typed_text": "6000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "north",
+      "surface_id": "2194569c-8cd9-4757-8804-fd6625b0a1bc",
+      "model_mm": [
+        10000,
+        4000
+      ],
+      "plane": "XZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+L",
+      "expected_actions": [
+        "draw"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "draw",
+      "count": 1
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "west_gable",
+      "text": "Zapadni stit"
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "west_gable",
+      "surface_id": "b8d9f67a-dd84-4757-9965-7f87963207f6",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+L",
+      "expected_actions": [
+        "draw"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "draw",
+      "count": 2
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "east_gable",
+      "text": "Vychodni stit"
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "east_gable",
+      "surface_id": "d93552da-e07e-4173-b156-b0f55705a135",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          4000
+        ],
+        [
+          3000,
+          7000
+        ],
+        [
+          0,
+          4000
+        ]
+      ]
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10000,
+      "interpreted_value": 10000.0,
+      "visible_text": "10000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10800,
+      "interpreted_value": 10800.0,
+      "visible_text": "10800,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10800,
+      "typed_text": "10800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4949.747468305833,
+      "interpreted_value": 4949.747468,
+      "visible_text": "4949,747468",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4949.747468305833,
+      "typed_text": "4949,747468",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 4
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "roof_south",
+      "text": "Jizni strecha"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -400,
+      "interpreted_value": -400.0,
+      "visible_text": "-400,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -400,
+      "typed_text": "-400",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -500,
+      "interpreted_value": -500.0,
+      "visible_text": "-500,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -500,
+      "typed_text": "-500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 3500,
+      "interpreted_value": 3500.0,
+      "visible_text": "3500,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3500,
+      "typed_text": "3500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 45,
+      "interpreted_value": 45.0,
+      "visible_text": "45,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 45,
+      "typed_text": "45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "roof_south",
+      "surface_id": "75549fb4-a564-4cac-b372-afb4c6c77044",
+      "model_mm": [
+        10800,
+        4949.747468305833
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10800,
+      "interpreted_value": 10800.0,
+      "visible_text": "10800,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10800,
+      "typed_text": "10800",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4949.747468305833,
+      "interpreted_value": 4949.747468,
+      "visible_text": "4949,747468",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4949.747468305833,
+      "typed_text": "4949,747468",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 5
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "roof_north",
+      "text": "Severni strecha"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -400,
+      "interpreted_value": -400.0,
+      "visible_text": "-400,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -400,
+      "typed_text": "-400",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 3000,
+      "interpreted_value": 3000.0,
+      "visible_text": "3000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 3000,
+      "typed_text": "3000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 7000,
+      "interpreted_value": 7000.0,
+      "visible_text": "7000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 7000,
+      "typed_text": "7000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -45,
+      "interpreted_value": -45.0,
+      "visible_text": "-45,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -45,
+      "typed_text": "-45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "roof_north",
+      "surface_id": "74a014d1-803e-4c3f-9634-9258caad6785",
+      "model_mm": [
+        10800,
+        4949.747468305833
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Spoje a rozvin"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 90,
+      "interpreted_value": 90.0,
+      "visible_text": "90,000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 90,
+      "typed_text": "90",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 1
+    },
+    {
+      "event": "actual_edgepair_fold",
+      "joint_id": "1e3bc6a1-bfbc-4bf3-b6e7-546a305d0aef",
+      "angle_deg": 90
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Modelování"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 13000,
+      "interpreted_value": 13000.0,
+      "visible_text": "13000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 13000,
+      "typed_text": "13000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10000,
+      "interpreted_value": 10000.0,
+      "visible_text": "10000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 10000,
+      "typed_text": "10000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 6
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "base",
+      "text": "Zakladna"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -1500,
+      "interpreted_value": -1500.0,
+      "visible_text": "-1500,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -1500,
+      "typed_text": "-1500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -2000,
+      "interpreted_value": -2000.0,
+      "visible_text": "-2000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -2000,
+      "typed_text": "-2000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "base",
+      "surface_id": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+      "model_mm": [
+        13000,
+        10000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+L",
+      "expected_actions": [
+        "draw"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "draw",
+      "count": 3
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          3000
+        ],
+        [
+          3000,
+          6000
+        ],
+        [
+          0,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "brace",
+      "text": "Vyztuha"
+    },
+    {
+      "event": "own_clicked_polygon",
+      "role": "brace",
+      "surface_id": "dafd3082-1c7b-4ee9-83a3-76367e5c135f",
+      "requested_model_mm": [
+        [
+          0,
+          0
+        ],
+        [
+          6000,
+          0
+        ],
+        [
+          6000,
+          3000
+        ],
+        [
+          3000,
+          6000
+        ],
+        [
+          0,
+          3000
+        ]
+      ]
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+H",
+      "expected_actions": [
+        "hole"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "hole",
+      "count": 1
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          2000,
+          1000
+        ],
+        [
+          4000,
+          1000
+        ],
+        [
+          4000,
+          2500
+        ],
+        [
+          2000,
+          2500
+        ]
+      ]
+    },
+    {
+      "event": "own_clicked_hole",
+      "role": "brace_hole",
+      "surface_id": "dafd3082-1c7b-4ee9-83a3-76367e5c135f",
+      "requested_model_mm": [
+        [
+          2000,
+          1000
+        ],
+        [
+          4000,
+          1000
+        ],
+        [
+          4000,
+          2500
+        ],
+        [
+          2000,
+          2500
+        ]
+      ]
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5000,
+      "interpreted_value": 5000.0,
+      "visible_text": "5000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5000,
+      "typed_text": "5000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1000,
+      "interpreted_value": 1000.0,
+      "visible_text": "1000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 8000,
+      "interpreted_value": 8000.0,
+      "visible_text": "8000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 8000,
+      "typed_text": "8000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1000,
+      "interpreted_value": 1000.0,
+      "visible_text": "1000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "rectangle",
+      "count": 7
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "soffit",
+      "text": "Podhled"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1000,
+      "interpreted_value": 1000.0,
+      "visible_text": "1000,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 1000,
+      "typed_text": "1000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4500,
+      "interpreted_value": 4500.0,
+      "visible_text": "4500,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 4500,
+      "typed_text": "4500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5500,
+      "interpreted_value": 5500.0,
+      "visible_text": "5500,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5500,
+      "typed_text": "5500",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -45,
+      "interpreted_value": -45.0,
+      "visible_text": "-45,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -45,
+      "typed_text": "-45",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "own_rectangle",
+      "role": "soffit",
+      "surface_id": "2a9f39fd-468f-4688-8703-e175c407ecdb",
+      "model_mm": [
+        8000,
+        1000
+      ],
+      "plane": "XY"
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Stránky"
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Spoje a rozvin"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+          "c056735d-c83d-469e-b083-4164b8ba7fe0"
+        ],
+        "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            707.1067811865476
+          ],
+          [
+            400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+      "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "2194569c-8cd9-4757-8804-fd6625b0a1bc",
+          "d18cd307-ea7f-4bc2-84b0-2f452c7dab8c"
+        ],
+        "target": "74a014d1-803e-4c3f-9634-9258caad6785",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4242.640687119286
+          ],
+          [
+            400.0,
+            4242.640687119286
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": -1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "2194569c-8cd9-4757-8804-fd6625b0a1bc",
+      "target": "74a014d1-803e-4c3f-9634-9258caad6785",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 2
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "b8d9f67a-dd84-4757-9965-7f87963207f6",
+          "ec891ae6-636d-4b6f-94fc-fdf032249d93"
+        ],
+        "target": "74a014d1-803e-4c3f-9634-9258caad6785",
+        "mode": "contact",
+        "trace": [
+          [
+            400.0,
+            4242.640687119286
+          ],
+          [
+            400.0,
+            6.431098710333652e-13
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "b8d9f67a-dd84-4757-9965-7f87963207f6",
+      "target": "74a014d1-803e-4c3f-9634-9258caad6785",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 3
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "b8d9f67a-dd84-4757-9965-7f87963207f6",
+          "0099f9f9-5095-49db-93c2-fee1dfd8311a"
+        ],
+        "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+        "mode": "contact",
+        "trace": [
+          [
+            400.0,
+            4949.747468305833
+          ],
+          [
+            400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "b8d9f67a-dd84-4757-9965-7f87963207f6",
+      "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 4
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "d93552da-e07e-4173-b156-b0f55705a135",
+          "b242898d-d8a5-4409-ab0f-1a1c0d53035a"
+        ],
+        "target": "74a014d1-803e-4c3f-9634-9258caad6785",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4242.640687119286
+          ],
+          [
+            10400.0,
+            6.431098710333652e-13
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "d93552da-e07e-4173-b156-b0f55705a135",
+      "target": "74a014d1-803e-4c3f-9634-9258caad6785",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 5
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "d93552da-e07e-4173-b156-b0f55705a135",
+          "2ee3a652-a070-4258-a827-f1565f7996c5"
+        ],
+        "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+        "mode": "contact",
+        "trace": [
+          [
+            10400.0,
+            4949.747468305833
+          ],
+          [
+            10400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "d93552da-e07e-4173-b156-b0f55705a135",
+      "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 6
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5.0,
+      "interpreted_value": 5.0,
+      "visible_text": "5,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 95.0,
+      "interpreted_value": 95.0,
+      "visible_text": "95,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+          "690f8d34-624c-4545-b910-78623113c19d"
+        ],
+        "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+        "mode": "contact",
+        "trace": [
+          [
+            2000.0,
+            2000.0
+          ],
+          [
+            11000.0,
+            2000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "10ef8bd3-7a0e-4e76-91b7-438daace6db8",
+      "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 7
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5.0,
+      "interpreted_value": 5.0,
+      "visible_text": "5,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 95.0,
+      "interpreted_value": 95.0,
+      "visible_text": "95,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "2194569c-8cd9-4757-8804-fd6625b0a1bc",
+          "3b1a0db9-508c-4bf4-ba78-4529143cad3a"
+        ],
+        "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+        "mode": "contact",
+        "trace": [
+          [
+            2000.0,
+            8000.0
+          ],
+          [
+            11000.0,
+            8000.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "2194569c-8cd9-4757-8804-fd6625b0a1bc",
+      "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 8
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5.0,
+      "interpreted_value": 5.0,
+      "visible_text": "5,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 95.0,
+      "interpreted_value": 95.0,
+      "visible_text": "95,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "b8d9f67a-dd84-4757-9965-7f87963207f6",
+          "7ac3383a-1012-49fa-9a5e-9c36a3f03591"
+        ],
+        "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+        "mode": "contact",
+        "trace": [
+          [
+            1500.0,
+            2300.0
+          ],
+          [
+            1500.0,
+            7700.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "b8d9f67a-dd84-4757-9965-7f87963207f6",
+      "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 9
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5.0,
+      "interpreted_value": 5.0,
+      "visible_text": "5,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5.0,
+      "typed_text": "5,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 95.0,
+      "interpreted_value": 95.0,
+      "visible_text": "95,0000",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 95.0,
+      "typed_text": "95,000000",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ]
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "d93552da-e07e-4173-b156-b0f55705a135",
+          "5036e0f4-1c8c-48db-abcf-c3d2c3078fb3"
+        ],
+        "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+        "mode": "contact",
+        "trace": [
+          [
+            11500.0,
+            2300.0
+          ],
+          [
+            11500.0,
+            7700.0
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": [
+          [
+            1389.0,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            1887.6000000000001
+          ],
+          [
+            11610.6,
+            8084.700000000001
+          ],
+          [
+            1389.0,
+            8084.700000000001
+          ]
+        ],
+        "interval": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "d93552da-e07e-4173-b156-b0f55705a135",
+      "target": "d1b690c8-01bc-42b5-b011-69067938d4ae",
+      "interval": [
+        0.05,
+        0.95
+      ],
+      "region": [
+        [
+          1400,
+          1900
+        ],
+        [
+          11600,
+          1900
+        ],
+        [
+          11600,
+          8100
+        ],
+        [
+          1400,
+          8100
+        ]
+      ],
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 10
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+J",
+      "expected_actions": [
+        "attach_inside"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "actual_attachment_specification",
+      "specification": {
+        "source": [
+          "dafd3082-1c7b-4ee9-83a3-76367e5c135f",
+          "57bbcb31-888a-41b8-b3b8-9bf8ee2c1f43"
+        ],
+        "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+        "mode": "contact",
+        "trace": [
+          [
+            5400.0,
+            4949.747468305833
+          ],
+          [
+            5400.0,
+            707.1067811865476
+          ]
+        ],
+        "angle_deg": 90.0,
+        "target_side": "inside",
+        "glue_direction": 1,
+        "region": null,
+        "interval": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "event": "actual_attachment_preview",
+      "source": "dafd3082-1c7b-4ee9-83a3-76367e5c135f",
+      "target": "75549fb4-a564-4cac-b372-afb4c6c77044",
+      "interval": null,
+      "region": null,
+      "feedback": "Připojení odpovídá skutečnému materiálu. Zkontrolujte polohu a stranu v náhledu. Chlopeň nebo pásek vytvoříte následně; zrušení nic nezmění."
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "attach_inside",
+      "count": 11
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_inline_surface_name",
+      "role": "band_root",
+      "text": "Lepici pasek"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Shift+J",
+      "expected_actions": [
+        "glue_region"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "view_only_camera_frame",
+      "points": [
+        [
+          1000,
+          1800
+        ],
+        [
+          10000,
+          1800
+        ],
+        [
+          10000,
+          3500
+        ],
+        [
+          1000,
+          3500
+        ]
+      ]
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "glue_region",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 2
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 20,
+      "interpreted_value": 20.0,
+      "visible_text": "20,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 20,
+      "typed_text": "20",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5,
+      "interpreted_value": 5.0,
+      "visible_text": "5,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_width",
+      "value": 5,
+      "typed_text": "5",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4,
+      "interpreted_value": 4,
+      "visible_text": "4",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_count",
+      "value": 4,
+      "typed_text": "4",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 1,
+      "interpreted_value": 1.0,
+      "visible_text": "1,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_gap",
+      "value": 1,
+      "typed_text": "1",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_drawn_tab_before_numeric_refinement",
+      "tab_id": "71eababb-7567-44c9-8d43-b69dbcc84ce0",
+      "paper_mm": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          24.0,
+          0.0
+        ],
+        [
+          24.005882352941175,
+          2.0058823529411764
+        ],
+        [
+          14.024999999999999,
+          1.9799999999999998
+        ],
+        [
+          13.98913043478261,
+          4.005434782608695
+        ],
+        [
+          9.983695652173914,
+          4.005434782608695
+        ],
+        [
+          9.983695652173914,
+          1.9728260869565217
+        ],
+        [
+          0.0,
+          1.9728260869565217
+        ]
+      ]
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 24,
+      "interpreted_value": 24.0,
+      "visible_text": "24,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_x",
+      "value": 24,
+      "typed_text": "24",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_y",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 14,
+      "interpreted_value": 14.0,
+      "visible_text": "14,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_x",
+      "value": 14,
+      "typed_text": "14",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_y",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 14,
+      "interpreted_value": 14.0,
+      "visible_text": "14,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_x",
+      "value": 14,
+      "typed_text": "14",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4,
+      "interpreted_value": 4.0,
+      "visible_text": "4,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_y",
+      "value": 4,
+      "typed_text": "4",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10,
+      "interpreted_value": 10.0,
+      "visible_text": "10,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_x",
+      "value": 10,
+      "typed_text": "10",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 4,
+      "interpreted_value": 4.0,
+      "visible_text": "4,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_y",
+      "value": 4,
+      "typed_text": "4",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 10,
+      "interpreted_value": 10.0,
+      "visible_text": "10,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_x",
+      "value": 10,
+      "typed_text": "10",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_y",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_x",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 2,
+      "interpreted_value": 2.0,
+      "visible_text": "2,0000 mm papír",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "connector_outline_y",
+      "value": 2,
+      "typed_text": "2",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Modelování"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -424.26406871192853,
+      "interpreted_value": -424.264069,
+      "visible_text": "-424,264069",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -424.26406871192853,
+      "typed_text": "-424,264069",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": -424.26406871192853,
+      "interpreted_value": -424.264069,
+      "visible_text": "-424,264069",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": -424.26406871192853,
+      "typed_text": "-424,264069",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 3
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 3
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 4
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 3
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 4
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Stránky"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5,
+      "interpreted_value": 5.0,
+      "visible_text": "5,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5,
+      "typed_text": "5",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 110,
+      "interpreted_value": 110.0,
+      "visible_text": "110,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 110,
+      "typed_text": "110",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 140,
+      "interpreted_value": 140.0,
+      "visible_text": "140,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 140,
+      "typed_text": "140",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 140,
+      "interpreted_value": 140.0,
+      "visible_text": "140,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 140,
+      "typed_text": "140",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 130,
+      "interpreted_value": 130.0,
+      "visible_text": "130,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 130,
+      "typed_text": "130",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 160,
+      "interpreted_value": 160.0,
+      "visible_text": "160,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 160,
+      "typed_text": "160",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 190,
+      "interpreted_value": 190.0,
+      "visible_text": "190,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 190,
+      "typed_text": "190",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 100,
+      "interpreted_value": 100.0,
+      "visible_text": "100,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 100,
+      "typed_text": "100",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 250,
+      "interpreted_value": 250.0,
+      "visible_text": "250,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 250,
+      "typed_text": "250",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 40,
+      "interpreted_value": 40.0,
+      "visible_text": "40,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 40,
+      "typed_text": "40",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 270,
+      "interpreted_value": 270.0,
+      "visible_text": "270,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 270,
+      "typed_text": "270",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 140,
+      "interpreted_value": 140.0,
+      "visible_text": "140,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 140,
+      "typed_text": "140",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 190,
+      "interpreted_value": 190.0,
+      "visible_text": "190,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 190,
+      "typed_text": "190",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 0,
+      "interpreted_value": 0.0,
+      "visible_text": "0,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 0,
+      "typed_text": "0",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Spoje a rozvin"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus_all",
+      "count": 1
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Stránky"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus",
+      "count": 1
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 30,
+      "interpreted_value": 30.0,
+      "visible_text": "30,000000 mm",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 30,
+      "typed_text": "30",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5,
+      "interpreted_value": 5.0,
+      "visible_text": "5,000000°",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5,
+      "typed_text": "5",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus",
+      "count": 2
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "problems",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+S",
+      "expected_actions": [
+        "save"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "save",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+N",
+      "expected_actions": [
+        "new"
+      ],
+      "window_active": true,
+      "active_window_title": "Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "new",
+      "count": 1
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+O",
+      "expected_actions": [
+        "open"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "open",
+      "count": 1
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Stránky"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 4
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Modelování"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5091.168824543142,
+      "interpreted_value": 5091.168825,
+      "visible_text": "5091,168825",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5091.168824543142,
+      "typed_text": "5091,168825",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "numeric_focus_context",
+      "window_active": true,
+      "focused_class": "QDoubleSpinBox",
+      "owns_focus": true
+    },
+    {
+      "event": "numeric_after_tab",
+      "expected": 5091.168824543142,
+      "interpreted_value": 5091.168825,
+      "visible_text": "5091,168825",
+      "still_focused": false
+    },
+    {
+      "event": "numeric_widget",
+      "object": "",
+      "value": 5091.168824543142,
+      "typed_text": "5091,168825",
+      "locale": "cs_CZ"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 5
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Z",
+      "expected_actions": [
+        "undo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "undo",
+      "count": 6
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 5
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+Y",
+      "expected_actions": [
+        "redo"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "redo",
+      "count": 6
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 5
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "problems",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+S",
+      "expected_actions": [
+        "save"
+      ],
+      "window_active": true,
+      "active_window_title": "* Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "save",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+N",
+      "expected_actions": [
+        "new"
+      ],
+      "window_active": true,
+      "active_window_title": "Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "new",
+      "count": 2
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+O",
+      "expected_actions": [
+        "open"
+      ],
+      "window_active": true,
+      "active_window_title": "Nový model — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "open",
+      "count": 2
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Stránky"
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+R",
+      "expected_actions": [
+        "recompute"
+      ],
+      "window_active": true,
+      "active_window_title": "Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "recompute",
+      "count": 6
+    },
+    {
+      "event": "shortcut_context",
+      "sequence": "Ctrl+E",
+      "expected_actions": [
+        "export"
+      ],
+      "window_active": true,
+      "active_window_title": "Vlastni otevreny domecek — ArchPapercraft Studio",
+      "focus_class": "AuthorMainWindow"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "export",
+      "count": 1
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Modelování"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus_all",
+      "count": 2
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Stránky"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus_all",
+      "count": 3
+    },
+    {
+      "event": "actual_workspace_button",
+      "context": "Export"
+    },
+    {
+      "event": "observed_QAction_triggered",
+      "action": "focus_all",
+      "count": 4
+    }
+  ],
+  "dialogs": [
+    {
+      "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\workspace-house-191d24e-run01\\model-A\\model-A.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Uložit model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\workspace-house-191d24e-run01\\model-A\\model-A.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\workspace-house-191d24e-run01\\model-A\\model-A.apcraft",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Otevřít model"
+    },
+    {
+      "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\integration\\docs\\p2\\implementation\\evidence\\workspace-house-191d24e-run01\\model-A\\export",
+      "native_seen": true,
+      "accepted": true,
+      "title": "Vyberte složku pro SVG a PDF",
+      "directory_confirmation": true
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Vektorový export",
+      "text": "Exportovat 2 stránek v měřítku 1:100 jako editovatelné SVG a vektorové PDF?"
+    },
+    {
+      "kind": "real_QMessageBox",
+      "title": "Export dokončen",
+      "text": "Uloženo:\npage-16705f40-f55d-40a1-9dcc-6263a4942984.svg\npage-71fa2205-bf23-4992-8e21-e7a458ee4bf3.svg\nmodel.pdf\n\nTiskněte 100 %, bez přizpůsobení stránce. Kalibrace má 100 mm."
+    }
+  ],
+  "negative_cases": [
+    {
+      "status": "EXPECTED_REJECTION",
+      "kind": "outside_roof",
+      "feedback": "Upravte návrh: FOLDED_GLUE_AREA_PARTIAL: záložka není celá na materiálu protikusu."
+    }
+  ],
+  "opengl": {
+    "version": "4.6.0 NVIDIA 610.71",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 5050 Laptop GPU/PCIe/SSE2"
+  },
+  "elapsed_seconds": 202.204,
+  "files_sha256": {
+    "A-complete-before-asymmetric-edit-desktop.png": "988fb00377a342de58a01c7e8e701f72c5a532f3446719cdfcab6f6a68d96fed",
+    "A-complete-before-asymmetric-edit-opengl.png": "81996cce2866556b39d0e544a53d1fe5366d7d5d9af8a21fbb01d25ba5c0a7d1",
+    "A-manual-two-page-layout-desktop.png": "e784b942e3aeca800fb1c1ac5839bb846b2e665eee8701cc047a98e458e8f8c1",
+    "A-manual-two-page-layout-opengl.png": "28633e42a6b622ff2fa6b89116ee62acd3d95610e27b2088bedf3227da4f2b8e",
+    "A-native-delete-impact-desktop.png": "5bb7fda623da614f6e1347e74b4bb2ec7b6ed28deeb6135675353ce0848eac33",
+    "A-native-delete-impact-opengl.png": "d2e5b3fd4300b4f9dc1d2577ba165b0d9c822cae8e83d7e79ad259255dfe52d8",
+    "A-native-own-names-desktop.png": "f6ab9d48acd1f36c2d72f7052b1b70c1d6b54a5ad3de58b4a73d2b6b549078c2",
+    "A-native-own-names-opengl.png": "0e4178486200819b384210f548e23aec5d501c1dc2d629d57d6d8106ced34e8e",
+    "A-negative-outside-roof-desktop.png": "f07dbdf53633b0a0d45cc2f17d8c9ac894f676162f1656f8819d8ced0b2dc7f0",
+    "A-negative-outside-roof-opengl.png": "0dd718bd59ca92eb9e24f6d1dc6b2834f405a30ccb02a1eb84dc2dd867fb4c15",
+    "A-positive-stepped-tab-drawn-and-refined-desktop.png": "c4919fe80e89aad36e553e8d2ca8fac0adc853a13f32c01f39582836d3d42673",
+    "A-positive-stepped-tab-drawn-and-refined-opengl.png": "0dd718bd59ca92eb9e24f6d1dc6b2834f405a30ccb02a1eb84dc2dd867fb4c15",
+    "empty-real-app-desktop.png": "c1aaa2a76c62283ec4745923508cba4cebb005664f123913c4128a189b1d8002",
+    "empty-real-app-opengl.png": "316a4f22c894da1b5a252e1d652f9da24c8c7e3ddecd48006b73789396ea23b8",
+    "export-progress-1-1.png": "da17e84f0238c8ea75f0419c5e0e91c8d4094d23f202750c32e42edf36a03bb4",
+    "model-A/export/.author-export.json": "c8b7807d7b3ff4e8703225a54d99dd2c4b99b06cd26503e085f22f65f2af1a1e",
+    "model-A/export/model.pdf": "c002bc4d5b2549e4d7ed3422c391696dcc30f4f027207dd2a40414dd1ef7cc47",
+    "model-A/export/page-16705f40-f55d-40a1-9dcc-6263a4942984.svg": "0c270d564d6b2b9848a3d8019ae1af0735eaa5214b41f6cc8c6d394093b71dbe",
+    "model-A/export/page-71fa2205-bf23-4992-8e21-e7a458ee4bf3.svg": "b3bae4d806526a3d55d2aa0616f41da27c4550d46a8f84ced5f7da2fae50e536",
+    "model-A/model-A.apcraft": "e0002bf437473511a1bc0cb75e861fd31b4f42ef908ccaec152c637270a72faa",
+    "model-A/snapshot.json": "fcb8c4b3e74f4c6da23eaada79236f6148202fa3949dc50ffa92efb8ea8ee26e",
+    "model-A-changed-after-reopen-desktop.png": "b8a55904bfcd2630bdeb70f683777af673018d3d6c158884777044bac1ef37fd",
+    "model-A-changed-after-reopen-opengl.png": "924c5a83132288c6ee2c58c4343a2577bfacd9a1b6a74b50e6b3b659c8dedcf6",
+    "model-A-changed-reopened-auto-frame-all-material-desktop.png": "083aa52f8d8a897d3a54b0c4bb05cd7ab240ff35e074de33fb13f41b0afed385",
+    "model-A-changed-reopened-auto-frame-all-material-opengl.png": "183131bdb54d0e0fa1bdff97f39266bc9b347f33ba528a0addee20a0583e8872",
+    "model-A-reopened-auto-frame-all-material-desktop.png": "28367a75ce8c959c44a24ab814304dad8601cd07aceeb246ccb28c83ed6b8e00",
+    "model-A-reopened-auto-frame-all-material-opengl.png": "480c63cf6cfddbe13fa201b6bc163e277bfb8521393b68b00b685a12fdaf86e7",
+    "model-A-reopened-desktop.png": "bd024b31295a44dd7c7b77ac5ac18d237af2dac49417231332d8c0567de9801d",
+    "model-A-reopened-opengl.png": "183131bdb54d0e0fa1bdff97f39266bc9b347f33ba528a0addee20a0583e8872",
+    "recovery/63b9e450-219b-459f-90c3-221045f7411c.recovery.json.lock": "e84cee7a2e8d20e3a7ddade2c28a35983de66603b5398601561ac00ff40e53b6",
+    "settings.ini": "dc9b6eb795bc3c6eefb2497744f709ba793cb10ac79781f3b6d8dc21f50eb953",
+    "workspace-house-export-desktop.png": "e96de60f8ffcf49a688effe28315161e39a38e194b70fefe5663d9dd18eb7f2b",
+    "workspace-house-export-opengl.png": "7327904a82f4bc87a3528146d2f783c5538f9c2dfad71904b92787571281fb63",
+    "workspace-house-modeling-desktop.png": "ee7d8abffdf980b64de3124853b61f46864fc0a25add3b61fb942efdadc1954e",
+    "workspace-house-modeling-opengl.png": "7327904a82f4bc87a3528146d2f783c5538f9c2dfad71904b92787571281fb63",
+    "workspace-house-pages-desktop.png": "151af05389b4bd207e09b6e955663a0d887813392b9f0a87d899ad8fba9bdaa5",
+    "workspace-house-pages-opengl.png": "7327904a82f4bc87a3528146d2f783c5538f9c2dfad71904b92787571281fb63"
+  },
+  "native_camera_inputs": [
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    },
+    {
+      "own_pid": 27752,
+      "own_hwnd": 6162866,
+      "own_thread": 7156,
+      "foreground_before": 6162866,
+      "pid_query_error": 0,
+      "method": "Win32 actual cursor Ctrl+wheel, verified own root HWND",
+      "foreground_after_activation": 6162866,
+      "hit_hwnd": 6162866,
+      "target_native": [
+        899,
+        499
+      ],
+      "target_logical": [
+        899,
+        476
+      ],
+      "native_client": [
+        1920,
+        1009
+      ],
+      "device_pixel_ratio": 1.0
+    }
+  ],
+  "export_progress": [
+    {
+      "dialog_identity": 1936366331648,
+      "samples": 1,
+      "max_observed_gap_seconds": 0,
+      "phases": [
+        {
+          "text": "Vytvářím editovatelné SVG stránky a vektorové PDF…",
+          "elapsed_seconds": 200.329000000027
+        }
+      ],
+      "last_at": 389581.375
+    }
+  ],
+  "failures": []
+}

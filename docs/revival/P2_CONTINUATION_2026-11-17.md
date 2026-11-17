@@ -380,3 +380,34 @@ zachovávají i chyby automatizačního selectoru/modal timing; ty nejsou označ
 za produktové chyby. Žádná doménová/JSON injekce modelu, packing ani interní
 UUID jako povinná znalost uživatele nebyly použity. Desktop byl po ukončení
 vlastního procesu vrácen rootu.
+
+### Skutečný vlastní domek v novém workspace `191d24e`
+
+Po opravě názvů, sbalených profilových ovladačů a promítnutého středu kamery
+proběhl z prázdné skutečné aplikace celý ruční model A, bez presetu a bez
+injekce geometrie. **PASS_REQUESTED_FIXTURE / 202,204 s**, source
+`191d24e653af2bc63cfa6e77d46b998eb516cf32`; původní selhání d94 zůstávají výše.
+Výsledek obsahuje vlastní stěny a štíty, střechu s přesahem, základnu,
+výztuhu s opravdovým otvorem, podhled, samostatný lepicí pásek a autorské
+chlopně. Přes skutečné ovladače se zadaly názvy, rozměry a spoje, opravilo
+odmítnutí a provedly Undo/Redo. Ruční dvě A4 a oba zámky přežily Save/New/Open,
+další skutečnou změnu střechy, Undo/Redo, Save/New/Open i společný SVG/PDF.
+Čtyři očekávané nativní souborové dialogy byly skutečně otevřeny a potvrzeny.
+Přesné geometrické a souborové kontroly i source/import binding jsou ve
+[výsledku](../p2/implementation/evidence/workspace-house-191d24e-run01/results.json).
+
+[Otevíratelný domek](../p2/implementation/evidence/workspace-house-191d24e-run01/model-A/model-A.apcraft),
+[SVG/PDF](../p2/implementation/evidence/workspace-house-191d24e-run01/model-A/export/),
+[skutečné Modelování](../p2/implementation/evidence/workspace-house-191d24e-run01/workspace-house-modeling-desktop.png)
+a [Stránky](../p2/implementation/evidence/workspace-house-191d24e-run01/workspace-house-pages-desktop.png)
+slouží ke kontrole pracovního desktopu, nikoli jako statický návrh UI.
+Je to technicky řízený autorský průchod; není nový člověk, fyzická stavba,
+historický model PC010 ani uzavření všech A/B/C/D přejímek PC009.
+Na stejném pinu prošlo **128 cílených testů / 24,02 s** včetně nových projekcí,
+pojmenování, původních pending input a recovery regresí, s importy v procesu
+a nezměněnými zdrojovými hashi:
+[JUnit](../p2/implementation/evidence/workspace-final-191d24e-targeted.xml),
+[binding](../p2/implementation/evidence/workspace-final-191d24e-targeted.json).
+Úplný běh d94 výše zůstává samostatným výsledkem; počty se nesčítají.
+Po tomto průchodu se ještě opravuje přetrvávající prázdná výška docku při
+výslovném skrytí podrobností problémů. Nezávislý native repair replay následuje.
