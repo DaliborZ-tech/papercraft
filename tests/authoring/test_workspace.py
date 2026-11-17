@@ -146,18 +146,26 @@ def test_active_fit_and_refresh_preserve_other_cameras(window, qtbot):
     window.actions["cancel"].trigger()
 
 
-def test_inline_surface_name_uses_history_and_context_validation(window, qtbot):
+def test_inline_surface_name_uses_history_and_context_validation(window, qtbot, tmp_path):
     sid = arrange_rectangle(window)
     original = window.project.surfaces[sid].name
+    pid = window.selected_part
+    original_part = window.project.parts[pid].name
+    original_frame = deepcopy(window.project.parts[pid].frame)
+    original_placement = deepcopy(window.project.placements[pid])
     window.selection_name.setFocus()
     window.selection_name.selectAll()
     qtbot.keyClicks(window.selection_name, "Vlastni severni stena")
     switch_workspace(qtbot, window, "Spoje a rozvin")
     assert window.project.surfaces[sid].name == "Vlastni severni stena"
+    assert window.project.parts[pid].name == "P1 · Vlastni severni stena"
+    assert window.problems._part_names[pid] == "P1 · Vlastni severni stena"
     window.actions["undo"].trigger()
     assert window.project.surfaces[sid].name == original
+    assert window.project.parts[pid].name == original_part
     window.actions["redo"].trigger()
     assert window.project.surfaces[sid].name == "Vlastni severni stena"
+    assert window.project.parts[pid].name == "P1 · Vlastni severni stena"
     window.selection_name.setFocus()
     window.selection_name.selectAll()
     qtbot.keyClick(window.selection_name, Qt.Key.Key_Backspace)
@@ -166,6 +174,40 @@ def test_inline_surface_name_uses_history_and_context_validation(window, qtbot):
     assert window.selection_name.text() == ""
     assert window.project.surfaces[sid].name == "Vlastni severni stena"
     window.selection_name.setText("Vlastni severni stena")
+    path = tmp_path / "named-wall.apcraft"
+    window.controller.save(path)
+    window.controller.new()
+    window.controller.open(path)
+    assert window.project.surfaces[sid].name == "Vlastni severni stena"
+    assert window.project.parts[pid].name == "P1 · Vlastni severni stena"
+    assert window.project.parts[pid].frame == original_frame
+    assert window.project.placements[pid] == original_placement
+
+
+@pytest.mark.parametrize("separate_name", [False, True])
+def test_inline_name_keeps_mixed_component_and_explicit_paper_name(window, qtbot, separate_name):
+    from archpapercraft.authoring.editing import rename_author_entities
+    from test_editing import connected_component
+
+    if separate_name:
+        sid = arrange_rectangle(window)
+        pid = window.selected_part
+        window.controller.execute("Own paper name", lambda p: rename_author_entities(
+            p, part_id=pid, part_name="My printed wall"))
+    else:
+        project, pid, surfaces, *_ = connected_component()
+        window.controller.project = project
+        window.refresh()
+        sid = surfaces[0]
+        window.select_surface(sid)
+        assert len(window.project.parts[pid].surface_ids) == 2
+    original_part = window.project.parts[pid].name
+    window.selection_name.setFocus()
+    window.selection_name.selectAll()
+    qtbot.keyClicks(window.selection_name, "New wall name")
+    qtbot.keyClick(window.selection_name, Qt.Key.Key_Return)
+    assert window.project.surfaces[sid].name == "New wall name"
+    assert window.project.parts[pid].name == original_part
 
 
 def test_problem_navigation_validates_raw_then_focuses_actual_unplaced_part(window, qtbot):

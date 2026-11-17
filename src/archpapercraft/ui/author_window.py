@@ -523,8 +523,13 @@ class AuthorMainWindow(QMainWindow):
         self.selection_label.setWordWrap(True)
         layout.addWidget(self.selection_label)
         self.selection_name = QLineEdit()
-        self.selection_name.setPlaceholderText("Vlastní název vybrané plochy")
+        self.selection_name.setPlaceholderText("Např. Jižní stěna")
         self.selection_name.setAccessibleName("Název vybrané plochy")
+        self.selection_name.setToolTip(
+            "U samostatné plochy se původní automatický název dílu změní také "
+            "na papíře a ve výstupu. Odlišné vlastní názvy a složené díly "
+            "upravíte tlačítkem Pojmenovat."
+        )
         self.selection_name.editingFinished.connect(self._commit_selection_name)
         layout.addWidget(self.selection_name)
         commands = QVBoxLayout()
@@ -2628,11 +2633,20 @@ class AuthorMainWindow(QMainWindow):
         raw = self.selection_name.text()
         if raw == self.project.surfaces[self.selected_surface].name:
             return True
+        surface = self.project.surfaces[self.selected_surface]
+        part = self.project.parts[surface.part_id]
+        # A single freshly named object should retain its name on paper. The
+        # existing explicit rename dialog still owns independently named parts
+        # and multi-surface components; never silently replace those names.
+        part_changes = {}
+        if (part.surface_ids == [surface.id]
+                and part.name == f"P{part.number} · {surface.name}"):
+            part_changes = {"part_id": part.id, "part_name": f"P{part.number} · {raw}"}
         errors_before = self._command_errors
         self.run(lambda: self.controller.execute(
             "Pojmenovat plochu",
             lambda project: rename_author_entities(
-                project, surface_id=self.selected_surface, surface_name=raw
+                project, surface_id=self.selected_surface, surface_name=raw, **part_changes
             ),
         ))
         if self._command_errors != errors_before:
