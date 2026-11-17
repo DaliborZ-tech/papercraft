@@ -132,3 +132,42 @@ Překryv s předchozími běhy se nesčítá. Review checkout má byte shodnou c
 produkční `src` s3e6f; nové UI a společný finální snapshot se kontrolují níže
 samostatně. Desktop/Inkscape tímto během neproběhly, nový člověk a P3 zůstávají
 NOT_RUN.
+
+## Společný frozen zdroj 5415e2bc — doména a křivkové UI
+
+**APPROVED_IN_SCOPE**, bez nového blokujícího nálezu pro produkční source
+**5415e2bc45f0a073d202144f1281557377afbc61** v rozsahu CORE9/R01, detached
+authority a měřeného subdivision UI. [Vazba](evidence/au13-core9-final-5415-binding.json)
+ověřuje všech118 souborů `src` proti skutečným Git blobům kandidáta a importy
+uvnitř reviewerova procesu. Produkční strom je
+`76883ed59a115d877e8456d35a742116828a5699`.
+
+Delta proti posouzenému3e6f obsahuje pouze `ui/author_subdivision.py` a
+`ui/author_window.py`, přesně odpovídající dřívějšímu UI406fa6f. Merge nemění
+již zkontrolované doménové guardy. Četba ověřila oddělený snapshot workeru,
+latest-only token/queue, Cancel/close bez aplikace pozdního výsledku,
+opětovný source fingerprint před příkazem, vstup po skutečné obloukové délce
+a předání pouze parametrů do atomického controlleru. Main-window kontext
+nejprve vyhodnotí rozepsaný vstup, po odmítnutí vrátí viditelnou volbu bez
+smazání raw textu a po přijetí sjednotí podvýběr s požadovaným zdrojem.
+
+Na tomto přesném zdroji: **21 PASS /20,92s**, [JUnit](evidence/au13-core9-ui-5415.xml):
+18 původních skutečných-core/widget regresí a
+[3 nové nezávislé UI případy](evidence/au13-core9-ui-own.py). Vlastní kubika
+má jiný rozměr a nezávislý integrál `L(u)=24u³−36u²+36u`; zadání57/8 po délce
+musí dát parametr1/4, nikoli poměr19/64. První běžící skutečný výpočet byl
+záměrně zpožděn, nové zadání ho zneplatnilo a přijal se pouze nový skutečný
+výpočet. Další případy ověřily raw neplatný vstup po platném náhledu a skutečnou
+úpravu řídicího bodu živého projektu za běhu workeru. Pozdní Apply neprojde;
+původní nebo nově autorem změněná práce zůstává zachovaná. Zpoždění je pouze
+plánovací dependency; geometrie se stále počítá skutečnými veřejnými příkazy.
+
+Zpřesněný odstavec SK013 ve skillu authoring-ui odpovídá doloženému CUI01 a
+je **APPROVED_IN_SCOPE jako úzká pracovní rada**. Viditelný rollback s raw
+vstupem byl nyní znovu spuštěn i v jiném přepínači křivky; není to nový lidský
+uživatel ani plošně prokázaná účinnost dalších přenosů.
+
+Tento verdikt není kontrolou rootova dosud běžícího nativního Windows/editor
+průchodu, nového comparator guardu, škálování, celé regresní sady ani pozdějších
+předávacích metadat. Tyto výstupy mají samostatné source-bound důkazy a review.
+Celý P2, AC-US08 a fyzické P3 tímto nejsou přijaty ani dokončeny.
