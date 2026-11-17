@@ -152,3 +152,32 @@ zůstávají zachovaná. Tento úspěch prokazuje konkrétní C-cylinder workflo
 `QT_SCALE_FACTOR=1.5`, nikoli změnu systémového DPI, všechny monitory, nové
 uživatele, celé PC-009 ani fyzickou stavbu. OS scaling certification,
 AC-US08 a P3 zůstávají NOT_RUN; near-cylinder editorový důkaz má samostatný rozsah.
+
+## Regrese pořadí zdrojové topologie — 17. 11. 2026
+
+Při úplné sadě na6969069 selhaly dva původní nezávislé kuželové orákuly
+s obrácenou korespondencí čtvrtkružnic. Původní C8 zdroj8f1ec638 všechny jejich
+šest variant přijímá: [JUnit](evidence/reversed-quarter-arc/baseline-8f1.xml),
+[importy a připnutí všech src blobů](evidence/reversed-quarter-arc/baseline-binding.json).
+Nejde o změnu analytického očekávání: platný zdrojový kruh byl chybně
+odmítnut jako nesouvislá hranice.
+
+Příčina: CORE9 použilo pro source_topology pořadí source.curves odvozené
+z korespondence. Při obráceném průchodu tak obrátilo pořadí hran, aniž obrátilo
+jejich vlastní orientaci. Kontrola skutečného profilu musí zachovat jeho
+původní orientovanou topologii bez ohledu na směr párování loftu.
+
+Oprava **09b6811** používá existující canonical_profile_curves v původním
+pořadí identit uloženého profilu. Nemění analytické zdroje, jejich orientaci,
+korespondenci, fit, geometrii ani tolerance; nepřidává spojování podle bodové
+vzdálenosti. Párování a úplnost materiálového pokrytí se nadále kontrolují
+samostatně. Existující validace partial/mixed-generation zdrojů zůstává.
+
+Širší cílený běh curved provenance + circular body + circular shell má
+76 PASS/110,00s. Šest nových regresí ověřuje otevřený/uzavřený profil,
+oba směry korespondence, jednostranný split před loftem, inverse merge,
+zachování souřadnic, patches, frame/layout/locks a save/reopen; skutečné
+self-intersections se atomicky odmítnou. [JUnit](evidence/reversed-quarter-arc/order-regression.xml).
+Nezávislé review opravy a finální úplná sada na integračním pinu ještě musí
+být doloženy. Původní FAIL696 se nemaže; tento backendový důkaz nenahrazuje
+nativní aplikaci, nového člověka ani fyzické P3.
