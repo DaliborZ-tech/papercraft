@@ -1,0 +1,44 @@
+[
+  {
+    "source_pin": "7c61c7ee54233dc662420b5199e3a5d914da4441",
+    "import_path": "C:\\Users\\dalib\\projects\\papercraft-core9-review\\src\\archpapercraft\\authoring\\project.py",
+    "results": [
+      {
+        "retired": "root",
+        "rejected": false,
+        "error": "Failed",
+        "message": "DID NOT RAISE ProjectFormatError"
+      },
+      {
+        "retired": "left",
+        "rejected": false,
+        "error": "Failed",
+        "message": "DID NOT RAISE ProjectFormatError"
+      },
+      {
+        "retired": "right",
+        "rejected": false,
+        "error": "Failed",
+        "message": "DID NOT RAISE ProjectFormatError"
+      }
+    ]
+  },
+  {
+    "source_pin": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
+    "import_path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\identity-consumers\\src\\archpapercraft\\authoring\\project.py",
+    "results": [
+      {
+        "retired": "root",
+        "rejected": true
+      },
+      {
+        "retired": "left",
+        "rejected": true
+      },
+      {
+        "retired": "right",
+        "rejected": true
+      }
+    ]
+  }
+]

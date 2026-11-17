@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="7" time="2.393" timestamp="2026-11-17T17:28:14.757481+01:00" hostname="Dalibor"><testcase classname="tests.authoring.test_detached_history_authority" name="test_detached_merged_descriptor_requires_history[validate]" time="0.460"><failure message="Failed: DID NOT RAISE any of (CurveOutputError, ValueError)">operation = 'validate'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1550/test_detached_merged_descripto0')
+
+    @pytest.mark.parametrize("operation", ["validate", "writer"])
+    def test_detached_merged_descriptor_requires_history(operation, tmp_path):
+        p, sid = merged_loft("cubic")
+        snapshot = p.snapshot()
+        validate_loft_snapshot(snapshot)
+        report = snapshot["construction_checks"]["lofts"][sid]
+        binding = report["source_binding"]
+        binding["profile_subdivisions"] = {}
+        # Digest agreement is not independent authority: an untrusted snapshot can
+        # recompute its declared hashes after deleting the mandatory replay record.
+        intrinsic = dict(profiles=binding["profiles"], params=binding["surface"]["params"],
+                         scale=binding["scale"])
+        report["intrinsic_source_digest"] = _digest(intrinsic)
+        report["source_digest"] = _digest(dict(
+            intrinsic_source_digest=report["intrinsic_source_digest"], surface=binding["surface"]))
+        # Rebuild the internally consistent representation too. Merely retaining
+        # the old certificate fails safely for an incidental digest mismatch.
+        analysis = _bound_analysis(json.dumps(intrinsic, sort_keys=True),
+                                   json.dumps(binding["surface"], sort_keys=True))
+        assert analysis["status"] == "EXACT"
+        report["representation"] = analysis["representation"]
+&gt;       with pytest.raises((CurveOutputError, ValueError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (CurveOutputError, ValueError)
+
+tests\authoring\test_detached_history_authority.py:65: Failed</failure></testcase><testcase classname="tests.authoring.test_detached_history_authority" name="test_detached_merged_descriptor_requires_history[writer]" time="0.617"><failure message="Failed: DID NOT RAISE any of (CurveOutputError, ValueError)">operation = 'writer'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1550/test_detached_merged_descripto1')
+
+    @pytest.mark.parametrize("operation", ["validate", "writer"])
+    def test_detached_merged_descriptor_requires_history(operation, tmp_path):
+        p, sid = merged_loft("cubic")
+        snapshot = p.snapshot()
+        validate_loft_snapshot(snapshot)
+        report = snapshot["construction_checks"]["lofts"][sid]
+        binding = report["source_binding"]
+        binding["profile_subdivisions"] = {}
+        # Digest agreement is not independent authority: an untrusted snapshot can
+        # recompute its declared hashes after deleting the mandatory replay record.
+        intrinsic = dict(profiles=binding["profiles"], params=binding["surface"]["params"],
+                         scale=binding["scale"])
+        report["intrinsic_source_digest"] = _digest(intrinsic)
+        report["source_digest"] = _digest(dict(
+            intrinsic_source_digest=report["intrinsic_source_digest"], surface=binding["surface"]))
+        # Rebuild the internally consistent representation too. Merely retaining
+        # the old certificate fails safely for an incidental digest mismatch.
+        analysis = _bound_analysis(json.dumps(intrinsic, sort_keys=True),
+                                   json.dumps(binding["surface"], sort_keys=True))
+        assert analysis["status"] == "EXACT"
+        report["representation"] = analysis["representation"]
+&gt;       with pytest.raises((CurveOutputError, ValueError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (CurveOutputError, ValueError)
+
+tests\authoring\test_detached_history_authority.py:65: Failed</failure></testcase><testcase classname="tests.authoring.test_detached_history_authority" name="test_detached_source_context_requires_history_even_if_registry_empty[arc]" time="0.316"><failure message="Failed: DID NOT RAISE ValueError">kind = 'arc'
+
+    @pytest.mark.parametrize("kind", ["arc", "cubic"])
+    def test_detached_source_context_requires_history_even_if_registry_empty(kind):
+        p, sid = merged_loft(kind)
+        binding = p.loft_status(sid)["source_binding"]
+        intrinsic = dict(profiles=binding["profiles"], params=binding["surface"]["params"],
+                         scale=binding["scale"])
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\authoring\test_detached_history_authority.py:79: Failed</failure></testcase><testcase classname="tests.authoring.test_detached_history_authority" name="test_detached_source_context_requires_history_even_if_registry_empty[cubic]" time="0.326"><failure message="Failed: DID NOT RAISE ValueError">kind = 'cubic'
+
+    @pytest.mark.parametrize("kind", ["arc", "cubic"])
+    def test_detached_source_context_requires_history_even_if_registry_empty(kind):
+        p, sid = merged_loft(kind)
+        binding = p.loft_status(sid)["source_binding"]
+        intrinsic = dict(profiles=binding["profiles"], params=binding["surface"]["params"],
+                         scale=binding["scale"])
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\authoring\test_detached_history_authority.py:79: Failed</failure></testcase><testcase classname="tests.authoring.test_detached_history_authority" name="test_retired_line_identity_rejected_after_inverse_merge[root]" time="0.003" /><testcase classname="tests.authoring.test_detached_history_authority" name="test_retired_line_identity_rejected_after_inverse_merge[left]" time="0.002" /><testcase classname="tests.authoring.test_detached_history_authority" name="test_retired_line_identity_rejected_after_inverse_merge[right]" time="0.002" /></testsuite></testsuites>

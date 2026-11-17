@@ -1,0 +1,27 @@
+{
+  "code_sha": "3e6fbb636f57d394ca0e5433553dc394e1b9379e",
+  "base_sha": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
+  "source_root": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\identity-consumers",
+  "source_lf_sha256": {
+    "src/archpapercraft/authoring/loft_surface.py": "c4deb29a8188b9cc0e0fa25eb9f4c202f4f566f853a948cd99f371f0fe3b16c0",
+    "src/archpapercraft/authoring/profile_subdivision.py": "d564c0e7d5a191bb4753043ec06b65984cbe7253ac79ccfadcff5f8d1ff6286e",
+    "tests/authoring/test_detached_history_authority.py": "8ffbc08826baeed7577a3c3804d53f5c23477034c82e756efb9fb02d77d5a06d"
+  },
+  "verification": {
+    "before": "4 failed, 3 passed on6064; validator/writer CUBIC bypass and ARC/CUBIC missing-authority context",
+    "after_coupled": "120 passed /98.75s (new test subsequently added explicit None LINE assignment; standalone replay and final targeted run cover that delta)",
+    "final_targeted": "7 passed /2.14s",
+    "ruff": "PASS",
+    "diff": "PASS"
+  },
+  "invalid_evidence": {
+    "file": "core9-line-pre72-DISQUALIFIED.xml",
+    "reason": "tests/conftest.py prepended current worktree src despite PYTHONPATH/pytest pythonpath old src. It is NOT old-source evidence."
+  },
+  "outputs_sha256": {
+    ".author-export.json": "c9ab4ab599bf4a6e105525c56eea42eee598c11eaf6759978b2a02602f8e31b7",
+    "model.pdf": "cbe85726e230fe40ac76c12ad4bac9d6b513f50a8f5b2f5e3e85d2e981ac35ac",
+    "page-4dc79978-41b8-4019-8f2e-cc2a74c6ec5e.svg": "3607b67bad291059939fbc027719146b4947b6742f86db3b9fafcf18226951c0"
+  },
+  "limits": "Backend/source publisher checks only; independent review pending; no native GUI, novice or physical proof."
+}
