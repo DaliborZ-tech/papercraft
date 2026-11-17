@@ -384,10 +384,11 @@ def _develop_once(key, effective_tolerance):
         _, (first_source, second_source) = _math_profiles(data)
     except (ValueError, ValidationError) as exc:
         return {**_failure("UNRESOLVED", "LOFT_REFERENCE_UNRESOLVED", str(exc)), **binding}
-    topology_reports = {
-        p.id: _topology_profile(p, source.curves)
-        for p, source in zip((a, b), (first_source, second_source))
-    }
+    # Material topology follows the authored profile's oriented source order.
+    # Correspondence order can traverse it backwards or start at another seam;
+    # it is validated separately and must not reorder the source boundary.
+    # canonical_profile_curves retains analytical history in profile-ID order.
+    topology_reports = {p.id: _topology_profile(p) for p in (a, b)}
     for result in topology_reports.values():
         if result["status"] != "VALID":
             return {
