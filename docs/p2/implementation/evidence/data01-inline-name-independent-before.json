@@ -1,0 +1,30 @@
+{
+  "source_sha": "bea802078b3a7e192b04052396221d69c7721b83",
+  "import_path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-recovery-review\\src\\archpapercraft\\ui\\author_window.py",
+  "raw_name": "Unconfirmed author name",
+  "geometry_unchanged": true,
+  "dirty": false,
+  "checkpoint_return": false,
+  "candidates": [],
+  "ui_draft": {
+    "selection": {
+      "surface": "89e41e4e-1ada-4209-8cd0-4eb46aeada58",
+      "profile": "1024cd90-05d7-423e-815e-a98b0348d637",
+      "generation": null,
+      "edge": null,
+      "vertex": [
+        "1024cd90-05d7-423e-815e-a98b0348d637",
+        "997929c2-f11b-4cf4-828e-83cec50ca479"
+      ]
+    },
+    "joint": null,
+    "units": 1000,
+    "plane": "XY",
+    "grid": 0.1,
+    "sketch": null,
+    "pending_number": null,
+    "context": "Modelov\u00e1n\u00ed",
+    "sketch_visible": false
+  },
+  "original_unchanged": true
+}
