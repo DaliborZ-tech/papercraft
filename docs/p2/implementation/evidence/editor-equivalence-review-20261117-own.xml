@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="13" time="0.299" timestamp="2026-11-17T17:27:56.691024+01:00" hostname="Dalibor"><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_exact_whole_curve_position_boundary[.00002-CERTIFIED]" time="0.002" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_exact_whole_curve_position_boundary[.000020000000001-UNRESOLVED]" time="0.001" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_cubic_between_endpoints_position_violation_is_not_hidden" time="0.001" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_opposite_hole_area_changes_cannot_cancel_each_other" time="0.001" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_disjoint_holes_becoming_tangent_fail_topology_despite_tiny_metric_error" time="0.016" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_global_length_is_accumulated_from_independent_pythagorean_oracle" time="0.061" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_semicircle_radius_precision_is_not_pointwise_precision" time="0.000" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_native_arc_semantics_cannot_change_even_with_same_endpoints[A 10 10 0 1 1 0 10]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_native_arc_semantics_cannot_change_even_with_same_endpoints[A 10 10 0 0 0 0 10]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_native_arc_semantics_cannot_change_even_with_same_endpoints[A 10 11 0 0 1 0 10]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_native_arc_semantics_cannot_change_even_with_same_endpoints[A 10 10 1 0 1 0 10]" time="0.000" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_translation_and_rotate_list_proves_same_linear_frame_only" time="0.000" /><testcase classname="docs.p2.implementation.evidence.editor-equivalence-review-own" name="test_stylesheet_transform_cannot_bypass_xml_frame_guard" time="0.001"><failure message="Failed: DID NOT RAISE AssertionError">def test_stylesheet_transform_cannot_bypass_xml_frame_guard():
+        original = xml_fixture()
+        edited = deepcopy(original)
+        # Rotation changes the triangle to its complementary half of the square.
+        # All path d strings, linear frame attributes AND individual bboxes remain equal.
+        style = ET.SubElement(edited, "{" + probe.NS["s"] + "}style")
+        style.text = "#path-CUT {transform: rotate(180deg); transform-origin:5px 5px;}"
+        source_vertices = ((0, 0), (10, 0), (0, 10))
+        changed_vertices = tuple((10 - x, 10 - y) for x, y in source_vertices)
+        def bounds(points):
+            return tuple((min(p[i] for p in points), max(p[i] for p in points)) for i in (0, 1))
+        assert bounds(source_vertices) == bounds(changed_vertices)
+        assert max(sum((a - b)**2 for a, b in zip(p, q))
+                   for p, q in zip(source_vertices, changed_vertices)) == 200
+        assert probe._same_path(original[0][0][0].attrib["d"], edited[0][0][0].attrib["d"])["status"] == "CERTIFIED"
+&gt;       with pytest.raises(AssertionError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE AssertionError
+
+docs\p2\implementation\evidence\editor-equivalence-review-own.py:132: Failed</failure></testcase></testsuite></testsuites>

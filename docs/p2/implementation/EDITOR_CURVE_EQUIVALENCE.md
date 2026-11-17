@@ -118,3 +118,59 @@ racionálním jmenovatelům a Python limitu serializace integeru. Zachován jako
 [first raw](evidence/editor-equivalence-first-internal.json). Oprava používá
 prokázané venkovní zaokrouhlení skalárních mezí na stejnou racionální mřížku;
 žádný limit ani nepohodlný případ nebyl odstraněn.
+
+## Nezávislá revize 17. 11. 2026
+
+Reviewer `editor_review` je jiný agent než autor comparatoru. Posuzovaný snapshot
+`b9ff396cf9d319cbceb64d1cab0e0d8cb3effe30`, runtime změna
+`a799072ea87043ff11ea632b76217456f4a4f0a9`. Nový izolovaný worktree je mimo
+adresář projektů. `archpapercraft.__file__` ukázal jeho vlastní `src`; comparator
+a driver byly načteny explicitně z tohoto worktree. Historické výsledky výše
+zůstávají zachované.
+
+**Verdikt: CHANGES_REQUIRED, EDITOR-R01 (MAJOR) OPEN.** Samotný matematický helper
+má v posouzeném rozsahu správné konzervativní meze: venkovní racionální
+zaokrouhlení, kruhový chord graph, délkový součet, přímý Green po smyčkách a
+topologický důkaz nad homogenními obaly. Schválení celého editorového driveru
+brání následující vlastní reprodukce.
+
+### EDITOR-R01 — stylesheet obchází kontrolu frame
+
+`tools/authoring/editor_probe.py::_part_frame_checks` kontroluje atributy
+`transform` a inline `style`, ale nikoli obsah SVG `<style>`. Vlastní
+[negativní test](evidence/editor-equivalence-review-own.py) přidá stylesheet
+`#path-CUT {transform: rotate(180deg); transform-origin:5px 5px;}` k trojúhelníku
+`(0,0),(10,0),(0,10)`. Po rotaci jsou vrcholy `(10,10),(0,10),(10,0)`: stejný
+bbox, stejné délky i plocha, ale jiná řezná geometrie a maximální posun
+`sqrt(200) mm`. Atribut `d`, part/role ID a atributové transformace se nezmění.
+`_same_path` tedy vrátí CERTIFIED a `_part_frame_checks` nevyvolá očekávané
+odmítnutí. Bbox kontrola tento analytický případ nerozliší.
+
+Jde o potvrzenou mezeru validačního guardu. Skutečný škodlivý render či uložení
+v Inkscape tímto testem **nebyly provedeny**. Nativní desktop vlastní integrátor.
+Oprava má neanalyzované CSS geometrické efekty bezpečně odmítnout nebo doložit
+jejich úplnou sémantiku; samotná kontrola operandů, bbox či inline stylu nestačí.
+Reviewer produkci neměnil. Po opravě je nutný nezměněný replay tohoto negativu
+a source-bound review finálního kandidáta.
+
+### Provedené důkazy a meze
+
+- Původní tři cílené soubory: **33 PASS / 1,15 s**, [JUnit](evidence/editor-equivalence-review-20261117-targeted.xml).
+- Nezávislé opakování recorded fixture: **23/23 CERTIFIED / 0,62 s**, stejné
+  přísné původní meze a skutečné tokeny původních near path; [souhrn s vazbou zdroje](evidence/editor-equivalence-review-20261117-binding.json).
+  CUT délková mez `1,957583e-5 mm`, přímá plošná mez `1,289767e-6 mm²`.
+- Vlastní případy: **12 PASS + 1 FAIL / 0,33 s**,
+  [nezměněný negativní JUnit](evidence/editor-equivalence-review-20261117-own.xml).
+  Pozitivní přesná mez polohy `2e-5`, záporná strana těsně nad ní, skutečný
+  kubický meziuzlový posun `3e-5`, délkový Pythagorův oracle, opačné změny ploch
+  dvou děr bez vzájemného vyrušení, dotyk dvou děr při vyhovujících metrických
+  mezích, půlkružnice s radius změnou `1e-8` a posunem `>0,00044 mm`, změny
+  A flags/elipsy/rotace, ekvivalentní složený lineární frame a EDITOR-R01.
+- Ruff nad vlastními testy a oběma nástroji a `git diff --check` PASS.
+
+Skills jsou použity věcně: verification — nezávislé analytické negativy a
+skutečný import; construction — zachovaná topologie děr a native oblouků;
+authoring-ui — editorové změny transformace nesmějí měnit řeznou geometrii;
+delivery — přesný zdroj, zachovaný FAIL a oprava vrácená jinému autorovi.
+Nový native Inkscape průchod, vlastní GUI model, novice AC-US08 a fyzické P3
+zůstávají touto revizí **NOT_RUN**. Recorded replay nezavřel původní native FAIL.
