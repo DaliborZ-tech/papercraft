@@ -877,23 +877,27 @@
         "not_claimed": "No human usability session; initial1366 first-show growth was corrected as a DPI/harness observation, not a proven minimum-size product defect."
       },
       "product_correction": {
-        "status": "IMPLEMENTED_INDEPENDENT_CODE_REVIEW_NATIVE_CLOSURE_PENDING",
-        "source_sha": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
-        "description": "Four activity contexts and contextual inspector/tools, common selection/history, grouped actionable problems. Independent native findings repaired: single-object names through paper/output with custom/mixed names preserved; actual closed advanced section; camera centered on projected material bounds."
+        "status": "IMPLEMENTED_AND_INDEPENDENTLY_VERIFIED_IN_BASE_WORKSPACE_SCOPE",
+        "source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
+        "description": "Four activity contexts and contextual inspector/tools, common selection/history, grouped actionable problems. Independent native findings repaired: single-object names through paper/output with custom/mixed names preserved; actual closed advanced section; camera centered on projected material bounds. Explicit problem-details collapse also returns viewport space while preserving ordinary user resizing."
       },
       "skill_change": "Before adding a feature, establish its place in the activity, dominant view, selection, inspector and next step; review a complete actual workflow under a single product design owner.",
       "usage_example": "After joining walls and adding a tab, expose the pages action and a grouped unplaced count; retain direct access to advanced construction without keeping all views and forms equally dominant.",
       "verification": {
-        "status": "FULL1978PASS_D94_THEN3ACTUAL_GUI_FINDINGS_AND_PINNED_REPAIRS; FINAL_NATIVE_PENDING",
+        "status": "SOURCE_BOUND_FULL1978_THEN_FINAL141_AND_ACTUAL_NATIVE_HOUSE_EXPERT_RECOVERY_REPAIR_PASS",
         "evidence": [
           "docs/p2/implementation/evidence/workspace-final-d94f9b3-full.json",
           "docs/p2/implementation/evidence/workspace-recovery-native/results.json",
-          "docs/p2/implementation/evidence/workspace-final-191d24e-targeted.json"
+          "docs/p2/implementation/evidence/workspace-final-191d24e-targeted.json",
+          "docs/p2/implementation/evidence/workspace-house-191d24e-run01/results.json",
+          "docs/p2/implementation/evidence/workspace-repair-native/results.json",
+          "docs/p2/implementation/evidence/workspace-final-128a0dd-targeted.json",
+          "docs/p2/implementation/evidence/workspace-final-dock-native/results.json"
         ]
       },
       "independent_review": {
-        "status": "CODE_OFFSCREEN_APPROVED_SCOPE_NATIVE_CLOSURE_PENDING",
-        "source_sha": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
+        "status": "APPROVED_IN_VERIFIED_CODE_AND_NATIVE_BASE_WORKSPACE_SCOPE",
+        "source_sha": "128a0dd2fe24a2a6a8898af5380bc31f6469355d",
         "report": "docs/revival/P2_CONTINUATION_2026-11-17.md"
       },
       "effectiveness": "PENDING_NEXT_USE",

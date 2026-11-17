@@ -573,3 +573,19 @@ README/manuál a queue/SK019/skill update `1a60818` mají schválené věcné me
 z předchozího review; závěrečná metadata mají jen promítnout tato konkrétní
 closure. Nejde o PO přijetí celého P2, nový human test (0/NOT_RUN), historický
 PC010 ani fyzický P3. Původní negativní důkazy a limity obnovy zůstávají zachované.
+
+### Předávací stav prvního přepracovaného workspace
+
+Runtime zůstává přesně `128a0dd`; finální integrační cílená sada má
+**141 PASS / 0 FAIL/ERROR/SKIP / 22,52 s**, včetně vlastních neautorských
+regresí. [JUnit](../p2/implementation/evidence/workspace-final-128a0dd-targeted.xml),
+[neměnný zdroj a skutečné importy](../p2/implementation/evidence/workspace-final-128a0dd-targeted.json).
+Ruff všech změněných src/tests/tools Python souborů a diff check PASS.
+Neopakuje se již doložený úplný běh 1978 na d94; rozdíly jsou omezené
+na výše popsané a nezávisle uzavřené UI opravy a jejich regrese.
+Queue a SK019 nyní zaznamenávají skutečné native closure všech čtyř nálezů;
+účinnost poučení při dalším použití zůstává PENDING_NEXT_USE.
+Připraven je první ucelený workspace/recovery přírůstek ke scoped integraci,
+pushi a společné kontrole fungujícího desktopu. PC009 zůstává IN_PROGRESS
+pro zbývající konsolidaci A/B/C/D; UX přijetí vlastníkem je samostatné.
+Historický PC010, nový člověk AC-US08 a fyzické P3 nejsou tímto dokončeny.
