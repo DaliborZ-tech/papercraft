@@ -25,6 +25,14 @@ seskupeného problému. Jednotnou interakční architekturu drží vlastník Pro
 Designu; nezávislé expertní hodnocení může odmítnout nekonzistentní celek.
 Jeho závěr eviduj odděleně od testu s novým člověkem.
 
+Na skutečném snímku ověř také výsledek běžných drobných interakcí: sbalená
+skupina musí skrýt své ovladače i po změně výběru, vlastní jméno jednoduchého
+dílu musí jít poznat také na papíře a příkaz Vše musí ukázat celý asymetrický
+model při aktuální velikosti pohledu. Nálezy z nativního průchodu v témže
+[záznamu pokračování](../../../docs/revival/P2_CONTINUATION_2026-11-17.md)
+prošly původní komponentovou sadou; opravu ověř původním scénářem. Odlišný
+ruční název společného dílu zachovej a nezaměňuj zaměření výběru za Vše.
+
 Před uložením, exportním snapshotem nebo rozhodnutím o neuložených změnách vyhodnoť i právě rozepsaný viditelný vstup. [C-05](../../../docs/p2/implementation/PC006A_REVIEW.md) doložil, že Ctrl+S/E/N bez Enter ignorovalo číslo; modální dialog pak mohl změnu potvrdit až po pořízení snapshotu. Příklad ověření: napiš nový rozměr a rovnou použij zkratku, také s neplatným rozměrem. Platná změna musí předcházet ukládanému stavu, neplatná musí zastavit operaci a zachovat předchozí práci. Automatizovaná regrese není důkaz nového uživatele.
 
 Přepnutí pracovního kontextu sjednoť s aktuálním podvýběrem, stromem, vlastnostmi a3D zvýrazněním. [DU01](../../../docs/p2/implementation/PC008_UI_REVIEW.md) ukázal novou generaci v panelu, ale stále vybraný díl staré generace. Nestačí změnit popisek; podvýběr převeď na jednoznačného vlastníka nebo jej zruš. Příklad: při volbě jiné odvozené generace se vybere její původní konstrukční cíl a uvolní stará hrana/bod, zatímco samostatná volba materiálu pro tisk se nezmění. Ověř oba vlastníky a bezpečný další příkaz; přenos na jiný přepínač zůstává neověřený, dokud není skutečně použit.

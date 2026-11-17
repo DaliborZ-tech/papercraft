@@ -1391,39 +1391,43 @@
       "skill_application": [
         {
           "skill": "papercraft-construction",
-          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "status": "APPLIED_AND_INDEPENDENT_CODE_REVIEWED_NATIVE_CLOSURE_PENDING",
           "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
           "evidence": [
-            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+            "docs/revival/P2_CONTINUATION_2026-11-17.md",
+            "docs/p2/implementation/evidence/workspace-recovery-native/results.json"
           ],
-          "review": "NOT_RUN"
+          "review": "Independent expert191d24e code/offscreen approved scope; native closure pending."
         },
         {
           "skill": "papercraft-authoring-ui",
-          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "status": "APPLIED_AND_INDEPENDENT_CODE_REVIEWED_NATIVE_CLOSURE_PENDING",
           "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
           "evidence": [
-            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+            "docs/revival/P2_CONTINUATION_2026-11-17.md",
+            "docs/p2/implementation/evidence/workspace-recovery-native/results.json"
           ],
-          "review": "NOT_RUN"
+          "review": "Independent expert191d24e code/offscreen approved scope; native closure pending."
         },
         {
           "skill": "papercraft-verification",
-          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "status": "APPLIED_AND_INDEPENDENT_CODE_REVIEWED_NATIVE_CLOSURE_PENDING",
           "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
           "evidence": [
-            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+            "docs/revival/P2_CONTINUATION_2026-11-17.md",
+            "docs/p2/implementation/evidence/workspace-recovery-native/results.json"
           ],
-          "review": "NOT_RUN"
+          "review": "Independent expert191d24e code/offscreen approved scope; native closure pending."
         },
         {
           "skill": "papercraft-delivery",
-          "status": "IN_USE_WORKSPACE_REPAIR_IMPLEMENTATION",
+          "status": "APPLIED_AND_INDEPENDENT_CODE_REVIEWED_NATIVE_CLOSURE_PENDING",
           "decision": "One shared selection/history/document across activity contexts; protect pending input and manual work; dominant views and grouped problems with direct repair. Independent expert GUI and source-bound numeric/export verification remain distinct from real novice/physical proof.",
           "evidence": [
-            "docs/revival/P2_CONTINUATION_2026-11-17.md"
+            "docs/revival/P2_CONTINUATION_2026-11-17.md",
+            "docs/p2/implementation/evidence/workspace-recovery-native/results.json"
           ],
-          "review": "NOT_RUN"
+          "review": "Independent expert191d24e code/offscreen approved scope; native closure pending."
         }
       ],
       "usability": {
@@ -1438,21 +1442,25 @@
           "AC-US07",
           "AC-US08"
         ],
-        "main_flow_evidence": [],
-        "status": "NOT_RUN",
+        "main_flow_evidence": [
+          "docs/p2/implementation/evidence/workspace-recovery-native/results.json",
+          "docs/p2/implementation/evidence/workspace-final-d94f9b3-full.json",
+          "docs/p2/implementation/evidence/workspace-final-191d24e-targeted.json"
+        ],
+        "status": "INDEPENDENT_EXPERT_GUI_RUN_WITH_REPAIRS; NEW_HUMAN_NOT_RUN",
         "implementation_in_this_slice": true,
         "defer_to_visual_redesign": false,
         "ui_rework_evidence": {
-          "status": "NOT_RUN",
-          "problem": null,
-          "reason": null,
-          "preserved_parts": null,
-          "before_after_flow": null,
-          "consistency_impact": null,
-          "workflow_alternative_decision": null
+          "status": "IMPLEMENTED_REPAIR_NATIVE_REPLAY_PENDING",
+          "problem": "Persistent competing views, feature toolbar, repeated issues; owner rejected current workspace. Independent GUI additionally found inconsistent names, false collapse and clipped Fit All.",
+          "reason": "Give one authoring activity the main space while retaining shared document/selection/history and advanced commands.",
+          "preserved_parts": "Source geometry, identities, commands, manual layout/locks, canonical issue digests and explicit acknowledgements, SVG/PDF pipeline.",
+          "before_after_flow": "Independent real desktop d94 run; final repaired191 native house and repair replay pending.",
+          "consistency_impact": "Four freely accessible contexts, unified input guards, consistent names, actual projection framing and grouped repair actions.",
+          "workflow_alternative_decision": "Explicit owner four-context workspace request,17November2026."
         }
       },
-      "continuation_2026_11_17": "Preparing opt-in actual after-reopen author edits for A/B/C/D; original main flows retained, new native proof NOT_RUN until execution.",
+      "continuation_2026_11_17": "Four-context workspace/recovery implemented; independent d94 native story and recovery completed. Three actual UI findings repaired191d24e; final native house/replay in progress. A/B/C/D consolidation remains open.",
       "priority_update_2026_11_17": "Owner rejects currentUI target. Implement coordinated4context authoring workspace and safe drafts/recovery, evaluate complete first-modelGUI independently using local+web evidence; preserve every geometry/manual-layout/export capability. No new roadmap or general audit."
     },
     {
@@ -2649,7 +2657,7 @@
   "updated_on": "2026-11-17",
   "baseline_sha": "d689af67e059512fdc99e85e9eb0b8d432f4c5d4",
   "working_branch": "revival/p2-continuation-20261117",
-  "release_readiness": "NOT_READY: B1/B2/Bezier current native and editor evidence complete; B3/D/C, provenance and mixed changes, PC009, actual novice AC-US08, historic AC-AU19 and whole-P2 review remain required",
+  "release_readiness": "NOT_READY: owner has not accepted redesigned UX; whole A/B/C/D consolidation and historical PC010 remain. Independent expert GUI evidence does not replace new-human AC-US08 (0/NOT_RUN) or physical P3 (NOT_RUN).",
   "evidence_index": "docs/p2/v1.2/README.md",
   "p0_p1_technical_completion": "AGENT_VERIFIED",
   "integration_policy": {
@@ -2731,7 +2739,7 @@
     "P1",
     "P2"
   ],
-  "p2_digital_delivery": "IN_PROGRESS: CORE9/C9 technical candidate independently verified, full1916PASS; current UI explicitly NOT_PRODUCT_ACCEPTED by owner. Real workspace redesign/recovery and expert UX local+internet+GUI validation prioritized; PC010 actual model NOT_RUN, novice0/NOT_RUN, physicalP3NOT_RUN.",
+  "p2_digital_delivery": "IN_PROGRESS: C9 published6efa881. Four activity contexts, grouped actionable problems, names, camera and independent atomic drafts implemented. Full1978PASS on d94; independent actualGUI review found3UI issues now repaired191d24e. Final native repair/house demonstration and scoped publication in progress; UX PO acceptance NOT_RUN.",
   "product_gate_history": [
     {
       "id": "GATE-P2",
@@ -2797,7 +2805,7 @@
     "verification": "362 PASS, 0 FAIL, 0 SKIP; prototype only",
     "report": "docs/p2/v1.2/PRESERVATION.md"
   },
-  "current_authorized_package": "Close verified CORE9/C9 technical integration; prioritize PC009 authoring workspace and independent expert UX validation plus safe drafts/recovery before historical PC010.",
+  "current_authorized_package": "PC009 first usable authoring workspace and safe recovery, independently reviewed and demonstrated before historical PC010; C9 integrity published6efa881.",
   "p2_v12_design_delivery": {
     "status": "AGENT_VERIFIED",
     "technical_review": {
@@ -2909,16 +2917,16 @@
     "status_before_pause": "IN_PROGRESS",
     "implementation_authorization_unchanged": true,
     "handoff_report": "docs/p2/implementation/CONTINUE_2026-11-11.md",
-    "wip_source_sha": "5747a2af2d70cd622de49c057544b584baa699c2",
+    "wip_source_sha": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
     "wip_branch": "revival/p2-continuation-20261117",
-    "next_required_technical_work": "Read CONTINUE_2026-11-11.md. Close CORE9-R01 with unchanged reviewer replay and expanded poison/orphan/old-artifact cases; investigate unproven empty-history exporter and LINE resurrection hypotheses. Merge reviewed core fix into actual UI. Independently review editor helper and replay Inkscape near page. Finish source-bound C8 metadata/integration review, then safe publication, full PC009 and own historical PC010. No routine owner approval; novice0/NOT_RUN, P3NOT_RUN.",
+    "next_required_technical_work": "Complete actual native manual house A and independent repair render replay on191d24e, close naming/framing/collapse findings with pinned evidence, review final metadata and publish scoped workspace/recovery increment. Then owner desktop UX review and remaining PC009 A/B/C/D consolidation; historical PC010 actual NOT_RUN until usable workspace. No routine permission; humanAC-US08 and physicalP3 remain NOT_RUN.",
     "resumed_on": "2026-11-17",
     "resume_source": "explicit_owner_PO_CONTINUATION_attachment_2026_11_17",
     "digital_source_sha": "a46f179331a5ab94fec7b68ba52b2f9431ac699b",
     "remaining_external_evidence": [
       "AC-US08 actual novice participant unavailable, 0 observed; no automation substitution"
     ],
-    "active_work": "CORE9/C9 full1916PASS and independent technical review closed; exact integration metadata review and publication. In parallel actual4-context workspace implementation, grouped actionable problems, safe draft/recovery, independent local+web patterns and practicalGUI expert review. PC010 draft driver preserved, actual historicalmodelNOT_RUN.",
+    "active_work": "Native house from empty project through visible four-context UI, manual two-page layout, reopen author edit and SVG/PDF; independent final repair review. Runtime source frozen191d24e.",
     "active_reviews": {
       "planar_P01_P02": {
         "status": "CLOSED_VERIFIED_IN_SCOPE",
@@ -3100,11 +3108,27 @@
       "publication_evidence": "docs/revival/evidence/p2-c9-publication-6efa881.json"
     },
     "expert_usability": {
-      "status": "IN_PROGRESS",
+      "status": "INDEPENDENT_EXPERT_CODE_APPROVED_SCOPE_NATIVE_REPAIR_PENDING",
       "requested_by_owner": true,
-      "sources": "local product/contracts/manual and public internet workflows/firsthand experiences",
-      "proof_kind": "independent expert agent actualGUI evaluation; no human participant substitution",
+      "sources": "Local product/contracts/manual plus primary public workflow documentation and explicitly anecdotal firsthand experiences",
+      "research": "docs/p2/v1.2/USABILITY_TEST.md",
+      "report": "docs/revival/P2_CONTINUATION_2026-11-17.md",
+      "first_native_source": "d94f9b329c1e1e73241e8b66b76924a72bfac214",
+      "first_native_verdict": "CHANGES_REQUIRED_UI; DATA01_APPROVED_IN_VERIFIED_SCOPE",
+      "repair_source": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
+      "proof_kind": "independent expert agent actualGUI evaluation; not new-human participant",
       "participant_count": 0
+    },
+    "workspace_recovery_increment": {
+      "source_sha": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
+      "full_suite_source": "d94f9b329c1e1e73241e8b66b76924a72bfac214",
+      "full_suite": "1978PASS/0FAIL/0ERROR/0SKIP596.44s",
+      "final_targeted": "128PASS/24.02s; meaningful naming/custom/mixed negatives, projected camera bounds, pending input and recovery",
+      "native_recovery": "Actual30s timer -> os._exit -> newPID restore raw name and exact four-part/two-page document -> SaveAs; original preserved",
+      "product_acceptance": "NOT_RUN_OWNER_REVIEW_REQUIRED",
+      "published": false,
+      "human_novice": "0/NOT_RUN",
+      "physical": "P3_NOT_RUN"
     }
   },
   "owner_priority_update_2026_11_17": {
