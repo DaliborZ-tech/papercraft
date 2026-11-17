@@ -181,3 +181,27 @@ self-intersections se atomicky odmítnou. [JUnit](evidence/reversed-quarter-arc/
 Nezávislé review opravy a finální úplná sada na integračním pinu ještě musí
 být doloženy. Původní FAIL696 se nemaže; tento backendový důkaz nenahrazuje
 nativní aplikaci, nového člověka ani fyzické P3.
+
+## Úplná integrační sada a5eedc9 — zachovaný neúspěch
+
+Celý `pytest tests -q` bez selekce, přesný zdroj
+`a5eedc9b3a345320b9ae07e9e44bc7387c5ef73b`, Qt offscreen:
+**1867 PASS /37 FAIL /10 ERROR /0 SKIP,731,99s**.
+[JUnit](evidence/p2-candidate-a5eedc9-full/junit.xml),
+[raw log](evidence/p2-candidate-a5eedc9-full/pytest.log),
+[source binding](evidence/p2-candidate-a5eedc9-full/binding.json).
+Importy byly ověřeny uvnitř stejného pytest procesu při startu, po collection
+a na konci; všechny importované aplikační moduly pocházejí z vlastního src.
+LF bytes celého src odpovídají Git blobům a5 před i po běhu.
+[Ruff](evidence/p2-candidate-a5eedc9-full/ruff.json):36 změněných Python souborů,
+0 nálezů; diff check PASS. README předepisuje pytest, CI workflow v repu není.
+Historický P0/P1 validate_delivery s12tickety a zákazem produkčních změn před
+přijetím P2 se nevydává za platnou kontrolu přijaté implementace P2.
+
+Všech47 neúspěchů patří dvěma archivním D exportním fixtures a testu historické
+LINE generace. Loader podle aktuálního kontraktu zachoval jejich cache a
+označil ji stale; staré testy se přesto pokusily rovnou o snapshot. Oprava
+této testovací přípravy musí doložit explicitní přepočet a zachování původních
+bytů, zdrojů, identit, kotev a layoutu. Negativní publisher/poison/output/budget
+očekávání se nemění. Tento běh zůstává neúspěšný; případný následný PASS je
+samostatný důkaz nového připnutého testovacího snapshotu.
