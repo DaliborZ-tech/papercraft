@@ -67,7 +67,8 @@
       "junit_sha256": "e35a8527e3fd1146fb218c7f5519c943f9437e96c501eb64c21e65fa9319c75b"
     }
   },
-  "actual_legacy_artifact_lf_independent_sha256": {
+  "actual_legacy_artifact_bytes_preserved": "All seven independently asserted before/after original byte SHA256; safe-copy9/reopen/recompute/export. Test source root supplied by CORE9_ARTIFACT_ROOT to avoid copying old evidence.",
+  "actual_legacy_artifact_bytes_sha256": {
     "pc006a-desktop-7da2403-run04/own-model.apcraft": "c649da8478d5b36bf6ffeb764ff58c2e308ddb9c4a7d38191a2effcbb46b205d",
     "pc007a-loft-B1-desktop-a46f179-run01/loft-B1/loft-B1.apcraft": "e8ab5600952813e528978fd4314890b8209f06bc1a1e0994a1203695c1551744",
     "pc008-D-gothic-desktop-e7826dd-run01/D-gothic/D-gothic.apcraft": "55af07408f206fb03dd24e9f54f73756ad2ed0f30750ec8ea4f09563812c0f73",
@@ -75,6 +76,5 @@
     "pc007b-C-cylinder-desktop-8f1ec63-run02/C-cylinder/C-cylinder.apcraft": "a1b6793b533775672f577d257c203f4e00314a596dead1ad6a6b61e7e34026a5",
     "pc007b-C-cone-desktop-8f1ec63-run02/C-cone/C-cone.apcraft": "d8107cff69f063532745d832fbf9efa9d597cedec4538d2aacc811e034f9df9d",
     "pc007b-C-near-desktop-5283632-run02/C-near/C-near.apcraft": "84540c9dce6af5a0946d9815228c6916453778824bc034ee108619ecf2701b09"
-  },
-  "actual_legacy_artifact_bytes_preserved": "All seven independently asserted before/after original byte SHA256; safe-copy9/reopen/recompute/export. Test source root supplied by CORE9_ARTIFACT_ROOT to avoid copying old evidence."
+  }
 }

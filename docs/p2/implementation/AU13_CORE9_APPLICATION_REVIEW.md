@@ -98,3 +98,37 @@ následné UI a jeho skutečný
 ARC/CUBIC desktop, finální integrační snapshot a metadata ještě vyžadují vlastní
 kontrolu. Toto schválení samo nepovoluje vydávat celý CORE9/C/P2 za hotový.
 Nový lidský uživatel0/NOT_RUN; fyzické P3 NOT_RUN.
+
+## Detached exporter — nezávislé uzavření 3e6fbb63
+
+Původní hypotéza je nyní **potvrzená chyba před opravou a CLOSED po opravě**.
+Reviewer nepsal produkční fix
+**3e6fbb636f57d394ca0e5433553dc394e1b9379e**. Diff proti6064 mění pouze
+podmíněné zavolání existujícího projektového replay validatoru v
+`loft_surface._source_context` na nepodmíněné. Schválená matematika
+self-contained source-view se nemění; připojení projektu vyžaduje autoritu
+také tehdy, když je dodaný registr prázdný.
+
+[Nezávislý subprocess](evidence/au13-core9-detached-process-own.py) vytvořil
+vlastní kubickou extruzi, oba profily rozdělil2/7 a sloučil, potom ve snapshotu
+vyprázdnil nebo úplně vynechal historii a přepočítal vlastní SHA256 deklarace
+i interně konzistentní representation. Původní [6064 replay](evidence/au13-core9-detached-6064-process.json)
+oběma podvrhům skutečně vydal SVG/PDF a nahradil manifest. Nešlo tedy už jen
+o přijetí pomocným `_source_context` nebo o hypotézu z četby kódu.
+
+Na [opravě3e6f](evidence/au13-core9-detached-3e6f-process.json) tentýž skript
+oba vstupy odmítá kvůli chybějícímu přesnému aktivnímu vlastníkovi historie.
+Předchozí vydaný bundle a nesouvisející soubor zůstávají byte/hash shodné;
+zdrojový projekt se nemění. Na obou pinech současně projdou skutečným
+SVG/PDF writerem tři legitimní pozitivy: native legacy/None bez historie,
+platný qualified zdroj a nový LINE loft nad profilem se zachovanou orphan
+historií dřívější kubiky. `__file__` i zdrojové blob hashe se kontrolují uvnitř
+každého samostatného procesu bez pytest/conftest.
+
+**Verdikt: APPROVED_IN_SCOPE pro3e6f source-context opravu.** Opakování celé
+vlastní33případové matice včetně původních A/B/D/LINE/C8 projektů spolu se
+7 autorovými guard regresními případy: **40 PASS /61,20s**, [JUnit](evidence/au13-core9-detached-matrix-3e6f.xml).
+Překryv s předchozími běhy se nesčítá. Review checkout má byte shodnou celou
+produkční `src` s3e6f; nové UI a společný finální snapshot se kontrolují níže
+samostatně. Desktop/Inkscape tímto během neproběhly, nový člověk a P3 zůstávají
+NOT_RUN.
