@@ -1,0 +1,160 @@
+FFFFFF..........                                                         [100%]
+================================== FAILURES ===================================
+_ test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[root-arc] _
+
+kind = 'arc', retired = 'root'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1546/test_retired_piece_cannot_be_r0')
+
+    @pytest.mark.parametrize('kind',['arc','cubic'])
+    @pytest.mark.parametrize('retired',['root','left','right'])
+    def test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor(kind,retired,tmp_path):
+        p=AuthorProject.new(scale=.1)
+        pid=make_profile(p,kind)
+        root=p.profiles[pid].segments[0].id
+        cut=p.split_profile_segment(pid,root,Q(1,3))
+        merged=p.merge_profile_segments(pid,cut['segment_ids'])
+        raw=p.to_dict()
+        bad_id={'root':root,'left':cut['segment_ids'][0],'right':cut['segment_ids'][1]}[retired]
+        segment=raw['profiles'][pid]['segments'][0]
+        segment['id']=bad_id
+        segment['source_reference']['piece_id']=bad_id
+        witness=tmp_path/'retired-active-descriptor.apcraft'
+        witness.write_text(json.dumps(raw,indent=2),encoding='utf-8')
+>       with pytest.raises(ProjectFormatError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProjectFormatError
+
+docs\p2\implementation\evidence\au13-core9-review-own.py:47: Failed
+_ test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[root-cubic] _
+
+kind = 'cubic', retired = 'root'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1546/test_retired_piece_cannot_be_r1')
+
+    @pytest.mark.parametrize('kind',['arc','cubic'])
+    @pytest.mark.parametrize('retired',['root','left','right'])
+    def test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor(kind,retired,tmp_path):
+        p=AuthorProject.new(scale=.1)
+        pid=make_profile(p,kind)
+        root=p.profiles[pid].segments[0].id
+        cut=p.split_profile_segment(pid,root,Q(1,3))
+        merged=p.merge_profile_segments(pid,cut['segment_ids'])
+        raw=p.to_dict()
+        bad_id={'root':root,'left':cut['segment_ids'][0],'right':cut['segment_ids'][1]}[retired]
+        segment=raw['profiles'][pid]['segments'][0]
+        segment['id']=bad_id
+        segment['source_reference']['piece_id']=bad_id
+        witness=tmp_path/'retired-active-descriptor.apcraft'
+        witness.write_text(json.dumps(raw,indent=2),encoding='utf-8')
+>       with pytest.raises(ProjectFormatError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProjectFormatError
+
+docs\p2\implementation\evidence\au13-core9-review-own.py:47: Failed
+_ test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[left-arc] _
+
+kind = 'arc', retired = 'left'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1546/test_retired_piece_cannot_be_r2')
+
+    @pytest.mark.parametrize('kind',['arc','cubic'])
+    @pytest.mark.parametrize('retired',['root','left','right'])
+    def test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor(kind,retired,tmp_path):
+        p=AuthorProject.new(scale=.1)
+        pid=make_profile(p,kind)
+        root=p.profiles[pid].segments[0].id
+        cut=p.split_profile_segment(pid,root,Q(1,3))
+        merged=p.merge_profile_segments(pid,cut['segment_ids'])
+        raw=p.to_dict()
+        bad_id={'root':root,'left':cut['segment_ids'][0],'right':cut['segment_ids'][1]}[retired]
+        segment=raw['profiles'][pid]['segments'][0]
+        segment['id']=bad_id
+        segment['source_reference']['piece_id']=bad_id
+        witness=tmp_path/'retired-active-descriptor.apcraft'
+        witness.write_text(json.dumps(raw,indent=2),encoding='utf-8')
+>       with pytest.raises(ProjectFormatError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProjectFormatError
+
+docs\p2\implementation\evidence\au13-core9-review-own.py:47: Failed
+_ test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[left-cubic] _
+
+kind = 'cubic', retired = 'left'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1546/test_retired_piece_cannot_be_r3')
+
+    @pytest.mark.parametrize('kind',['arc','cubic'])
+    @pytest.mark.parametrize('retired',['root','left','right'])
+    def test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor(kind,retired,tmp_path):
+        p=AuthorProject.new(scale=.1)
+        pid=make_profile(p,kind)
+        root=p.profiles[pid].segments[0].id
+        cut=p.split_profile_segment(pid,root,Q(1,3))
+        merged=p.merge_profile_segments(pid,cut['segment_ids'])
+        raw=p.to_dict()
+        bad_id={'root':root,'left':cut['segment_ids'][0],'right':cut['segment_ids'][1]}[retired]
+        segment=raw['profiles'][pid]['segments'][0]
+        segment['id']=bad_id
+        segment['source_reference']['piece_id']=bad_id
+        witness=tmp_path/'retired-active-descriptor.apcraft'
+        witness.write_text(json.dumps(raw,indent=2),encoding='utf-8')
+>       with pytest.raises(ProjectFormatError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProjectFormatError
+
+docs\p2\implementation\evidence\au13-core9-review-own.py:47: Failed
+_ test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[right-arc] _
+
+kind = 'arc', retired = 'right'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1546/test_retired_piece_cannot_be_r4')
+
+    @pytest.mark.parametrize('kind',['arc','cubic'])
+    @pytest.mark.parametrize('retired',['root','left','right'])
+    def test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor(kind,retired,tmp_path):
+        p=AuthorProject.new(scale=.1)
+        pid=make_profile(p,kind)
+        root=p.profiles[pid].segments[0].id
+        cut=p.split_profile_segment(pid,root,Q(1,3))
+        merged=p.merge_profile_segments(pid,cut['segment_ids'])
+        raw=p.to_dict()
+        bad_id={'root':root,'left':cut['segment_ids'][0],'right':cut['segment_ids'][1]}[retired]
+        segment=raw['profiles'][pid]['segments'][0]
+        segment['id']=bad_id
+        segment['source_reference']['piece_id']=bad_id
+        witness=tmp_path/'retired-active-descriptor.apcraft'
+        witness.write_text(json.dumps(raw,indent=2),encoding='utf-8')
+>       with pytest.raises(ProjectFormatError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProjectFormatError
+
+docs\p2\implementation\evidence\au13-core9-review-own.py:47: Failed
+_ test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[right-cubic] _
+
+kind = 'cubic', retired = 'right'
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1546/test_retired_piece_cannot_be_r5')
+
+    @pytest.mark.parametrize('kind',['arc','cubic'])
+    @pytest.mark.parametrize('retired',['root','left','right'])
+    def test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor(kind,retired,tmp_path):
+        p=AuthorProject.new(scale=.1)
+        pid=make_profile(p,kind)
+        root=p.profiles[pid].segments[0].id
+        cut=p.split_profile_segment(pid,root,Q(1,3))
+        merged=p.merge_profile_segments(pid,cut['segment_ids'])
+        raw=p.to_dict()
+        bad_id={'root':root,'left':cut['segment_ids'][0],'right':cut['segment_ids'][1]}[retired]
+        segment=raw['profiles'][pid]['segments'][0]
+        segment['id']=bad_id
+        segment['source_reference']['piece_id']=bad_id
+        witness=tmp_path/'retired-active-descriptor.apcraft'
+        witness.write_text(json.dumps(raw,indent=2),encoding='utf-8')
+>       with pytest.raises(ProjectFormatError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ProjectFormatError
+
+docs\p2\implementation\evidence\au13-core9-review-own.py:47: Failed
+=========================== short test summary info ===========================
+FAILED docs/p2/implementation/evidence/au13-core9-review-own.py::test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[root-arc]
+FAILED docs/p2/implementation/evidence/au13-core9-review-own.py::test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[root-cubic]
+FAILED docs/p2/implementation/evidence/au13-core9-review-own.py::test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[left-arc]
+FAILED docs/p2/implementation/evidence/au13-core9-review-own.py::test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[left-cubic]
+FAILED docs/p2/implementation/evidence/au13-core9-review-own.py::test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[right-arc]
+FAILED docs/p2/implementation/evidence/au13-core9-review-own.py::test_retired_piece_cannot_be_resurrected_as_active_qualified_descriptor[right-cubic]
+6 failed, 10 passed in 32.65s

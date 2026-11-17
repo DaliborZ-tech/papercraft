@@ -1,0 +1,80 @@
+{
+  "source_commit": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
+  "production_fix": "72f7a168b0ecbc58ecd0f014cb1555f11d6339ba",
+  "python": "3.12.15 (main, Oct  3 2026, 01:05:37) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\dalib\\projects\\papercraft\\.venv\\Scripts\\python.exe",
+  "imported_project": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review\\src\\archpapercraft\\authoring\\project.py",
+  "worktree": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review",
+  "qt_qpa_platform": "offscreen",
+  "runtime_files_lf_sha256": {
+    "src/archpapercraft/authoring/project.py": "14dc683da7fec3bddbb365554acc2ff02a3fe547be9bbdb65d8dbc0ab629ccae",
+    "src/archpapercraft/authoring/model.py": "4f3e88a14f7077a58888d2b3a64474d1e9b68d32741d50fb41fd380340cc6528",
+    "src/archpapercraft/authoring/profile_subdivision.py": "d564c0e7d5a191bb4753043ec06b65984cbe7253ac79ccfadcff5f8d1ff6286e",
+    "src/archpapercraft/authoring/profile_curves.py": "95764663405a3256058a2be68d3da7a26820dc672b17fba5b0fc22597e17b79e",
+    "src/archpapercraft/authoring/loft_surface.py": "655a46db0fa4a4b05651c71f6a1bcb51a4824ab93ab20ef285366e0dc3243262",
+    "src/archpapercraft/authoring/profile_source_views.py": "061549a0b4cd2e584a972317914fe5f5f01cea6d3f018f3cacd93051e9fd5717"
+  },
+  "original_oracle_sha256": "beb29c70dcea12649a81c29a7e579ac817a4645c22c92acd1ac4cf6a1ba3a4b4",
+  "unchanged_function_bodies": true,
+  "adaptation": "Only PIN literal changed from7c61 to6064; expected bodies/decorators unchanged. Original replay used exact7c61 checkout.",
+  "reviewer": "core9_review independent agent; no production edits",
+  "baseline_expected": "6 failed,10 passed on7c61",
+  "fixed_replay": "16 passed on6064",
+  "diagnostic_probe": "Initial metadata collector without PYTHONPATH failed its import-path assertion before any claim/write; rerun here with own src. Both pytest calls had explicit own PYTHONPATH and their test imports asserted own src.",
+  "runs": {
+    "baseline-7c61-replay": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "6",
+      "skipped": "0",
+      "tests": "16",
+      "time": "32.649",
+      "timestamp": "2026-11-17T17:25:59.291193+01:00",
+      "hostname": "Dalibor",
+      "junit_sha256": "53e9234faca19392ccb28979f794b3673dc3e533c486cfa8392484845f42293a"
+    },
+    "fixed-6064-replay": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "16",
+      "time": "32.480",
+      "timestamp": "2026-11-17T17:25:59.291193+01:00",
+      "hostname": "Dalibor",
+      "junit_sha256": "8a5dccd19f0fb87084e3c09a9a06882d027b8dc8111aa4f83eabe251d9a1df6e"
+    },
+    "matrix-6064": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "33",
+      "time": "62.179",
+      "timestamp": "2026-11-17T17:28:13.646491+01:00",
+      "hostname": "Dalibor",
+      "junit_sha256": "fa21d4f5b5b4e52d86a76e7fc5be4ee6bff86954a63a61ebde8078b06347949b"
+    },
+    "author42-6064": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "42",
+      "time": "54.058",
+      "timestamp": "2026-11-17T17:28:43.578208+01:00",
+      "hostname": "Dalibor",
+      "junit_sha256": "e35a8527e3fd1146fb218c7f5519c943f9437e96c501eb64c21e65fa9319c75b"
+    }
+  },
+  "actual_legacy_artifact_bytes_preserved": "All seven independently asserted before/after original byte SHA256; safe-copy9/reopen/recompute/export. Test source root supplied by CORE9_ARTIFACT_ROOT to avoid copying old evidence.",
+  "actual_legacy_artifact_bytes_sha256": {
+    "pc006a-desktop-7da2403-run04/own-model.apcraft": "c649da8478d5b36bf6ffeb764ff58c2e308ddb9c4a7d38191a2effcbb46b205d",
+    "pc007a-loft-B1-desktop-a46f179-run01/loft-B1/loft-B1.apcraft": "e8ab5600952813e528978fd4314890b8209f06bc1a1e0994a1203695c1551744",
+    "pc008-D-gothic-desktop-e7826dd-run01/D-gothic/D-gothic.apcraft": "55af07408f206fb03dd24e9f54f73756ad2ed0f30750ec8ea4f09563812c0f73",
+    "pc008-AU13-line-desktop-24e0801-run05/AU13-line/AU13-line.apcraft": "2ae0291499d78435ccf89a85fbc1ee88266d63983e267ba877cb6584270ffd8c",
+    "pc007b-C-cylinder-desktop-8f1ec63-run02/C-cylinder/C-cylinder.apcraft": "a1b6793b533775672f577d257c203f4e00314a596dead1ad6a6b61e7e34026a5",
+    "pc007b-C-cone-desktop-8f1ec63-run02/C-cone/C-cone.apcraft": "d8107cff69f063532745d832fbf9efa9d597cedec4538d2aacc811e034f9df9d",
+    "pc007b-C-near-desktop-5283632-run02/C-near/C-near.apcraft": "84540c9dce6af5a0946d9815228c6916453778824bc034ee108619ecf2701b09"
+  }
+}

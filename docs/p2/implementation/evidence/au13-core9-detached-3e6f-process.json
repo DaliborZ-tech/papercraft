@@ -1,0 +1,28 @@
+{
+  "source_pin": "3e6fbb636f57d394ca0e5433553dc394e1b9379e",
+  "actual_head": "b2f1d85a20cbf2f106e149240b7c1b82249d2270",
+  "imported_project": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review\\src\\archpapercraft\\authoring\\project.py",
+  "worktree": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review",
+  "source_blobs_lf_sha256": {
+    "src/archpapercraft/authoring/project.py": "14dc683da7fec3bddbb365554acc2ff02a3fe547be9bbdb65d8dbc0ab629ccae",
+    "src/archpapercraft/authoring/profile_subdivision.py": "d564c0e7d5a191bb4753043ec06b65984cbe7253ac79ccfadcff5f8d1ff6286e",
+    "src/archpapercraft/authoring/loft_surface.py": "c4deb29a8188b9cc0e0fa25eb9f4c202f4f566f853a948cd99f371f0fe3b16c0"
+  },
+  "results": {
+    "legacy": "genuine SVG/PDF accepted",
+    "orphan": "genuine SVG/PDF accepted",
+    "qualified": "genuine SVG/PDF accepted",
+    "empty": {
+      "observed": "rejected",
+      "error": "D\u00edl 05c96678-8a41-4ed7-b96f-6c0c4b654e47: Nelze nav\u00e1zat v\u00fdstup na aktu\u00e1ln\u00ed zdroj loftu: Analytick\u00fd descriptor nem\u00e1 p\u0159esn\u00e9ho aktivn\u00edho vlastn\u00edka historie.",
+      "previous_bundle_preserved": true
+    },
+    "missing": {
+      "observed": "rejected",
+      "error": "D\u00edl 05c96678-8a41-4ed7-b96f-6c0c4b654e47: Nelze nav\u00e1zat v\u00fdstup na aktu\u00e1ln\u00ed zdroj loftu: Analytick\u00fd descriptor nem\u00e1 p\u0159esn\u00e9ho aktivn\u00edho vlastn\u00edka historie.",
+      "previous_bundle_preserved": true
+    }
+  },
+  "pytest": "not loaded; standalone Python process",
+  "desktop": "NOT_RUN"
+}

@@ -1,0 +1,28 @@
+{
+  "source_pin": "6064f222dfa87f6c46837f11ed9da5c04a6523cb",
+  "actual_head": "4b74953bf9656c28a31430e6f5fb4316788858e1",
+  "imported_project": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review\\src\\archpapercraft\\authoring\\project.py",
+  "worktree": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review",
+  "source_blobs_lf_sha256": {
+    "src/archpapercraft/authoring/project.py": "14dc683da7fec3bddbb365554acc2ff02a3fe547be9bbdb65d8dbc0ab629ccae",
+    "src/archpapercraft/authoring/profile_subdivision.py": "d564c0e7d5a191bb4753043ec06b65984cbe7253ac79ccfadcff5f8d1ff6286e",
+    "src/archpapercraft/authoring/loft_surface.py": "655a46db0fa4a4b05651c71f6a1bcb51a4824ab93ab20ef285366e0dc3243262"
+  },
+  "results": {
+    "legacy": "genuine SVG/PDF accepted",
+    "orphan": "genuine SVG/PDF accepted",
+    "qualified": "genuine SVG/PDF accepted",
+    "empty": {
+      "observed": "accepted",
+      "error": null,
+      "previous_bundle_preserved": false
+    },
+    "missing": {
+      "observed": "accepted",
+      "error": null,
+      "previous_bundle_preserved": false
+    }
+  },
+  "pytest": "not loaded; standalone Python process",
+  "desktop": "NOT_RUN"
+}

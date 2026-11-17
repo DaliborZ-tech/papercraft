@@ -1,0 +1,17 @@
+{
+  "source_pin": "7c61c7ee54233dc662420b5199e3a5d914da4441",
+  "actual_head": "7c61c7ee54233dc662420b5199e3a5d914da4441",
+  "imported_project": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-baseline\\src\\archpapercraft\\authoring\\project.py",
+  "worktree": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-baseline",
+  "source_blobs_lf_sha256": {
+    "src/archpapercraft/authoring/project.py": "14dc683da7fec3bddbb365554acc2ff02a3fe547be9bbdb65d8dbc0ab629ccae",
+    "src/archpapercraft/authoring/profile_subdivision.py": "2c58b5fda842f1d302cb69072ea1dd1722ab2bf3f2ac4b6f9f0afd8c5bd4f338",
+    "src/archpapercraft/authoring/model.py": "4f3e88a14f7077a58888d2b3a64474d1e9b68d32741d50fb41fd380340cc6528"
+  },
+  "results": {
+    "root": "accepted",
+    "left": "accepted",
+    "right": "accepted"
+  },
+  "pytest": "not loaded; standalone Python process"
+}
