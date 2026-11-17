@@ -167,7 +167,7 @@ def poll():
     path=OUT/"commands.jsonl"
     if not path.exists():return
     lines=path.read_text(encoding="utf8").splitlines()
-    for line in lines[count:]:
+    for line in lines[count:count+1]:
         count+=1
         command=json.loads(line)
         def do(command=command):
