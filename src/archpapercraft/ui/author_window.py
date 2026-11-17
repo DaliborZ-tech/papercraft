@@ -55,6 +55,7 @@ from archpapercraft.ui.author_material import MaterialDialog
 from archpapercraft.ui.author_paper import AuthorPaperView
 from archpapercraft.ui.author_problems import AuthorProblemsPanel
 from archpapercraft.ui.author_profile_placement import ProfilePlacementDialog
+from archpapercraft.ui.author_recovery import setup_recovery
 from archpapercraft.ui.author_segmentation import SegmentedVariantDialog
 from archpapercraft.ui.author_subdivision import SubdivisionDialog
 from archpapercraft.ui.author_viewport import AuthorViewport
@@ -96,6 +97,7 @@ class AuthorMainWindow(QMainWindow):
         self._apply_workspace_context()
         self.controller.new()
         QTimer.singleShot(0, self._initial_frame)
+        self.recovery = setup_recovery(self)
 
     @property
     def project(self):
@@ -2638,7 +2640,7 @@ class AuthorMainWindow(QMainWindow):
         return True
 
     def closeEvent(self, event):
-        if self._confirm_replace():
+        if self._confirm_replace() and self.recovery.finished_close():
             event.accept()
         else:
             event.ignore()

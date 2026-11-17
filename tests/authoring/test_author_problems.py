@@ -98,3 +98,16 @@ def test_refresh_preserves_the_selected_member_when_another_problem_is_resolved(
     assert panel.issues.count() == 1
     assert panel.issues.currentItem().data(Qt.ItemDataRole.UserRole) == selected
     assert panel.summary.text() == "3 díly čekají na umístění"
+
+
+def test_member_navigation_can_refresh_the_problem_list_during_activation(qtbot):
+    project = four_parts()
+    panel = AuthorProblemsPanel()
+    qtbot.addWidget(panel)
+    panel.set_issues(project.validate_layout(), project)
+    panel.primary.click()
+    # A normal guarded host command can commit pending input and rebuild its
+    # canonical problems synchronously while the navigation signal is emitted.
+    panel.issues.itemActivated.connect(lambda _item: panel.set_issues([], project))
+    panel._next_member()
+    assert panel.issues.count() == 0
