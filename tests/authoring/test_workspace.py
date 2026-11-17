@@ -148,6 +148,8 @@ def test_inline_surface_name_uses_history_and_context_validation(window, qtbot):
 def test_problem_navigation_validates_raw_then_focuses_actual_unplaced_part(window, qtbot):
     sid = arrange_rectangle(window)
     before = deepcopy(window.project.to_dict())
+    switch_workspace(qtbot, window, "Stránky")  # Consume the initial page Fit All.
+    switch_workspace(qtbot, window, "Modelování")
     window.vertex_x.setFocus()
     window.vertex_x.lineEdit().setText("-")
     qtbot.mouseClick(window.problems.primary, Qt.MouseButton.LeftButton)
@@ -161,6 +163,13 @@ def test_problem_navigation_validates_raw_then_focuses_actual_unplaced_part(wind
     assert window.workspace_context == "Stránky"
     assert window.selected_surface == sid
     assert window.project.to_dict() == before  # Navigation never packs or changes layout.
+    qtbot.wait(5)
+    visible = window.paper.mapToScene(window.paper.viewport().rect()).boundingRect()
+    page = window.project.pages[0]
+    origin = window.paper.page_origins[page.id]
+    assert visible.contains(origin)
+    assert visible.contains(origin + QPointF(page.width_mm, page.height_mm))
+    assert visible.contains(window.paper.part_items[window.selected_part].sceneBoundingRect())
 
 
 def test_responsive_properties_keep_complete_labels_and_values(window, qtbot):
