@@ -1,0 +1,58 @@
+{"start": true, "pid": 15340, "hwnd": 4590264, "source": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-repair-review\\src\\archpapercraft\\ui\\author_window.py", "evidence_type": "EXPERT_NATIVE_QT_WIDGET_AUTOMATION_NOT_NOVICE_HUMAN"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "resize", "size": [1366, 768]}, "status": "DONE"}
+{"command": {"op": "path", "path": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-repair-review/docs/p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft"}, "status": "DONE"}
+{"command": {"op": "menu", "path": ["Projekt", "Otevřít"]}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "key", "key": "Ctrl+1"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Vše"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "01-Modelovani-fourparts-fit-all-repaired"}, "status": "DONE"}
+{"command": {"op": "tree", "text": "Stena"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Výběr"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "02-Modelovani-selected-wall-repaired"}, "status": "DONE"}
+{"command": {"op": "key", "key": "F8"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Skrýt podrobnosti"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "03-Modelovani-hidden-problems-height"}, "status": "DONE"}
+{"command": {"op": "menu", "path": ["Projekt", "Nový"]}, "status": "DONE"}
+{"command": {"op": "choose", "label": "Nová pracovní rovina", "text": "Svisle (stěna)"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Šířka", "text": "6"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Výška", "text": "4"}, "status": "DONE"}
+{"command": {"op": "button", "text": "OK"}, "status": "DONE"}
+{"command": {"op": "menu", "path": ["Vytvořit", "Obdélník z rozměrů"]}, "status": "DONE"}
+{"command": {"op": "screen", "name": "04-Modelovani-first-rectangle-before-fit"}, "status": "DONE"}
+{"command": {"op": "entry", "label": "Název vybrané plochy", "text": "Jizni stena"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "05-Modelovani-fresh-name-collapsed-profile"}, "status": "DONE"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "* Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "* Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "* Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "* Nový model — ArchPapercraft Studio"}
+{"command": {"op": "button", "text": "Přepočítat papírové díly"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Umístit díly na stránky"}, "status": "DONE"}
+{"observation": "fresh-named-part-and-page", "workspace": "Stránky", "selected_surface": "Jizni stena", "selected_part": "ec346736-8513-4655-9ce7-29bc12012663", "visible_scene": [-152.89598108747046, -17.671394799054372, 631.5602836879433, 338.82978723404256], "pages": [{"rect": [0.0, 0.0, 210.0, 297.0], "fully_visible": true}], "selected_part_fully_visible": true, "selected_part_scene": [252.0, -4.0, 66.0, 47.0], "issues": ["1 díl čeká na umístění"], "issue_tooltips": ["Dotčené díly: P1 · Jizni stena\nDíl čeká na odkládací ploše. Přesuňte jej na stránku."], "placements": {"P1 · Jizni stena": {"page_id": null, "x_mm": 0.0, "y_mm": 0.0, "rotation_deg": 0.0, "position_locked": false, "rotation_locked": false}}, "acknowledgements": {}, "raw_name": "Jizni stena", "controller_dirty": true, "controller_path": null}
+{"command": {"op": "observe", "name": "fresh-named-part-and-page"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "06-Stranky-fresh-name-and-page"}, "status": "DONE"}
+{"command": {"op": "choose", "label": "Umístění", "text": "Stránka 1"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva X", "text": "40"}, "status": "DONE"}
+{"command": {"op": "field", "label": "Kotva Y", "text": "50"}, "status": "DONE"}
+{"command": {"op": "path", "path": "C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-repair-review/docs/p2/implementation/evidence/workspace-repair-native/fresh-named-wall.apcraft"}, "status": "DONE"}
+{"command": {"op": "menu", "path": ["Projekt", "Uložit"]}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "key", "key": "Ctrl+4"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Vše"}, "status": "DONE"}
+{"command": {"op": "screen", "name": "07-Export-fresh-name"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "dump"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "path", "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-repair-review\\docs\\p2\\implementation\\evidence\\workspace-repair-native\\export"}, "status": "DONE"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"heartbeat": true, "visible": true, "title": "Nový model — ArchPapercraft Studio"}
+{"command": {"op": "state"}, "status": "DONE"}
+{"command": {"op": "button", "text": "Export SVG/PDF"}, "status": "DONE"}
+{"about_to_quit": true, "window_visible": false, "title": "Nový model — ArchPapercraft Studio", "state": {"application": "ArchPapercraft.AuthorProject", "schema_version": 9, "status": "experimental", "writer_version": "0.3.0-pc008-curved-source-provenance-experimental", "project_id": "705300c2-619e-42de-8124-19147e440533", "name": "Nový model", "scale": 0.01, "material_profile": {"thickness_mm": null, "clearance_mm": 0.0, "bend_radius_mm": 0.0, "crease_zone_mm": 0.5}, "segmented_variants": {}, "curved_connectors": {}, "profile_subdivisions": {}, "revision": 7, "next_part_number": 2, "next_joint_number": 1, "next_attachment_number": 1, "profiles": {"3259c700-ac7b-4ba5-b9fb-42c197a5f3ca": {"id": "3259c700-ac7b-4ba5-b9fb-42c197a5f3ca", "name": "Vlastní obrys", "vertices": [{"id": "5be7cc71-50d3-4845-a857-4fed7d9ba0b9", "point": [0.0, 0.0]}, {"id": "af58f631-1854-4c5d-a209-f34b1a751916", "point": [6000.0, 0.0]}, {"id": "ad167773-0b45-4d12-9be2-6242eb7f3a21", "point": [6000.0, 4000.0]}, {"id": "dbc7ad2a-79a9-400f-b534-edeb11dee2bb", "point": [0.0, 4000.0]}], "segments": [{"id": "cedebb55-c99f-4888-9352-8bfc2e459d99", "kind": "line", "start_vertex_id": "5be7cc71-50d3-4845-a857-4fed7d9ba0b9", "end_vertex_id": "af58f631-1854-4c5d-a209-f34b1a751916", "data": {}, "source_reference": null}, {"id": "090ac882-2e97-47eb-8b31-9a1e41391188", "kind": "line", "start_vertex_id": "af58f631-1854-4c5d-a209-f34b1a751916", "end_vertex_id": "ad167773-0b45-4d12-9be2-6242eb7f3a21", "data": {}, "source_reference": null}, {"id": "129325d3-61b8-43e2-ba25-0d99e2b68238", "kind": "line", "start_vertex_id": "ad167773-0b45-4d12-9be2-6242eb7f3a21", "end_vertex_id": "dbc7ad2a-79a9-400f-b534-edeb11dee2bb", "data": {}, "source_reference": null}, {"id": "d4a3e8f2-5ab4-4ed9-84ba-016507bcad31", "kind": "line", "start_vertex_id": "dbc7ad2a-79a9-400f-b534-edeb11dee2bb", "end_vertex_id": "5be7cc71-50d3-4845-a857-4fed7d9ba0b9", "data": {}, "source_reference": null}], "closed": true, "plane": {"origin": [0.0, 0.0, 0.0], "u": [1.0, 0.0, 0.0], "v": [0.0, 0.0, 1.0]}, "revision": 1}}, "surfaces": {"300ddfe6-66ff-48a5-a82c-f00280823c7a": {"id": "300ddfe6-66ff-48a5-a82c-f00280823c7a", "name": "Jizni stena", "profile_id": "3259c700-ac7b-4ba5-b9fb-42c197a5f3ca", "hole_profile_ids": [], "kind": "planar", "params": {}, "position_mm": [0.0, 0.0, 0.0], "rotation_deg": [0.0, 0.0, 0.0], "parent_transforms": [], "revision": 2, "part_id": "ec346736-8513-4655-9ce7-29bc12012663"}}, "parts": {"ec346736-8513-4655-9ce7-29bc12012663": {"id": "ec346736-8513-4655-9ce7-29bc12012663", "name": "P1 · Jizni stena", "surface_ids": ["300ddfe6-66ff-48a5-a82c-f00280823c7a"], "frame": {"root_surface_id": "300ddfe6-66ff-48a5-a82c-f00280823c7a", "anchor_vertex_id": "5be7cc71-50d3-4845-a857-4fed7d9ba0b9", "axis_segment_id": "cedebb55-c99f-4888-9352-8bfc2e459d99"}, "stale": false, "source_revision": 4, "input_digest": "3dafc87bfaaa9547c3ad8c3feee0be80d573f5bd947d2c341e80234c7c5fa56b", "polygons": {"300ddfe6-66ff-48a5-a82c-f00280823c7a": [[[0.0, 0.0], [60.0, 0.0], [60.0, 40.0], [0.0, 40.0]]]}, "paths": {"CUT": [{"points": [[0.0, 0.0], [60.0, 0.0], [60.0, 40.0], [0.0, 40.0]], "closed": true}], "FOLD_MOUNTAIN": [], "FOLD_VALLEY": [], "TABS": [], "GUIDES": []}, "labels": [{"text": "P1 · Jizni stena", "x": 30.0, "y": 20.0, "size_mm": 2.5}], "lineage": [], "front_side": "outside", "edges": [{"surface_id": "300ddfe6-66ff-48a5-a82c-f00280823c7a", "edge_id": "cedebb55-c99f-4888-9352-8bfc2e459d99", "start": [0.0, 0.0], "end": [60.0, 0.0]}, {"surface_id": "300ddfe6-66ff-48a5-a82c-f00280823c7a", "edge_id": "090ac882-2e97-47eb-8b31-9a1e41391188", "start": [60.0, 0.0], "end": [60.0, 40.0]}, {"surface_id": "300ddfe6-66ff-48a5-a82c-f00280823c7a", "edge_id": "129325d3-61b8-43e2-ba25-0d99e2b68238", "start": [60.0, 40.0], "end": [0.0, 40.0]}, {"surface_id": "300ddfe6-66ff-48a5-a82c-f00280823c7a", "edge_id": "d4a3e8f2-5ab4-4ed9-84ba-016507bcad31", "start": [0.0, 40.0], "end": [0.0, 0.0]}], "number": 1}}, "joints": {}, "connectors": {}, "placements": {"ec346736-8513-4655-9ce7-29bc12012663": {"page_id": "66dc7b31-81c5-485e-8844-c2ad0a40e77d", "x_mm": 40.0, "y_mm": 50.0, "rotation_deg": 0.0, "position_locked": false, "rotation_locked": false}}, "attachments": {}, "pages": [{"id": "66dc7b31-81c5-485e-8844-c2ad0a40e77d", "width_mm": 210.0, "height_mm": 297.0, "margin_mm": 10.0}], "acknowledgements": {}}}
+{"command": {"op": "quit"}, "status": "DONE"}

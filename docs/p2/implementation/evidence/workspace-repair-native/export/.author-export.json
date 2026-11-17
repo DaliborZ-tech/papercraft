@@ -1,0 +1,61 @@
+{
+  "construction_checks": {
+    "accepted_layout_overlaps": [],
+    "assembly_digest": "4a7db8896d2801b8cc83b6db08680ddb144aa1e60ac84a1efe84625d6cb4ed64",
+    "connector_bends": {},
+    "curve_profiles": {},
+    "curve_regions": {},
+    "lofts": {},
+    "material_profile": {
+      "bend_radius_mm": 0.0,
+      "clearance_mm": 0.0,
+      "crease_zone_mm": 0.5,
+      "thickness_mm": null
+    },
+    "physical_build": "NOT_VERIFIED",
+    "reference_targets": {},
+    "segmented_variants": {}
+  },
+  "construction_summary": {
+    "connector_statuses": {},
+    "construction_checks_digest": "b6c5eaeeabebb72d48d32b58c211438d5ea8475bbe26612f8699ff66961641e9",
+    "material_profile": {
+      "bend_radius_mm": 0.0,
+      "clearance_mm": 0.0,
+      "crease_zone_mm": 0.5,
+      "thickness_mm": null
+    },
+    "physical_build": "NOT_VERIFIED",
+    "segmented_variant_modes": {},
+    "unknown_search_scope": "BOUNDED_COLLISION_WITNESS_SEARCH; ABSENCE_NOT_PROVEN"
+  },
+  "files": [
+    "page-66dc7b31-81c5-485e-8844-c2ad0a40e77d.svg",
+    "model.pdf"
+  ],
+  "font_sha256": "edfbd22a3d088fc2f5d7c79b8c9c732df6dc878a60f0a80be0f92a3c7a634404",
+  "pdf_arc_approximation": {
+    "bound_scope": "arc_to_cubic_before_numeric_serialization",
+    "max_interpolation_error_mm": 0.0,
+    "method": "cubic_hermite",
+    "precision_attempts": [
+      {
+        "actual_interpolation_bound_mm": 0.0,
+        "requested_interpolation_bound_mm": 0.0001,
+        "status": "POSITION_CHECKED_ONLY; NO_AUTHORED_MATERIAL_CERTIFICATE"
+      }
+    ],
+    "requested_interpolation_bound_mm": 0.0001
+  },
+  "pdf_geometry_precision": {
+    "combined_position_error_bound_mm": 3.1749296650904895e-14,
+    "method": "serialized_CTM_and_Bernstein_control_difference",
+    "numeric_serialization_bound_mm": 3.1749296650904895e-14,
+    "required_digital_budget_mm": 0.01,
+    "scope": "finite_input_paths_calibration_text_anchors; font_outlines_excluded",
+    "source_to_native_svg_bound_mm": 0
+  },
+  "project_id": "705300c2-619e-42de-8124-19147e440533",
+  "schema_version": 1,
+  "snapshot_digest": "b57f534910562c6768615b1521db28a8b85f89fad80a302bbaa663195cea66b9"
+}

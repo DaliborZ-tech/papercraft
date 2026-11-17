@@ -1,0 +1,71 @@
+{
+  "source_pin": "191d24e653af2bc63cfa6e77d46b998eb516cf32",
+  "harness_pin": "9449bac903418d3b03bcea726303a8f060bb3595",
+  "actual_process": {
+    "start": true,
+    "pid": 15340,
+    "hwnd": 4590264,
+    "source": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-repair-review\\src\\archpapercraft\\ui\\author_window.py",
+    "evidence_type": "EXPERT_NATIVE_QT_WIDGET_AUTOMATION_NOT_NOVICE_HUMAN"
+  },
+  "house_permanent_files_verified": [
+    "A-complete-before-asymmetric-edit-desktop.png",
+    "A-complete-before-asymmetric-edit-opengl.png",
+    "A-manual-two-page-layout-desktop.png",
+    "A-manual-two-page-layout-opengl.png",
+    "A-native-delete-impact-desktop.png",
+    "A-native-delete-impact-opengl.png",
+    "A-native-own-names-desktop.png",
+    "A-native-own-names-opengl.png",
+    "A-negative-outside-roof-desktop.png",
+    "A-negative-outside-roof-opengl.png",
+    "A-positive-stepped-tab-drawn-and-refined-desktop.png",
+    "A-positive-stepped-tab-drawn-and-refined-opengl.png",
+    "empty-real-app-desktop.png",
+    "empty-real-app-opengl.png",
+    "export-progress-1-1.png",
+    "model-A/export/.author-export.json",
+    "model-A/export/model.pdf",
+    "model-A/export/page-16705f40-f55d-40a1-9dcc-6263a4942984.svg",
+    "model-A/export/page-71fa2205-bf23-4992-8e21-e7a458ee4bf3.svg",
+    "model-A/model-A.apcraft",
+    "model-A/snapshot.json",
+    "model-A-changed-after-reopen-desktop.png",
+    "model-A-changed-after-reopen-opengl.png",
+    "model-A-changed-reopened-auto-frame-all-material-desktop.png",
+    "model-A-changed-reopened-auto-frame-all-material-opengl.png",
+    "model-A-reopened-auto-frame-all-material-desktop.png",
+    "model-A-reopened-auto-frame-all-material-opengl.png",
+    "model-A-reopened-desktop.png",
+    "model-A-reopened-opengl.png",
+    "settings.ini",
+    "workspace-house-export-desktop.png",
+    "workspace-house-export-opengl.png",
+    "workspace-house-modeling-desktop.png",
+    "workspace-house-modeling-opengl.png",
+    "workspace-house-pages-desktop.png",
+    "workspace-house-pages-opengl.png"
+  ],
+  "house_ephemeral_lease_removed": [
+    "recovery/63b9e450-219b-459f-90c3-221045f7411c.recovery.json.lock"
+  ],
+  "house_shape": {
+    "surfaces": 11,
+    "parts": 9,
+    "pages": 2
+  },
+  "house_both_locks": true,
+  "house_output": {
+    "cut_contours": 10,
+    "max_contour_area_difference_mm2": "4887/12500000",
+    "snapshot_digest": "bc5dc5ced88692ef8d8c7db215a5b382f359567eee64d5d406cc62938016a47d"
+  },
+  "fresh_native_output": {
+    "cut_contours": 1,
+    "max_contour_area_difference_mm2": "0",
+    "snapshot_digest": "b57f534910562c6768615b1521db28a8b85f89fad80a302bbaa663195cea66b9"
+  },
+  "fresh_name_in_saved_document_svg_pdf": true,
+  "three_prior_native_findings_closed": true,
+  "new_bottom_dock_height_finding": "CONFIRMED; narrow repair pending"
+}

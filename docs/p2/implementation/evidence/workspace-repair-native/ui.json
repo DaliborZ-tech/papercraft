@@ -1,0 +1,44 @@
+{
+  "title": "Vektorový export",
+  "size": [
+    1366,
+    768
+  ],
+  "pid": 15340,
+  "hwnd": 4590264,
+  "dpi": 1.0,
+  "screen": [
+    0,
+    0,
+    1920,
+    1080
+  ],
+  "logical_dpi": 96.0,
+  "frame": [
+    20,
+    35,
+    1366,
+    799
+  ],
+  "minimum_hint": [
+    301,
+    309
+  ],
+  "menus": [
+    "Projekt",
+    "Úpravy",
+    "Vytvořit",
+    "Zobrazení a pomoc"
+  ],
+  "labels": [],
+  "issues": [],
+  "selected_name": "Jizni stena",
+  "workspace": "Export",
+  "checkboxes": [],
+  "buttons": [],
+  "fields": [],
+  "combo_options": {},
+  "tree": [
+    "Jizni stena · P1"
+  ]
+}

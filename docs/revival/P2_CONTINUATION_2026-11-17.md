@@ -473,3 +473,37 @@ původní FAIL a předává konkrétní opravy k neautorskému replay. README a 
 manuál odpovídají čtyřem kontextům a neslibují human/P3 PASS. Jedna současná
 queue položka `next_required_technical_work` ještě zmiňuje již uzavřené CORE9
 hypotézy; root ji má srovnat s aktuálním C9closed stavem, bez změny historie.
+
+#### Skutečný native repair replay 191: tři původní nálezy CLOSED
+
+Neautorský PID 15340 / HWND 4590264, 1366 × 768 po DPI inicializaci,
+runtime přesně `191d24e`, předem zmrazený vlastní adapter `9449bac`.
+[Celý předchozí vlastní model po Vše](../p2/implementation/evidence/workspace-repair-native/01-Modelovani-fourparts-fit-all-repaired.png)
+se již neořezává. [První nová stěna před ručním fit](../p2/implementation/evidence/workspace-repair-native/04-Modelovani-first-rectangle-before-fit.png)
+je celá. [Sbalené profily a jednotný vlastní název](../p2/implementation/evidence/workspace-repair-native/05-Modelovani-fresh-name-collapsed-profile.png)
+odpovídají stavu. Fresh „Jizni stena“ jde přes papír a uložený
+[editovatelný APcraft](../p2/implementation/evidence/workspace-repair-native/fresh-named-wall.apcraft)
+do skutečného [SVG/PDF](../p2/implementation/evidence/workspace-repair-native/export/),
+nikoli pouze do UI aliasu. Všechny vstupy vytvořily UI příkazy; Open/Save/Export
+použily skutečné nativní dialogy. Současně zachováno správné legacy chování:
+starý d94 model se při otevření svévolně nepřejmenovává.
+
+**191 workspace/recovery APPROVED v doloženém expertním rozsahu; nový menší
+nález ke narrow opravě:** F8 → Skrýt podrobnosti ponechá prázdnou výšku
+spodního doku asi 180 px, přestože zůstává jediná řádka summary
+([přímý snímek](../p2/implementation/evidence/workspace-repair-native/03-Modelovani-hidden-problems-height.png)).
+Základní průchod tím není znemožněn, ale malý viewport zbytečně ztrácí prostor.
+Root má reprodukci; případná oprava vyžaduje vlastní konkrétní replay.
+Nativní proces byl ukončen a desktop vrácen. Nový člověk stále 0/NOT_RUN;
+nejde o human intuitivnost, historický model PC010 ani fyzickou přejímku.
+
+Nezávislé read-only přezkoumání rootova skutečného domu A na 191 navíc
+potvrzuje **36/36 trvalých artifact SHA256**; jediná další raw položka je
+správně po ukončení procesu odstraněný dočasný QLockFile lease. Není to 37/37
+souborů. Uložený model má 11 ploch / 9 dílů / 2 A4 a oba zámky jižní stěny TRUE.
+Vlastní canonical-JSON SHA256 snapshotu souhlasí s manifestem, oběma SVG i
+PDF Subject. Deset SVG/PDF CUT kontur se shoduje v nezávislém čtení jejich
+ploch s odchylkou pod 0,01 mm² na konturu; tato doplňující kontrola netvrdí
+fyzický proof ani nezávislé vytvoření domu. [Verifikátor](../p2/implementation/evidence/workspace-repair-native/verify_native.py),
+[výsledek včetně actual importu a permanent/ephemeral rozlišení](../p2/implementation/evidence/workspace-repair-native/results.json).
+Po native byly všechny src/tools LF hashe znovu shodné s 191.

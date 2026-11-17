@@ -1,0 +1,40 @@
+{"op":"resize","size":[1366,768]}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-repair-review/docs/p2/implementation/evidence/workspace-recovery-native/own-four-part-model.apcraft"}
+{"op":"menu","path":["Projekt","Otevřít"]}
+{"op":"key","key":"Ctrl+1"}
+{"op":"button","text":"Vše"}
+{"op":"dump"}
+{"op":"screen","name":"01-Modelovani-fourparts-fit-all-repaired"}
+{"op":"tree","text":"Stena"}
+{"op":"button","text":"Výběr"}
+{"op":"screen","name":"02-Modelovani-selected-wall-repaired"}
+{"op":"key","key":"F8"}
+{"op":"button","text":"Skrýt podrobnosti"}
+{"op":"screen","name":"03-Modelovani-hidden-problems-height"}
+{"op":"menu","path":["Projekt","Nový"]}
+{"op":"choose","label":"Nová pracovní rovina","text":"Svisle (stěna)"}
+{"op":"menu","path":["Vytvořit","Obdélník z rozměrů"]}
+{"op":"field","label":"Šířka","text":"6"}
+{"op":"field","label":"Výška","text":"4"}
+{"op":"button","text":"OK"}
+{"op":"screen","name":"04-Modelovani-first-rectangle-before-fit"}
+{"op":"entry","label":"Název vybrané plochy","text":"Jizni stena"}
+{"op":"screen","name":"05-Modelovani-fresh-name-collapsed-profile"}
+{"op":"dump"}
+{"op":"button","text":"Přepočítat papírové díly"}
+{"op":"button","text":"Umístit díly na stránky"}
+{"op":"observe","name":"fresh-named-part-and-page"}
+{"op":"screen","name":"06-Stranky-fresh-name-and-page"}
+{"op":"choose","label":"Umístění","text":"Stránka 1"}
+{"op":"field","label":"Kotva X","text":"40"}
+{"op":"field","label":"Kotva Y","text":"50"}
+{"op":"path","path":"C:/Users/dalib/.codex/workspaces/papercraft-20261117/workspace-repair-review/docs/p2/implementation/evidence/workspace-repair-native/fresh-named-wall.apcraft"}
+{"op":"menu","path":["Projekt","Uložit"]}
+{"op":"key","key":"Ctrl+4"}
+{"op":"button","text":"Vše"}
+{"op":"screen","name":"07-Export-fresh-name"}
+{"op":"button","text":"Export SVG/PDF"}
+{"op":"dump"}
+{"op": "path", "path": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\workspace-repair-review\\docs\\p2\\implementation\\evidence\\workspace-repair-native\\export"}
+{"op":"state"}
+{"op":"quit"}
