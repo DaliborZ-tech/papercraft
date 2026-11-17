@@ -507,3 +507,10 @@ ploch s odchylkou pod 0,01 mm² na konturu; tato doplňující kontrola netvrdí
 fyzický proof ani nezávislé vytvoření domu. [Verifikátor](../p2/implementation/evidence/workspace-repair-native/verify_native.py),
 [výsledek včetně actual importu a permanent/ephemeral rozlišení](../p2/implementation/evidence/workspace-repair-native/results.json).
 Po native byly všechny src/tools LF hashe znovu shodné s 191.
+
+Metadata `1a6081804fff74133e2652c898138d0a907a709d` byla nezávisle přečtena:
+**APPROVED v rozsahu queue + SK019 + osmiřádkového skill příkladu.** Stará
+aktivní CORE9 instrukce je opravená, tři příčiny/opravné scénáře jsou konkrétní
+a účinnost zůstává PENDING_NEXT_USE; expert nepředstírá human/P3/PO přijetí.
+Tehdejší konzervativní native-pending stav má nyní následovat doložené 191
+closure výše a nový dock nález odděleně. Historické d94 výsledky se nemění.
