@@ -215,3 +215,32 @@ zkontrolovanému `1b8037a6266dcd5d849bbddf0044b8ee8d4bb963` beze změny;
 komponentové výsledky jsou v [UI revizi](PC008_CURVED_SUBDIVISION_UI.md).
 Otevřené doménové consumer hypotézy, finální native důkazy, AC-US08 a P3 tímto
 omezeným schválením zůstávají nedotčeny.
+
+### Nezávislé review skutečného nového near Inkscape běhu
+
+Reviewer `core9_review` 17.11.2026 zkontroloval skutečný
+[27,485s PASS](evidence/c-near-original-inkscape-42dca62-run01/editor-results.json)
+na42dca627 a jeho zdrojově nezměněný comparator.
+**APPROVED_IN_SCOPE pro tento actual Inkscape1.4.4 roundtrip.**
+[Vlastní audit](evidence/near-editor-native-artifact-review-42dca.json) ověřil
+čtyři output hashe, čtyři původní bundle hashe a byte shodu původní kopie
+se skutečným exportem5283632. Native log, vlastní PID/HWND a screenshot
+odpovídají přesunu dílu, změně barvy a skutečnému GUI psaní/uložení textu.
+Původní FAIL není změněn ani vydáván za nový PASS.
+
+Na skutečných before/after souborech bylo znovu spuštěno již samostatně
+schválené bounded orákulum: **23/23 úplných path proofů je přesně shodných
+s archivním reportem**, stejně jako frame a kalibrační proof. Jde o nezávislý
+replay schváleného comparatoru, nikoli nové autorství jeho matematiky.
+CUT poloha≤5,567892e−7mm, globální délka≤1,957583e−5mm a přímá plocha
+≤1,289767e−6mm² zachovávají původní2e−5/0,01/0,01 meze. Native ARC příkazy,
+jediný CUT loop, všechny role a jejich stable IDs zůstávají zachované.
+
+Samostatná XML kontrola potvrdila přesný text „Žluťoučký – vlastní díl“,
+nezměněné ostatní texty, fyzickou velikost/viewBox a100mm kalibraci.
+Vlastní trigonometrický přepočet transformace potvrzuje stejnou17° lineární
+část a posun přibližně2,645832/3,968751mm, odpovídající10/15px.
+První pomocný stdin audit měl literal textu poškozený ASCII pipeline
+PowerShellu; opakování s explicitními Unicode escapes ověřilo přesný původní
+soubor. Žádný nový desktop vstup ani produktová změna při review neproběhly.
+Nový člověk, fyzické P3 a širší finální PC009 jsou stále oddělené.

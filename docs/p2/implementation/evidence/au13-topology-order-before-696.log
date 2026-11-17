@@ -1,0 +1,166 @@
+.F.F.                                                                    [100%]
+================================== FAILURES ===================================
+_ test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[0-True] _
+
+reverse = True, seam = 0
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1570/test_quarters_keep_independent1')
+
+    @pytest.mark.parametrize("reverse", [False, True])
+    @pytest.mark.parametrize("seam", [0, 1])
+    def test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam(
+            reverse, seam, tmp_path):
+        p = AuthorProject.new(scale=0.1)
+        a, b = quarters(p, 13, 0), quarters(p, 5, -17)
+        original_a, original_b = copy.deepcopy(p.profiles[a]), copy.deepcopy(p.profiles[b])
+        pairs = list(zip(p.profiles[a].segments, p.profiles[b].segments))
+        if reverse:
+            pairs.reverse()
+        pairs = pairs[seam:] + pairs[:seam]
+        interval = [1, 0] if reverse else [0, 1]
+        refs = [dict(first_segment_id=x.id, second_segment_id=y.id,
+                     first_interval=interval[:], second_interval=interval[:]) for x, y in pairs]
+>       sid = p.add_loft(a, b, correspondences=refs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\au13-topology-order-own.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\commands.py:15: in command
+    self.validate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <archpapercraft.authoring.project.AuthorProject object at 0x00000251EB46CC20>
+
+    def validate(self):
+        uuid(self.project_id)
+        self._validate_material_profile()
+        if not isinstance(self.name, str):
+            raise ValidationError("N�zev projektu mus� b�t text.")
+        number(self.scale, "M���tko", positive=True)
+        _revision(self.revision)
+        _revision(self.next_part_number)
+        _revision(self.next_joint_number)
+        all_ids = [self.project_id]
+        for pid, profile in self.profiles.items():
+            if profile.id != pid:
+                raise ValidationError("Identita profilu nesouhlas� s registrem.")
+            profile.validate()
+            all_ids.extend(
+                [pid, *[v.id for v in profile.vertices], *[s.id for s in profile.segments]]
+            )
+            if profile.closed and all(s.kind == "line" for s in profile.segments):
+                material_polygon(profile.points)
+        extra_ids, derived_children = self._validate_segmented_variants()
+        all_ids.extend(extra_ids)
+        all_ids.extend(self._validate_curved_connectors())
+        all_ids.extend(self._validate_profile_subdivisions())
+        expected_surfaces = []
+        if set(self.parts) != set(self.placements):
+            raise ValidationError("Ka�d� d�l mus� m�t pr�v� jeden z�znam um�st�n�.")
+        for sid, surface in self.surfaces.items():
+            uuid(sid)
+            all_ids.append(sid)
+            if (
+                surface.id != sid
+                or surface.profile_id not in self.profiles
+                or not isinstance(surface.name, str)
+            ):
+                raise ValidationError("Neplatn� registr povrch�.")
+            if surface.kind == "ruled_loft":
+                all_ids.extend(validate_loft_params(self, surface))
+                vector(surface.position_mm, 3)
+                vector(surface.rotation_deg, 3)
+                _revision(surface.revision)
+                self._surface_matrix(sid)
+                result = loft_analysis(self, surface)
+                if any(
+                    report["status"] == "INVALID"
+                    for report in result.get("source_topology", {}).values()
+                ):
+>                   raise ValidationError("Zdrojov� profil loftu se k��� nebo p�ekr�v�.")
+E                   archpapercraft.authoring.errors.ValidationError: Zdrojov� profil loftu se k��� nebo p�ekr�v�.
+
+src\archpapercraft\authoring\project.py:1072: ValidationError
+_ test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[1-True] _
+
+reverse = True, seam = 1
+tmp_path = WindowsPath('C:/Users/dalib/AppData/Local/Temp/pytest-of-dalib/pytest-1570/test_quarters_keep_independent3')
+
+    @pytest.mark.parametrize("reverse", [False, True])
+    @pytest.mark.parametrize("seam", [0, 1])
+    def test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam(
+            reverse, seam, tmp_path):
+        p = AuthorProject.new(scale=0.1)
+        a, b = quarters(p, 13, 0), quarters(p, 5, -17)
+        original_a, original_b = copy.deepcopy(p.profiles[a]), copy.deepcopy(p.profiles[b])
+        pairs = list(zip(p.profiles[a].segments, p.profiles[b].segments))
+        if reverse:
+            pairs.reverse()
+        pairs = pairs[seam:] + pairs[:seam]
+        interval = [1, 0] if reverse else [0, 1]
+        refs = [dict(first_segment_id=x.id, second_segment_id=y.id,
+                     first_interval=interval[:], second_interval=interval[:]) for x, y in pairs]
+>       sid = p.add_loft(a, b, correspondences=refs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+docs\p2\implementation\evidence\au13-topology-order-own.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\archpapercraft\authoring\commands.py:15: in command
+    self.validate()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <archpapercraft.authoring.project.AuthorProject object at 0x00000251E9393C50>
+
+    def validate(self):
+        uuid(self.project_id)
+        self._validate_material_profile()
+        if not isinstance(self.name, str):
+            raise ValidationError("N�zev projektu mus� b�t text.")
+        number(self.scale, "M���tko", positive=True)
+        _revision(self.revision)
+        _revision(self.next_part_number)
+        _revision(self.next_joint_number)
+        all_ids = [self.project_id]
+        for pid, profile in self.profiles.items():
+            if profile.id != pid:
+                raise ValidationError("Identita profilu nesouhlas� s registrem.")
+            profile.validate()
+            all_ids.extend(
+                [pid, *[v.id for v in profile.vertices], *[s.id for s in profile.segments]]
+            )
+            if profile.closed and all(s.kind == "line" for s in profile.segments):
+                material_polygon(profile.points)
+        extra_ids, derived_children = self._validate_segmented_variants()
+        all_ids.extend(extra_ids)
+        all_ids.extend(self._validate_curved_connectors())
+        all_ids.extend(self._validate_profile_subdivisions())
+        expected_surfaces = []
+        if set(self.parts) != set(self.placements):
+            raise ValidationError("Ka�d� d�l mus� m�t pr�v� jeden z�znam um�st�n�.")
+        for sid, surface in self.surfaces.items():
+            uuid(sid)
+            all_ids.append(sid)
+            if (
+                surface.id != sid
+                or surface.profile_id not in self.profiles
+                or not isinstance(surface.name, str)
+            ):
+                raise ValidationError("Neplatn� registr povrch�.")
+            if surface.kind == "ruled_loft":
+                all_ids.extend(validate_loft_params(self, surface))
+                vector(surface.position_mm, 3)
+                vector(surface.rotation_deg, 3)
+                _revision(surface.revision)
+                self._surface_matrix(sid)
+                result = loft_analysis(self, surface)
+                if any(
+                    report["status"] == "INVALID"
+                    for report in result.get("source_topology", {}).values()
+                ):
+>                   raise ValidationError("Zdrojov� profil loftu se k��� nebo p�ekr�v�.")
+E                   archpapercraft.authoring.errors.ValidationError: Zdrojov� profil loftu se k��� nebo p�ekr�v�.
+
+src\archpapercraft\authoring\project.py:1072: ValidationError
+=========================== short test summary info ===========================
+FAILED docs/p2/implementation/evidence/au13-topology-order-own.py::test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[0-True]
+FAILED docs/p2/implementation/evidence/au13-topology-order-own.py::test_quarters_keep_independent_cone_metrics_and_authored_identity_under_reverse_seam[1-True]
+2 failed, 3 passed in 2.19s

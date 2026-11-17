@@ -1,0 +1,15 @@
+{
+  "source_pin": "09b68111bc89accfad7cbeb05e0f2cd843009d19",
+  "source_diff": "",
+  "actual_head": "b99e4f80f3ea02e02c91eb32a026e5d101394081",
+  "native_artifacts": {
+    "arc": {
+      "snapshot_json_equal": true,
+      "schema": 9
+    },
+    "cubic": {
+      "snapshot_json_equal": true,
+      "schema": 9
+    }
+  }
+}

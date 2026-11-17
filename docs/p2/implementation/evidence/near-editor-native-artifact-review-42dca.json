@@ -1,0 +1,35 @@
+{
+  "source_pin": "42dca6279f4fbabeb922f950a8480e305a7d8c55",
+  "original_source_pin": "52836321810f7a8a0c6a8d43b801f98ed875bbde",
+  "native_results_sha256": "2b298b56d106cfb622066de2ef185050b7841c50b311641722cfba9a003d0b80",
+  "native_seconds": 27.485,
+  "artifact_hashes_verified": 4,
+  "original_bundle_hashes_verified": 4,
+  "actual_path_proofs_replayed_unchanged": 23,
+  "calibration_path_proof_replayed": true,
+  "frames": {
+    "part-35d459f7-1ebb-4fb3-8d2d-ee419486a194": {
+      "status": "CERTIFIED_TRANSLATION_ONLY",
+      "net_angle_deg_exact": "17",
+      "allowed_operators": [
+        "translate",
+        "rotate"
+      ],
+      "units_condition": "UNCHANGED_ROOT_VIEWBOX_AND_PHYSICAL_SIZE",
+      "before": "translate(55 90) rotate(17)",
+      "after": "rotate(17,-285.55688,239.84301)"
+    }
+  },
+  "physical_translation_mm": [
+    2.645832141498204,
+    3.9687506534160946
+  ],
+  "native_unicode_text_exact": "Žluťoučký – vlastní díl",
+  "cut_position_bound_mm": 5.567891916752354e-07,
+  "cut_global_length_bound_mm": 1.957582038445147e-05,
+  "cut_direct_net_area_bound_mm2": 1.2897661580102974e-06,
+  "claim": "Independent archive/source/approved-comparator replay review of the actual new Inkscape1.4.4 run; reviewer did not operate desktop",
+  "new_user": "NOT_RUN",
+  "physical_P3": "NOT_RUN",
+  "diagnostic_correction": "First stdin audit passed hashes/proofs then compared a literal damaged by PowerShell ASCII piping; repeated using explicit Unicode escapes; no native input or product change."
+}

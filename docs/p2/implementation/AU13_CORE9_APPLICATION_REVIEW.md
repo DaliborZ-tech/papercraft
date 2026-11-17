@@ -171,3 +171,76 @@ Tento verdikt není kontrolou rootova dosud běžícího nativního Windows/edit
 průchodu, nového comparator guardu, škálování, celé regresní sady ani pozdějších
 předávacích metadat. Tyto výstupy mají samostatné source-bound důkazy a review.
 Celý P2, AC-US08 a fyzické P3 tímto nejsou přijaty ani dokončeny.
+
+## Skutečný native ARC/CUBIC průchod — evidence6969069 na42dca627
+
+**APPROVED_IN_SCOPE pro oba doložené nativní subdivision průchody a jejich
+soubory.** Produkce6969069/42dca627 zůstává byte shodná s posouzeným5415.
+[Nezávislý audit](evidence/au13-native-artifact-review-own.py) a jeho
+[výsledek](evidence/au13-native-artifact-review-42dca.json) ověřily48/48
+původních output hashů a každý ze132 runtime/source hashů obou běhů proti
+Git6969069. ARC run02 trval29,75s, CUBIC run01 91,64s; import ukazuje skutečný
+integrační checkout, vlastní PID, nativní OpenGL a skutečné Save/Open/Export
+dialogy. Četba driveru, input/action logů a screenshotů potvrzuje vlastní
+kreslení od prázdného projektu, měřený split/merge, Undo/Redo, neplatný vstup,
+ruční dvě stránky/locks a3D↔2D picking. Reviewer desktop znovu neovládal.
+
+Oba skutečné saved schema9 projekty se otevřou v aktuálním zdroji a jejich
+JSON snapshot přesně odpovídá archivnímu snapshotu; původní projekt se nemění.
+První pomocná audit assertion porovnávala Python tuple v topologickém proofu
+s JSON listem; audit pak explicitně normalizoval jen JSON container kontrakt.
+Původní root a děti zůstávají retired, aktuální merged UUID je nové, původní
+root kotvy, correspondence/seam i55/90/17° na druhé stránce a oba locks drží.
+SVG, PDF subject a manifest nesou stejný ručně přepočtený snapshot digest.
+
+Samostatný Fraction lexer použil původní číselné tokeny SVG a dekomprimovaného
+PDF streamu včetně skutečného CTM, bez původního float orákula. ARC má očekávání
+`100π =314,1592653589793mm²`, oba výstupy314,154455352098mm²,
+chyba0,004810006881mm². CUBIC má očekávání800mm², SVG799,996938547659mm²,
+PDF799,9969385476588mm², chyba0,003061452341mm². Obě jsou pod původní0,01mm²
+mezí. Split vzdálenosti10,47197551 a20,000093598883paper mm potvrzuje vlastní
+obloukový/rychlostní integrál. Vektorový výstup obsahuje oba díly na dvou A4
+stránkách a žádné raster XObjects.
+
+Původní [FAIL5415](evidence/au13-arc-native-5415e2-run01/results.json) zůstává:
+observer četl neexistující `.parameters`;696 opravuje pouze dvě čtení na
+`.params`. Nejde o zametenou vadu produktu. Toto review nepřenáší native PASS
+na nový camera-only nástroj42dca, Inkscape, nové jiné loft rodiny ani celý
+PC009. Nový člověk0/NOT_RUN, AC-AU19 NOT_RUN, fyzické P3 NOT_RUN.
+
+## Legacy fixture korekce —a5eedc9
+
+**APPROVED_IN_SCOPE pro testovou opravu a5eedc9b3a345320b9ae07e9e44bc7387c5ef73b.**
+Původní schema6/7 fixture přeznačovala novější envelope se schema9 polem
+`source_reference`; produkční reader správně odmítal i jeho None hodnotu.
+Oprava odstraňuje pouze prokazatelně None novější default, s assertion proti
+vymazání qualified zdroje. Přidané None i nonNone smuggling negativy ponechávají
+striktní reader beze změny. Nejde o oslabení starého formátu. Nezávislý replay
+celého dotčeného souboru: **3 PASS /1,78s**, [JUnit](evidence/au13-legacy-fixture-review-a5eed.xml).
+Původní full-suite FAIL se zachovává a celá nová suite má samostatný důkaz.
+
+## Quarter-ARC source order —09b68111
+
+**APPROVED_IN_SCOPE pro09b68111bc89accfad7cbeb05e0f2cd843009d19.**
+Nezávislý [odlišný fixture](evidence/au13-topology-order-own.py) má čtyři
+čtvrtoblouky r13/r5 v hloubce−17 a původní i obrácenou korespondenci, každý
+také s posunutým švem. Na stejné produkci jako696 byl výsledek
+[2 FAIL reversed +3 PASS](evidence/au13-topology-order-before-696.xml).
+Po opravě totožná očekávání spolu s6 autorskými regresními případy dávají
+**11 PASS /5,52s**, [JUnit](evidence/au13-topology-order-after-09b.xml).
+
+Oprava používá existující `canonical_profile_curves` v pořadí autorských
+segment UUID pouze pro topologii původního profilu. Nemění source intervals,
+reversed correspondence ani flattening order; samostatné ID/incidence kontroly
+korespondencí zůstávají. Úmyslně překřížená korespondence je nadále atomicky
+odmítnuta. Žádný endpoint/nearest/first-child fallback nevzniká.
+
+Vlastní očekávání poloměrů rozvinu a plochy `π·18·sqrt(353)·0,01` nezávisí
+na výrobním helperu. Jednostranný split2/7→přepočet→merge zachová CUT, zdrojové
+body druhého profilu, nový merged UUID, původní params/frame a61/87/31° s oběma
+locks přes save/reopen. Dalších **24 vlastních authority/counterfeit/orphan
+a mixed-generation regresí PASS /3,76s**, [JUnit](evidence/au13-topology-order-authority-09b.xml).
+[Přenos existujících native souborů](evidence/au13-topology-order-native-transfer-09b.json)
+znovu načetl skutečné ARC/CUBIC schema9 projekty: snapshoty po JSON normalizaci
+zůstaly přesně shodné. Nativní desktop se tímto znovu neprohlašuje provedený
+na09b; finální běhy a celá suite mají vlastní kontrolu.

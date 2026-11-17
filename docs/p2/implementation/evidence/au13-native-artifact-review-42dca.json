@@ -1,0 +1,53 @@
+{
+  "reviewed_candidate": "42dca6279f4fbabeb922f950a8480e305a7d8c55",
+  "native_source": "696906954f3e6863a6c945a1afc0d62f9d60f769",
+  "imported_project": "C:\\Users\\dalib\\.codex\\workspaces\\papercraft-20261117\\core9-review\\src\\archpapercraft\\authoring\\project.py",
+  "results": {
+    "arc": {
+      "native_results_sha256": "bdb15ce0975cddff4f8f552c7de8884ccf0a6b8257ac20d37e602f8df2a96e0b",
+      "original_project_sha256": "05ad31d02516dbafafa311f90542914796188578b7397c5de83ada0ab8cbe2ff",
+      "file_hashes_verified": 24,
+      "native_source_hashes_bound_to_git": 132,
+      "native_seconds": 29.75,
+      "snapshot_matches_reopened_project": true,
+      "snapshot_digest": "519d5911f2ce38de5cd1dec087363c90d1d22db6067037c25bcd9ef212e1109b",
+      "retired_root": "54cac917-4f58-4e9b-b105-e8f8466c2409",
+      "current_piece": "cdda43e9-4a38-41c4-8e99-50e6f8995777",
+      "expected_area_mm2": 314.1592653589793,
+      "svg_area_exact": "157077227676049/500000000000",
+      "pdf_area_exact": "1988008662774995133858443445251988865939298249819258338763974875540734974587266947494161/6328125000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "svg_area_mm2": 314.154455352098,
+      "pdf_area_mm2": 314.154455352098,
+      "svg_area_error_mm2": 0.004810006881314166,
+      "pdf_area_error_mm2": 0.004810006881314166,
+      "svg_width_original_token": "157077227676049/5000000000000",
+      "pdf_width_original_token": "3141544553520979477/100000000000000000",
+      "independently_integrated_split_distance_paper_mm": 10.47197551
+    },
+    "cubic": {
+      "native_results_sha256": "4f530eb9305058d30d7289c423a58721efefce218753e31642e6bf18ba4b5be5",
+      "original_project_sha256": "9f4dd68b0f181da00a0e0cd6f8489172fdc6ab638b4d8f733efaae21882bd59e",
+      "file_hashes_verified": 24,
+      "native_source_hashes_bound_to_git": 132,
+      "native_seconds": 91.64,
+      "snapshot_matches_reopened_project": true,
+      "snapshot_digest": "7c3797385952f2919164feb09b96df242337393e8aa29b12fb7407d4b8d74034",
+      "retired_root": "ecea359a-cabb-4bdb-8570-5ebc579216da",
+      "current_piece": "28bf5f97-4ea2-4d16-a7f7-dbff96f138e3",
+      "expected_area_mm2": 800,
+      "svg_area_exact": "799996938547659/1000000000000",
+      "pdf_area_exact": "5062480626746903231563562527632079945080187524495108180744943201128430945312190272420433/6328125000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "svg_area_mm2": 799.996938547659,
+      "pdf_area_mm2": 799.9969385476588,
+      "svg_area_error_mm2": 0.0030614523409440153,
+      "pdf_area_error_mm2": 0.003061452341171389,
+      "svg_width_original_token": "799996938547659/10000000000000",
+      "pdf_width_original_token": "7999969385476586581/100000000000000000",
+      "independently_integrated_split_distance_paper_mm": 20.000093598882813
+    }
+  },
+  "scope": "Independent review of archived actual native widget runs and files; no desktop replay",
+  "new_user": "0/NOT_RUN",
+  "physical_P3": "NOT_RUN",
+  "AC_AU19": "NOT_RUN"
+}
