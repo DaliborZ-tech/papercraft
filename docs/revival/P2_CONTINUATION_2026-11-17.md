@@ -45,3 +45,39 @@ finální nezávislé digitální ověření zůstávají rozpracované. AC-US08
 0 skutečných nových účastníků / NOT_RUN. Fyzické P3 je NOT_RUN.
 
 Integrace tohoto pokračování na master a ověření remote SHA zatím PENDING.
+### DATA01 — oddělené koncepty a obnova, první autorský kandidát
+
+Zdroj `7edf31431de0a3aa4a0b20636e57c09ba3b405d2` (autor `editor_review`,
+izolace `data01-recovery`, základ `f5f06b2`) přidává samostatný atomic recovery
+store, 30s timer a obnovu v aktivním AuthorController/AuthorMainWindow přes
+malý [Window hook patch](../p2/implementation/evidence/data01-window-hooks.patch).
+Window layout/actions nepřepisuji: tento přesný patch byl při ověření aplikován
+navíc ke zdrojovému commitu, poté vrácen; vlastník nového workspace jej přebírá
+se společným modulem. Feature bez těchto hooků není v aplikaci zapojená.
+
+Koncept nikdy nepíše uživatelský projekt. Uchovává potvrzenou doménu a odděleně
+rozepsané číslo hlavního inspektoru či nedokončený obrys, bez interpretace textu,
+přepočtu, změny fokusu, savepointu nebo undo. Obnova je neuložená kopie s novým
+jménem při Save As a ochranou původního souboru. Dialog rozlišuje obnovení,
+odložení a výslovné zahození; QLockFile vylučuje koncept jiného živého okna.
+Při nemožnosti smazat vlastní koncept se New/Open/close zastaví. Testovací INI
+settings izolují také vyhledávání konceptů, takže offscreen testy nečtou AppData.
+
+Finální cílený běh se source/import guardem uvnitř procesu:
+**82 PASS / 0 FAIL/ERROR/SKIP, 29,66 s** = 12 storage/controller + 21 recovery UI
++ 49 původních regresí. [JUnit](../p2/implementation/evidence/data01-recovery-final.xml),
+[raw](../p2/implementation/evidence/data01-recovery-final.log),
+[binding](../p2/implementation/evidence/data01-recovery-binding.json).
+Ověřeny jsou disk-full/NaN/corrupt negativy, original/foreign bytes,
+skutečné os._exit aktivního AuthorWindow a následné převzetí dead lock s obnovou
+modelu i syrového `-`, všechny tři dialogové volby, exact druhý zdrojový bod
+loftu, kubické pending úchopy s Backspace, celé aktuální C a D generace/layout.
+Původní komponentové mezikroky jsou zachovány; binding také uvádí jediný
+pozdější neúspěšný testovací setup s chybným názvem public API, opravený před
+finálním během. Ruff dotčených souborů a diff check PASS.
+
+Neobnovuje nepotvrzené ovladače uvnitř samostatných modálních konstrukčních
+náhledů. Zápis je synchronní lokální atomic operace; není doložená výkonnost na
+libovolně velkém projektu. Native desktop tohoto přírůstku, společný nový
+workspace a nezávislé review feature jsou PENDING; autor je sám neschvaluje.
+Nový člověk AC-US08 i fyzické P3 zůstávají NOT_RUN.
